@@ -51,7 +51,8 @@ cspace = cspace || {};
         },
         strings: {
             divider: "-",
-            recordTypeSelector: "recordTypeSelect"
+            recordTypeSelector: "recordTypeSelect",
+            allRecords: "all"
         },
         parentBundle: "{globalBundle}",
         model: {
@@ -152,8 +153,13 @@ cspace = cspace || {};
             
             // String divider which we are going to use between different categories
             var divider = that.options.strings.divider;
+            // Additional option which we are going to add to the options
+            var allRecords = that.options.strings.allRecords;
             // The array which will be a set of all categories with dividers between them
             var options = [];
+            
+            // Try to add our additional option. It might not exist though if options are not set properly
+            options = options.concat([allRecords]);
             
             // First let's build an overall array which is a set of all categories
             fluid.each(model.categories, function (category) {
