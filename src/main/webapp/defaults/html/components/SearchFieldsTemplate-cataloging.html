@@ -74,14 +74,13 @@
                         <select class="csc-object-description-form input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
-                <!-- CSPACE-4775: Removing inscriptionDescriptionInscriber and inscriptionDescriptionMethod to work around CSPACE-4894. -->
-                <!--              Replace when CSPACE-4894 is fixed. -->
+                <!-- Commenting these out for now, as they're acting strangely. Possible bug in the ui layer. -->
                 <!--
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-collection-object-inscriptionDescriptionInscriber-label"></div>
                     </div>
-                    <div class="content clearfix">
+                    <div class="content clearfix csc-collection-object-nonTextualInscriptionGroup">
                         <input type="text" class="csc-object-description-inscription-description-inscriber"/>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                     <div class="header">
                         <div class="label csc-collection-object-inscriptionDescriptionMethod-label"></div>
                     </div>
-                    <div class="content clearfix">
+                    <div class="content clearfix csc-collection-object-nonTextualInscriptionGroup">
                         <input type="text" class="csc-object-description-inscription-description-method"/>
                     </div>
                 </div>
