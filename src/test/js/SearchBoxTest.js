@@ -64,7 +64,7 @@ var searchBoxTester = function ($) {
         var searchBox = setupSearchBox({related: "all"});
         searchBox.refreshView();
         // 8 expected for 9 members of "all" category minus person which has no read permission
-        jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 8, $("option", searchBox.locate("recordTypeSelect")).length);
+        jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 10, $("option", searchBox.locate("recordTypeSelect")).length);
         jqUnit.assertEquals("Label is ", "", searchBox.locate("recordTypeSelectLabel").text());
     });
     
