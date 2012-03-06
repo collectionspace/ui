@@ -17,6 +17,27 @@ collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 # Taxon record
 taxon: Taxon
 taxon-identificationNumberRequired: Please specify a Display Name
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
+taxon-displayNameLabel: Display Name
+taxon-termStatusLabel: Term Status
+taxon-taxonFullNameLabel: Full Name
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Currency
+taxon-taxonAuthorGroupLabel: Author		
+taxon-taxonAuthorLabel: Author
+taxon-taxonAuthorTypeLabel: Author Type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is Named Hybrid
+taxon-taxonCitationLabel: Citations
+taxon-taxonomicStatusLabel: Taxonomic Status
+taxon-taxonNameSourceLabel: Name Source
+taxon-taxonNameSourceCodeLabel: Name Source Code
+taxon-taxonGUIDLabel: GUID
+taxon-taxonNoteLabel: Note
+taxon-updatedAtLabel: Modified Date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
+
 
 # -------------------------------------
 #Login
