@@ -304,10 +304,19 @@ cspace = cspace || {};
     };
     
     cspace.advancedSearch.finalInit = function (that) {
+        // Disable all the options which are divider
+        var divider = that.options.strings.divider;
+        
+        // Not sure how I could get to the selector differently here
+        fluid.each($(".csc-advancedSearch-selectRecordType option"), function (option, index) {
+            $(option).prop("disabled", $(option).text() === divider);
+        });
+        
         that.toggleControls = function (hideSteps) {
             that.locate("step1").add(that.locate("step2"))[hideSteps ? "hide" : "show"]();
             that.locate("toggle")[hideSteps ? "show" : "hide"]();
         };
+
         that.refreshView();
     };
     
