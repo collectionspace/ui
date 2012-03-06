@@ -128,12 +128,12 @@ cspace = cspace || {};
     
     cspace.searchBox.finalInit = function (that) {
         // Disable all the options which are divider
-        var divider = that.options.strings.divider;
+        //var divider = that.options.strings.divider;
         
         // Not sure how I could get to the selector differently here
-        fluid.each($(".csc-searchBox-selectRecordType option"), function (option, index) {
-            $(option).prop("disabled", $(option).text() === divider);
-        });
+        //fluid.each($(".csc-searchBox-selectRecordType option"), function (option, index) {
+        //    $(option).prop("disabled", $(option).text() === divider);
+        //});
         
         if (that.options.selfRender) {
             that.refreshView();
@@ -182,7 +182,11 @@ cspace = cspace || {};
                         return divider;
                     }
                     return that.messageResolver.resolve(recordType);
-                })
+                }),
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.searchBox.selectDecorator"
+                }
             };
             
             // Return part of the tree which is a selector we complete
@@ -250,6 +254,28 @@ cspace = cspace || {};
             }
         };
         return tree;
+    };
+    
+    /***********************************************
+     * UI Options Select Dropdown Options Decorator*
+     ***********************************************/
+
+    /**
+     * A sub-component that decorates the options on the select dropdown list box with the css style
+     */
+    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {
+    //    container: "{arguments}.0"
+    });
+    
+    fluid.defaults("cspace.searchBox.selectDecorator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"], 
+        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit"
+    });
+    
+    cspace.searchBox.selectDecorator.finalInit = function (that) {
+        fluid.each($("option", that.container), function (option) {
+            $(option).prop("disabled", $(option).text() === divider);
+        });
     };
     
     // This function executes on file load and starts the fetch process of component's template.
