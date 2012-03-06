@@ -23,7 +23,7 @@ taxon-termStatusLabel: Term Status
 taxon-taxonFullNameLabel: Full Name
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Currency
-taxon-taxonAuthorGroupLabel: Author		
+taxon-taxonAuthorGroupLabel: Author
 taxon-taxonAuthorLabel: Author
 taxon-taxonAuthorTypeLabel: Author Type
 taxon-taxonYearLabel: Year
