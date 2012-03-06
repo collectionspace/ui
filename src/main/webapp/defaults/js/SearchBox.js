@@ -263,16 +263,18 @@ cspace = cspace || {};
     /**
      * A sub-component that decorates the options on the select dropdown list box with the css style
      */
-    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {
-    //    container: "{arguments}.0"
-    });
+    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {});
     
     fluid.defaults("cspace.searchBox.selectDecorator", {
         gradeNames: ["fluid.viewComponent", "autoInit"], 
-        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit"
+        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit",
+        strings: {
+            divider: "-"
+        }
     });
     
     cspace.searchBox.selectDecorator.finalInit = function (that) {
+        var divider = that.options.strings.divider;
         fluid.each($("option", that.container), function (option) {
             $(option).prop("disabled", $(option).text() === divider);
         });
