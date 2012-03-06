@@ -19,16 +19,9 @@ cspace = cspace || {};
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         produceTree: "cspace.advancedSearch.produceTree",
         components: {
-            recordTypeSelector: {
-                type: "cspace.util.recordTypeSelector",
-                options: {
-                    related: "allTypes",
-                    dom: "{advancedSearch}.dom",
-                    componentID: "recordTypeSelect",
-                    selector: "recordTypeSelect",
-                    permission: "{advancedSearch}.options.permission"
-                }
-            },
+            globalNavigator: "{globalNavigator}",
+            recordTypeManager: "{recordTypeManager}",
+            permissionsResolver: "{permissionsResolver}",
             fetcher: {
                 type: "cspace.advancedSearch.fetcher",
                 options: {
@@ -64,7 +57,44 @@ cspace = cspace || {};
                 } 
             },
             operation: "or",
-            keywords: ""
+            keywords: "",
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "vocabularies",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }]
         },
         permission: "list",
         selectors: {
@@ -139,7 +169,11 @@ cspace = cspace || {};
             },
             updateSearchHistory: "cspace.advancedSearch.updateSearchHistory"
         },
-        strings: {},
+        strings: {
+            divider: "-",
+            recordTypeSelector: "recordTypeSelect",
+            allRecords: "all"
+        },
         parentBundle: "{globalBundle}",
         finalInitFunction: "cspace.advancedSearch.finalInit",
         postInitFunction: "cspace.advancedSearch.postInit",
@@ -218,6 +252,49 @@ cspace = cspace || {};
                 that.updateSearchHistory(searchModel);
             }
         });
+        
+        that.produceComponent = function () {
+            // Name of the selector we are going to modify with dynamic options
+            var componentID = that.options.strings.recordTypeSelector;
+            var model = that.model;
+            
+            // String divider which we are going to use between different categories
+            var divider = that.options.strings.divider;
+            // Additional option which we are going to add to the options
+            var allRecords = that.options.strings.allRecords;
+            // The array which will be a set of all categories with dividers between them
+            var options = [];
+            
+            // Try to add our additional option. It might not exist though if options are not set properly
+            options = options.concat([allRecords]);
+            
+            // First let's build an overall array which is a set of all categories
+            fluid.each(model.categories, function (category) {
+                if (options.length === 0) {
+                    options = options.concat(category);
+                    return;
+                }
+                // Add a divider in between only if options is not empty
+                options = options.concat([divider], category);
+            });
+            
+            // we need this variable to resolve componentID inside of JSON
+            var result = {};
+            result[componentID] = {
+                selection: options[0],
+                optionlist: options,
+                optionnames: fluid.transform(options, function (recordType) {
+                    // If the type is a divider then just show a divider and do not resolve it
+                    if (recordType === divider) {
+                        return divider;
+                    }
+                    return that.messageResolver.resolve(recordType);
+                })
+            };
+            
+            // Return part of the tree which is a selector we complete
+            return result;
+        };
     };
     
     cspace.advancedSearch.postInit = function (that) {
@@ -319,7 +396,9 @@ cspace = cspace || {};
             },
             searchFields: {decorators: {addClass: "{styles}.searchFields"}}
         };
-        tree = $.extend(tree, that.recordTypeSelector.produceComponent());
+        
+        tree = $.extend(tree, that.produceComponent());
+        
         // TODO: This is a hack, recordTypeSelector's selection can't be bound.
         if (!that.model.recordType) {
             that.applier.requestChange("recordType", tree.recordTypeSelect.selection);
