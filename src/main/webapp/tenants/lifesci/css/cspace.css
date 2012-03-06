@@ -10,7 +10,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 CollectionSpace 1.8 default CSS selectors 
 */
 
-
 /* ---------------------------------------*/
 /* Styling of HTML elements specific to the lifesci tenant */
 
@@ -31,19 +30,6 @@ CollectionSpace 1.8 default CSS selectors
 .input-numeric-tiny   {
 	width: 35px  !important;}
 /* ---------------------------------------*/
-
-
-/*
-Copyright 2010 - 2011
-
-Licensed under the Educational Community License (ECL), Version 2.0. 
-You may not use this file except in compliance with this License.
-
-You may obtain a copy of the ECL 2.0 License at
-https://source.collectionspace.org/collection-space/LICENSE.txt
-
-CollectionSpace 1.8 default CSS selectors 
-*/
 
 /* core HTML elements*/
 html{
@@ -988,7 +974,8 @@ table.cs-admin-table td.checkbox {
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
     width:100%; 
     position:relative; 
-    padding-bottom:18px; 
+    margin-bottom:18px;
+	padding-bottom:0px;
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;
@@ -1331,7 +1318,7 @@ input[disabled]:hover, input[disabled]:hover    {
     filter:alpha(opacity=85);
     z-index: 9999;
     background: #FFF url('../images/indeterminateProgressSpinner_92x92_blackonwhite.gif') no-repeat center center;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -1804,6 +1791,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     color: gray;
     cursor: default;
 }
+.cs-mediaUploader .cs-disabled {
+	background-color: #CCC;
+}
 
 .cs-recordList-thumbnail {
     max-height: 10px;
@@ -1935,16 +1925,19 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     width: 45%;
     margin: 15px 5px 15px 15px;
 }
-.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-searchButton {
-    display: inline;
+.cs-advancedSearch-template .cs-advancedSearch-searchButton {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
+    float: right;
+}
+.cs-advancedSearch-template .cs-advancedSearch-searchButton:nth-child(even) {
+    margin: 10px 0;
+}
+.cs-advancedSearch-template .cs-advancedSearch-searchButton:nth-child(odd) {
+    margin-top: -30px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-searchFields {
     padding-left: 20px;
-}
-.cs-advancedSearch-searchButton.cs-advancedSearch-fieldBasedSearchButton {
-    margin: 0 0 10px 32px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-toggle {
     background-color: #FFF;
@@ -1967,10 +1960,16 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
 }
-.cs-searchTips-template .cs-searchTips-title, .cs-searchTips-template .cs-searchTips-instructions-top, .cs-searchTips-template .cs-searchTips-instructions-date, .cs-searchTips-template .cs-searchTips-instructions-number, .cs-searchTips-template .cs-searchTips-instructions-bottom {
-    display: block;
+
+.cs-searchTips-template ul {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.cs-searchTips-template li {
     padding-bottom: 15px;
 }
+
 .cs-searchTips-template .cs-searchTips-title {
     color: #316285;
     font-size: 14px;
@@ -2061,6 +2060,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     color: gray !important;
     cursor: default !important;
 }
+
 .cs-search-highlight {
     display:inline-block;
     overflow:hidden;
