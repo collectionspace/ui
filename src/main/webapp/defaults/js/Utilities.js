@@ -1067,6 +1067,7 @@ fluid.registerNamespace("cspace.util");
             strategies: [that.options.strategy(that.options)]
         };
         that.all = that.getRecordTypes("recordlist");
+        that.allCategory = that.getRecordTypes("recordtypes.all");
         that.procedures = that.getRecordTypes("recordtypes.procedures");
         that.vocabularies = that.getRecordTypes("recordtypes.vocabularies");
         that.cataloging = that.getRecordTypes("recordtypes.cataloging");

@@ -26,7 +26,7 @@ cspace = cspace || {};
             searchBox: {
                 type: "cspace.searchBox",
                 options: {
-                    related: "all"
+                    related: ["allCategory", "cataloging", "procedures", "vocabularies"]
                 }
             }
         },

@@ -1,6 +1,12 @@
 {
     "recordtypes": {
         "properties": {
+            "all": {
+                "default": [
+                    "all"
+                ],
+                "type": "array"
+            },
             "vocabularies": {
                 "default": [
                     "persontest1",

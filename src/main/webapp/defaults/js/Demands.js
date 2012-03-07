@@ -1861,7 +1861,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             events: {
                                 afterSearch: "{searchView}.events.afterSearch"
                             },
-                            preInitFunction: "cspace.searchBox.preInitSearch",
+                            preInitFunction: {
+                                namespace: "preInitSearch",
+                                listener: "cspace.searchBox.preInitSearch"
+                            },
                             invokers: {
                                 updateSearchHistory: "cspace.searchBox.updateSearchHistory"
                             }

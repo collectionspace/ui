@@ -17,22 +17,20 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.searchBox");
     
-    var bindEvents = function (that) {
-        // Bind a click event on search button to trigger searchBox's navigateToSearch
-        that.locate("searchButton").click(that.navigateToSearch);
-        that.locate("searchQuery").keypress(function (e) {
-            if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
-                that.navigateToSearch();
-            }
-        });
-    };
-    
     fluid.defaults("cspace.searchBox", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        preInitFunction: "cspace.searchBox.preInit",
+        preInitFunction: [{
+            namespace: "preInitPrepareModel",
+            listener: "cspace.searchBox.preInitPrepareModel"
+        }, {
+            namespace: "preInit",
+            listener: "cspace.searchBox.preInit"
+        }],
         finalInitFunction: "cspace.searchBox.finalInit",
         mergePolicy: {
-            model: "preserve"   
+            model: "preserve",
+            recordTypeManager: "nomerge",
+            permissionsResolver: "nomerge"
         },
         selectors: {                // Set of selectors that the component is interested in rendering.
             recordTypeSelect: ".csc-searchBox-selectRecordType",
@@ -50,62 +48,23 @@ cspace = cspace || {};
             advancedSearch: "cs-searchBox-advancedSearch"
         },
         strings: {
-            divider: "-",
-            recordTypeSelector: "recordTypeSelect",
-            allRecords: "all"
+            divider: ""
         },
         parentBundle: "{globalBundle}",
         model: {
             messagekeys: {
                 recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
-            },
-            categories: [{
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.modelBuilder",
-                    args: {
-                        callback: "cspace.searchBox.buildModel",
-                        related: "cataloging",
-                        resolver: "{permissionsResolver}",
-                        recordTypeManager: "{recordTypeManager}",
-                        permission: "list"
-                    }
-                }
-            }, {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.modelBuilder",
-                    args: {
-                        callback: "cspace.searchBox.buildModel",
-                        related: "procedures",
-                        resolver: "{permissionsResolver}",
-                        recordTypeManager: "{recordTypeManager}",
-                        permission: "list"
-                    }
-                }
-            }, {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.modelBuilder",
-                    args: {
-                        callback: "cspace.searchBox.buildModel",
-                        related: "vocabularies",
-                        resolver: "{permissionsResolver}",
-                        recordTypeManager: "{recordTypeManager}",
-                        permission: "list"
-                    }
-                }
-            }]
+            }
         },                  // A default data model object.
         produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
         rendererOptions: {
             autoBind: false
         },
         components: {
-            globalNavigator: "{globalNavigator}",
-            recordTypeManager: "{recordTypeManager}",
-            permissionsResolver: "{permissionsResolver}"        
+            globalNavigator: "{globalNavigator}"
         },
+        recordTypeManager: "{recordTypeManager}",
+        permissionsResolver: "{permissionsResolver}",
         invokers: {
             navigateToSearch: "cspace.searchBox.navigateToSearch"
         },
@@ -120,6 +79,9 @@ cspace = cspace || {};
                 }
             })
         },
+        listeners: {
+            afterRender: "{cspace.searchBox}.afterRenderHandler"
+        },
         urls: cspace.componentUrlBuilder({
             advancedSearchURL: "%webapp/html/advancedsearch.html"
         }),
@@ -127,75 +89,72 @@ cspace = cspace || {};
     });
     
     cspace.searchBox.finalInit = function (that) {
-        // Disable all the options which are divider
-        //var divider = that.options.strings.divider;
-        
-        // Not sure how I could get to the selector differently here
-        //fluid.each($(".csc-searchBox-selectRecordType option"), function (option, index) {
-        //    $(option).prop("disabled", $(option).text() === divider);
-        //});
-        
         if (that.options.selfRender) {
             that.refreshView();
         }
     };
-    
+
+    cspace.searchBox.preInitPrepareModel = function (that) {
+        that.options.related = fluid.makeArray(that.options.related);
+        fluid.each(that.options.related, function (related) {
+            var relatedCategory = cspace.util.modelBuilder({
+                callback: "cspace.searchBox.buildModel",
+                related: related,
+                resolver: that.options.permissionsResolver,
+                recordTypeManager: that.options.recordTypeManager,
+                permission: "list"
+            });
+            if (!relatedCategory) {
+                return;
+            }
+            that.applier.requestChange(related, relatedCategory);
+        });
+    };
+
     cspace.searchBox.preInit = function (that) {
-        that.options.listeners = that.options.listeners || {};
-        that.options.listeners.afterRender = function () {
-            bindEvents(that);
+        that.afterRenderHandler = function () {
+            // Bind a click event on search button to trigger searchBox's navigateToSearch
+            that.locate("searchButton").click(that.navigateToSearch);
+            that.locate("searchQuery").keypress(function (e) {
+                if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
+                    that.navigateToSearch();
+                }
+            });
         };
-        
-        that.produceComponent = function () {
-            // Name of the selector we are going to modify with dynamic options
-            var componentID = that.options.strings.recordTypeSelector;
-            var model = that.model;
-            
-            // String divider which we are going to use between different categories
-            var divider = that.options.strings.divider;
-            // Additional option which we are going to add to the options
-            var allRecords = that.options.strings.allRecords;
-            // The array which will be a set of all categories with dividers between them
-            var options = [];
-            
-            // Try to add our additional option. It might not exist though if options are not set properly
-            options = options.concat([allRecords]);
-            
-            // First let's build an overall array which is a set of all categories
-            fluid.each(model.categories, function (category) {
-                if (options.length === 0) {
-                    options = options.concat(category);
+        that.produceRecordTypeSelect = function () {
+            var optionlist = [],
+                optionnames = [];
+            fluid.each(that.options.related, function (related) {
+                if (!that.model[related]) {
                     return;
                 }
-                // Add a divider in between only if options is not empty
-                options = options.concat([divider], category);
+                if (optionlist.length !== 0) {
+                    optionlist.push(that.options.strings.divider);
+                }
+                optionlist = optionlist.concat(that.model[related])
             });
-            
-            // we need this variable to resolve componentID inside of JSON
-            var result = {};
-            result[componentID] = {
-                selection: options[0],
-                optionlist: options,
-                optionnames: fluid.transform(options, function (recordType) {
-                    // If the type is a divider then just show a divider and do not resolve it
-                    if (recordType === divider) {
-                        return divider;
-                    }
-                    return that.messageResolver.resolve(recordType);
-                }),
-                decorators: {
-                    type: "fluid",
-                    func: "cspace.searchBox.selectDecorator"
+            fluid.each(optionlist, function (option) {
+                if (!option) {
+                    optionnames.push(option);
+                    return;
+                }
+                optionnames.push(that.options.parentBundle.resolve(option));
+            });
+            return {
+                recordTypeSelect: {
+                    selection: optionlist[0],
+                    optionlist: optionlist,
+                    optionnames: optionnames,
+                    decorators: [{
+                        type: "fluid",
+                        func: "cspace.searchBox.selectDecorator"
+                    }]
                 }
             };
-            
-            // Return part of the tree which is a selector we complete
-            return result;
         };
     };
 
     cspace.searchBox.preInitSearch = function (that) {
-        cspace.searchBox.preInit(that);
         cspace.util.preInitMergeListeners(that.options, {
             afterSearch: function (searchModel) {
                 that.updateSearchHistory(searchModel);
@@ -235,14 +194,16 @@ cspace = cspace || {};
             }
         };
         
-        tree = $.extend(tree, that.produceComponent());
+        fluid.merge(null, tree, that.produceRecordTypeSelect());
         
         fluid.each(tree, function (child, key) {
-            child.decorators = [{
+            var decorator = {
                 type: "addClass",
                 classes: that.options.styles[key]
-            }];
+            };
+            child.decorators = child.decorators ? child.decorators.concat([decorator]) : [decorator];
         });
+
         if (!that.options.enableAdvancedSearch) {
             return tree;
         }
@@ -255,28 +216,20 @@ cspace = cspace || {};
         };
         return tree;
     };
-    
-    /***********************************************
-     * UI Options Select Dropdown Options Decorator*
-     ***********************************************/
 
-    /**
-     * A sub-component that decorates the options on the select dropdown list box with the css style
-     */
-    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {});
+    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {
+        container: "{arguments}.0"
+    });
     
     fluid.defaults("cspace.searchBox.selectDecorator", {
         gradeNames: ["fluid.viewComponent", "autoInit"], 
-        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit",
-        strings: {
-            divider: "-"
-        }
+        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit"
     });
     
     cspace.searchBox.selectDecorator.finalInit = function (that) {
-        var divider = that.options.strings.divider;
         fluid.each($("option", that.container), function (option) {
-            $(option).prop("disabled", $(option).text() === divider);
+            option = $(option);
+            option.prop("disabled", !!!option.text());
         });
     };
     
