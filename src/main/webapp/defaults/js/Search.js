@@ -229,7 +229,7 @@ cspace = cspace || {};
                         }
                     },
                     selfRender: true,
-                    related: "all"
+                    related: ["allCategory", "cataloging", "procedures", "vocabularies"]
                 }
             },
             resultsPager: {
