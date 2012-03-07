@@ -325,7 +325,8 @@ cspace = cspace || {};
             that.applier.requestChange("recordType", tree.recordTypeSelect.selection);
         }
         tree.recordTypeSelect.selection = "${recordType}";
-        tree.recordTypeSelect.decorators = {"addClass": "{styles}.recordTypeSelect"};
+        tree.recordTypeSelect.decorators = tree.recordTypeSelect.decorators ?
+            tree.recordTypeSelect.decorators.concat([{"addClass": "{styles}.recordTypeSelect"}]) : [{"addClass": "{styles}.recordTypeSelect"}];
         return tree;
     };
     
