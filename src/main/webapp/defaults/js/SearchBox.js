@@ -49,12 +49,53 @@ cspace = cspace || {};
             searchButton: "cs-searchBox-button",
             advancedSearch: "cs-searchBox-advancedSearch"
         },
-        strings: {},
+        strings: {
+            divider: "-",
+            recordTypeSelector: "recordTypeSelect",
+            allRecords: "all"
+        },
         parentBundle: "{globalBundle}",
         model: {
             messagekeys: {
                 recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
-            }
+            },
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.searchBox.buildModel",
+                        related: "vocabularies",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }]
         },                  // A default data model object.
         produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
         rendererOptions: {
@@ -62,16 +103,8 @@ cspace = cspace || {};
         },
         components: {
             globalNavigator: "{globalNavigator}",
-            recordTypeSelector: {
-                type: "cspace.util.recordTypeSelector",
-                options: {
-                    related: "{searchBox}.options.related",
-                    dom: "{searchBox}.dom",
-                    componentID: "recordTypeSelect",
-                    selector: "recordTypeSelect",
-                    permission: "{searchBox}.options.permission"
-                }
-            }          
+            recordTypeManager: "{recordTypeManager}",
+            permissionsResolver: "{permissionsResolver}"        
         },
         invokers: {
             navigateToSearch: "cspace.searchBox.navigateToSearch"
@@ -94,6 +127,14 @@ cspace = cspace || {};
     });
     
     cspace.searchBox.finalInit = function (that) {
+        // Disable all the options which are divider
+        //var divider = that.options.strings.divider;
+        
+        // Not sure how I could get to the selector differently here
+        //fluid.each($(".csc-searchBox-selectRecordType option"), function (option, index) {
+        //    $(option).prop("disabled", $(option).text() === divider);
+        //});
+        
         if (that.options.selfRender) {
             that.refreshView();
         }
@@ -103,6 +144,53 @@ cspace = cspace || {};
         that.options.listeners = that.options.listeners || {};
         that.options.listeners.afterRender = function () {
             bindEvents(that);
+        };
+        
+        that.produceComponent = function () {
+            // Name of the selector we are going to modify with dynamic options
+            var componentID = that.options.strings.recordTypeSelector;
+            var model = that.model;
+            
+            // String divider which we are going to use between different categories
+            var divider = that.options.strings.divider;
+            // Additional option which we are going to add to the options
+            var allRecords = that.options.strings.allRecords;
+            // The array which will be a set of all categories with dividers between them
+            var options = [];
+            
+            // Try to add our additional option. It might not exist though if options are not set properly
+            options = options.concat([allRecords]);
+            
+            // First let's build an overall array which is a set of all categories
+            fluid.each(model.categories, function (category) {
+                if (options.length === 0) {
+                    options = options.concat(category);
+                    return;
+                }
+                // Add a divider in between only if options is not empty
+                options = options.concat([divider], category);
+            });
+            
+            // we need this variable to resolve componentID inside of JSON
+            var result = {};
+            result[componentID] = {
+                selection: options[0],
+                optionlist: options,
+                optionnames: fluid.transform(options, function (recordType) {
+                    // If the type is a divider then just show a divider and do not resolve it
+                    if (recordType === divider) {
+                        return divider;
+                    }
+                    return that.messageResolver.resolve(recordType);
+                }),
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.searchBox.selectDecorator"
+                }
+            };
+            
+            // Return part of the tree which is a selector we complete
+            return result;
         };
     };
 
@@ -127,6 +215,14 @@ cspace = cspace || {};
         });
     };
     
+    // A public function which should return array of records of the defined type
+    cspace.searchBox.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return records;
+    };
+    
     // A public function that is called as searchBox's treeBuilder method and builds a component tree.
     cspace.searchBox.produceTree = function (that) {
         var tree = {
@@ -138,8 +234,9 @@ cspace = cspace || {};
                 messagekey: "${messagekeys.recordTypeSelectLabel}"
             }
         };
-        tree = $.extend(tree, that.recordTypeSelector.produceComponent());
-        // Adding all custom components styles.
+        
+        tree = $.extend(tree, that.produceComponent());
+        
         fluid.each(tree, function (child, key) {
             child.decorators = [{
                 type: "addClass",
@@ -157,6 +254,30 @@ cspace = cspace || {};
             }
         };
         return tree;
+    };
+    
+    /***********************************************
+     * UI Options Select Dropdown Options Decorator*
+     ***********************************************/
+
+    /**
+     * A sub-component that decorates the options on the select dropdown list box with the css style
+     */
+    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {});
+    
+    fluid.defaults("cspace.searchBox.selectDecorator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"], 
+        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit",
+        strings: {
+            divider: "-"
+        }
+    });
+    
+    cspace.searchBox.selectDecorator.finalInit = function (that) {
+        var divider = that.options.strings.divider;
+        fluid.each($("option", that.container), function (option) {
+            $(option).prop("disabled", $(option).text() === divider);
+        });
     };
     
     // This function executes on file load and starts the fetch process of component's template.
