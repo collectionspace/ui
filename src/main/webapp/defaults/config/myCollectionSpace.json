@@ -31,7 +31,7 @@
                         "strings": {
                             "searchBox-recordTypeSelectLabel": "Record Type"
                         },
-                        "related": "all",
+                        "related": ["allCategory", "cataloging", "procedures", "vocabularies"],
                         "selfRender": true,
                         "permission": "list"
                     }
