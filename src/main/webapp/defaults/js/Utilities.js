@@ -507,47 +507,121 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
 
-    cspace.util.recordTypeSelector = function (options) {
-        var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
-        fluid.initDependents(that);
-        var model = cspace.permissions.getPermissibleRelatedRecords(that.options.related, that.permissionsResolver, that.recordTypeManager, that.options.permission);
-        that.model = model;
+    fluid.defaults("cspace.util.recordTypeSelector", {
+        gradeNames: ["fluid.modelComponent", "autoInit"],
+        mergePolicy: {
+            recordTypeManager: "nomerge",
+            permissionsResolver: "nomerge",
+            messageResolver: "nomerge"
+        },
+        recordTypeManager: "{recordTypeManager}",
+        permissionsResolver: "{permissionsResolver}",
+        messageResolver: "{globalBundle}",
+        preInitFunction: [{
+            namespace: "preInitPrepareModel",
+            listener: "cspace.util.recordTypeSelector.preInitPrepareModel"
+        }, {
+            namespace: "preInit",
+            listener: "cspace.util.recordTypeSelector.preInit"
+        }],
+        finalInitFunction: "cspace.util.recordTypeSelector.finalInit",
+        permission: "read",
+        strings: {
+            divider: ""
+        }
+    });
+
+    cspace.util.recordTypeSelector.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return records;
+    };
+
+    cspace.util.recordTypeSelector.preInitPrepareModel = function (that) {
+        that.options.related = fluid.makeArray(that.options.related);
+        fluid.each(that.options.related, function (related) {
+            var relatedCategory = cspace.util.modelBuilder({
+                callback: "cspace.util.recordTypeSelector.buildModel",
+                related: related,
+                resolver: that.options.permissionsResolver,
+                recordTypeManager: that.options.recordTypeManager,
+                permission: that.options.permission
+            });
+            if (!relatedCategory) {
+                return;
+            }
+            that.applier.requestChange(related, relatedCategory);
+        });
+    };
+
+    cspace.util.recordTypeSelector.preInit = function (that) {
         that.produceComponent = function () {
-            var togo = {};
-            if (model.length > 0) {
+            var togo = {},
+                optionlist = [],
+                optionnames = [];
+            fluid.each(that.options.related, function (related) {
+                if (!that.model[related]) {
+                    return;
+                }
+                if (optionlist.length !== 0) {
+                    optionlist.push(that.options.strings.divider);
+                }
+                optionlist = optionlist.concat(that.model[related])
+            });
+            fluid.each(optionlist, function (option) {
+                if (!option) {
+                    optionnames.push(option);
+                    return;
+                }
+                optionnames.push(that.options.messageResolver.resolve(option));
+            });
+            if (optionlist.length > 0) {
                 togo[that.options.componentID] = {
-                    selection: model[0],
-                    optionlist: model,
-                    optionnames: fluid.transform(model, function (recordType) {
-                        return that.messageResolver.resolve(recordType);
-                    })
+                    selection: optionlist[0],
+                    optionlist: optionlist,
+                    optionnames: fluid.transform(optionlist, function (option) {
+                        return option ? that.options.messageResolver.resolve(option) : option
+                    }),
+                    decorators: [{
+                        type: "fluid",
+                        func: "cspace.util.recordTypeSelector.selectDecorator"
+                    }]
                 };
             }
+            that.options.singleton = optionlist.length < 2;
             return togo;
         };
+    };
 
+    cspace.util.recordTypeSelector.finalInit = function (that) {
         that.returnedOptions = {
             listeners: {
                 afterRender: function () {
-                    if (that.model.length < 2) {
+                    if (that.options.singleton) {
                         fluid.enabled(that.options.dom.locate(that.options.selector), false);
                     }
                 }
             }
         };
         fluid.log("Record type selector constructed");
-        return that;
     };
 
-    fluid.defaults("cspace.util.recordTypeSelector", {
-        gradeNames: ["fluid.littleComponent"],
-        components: {
-            recordTypeManager: "{recordTypeManager}",
-            permissionsResolver: "{permissionsResolver}",
-            messageResolver: "{globalBundle}"
-        },
-        permission: "read"
+    fluid.demands("cspace.util.recordTypeSelector.selectDecorator", "cspace.util.recordTypeSelector", {
+        container: "{arguments}.0"
     });
+
+    fluid.defaults("cspace.util.recordTypeSelector.selectDecorator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        finalInitFunction: "cspace.util.recordTypeSelector.selectDecorator.finalInit"
+    });
+
+    cspace.util.recordTypeSelector.selectDecorator.finalInit = function (that) {
+        fluid.each($("option", that.container), function (option) {
+            option = $(option);
+            option.prop("disabled", !!!option.text());
+        });
+    };
 
     // This will eventually go away once the getBeanValue strategy is used everywhere.
     cspace.util.getBeanValue = function (root, EL, schema, permManager) {

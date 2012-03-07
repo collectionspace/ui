@@ -20,17 +20,12 @@ cspace = cspace || {};
     fluid.defaults("cspace.searchBox", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: [{
-            namespace: "preInitPrepareModel",
-            listener: "cspace.searchBox.preInitPrepareModel"
-        }, {
             namespace: "preInit",
             listener: "cspace.searchBox.preInit"
         }],
         finalInitFunction: "cspace.searchBox.finalInit",
         mergePolicy: {
-            model: "preserve",
-            recordTypeManager: "nomerge",
-            permissionsResolver: "nomerge"
+            model: "preserve"
         },
         selectors: {                // Set of selectors that the component is interested in rendering.
             recordTypeSelect: ".csc-searchBox-selectRecordType",
@@ -47,9 +42,7 @@ cspace = cspace || {};
             searchButton: "cs-searchBox-button",
             advancedSearch: "cs-searchBox-advancedSearch"
         },
-        strings: {
-            divider: ""
-        },
+        strings: {},
         parentBundle: "{globalBundle}",
         model: {
             messagekeys: {
@@ -61,10 +54,18 @@ cspace = cspace || {};
             autoBind: false
         },
         components: {
-            globalNavigator: "{globalNavigator}"
+            globalNavigator: "{globalNavigator}",
+            recordTypeSelector: {
+                type: "cspace.util.recordTypeSelector",
+                options: {
+                    related: "{searchBox}.options.related",
+                    dom: "{searchBox}.dom",
+                    componentID: "recordTypeSelect",
+                    selector: "recordTypeSelect",
+                    permission: "{searchBox}.options.permission"
+                }
+            }
         },
-        recordTypeManager: "{recordTypeManager}",
-        permissionsResolver: "{permissionsResolver}",
         invokers: {
             navigateToSearch: "cspace.searchBox.navigateToSearch"
         },
@@ -94,23 +95,6 @@ cspace = cspace || {};
         }
     };
 
-    cspace.searchBox.preInitPrepareModel = function (that) {
-        that.options.related = fluid.makeArray(that.options.related);
-        fluid.each(that.options.related, function (related) {
-            var relatedCategory = cspace.util.modelBuilder({
-                callback: "cspace.searchBox.buildModel",
-                related: related,
-                resolver: that.options.permissionsResolver,
-                recordTypeManager: that.options.recordTypeManager,
-                permission: "list"
-            });
-            if (!relatedCategory) {
-                return;
-            }
-            that.applier.requestChange(related, relatedCategory);
-        });
-    };
-
     cspace.searchBox.preInit = function (that) {
         that.afterRenderHandler = function () {
             // Bind a click event on search button to trigger searchBox's navigateToSearch
@@ -120,37 +104,6 @@ cspace = cspace || {};
                     that.navigateToSearch();
                 }
             });
-        };
-        that.produceRecordTypeSelect = function () {
-            var optionlist = [],
-                optionnames = [];
-            fluid.each(that.options.related, function (related) {
-                if (!that.model[related]) {
-                    return;
-                }
-                if (optionlist.length !== 0) {
-                    optionlist.push(that.options.strings.divider);
-                }
-                optionlist = optionlist.concat(that.model[related])
-            });
-            fluid.each(optionlist, function (option) {
-                if (!option) {
-                    optionnames.push(option);
-                    return;
-                }
-                optionnames.push(that.options.parentBundle.resolve(option));
-            });
-            return {
-                recordTypeSelect: {
-                    selection: optionlist[0],
-                    optionlist: optionlist,
-                    optionnames: optionnames,
-                    decorators: [{
-                        type: "fluid",
-                        func: "cspace.searchBox.selectDecorator"
-                    }]
-                }
-            };
         };
     };
 
@@ -174,14 +127,6 @@ cspace = cspace || {};
         });
     };
     
-    // A public function which should return array of records of the defined type
-    cspace.searchBox.buildModel = function (options, records) {
-        if (!records || records.length < 1) {
-            return;
-        }
-        return records;
-    };
-    
     // A public function that is called as searchBox's treeBuilder method and builds a component tree.
     cspace.searchBox.produceTree = function (that) {
         var tree = {
@@ -194,7 +139,7 @@ cspace = cspace || {};
             }
         };
         
-        fluid.merge(null, tree, that.produceRecordTypeSelect());
+        fluid.merge(null, tree, that.recordTypeSelector.produceComponent());
         
         fluid.each(tree, function (child, key) {
             var decorator = {
@@ -215,22 +160,6 @@ cspace = cspace || {};
             }
         };
         return tree;
-    };
-
-    fluid.demands("cspace.searchBox.selectDecorator", "cspace.searchBox", {
-        container: "{arguments}.0"
-    });
-    
-    fluid.defaults("cspace.searchBox.selectDecorator", {
-        gradeNames: ["fluid.viewComponent", "autoInit"], 
-        finalInitFunction: "cspace.searchBox.selectDecorator.finalInit"
-    });
-    
-    cspace.searchBox.selectDecorator.finalInit = function (that) {
-        fluid.each($("option", that.container), function (option) {
-            option = $(option);
-            option.prop("disabled", !!!option.text());
-        });
     };
     
     // This function executes on file load and starts the fetch process of component's template.
