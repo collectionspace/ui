@@ -561,28 +561,37 @@ fluid.registerNamespace("cspace.util");
                 optionlist = [],
                 optionnames = [];
             fluid.each(that.options.related, function (related) {
-                if (!that.model[related]) {
+                var category = that.model[related],
+                    categoryNames = [],
+                    categoryHash = {};
+                if (!category) {
                     return;
                 }
                 if (optionlist.length !== 0) {
                     optionlist.push(that.options.strings.divider);
+                    optionnames.push(that.options.strings.divider);
                 }
-                optionlist = optionlist.concat(that.model[related])
+                fluid.each(category, function (val) {
+                    var name = that.options.messageResolver.resolve(val);
+                    categoryHash[name] = val;
+                    categoryNames.push(name);
+                });
+
+                categoryNames.sort();
+
+                fluid.each(categoryNames, function (name, index) {
+                    category[index] = categoryHash[name];
+                });
+
+                optionlist = optionlist.concat(category)
+                optionnames = optionnames.concat(categoryNames)
             });
-            fluid.each(optionlist, function (option) {
-                if (!option) {
-                    optionnames.push(option);
-                    return;
-                }
-                optionnames.push(that.options.messageResolver.resolve(option));
-            });
+
             if (optionlist.length > 0) {
                 togo[that.options.componentID] = {
                     selection: optionlist[0],
                     optionlist: optionlist,
-                    optionnames: fluid.transform(optionlist, function (option) {
-                        return option ? that.options.messageResolver.resolve(option) : option
-                    }),
+                    optionnames: optionnames,
                     decorators: [{
                         type: "fluid",
                         func: "cspace.util.recordTypeSelector.selectDecorator"
