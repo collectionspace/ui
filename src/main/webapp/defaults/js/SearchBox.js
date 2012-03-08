@@ -17,22 +17,15 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.searchBox");
     
-    var bindEvents = function (that) {
-        // Bind a click event on search button to trigger searchBox's navigateToSearch
-        that.locate("searchButton").click(that.navigateToSearch);
-        that.locate("searchQuery").keypress(function (e) {
-            if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
-                that.navigateToSearch();
-            }
-        });
-    };
-    
     fluid.defaults("cspace.searchBox", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        preInitFunction: "cspace.searchBox.preInit",
+        preInitFunction: [{
+            namespace: "preInit",
+            listener: "cspace.searchBox.preInit"
+        }],
         finalInitFunction: "cspace.searchBox.finalInit",
         mergePolicy: {
-            model: "preserve"   
+            model: "preserve"
         },
         selectors: {                // Set of selectors that the component is interested in rendering.
             recordTypeSelect: ".csc-searchBox-selectRecordType",
@@ -71,7 +64,7 @@ cspace = cspace || {};
                     selector: "recordTypeSelect",
                     permission: "{searchBox}.options.permission"
                 }
-            }          
+            }
         },
         invokers: {
             navigateToSearch: "cspace.searchBox.navigateToSearch"
@@ -87,6 +80,9 @@ cspace = cspace || {};
                 }
             })
         },
+        listeners: {
+            afterRender: "{cspace.searchBox}.afterRenderHandler"
+        },
         urls: cspace.componentUrlBuilder({
             advancedSearchURL: "%webapp/html/advancedsearch.html"
         }),
@@ -98,16 +94,20 @@ cspace = cspace || {};
             that.refreshView();
         }
     };
-    
+
     cspace.searchBox.preInit = function (that) {
-        that.options.listeners = that.options.listeners || {};
-        that.options.listeners.afterRender = function () {
-            bindEvents(that);
+        that.afterRenderHandler = function () {
+            // Bind a click event on search button to trigger searchBox's navigateToSearch
+            that.locate("searchButton").click(that.navigateToSearch);
+            that.locate("searchQuery").keypress(function (e) {
+                if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
+                    that.navigateToSearch();
+                }
+            });
         };
     };
 
     cspace.searchBox.preInitSearch = function (that) {
-        cspace.searchBox.preInit(that);
         cspace.util.preInitMergeListeners(that.options, {
             afterSearch: function (searchModel) {
                 that.updateSearchHistory(searchModel);
@@ -138,14 +138,17 @@ cspace = cspace || {};
                 messagekey: "${messagekeys.recordTypeSelectLabel}"
             }
         };
-        tree = $.extend(tree, that.recordTypeSelector.produceComponent());
-        // Adding all custom components styles.
+        
+        fluid.merge(null, tree, that.recordTypeSelector.produceComponent());
+        
         fluid.each(tree, function (child, key) {
-            child.decorators = [{
+            var decorator = {
                 type: "addClass",
                 classes: that.options.styles[key]
-            }];
+            };
+            child.decorators = child.decorators ? child.decorators.concat([decorator]) : [decorator];
         });
+
         if (!that.options.enableAdvancedSearch) {
             return tree;
         }
