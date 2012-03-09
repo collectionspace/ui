@@ -394,6 +394,8 @@ cspace = cspace || {};
         try {
             eStaticDate = setStaticDate(eYear, eMonth, eDay, lYear, lMonth, lDay, true);
             lStaticDate = setStaticDate(eYear, eMonth, eDay, lYear, lMonth, lDay, false);
+            // CSPACE-4793: Adding 1 day to latest so it is inclusive of the last day.
+            lStaticDate = lStaticDate.add({days: 1});
         } catch (e) {
             return;
         }
