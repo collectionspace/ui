@@ -33,9 +33,9 @@
                         "model": "{pageBuilder}.model",
                         "uispec": "{pageBuilder}.options.uispec",
                         "strings": {
-                            "editRecord": "Edit Location and Movement Control Record",
-                            "recordList": "Related Location and Movement Control Records",
-                            "newRecordRow": "New Location and Movement Control Record"
+                            "editRecord": "Edit Location/Movement/Inventory Control Record",
+                            "recordList": "Related Location/Movement/Inventory Control Records",
+                            "newRecordRow": "New Location/Movement/Inventory Control Record"
                         },
                         "components": {
                             "listEditor": {
