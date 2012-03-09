@@ -253,6 +253,21 @@
         ".csc-movement-movementMethods-label": {
             "messagekey": "movement-movementMethodsLabel"
         },
-        ".csc-movement-updatedBy": "${fields.updatedBy}"
+        ".csc-movement-updatedBy": "${fields.updatedBy}",
+        ".csc-movement-inventoryControlInventory-label": {
+            "messagekey": "movement-inventoryControlInformationLabel"
+        },
+        ".csc-movement-inventoryDate-label": {
+            "messagekey": "movement-inventoryDateLabel"
+        },
+        ".csc-movement-inventoryDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.inventoryDate}"
+        }
     }
 }
