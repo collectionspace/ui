@@ -1384,7 +1384,7 @@ input[disabled]:hover, input[disabled]:hover    {
     -moz-border-radius:4px 4px 0 0; 
     -webkit-border-radius:4px 4px 0 0;}
     
-/***********    CSS For New Markup on Location and Movement Control Record    ***********/
+/***********    CSS For New Markup on Location/Movement/Inventory Control Record    ***********/
 /* Note: The scoping of these styles to the movement template is temporary, until the styles are approved */
 /*.csc-movement-template .button-row {
     padding-bottom: 32px;}*/
