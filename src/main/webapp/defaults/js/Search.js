@@ -35,7 +35,7 @@ cspace = cspace || {};
             var comp;
             if (key === "number") {
                 comp = {
-                    target: "${searchModel.recordType}.html?csid=${*.csid}",
+                    target: "${*.recordtype}.html?csid=${*.csid}",
                     linktext: "${*.number}"
                 };
             } else if (key !== "csid") {
