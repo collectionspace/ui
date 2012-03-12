@@ -166,7 +166,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire"],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire",
                     modelChanged: {
@@ -187,7 +187,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
                     },
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire"],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
@@ -203,10 +203,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], {
             options: {
                 listeners: {
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire", {
-                        listener: "{pageBuilderIO}.resolveHardSaved",
-                        args: ["{pageBuilderIO}.options", "{arguments}.0"]
-                    }],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 },
@@ -814,7 +811,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
                     },
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire"],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
@@ -834,10 +831,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }, {
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }],
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire", {
-                        listener: "{pageBuilderIO}.resolveHardSaved",
-                        args: ["{pageBuilderIO}.options", "{arguments}.0"]
-                    }],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
@@ -851,10 +845,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }, {
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }],
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire", {
-                        listener: "{pageBuilderIO}.resolveHardSaved",
-                        args: ["{pageBuilderIO}.options", "{arguments}.0"]
-                    }],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 },
                 urls: {
@@ -876,7 +867,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
                     },
-                    afterFetch: ["{loadingIndicator}.events.hideOn.fire"],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onFetch: "{loadingIndicator}.events.showOn.fire"
                 }

@@ -1525,8 +1525,12 @@ fluid.registerNamespace("cspace.util");
         }) : [path]);
     };
 
-    cspace.util.resolveHardSaved = function (data) {
-        return !!data.hardSaved;
+    cspace.util.resolveHardSaved = function (model) {
+        return !!model.hardSaved;
+    };
+
+    cspace.util.isReadOnly = function (readOnly, model) {
+        return readOnly || cspace.util.resolveHardSaved(model);
     };
     
 })(jQuery, fluid);
