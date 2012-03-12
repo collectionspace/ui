@@ -321,15 +321,33 @@
         ".csc-movement-inventoryContact": {
             "decorators": [
                 {
-                    "func": "cspace.autocomplete",
+                    "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
-                        "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-movement-inventoryContact": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/movement/autocomplete/inventoryContact",
+                                                    "vocabUrl": "../../../tenant/core/movement/source-vocab/inventoryContact"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.inventoryContact}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.owners"
                     }
                 }
-            ],
-            "value": "${fields.inventoryContact}"
+            ]
         }
     }
 }
