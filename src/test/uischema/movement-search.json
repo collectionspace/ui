@@ -11,6 +11,7 @@
                             "type": "string"
                         },
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         }
                     },
@@ -25,6 +26,7 @@
                             "type": "string"
                         },
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         }
                     },
@@ -39,6 +41,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "movementMethod": {
@@ -60,6 +63,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "movementReferenceNumber": {
@@ -77,6 +81,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "reasonForMove": {
@@ -101,6 +106,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "currentLocation": {
@@ -115,6 +121,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "updatedBy": {

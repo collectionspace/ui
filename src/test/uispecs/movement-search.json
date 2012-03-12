@@ -35,35 +35,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "movementContacts",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-movementContact": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
-                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.movementContact}"
+                                ".csc-movement-movementContact": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
+                                                "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "movementContacts"
+                                    ],
+                                    "value": "${{row}.movementContact}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "movementContacts",
                     "hidePrimary": true
                 }
             }
@@ -78,38 +70,30 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "movementMethods",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-movementMethods": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Forklift",
-                                                "Handcarried",
-                                                "Trolley"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "forklift",
-                                                "handcarried",
-                                                "trolley"
-                                            ],
-                                            "selection": "${{row}.movementMethod}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "movementMethods"
+                                ".csc-movement-movementMethods": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Forklift",
+                                        "Handcarried",
+                                        "Trolley"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "forklift",
+                                        "handcarried",
+                                        "trolley"
+                                    ],
+                                    "selection": "${{row}.movementMethod}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "movementMethods",
                     "hidePrimary": true
                 }
             }
@@ -121,35 +105,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "normalLocations",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-normalLocation": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/normalLocation",
-                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/normalLocation"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.normalLocation}"
+                                ".csc-movement-normalLocation": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/movement/autocomplete/normalLocation",
+                                                "vocabUrl": "../../../tenant/core/movement/source-vocab/normalLocation"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "normalLocations"
+                                    ],
+                                    "value": "${{row}.normalLocation}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "normalLocations",
                     "hidePrimary": true
                 }
             }
@@ -206,35 +182,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "currentLocations",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-currentLocation": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/currentLocation",
-                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/currentLocation"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.currentLocation}"
+                                ".csc-movement-currentLocation": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/movement/autocomplete/currentLocation",
+                                                "vocabUrl": "../../../tenant/core/movement/source-vocab/currentLocation"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "currentLocations"
+                                    ],
+                                    "value": "${{row}.currentLocation}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "currentLocations",
                     "hidePrimary": true
                 }
             }
@@ -273,23 +241,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "movementReferenceNumbers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-movementReferenceNumber": "${{row}.movementReferenceNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "movementReferenceNumbers"
-                                }
+                                ".csc-movement-movementReferenceNumber": "${{row}.movementReferenceNumber}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "movementReferenceNumbers",
                     "hidePrimary": true
                 }
             }
@@ -301,46 +261,38 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "reasonForMoves",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-reasonForMove": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Conservation",
-                                                "Exhibition",
-                                                "Inventory",
-                                                "Loan",
-                                                "New Storage Location",
-                                                "Photography",
-                                                "Research"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "conservation",
-                                                "exhibition",
-                                                "inventory",
-                                                "loan",
-                                                "newstoragelocation",
-                                                "photography",
-                                                "research"
-                                            ],
-                                            "selection": "${{row}.reasonForMove}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "reasonForMoves"
+                                ".csc-movement-reasonForMove": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Conservation",
+                                        "Exhibition",
+                                        "Inventory",
+                                        "Loan",
+                                        "New Storage Location",
+                                        "Photography",
+                                        "Research"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "conservation",
+                                        "exhibition",
+                                        "inventory",
+                                        "loan",
+                                        "newstoragelocation",
+                                        "photography",
+                                        "research"
+                                    ],
+                                    "selection": "${{row}.reasonForMove}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "reasonForMoves",
                     "hidePrimary": true
                 }
             }
@@ -376,23 +328,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
+                                ".csc-movement-updatedBy": "${{row}.updatedBy}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "updatedBys",
                     "hidePrimary": true
                 }
             }
@@ -426,7 +370,7 @@
         "value": "${inventoryDateEnd}"
     },
     ".csc-movement-inventoryContact-label": {
-        "messagekey": "movement-inventoryContact"
+        "messagekey": "movement-search-inventoryContactLabel"
     },
     ".csc-movement-inventoryContact": {
         "decorators": [
@@ -434,35 +378,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "inventoryContacts",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-inventoryContact": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/inventoryContact",
-                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/inventoryContact"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.inventoryContact}"
+                                ".csc-movement-inventoryContact": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/movement/autocomplete/inventoryContact",
+                                                "vocabUrl": "../../../tenant/core/movement/source-vocab/inventoryContact"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inventoryContacts"
+                                    ],
+                                    "value": "${{row}.inventoryContact}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "inventoryContacts",
                     "hidePrimary": true
                 }
             }
@@ -477,53 +413,34 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "inventoryActionsRequired",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-reasonForMove": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Conservation",
-                                                "Exhibition",
-                                                "Inventory",
-                                                "Loan",
-                                                "New Storage Location",
-                                                "Photography",
-                                                "Research"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "conservation",
-                                                "exhibition",
-                                                "inventory",
-                                                "loan",
-                                                "newstoragelocation",
-                                                "photography",
-                                                "research"
-                                            ],
-                                            "selection": "${{row}.inventoryActionRequired}"
+                                ".csc-movement-inventoryActionRequired": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.termList",
+                                            "type": "fluid",
+                                            "options": {
+                                                "root": "{row}",
+                                                "elPath": "inventoryActionRequired",
+                                                "termListType": "inventoryActionRequired"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inventoryActionsRequired"
+                                    ]
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "inventoryActionsRequired",
                     "hidePrimary": true
                 }
             }
         ]
     },
     ".csc-movement-inventoryNote-label": {
-        "messagekey": "movement-inventoryNoteLabel"
+        "messagekey": "movement-search-inventoryNoteLabel"
     },
     ".csc-movement-inventoryNote": {
         "decorators": [
@@ -531,23 +448,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "inventoryNotes",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-location-accessNote": "${{row}.inventoryNote}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inventoryNotes"
-                                }
+                                ".csc-movement-inventoryNote": "${{row}.inventoryNote}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "inventoryNotes",
                     "hidePrimary": true
                 }
             }
@@ -562,46 +471,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "inventoryFrequencies",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-movement-inventoryFrequency": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Conservation",
-                                                "Exhibition",
-                                                "Inventory",
-                                                "Loan",
-                                                "New Storage Location",
-                                                "Photography",
-                                                "Research"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "conservation",
-                                                "exhibition",
-                                                "inventory",
-                                                "loan",
-                                                "newstoragelocation",
-                                                "photography",
-                                                "research"
-                                            ],
-                                            "selection": "${{row}.inventoryFrequency}"
+                                ".csc-movement-inventoryFrequency": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.termList",
+                                            "type": "fluid",
+                                            "options": {
+                                                "root": "{row}",
+                                                "elPath": "inventoryFrequency",
+                                                "termListType": "inventoryFrequency"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inventoryFrequencies"
+                                    ]
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "inventoryFrequencies",
                     "hidePrimary": true
                 }
             }
@@ -616,7 +506,7 @@
     ".csc-movement-nextInventoryDateEnd-label": {
         "messagekey": "movement-nextInventoryDateEndLabel"
     },
-    ".csc-movement-nextInventoryDateStart: {
+    ".csc-movement-nextInventoryDateStart": {
         "decorators": [
             {
                 "func": "cspace.datePicker",
