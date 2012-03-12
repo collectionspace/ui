@@ -397,5 +397,241 @@
                 }
             }
         ]
+    },
+    ".csc-movement-inventoryDate-label": {
+        "messagekey": "movement-inventoryDateLabel"
+    },
+    ".csc-movement-inventoryDateStart-label": {
+        "messagekey": "movement-inventoryDateStartLabel"
+    },
+    ".csc-movement-inventoryDateEnd-label": {
+        "messagekey": "movement-inventoryDateEndLabel"
+    },
+    ".csc-movement-inventoryDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${inventoryDateStart}"
+    },
+    ".csc-movement-inventoryDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${inventoryDateEnd}"
+    },
+    ".csc-movement-inventoryContact-label": {
+        "messagekey": "movement-inventoryContact"
+    },
+    ".csc-movement-inventoryContact": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "inventoryContacts",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-inventoryContact": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/inventoryContact",
+                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/inventoryContact"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.inventoryContact}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inventoryContacts"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-movement-inventoryActionRequired-label": {
+        "messagekey": "movement-inventoryActionRequiredLabel"
+    },
+    ".csc-movement-inventoryActionRequired": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "inventoryActionsRequired",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-reasonForMove": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Conservation",
+                                                "Exhibition",
+                                                "Inventory",
+                                                "Loan",
+                                                "New Storage Location",
+                                                "Photography",
+                                                "Research"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "conservation",
+                                                "exhibition",
+                                                "inventory",
+                                                "loan",
+                                                "newstoragelocation",
+                                                "photography",
+                                                "research"
+                                            ],
+                                            "selection": "${{row}.inventoryActionRequired}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inventoryActionsRequired"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-movement-inventoryNote-label": {
+        "messagekey": "movement-inventoryNoteLabel"
+    },
+    ".csc-movement-inventoryNote": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "inventoryNotes",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-location-accessNote": "${{row}.inventoryNote}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inventoryNotes"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-movement-inventoryFrequency-label": {
+        "messagekey": "movement-inventoryFrequencyLabel"
+    },
+    ".csc-movement-inventoryFrequency": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "inventoryFrequencies",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-inventoryFrequency": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Conservation",
+                                                "Exhibition",
+                                                "Inventory",
+                                                "Loan",
+                                                "New Storage Location",
+                                                "Photography",
+                                                "Research"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "conservation",
+                                                "exhibition",
+                                                "inventory",
+                                                "loan",
+                                                "newstoragelocation",
+                                                "photography",
+                                                "research"
+                                            ],
+                                            "selection": "${{row}.inventoryFrequency}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inventoryFrequencies"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-movement-nextInventoryDate-label": {
+        "messagekey": "movement-nextInventoryDateLabel"
+    },
+    ".csc-movement-nextInventoryDateStart-label": {
+        "messagekey": "movement-nextInventoryDateStartLabel"
+    },
+    ".csc-movement-nextInventoryDateEnd-label": {
+        "messagekey": "movement-nextInventoryDateEndLabel"
+    },
+    ".csc-movement-nextInventoryDateStart: {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${nextInventoryDateStart}"
+    },
+    ".csc-movement-nextInventoryDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${nextInventoryDateEnd}"
     }
 }
