@@ -182,6 +182,12 @@ cspace = cspace || {};
 
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
+
+        // Verify if the record is hard-saved. If so, it should be marked as readOnly.
+        that.resolveHardSaved = function (options, data) {
+            options.readOnly = options.readOnly || !!data.hardSaved;
+        };
+
         fluid.instantiateFirers(that, that.options);
         that.recordTypeTag = fluid.typeTag(that.options.namespace || that.options.recordType);
         fluid.initDependents(that);
