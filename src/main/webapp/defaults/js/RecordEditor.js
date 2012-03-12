@@ -196,10 +196,11 @@ cspace = cspace || {};
         that.rollbackModel = fluid.copy(that.model.fields);
         
         that.refreshView = function () {
+            that.options.readOnly = cspace.util.isReadOnly(that.options.readOnly, that.model);
             fluid.log("RecordEditor.js before render");
             that.events.onRefreshView.fire();
             that.renderer.refreshView();
-            cspace.util.processReadOnly(that.container, cspace.util.isReadOnly(that.options.readOnly, that.model));
+            cspace.util.processReadOnly(that.container, that.options.readOnly);
             processChanges(that, false);
             that.rollbackModel = fluid.copy(that.model.fields);
             that.messageBar.hide();
