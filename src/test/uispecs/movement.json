@@ -344,7 +344,7 @@
                                 "type": "fluid.noexpand"
                             }
                         },
-                        "elPath": "fields.owners"
+                        "elPath": "fields.inventoryContacts"
                     }
                 }
             ]
