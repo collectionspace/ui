@@ -185,7 +185,7 @@ cspace = cspace || {};
 
         // Verify if the record is hard-saved. If so, it should be marked as readOnly.
         that.resolveHardSaved = function (options, data) {
-            options.readOnly = options.readOnly || !!data.hardSaved;
+            options.readOnly = options.readOnly || cspace.util.resolveHardSaved(data);
         };
 
         fluid.instantiateFirers(that, that.options);

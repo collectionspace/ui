@@ -1524,5 +1524,9 @@ fluid.registerNamespace("cspace.util");
             if (!arg) {return true;}
         }) : [path]);
     };
+
+    cspace.util.resolveHardSaved = function (data) {
+        return !!data.hardSaved;
+    };
     
 })(jQuery, fluid);
