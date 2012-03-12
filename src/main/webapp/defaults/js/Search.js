@@ -113,7 +113,7 @@ cspace = cspace || {};
             // but pager does not give us a more suitable event to listen to
             that.resultsPager.events.onModelChange.addListener(function (newModel, oldModel) {
                 $("a.link", that.container).click(function (event) {
-                    event.stopPropagation();
+                    event.preventDefault();
                 });
                 that.locate("resultsRow").click(function (event) {
                     var index = that.locate("resultsRow").index($(event.currentTarget));
