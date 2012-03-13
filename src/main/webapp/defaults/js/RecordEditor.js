@@ -224,46 +224,72 @@ cspace = cspace || {};
         cspace.recordEditor.hasRelations = function (that) {
             return (that.model.csid && that.model.relations && !$.isEmptyObject(that.model.relations));
         };
-        /*
-         * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
-         * Note that a return value of true does not necessarily indicate that the save was successful, only that
-         * it was successfully submitted.
-         */
-        that.requestSave = function () {
-            var ret = that.events.onSave.fire(that.model);
-            if (ret === false) {
-                that.events.cancelSave.fire();
-                return ret;
-            }
-            if (that.namespaces) {
-                var namespace = cspace.util.getDefaultConfigURL.getRecordType();
-                if (that.namespaces.isNamespace(namespace)) {
-                    that.options.applier.requestChange("namespace", namespace);
-                }
-            }
-            if (that.validator) {
-                var validatedModel = that.validator.validate(that.model);
-                if (!validatedModel) {
-                    that.events.cancelSave.fire();
-                    return false;
-                }
-                else {
-                    that.applier.requestChange("", validatedModel)
-                }
-            }
-            that.locate("save").prop("disabled", true);
-            if (that.model.csid) {
-                that.options.dataContext.update();
-            } else {
-                that.options.applier.requestChange("csid", "");
-                that.options.dataContext.create();
-            }
-            return true;
-        };
 
         setupRecordEditor(that);
 
         return that;
+    };
+
+    cspace.recordEditor.requestSaveMovement = function (that) {
+        that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+            model: {
+                messages: ["hardSaveDialog-primaryMessage", "hardSaveDialog-secondaryMessage"],
+                messagekeys: {
+                    actText: "hardSaveDialog-actText",
+                    actAlt: "hardSaveDialog-actAlt",
+                    proceedText: "hardSaveDialog-proceedText",
+                    proceedAlt: "hardSaveDialog-proceedAlt"
+                }
+            },
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        cspace.recordEditor.requestSave(that);
+                    } else if (userAction === "proceed") {
+                        that.applier.requestChange("hardSaved", true);
+                        cspace.recordEditor.requestSave(that);
+                    }
+                }
+            },
+            parentBundle: that.options.parentBundle
+        });
+    };
+
+    /*
+     * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
+     * Note that a return value of true does not necessarily indicate that the save was successful, only that
+     * it was successfully submitted.
+     */
+    cspace.recordEditor.requestSave = function (that) {
+        var ret = that.events.onSave.fire(that.model);
+        if (ret === false) {
+            that.events.cancelSave.fire();
+            return ret;
+        }
+        if (that.namespaces) {
+            var namespace = cspace.util.getDefaultConfigURL.getRecordType();
+            if (that.namespaces.isNamespace(namespace)) {
+                that.options.applier.requestChange("namespace", namespace);
+            }
+        }
+        if (that.validator) {
+            var validatedModel = that.validator.validate(that.model);
+            if (!validatedModel) {
+                that.events.cancelSave.fire();
+                return false;
+            }
+            else {
+                that.applier.requestChange("", validatedModel)
+            }
+        }
+        that.locate("save").prop("disabled", true);
+        if (that.model.csid) {
+            that.options.dataContext.update();
+        } else {
+            that.options.applier.requestChange("csid", "");
+            that.options.dataContext.create();
+        }
+        return true;
     };
     
     cspace.recordEditor.removeWithCheck = function (that) {
@@ -590,6 +616,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
             },
+            requestSave: "cspace.recordEditor.requestSave",
             remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button

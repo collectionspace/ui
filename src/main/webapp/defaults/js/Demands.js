@@ -1043,6 +1043,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordEditor.navigateToFullImage",
             args: "{recordEditor}"
         });
+
+        fluid.demands("cspace.recordEditor.requestSave", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.requestSave",
+            args: "{recordEditor}"
+        });
+
+        fluid.demands("cspace.recordEditor.requestSave", ["cspace.recordEditor", "movement"], {
+            funcName: "cspace.recordEditor.requestSaveMovement",
+            args: "{recordEditor}"
+        });
         
         fluid.demands("cancel", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.cancel",
