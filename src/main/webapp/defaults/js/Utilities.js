@@ -1525,12 +1525,12 @@ fluid.registerNamespace("cspace.util");
         }) : [path]);
     };
 
-    cspace.util.resolveHardSaved = function (model) {
-        return !!model.hardSaved;
+    cspace.util.resolveLocked = function (model) {
+        return !!model.locked;
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
-        return readOnly || cspace.util.resolveHardSaved(model);
+        return readOnly || cspace.util.resolveLocked(model);
     };
     
 })(jQuery, fluid);

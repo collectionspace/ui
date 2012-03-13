@@ -233,12 +233,12 @@ cspace = cspace || {};
     cspace.recordEditor.requestSaveMovement = function (that) {
         that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
             model: {
-                messages: ["hardSaveDialog-primaryMessage", "hardSaveDialog-secondaryMessage"],
+                messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
                 messagekeys: {
-                    actText: "hardSaveDialog-actText",
-                    actAlt: "hardSaveDialog-actAlt",
-                    proceedText: "hardSaveDialog-proceedText",
-                    proceedAlt: "hardSaveDialog-proceedAlt"
+                    actText: "lockDialog-actText",
+                    actAlt: "lockDialog-actAlt",
+                    proceedText: "lockDialog-proceedText",
+                    proceedAlt: "lockDialog-proceedAlt"
                 }
             },
             listeners: {
@@ -246,7 +246,7 @@ cspace = cspace || {};
                     if (userAction === "act") {
                         cspace.recordEditor.requestSave(that);
                     } else if (userAction === "proceed") {
-                        that.applier.requestChange("hardSaved", true);
+                        that.applier.requestChange("locked", true);
                         cspace.recordEditor.requestSave(that);
                     }
                 }

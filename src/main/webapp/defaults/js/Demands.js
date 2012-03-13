@@ -1049,7 +1049,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: "{recordEditor}"
         });
 
-        fluid.demands("cspace.recordEditor.requestSave", ["cspace.recordEditor", "movement"], {
+        fluid.demands("cspace.recordEditor.requestSave", ["cspace.recordEditor", "movement.lock"], {
             funcName: "cspace.recordEditor.requestSaveMovement",
             args: "{recordEditor}"
         });

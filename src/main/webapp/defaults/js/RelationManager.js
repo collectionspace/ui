@@ -98,7 +98,7 @@ cspace = cspace || {};
         finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
     });
     cspace.relationManager.permissionResolver.finalInit = function (that) {
-        if (that.options.hardSaved) {
+        if (that.options.locked) {
             that.visible = false;
             return;
         }
@@ -165,10 +165,10 @@ cspace = cspace || {};
             showAddButton: {
                 type: "cspace.relationManager.permissionResolver",
                 options: {
-                    hardSaved: {
+                    locked: {
                         expander: {
                             type: "fluid.deferredInvokeCall",
-                            func: "cspace.util.resolveHardSaved",
+                            func: "cspace.util.resolveLocked",
                             args: "{cspace.relationManager}.model"
                         }
                     },
