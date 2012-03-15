@@ -12,11 +12,12 @@
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
                             "hierarchy": ".csc-place-hierarchy",
                             "identificationNumber": ".csc-place-displayName"
                         },
-                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
                             "hierarchy": {
                                 "type": "cspace.hierarchy",
