@@ -754,9 +754,7 @@ table.cs-admin-table td.checkbox {
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
-.list-table  table tbody tr td a:focus {
-    background-color:#C3D9E9;}
-.list-table  table tbody tr:hover td {
+.list-table  table tbody tr td a:focus, .cs-selecting, .list-table table tbody tr:hover td, .list-table table tbody tr.cs-selecting td {
     background-color:#C3D9E9;}
 .list-table  table tbody tr.cs-search-disabled:hover td,
 .list-table  table tbody tr.cs-search-disabled:focus td {
@@ -2026,6 +2024,21 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 
 .cs-listView-row:hover {
     cursor:pointer;
+}
+tbody.csc-listView-rows tr.cs-listView-row td {
+    padding: 0;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a {
+    cursor:pointer;
+    padding: 5px 2px 4px 4px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    min-height: 14.4px;
+    background-color: inherit;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
+    background-color: inherit;
 }
 .list-table .cs-disabled.cs-listView-row:hover > td,
 .list-table .cs-disabled.cs-listView-row:focus > td {
