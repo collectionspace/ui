@@ -2048,3 +2048,92 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
+
+/****************************************
+ * Styling of HTML elements developed for UCB place authority template - rjaffe, 18Oct2011, awieliczka, jan2012 *
+ * Needs approval to be added to default css.  *
+ ****************************************/
+
+/* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
+/* example: 
+   <div class="line">
+		<div class="unit size1of4"></div>
+		<div class="unit size1of2"></div>
+		<div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
+			<div class="unit size1of3"></div>
+			<div class="lastUnit size2of3"</div>
+		</div>
+	</div>
+*/
+.line, .lastUnit { overflow: hidden; _overflow: visible; _zoom:1; }
+.unit { float: left; _zoom: 1; }
+.unitExt { float: right; }
+.size1of1 { width: 100% }
+.size1of2 { width: 50%; }
+.size1of3 { width: 33.33333%; }
+.size2of3 { width: 66.66666%; }
+.size1of4 { width: 25%; }
+.size3of4 { width: 75%; }
+.size1of5 { width: 20%; }
+.size2of5 { width: 40%; }
+.size3of5 { width: 60%; }
+.size4of5 { width: 80%; }
+.lastUnit { float: none; _position: relative; _left: -3px; _margin-right: -3px; width: auto; }
+/* the class media extends the grid system to allow a unit that takes the width of its content */
+.media { width: auto; }
+
+.size1of6 { width: 16.66666%; }
+.size5of6 { width: 83.33333%; }
+.smallfield { width: 75% !important; }
+.spacer { height: 4.5em; }
+
+.csc-place .cs-structuredDate-popup {
+	width: 615px !important;
+}
+
+.csc-place .nameDate .cs-structuredDate-popup {
+	right: 38px !important;
+	top: 127px;
+}
+
+.csc-place .info-pair, 
+.csc-place .info-pair-addrow, 
+.csc-place .info-pair-table, 
+.csc-place .info-pair-date,
+.csc-place .info-pair-select,
+.csc-place .info-pair-termlist
+{
+	width: auto;
+	padding-right: 1.5em;
+}
+
+.csc-place li {
+	background-color: #E2E2E2 !important;
+	border: 1px solid #CCC !important;
+	padding: 4px 4px 0 4px !important;
+	margin-bottom: 4px !important;
+}
+
+.csc-place .infoDiv input[type="button"].cs-repeatable-add {
+	top: -12px !important;
+}
+
+.infoDiv .fieldgroup {
+	background: none !important;
+}
+
+/*.csc-place .cs-repeatable-repeat input, .csc-place .cs-repeatable-repeat textarea {
+	width: 100% !important;
+}
+*/
+.remarks, .georefplacename {
+    width:350px;
+    margin-right: 30px;
+}
+.unitofmeasure {
+    width:120px;
+    margin-right:100px;
+}
+/* ---------------------------------------*/
+
+
