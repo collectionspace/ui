@@ -1,0 +1,234 @@
+{
+    ".csc-place-termStatus": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-place-termStatus": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Provisional",
+                                        "Under review",
+                                        "Accepted",
+                                        "Rejected",
+                                        "Please select a value"
+                                    ],
+                                    "optionlist": [
+                                        "provisional",
+                                        "under-review",
+                                        "accepted",
+                                        "rejected",
+                                        ""
+                                    ],
+                                    "selection": "${{row}.termStatus}"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "termStatuss",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-place-placeType": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-place-placeType": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Autonomous region",
+                                        "Borough",
+                                        "Collection site",
+                                        "Continent",
+                                        "Country",
+                                        "Country code",
+                                        "County",
+                                        "Dependent state",
+                                        "Deserted settlement",
+                                        "District (national)",
+                                        "General region",
+                                        "Governorate",
+                                        "Inhabited place",
+                                        "Island",
+                                        "Island group",
+                                        "Locality",
+                                        "Metropolitan area",
+                                        "Municipality",
+                                        "Nation",
+                                        "National division",
+                                        "Neighborhood",
+                                        "Occupied territory",
+                                        "Prefecture",
+                                        "Province",
+                                        "Region",
+                                        "State",
+                                        "State province",
+                                        "Territory",
+                                        "Union territory",
+                                        "Unitary authority",
+                                        "Urban prefecture",
+                                        "Water body"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "autonomous-region",
+                                        "borough",
+                                        "collection-site",
+                                        "continent",
+                                        "country",
+                                        "country-code",
+                                        "county",
+                                        "dependent-state",
+                                        "deserted-settlement",
+                                        "district-national",
+                                        "general-region",
+                                        "governorate",
+                                        "inhabited-place",
+                                        "island",
+                                        "island-group",
+                                        "locality",
+                                        "metropolitan-area",
+                                        "municipality",
+                                        "nation",
+                                        "national-division",
+                                        "neighborhood",
+                                        "occupied-territory",
+                                        "prefecture",
+                                        "province",
+                                        "region",
+                                        "state",
+                                        "state-province",
+                                        "territory",
+                                        "union-territory",
+                                        "unitary-authority",
+                                        "urban-prefecture",
+                                        "water-body"
+                                    ],
+                                    "selection": "${{row}.placeType}"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "placeTypes",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-place-updatedBy-label": {
+        "messagekey": "place-updatedByLabel"
+    },
+    ".csc-place-updatedBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-place-updatedBy": "${{row}.updatedBy}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "updatedBys",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-place-displayName-label": {
+        "messagekey": "place-displayNameLabel"
+    },
+    ".csc-place-createdBy-label": {
+        "messagekey": "place-createdByLabel"
+    },
+    ".csc-place-placeType-label": {
+        "messagekey": "place-placeTypeLabel"
+    },
+    ".csc-place-updatedAtStart-label": {
+        "messagekey": "place-updatedAtStartLabel"
+    },
+    ".csc-place-updatedAtEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtEnd}"
+    },
+    ".csc-place-termStatus-label": {
+        "messagekey": "place-termStatusLabel"
+    },
+    ".csc-place-createdBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-place-createdBy": "${{row}.createdBy}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "createdBys",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-place-updatedAt-label": {
+        "messagekey": "place-updatedAtLabel"
+    },
+    ".csc-place-updatedAtEnd-label": {
+        "messagekey": "place-updatedAtEndLabel"
+    },
+    ".csc-place-displayName": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-place-displayName": "${{row}.displayName}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "displayNames",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-place-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
+    }
+}
