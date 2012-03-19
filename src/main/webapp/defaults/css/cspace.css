@@ -54,7 +54,7 @@ input, textarea, select {
     overflow:visible; 
     height:19px;
     vertical-align: middle;}
-select {height:21px;}
+select {height:21px; padding:1px 0;}
 table select, table ~ select, table input {
     border:none;}
 input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
@@ -681,7 +681,7 @@ td.fl-date-group {
     border-spacing:0; 
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    /*padding:0;*/}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
     width:100%; 
     border-spacing:0; 
@@ -951,7 +951,7 @@ table.cs-admin-table td.checkbox {
 .cataloging .fl-container-pivot {
     padding-top:0px;}
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
-    width:100%; 
+    /*width:100%;*/
     position:relative; 
     margin-bottom:8px;
 	padding:6px; 
@@ -1090,7 +1090,7 @@ table.cs-admin-table td.checkbox {
 .content table select {
     width: 100%; 
     height:19px; 
-    padding-top:0; 
+    /*padding-top:0;*/ 
     border:none;}
 .content textarea { 
     width:100%; 
@@ -1286,7 +1286,8 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /*   styling the date pickers   */
 .cs-date-picker {
-    margin-top: 21px;}
+	/*margin-top: 21px;*/
+    margin-top: 0;}
 .cs-calendar-image {
     background: url('../images/cal.png') no-repeat center center;
 }
@@ -1542,7 +1543,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     height:19px;
     width: 18px;
 	cursor:pointer;
-    /*float:left;*/}
+    float:right;}
 table .cs-calendar-button { 
     border:none;}
 table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button { background-color:#fff;}
@@ -1550,7 +1551,8 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     margin:0 0 -1px 2px; 
     padding: 1px 1px 0 0; 
     width:16px; 
-    height:17px}
+    height:17px;
+	float:right;}
 .info-pair-date .content {
     background-color:#fff;}
 .info-pair-date .content input {

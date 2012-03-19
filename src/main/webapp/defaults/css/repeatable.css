@@ -11,6 +11,9 @@
 .content li.cs-repeatable-repeat .content button,
 .content li.cs-repeatable-repeat .content textarea {
 	float:none;}
+.content li.cs-repeatable-repeat .input-date {
+	float:left;
+}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
 .cs-repeatable-add {}
@@ -25,8 +28,11 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     width:14px; 
     font-weight:bold; 
     position:absolute; 
-    top:0; 
+    top:6px; 
     padding:0}
+.infoGroup .cs-repeatable-group input[type="button"].cs-repeatable-add, .infoGroup .cs-repeatable-group .info-pair-date input[type="button"].cs-repeatable-add {
+	top:0;
+}
 .info-pair-date input[type="button"].cs-repeatable-add {
     right:0; 
     left:136px;}
@@ -49,8 +55,12 @@ input.cs-repeatable-primary {
     margin-right:3px;
     margin-top:2px;
 }
+/* assumes the first td child is the primary radio button and the last td child is the delete button */
+table.cs-repeatable-table td:first-child, table.cs-repeatable-table td:last-child {
+	width:13px;
+}
 td input.cs-repeatable-primary {
-    margin:0px 2px 0 2px;
+    margin:0 0 0 3px;
     vertical-align:middle;}
 input.cs-repeatable-delete {
     border:none; 
