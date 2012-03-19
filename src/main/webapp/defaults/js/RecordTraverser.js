@@ -9,11 +9,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid, window*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
     
     fluid.defaults("cspace.recordTraverser", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
@@ -235,6 +236,20 @@ cspace = cspace || {};
     };
 
     cspace.recordTraverser.preInitFunction = function (that) {
+        that.save = function (increment) {
+            var model = that.model,
+                elPaths = that.options.elPaths,
+                searchReference = elPaths.searchReference;
+
+            if (typeof increment !== "number") {
+                increment = 0;
+            }
+            that.searchReferenceStorage.set({
+                token: get(model, searchReference, elPaths.token),
+                index: get(model, searchReference, elPaths.index) + increment,
+                source: get(model, searchReference, elPaths.source)
+            });
+        };
         that.prepareModelForRenderListener = function () {
             that.prepareModel();
         };
@@ -269,19 +284,15 @@ cspace = cspace || {};
             if (target.length === 0) {
                 return;
             }
-            searchReferenceStorage.set(fluid.find({
+            that.save(fluid.find({
                 "linkNext": 1,
                 "linkPrevious": -1
             }, function (increment, selector) {
                 if (that.locate(selector).attr("href") === target.attr("href")) {
-                    return {
-                        token: get(model, searchReference, elPaths.token),
-                        index: get(model, searchReference, elPaths.index) + increment,
-                        source: get(model, searchReference, elPaths.source)
-                    };
+                    return increment;
                 }
             }));
-        });
+        }, "recordTraverser");
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");
