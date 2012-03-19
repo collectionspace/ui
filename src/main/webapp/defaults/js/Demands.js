@@ -951,7 +951,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 components: {
                     recordTraverser: {
                         type: "cspace.recordTraverser",
-                        createOnEvent: "afterRender"
+                        createOnEvent: "afterRender",
+                        options: {
+                            events: {
+                                onSave: "{cspace.recordEditor}.events.onSave"
+                            },
+                            listeners: {
+                                onSave: {
+                                    namespace: "recordTraverser",
+                                    listener: "{cspace.recordTraverser}.save",
+                                    priority: "last"
+                                }
+                            }
+                        }
                     }
                 },
                 listeners: {
