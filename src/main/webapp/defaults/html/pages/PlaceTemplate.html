@@ -2,16 +2,20 @@
     <div class="csc-place">
         <div id="secondary-nav">
             <div id="secondary-nav-menu-sub">
+                <span class="csc-recordTraverser"></span>
                 <div class="button-row">
-                    <input type="button" class="csc-save saveButton primary" />
-                    <input type="button" class="csc-delete deleteButton primary" />
-                    <input type="button" class="csc-cancel cancelButton" />
                     <a style="display:none;" class="csc-goto gotoButton"></a>
-                    <div class="clear"></div>
+                        <input type="button" class="csc-createFromExisting createFromExistingButton" />
+                        <input type="button" class="csc-cancel cancelButton" />
+                        <input type="button" class="csc-delete deleteButton" />
+                        <input type="button" class="csc-save saveButton" />
                 </div>
+                <div class="time-stamp"> </div>
             </div>
         </div>
 
+        <div class="csc-templateEditor"></div>
+        
         <div class="fl-container-flex fl-fix information-group info-column">
             <div class="csc-recordEditor-header fl-container-flex header toggle csc-place-placeAuthorityInformation-label"></div>
             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
