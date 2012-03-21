@@ -299,6 +299,15 @@ cspace = cspace || {};
                 options: {
                     elPath: "modelToClone"
                 }
+            },
+            recordEditorTogglable: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{cspace.recordEditor}.options.selectors.header",
+                        togglable: "{cspace.recordEditor}.options.selectors.togglable"
+                    }
+                }
             }
         },
         events: {
