@@ -962,13 +962,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
-                produceTree: {
-                    expander: {
-                        type: "fluid.deferredInvokeCall",
-                        func: "cspace.recordEditor.provideProduceTree",
-                        args: "{pageBuilderIO}.options.recordType"
-                    }
-                },
                 showDeleteButton: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
@@ -1178,13 +1171,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
-	            produceTree: {
-                    expander: {
-                        type: "fluid.deferredInvokeCall",
-                        func: "cspace.recordEditor.provideProduceTree",
-                        args: "{pageBuilderIO}.options.recordType"
-                    }
-                },
                 showDeleteButton: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
@@ -2320,8 +2306,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("titleBar", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.titleBar",
             options: {
-                recordApplier: "{pageBuilder}.applier",
-                recordModel: "{pageBuilder}.model",
+                recordApplier: "{cspace.recordEditor}.applier",
+                recordModel: "{cspace.recordEditor}.model",
                 model: {
                     recordType: "{pageBuilder}.options.recordType"
                 }

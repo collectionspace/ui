@@ -1,0 +1,31 @@
+{
+    "termsUsed": {
+        "results": [
+            {
+                "recordinstance": "person",
+                "sourceFieldName": "currentOwner",
+                "sourceFieldType": "objectexit",
+                "sourceFieldselector": "objectexit-currentOwner",
+                "number": "Clara Young",
+                "csid": "urn:cspace:name(ClaraYoung1331894758909)",
+                "recordtype": "person"
+            },
+            {
+                "recordinstance": "organization",
+                "sourceFieldName": "depositor",
+                "sourceFieldType": "objectexit",
+                "sourceFieldselector": "objectexit-depositor",
+                "number": "National Mask & Puppet Corp.",
+                "csid": "urn:cspace:name(NationalMaskPuppetCorp1331894762396)",
+                "recordtype": "organization"
+            }
+        ],
+        "pagination": {
+            "totalItems": "2",
+            "pageSize": "40",
+            "itemsInPage": "2",
+            "pageNum": "0"
+        }
+    },
+    "csid": "aa643807-e1d1-4ca2-9f9b"
+}

@@ -29,19 +29,6 @@ cspace = cspace || {};
         container.append($(selector, templateContainer)); 
     };
     
-    var isTab = function (pageType) {
-        return pageType.indexOf("tab") !== -1;
-    };
-    
-    var setupModel = function (applier, existingModel, pageType, recordType, schema) {
-        // TODO: This logic shouldn't really be here and needs to be moved to the dataSource once it
-        // replaces the dataContext and gathers all the model related logic inside.
-        if (!pageType || isTab(pageType) || existingModel.csid) {
-            return;
-        }
-        applier.requestChange("", cspace.util.getBeanValue(existingModel, recordType, schema));
-    };
-    
     cspace.pageSpecManager = function (pageSpecs) {
         var texts = {};
         function attemptApply() { // Further soundness in correcting FLUID-2792
@@ -180,12 +167,44 @@ cspace = cspace || {};
         return resourceSpecs;
     };
 
-    cspace.pageBuilderIO = function (options) {
-        var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
-        fluid.instantiateFirers(that, that.options);
+    fluid.defaults("cspace.pageBuilderIO", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        preInitFunction: "cspace.pageBuilderIO.preInit",
+        finalInitFunction: "cspace.pageBuilderIO.finalInit",
+        schema: [
+            "recordlist",
+            "recordtypes",
+            "namespaces"
+        ],
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: "cspace.util.lookupMessage"
+        },
+        components: {
+            composite: {
+                type: "cspace.composite"
+            },
+            pageCategory: {
+                type: "cspace.pageCategory",
+                priority: "first",
+                options: {
+                    pageCategory: "{pageBuilderIO}.options.pageCategory"
+                }
+            },
+            instantiator: "{instantiator}"
+        },
+        pageSpec: {},
+        events: {
+            pageReady: null,
+            onError: null
+        }
+    });
+
+    cspace.pageBuilderIO.preInit = function (that) {
         that.recordTypeTag = fluid.typeTag(that.options.namespace || that.options.recordType);
-        fluid.initDependents(that);
-        
+    };
+
+    cspace.pageBuilderIO.finalInit = function (that) {
         that.options.components = {
             pageBuilder: {
                 type: "cspace.pageBuilder",
@@ -249,11 +268,6 @@ cspace = cspace || {};
                 };
             });
             
-            if (that.options.csid) {
-                var dcthat = that.dataContext;
-                resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.buildUrl, dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);
-            }
-            
             options.pageType = options.pageType || that.options.recordType;
             if (options.pageType) {
                 var url = that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", options.pageType);
@@ -300,57 +314,7 @@ cspace = cspace || {};
             };
             fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback);
         };
-        
-        return that;
     };
-    fluid.defaults("cspace.pageBuilderIO", {
-        gradeNames: ["fluid.littleComponent"],
-        schema: [
-            "recordlist",
-            "recordtypes",
-            "namespaces"
-        ],
-        model: {},
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge"
-        },
-        invokers: {
-            displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: "cspace.util.lookupMessage"
-        },
-        components: {
-            composite: {
-                type: "cspace.composite"
-            },
-            pageCategory: {
-                type: "cspace.pageCategory",
-                priority: "first",
-                options: {
-                    pageCategory: "{pageBuilderIO}.options.pageCategory"
-                }
-            },
-            instantiator: "{instantiator}",
-            dataContext: {
-                type: "cspace.dataContext",
-                options: {
-                    recordType: "{pageBuilderIO}.options.recordType"
-                }
-            }
-        },
-        pageSpec: {},
-        csid: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.getUrlParameter",
-                args: "csid"
-            }
-        },
-        events: {
-            pageReady: null,
-            onError: null
-        }
-    });
     
     fluid.defaults("cspace.pageBuilderIO.templateLocator", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
@@ -393,9 +357,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.pageBuilder", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         preInitFunction: "cspace.pageBuilder.preInit",
-        dataContext: "{dataContext}",
         recordType: "{pageBuilderIO}.options.recordType",
-        model: "{pageBuilderIO}.options.model",
         selectors: {
             header: ".csc-header-container",
             footer: ".csc-footer-container",
@@ -446,9 +408,6 @@ cspace = cspace || {};
             onDependencySetup: null
         },
         mergePolicy: {
-            model: "preserve",
-            applier: "nomerge",
-            dataContext: "nomerge",
             uispec: "noexpand",
             schema: "nomerge",
             userLogin: "nomerge"
@@ -456,13 +415,9 @@ cspace = cspace || {};
     });
     
     cspace.pageBuilder.preInit = function (that) {
-        that.dataContext = that.options.dataContext;
-        that.model = that.options.model || {};
-        that.applier = that.options.applier || fluid.makeChangeApplier(that.model, {thin: true});
         that.schema = that.options.schema;
         that.permissions = that.options.userLogin.permissions;
         fluid.instantiateFirers(that, that.options);
-        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
         that.events.onDependencySetup.fire(that.options.uispec);
     };
     

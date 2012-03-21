@@ -322,9 +322,17 @@ fluid.registerNamespace("cspace.util");
             });
         };
         if (that.options.writeable) {
-            that.put = function (model, directModel, callback, errorCallback) {
+            that.set = function (model, directModel, callback, errorCallback) {
                 var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST", errorCallback);
                 $.ajax(ajaxOpts);
+            };
+        }
+        if (that.options.removable) {
+            that.remove = function (directModel, callback, errorCallback) {
+                var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "DELETE", errorCallback);
+                wrapper(function () {
+                    $.ajax(ajaxOpts);
+                });
             };
         }
         return that;

@@ -9,12 +9,7 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-                        "selectors": {
-                            "identificationNumber": ".csc-objectexit-exitNumber"
-                        },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.exitNumber"]
                     }
                 },
@@ -33,12 +28,6 @@
                         "schema": "{pageBuilder}.schema",
                         "permissions": "{pageBuilder}.permissions"
                     }
-                },
-                "tabs": {
-                    "type": "cspace.tabs"
-                },
-                "sidebar": {
-                    "type": "cspace.sidebar"
                 }
             }
         }

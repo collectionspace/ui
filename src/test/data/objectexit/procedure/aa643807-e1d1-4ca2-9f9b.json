@@ -1,0 +1,39 @@
+{
+    "relations": {
+        "results": {
+            "intake": [
+                {
+                    "summary": "",
+                    "summarylist": {
+                        "updatedAt": "2012-03-16T14:22:09Z",
+                        "currentOwner": "",
+                        "entryNumber": "IN2012.3"
+                    },
+                    "csid": "d74d9309-44d7-4101-9b1a",
+                    "number": "IN2012.3",
+                    "relid": "d09a7fef-18b3-4da9-b6ff",
+                    "relationshiptype": "affects",
+                    "recordtype": "intake"
+                }
+            ]
+        },
+        "pagination": [
+            {
+                "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
+                "separatelists": [
+                    [
+                        "d09a7fef-18b3-4da9-b6ff"
+                    ]
+                ],
+                "totalItems": "1",
+                "pageSize": "40",
+                "itemsInPage": "1",
+                "recordtypes": [
+                    "intake"
+                ],
+                "pageNum": "0"
+            }
+        ]
+    },
+    "csid": "aa643807-e1d1-4ca2-9f9b"
+}
