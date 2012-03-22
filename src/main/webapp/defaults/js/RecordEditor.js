@@ -269,9 +269,18 @@ cspace = cspace || {};
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
         selectors: {
+            controlPanel: ".csc-recordEditor-controlPanel-container",
             recordRendererContainer: ".csc-recordEditor-renderer-container",
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
+        },
+        protoTree: {
+            controlPanel: {
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.recordEditor.controlPanel"
+                }
+            }
         },
         selectorsToIgnore: ["recordRendererContainer", "header", "togglable"],
         resources: {
@@ -283,7 +292,6 @@ cspace = cspace || {};
                 }
             })
         },
-        renderOnInit: true,
         components: {
             recordRenderer: {
                 type: "cspace.recordEditor.recordRenderer",
@@ -327,11 +335,7 @@ cspace = cspace || {};
                     }
                 },
                 createOnEvent: "ready"
-            }//,
-//            controlPanel: {
-//                type: "cspace.recordEditor.controlPanel",
-//                container: ""
-//            }
+            }
         },
         events: {
             afterFetch: null,
@@ -349,12 +353,20 @@ cspace = cspace || {};
             onError: null, // params: operation
             afterRenderRefresh: null,
             onRefreshView: null
-        }
+        },
+        listeners: {
+            ready: "{cspace.recordEditor}.onReady"
+        },
+        showCreateFromExistingButton: false
     });
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
 
-    cspace.recordEditor.preInit = function (that) {};
+    cspace.recordEditor.preInit = function (that) {
+        that.onReady = function () {
+            that.refreshView();
+        };
+    };
 
     cspace.recordEditor.finalInit = function (that) {
         var modelToClone = that.localStorage.get();
@@ -377,6 +389,65 @@ cspace = cspace || {};
             });
         }
     };
+
+    fluid.demands("cspace.recordEditor.controlPanel", "cspace.recordEditor", {
+        mergeAllOptions: [{
+            recordModel: "{cspace.recordEditor}.model",
+            recordApplier: "{cspace.recordEditor}.applier",
+            model: {
+                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton"
+            }
+        }, "{arguments}.1"]
+    });
+
+    fluid.defaults("cspace.recordEditor.controlPanel", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        preInitFunction: "cspace.recordEditor.controlPanel.preInit",
+        mergePolicy: {
+            recordModel: "preserve",
+            recordApplier: "nomerge"
+        },
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/ControlPanelTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        selectors: {
+            createFromExistingButton: ".csc-createFromExisting"
+        },
+        protoTree: {
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${showCreateFromExistingButton}",
+                trueTree: {
+                    createFromExistingButton: {
+                        messagekey: "recordEditor-createFromExistingButton",
+                        decorators: {
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableCreateFromExistingButton}"
+                            }
+                        }
+                    }
+                }
+            }]
+        },
+        parentBundle: "{globalBundle}",
+        renderOnInit: true,
+        strings: {}
+    });
+
+    cspace.recordEditor.controlPanel.preInit = function (that) {
+        var rModel = that.options.recordModel;
+        that.applier.requestChange("disableCreateFromExistingButton", !!(rModel && !rModel.csid));
+    };
+
+    fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
 
     fluid.defaults("cspace.recordEditor.templateFetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
