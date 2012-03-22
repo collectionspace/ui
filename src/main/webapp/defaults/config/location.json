@@ -56,7 +56,8 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "location",
-             "schema": [
+            "namespace": "location",
+            "schema": [
                 "recordlist",
                 "recordtypes",
                 "namespaces",
