@@ -3,7 +3,7 @@
         "options": {
             "pageType": "objectexit",
             "selectors": {
-                "recordEditor": ".csc-objectexit-template"
+                "recordEditor": ".csc-record-edit-container"
             },
             "components": {
                 "recordEditor": {
@@ -40,14 +40,7 @@
                 "namespaces",
                 "recordtypes",
                 "objectexit"
-            ],
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/ObjectexitTemplate.html",
-                    "templateSelector": ".csc-objectexit-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
-            }
+            ]
         }
     }
 }

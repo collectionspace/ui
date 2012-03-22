@@ -18,70 +18,6 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.pageBuilder");
     
-    var inject = function (docString, selector, container) {
-        if (!docString) {
-            return;
-        }
-        var bodyTag = docString.match(/<body(.|\s)*?\/body>/gi);
-        bodyTag = bodyTag ? bodyTag[0] : docString;
-        var templateContainer = $("<div></div>").html(bodyTag);
-        var templateContent = $(selector, templateContainer);
-        container.append($(selector, templateContainer)); 
-    };
-    
-    cspace.pageSpecManager = function (pageSpecs) {
-        var texts = {};
-        function attemptApply() { // Further soundness in correcting FLUID-2792
-            var anyApplied = true;
-            while (anyApplied) {
-                anyApplied = false;
-                fluid.each(texts, function (entry, key) {
-                    if (!entry.applied) {
-                        var spec = pageSpecs[key];
-                        var target = $(spec.targetSelector);
-                        if (target.length > 0) {
-                            inject(entry.text, spec.templateSelector, target);
-                            entry.applied = true;
-                            anyApplied = true;
-                        }
-                        else {
-                            fluid.log("Deferring application to selector " + spec.targetSelector);
-                        }
-                    }
-                });
-            }
-        }
-        var that = {
-            makeCallback: function (that, spec, key) {
-                return function (text) {
-                    if (!text) {
-                        that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                            url: spec.href
-                        }));
-                        return;
-                    }
-                    if (text.isError === true) {
-                        fluid.each(text.messages, function (message) {
-                            that.displayErrorMessage(message);
-                        });
-                        return;
-                    }
-                    texts[key] = {text: text};
-                    attemptApply();
-                };
-            },
-            conclude: function () {
-                fluid.each(texts, function (entry, key) {
-                    if (!entry.applied) {
-                        var spec = pageSpecs[key];
-                        fluid.fail("Error applying templates - template with URL " + spec.href + " could not be applied to target selector " + spec.targetSelector);
-                    }
-                });
-            }
-        };
-        return that;
-    };
-    
     // A composite component that has a compose method for modifying resourceSpecs ready to be fetched.
     fluid.defaults("cspace.composite", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
@@ -213,26 +149,12 @@ cspace = cspace || {};
         };
         
         that.initPageBuilder = function (options) {
-            var pageSpecs = fluid.copy(that.options.pageSpec);
-            var resourceSpecs = that.resourceSpecs = fluid.copy(pageSpecs);
-            var pageSpecManager = cspace.pageSpecManager(pageSpecs);
+            var resourceSpecs = {};
             that.options.readOnly = cspace.util.resolveReadOnly({
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
                 readOnly: options.readOnly,
                 target: that.options.namespace || that.options.recordType
-            });
-            
-            fluid.each(resourceSpecs, function (spec, key) {
-                spec.href = spec.href
-                spec.options = {
-                    dataType: "html",
-                    success: pageSpecManager.makeCallback(that, spec, key),
-                    error: function (xhr, textStatus, errorThrown) {
-                        cspace.util.provideErrorCallback(that, spec.href, "errorFetching")(xhr, textStatus, errorThrown);
-                        that.events.onError.fire();
-                    }
-                };
             });
 
             options.schema = options.schema || {};
@@ -309,49 +231,10 @@ cspace = cspace || {};
                     that.options.components.pageBuilder.options = options;
                     fluid.initDependent(that, "pageBuilder", that.instantiator);
                 }
-                pageSpecManager.conclude();
                 that.events.pageReady.fire();
             };
             fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback);
         };
-    };
-    
-    fluid.defaults("cspace.pageBuilderIO.templateLocator", {
-        gradeNames: ["autoInit", "fluid.littleComponent"],
-        mergePolicy: {
-            pageSpec: "nomerge"
-        },
-        finalInitFunction: "cspace.pageBuilderIO.templateLocator.finalInit",
-        specs: {
-            recordEditor: {
-                href: "%webapp/html/pages/%recordTypeTemplate%template.html",
-                templateSelector: ".csc-%recordType-template",
-                targetSelector: ".csc-record-edit-container"
-            }
-        },
-        components: {
-            urlExpander: {
-                type: "cspace.urlExpander"
-            }
-        },
-        template: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.getUrlParameter",
-                args: "template"
-            }
-        }
-    });
-    
-    cspace.pageBuilderIO.templateLocator.finalInit = function (that) {
-        fluid.each(that.options.specs, function (spec, key) {
-            that.options.pageSpec[key] = spec;
-            that.options.pageSpec[key].templateSelector = fluid.stringTemplate(that.options.pageSpec[key].templateSelector, {recordType: that.options.recordType});
-            that.options.pageSpec[key].href = fluid.stringTemplate(that.urlExpander(that.options.pageSpec[key].href), {
-                recordType: that.options.recordType.charAt(0).toUpperCase() + that.options.recordType.slice(1),
-                template: that.options.template ? ("-" + that.options.template) : ""
-            });
-        });
     };
 
     fluid.defaults("cspace.pageBuilder", {

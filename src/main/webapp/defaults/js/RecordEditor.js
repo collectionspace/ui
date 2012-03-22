@@ -260,7 +260,7 @@ cspace = cspace || {};
 //    });
 
     fluid.defaults("cspace.recordEditor", {
-        gradeNames: ["autoInit", "fluid.viewComponent"],
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
             fieldsToIgnore: "replace",
             "uispec": "nomerge"
@@ -273,20 +273,38 @@ cspace = cspace || {};
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
         },
+        selectorsToIgnore: ["recordRendererContainer", "header", "togglable"],
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/RecordEditorTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        renderOnInit: true,
         components: {
             recordRenderer: {
                 type: "cspace.recordEditor.recordRenderer",
                 container: "{cspace.recordEditor}.dom.recordRendererContainer",
                 options: {
-                    //TODO: Hopefully this is here temporarily for backwork compatibility.
-                    events: {
-                        afterRender: "{cspace.recordEditor}.events.afterRender"
-                    },
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier",
-                    uispec: "{cspace.recordEditor}.options.uispec"
+                    uispec: "{cspace.recordEditor}.options.uispec",
+                    resources: "{cspace.recordEditor.templateFetcher}.options.resources"
                 },
-                createOnEvent: "afterFetch"
+                createOnEvent: "ready"
+            },
+            templateFetcher: {
+                type: "cspace.recordEditor.templateFetcher",
+                priority: "first",
+                options: {
+                    recordType: "{cspace.recordEditor}.options.recordType",
+                    events: {
+                        afterFetch: "{cspace.recordEditor}.events.afterFetchTemplate"
+                    }
+                }
             },
             recordDataSource: {
                 type: "cspace.recordEditor.dataSource",
@@ -307,12 +325,23 @@ cspace = cspace || {};
                         header: "{cspace.recordEditor}.options.selectors.header",
                         togglable: "{cspace.recordEditor}.options.selectors.togglable"
                     }
-                }
-            }
+                },
+                createOnEvent: "ready"
+            }//,
+//            controlPanel: {
+//                type: "cspace.recordEditor.controlPanel",
+//                container: ""
+//            }
         },
         events: {
-            afterRender: null,
             afterFetch: null,
+            afterFetchTemplate: null,
+            ready: {
+                events: {
+                    data: "{cspace.recordEditor}.events.afterFetch",
+                    template: "{cspace.recordEditor}.events.afterFetchTemplate"
+                }
+            },
             onSave: "preventable",
             onCancel: null,
             cancelSave: null,
@@ -322,6 +351,8 @@ cspace = cspace || {};
             onRefreshView: null
         }
     });
+
+    fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
 
     cspace.recordEditor.preInit = function (that) {};
 
@@ -345,6 +376,42 @@ cspace = cspace || {};
                 that.events.afterFetch.fire();
             });
         }
+    };
+
+    fluid.defaults("cspace.recordEditor.templateFetcher", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        resources: {
+            template: cspace.resourceSpecExpander({
+                url: "%webapp/html/pages/%recordTypeTemplate%template.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        template: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "template"
+            }
+        },
+        events: {
+            afterFetch: null
+        },
+        finalInitFunction: "cspace.recordEditor.templateFetcher.finalInit"
+    });
+
+    cspace.recordEditor.templateFetcher.finalInit = function (that) {
+        var template = that.options.resources.template,
+            recordType = that.options.recordType;
+        recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        template.url = fluid.stringTemplate(template.url, {
+            recordType: recordType,
+            template: that.options.template
+        });
+        fluid.fetchResources(that.options.resources, function () {
+            that.events.afterFetch.fire(that.options.resources.template.resourceText);
+        });
     };
 
     fluid.defaults("cspace.recordEditor.recordRenderer", {
