@@ -405,6 +405,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.validator", "cspace.recordEditor", {
             options: {  
                 recordType: "{pageBuilderIO}.options.recordType",
+                namespace: "{pageBuilderIO}.options.namespace",
                 schema: "{pageBuilder}.schema"
             }
         });
