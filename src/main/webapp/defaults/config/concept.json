@@ -56,7 +56,8 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "concept",
-             "schema": [
+            "namespace": "concept",
+            "schema": [
                 "recordlist",
                 "recordtypes",
                 "namespaces",
