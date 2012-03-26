@@ -457,38 +457,38 @@ li .flc-pager-pageLink {
 
 
 /* secondary navigation menu */
-#secondary-nav {
+.secondary-nav {
     padding-bottom:10px;}
-#secondary-nav-footer {
+.secondary-nav-footer {
     padding-bottom:0;}
-#secondary-nav-menu {
+.secondary-nav-menu {
     /*padding-top:6px;*/ 
     width:100%;     
     margin-bottom:0px;}
-#secondary-nav.pivot {
+.secondary-nav.pivot {
     padding-bottom:0;}
-#secondary-nav.pivot .menu-record {}
-#secondary-nav.pivot ul.menu-record { 
+.secondary-nav.pivot .menu-record {}
+.secondary-nav.pivot ul.menu-record { 
     white-space:nowrap;}
-#secondary-nav.pivot ul.menu-record li {
+.secondary-nav.pivot ul.menu-record li {
     display:inline; 
     list-style-type:none; 
     margin-right:3px;}
-#secondary-nav.pivot ul.menu-record li a {
+.secondary-nav.pivot ul.menu-record li a {
     width:100%;}
-#secondary-nav-menu .menu-record ul {
+.secondary-nav-menu .menu-record ul {
     margin:0; 
     padding:0;}
-#secondary-nav-menu .menu-record li {
+.secondary-nav-menu .menu-record li {
     /*display:inline;*/}
-#secondary-nav-menu-sub  .button-row{
+.secondary-nav-menu-sub  .button-row{
 	/*float:right;*/
 	text-align:right;}
-#secondary-nav-menu-sub .upper-save {
+.secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
     margin-left:15px;}
-#secondary-nav-menu-sub .time-stamp {
+.secondary-nav-menu-sub .time-stamp {
     float:right; 
     /*padding-top:6px; */
     font-size:10px; 

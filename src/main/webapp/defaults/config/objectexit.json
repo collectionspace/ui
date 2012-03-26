@@ -28,6 +28,9 @@
                         "schema": "{pageBuilder}.schema",
                         "permissions": "{pageBuilder}.permissions"
                     }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
                 }
             }
         }
