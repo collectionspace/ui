@@ -124,16 +124,6 @@ cspace = cspace || {};
 //            }
 //        }, that.options.navigationEventNamespace);
 //    };
-//    
-//    var bindHandlers = function (that) {
-//        that.locate("save").click(that.requestSave);
-//        that.locate("deleteButton").click(that.remove);
-//        that.locate("cancel").click(function () {
-//            that.cancel();
-//        });
-//        that.locate("createFromExistingButton").click(that.createNewFromExistingRecord);
-////        cspace.util.setZIndex();      
-//    };
 //
 //    var setupRecordEditor = function (that) {
 //        bindEventHandlers(that);
@@ -293,6 +283,21 @@ cspace = cspace || {};
             })
         },
         components: {
+            messanger: {
+                type: "cspace.recordEditor.messanger"
+            },
+            canceller: {
+                type: "cspace.recordEditor.canceller",
+                createOnEvent: "afterFetch"
+            },
+            changeTracker: {
+                type: "cspace.recordEditor.changeTracker",
+                options: {
+                    model: "{cspace.recordEditor}.model",
+                    applier: "{cspace.recordEditor}.applier"
+                },
+                createOnEvent: "afterFetch"
+            },
             recordRenderer: {
                 type: "cspace.recordEditor.recordRenderer",
                 container: "{cspace.recordEditor}.dom.recordRendererContainer",
@@ -347,16 +352,19 @@ cspace = cspace || {};
                 }
             },
             onSave: "preventable",
+            afterSave: null,
+            onRemove: "preventable",
+            afterRemove: null,
             onCancel: null,
-            cancelSave: null,
-            afterRemove: null, // params: textStatus
-            onError: null, // params: operation
-            afterRenderRefresh: null,
-            onRefreshView: null
+            onCreateFromExisting: null,
+
+            onError: null,
+            cancelSave: null
         },
         listeners: {
             ready: "{cspace.recordEditor}.onReady"
         },
+        parentBundle: "{globalBundle}",
         showCreateFromExistingButton: false,
         showDeleteButton: false
     });
@@ -378,12 +386,19 @@ cspace = cspace || {};
         } else {
             that.recordDataSource.get(function (data) {
                 if (!data) {
-                    //TODO
-                    console.log("ERROR");
+                    var resolve = that.options.parentBundle.resolve;
+                    that.events.onError.fire({
+                        isError: true,
+                        message: resolve("recordEditor-fetchFailedMessage", [
+                            resolve(that.options.recordType),
+                            resolve("recordEditor-unknownError")
+                        ])
+                    });
+                    return;
                 }
                 if (data.isError) {
-                    //TODO
-                    console.log("ERROR");
+                    that.events.onError.fire(data);
+                    return;
                 }
                 that.applier.requestChange("", data);
                 that.events.afterFetch.fire();
@@ -391,27 +406,126 @@ cspace = cspace || {};
         }
     };
 
+    fluid.defaults("cspace.recordEditor.changeTracker", {
+        gradeNames: ["autoInit", "fluid.modelComponent", "fluid.eventedComponent"],
+        preInitFunction: "cspace.recordEditor.changeTracker.preInit",
+        events: {
+            onChange: null
+        }
+    });
+
+    cspace.recordEditor.changeTracker.preInit = function (that) {
+        that.rollbackModel = fluid.copy(that.model);
+        that.unsavedChanges = false;
+        that.applier.modelChanged.addListener("", function () {
+            that.unsavedChanges = true;
+            that.events.onChange.fire(that.unsavedChanges);
+        });
+        that.revert = function () {
+            that.applier.requestChange("", that.rollbackModel);
+            that.unsavedChanges = false;
+            that.events.onChange.fire(that.unsavedChanges);
+        };
+    };
+
+    fluid.defaults("cspace.recordEditor.canceller", {
+        gradeNames: ["autoInit", "fluid.eventedComponent", "fluid.modelComponent"],
+        events: {
+            onCancel: {
+                event: "{cspace.recordEditor}.events.onCancel"
+            },
+            ready: {
+                event: "{cspace.recordEditor}.events.ready"
+            }
+        },
+        components: {
+            changeTracker: "{changeTracker}"
+        },
+        listeners: {
+            onCancel: "{cspace.recordEditor.canceller}.onCancelHandler"
+        },
+        preInitFunction: "cspace.recordEditor.canceller.preInit",
+        invokers: {
+            cancel: "cspace.recordEditor.canceller.cancel"
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.canceller.cancel", "cspace.recordEditor.canceller", {
+        funcName: "cspace.recordEditor.canceller.cancel",
+        args: "{cspace.recordEditor.canceller}"
+    });
+
+    cspace.recordEditor.canceller.cancel = function (that) {
+        that.changeTracker.revert();
+        that.events.ready.fire();
+    };
+
+    cspace.recordEditor.canceller.preInit = function (that) {
+        that.onCancelHandler = function () {
+            that.cancel();
+        };
+    };
+
+    fluid.defaults("cspace.recordEditor.messanger", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        events: {
+            onError: {
+                event: "{cspace.recordEditor}.events.onError"
+            }
+        },
+        listeners: {
+            onError: "{cspace.recordEditor.messanger}.onErrorHandler"
+        },
+        preInitFunction: "cspace.recordEditor.messanger.preInit",
+        components: {
+            messageBar: "{messageBar}"
+        }
+    });
+
+    cspace.recordEditor.messanger.preInit = function (that) {
+        that.onErrorHandler = function (data) {
+            if (!data) {
+                return;
+            }
+            that.messageBar.show(data.message, Date.today(), data.isError);
+        };
+    };
+
+    fluid.demands("cspace.util.eventBinder", ["cspace.recordEditor.controlPanel", "cspace.recordEditor.changeTracker"], {
+        options: {
+            listeners: {
+                "{cspace.recordEditor.changeTracker}.events.onChange": "{cspace.recordEditor.controlPanel}.onChangeHandler"
+            }
+        }
+    });
+
     fluid.demands("cspace.recordEditor.controlPanel", "cspace.recordEditor", {
         mergeAllOptions: [{
             recordModel: "{cspace.recordEditor}.model",
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
                 showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
-                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton",
-                recordType: "{cspace.recordEditor}.options.recordType"
-            }
+                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
+            },
+            recordType: "{cspace.recordEditor}.options.recordType"
         }, "{arguments}.1"]
     });
 
     fluid.defaults("cspace.recordEditor.controlPanel", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: "cspace.recordEditor.controlPanel.preInit",
+        finalInitFunction: "cspace.recordEditor.controlPanel.finalInit",
         mergePolicy: {
             recordModel: "preserve",
             recordApplier: "nomerge",
-            resolver: "nomerge"
         },
-        resolver: "{permissionsResolver}",
+        components: {
+            changeTracker: "{changeTracker}",
+            resolver: "{permissionsResolver}",
+            eventBinder: {
+                type: "cspace.util.eventBinder"
+            }
+        },
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -428,18 +542,23 @@ cspace = cspace || {};
             cancel: ".csc-cancel"
         },
         events: {
-            onSave: null,
-            onRemove: null,
-            onCancel: null,
-            onCreateFromExisting: null
+            onSave: {
+                event: "{cspace.recordEditor}.events.onSave"
+            },
+            onRemove: {
+                event: "{cspace.recordEditor}.events.onRemove"
+            },
+            onCancel: {
+                event: "{cspace.recordEditor}.events.onCancel"
+            },
+            onCreateFromExisting: {
+                event: "{cspace.recordEditor}.events.onCreateFromExisting"
+            }
         },
         produceTree: "cspace.recordEditor.controlPanel.produceTree",
         parentBundle: "{globalBundle}",
-        renderOnInit: true,
         strings: {},
-        model: {
-            saveCancelPermission: "update"
-        }
+        saveCancelPermission: "update"
     });
 
     cspace.recordEditor.controlPanel.produceTree = function (that) {
@@ -484,14 +603,7 @@ cspace = cspace || {};
                 }
             }, {
                 type: "fluid.renderer.condition",
-                condition: {
-                    funcName: "cspace.permissions.resolve",
-                    args: {
-                        permission: "${saveCancelPermission}",
-                        target: "${recordType}",
-                        resolver: "${resolver}"
-                    }
-                },
+                condition: "${showSaveCancelButtons}",
                 trueTree: {
                     save: {
                         messagekey: "recordEditor-save",
@@ -503,11 +615,17 @@ cspace = cspace || {};
                     },
                     cancel: {
                         messagekey: "recordEditor-cancel",
-                        decorators: {
+                        decorators: [{
                             type: "jQuery",
                             func: "click",
                             args: that.events.onCancel.fire
-                        }
+                        }, {
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableCancelButton}"
+                            }
+                        }]
                     }
                 }
             }]
@@ -548,10 +666,22 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.controlPanel.preInit = function (that) {
+        that.onChangeHandler = function (unsavedChanges) {
+            that.locate("cancel").prop("disabled", !unsavedChanges);
+        };
+    };
+
+    cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel;
         that.applier.requestChange("disableCreateFromExistingButton", !!(rModel && !rModel.csid));
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
-        that.applier.requestChange("resolver", that.options.resolver);
+        that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
+            permission: that.options.saveCancelPermission,
+            target: that.options.recordType,
+            resolver: that.resolver
+        }));
+        that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
+        that.refreshView();
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
@@ -863,11 +993,6 @@ cspace = cspace || {};
 //        return tree;
 //    };
 //    
-//    cspace.recordEditor.cancel = function (that) {
-//        that.events.onCancel.fire();
-//        that.rollback();
-//    };
-//    
 //    cspace.recordEditor.cloneAndStore = function (that) {
 //        var modelToClone = fluid.copy(that.model);
 //        fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
@@ -946,26 +1071,6 @@ cspace = cspace || {};
 //            });
 //           return true;
 //        };
-//
-//        var modelToClone = that.localStorage.get();
-//        if (modelToClone) {
-//            that.localStorage.set();
-//            that.applier.requestChange("", modelToClone);
-//            that.events.afterFetch.fire();
-//        } else {
-//            that.recordDataSource.get(function (data) {
-//                if (!data) {
-//                    //TODO
-//                    console.log("ERROR");
-//                }
-//                if (data.isError) {
-//                    //TODO
-//                    console.log("ERROR");
-//                }
-//                that.applier.requestChange("", data);
-//                that.events.afterFetch.fire();
-//            });
-//        }
 //    };
 //
 //    cspace.recordEditor.preInit = function (that) {

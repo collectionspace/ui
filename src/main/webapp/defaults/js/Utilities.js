@@ -286,7 +286,7 @@ fluid.registerNamespace("cspace.util");
             return replaced;
         };
 
-        that.makeAjaxOpts = function (model, directModel, callback, type, errorCallback) {
+        that.makeAjaxOpts = function (model, directModel, callback, type) {
             var togo = {
                 type: type,
                 url: that.resolveUrl(directModel),
@@ -304,9 +304,7 @@ fluid.registerNamespace("cspace.util");
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.log("Data fetch error for url " + togo.url + " - textStatus: " + textStatus);
                     fluid.log("ErrorThrown: " + errorThrown);
-                    if (errorCallback) {
-                        errorCallback(xhr, textStatus, errorThrown);
-                    }
+                    callback();
                 }
             };
             if (model) {
@@ -315,21 +313,21 @@ fluid.registerNamespace("cspace.util");
             return togo;
         };
 
-        that.get = function (directModel, callback, errorCallback) {
-            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET", errorCallback);
+        that.get = function (directModel, callback) {
+            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
             wrapper(function () {
                 $.ajax(ajaxOpts);
             });
         };
         if (that.options.writeable) {
-            that.set = function (model, directModel, callback, errorCallback) {
-                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST", errorCallback);
+            that.set = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
             };
         }
         if (that.options.removable) {
-            that.remove = function (directModel, callback, errorCallback) {
-                var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "DELETE", errorCallback);
+            that.remove = function (directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "DELETE");
                 wrapper(function () {
                     $.ajax(ajaxOpts);
                 });
@@ -1532,5 +1530,9 @@ fluid.registerNamespace("cspace.util");
             if (!arg) {return true;}
         }) : [path]);
     };
+
+    fluid.defaults("cspace.util.eventBinder", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"]
+    });
     
 })(jQuery, fluid);
