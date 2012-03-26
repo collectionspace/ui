@@ -357,7 +357,8 @@ cspace = cspace || {};
         listeners: {
             ready: "{cspace.recordEditor}.onReady"
         },
-        showCreateFromExistingButton: false
+        showCreateFromExistingButton: false,
+        showDeleteButton: false
     });
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
@@ -395,7 +396,9 @@ cspace = cspace || {};
             recordModel: "{cspace.recordEditor}.model",
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
-                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton"
+                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton",
+                recordType: "{cspace.recordEditor}.options.recordType"
             }
         }, "{arguments}.1"]
     });
@@ -405,8 +408,10 @@ cspace = cspace || {};
         preInitFunction: "cspace.recordEditor.controlPanel.preInit",
         mergePolicy: {
             recordModel: "preserve",
-            recordApplier: "nomerge"
+            recordApplier: "nomerge",
+            resolver: "nomerge"
         },
+        resolver: "{permissionsResolver}",
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -417,7 +422,10 @@ cspace = cspace || {};
             })
         },
         selectors: {
-            createFromExistingButton: ".csc-createFromExisting"
+            createFromExistingButton: ".csc-createFromExisting",
+            deleteButton: ".csc-delete",
+            save: ".csc-save",
+            cancel: ".csc-cancel"
         },
         protoTree: {
             expander: [{
@@ -435,16 +443,87 @@ cspace = cspace || {};
                         }
                     }
                 }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: "${showDeleteButton}",
+                trueTree: {
+                    deleteButton: {
+                        messagekey: "recordEditor-deleteButton",
+                        decorators: {
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableDeleteButton}"
+                            }
+                        }
+                    }
+                }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: {
+                    funcName: "cspace.permissions.resolve",
+                    args: {
+                        permission: "${saveCancelPermission}",
+                        target: "${recordType}",
+                        resolver: "${resolver}"
+                    }
+                },
+                trueTree: {
+                    save: {
+                        messagekey: "recordEditor-save"
+                    },
+                    cancel: {
+                        messagekey: "recordEditor-cancel"
+                    }
+                }
             }]
         },
         parentBundle: "{globalBundle}",
         renderOnInit: true,
-        strings: {}
+        strings: {},
+        model: {
+            saveCancelPermission: "update"
+        }
     });
+
+    cspace.recordEditor.controlPanel.disableDeleteButton = function (rModel) {
+        //disable if: model.csid is not set (new record)
+        if (!rModel || !rModel.csid) {
+            return true;
+        }
+        //disable if: if we are looking at admin account
+        if (rModel.fields.email === "admin@collectionspace.org") {
+            return true;
+        }
+//        //check whether we need to disable delete button due to related records
+//        //that we do not have update permission to (which we need since we will
+//        //be modifying their relations when deleting the record)
+//        var relations = that.model.relations;
+//        //if relations isn't set, no need to check any further
+//        if (!relations || relations.length < 1 || $.isEmptyObject(relations)) {
+//            return false;
+//        }
+//        var relatedTypes = [];
+//        fluid.each(relations, function (val, recordType) {
+//            relatedTypes.push({
+//                target: recordType,
+//                permission: "update"
+//            });
+//        });
+//        //now build opts for checking permissions
+//        return (!cspace.permissions.resolveMultiple({
+//            recordTypeManager: that.options.recordTypeManager,
+//            resolver: that.options.resolver,
+//            allOf: relatedTypes
+//        }));
+        return false;
+    };
 
     cspace.recordEditor.controlPanel.preInit = function (that) {
         var rModel = that.options.recordModel;
         that.applier.requestChange("disableCreateFromExistingButton", !!(rModel && !rModel.csid));
+        that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
+        that.applier.requestChange("resolver", that.options.resolver);
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
