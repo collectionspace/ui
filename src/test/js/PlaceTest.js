@@ -55,47 +55,47 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupPlace(options);
     });
 
-//     placeTests.asyncTest("Repeatable fields: existence", function () {
-//         var options = {
-//             pageBuilderIO: {
-//                 options: {
-//                     csid: "1234567"
-//                 }
-//             },
-//             pageBuilder: {
-//                 options: {
-//                     components: {
-//                         recordEditor: {
-//                             options: {
-//                                 listeners: {
-//                                     "afterRender.placeTest": function (recordEditor) {
-//                                         var repeatableField = [
-//                                             "placeNameGroup",
-//                                             "placeOwnerGroup",
-//                                             "placeGeoRefGroup"
-//                                         ];
-//                                         fluid.each(repeatableField, function (repeatableName) {
-//                                             var found = fluid.find(recordEditor, function (property, name) {
-//                                                 if (name.indexOf(repeatableName) > -1) {
-//                                                     return property;
-//                                                 }
-//                                             });
-//                                             if (!found) {
-//                                                 ok(false, "Repeatable " + repeatableName + " not found");
-//                                                 return;
-//                                             }
-//                                             jqUnit.assertEquals("Type of renderer decorator subcomponent " + repeatableName + " is ", "cspace.makeRepeatable", found.typeName);
-//                                         });
-//                                         start();
-//                                     }
-//                                 }
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         };
-//         setupPlace(options);
-//     }); 
+    placeTests.asyncTest("Repeatable fields: existence", function () {
+        var options = {
+            pageBuilderIO: {
+                options: {
+                    csid: "1234567"
+                }
+            },
+            pageBuilder: {
+                options: {
+                    components: {
+                        recordEditor: {
+                            options: {
+                                listeners: {
+                                    "afterRender.placeTest": function (recordEditor) {
+                                        var repeatableField = [
+                                            "placeNameGroup",
+                                            "placeOwnerGroup",
+                                            "placeGeoRefGroup"
+                                        ];
+                                        fluid.each(repeatableField, function (repeatableName) {
+                                            var found = fluid.find(recordEditor, function (property, name) {
+                                                if (name.indexOf(repeatableName) > -1) {
+                                                    return property;
+                                                }
+                                            });
+                                            if (!found) {
+                                                ok(false, "Repeatable " + repeatableName + " not found");
+                                                return;
+                                            }
+                                            jqUnit.assertEquals("Type of renderer decorator subcomponent " + repeatableName + " is ", "cspace.makeRepeatable", found.typeName);
+                                        });
+                                        start();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        setupPlace(options);
+    }); 
 }(jQuery));
 
