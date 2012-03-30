@@ -108,7 +108,7 @@ cspace = cspace || {};
         };
         fluid.each(records, function (record) {
             model.tabs.push({
-                "name": record,
+                "name": record + "-tab",
                 href: urlExpander(options.href)
             });
         });

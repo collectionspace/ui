@@ -1573,6 +1573,12 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     display:table-row;
     width: 100%;
 }
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer {
+    width: auto;
+}
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer span.fl-uploader-browse {
+    max-width: 400px;
+}
 .cs-mediaUploader-table-row {
     display:table-row;
     width: 100%;

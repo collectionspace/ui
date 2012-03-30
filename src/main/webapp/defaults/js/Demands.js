@@ -405,6 +405,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.validator", "cspace.recordEditor", {
             options: {  
                 recordType: "{pageBuilderIO}.options.recordType",
+                namespace: "{pageBuilderIO}.options.namespace",
                 schema: "{pageBuilder}.schema"
             }
         });
@@ -951,7 +952,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 components: {
                     recordTraverser: {
                         type: "cspace.recordTraverser",
-                        createOnEvent: "afterRender"
+                        createOnEvent: "afterRender",
+                        options: {
+                            events: {
+                                onSave: "{cspace.recordEditor}.events.onSave"
+                            },
+                            listeners: {
+                                onSave: {
+                                    namespace: "recordTraverser",
+                                    listener: "{cspace.recordTraverser}.save",
+                                    priority: "last"
+                                }
+                            }
+                        }
                     }
                 },
                 listeners: {

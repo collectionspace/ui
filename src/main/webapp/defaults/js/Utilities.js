@@ -1423,6 +1423,7 @@ fluid.registerNamespace("cspace.util");
             schema: "nomerge"
         },
         recordType: "",
+        namespace: "",
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",
             validatePrimitive: {
@@ -1477,8 +1478,9 @@ fluid.registerNamespace("cspace.util");
 
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
+        var schemaName = that.options.namespace || that.options.recordType;
         // Only validate fields.
-        schema = schema[that.options.recordType].properties.fields.properties;
+        schema = schema[schemaName].properties.fields.properties;
 
         that.validate = function (data) {
             var thisData = fluid.copy(data);
