@@ -56,6 +56,7 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "organization",
+            "namespace": "organization",
             "schema": [
                 "recordlist",
                 "recordtypes",
