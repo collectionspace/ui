@@ -11,6 +11,7 @@
                             "type": "string"
                         },
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         }
                     },
@@ -25,6 +26,7 @@
                             "type": "string"
                         },
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         }
                     },
@@ -39,6 +41,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "movementMethod": {
@@ -60,6 +63,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "movementReferenceNumber": {
@@ -77,6 +81,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "reasonForMove": {
@@ -101,6 +106,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "currentLocation": {
@@ -115,6 +121,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "updatedBy": {
@@ -124,6 +131,76 @@
                     "type": "object"
                 },
                 "type": "array"
+            },
+            "inventoryDateStart": {
+                "type": "date"
+            },
+            "inventoryDateEnd": {
+                "type": "date"
+            },
+            "inventoryContacts": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "inventoryContact": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryActionsRequired": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "inventoryActionRequired": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryNotes": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "inventoryNote": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryFrequencies": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "inventoryFrequency": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "nextInventoryDateStart": {
+                "type": "date"
+            },
+            "nextInventoryDateEnd": {
+                "type": "date"
             }
         },
         "type": "object"

@@ -259,6 +259,101 @@
         ".csc-movement-movementMethods-label": {
             "messagekey": "movement-movementMethodsLabel"
         },
-        ".csc-movement-updatedBy": "${fields.updatedBy}"
+        ".csc-movement-updatedBy": "${fields.updatedBy}",
+        ".csc-movement-inventoryControlInventory-label": {
+            "messagekey": "movement-inventoryControlInformationLabel"
+        },
+        ".csc-movement-inventoryDate-label": {
+            "messagekey": "movement-inventoryDateLabel"
+        },
+        ".csc-movement-inventoryDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.inventoryDate}"
+        },
+        ".csc-movement-nextInventoryDate-label": {
+            "messagekey": "movement-nextInventoryDateLabel"
+        },
+        ".csc-movement-nextInventoryDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.nextInventoryDate}"
+        },
+        ".csc-movement-inventoryFrequency-label": {
+            "messagekey": "movement-inventoryFrequencyLabel"
+        },
+        ".csc-movement-inventoryFrequency": {
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.inventoryFrequency",
+                        "termListType": "inventoryFrequency"
+                    }
+                }
+            ]
+        },
+        ".csc-movement-inventoryNote-label": {
+            "messagekey": "movement-inventoryNoteLabel"
+        },
+        ".csc-movement-inventoryNote": "${fields.inventoryNote}",
+        ".csc-movement-inventoryActionRequired-label": {
+            "messagekey": "movement-inventoryActionRequiredLabel"
+        },
+        ".csc-movement-inventoryActionRequired": {
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.inventoryActionRequired",
+                        "termListType": "inventoryActionRequired"
+                    }
+                }
+            ]
+        },
+        ".csc-movement-inventoryContact-label": {
+            "messagekey": "movement-inventoryContactLabel"
+        },
+        ".csc-movement-inventoryContact": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-movement-inventoryContact": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/movement/autocomplete/inventoryContact",
+                                                    "vocabUrl": "../../../tenant/core/movement/source-vocab/inventoryContact"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.inventoryContact}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.inventoryContacts"
+                    }
+                }
+            ]
+        }
     }
 }
