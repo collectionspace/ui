@@ -38,5 +38,5 @@
             }
         ]
     },
-    "locked": true
+    "workflow": "lock"
 }

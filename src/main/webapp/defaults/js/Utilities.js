@@ -1528,7 +1528,7 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.resolveLocked = function (model) {
-        return !!model.locked;
+        return model.workflow && model.workflow === "lock";
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
