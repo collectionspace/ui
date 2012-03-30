@@ -129,7 +129,8 @@
             "read",
             "update",
             "delete",
-            "list"
+            "list",
+            "lock"
         ],
         "role": [
             "create",
