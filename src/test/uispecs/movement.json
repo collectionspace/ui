@@ -11,13 +11,19 @@
                     "options": {
                         "model": {
                             "names": [
-                                "Movement"
+                                "Movement",
+                                "Location",
+                                "Inventory"
                             ],
                             "list": [
-                                "movement"
+                                "movement",
+                                "location",
+                                "inventory"
                             ],
                             "samples": [
-                                "MV2010.001"
+                                "MV2012.001",
+                                "LOC2012.001",
+                                "INV2012.001"
                             ]
                         },
                         "selectors": {
