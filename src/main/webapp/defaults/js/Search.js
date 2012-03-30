@@ -413,8 +413,9 @@ cspace = cspace || {};
         bindEventHandlers(that);
         if (that.model.searchModel.recordType) {
             that.events.onInitialSearch.fire();
+        } else {
+            that.events.ready.fire();
         }
-        that.events.ready.fire();
     };
 
     cspace.search.searchView.onInitialSearch = function (that) {
