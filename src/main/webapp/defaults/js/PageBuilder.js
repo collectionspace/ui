@@ -182,6 +182,9 @@ cspace = cspace || {};
 
     var setTags = function (that, options) {
         fluid.each([that.options.recordType, that.options.namespace], function (type) {
+            if (!type) {
+                return;
+            }
             fluid.each(options.userLogin.permissions[type], function (permission) {
                 that[fluid.model.composeSegments(type, permission, "tag")] = fluid.typeTag(fluid.model.composeSegments(type, permission));
             });
