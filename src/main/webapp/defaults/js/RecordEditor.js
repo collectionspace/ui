@@ -297,6 +297,14 @@ cspace = cspace || {};
                 },
                 createOnEvent: "afterFetch"
             },
+            remover: {
+                type: "cspace.recordEditor.remover",
+                createOnEvent: "afterFetch",
+                options: {
+                    recordType: "{cspace.recordEditor}.options.recordType",
+                    strings: "{cspace.recordEditor}.options.strings"
+                }
+            },
             canceller: {
                 type: "cspace.recordEditor.canceller",
                 createOnEvent: "afterFetch"
@@ -503,6 +511,175 @@ cspace = cspace || {};
             that.unsavedChanges = false;
             that.events.onChange.fire(that.unsavedChanges);
         };
+    };
+
+    fluid.defaults("cspace.recordEditor.remover", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        events: {
+            onRemove: {
+                event: "{cspace.recordEditor}.events.onRemove"
+            },
+            afterRemove: {
+                event: "{cspace.recordEditor}.events.afterRemove"
+            },
+            afterFetchProcedures: null,
+            afterFetchCataloging: null,
+            afterFetch: {
+                events: {
+                    procedures: "{cspace.recordEditor.remover}.events.afterFetchProcedures",
+                    cataloging: "{cspace.recordEditor.remover}.events.afterFetchCataloging"
+                },
+                args: ["{arguments}.procedures.0", "{arguments}.cataloging.0"]
+            }
+        },
+        listeners: {
+            afterFetch: "{cspace.recordEditor.remover}.onAfterFetch",
+            onRemove: "{cspace.recordEditor.remover}.onRemoveHandler"
+        },
+        components: {
+            proceduresDataSource: {
+                type: "cspace.recordEditor.remover.proceduresDataSource"
+            },
+            catalogingDataSource: {
+                type: "cspace.recordEditor.remover.catalogingDataSource"
+            }
+        },
+        invokers: {
+            remove: "cspace.recordEditor.remover.remove",
+            hasMediaAttached: "cspace.recordEditor.remover.hasMediaAttached",
+            openConfirmation: "cspace.recordEditor.remover.openConfirmation"
+        },
+        preInitFunction: "cspace.recordEditor.remover.preInit",
+        urls: cspace.componentUrlBuilder({
+            proceduresURL: "%tenant/%tname/%recordType/procedure/%csid",
+            catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid"
+        }),
+        csid: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "csid"
+            }
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.remover.openConfirmation", "cspace.recordEditor.remover", {
+        funcName: "cspace.recordEditor.remover.openConfirmation",
+        args: ["{confirmation}", "{recordDataSource}", "{globalBundle}", "{cspace.recordEditor.remover}", "{arguments}.0", "{arguments}.1"]
+    });
+
+    cspace.recordEditor.remover.openConfirmation = function (confirmation, recordDataSource, parentBundle, that, procedures, cataloging) {
+        var hasRelations = procedures.relations.pagination.length + cataloging.relations.pagination.length > 0;
+        confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        recordDataSource.remove(function () {
+                            that.events.afterRemove.fire();
+                        });
+                    }
+                }
+            },
+            model: {
+                messages: ["recordEditor-dialog-deletePrimaryMessage"]
+            },
+            termMap: [
+                parentBundle.resolve(that.options.recordType),
+                that.hasMediaAttached() ? that.options.strings.deleteMessageMediaAttached : "",
+                hasRelations ? that.options.strings.deleteMessageWithRelated : ""
+            ],
+            parentBundle: parentBundle
+        });
+    };
+
+    cspace.recordEditor.remover.preInit = function (that) {
+        that.onAfterFetch = function (procedures, cataloging) {
+            that.openConfirmation(procedures, cataloging);
+        };
+        that.onRemoveHandler = function () {
+            that.remove();
+        };
+    };
+
+    fluid.demands("cspace.recordEditor.remover.proceduresDataSource",  ["cspace.localData", "cspace.recordEditor.remover"], {
+        funcName: "cspace.recordEditor.remover.testProceduresDataSource",
+        args: {
+            targetTypeName: "cspace.recordEditor.remover.testProceduresDataSource",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            }
+        }
+    });
+    fluid.demands("cspace.recordEditor.remover.proceduresDataSource", "cspace.recordEditor.remover", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.recordEditor.remover}.options.urls.proceduresURL",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            },
+            targetTypeName: "cspace.recordEditor.remover.proceduresDataSource"
+        }
+    });
+    fluid.defaults("cspace.recordEditor.remover.testProceduresDataSource", {
+        url: "%test/data/%recordType/procedure/%csid.json"
+    });
+    cspace.recordEditor.remover.testProceduresDataSource = cspace.URLDataSource;
+
+    fluid.demands("cspace.recordEditor.remover.catalogingDataSource",  ["cspace.localData", "cspace.recordEditor.remover"], {
+        funcName: "cspace.recordEditor.remover.testCatalogingDataSource",
+        args: {
+            targetTypeName: "cspace.recordEditor.remover.testCatalogingDataSource",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            }
+        }
+    });
+    fluid.demands("cspace.recordEditor.remover.catalogingDataSource", "cspace.recordEditor.remover", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.recordEditor.remover}.options.urls.catalogingURL",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            },
+            targetTypeName: "cspace.recordEditor.remover.catalogingDataSource"
+        }
+    });
+    fluid.defaults("cspace.recordEditor.remover.testCatalogingDataSource", {
+        url: "%test/data/%recordType/cataloging/%csid.json"
+    });
+    cspace.recordEditor.remover.testCatalogingDataSource = cspace.URLDataSource;
+
+    fluid.demands("cspace.recordEditor.remover.hasMediaAttached", "cspace.recordEditor", {
+        funcName: "cspace.recordEditor.remover.hasMediaAttached",
+        args: "{cspace.recordEditor}.model"
+    });
+
+    cspace.recordEditor.remover.hasMediaAttached = function (model) {
+        return (model.fields && model.fields.blobCsid);
+    };
+
+    fluid.demands("cspace.recordEditor.remover.remove", "cspace.recordEditor", {
+        funcName: "cspace.recordEditor.remover.remove",
+        args: "{cspace.recordEditor.remover}"
+    });
+
+    cspace.recordEditor.remover.remove = function (that) {
+        that.proceduresDataSource.get({
+            recordType: that.options.recordType,
+            csid: that.options.csid
+        }, function (data) {
+            that.events.afterFetchProcedures.fire(data);
+        });
+        that.catalogingDataSource.get({
+            recordType: that.options.recordType,
+            csid: that.options.csid
+        }, function (data) {
+            that.events.afterFetchCataloging.fire(data);
+        });
     };
 
     fluid.defaults("cspace.recordEditor.canceller", {
@@ -851,11 +1028,7 @@ cspace = cspace || {};
         },
         components: {
             source: {
-                type: "cspace.recordEditor.dataSource.source",
-                options: {
-                    writeable: true,
-                    removable: true
-                }
+                type: "cspace.recordEditor.dataSource.source"
             }
         },
         urls: cspace.componentUrlBuilder({
@@ -910,6 +1083,8 @@ cspace = cspace || {};
     fluid.demands("cspace.recordEditor.dataSource.source",  ["cspace.localData", "cspace.recordEditor.dataSource"], {
         funcName: "cspace.recordEditor.dataSource.testDataSource",
         args: {
+            writeable: true,
+            removable: true,
             targetTypeName: "cspace.recordEditor.dataSource.testDataSource",
             termMap: {
                 recordType: "%recordType",
@@ -920,6 +1095,8 @@ cspace = cspace || {};
     fluid.demands("cspace.recordEditor.dataSource.source", ["cspace.recordEditor.dataSource"], {
         funcName: "cspace.URLDataSource",
         args: {
+            writeable: true,
+            removable: true,
             url: "{cspace.recordEditor.dataSource}.options.urls.recordURL",
             termMap: {
                 recordType: "%recordType",
