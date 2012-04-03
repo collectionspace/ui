@@ -120,7 +120,7 @@ cspace = cspace || {};
         that.confirmationDialog.events.onClose.addListener(function (userAction) {
             that.popup.dialog("close");
             that.popup.empty();
-        });
+        }, undefined, undefined, "first");
     };
     
     var setupConfirmation = function (that) {
@@ -163,6 +163,9 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.confirmation", {
+        mergePolicy: {
+            parentBundle: "nomerge"
+        },
         parentBundle: "{globalBundle}"
     });
     
