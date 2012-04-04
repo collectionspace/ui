@@ -1564,7 +1564,8 @@ fluid.registerNamespace("cspace.util");
         },
         components: {
             instantiator: "{instantiator}"
-        }
+        },
+        offset: 0
     });
 
     fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.listView", {
@@ -1586,13 +1587,13 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.workflowStyler.finalInit = function (that) {
-        fluid.each(that.options.list, function (record, index) {
+        fluid.each(that.options.rows, function (row, index) {
             var name = "recordLock-" + index;
             that.options.components[name] = {
                 type: "cspace.util.recordLock",
                 container: that.getRecordLockContainer(index),
                 options: {
-                    model: record
+                    model: that.options.list[that.options.offset + index]
                 }
             };
             fluid.initDependent(that, name, that.instantiator);
