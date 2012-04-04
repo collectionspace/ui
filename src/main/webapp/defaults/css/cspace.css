@@ -2069,3 +2069,10 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background-repeat: no-repeat;
     background-position: right center;
 }
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
