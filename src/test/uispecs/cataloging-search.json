@@ -8,35 +8,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectProductionOrganizationGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-organization": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
-                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.objectProductionOrganization}"
+                                ".csc-object-production-organization": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
+                                                "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectProductionOrganizationGroup"
+                                    ],
+                                    "value": "${{row}.objectProductionOrganization}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectProductionOrganizationGroup",
                     "hidePrimary": true
                 }
             }
@@ -57,30 +49,94 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "editionNumbers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-edition-number": "${{row}.editionNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "editionNumbers"
-                                }
+                                ".csc-object-description-edition-number": "${{row}.editionNumber}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "editionNumbers",
                     "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-collection-object-objectProductionDate-label": {
-        "messagekey": "collection-object-objectProductionDateLabel"
+    ".csc-collection-object-inscriptionDescriptionDateGroupEnd": {
+        "decorators": [
+            {
+                "func": "",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.collection-object-inscriptionDescriptionDateGroupEnd",
+                    "elPaths": {
+                        "dateEarliestSingleQualifier": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleQualifier",
+                        "dateLatestDay": "fields.inscriptionDescriptionDateGroupEnd.dateLatestDay",
+                        "dateLatestYear": "fields.inscriptionDescriptionDateGroupEnd.dateLatestYear",
+                        "dateAssociation": "fields.inscriptionDescriptionDateGroupEnd.dateAssociation",
+                        "dateEarliestSingleEra": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleEra",
+                        "dateDisplayDate": "fields.inscriptionDescriptionDateGroupEnd.dateDisplayDate",
+                        "dateEarliestSingleCertainty": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleCertainty",
+                        "dateLatestEra": "fields.inscriptionDescriptionDateGroupEnd.dateLatestEra",
+                        "dateEarliestSingleQualifierValue": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleQualifierValue",
+                        "dateLatestCertainty": "fields.inscriptionDescriptionDateGroupEnd.dateLatestCertainty",
+                        "dateEarliestSingleYear": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleYear",
+                        "dateLatestQualifier": "fields.inscriptionDescriptionDateGroupEnd.dateLatestQualifier",
+                        "dateLatestQualifierValue": "fields.inscriptionDescriptionDateGroupEnd.dateLatestQualifierValue",
+                        "dateEarliestSingleQualifierUnit": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleQualifierUnit",
+                        "datePeriod": "fields.inscriptionDescriptionDateGroupEnd.datePeriod",
+                        "dateEarliestScalarValue": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestScalarValue",
+                        "dateLatestMonth": "fields.inscriptionDescriptionDateGroupEnd.dateLatestMonth",
+                        "dateNote": "fields.inscriptionDescriptionDateGroupEnd.dateNote",
+                        "dateLatestScalarValue": "fields.inscriptionDescriptionDateGroupEnd.dateLatestScalarValue",
+                        "dateLatestQualifierUnit": "fields.inscriptionDescriptionDateGroupEnd.dateLatestQualifierUnit",
+                        "dateEarliestSingleDay": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleDay",
+                        "dateEarliestSingleMonth": "fields.inscriptionDescriptionDateGroupEnd.dateEarliestSingleMonth"
+                    }
+                }
+            }
+        ],
+        "value": "${fields.collection-object-inscriptionDescriptionDateGroupEnd}"
+    },
+    ".csc-collection-object-fieldCollectionDate-label": {
+        "messagekey": "collection-object-fieldCollectionDateLabel"
+    },
+    ".csc-collection-object-contentDateStart": {
+        "decorators": [
+            {
+                "func": "",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.collection-object-contentDateStart",
+                    "elPaths": {
+                        "dateEarliestSingleQualifier": "fields.contentDateStart.dateEarliestSingleQualifier",
+                        "dateLatestDay": "fields.contentDateStart.dateLatestDay",
+                        "dateLatestYear": "fields.contentDateStart.dateLatestYear",
+                        "dateAssociation": "fields.contentDateStart.dateAssociation",
+                        "dateEarliestSingleEra": "fields.contentDateStart.dateEarliestSingleEra",
+                        "dateDisplayDate": "fields.contentDateStart.dateDisplayDate",
+                        "dateEarliestSingleCertainty": "fields.contentDateStart.dateEarliestSingleCertainty",
+                        "dateLatestEra": "fields.contentDateStart.dateLatestEra",
+                        "dateEarliestSingleQualifierValue": "fields.contentDateStart.dateEarliestSingleQualifierValue",
+                        "dateLatestCertainty": "fields.contentDateStart.dateLatestCertainty",
+                        "dateEarliestSingleYear": "fields.contentDateStart.dateEarliestSingleYear",
+                        "dateLatestQualifier": "fields.contentDateStart.dateLatestQualifier",
+                        "dateLatestQualifierValue": "fields.contentDateStart.dateLatestQualifierValue",
+                        "dateEarliestSingleQualifierUnit": "fields.contentDateStart.dateEarliestSingleQualifierUnit",
+                        "datePeriod": "fields.contentDateStart.datePeriod",
+                        "dateEarliestScalarValue": "fields.contentDateStart.dateEarliestScalarValue",
+                        "dateLatestMonth": "fields.contentDateStart.dateLatestMonth",
+                        "dateNote": "fields.contentDateStart.dateNote",
+                        "dateLatestScalarValue": "fields.contentDateStart.dateLatestScalarValue",
+                        "dateLatestQualifierUnit": "fields.contentDateStart.dateLatestQualifierUnit",
+                        "dateEarliestSingleDay": "fields.contentDateStart.dateEarliestSingleDay",
+                        "dateEarliestSingleMonth": "fields.contentDateStart.dateEarliestSingleMonth"
+                    }
+                }
+            }
+        ],
+        "value": "${fields.collection-object-contentDateStart}"
     },
     ".csc-collection-object-collection-label": {
         "messagekey": "collection-object-collectionLabel"
@@ -91,35 +147,28 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "technicalAttributeGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-technical-attribute": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "magnetic tape type",
-                                                "record speed"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "magnetic-tape-type",
-                                                "record-speed"
-                                            ],
-                                            "selection": "${{row}.technicalAttribute}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "technicalAttributeGroup"
+                                ".csc-object-description-technical-attribute": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "magnetic tape type",
+                                        "record speed"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "magnetic-tape-type",
+                                        "record-speed"
+                                    ],
+                                    "selection": "${{row}.technicalAttribute}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "technicalAttributeGroup",
                     "hidePrimary": true
                 }
             }
@@ -143,43 +192,94 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "collections",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-collection": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Library collection",
-                                                "Permanent collection",
-                                                "Study collection",
-                                                "Teaching collection"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "library-collection",
-                                                "permanent-collection",
-                                                "study-collection",
-                                                "teaching-collection"
-                                            ],
-                                            "selection": "${{row}.collection}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "collections"
+                                ".csc-object-identification-collection": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Library collection",
+                                        "Permanent collection",
+                                        "Study collection",
+                                        "Teaching collection"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "library-collection",
+                                        "permanent-collection",
+                                        "study-collection",
+                                        "teaching-collection"
+                                    ],
+                                    "selection": "${{row}.collection}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "collections",
                     "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-collection-object-fieldCollectionDate": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-collection-object-fieldCollectionDate": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.structuredDate",
+                                            "type": "fluid",
+                                            "options": {
+                                                "elPath": "fields.fieldCollectionDate.dateDisplayDate",
+                                                "elPaths": {
+                                                    "dateEarliestSingleQualifier": "fields.fieldCollectionDate.dateEarliestSingleQualifier",
+                                                    "dateLatestDay": "fields.fieldCollectionDate.dateLatestDay",
+                                                    "dateLatestYear": "fields.fieldCollectionDate.dateLatestYear",
+                                                    "dateAssociation": "fields.fieldCollectionDate.dateAssociation",
+                                                    "dateEarliestSingleEra": "fields.fieldCollectionDate.dateEarliestSingleEra",
+                                                    "dateDisplayDate": "fields.fieldCollectionDate.dateDisplayDate",
+                                                    "dateEarliestSingleCertainty": "fields.fieldCollectionDate.dateEarliestSingleCertainty",
+                                                    "dateLatestEra": "fields.fieldCollectionDate.dateLatestEra",
+                                                    "dateEarliestSingleQualifierValue": "fields.fieldCollectionDate.dateEarliestSingleQualifierValue",
+                                                    "dateLatestCertainty": "fields.fieldCollectionDate.dateLatestCertainty",
+                                                    "dateEarliestSingleYear": "fields.fieldCollectionDate.dateEarliestSingleYear",
+                                                    "dateLatestQualifier": "fields.fieldCollectionDate.dateLatestQualifier",
+                                                    "dateLatestQualifierValue": "fields.fieldCollectionDate.dateLatestQualifierValue",
+                                                    "dateEarliestSingleQualifierUnit": "fields.fieldCollectionDate.dateEarliestSingleQualifierUnit",
+                                                    "datePeriod": "fields.fieldCollectionDate.datePeriod",
+                                                    "dateEarliestScalarValue": "fields.fieldCollectionDate.dateEarliestScalarValue",
+                                                    "dateLatestMonth": "fields.fieldCollectionDate.dateLatestMonth",
+                                                    "dateNote": "fields.fieldCollectionDate.dateNote",
+                                                    "dateLatestScalarValue": "fields.fieldCollectionDate.dateLatestScalarValue",
+                                                    "dateLatestQualifierUnit": "fields.fieldCollectionDate.dateLatestQualifierUnit",
+                                                    "dateEarliestSingleDay": "fields.fieldCollectionDate.dateEarliestSingleDay",
+                                                    "dateEarliestSingleMonth": "fields.fieldCollectionDate.dateEarliestSingleMonth"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "value": "${fields.fieldCollectionDate.dateDisplayDate}"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "fieldCollectionDates",
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-contentDateStart-label": {
+        "messagekey": "collection-object-contentDateStartLabel"
     },
     ".csc-collection-object-titleLanguage-label": {
         "messagekey": "collection-object-titleLanguageLabel"
@@ -187,57 +287,53 @@
     ".csc-collection-object-inscriptionDescriptionInscriber-label": {
         "messagekey": "collection-object-inscriptionDescriptionInscriberLabel"
     },
+    ".csc-collection-object-inscriptionDescription-label": {
+        "messagekey": "collection-object-inscriptionDescriptionLabel"
+    },
     ".csc-object-identification-responsible-department": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "responsibleDepartments",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-responsible-department": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Antiquities",
-                                                "Architecture and Design",
-                                                "Decorative Arts",
-                                                "Ethnography",
-                                                "Herpetology",
-                                                "Media and Performance Art",
-                                                "Paintings and Sculpture",
-                                                "Paleobotany",
-                                                "Photographs",
-                                                "Prints and Drawings"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "antiquities",
-                                                "architecture-design",
-                                                "decorative-arts",
-                                                "ethnography",
-                                                "herpetology",
-                                                "media-performance-art",
-                                                "paintings-sculpture",
-                                                "paleobotany",
-                                                "photographs",
-                                                "prints-drawings"
-                                            ],
-                                            "selection": "${{row}.responsibleDepartment}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "responsibleDepartments"
+                                ".csc-object-identification-responsible-department": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Antiquities",
+                                        "Architecture and Design",
+                                        "Decorative Arts",
+                                        "Ethnography",
+                                        "Herpetology",
+                                        "Media and Performance Art",
+                                        "Paintings and Sculpture",
+                                        "Paleobotany",
+                                        "Photographs",
+                                        "Prints and Drawings"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "antiquities",
+                                        "architecture-design",
+                                        "decorative-arts",
+                                        "ethnography",
+                                        "herpetology",
+                                        "media-performance-art",
+                                        "paintings-sculpture",
+                                        "paleobotany",
+                                        "photographs",
+                                        "prints-drawings"
+                                    ],
+                                    "selection": "${{row}.responsibleDepartment}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "responsibleDepartments",
                     "hidePrimary": true
                 }
             }
@@ -252,23 +348,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectProductionPlaceGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-place": "${{row}.objectProductionPlace}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectProductionPlaceGroup"
-                                }
+                                ".csc-object-production-place": "${{row}.objectProductionPlace}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectProductionPlaceGroup",
                     "hidePrimary": true
                 }
             }
@@ -277,8 +365,14 @@
     ".csc-collection-object-phase-label": {
         "messagekey": "collection-object-phaseLabel"
     },
+    ".csc-collection-object-inscriptionDescriptionInterpretation-label": {
+        "messagekey": "collection-object-inscriptionDescriptionInterpretationLabel"
+    },
     ".csc-collection-object-technicalAttribute-label": {
         "messagekey": "collection-object-technicalAttributeLabel"
+    },
+    ".csc-collection-object-titleTranslationSubGroup-label": {
+        "messagekey": "titleGroup-titleTranslationSubGroupLabel"
     },
     ".csc-object-description-sex": {
         "decorators": [
@@ -286,35 +380,28 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "sexs",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-sex": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "male",
-                                                "female"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "male",
-                                                "female"
-                                            ],
-                                            "selection": "${{row}.sex}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "sexs"
+                                ".csc-object-description-sex": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "male",
+                                        "female"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "male",
+                                        "female"
+                                    ],
+                                    "selection": "${{row}.sex}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "sexs",
                     "hidePrimary": true
                 }
             }
@@ -326,23 +413,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "titleGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-object-title": "${{row}.title}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "titleGroup"
-                                }
+                                ".csc-object-identification-object-title": "${{row}.title}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "titleGroup",
                     "hidePrimary": true
                 }
             }
@@ -357,205 +436,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-object-production-people": "${{row}.objectProductionPeople}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
                     "elPath": "objectProductionPeopleGroup",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-people": "${{row}.objectProductionPeople}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectProductionPeopleGroup"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-object-production-date": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "objectProductionDates",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-date": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.structuredDate",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "elPath": "fields.objectProductionDate.dateDisplayDate",
-                                                        "protoTree": {
-                                                            "expander": {
-                                                                "tree": {
-                                                                    "dateEarliestSingleQualifier": {
-                                                                        "optionnames": [
-                                                                            "+/-",
-                                                                            "+",
-                                                                            "-"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "+/-",
-                                                                            "+",
-                                                                            "-"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateEarliestSingleQualifier}"
-                                                                    },
-                                                                    "dateLatestDay": "${fields.objectProductionDate.dateLatestDay}",
-                                                                    "dateLatestYear": "${fields.objectProductionDate.dateLatestYear}",
-                                                                    "dateAssociation": "${fields.objectProductionDate.dateAssociation}",
-                                                                    "dateEarliestSingleEra": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "BCE",
-                                                                            "CE"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "bce",
-                                                                            "ce"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateEarliestSingleEra}"
-                                                                    },
-                                                                    "dateDisplayDate": "${fields.objectProductionDate.dateDisplayDate}",
-                                                                    "dateEarliestSingleCertainty": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "Probably",
-                                                                            "Possibly",
-                                                                            "Before",
-                                                                            "Circa",
-                                                                            "After",
-                                                                            "Approximate"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "probably",
-                                                                            "possibly",
-                                                                            "before",
-                                                                            "circa",
-                                                                            "after",
-                                                                            "approximate"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateEarliestSingleCertainty}"
-                                                                    },
-                                                                    "dateLatestEra": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "BCE",
-                                                                            "CE"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "bce",
-                                                                            "ce"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateLatestEra}"
-                                                                    },
-                                                                    "dateEarliestSingleQualifierValue": "${fields.objectProductionDate.dateEarliestSingleQualifierValue}",
-                                                                    "dateLatestCertainty": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "Probably",
-                                                                            "Possibly",
-                                                                            "Before",
-                                                                            "Circa",
-                                                                            "After",
-                                                                            "Approximate"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "probably",
-                                                                            "possibly",
-                                                                            "before",
-                                                                            "circa",
-                                                                            "after",
-                                                                            "approximate"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateLatestCertainty}"
-                                                                    },
-                                                                    "dateEarliestSingleYear": "${fields.objectProductionDate.dateEarliestSingleYear}",
-                                                                    "dateLatestQualifier": {
-                                                                        "optionnames": [
-                                                                            "+/-",
-                                                                            "+",
-                                                                            "-"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "+/-",
-                                                                            "+",
-                                                                            "-"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateLatestQualifier}"
-                                                                    },
-                                                                    "dateLatestQualifierValue": "${fields.objectProductionDate.dateLatestQualifierValue}",
-                                                                    "dateEarliestSingleQualifierUnit": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "Month(s)",
-                                                                            "Year(s)",
-                                                                            "Day(s)"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "month",
-                                                                            "years",
-                                                                            "days"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateEarliestSingleQualifierUnit}"
-                                                                    },
-                                                                    "datePeriod": "${fields.objectProductionDate.datePeriod}",
-                                                                    "dateLatestMonth": "${fields.objectProductionDate.dateLatestMonth}",
-                                                                    "dateNote": "${fields.objectProductionDate.dateNote}",
-                                                                    "dateLatestQualifierUnit": {
-                                                                        "optionnames": [
-                                                                            "Please select a value",
-                                                                            "Month(s)",
-                                                                            "Year(s)",
-                                                                            "Day(s)"
-                                                                        ],
-                                                                        "optionlist": [
-                                                                            "",
-                                                                            "month",
-                                                                            "years",
-                                                                            "days"
-                                                                        ],
-                                                                        "selection": "${fields.objectProductionDate.dateLatestQualifierUnit}"
-                                                                    },
-                                                                    "dateEarliestSingleDay": "${fields.objectProductionDate.dateEarliestSingleDay}",
-                                                                    "dateEarliestSingleMonth": "${fields.objectProductionDate.dateEarliestSingleMonth}"
-                                                                },
-                                                                "type": "fluid.noexpand"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${fields.objectProductionDate.dateDisplayDate}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectProductionDates"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
                     "hidePrimary": true
                 }
             }
@@ -570,39 +459,32 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "forms",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-form": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "dry",
-                                                "pinned",
-                                                "thin section",
-                                                "wet"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "dry",
-                                                "pinned",
-                                                "thin-section",
-                                                "wet"
-                                            ],
-                                            "selection": "${{row}.form}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "forms"
+                                ".csc-object-description-form": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "dry",
+                                        "pinned",
+                                        "thin section",
+                                        "wet"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "dry",
+                                        "pinned",
+                                        "thin-section",
+                                        "wet"
+                                    ],
+                                    "selection": "${{row}.form}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "forms",
                     "hidePrimary": true
                 }
             }
@@ -626,27 +508,22 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "materialGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-material": "${{row}.material}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "materialGroup"
-                                }
+                                ".csc-object-description-material": "${{row}.material}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "materialGroup",
                     "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-collection-object-contentDate-label": {
+        "messagekey": "collection-object-contentDateLabel"
     },
     ".csc-collection-object-updatedAtEnd-label": {
         "messagekey": "collection-object-updatedAtEndLabel"
@@ -660,23 +537,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectNameGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-object-name": "${{row}.objectName}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectNameGroup"
-                                }
+                                ".csc-object-identification-object-name": "${{row}.objectName}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectNameGroup",
                     "hidePrimary": true
                 }
             }
@@ -700,46 +569,6 @@
     ".csc-collection-object-objectProductionPeople-label": {
         "messagekey": "collection-object-objectProductionPeopleLabel"
     },
-    ".csc-object-description-inscription-description-inscriber": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "inscriptionDescriptionInscribers",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-inscription-description-inscriber": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionDescriptionInscriber",
-                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionDescriptionInscriber"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.inscriptionDescriptionInscriber}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inscriptionDescriptionInscribers"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
     ".csc-collection-object-updatedAt-label": {
         "messagekey": "collection-object-updatedAtLabel"
     },
@@ -749,39 +578,32 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectComponentGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-object-component-name": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "blade",
-                                                "buttonhole",
-                                                "handle",
-                                                "sleeve"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "blade",
-                                                "buttonhole",
-                                                "handle",
-                                                "sleeve"
-                                            ],
-                                            "selection": "${{row}.objectComponentName}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectComponentGroup"
+                                ".csc-object-description-object-component-name": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "blade",
+                                        "buttonhole",
+                                        "handle",
+                                        "sleeve"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "blade",
+                                        "buttonhole",
+                                        "handle",
+                                        "sleeve"
+                                    ],
+                                    "selection": "${{row}.objectComponentName}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectComponentGroup",
                     "hidePrimary": true
                 }
             }
@@ -793,35 +615,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectProductionPersonGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-person": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
-                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.objectProductionPerson}"
+                                ".csc-object-production-person": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
+                                                "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectProductionPersonGroup"
+                                    ],
+                                    "value": "${{row}.objectProductionPerson}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectProductionPersonGroup",
                     "hidePrimary": true
                 }
             }
@@ -833,23 +647,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "copyNumbers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-copy-number": "${{row}.copyNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "copyNumbers"
-                                }
+                                ".csc-object-description-copy-number": "${{row}.copyNumber}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "copyNumbers",
                     "hidePrimary": true
                 }
             }
@@ -870,27 +676,55 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-collection-object-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
+                                ".csc-collection-object-updatedBy": "${{row}.updatedBy}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "updatedBys",
                     "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-collection-object-contentDateEnd": {
+        "decorators": [
+            {
+                "func": "",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.collection-object-contentDateEnd",
+                    "elPaths": {
+                        "dateEarliestSingleQualifier": "fields.contentDateEnd.dateEarliestSingleQualifier",
+                        "dateLatestDay": "fields.contentDateEnd.dateLatestDay",
+                        "dateLatestYear": "fields.contentDateEnd.dateLatestYear",
+                        "dateAssociation": "fields.contentDateEnd.dateAssociation",
+                        "dateEarliestSingleEra": "fields.contentDateEnd.dateEarliestSingleEra",
+                        "dateDisplayDate": "fields.contentDateEnd.dateDisplayDate",
+                        "dateEarliestSingleCertainty": "fields.contentDateEnd.dateEarliestSingleCertainty",
+                        "dateLatestEra": "fields.contentDateEnd.dateLatestEra",
+                        "dateEarliestSingleQualifierValue": "fields.contentDateEnd.dateEarliestSingleQualifierValue",
+                        "dateLatestCertainty": "fields.contentDateEnd.dateLatestCertainty",
+                        "dateEarliestSingleYear": "fields.contentDateEnd.dateEarliestSingleYear",
+                        "dateLatestQualifier": "fields.contentDateEnd.dateLatestQualifier",
+                        "dateLatestQualifierValue": "fields.contentDateEnd.dateLatestQualifierValue",
+                        "dateEarliestSingleQualifierUnit": "fields.contentDateEnd.dateEarliestSingleQualifierUnit",
+                        "datePeriod": "fields.contentDateEnd.datePeriod",
+                        "dateEarliestScalarValue": "fields.contentDateEnd.dateEarliestScalarValue",
+                        "dateLatestMonth": "fields.contentDateEnd.dateLatestMonth",
+                        "dateNote": "fields.contentDateEnd.dateNote",
+                        "dateLatestScalarValue": "fields.contentDateEnd.dateLatestScalarValue",
+                        "dateLatestQualifierUnit": "fields.contentDateEnd.dateLatestQualifierUnit",
+                        "dateEarliestSingleDay": "fields.contentDateEnd.dateEarliestSingleDay",
+                        "dateEarliestSingleMonth": "fields.contentDateEnd.dateEarliestSingleMonth"
+                    }
+                }
+            }
+        ],
+        "value": "${fields.collection-object-contentDateEnd}"
     },
     ".csc-collection-object-fieldColEventName": {
         "decorators": [
@@ -898,23 +732,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "fieldColEventNames",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-collection-object-fieldColEventName": "${{row}.fieldColEventName}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "fieldColEventNames"
-                                }
+                                ".csc-collection-object-fieldColEventName": "${{row}.fieldColEventName}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "fieldColEventNames",
                     "hidePrimary": true
                 }
             }
@@ -926,30 +752,28 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectNumbers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-object-number": "${{row}.objectNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectNumbers"
-                                }
+                                ".csc-object-identification-object-number": "${{row}.objectNumber}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectNumbers",
                     "hidePrimary": true
                 }
             }
         ]
     },
+    ".csc-collection-object-inscriptionDescriptionDateGroup-label": {
+        "messagekey": "nonTextualInscriptionGroup-inscriptionDescriptionDateGroupLabel"
+    },
     ".csc-collection-object-objectName-label": {
         "messagekey": "collection-object-objectNameLabel"
+    },
+    ".csc-collection-object-objectProductionOrganizationRole-label": {
+        "messagekey": "collection-object-objectProductionOrganizationRoleLabel"
     },
     ".csc-object-description-style": {
         "decorators": [
@@ -957,30 +781,19 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "styles",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-style": "${{row}.style}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "styles"
-                                }
+                                ".csc-object-description-style": "${{row}.style}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "styles",
                     "hidePrimary": true
                 }
             }
         ]
-    },
-    ".csc-collection-object-objectProductionOrganizationRole-label": {
-        "messagekey": "collection-object-objectProductionOrganizationRoleLabel"
     },
     ".csc-collection-object-updatedAtStart": {
         "decorators": [
@@ -991,11 +804,11 @@
         ],
         "value": "${updatedAtStart}"
     },
-    ".csc-collection-object-copyNumber-label": {
-        "messagekey": "collection-object-copyNumberLabel"
-    },
     ".csc-collection-object-objectProductionOrganization-label": {
         "messagekey": "collection-object-objectProductionOrganizationLabel"
+    },
+    ".csc-collection-object-copyNumber-label": {
+        "messagekey": "collection-object-copyNumberLabel"
     },
     ".csc-object-identification-record-status": {
         "decorators": [
@@ -1003,38 +816,32 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "recordStatuss",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-identification-record-status": {
-                                            "default": "new",
-                                            "optionnames": [
-                                                "Approved",
-                                                "In process",
-                                                "New",
-                                                "Temporary"
-                                            ],
-                                            "optionlist": [
-                                                "approved",
-                                                "in-process",
-                                                "new",
-                                                "temporary"
-                                            ],
-                                            "selection": "${{row}.recordStatus}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "recordStatuss"
+                                ".csc-object-identification-record-status": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Approved",
+                                        "In process",
+                                        "New",
+                                        "Temporary",
+                                        "Please select a value"
+                                    ],
+                                    "optionlist": [
+                                        "approved",
+                                        "in-process",
+                                        "new",
+                                        "temporary",
+                                        ""
+                                    ],
+                                    "selection": "${{row}.recordStatus}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "recordStatuss",
                     "hidePrimary": true
                 }
             }
@@ -1046,9 +853,6 @@
     ".csc-collection-object-objectNameCurrency-label": {
         "messagekey": "collection-object-objectNameCurrencyLabel"
     },
-    ".csc-collection-object-titleTranslation-label": {
-        "messagekey": "collection-object-titleTranslationLabel"
-    },
     ".csc-collection-object-objectNameNote-label": {
         "messagekey": "collection-object-objectNameNoteLabel"
     },
@@ -1058,11 +862,80 @@
     ".csc-collection-object-recordStatus-label": {
         "messagekey": "collection-object-recordStatusLabel"
     },
-    ".csc-collection-object-titleTranslationLanguage-label": {
-        "messagekey": "collection-object-titleTranslationLanguageLabel"
+    ".csc-collection-object-contentDateEnd-label": {
+        "messagekey": "collection-object-contentDateEndLabel"
     },
     ".csc-collection-object-objectNameLevel-label": {
         "messagekey": "collection-object-objectNameLevelLabel"
+    },
+    ".csc-collection-object-nonTextualInscriptionGroup": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-object-description-inscription-description-method": "${{row}.inscriptionDescriptionMethod}",
+                                ".csc-object-description-inscription-description-date": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.structuredDate",
+                                            "type": "fluid",
+                                            "options": {
+                                                "elPath": "fields.dateDisplayDate",
+                                                "elPaths": {
+                                                    "dateEarliestSingleQualifier": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleQualifier",
+                                                    "dateLatestDay": "fields.inscriptionDescriptionDateGroup.dateLatestDay",
+                                                    "dateLatestYear": "fields.inscriptionDescriptionDateGroup.dateLatestYear",
+                                                    "dateAssociation": "fields.inscriptionDescriptionDateGroup.dateAssociation",
+                                                    "dateEarliestSingleEra": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleEra",
+                                                    "dateDisplayDate": "fields.inscriptionDescriptionDateGroup.dateDisplayDate",
+                                                    "dateEarliestSingleCertainty": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleCertainty",
+                                                    "dateLatestEra": "fields.inscriptionDescriptionDateGroup.dateLatestEra",
+                                                    "dateEarliestSingleQualifierValue": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleQualifierValue",
+                                                    "dateLatestCertainty": "fields.inscriptionDescriptionDateGroup.dateLatestCertainty",
+                                                    "dateEarliestSingleYear": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleYear",
+                                                    "dateLatestQualifier": "fields.inscriptionDescriptionDateGroup.dateLatestQualifier",
+                                                    "dateLatestQualifierValue": "fields.inscriptionDescriptionDateGroup.dateLatestQualifierValue",
+                                                    "dateEarliestSingleQualifierUnit": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleQualifierUnit",
+                                                    "datePeriod": "fields.inscriptionDescriptionDateGroup.datePeriod",
+                                                    "dateEarliestScalarValue": "fields.inscriptionDescriptionDateGroup.dateEarliestScalarValue",
+                                                    "dateLatestMonth": "fields.inscriptionDescriptionDateGroup.dateLatestMonth",
+                                                    "dateNote": "fields.inscriptionDescriptionDateGroup.dateNote",
+                                                    "dateLatestScalarValue": "fields.inscriptionDescriptionDateGroup.dateLatestScalarValue",
+                                                    "dateLatestQualifierUnit": "fields.inscriptionDescriptionDateGroup.dateLatestQualifierUnit",
+                                                    "dateEarliestSingleDay": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleDay",
+                                                    "dateEarliestSingleMonth": "fields.inscriptionDescriptionDateGroup.dateEarliestSingleMonth"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "value": "${fields.dateDisplayDate}"
+                                },
+                                ".csc-object-description-inscription-description-inscriber": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionDescriptionInscriber",
+                                                "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionDescriptionInscriber"
+                                            }
+                                        }
+                                    ],
+                                    "value": "${{row}.inscriptionDescriptionInscriber}"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "elPath": "nonTextualInscriptionGroup",
+                    "hidePrimary": true
+                }
+            }
+        ]
     },
     ".csc-collection-object-materialSource-label": {
         "messagekey": "collection-object-materialSourceLabel"
@@ -1073,33 +946,8 @@
     ".csc-collection-object-objectProductionPlaceRole-label": {
         "messagekey": "collection-object-objectProductionPlaceRoleLabel"
     },
-    ".csc-object-description-inscription-description-method": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "inscriptionDescriptionMethods",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-inscription-description-method": "${{row}.inscriptionDescriptionMethod}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "inscriptionDescriptionMethods"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
+    ".csc-collection-object-inscriptionDescriptionDateGroupStart-label": {
+        "messagekey": "collection-object-inscriptionDescriptionDateGroupStartLabel"
     },
     ".csc-collection-object-materialName-label": {
         "messagekey": "collection-object-materialNameLabel"
@@ -1113,47 +961,76 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "objectStatusList",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-object-status": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "copy",
-                                                "forgery",
-                                                "holotype",
-                                                "paralectotype",
-                                                "paratype",
-                                                "type"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "copy",
-                                                "forgery",
-                                                "holotype",
-                                                "paralectotype",
-                                                "paratype",
-                                                "type"
-                                            ],
-                                            "selection": "${{row}.objectStatus}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "objectStatusList"
+                                ".csc-object-description-object-status": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "copy",
+                                        "forgery",
+                                        "holotype",
+                                        "paralectotype",
+                                        "paratype",
+                                        "type"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "copy",
+                                        "forgery",
+                                        "holotype",
+                                        "paralectotype",
+                                        "paratype",
+                                        "type"
+                                    ],
+                                    "selection": "${{row}.objectStatus}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "objectStatusList",
                     "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-collection-object-inscriptionDescriptionDateGroupStart": {
+        "decorators": [
+            {
+                "func": "",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.collection-object-inscriptionDescriptionDateGroupStart",
+                    "elPaths": {
+                        "dateEarliestSingleQualifier": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleQualifier",
+                        "dateLatestDay": "fields.inscriptionDescriptionDateGroupStart.dateLatestDay",
+                        "dateLatestYear": "fields.inscriptionDescriptionDateGroupStart.dateLatestYear",
+                        "dateAssociation": "fields.inscriptionDescriptionDateGroupStart.dateAssociation",
+                        "dateEarliestSingleEra": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleEra",
+                        "dateDisplayDate": "fields.inscriptionDescriptionDateGroupStart.dateDisplayDate",
+                        "dateEarliestSingleCertainty": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleCertainty",
+                        "dateLatestEra": "fields.inscriptionDescriptionDateGroupStart.dateLatestEra",
+                        "dateEarliestSingleQualifierValue": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleQualifierValue",
+                        "dateLatestCertainty": "fields.inscriptionDescriptionDateGroupStart.dateLatestCertainty",
+                        "dateEarliestSingleYear": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleYear",
+                        "dateLatestQualifier": "fields.inscriptionDescriptionDateGroupStart.dateLatestQualifier",
+                        "dateLatestQualifierValue": "fields.inscriptionDescriptionDateGroupStart.dateLatestQualifierValue",
+                        "dateEarliestSingleQualifierUnit": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleQualifierUnit",
+                        "datePeriod": "fields.inscriptionDescriptionDateGroupStart.datePeriod",
+                        "dateEarliestScalarValue": "fields.inscriptionDescriptionDateGroupStart.dateEarliestScalarValue",
+                        "dateLatestMonth": "fields.inscriptionDescriptionDateGroupStart.dateLatestMonth",
+                        "dateNote": "fields.inscriptionDescriptionDateGroupStart.dateNote",
+                        "dateLatestScalarValue": "fields.inscriptionDescriptionDateGroupStart.dateLatestScalarValue",
+                        "dateLatestQualifierUnit": "fields.inscriptionDescriptionDateGroupStart.dateLatestQualifierUnit",
+                        "dateEarliestSingleDay": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleDay",
+                        "dateEarliestSingleMonth": "fields.inscriptionDescriptionDateGroupStart.dateEarliestSingleMonth"
+                    }
+                }
+            }
+        ],
+        "value": "${fields.collection-object-inscriptionDescriptionDateGroupStart}"
     },
     ".csc-collection-object-technique-label": {
         "messagekey": "collection-object-techniqueLabel"
@@ -1161,11 +1038,20 @@
     ".csc-collection-object-objectNameSystem-label": {
         "messagekey": "collection-object-objectNameSystemLabel"
     },
+    ".csc-collection-object-inscriptionDescriptionPosition-label": {
+        "messagekey": "collection-object-inscriptionDescriptionPositionLabel"
+    },
     ".csc-collection-object-objectComponentInformation-label": {
         "messagekey": "collection-object-objectComponentInformationLabel"
     },
     ".csc-collection-object-materialComponent-label": {
         "messagekey": "collection-object-materialComponentLabel"
+    },
+    ".csc-collection-object-inscriptionDescriptionDateGroupEnd-label": {
+        "messagekey": "collection-object-inscriptionDescriptionDateGroupEndLabel"
+    },
+    ".csc-collection-object-inscriptionDescriptionType-label": {
+        "messagekey": "collection-object-inscriptionDescriptionTypeLabel"
     },
     ".csc-collection-object-techniqueGroup": {
         "decorators": [
@@ -1173,23 +1059,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "techniqueGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-production-technique": "${{row}.technique}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "techniqueGroup"
-                                }
+                                ".csc-object-production-technique": "${{row}.technique}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "techniqueGroup",
                     "hidePrimary": true
                 }
             }
@@ -1201,41 +1079,34 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "phases",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-object-description-phase": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "adult",
-                                                "imago",
-                                                "larva",
-                                                "nymph",
-                                                "pupa"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "adult",
-                                                "imago",
-                                                "larva",
-                                                "nymph",
-                                                "pupa"
-                                            ],
-                                            "selection": "${{row}.phase}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "phases"
+                                ".csc-object-description-phase": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "adult",
+                                        "imago",
+                                        "larva",
+                                        "nymph",
+                                        "pupa"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "adult",
+                                        "imago",
+                                        "larva",
+                                        "nymph",
+                                        "pupa"
+                                    ],
+                                    "selection": "${{row}.phase}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "phases",
                     "hidePrimary": true
                 }
             }

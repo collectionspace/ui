@@ -131,8 +131,13 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
+input[type="button"].saveButton[disabled], input[type="submit"].saveButton[disabled] {
+    background:transparent url('../images/icnSaveDisabled.png') no-repeat 24px 4px;
+    color:#CCC;}
 input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover,
-input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus {
+input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus,
+input[type="button"].saveButton[disabled]:hover, input[type="submit"].saveButton[disabled]:hover,
+input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton[disabled]:focus {
     background-color:#ADADAD;
     color:#606060
 }

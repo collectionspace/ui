@@ -1423,6 +1423,7 @@ fluid.registerNamespace("cspace.util");
             schema: "nomerge"
         },
         recordType: "",
+        namespace: "",
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",
             validatePrimitive: {
@@ -1477,8 +1478,9 @@ fluid.registerNamespace("cspace.util");
 
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
+        var schemaName = that.options.namespace || that.options.recordType;
         // Only validate fields.
-        schema = schema[that.options.recordType].properties.fields.properties;
+        schema = schema[schemaName].properties.fields.properties;
 
         that.validate = function (data) {
             var thisData = fluid.copy(data);
@@ -1523,6 +1525,14 @@ fluid.registerNamespace("cspace.util");
         return fluid.model.composeSegments.apply(null, root ? fluid.remove_if(fluid.makeArray(arguments), function (arg) {
             if (!arg) {return true;}
         }) : [path]);
+    };
+
+    cspace.util.resolveLocked = function (model) {
+        return model.workflow && model.workflow === "lock";
+    };
+
+    cspace.util.isReadOnly = function (readOnly, model) {
+        return readOnly || cspace.util.resolveLocked(model);
     };
     
 })(jQuery, fluid);
