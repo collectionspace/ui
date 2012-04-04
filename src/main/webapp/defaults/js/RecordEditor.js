@@ -588,6 +588,9 @@ cspace = cspace || {};
             confirmation: {
                 type: "cspace.confirmation"
             },
+            recordLock: {
+                type: "cspace.util.recordLock"
+            },
             recordEditorTogglable: {
                 type: "cspace.util.togglable",
                 options: {

@@ -1534,5 +1534,26 @@ fluid.registerNamespace("cspace.util");
     cspace.util.isReadOnly = function (readOnly, model) {
         return readOnly || cspace.util.resolveLocked(model);
     };
+
+    fluid.defaults("cspace.util.recordLock", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        styles: {
+            locked: "cs-locked"
+        },
+        finalInitFunction: "cspace.util.recordLock.finalInit"
+    });
+
+    cspace.util.recordLock.finalInit = function (that) {
+        function processWorkflow (model) {
+            if (!cspace.util.resolveLocked(model)) {
+                return;
+            }
+            that.container.addClass(that.options.styles.locked);
+        }
+        that.applier.modelChanged.addListener("workflow", function (model) {
+             processWorkflow(model);
+        });
+        processWorkflow(that.model);
+    };
     
 })(jQuery, fluid);
