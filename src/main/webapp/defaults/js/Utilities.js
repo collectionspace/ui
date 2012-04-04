@@ -1528,11 +1528,76 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.resolveLocked = function (model) {
-        return model.workflow && model.workflow === "lock";
+        return model.workflow && model.workflow === "locked";
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
         return readOnly || cspace.util.resolveLocked(model);
+    };
+
+    fluid.defaults("cspace.util.recordLock", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        styles: {
+            locked: "cs-locked"
+        },
+        finalInitFunction: "cspace.util.recordLock.finalInit"
+    });
+
+    cspace.util.recordLock.finalInit = function (that) {
+        function processWorkflow (model) {
+            if (!cspace.util.resolveLocked(model)) {
+                return;
+            }
+            that.container.addClass(that.options.styles.locked);
+        }
+        that.applier.modelChanged.addListener("workflow", function (model) {
+             processWorkflow(model);
+        });
+        processWorkflow(that.model);
+    };
+
+    fluid.defaults("cspace.util.workflowStyler", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "cspace.util.workflowStyler.finalInit",
+        invokers: {
+            getRecordLockContainer: "cspace.util.workflowStyler.getRecordLockContainer"
+        },
+        components: {
+            instantiator: "{instantiator}"
+        },
+        offset: 0
+    });
+
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.listView", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerListView",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.recordList", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerRecordList",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
+    cspace.util.workflowStyler.getRecordLockContainerRecordList = function (rows, index) {
+        return rows.eq(index);
+    };
+
+    cspace.util.workflowStyler.getRecordLockContainerListView = function (rows, index) {
+        return $("td", rows.eq(index)).last();
+    };
+
+    cspace.util.workflowStyler.finalInit = function (that) {
+        fluid.each(that.options.rows, function (row, index) {
+            var name = "recordLock-" + index;
+            that.options.components[name] = {
+                type: "cspace.util.recordLock",
+                container: that.getRecordLockContainer(index),
+                options: {
+                    model: that.options.list[that.options.offset + index]
+                }
+            };
+            fluid.initDependent(that, name, that.instantiator);
+        });
     };
     
 })(jQuery, fluid);

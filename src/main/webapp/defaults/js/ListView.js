@@ -119,6 +119,16 @@ cspace = cspace || {};
                 type: "cspace.listView.listPermissionStyler",
                 createOnEvent: "pagerAfterRender",
                 options: {
+                    offset: "{cspace.listView}.model.offset",
+                    rows: "{cspace.listView}.dom.row",
+                    list: "{cspace.listView}.model.list"
+                }
+            },
+            workflowStyler: {
+                type: "cspace.util.workflowStyler",
+                createOnEvent: "pagerAfterRender",
+                options: {
+                    offset: "{cspace.listView}.model.offset",
                     rows: "{cspace.listView}.dom.row",
                     list: "{cspace.listView}.model.list"
                 }
@@ -219,6 +229,7 @@ cspace = cspace || {};
         that.updateList = function (list) {
             var pagerModel = that.pager.model;
             var offset = pagerModel.pageIndex * pagerModel.pageSize;
+            that.applier.requestChange("offset", offset);
             fluid.each(list, function (row, index) {
                 var fullIndex = offset + index;
                 that.applier.requestChange(fluid.model.composeSegments("list", fullIndex), row);
@@ -331,11 +342,13 @@ cspace = cspace || {};
         },
         styles: {
             disabled: "cs-disabled"
-        }
+        },
+        offset: 0
     });
 
     cspace.listView.listPermissionStyler.finalInit = function (that) {
-        fluid.each(that.options.list, function (record, index) {
+        fluid.each(that.options.rows, function (row, index) {
+            var record = that.options.list[that.options.offset + index];
             if (!cspace.permissions.resolve({
                 permission: "read",
                 target: record.recordtype || record.sourceFieldType,

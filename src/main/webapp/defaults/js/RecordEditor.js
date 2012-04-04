@@ -246,7 +246,7 @@ cspace = cspace || {};
                     if (userAction === "act") {
                         cspace.recordEditor.requestSave(that);
                     } else if (userAction === "proceed") {
-                        that.applier.requestChange("locked", true);
+                        that.applier.requestChange("workflowTransition", "lock");
                         cspace.recordEditor.requestSave(that);
                     }
                 }
