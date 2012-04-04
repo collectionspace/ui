@@ -353,8 +353,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeDemands = function () {
 
+        fluid.demands("cspace.util.recordLock", "cspace.recordList", {
+            options: fluid.COMPONENT_OPTIONS
+        });
+
         fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
-            container: ".csc-recordLock",
+            container: "{cspace.recordEditor}.dom.recordLockContainer",
             options: {
                 model: "{cspace.recordEditor}.model",
                 applier: "{cspace.recordEditor}.applier"

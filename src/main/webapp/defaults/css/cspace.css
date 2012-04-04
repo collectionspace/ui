@@ -2076,3 +2076,10 @@ tr .cs-locked {
     width: inherit;
     height: inherit;
 }
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}

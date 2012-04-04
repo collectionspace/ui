@@ -124,7 +124,7 @@ cspace = cspace || {};
                 }
             },
             workflowStyler: {
-                type: "cspace.listView.workflowStyler",
+                type: "cspace.util.workflowStyler",
                 createOnEvent: "pagerAfterRender",
                 options: {
                     rows: "{cspace.listView}.dom.row",
@@ -328,28 +328,6 @@ cspace = cspace || {};
         that.locate("row").click(function () {
             $(that.options.selectors["row"]).removeClass(that.options.styles.selected);
             that.styleAndActivate($(this), that.locate("row"));
-        });
-    };
-
-    fluid.defaults("cspace.listView.workflowStyler", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
-        finalInitFunction: "cspace.listView.workflowStyler.finalInit",
-        components: {
-            instantiator: "{instantiator}"
-        }
-    });
-
-    cspace.listView.workflowStyler.finalInit = function (that) {
-        fluid.each(that.options.list, function (record, index) {
-            var name = "recordLock-" + index;
-            that.options.components[name] = {
-                type: "cspace.util.recordLock",
-                container: $("td", that.options.rows.eq(index)).last(),
-                options: {
-                    model: record
-                }
-            };
-            fluid.initDependent(that, name, that.instantiator);
         });
     };
 
