@@ -1573,6 +1573,11 @@ fluid.registerNamespace("cspace.util");
         args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
     });
 
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.search.searchView", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerListView",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
     fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.recordList", {
         funcName: "cspace.util.workflowStyler.getRecordLockContainerRecordList",
         args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
