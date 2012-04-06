@@ -2060,6 +2060,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     white-space: nowrap;
 }
 
+
 /****************************************
  * Styling of HTML elements developed for UCB place authority template - rjaffe, 18Oct2011, awieliczka, jan2012 *
  * Needs approval to be added to default css.  *
@@ -2147,4 +2148,29 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 /* ---------------------------------------*/
 
+
+.cs-locked {
+    background-image: url(../images/lock.png);
+    width: 16px;
+    height: 20px;
+    float: right;
+    display: inline;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}
 
