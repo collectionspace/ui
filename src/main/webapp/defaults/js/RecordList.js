@@ -26,6 +26,16 @@ cspace = cspace || {};
         rendererOptions: {
             autoBind: true
         },
+        components: {
+            workflowStyler: {
+                type: "cspace.util.workflowStyler",
+                createOnEvent: "afterRender",
+                options: {
+                    rows: "{cspace.recordList}.dom.row",
+                    list: "{cspace.recordList}.model.items"
+                }
+            }
+        },
         invokers: {
             bindEvents: {
                 funcName: "cspace.recordList.bindEvents",
@@ -161,6 +171,7 @@ cspace = cspace || {};
         that.options.listeners.onSelect = function () {
             that.select();
         };
+        // TODO: This need to move into defaults.
         that.options.listeners.afterRender = function () {
         	that.bindEvents();
         };
@@ -411,7 +422,7 @@ cspace = cspace || {};
     };
 
     cspace.recordList.selectNavigateVocab = function (model, options, url, permissionsResolver, dom) {
-        selectNavigate(model, options, url, permissionsResolver, dom, "sourceFieldType");
+        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
     };
 
     cspace.recordList.selectNavigate = function (model, options, url, permissionsResolver, dom) {

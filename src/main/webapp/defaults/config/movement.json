@@ -10,7 +10,14 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-movement-currentLocation" 
+                            "identificationNumber": ".csc-movement-currentLocation",
+                            "recordLockContainer": ".csc-recordLock"
+                        },
+                        "selectorsToIgnore": ["recordLockContainer", "recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
+                        "components": {
+                            "recordLock": {
+                                "type": "cspace.util.recordLock"
+                            }
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",

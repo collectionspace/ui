@@ -2059,3 +2059,27 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
+.cs-locked {
+    background-image: url(../images/lock.png);
+    width: 16px;
+    height: 20px;
+    float: right;
+    display: inline;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}
