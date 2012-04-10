@@ -116,6 +116,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         funcName: "cspace.tests.selectNavigateVocab",
         args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
     });
+    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "concept", "cspace.relatedRecordsList"], {
+        funcName: "cspace.tests.selectNavigateVocab",
+        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
+    });
     fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "cspace.tab"], {
         funcName: "cspace.recordList.selectFromList",
         args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
