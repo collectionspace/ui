@@ -103,7 +103,8 @@ cspace = cspace || {};
         var model = {
             tabs: [{
                 "name": "tablist-primary",
-                href: "#primaryTab"
+                href: "#primaryTab",
+                title: "tablist-primary"
             }]
         };
         fluid.each(records, function (record) {
