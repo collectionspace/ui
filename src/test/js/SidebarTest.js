@@ -57,6 +57,7 @@ var sidebarTester = function ($) {
 
     var setupSidebar = function (options) {
         options.recordModel = options.recordModel || {
+            "fields": {},
             "relations": {
                 "cataloging": [
                     {
@@ -229,7 +230,7 @@ var sidebarTester = function ($) {
         var mediaSnapshot = ".csc-sidebar-mediumImage";
         jqUnit.assertTrue("Media snapshot", $(mediaSnapshot, sidebar.locate("media")).length);
 		console.log($(mediaSnapshot));
-		jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr(src) != 'undefined'));
+		jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));
         // jqUnit.assertNotEquals("Related Procedures shown", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
     });
 };
