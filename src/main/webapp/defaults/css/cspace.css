@@ -2063,7 +2063,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 
 /****************************************
  * Styling of HTML elements developed for UCB place authority template - rjaffe, 18Oct2011, awieliczka, jan2012 *
- * Needs approval to be added to default css.  *
+ * For padding on items nested within the OOCSS grid - like .info-pair (see line 2111) - include 'oocss' as a high level class *
  ****************************************/
 
 /* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
@@ -2099,34 +2099,34 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .smallfield { width: 75% !important; }
 .spacer { height: 4.5em; }
 
-.csc-place .cs-structuredDate-popup {
-	width: 615px !important;
+/*.csc-place .cs-structuredDate-popup {
+    width: 615px !important;
 }
 
 .csc-place .nameDate .cs-structuredDate-popup {
-	right: 38px !important;
-	top: 127px;
+    right: 38px !important;
+    top: 127px;
 }
-
-.csc-place .info-pair, 
-.csc-place .info-pair-addrow, 
-.csc-place .info-pair-table, 
-.csc-place .info-pair-date,
-.csc-place .info-pair-select,
-.csc-place .info-pair-termlist
+*/
+.oocss .info-pair, 
+.oocss .info-pair-addrow, 
+.oocss .info-pair-table, 
+.oocss .info-pair-date,
+.oocss .info-pair-select,
+.oocss .info-pair-termlist
 {
 	width: auto;
 	padding-right: 1.5em;
 }
 
-.csc-place li {
+.oocss li {
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
 	margin-bottom: 4px !important;
 }
 
-.csc-place .infoDiv input[type="button"].cs-repeatable-add {
+.oocss .infoDiv input[type="button"].cs-repeatable-add {
 	top: -12px !important;
 }
 
