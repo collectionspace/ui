@@ -229,9 +229,7 @@ var sidebarTester = function ($) {
         var sidebar = setupSidebar(sampleOptions);
         var mediaSnapshot = ".csc-sidebar-mediumImage";
         jqUnit.assertTrue("Media snapshot", $(mediaSnapshot, sidebar.locate("media")).length);
-		console.log($(mediaSnapshot));
-		jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));
-        // jqUnit.assertNotEquals("Related Procedures shown", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
+		jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));		
     });
 };
 
