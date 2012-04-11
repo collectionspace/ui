@@ -87,22 +87,21 @@ var sidebarTester = function ($) {
                         "recordtype": "movement"
                     }
                 ],
-				"media": [
-					{
-						"summary": "Ulva compressa",
+                "media": [
+                    {
+                        "summary": "Exploding Dog",
 						"summarylist": {
 							"updatedAt": "2011-12-05T17:18:03Z",
-			                "imgOrig": "http://ucjeps2.collectionspace.org:8180/collectionspace/chain/download/cea566a7-ed92-4178-ae8a/OriginalJpeg",
-			                "imgThumb": "http://ucjeps2.collectionspace.org:8180/collectionspace/chain/download/cea566a7-ed92-4178-ae8a/Thumbnail",
-						},
-						"csid": "9d335347-1aec-4b2e-b8d2",
-			            "number": "UC431034",
-			            "relid": "0e245077-560e-4579-b1bb-c40b9808ee90",
-			            "relationshiptype": "affects",
-			            "recordtype": "media"
-					}
-				]
-				
+			                "imgOrig": "http://explodingdog.com/title/idontknowwhy.html",
+                            "imgThumb": "http://explodingdog.com/title/idontknowwhy.html",
+                        },
+                        "csid": "9d335347-1aec-4b2e-b8d2",
+                        "number": "I don't know why",
+                        "relid": "0e245077-560e-4579-b1bb-c40b9808ee90",
+                        "relationshiptype": "affects",
+                        "recordtype": "media"
+                    }
+                ]
             },
             "termsUsed": [
                 {
@@ -219,13 +218,12 @@ var sidebarTester = function ($) {
 
     });
 
-	var mediaSnapshotTest = cspace.tests.testEnvironment({
-		testCase: bareSidebarTest,
+    var mediaSnapshotTest = cspace.tests.testEnvironment({
+        testCase: bareSidebarTest,
         permissions: cspace.tests.sampleUserPerms
+    });
 
-	});
-		
-	mediaSnapshotTest.test("Media Snapshot test", function () {
+    mediaSnapshotTest.test("Media Snapshot test", function () {
         var sidebar = setupSidebar(sampleOptions);
         var mediaSnapshot = ".csc-sidebar-mediumImage";
         jqUnit.assertTrue("Media snapshot", $(mediaSnapshot, sidebar.locate("media")).length);

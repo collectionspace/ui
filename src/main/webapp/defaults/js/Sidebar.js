@@ -250,10 +250,10 @@ cspace = cspace || {};
                                 src: that.getImageSource()
                             }
                         }, {
-							type: "jQuery",
-							func: "click", 
-							args: that.getOriginalImage
-						}]
+                            type: "jQuery",
+                            func: "click", 
+                            args: that.getOriginalImage
+                        }]
                     },
                     mediaSnapshot: {
                         decorators: {
