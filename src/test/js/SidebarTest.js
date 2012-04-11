@@ -90,8 +90,8 @@ var sidebarTester = function ($) {
                 "media": [
                     {
                         "summary": "Exploding Dog",
-						"summarylist": {
-							"updatedAt": "2011-12-05T17:18:03Z",
+                        "summarylist": {
+                            "updatedAt": "2011-12-05T17:18:03Z",
 			                "imgOrig": "http://explodingdog.com/title/idontknowwhy.html",
                             "imgThumb": "http://explodingdog.com/title/idontknowwhy.html",
                         },
