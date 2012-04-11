@@ -229,7 +229,7 @@ var sidebarTester = function ($) {
         var sidebar = setupSidebar(sampleOptions);
         var mediaSnapshot = ".csc-sidebar-mediumImage";
         jqUnit.assertTrue("Media snapshot", $(mediaSnapshot, sidebar.locate("media")).length);
-		jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));		
+        jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));		
     });
 };
 

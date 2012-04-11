@@ -154,19 +154,19 @@ cspace = cspace || {};
             return false;
         }
 		
-		if (model.fields.blobCsid) {
-			return !!(model.fields.blobs && model.fields.blobs.length > 0);
-		} else if (model.relations) {
-			if (!model.relations.media) {
-				return false;
-			}
-			if (model.relations.media.length <= 0) {
-				return false;
-			}
-			return !!(model.relations.media[0].summarylist.imgThumb);
-		} else {
-			return false;
-		}
+        if (model.fields.blobCsid) {
+            return !!(model.fields.blobs && model.fields.blobs.length > 0);
+        } else if (model.relations) {
+            if (!model.relations.media) {
+                return false;
+            }
+            if (model.relations.media.length <= 0) {
+                return false;
+            }
+            return !!(model.relations.media[0].summarylist.imgThumb);
+        } else {
+            return false;
+        }
     };
     
     cspace.sidebar.media.finalInit = function (that) {
