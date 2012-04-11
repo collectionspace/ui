@@ -1306,7 +1306,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 showDeleteButton: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.permissions.resolveMultiple",
+                        func: "cspace.util.resolveDeleteRelation",
                         args: {
                             recordTypeManager: "{recordTypeManager}",
                             resolver: "{permissionsResolver}",
@@ -1316,7 +1316,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }, {
                                 target: "{relatedRecordsTab}.related",
                                 permission: "update"
-                            }]
+                            }],
+                            recordModel: "{relatedRecordsTab}.model"
                         }
                     }
                 },
@@ -1350,7 +1351,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 showDeleteButton: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.permissions.resolveMultiple",
+                        func: "cspace.util.resolveDeleteRelation",
                         args: {
                             recordTypeManager: "{recordTypeManager}",
                             resolver: "{permissionsResolver}",
@@ -1360,7 +1361,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }, {
                                 target: "{relatedRecordsTab}.related",
                                 permission: "update"
-                            }]
+                            }],
+                            recordModel: "{relatedRecordsTab}.model"
                         }
                     }
                 },
