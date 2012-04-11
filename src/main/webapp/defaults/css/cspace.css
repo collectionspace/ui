@@ -2091,23 +2091,12 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .size3of5 { width: 60%; }
 .size4of5 { width: 80%; }
 .lastUnit { float: none; _position: relative; _left: -3px; _margin-right: -3px; width: auto; }
-/* the class media extends the grid system to allow a unit that takes the width of its content */
-.media { width: auto; }
 
 .size1of6 { width: 16.66666%; }
 .size5of6 { width: 83.33333%; }
 .smallfield { width: 75% !important; }
 .spacer { height: 4.5em; }
 
-/*.csc-place .cs-structuredDate-popup {
-    width: 615px !important;
-}
-
-.csc-place .nameDate .cs-structuredDate-popup {
-    right: 38px !important;
-    top: 127px;
-}
-*/
 .oocss .info-pair, 
 .oocss .info-pair-addrow, 
 .oocss .info-pair-table, 
