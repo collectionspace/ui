@@ -353,30 +353,43 @@ cspace = cspace || {};
             .attr("alt", that.options.parentBundle.resolve("recordList-thumbnail"))
             .addClass(that.options.styles.thumbnail);
     };
+
+    fluid.defaults("cspace.recordList.showDeleteRow", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        finalInitFunction: "cspace.recordList.showDeleteRow.finalInit",
+        showDeleteButton: false
+    });
+    cspace.recordList.showDeleteRow.finalInit = function (that) {
+        var segs = fluid.model.parseEL(that.options.row);
+        var item = that.model[segs[segs.length - 1]];
+        that.container[that.options.showDeleteButton && !cspace.util.resolveLocked(item) ? "show": "hide"]();
+    };
     
     cspace.recordList.produceTreeTabs = function (that) {
         var tree = cspace.recordList.produceTree(that);
-        tree.expander[0].trueTree.expander[0].tree.expander.push({
-            type: "fluid.renderer.condition",
-            condition: that.options.showDeleteButton,
-            trueTree: {
-                deleteRelation: {
-                    decorators: [{
-                        type: "addClass",
-                        classes: that.options.styles.deleteRelation
-                    }, {
-                        type: "attrs",
-                        attributes: {
-                            alt: that.lookupMessage("tab-list-deleteRelation") 
-                        }
-                    }, {
-                        type: "jQuery",
-                        func: "click",
-                        args: that.deleteRelation
-                    }]
+        tree.expander[0].trueTree.expander[0].tree.deleteRelation = {
+            decorators: [{
+                type: "fluid",
+                func: "cspace.recordList.showDeleteRow",
+                options: {
+                    showDeleteButton: that.options.showDeleteButton,
+                    row: "{row}",
+                    model: fluid.get(that.model, that.options.elPaths.items)
                 }
-            }
-        });
+            }, {
+                type: "addClass",
+                classes: that.options.styles.deleteRelation
+            }, {
+                type: "attrs",
+                attributes: {
+                    alt: that.lookupMessage("tab-list-deleteRelation")
+                }
+            }, {
+                type: "jQuery",
+                func: "click",
+                args: that.deleteRelation
+            }]
+        };
         return tree;
     };
     
