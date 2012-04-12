@@ -2501,7 +2501,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     tabs: {
                         primary: {
                             "name": "tablist-primary",
-                            href: "#primaryTab"
+                            href: "#primaryTab",
+                            title: "tablist-primary"
                         }
                     }
                 }
@@ -2514,7 +2515,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     tabs: {
                         primary: {
                             "name": "tablist-primary",
-                            href: "#primaryTab"
+                            href: "#primaryTab",
+                            title: "tablist-primary"
                         }
                     }
                 }
@@ -2527,7 +2529,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     tabs: {
                         primary: {
                             "name": "tablist-primary",
-                            href: "#primaryTab"
+                            href: "#primaryTab",
+                            title: "tablist-primary"
                         }
                     }
                 }
@@ -2540,7 +2543,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     tabs: {
                         primary: {
                             "name": "tablist-primary",
-                            href: "#primaryTab"
+                            href: "#primaryTab",
+                            title: "tablist-primary"
                         }
                     }
                 }
@@ -2553,7 +2557,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     tabs: {
                         primary: {
                             "name": "tablist-primary",
-                            href: "#primaryTab"
+                            href: "#primaryTab",
+                            title: "tablist-primary"
                         }
                     }
                 }
