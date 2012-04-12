@@ -33,6 +33,20 @@
             "delete",
             "list"
         ],
+        "concept": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
+        "place": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "group": [
             "create",
             "read",

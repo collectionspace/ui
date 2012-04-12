@@ -13,7 +13,9 @@
             "objectexit",
             "media",
             "group",
-            "location"
+            "location",
+            "concept",
+            "place"
         ],
         "type": "array"
     }
