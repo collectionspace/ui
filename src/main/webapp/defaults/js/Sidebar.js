@@ -148,25 +148,9 @@ cspace = cspace || {};
         },
         strings: { }
     });
-    
+        
     cspace.sidebar.media.showMediaImage = function (model) {
-        if (!model.fields) {
-            return false;
-        }
-		
-        if (model.fields.blobCsid) {
-            return !!(model.fields.blobs && model.fields.blobs.length > 0);
-        } else if (model.relations) {
-            if (!model.relations.media) {
-                return false;
-            }
-            if (model.relations.media.length <= 0) {
-                return false;
-            }
-            return !!(model.relations.media[0].summarylist.imgThumb);
-        } else {
-            return false;
-        }
+        return getMedia("bool");
     };
     
     cspace.sidebar.media.finalInit = function (that) {
@@ -174,55 +158,64 @@ cspace = cspace || {};
     };
     
     cspace.sidebar.media.preInit = function (that) {
-        that.getImageSource = function () {
-            var src = "";
+        that.formatMedia = function (url, format) {
+            if (url == "") {
+                if (format == "bool") {
+                    return false;
+                } else {
+                    return url;
+                }
+            } else {
+                if (format == "bool") {
+                    return true;
+                } else if (format == "Thumbnail") {
+                    return url;
+                } else if (format == "Medium") {
+                    if (/Thumbnail.jpeg$/.test(url)) {
+                        return url.replace(/Thumbnail.jpeg$/, "Medium.jpeg");
+                    } else if (/Thumbnail$/.test(url)) {
+                        return url.replace(/Thumbnail$/, "Medium");
+                    }
+                } else if (format == "Original") {
+                    if (/Thumbnail.jpeg$/.test(url)) {
+                        return url.replace(/Thumbnail.jpeg$/, "OriginalJpeg.jpeg");
+                    } else if (/Thumbnail$/.test(url)) {
+                        return url.replace(/Thumbnail$/, "OriginalJpeg");
+                    }
+                }
+            }
+        };
+        
+        that.getMedia = function (format) {
             if (!that.model.fields) {
-                return src;
+                return that.formatMedia("", format);
             }
 
             if (that.model.fields.blobCsid) {
-                if (!that.model.fields.blobs) {
-                    return src;
-                }
-                if (that.model.fields.blobs.length <= 0) {
-                    return src;
-                }
-                return that.model.fields.blobs[0].imgMedium;
-            } else if (that.model.relations) {
-                if (that.model.relations.media) {
-                    if (that.model.relations.media.length <= 0) {
-                        return src;
-                    }
-                    if (!that.model.relations.media[0].summarylist.imgThumb) {
-                        return src;
-                    }
-                    var s = that.model.relations.media[0].summarylist.imgThumb;
-                    s = s.replace(/Thumbnail$/, "Medium");
-                    return s;
+                if (that.model.fields.blobs && that.model.fields.blobs.length > 0 && that.model.fields.blobs[0].imgThumb) {
+                    return that.formatMedia(that.model.fields.blobs[0].imgThumb, format);
                 } else {
-                    return src;
+                    return that.formatMedia("", format);
                 }
+            } else if (that.model.relations) {
+                if (that.model.relations.media && that.model.relations.media.length > 0 && that.model.relations.media[0].summarylist && that.model.relations.media[0].summarylist.imgThumb) {
+                    return that.formatMedia(that.model.relations.media[0].summarylist.imgThumb, format);
+                } else {
+                    return that.formatMedia("", format);
+                }
+            } else {
+                return that.formatMedia("", format);
             }
-            return src;
         };
 
 		that.getOriginalImage = function () {
-			if ((that.getImageSource() != "")) {
-				var src = "";
-				if (that.model.fields.blobCsid) {
-					src = that.model.fields.blobs[0].imgOrig;
-				} else if (that.model.relations.media) {
-					src = that.model.relations.media[0].summarylist.imgOrig;
-				} else {
-					return src;
-				}
+            var src = that.getMedia("Original");
 				
-				window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
-					height: "600",
-					width: "800",
-					scrollbars: "yes"
-				}));
-			}
+			window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
+				height: "600",
+				width: "800",
+				scrollbars: "yes"
+			}));
 		};
 		
 		that.applier.modelChanged.addListener("fields.blobCsid", function () {
@@ -238,7 +231,7 @@ cspace = cspace || {};
             },
             expander: {
                 type: "fluid.renderer.condition",
-                condition: that.showMediaImage(),
+                condition: that.getMedia("bool"),
                 trueTree: {
                     mediumImage: {
                         decorators: [{
@@ -247,7 +240,7 @@ cspace = cspace || {};
                             type: "attrs",
                             attributes: {
                                 alt: that.lookupMessage("sidebar-mediumImage"),
-                                src: that.getImageSource()
+                                src: that.getMedia("Medium")
                             }
                         }, {
                             type: "jQuery",

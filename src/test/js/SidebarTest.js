@@ -92,8 +92,8 @@ var sidebarTester = function ($) {
                         "summary": "Exploding Dog",
                         "summarylist": {
                             "updatedAt": "2011-12-05T17:18:03Z",
-			                "imgOrig": "http://explodingdog.com/title/idontknowwhy.html",
-                            "imgThumb": "http://explodingdog.com/title/idontknowwhy.html",
+			                "imgOrig": "../data/images/Original.png",
+                            "imgThumb": "../data/images/Thumbnail.jpeg",
                         },
                         "csid": "9d335347-1aec-4b2e-b8d2",
                         "number": "I don't know why",
@@ -225,9 +225,10 @@ var sidebarTester = function ($) {
 
     mediaSnapshotTest.test("Media Snapshot test", function () {
         var sidebar = setupSidebar(sampleOptions);
-        var mediaSnapshot = ".csc-sidebar-mediumImage";
-        jqUnit.assertTrue("Media snapshot", $(mediaSnapshot, sidebar.locate("media")).length);
-        jqUnit.assertTrue("Media snapshot has source", ($(mediaSnapshot).attr("src") != 'undefined'));		
+        var mediumImage = ".csc-sidebar-mediumImage";
+        jqUnit.assertTrue("Media snapshot", $(mediumImage, sidebar.locate("media")).length);
+        jqUnit.assertTrue("Media snapshot has source", ($(mediumImage).attr("src") != 'undefined'));
+        jqUnit.assertTrue("Media snapshot has appropriate derivative", (/Medium/.test($(mediumImage).attr("src"))));
     });
 };
 

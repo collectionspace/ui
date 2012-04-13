@@ -62,7 +62,7 @@
                 "relationshiptype": "affects",
                 "recordtype": "media",
                 "summarylist": {
-                    "imgThumb": "../../../test/data/images/Thumbnail.jpeg"
+                    "imgThumb": "../images/Thumbnail.jpeg"
                 }
             }
         ]
