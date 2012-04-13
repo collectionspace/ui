@@ -14,8 +14,8 @@
             "media",
             "group",
             "location",
-            "concept",
-            "place"
+            "place",
+            "concept"
         ],
         "type": "array"
     }

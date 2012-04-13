@@ -91,6 +91,7 @@ var createNewTester = function ($) {
     lessCategories.person = [];
     lessCategories.organization = [];
     lessCategories.place = [];
+    lessCategories.concept = [];
     
     var createNewTestOneCategories = cspace.tests.testEnvironment({
         testCase: bareCreateNewTest,

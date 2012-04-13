@@ -1604,5 +1604,9 @@ fluid.registerNamespace("cspace.util");
             fluid.initDependent(that, name, that.instantiator);
         });
     };
+
+    cspace.util.resolveDeleteRelation = function (options) {
+        return !cspace.util.resolveLocked(options.recordModel) && cspace.permissions.resolveMultiple(options);
+    };
     
 })(jQuery, fluid);
