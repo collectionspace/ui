@@ -13,7 +13,8 @@
             "objectexit",
             "media",
             "group",
-            "location"
+            "location",
+            "concept"
         ],
         "type": "array"
     }
