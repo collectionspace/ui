@@ -44,7 +44,7 @@ var createNewTester = function ($) {
     createNewTest.asyncTest("All headers and records shown", function () {
         var callback = function (createNewPage) {
             jqUnit.assertEquals("Number of headers shown:", 3, createNewPage.locate("categoryHeader").length);
-            jqUnit.assertEquals("Number of records shown ", 7, $(".csc-createNew-recordRadio", createNewPage.container).length);
+            jqUnit.assertEquals("Number of records shown ", 8, $(".csc-createNew-recordRadio", createNewPage.container).length);
             //styling:
             assertStyling(createNewPage, createNewPage.options.styles.totalOf3);
             start();
@@ -66,7 +66,7 @@ var createNewTester = function ($) {
     createNewTestLessPerms.asyncTest("Hiding Records", function () {
         var callback = function (createNewPage) {
             jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
-            jqUnit.assertEquals("Number of records shown ", 7, $(".csc-createNew-recordRadio", createNewPage.container).length);
+            jqUnit.assertEquals("Number of records shown ", 8, $(".csc-createNew-recordRadio", createNewPage.container).length);
             //acquisition:
             var str = createNewPage.options.parentBundle.messageBase.acquisition;
             jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
