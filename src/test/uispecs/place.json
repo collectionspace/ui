@@ -98,11 +98,11 @@
                 "controlledBy": "fields.equivalentContexts"
             }
         ],
-        ".csc-hierarchy-relatedTerms-label": {
-            "messagekey": "hierarchy-relatedTermsLabel"
-        },
         ".csc-hierarchy-domaindata-label": {
             "messagekey": "hierarchy-domaindataLabel"
+        },
+        ".csc-hierarchy-relatedTerms-label": {
+            "messagekey": "hierarchy-relatedTermsLabel"
         },
         ".csc-hierarchy-narrowerContexts-label": {
             "messagekey": "hierarchy-narrowerContextsLabel"
@@ -322,6 +322,7 @@
                                         ],
                                         "value": "${{row}.nameDateGroup.dateDisplayDate}"
                                     },
+                                    ".csc-place-placeName": "${{row}.placeName}",
                                     ".csc-place-nameLanguage": {
                                         "decorators": [
                                             {
@@ -337,7 +338,6 @@
                                     },
                                     ".csc-place-nameSource": "${{row}.nameSource}",
                                     ".csc-place-nameSourceDetail": "${{row}.nameSourceDetail}",
-                                    ".csc-place-name": "${{row}.name}",
                                     ".csc-place-nameNote": "${{row}.nameNote}",
                                     ".csc-place-nameType": {
                                         "optionnames": [
@@ -520,7 +520,6 @@
         ".csc-place-placeGeoRefGroup-label": {
             "messagekey": "place-placeGeoRefGroupLabel"
         },
-        ".csc-placeAuthority-name": "${fields.name}",
         ".csc-place-geoRefRemarks-label": {
             "messagekey": "place-geoRefRemarksLabel"
         },
@@ -679,9 +678,6 @@
         ".csc-place-geoRefSource-label": {
             "messagekey": "place-geoRefSourceLabel"
         },
-        ".csc-place-name-label": {
-            "messagekey": "place-nameLabel"
-        },
         ".csc-place-placeType": {
             "default": "",
             "optionnames": [
@@ -769,6 +765,9 @@
         },
         ".csc-place-uri-label": {
             "messagekey": "place-uriLabel"
+        },
+        ".csc-place-placeName-label": {
+            "messagekey": "place-placeNameLabel"
         },
         ".csc-place-displayName": "${fields.displayName}",
         ".csc-place-vUnitofMeasure-label": {
@@ -870,11 +869,11 @@
         ".csc-place-nameSource-label": {
             "messagekey": "place-nameSourceLabel"
         },
-        ".csc-placeNameGroup-nameDateGroup-label": {
-            "messagekey": "placeNameGroup-nameDateGroupLabel"
-        },
         ".csc-place-vCoordSource-label": {
             "messagekey": "place-vCoordSourceLabel"
+        },
+        ".csc-placeNameGroup-nameDateGroup-label": {
+            "messagekey": "placeNameGroup-nameDateGroupLabel"
         }
     }
 }

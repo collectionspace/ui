@@ -171,9 +171,6 @@
                     "createdAt": {
                         "type": "string"
                     },
-                    "name": {
-                        "type": "string"
-                    },
                     "termStatus": {
                         "default": "accepted",
                         "type": "string"
@@ -224,6 +221,9 @@
                                 },
                                 "nameStatus": {
                                     "default": "",
+                                    "type": "string"
+                                },
+                                "placeName": {
                                     "type": "string"
                                 },
                                 "nameSourceRefId": {
@@ -332,9 +332,6 @@
                                     "type": "object"
                                 },
                                 "nameAbbrev": {
-                                    "type": "string"
-                                },
-                                "name": {
                                     "type": "string"
                                 },
                                 "nameNote": {
