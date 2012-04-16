@@ -80,7 +80,6 @@ cspace = cspace || {};
             record: that.lookupMessage(that.options.recordType)
         }), Date());
         processChanges(that, false);
-        that.locate("save").prop("disabled", false);
     };
 
     var bindEventHandlers = function (that) {

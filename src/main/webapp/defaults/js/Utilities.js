@@ -1600,7 +1600,7 @@ fluid.registerNamespace("cspace.util");
                 type: "cspace.util.recordLock",
                 container: that.getRecordLockContainer(index),
                 options: {
-                    model: that.options.list[that.options.offset + index]
+                    model: that.options.list[that.options.offset + index].summarylist
                 }
             };
             fluid.initDependent(that, name, that.instantiator);
