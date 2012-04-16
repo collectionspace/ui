@@ -188,8 +188,12 @@ cspace = cspace || {};
 				scrollbars: "yes"
 			}));
 		};
-		
+				
 		that.applier.modelChanged.addListener("fields.blobCsid", function () {
+            that.refreshView();
+        });
+        
+        that.applier.modelChanged.addListener("relations.media", function () {
             that.refreshView();
         });
         
