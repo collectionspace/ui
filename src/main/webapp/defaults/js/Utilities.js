@@ -1528,7 +1528,9 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.resolveLocked = function (model) {
-        return model.workflow && model.workflow === "locked";
+        // Checking whether workflow is present in model.fields or model.
+        var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
+        return workflow && workflow === "locked";
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
@@ -1550,7 +1552,7 @@ fluid.registerNamespace("cspace.util");
             }
             that.container.addClass(that.options.styles.locked);
         }
-        that.applier.modelChanged.addListener("workflow", function (model) {
+        that.applier.modelChanged.addListener("fields.workflow", function (model) {
              processWorkflow(model);
         });
         processWorkflow(that.model);
