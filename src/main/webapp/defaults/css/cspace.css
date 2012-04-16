@@ -2060,8 +2060,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
-<<<<<<< HEAD
-=======
 .cs-locked {
     background-image: url(../images/lock.png);
     width: 16px;
@@ -2086,4 +2084,3 @@ li.cs-locked {
     width: inherit;
     height: inherit;
 }
->>>>>>> cspaceoriginal/master
