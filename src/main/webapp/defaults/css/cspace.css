@@ -131,8 +131,13 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
+input[type="button"].saveButton[disabled], input[type="submit"].saveButton[disabled] {
+    background:transparent url('../images/icnSaveDisabled.png') no-repeat 24px 4px;
+    color:#CCC;}
 input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover,
-input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus {
+input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus,
+input[type="button"].saveButton[disabled]:hover, input[type="submit"].saveButton[disabled]:hover,
+input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton[disabled]:focus {
     background-color:#ADADAD;
     color:#606060
 }
@@ -1569,6 +1574,12 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     display:table-row;
     width: 100%;
 }
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer {
+    width: auto;
+}
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer span.fl-uploader-browse {
+    max-width: 400px;
+}
 .cs-mediaUploader-table-row {
     display:table-row;
     width: 100%;
@@ -2049,3 +2060,30 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
+<<<<<<< HEAD
+=======
+.cs-locked {
+    background-image: url(../images/lock.png);
+    width: 16px;
+    height: 20px;
+    float: right;
+    display: inline;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}
+>>>>>>> cspaceoriginal/master

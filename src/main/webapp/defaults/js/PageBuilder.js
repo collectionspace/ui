@@ -180,6 +180,17 @@ cspace = cspace || {};
         return resourceSpecs;
     };
 
+    var setTags = function (that, options) {
+        fluid.each([that.options.recordType, that.options.namespace], function (type) {
+            if (!type) {
+                return;
+            }
+            fluid.each(options.userLogin.permissions[type], function (permission) {
+                that[fluid.model.composeSegments(type, permission, "tag")] = fluid.typeTag(fluid.model.composeSegments(type, permission));
+            });
+        });
+    };
+
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
         fluid.instantiateFirers(that, that.options);
@@ -194,6 +205,7 @@ cspace = cspace || {};
         };
         
         that.initPageBuilder = function (options) {
+            setTags(that, options);
             var pageSpecs = fluid.copy(that.options.pageSpec);
             var resourceSpecs = that.resourceSpecs = fluid.copy(pageSpecs);
             var pageSpecManager = cspace.pageSpecManager(pageSpecs);

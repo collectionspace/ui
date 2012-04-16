@@ -196,6 +196,7 @@ cspace = cspace || {};
         that.rollbackModel = fluid.copy(that.model.fields);
         
         that.refreshView = function () {
+            that.options.readOnly = cspace.util.isReadOnly(that.options.readOnly, that.model);
             fluid.log("RecordEditor.js before render");
             that.events.onRefreshView.fire();
             that.renderer.refreshView();
@@ -223,46 +224,72 @@ cspace = cspace || {};
         cspace.recordEditor.hasRelations = function (that) {
             return (that.model.csid && that.model.relations && !$.isEmptyObject(that.model.relations));
         };
-        /*
-         * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
-         * Note that a return value of true does not necessarily indicate that the save was successful, only that
-         * it was successfully submitted.
-         */
-        that.requestSave = function () {
-            var ret = that.events.onSave.fire(that.model);
-            if (ret === false) {
-                that.events.cancelSave.fire();
-                return ret;
-            }
-            if (that.namespaces) {
-                var namespace = cspace.util.getDefaultConfigURL.getRecordType();
-                if (that.namespaces.isNamespace(namespace)) {
-                    that.options.applier.requestChange("namespace", namespace);
-                }
-            }
-            if (that.validator) {
-                var validatedModel = that.validator.validate(that.model);
-                if (!validatedModel) {
-                    that.events.cancelSave.fire();
-                    return false;
-                }
-                else {
-                    that.applier.requestChange("", validatedModel)
-                }
-            }
-            that.locate("save").prop("disabled", true);
-            if (that.model.csid) {
-                that.options.dataContext.update();
-            } else {
-                that.options.applier.requestChange("csid", "");
-                that.options.dataContext.create();
-            }
-            return true;
-        };
 
         setupRecordEditor(that);
 
         return that;
+    };
+
+    cspace.recordEditor.requestSaveMovement = function (that) {
+        that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+            model: {
+                messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
+                messagekeys: {
+                    actText: "lockDialog-actText",
+                    actAlt: "lockDialog-actAlt",
+                    proceedText: "lockDialog-proceedText",
+                    proceedAlt: "lockDialog-proceedAlt"
+                }
+            },
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        cspace.recordEditor.requestSave(that);
+                    } else if (userAction === "proceed") {
+                        that.applier.requestChange("workflowTransition", "lock");
+                        cspace.recordEditor.requestSave(that);
+                    }
+                }
+            },
+            parentBundle: that.options.parentBundle
+        });
+    };
+
+    /*
+     * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
+     * Note that a return value of true does not necessarily indicate that the save was successful, only that
+     * it was successfully submitted.
+     */
+    cspace.recordEditor.requestSave = function (that) {
+        var ret = that.events.onSave.fire(that.model);
+        if (ret === false) {
+            that.events.cancelSave.fire();
+            return ret;
+        }
+        if (that.namespaces) {
+            var namespace = cspace.util.getDefaultConfigURL.getRecordType();
+            if (that.namespaces.isNamespace(namespace)) {
+                that.options.applier.requestChange("namespace", namespace);
+            }
+        }
+        if (that.validator) {
+            var validatedModel = that.validator.validate(that.model);
+            if (!validatedModel) {
+                that.events.cancelSave.fire();
+                return false;
+            }
+            else {
+                that.applier.requestChange("", validatedModel)
+            }
+        }
+        that.locate("save").prop("disabled", true);
+        if (that.model.csid) {
+            that.options.dataContext.update();
+        } else {
+            that.options.applier.requestChange("csid", "");
+            that.options.dataContext.create();
+        }
+        return true;
     };
     
     cspace.recordEditor.removeWithCheck = function (that) {
@@ -589,6 +616,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
             },
+            requestSave: "cspace.recordEditor.requestSave",
             remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button

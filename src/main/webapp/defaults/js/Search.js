@@ -190,7 +190,8 @@ cspace = cspace || {};
             onInitialSearch: null,
             afterSearch: null,
             onError: null,
-            ready: null
+            ready: null,
+            pagerAfterRender: null
         },
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
@@ -232,6 +233,15 @@ cspace = cspace || {};
                     related: ["allCategory", "cataloging", "procedures", "vocabularies"]
                 }
             },
+            workflowStyler: {
+                type: "cspace.util.workflowStyler",
+                createOnEvent: "pagerAfterRender",
+                options: {
+                    offset: "{cspace.search.searchView}.model.offset",
+                    rows: "{cspace.search.searchView}.dom.resultsRow",
+                    list: "{cspace.search.searchView}.model.results"
+                }
+            },
             resultsPager: {
                 type: "fluid.pager",
                 options: {
@@ -251,6 +261,9 @@ cspace = cspace || {};
                             func: "cspace.search.colDefsGenerator",
                             args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable", "{searchView}.options.strings"]
                         }
+                    },
+                    listeners: {
+                        afterRender: "{cspace.search.searchView}.events.pagerAfterRender.fire"
                     },
                     annotateColumnRange: "{searchView}.options.columnList.0",
                     bodyRenderer: {
@@ -351,6 +364,7 @@ cspace = cspace || {};
     cspace.search.searchView.applyResults = function (that, data) {
         var searchModel = that.model.searchModel;
         var offset = searchModel.pageIndex * searchModel.pageSize;
+        that.applier.requestChange("offset", offset);
         that.applier.requestChange("pagination", data.pagination);
         fluid.each(data.results, function (row, index) {
             var fullIndex = offset + index;
@@ -413,8 +427,9 @@ cspace = cspace || {};
         bindEventHandlers(that);
         if (that.model.searchModel.recordType) {
             that.events.onInitialSearch.fire();
+        } else {
+            that.events.ready.fire();
         }
-        that.events.ready.fire();
     };
 
     cspace.search.searchView.onInitialSearch = function (that) {

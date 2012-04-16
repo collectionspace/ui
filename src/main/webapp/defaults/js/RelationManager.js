@@ -98,6 +98,10 @@ cspace = cspace || {};
         finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
     });
     cspace.relationManager.permissionResolver.finalInit = function (that) {
+        if (that.options.locked) {
+            that.visible = false;
+            return;
+        }
         that.options.resolver = that.resolver;
         that.options.allOf.push({
             permission: that.options.recordClassPermission,
@@ -161,6 +165,13 @@ cspace = cspace || {};
             showAddButton: {
                 type: "cspace.relationManager.permissionResolver",
                 options: {
+                    locked: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.util.resolveLocked",
+                            args: "{cspace.relationManager}.model"
+                        }
+                    },
                     recordClass: "{relationManager}.options.related",
                     recordClassPermission: "update",
                     allOf: [{

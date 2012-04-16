@@ -50,7 +50,7 @@ cspace = cspace || {};
                     tabLink: {
                         target: "${{tabInfo}.href}",
                         linktext: {
-                            messagekey: "${{tabInfo}.name}"
+                            messagekey: "${{tabInfo}.title}"
                         }
                     }
                 },
@@ -103,12 +103,14 @@ cspace = cspace || {};
         var model = {
             tabs: [{
                 "name": "tablist-primary",
-                href: "#primaryTab"
+                href: "#primaryTab",
+                title: "tablist-primary"
             }]
         };
         fluid.each(records, function (record) {
             model.tabs.push({
                 "name": record,
+                title: record + "-tab",
                 href: urlExpander(options.href)
             });
         });
@@ -123,6 +125,7 @@ cspace = cspace || {};
         fluid.each(records, function (record) {
             model.tabs.push({
                 "name": record + "-tab",
+                title: record + "-tab",
                 type: record,
                 href: fluid.stringTemplate(urlExpander(options.href), {
                     recordType: record

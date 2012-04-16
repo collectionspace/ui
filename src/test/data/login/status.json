@@ -33,6 +33,13 @@
             "delete",
             "list"
         ],
+        "concept": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "group": [
             "create",
             "read",
@@ -129,7 +136,8 @@
             "read",
             "update",
             "delete",
-            "list"
+            "list",
+            "lock"
         ],
         "role": [
             "create",

@@ -1,17 +1,21 @@
 {
     "pageBuilder": {
         "options": {
-            "pageType": "organization",
+            "pageType": "concept",
             "selectors": {
-                "recordEditor": ".csc-organization-template"
+                "recordEditor": ".csc-concept-template"
             },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
-                            "hierarchy": ".csc-hierarchy",
-                            "identificationNumber": ".csc-organizationAuthority-displayName" 
+                            "hierarchy": ".csc-concept-hierarchy",
+                            "identificationNumber": ".csc-concept-displayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
@@ -22,18 +26,14 @@
                                 },
                                 "createOnEvent": "afterRender"
                             }
-                        },
-                        "applier": "{pageBuilder}.applier",
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"]
+                        }
                     }
                 },
                 "titleBar": {
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.displayName"
+                            "fields.displayName" 
                         ]
                     }
                 },
@@ -55,18 +55,18 @@
     },
     "pageBuilderIO": {
         "options": {
-            "recordType": "organization",
-            "namespace": "organization",
+            "recordType": "concept",
+            "namespace": "concept",
             "schema": [
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "organization"
+                "concept"
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "pages/OrganizationTemplate.html",
-                    "templateSelector": ".csc-organization-template",
+                    "href": "pages/ConceptTemplate.html",
+                    "templateSelector": ".csc-concept-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }
             },
