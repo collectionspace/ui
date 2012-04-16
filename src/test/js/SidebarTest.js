@@ -227,7 +227,7 @@ var sidebarTester = function ($) {
         var sidebar = setupSidebar(sampleOptions);
         var mediumImage = ".csc-sidebar-mediumImage";
         jqUnit.assertTrue("Media snapshot", $(mediumImage, sidebar.locate("media")).length);
-        jqUnit.assertTrue("Media snapshot has source", ($(mediumImage).attr("src") != 'undefined'));
+        jqUnit.assertTrue("Media snapshot has source", ($(mediumImage).attr("src") !== 'undefined'));
         jqUnit.assertTrue("Media snapshot has appropriate derivative", (/Medium/.test($(mediumImage).attr("src"))));
     });
 };

@@ -112,10 +112,6 @@ cspace = cspace || {};
         finalInitFunction: "cspace.sidebar.media.finalInit",
         produceTree: "cspace.sidebar.media.produceTree",
         invokers: {
-            showMediaImage: {
-                funcName: "cspace.sidebar.media.showMediaImage",
-                args: "{media}.model"
-            },
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
@@ -149,41 +145,20 @@ cspace = cspace || {};
         strings: { }
     });
         
-    cspace.sidebar.media.showMediaImage = function (model) {
-        return getMedia("bool");
-    };
-    
     cspace.sidebar.media.finalInit = function (that) {
         that.refreshView();
     };
     
     cspace.sidebar.media.preInit = function (that) {
         that.formatMedia = function (url, format) {
-            if (url == "") {
-                if (format == "bool") {
-                    return false;
-                } else {
-                    return url;
-                }
-            } else {
-                if (format == "bool") {
-                    return true;
-                } else if (format == "Thumbnail") {
-                    return url;
-                } else if (format == "Medium") {
-                    if (/Thumbnail.jpeg$/.test(url)) {
-                        return url.replace(/Thumbnail.jpeg$/, "Medium.jpeg");
-                    } else if (/Thumbnail$/.test(url)) {
-                        return url.replace(/Thumbnail$/, "Medium");
-                    }
-                } else if (format == "Original") {
-                    if (/Thumbnail.jpeg$/.test(url)) {
-                        return url.replace(/Thumbnail.jpeg$/, "OriginalJpeg.jpeg");
-                    } else if (/Thumbnail$/.test(url)) {
-                        return url.replace(/Thumbnail$/, "OriginalJpeg");
-                    }
-                }
+            var bool = !!url;
+            if (format === "bool") {
+                return bool;
             }
+            if (!url) {
+                return url;
+            }
+            return url.replace(/Thumbnail/, format==="Medium" ? "Medium": "OriginalJpeg");
         };
         
         that.getMedia = function (format) {
