@@ -64,6 +64,9 @@ taxon-taxonNameSourceLabel: Name source
 taxon-taxonNameSourceCodeLabel: Name source code
 taxon-taxonGUIDLabel: GUID
 taxon-taxonNoteLabel: Note
+taxon-updatedAtLabel: Modified Date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
 
 #Login
 login-current-info: 
