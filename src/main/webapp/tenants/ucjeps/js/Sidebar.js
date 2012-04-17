@@ -112,10 +112,6 @@ cspace = cspace || {};
         finalInitFunction: "cspace.sidebar.media.finalInit",
         produceTree: "cspace.sidebar.media.produceTree",
         invokers: {
-            showMediaImage: {
-                funcName: "cspace.sidebar.media.showMediaImage",
-                args: "{media}.model"
-            },
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
@@ -137,7 +133,6 @@ cspace = cspace || {};
             mediaHeader: ".csc-sidebar-mediaHeader",
             mediaSnapshot: ".csc-media-snapshot",
             mediumImage: ".csc-sidebar-mediumImage",
-			imageLink: ".csc-sidebar-imageLink",
             header: ".csc-media-header",
             togglable: ".csc-media-togglable"
         },
@@ -149,85 +144,59 @@ cspace = cspace || {};
         },
         strings: { }
     });
-    
-    cspace.sidebar.media.showMediaImage = function (model) {
-        if (!model.fields) {
-            return false;
-        }
-
-		//added for the first related media record:
-		if (model.fields.blobCsid) {
-			return !!(model.fields.blobs && model.fields.blobs.length > 0);
-		} else if (model.relations) {
-			if (!model.relations.media) {
-				return false;
-			}
-			if (model.relations.media.length <= 0) {
-				return false;
-			}
-			return !!(model.relations.media[0].summarylist.imgThumb);
-		} else {
-			return false;
-		}
-    };
-    
+        
     cspace.sidebar.media.finalInit = function (that) {
         that.refreshView();
     };
     
     cspace.sidebar.media.preInit = function (that) {
-        that.getImageSource = function () {
-            var src = "";
-            if (!that.model.fields) {
-                return src;
+        that.formatMedia = function (url, format) {
+            var bool = !!url;
+            if (format === "bool") {
+                return bool;
             }
-
-			if (that.model.fields.blobCsid) {
-				if (!that.model.fields.blobs) {
-					return src;
-				}
-				if (that.model.fields.blobs.length <= 0) {
-					return src;
-				}
-				return that.model.fields.blobs[0].imgMedium;
-			} else if (that.model.relations.media) {
-				if (that.model.relations.media.length <= 0) {
-					return src;
-				}
-				if (!that.model.relations.media[0].summarylist.imgThumb) {
-					return src;
-				}
-				var s = that.model.relations.media[0].summarylist.imgThumb;
-				s = s.replace(/Thumbnail$/, "Medium");
-				return s;
-			} else {
-				return src;
-			}			
+            if (!url) {
+                return url;
+            }
+            return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
+        };
+        
+        that.getMedia = function (format) {
+            if (!that.model.fields) {
+                return that.formatMedia("", format);
+            }
+            var imgThumb;
+            if (fluid.get(that.model, "fields.blobCsid")) {
+                imgThumb = fluid.get(that.model, "fields.blobs.0.imgThumb");
+            }
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            imgThumb = fluid.get(that.model, "relations.media.0.summarylist.imgThumb");
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            return that.formatMedia("", format);
         };
 
 		that.getOriginalImage = function () {
-			if ((that.getImageSource() != "")) {
-				var src = ""
-				if (that.model.fields.blobCsid) {
-					src = that.model.fields.blobs[0].imgOrig;
-				} else if (that.model.relations.media) {
-					src = that.model.relations.media[0].summarylist.imgOrig;
-				} else {
-					return "";
-				}
+            var src = that.getMedia("Original");
 				
-				window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
-					height: "600",
-					width: "800",
-					scrollbars: "yes"
-				}));
-			}
+			window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
+				height: "600",
+				width: "800",
+				scrollbars: "yes"
+			}));
 		};
-		
-        that.applier.modelChanged.addListener("fields.blobCsid", function () {
+				
+		that.applier.modelChanged.addListener("fields.blobCsid", function () {
             that.refreshView();
         });
-
+        
+        that.applier.modelChanged.addListener("relations.media", function () {
+            that.refreshView();
+        });
+        
     };
     
     cspace.sidebar.media.produceTree = function (that) {
@@ -237,7 +206,7 @@ cspace = cspace || {};
             },
             expander: {
                 type: "fluid.renderer.condition",
-                condition: that.showMediaImage(),
+                condition: that.getMedia("bool"),
                 trueTree: {
                     mediumImage: {
                         decorators: [{
@@ -246,18 +215,18 @@ cspace = cspace || {};
                             type: "attrs",
                             attributes: {
                                 alt: that.lookupMessage("sidebar-mediumImage"),
-                                src: that.getImageSource()
+                                src: that.getMedia("Medium")
                             }
                         }, {
-							type: "jQuery",
-							func: "click", 
-							args: that.getOriginalImage
-						}]
+                            type: "jQuery",
+                            func: "click", 
+                            args: that.getOriginalImage
+                        }]
                     },
                     mediaSnapshot: {
-                        decorators: [{
+                        decorators: {
                             addClass: "{styles}.mediaSnapshot"
-                        }]
+                        }
                     }
                 },
                 falseTree: {
