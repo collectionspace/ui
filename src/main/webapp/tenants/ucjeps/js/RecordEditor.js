@@ -80,7 +80,6 @@ cspace = cspace || {};
             record: that.lookupMessage(that.options.recordType)
         }), Date());
         processChanges(that, false);
-        that.locate("save").prop("disabled", false);
     };
 
 	//Set Cookie
@@ -519,8 +518,8 @@ cspace = cspace || {};
     cspace.recordEditor.navigateToFullImage = function (that) {
         window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
             height: that.options.originalMediaDimensions.height,
-            width: that.options.originalMediaDimensions.width, 
-			scrollbars: "yes"
+            width: that.options.originalMediaDimensions.width,
+            scrollbars: "yes"
         }));
     };
     
