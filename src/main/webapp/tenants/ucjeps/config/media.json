@@ -9,6 +9,7 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber"],
                         "selectors": {
                             "identificationNumber": ".csc-media-identificationNumber",
                             "uploader": ".csc-media-upload",
@@ -18,7 +19,7 @@
                             "width": "800",
                             "height": "600"
                         },
-                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "uploader"],
+                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "uploader"],
                         "invokers": {
                             "navigateToFullImage": "navigateToFullImage"
                         },

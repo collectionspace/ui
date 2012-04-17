@@ -152,8 +152,13 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
+input[type="button"].saveButton[disabled], input[type="submit"].saveButton[disabled] {
+    background:transparent url('../images/icnSaveDisabled.png') no-repeat 24px 4px;
+    color:#CCC;}
 input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover,
-input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus {
+input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus,
+input[type="button"].saveButton[disabled]:hover, input[type="submit"].saveButton[disabled]:hover,
+input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton[disabled]:focus {
     background-color:#ADADAD;
     color:#606060
 }
@@ -1451,7 +1456,7 @@ input[disabled]:hover, input[disabled]:hover    {
 }
 .cs-searchBox .cs-searchBox-button {
     float:right;}
-a.cs-searchBox-advancedSearch {
+a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
 }
@@ -1592,6 +1597,12 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     display:table-row;
     width: 100%;
 }
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer {
+    width: auto;
+}
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer span.fl-uploader-browse {
+    max-width: 400px;
+}
 .cs-mediaUploader-table-row {
     display:table-row;
     width: 100%;
@@ -1658,7 +1669,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     text-align: left;
     font: inherit;
 }
-.cs-recordList .cs-selected {
+.cs-recordList .cs-selected, .list-table .cs-selected, .list-table .cs-selected > td {
     background-color:#6E9FCE !important;
     color:#fff !important; 
 }
@@ -1793,6 +1804,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordList .cs-disabled {
     color: gray;
     cursor: default;
+}
+.cs-mediaUploader .cs-disabled {
+	background-color: #CCC;
 }
 
 .cs-recordList-thumbnail {
@@ -2008,36 +2022,89 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background-color: #E8E8E8;
 }
 
+/* recordTraverser styling */
+.cs-recordTraverser-template {
+    display: table;
+}
+.cs-recordTraverser-template .cs-recordTraverser-controls, .cs-recordTraverser-template .cs-recordTraverser-nextPrevious {
+    padding-left: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious a {
+    display: block;
+    padding-left: 18px;
+    padding-top: 9px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous {
+    background:transparent url('../images/previous.png') no-repeat 0px 0px;
+    margin-bottom: 5px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous.cs-recordTraverser-disabled {
+    background:transparent url('../images/noprevious.png') no-repeat 0px 0px;
+    cursor: default;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
+    background:transparent url('../images/next.png') no-repeat 0px 0px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next.cs-recordTraverser-disabled {
+    background:transparent url('../images/nonext.png') no-repeat 0px 0px;
+    cursor: default;
+}
+.cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
+    display: table-row;
+    text-decoration: none;
+}
+
 /* CSPACE-4676 */
 .csc-blobs-dimension *{ display:none;}
 
-/* styling for scrollableTabs plugin */
-#stTabswrapper {
-	width:100% !important;}
-/*.stTabsInnerWrapper {
-	width:100% !important;
-	overflow-x:hidden;}
-.ui-tabs-nav {
-	overflow:visible !important;
-	height:auto !important;}*/
-.stNav {border:2px solid #6F9ECD; background-color:#fff; cursor:pointer; z-index:30; position:absolute; top:6px; height:15px;}
-.stPrev { -moz-border-radius: 6px 0 0 0;	-webkit-border-radius: 6px 0 0 0;}
-.stNext { -moz-border-radius: 0 6px 0 0;	-webkit-border-radius: 0 6px 0 0;}
-
-.line {
-	display: -webkit-box;
-	-webkit-box-orient: horizontal;
-	
-	display: -moz-box;
-	-moz-box-orient: horizontal;
-	
-	display: box;
-	box-orient: horizontal;
+.cs-listView-row:hover {
+    cursor:pointer;
+}
+.list-table .cs-disabled.cs-listView-row:hover > td,
+.list-table .cs-disabled.cs-listView-row:focus > td {
+    background-color: #F0F5FB;
+}
+.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td,
+.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td {
+    background-color: #F0F5FB;
+}
+.list-table .cs-disabled, .cs-disabled > td {
+    color: gray !important;
+    cursor: default !important;
 }
 
-.size1of3 { width: 33%; }
-
-/*.previous, .page, .next { display: inline-block; width: 30%;}
-.previous { text-align: left; }
-.page {text-align: middle;}
-.next {text-align: right; float: right;}*/
+.cs-search-highlight {
+    display:inline-block;
+    overflow:hidden;
+    width:99%;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.cs-locked {
+    background-image: url(../images/lock.png);
+    width: 16px;
+    height: 20px;
+    float: right;
+    display: inline;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}
