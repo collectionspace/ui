@@ -96,3 +96,68 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .infoGroup .cs-repeatable-group { position:relative;}
 
 .infoGroup .cs-repeatable-group .cs-repeatable-repeat { padding:16px 4px 10px 4px; border:none; background-color:inherit;}
+
+/***************************************************************************************************************
+ * Repeatable group in a div, rather than in a table (e.g., see block in Place/Georeference Information group) *
+ * Based on Jesse's css from 21Nov011. Added by rjaffe, Dec2011-Jan2012                                        *
+ ***************************************************************************************************************/
+
+.infoDiv { padding:4px 0 0 0; position: relative; margin-top:12px; background-color: #F5F5F5;}
+
+/*.infoDiv .cs-repeatable-group { position:relative; background-color: #E2E2E2;}*/
+
+/*.infoDiv ul, .infoDiv ol, .infoDiv dl {margin-left: 1em;}*/
+
+.infoDiv li.cs-repeatable-repeat { padding:4px; border:none; background-color:#F5F5F5;}
+
+.infoDiv .repeatable-bkgnd {background-color: #CBCBCB;}
+
+.infoDiv .cs-repeatable-content {
+    width:94%;
+    padding:4px;
+    float: left;
+}
+.infoDiv input[type="button"].cs-repeatable-add {
+    font-size:14px;
+    height:16px;
+    width:14px;
+    font-weight:bold;
+    position:absolute !important;
+    top: -16px;
+    right:2px !important;
+    padding:0;
+}
+.infoDiv input.cs-repeatable-delete {
+    float:right;
+    border:none;
+    vertical-align:top;
+    padding:0px;
+	width:16px;
+    background-color:transparent !important;
+    background:url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
+}
+.infoDiv input.cs-repeatable-delete:hover,
+.infoDiv input.cs-repeatable-delete:focus {
+/*    float:right;*/
+    color:white;
+    background-color:transparent !important;
+    background:url('../images/icnDelete.png') no-repeat 2px 3px;
+}
+.infoDiv input.cs-repeatable-delete[disabled],
+.infoDiv input.cs-repeatable-delete[disabled]:hover,
+.infoDiv input.cs-repeatable-delete[disabled]:focus {
+    float:right;
+    background-color:transparent !important;
+    background:url('../images/icnDeleteDisabled.png') no-repeat 2px 3px;
+}
+.infoDiv .fieldgroup {
+    background: #F5F5F5;
+    float: left;
+    margin: 6px;
+    padding: 8px;
+    width: 97%;
+}
+
+.infoDiv .info-column {
+    margin-bottom: 18px;
+}

@@ -29,6 +29,7 @@ cspace.tests.sampleSchema = {
                 "default": [
                     "person",
                     "organization",
+                    "place",
                     "concept"
                 ],
                 "type": "array"
@@ -61,6 +62,7 @@ cspace.tests.sampleSchema = {
             "loanout",
             "acquisition",
             "organization",
+            "place",
             "concept",
             "cataloging",
             "movement",
@@ -77,6 +79,7 @@ cspace.tests.sampleUserPerms = {
         "loanin": ["read", "list"],
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "cataloging": ["create", "read", "update", "delete", "list"],
@@ -94,6 +97,7 @@ cspace.tests.fullPerms = {
         "objectexit": ["create", "read", "update", "delete", "list"],
         "person": ["create", "read", "update", "delete", "list"],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
         "users": ["create", "read", "update", "delete", "list"]
