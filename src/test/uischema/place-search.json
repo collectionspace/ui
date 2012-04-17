@@ -1,6 +1,19 @@
 {
     "place": {
         "properties": {
+            "nameDateGroupStart": {
+                "properties": {
+                    "scalarValuesComputed": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "_primary": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "createdBys": {
                 "items": {
                     "properties": {
@@ -15,6 +28,19 @@
                     "type": "object"
                 },
                 "type": "array"
+            },
+            "ownershipDateGroupEnd": {
+                "properties": {
+                    "scalarValuesComputed": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "_primary": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
             },
             "termStatuss": {
                 "items": {
@@ -32,8 +58,80 @@
                 },
                 "type": "array"
             },
+            "placeNameGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "nameDateGroup": {
+                            "properties": {
+                                "scalarValuesComputed": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "placeName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
             "updatedAtEnd": {
                 "type": "date"
+            },
+            "placeOwnerGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "ownershipDateGroup": {
+                            "properties": {
+                                "scalarValuesComputed": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "owner": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "nameDateGroupEnd": {
+                "properties": {
+                    "scalarValuesComputed": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "_primary": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
             },
             "placeTypes": {
                 "items": {
@@ -66,6 +164,19 @@
                 },
                 "type": "array"
             },
+            "ownershipDateGroupStart": {
+                "properties": {
+                    "scalarValuesComputed": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "_primary": {
+                        "default": true,
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "updatedBys": {
                 "items": {
                     "properties": {
@@ -80,9 +191,6 @@
                     "type": "object"
                 },
                 "type": "array"
-            },
-            "updatedAtStart": {
-                "type": "date"
             }
         },
         "type": "object"

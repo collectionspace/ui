@@ -5,14 +5,16 @@
                 <span class="csc-recordTraverser"></span>
                 <div class="button-row">
                     <a style="display:none;" class="csc-goto gotoButton"></a>
-                        <input type="button" class="csc-createFromExisting createFromExistingButton" />
-                        <input type="button" class="csc-cancel cancelButton" />
-                        <input type="button" class="csc-delete deleteButton" />
-                        <input type="button" class="csc-save saveButton" />
+                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
+                    <input type="button" class="csc-cancel cancelButton" />
+                    <input type="button" class="csc-delete deleteButton" />
+                    <input type="button" class="csc-save saveButton" />
                 </div>
                 <div class="time-stamp"> </div>
             </div>
         </div>
+        
+        <div class="csc-templateEditor"></div>
         
         <div class="fl-container-flex fl-fix information-group info-column">
             <div class="csc-recordEditor-header fl-container-flex header toggle csc-place-placeAuthorityInformation-label"></div>
@@ -29,225 +31,225 @@
                             </div>
                         </div>
                     </div>
-					<div class="size1of2 fl-force-left">
-	                    <div class="size1of3 fl-force-left">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-placeType-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-place-placeType input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-	                    </div>
-	                   	<div class="size1of3 fl-force-left">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-termStatus-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-place-termStatus input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <!-- placeRecordAdminStatus ("Admin status") discarded in favor of ... -->
-	                    <!-- Term status field common to all authorities -->
-	                    <!--<div class="size1of4 fl-force-left">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-placeRecordAdminStatus-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-place-placeRecordAdminStatus input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-	                    </div>-->
-	                    <div class="size1of3 fl-force-left">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-placeIdentifier-label"/>
-	                            </div>
-	                            <div class="content">
-	                                <input type="text" class="csc-place-placeIdentifier" />
-	                            </div>
-	                        </div>
-						</div>
-					</div>
-				</div>
+                    <div class="size1of2 fl-force-left">
+                        <div class="size1of3 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-placeType-label"></div>
+                                </div>
+                                <div class="content">
+                                    <select class="csc-place-placeType input-select"><option value="">Options not loaded</option></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="size1of3 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-termStatus-label"></div>
+                                </div>
+                                <div class="content">
+                                    <select class="csc-place-termStatus input-select"><option value="">Options not loaded</option></select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- placeRecordAdminStatus ("Admin status") discarded in favor of ... -->
+                        <!-- Term status field common to all authorities -->
+                        <!--<div class="size1of4 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-placeRecordAdminStatus-label"></div>
+                                </div>
+                                <div class="content">
+                                    <select class="csc-place-placeRecordAdminStatus input-select"><option value="">Options not loaded</option></select>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="size1of3 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-placeIdentifier-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-place-placeIdentifier" />
+                                </div>
+                            </div>
+			</div>
+                    </div>
+		</div>
 
-				<!-- Row 2 --><!-- Repeating group with three table rows -->
-				<div class="info-pair">
-	               	<div class="header">
-	                   	<span class="label csc-place-placeNameGroup-label"></span>
-					</div>
-					<div class="content">
-		                <div class="fl-container-flex fl-fix information-group infoDiv" style="margin-top:0px"><!--repeatable container -->
-		                    <div class="csc-place-placeNameGroup"><!-- This ties to app layer, gets repeat decorations -->
-	                            <div class="info-column fieldgroup">
-									<table style="margin-bottom:12px;">
-										<thead>
-											<tr>
-		                                        <td class="csc-place-placeName-label"></td>
-		                                        <td class="csc-place-nameQualifiedName-label"></td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-										        <td class="flc-inlineEdit-text placeName">
-		                                            <input type="text" class="csc-place-placeName editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text qualifiedName">
-		                                            <input type="text" class="csc-place-nameQualifiedName editableText" />
-		                                        </td>
-		                                	</tr>
-										</tbody>
-									</table>
+                <!-- Row 2 --><!-- Repeating group with three table rows -->
+                <div class="info-pair">
+                    <div class="header">
+                        <span class="label csc-place-placeNameGroup-label"></span>
+                    </div>
+                    <div class="content">
+                        <div class="fl-container-flex fl-fix information-group infoDiv" style="margin-top:0px"><!--repeatable container -->
+                            <div class="csc-place-placeNameGroup"><!-- This ties to app layer, gets repeat decorations -->
+                                <div class="info-column fieldgroup">
+                                    <table style="margin-bottom:12px;">
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-place-placeName-label"></td>
+                                                <td class="csc-place-nameQualifiedName-label"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="flc-inlineEdit-text placeName">
+                                                    <input type="text" class="csc-place-placeName editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text qualifiedName">
+                                                    <input type="text" class="csc-place-nameQualifiedName editableText" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 							
-									<table style="width: 90%; float: right; margin-bottom: 12px;">
-										<thead>
-											<tr>
-												<td class="csc-place-nameLanguage-label"></td>
-		                                        <td class="csc-place-nameAbbrev-label"></td>
-		                                        <td class="csc-place-nameType-label"></td>
-		                                        <td class="csc-place-nameStatus-label"></td>
-		                                        <td class="csc-place-nameNote-label"></td>
-		                                        <td class="csc-placeNameGroup-nameDateGroup-label"></td>
-		                                        <td class="csc-place-nameAdminStatus-label"></td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="flc-inlineEdit-text nameLanguage">
-		                                            <select class="csc-place-nameLanguage input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameAbbrev">
-		                                            <input type="text" class="csc-place-nameAbbrev editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameType">
-		                                            <select class="csc-place-nameType input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameStatus">
-		                                            <select class="csc-place-nameStatus input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameNote">
-		                                            <input type="text" class="csc-place-nameNote editableText" />
-		                                        </td>
+                                    <table style="width: 90%; float: right; margin-bottom: 12px;">
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-place-nameLanguage-label"></td>
+                                                <td class="csc-place-nameAbbrev-label"></td>
+                                                <td class="csc-place-nameType-label"></td>
+                                                <td class="csc-place-nameStatus-label"></td>
+                                                <td class="csc-place-nameNote-label"></td>
+                                                <td class="csc-placeNameGroup-nameDateGroup-label"></td>
+                                                <td class="csc-place-nameAdminStatus-label"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="flc-inlineEdit-text nameLanguage">
+                                                    <select class="csc-place-nameLanguage input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameAbbrev">
+                                                    <input type="text" class="csc-place-nameAbbrev editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameType">
+                                                    <select class="csc-place-nameType input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameStatus">
+                                                    <select class="csc-place-nameStatus input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameNote">
+                                                    <input type="text" class="csc-place-nameNote editableText" />
+                                                </td>
                                                 <td class="flc-inlineEdit-text nameDate">
-		                                            <input type="text" class="csc-placeNameGroup-nameDateGroup editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameAdminStatus">
-		                                            <select class="csc-place-nameAdminStatus input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-											</tr>
-										</tbody>
-									</table>
+                                                    <input type="text" class="csc-placeNameGroup-nameDateGroup editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameAdminStatus">
+                                                    <select class="csc-place-nameAdminStatus input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-									<table style="width: 90%; float: right">
-										<thead>
-											<tr>
-		                                        <td class="csc-place-nameSource-label"></td>
-		                                        <td class="csc-place-nameSourceDetail-label"></td>
-		                                        <td class="csc-place-nameSourceRefId-label"></td> 
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="flc-inlineEdit-text nameSource">
-		                                            <input type="text" class="csc-place-nameSource editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameSourceDetail">
-		                                            <input type="text" class="csc-place-nameSourceDetail editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameSourceRefId">
-		                                            <input type="text" class="csc-place-nameSourceRefId editableText" />
-		                                        </td>
-											</tr>
-										</tbody>
-									</table>
-
-
-									<!-- this table goes in place of the previous two tables if it is desirable to only have two tables (vertically) instead of 3>-->
-									<!--<table style="width: 90%; float: right; margin-bottom: 12px;">
-										<thead>
-											<tr>
-												<td class="csc-place-nameLanguage-label"></td>
-		                                        <td class="csc-place-nameAbbrev-label"></td>
-		                                        <td class="csc-place-nameType-label"></td>
-		                                        <td class="csc-place-nameStatus-label"></td>
-		                                        <td class="csc-place-nameSource-label"></td>
-		                                        <td class="csc-place-nameSourceDetail-label"></td>
-		                                        <td class="csc-place-nameSourceRefId-label"></td>
-		                                        <td class="csc-place-nameNote-label"></td>
-		                                        <td class="csc-place-nameDate-label"></td>
-		                                        <td class="csc-place-nameAdminStatus-label"></td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="flc-inlineEdit-text nameLanguage">
-		                                            <select class="csc-place-nameLanguage input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameAbbrev">
-		                                            <input type="text" class="csc-place-nameAbbrev editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameType">
-		                                            <select class="csc-place-nameType input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameStatus">
-		                                            <select class="csc-place-nameStatus input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-												<td class="flc-inlineEdit-text nameSource">
-		                                            <input type="text" class="csc-place-nameSource editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameSourceDetail">
-		                                            <input type="text" class="csc-place-nameSourceDetail editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameSourceRefId">
-		                                            <input type="text" class="csc-place-nameSourceRefId editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameNote">
-		                                            <input type="text" class="csc-place-nameNote editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameDate">
-		                                            <input type="text" class="csc-place-nameDate editableText" />
-		                                        </td>
-		                                        <td class="flc-inlineEdit-text nameAdminStatus">
-		                                            <select class="csc-place-nameAdminStatus input-select-shorter">
-		                                                <option value="">Options not loaded</option>
-		                                            </select>
-		                                        </td>
-											</tr>
-										</tbody>
-									</table>-->
+                                    <table style="width: 90%; float: right">
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-place-nameSource-label"></td>
+                                                <td class="csc-place-nameSourceDetail-label"></td>
+                                                <td class="csc-place-nameSourceRefId-label"></td> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="flc-inlineEdit-text nameSource">
+                                                    <input type="text" class="csc-place-nameSource editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameSourceDetail">
+                                                    <input type="text" class="csc-place-nameSourceDetail editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameSourceRefId">
+                                                    <input type="text" class="csc-place-nameSourceRefId editableText" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
 
-								</div> 
-							</div>
-						</div>
-					</div>
-				</div>			
-				<!-- Row 2 --><!-- Replace everything between previous 'Row 2' comment and this one if it is desirable to have a table with repeating rows instead of a repeating group -->
+                                    <!-- this table goes in place of the previous two tables if it is desirable to only have two tables (vertically) instead of 3>-->
+                                    <!--<table style="width: 90%; float: right; margin-bottom: 12px;">
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-place-nameLanguage-label"></td>
+                                                <td class="csc-place-nameAbbrev-label"></td>
+                                                <td class="csc-place-nameType-label"></td>
+                                                <td class="csc-place-nameStatus-label"></td>
+                                                <td class="csc-place-nameSource-label"></td>
+                                                <td class="csc-place-nameSourceDetail-label"></td>
+                                                <td class="csc-place-nameSourceRefId-label"></td>
+                                                <td class="csc-place-nameNote-label"></td>
+                                                <td class="csc-place-nameDate-label"></td>
+                                                <td class="csc-place-nameAdminStatus-label"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="flc-inlineEdit-text nameLanguage">
+                                                    <select class="csc-place-nameLanguage input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameAbbrev">
+                                                    <input type="text" class="csc-place-nameAbbrev editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameType">
+                                                    <select class="csc-place-nameType input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameStatus">
+                                                    <select class="csc-place-nameStatus input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameSource">
+                                                    <input type="text" class="csc-place-nameSource editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameSourceDetail">
+                                                    <input type="text" class="csc-place-nameSourceDetail editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameSourceRefId">
+                                                    <input type="text" class="csc-place-nameSourceRefId editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameNote">
+                                                    <input type="text" class="csc-place-nameNote editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameDate">
+                                                    <input type="text" class="csc-place-nameDate editableText" />
+                                                </td>
+                                                <td class="flc-inlineEdit-text nameAdminStatus">
+                                                    <select class="csc-place-nameAdminStatus input-select-shorter">
+                                                        <option value="">Options not loaded</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>-->
+
+
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>			
+                <!-- Row 2 --><!-- Replace everything between previous 'Row 2' comment and this one if it is desirable to have a table with repeating rows instead of a repeating group -->
                 <!-- <div class="info-column">
                     <div class="info-pair">
                         <div class="header">
                             <div class="label csc-place-placeNameGroup-label"></div>
                         </div>
                         <div class="content">
-							<table>
+                            <table>
                                 <thead>
                                     <tr>
                                         <td class="csc-place-name-label"></td>
@@ -312,8 +314,7 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
-                            
+                            </table>                           
                         </div>
                     </div>
                 </div> -->
@@ -359,20 +360,18 @@
                                 <input type="text" class="csc-place-source" />
                             </div>
                         </div>
-
                     </div>
-					<div class="size1of2 fl-force-left">
+                    <div class="size1of2 fl-force-left">
                         <div class="info-pair">
                             <div class="header">
                                 <div class="label csc-place-note-label"></div>
                             </div>
                             <div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-place-note"></textarea>
+                                <textarea rows="4" cols="30" class="input-textarea csc-place-note"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="clear"></div>
             </div>
         </div>
@@ -381,6 +380,7 @@
             <div class="csc-recordEditor-header fl-container-flex header toggle csc-place-localityInformation-label"></div>
             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                 <div class="info-column">
+
                     <!-- Row 1 -->
                     <div class="info-column fl-force-left">
                         <div class="size1of6 fl-force-left" >
@@ -394,14 +394,14 @@
                             </div>
                         </div>
                         <div class="size1of6 fl-force-left">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-vLatitude-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <input type="text" class="csc-place-vLatitude" />
-	                            </div>
-	                        </div>
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-vLatitude-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-place-vLatitude" />
+                                </div>
+                            </div>
                         </div>
                         <div class="size1of6 fl-force-left" >
                             <div class="info-pair">
@@ -414,29 +414,30 @@
                             </div>
                         </div>
                         <div class="size1of2 fl-force-left">
-							<div class="size1of2 fl-force-left">
-	                            <div class="info-pair">
-	                                <div class="header">
-	                                    <div class="label csc-place-vCoordSys-label"></div>
-	                                </div>
-	                                <div class="content">
-	                                    <select class="csc-place-vCoordSys input-select"><option value="">Options not loaded</option></select>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="size1of2 fl-force-left" >
-	                            <div class="info-pair">
-	                                <div class="header">
-	                                    <div class="label csc-place-vSpatialReferenceSystem-label"></div>
-	                                </div>
-	                                <div class="content">
-	                                    <select class="csc-place-vSpatialReferenceSystem input-select"><option value="">Options not loaded</option></select>
-	                                </div>
-	                            </div>
-	                        </div>
-						</div>
+                            <div class="size1of2 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-place-vCoordSys-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <select class="csc-place-vCoordSys input-select"><option value="">Options not loaded</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="size1of2 fl-force-left" >
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-place-vSpatialReferenceSystem-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <select class="csc-place-vSpatialReferenceSystem input-select"><option value="">Options not loaded</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                	<!-- Row 2 -->
+ 
+                    <!-- Row 2 -->
                     <div class="info-column fl-force-left">
                         <div class="size1of6 fl-force-left" >
                             <div class="info-pair">
@@ -468,90 +469,91 @@
                                 </div>
                             </div>
                         </div>
-						<div class="size1of2 fl-force-left">
-	                        <div class="size1of2 fl-force-left" >
-	                            <div class="info-pair">
-	                                <div class="header">
-	                                    <div class="label csc-place-vUnitofMeasure-label"></div>
-	                                </div>
-	                                <div class="content">
-	                                    <select class="csc-place-vUnitofMeasure input-select"><option value="">Options not loaded</option></select>
-	                                </div>
-	                            </div>
-	                        </div>
-						</div>
+                        <div class="size1of2 fl-force-left">
+                            <div class="size1of2 fl-force-left" >
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-place-vUnitofMeasure-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <select class="csc-place-vUnitofMeasure input-select"><option value="">Options not loaded</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-				</div>
-				
-				<!-- Rows 3 and 4 in a column-based layout -->
-				<div class="info-column fl-force-left">
-					<div class="size1of2 fl-force-left">
-						<!-- Column 1 -->
-						<div class="info-column fl-force-left size1of3">
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-minElevationInMeters-label"></div>
-	                            </div>
-	                            <div class="content smallfield">
-	                                <input type="text" class="csc-place-minElevationInMeters" />
-	                            </div>
-	                        </div>
-	                        <div class="info-pair">
-	                            <div class="header">
-	                                <div class="label csc-place-maxElevationInMeters-label"></div>
-	                            </div>
-	                            <div class="content smallfield">
-	                                <input type="text" class="csc-place-maxElevationInMeters" />
-	                            </div>
-	                        </div>
-		                </div>
+                </div>				
 
-						<!-- Column 2 -->
-						<div class="info-column fl-force-left size1of3">
-							<div class="info-pair">
-		                        <div class="header">
-		                            <div class="label csc-place-minDepthInMeters-label"></div>
-		                        </div>
-		                        <div class="content smallfield">
-		                            <input type="text" class="csc-place-minDepthInMeters" />
-		                        </div>
-		                    </div>
+                <!-- Rows 3 and 4 in a column-based layout -->
+                <div class="info-column fl-force-left">
+                    <div class="size1of2 fl-force-left">
+
+                        <!-- Column 1 -->
+                        <div class="info-column fl-force-left size1of3">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-minElevationInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-minElevationInMeters" />
+                                </div>
+                            </div>
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-maxElevationInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-maxElevationInMeters" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="info-column fl-force-left size1of3">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-minDepthInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-minDepthInMeters" />
+                                </div>
+                            </div>
                     
-		                    <div class="info-pair">
-		                        <div class="header">
-		                            <div class="label csc-place-maxDepthInMeters-label"></div>
-		                        </div>
-		                        <div class="content smallfield">
-		                            <input type="text" class="csc-place-maxDepthInMeters" />
-		                        </div>
-		                    </div>
-						</div>
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-maxDepthInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-maxDepthInMeters" />
+                                </div>
+                            </div>
+                        </div>
 
-						<!-- Column 3 -->
-						<div class="info-column fl-force-left size1of3">
-							<div class="info-pair">
-		                        <div class="header">
-		                            <div class="label csc-place-minDistanceAboveSurfaceInMeters-label"></div>
-		                        </div>
-		                        <div class="content smallfield">
-		                            <input type="text" class="csc-place-minDistanceAboveSurfaceInMeters" />
-		                        </div>
-		                    </div>
-		                    <div class="info-pair">
-		                        <div class="header">
-		                            <div class="label csc-place-maxDistanceAboveSurfaceInMeters-label"></div>
-		                        </div>
-		                        <div class="content smallfield">
-		                            <input type="text" class="csc-place-maxDistanceAboveSurfaceInMeters" />
-		                        </div>
-		                    </div>
-						</div>
-					</div>
-					<div class="size1of2 fl-force-left">
-						<!-- vertical spacer for row 3 so source and source detail appear on row 4 -->
-						<div class="size1of1 fl-force-left spacer"></div>
-						<div class="size1of2 fl-force-left">
-							<div class="info-pair">
+                        <!-- Column 3 -->
+                        <div class="info-column fl-force-left size1of3">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-minDistanceAboveSurfaceInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-minDistanceAboveSurfaceInMeters" />
+                                </div>
+                            </div>
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-place-maxDistanceAboveSurfaceInMeters-label"></div>
+                                </div>
+                                <div class="content smallfield">
+                                    <input type="text" class="csc-place-maxDistanceAboveSurfaceInMeters" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="size1of2 fl-force-left">
+                        <!-- vertical spacer for row 3 so source and source detail appear on row 4 -->
+                        <div class="size1of1 fl-force-left spacer"></div>
+                        <div class="size1of2 fl-force-left">
+                            <div class="info-pair">
                                 <div class="header">
                                     <div class="label csc-place-vCoordSource-label"></div>
                                 </div>
@@ -559,8 +561,8 @@
                                     <input type="text" class="csc-place-vCoordSource" />
                                 </div>
                             </div>
-						</div>
-						<div class="size1of2 fl-force-left" >
+                        </div>
+                        <div class="size1of2 fl-force-left" >
                             <div class="info-pair">
                                 <div class="header">
                                     <div class="label csc-place-vCoordSourceRefId-label"></div>
@@ -570,10 +572,8 @@
                                 </div>
                             </div>
                         </div>
-					</div>
-				</div>
-
-
+                    </div>
+                </div>
                 <div class="clear"></div>
             </div>
         </div>
@@ -581,10 +581,11 @@
         <div class="fl-container-flex fl-fix information-group">
             <div class="csc-recordEditor-header fl-container-flex header toggle csc-place-geoReferenceInformation-label"></div>
             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-pair">
-	                <div class="fl-container-flex fl-fix information-group infoDiv"><!--repeatable container -->
-	                    <div class="csc-place-placeGeoRefGroup"><!-- This ties to app layer, gets repeat decorations -->
+                <div class="info-pair">
+                    <div class="fl-container-flex fl-fix information-group infoDiv"><!--repeatable container -->
+                        <div class="csc-place-placeGeoRefGroup"><!-- This ties to app layer, gets repeat decorations -->
                             <div class="info-column fieldgroup">
+
                                 <!-- Row 1 -->
                                 <div class="info-column fl-force-left">
                                     <div class="size1of5 fl-force-left">
@@ -638,8 +639,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="clear"></div>
+
                                 <!-- Row 2 -->
                                 <div class="info-column fl-force-left">
                                     <div class="size1of5 fl-force-left">
@@ -684,6 +685,7 @@
                                     </div>
                                 </div>
                                 <div class="clear"></div>
+ 
                                 <!-- Row 3 -->
                                 <div class="info-column fl-force-left">
                                     <div class="size1of5 fl-force-left">
@@ -738,6 +740,7 @@
                                     </div>
                                 </div>
                                 <div class="clear"></div>
+
                                 <!-- Row 4 -->
                                 <div class="info-column fl-force-left">
                                     <div class="size2of5 fl-force-left">
@@ -763,21 +766,25 @@
                                 </div>
                             </div>
                             <div class="clear"></div>
-	                    </div>
-	                </div>
+                        </div>
+                    </div>
                     <div class="clear"></div>
-				</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="csc-place-hierarchy"></div>
+
+        <div id="secondary-nav-footer">
+            <div id="secondary-nav-menu-sub">
+                <div class="button-row">
+                    <a style="display:none;" class="csc-goto gotoButton"></a>
+                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
+                    <input type="button" class="csc-cancel cancelButton" />
+                    <input type="button" class="csc-delete deleteButton" />
+                    <input type="button" class="csc-save saveButton" />                                           
+                </div>
             </div>
         </div>
     </div>
-    <div class="csc-place-hierarchy"></div>
-
-    <div class="fl-container-flex button-row">
-        <a style="display:none;" class="csc-goto gotoButton"></a>
-        <input type="button" class="csc-createFromExisting createFromExistingButton" />
-        <input type="button" class="csc-save saveButton primary" />
-        <input type="button" class="csc-delete deleteButton primary" />
-        <input type="button" class="csc-cancel cancelButton" />
-    </div>
-    <div class="clear"></div>
 </div>
