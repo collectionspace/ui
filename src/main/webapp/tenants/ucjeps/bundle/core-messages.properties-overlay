@@ -76,6 +76,7 @@ login-rologin: reader@ucjeps.cspace.berkeley.edu
 
 #Records:
 cataloging-number: Accession number
+cataloging-identificationNumberRequired: Please specify an Accession Number
 
 #media
 media-scientificTaxonomyLabel: Scientific name
