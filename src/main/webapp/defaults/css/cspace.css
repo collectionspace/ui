@@ -486,7 +486,8 @@ li .flc-pager-pageLink {
     padding:0;}
 #secondary-nav-menu .menu-record li {
     /*display:inline;*/}
-#secondary-nav-menu-sub  .button-row{
+#secondary-nav-menu-sub  .button-row,
+#secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
 #secondary-nav-menu-sub .upper-save {
