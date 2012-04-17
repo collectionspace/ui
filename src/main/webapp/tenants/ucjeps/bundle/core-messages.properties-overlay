@@ -15,8 +15,7 @@ collection-object-referenceLabel: Reference
 collection-object-refPageLabel: Page
 collection-object-notesLabel: Notes
 
-#collection-object-identificationInformationLabel: Object Identification Informat
-collection-object-fieldCollectionInformationLabel: Field Collection Infomation
+collection-object-objectCollectionInformationLabel: Field Collection Information
 collection-object-fieldCollectionDateLabel: Field collection date
 collection-object-fieldLocVerbatimLabel: Field collection location verbatim
 collection-object-fieldCollectorLabel: Field collection collector
