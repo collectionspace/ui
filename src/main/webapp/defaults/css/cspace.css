@@ -486,7 +486,8 @@ li .flc-pager-pageLink {
     padding:0;}
 #secondary-nav-menu .menu-record li {
     /*display:inline;*/}
-#secondary-nav-menu-sub  .button-row{
+#secondary-nav-menu-sub  .button-row,
+#secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
 #secondary-nav-menu-sub .upper-save {
@@ -2060,6 +2061,85 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
+
+
+/****************************************
+ * Styling of HTML elements developed for UCB place authority template - rjaffe, 18Oct2011, awieliczka, jan2012 *
+ * For padding on items nested within the OOCSS grid - like .info-pair (see line 2111) - include 'oocss' as a high level class *
+ ****************************************/
+
+/* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
+/* example: 
+   <div class="line">
+		<div class="unit size1of4"></div>
+		<div class="unit size1of2"></div>
+		<div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
+			<div class="unit size1of3"></div>
+			<div class="lastUnit size2of3"</div>
+		</div>
+	</div>
+*/
+.line, .lastUnit { overflow: hidden; _overflow: visible; _zoom:1; }
+.unit { float: left; _zoom: 1; }
+.unitExt { float: right; }
+.size1of1 { width: 100% }
+.size1of2 { width: 50%; }
+.size1of3 { width: 33.33333%; }
+.size2of3 { width: 66.66666%; }
+.size1of4 { width: 25%; }
+.size3of4 { width: 75%; }
+.size1of5 { width: 20%; }
+.size2of5 { width: 40%; }
+.size3of5 { width: 60%; }
+.size4of5 { width: 80%; }
+.lastUnit { float: none; _position: relative; _left: -3px; _margin-right: -3px; width: auto; }
+
+.size1of6 { width: 16.66666%; }
+.size5of6 { width: 83.33333%; }
+.smallfield { width: 75% !important; }
+.spacer { height: 4.5em; }
+
+.oocss .info-pair, 
+.oocss .info-pair-addrow, 
+.oocss .info-pair-table, 
+.oocss .info-pair-date,
+.oocss .info-pair-select,
+.oocss .info-pair-termlist
+{
+	width: auto;
+	padding-right: 1.5em;
+}
+
+.oocss .cs-repeatable-group li {
+	background-color: #E2E2E2 !important;
+	border: 1px solid #CCC !important;
+	padding: 4px 4px 0 4px !important;
+	margin-bottom: 4px !important;
+}
+
+.oocss .infoDiv input[type="button"].cs-repeatable-add {
+	top: -12px !important;
+}
+
+.infoDiv .fieldgroup {
+	background: none !important;
+}
+
+/*.csc-place .cs-repeatable-repeat input, .csc-place .cs-repeatable-repeat textarea {
+	width: 100% !important;
+}
+*/
+.remarks, .georefplacename {
+    width:350px;
+    margin-right: 30px;
+}
+.unitofmeasure {
+    width:120px;
+    margin-right:100px;
+}
+/* ---------------------------------------*/
+
+
 .cs-locked {
     background-image: url(../images/lock.png);
     width: 16px;

@@ -1,0 +1,8 @@
+{
+    "items": [
+        {"number": "Test Place", "csid": "1234567", "summary": "Test Place", "recordtype": "place"}
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
+}
