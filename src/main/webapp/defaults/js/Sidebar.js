@@ -112,10 +112,6 @@ cspace = cspace || {};
         finalInitFunction: "cspace.sidebar.media.finalInit",
         produceTree: "cspace.sidebar.media.produceTree",
         invokers: {
-            showMediaImage: {
-                funcName: "cspace.sidebar.media.showMediaImage",
-                args: "{media}.model"
-            },
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
@@ -148,41 +144,59 @@ cspace = cspace || {};
         },
         strings: { }
     });
-    
-    cspace.sidebar.media.showMediaImage = function (model) {
-        if (!model.fields) {
-            return false;
-        }
-        if (!model.fields.blobCsid) {
-            return false;
-        }
-        return !!(model.fields.blobs && model.fields.blobs.length > 0);
-    };
-    
+        
     cspace.sidebar.media.finalInit = function (that) {
         that.refreshView();
     };
     
     cspace.sidebar.media.preInit = function (that) {
-        that.getImageSource = function () {
-            var src = "";
-            if (!that.model.fields) {
-                return src;
+        that.formatMedia = function (url, format) {
+            var bool = !!url;
+            if (format === "bool") {
+                return bool;
             }
-            if (!that.model.fields.blobCsid) {
-                return src;
+            if (!url) {
+                return url;
             }
-            if (!that.model.fields.blobs) {
-                return src;
-            }
-            if (that.model.fields.blobs.length <= 0) {
-                return src;
-            }
-            return that.model.fields.blobs[0].imgMedium;
+            return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
         };
-        that.applier.modelChanged.addListener("fields.blobCsid", function () {
+        
+        that.getMedia = function (format) {
+            if (!that.model.fields) {
+                return that.formatMedia("", format);
+            }
+            var imgThumb;
+            if (fluid.get(that.model, "fields.blobCsid")) {
+                imgThumb = fluid.get(that.model, "fields.blobs.0.imgThumb");
+            }
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            imgThumb = fluid.get(that.model, "relations.media.0.summarylist.imgThumb");
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            return that.formatMedia("", format);
+        };
+
+		that.getOriginalImage = function () {
+            var src = that.getMedia("Original");
+				
+			window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
+				height: "600",
+				width: "800",
+				scrollbars: "yes"
+			}));
+		};
+				
+		that.applier.modelChanged.addListener("fields.blobCsid", function () {
             that.refreshView();
         });
+        
+        that.applier.modelChanged.addListener("relations.media", function () {
+            that.refreshView();
+        });
+        
     };
     
     cspace.sidebar.media.produceTree = function (that) {
@@ -192,7 +206,7 @@ cspace = cspace || {};
             },
             expander: {
                 type: "fluid.renderer.condition",
-                condition: that.showMediaImage(),
+                condition: that.getMedia("bool"),
                 trueTree: {
                     mediumImage: {
                         decorators: [{
@@ -201,8 +215,12 @@ cspace = cspace || {};
                             type: "attrs",
                             attributes: {
                                 alt: that.lookupMessage("sidebar-mediumImage"),
-                                src: that.getImageSource()
+                                src: that.getMedia("Medium")
                             }
+                        }, {
+                            type: "jQuery",
+                            func: "click", 
+                            args: that.getOriginalImage
                         }]
                     },
                     mediaSnapshot: {

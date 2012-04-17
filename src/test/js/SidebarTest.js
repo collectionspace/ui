@@ -57,6 +57,7 @@ var sidebarTester = function ($) {
 
     var setupSidebar = function (options) {
         options.recordModel = options.recordModel || {
+            "fields": {},
             "relations": {
                 "cataloging": [
                     {
@@ -84,6 +85,21 @@ var sidebarTester = function ($) {
                         "relid": "19ba9f30-abcd-fede-abcd",
                         "relationshiptype": "affects",
                         "recordtype": "movement"
+                    }
+                ],
+                "media": [
+                    {
+                        "summary": "Exploding Dog",
+                        "summarylist": {
+                            "updatedAt": "2011-12-05T17:18:03Z",
+			                "imgOrig": "../data/images/Original.png",
+                            "imgThumb": "../data/images/Thumbnail.jpeg",
+                        },
+                        "csid": "9d335347-1aec-4b2e-b8d2",
+                        "number": "I don't know why",
+                        "relid": "0e245077-560e-4579-b1bb-c40b9808ee90",
+                        "relationshiptype": "affects",
+                        "recordtype": "media"
                     }
                 ]
             },
@@ -200,6 +216,22 @@ var sidebarTester = function ($) {
         jqUnit.assertFalse("Related Procedures not disabled", $(rowCss, sidebar.locate("relatedProcedures")).hasClass(disabledClass));
         jqUnit.assertEquals("Related Procedures not disabled", 4, $("."+disabledClass, sidebar.locate("termsUsed")).length);
 
+    });
+
+    var mediaSnapshotTest = cspace.tests.testEnvironment({
+        testCase: bareSidebarTest,
+        permissions: cspace.tests.sampleUserPerms
+    });
+
+    mediaSnapshotTest.test("Media Snapshot test", function () {
+        var sidebar = setupSidebar(sampleOptions);
+        var mediumImage = ".csc-sidebar-mediumImage";
+        jqUnit.assertTrue("Media snapshot", $(mediumImage, sidebar.locate("media")).length > 0);
+        jqUnit.assertTrue("Media snapshot has source", ($(mediumImage).attr("src") !== 'undefined'));
+        jqUnit.assertTrue("Media snapshot has appropriate derivative", (/Medium/.test($(mediumImage).attr("src"))));
+        sidebar.options.recordApplier.requestChange("relations.media.0.summarylist.imgThumb", "../data/images/2Thumbnail.jpeg");
+        jqUnit.assertTrue("Media snapshot updates dynamically when related media is added", 
+            (($(mediumImage).attr("src") !== 'undefined') && (/2Medium/.test($(mediumImage).attr("src")))));
     });
 };
 
