@@ -1,0 +1,116 @@
+# Added for ucjeps tenant
+media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
+
+# Schema extensions to Cataloging record
+collection-object-taxonLabel: Name
+collection-object-qualifierLabel: Qualifier
+collection-object-identByLabel: By
+collection-object-identDateLabel: Date
+collection-object-institutionLabel: Institution
+collection-object-identKindLabel: Kind
+
+# Inadvertently shares field name and label
+# with another entry below
+collection-object-referenceLabel: Reference
+collection-object-refPageLabel: Page
+collection-object-notesLabel: Notes
+
+#collection-object-identificationInformationLabel: Object Identification Informat
+collection-object-fieldCollectionInformationLabel: Field Collection Infomation
+collection-object-fieldCollectionDateLabel: Field collection date
+collection-object-fieldLocVerbatimLabel: Field collection location verbatim
+collection-object-fieldCollectorLabel: Field collection collector
+collection-object-fieldLocLatDecimalLabel: Field location latitude
+collection-object-fieldLocLongDecimalLabel: Field location longitude
+collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-fieldLocGeodeticDatumLabel: Geodetic datum
+collection-object-fieldLocCoordinateSystemLabel: Coordinate system
+collection-object-fieldCollectionMethodLabel: Field collection method
+collection-object-fieldLocCountyLabel: Field location county
+collection-object-fieldLocCountryLabel: Field location country
+collection-object-fieldLocStateLabel: Field location state
+collection-object-fieldCollectionNoteLabel: Habitat information
+collection-object-fieldCollectionSourceLabel: Field collection source
+collection-object-fieldLocHigherGeographyLabel: Field location higher geography
+collection-object-fieldColEventNameLabel: Field collection event name
+collection-object-fieldLocDepthLabel: Depth
+collection-object-fieldLocElevationLabel: Elevation
+collection-object-fieldLocElevationLabel: Elevation
+collection-object-fieldAssociatedTaxaLabel: Associated taxa
+
+
+# From Type Specimen fieldgroup
+collection-object-typeSpecimenGroupLabel: Type Specimen
+collection-object-typeSpecimenKindLabel: Kind of Type
+collection-object-typeSpecimenReferenceLabel: Reference
+collection-object-typeSpecimenRefPageLabel: Page
+collection-object-typeSpecimenNotesLabel: Notes
+
+# Taxon record
+taxon: Taxon
+taxon-taxonNameAuthorityInformationLabel: FIX-Taxonomic Name Authority Information
+taxon-displayNameLabel: Display name
+taxon-termStatusLabel: Term status
+taxon-taxonFullNameLabel: Full name
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Current?
+taxon-taxonAuthorGroupLabel: Author		
+taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorTypeLabel: Author type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is named hybrid?
+taxon-taxonCitationLabel: Citation
+taxon-taxonomicStatusLabel: Taxonomic status
+taxon-taxonNameSourceLabel: Name source
+taxon-taxonNameSourceCodeLabel: Name source code
+taxon-taxonGUIDLabel: GUID
+taxon-taxonNoteLabel: Note
+
+#Login
+login-current-info: 
+login-login: admin@ucjeps.cspace.berkeley.edu
+login-rologin: reader@ucjeps.cspace.berkeley.edu
+
+#Records:
+cataloging-number: Accession number
+
+#media
+media-scientificTaxonomyLabel: Scientific name
+media-handwrittenLabel: Handwritten label
+media-postToPublicLabel: Post to public
+media-identificationNumberLabel: Accession number
+
+#cataloging
+collection-object-objectNumberLabel: Accession Number
+collection-object-otherNumberLabel: Other Number
+collection-object-otherNumberGroupLabel: Other Number
+collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-labelHeaderLabel: Label Header
+collection-object-labelFooterLabel: Label Footer
+collection-object-numberOfObjectsLabel: Number of Sheets
+collection-object-handwrittenLabel: Handwritten label
+collection-object-postToPublicLabel: Post to public
+
+collection-object-elevationLabel: Elevation
+collection-object-elevationMinLabel: Minimum
+collection-object-elevationMaxLabel: Maximum
+collection-object-elevationUnitLabel: Unit
+collection-object-elevationQualifierLabel: Qualifier
+collection-object-elevationNoteLabel: Note
+
+collection-object-depthLabel: Depth
+collection-object-depthMinLabel: Minimum
+collection-object-depthMaxLabel: Maximum
+collection-object-depthUnitLabel: Unit
+collection-object-depthQualifierLabel: Qualifier
+collection-object-depthNoteLabel: Note
+
+collection-object-associatedTaxaGroupLabel: Associated Taxa
+collection-object-commonNameLabel: Common Name
+collection-object-interactionLabel: Interaction
+
+collection-object-annotationGroupLabel: Annotations
+collection-object-annotationTypeLabel: Type
+collection-object-annotationNoteLabel: Note
+collection-object-annotationDateLabel: Date
+collection-object-annotationAuthorLabel: Author

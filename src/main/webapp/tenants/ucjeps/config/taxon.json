@@ -1,0 +1,88 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "taxon",
+            "selectors": {
+                "recordEditor": ".csc-taxon-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "hierarchy": ".csc-hierarchy",
+                            "identificationNumber": ".csc-taxon-displayName"
+                        },
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "components": {
+                            "hierarchy": {
+                                "type": "cspace.hierarchy",
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
+                                },
+                                "createOnEvent": "afterRender"
+                            }
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.displayName"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "taxon",
+            "namespace": "taxon",
+            "schema": [
+                "recordlist",
+                "recordtypes",
+                "namespaces",
+                "taxon"
+            ],
+            "pageSpec": {},
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
+                },
+                "dataContext": {
+                    "options": {
+                        "baseUrl": {
+                            "expander": {
+                                "type": "fluid.deferredInvokeCall",
+                                "func": "cspace.util.urlBuilder",
+                                "args": "%tenant/%tname/vocabularies"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
