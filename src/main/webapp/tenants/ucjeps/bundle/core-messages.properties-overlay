@@ -19,8 +19,8 @@ collection-object-objectCollectionInformationLabel: Field Collection Information
 collection-object-fieldCollectionDateLabel: Field collection date
 collection-object-fieldLocVerbatimLabel: Field collection location verbatim
 collection-object-fieldCollectorLabel: Field collection collector
-collection-object-fieldLocLatDecimalLabel: Field location latitude
-collection-object-fieldLocLongDecimalLabel: Field location longitude
+collection-object-fieldLocLatLabel: Field location latitude
+collection-object-fieldLocLongLabel: Field location longitude
 collection-object-fieldCollectionNumberLabel: Field collection number
 collection-object-fieldLocGeodeticDatumLabel: Geodetic datum
 collection-object-fieldLocCoordinateSystemLabel: Coordinate system
