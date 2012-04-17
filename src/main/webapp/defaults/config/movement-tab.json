@@ -57,7 +57,8 @@
                                                 ],
                                                 "components": {
                                                     "recordLock": {
-                                                        "type": "cspace.util.recordLock"
+                                                        "type": "cspace.util.recordLock",
+                                                        "createOnEvent": "afterRender"
                                                     }
                                                 }
                                             }

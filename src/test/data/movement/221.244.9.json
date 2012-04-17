@@ -16,7 +16,8 @@
         "movementNote": "Sample movement note",
         "movementReferenceNumber": "211.442.1",
         "plannedRemovalDate": "Oct 10, 2010",
-        "reasonForMove": "exhibition" 
+        "reasonForMove": "exhibition",
+        "workflow": "locked"
     },
     "termsUsed": [
         {
@@ -37,6 +38,5 @@
                 "recordtype": "movement"
             }
         ]
-    },
-    "workflow": "locked"
+    }
 }
