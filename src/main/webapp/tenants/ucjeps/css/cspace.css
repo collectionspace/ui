@@ -29,6 +29,9 @@ CollectionSpace 1.8 default CSS selectors
     width: 145px !important;}
 .input-numeric-tiny   {
 	width: 35px  !important;}
+.interfield-text {
+	padding: 1.5em .5em 0 .5em;
+}
 /* ---------------------------------------*/
 
 /* core HTML elements*/
