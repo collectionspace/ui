@@ -2109,7 +2109,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 	padding-right: 1.5em;
 }
 
-.oocss li {
+.oocss .cs-repeatable-group li {
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
