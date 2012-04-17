@@ -47,7 +47,7 @@ collection-object-typeSpecimenNotesLabel: Notes
 
 # Taxon record
 taxon: Taxon
-taxon-taxonNameAuthorityInformationLabel: FIX-Taxonomic Name Authority Information
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
 taxon-displayNameLabel: Display name
 taxon-termStatusLabel: Term status
 taxon-taxonFullNameLabel: Full name
