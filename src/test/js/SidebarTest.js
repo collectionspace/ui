@@ -226,9 +226,12 @@ var sidebarTester = function ($) {
     mediaSnapshotTest.test("Media Snapshot test", function () {
         var sidebar = setupSidebar(sampleOptions);
         var mediumImage = ".csc-sidebar-mediumImage";
-        jqUnit.assertTrue("Media snapshot", $(mediumImage, sidebar.locate("media")).length);
+        jqUnit.assertTrue("Media snapshot", $(mediumImage, sidebar.locate("media")).length > 0);
         jqUnit.assertTrue("Media snapshot has source", ($(mediumImage).attr("src") !== 'undefined'));
         jqUnit.assertTrue("Media snapshot has appropriate derivative", (/Medium/.test($(mediumImage).attr("src"))));
+        sidebar.options.recordApplier.requestChange("relations.media.0.summarylist.imgThumb", "../data/images/2Thumbnail.jpeg");
+        jqUnit.assertTrue("Media snapshot updates dynamically when related media is added", 
+            (($(mediumImage).attr("src") !== 'undefined') && (/2Medium/.test($(mediumImage).attr("src")))));
     });
 };
 
