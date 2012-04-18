@@ -94,6 +94,7 @@ collection-object-labelFooterLabel: Label Footer
 collection-object-numberOfObjectsLabel: Number of Sheets
 collection-object-handwrittenLabel: Handwritten label
 collection-object-postToPublicLabel: Post to public
+collection-object-cultivatedLabel: Cultivated
 
 collection-object-elevationLabel: Elevation
 collection-object-elevationMinLabel: Minimum
