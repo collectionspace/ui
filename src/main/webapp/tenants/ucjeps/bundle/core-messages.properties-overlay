@@ -8,7 +8,7 @@ collection-object-identByLabel: By
 collection-object-identDateLabel: Date
 collection-object-institutionLabel: Institution
 collection-object-identKindLabel: Kind
-collection-object-sheetNumberLabel: Sheet
+collection-object-objectCountNumberLabel: Sheet
 
 # Inadvertently shares field name and label
 # with another entry below
