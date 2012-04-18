@@ -42,10 +42,10 @@ collection-object-fieldAssociatedTaxaLabel: Associated taxa
 # From Type Specimen fieldgroup
 collection-object-typeSpecimenGroupLabel: Type Specimen
 collection-object-typeSpecimenKindLabel: Kind of Type
-collection-object-typeSpecimenAssertionByLabel: Assertion By
+collection-object-typeSpecimenAssertionByLabel: Asserted By
 collection-object-typeSpecimenReferenceLabel: Reference
 collection-object-typeSpecimenRefPageLabel: Page
-collection-object-typeSpecimenBasionymLabel: Basionym
+collection-object-typeSpecimenBasionymLabel: Verified Basionym
 collection-object-typeSpecimenNotesLabel: Notes
 
 # Taxon record
