@@ -392,6 +392,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model"
             }, "{arguments}.1"]
         });
+        
+        fluid.demands("cspace.preferred", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                recordType: "{recordEditor}.options.recordType",
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model"
+            }, "{arguments}.1"]
+        });
     
         // Term list
         fluid.demands("cspace.termList", "cspace.recordEditor", {

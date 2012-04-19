@@ -10,6 +10,45 @@
             },
             "fields": {
                 "properties": {
+                    "preferredAuthorityGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "authorityDisplayName": {
+                                    "type": "string"
+                                },
+                                "authorityQualifier": {
+                                    "type": "string"
+                                },
+                                "authorityTermType": {
+                                    "type": "string"
+                                },
+                                "authorityTerm": {
+                                    "type": "string"
+                                },
+                                "authorityTermLanguage": {
+                                    "type": "string"
+                                },
+                                "authorityTermPreferredForLanguage": {
+                                    "type": "string"
+                                },
+                                "authorityTermSource": {
+                                    "type": "string"
+                                },
+                                "authorityTermSourceDetail": {
+                                    "type": "string"
+                                },
+                                "authorityTermSourceID": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "relatedTerms": {
                         "items": {
                             "properties": {
