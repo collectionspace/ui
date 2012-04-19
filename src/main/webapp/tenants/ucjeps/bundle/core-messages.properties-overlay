@@ -5,7 +5,7 @@ media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
 collection-object-taxonLabel: Name
 collection-object-qualifierLabel: Qualifier
 collection-object-identByLabel: By
-collection-object-identDateLabel: Date
+taxonomicIdentGroup-identDateGroupLabel: Date
 collection-object-institutionLabel: Institution
 collection-object-identKindLabel: Kind
 collection-object-objectCountNumberLabel: Sheet
