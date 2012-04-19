@@ -10,38 +10,59 @@
             },
             "fields": {
                 "properties": {
-                    "preferredAuthorityGroup": {
+                    "preferredPersonGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "authorityDisplayName": {
+                                "personDisplayName": {
                                     "type": "string"
                                 },
-                                "authorityQualifier": {
+                                "personQualifier": {
                                     "type": "string"
                                 },
-                                "authorityTermType": {
+                                "personTermType": {
                                     "type": "string"
                                 },
-                                "authorityTerm": {
+                                "personTerm": {
                                     "type": "string"
                                 },
-                                "authorityTermLanguage": {
+                                "personTermLanguage": {
                                     "type": "string"
                                 },
-                                "authorityTermPreferredForLanguage": {
+                                "personTermPreferredForLanguage": {
                                     "type": "string"
                                 },
-                                "authorityTermSource": {
+                                "personTermSource": {
                                     "type": "string"
                                 },
-                                "authorityTermSourceDetail": {
+                                "personTermSourceDetail": {
                                     "type": "string"
                                 },
-                                "authorityTermSourceID": {
+                                "personTermSourceID": {
+                                    "type": "string"
+                                },
+                                "personSalutation": {
+                                    "type": "string"
+                                },
+                                "personTitle": {
+                                    "type": "string"
+                                },
+                                "personForename": {
+                                    "type": "string"
+                                },
+                                "personMiddleName": {
+                                    "type": "string"
+                                },
+                                "personSurname": {
+                                    "type": "string"
+                                },
+                                "personAddition": {
+                                    "type": "string"
+                                },
+                                "personInitials": {
                                     "type": "string"
                                 }
                             },

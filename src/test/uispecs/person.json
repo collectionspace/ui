@@ -146,8 +146,7 @@
         }
     },
     "recordEditor": {
-        
-        ".csc-personAuthority-preferred": {
+        ".csc-preferred-personAuthority": {
             "decorators": [
                 {
                     "func": "cspace.preferred",
@@ -156,7 +155,7 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-preferred-authorityGroup": {
+                                    ".csc-preferred-personGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
@@ -165,51 +164,80 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-preferred-authorityDisplayName": "${{row}.authorityDisplayName}",
-                                                                ".csc-preferred-authorityQualifier": "${{row}.authorityQualifier}",
-                                                                ".csc-preferred-authorityTermType": "${{row}.authorityTermType}",
-                                                                ".csc-preferred-authorityTerm": "${{row}.authorityTerm}",
-                                                                ".csc-preferred-authorityTermLanguage": "${{row}.authorityTermLanguage}",
-                                                                ".csc-preferred-authorityTermPreferredForLanguage": "${{row}.authorityTermPreferredForLanguage}",
-                                                                ".csc-preferred-authorityTermSource": "${{row}.authorityTermSource}",
-                                                                ".csc-preferred-authorityTermSourceDetail": "${{row}.authorityTermSourceDetail}",
-                                                                ".csc-preferred-authorityTermSourceID": "${{row}.authorityTermSourceID}"
+                                                                ".csc-preferred-personDisplayName": "${{row}.personDisplayName}",
+                                                                ".csc-preferred-personQualifier": "${{row}.personQualifier}",
+                                                                ".csc-preferred-personTermType": "${{row}.personTermType}",
+                                                                ".csc-preferred-personTerm": "${{row}.personTerm}",
+                                                                ".csc-preferred-personTermLanguage": "${{row}.personTermLanguage}",
+                                                                ".csc-preferred-personTermPreferredForLanguage": "${{row}.personTermPreferredForLanguage}",
+                                                                ".csc-preferred-personTermSource": "${{row}.personTermSource}",
+                                                                ".csc-preferred-personTermSourceDetail": "${{row}.personTermSourceDetail}",
+                                                                ".csc-preferred-personTermSourceID": "${{row}.personTermSourceID}",
+                                                                ".csc-preferred-personSalutation": "${{row}.personSalutation}",
+                                                                ".csc-preferred-personTitle": "${{row}.personTitle}",
+                                                                ".csc-preferred-personForename": "${{row}.personForename}",
+                                                                ".csc-preferred-personMiddleName": "${{row}.personMiddleName}",
+                                                                ".csc-preferred-personSurname": "${{row}.personSurname}",
+                                                                ".csc-preferred-personAddition": "${{row}.personAddition}",
+                                                                ".csc-preferred-personInitials": "${{row}.personInitials}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredAuthorityGroup"
+                                                    "elPath": "fields.preferredPersonGroup"
                                                 }
                                             }
                                         ]
                                     },
-                                    ".csc-preferred-authorityDisplayName-label": {
-                                        "messagekey": "preferred-authorityDisplayNameLabel"
+                                    ".csc-preferred-personDisplayName-label": {
+                                        "messagekey": "preferred-personDisplayNameLabel"
                                     },
-                                    ".csc-preferred-authorityQualifier-label": {
-                                        "messagekey": "preferred-authorityQualifierLabel"
+                                    ".csc-preferred-personQualifier-label": {
+                                        "messagekey": "preferred-personQualifierLabel"
                                     },
-                                    ".csc-preferred-authorityTermType-label": {
-                                        "messagekey": "preferred-authorityTermTypeLabel"
+                                    ".csc-preferred-personTermType-label": {
+                                        "messagekey": "preferred-personTermTypeLabel"
                                     },
-                                    ".csc-preferred-authorityTerm-label": {
-                                        "messagekey": "preferred-authorityTermLabel"
+                                    ".csc-preferred-personTerm-label": {
+                                        "messagekey": "preferred-personTermLabel"
                                     },
-                                    ".csc-preferred-authorityTermLanguage-label": {
-                                        "messagekey": "preferred-authorityTermLanguageLabel"
+                                    ".csc-preferred-personTermLanguage-label": {
+                                        "messagekey": "preferred-personTermLanguageLabel"
                                     },
-                                    ".csc-preferred-authorityTermPreferredForLanguage-label": {
-                                        "messagekey": "preferred-authorityTermPreferredForLanguageLabel"
+                                    ".csc-preferred-personTermPreferredForLanguage-label": {
+                                        "messagekey": "preferred-personTermPreferredForLanguageLabel"
                                     },
-                                    ".csc-preferred-authorityTermSource-label": {
-                                        "messagekey": "preferred-authorityTermSourceLabel"
+                                    ".csc-preferred-personTermSource-label": {
+                                        "messagekey": "preferred-personTermSourceLabel"
                                     },
-                                    ".csc-preferred-authorityTermSourceDetail-label": {
-                                        "messagekey": "preferred-authorityTermSourceDetailLabel"
+                                    ".csc-preferred-personTermSourceDetail-label": {
+                                        "messagekey": "preferred-personTermSourceDetailLabel"
                                     },
-                                    ".csc-preferred-authorityTermSourceID-label": {
-                                        "messagekey": "preferred-authorityTermSourceIDLabel"
+                                    ".csc-preferred-personTermSourceID-label": {
+                                        "messagekey": "preferred-personTermSourceIDLabel"
+                                    },
+                                    ".csc-preferred-personSalutation-label": {
+                                        "messagekey": "preferred-personSalutationLabel"
+                                    },
+                                    ".csc-preferred-personTitle-label": {
+                                        "messagekey": "preferred-personTitleLabel"
+                                    },
+                                    ".csc-preferred-personForename-label": {
+                                        "messagekey": "preferred-personForenameLabel"
+                                    },
+                                    ".csc-preferred-personMiddleName-label": {
+                                        "messagekey": "preferred-personMiddleNameLabel"
+                                    },
+                                    ".csc-preferred-personSurname-label": {
+                                        "messagekey": "preferred-personSurnameLabel"
+                                    },
+                                    ".csc-preferred-personAddition-label": {
+                                        "messagekey": "preferred-personAdditionLabel"
+                                    },
+                                    ".csc-preferred-personInitials-label": {
+                                        "messagekey": "preferred-personInitialsLabel"
                                     }
+                                    
                                 },
                                 "type": "fluid.noexpand"
                             }
