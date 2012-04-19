@@ -1148,7 +1148,7 @@ fluid.registerNamespace("cspace.util");
                 return fluid.get(list, fluid.model.composeSegments(vocab, "allowed"));
             }) || false;
         };
-
+        // NOTE: This does not work in the <IE9.
         Object.defineProperty(that, "authorities", {
             get: function () {
                 return fluid.transform(that.list, function (list, authority) {
