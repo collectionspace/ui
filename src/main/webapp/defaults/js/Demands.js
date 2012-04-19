@@ -429,7 +429,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.validator", "cspace.recordEditor", {
             options: {  
                 recordType: "{pageBuilderIO}.options.recordType",
-                namespace: "{pageBuilderIO}.options.namespace",
                 schema: "{pageBuilder}.schema"
             }
         });
@@ -442,13 +441,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
                 }
             }, "{arguments}.1"]
-        });
-
-        // Namespaces
-        fluid.demands("cspace.namespaces", ["cspace.pageBuilder", "cspace.pageBuilderIO"], {
-            options: {
-                recordType: "{pageBuilderIO}.options.recordType"
-            }
         });
 
         // Pagebuilder

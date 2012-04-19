@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "taxon",
-            "namespace": "taxon",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
+            "schema": {
                 "taxon"
-            ],
+            },
             "pageSpec": {},
             "components": {
                 "templateLocator": {

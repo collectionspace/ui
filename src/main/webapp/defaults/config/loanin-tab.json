@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "loanin",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "loanin"
-            ],
+            "schema": {
+                "loanin": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/LoaninTemplate.html",

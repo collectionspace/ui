@@ -46,12 +46,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "loanout",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "loanout"
-            ],
+            "schema": {
+                "loanout": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/LoanoutTemplate.html",

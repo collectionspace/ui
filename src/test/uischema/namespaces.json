@@ -1,25 +1,140 @@
 {
-    "properties": {
-        "person": {
-            "default": [
-                "persontest1",
-                "person",
-                "persontest2"
-            ],
-            "type": "array"
+    "namespaces": {
+        "properties": {
+            "person": {
+                "properties": {
+                    "person": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest1": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest2": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "concept": {
+                "properties": {
+                    "concept": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "activity": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "material": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest1": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest2": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "organization": {
+                "properties": {
+                    "organization": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "organizationtest": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "location": {
+                "properties": {
+                    "location": {
+                        "type": "object",
+                        "properties": {
+                            "allowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            }
         },
-        "organization": {
-            "default": [
-                "organization"
-            ],
-            "type": "array"
-        },
-        "location": {
-            "default": [
-                "location"
-            ],
-            "type": "array"
-        }
-    },
-    "type": "object"
+        "type": "object"
+    }
 }
