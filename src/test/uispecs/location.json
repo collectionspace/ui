@@ -146,6 +146,77 @@
         }
     },
     "recordEditor": {
+        ".csc-preferred-locationAuthority": {
+            "decorators": [
+                {
+                    "func": "cspace.preferred",
+                    "type": "fluid",
+                    "options": {
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-preferred-locationGroup": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.makeRepeatable",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "repeatTree": {
+                                                        "expander": {
+                                                            "tree": {
+                                                                ".csc-preferred-locationDisplayName": "${{row}.locationDisplayName}",
+                                                                ".csc-preferred-locationQualifier": "${{row}.locationQualifier}",
+                                                                ".csc-preferred-locationTermType": "${{row}.locationTermType}",
+                                                                ".csc-preferred-locationTerm": "${{row}.locationTerm}",
+                                                                ".csc-preferred-locationTermLanguage": "${{row}.locationTermLanguage}",
+                                                                ".csc-preferred-locationTermPreferredForLanguage": "${{row}.locationTermPreferredForLanguage}",
+                                                                ".csc-preferred-locationTermSource": "${{row}.locationTermSource}",
+                                                                ".csc-preferred-locationTermSourceDetail": "${{row}.locationTermSourceDetail}",
+                                                                ".csc-preferred-locationTermSourceID": "${{row}.locationTermSourceID}"
+                                                            },
+                                                            "type": "fluid.noexpand"
+                                                        }
+                                                    },
+                                                    "elPath": "fields.preferredLocationGroup"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-preferred-locationDisplayName-label": {
+                                        "messagekey": "preferred-locationDisplayNameLabel"
+                                    },
+                                    ".csc-preferred-locationQualifier-label": {
+                                        "messagekey": "preferred-locationQualifierLabel"
+                                    },
+                                    ".csc-preferred-locationTermType-label": {
+                                        "messagekey": "preferred-locationTermTypeLabel"
+                                    },
+                                    ".csc-preferred-locationTerm-label": {
+                                        "messagekey": "preferred-locationTermLabel"
+                                    },
+                                    ".csc-preferred-locationTermLanguage-label": {
+                                        "messagekey": "preferred-locationTermLanguageLabel"
+                                    },
+                                    ".csc-preferred-locationTermPreferredForLanguage-label": {
+                                        "messagekey": "preferred-locationTermPreferredForLanguageLabel"
+                                    },
+                                    ".csc-preferred-locationTermSource-label": {
+                                        "messagekey": "preferred-locationTermSourceLabel"
+                                    },
+                                    ".csc-preferred-locationTermSourceDetail-label": {
+                                        "messagekey": "preferred-locationTermSourceDetailLabel"
+                                    },
+                                    ".csc-preferred-locationTermSourceID-label": {
+                                        "messagekey": "preferred-locationTermSourceIDLabel"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-location-address-label": {
             "messagekey": "location-addressLabel"
         },

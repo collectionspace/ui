@@ -173,8 +173,54 @@
                                                                 ".csc-preferred-personTermSource": "${{row}.personTermSource}",
                                                                 ".csc-preferred-personTermSourceDetail": "${{row}.personTermSourceDetail}",
                                                                 ".csc-preferred-personTermSourceID": "${{row}.personTermSourceID}",
-                                                                ".csc-preferred-personSalutation": "${{row}.personSalutation}",
-                                                                ".csc-preferred-personTitle": "${{row}.personTitle}",
+                                                                ".csc-preferred-personSalutation": {
+                                                                    "default": "dear",
+                                                                    "optionnames": [
+                                                                        "Dear",
+                                                                        "Hello",
+                                                                        "To"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "dear",
+                                                                        "hello",
+                                                                        "to"
+                                                                    ],
+                                                                    "selection": "${{row}.personSalutation}"
+                                                                },
+                                                                ".csc-preferred-personTitle": {
+                                                                    "default": "",
+                                                                    "optionnames": [
+                                                                        "Please select a value",
+                                                                        "Mr",
+                                                                        "Mrs",
+                                                                        "Ms",
+                                                                        "Miss",
+                                                                        "Dr",
+                                                                        "Professor",
+                                                                        "Sir",
+                                                                        "Dame",
+                                                                        "Baron",
+                                                                        "Baroness",
+                                                                        "Lord",
+                                                                        "Lady"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "",
+                                                                        "Mr",
+                                                                        "Mrs",
+                                                                        "Ms",
+                                                                        "Miss",
+                                                                        "Dr",
+                                                                        "Professor",
+                                                                        "Sir",
+                                                                        "Dame",
+                                                                        "Baron",
+                                                                        "Baroness",
+                                                                        "Lord",
+                                                                        "Lady"
+                                                                    ],
+                                                                    "selection": "${{row}.personTitle}"
+                                                                },
                                                                 ".csc-preferred-personForename": "${{row}.personForename}",
                                                                 ".csc-preferred-personMiddleName": "${{row}.personMiddleName}",
                                                                 ".csc-preferred-personSurname": "${{row}.personSurname}",
@@ -237,7 +283,6 @@
                                     ".csc-preferred-personInitials-label": {
                                         "messagekey": "preferred-personInitialsLabel"
                                     }
-                                    
                                 },
                                 "type": "fluid.noexpand"
                             }
@@ -245,7 +290,7 @@
                     }
                 }
             ]
-        },        
+        },
         ".csc-personAuthority-nameNote": "${fields.nameNote}",
         ".csc-person-updatedBy-label": {
             "messagekey": "person-updatedByLabel"
@@ -529,9 +574,6 @@
         ".csc-contact-emailGroup-label": {
             "messagekey": "contact-emailGroupLabel"
         },
-        ".csc-person-displayName-label": {
-            "messagekey": "person-displayNameLabel"
-        },
         ".csc-personAuthority-initials": "${fields.initials}",
         ".csc-contact-webAddressType-label": {
             "messagekey": "contact-webAddressTypeLabel"
@@ -767,7 +809,6 @@
                 }
             ]
         },
-        ".csc-personAuthority-displayName": "${fields.displayName}",
         ".csc-person-group-label": {
             "messagekey": "person-groupLabel"
         },

@@ -45,9 +45,11 @@
                                     "type": "string"
                                 },
                                 "personSalutation": {
+                                    "default": "dear",
                                     "type": "string"
                                 },
                                 "personTitle": {
+                                    "default": "",
                                     "type": "string"
                                 },
                                 "personForename": {
@@ -273,9 +275,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "displayName": {
-                        "type": "string"
                     },
                     "salutation": {
                         "default": "dear",

@@ -10,6 +10,45 @@
             },
             "fields": {
                 "properties": {
+                    "preferredLocationGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "locationDisplayName": {
+                                    "type": "string"
+                                },
+                                "locationQualifier": {
+                                    "type": "string"
+                                },
+                                "locationTermType": {
+                                    "type": "string"
+                                },
+                                "locationTerm": {
+                                    "type": "string"
+                                },
+                                "locationTermLanguage": {
+                                    "type": "string"
+                                },
+                                "locationTermPreferredForLanguage": {
+                                    "type": "string"
+                                },
+                                "locationTermSource": {
+                                    "type": "string"
+                                },
+                                "locationTermSourceDetail": {
+                                    "type": "string"
+                                },
+                                "locationTermSourceID": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "tenantID": {
                         "type": "string"
                     },
