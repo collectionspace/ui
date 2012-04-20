@@ -3,8 +3,18 @@
         ".csc-hierarchy-narrowerContext-label": {
             "messagekey": "hierarchy-narrowerContextLabel"
         },
-        ".csc-hierarchy-broaderContext-label": {
-            "messagekey": "hierarchy-broaderContextLabel"
+        ".csc-hierarchy-broaderContext": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/broaderContext",
+                        "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/broaderContext"
+                    }
+                }
+            ],
+            "value": "${fields.broaderContext}"
         },
         ".csc-hierarchy-narrowerContext": {
             "decorators": [
@@ -45,33 +55,23 @@
                 }
             ]
         },
-        ".csc-hierarchy-broaderContext": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/broaderContext",
-                        "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/broaderContext"
-                    }
-                }
-            ],
-            "value": "${fields.broaderContext}"
+        ".csc-hierarchy-broaderContext-label": {
+            "messagekey": "hierarchy-broaderContextLabel"
         },
         ".csc-hierarchy-equivalentContext-label": {
             "messagekey": "hierarchy-equivalentContextLabel"
         },
         "expander": [
             {
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
-                    }
-                },
                 "condition": {
                     "funcName": "cspace.hierarchy.assertEquivalentContexts",
                     "args": {
                         "equivalentContexts": "${fields.equivalentContexts}"
+                    }
+                },
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "type": "fluid.renderer.condition",
@@ -276,6 +276,15 @@
             "messagekey": "person-createdAtLabel"
         },
         ".csc-personAuthority-deathPlace": "${fields.deathPlace}",
+        ".csc-personAuthority-birthDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.birthDate}"
+        },
         ".csc-personAuthority-status": {
             "default": "provisional",
             "optionnames": [
@@ -291,15 +300,6 @@
                 "rejected"
             ],
             "selection": "${fields.termStatus}"
-        },
-        ".csc-personAuthority-birthDate": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.birthDate}"
         },
         ".csc-contact-createdBy": "${fields.contact.createdBy}",
         ".csc-person-updatedAt": {
@@ -414,6 +414,7 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
+                                    ".csc-contact-email": "${{row}.email}",
                                     ".csc-contact-emailType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -428,8 +429,7 @@
                                             "other"
                                         ],
                                         "selection": "${{row}.emailType}"
-                                    },
-                                    ".csc-contact-email": "${{row}.email}"
+                                    }
                                 },
                                 "type": "fluid.noexpand"
                             }
@@ -449,11 +449,11 @@
             "value": "${fields.deathDate}"
         },
         ".csc-personAuthority-birthPlace": "${fields.birthPlace}",
-        ".csc-contact-telephoneNumberGroup-label": {
-            "messagekey": "contact-telephoneNumberGroupLabel"
-        },
         ".csc-person-domaindata-label": {
             "messagekey": "person-domaindataLabel"
+        },
+        ".csc-contact-telephoneNumberGroup-label": {
+            "messagekey": "contact-telephoneNumberGroupLabel"
         },
         ".csc-person-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-person-updatedAt-label": {
@@ -522,11 +522,11 @@
         ".csc-contact-domaindata-label": {
             "messagekey": "contact-domaindataLabel"
         },
-        ".csc-contact-updatedBy-label": {
-            "messagekey": "contact-updatedByLabel"
-        },
         ".csc-person-birthPlace-label": {
             "messagekey": "person-birthPlaceLabel"
+        },
+        ".csc-contact-updatedBy-label": {
+            "messagekey": "contact-updatedByLabel"
         },
         ".csc-person-csid": "${fields.csid}",
         ".csc-contact-addressMunicipality-label": {
@@ -574,6 +574,7 @@
                             "expander": {
                                 "tree": {
                                     ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -589,9 +590,8 @@
                                         ],
                                         "selection": "${{row}.addressType}"
                                     },
-                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
-                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
                                     ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
                                     ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
                                     ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
                                 },
@@ -606,7 +606,6 @@
         ".csc-person-uri-label": {
             "messagekey": "person-uriLabel"
         },
-        ".csc-personAuthority-name": "${fields.name}",
         ".csc-person-createdAt": "${fields.createdAt}",
         ".csc-contact-faxNumberType-label": {
             "messagekey": "contact-faxNumberTypeLabel"
@@ -643,11 +642,11 @@
         ".csc-contact-addressPlace2-label": {
             "messagekey": "contact-addressPlace2Label"
         },
-        ".csc-person-nationality-label": {
-            "messagekey": "person-nationalityLabel"
-        },
         ".csc-contact-faxNumber-label": {
             "messagekey": "contact-faxNumberLabel"
+        },
+        ".csc-person-nationality-label": {
+            "messagekey": "person-nationalityLabel"
         },
         ".csc-person-createdBy": "${fields.createdBy}",
         ".csc-person-tenantID-label": {
@@ -659,11 +658,11 @@
         ".csc-contact-createdAt-label": {
             "messagekey": "contact-createdAtLabel"
         },
-        ".csc-person-createdBy-label": {
-            "messagekey": "person-createdByLabel"
-        },
         ".csc-person-personNameAuthorityInformation-label": {
             "messagekey": "person-personNameAuthorityInformationLabel"
+        },
+        ".csc-person-createdBy-label": {
+            "messagekey": "person-createdByLabel"
         },
         ".csc-person-csid-label": {
             "messagekey": "person-csidLabel"
@@ -674,9 +673,6 @@
         ".csc-person-tenantID": "${fields.tenantID}",
         ".csc-person-nationalities-label": {
             "messagekey": "person-nationalitiesLabel"
-        },
-        ".csc-person-name-label": {
-            "messagekey": "person-nameLabel"
         },
         ".csc-contact-webAddress-label": {
             "messagekey": "contact-webAddressLabel"
@@ -742,6 +738,9 @@
                 }
             ]
         },
+        ".csc-person-termStatus-label": {
+            "messagekey": "person-termStatusLabel"
+        },
         ".csc-personAuthority-nationality": {
             "decorators": [
                 {
@@ -760,9 +759,6 @@
                     }
                 }
             ]
-        },
-        ".csc-person-termStatus-label": {
-            "messagekey": "person-termStatusLabel"
         }
     }
 }
