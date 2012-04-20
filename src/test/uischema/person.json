@@ -24,12 +24,14 @@
                                     "type": "string"
                                 },
                                 "termType": {
+                                    "default": "",
                                     "type": "string"
                                 },
                                 "term": {
                                     "type": "string"
                                 },
                                 "termLanguage": {
+                                    "default": "",
                                     "type": "string"
                                 },
                                 "termPreferredForLanguage": {

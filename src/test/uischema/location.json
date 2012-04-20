@@ -17,31 +17,33 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "locationDisplayName": {
+                                "name": {
                                     "type": "string"
                                 },
-                                "locationQualifier": {
+                                "qualifier": {
                                     "type": "string"
                                 },
-                                "locationTermType": {
+                                "termType": {
+                                    "default": "",
                                     "type": "string"
                                 },
-                                "locationTerm": {
+                                "term": {
                                     "type": "string"
                                 },
-                                "locationTermLanguage": {
+                                "termLanguage": {
+                                    "default": "",
                                     "type": "string"
                                 },
-                                "locationTermPreferredForLanguage": {
+                                "termPreferredForLanguage": {
                                     "type": "string"
                                 },
-                                "locationTermSource": {
+                                "termSource": {
                                     "type": "string"
                                 },
-                                "locationTermSourceDetail": {
+                                "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "locationTermSourceID": {
+                                "termSourceID": {
                                     "type": "string"
                                 }
                             },
@@ -56,6 +58,7 @@
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "relatedTerm": {
@@ -66,13 +69,25 @@
                         },
                         "type": "array"
                     },
-                    "shortIdentifier": {
+                    "csid": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string"
+                    },
+                    "updatedBy": {
                         "type": "string"
                     },
                     "updatedAt": {
+                        "type": "date"
+                    },
+                    "shortIdentifier": {
                         "type": "string"
                     },
                     "accessNote": {
+                        "type": "string"
+                    },
+                    "createdBy": {
                         "type": "string"
                     },
                     "address": {
@@ -81,10 +96,10 @@
                     "broaderContext": {
                         "type": "string"
                     },
-                    "securityNote": {
+                    "createdAt": {
                         "type": "string"
                     },
-                    "createdAt": {
+                    "securityNote": {
                         "type": "string"
                     },
                     "locationType": {
@@ -92,16 +107,17 @@
                         "type": "string"
                     },
                     "termStatus": {
-                        "default": "",
+                        "default": "provisional",
                         "type": "string"
                     },
-                    "name": {
+                    "refName": {
                         "type": "string"
                     },
                     "conditionGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "conditionNote": {
@@ -115,10 +131,29 @@
                         },
                         "type": "array"
                     },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "narrowerContexts": {
+                        "items": {
+                            "properties": {
+                                "narrowerContext": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "equivalentContexts": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "equivalentContext": {
@@ -128,23 +163,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "narrowerContexts": {
-                        "items": {
-                            "properties": {
-                                "narrowerContext": {
-                                    "type": "string"
-                                },
-                                "_primary": {
-                                    "type": "boolean"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "displayName": {
-                        "type": "string"
                     }
                 },
                 "type": "object"

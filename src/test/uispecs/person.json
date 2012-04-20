@@ -166,59 +166,36 @@
                                                             "tree": {
                                                                 ".csc-personAuthority-displayName": "${{row}.displayName}",
                                                                 ".csc-personAuthority-qualifier": "${{row}.qualifier}",
-                                                                ".csc-personAuthority-termType": "${{row}.termType}",
+                                                                ".csc-personAuthority-termType": {
+                                                                    "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "selection": "${{row}.termType}"
+                                                                },
                                                                 ".csc-personAuthority-term": "${{row}.term}",
-                                                                ".csc-personAuthority-termLanguage": "${{row}.termLanguage}",
+                                                                ".csc-personAuthority-termLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "fields.termLanguage",
+                                                                            "termListType": "termLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
                                                                 ".csc-personAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-personAuthority-salutation": {
                                                                     "default": "dear",
-                                                                    "optionnames": [
-                                                                        "Dear",
-                                                                        "Hello",
-                                                                        "To"
-                                                                    ],
-                                                                    "optionlist": [
-                                                                        "dear",
-                                                                        "hello",
-                                                                        "to"
-                                                                    ],
+                                                                    "optionnames": ["Dear", "Hello", "To"],
+                                                                    "optionlist": ["dear", "hello", "to"],
                                                                     "selection": "${{row}.salutation}"
                                                                 },
                                                                 ".csc-personAuthority-title": {
                                                                     "default": "",
-                                                                    "optionnames": [
-                                                                        "Please select a value",
-                                                                        "Mr",
-                                                                        "Mrs",
-                                                                        "Ms",
-                                                                        "Miss",
-                                                                        "Dr",
-                                                                        "Professor",
-                                                                        "Sir",
-                                                                        "Dame",
-                                                                        "Baron",
-                                                                        "Baroness",
-                                                                        "Lord",
-                                                                        "Lady"
-                                                                    ],
-                                                                    "optionlist": [
-                                                                        "",
-                                                                        "Mr",
-                                                                        "Mrs",
-                                                                        "Ms",
-                                                                        "Miss",
-                                                                        "Dr",
-                                                                        "Professor",
-                                                                        "Sir",
-                                                                        "Dame",
-                                                                        "Baron",
-                                                                        "Baroness",
-                                                                        "Lord",
-                                                                        "Lady"
-                                                                    ],
+                                                                    "optionnames": ["Please select a value", "Mr", "Mrs", "Ms", "Miss", "Dr", "Professor", "Sir", "Dame", "Baron", "Baroness", "Lord", "Lady"],
+                                                                    "optionlist": ["", "Mr", "Mrs", "Ms", "Miss", "Dr", "Professor", "Sir", "Dame", "Baron", "Baroness", "Lord", "Lady"],
                                                                     "selection": "${{row}.title}"
                                                                 },
                                                                 ".csc-personAuthority-foreName": "${{row}.foreName}",
