@@ -17,54 +17,54 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "personDisplayName": {
+                                "displayName": {
                                     "type": "string"
                                 },
-                                "personQualifier": {
+                                "qualifier": {
                                     "type": "string"
                                 },
-                                "personTermType": {
+                                "termType": {
                                     "type": "string"
                                 },
-                                "personTerm": {
+                                "term": {
                                     "type": "string"
                                 },
-                                "personTermLanguage": {
+                                "termLanguage": {
                                     "type": "string"
                                 },
-                                "personTermPreferredForLanguage": {
+                                "termPreferredForLanguage": {
                                     "type": "string"
                                 },
-                                "personTermSource": {
+                                "termSource": {
                                     "type": "string"
                                 },
-                                "personTermSourceDetail": {
+                                "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "personTermSourceID": {
+                                "termSourceID": {
                                     "type": "string"
                                 },
-                                "personSalutation": {
+                                "salutation": {
                                     "default": "dear",
                                     "type": "string"
                                 },
-                                "personTitle": {
+                                "title": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "personForename": {
+                                "foreName": {
                                     "type": "string"
                                 },
-                                "personMiddleName": {
+                                "middleName": {
                                     "type": "string"
                                 },
-                                "personSurname": {
+                                "surName": {
                                     "type": "string"
                                 },
-                                "personAddition": {
+                                "nameAdditions": {
                                     "type": "string"
                                 },
-                                "personInitials": {
+                                "initials": {
                                     "type": "string"
                                 }
                             },
@@ -85,9 +85,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "surName": {
-                        "type": "string"
                     },
                     ".csc-contact-addressPlace-label": {
                         "messagekey": "contact-addressPlaceLabel"
@@ -115,10 +112,6 @@
                     "shortIdentifier": {
                         "type": "string"
                     },
-                    "title": {
-                        "default": "",
-                        "type": "string"
-                    },
                     "schoolsOrStyles": {
                         "items": {
                             "properties": {
@@ -138,9 +131,6 @@
                     },
                     ".csc-contact-email-label": {
                         "messagekey": "contact-emailLabel"
-                    },
-                    "initials": {
-                        "type": "string"
                     },
                     "createdAt": {
                         "type": "string"
@@ -182,9 +172,6 @@
                         },
                         "type": "array"
                     },
-                    "foreName": {
-                        "type": "string"
-                    },
                     "groups": {
                         "items": {
                             "properties": {
@@ -199,9 +186,6 @@
                         },
                         "type": "array"
                     },
-                    "nameAdditions": {
-                        "type": "string"
-                    },
                     "occupations": {
                         "items": {
                             "properties": {
@@ -215,9 +199,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "middleName": {
-                        "type": "string"
                     },
                     "bioNote": {
                         "type": "string"
@@ -275,10 +256,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "salutation": {
-                        "default": "dear",
-                        "type": "string"
                     },
                     ".csc-contact-telephoneNumber-label": {
                         "messagekey": "contact-telephoneNumberLabel"

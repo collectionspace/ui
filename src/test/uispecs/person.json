@@ -164,15 +164,15 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-preferred-personDisplayName": "${{row}.personDisplayName}",
-                                                                ".csc-preferred-personQualifier": "${{row}.personQualifier}",
-                                                                ".csc-preferred-personTermType": "${{row}.personTermType}",
-                                                                ".csc-preferred-personTerm": "${{row}.personTerm}",
-                                                                ".csc-preferred-personTermLanguage": "${{row}.personTermLanguage}",
-                                                                ".csc-preferred-personTermPreferredForLanguage": "${{row}.personTermPreferredForLanguage}",
-                                                                ".csc-preferred-personTermSource": "${{row}.personTermSource}",
-                                                                ".csc-preferred-personTermSourceDetail": "${{row}.personTermSourceDetail}",
-                                                                ".csc-preferred-personTermSourceID": "${{row}.personTermSourceID}",
+                                                                ".csc-preferred-personDisplayName": "${{row}.displayName}",
+                                                                ".csc-preferred-personQualifier": "${{row}.qualifier}",
+                                                                ".csc-preferred-personTermType": "${{row}.termType}",
+                                                                ".csc-preferred-personTerm": "${{row}.term}",
+                                                                ".csc-preferred-personTermLanguage": "${{row}.termLanguage}",
+                                                                ".csc-preferred-personTermPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-preferred-personTermSource": "${{row}.termSource}",
+                                                                ".csc-preferred-personTermSourceDetail": "${{row}.termSourceDetail}",
+                                                                ".csc-preferred-personTermSourceID": "${{row}.termSourceID}",
                                                                 ".csc-preferred-personSalutation": {
                                                                     "default": "dear",
                                                                     "optionnames": [
@@ -185,7 +185,7 @@
                                                                         "hello",
                                                                         "to"
                                                                     ],
-                                                                    "selection": "${{row}.personSalutation}"
+                                                                    "selection": "${{row}.salutation}"
                                                                 },
                                                                 ".csc-preferred-personTitle": {
                                                                     "default": "",
@@ -219,13 +219,13 @@
                                                                         "Lord",
                                                                         "Lady"
                                                                     ],
-                                                                    "selection": "${{row}.personTitle}"
+                                                                    "selection": "${{row}.title}"
                                                                 },
-                                                                ".csc-preferred-personForename": "${{row}.personForename}",
-                                                                ".csc-preferred-personMiddleName": "${{row}.personMiddleName}",
-                                                                ".csc-preferred-personSurname": "${{row}.personSurname}",
-                                                                ".csc-preferred-personAddition": "${{row}.personAddition}",
-                                                                ".csc-preferred-personInitials": "${{row}.personInitials}"
+                                                                ".csc-preferred-personForename": "${{row}.foreName}",
+                                                                ".csc-preferred-personMiddleName": "${{row}.middleName}",
+                                                                ".csc-preferred-personSurname": "${{row}.surName}",
+                                                                ".csc-preferred-personAddition": "${{row}.nameAdditions}",
+                                                                ".csc-preferred-personInitials": "${{row}.initials}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
