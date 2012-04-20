@@ -121,3 +121,7 @@ collection-object-annotationTypeLabel: Type
 collection-object-annotationNoteLabel: Note
 collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
+
+#concept
+concept: Label Text
+concept-concept: Label Text
