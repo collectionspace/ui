@@ -292,25 +292,7 @@
 								<input type="text" class="input-alpha csc-collection-object-fieldCollectionNumber" />
 							</div>
 						</div>
-						
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionMethods-label"></div>
-							</div>
-							<div class="content">
-								<select class="input-select csc-collection-object-fieldCollectionMethod"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
-						
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionNote-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-collection-object-fieldCollectionNote"></textarea>
-							</div>
-						</div>
-						
+
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-collection-object-fieldCollectionSources-label"></div>
@@ -320,6 +302,25 @@
 							</div>
 						</div>
 						
+					</div>
+								
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionMethods-label"></div>
+							</div>
+							<div class="content">
+								<select class="input-select csc-collection-object-fieldCollectionMethod"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionNote-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-collection-object-fieldCollectionNote"></textarea>
+							</div>
+						</div>
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-collection-object-associatedTaxaGroup-label"></div>
@@ -352,179 +353,431 @@
 							</div>
 						</div>
 					</div>
-								
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldLocVerbatim-label"></div>
-							</div>                            
-							<div class="content">
-								<input type="text" class="input-alpha csc-collection-object-fieldLocVerbatim" />
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-column2-50 fl-force-left">
-								<!-- Field Location Latitude -->
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-fieldLocLat-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="input-alpha csc-collection-object-fieldLocLat">
-									</div>
-								</div>
-							</div>				
-							<div class="info-column2-50 fl-force-right">
-								<!-- Field Location Longitude -->
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-fieldLocLong-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="input-alpha csc-collection-object-fieldLocLong">
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-column2-50 fl-force-left">
-							<!-- Geodetic Datum -->
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-fieldLocGeodeticDatum-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-collection-object-fieldLocGeodeticDatum input-select">
-											<option value="">Options not loaded</option>
-										</select>
-									</div>
-								</div>
+				</div>
+			</div>
+		</div> <!-- information-group -->
 
-							</div>				
-							<div class="info-column2-50 fl-force-right">
-								<!-- Coordinate System -->
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-fieldLocCoordinateSystem-label"></div>
+		<div class="fl-container-flex fl-fix information-group oocss">
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-localityInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column" id="multipleEdit">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label"><br/></div>
+						</div>
+						<div class="content csc-collection-object-localityGroup">
+							<div class="info-column">
+								<div class="info-column2-50 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-fieldLocVerbatim-label"></div>
+										</div>                            
+										<div class="content">
+											<input type="text" class="input-alpha csc-collection-object-fieldLocVerbatim" />
+										</div>
 									</div>
-									<div class="content">
-										<select class="csc-collection-object-fieldLocCoordinateSystem input-select">
-											<option value="">Options not loaded</option>
-										</select>
+								</div>
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-fieldLocPlace-label"></div>
+										</div>                            
+										<div class="content">
+											<input type="text" class="input-alpha csc-collection-object-fieldLocPlace" />
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					
-						<!-- Field Location County -->
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldLocCounty-label"></div>
+							
+							<div class="info-column">
+								<div class="info-column2-50 fl-force-left">
+									<div class="info-column2-50 fl-force-left">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-fieldLocCounty-label"></div>
+											</div>
+											<div class="content">
+												<select class="csc-collection-object-fieldLocCounty input-select">
+													<option value="">Options not loaded</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="info-column2-50 fl-force-right">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-fieldLocState-label"></div>
+											</div>
+											<div class="content">
+												<select class="csc-collection-object-fieldLocState input-select">
+													<option value="">Options not loaded</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-column2-50 fl-force-left">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-fieldLocCountry-label"></div>
+											</div>
+											<div class="content">
+												<select class="csc-collection-object-fieldLocCountry input-select">
+													<option value="">Options not loaded</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="info-column2-50 fl-force-right">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-fieldLocHigherGeography-label"></div>
+											</div>
+											<div class="content">
+												<select class="csc-collection-object-fieldLocHigherGeography input-select">
+													<option value="">Options not loaded</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="content">
-								<select class="csc-collection-object-fieldLocCounty input-select">
-									<option value="">Options not loaded</option>
-								</select>
-							</div>
-						</div>
 
-						<!-- Field Location State -->
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldLocState-label"></div>
+							<div class="info-column fl-force-left">
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-vCoordinates-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-vCoordinates" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair ">
+										<div class="header">
+											<div class="label csc-collection-object-vLatitude-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-vLatitude" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-vLongitude-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-vLongitude" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-vCoordSys-label"></div>
+										</div>
+										<div class="content">
+											<select class="csc-collection-object-vCoordSys input-select"><option value="">Options not loaded</option></select>
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-vSpatialReferenceSystem-label"></div>
+										</div>
+										<div class="content">
+											<select class="csc-collection-object-vSpatialReferenceSystem input-select"><option value="">Options not loaded</option></select>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="content">
-								<select class="csc-collection-object-fieldLocState input-select">
-									<option value="">Options not loaded</option>
-								</select>
+							<div class="info-column fl-force-left">
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair ">
+										<div class="header">
+											<div class="label csc-collection-object-decimalLatitude-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-decimalLatitude" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-decimalLongitude-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-decimalLongitude" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-geodeticDatum-label"></div>
+										</div>
+										<div class="content">
+											<select class="csc-collection-object-geodeticDatum input-select"><option value="">Options not loaded</option></select>
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-coordUncertainty-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-coordUncertainty" />
+										</div>
+									</div>
+								</div>
+								<div class="size1of5 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-coordUncertaintyUnit-label"></div>
+										</div>
+										<div class="content">
+											<input type="text" class="csc-collection-object-coordUncertaintyUnit" />
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						
-						<!-- Field Location Country -->
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldLocCountry-label"></div>
-							</div>
-							<div class="content">
-								<select class="csc-collection-object-fieldLocCountry input-select">
-									<option value="">Options not loaded</option>
-								</select>
-							</div>
-						</div>
 
-						<!-- Field Location Higher Geography -->
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldLocHigherGeography-label"></div>
+							<div class="info-column">
+								<div class="info-column2-50 fl-force-left">
+									<table>
+										<thead>
+											<tr>
+												<td class="csc-collection-object-vDepth-label"></td>
+												<td class="csc-collection-object-minDepth-label"></td>
+												<td class="csc-collection-object-maxDepth-label"></td>
+												<td class="csc-collection-object-depthUnit-label"></td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" class="csc-collection-object-vDepth"/></td>
+												<td><input type="text" class="csc-collection-object-minDepth"/></td>
+												<td><input type="text" class="csc-collection-object-maxDepth"/></td>
+												<td><select class="csc-collection-object-depthUnit input-select"><option value="">Options not loaded</option></select></td>
+											</tr>
+										</tbody>
+									</table>
+									<br/>
+									<table>
+										<thead>
+											<tr>
+												<td class="csc-collection-object-vElevation-label"></td>
+												<td class="csc-collection-object-minElevation-label"></td>
+												<td class="csc-collection-object-maxElevation-label"></td>
+												<td class="csc-collection-object-elevationUnit-label"></td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" class="csc-collection-object-vElevation"/></td>
+												<td><input type="text" class="csc-collection-object-minElevation"/></td>
+												<td><input type="text" class="csc-collection-object-maxElevation"/></td>
+												<td><select class="csc-collection-object-elevationUnit input-select"><option value="">Options not loaded</option></select></td>
+											</tr>
+										</tbody>
+									</table>
+									<br/>
+									<table>
+										<thead>
+											<tr>
+												<td class="csc-collection-object-vDistanceAboveSurface-label"></td>
+												<td class="csc-collection-object-minDistanceAboveSurface-label"></td>
+												<td class="csc-collection-object-maxDistanceAboveSurface-label"></td>
+												<td class="csc-collection-object-distanceAboveSurfaceUnit-label"></td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" class="csc-collection-object-vDistanceAboveSurface"/></td>
+												<td><input type="text" class="csc-collection-object-minDistanceAboveSurface"/></td>
+												<td><input type="text" class="csc-collection-object-maxDistanceAboveSurface"/></td>
+												<td><select class="csc-collection-object-distanceAboveSurfaceUnit input-select"><option value="">Options not loaded</option></select></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-localityNote-label"></div>
+										</div>
+										<div class="content">
+											<textarea rows="4" cols="30" class="input-textarea csc-collection-object-localityNote"></textarea>
+										</div>
+									</div>
+									<div class="info-column2-50 fl-force-left">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-localitySource-label"></div>
+											</div>
+											<div class="content">
+												<input type="text" class="input-alpha csc-collection-object-localitySource" />
+											</div>
+										</div>
+									</div>
+									<div class="info-column2-50 fl-force-right">
+										<div class="info-pair">
+											<div class="header">
+												<div class="label csc-collection-object-localitySourceDetail-label"></div>
+											</div>
+											<div class="content">
+												<input type="text" class="input-alpha csc-collection-object-localitySourceDetail" />
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="content">
-								<select class="csc-collection-object-fieldLocHigherGeography input-select">
-									<option value="">Options not loaded</option>
-								</select>
-							</div>
-						</div>
+							
+							<div class="fl-container-flex fl-fix information-subgroup">
+								<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-geoRefDetail-label cs-togglable-collapsed"></div>
+								<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display: none">
+									<div class="info-column fl-force-left">
+										<div class="size1of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-pointRadiusSpatialFit-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-pointRadiusSpatialFit" />
+												</div>
+											</div>
+										</div>
+										<div class="size1of5 fl-force-left">
+											<div class="info-pair ">
+												<div class="header">
+													<div class="label csc-collection-object-footprintWKT-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-footprintWKT" />
+												</div>
+											</div>
+										</div>
+										<div class="size1of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-footprintSRS-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-footprintSRS" />
+												</div>
+											</div>
+										</div>
+										<div class="size1of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-footprintSpatialFit-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-footprintSpatialFit" />
+												</div>
+											</div>
+										</div>
+										<div class="size1of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-coordPrecision-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-coordPrecision" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="info-column fl-force-left">
+											<div class="size1of5 fl-force-left">
+												<div class="info-pair">
+													<div class="header">
+														<div class="label csc-collection-object-geoRefencedBy-label"></div>
+													</div>
+													<div class="content">
+														<input type="text" class="csc-collection-object-geoRefencedBy" />
+													</div>
+												</div>
+											</div>
+											<div class="size1of5 fl-force-left">
+												<div class="info-pair ">
+													<div class="header">
+														<div class="label csc-localityGroup-geoRefDateGroup-label"></div>
+													</div>
+													<div class="content">
+														<input type="text" class="csc-localityGroup-geoRefDateGroup editableText" />
+													</div>
+												</div>
+											</div>
+											<div class="size1of5 fl-force-left">
+												<div class="info-pair">
+													<div class="header">
+														<div class="label csc-collection-object-geoRefProtocol-label"></div>
+													</div>
+													<div class="content">
+														<select class="csc-collection-object-geoRefProtocol input-select"><option value="">Options not loaded</option></select>
+													</div>
+												</div>
+											</div>
+											<div class="size1of5 fl-force-left">
+												<div class="info-pair">
+													<div class="header">
+														<div class="label csc-collection-object-geoRefSource-label"></div>
+													</div>
+													<div class="content">
+														<input type="text" class="csc-collection-object-geoRefSource" />
+													</div>
+												</div>
+											</div>
+											<div class="size1of5 fl-force-left">
+												<div class="info-pair">
+													<div class="header">
+														<div class="label csc-collection-object-geoRefVerificationStatus-label"></div>
+													</div>
+													<div class="content">
+														<select class="csc-collection-object-geoRefVerificationStatus input-select"><option value="">Options not loaded</option></select>
+													</div>
+												</div>
+											</div>
+										</div>
+									<div class="info-column fl-force-left">
+										<div class="size2of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-geoRefRemarks-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-geoRefRemarks" />
+												</div>
+											</div>
+										</div>
+										<div class="size2of5 fl-force-left">
+											<div class="info-pair">
+												<div class="header">
+													<div class="label csc-collection-object-geoRefPlaceName-label"></div>
+												</div>
+												<div class="content">
+													<input type="text" class="csc-collection-object-geoRefPlaceName" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-depth-label"></div>
-							</div>
-							<div class="content">
-								<table>
-									<thead>
-										<tr>
-											<td class="csc-collection-object-depthMin-label"></td>
-											<td class="csc-collection-object-depthMax-label"></td>
-											<td class="csc-collection-object-depthUnit-label"></td>
-											<td class="csc-collection-object-depthQualifier-label"></td>
-											<td class="csc-collection-object-depthNote-label"></td>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="text" class="csc-collection-object-depthMin"/></td>
-											<td><input type="text" class="csc-collection-object-depthMax"/></td>
-											<td><select class="csc-collection-object-depthUnit input-select"><option value="">Options not loaded</option></select></td>
-											<td><select class="csc-collection-object-depthQualifier input-select"><option value="">Options not loaded</option></select></td>
-											<td><input type="text" class="csc-collection-object-depthNote"/></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-elevation-label"></div>
-							</div>
-							<div class="content">
-								<table>
-									<thead>
-										<tr>
-											<td class="csc-collection-object-elevationMin-label"></td>
-											<td class="csc-collection-object-elevationMax-label"></td>
-											<td class="csc-collection-object-elevationUnit-label"></td>
-											<td class="csc-collection-object-elevationQualifier-label"></td>
-											<td class="csc-collection-object-elevationNote-label"></td>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="text" class="csc-collection-object-elevationMin"/></td>
-											<td><input type="text" class="csc-collection-object-elevationMax"/></td>
-											<td><select class="csc-collection-object-elevationUnit input-select"><option value="">Options not loaded</option></select></td>
-											<td><select class="csc-collection-object-elevationQualifier input-select"><option value="">Options not loaded</option></select></td>
-											<td><input type="text" class="csc-collection-object-elevationNote"/></td>
-										</tr>
-									</tbody>
-								</table>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div> <!-- information-group -->
+		</div>
 
 		<div class="fl-container-flex fl-fix information-group">
 			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-descriptionInformation-label"></div>
