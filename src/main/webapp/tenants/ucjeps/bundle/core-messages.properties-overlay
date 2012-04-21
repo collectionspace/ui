@@ -18,25 +18,13 @@ collection-object-notesLabel: Notes
 
 collection-object-objectCollectionInformationLabel: Field Collection Information
 collection-object-fieldCollectionDateLabel: Field collection date
-collection-object-fieldLocVerbatimLabel: Field collection location verbatim
 collection-object-fieldCollectorLabel: Field collection collector
-collection-object-fieldLocLatLabel: Field location latitude
-collection-object-fieldLocLongLabel: Field location longitude
 collection-object-fieldCollectionNumberLabel: Field collection number
-collection-object-fieldLocGeodeticDatumLabel: Geodetic datum
-collection-object-fieldLocCoordinateSystemLabel: Coordinate system
 collection-object-fieldCollectionMethodLabel: Field collection method
-collection-object-fieldLocCountyLabel: Field location county
-collection-object-fieldLocCountryLabel: Field location country
-collection-object-fieldLocStateLabel: Field location state
 collection-object-fieldCollectionNoteLabel: Habitat information
 collection-object-fieldCollectionSourceLabel: Field collection source
-collection-object-fieldLocHigherGeographyLabel: Field location higher geography
 collection-object-fieldColEventNameLabel: Field collection event name
-collection-object-fieldLocDepthLabel: Depth
-collection-object-fieldLocElevationLabel: Elevation
-collection-object-fieldLocElevationLabel: Elevation
-collection-object-fieldAssociatedTaxaLabel: Associated taxa
+ccollection-object-fieldAssociatedTaxaLabel: Associated taxa
 
 
 # From Type Specimen fieldgroup
@@ -98,20 +86,6 @@ collection-object-handwrittenLabel: Handwritten label
 collection-object-postToPublicLabel: Post to public
 collection-object-cultivatedLabel: Cultivated
 
-collection-object-elevationLabel: Elevation
-collection-object-elevationMinLabel: Minimum
-collection-object-elevationMaxLabel: Maximum
-collection-object-elevationUnitLabel: Unit
-collection-object-elevationQualifierLabel: Qualifier
-collection-object-elevationNoteLabel: Note
-
-collection-object-depthLabel: Depth
-collection-object-depthMinLabel: Minimum
-collection-object-depthMaxLabel: Maximum
-collection-object-depthUnitLabel: Unit
-collection-object-depthQualifierLabel: Qualifier
-collection-object-depthNoteLabel: Note
-
 collection-object-associatedTaxaGroupLabel: Associated Taxa
 collection-object-commonNameLabel: Common Name
 collection-object-interactionLabel: Interaction
@@ -121,6 +95,52 @@ collection-object-annotationTypeLabel: Type
 collection-object-annotationNoteLabel: Note
 collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
+
+collection-object-localityInformationLabel: Locality Information
+collection-object-fieldLocVerbatimLabel: Field collection location verbatim
+collection-object-fieldLocPlaceLabel: Field collection place
+collection-object-fieldLocCountyLabel: Field location county
+collection-object-fieldLocCountryLabel: Field location country
+collection-object-fieldLocStateLabel: Field location state
+collection-object-fieldLocHigherGeographyLabel: Field location higher geography
+collection-object-decimalLatitudeLabel: Decimal latitude
+collection-object-decimalLongitudeLabel: Decimal longitude
+collection-object-geodeticDatumLabel: Datum
+collection-object-coordUncertaintyLabel: Uncertainty
+collection-object-coordUncertaintyUnitLabel: Uncertainty units
+collection-object-vCoordinatesLabel: Verbatim coords
+collection-object-vLatitudeLabel: Verbatim latitude
+collection-object-vLongitudeLabel: Verbatim longitude
+collection-object-vCoordSysLabel: Coordinate system
+collection-object-vSpatialReferenceSystemLabel: Verbatim SRS
+collection-object-vDepthLabel: Depth
+collection-object-minDepthLabel: Min
+collection-object-maxDepthLabel: Max
+collection-object-depthUnitLabel: Unit
+collection-object-vElevationLabel: Elevation
+collection-object-minElevationLabel: Min
+collection-object-maxElevationLabel: Max
+collection-object-elevationUnitLabel: Unit
+collection-object-vDistanceAboveSurfaceLabel: Above surface
+collection-object-minDistanceAboveSurfaceLabel: Min
+collection-object-maxDistanceAboveSurfaceLabel: Max
+collection-object-distanceAboveSurfaceUnitLabel: Unit
+collection-object-localityNoteLabel: Locality note
+collection-object-localitySourceLabel: Source
+collection-object-localitySourceDetailLabel: Source detail
+collection-object-geoRefDetailLabel: Georeference Detail
+collection-object-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+collection-object-footprintWKTLabel: Footprint WKT
+collection-object-footprintSRSLabel: Footprint SRS
+collection-object-footprintSpatialFitLabel: Footprint sp. fit
+collection-object-coordPrecisionLabel: Precision
+collection-object-geoRefencedByLabel: Georeference by
+localityGroup-geoRefDateGroupLabel: Date
+collection-object-geoRefProtocolLabel: Protocol
+collection-object-geoRefSourceLabel: Source
+collection-object-geoRefVerificationStatusLabel: Verification
+collection-object-geoRefRemarksLabel: Remarks
+collection-object-geoRefPlaceNameLabel: Georeference place name
 
 #concept
 concept: Label Text
