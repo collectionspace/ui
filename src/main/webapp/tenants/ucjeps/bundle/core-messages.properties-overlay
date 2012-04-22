@@ -81,6 +81,10 @@ collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
 collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-donorGroupLabel: Donor
+collection-object-donorLabel: Donor
+collection-object-donorDateLabel: Date
+collection-object-donorNoteLabel: Note
 collection-object-labelHeaderLabel: Label Header
 collection-object-labelFooterLabel: Label Footer
 collection-object-numberOfObjectsLabel: Number of Sheets
