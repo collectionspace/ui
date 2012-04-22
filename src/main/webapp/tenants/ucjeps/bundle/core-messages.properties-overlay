@@ -77,6 +77,7 @@ media-identificationNumberLabel: Accession number
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
+collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
 collection-object-taxonomicIdentGroupLabel: Determination History
