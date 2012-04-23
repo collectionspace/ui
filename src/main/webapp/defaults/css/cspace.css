@@ -62,8 +62,8 @@ input[type="button"], input[type="submit"], input[type="checkbox"], input[type="
 input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    width:99.5%; 
-    margin:0;}
+    margin:0;
+}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
 input[type="submit"].logout {

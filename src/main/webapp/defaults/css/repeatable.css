@@ -1,4 +1,7 @@
 /*  styling repeatable fields  */
+.cs-repeatable {
+    display: inline;
+}
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
 .content .cs-repeatable-repeat {}
 .content li.cs-repeatable-repeat input,
@@ -17,15 +20,15 @@ tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {
     display:none;}
 #read-only .cs-repeatable-primary {}
-.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
-    width:88.5%;}
 input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
     font-size:14px; 
     height:16px; 
     width:14px; 
-    font-weight:bold; 
-    position:absolute; 
-    top:0; 
+    font-weight:bold;
+    position: relative; 
+    float: right;
+    right: 31px;
+    top: -16px;
     padding:0}
 .info-pair-date input[type="button"].cs-repeatable-add {
     right:0; 
