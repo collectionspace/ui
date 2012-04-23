@@ -1,14 +1,206 @@
 {
+    "hierarchy": {
+        ".csc-hierarchy-narrowerContext-label": {
+            "messagekey": "hierarchy-narrowerContextLabel"
+        },
+        ".csc-hierarchy-broaderContext": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/vocabularies/organization/autocomplete/broaderContext",
+                        "vocabUrl": "../../../tenant/core/vocabularies/organization/source-vocab/broaderContext"
+                    }
+                }
+            ],
+            "value": "${fields.broaderContext}"
+        },
+        ".csc-hierarchy-narrowerContext": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-hierarchy-narrowerContext": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/vocabularies/organization/autocomplete/narrowerContext",
+                                                    "vocabUrl": "../../../tenant/core/vocabularies/organization/source-vocab/narrowerContext",
+                                                    "invokers": {
+                                                        "selectMatch": {
+                                                            "funcName": "cspace.autocomplete.selectMatchConfirm"
+                                                        }
+                                                    },
+                                                    "strings": {
+                                                        "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.narrowerContext}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.narrowerContexts"
+                    }
+                }
+            ]
+        },
+        ".csc-hierarchy-broaderContext-label": {
+            "messagekey": "hierarchy-broaderContextLabel"
+        },
+        ".csc-hierarchy-equivalentContext-label": {
+            "messagekey": "hierarchy-equivalentContextLabel"
+        },
+        "expander": [
+            {
+                "condition": {
+                    "funcName": "cspace.hierarchy.assertEquivalentContexts",
+                    "args": {
+                        "equivalentContexts": "${fields.equivalentContexts}"
+                    }
+                },
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
+                    }
+                },
+                "type": "fluid.renderer.condition",
+                "falseTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "decorators": {
+                            "classes": "hidden",
+                            "type": "addClass"
+                        }
+                    }
+                }
+            },
+            {
+                "repeatID": ".csc-hierarchy-equivalentContext:",
+                "tree": {
+                    "decorators": {
+                        "classes": "cs-hierarchy-equivalentContext",
+                        "type": "addClass"
+                    },
+                    "value": "${{row}.equivalentContext}"
+                },
+                "type": "fluid.renderer.repeat",
+                "pathAs": "row",
+                "controlledBy": "fields.equivalentContexts"
+            }
+        ],
+        ".csc-hierarchy-relatedTerms-label": {
+            "messagekey": "hierarchy-relatedTermsLabel"
+        },
+        ".csc-hierarchy-domaindata-label": {
+            "messagekey": "hierarchy-domaindataLabel"
+        },
+        ".csc-hierarchy-narrowerContexts-label": {
+            "messagekey": "hierarchy-narrowerContextsLabel"
+        },
+        ".csc-hierarchy-relatedTerm": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-hierarchy-relatedTerm": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/vocabularies/organization/autocomplete/relatedTerm",
+                                                    "vocabUrl": "../../../tenant/core/vocabularies/organization/source-vocab/relatedTerm"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.relatedTerm}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.relatedTerms"
+                    }
+                }
+            ]
+        },
+        ".csc-hierarchy-equivalentContexts-label": {
+            "messagekey": "hierarchy-equivalentContextsLabel"
+        },
+        ".csc-hierarchy-relatedTerm-label": {
+            "messagekey": "hierarchy-relatedTermLabel"
+        }
+    },
     "recordEditor": {
+        ".csc-contact-addressStateOrProvince-label": {
+            "messagekey": "contact-addressStateOrProvinceLabel"
+        },
         ".csc-organization-organizationNameAuthorityInformation-label": {
             "messagekey": "organization-organizationNameAuthorityInformationLabel"
         },
         ".csc-organization-domaindata-label": {
             "messagekey": "organization-domaindataLabel"
         },
+        ".csc-contact-addressGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
+                                    ".csc-contact-addressType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.addressType}"
+                                    },
+                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
+                                    ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
+                                    ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.addressGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-contact-createdBy-label": {
+            "messagekey": "contact-createdByLabel"
+        },
         ".csc-organization-groups-label": {
             "messagekey": "organization-groupsLabel"
         },
+        ".csc-contact-createdBy": "${fields.contact.createdBy}",
         ".csc-organization-historyNote-label": {
             "messagekey": "organization-historyNoteLabel"
         },
@@ -17,6 +209,42 @@
         },
         ".csc-organization-tenantID-label": {
             "messagekey": "organization-tenantIDLabel"
+        },
+        ".csc-contact-telephoneNumberGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-telephoneNumberType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "mobile",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "mobile",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.telephoneNumberType}"
+                                    },
+                                    ".csc-contact-telephoneNumber": "${{row}.telephoneNumber}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.telephoneNumberGroup"
+                    }
+                }
+            ]
         },
         ".csc-organization-mainBodyGroup": {
             "decorators": [
@@ -48,8 +276,17 @@
             ],
             "value": "${fields.dissolutionDate}"
         },
+        ".csc-organization-contact-label": {
+            "messagekey": "organization-contactLabel"
+        },
         ".csc-organization-foundingPlace-label": {
             "messagekey": "organization-foundingPlaceLabel"
+        },
+        ".csc-contact-tenantID-label": {
+            "messagekey": "contact-tenantIDLabel"
+        },
+        ".csc-contact-faxNumberType-label": {
+            "messagekey": "contact-faxNumberTypeLabel"
         },
         ".csc-organizationAuthority-group": {
             "decorators": [
@@ -70,6 +307,44 @@
                 }
             ]
         },
+        ".csc-contact-faxNumberGroup-label": {
+            "messagekey": "contact-faxNumberGroupLabel"
+        },
+        ".csc-contact-faxNumberGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-faxNumberType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.faxNumberType}"
+                                    },
+                                    ".csc-contact-faxNumber": "${{row}.faxNumber}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.faxNumberGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-contact-tenantID": "${fields.contact.tenantID}",
         ".csc-organization-updatedAt": {
             "decorators": [
                 {
@@ -79,6 +354,7 @@
             ],
             "value": "${fields.updatedAt}"
         },
+        ".csc-contact-createdAt": "${fields.contact.createdAt}",
         ".csc-organization-shortName-label": {
             "messagekey": "organization-shortNameLabel"
         },
@@ -117,6 +393,40 @@
                 }
             ]
         },
+        ".csc-contact-emailGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-email": "${{row}.email}",
+                                    ".csc-contact-emailType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.emailType}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.emailGroup"
+                    }
+                }
+            ]
+        },
         ".csc-organization-uri": "${fields.uri}",
         ".csc-organization-refName-label": {
             "messagekey": "organization-refNameLabel"
@@ -127,17 +437,32 @@
         ".csc-organization-nameAdditions-label": {
             "messagekey": "organization-nameAdditionsLabel"
         },
+        ".csc-contact-addressPlace2-label": {
+            "messagekey": "contact-addressPlace2Label"
+        },
+        ".csc-contact-faxNumber-label": {
+            "messagekey": "contact-faxNumberLabel"
+        },
         ".csc-organization-termStatus-label": {
             "messagekey": "organization-termStatusLabel"
+        },
+        ".csc-contact-updatedAt-label": {
+            "messagekey": "contact-updatedAtLabel"
         },
         ".csc-organization-updatedBy-label": {
             "messagekey": "organization-updatedByLabel"
         },
-        ".csc-organization-updatedAt-label": {
-            "messagekey": "organization-updatedAtLabel"
+        ".csc-contact-telephoneNumberGroup-label": {
+            "messagekey": "contact-telephoneNumberGroupLabel"
+        },
+        ".csc-contact-createdAt-label": {
+            "messagekey": "contact-createdAtLabel"
         },
         ".csc-organization-createdBy-label": {
             "messagekey": "organization-createdByLabel"
+        },
+        ".csc-organization-updatedAt-label": {
+            "messagekey": "organization-updatedAtLabel"
         },
         ".csc-organizationAuthority-function": {
             "decorators": [
@@ -158,6 +483,9 @@
                 }
             ]
         },
+        ".csc-contact-telephoneNumber-label": {
+            "messagekey": "contact-telephoneNumberLabel"
+        },
         ".csc-organization-foundingDate-label": {
             "messagekey": "organization-foundingDateLabel"
         },
@@ -175,10 +503,25 @@
         ".csc-organization-subBodies-label": {
             "messagekey": "organization-subBodiesLabel"
         },
+        ".csc-contact-webAddress-label": {
+            "messagekey": "contact-webAddressLabel"
+        },
+        ".csc-contact-webAddressGroup-label": {
+            "messagekey": "contact-webAddressGroupLabel"
+        },
+        ".csc-contact-email-label": {
+            "messagekey": "contact-emailLabel"
+        },
         ".csc-organization-contactNames-label": {
             "messagekey": "organization-contactNamesLabel"
         },
-        ".csc-organization-refName": "${fields.refName}",
+        ".csc-contact-updatedBy": "${fields.contact.updatedBy}",
+        ".csc-contact-addressType-label": {
+            "messagekey": "contact-addressTypeLabel"
+        },
+        ".csc-contact-addressPostCode-label": {
+            "messagekey": "contact-addressPostCodeLabel"
+        },
         ".csc-organizationAuthority-foundingDate": {
             "decorators": [
                 {
@@ -188,15 +531,59 @@
             ],
             "value": "${fields.foundingDate}"
         },
+        ".csc-contact-webAddressGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-webAddressType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.webAddressType}"
+                                    },
+                                    ".csc-contact-webAddress": "${{row}.webAddress}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.webAddressGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-organization-refName": "${fields.refName}",
         ".csc-organization-functions-label": {
             "messagekey": "organization-functionsLabel"
         },
         ".csc-organization-csid-label": {
             "messagekey": "organization-csidLabel"
         },
+        ".csc-contact-domaindata-label": {
+            "messagekey": "contact-domaindataLabel"
+        },
+        ".csc-contact-addressCountry-label": {
+            "messagekey": "contact-addressCountryLabel"
+        },
         ".csc-organization-createdAt": "${fields.createdAt}",
         ".csc-organization-contactName-label": {
             "messagekey": "organization-contactNameLabel"
+        },
+        ".csc-contact-updatedBy-label": {
+            "messagekey": "contact-updatedByLabel"
         },
         ".csc-organizationAuthority-history": {
             "decorators": [
@@ -219,6 +606,15 @@
         },
         ".csc-organization-dissolutionDate-label": {
             "messagekey": "organization-dissolutionDateLabel"
+        },
+        ".csc-contact-emailType-label": {
+            "messagekey": "contact-emailTypeLabel"
+        },
+        ".csc-contact-telephoneNumberType-label": {
+            "messagekey": "contact-telephoneNumberTypeLabel"
+        },
+        ".csc-contact-addressMunicipality-label": {
+            "messagekey": "contact-addressMunicipalityLabel"
         },
         ".csc-organization-function-label": {
             "messagekey": "organization-functionLabel"
@@ -259,12 +655,25 @@
         },
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-organization-csid": "${fields.csid}",
+        ".csc-contact-emailGroup-label": {
+            "messagekey": "contact-emailGroupLabel"
+        },
+        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
+        ".csc-contact-webAddressType-label": {
+            "messagekey": "contact-webAddressTypeLabel"
+        },
         ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
         ".csc-organization-mainBodyGroup-label": {
             "messagekey": "organization-mainBodyGroupLabel"
         },
+        ".csc-contact-addressGroup-label": {
+            "messagekey": "contact-addressGroupLabel"
+        },
         ".csc-organization-historyNotes-label": {
             "messagekey": "organization-historyNotesLabel"
+        },
+        ".csc-contact-addressPlace1-label": {
+            "messagekey": "contact-addressPlace1Label"
         },
         ".csc-organizationAuthority-status": {
             "default": "provisional",
