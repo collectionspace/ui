@@ -177,12 +177,21 @@
                                                                         "func": "cspace.termList",
                                                                         "type": "fluid",
                                                                         "options": {
-                                                                            "elPath": "fields.termLanguage",
+                                                                            "elPath": "${{row}.termLanguage}",
                                                                             "termListType": "termLanguage"
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-locationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-locationAuthority-termPreferredForLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "${{row}.termPreferredForLanguage}",
+                                                                            "termListType": "termPreferredForLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
                                                                 ".csc-locationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-locationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-locationAuthority-termSourceID": "${{row}.termSourceID}"

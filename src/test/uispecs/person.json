@@ -177,12 +177,21 @@
                                                                         "func": "cspace.termList",
                                                                         "type": "fluid",
                                                                         "options": {
-                                                                            "elPath": "fields.termLanguage",
+                                                                            "elPath": "${{row}.termLanguage}",
                                                                             "termListType": "termLanguage"
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-personAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-personAuthority-termPreferredForLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "${{row}.termPreferredForLanguage}",
+                                                                            "termListType": "termPreferredForLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",

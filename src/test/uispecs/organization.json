@@ -177,12 +177,21 @@
                                                                         "func": "cspace.termList",
                                                                         "type": "fluid",
                                                                         "options": {
-                                                                            "elPath": "fields.termLanguage",
+                                                                            "elPath": "${{row}.termLanguage}",
                                                                             "termListType": "termLanguage"
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-organizationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-organizationAuthority-termPreferredForLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "${{row}.termPreferredForLanguage}",
+                                                                            "termListType": "termPreferredForLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
                                                                 ".csc-organizationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-organizationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",
