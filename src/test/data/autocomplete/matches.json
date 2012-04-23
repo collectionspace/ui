@@ -33,18 +33,45 @@
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLee1334763571214)'Christopher Lee'",
         "csid": "75f5ff26-ee75-4de5-a3ae",
         "label": "Christopher Lee",
-        "type": "person"
+        "type": "person",
+        "nonPreferredNames": [
+            {
+                "label": "Chris Lee"
+            },
+            {
+                "label": "C. Lee"
+            },
+            {
+                "label": "Christopher L."
+            }
+        ]
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLloyd1334763574730)'Christopher Lloyd'",
         "csid": "4caeedaa-a6d4-43d5-b17f",
         "label": "Christopher Lloyd",
-        "type": "person"
+        "type": "person",
+        "preferredName": "Chris Lloyd"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)'Christopher Plummer'",
         "csid": "9c641934-5e59-4df7-a5ec",
         "label": "Christopher Plummer",
-        "type": "person"
+        "type": "person",
+        "preferredName": "Christopher Plummer",
+        "nonPreferredNames": [
+            {
+                "label": "Chris Plummer"
+            },
+            {
+                "label": "C. Plummer"
+            },
+            {
+                "label": "Christopher P."
+            },
+            {
+                "label": "Chris P."
+            }
+        ]
     }
 ]
