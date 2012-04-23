@@ -22,25 +22,34 @@ cspace = cspace || {};
         that.locate("numOfTerms").text(fluid.stringTemplate(that.lookupMessage("sidebar-numOfTerms"), {
             numOfTerms: that.termsUsed.calculateRecordListSize()
         }));
-    }; 
+    };
 
     cspace.sidebar = function (container, options) {
         var that = fluid.initRendererComponent("cspace.sidebar", container, options);
         restrictRelatedRecordLists(that);
         fluid.initDependents(that);
         that.renderer.refreshView();
-        
+
         that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
-            that.termsUsed.applier.requestChange("items", model.termsUsed);
+            that.termsUsed.applier.requestChange("items", that.addLabelToTermsUsed());
             that.termsUsed.refreshView();
             setupSideBar(that);
         });
-        
+
         setupSideBar(that);
         
         return that;
     };
-    
+
+    cspace.sidebar.addLabelToTermsUsed = function (lookupMessage, termsUsed) {
+        var records = fluid.copy(termsUsed);
+        // Find proper Label Names for items
+        return fluid.transform(records, function (item) {
+            item.labelText = lookupMessage(item.sourceFieldselector + "Label");
+            return item;
+        });
+    };
+
     /**
      * Checks whether user has "list" permissions to the record types listed by the
      * relatedRecordLists in this sidebar. If this is not the case, remove them from
@@ -248,7 +257,13 @@ cspace = cspace || {};
                 createOnEvent: "afterRender",
                 options: {
                     model: {
-                        items: "{sidebar}.options.recordModel.termsUsed",
+                        items: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.sidebar.addLabelToTermsUsed",
+                                args: ["{sidebar}.lookupMessage", "{sidebar}.options.recordModel.termsUsed"]
+                            }
+                        },
                         messagekeys: {
                             nothingYet: "sidebar-nothingYet"
                         }
@@ -256,11 +271,11 @@ cspace = cspace || {};
                     elPaths: {
                         items: "items"
                     },
-                    columns: ["number", "recordtype", "sourceFieldName"],
+                    columns: ["number", "recordtype", "labelText"],
                     strings: {
                         number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
-                        sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
-                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
+                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype",
+                        labelText: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName"
                     },
                     showNumberOfItems: false
                 }
@@ -302,6 +317,10 @@ cspace = cspace || {};
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
+            addLabelToTermsUsed: {
+                funcName: "cspace.sidebar.addLabelToTermsUsed",
+                args: ["{sidebar}.lookupMessage", "{sidebar}.options.recordModel.termsUsed"]
             }
         },
         model: {
