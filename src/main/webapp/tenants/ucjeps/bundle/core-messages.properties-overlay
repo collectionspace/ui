@@ -81,6 +81,10 @@ collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
 collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-hybridParentGroupLabel: Hybrid Parent
+collection-object-hybridParentLabel: Hybrid Parent
+collection-object-hybridParentQualifierLabel: Parent Qualifier
+collection-object-hybridNameLabel: Hybrid Name
 collection-object-donorGroupLabel: Donor
 collection-object-donorLabel: Donor
 collection-object-donorDateLabel: Date
