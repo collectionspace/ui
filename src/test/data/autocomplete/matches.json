@@ -1,11 +1,50 @@
-[{"urn":"urn:cspace:org.collectionspace.demo:orgauthority:id(5bcc21d0-ea63-416d-860f):organization:id(5e0edb53-a138-4430-82b8)'Allen+B.+DuMont+Laboratories'","label":"Allen B. DuMont Laboratories"},
-{"urn":"urn:cspace:org.collectionspace.demo:orgauthority:id(5bcc21d0-ea63-416d-860f):organization:id(a4b40f19-d7c9-4e5a-9eab)'Allendale+Theatre'","label":"Allendale Theatre"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(0165ff6c-d204-4c9f-9ebf)'Phyllis+Allen'","label":"Phyllis Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(2925cffe-4fd6-46bb-bc4d)'Allene+Ray'","label":"Allene Ray"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(51b9c5ab-0ae9-472d-bdf0)'Karen+Allen'","label":"Karen Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(64726dd5-96df-4313-b56d)'Woody+Allen'","label":"Woody Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(dc19787b-1f5a-41c2-8949)'Lewis+Allen+Browne'","label":"Lewis Allen Browne"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(65e8d339-3181-41f0-9d5a)'Gracie+Allen'","label":"Gracie Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(18b79e32-7ce4-46db-b4fc)'Steve+Allen'","label":"Steve Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(c42e0cfa-2738-4f83-99e4)'Rex+Allen'","label":"Rex Allen"},
-{"urn":"urn:cspace:org.collectionspace.demo:personauthority:id(6802d18a-8cd1-4439-9213):person:id(5520ce9c-d58f-4fe9-8584)'Fred+Allen'","label":"Fred Allen"}]
+[
+    {
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(MayflowerPhotoplayCorp1334763694417)'Mayflower Photoplay Corp.'",
+        "csid": "23ad5ed1-fb54-4d7e-ba50",
+        "label": "Mayflower Photoplay Corp.",
+        "type": "organization"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(OliverMoroscoPhotoplayCompany1334763683937)'Oliver Morosco Photoplay Company'",
+        "csid": "fe7e0fd4-abeb-43df-a265",
+        "label": "Oliver Morosco Photoplay Company",
+        "type": "organization"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(Photoplay1334763775670)'Photoplay'",
+        "csid": "312a0771-0d40-4653-9a31",
+        "label": "Photoplay",
+        "type": "organization"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(ToppsCompanyInc1334763749665)'Topps Company, Inc.'",
+        "csid": "bc831b9c-a9eb-4e4a-ab80",
+        "label": "Topps Company, Inc.",
+        "type": "organization"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(UtopiaEnterprisesInc1334763691997)'Utopia Enterprises, Inc.'",
+        "csid": "14ecc869-d337-4f2a-a426",
+        "label": "Utopia Enterprises, Inc.",
+        "type": "organization"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLee1334763571214)'Christopher Lee'",
+        "csid": "75f5ff26-ee75-4de5-a3ae",
+        "label": "Christopher Lee",
+        "type": "person"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLloyd1334763574730)'Christopher Lloyd'",
+        "csid": "4caeedaa-a6d4-43d5-b17f",
+        "label": "Christopher Lloyd",
+        "type": "person"
+    },
+    {
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)'Christopher Plummer'",
+        "csid": "9c641934-5e59-4df7-a5ec",
+        "label": "Christopher Plummer",
+        "type": "person"
+    }
+]
