@@ -14,6 +14,56 @@
             },
             "fields": {
                 "properties": {
+                    "preferredOrganizationGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "displayName": {
+                                    "type": "string"
+                                },
+                                "qualifier": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "term": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termPreferredForLanguage": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "longName": {
+                                    "type": "string"
+                                },
+                                "shortName": {
+                                    "type": "string"
+                                },
+                                "nameAdditions": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "relatedTerms": {
                         "items": {
                             "properties": {
@@ -268,27 +318,6 @@
                         },
                         "type": "array"
                     },
-                    "mainBodyGroup": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "longName": {
-                                    "type": "string"
-                                },
-                                "shortName": {
-                                    "type": "string"
-                                },
-                                "nameAdditions": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "tenantID": {
                         "type": "string"
                     },
@@ -311,9 +340,6 @@
                         "type": "string"
                     },
                     "refName": {
-                        "type": "string"
-                    },
-                    "displayName": {
                         "type": "string"
                     },
                     "equivalentContexts": {

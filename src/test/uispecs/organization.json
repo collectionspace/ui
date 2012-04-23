@@ -146,6 +146,102 @@
         }
     },
     "recordEditor": {
+        ".csc-preferred-organizationAuthority": {
+            "decorators": [
+                {
+                    "func": "cspace.preferred",
+                    "type": "fluid",
+                    "options": {
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-preferred-organizationGroup": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.makeRepeatable",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "repeatTree": {
+                                                        "expander": {
+                                                            "tree": {
+                                                                ".csc-organization-displayName": "${{row}.displayName}",
+                                                                ".csc-organizationAuthority-qualifier": "${{row}.qualifier}",
+                                                                ".csc-organizationAuthority-termType": {
+                                                                    "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "selection": "${{row}.termType}"
+                                                                },
+                                                                ".csc-organizationAuthority-term": "${{row}.term}",
+                                                                ".csc-organizationAuthority-termLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "fields.termLanguage",
+                                                                            "termListType": "termLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
+                                                                ".csc-organizationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-organizationAuthority-termSource": "${{row}.termSource}",
+                                                                ".csc-organizationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
+                                                                ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",
+                                                                ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
+                                                                ".csc-organizationAuthority-longName": "${{row}.longName}",
+                                                                ".csc-organizationAuthority-shortName": "${{row}.shortName}"
+                                                            },
+                                                            "type": "fluid.noexpand"
+                                                        }
+                                                    },
+                                                    "elPath": "fields.preferredOrganizationGroup"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-organization-displayName-label": {
+                                        "messagekey": "organization-displayNameLabel"
+                                    },
+                                    ".csc-organization-qualifier-label": {
+                                        "messagekey": "organization-qualifierLabel"
+                                    },
+                                    ".csc-organization-termType-label": {
+                                        "messagekey": "organization-termTypeLabel"
+                                    },
+                                    ".csc-organization-term-label": {
+                                        "messagekey": "organization-termLabel"
+                                    },
+                                    ".csc-organization-termLanguage-label": {
+                                        "messagekey": "organization-termLanguageLabel"
+                                    },
+                                    ".csc-organization-termPreferredForLanguage-label": {
+                                        "messagekey": "organization-termPreferredForLanguageLabel"
+                                    },
+                                    ".csc-organization-termSource-label": {
+                                        "messagekey": "organization-termSourceLabel"
+                                    },
+                                    ".csc-organization-termSourceDetail-label": {
+                                        "messagekey": "organization-termSourceDetailLabel"
+                                    },
+                                    ".csc-organization-termSourceID-label": {
+                                        "messagekey": "organization-termSourceIDLabel"
+                                    },
+                                    ".csc-organization-shortName-label": {
+                                        "messagekey": "organization-shortNameLabel"
+                                    },
+                                    ".csc-organization-longName-label": {
+                                        "messagekey": "organization-longNameLabel"
+                                    },
+                                    ".csc-organization-nameAdditions-label": {
+                                        "messagekey": "organization-nameAdditionsLabel"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-contact-addressStateOrProvince-label": {
             "messagekey": "contact-addressStateOrProvinceLabel"
         },
@@ -246,27 +342,6 @@
                 }
             ]
         },
-        ".csc-organization-mainBodyGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
-                                    ".csc-organizationAuthority-longName": "${{row}.longName}",
-                                    ".csc-organizationAuthority-shortName": "${{row}.shortName}"
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.mainBodyGroup"
-                    }
-                }
-            ]
-        },
         ".csc-organizationAuthority-dissolutionDate": {
             "decorators": [
                 {
@@ -355,12 +430,6 @@
             "value": "${fields.updatedAt}"
         },
         ".csc-contact-createdAt": "${fields.contact.createdAt}",
-        ".csc-organization-shortName-label": {
-            "messagekey": "organization-shortNameLabel"
-        },
-        ".csc-organization-displayName-label": {
-            "messagekey": "organization-displayNameLabel"
-        },
         ".csc-organization-createdBy": "${fields.createdBy}",
         ".csc-organizationAuthority-subBodyName": {
             "decorators": [
@@ -434,9 +503,6 @@
         ".csc-organization-subBody-label": {
             "messagekey": "organization-subBodyLabel"
         },
-        ".csc-organization-nameAdditions-label": {
-            "messagekey": "organization-nameAdditionsLabel"
-        },
         ".csc-contact-addressPlace2-label": {
             "messagekey": "contact-addressPlace2Label"
         },
@@ -489,7 +555,6 @@
         ".csc-organization-foundingDate-label": {
             "messagekey": "organization-foundingDateLabel"
         },
-        ".csc-organizationAuthority-displayName": "${fields.displayName}",
         ".csc-organization-uri-label": {
             "messagekey": "organization-uriLabel"
         },
@@ -649,9 +714,6 @@
                     }
                 }
             ]
-        },
-        ".csc-organization-longName-label": {
-            "messagekey": "organization-longNameLabel"
         },
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-organization-csid": "${fields.csid}",
