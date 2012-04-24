@@ -91,13 +91,15 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
 	padding:4px 4px 0 4px;
+	float: left;
 }
 
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
 	float:left;
-	width:96%;}
+/* 	width:96%; */
+}
 
 /* From Jesse, 21Nov011 */
 .infoGroup { padding:4px 0 0 0; background-color:#E2E2E2;}

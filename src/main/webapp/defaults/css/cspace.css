@@ -693,12 +693,13 @@ td.fl-date-group {
     border:1px solid #C7CFD4; 
     padding:0;}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width:100%; 
+/*     width:100%;  */
     border-spacing:0; 
     background-color:#FFF; 
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
@@ -747,7 +748,8 @@ table.cs-admin-table td.checkbox {
     line-height:120%; 
     background-color:#F0F5FB; 
     border:none; 
-    width:100%;}
+    width:100%;
+}
 .list-table  table thead tr td, .list-table  table thead tr th {
     font-size:11px; 
     background-color:#EFEFEF; 
@@ -961,7 +963,7 @@ table.cs-admin-table td.checkbox {
 .cataloging .fl-container-pivot {
     padding-top:0px;}
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
-    width:100%; 
+/*     width:100%;  */
     position:relative; 
     margin-bottom:18px;
 	padding-bottom:0px;
@@ -1104,7 +1106,7 @@ table.cs-admin-table td.checkbox {
     padding-top:0; 
     border:none;}
 .content textarea { 
-    width:100%; 
+/*     width:100%;  */
     height:75px; 
     overflow:auto;}
 .input-alpha-login {
@@ -2179,3 +2181,6 @@ li.cs-locked {
     height: inherit;
 }
 
+.cs-termList {
+    float: left;
+}
