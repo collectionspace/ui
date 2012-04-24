@@ -677,7 +677,7 @@ table tbody.highlight tr:focus td {
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
 	display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
-    width:100%; 
+/*     width:100%;  */
     /*float:left; */
     border:none;}
 .info-pair .content.fl-date-group {
@@ -1255,6 +1255,11 @@ input[disabled]:hover, input[disabled]:hover    {
    display: block;
    height: 0;
    clear: both;
+}
+
+.clearfix .cs-repeatable-content,
+.info-column .cs-repeatable-content {
+    float: left;
 }
 	
 .ui-tabs .ui-tabs-hide {

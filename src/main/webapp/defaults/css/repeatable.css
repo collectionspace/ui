@@ -36,14 +36,20 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
 li.cs-repeatable-repeat {
     list-style-type: none; 
     margin-bottom:1px; 
-    width:99%}
+/*     width:99% */
+}
+/*
 .cs-repeatable-content {
     width:89%;
 }
+*/
+/*
 .cs-repeatable-content > input {
     width: 89.2%;}
+*/
 .cs-repeatable-content .ui-autocomplete-input {
-    width:100%;}
+/*     width:100%; */
+    }
 input.cs-repeatable-primary {
     width: 11px; 
     position: relative; 
