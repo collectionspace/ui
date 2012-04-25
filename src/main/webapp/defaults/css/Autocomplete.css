@@ -97,3 +97,6 @@ the "overflow" properties on "Matches" prevent it being seen */
     color: #909090;
     margin-left: 15px;
 }
+.cs-autocomplete-matchItem-content {
+    display: block;
+}
