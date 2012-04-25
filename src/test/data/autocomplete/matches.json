@@ -34,15 +34,13 @@
         "csid": "75f5ff26-ee75-4de5-a3ae",
         "label": "Christopher Lee",
         "type": "person",
-        "nonPreferredNames": [
+        "preferredGroup": [
             {
-                "label": "Chris Lee"
+                "label": "Chris Lee",
+                "_primary": true
             },
             {
                 "label": "C. Lee"
-            },
-            {
-                "label": "Christopher L."
             }
         ]
     },
@@ -51,15 +49,23 @@
         "csid": "4caeedaa-a6d4-43d5-b17f",
         "label": "Christopher Lloyd",
         "type": "person",
-        "preferredName": "Chris Lloyd"
+        "preferredGroup": [
+            {
+                "label": "Christopher Lloyd",
+                "_primary": true
+            }
+        ]
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)'Christopher Plummer'",
         "csid": "9c641934-5e59-4df7-a5ec",
         "label": "Christopher Plummer",
         "type": "person",
-        "preferredName": "Christopher Plummer",
-        "nonPreferredNames": [
+        "preferredGroup": [
+            {
+                "label": "Christopher Plummer",
+                "_primary": true
+            },
             {
                 "label": "Chris Plummer"
             },

@@ -223,7 +223,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return that;
     };
     
-    cspace.autocomplete.makeSelectionTree = function (tree, repeatID, listPath, fieldName) {
+    cspace.autocomplete.makeAuthoritySelectionTree = function (tree, repeatID, listPath, fieldName) {
         tree.expander = fluid.makeArray(tree.expander);
         tree.expander.push({
             repeatID: repeatID,
@@ -234,6 +234,60 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
+    cspace.autocomplete.makePNPSelectionTree = function (that, tree, repeatID, pulledMatches, popupMatches, fieldName) {
+        var model = that.model,
+            styles = that.options.styles,
+            preferredFlag = that.options.strings.preferredFlag,
+            newArray = [];
+        
+        tree.expander = fluid.makeArray(tree.expander);
+        
+        fluid.each(fluid.copy(fluid.get(model, pulledMatches)), function (element) {
+            element.label = element.label || "";
+            element.preferredGroup = element.preferredGroup || [];
+            
+            if (!element.preferredGroup.length) {
+                var newElement = {};
+                newElement[fieldName] = element.label;
+                newElement[preferredFlag] = true;
+                element.preferredGroup.push(newElement);
+            }
+            
+            newArray.push.apply(newArray, element.preferredGroup);
+        });
+        
+        model.popupMatches = newArray;
+        //that.applier.requestChange(fluid.model.composeSegments("model", popupMatches), newArray);
+        
+        tree.expander.push({
+            repeatID: repeatID,
+            type: "fluid.renderer.repeat",
+            pathAs: "row",
+            valueAs: "rowValue",
+            controlledBy: popupMatches,
+            tree: {
+                expander: [{
+                    type: "fluid.renderer.condition",
+                    condition: "${" + fluid.model.composeSegments("{row}", preferredFlag) + "}",
+                    trueTree: {
+                        matchItemContent: {
+                            value: "${" + fluid.model.composeSegments("{row}", fieldName) + "}"
+                        }
+                    },
+                    falseTree: {
+                        matchItemContent: {
+                            value: "${" + fluid.model.composeSegments("{row}", fieldName) + "}",
+                            decorators: {
+                                type: "addClass",
+                                classes: styles.nonPreferred
+                            }
+                        }
+                    }
+                }]
+            }
+        });
+    };
+
     cspace.autocomplete.matchTerm = function (label, term) {
         return label.toLowerCase() === term.toLowerCase();
     };
@@ -251,7 +305,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 messagekey: "autocomplete-addTermTo",
                 args: ["${term}"]
             };
-            cspace.autocomplete.makeSelectionTree(tree, "authorityItem", "authorities", "fullName");
+            cspace.autocomplete.makeAuthoritySelectionTree(tree, "authorityItem", "authorities", "fullName");
         }
         if (that.model.matches.length === 0) {
             tree.noMatches = {
@@ -261,7 +315,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         else {
             tree.matches = {};
             tree.longestMatch = cspace.autocomplete.longest(that.model.matches);
-            cspace.autocomplete.makeSelectionTree(tree, "matchItem", "matches", "label");
+            cspace.autocomplete.makePNPSelectionTree(that, tree, "matchItem", "matches", "popupMatches", "label");
         }
         return tree;
     };
@@ -376,12 +430,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             noMatches: ".csc-autocomplete-noMatches",
             matches: ".csc-autocomplete-matches",
             matchItem: ".csc-autocomplete-matchItem",
+            matchItemContent: ".csc-autocomplete-matchItem-content",
             longestMatch: ".csc-autocomplete-longestMatch",
             addTermTo: ".csc-autocomplete-addTermTo"
         },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
-            matchesSelect: "cs-autocomplete-matchItem-select"
+            matchesSelect: "cs-autocomplete-matchItem-select",
+            nonPreferred: "cs-autocomplete-nonPreferred"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
         produceTree: "cspace.autocomplete.produceTree",
@@ -591,7 +647,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.selectMatch = function (that, key) {
-        var match = that.model.matches[key];
+        var match = that.model.popupMatches[key];
         updateAuthoritatively(that, match);
         that.buttonAdjustor();
         that.eventHolder.events.afterSelectMatch.fire();
@@ -642,7 +698,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         minChars: 3,
         model: {
             authorities: [],
-            matches: []
+            matches: [],
+            popupMatches: []
         },
         delay: 500,
         invokers: {
@@ -681,7 +738,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 options: {
                     model: "{autocomplete}.model",
                     applier: "{autocomplete}.applier",
-                    inputField: "{autocomplete}.autocompleteInput"
+                    inputField: "{autocomplete}.autocompleteInput",
+                    strings: "{autocomplete}.options.strings"
                 }
             },
             authoritiesSource: {
@@ -698,7 +756,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         parentBundle: "{globalBundle}",
-        strings: {}
+        strings: {
+            preferredFlag: "_primary"
+        }
     });
     
     fluid.defaults("fluid.autocomplete.eventHolder", {

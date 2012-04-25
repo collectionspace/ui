@@ -92,3 +92,8 @@ the "overflow" properties on "Matches" prevent it being seen */
     filter: alpha(opacity=0); /* For idiot IE */
     height: 0px;
 }
+
+.cs-autocomplete-nonPreferred {
+    color: #909090;
+    margin-left: 15px;
+}
