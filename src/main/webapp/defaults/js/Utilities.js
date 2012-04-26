@@ -1136,16 +1136,16 @@ fluid.registerNamespace("cspace.util");
             return !!fluid.get(that.list, vocab);
         };
 
-        that.isAllowed = function (vocab, authority) {
+        that.isNptAllowed = function (vocab, authority) {
             var list;
             if (authority) {
                 list = fluid.get(that.list, authority);
             }
             if (list) {
-                return fluid.get(list, fluid.model.composeSegments(vocab, "allowed"));
+                return fluid.get(list, fluid.model.composeSegments(vocab, "nptAllowed"));
             }
             return fluid.find(that.list, function (list) {
-                return fluid.get(list, fluid.model.composeSegments(vocab, "allowed"));
+                return fluid.get(list, fluid.model.composeSegments(vocab, "nptAllowed"));
             }) || false;
         };
         // NOTE: This does not work in the <IE9.
@@ -1159,7 +1159,7 @@ fluid.registerNamespace("cspace.util");
         });
         fluid.each(that.authorities, function (authority) {
             that.authority[authority] = {
-                allowed: {}
+                nptAllowed: {}
             };
             Object.defineProperty(that.authority[authority], "vocabs", {
                 get: function () {
@@ -1169,10 +1169,10 @@ fluid.registerNamespace("cspace.util");
                 },
                 enumerable : true
             });
-            Object.defineProperty(that.authority[authority].allowed, "vocabs", {
+            Object.defineProperty(that.authority[authority].nptAllowed, "vocabs", {
                 get: function () {
                     return fluid.transform(fluid.get(that.list, authority), function (val) {
-                        return val.allowed;
+                        return val.nptAllowed;
                     });
                 },
                 enumerable : true

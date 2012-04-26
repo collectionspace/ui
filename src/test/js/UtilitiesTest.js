@@ -21,7 +21,7 @@ var utilitiesTester = function ($) {
                         "person": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -30,7 +30,7 @@ var utilitiesTester = function ($) {
                         "persontest1": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -39,7 +39,7 @@ var utilitiesTester = function ($) {
                         "persontest2": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -53,7 +53,7 @@ var utilitiesTester = function ($) {
                         "concept": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -62,7 +62,7 @@ var utilitiesTester = function ($) {
                         "activity": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -71,7 +71,7 @@ var utilitiesTester = function ($) {
                         "material": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -85,7 +85,7 @@ var utilitiesTester = function ($) {
                         "place": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -94,7 +94,7 @@ var utilitiesTester = function ($) {
                         "placetest1": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -103,7 +103,7 @@ var utilitiesTester = function ($) {
                         "placetest2": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -117,7 +117,7 @@ var utilitiesTester = function ($) {
                         "organization": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -126,7 +126,7 @@ var utilitiesTester = function ($) {
                         "organizationtest": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -140,7 +140,7 @@ var utilitiesTester = function ($) {
                         "location": {
                             "type": "object",
                             "properties": {
-                                "allowed": {
+                                "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
                                 }
@@ -451,11 +451,11 @@ var utilitiesTester = function ($) {
             persontest2: "persontest2"
         }, vocab.authority.person.vocabs);
 
-        jqUnit.assertDeepEq("Person allowed vocabs", {
+        jqUnit.assertDeepEq("Person nptAllowed vocabs", {
             person: true,
             persontest1: true,
             persontest2: true
-        }, vocab.authority.person.allowed.vocabs);
+        }, vocab.authority.person.nptAllowed.vocabs);
 
         jqUnit.assertTrue("Person is default", vocab.isDefault("person"));
         jqUnit.assertFalse("Persontest1 is not default", vocab.isDefault("persontest1"));
