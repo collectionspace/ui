@@ -256,7 +256,7 @@ cspace = cspace || {};
             }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
         };
         that.styleAndActivate = function (row, rows) {
-            var index = rows.index(row),
+            var index = that.model.offset + rows.index(row),
                 record = that.model.list[index];
             if (!cspace.permissions.resolve({
                 permission: "read",
