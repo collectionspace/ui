@@ -960,7 +960,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.dataContext.buildUrl", "cspace.dataContext", {
             funcName: "cspace.util.buildUrl",
-            args: ["{arguments}.0", "{dataContext}.options.baseUrl", "{dataContext}.options.recordType", "{arguments}.1", "{dataContext}.options.fileExtension"]
+            args: ["{arguments}.0", "{dataContext}.options.baseUrl", "{dataContext}.options.recordType", "{arguments}.1", "{dataContext}.options.fileExtension", "{arguments}.2"]
         });
         fluid.demands("cspace.dataContext.buildUrl", ["cspace.dataContext", "cspace.template"], {
             funcName: "cspace.dataContext.buildTemplateUrl",

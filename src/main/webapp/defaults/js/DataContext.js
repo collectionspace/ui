@@ -27,7 +27,9 @@ cspace = cspace || {};
 
     var buildOpts = function (operation, buildUrl, options, successEvent, events, csid, data) {
         var opts = {
-            url: buildUrl(operation, csid),
+            url: buildUrl(operation, csid, cspace.vocab.resolve({
+                model: data
+            })),
             type: types[operation],
             dataType: options.dataType,
             contentType: "application/json; charset=utf-8",
