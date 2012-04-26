@@ -106,12 +106,10 @@ cspace = cspace || {};
             lookupMessage: "cspace.util.lookupMessage"
         },
         urls: cspace.componentUrlBuilder({
-            newRecordUrl: "%webapp/html/%recordType.html%template",
-            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType%template",
+            newRecordUrl: "%webapp/html/%recordType.html?%params",
+            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType&%params",
             templateUrl: "%webapp/html/template.html?recordtype=%recordType",
-            templateViewsUrl: "%webapp/config/templateViews.json",
-            template: "?template=%template",
-            templateLocal: "&template=%template"
+            templateViewsUrl: "%webapp/config/templateViews.json"
         }),
         newRecordUrl: "%recordUrl.html",
         resources: {
@@ -149,9 +147,11 @@ cspace = cspace || {};
             if (!permittedAuth) {
                 return;
             }
-            that.applier.requestChange("vocabs", fluid.transform(permittedAuth, function (auth) {
-                return that.vocab.authority[auth].vocabs;
-            }));
+            var vocabs = {};
+            fluid.each(permittedAuth, function (auth) {
+                vocabs[auth] = that.vocab.authority[auth].vocabs;
+            });
+            that.applier.requestChange("vocabs", vocabs);
         };
     };
     
@@ -166,12 +166,24 @@ cspace = cspace || {};
     // Note that the record isn't actually created until the user clicks the save button. This
     // function will simply redirect user to a page where he is presented with an empty
     // record
-    cspace.createNew.createRecord = function (model, url, templateUrl) {
-        var template = model.createFromSelection === "fromTemplate" ? model.templateSelection : "";
-        window.location = fluid.stringTemplate(url, {
+    cspace.createNew.createRecord = function (model, url) {
+        var template = model.createFromSelection === "fromTemplate" ? model.templateSelection : "",
+            vocab = model.vocabSelection,
+            params = {};
+        if (template) {
+            params.template = template;
+        }
+        if (vocab) {
+            params.vocab = vocab;
+        }
+        var url = fluid.stringTemplate(url, {
             recordType: model.currentSelection,
-            template: template ? fluid.stringTemplate(templateUrl, {template: template}) : ""
+            params: $.param(params)
         });
+        if (url[url.length - 1] === "&" || url[url.length - 1] === "?") {
+            url = url.slice(0, url.length - 1);
+        }
+        window.location = url;
     };
 
     cspace.createNew.stylefy = function (that) {
@@ -315,14 +327,16 @@ cspace = cspace || {};
             createFrom: ".csc-createNew-createFrom",
             createInput: ".csc-createNew-createFrom-input",
             createLabel: ".csc-createNew-createFrom-label",
-            templateSelection: ".csc-createNew-templateSelection"
+            templateSelection: ".csc-createNew-templateSelection",
+            vocabs: ".csc-createNew-vocabs"
         },
         repeatingSelectors: ["createFrom"],
         styles: {
             radio: "cs-createNew-recordRadio",
             "label": "cs-createNew-recordLabel",
             templates: "cs-createNew-templates",
-            templateSelection: "cs-createNew-templateSelection"
+            templateSelection: "cs-createNew-templateSelection",
+            vocabs: "cs-createNew-vocabs"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -347,7 +361,9 @@ cspace = cspace || {};
             createFromNames: [],
             createFromSelection: "fromScratch",
             templateSelection: "",
-            templateNames: []
+            templateNames: [],
+            vocabSelection: "",
+            vocabNames: []
         },
         animationOpts: {
             time: 300,
@@ -359,7 +375,8 @@ cspace = cspace || {};
         that.events.updateModel.fire({
             currentSelection: that.locate("radio").val(),
             createFromSelection: that.model.createFromSelection,
-            templateSelection: that.model.templateSelection
+            templateSelection: that.model.templateSelection,
+            vocabSelection: that.model.vocabSelection
         });
     };
     
@@ -392,7 +409,18 @@ cspace = cspace || {};
                     }
                 }, {"addClass": "{styles}.radio"}]
             }, 
-            expander: {
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${vocabs}",
+                trueTree: {
+                    vocabs: {
+                        decorators: {"addClass": "{styles}.vocabs"},
+                        selection: "${vocabSelection}",
+                        optionlist: "${vocabs}",
+                        optionnames: "${vocabNames}"
+                    }
+                }
+            }, {
                 type: "fluid.renderer.condition",
                 condition: "${templates}",
                 trueTree: {
@@ -427,7 +455,7 @@ cspace = cspace || {};
                         }
                     }
                 }
-            }
+            }]
         };
     };
     
@@ -446,6 +474,22 @@ cspace = cspace || {};
         }
         lookupNames(applier, messageBase, model.createFromList, "createFromNames", "createnew");
         lookupNames(applier, messageBase, model.templates, "templateNames", "template");
+
+        var allVocabs = fluid.get(model, "vocabs");
+        if (!allVocabs) {
+            return;
+        }
+        var vocabsExist = allVocabs[model.recordType];
+        if (!vocabsExist) {
+            return applier.requestChange("vocabs", undefined);;
+        }
+        var vocabs = [];
+        fluid.each(vocabsExist, function (vocab) {
+            vocabs.push(vocab);
+        });
+        applier.requestChange("vocabs", vocabs);
+        applier.requestChange("vocabSelection", vocabs[0]);
+        lookupNames(applier, messageBase, model.vocabs, "vocabNames", "vocab");
     };
     
     cspace.createNew.recordBox.preInit = function (that) {
@@ -459,6 +503,9 @@ cspace = cspace || {};
             that.applier.modelChanged.addListener(value, function () {
                 updateModel(that);
             });
+        });
+        that.applier.modelChanged.addListener("vocabSelection", function () {
+            updateModel(that);
         });
     };
     

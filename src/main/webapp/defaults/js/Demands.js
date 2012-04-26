@@ -168,7 +168,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.newRecordLocalUrl", "{createNew}.options.urls.templateLocal"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordLocalUrl"]
         });
         
         // DataContext demands
@@ -848,11 +848,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.newRecordUrl", "{createNew}.options.urls.template"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordUrl"]
         });
         fluid.demands("createTemplate", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.templateUrl", "{createNew}.options.urls.template"]
+            args: ["{createNew}.model", "{createNew}.options.urls.templateUrl"]
         });
         fluid.demands("createNew", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.createNew"
