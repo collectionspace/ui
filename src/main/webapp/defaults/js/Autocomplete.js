@@ -238,6 +238,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var preferredFlag = strings.preferredFlag,
             fieldName = strings.matchName;
         
+        tree.expander = fluid.makeArray(tree.expander);
+        
         tree.expander.push({
             repeatID: repeatID,
             type: "fluid.renderer.repeat",
@@ -409,6 +411,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     newArray = [],
                     fieldName = that.options.strings.matchName,
                     preferredFlag = that.options.strings.preferredFlag,
+                    recordKey = that.options.strings.recordKey,
                     popupMatches = "popupMatches";
                 
                 fluid.each(fluid.copy(fluid.get(model, pulledMatches)), function (element) {
@@ -419,6 +422,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         var newElement = {};
                         newElement[fieldName] = element.label;
                         newElement[preferredFlag] = true;
+                        newElement[recordKey] = element[recordKey];
                         element.preferredGroup.push(newElement);
                     }
                     
@@ -767,7 +771,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         parentBundle: "{globalBundle}",
         strings: {
             preferredFlag: "_primary",
-            matchName: "label"
+            matchName: "label",
+            recordKey: "urn"
         }
     });
     

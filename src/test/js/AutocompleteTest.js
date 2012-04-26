@@ -43,11 +43,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var input = autocomplete.autocompleteInput;
         jqUnit.assertValue("Found input", input);
         autocomplete.autocomplete.events.onSearch.addListener(function(newValue, permitted) {
-            jqUnit.assertEquals("Search performed", "all", newValue);
+            jqUnit.assertEquals("Search performed", "top", newValue);
             jqUnit.assertTrue("Results loading indicator", input.hasClass(autocomplete.autocomplete.options.styles.loadingStyle));
         });
         autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertMatchCount("\"all\" results count in markup", 11, autocomplete);
+            assertMatchCount("\"top\" results count in markup", 13, autocomplete);
             assertCloseVisible(autocomplete, true);
             closeFunc(autocomplete);
             assertCloseVisible(autocomplete, false);
@@ -57,7 +57,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         jqUnit.assertTrue("Close button initially hidden", autocomplete.closeButton.button.is(":hidden"));
         input.keydown();
-        input.val("all");
+        input.val("top");
         stop();
     };
 
@@ -81,11 +81,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     function clickMatch(autocomplete) {
         var popup = autocomplete.popup;
-        popup.dom.locate("matchItem").click();        
+        popup.dom.locate("matchItemContent").click();
     }
     
     function enterMatch(autocomplete) {
-        autocomplete.popup.dom.locate("matchItem").trigger({type: "keydown", keyCode: $.ui.keyCode.ENTER});
+        autocomplete.popup.dom.locate("matchItemContent").trigger({type: "keydown", keyCode: $.ui.keyCode.ENTER});
     }
 
     var chooseMatchInteraction = function (container, chooseFunc) {
@@ -93,7 +93,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var autocomplete = cspace.autocomplete(container);
         var input = autocomplete.autocompleteInput;
         autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertMatchCount("\"karen\" results count in markup", 1, autocomplete);
+            assertMatchCount("\"Utopia\" results count in markup", 1, autocomplete);
             assertCloseVisible(autocomplete, true);
             chooseFunc(autocomplete);
             assertCloseVisible(autocomplete, false);
@@ -105,7 +105,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         input.keydown();
-        input.val("karen");
+        input.val("Utopia");
         stop();
     };
     
@@ -119,7 +119,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var focusMatch = function (autocomplete) {
         var popup = autocomplete.popup;
-        popup.dom.locate("matchItem").focus();        
+        popup.dom.locate("matchItemContent").focus();        
     };
     
     var assertPopupOpen = function (autocomplete, state) {
@@ -162,13 +162,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, 150);
         });
         input.keydown();
-        input.val("karen");
+        input.val("Utopia");
         input.focus();
         stop();
     };
     
     var gdInteractionClick = function (container, focusFunc) {
-        gdInteraction(container, focusFunc, false, true, "karen");
+        gdInteraction(container, focusFunc, false, true, "Utopia");
     };
     
     var gdInteractionBlur = function (container, focusFunc) {
@@ -176,7 +176,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     var gdInteractionExclude = function (container, focusFunc) {
-        gdInteraction(container, focusFunc, true, false, "karen");
+        gdInteraction(container, focusFunc, true, false, "Utopia");
     };
     
     submitTest("Test Global Dismissal interaction when click", makeArgumentedTest(gdInteractionClick, clickAuthority));
