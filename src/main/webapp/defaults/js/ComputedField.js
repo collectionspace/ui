@@ -79,7 +79,7 @@ cspace = cspace || {};
         func: "cspace.computedField.joinArgs",
 
         // Arguments to the calculation function. These are specified as EL paths.
-        // See cspace.computedField.bindModelEvents for details on how these paths are resolved in the model.
+        // See cspace.computedField.resolveElPath for details on how these paths are resolved in the model.
         args: [],
 
         // The datatype used for validation.
@@ -126,6 +126,10 @@ cspace = cspace || {};
             status: that.lookupMessage("invalidCalculatedNumber")
         });
 
+        if (that.options.readOnly) {
+            that.container.attr("disabled", true);
+        }
+        
         that.fullElPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
         that.bindModelEvents();
     };
