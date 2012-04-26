@@ -25,7 +25,11 @@ cspace = cspace || {};
             lookupMessage: "cspace.util.lookupMessage",
             validate: {
                 funcName: "cspace.computedField.validate",
-                args: ["{computedField}", "{arguments}.0", "{messageBar}"]
+                args: ["{computedField}", "{arguments}.0", "{messageBar}", "{arguments}.1"]
+            },
+            showMessage: {
+                funcName: "cspace.computedField.showMessage",
+                args: ["{messageBar}", "{arguments}.0"]
             },
             clear: {
                 funcName: "cspace.computedField.clear",
@@ -39,13 +43,21 @@ cspace = cspace || {};
                 funcName: "cspace.computedField.resolveElPath",
                 args: ["{computedField}", "{arguments}.0"]
             },
+            refresh: {
+                funcName: "cspace.computedField.refresh",
+                args: "{computedField}"
+            },
             calculateFieldValue: {
                 funcName: "cspace.computedField.calculateFieldValue",
                 args: "{computedField}"
             },
-            getListenerNamespace: {
-                funcName: "cspace.computedField.getListenerNamespace",
+            getArgListenerNamespace: {
+                funcName: "cspace.computedField.getArgListenerNamespace",
                 args: ["{computedField}", "{arguments}.0"]
+            },
+            getFieldListenerNamespace: {
+                funcName: "cspace.computedField.getFieldListenerNamespace",
+                args: "{computedField}"
             }
         },
         events: {
@@ -78,9 +90,11 @@ cspace = cspace || {};
     });
        
     cspace.computedField.preInit = function (that) {
+        that.applierListenerNamespaces = [];
+        
         that.removeApplierListeners = function () {
-            fluid.each(that.options.args, function(argElPath) {            
-                that.applier.modelChanged.removeListener(that.getListenerNamespace(argElPath));
+            fluid.each(that.applierListenerNamespaces, function(namespace) {            
+                that.applier.modelChanged.removeListener(namespace);
             });
         };
     };
@@ -91,37 +105,84 @@ cspace = cspace || {};
             that.outFirer = setTimeout(function () {
                 that.clear();
                 var value = that.container.val();
-                that.validate(value);
+                that.validate(value, that.invalidNumberMessage);
             }, that.options.delay);
         });
     };
 
     cspace.computedField.finalInit = function (that) {
-        var label;
+        that.labelText = "";
+
         if (that.options.label) {
-            label = that.lookupMessage(that.options.label) + ": ";
-        };
+            that.labelText = that.lookupMessage(that.options.label) + ": ";
+        }
+
         that.invalidNumberMessage = fluid.stringTemplate(that.lookupMessage("invalidNumber"), {
-            label: label || ""
+            label: that.labelText
         });
 
+        that.invalidCalculationMessage = fluid.stringTemplate(that.lookupMessage("errorCalculating"), {
+            label: that.labelText,
+            status: that.lookupMessage("invalidCalculatedNumber")
+        });
+
+        that.fullElPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
         that.bindModelEvents();
     };
 
     /*
-     * Registers listeners for changes in the model. When the value at an EL path specified as an
-     * argument to the calculation function is changed, recompute the field value.
+     * Registers listeners for changes in the model.
+     * When the value at an EL path specified as an argument to the calculation function is changed, recompute the field value, and update the model.
+     * When the value of the field is updated in the model, update it in the view.
      */
     cspace.computedField.bindModelEvents = function (that) {
         fluid.each(that.options.args, function(argElPath) {
-            var fullElPath = that.resolveElPath(argElPath);
+            var fullArgElPath = that.resolveElPath(argElPath);
+            var namespace = that.getArgListenerNamespace(argElPath);
             
-            that.applier.modelChanged.addListener(fullElPath, function(model) {
-                var newValue = that.calculateFieldValue();
-                that.container.val(newValue);
-            }, that.getListenerNamespace(argElPath));
+            that.applier.modelChanged.addListener(fullArgElPath, function(model) {
+                that.refresh();
+            }, namespace);
+
+            that.applierListenerNamespaces.push(namespace);
         });
+
+        var namespace = that.getFieldListenerNamespace();
+
+        that.applier.modelChanged.addListener(that.fullElPath, function(model) {
+            that.container.val(fluid.get(model, that.fullElPath));
+        }, namespace);
+
+        that.applierListenerNamespaces.push(namespace);      
     };
+
+    /*
+     * Updates the field value in the model, showing an error message if necessary.
+     */
+    cspace.computedField.refresh = function (that) {
+        that.clear();
+
+        var newValue;
+
+        try {
+            newValue = that.calculateFieldValue();
+        }
+        catch (error) {
+            var message = fluid.stringTemplate(that.lookupMessage("errorCalculating"), {
+                label: that.labelText,
+                status: error.message
+            });
+            
+            that.showMessage(message);
+            return;
+        }
+        
+        if (!that.validate(newValue, that.invalidCalculationMessage)) {
+            return;
+        }
+        
+        that.applier.requestChange(that.fullElPath, newValue);      
+    }
 
     /*
      * Calculates the field value, applying the configured calculation function to the values
@@ -157,20 +218,31 @@ cspace = cspace || {};
     };
 
     /*
-     * Returns a unique namespace name for a given EL path.
+     * Returns a unique namespace name for a given argument EL path.
      */
-    cspace.computedField.getListenerNamespace = function (that, elPath) {
-        return  ("elPath-" + elPath + "-" + that.id);
+    cspace.computedField.getArgListenerNamespace = function (that, elPath) {
+        return  ("argElPath-" + elPath + "-" + that.id);
     };
 
-    cspace.computedField.validate = function (that, value, messageBar) {
+    /*
+     * Returns a unique namespace name for this component's field.
+     */
+    cspace.computedField.getFieldListenerNamespace = function (that) {
+        return  ("elPath-" + that.id);
+    };
+
+    cspace.computedField.validate = function (that, value, messageBar, message) {
         var valid = true;
         
         if (that.options.type && that.options.type != "string") {
-            valid = cspace.util.validate(value, that.options.type, messageBar, that.invalidNumberMessage);            
+            valid = cspace.util.validate(value, that.options.type, messageBar, message);            
         }
         
         return valid;
+    }
+
+    cspace.computedField.showMessage = function (messageBar, message) {
+        messageBar.show(message, null, true);
     }
 
     cspace.computedField.clear = function (messageBar) {
