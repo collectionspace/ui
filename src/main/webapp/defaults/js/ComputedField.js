@@ -31,8 +31,8 @@ cspace = cspace || {};
                 funcName: "cspace.computedField.showMessage",
                 args: ["{messageBar}", "{arguments}.0"]
             },
-            clear: {
-                funcName: "cspace.computedField.clear",
+            clearMessage: {
+                funcName: "cspace.computedField.clearMessage",
                 args: "{messageBar}"
             },
             bindModelEvents: {
@@ -103,7 +103,7 @@ cspace = cspace || {};
         that.container.keyup(function () {
             clearTimeout(that.outFirer);
             that.outFirer = setTimeout(function () {
-                that.clear();
+                that.clearMessage();
                 var value = that.container.val();
                 that.validate(value, that.invalidNumberMessage);
             }, that.options.delay);
@@ -164,7 +164,7 @@ cspace = cspace || {};
      * Updates the field value in the model, showing an error message if necessary.
      */
     cspace.computedField.refresh = function (that) {
-        that.clear();
+        that.clearMessage();
 
         var newValue;
 
@@ -249,7 +249,7 @@ cspace = cspace || {};
         messageBar.show(message, null, true);
     }
 
-    cspace.computedField.clear = function (messageBar) {
+    cspace.computedField.clearMessage = function (messageBar) {
         messageBar.hide();
     };
 })(jQuery, fluid);
