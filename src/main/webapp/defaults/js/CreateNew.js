@@ -18,6 +18,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.createNew", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         finalInitFunction: "cspace.createNew.finalInit",
+        preInitFunction: "cspace.createNew.preInit",
         parentBundle: "{globalBundle}",
         model: {
             categories: [{
@@ -125,14 +126,34 @@ cspace = cspace || {};
         components: {
             templateSource: {
                 type: "cspace.createNew.templateViewDataSource"
-            }
+            },
+            vocab: "{vocab}"
         },
         events: {
             collapseAll: null,
             updateModel: null,
             onReady: null
+        },
+        listeners: {
+            prepareModelForRender: "{cspace.createNew}.prepareModelForRender"
         }
     });
+
+    cspace.createNew.preInit = function (that) {
+        that.prepareModelForRender = function () {
+            var permittedAuth = fluid.find(that.model.categories, function (category) {
+                if (category.name === "vocabulariesCategory") {
+                    return category.arr;
+                }
+            });
+            if (!permittedAuth) {
+                return;
+            }
+            that.applier.requestChange("vocabs", fluid.transform(permittedAuth, function (auth) {
+                return that.vocab.authority[auth].vocabs;
+            }));
+        };
+    };
     
     cspace.createNew.updateModel = function (that, model) {
         fluid.each(model, function (value, key) {
