@@ -234,30 +234,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
-    cspace.autocomplete.makePNPSelectionTree = function (that, tree, repeatID, pulledMatches, popupMatches, fieldName) {
-        var model = that.model,
-            styles = that.options.styles,
-            preferredFlag = that.options.strings.preferredFlag,
-            newArray = [];
-        
-        tree.expander = fluid.makeArray(tree.expander);
-        
-        fluid.each(fluid.copy(fluid.get(model, pulledMatches)), function (element) {
-            element.label = element.label || "";
-            element.preferredGroup = element.preferredGroup || [];
-            
-            if (!element.preferredGroup.length) {
-                var newElement = {};
-                newElement[fieldName] = element.label;
-                newElement[preferredFlag] = true;
-                element.preferredGroup.push(newElement);
-            }
-            
-            newArray.push.apply(newArray, element.preferredGroup);
-        });
-        
-        model.popupMatches = newArray;
-        //that.applier.requestChange(fluid.model.composeSegments("model", popupMatches), newArray);
+    cspace.autocomplete.makePNPSelectionTree = function (strings, styles, tree, repeatID, popupMatches) {
+        var preferredFlag = strings.preferredFlag,
+            fieldName = strings.matchName;
         
         tree.expander.push({
             repeatID: repeatID,
@@ -293,13 +272,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.produceTree = function (that) {
-        var tree = {};
+        var tree = {},
+            model = that.model;
         var index = fluid.find(that.model.matches, function (match, index) {
-            if (cspace.autocomplete.matchTerm(match.label, that.model.term)) {
+            if (cspace.autocomplete.matchTerm(match.label, model.term)) {
                 return index;
             }
         });
-        if (index === undefined && that.model.authorities.length > 0) {
+        if (index === undefined && model.authorities.length > 0) {
             tree.addToPanel = {};
             tree.addTermTo = {
                 messagekey: "autocomplete-addTermTo",
@@ -307,15 +287,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             };
             cspace.autocomplete.makeAuthoritySelectionTree(tree, "authorityItem", "authorities", "fullName");
         }
-        if (that.model.matches.length === 0) {
+        if (model.matches.length === 0) {
             tree.noMatches = {
                 messagekey: "autocomplete-noMatches"
             };
         }
         else {
             tree.matches = {};
-            tree.longestMatch = cspace.autocomplete.longest(that.model.matches);
-            cspace.autocomplete.makePNPSelectionTree(that, tree, "matchItem", "matches", "popupMatches", "label");
+            tree.longestMatch = cspace.autocomplete.longest(model.matches);
+            cspace.autocomplete.makePNPSelectionTree(that.options.strings, that.options.styles, tree, "matchItem", "popupMatches");
         }
         return tree;
     };
@@ -422,6 +402,34 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return that;
     };
     
+    cspace.autocomplete.popup.preInit = function (that) {
+        cspace.util.preInitMergeListeners(that.options, {
+            prepareModelForRender: function (model, applier, that) {
+                var pulledMatches = "matches",
+                    newArray = [],
+                    fieldName = that.options.strings.matchName,
+                    preferredFlag = that.options.strings.preferredFlag,
+                    popupMatches = "popupMatches";
+                
+                fluid.each(fluid.copy(fluid.get(model, pulledMatches)), function (element) {
+                    element.label = element.label || "";
+                    element.preferredGroup = element.preferredGroup || [];
+                    
+                    if (!element.preferredGroup.length) {
+                        var newElement = {};
+                        newElement[fieldName] = element.label;
+                        newElement[preferredFlag] = true;
+                        element.preferredGroup.push(newElement);
+                    }
+                    
+                    newArray.push.apply(newArray, element.preferredGroup);
+                });
+                
+                that.applier.requestChange(popupMatches, newArray);
+            }
+        });
+    };
+    
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
         selectors: {
@@ -440,6 +448,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             nonPreferred: "cs-autocomplete-nonPreferred"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
+        preInitFunction: "cspace.autocomplete.popup.preInit",
         produceTree: "cspace.autocomplete.produceTree",
         resources: {
             template: {
@@ -757,7 +766,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         parentBundle: "{globalBundle}",
         strings: {
-            preferredFlag: "_primary"
+            preferredFlag: "_primary",
+            matchName: "label"
         }
     });
     
