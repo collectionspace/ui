@@ -242,11 +242,12 @@ cspace = cspace || {};
                             row: {
                                 decorators: [{
                                     type: "fluid",
-                                    func: "cspace.createNew.recordTemplateBox",
+                                    func: "cspace.createNew.recordBox",
                                     options: {
                                         model: {
                                             recordType: "${{rowdyVal}}",
-                                            templates: "${templateViews}"
+                                            templates: "${templateViews}",
+                                            vocabs: "${vocabs}"
                                         }
                                     }
                                 }, {"addClass": "{styles}.row"}]
@@ -293,7 +294,7 @@ cspace = cspace || {};
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");
     
-    fluid.defaults("cspace.createNew.recordTemplateBox", {
+    fluid.defaults("cspace.createNew.recordBox", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
             "rendererOptions.applier": "applier",
@@ -305,7 +306,7 @@ cspace = cspace || {};
             collapseOn: null,
             updateModel: null
         },
-        produceTree: "cspace.createNew.recordTemplateBox.produceTree",
+        produceTree: "cspace.createNew.recordBox.produceTree",
         renderOnInit: true,
         selectors: {
             radio: ".csc-createNew-recordRadio",
@@ -334,13 +335,13 @@ cspace = cspace || {};
         },
         invokers: {
             updateCurrentSelection: {
-                funcName: "cspace.createNew.recordTemplateBox.updateCurrentSelection",
-                args: "{recordTemplateBox}"
+                funcName: "cspace.createNew.recordBox.updateCurrentSelection",
+                args: "{recordBox}"
             }
         },
         strings: {},
         parentBundle: "{globalBundle}",
-        preInitFunction: "cspace.createNew.recordTemplateBox.preInit",
+        preInitFunction: "cspace.createNew.recordBox.preInit",
         model: {
             createFromList: ["fromScratch", "fromTemplate"],
             createFromNames: [],
@@ -362,7 +363,7 @@ cspace = cspace || {};
         });
     };
     
-    cspace.createNew.recordTemplateBox.updateCurrentSelection = function (that) {
+    cspace.createNew.recordBox.updateCurrentSelection = function (that) {
         that.events.onShowTemplate.fire();
         if (that.model.templates) {
             that.refreshView();
@@ -372,7 +373,7 @@ cspace = cspace || {};
         updateModel(that);
     };
     
-    cspace.createNew.recordTemplateBox.produceTree = function (that) {
+    cspace.createNew.recordBox.produceTree = function (that) {
         return {
             "label": {
                 messagekey: "${recordType}",
@@ -447,7 +448,7 @@ cspace = cspace || {};
         lookupNames(applier, messageBase, model.templates, "templateNames", "template");
     };
     
-    cspace.createNew.recordTemplateBox.preInit = function (that) {
+    cspace.createNew.recordBox.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             collapseOn: function () {
                 that.locate("templates").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
@@ -461,6 +462,6 @@ cspace = cspace || {};
         });
     };
     
-    fluid.fetchResources.primeCacheFromResources("cspace.createNew.recordTemplateBox");
+    fluid.fetchResources.primeCacheFromResources("cspace.createNew.recordBox");
     
 })(jQuery, fluid);

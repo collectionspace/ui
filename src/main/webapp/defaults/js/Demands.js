@@ -864,7 +864,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.createNew.templateViewDataSource"
             }
         });
-        fluid.demands("cspace.createNew.recordTemplateBox", "cspace.createNew", {
+        fluid.demands("cspace.createNew.recordBox", "cspace.createNew", {
             container: "{arguments}.0",
             mergeAllOptions: [{
                 createNewModel: "{createNew}.model",
