@@ -17,17 +17,11 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "displayName": {
-                                    "type": "string"
-                                },
-                                "qualifier": {
-                                    "type": "string"
-                                },
                                 "termType": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "term": {
+                                "shortDisplayName": {
                                     "type": "string"
                                 },
                                 "termLanguage": {
@@ -79,10 +73,6 @@
                     "uri": {
                         "type": "string"
                     },
-                    "termLanguage": {
-                        "default": "",
-                        "type": "string"
-                    },
                     "updatedBy": {
                         "type": "string"
                     },
@@ -90,13 +80,6 @@
                         "type": "date"
                     },
                     "shortIdentifier": {
-                        "type": "string"
-                    },
-                    "shortDisplayName": {
-                        "type": "string"
-                    },
-                    "termType": {
-                        "default": "",
                         "type": "string"
                     },
                     "createdBy": {

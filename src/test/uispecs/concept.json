@@ -164,14 +164,12 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-conceptAuthority-displayName": "${{row}.displayName}",
-                                                                ".csc-conceptAuthority-qualifier": "${{row}.qualifier}",
                                                                 ".csc-conceptAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-conceptAuthority-term": "${{row}.term}",
+                                                                ".csc-concept-shortDisplayName": "${fields.shortDisplayName}",
                                                                 ".csc-conceptAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -195,17 +193,11 @@
                                             }
                                         ]
                                     },
-                                    ".csc-concept-displayName-label": {
-                                        "messagekey": "concept-displayNameLabel"
-                                    },
-                                    ".csc-concept-qualifier-label": {
-                                        "messagekey": "concept-qualifierLabel"
-                                    },
                                     ".csc-concept-termType-label": {
                                         "messagekey": "concept-termTypeLabel"
                                     },
-                                    ".csc-concept-term-label": {
-                                        "messagekey": "concept-termLabel"
+                                    ".csc-concept-shortDisplayName-label": {
+                                        "messagekey": "concept-shortDisplayNameLabel"
                                     },
                                     ".csc-concept-termLanguage-label": {
                                         "messagekey": "concept-termLanguageLabel"
@@ -230,22 +222,15 @@
                 }
             ]
         },
-        ".csc-concept-shortDisplayName-label": {
-            "messagekey": "concept-shortDisplayNameLabel"
-        },
         ".csc-concept-shortIdentifier-label": {
             "messagekey": "concept-shortIdentifierLabel"
         },
         ".csc-concept-createdBy": "${fields.createdBy}",
         ".csc-concept-updatedBy": "${fields.updatedBy}",
-        ".csc-concept-termType-label": {
-            "messagekey": "concept-termTypeLabel"
-        },
         ".csc-concept-createdBy-label": {
             "messagekey": "concept-createdByLabel"
         },
         ".csc-concept-tenantID": "${fields.tenantID}",
-        ".csc-concept-shortDisplayName": "${fields.shortDisplayName}",
         ".csc-concept-qualifier": "${fields.qualifier}",
         ".csc-concept-uri": "${fields.uri}",
         ".csc-concept-createdAt-label": {
@@ -287,9 +272,6 @@
         ".csc-concept-qualifier-label": {
             "messagekey": "concept-qualifierLabel"
         },
-        ".csc-concept-termLanguage-label": {
-            "messagekey": "concept-termLanguageLabel"
-        },
         ".csc-concept-displayName": "${fields.displayName}",
         ".csc-concept-csid-label": {
             "messagekey": "concept-csidLabel"
@@ -297,37 +279,10 @@
         ".csc-concept-updatedAt-label": {
             "messagekey": "concept-updatedAtLabel"
         },
-        ".csc-concept-termLanguage": {
-            "decorators": [
-                {
-                    "func": "cspace.termList",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.termLanguage",
-                        "termListType": "termLanguage"
-                    }
-                }
-            ]
-        },
         ".csc-concept-createdAt": "${fields.createdAt}",
         ".csc-concept-refName": "${fields.refName}",
         ".csc-concept-termStatus-label": {
             "messagekey": "concept-termStatusLabel"
-        },
-        ".csc-concept-termType": {
-            "optionnames": [
-                "Please select a value",
-                "descriptor",
-                "alternate descriptor",
-                "used for term"
-            ],
-            "optionlist": [
-                "",
-                "descriptor",
-                "alternate descriptor",
-                "used for term"
-            ],
-            "selection": "${fields.termType}"
         }
     }
 }
