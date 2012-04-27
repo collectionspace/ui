@@ -41,7 +41,8 @@ cspace = cspace || {};
                 options: {
                     resources: "{cspace.preferred}.options.resourceSpec",
                     applier: "{cspace.preferred}.applier",
-                    model: "{cspace.preferred}.model"
+                    model: "{cspace.preferred}.model",
+                    readOnly: "{cspace.preferred}.options.readOnly"
                 }
             }
         },
