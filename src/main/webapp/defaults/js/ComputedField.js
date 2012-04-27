@@ -166,7 +166,7 @@ cspace = cspace || {};
     cspace.computedField.refresh = function (that) {
         that.clearMessage();
 
-        var newValue;
+        var newValue = "";
 
         try {
             newValue = that.calculateFieldValue();
@@ -178,7 +178,6 @@ cspace = cspace || {};
             });
             
             that.showMessage(message);
-            return;
         }
         
         if (!that.validate(newValue, that.invalidCalculationMessage)) {
