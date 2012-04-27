@@ -10,6 +10,48 @@
             },
             "fields": {
                 "properties": {
+                    "preferredConceptGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "displayName": {
+                                    "type": "string"
+                                },
+                                "qualifier": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "term": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termPreferredForLanguage": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "tenantID": {
                         "type": "string"
                     },
@@ -60,10 +102,10 @@
                     "createdBy": {
                         "type": "string"
                     },
-                    "broaderContext": {
+                    "createdAt": {
                         "type": "string"
                     },
-                    "createdAt": {
+                    "broaderContext": {
                         "type": "string"
                     },
                     "termStatus": {
@@ -72,20 +114,8 @@
                     "refName": {
                         "type": "string"
                     },
-                    "equivalentContexts": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "equivalentContext": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
+                    "displayName": {
+                        "type": "string"
                     },
                     "narrowerContexts": {
                         "items": {
@@ -102,8 +132,20 @@
                         },
                         "type": "array"
                     },
-                    "displayName": {
-                        "type": "string"
+                    "equivalentContexts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "equivalentContext": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
