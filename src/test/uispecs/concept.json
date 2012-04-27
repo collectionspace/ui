@@ -188,7 +188,10 @@
                                                                 },
                                                                 ".csc-conceptAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-conceptAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-conceptAuthority-termSourceID": "${{row}.termSourceID}"
+                                                                ".csc-conceptAuthority-termSourceID": "${{row}.termSourceID}",
+                                                                ".csc-conceptAuthority-termScopeNote": "${{row}.termScopeNote}",
+                                                                ".csc-conceptAuthority-termScopeNoteSource": "${{row}.termScopeNoteSource}",
+                                                                ".csc-conceptAuthority-termScopeNoteSourceDetail": "${{row}.termScopeNoteSourceDetail}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -221,6 +224,15 @@
                                     },
                                     ".csc-concept-termSourceID-label": {
                                         "messagekey": "concept-termSourceIDLabel"
+                                    },
+                                    ".csc-concept-termScopeNote-label": {
+                                        "messagekey": "concept-termScopeNoteLabel"
+                                    },
+                                    ".csc-concept-termScopeNoteSource-label": {
+                                        "messagekey": "concept-termScopeNoteSourceLabel"
+                                    },
+                                    ".csc-concept-termScopeNoteSourceDetail-label": {
+                                        "messagekey": "concept-termScopeNoteSourceDetailLabel"
                                     }
                                 },
                                 "type": "fluid.noexpand"

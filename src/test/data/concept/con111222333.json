@@ -15,6 +15,9 @@
                 "termSourceDetail": "Source Detail",
                 "termSourceID": "Source ID",
                 "historicalFlag": "both",
+                "termScopeNote": "Scope Note",
+                "termScopeNoteSource": "Scope Note Source",
+                "termScopeNoteSourceDetail": "Scope Note Source Detail",
                 "_primary": true
             }
         ],

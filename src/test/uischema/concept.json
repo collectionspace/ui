@@ -44,6 +44,15 @@
                                 },
                                 "termSourceID": {
                                     "type": "string"
+                                },
+                                "termScopeNote": {
+                                    "type": "string"
+                                },
+                                "termScopeNoteSource": {
+                                    "type": "string"
+                                },
+                                "termScopeNoteSourceDetail": {
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
