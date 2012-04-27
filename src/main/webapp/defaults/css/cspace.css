@@ -451,6 +451,11 @@ li .flc-pager-pageLink {
     color: #696565;
     float: left;
 }
+.cs-titleBar-vocab {
+    float: right;
+    padding: 9px 10px 0 0;
+    color: #74AC4D;
+}
 
 
 /* inner body formatting */
