@@ -32,6 +32,10 @@
                                     "default": false,
                                     "type": "boolean"
                                 },
+                                "historicalFlag": {
+                                    "default": "",
+                                    "type": "string"
+                                },
                                 "termSource": {
                                     "type": "string"
                                 },

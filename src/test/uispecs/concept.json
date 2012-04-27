@@ -181,6 +181,11 @@
                                                                     }]
                                                                 },
                                                                 ".csc-conceptAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-conceptAuthority-historicalFlag": {
+                                                                    "optionnames": ["Please select a value", "current", "historical", "both"],
+                                                                    "optionlist": ["", "current", "historical", "both"],
+                                                                    "selection": "${{row}.historicalFlag}"
+                                                                },
                                                                 ".csc-conceptAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-conceptAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-conceptAuthority-termSourceID": "${{row}.termSourceID}"
@@ -204,6 +209,9 @@
                                     },
                                     ".csc-concept-termPreferredForLanguage-label": {
                                         "messagekey": "concept-termPreferredForLanguageLabel"
+                                    },
+                                    ".csc-concept-historicalFlag-label": {
+                                        "messagekey": "concept-historicalFlagLabel"
                                     },
                                     ".csc-concept-termSource-label": {
                                         "messagekey": "concept-termSourceLabel"

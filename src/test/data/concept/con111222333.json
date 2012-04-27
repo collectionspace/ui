@@ -1,0 +1,49 @@
+{
+    "termsUsed": [],
+    "relations": [],
+    "csid": "con111222333",
+    "refobjs": [],
+    "namespace": "concept",
+    "fields": {
+        "preferredConceptGroup": [
+            {
+                "termType": "descriptor",
+                "shortDisplayName": "Shortie",
+                "termLanguage": "Value 1",
+                "termPreferredForLanguage": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "historicalFlag": "both",
+                "_primary": true
+            }
+        ],
+        "relatedTerms": [{
+            "_primary": true
+        }],
+        "csid": "8c7853a1-f1d3-4ae5-8511",
+        "qualifier": "Qualifier",
+        "termLanguage": "urn:cspace:core.collectionspace.org:vocabularies:name(languages):item:name(eng)'English'",
+        "updatedBy": "admin@core.collectionspace.org",
+        "shortIdentifier": "ConceptDisplayName1332900713944",
+        "updatedAt": "2012-03-28T02:11:53Z",
+        "shortDisplayName": "Concept",
+        "termType": "descriptor",
+        "de-urned-termLanguage": "English",
+        "createdBy": "admin@core.collectionspace.org",
+        "broaderContext": "",
+        "createdAt": "2012-03-28T02:11:53Z",
+        "termStatus": "",
+        "refName": "urn:cspace:core.collectionspace.org:conceptauthorities:name(concept):item:name(ConceptDisplayName1332900713944)'Concept (Display Name)'",
+        "narrowerContexts": [{
+            "_primary": true
+        }],
+        "equivalentContexts": [{
+            "_primary": true
+        }],
+        "authorityid": "6ca3db57-7c96-47b6-b17d",
+        "displayName": "Concept (Display Name)",
+        "refid": "urn:cspace:core.collectionspace.org:conceptauthorities:name(concept):item:name(ConceptDisplayName1332900713944)'Concept (Display Name)'",
+        "recordtype": "concept"
+    }
+}
