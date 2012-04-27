@@ -1578,14 +1578,6 @@ fluid.registerNamespace("cspace.util");
         });
     };
     
-    cspace.util.merge = function () {
-        var togo = [];
-        fluid.each(arguments, function (arr) {
-            $.merge(togo, fluid.makeArray(arr));
-        });
-        return togo;
-    };
-    
     cspace.util.composeSegments = function (root, path) {
         return fluid.model.composeSegments.apply(null, root ? fluid.remove_if(fluid.makeArray(arguments), function (arg) {
             if (!arg) {return true;}

@@ -127,7 +127,7 @@ cspace = cspace || {};
         
         // Go through all of resourceSpecs and move|map matched ones into the composite part.
         fluid.remove_if(resourceSpecs, function (resourceSpec, name) {
-            if ($.inArray(name, that.options.resources) < 0) {
+            if (typeof that.options.resources[name] === "undefined") {
                 return;
             }
             if (!resourceSpec) {
@@ -182,6 +182,9 @@ cspace = cspace || {};
 
     var setTags = function (that, options) {
         var type = that.options.recordType;
+        if (!type) {
+            return;
+        }
         fluid.each(options.userLogin.permissions[type], function (permission) {
             that[fluid.model.composeSegments(type, permission, "tag")] = fluid.typeTag(fluid.model.composeSegments(type, permission));
         });

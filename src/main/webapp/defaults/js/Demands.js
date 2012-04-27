@@ -2755,8 +2755,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 resources: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.util.merge",
-                        args: ["{pageBuilderIO}.options.schema", "uispec"]
+                        func: "fluid.merge",
+                        args: [null, {}, "{pageBuilderIO}.options.schema", {"uispec": null}]
                     }
                 },
                 urls: {
