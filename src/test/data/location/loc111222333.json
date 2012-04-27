@@ -1,0 +1,40 @@
+{
+    "csid": "loc111222333",
+    "fields": {
+        "preferredLocationGroup": [
+            {
+                "name": "Epic Drawer",
+                "qualifier": "Drawer Qualifier",
+                "termType": "descriptor",
+                "term": "abc",
+                "termLanguage": "Value 1",
+                "termPreferredForLanguage": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "_primary": true
+            }
+        ],
+        "displayName": "MST:3:4B",
+        "termStatus": "rejected",
+        "name": "Drawer 4B",
+        "type": "drawer",
+        "address": "This is drawer's address.",
+        "securityNote": "This is drawer's security note.",
+        "accessNote": "This is drawer's access note.",
+        "conditionGroup": [
+            {
+                "_primary": true,
+                "conditionNote": "Primary condition note",
+                "conditionNoteDate": "12-12-2001" 
+            },
+            {
+                "_primary": false,
+                "conditionNote": "Secondary condition note",
+                "conditionNoteDate": "01-01-2001"
+            }
+        ]
+    },
+    "termsUsed": [],
+    "relations": {}
+}

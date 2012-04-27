@@ -398,7 +398,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             mergeAllOptions: [{
                 recordType: "{recordEditor}.options.recordType",
                 applier: "{recordEditor}.applier",
-                model: "{recordEditor}.model"
+                model: "{recordEditor}.model",
+                readOnly: "{recordEditor}.options.readOnly"
             }, "{arguments}.1"]
         });
     

@@ -35,7 +35,8 @@
                                     "type": "string"
                                 },
                                 "termPreferredForLanguage": {
-                                    "type": "string"
+                                    "default": false,
+                                    "type": "boolean"
                                 },
                                 "termSource": {
                                     "type": "string"

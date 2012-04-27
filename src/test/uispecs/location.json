@@ -164,7 +164,7 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-location-name": "${{row}.name}",
+                                                                ".csc-locationAuthority-name": "${{row}.name}",
                                                                 ".csc-locationAuthority-qualifier": "${{row}.qualifier}",
                                                                 ".csc-locationAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
@@ -182,16 +182,7 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-locationAuthority-termPreferredForLanguage": {
-                                                                    "decorators": [{
-                                                                        "func": "cspace.termList",
-                                                                        "type": "fluid",
-                                                                        "options": {
-                                                                            "elPath": "${{row}.termPreferredForLanguage}",
-                                                                            "termListType": "termPreferredForLanguage"
-                                                                        }
-                                                                    }]
-                                                                },
+                                                                ".csc-locationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-locationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-locationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-locationAuthority-termSourceID": "${{row}.termSourceID}"

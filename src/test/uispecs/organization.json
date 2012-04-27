@@ -164,7 +164,7 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-organization-displayName": "${{row}.displayName}",
+                                                                ".csc-organizationAuthority-displayName": "${{row}.displayName}",
                                                                 ".csc-organizationAuthority-qualifier": "${{row}.qualifier}",
                                                                 ".csc-organizationAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
@@ -182,16 +182,7 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-organizationAuthority-termPreferredForLanguage": {
-                                                                    "decorators": [{
-                                                                        "func": "cspace.termList",
-                                                                        "type": "fluid",
-                                                                        "options": {
-                                                                            "elPath": "${{row}.termPreferredForLanguage}",
-                                                                            "termListType": "termPreferredForLanguage"
-                                                                        }
-                                                                    }]
-                                                                },
+                                                                ".csc-organizationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-organizationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-organizationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",

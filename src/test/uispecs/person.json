@@ -182,16 +182,7 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-personAuthority-termPreferredForLanguage": {
-                                                                    "decorators": [{
-                                                                        "func": "cspace.termList",
-                                                                        "type": "fluid",
-                                                                        "options": {
-                                                                            "elPath": "${{row}.termPreferredForLanguage}",
-                                                                            "termListType": "termPreferredForLanguage"
-                                                                        }
-                                                                    }]
-                                                                },
+                                                                ".csc-personAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",
