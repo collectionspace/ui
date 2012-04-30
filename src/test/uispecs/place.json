@@ -146,6 +146,192 @@
         }
     },
     "recordEditor": {
+        ".csc-preferred-placeAuthority": {
+            "decorators": [
+                {
+                    "func": "cspace.preferred",
+                    "type": "fluid",
+                    "options": {
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-preferred-placeGroup": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.makeRepeatable",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "repeatTree": {
+                                                        "expander": {
+                                                            "tree": {
+                                                                ".csc-place-nameQualifiedName": "${{row}.nameQualifiedName}",
+                                                                ".csc-place-nameAdminStatus": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under-review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.nameAdminStatus}"
+                                                                },
+                                                                ".csc-place-nameStatus": {
+                                                                    "default": "",
+                                                                    "optionnames": [
+                                                                        "Please select a value",
+                                                                        "Current",
+                                                                        "Historical",
+                                                                        "Both",
+                                                                        "Unknown"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "",
+                                                                        "current",
+                                                                        "historical",
+                                                                        "both",
+                                                                        "unknown"
+                                                                    ],
+                                                                    "selection": "${{row}.nameStatus}"
+                                                                },
+                                                                ".csc-place-nameAbbrev": "${{row}.nameAbbrev}",
+                                                                ".csc-placeNameGroup-nameDateGroup": {
+                                                                    "decorators": [
+                                                                        {
+                                                                            "func": "cspace.structuredDate",
+                                                                            "type": "fluid",
+                                                                            "options": {
+                                                                                "root": "{row}",
+                                                                                "elPath": "nameDateGroup.dateDisplayDate",
+                                                                                "elPaths": {
+                                                                                    "dateEarliestSingleQualifier": "nameDateGroup.dateEarliestSingleQualifier",
+                                                                                    "scalarValuesComputed": "nameDateGroup.scalarValuesComputed",
+                                                                                    "dateLatestDay": "nameDateGroup.dateLatestDay",
+                                                                                    "dateLatestYear": "nameDateGroup.dateLatestYear",
+                                                                                    "dateAssociation": "nameDateGroup.dateAssociation",
+                                                                                    "dateEarliestSingleEra": "nameDateGroup.dateEarliestSingleEra",
+                                                                                    "dateDisplayDate": "nameDateGroup.dateDisplayDate",
+                                                                                    "dateEarliestSingleCertainty": "nameDateGroup.dateEarliestSingleCertainty",
+                                                                                    "dateLatestEra": "nameDateGroup.dateLatestEra",
+                                                                                    "dateEarliestSingleQualifierValue": "nameDateGroup.dateEarliestSingleQualifierValue",
+                                                                                    "dateLatestCertainty": "nameDateGroup.dateLatestCertainty",
+                                                                                    "dateEarliestSingleYear": "nameDateGroup.dateEarliestSingleYear",
+                                                                                    "dateLatestQualifier": "nameDateGroup.dateLatestQualifier",
+                                                                                    "dateLatestQualifierValue": "nameDateGroup.dateLatestQualifierValue",
+                                                                                    "dateEarliestSingleQualifierUnit": "nameDateGroup.dateEarliestSingleQualifierUnit",
+                                                                                    "datePeriod": "nameDateGroup.datePeriod",
+                                                                                    "dateEarliestScalarValue": "nameDateGroup.dateEarliestScalarValue",
+                                                                                    "dateLatestMonth": "nameDateGroup.dateLatestMonth",
+                                                                                    "dateNote": "nameDateGroup.dateNote",
+                                                                                    "dateLatestScalarValue": "nameDateGroup.dateLatestScalarValue",
+                                                                                    "dateLatestQualifierUnit": "nameDateGroup.dateLatestQualifierUnit",
+                                                                                    "dateEarliestSingleDay": "nameDateGroup.dateEarliestSingleDay",
+                                                                                    "dateEarliestSingleMonth": "nameDateGroup.dateEarliestSingleMonth"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "value": "${{row}.nameDateGroup.dateDisplayDate}"
+                                                                },
+                                                                ".csc-place-placeName": "${{row}.placeName}",
+                                                                ".csc-place-nameLanguage": {
+                                                                    "decorators": [
+                                                                        {
+                                                                            "func": "cspace.termList",
+                                                                            "type": "fluid",
+                                                                            "options": {
+                                                                                "root": "{row}",
+                                                                                "elPath": "nameLanguage",
+                                                                                "termListType": "nameLanguage"
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                ".csc-place-nameSource": "${{row}.nameSource}",
+                                                                ".csc-place-nameSourceDetail": "${{row}.nameSourceDetail}",
+                                                                ".csc-place-nameNote": "${{row}.nameNote}",
+                                                                ".csc-place-nameType": {
+                                                                    "optionnames": [
+                                                                        "Please select a value",
+                                                                        "Common name",
+                                                                        "Technical or scientific name",
+                                                                        "Native name",
+                                                                        "Non-native name",
+                                                                        "Local name",
+                                                                        "Descriptive name",
+                                                                        "Spelling variant"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "",
+                                                                        "common",
+                                                                        "technical-scientific",
+                                                                        "native",
+                                                                        "non-native",
+                                                                        "local",
+                                                                        "descriptive",
+                                                                        "spelling-variant"
+                                                                    ],
+                                                                    "selection": "${{row}.nameType}"
+                                                                },
+                                                                ".csc-place-nameSourceRefId": "${{row}.nameSourceRefId}"
+                                                            },
+                                                            "type": "fluid.noexpand"
+                                                        }
+                                                    },
+                                                    "elPath": "fields.preferredPersonGroup"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-place-nameQualifiedName-label": {
+                                        "messagekey": "place-nameQualifiedNameLabel"
+                                    },
+                                    ".csc-place-nameAdminStatus-label": {
+                                        "messagekey": "place-nameAdminStatusLabel"
+                                    },
+                                    ".csc-place-nameStatus-label": {
+                                        "messagekey": "place-nameStatusLabel"
+                                    },
+                                    ".csc-place-nameAbbrev-label": {
+                                        "messagekey": "place-nameAbbrevLabel"
+                                    },
+                                    ".csc-placeNameGroup-nameDateGroup-label": {
+                                        "messagekey": "placeNameGroup-nameDateGroupLabel"
+                                    },
+                                    ".csc-place-placeName-label": {
+                                        "messagekey": "place-placeNameLabel"
+                                    },
+                                    ".csc-place-nameLanguage-label": {
+                                        "messagekey": "place-nameLanguageLabel"
+                                    },
+                                    ".csc-place-nameSource-label": {
+                                        "messagekey": "place-nameSourceLabel"
+                                    },
+                                    ".csc-place-nameSourceDetail-label": {
+                                        "messagekey": "place-nameSourceDetailLabel"
+                                    },
+                                    ".csc-place-nameNote-label": {
+                                        "messagekey": "place-nameNoteLabel"
+                                    },
+                                    ".csc-place-nameType-label": {
+                                        "messagekey": "place-nameTypeLabel"
+                                    },
+                                    ".csc-place-nameSourceRefId-label": {
+                                        "messagekey": "place-nameSourceRefIdLabel"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-place-termStatus": {
             "default": "accepted",
             "optionnames": [
@@ -174,14 +360,8 @@
         ".csc-place-maxDepthInMeters-label": {
             "messagekey": "place-maxDepthInMetersLabel"
         },
-        ".csc-place-nameType-label": {
-            "messagekey": "place-nameTypeLabel"
-        },
         ".csc-place-csid-label": {
             "messagekey": "place-csidLabel"
-        },
-        ".csc-place-nameQualifiedName-label": {
-            "messagekey": "place-nameQualifiedNameLabel"
         },
         ".csc-place-coordPrecision-label": {
             "messagekey": "place-coordPrecisionLabel"
@@ -239,143 +419,7 @@
         ".csc-place-updatedAt-label": {
             "messagekey": "place-updatedAtLabel"
         },
-        ".csc-place-placeNameGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-place-nameQualifiedName": "${{row}.nameQualifiedName}",
-                                    ".csc-place-nameAdminStatus": {
-                                        "default": "provisional",
-                                        "optionnames": [
-                                            "Provisional",
-                                            "Under review",
-                                            "Accepted",
-                                            "Rejected"
-                                        ],
-                                        "optionlist": [
-                                            "provisional",
-                                            "under-review",
-                                            "accepted",
-                                            "rejected"
-                                        ],
-                                        "selection": "${{row}.nameAdminStatus}"
-                                    },
-                                    ".csc-place-nameStatus": {
-                                        "default": "",
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Current",
-                                            "Historical",
-                                            "Both",
-                                            "Unknown"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "current",
-                                            "historical",
-                                            "both",
-                                            "unknown"
-                                        ],
-                                        "selection": "${{row}.nameStatus}"
-                                    },
-                                    ".csc-place-nameAbbrev": "${{row}.nameAbbrev}",
-                                    ".csc-placeNameGroup-nameDateGroup": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.structuredDate",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "nameDateGroup.dateDisplayDate",
-                                                    "elPaths": {
-                                                        "dateEarliestSingleQualifier": "nameDateGroup.dateEarliestSingleQualifier",
-                                                        "scalarValuesComputed": "nameDateGroup.scalarValuesComputed",
-                                                        "dateLatestDay": "nameDateGroup.dateLatestDay",
-                                                        "dateLatestYear": "nameDateGroup.dateLatestYear",
-                                                        "dateAssociation": "nameDateGroup.dateAssociation",
-                                                        "dateEarliestSingleEra": "nameDateGroup.dateEarliestSingleEra",
-                                                        "dateDisplayDate": "nameDateGroup.dateDisplayDate",
-                                                        "dateEarliestSingleCertainty": "nameDateGroup.dateEarliestSingleCertainty",
-                                                        "dateLatestEra": "nameDateGroup.dateLatestEra",
-                                                        "dateEarliestSingleQualifierValue": "nameDateGroup.dateEarliestSingleQualifierValue",
-                                                        "dateLatestCertainty": "nameDateGroup.dateLatestCertainty",
-                                                        "dateEarliestSingleYear": "nameDateGroup.dateEarliestSingleYear",
-                                                        "dateLatestQualifier": "nameDateGroup.dateLatestQualifier",
-                                                        "dateLatestQualifierValue": "nameDateGroup.dateLatestQualifierValue",
-                                                        "dateEarliestSingleQualifierUnit": "nameDateGroup.dateEarliestSingleQualifierUnit",
-                                                        "datePeriod": "nameDateGroup.datePeriod",
-                                                        "dateEarliestScalarValue": "nameDateGroup.dateEarliestScalarValue",
-                                                        "dateLatestMonth": "nameDateGroup.dateLatestMonth",
-                                                        "dateNote": "nameDateGroup.dateNote",
-                                                        "dateLatestScalarValue": "nameDateGroup.dateLatestScalarValue",
-                                                        "dateLatestQualifierUnit": "nameDateGroup.dateLatestQualifierUnit",
-                                                        "dateEarliestSingleDay": "nameDateGroup.dateEarliestSingleDay",
-                                                        "dateEarliestSingleMonth": "nameDateGroup.dateEarliestSingleMonth"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.nameDateGroup.dateDisplayDate}"
-                                    },
-                                    ".csc-place-placeName": "${{row}.placeName}",
-                                    ".csc-place-nameLanguage": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.termList",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "nameLanguage",
-                                                    "termListType": "nameLanguage"
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    ".csc-place-nameSource": "${{row}.nameSource}",
-                                    ".csc-place-nameSourceDetail": "${{row}.nameSourceDetail}",
-                                    ".csc-place-nameNote": "${{row}.nameNote}",
-                                    ".csc-place-nameType": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Common name",
-                                            "Technical or scientific name",
-                                            "Native name",
-                                            "Non-native name",
-                                            "Local name",
-                                            "Descriptive name",
-                                            "Spelling variant"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "common",
-                                            "technical-scientific",
-                                            "native",
-                                            "non-native",
-                                            "local",
-                                            "descriptive",
-                                            "spelling-variant"
-                                        ],
-                                        "selection": "${{row}.nameType}"
-                                    },
-                                    ".csc-place-nameSourceRefId": "${{row}.nameSourceRefId}"
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.placeNameGroup"
-                    }
-                }
-            ]
-        },
         ".csc-place-note": "${fields.note}",
-        ".csc-place-nameAbbrev-label": {
-            "messagekey": "place-nameAbbrevLabel"
-        },
         ".csc-place-coordUncertaintyInMeters-label": {
             "messagekey": "place-coordUncertaintyInMetersLabel"
         },
@@ -510,9 +554,6 @@
         ".csc-place-termStatus-label": {
             "messagekey": "place-termStatusLabel"
         },
-        ".csc-place-nameSourceRefId-label": {
-            "messagekey": "place-nameSourceRefIdLabel"
-        },
         ".csc-place-uri": "${fields.uri}",
         ".csc-place-placeOwnerGroup-label": {
             "messagekey": "place-placeOwnerGroupLabel"
@@ -564,9 +605,6 @@
         ".csc-place-footprintSRS-label": {
             "messagekey": "place-footprintSRSLabel"
         },
-        ".csc-place-placeNameGroup-label": {
-            "messagekey": "place-placeNameGroupLabel"
-        },
         ".csc-place-geoRefPlaceName-label": {
             "messagekey": "place-geoRefPlaceNameLabel"
         },
@@ -575,9 +613,6 @@
         },
         ".csc-place-tenantID": "${fields.tenantID}",
         ".csc-place-minDistanceAboveSurfaceInMeters": "${fields.minDistanceAboveSurfaceInMeters}",
-        ".csc-place-nameAdminStatus-label": {
-            "messagekey": "place-nameAdminStatusLabel"
-        },
         ".csc-place-decimalLatitude-label": {
             "messagekey": "place-decimalLatitudeLabel"
         },
@@ -599,9 +634,7 @@
             ],
             "selection": "${fields.vSpatialReferenceSystem}"
         },
-        ".csc-place-nameStatus-label": {
-            "messagekey": "place-nameStatusLabel"
-        },
+
         ".csc-place-vLatitude-label": {
             "messagekey": "place-vLatitudeLabel"
         },
@@ -618,9 +651,6 @@
         ".csc-place-vElevation": "${fields.vElevation}",
         ".csc-place-vCoordSys-label": {
             "messagekey": "place-vCoordSysLabel"
-        },
-        ".csc-place-nameLanguage-label": {
-            "messagekey": "place-nameLanguageLabel"
         },
         ".csc-place-decimalLongitude-label": {
             "messagekey": "place-decimalLongitudeLabel"
@@ -766,9 +796,6 @@
         ".csc-place-uri-label": {
             "messagekey": "place-uriLabel"
         },
-        ".csc-place-placeName-label": {
-            "messagekey": "place-placeNameLabel"
-        },
         ".csc-place-displayName": "${fields.displayName}",
         ".csc-place-vUnitofMeasure-label": {
             "messagekey": "place-vUnitofMeasureLabel"
@@ -846,9 +873,6 @@
                 }
             ]
         },
-        ".csc-place-nameNote-label": {
-            "messagekey": "place-nameNoteLabel"
-        },
         ".csc-place-refName-label": {
             "messagekey": "place-refNameLabel"
         },
@@ -857,23 +881,14 @@
         ".csc-place-note-label": {
             "messagekey": "place-noteLabel"
         },
-        ".csc-place-nameSourceDetail-label": {
-            "messagekey": "place-nameSourceDetailLabel"
-        },
         ".csc-place-refName": "${fields.refName}",
         ".csc-place-createdBy": "${fields.createdBy}",
         ".csc-place-placeAuthorityInformation-label": {
             "messagekey": "place-placeAuthorityInformationLabel"
         },
         ".csc-place-vCoordinates": "${fields.vCoordinates}",
-        ".csc-place-nameSource-label": {
-            "messagekey": "place-nameSourceLabel"
-        },
         ".csc-place-vCoordSource-label": {
             "messagekey": "place-vCoordSourceLabel"
-        },
-        ".csc-placeNameGroup-nameDateGroup-label": {
-            "messagekey": "placeNameGroup-nameDateGroupLabel"
         }
     }
 }
