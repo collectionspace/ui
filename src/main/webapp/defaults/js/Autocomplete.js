@@ -56,19 +56,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
-    cspace.autocomplete.longest = function (list) {
-        var length = 0;
-        var longest = "";
-        fluid.each(list, function (item) {
-            var label = item.label;
-            if (label.length > length) {
-                length = label.length;
-                longest = label;
-            }    
-        });
-        return longest;
-    };
-    
     /** A vestigial "autocomplete component" which does nothing other than track keystrokes
      * and fire events. It also deals with styling of a progress indicator attached to the
      * managed element, probably an <input>. */ 
@@ -156,7 +143,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var togo = [];
         var lowterm = directModel.term.toLowerCase();
         fluid.each(data, function (item) {
-            if (item.label.toLowerCase().indexOf(lowterm) !== -1) {
+            if (fluid.find(item.labels, function (label) {
+                if (label.toLowerCase().indexOf(lowterm) !== -1) {
+                    return label;
+                }
+            })) {
                 togo.push(item);
             }
         });
@@ -234,9 +225,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
-    cspace.autocomplete.makePNPSelectionTree = function (strings, styles, tree, repeatID, popupMatches) {
-        var preferredFlag = strings.preferredFlag,
-            fieldName = strings.matchName;
+    cspace.autocomplete.makePNPSelectionTree = function (elPaths, styles, tree, repeatID) {
+        var preferred = elPaths.preferred,
+            urn = elPaths.urn,
+            label = elPaths.label;
         
         tree.expander = fluid.makeArray(tree.expander);
         
@@ -245,19 +237,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             type: "fluid.renderer.repeat",
             pathAs: "row",
             valueAs: "rowValue",
-            controlledBy: popupMatches,
+            controlledBy: "popupMatches",
             tree: {
                 expander: [{
                     type: "fluid.renderer.condition",
-                    condition: "${" + fluid.model.composeSegments("{row}", preferredFlag) + "}",
+                    condition: "${" + fluid.model.composeSegments("{row}", preferred) + "}",
                     trueTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", fieldName) + "}"
+                            value: "${" + fluid.model.composeSegments("{row}", label) + "}"
                         }
                     },
                     falseTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", fieldName) + "}",
+                            value: "${" + fluid.model.composeSegments("{row}", label) + "}",
                             decorators: {
                                 type: "addClass",
                                 classes: styles.nonPreferred
@@ -268,20 +260,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     };
-
-    cspace.autocomplete.matchTerm = function (label, term) {
-        return label.toLowerCase() === term.toLowerCase();
-    };
     
     cspace.autocomplete.produceTree = function (that) {
         var tree = {},
             model = that.model;
-        var index = fluid.find(that.model.matches, function (match, index) {
-            if (cspace.autocomplete.matchTerm(match.label, model.term)) {
-                return index;
-            }
-        });
-        if (index === undefined && model.authorities.length > 0) {
+        if (model.authorities.length > 0) {
             tree.addToPanel = {};
             tree.addTermTo = {
                 messagekey: "autocomplete-addTermTo",
@@ -289,15 +272,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             };
             cspace.autocomplete.makeAuthoritySelectionTree(tree, "authorityItem", "authorities", "fullName");
         }
-        if (model.matches.length === 0) {
+        if (model.matches.length < 1) {
             tree.noMatches = {
                 messagekey: "autocomplete-noMatches"
             };
         }
         else {
             tree.matches = {};
-            tree.longestMatch = cspace.autocomplete.longest(model.matches);
-            cspace.autocomplete.makePNPSelectionTree(that.options.strings, that.options.styles, tree, "matchItem", "popupMatches");
+            cspace.autocomplete.makePNPSelectionTree(that.options.elPaths, that.options.styles, tree, "matchItem");
         }
         return tree;
     };
@@ -407,29 +389,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.popup.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             prepareModelForRender: function (model, applier, that) {
-                var pulledMatches = "matches",
-                    newArray = [],
-                    fieldName = that.options.strings.matchName,
-                    preferredFlag = that.options.strings.preferredFlag,
-                    recordKey = that.options.strings.recordKey,
-                    popupMatches = "popupMatches";
-                
-                fluid.each(fluid.copy(fluid.get(model, pulledMatches)), function (element) {
-                    element.label = element.label || "";
-                    element.preferredGroup = element.preferredGroup || [];
-                    
-                    if (!element.preferredGroup.length) {
-                        var newElement = {};
-                        newElement[fieldName] = element.label;
-                        newElement[preferredFlag] = true;
-                        newElement[recordKey] = element[recordKey];
-                        element.preferredGroup.push(newElement);
-                    }
-                    
-                    newArray.push.apply(newArray, element.preferredGroup);
+                var popupMatches = [],
+                    preferred = that.options.elPaths.preferred,
+                    label = that.options.elPaths.label,
+                    labels = that.options.elPaths.labels,
+                    urn = that.options.elPaths.urn,
+                    matches = that.options.elPaths.matches;
+                fluid.each(fluid.get(model, matches), function (match) {
+                    popupMatches = popupMatches.concat(fluid.transform(fluid.get(match, labels), function (thisLabel, index) {
+                        var elem = {};
+                        elem[urn] = match.urn.concat("'", thisLabel, "'");
+                        elem[label] = thisLabel;
+                        elem[preferred] = index === 0;
+                        return elem;
+                    }));
                 });
-                
-                that.applier.requestChange(popupMatches, newArray);
+                that.applier.requestChange("popupMatches", popupMatches);
             }
         });
     };
@@ -443,7 +418,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matches: ".csc-autocomplete-matches",
             matchItem: ".csc-autocomplete-matchItem",
             matchItemContent: ".csc-autocomplete-matchItem-content",
-            longestMatch: ".csc-autocomplete-longestMatch",
             addTermTo: ".csc-autocomplete-addTermTo"
         },
         styles: {
@@ -752,7 +726,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     model: "{autocomplete}.model",
                     applier: "{autocomplete}.applier",
                     inputField: "{autocomplete}.autocompleteInput",
-                    strings: "{autocomplete}.options.strings"
+                    elPaths: "{autocomplete}.options.elPaths"
                 }
             },
             authoritiesSource: {
@@ -769,10 +743,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         parentBundle: "{globalBundle}",
-        strings: {
-            preferredFlag: "_primary",
-            matchName: "label",
-            recordKey: "urn"
+        elPaths: {
+            preferred: "preferred",
+            label: "label",
+            urn: "urn",
+            labels: "labels",
+            matches: "matches"
         }
     });
     

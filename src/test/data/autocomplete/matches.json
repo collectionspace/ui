@@ -1,83 +1,72 @@
 [
     {
-        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(MayflowerPhotoplayCorp1334763694417)'Mayflower Photoplay Corp.'",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(MayflowerPhotoplayCorp1334763694417)",
         "csid": "23ad5ed1-fb54-4d7e-ba50",
-        "label": "Mayflower Photoplay Corp.",
+        "labels": [
+            "Mayflower Photoplay Corp."
+        ],
         "type": "organization"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(OliverMoroscoPhotoplayCompany1334763683937)'Oliver Morosco Photoplay Company'",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(OliverMoroscoPhotoplayCompany1334763683937)",
         "csid": "fe7e0fd4-abeb-43df-a265",
-        "label": "Oliver Morosco Photoplay Company",
+        "labels": [
+            "Oliver Morosco Photoplay Company"
+        ],
         "type": "organization"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(Photoplay1334763775670)'Photoplay'",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(Photoplay1334763775670)",
         "csid": "312a0771-0d40-4653-9a31",
-        "label": "Photoplay",
+        "labels": [
+            "Photoplay"
+        ],
         "type": "organization"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(ToppsCompanyInc1334763749665)'Topps Company, Inc.'",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(ToppsCompanyInc1334763749665)",
         "csid": "bc831b9c-a9eb-4e4a-ab80",
-        "label": "Topps Company, Inc.",
+        "labels": [
+            "Topps Company, Inc."
+        ],
         "type": "organization"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(UtopiaEnterprisesInc1334763691997)'Utopia Enterprises, Inc.'",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(UtopiaEnterprisesInc1334763691997)",
         "csid": "14ecc869-d337-4f2a-a426",
-        "label": "Utopia Enterprises, Inc.",
+        "labels": [
+            "Utopia Enterprises, Inc."
+        ],
         "type": "organization"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLee1334763571214)'Christopher Lee'",
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLee1334763571214)",
         "csid": "75f5ff26-ee75-4de5-a3ae",
-        "label": "Christopher Lee",
         "type": "person",
-        "preferredGroup": [
-            {
-                "label": "Chris Lee",
-                "_primary": true
-            },
-            {
-                "label": "C. Lee"
-            }
+        "labels": [
+            "Christopher Lee",
+            "Chris Lee",
+            "C. Lee"
         ]
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLloyd1334763574730)'Christopher Lloyd'",
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLloyd1334763574730)",
         "csid": "4caeedaa-a6d4-43d5-b17f",
-        "label": "Christopher Lloyd",
-        "type": "person",
-        "preferredGroup": [
-            {
-                "label": "Christopher Lloyd",
-                "_primary": true
-            }
-        ]
+        "labels": [
+            "Christopher Lloyd"
+        ],
+        "type": "person"
     },
     {
-        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)'Christopher Plummer'",
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)",
         "csid": "9c641934-5e59-4df7-a5ec",
-        "label": "Christopher Plummer",
         "type": "person",
-        "preferredGroup": [
-            {
-                "label": "Christopher Plummer",
-                "_primary": true
-            },
-            {
-                "label": "Chris Plummer"
-            },
-            {
-                "label": "C. Plummer"
-            },
-            {
-                "label": "Christopher P."
-            },
-            {
-                "label": "Chris P."
-            }
+        "labels": [
+            "Christopher Plummer",
+            "Chris Plummer",
+            "C. Plummer",
+            "Christopher P.",
+            "Chris P."
         ]
     }
 ]
