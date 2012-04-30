@@ -72,6 +72,37 @@
                     },
                     "currentLocationNote": {
                         "type": "string"
+                    },
+                    "inventoryActionRequired": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "inventoryFrequency": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "inventoryDate": {
+                        "type": "date"
+                    },
+                    "nextInventoryDate": {
+                        "type": "date"
+                    },
+                    "inventoryContacts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "inventoryContact": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "inventoryNote": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

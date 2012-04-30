@@ -13,7 +13,9 @@
                     "person",
                     "persontest2",
                     "location",
-                    "organization"
+                    "organization",
+                    "place",
+                    "concept"
                 ],
                 "type": "array"
             },

@@ -152,8 +152,13 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
+input[type="button"].saveButton[disabled], input[type="submit"].saveButton[disabled] {
+    background:transparent url('../images/icnSaveDisabled.png') no-repeat 24px 4px;
+    color:#CCC;}
 input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover,
-input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus {
+input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus,
+input[type="button"].saveButton[disabled]:hover, input[type="submit"].saveButton[disabled]:hover,
+input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton[disabled]:focus {
     background-color:#ADADAD;
     color:#606060
 }
@@ -1589,6 +1594,12 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     display:table-row;
     width: 100%;
 }
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer {
+    width: auto;
+}
+.cs-mediaUploader-fileUploaderContainer div.fl-uploader-queue-footer span.fl-uploader-browse {
+    max-width: 400px;
+}
 .cs-mediaUploader-table-row {
     display:table-row;
     width: 100%;
@@ -2069,3 +2080,107 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -o-text-overflow:ellipsis;
     white-space: nowrap;
 }
+
+
+/****************************************
+ * Styling of HTML elements developed for UCB place authority template - rjaffe, 18Oct2011, awieliczka, jan2012 *
+ * For padding on items nested within the OOCSS grid - like .info-pair (see line 2111) - include 'oocss' as a high level class *
+ ****************************************/
+
+/* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
+/* example: 
+   <div class="line">
+		<div class="unit size1of4"></div>
+		<div class="unit size1of2"></div>
+		<div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
+			<div class="unit size1of3"></div>
+			<div class="lastUnit size2of3"</div>
+		</div>
+	</div>
+*/
+.line, .lastUnit { overflow: hidden; _overflow: visible; _zoom:1; }
+.unit { float: left; _zoom: 1; }
+.unitExt { float: right; }
+.size1of1 { width: 100% }
+.size1of2 { width: 50%; }
+.size1of3 { width: 33.33333%; }
+.size2of3 { width: 66.66666%; }
+.size1of4 { width: 25%; }
+.size3of4 { width: 75%; }
+.size1of5 { width: 20%; }
+.size2of5 { width: 40%; }
+.size3of5 { width: 60%; }
+.size4of5 { width: 80%; }
+.lastUnit { float: none; _position: relative; _left: -3px; _margin-right: -3px; width: auto; }
+
+.size1of6 { width: 16.66666%; }
+.size5of6 { width: 83.33333%; }
+.smallfield { width: 75% !important; }
+.spacer { height: 4.5em; }
+
+.oocss .info-pair, 
+.oocss .info-pair-addrow, 
+.oocss .info-pair-table, 
+.oocss .info-pair-date,
+.oocss .info-pair-select,
+.oocss .info-pair-termlist
+{
+	width: auto;
+	padding-right: 1.5em;
+}
+
+.oocss li {
+	background-color: #E2E2E2 !important;
+	border: 1px solid #CCC !important;
+	padding: 4px 4px 0 4px !important;
+	margin-bottom: 4px !important;
+}
+
+.oocss .infoDiv input[type="button"].cs-repeatable-add {
+	top: -12px !important;
+}
+
+.infoDiv .fieldgroup {
+	background: none !important;
+}
+
+/*.csc-place .cs-repeatable-repeat input, .csc-place .cs-repeatable-repeat textarea {
+	width: 100% !important;
+}
+*/
+.remarks, .georefplacename {
+    width:350px;
+    margin-right: 30px;
+}
+.unitofmeasure {
+    width:120px;
+    margin-right:100px;
+}
+/* ---------------------------------------*/
+
+
+.cs-locked {
+    background-image: url(../images/lock.png);
+    width: 16px;
+    height: 20px;
+    float: right;
+    display: inline;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+tr .cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+}
+li.cs-locked {
+    background-image: url(../images/lock_small.png);
+    float: none;
+    display: list-item;
+    width: inherit;
+    height: inherit;
+}
+

@@ -44,8 +44,23 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-movement-currentLocation" 
-                                                } 
+                                                    "identificationNumber": ".csc-movement-currentLocation",
+                                                    "recordLockContainer": ".csc-recordLock"
+                                                },
+                                                "selectorsToIgnore": [
+                                                    "recordLockContainer",
+                                                    "recordTraverser",
+                                                    "requiredFields",
+                                                    "identificationNumber",
+                                                    "header",
+                                                    "togglable"
+                                                ],
+                                                "components": {
+                                                    "recordLock": {
+                                                        "type": "cspace.util.recordLock",
+                                                        "createOnEvent": "afterRender"
+                                                    }
+                                                }
                                             }
                                         }
                                     }

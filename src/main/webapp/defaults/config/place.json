@@ -1,0 +1,87 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "place",
+            "selectors": {
+                "recordEditor": ".csc-place-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
+                        "selectors": {
+                            "hierarchy": ".csc-place-hierarchy",
+                            "identificationNumber": ".csc-place-displayName"
+                        },
+                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "components": {
+                            "hierarchy": {
+                                "type": "cspace.hierarchy",
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
+                                },
+                                "createOnEvent": "afterRender"
+                            }
+                        }
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.displayName"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "place",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "namespaces",
+                "place"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "pages/PlaceTemplate.html",
+                    "templateSelector": ".csc-place-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                }
+            },
+            "components": {
+                "dataContext": {
+                    "options": {
+                        "baseUrl": {
+                            "expander": {
+                                "type": "fluid.deferredInvokeCall",
+                                "func": "cspace.util.urlBuilder",
+                                "args": "%tenant/%tname/vocabularies"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

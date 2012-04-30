@@ -73,6 +73,8 @@ var utilitiesTester = function ($) {
         "loanin": ["read", "list"],
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
+        "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
         "objects": ["create", "read", "update", "delete", "list"]
@@ -251,6 +253,8 @@ var utilitiesTester = function ($) {
             "loanout",
             "acquisition",
             "organization",
+            "place",
+            "concept",
             "cataloging",
             "movement",
             "objectexit",
@@ -270,7 +274,9 @@ var utilitiesTester = function ($) {
         ], recTypes.procedures);
         jqUnit.assertDeepEq("vocabularies should contain", [
             "person",
-            "organization"
+            "organization",
+            "place",
+            "concept"
         ], recTypes.vocabularies);
     });
     

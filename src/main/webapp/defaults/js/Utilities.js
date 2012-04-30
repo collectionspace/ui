@@ -1423,6 +1423,7 @@ fluid.registerNamespace("cspace.util");
             schema: "nomerge"
         },
         recordType: "",
+        namespace: "",
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",
             validatePrimitive: {
@@ -1477,8 +1478,9 @@ fluid.registerNamespace("cspace.util");
 
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
+        var schemaName = that.options.namespace || that.options.recordType;
         // Only validate fields.
-        schema = schema[that.options.recordType].properties.fields.properties;
+        schema = schema[schemaName].properties.fields.properties;
 
         that.validate = function (data) {
             var thisData = fluid.copy(data);
@@ -1523,6 +1525,90 @@ fluid.registerNamespace("cspace.util");
         return fluid.model.composeSegments.apply(null, root ? fluid.remove_if(fluid.makeArray(arguments), function (arg) {
             if (!arg) {return true;}
         }) : [path]);
+    };
+
+    cspace.util.resolveLocked = function (model) {
+        // Checking whether workflow is present in model.fields or model.
+        var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
+        return workflow && workflow === "locked";
+    };
+
+    cspace.util.isReadOnly = function (readOnly, model) {
+        return readOnly || cspace.util.resolveLocked(model);
+    };
+
+    fluid.defaults("cspace.util.recordLock", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        styles: {
+            locked: "cs-locked"
+        },
+        finalInitFunction: "cspace.util.recordLock.finalInit"
+    });
+
+    cspace.util.recordLock.finalInit = function (that) {
+        function processWorkflow (model) {
+            if (!cspace.util.resolveLocked(model)) {
+                return;
+            }
+            that.container.addClass(that.options.styles.locked);
+        }
+        that.applier.modelChanged.addListener("fields.workflow", function (model) {
+             processWorkflow(model);
+        });
+        processWorkflow(that.model);
+    };
+
+    fluid.defaults("cspace.util.workflowStyler", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "cspace.util.workflowStyler.finalInit",
+        invokers: {
+            getRecordLockContainer: "cspace.util.workflowStyler.getRecordLockContainer"
+        },
+        components: {
+            instantiator: "{instantiator}"
+        },
+        offset: 0
+    });
+
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.listView", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerListView",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.search.searchView", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerListView",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
+    fluid.demands("cspace.util.workflowStyler.getRecordLockContainer", "cspace.recordList", {
+        funcName: "cspace.util.workflowStyler.getRecordLockContainerRecordList",
+        args: ["{cspace.util.workflowStyler}.options.rows", "{arguments}.0"]
+    });
+
+    cspace.util.workflowStyler.getRecordLockContainerRecordList = function (rows, index) {
+        return rows.eq(index);
+    };
+
+    cspace.util.workflowStyler.getRecordLockContainerListView = function (rows, index) {
+        return $("td", rows.eq(index)).last();
+    };
+
+    cspace.util.workflowStyler.finalInit = function (that) {
+        fluid.each(that.options.rows, function (row, index) {
+            var name = "recordLock-" + index;
+            that.options.components[name] = {
+                type: "cspace.util.recordLock",
+                container: that.getRecordLockContainer(index),
+                options: {
+                    model: fluid.get(that.options.list, fluid.model.composeSegments(that.options.offset + index, "summarylist"))
+                }
+            };
+            fluid.initDependent(that, name, that.instantiator);
+        });
+    };
+
+    cspace.util.resolveDeleteRelation = function (options) {
+        return !cspace.util.resolveLocked(options.recordModel) && cspace.permissions.resolveMultiple(options);
     };
     
 })(jQuery, fluid);

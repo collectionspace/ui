@@ -1,0 +1,32 @@
+{
+    "results": [{
+        "shortIdentifier": "ConceptDisplayName1332900713944",
+        "summary": "descriptor",
+        "summarylist": {
+            "updatedAt": "2012-03-28T02:11:53Z",
+            "shortIdentifier": "ConceptDisplayName1332900713944",
+            "termType": "descriptor",
+            "termStatus": "",
+            "refName": "urn:cspace:core.collectionspace.org:conceptauthorities:name(concept):item:name(ConceptDisplayName1332900713944)'Concept (Display Name)'",
+            "csid": "8c7853a1-f1d3-4ae5-8511",
+            "displayName": "Concept (Display Name)",
+            "uri": "/conceptauthorities/6ca3db57-7c96-47b6-b17d/items/8c7853a1-f1d3-4ae5-8511"
+        },
+        "termStatus": "",
+        "csid": "8c7853a1-f1d3-4ae5-8511",
+        "number": "Concept (Display Name)",
+        "displayName": "Concept (Display Name)",
+        "refid": "urn:cspace:core.collectionspace.org:conceptauthorities:name(concept):item:name(ConceptDisplayName1332900713944)'Concept (Display Name)'",
+        "recordtype": "concept"
+    }],
+    "pagination": {
+        "fieldsReturned": "csid|uri|updatedAt|termType|displayName|shortIdentifier|refName|termStatus",
+        "separatelists": [[]],
+        "totalItems": "1",
+        "pageSize": "30",
+        "traverser": "E41EBA34EC3D3BE59D97843ED7EC63CC",
+        "itemsInPage": "1",
+        "numInstances": "1",
+        "pageNum": "0"
+    }
+}
