@@ -87,6 +87,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     font-weight: normal;
     white-space: nowrap;
 }
+.cs-autocomplete-MatchItem:focus {
+    color: red;
+    background-color: red;
+}
 .cs-autocomplete-matchItem-content.cs-autocomplete-nonPreferred {
     color: #909090;
     margin-left: 20px;

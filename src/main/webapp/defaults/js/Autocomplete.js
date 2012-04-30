@@ -313,7 +313,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.open = function () {
             that.renderer.refreshView();
             
-            var activatables = that.locate("authorityItem").add(that.locate("matchItem"));
+            var activatables = that.locate("authorityItem").add(that.locate("matchItemContent"));
             fluid.activatable(activatables, activateFunction);
             
             var selectables = $(activatables).add(input);
@@ -344,10 +344,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         
         that.blurHandler = fluid.deadMansBlur(that.union, {
-                exclusions: {union: that.union}, 
-                    handler: function () {
-                    that.eventHolder.events.revertState.fire();
-                }
+            exclusions: {union: that.union}, 
+                handler: function () {
+                that.eventHolder.events.revertState.fire();
+            }
         });
 
         function makeHighlighter(funcName) {
@@ -422,7 +422,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
-            matchesSelect: "cs-autocomplete-matchItem-select",
+            popupMatchesSelect: "cs-autocomplete-matchItem-select",
             nonPreferred: "cs-autocomplete-nonPreferred"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],

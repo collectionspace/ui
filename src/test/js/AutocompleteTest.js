@@ -47,7 +47,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.assertTrue("Results loading indicator", input.hasClass(autocomplete.autocomplete.options.styles.loadingStyle));
         });
         autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertMatchCount("\"top\" results count in markup", 13, autocomplete);
+            assertMatchCount("\"top\" results count in markup", 14, autocomplete);
             assertCloseVisible(autocomplete, true);
             closeFunc(autocomplete);
             assertCloseVisible(autocomplete, false);
@@ -98,8 +98,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             chooseFunc(autocomplete);
             assertCloseVisible(autocomplete, false);
             var match = autocomplete.model.matches[0];
-            jqUnit.assertEquals("Visible field value", match.label, input.val());
-            jqUnit.assertEquals("Hidden field value", match.urn, autocomplete.hiddenInput.val());
+            var matchLabel = match.labels[0];
+            var matchUrn = match.urn.concat("'", matchLabel , "'");
+            jqUnit.assertEquals("Visible field value", matchLabel, input.val());
+            jqUnit.assertEquals("Hidden field value", matchUrn, autocomplete.hiddenInput.val());
             assertMatchCount("Dialog now empty", 0, autocomplete);
             start();
         });
