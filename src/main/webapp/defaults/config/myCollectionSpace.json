@@ -28,8 +28,11 @@
                 "pivotSearch": {
                     "type": "cspace.searchBox",
                     "options": {
-                        "strings": {
-                            "searchBox-recordTypeSelectLabel": "Record Type"
+                        "model": {
+                            "messagekeys": {
+                                "recordTypeSelectLabel": "searchBox-recordTypeSelectLabel",
+                                "selectVocabLabel": "selectVocabLabel"
+                            }
                         },
                         "related": ["allCategory", "cataloging", "procedures", "vocabularies"],
                         "selfRender": true,

@@ -481,7 +481,7 @@ cspace = cspace || {};
         }
         var vocabsExist = allVocabs[model.recordType];
         if (!vocabsExist) {
-            return applier.requestChange("vocabs", undefined);;
+            return applier.requestChange("vocabs", undefined);
         }
         var vocabs = [];
         fluid.each(vocabsExist, function (vocab) {

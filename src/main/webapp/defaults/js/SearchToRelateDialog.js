@@ -216,7 +216,8 @@ cspace = cspace || {};
                             options: {
                                 model: {
                                     messagekeys: {
-                                        recordTypeSelectLabel: "searchToRelateDialog-recordTypeSelectLabel"
+                                        recordTypeSelectLabel: "searchToRelateDialog-recordTypeSelectLabel",
+                                        selectVocabLabel: "selectVocabLabel"
                                     }
                                 },
                                 related: "{searchToRelateDialog}.options.related",

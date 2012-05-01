@@ -226,7 +226,8 @@ cspace = cspace || {};
                 options: {
                     model: {
                         messagekeys: {
-                            recordTypeSelectLabel: "mainSearch-recordTypeSelectLabel" 
+                            recordTypeSelectLabel: "mainSearch-recordTypeSelectLabel",
+                            selectVocabLabel: "selectVocabLabel"
                         }
                     },
                     selfRender: true,
