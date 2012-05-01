@@ -52,7 +52,7 @@
                                 "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "termSourceID": {
+                                "termSourceUniqueID": {
                                     "type": "string"
                                 },
                                 "termSourceNote": {
