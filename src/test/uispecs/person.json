@@ -164,14 +164,14 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-personAuthority-displayName": "${{row}.displayName}",
-                                                                ".csc-personAuthority-qualifier": "${{row}.qualifier}",
+                                                                ".csc-personAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                                                ".csc-personAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-personAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-personAuthority-status": {
+                                                                ".csc-personAuthority-termStatus": {
                                                                     "default": "provisional",
                                                                     "optionnames": [
                                                                         "Provisional",
@@ -200,7 +200,7 @@
                                                                 ".csc-personAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",
+                                                                ".csc-personAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
                                                                 ".csc-personAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-personAuthority-salutation": {
                                                                     "default": "dear",
@@ -228,11 +228,11 @@
                                             }
                                         ]
                                     },
-                                    ".csc-person-displayName-label": {
-                                        "messagekey": "person-displayNameLabel"
+                                    ".csc-person-termDisplayName-label": {
+                                        "messagekey": "person-termDisplayNameLabel"
                                     },
-                                    ".csc-person-qualifier-label": {
-                                        "messagekey": "person-qualifierLabel"
+                                    ".csc-person-termQualifier-label": {
+                                        "messagekey": "person-termQualifierLabel"
                                     },
                                     ".csc-person-termType-label": {
                                         "messagekey": "person-termTypeLabel"
@@ -252,8 +252,8 @@
                                     ".csc-person-termSourceDetail-label": {
                                         "messagekey": "person-termSourceDetailLabel"
                                     },
-                                    ".csc-person-termSourceID-label": {
-                                        "messagekey": "person-termSourceIDLabel"
+                                    ".csc-person-termSourceUniqueID-label": {
+                                        "messagekey": "person-termSourceUniqueIDLabel"
                                     },
                                     ".csc-person-termSourceNote-label": {
                                         "messagekey": "person-termSourceNoteLabel"

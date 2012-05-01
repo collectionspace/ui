@@ -9,16 +9,18 @@
 					<table>
 						<thead>
 							<tr>
-								<td><span class="csc-organization-displayName-label label required"></span><span class="required">*</span></td>
-								<td class="csc-organization-qualifier-label"></td>
+								<td><span class="csc-organization-termDisplayName-label label required"></span><span class="required">*</span></td>
+								<td class="csc-organization-termQualifier-label"></td>
 								<td class="csc-organization-termType-label"></td>
+								<td class="csc-organization-termStatus-label label"></td>
 							</tr>
 						</thead>                                                        
 						<tbody>
 							<tr>
-								<td><input type="text" class="csc-organizationAuthority-displayName"/></td>
-								<td><input type="text" class="csc-organizationAuthority-qualifier"/></td>
+								<td><input type="text" class="csc-organizationAuthority-termDisplayName"/></td>
+								<td><input type="text" class="csc-organizationAuthority-termQualifier"/></td>
 								<td><select class="csc-organizationAuthority-termType input-select"><option value="">Options not loaded</option></select></td>
+								<td><select class="csc-organizationAuthority-status input-select"><option value="">Options not loaded</option></select></td>
 							</tr>
 						</tbody>
 					</table>
@@ -31,22 +33,24 @@
 					<table>
 						<thead>
 							<tr>
-								<td class="csc-organization-term-label"></td>
+								<td class="csc-organization-termName-label"></td>
 								<td class="csc-organization-termLanguage-label"></td>
 								<td class="csc-organization-termPreferredForLanguage-label"></td>
 								<td class="csc-organization-termSource-label"></td>
 								<td class="csc-organization-termSourceDetail-label"></td>
-								<td class="csc-organization-termSourceID-label"></td>
+								<td class="csc-organization-termSourceUniqueID-label"></td>
+								<td class="csc-organization-termSourceNote-label"></td>
 							</tr>
 						</thead>                                                        
 						<tbody>
 							<tr>
-								<td><input type="text" class="csc-organizationAuthority-term"/></td>
+								<td><input type="text" class="csc-organizationAuthority-termName"/></td>
 								<td><select class="csc-organizationAuthority-termLanguage input-select"><option value="">Options not loaded</option></select></td>
 								<td><input type="checkbox" class="csc-organizationAuthority-termPreferredForLanguage"/></td>
 								<td><input type="text" class="csc-organizationAuthority-termSource"/></td>
 								<td><input type="text" class="csc-organizationAuthority-termSourceDetail"/></td>
-								<td><input type="text" class="csc-organizationAuthority-termSourceID"/></td>
+								<td><input type="text" class="csc-organizationAuthority-termSourceUniqueID"/></td>
+								<td><input type="text" class="csc-organizationAuthority-termSourceNote"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -60,14 +64,12 @@
 						<thead>
 							<tr>
 								<td class="csc-organization-longName-label"></td>
-								<td class="csc-organization-shortName-label"></td>
 								<td class="csc-organization-nameAdditions-label"></td>
 							</tr>
 						</thead>                                                        
 						<tbody>
 							<tr>
 								<td><input type="text" class="csc-organizationAuthority-longName" /></td>
-								<td><input type="text" class="csc-organizationAuthority-shortName" /></td>
 								<td><input type="text" class="csc-organizationAuthority-nameAdditions" /></td>
 							</tr>
 						</tbody>

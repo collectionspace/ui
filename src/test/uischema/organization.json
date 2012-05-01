@@ -21,17 +21,21 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "displayName": {
+                                "termDisplayName": {
                                     "type": "string"
                                 },
-                                "qualifier": {
+                                "termQualifier": {
                                     "type": "string"
                                 },
                                 "termType": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "term": {
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termName": {
                                     "type": "string"
                                 },
                                 "termLanguage": {
@@ -51,10 +55,10 @@
                                 "termSourceID": {
                                     "type": "string"
                                 },
-                                "longName": {
+                                "termSourceNote": {
                                     "type": "string"
                                 },
-                                "shortName": {
+                                "longName": {
                                     "type": "string"
                                 },
                                 "nameAdditions": {

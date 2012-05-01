@@ -164,14 +164,30 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-organizationAuthority-displayName": "${{row}.displayName}",
-                                                                ".csc-organizationAuthority-qualifier": "${{row}.qualifier}",
+                                                                ".csc-organizationAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                                                ".csc-organizationAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-organizationAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-organizationAuthority-term": "${{row}.term}",
+                                                                ".csc-organizationAuthority-termStatus": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under Review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.termStatus}"
+                                                                },
+                                                                ".csc-organizationAuthority-termName": "${{row}.termName}",
                                                                 ".csc-organizationAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -185,10 +201,10 @@
                                                                 ".csc-organizationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-organizationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-organizationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",
+                                                                ".csc-organizationAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-organizationAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
-                                                                ".csc-organizationAuthority-longName": "${{row}.longName}",
-                                                                ".csc-organizationAuthority-shortName": "${{row}.shortName}"
+                                                                ".csc-organizationAuthority-longName": "${{row}.longName}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -198,17 +214,20 @@
                                             }
                                         ]
                                     },
-                                    ".csc-organization-displayName-label": {
-                                        "messagekey": "organization-displayNameLabel"
+                                    ".csc-organization-termDisplayName-label": {
+                                        "messagekey": "organization-termDisplayNameLabel"
                                     },
-                                    ".csc-organization-qualifier-label": {
-                                        "messagekey": "organization-qualifierLabel"
+                                    ".csc-organization-termQualifier-label": {
+                                        "messagekey": "organization-termQualifierLabel"
                                     },
                                     ".csc-organization-termType-label": {
                                         "messagekey": "organization-termTypeLabel"
                                     },
-                                    ".csc-organization-term-label": {
-                                        "messagekey": "organization-termLabel"
+                                    ".csc-organization-termStatus-label": {
+                                        "messagekey": "organization-termStatusLabel"
+                                    },
+                                    ".csc-organization-termName-label": {
+                                        "messagekey": "organization-termNameLabel"
                                     },
                                     ".csc-organization-termLanguage-label": {
                                         "messagekey": "organization-termLanguageLabel"
@@ -222,11 +241,11 @@
                                     ".csc-organization-termSourceDetail-label": {
                                         "messagekey": "organization-termSourceDetailLabel"
                                     },
-                                    ".csc-organization-termSourceID-label": {
-                                        "messagekey": "organization-termSourceIDLabel"
+                                    ".csc-organization-termSourceUniqueID-label": {
+                                        "messagekey": "organization-termSourceUniqueIDLabel"
                                     },
-                                    ".csc-organization-shortName-label": {
-                                        "messagekey": "organization-shortNameLabel"
+                                    ".csc-organization-termSourceNote-label": {
+                                        "messagekey": "organization-termSourceNoteLabel"
                                     },
                                     ".csc-organization-longName-label": {
                                         "messagekey": "organization-longNameLabel"

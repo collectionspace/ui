@@ -17,10 +17,10 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "displayName": {
+                                "termDisplayName": {
                                     "type": "string"
                                 },
-                                "qualifier": {
+                                "termQualifier": {
                                     "type": "string"
                                 },
                                 "termType": {
@@ -45,7 +45,7 @@
                                 "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "termSourceID": {
+                                "termSourceUniqueID": {
                                     "type": "string"
                                 },
                                 "termSourceNote": {

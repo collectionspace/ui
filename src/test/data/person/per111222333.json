@@ -3,15 +3,15 @@
     "fields": {
         "preferredPersonGroup": [
             {
-                "displayName": "Fred Bloggs",
-                "qualifier": "Person Qualifier",
+                "termDisplayName": "Fred Bloggs",
+                "termQualifier": "Person Qualifier",
                 "termType": "descriptor",
                 "termStatus": "provisional",
                 "termLanguage": "Value 1",
                 "termPreferredForLanguage": true,
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
-                "termSourceID": "Source ID",
+                "termSourceUniqueID": "Source ID",
                 "termSourceNote": "Source Note",
                 "salutation": "My Darling",
                 "title": "Sir",
