@@ -27,7 +27,8 @@
                                     "default": "",
                                     "type": "string"
                                 },
-                                "term": {
+                                "termStatus": {
+                                    "default": "provisional",
                                     "type": "string"
                                 },
                                 "termLanguage": {
@@ -266,10 +267,6 @@
                         "type": "string"
                     },
                     "nameNote": {
-                        "type": "string"
-                    },
-                    "termStatus": {
-                        "default": "provisional",
                         "type": "string"
                     },
                     "gender": {

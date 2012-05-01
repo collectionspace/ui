@@ -6,7 +6,7 @@
                 "displayName": "Fred Bloggs",
                 "qualifier": "Person Qualifier",
                 "termType": "descriptor",
-                "term": "abc",
+                "termStatus": "provisional",
                 "termLanguage": "Value 1",
                 "termPreferredForLanguage": true,
                 "termSource": "Source",

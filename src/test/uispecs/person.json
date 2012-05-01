@@ -171,7 +171,22 @@
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-personAuthority-term": "${{row}.term}",
+                                                                ".csc-personAuthority-status": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under Review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.termStatus}"
+                                                                },
                                                                 ".csc-personAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -221,8 +236,8 @@
                                     ".csc-person-termType-label": {
                                         "messagekey": "person-termTypeLabel"
                                     },
-                                    ".csc-person-term-label": {
-                                        "messagekey": "person-termLabel"
+                                    ".csc-person-termStatus-label": {
+                                        "messagekey": "person-termStatusLabel"
                                     },
                                     ".csc-person-termLanguage-label": {
                                         "messagekey": "person-termLanguageLabel"
@@ -284,22 +299,6 @@
                 }
             ],
             "value": "${fields.birthDate}"
-        },
-        ".csc-personAuthority-status": {
-            "default": "provisional",
-            "optionnames": [
-                "Provisional",
-                "Under Review",
-                "Accepted",
-                "Rejected"
-            ],
-            "optionlist": [
-                "provisional",
-                "under review",
-                "accepted",
-                "rejected"
-            ],
-            "selection": "${fields.termStatus}"
         },
         ".csc-contact-createdBy": "${fields.contact.createdBy}",
         ".csc-person-updatedAt": {
@@ -737,9 +736,6 @@
                     }
                 }
             ]
-        },
-        ".csc-person-termStatus-label": {
-            "messagekey": "person-termStatusLabel"
         },
         ".csc-personAuthority-nationality": {
             "decorators": [
