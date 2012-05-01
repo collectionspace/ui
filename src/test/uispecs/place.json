@@ -283,7 +283,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredPlaceGroup"
+                                                    "elPath": "fields.preferredPersonGroup"
                                                 }
                                             }
                                         ]
