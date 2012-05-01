@@ -48,6 +48,9 @@
                                 "termSourceID": {
                                     "type": "string"
                                 },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
                                 "salutation": {
                                     "default": "dear",
                                     "type": "string"

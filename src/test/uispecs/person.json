@@ -201,6 +201,7 @@
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",
+                                                                ".csc-personAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-personAuthority-salutation": {
                                                                     "default": "dear",
                                                                     "optionnames": ["Dear", "Hello", "To"],
@@ -253,6 +254,9 @@
                                     },
                                     ".csc-person-termSourceID-label": {
                                         "messagekey": "person-termSourceIDLabel"
+                                    },
+                                    ".csc-person-termSourceNote-label": {
+                                        "messagekey": "person-termSourceNoteLabel"
                                     },
                                     ".csc-person-salutation-label": {
                                         "messagekey": "person-salutationLabel"
