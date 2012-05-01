@@ -9,9 +9,6 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-                        "selectors": {
-                            "identificationNumber": ".csc-object-identification-object-number" 
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
