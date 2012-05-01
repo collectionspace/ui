@@ -17,17 +17,18 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "name": {
+                                "termName": {
                                     "type": "string"
                                 },
-                                "qualifier": {
+                                "termQualifier": {
                                     "type": "string"
                                 },
                                 "termType": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "term": {
+                                "termStatus": {
+                                    "default": "provisional",
                                     "type": "string"
                                 },
                                 "termLanguage": {
@@ -44,7 +45,10 @@
                                 "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "termSourceID": {
+                                "termSourceUniqueID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
                                     "type": "string"
                                 }
                             },

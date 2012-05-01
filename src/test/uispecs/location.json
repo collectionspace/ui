@@ -164,14 +164,39 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
-                                                                ".csc-locationAuthority-name": "${{row}.name}",
-                                                                ".csc-locationAuthority-qualifier": "${{row}.qualifier}",
+                                                                ".csc-locationAuthority-termName": "${{row}.termName}",
+                                                                ".csc-locationAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-locationAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-locationAuthority-term": "${{row}.term}",
+                                                                ".csc-locationAuthority-termStatus": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under Review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.termStatus}"
+                                                                },
+                                                                ".csc-personAuthority-termLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "${{row}.termLanguage}",
+                                                                            "termListType": "termLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
                                                                 ".csc-locationAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -185,7 +210,8 @@
                                                                 ".csc-locationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
                                                                 ".csc-locationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-locationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-locationAuthority-termSourceID": "${{row}.termSourceID}"
+                                                                ".csc-locationAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-locationAuthority-termSourceNote": "${{row}.termSourceNote}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -195,17 +221,17 @@
                                             }
                                         ]
                                     },
-                                    ".csc-location-name-label": {
-                                        "messagekey": "location-nameLabel"
+                                    ".csc-location-termName-label": {
+                                        "messagekey": "location-termNameLabel"
                                     },
-                                    ".csc-location-qualifier-label": {
-                                        "messagekey": "location-qualifierLabel"
+                                    ".csc-location-termQualifier-label": {
+                                        "messagekey": "location-termQualifierLabel"
                                     },
                                     ".csc-location-termType-label": {
                                         "messagekey": "location-termTypeLabel"
                                     },
-                                    ".csc-location-term-label": {
-                                        "messagekey": "location-termLabel"
+                                    ".csc-location-termStatus-label": {
+                                        "messagekey": "location-termStatusLabel"
                                     },
                                     ".csc-location-termLanguage-label": {
                                         "messagekey": "location-termLanguageLabel"
@@ -219,8 +245,11 @@
                                     ".csc-location-termSourceDetail-label": {
                                         "messagekey": "location-termSourceDetailLabel"
                                     },
-                                    ".csc-location-termSourceID-label": {
-                                        "messagekey": "location-termSourceIDLabel"
+                                    ".csc-location-termSourceUniqueID-label": {
+                                        "messagekey": "location-termSourceUniqueIDLabel"
+                                    },
+                                    ".csc-location-termSourceNote-label": {
+                                        "messagekey": "location-termSourceNoteLabel"
                                     }
                                 },
                                 "type": "fluid.noexpand"

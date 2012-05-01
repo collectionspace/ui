@@ -3,15 +3,16 @@
     "fields": {
         "preferredLocationGroup": [
             {
-                "name": "Epic Drawer",
-                "qualifier": "Drawer Qualifier",
+                "termName": "Epic Drawer",
+                "termQualifier": "Drawer Qualifier",
                 "termType": "descriptor",
-                "term": "abc",
+                "termStatus": "provisional",
                 "termLanguage": "Value 1",
                 "termPreferredForLanguage": true,
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
-                "termSourceID": "Source ID",
+                "termSourceUniqueID": "Source ID",
+                "termSourceNote": "Source Note",
                 "_primary": true
             }
         ],
