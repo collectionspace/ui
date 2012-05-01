@@ -164,12 +164,30 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
+                                                                ".csc-conceptAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                                                ".csc-conceptAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-conceptAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
                                                                     "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
                                                                     "selection": "${{row}.termType}"
                                                                 },
-                                                                ".csc-concept-shortDisplayName": "${fields.shortDisplayName}",
+                                                                ".csc-conceptAuthority-termStatus": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under Review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.termStatus}"
+                                                                },
+                                                                ".csc-concept-termName": "${fields.termName}",
                                                                 ".csc-conceptAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -181,17 +199,15 @@
                                                                     }]
                                                                 },
                                                                 ".csc-conceptAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
-                                                                ".csc-conceptAuthority-historicalFlag": {
+                                                                ".csc-conceptAuthority-historicalStatus": {
                                                                     "optionnames": ["Please select a value", "current", "historical", "both"],
                                                                     "optionlist": ["", "current", "historical", "both"],
                                                                     "selection": "${{row}.historicalFlag}"
                                                                 },
                                                                 ".csc-conceptAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-conceptAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-conceptAuthority-termSourceID": "${{row}.termSourceID}",
-                                                                ".csc-conceptAuthority-termScopeNote": "${{row}.termScopeNote}",
-                                                                ".csc-conceptAuthority-termScopeNoteSource": "${{row}.termScopeNoteSource}",
-                                                                ".csc-conceptAuthority-termScopeNoteSourceDetail": "${{row}.termScopeNoteSourceDetail}"
+                                                                ".csc-conceptAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-conceptAuthority-termSourceNote": "${{row}.termSourceNote}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -201,11 +217,20 @@
                                             }
                                         ]
                                     },
+                                    ".csc-concept-termDisplayName-label": {
+                                        "messagekey": "concept-termDisplayNameLabel"
+                                    },
+                                    ".csc-concept-termQualifier-label": {
+                                        "messagekey": "concept-termQualifierLabel"
+                                    },
                                     ".csc-concept-termType-label": {
                                         "messagekey": "concept-termTypeLabel"
                                     },
-                                    ".csc-concept-shortDisplayName-label": {
-                                        "messagekey": "concept-shortDisplayNameLabel"
+                                    ".csc-concept-termStatus-label": {
+                                        "messagekey": "concept-termStatusLabel"
+                                    },
+                                    ".csc-concept-termName-label": {
+                                        "messagekey": "concept-termNameLabel"
                                     },
                                     ".csc-concept-termLanguage-label": {
                                         "messagekey": "concept-termLanguageLabel"
@@ -213,8 +238,8 @@
                                     ".csc-concept-termPreferredForLanguage-label": {
                                         "messagekey": "concept-termPreferredForLanguageLabel"
                                     },
-                                    ".csc-concept-historicalFlag-label": {
-                                        "messagekey": "concept-historicalFlagLabel"
+                                    ".csc-concept-historicalStatus-label": {
+                                        "messagekey": "concept-historicalStatusLabel"
                                     },
                                     ".csc-concept-termSource-label": {
                                         "messagekey": "concept-termSourceLabel"
@@ -222,17 +247,11 @@
                                     ".csc-concept-termSourceDetail-label": {
                                         "messagekey": "concept-termSourceDetailLabel"
                                     },
-                                    ".csc-concept-termSourceID-label": {
-                                        "messagekey": "concept-termSourceIDLabel"
+                                    ".csc-concept-termSourceUniqueID-label": {
+                                        "messagekey": "concept-termSourceUniqueIDLabel"
                                     },
-                                    ".csc-concept-termScopeNote-label": {
-                                        "messagekey": "concept-termScopeNoteLabel"
-                                    },
-                                    ".csc-concept-termScopeNoteSource-label": {
-                                        "messagekey": "concept-termScopeNoteSourceLabel"
-                                    },
-                                    ".csc-concept-termScopeNoteSourceDetail-label": {
-                                        "messagekey": "concept-termScopeNoteSourceDetailLabel"
+                                    ".csc-concept-termSourceNote-label": {
+                                        "messagekey": "concept-termSourceNoteLabel"
                                     }
                                 },
                                 "type": "fluid.noexpand"
@@ -241,6 +260,18 @@
                     }
                 }
             ]
+        },
+        ".csc-conceptAuthority-termScopeNote": "${fields.termScopeNote}",
+        ".csc-conceptAuthority-termScopeNoteSource": "${fields.termScopeNoteSource}",
+        ".csc-conceptAuthority-termScopeNoteSourceDetail": "${fields.termScopeNoteSourceDetail}",
+        ".csc-concept-termScopeNote-label": {
+            "messagekey": "concept-termScopeNoteLabel"
+        },
+        ".csc-concept-termScopeNoteSource-label": {
+            "messagekey": "concept-termScopeNoteSourceLabel"
+        },
+        ".csc-concept-termScopeNoteSourceDetail-label": {
+            "messagekey": "concept-termScopeNoteSourceDetailLabel"
         },
         ".csc-concept-shortIdentifier-label": {
             "messagekey": "concept-shortIdentifierLabel"
@@ -251,7 +282,6 @@
             "messagekey": "concept-createdByLabel"
         },
         ".csc-concept-tenantID": "${fields.tenantID}",
-        ".csc-concept-qualifier": "${fields.qualifier}",
         ".csc-concept-uri": "${fields.uri}",
         ".csc-concept-createdAt-label": {
             "messagekey": "concept-createdAtLabel"
@@ -289,9 +319,6 @@
             "messagekey": "concept-uriLabel"
         },
         ".csc-concept-shortIdentifier": "${fields.shortIdentifier}",
-        ".csc-concept-qualifier-label": {
-            "messagekey": "concept-qualifierLabel"
-        },
         ".csc-concept-displayName": "${fields.displayName}",
         ".csc-concept-csid-label": {
             "messagekey": "concept-csidLabel"

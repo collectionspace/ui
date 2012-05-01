@@ -7,17 +7,19 @@
     "fields": {
         "preferredConceptGroup": [
             {
+                "termDisplayName": "Fred Bloggs",
+                "termQualifier": "Person Qualifier",
                 "termType": "descriptor",
-                "shortDisplayName": "Shortie",
+                "termStatus": "provisional",
+                "termName": "Shortie",
                 "termLanguage": "Value 1",
                 "termPreferredForLanguage": true,
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
-                "termSourceID": "Source ID",
+                "termSourceUniqueID": "Source ID",
+                "termSourceNote": "Source Note",
                 "historicalFlag": "both",
-                "termScopeNote": "Scope Note",
-                "termScopeNoteSource": "Scope Note Source",
-                "termScopeNoteSourceDetail": "Scope Note Source Detail",
+                
                 "_primary": true
             }
         ],
@@ -25,7 +27,9 @@
             "_primary": true
         }],
         "csid": "8c7853a1-f1d3-4ae5-8511",
-        "qualifier": "Qualifier",
+        "termScopeNote": "Scope Note",
+        "termScopeNoteSource": "Scope Note Source",
+        "termScopeNoteSourceDetail": "Scope Note Source Detail",
         "termLanguage": "urn:cspace:core.collectionspace.org:vocabularies:name(languages):item:name(eng)'English'",
         "updatedBy": "admin@core.collectionspace.org",
         "shortIdentifier": "ConceptDisplayName1332900713944",
@@ -45,7 +49,6 @@
             "_primary": true
         }],
         "authorityid": "6ca3db57-7c96-47b6-b17d",
-        "displayName": "Concept (Display Name)",
         "refid": "urn:cspace:core.collectionspace.org:conceptauthorities:name(concept):item:name(ConceptDisplayName1332900713944)'Concept (Display Name)'",
         "recordtype": "concept"
     }

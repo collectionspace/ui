@@ -17,11 +17,21 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
+                                "displayName": {
+                                    "type": "string"
+                                },
                                 "termType": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "shortDisplayName": {
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termQualifier": {
                                     "type": "string"
                                 },
                                 "termLanguage": {
@@ -32,7 +42,7 @@
                                     "default": false,
                                     "type": "boolean"
                                 },
-                                "historicalFlag": {
+                                "historicalStatus": {
                                     "default": "",
                                     "type": "string"
                                 },
@@ -42,16 +52,10 @@
                                 "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "termSourceID": {
+                                "termSourceUniqueID": {
                                     "type": "string"
                                 },
-                                "termScopeNote": {
-                                    "type": "string"
-                                },
-                                "termScopeNoteSource": {
-                                    "type": "string"
-                                },
-                                "termScopeNoteSourceDetail": {
+                                "termSourceNote": {
                                     "type": "string"
                                 }
                             },
@@ -77,13 +81,19 @@
                         },
                         "type": "array"
                     },
-                    "qualifier": {
-                        "type": "string"
-                    },
                     "csid": {
                         "type": "string"
                     },
                     "uri": {
+                        "type": "string"
+                    },
+                    "termScopeNote": {
+                        "type": "string"
+                    },
+                    "termScopeNoteSource": {
+                        "type": "string"
+                    },
+                    "termScopeNoteSourceDetail": {
                         "type": "string"
                     },
                     "updatedBy": {
@@ -108,9 +118,6 @@
                         "type": "string"
                     },
                     "refName": {
-                        "type": "string"
-                    },
-                    "displayName": {
                         "type": "string"
                     },
                     "narrowerContexts": {
