@@ -23,6 +23,12 @@ CollectionSpace 1.8 default CSS selectors
 .interfield-text {
 	padding: 1.5em .5em 0 .5em;
 }
+.info-column2-90 {width:  89%;}
+.info-column2-10 {width:  9%;}
+.info-column.indent {
+	width: 90%;
+	float: right;
+}
 
 .determinationHistory .cs-autocomplete-input {
 	width: 99.5%;

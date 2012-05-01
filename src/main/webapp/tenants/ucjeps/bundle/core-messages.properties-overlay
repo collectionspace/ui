@@ -155,3 +155,36 @@ collection-object-geoRefPlaceNameLabel: Georeference place name
 #concept
 concept: Label Text
 concept-concept: Label Text
+
+#loanout
+loanout-collectionLabel: Collection
+loanout-geographyLabel: Geography
+loanout-taxonomyLabel: Taxonomy
+loanout-objKindLabel: Object Kind
+loanout-shipDateLabel: Shipping Form Date
+loanout-transportMethodLabel: Transportation
+loanout-numPackagesLabel: # Packages
+loanout-acknowledgeDateLabel: Acknowledge Date
+loanout-manualCountsLabel: Manual Counts
+loanout-numLentLabel: Lent
+loanout-numReturnedLabel: Returned
+loanout-balanceLabel: Balance
+loanout-discrepancyLabel: Discrepancy
+loanout-objectInformationLabel: Loan Out Items
+loanout-objectNumbersLabel: Object number(s)
+loanout-objectQuantityLabel: Quantity
+loanout-objectConditionsLabel: Loan Conditions
+loanout-objectNotesLabel: Notes
+loanout-returnInformationLabel: Loan Return Items
+loanout-returnObjectNumbersLabel: Object number(s)
+loanout-returnQuantityLabel: Quantity
+loanout-returnDateLabel: Return Date
+loanout-returnDeterminationLabel: New Determination
+loanout-returnNotesLabel: Notes
+loanout-transferInformationLabel: Loan Transfers
+loanout-transferDateLabel: Transfer Date
+loanout-transferOrgLabel: To Institution
+loanout-transferPersonLabel: To Person
+loanout-transferDirectorLabel: Under Direction Of
+loanout-transferQuantityLabel: Quantity
+loanout-transferNotesLabel: Notes
