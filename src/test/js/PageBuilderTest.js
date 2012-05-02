@@ -408,7 +408,7 @@ cspace = cspace || {};
             var result = cspace.composite.compose({
                 transform: fluid.model.transformWithRules,
                 options: {
-                    resources: ["test1", "test3"],
+                    resources: {"test1": null, "test3": null},
                     urls: {
                         composite: "../../tenant/core/composite",
                         prefix: "../../tenant/core"
