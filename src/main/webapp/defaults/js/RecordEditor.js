@@ -519,7 +519,12 @@ cspace = cspace || {};
     
     cspace.recordEditor.reloadAndCloneRecord = function (that) {
         that.cloneAndStore();
-        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.options.recordType});
+        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {
+            recordType: that.options.recordType,
+            vocab: that.model.namespace ? ("?" + $.param({
+                vocab: that.model.namespace
+            })) : ""
+        });
     };
     
     cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
@@ -670,7 +675,7 @@ cspace = cspace || {};
         strings: {},
         urls: cspace.componentUrlBuilder({
             deleteURL: "%webapp/html/findedit.html",
-            cloneURL: "%webapp/html/%recordType.html"
+            cloneURL: "%webapp/html/%recordType.html%vocab"
         })
     });
     

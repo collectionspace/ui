@@ -158,7 +158,7 @@ cspace = cspace || {};
         that.messageBar.hide();
         that.applier.requestChange("results", []);
         that.updateModel({
-            keywords: searchBox.locate("searchQuery").val(),
+            keywords: searchBox.model.keywords,
             recordType: searchBox.model.recordType,
             vocab: searchBox.model.vocabs ? searchBox.model.vocabSelection : undefined,
             sortKey: ""
@@ -497,7 +497,7 @@ cspace = cspace || {};
     
     cspace.search.searchView.search = function (newPagerModel, that) {
         var searchModel = that.model.searchModel;
-        that.mainSearch.locate("searchQuery").val(searchModel.keywords);
+        that.mainSearch.locate("searchQuery").val(searchModel.keywords).change();
         that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType).change();
         that.mainSearch.locate("selectVocab").val(searchModel.vocab).change();
         displayLookingMessage(that.dom, searchModel.keywords, that.options.strings);

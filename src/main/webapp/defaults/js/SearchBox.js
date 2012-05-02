@@ -49,7 +49,8 @@ cspace = cspace || {};
         strings: {},
         parentBundle: "{globalBundle}",
         model: {
-            messagekeys: {}
+            messagekeys: {},
+            keywords: ""
         },                  // A default data model object.
         produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
         rendererOptions: {
@@ -182,7 +183,7 @@ cspace = cspace || {};
                 vocab: that.model.vocabs ? ("&" + $.param({
                     vocab: that.model.vocabSelection
                 })) : "",
-                keywords: that.locate("searchQuery").val() || ""
+                keywords: that.model.keywords
             });
             window.location = url;
         });
@@ -194,7 +195,7 @@ cspace = cspace || {};
             searchButton: {
                 messagekey: "searchBox-searchButtonText"
             },
-            searchQuery: {},
+            searchQuery: "${keywords}",
             expander: [{
                 type: "fluid.renderer.condition",
                 condition: "${messagekeys.recordTypeSelectLabel}",
