@@ -73,7 +73,7 @@ cspace = cspace || {};
             navigateToSearch: "cspace.searchBox.navigateToSearch"
         },
         selfRender: false,          // An options that indicates whether the component needs to render on initialization.
-        searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
+        searchUrl: "findedit.html?recordtype=%recordtype%vocab&keywords=%keywords",   // Search page's url template.
         resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -178,7 +178,10 @@ cspace = cspace || {};
     cspace.searchBox.navigateToSearch = function (that) {
         that.globalNavigator.events.onPerformNavigation.fire(function () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
-                recordtype: that.locate("recordTypeSelect").val(),
+                recordtype: that.model.recordType,
+                vocab: that.model.vocabs ? ("&" + $.param({
+                    vocab: that.model.vocabSelection
+                })) : "",
                 keywords: that.locate("searchQuery").val() || ""
             });
             window.location = url;
