@@ -146,21 +146,165 @@
         }
     },
     "recordEditor": {
-        ".csc-place-termStatus": {
-            "default": "accepted",
-            "optionnames": [
-                "Provisional",
-                "Under review",
-                "Accepted",
-                "Rejected"
-            ],
-            "optionlist": [
-                "provisional",
-                "under-review",
-                "accepted",
-                "rejected"
-            ],
-            "selection": "${fields.termStatus}"
+        ".csc-preferred-placeAuthority": {
+            "decorators": [
+                {
+                    "func": "cspace.preferred",
+                    "type": "fluid",
+                    "options": {
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-preferred-placeGroup": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.makeRepeatable",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "repeatTree": {
+                                                        "expander": {
+                                                            "tree": {
+                                                                ".csc-placeAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                                                ".csc-placeAuthority-termQualifier": "${{row}.termQualifier}",
+                                                                ".csc-placeAuthority-termLanguage": {
+                                                                    "decorators": [{
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "elPath": "${{row}.termLanguage}",
+                                                                            "termListType": "termLanguage"
+                                                                        }
+                                                                    }]
+                                                                },
+                                                                ".csc-placeAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-placeAuthority-nameAbbrev": "${{row}.nameAbbrev}",
+                                                                ".csc-placeAuthority-historicalStatus": {
+                                                                    "optionnames": ["Please select a value", "current", "historical", "both"],
+                                                                    "optionlist": ["", "current", "historical", "both"],
+                                                                    "selection": "${{row}.historicalFlag}"
+                                                                },
+                                                                ".csc-placeAuthority-termType": {
+                                                                    "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
+                                                                    "selection": "${{row}.termType}"
+                                                                },
+                                                                ".csc-placeAuthority-termSource": "${{row}.termSource}",
+                                                                ".csc-placeAuthority-termSourceDetail": "${{row}.termSourceDetail}",
+                                                                ".csc-placeAuthority-termSourceNote": "${{row}.termSourceNote}",
+                                                                ".csc-placeAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-placeAuthority-nameNote": "${{row}.nameNote}",
+                                                                ".csc-placeAuthority-nameDateGroup": {
+                                                                    "decorators": [
+                                                                        {
+                                                                            "func": "cspace.structuredDate",
+                                                                            "type": "fluid",
+                                                                            "options": {
+                                                                                "root": "{row}",
+                                                                                "elPath": "nameDateGroup.dateDisplayDate",
+                                                                                "elPaths": {
+                                                                                    "dateEarliestSingleQualifier": "nameDateGroup.dateEarliestSingleQualifier",
+                                                                                    "scalarValuesComputed": "nameDateGroup.scalarValuesComputed",
+                                                                                    "dateLatestDay": "nameDateGroup.dateLatestDay",
+                                                                                    "dateLatestYear": "nameDateGroup.dateLatestYear",
+                                                                                    "dateAssociation": "nameDateGroup.dateAssociation",
+                                                                                    "dateEarliestSingleEra": "nameDateGroup.dateEarliestSingleEra",
+                                                                                    "dateDisplayDate": "nameDateGroup.dateDisplayDate",
+                                                                                    "dateEarliestSingleCertainty": "nameDateGroup.dateEarliestSingleCertainty",
+                                                                                    "dateLatestEra": "nameDateGroup.dateLatestEra",
+                                                                                    "dateEarliestSingleQualifierValue": "nameDateGroup.dateEarliestSingleQualifierValue",
+                                                                                    "dateLatestCertainty": "nameDateGroup.dateLatestCertainty",
+                                                                                    "dateEarliestSingleYear": "nameDateGroup.dateEarliestSingleYear",
+                                                                                    "dateLatestQualifier": "nameDateGroup.dateLatestQualifier",
+                                                                                    "dateLatestQualifierValue": "nameDateGroup.dateLatestQualifierValue",
+                                                                                    "dateEarliestSingleQualifierUnit": "nameDateGroup.dateEarliestSingleQualifierUnit",
+                                                                                    "datePeriod": "nameDateGroup.datePeriod",
+                                                                                    "dateEarliestScalarValue": "nameDateGroup.dateEarliestScalarValue",
+                                                                                    "dateLatestMonth": "nameDateGroup.dateLatestMonth",
+                                                                                    "dateNote": "nameDateGroup.dateNote",
+                                                                                    "dateLatestScalarValue": "nameDateGroup.dateLatestScalarValue",
+                                                                                    "dateLatestQualifierUnit": "nameDateGroup.dateLatestQualifierUnit",
+                                                                                    "dateEarliestSingleDay": "nameDateGroup.dateEarliestSingleDay",
+                                                                                    "dateEarliestSingleMonth": "nameDateGroup.dateEarliestSingleMonth"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "value": "${{row}.nameDateGroup.dateDisplayDate}"
+                                                                },
+                                                                ".csc-placeAuthority-termStatus": {
+                                                                    "default": "provisional",
+                                                                    "optionnames": [
+                                                                        "Provisional",
+                                                                        "Under Review",
+                                                                        "Accepted",
+                                                                        "Rejected"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "provisional",
+                                                                        "under review",
+                                                                        "accepted",
+                                                                        "rejected"
+                                                                    ],
+                                                                    "selection": "${{row}.termStatus}"
+                                                                }
+                                                            },
+                                                            "type": "fluid.noexpand"
+                                                        }
+                                                    },
+                                                    "elPath": "fields.preferredPlaceGroup"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-place-termDisplayName-label": {
+                                        "messagekey": "place-termDisplayNameLabel"
+                                    },
+                                    ".csc-place-termQualifier-label": {
+                                        "messagekey": "place-termQualifierLabel"
+                                    },
+                                    ".csc-place-termLanguage-label": {
+                                        "messagekey": "place-termLanguageLabel"
+                                    },
+                                    ".csc-place-termPreferredForLanguage-label": {
+                                        "messagekey": "place-termPreferredForLanguageLabel"
+                                    },
+                                    ".csc-place-nameAbbrev-label": {
+                                        "messagekey": "place-nameAbbrevLabel"
+                                    },
+                                    ".csc-place-historicalStatus-label": {
+                                        "messagekey": "place-historicalStatusLabel"
+                                    },
+                                    ".csc-place-termType-label": {
+                                        "messagekey": "place-termTypeLabel"
+                                    },
+                                    ".csc-place-termSource-label": {
+                                        "messagekey": "place-termSourceLabel"
+                                    },
+                                    ".csc-place-termSourceDetail-label": {
+                                        "messagekey": "place-termSourceDetailLabel"
+                                    },
+                                    ".csc-place-termSourceNote-label": {
+                                        "messagekey": "place-termSourceNoteLabel"
+                                    },
+                                    ".csc-place-termSourceUniqueID-label": {
+                                        "messagekey": "place-termSourceUniqueIDLabel"
+                                    },
+                                    ".csc-place-nameNote-label": {
+                                        "messagekey": "place-nameNoteLabel"
+                                    },
+                                    ".csc-place-nameDateGroup-label": {
+                                        "messagekey": "place-nameDateGroupLabel"
+                                    },
+                                    ".csc-place-termStatus-label": {
+                                        "messagekey": "place-termStatusLabel"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
         },
         ".csc-place-vDistanceAboveSurface-label": {
             "messagekey": "place-vDistanceAboveSurfaceLabel"
@@ -239,143 +383,7 @@
         ".csc-place-updatedAt-label": {
             "messagekey": "place-updatedAtLabel"
         },
-        ".csc-place-placeNameGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-place-nameQualifiedName": "${{row}.nameQualifiedName}",
-                                    ".csc-place-nameAdminStatus": {
-                                        "default": "provisional",
-                                        "optionnames": [
-                                            "Provisional",
-                                            "Under review",
-                                            "Accepted",
-                                            "Rejected"
-                                        ],
-                                        "optionlist": [
-                                            "provisional",
-                                            "under-review",
-                                            "accepted",
-                                            "rejected"
-                                        ],
-                                        "selection": "${{row}.nameAdminStatus}"
-                                    },
-                                    ".csc-place-nameStatus": {
-                                        "default": "",
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Current",
-                                            "Historical",
-                                            "Both",
-                                            "Unknown"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "current",
-                                            "historical",
-                                            "both",
-                                            "unknown"
-                                        ],
-                                        "selection": "${{row}.nameStatus}"
-                                    },
-                                    ".csc-place-nameAbbrev": "${{row}.nameAbbrev}",
-                                    ".csc-placeNameGroup-nameDateGroup": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.structuredDate",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "nameDateGroup.dateDisplayDate",
-                                                    "elPaths": {
-                                                        "dateEarliestSingleQualifier": "nameDateGroup.dateEarliestSingleQualifier",
-                                                        "scalarValuesComputed": "nameDateGroup.scalarValuesComputed",
-                                                        "dateLatestDay": "nameDateGroup.dateLatestDay",
-                                                        "dateLatestYear": "nameDateGroup.dateLatestYear",
-                                                        "dateAssociation": "nameDateGroup.dateAssociation",
-                                                        "dateEarliestSingleEra": "nameDateGroup.dateEarliestSingleEra",
-                                                        "dateDisplayDate": "nameDateGroup.dateDisplayDate",
-                                                        "dateEarliestSingleCertainty": "nameDateGroup.dateEarliestSingleCertainty",
-                                                        "dateLatestEra": "nameDateGroup.dateLatestEra",
-                                                        "dateEarliestSingleQualifierValue": "nameDateGroup.dateEarliestSingleQualifierValue",
-                                                        "dateLatestCertainty": "nameDateGroup.dateLatestCertainty",
-                                                        "dateEarliestSingleYear": "nameDateGroup.dateEarliestSingleYear",
-                                                        "dateLatestQualifier": "nameDateGroup.dateLatestQualifier",
-                                                        "dateLatestQualifierValue": "nameDateGroup.dateLatestQualifierValue",
-                                                        "dateEarliestSingleQualifierUnit": "nameDateGroup.dateEarliestSingleQualifierUnit",
-                                                        "datePeriod": "nameDateGroup.datePeriod",
-                                                        "dateEarliestScalarValue": "nameDateGroup.dateEarliestScalarValue",
-                                                        "dateLatestMonth": "nameDateGroup.dateLatestMonth",
-                                                        "dateNote": "nameDateGroup.dateNote",
-                                                        "dateLatestScalarValue": "nameDateGroup.dateLatestScalarValue",
-                                                        "dateLatestQualifierUnit": "nameDateGroup.dateLatestQualifierUnit",
-                                                        "dateEarliestSingleDay": "nameDateGroup.dateEarliestSingleDay",
-                                                        "dateEarliestSingleMonth": "nameDateGroup.dateEarliestSingleMonth"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.nameDateGroup.dateDisplayDate}"
-                                    },
-                                    ".csc-place-placeName": "${{row}.placeName}",
-                                    ".csc-place-nameLanguage": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.termList",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "nameLanguage",
-                                                    "termListType": "nameLanguage"
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    ".csc-place-nameSource": "${{row}.nameSource}",
-                                    ".csc-place-nameSourceDetail": "${{row}.nameSourceDetail}",
-                                    ".csc-place-nameNote": "${{row}.nameNote}",
-                                    ".csc-place-nameType": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Common name",
-                                            "Technical or scientific name",
-                                            "Native name",
-                                            "Non-native name",
-                                            "Local name",
-                                            "Descriptive name",
-                                            "Spelling variant"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "common",
-                                            "technical-scientific",
-                                            "native",
-                                            "non-native",
-                                            "local",
-                                            "descriptive",
-                                            "spelling-variant"
-                                        ],
-                                        "selection": "${{row}.nameType}"
-                                    },
-                                    ".csc-place-nameSourceRefId": "${{row}.nameSourceRefId}"
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.placeNameGroup"
-                    }
-                }
-            ]
-        },
         ".csc-place-note": "${fields.note}",
-        ".csc-place-nameAbbrev-label": {
-            "messagekey": "place-nameAbbrevLabel"
-        },
         ".csc-place-coordUncertaintyInMeters-label": {
             "messagekey": "place-coordUncertaintyInMetersLabel"
         },
@@ -503,13 +511,7 @@
         ".csc-place-updatedBy-label": {
             "messagekey": "place-updatedByLabel"
         },
-        ".csc-place-displayName-label": {
-            "messagekey": "place-displayNameLabel"
-        },
         ".csc-place-maxDepthInMeters": "${fields.maxDepthInMeters}",
-        ".csc-place-termStatus-label": {
-            "messagekey": "place-termStatusLabel"
-        },
         ".csc-place-nameSourceRefId-label": {
             "messagekey": "place-nameSourceRefIdLabel"
         },
@@ -626,9 +628,6 @@
             "messagekey": "place-decimalLongitudeLabel"
         },
         ".csc-place-vCoordSourceRefId": "${fields.vCoordSourceRefId}",
-        ".csc-place-placeIdentifier-label": {
-            "messagekey": "place-placeIdentifierLabel"
-        },
         ".csc-place-maxDistanceAboveSurfaceInMeters": "${fields.maxDistanceAboveSurfaceInMeters}",
         ".csc-place-source-label": {
             "messagekey": "place-sourceLabel"
@@ -655,7 +654,6 @@
             "messagekey": "place-vCoordSourceRefIdLabel"
         },
         ".csc-place-maxElevationInMeters": "${fields.maxElevationInMeters}",
-        ".csc-place-placeIdentifier": "${fields.placeIdentifier}",
         ".csc-place-minDepthInMeters": "${fields.minDepthInMeters}",
         ".csc-place-tenantID-label": {
             "messagekey": "place-tenantIDLabel"
@@ -769,7 +767,6 @@
         ".csc-place-placeName-label": {
             "messagekey": "place-placeNameLabel"
         },
-        ".csc-place-displayName": "${fields.displayName}",
         ".csc-place-vUnitofMeasure-label": {
             "messagekey": "place-vUnitofMeasureLabel"
         },
@@ -846,9 +843,6 @@
                 }
             ]
         },
-        ".csc-place-nameNote-label": {
-            "messagekey": "place-nameNoteLabel"
-        },
         ".csc-place-refName-label": {
             "messagekey": "place-refNameLabel"
         },
@@ -871,9 +865,6 @@
         },
         ".csc-place-vCoordSource-label": {
             "messagekey": "place-vCoordSourceLabel"
-        },
-        ".csc-placeNameGroup-nameDateGroup-label": {
-            "messagekey": "placeNameGroup-nameDateGroupLabel"
         }
     }
 }
