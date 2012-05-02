@@ -198,10 +198,10 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-organizationAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-organizationAuthority-termPrefForLang": "${{row}.termPrefForLang}",
                                                                 ".csc-organizationAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-organizationAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-organizationAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-organizationAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
                                                                 ".csc-organizationAuthority-longName": "${{row}.longName}"
@@ -232,8 +232,8 @@
                                     ".csc-organization-termLanguage-label": {
                                         "messagekey": "organization-termLanguageLabel"
                                     },
-                                    ".csc-organization-termPreferredForLanguage-label": {
-                                        "messagekey": "organization-termPreferredForLanguageLabel"
+                                    ".csc-organization-termPrefForLang-label": {
+                                        "messagekey": "organization-termPrefForLangLabel"
                                     },
                                     ".csc-organization-termSource-label": {
                                         "messagekey": "organization-termSourceLabel"
@@ -241,8 +241,8 @@
                                     ".csc-organization-termSourceDetail-label": {
                                         "messagekey": "organization-termSourceDetailLabel"
                                     },
-                                    ".csc-organization-termSourceUniqueID-label": {
-                                        "messagekey": "organization-termSourceUniqueIDLabel"
+                                    ".csc-organization-termSourceID-label": {
+                                        "messagekey": "organization-termSourceIDLabel"
                                     },
                                     ".csc-organization-termSourceNote-label": {
                                         "messagekey": "organization-termSourceNoteLabel"

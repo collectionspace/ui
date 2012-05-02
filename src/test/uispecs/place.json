@@ -176,7 +176,7 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-placeAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-placeAuthority-termPrefForLang": "${{row}.termPrefForLang}",
                                                                 ".csc-placeAuthority-nameAbbrev": "${{row}.nameAbbrev}",
                                                                 ".csc-placeAuthority-historicalStatus": {
                                                                     "optionnames": ["Please select a value", "current", "historical", "both"],
@@ -191,7 +191,7 @@
                                                                 ".csc-placeAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-placeAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-placeAuthority-termSourceNote": "${{row}.termSourceNote}",
-                                                                ".csc-placeAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-placeAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-placeAuthority-nameNote": "${{row}.nameNote}",
                                                                 ".csc-placeAuthority-nameDateGroup": {
                                                                     "decorators": [
@@ -265,8 +265,8 @@
                                     ".csc-place-termLanguage-label": {
                                         "messagekey": "place-termLanguageLabel"
                                     },
-                                    ".csc-place-termPreferredForLanguage-label": {
-                                        "messagekey": "place-termPreferredForLanguageLabel"
+                                    ".csc-place-termPrefForLang-label": {
+                                        "messagekey": "place-termPrefForLangLabel"
                                     },
                                     ".csc-place-nameAbbrev-label": {
                                         "messagekey": "place-nameAbbrevLabel"
@@ -286,8 +286,8 @@
                                     ".csc-place-termSourceNote-label": {
                                         "messagekey": "place-termSourceNoteLabel"
                                     },
-                                    ".csc-place-termSourceUniqueID-label": {
-                                        "messagekey": "place-termSourceUniqueIDLabel"
+                                    ".csc-place-termSourceID-label": {
+                                        "messagekey": "place-termSourceIDLabel"
                                     },
                                     ".csc-place-nameNote-label": {
                                         "messagekey": "place-nameNoteLabel"

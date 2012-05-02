@@ -8,10 +8,10 @@
                 "termType": "descriptor",
                 "termStatus": "provisional",
                 "termLanguage": "Value 1",
-                "termPreferredForLanguage": true,
+                "termPrefForLang": true,
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
-                "termSourceUniqueID": "Source ID",
+                "termSourceID": "Source ID",
                 "termSourceNote": "Source Note",
                 "_primary": true
             }

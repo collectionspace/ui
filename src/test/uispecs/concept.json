@@ -187,7 +187,7 @@
                                                                     ],
                                                                     "selection": "${{row}.termStatus}"
                                                                 },
-                                                                ".csc-concept-termName": "${fields.termName}",
+                                                                ".csc-concept-termName": "${{row}.termName}",
                                                                 ".csc-conceptAuthority-termLanguage": {
                                                                     "decorators": [{
                                                                         "func": "cspace.termList",
@@ -198,7 +198,7 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-conceptAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-conceptAuthority-termPrefForLang": "${{row}.termPrefForLang}",
                                                                 ".csc-conceptAuthority-historicalStatus": {
                                                                     "optionnames": ["Please select a value", "current", "historical", "both"],
                                                                     "optionlist": ["", "current", "historical", "both"],
@@ -206,7 +206,7 @@
                                                                 },
                                                                 ".csc-conceptAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-conceptAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-conceptAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-conceptAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-conceptAuthority-termSourceNote": "${{row}.termSourceNote}"
                                                             },
                                                             "type": "fluid.noexpand"
@@ -235,8 +235,8 @@
                                     ".csc-concept-termLanguage-label": {
                                         "messagekey": "concept-termLanguageLabel"
                                     },
-                                    ".csc-concept-termPreferredForLanguage-label": {
-                                        "messagekey": "concept-termPreferredForLanguageLabel"
+                                    ".csc-concept-termPrefForLang-label": {
+                                        "messagekey": "concept-termPrefForLangLabel"
                                     },
                                     ".csc-concept-historicalStatus-label": {
                                         "messagekey": "concept-historicalStatusLabel"
@@ -247,8 +247,8 @@
                                     ".csc-concept-termSourceDetail-label": {
                                         "messagekey": "concept-termSourceDetailLabel"
                                     },
-                                    ".csc-concept-termSourceUniqueID-label": {
-                                        "messagekey": "concept-termSourceUniqueIDLabel"
+                                    ".csc-concept-termSourceID-label": {
+                                        "messagekey": "concept-termSourceIDLabel"
                                     },
                                     ".csc-concept-termSourceNote-label": {
                                         "messagekey": "concept-termSourceNoteLabel"

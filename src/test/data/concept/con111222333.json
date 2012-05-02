@@ -13,13 +13,12 @@
                 "termStatus": "provisional",
                 "termName": "Shortie",
                 "termLanguage": "Value 1",
-                "termPreferredForLanguage": true,
+                "termPrefForLang": true,
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
-                "termSourceUniqueID": "Source ID",
+                "termSourceID": "Source ID",
                 "termSourceNote": "Source Note",
                 "historicalFlag": "both",
-                
                 "_primary": true
             }
         ],

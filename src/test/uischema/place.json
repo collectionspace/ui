@@ -31,7 +31,7 @@
                                     "default": "",
                                     "type": "string"
                                 },
-                                "termPreferredForLanguage": {
+                                "termPrefForLang": {
                                     "default": false,
                                     "type": "boolean"
                                 },
@@ -55,7 +55,7 @@
                                 "termSourceNote": {
                                     "type": "string"
                                 },
-                                "termSourceUniqueID": {
+                                "termSourceID": {
                                     "type": "string"
                                 },
                                 "nameNote": {

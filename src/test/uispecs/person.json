@@ -197,10 +197,10 @@
                                                                         }
                                                                     }]
                                                                 },
-                                                                ".csc-personAuthority-termPreferredForLanguage": "${{row}.termPreferredForLanguage}",
+                                                                ".csc-personAuthority-termPrefForLang": "${{row}.termPrefForLang}",
                                                                 ".csc-personAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-personAuthority-termSourceUniqueID": "${{row}.termSourceUniqueID}",
+                                                                ".csc-personAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-personAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-personAuthority-salutation": {
                                                                     "default": "dear",
@@ -243,8 +243,8 @@
                                     ".csc-person-termLanguage-label": {
                                         "messagekey": "person-termLanguageLabel"
                                     },
-                                    ".csc-person-termPreferredForLanguage-label": {
-                                        "messagekey": "person-termPreferredForLanguageLabel"
+                                    ".csc-person-termPrefForLang-label": {
+                                        "messagekey": "person-termPrefForLangLabel"
                                     },
                                     ".csc-person-termSource-label": {
                                         "messagekey": "person-termSourceLabel"
@@ -252,8 +252,8 @@
                                     ".csc-person-termSourceDetail-label": {
                                         "messagekey": "person-termSourceDetailLabel"
                                     },
-                                    ".csc-person-termSourceUniqueID-label": {
-                                        "messagekey": "person-termSourceUniqueIDLabel"
+                                    ".csc-person-termSourceID-label": {
+                                        "messagekey": "person-termSourceIDLabel"
                                     },
                                     ".csc-person-termSourceNote-label": {
                                         "messagekey": "person-termSourceNoteLabel"
