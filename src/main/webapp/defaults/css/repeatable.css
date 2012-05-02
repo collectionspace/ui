@@ -13,7 +13,11 @@
 .content li.cs-repeatable-repeat .content select,
 .content li.cs-repeatable-repeat .content button,
 .content li.cs-repeatable-repeat .content textarea {
-	float:none;}
+	float:none;
+}
+.content li.cs-repeatable-repeat .content input.cs-repeatable-add {
+    float: right;
+}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
 .cs-repeatable-add {}
