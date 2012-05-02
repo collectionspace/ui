@@ -90,7 +90,11 @@ cspace = cspace || {};
         urls: cspace.componentUrlBuilder({
             advancedSearchURL: "%webapp/html/advancedsearch.html"
         }),
-        enableAdvancedSearch: true
+        enableAdvancedSearch: true,
+        animationOpts: {
+            time: 300,
+            easing: "linear"
+        }
     });
     
     cspace.searchBox.finalInit = function (that) {
@@ -104,6 +108,11 @@ cspace = cspace || {};
 
         that.applier.modelChanged.addListener("recordType", function () {
             that.refreshView();
+            if (that.model.vocabs) {
+                that.locate("selectVocab")
+                    .add(that.locate("selectVocabLabel"))
+                    .show(that.options.animationOpts.time, that.options.animationOpts.easing);
+            }
         });
 
         if (that.options.selfRender) {
@@ -196,6 +205,10 @@ cspace = cspace || {};
                 condition: "${vocabs}",
                 trueTree: {
                     selectVocab: {
+                        decorators: {
+                            type: "jQuery",
+                            func: "hide"
+                        },
                         selection: "${vocabSelection}",
                         optionlist: "${vocabs}",
                         optionnames: "${vocabNames}"
@@ -205,7 +218,11 @@ cspace = cspace || {};
                         condition: "${messagekeys.selectVocabLabel}",
                         trueTree: {
                             selectVocabLabel: {
-                                messagekey: "${messagekeys.selectVocabLabel}"
+                                messagekey: "${messagekeys.selectVocabLabel}",
+                                decorators: {
+                                    type: "jQuery",
+                                    func: "hide"
+                                }
                             }
                         }
                     }

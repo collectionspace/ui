@@ -387,6 +387,9 @@ cspace = cspace || {};
             that.locate("radio").prop("checked", true);
             that.locate("templates").show(that.options.animationOpts.time, that.options.animationOpts.easing);
         }
+        if (that.model.vocabs) {
+            that.locate("vocabs").show(that.options.animationOpts.time, that.options.animationOpts.easing);
+        }
         updateModel(that);
     };
     
@@ -496,6 +499,7 @@ cspace = cspace || {};
         cspace.util.preInitMergeListeners(that.options, {
             collapseOn: function () {
                 that.locate("templates").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
+                that.locate("vocabs").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
             }
         });
         fixupModel(that.model, that.applier, that.options.parentBundle.messageBase);
