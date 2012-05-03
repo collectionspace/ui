@@ -383,7 +383,6 @@ li .flc-pager-pageLink {
     height:51px; 
     text-indent:-9999px;}
 .header-menu-right {
-    width:500px; 
     float:right; 
     padding-bottom:10px;}
 .header-menu-right input, .header-menu-right select {
@@ -471,6 +470,11 @@ li .flc-pager-pageLink {
 #administration #title-bar .record-type.cs-titleBar-recordType {
     color: #696565;
     float: left;
+}
+.cs-titleBar-vocab {
+    float: right;
+    padding: 9px 10px 0 0;
+    color: #74AC4D;
 }
 
 
@@ -1417,7 +1421,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
 .cs-searchBox-container {
-	width:580px;}
+    display: table-cell;}
 .cs-searchBox {
     padding:12px 14px 12px 0; 
     background-color:#F5F5F5; }
@@ -1437,11 +1441,18 @@ input[disabled]:hover, input[disabled]:hover    {
     width:200px !important; 
     border:1px solid #BCBDBD;
     font-size:13px; 
-    line-height:13px;}
-.cs-searchBox .cs-searchBox-selectRecordTypeLabel {
+    line-height:13px;
+    margin-left: 10px;}
+.cs-searchBox .cs-searchBox-selectRecordTypeLabel, .cs-searchBox .cs-searchBox-selectVocabLabel, .cs-advancedSearch-selectVocabLabel {
     padding: 3px 8px 0 15px; 
     font-size:12px; 
-    color:#6D6E71;}
+    color:#6D6E71;
+    display: inline-table;
+    vertical-align: middle;}
+.cs-advancedSearch-selectVocabLabel {
+    padding-right: 0;
+    vertical-align: inherit;
+}
 .cs-pivot-searchBox .cs-searchBox {
     width: 99%; 
     background-color:inherit; 
@@ -1452,7 +1463,7 @@ input[disabled]:hover, input[disabled]:hover    {
     float: none;
 }
 .cs-searchBox .cs-searchBox-button {
-    float:right;}
+    margin-left: 5px;}
 a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
