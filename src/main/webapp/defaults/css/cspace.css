@@ -1431,7 +1431,6 @@ input[disabled]:hover, input[disabled]:hover    {
     vertical-align: middle;}
 .cs-advancedSearch-selectVocabLabel {
     padding-right: 0;
-    vertical-align: inherit;
 }
 .cs-pivot-searchBox .cs-searchBox {
     width: 99%; 

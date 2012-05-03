@@ -134,6 +134,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordTraverser.prepareModel",
                 args: [
                     ["{cspace.recordTraverser}.searchHistoryStorage", "{cspace.recordTraverser}.findeditHistoryStorage"],
+                    "{vocab}",
                     "{cspace.recordTraverser}.model",
                     "{cspace.recordTraverser}.applier",
                     "{cspace.recordTraverser}.options.elPaths",
@@ -142,7 +143,7 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             adjacentRecords: "%tenant/%tname/adjacentRecords/%token/%index",
             returnToSearch: "%webapp/html/%source.html?hashtoken=%hashtoken"
         }),
@@ -162,7 +163,8 @@ cspace = cspace || {};
             previous: "adjacentRecords.previous",
             next: "adjacentRecords.next",
             recordType: "recordtype",
-            source: "source"
+            source: "source",
+            vocab: "namespace"
         }
     });
 
@@ -197,14 +199,20 @@ cspace = cspace || {};
         return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
     
-    cspace.recordTraverser.prepareModel = function (storages, model, applier, elPaths, urls) {
+    cspace.recordTraverser.prepareModel = function (storages, vocabComponent, model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
             if (!get(model, rec, elPaths.csid)) {
                 return;
             }
+            var vocab = cspace.vocab.resolve({
+                model: get(model, rec),
+                recordType: get(model, rec, elPaths.recordType),
+                vocab: vocabComponent
+            });
             applier.requestChange(rec + ".target", fluid.stringTemplate(urls.navigate, {
                 recordType: get(model, rec, elPaths.recordType),
-                csid: get(model, rec, elPaths.csid)
+                csid: get(model, rec, elPaths.csid),
+                vocab: vocab ? ("?" + $.param({vocab: vocab})) : ""
             }));
         });
         applier.requestChange(fluid.model.composeSegments(elPaths.adjacentRecords, elPaths.userIndex),
