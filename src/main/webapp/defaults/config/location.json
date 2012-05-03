@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "location",
-            "namespace": "location",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "location"
-            ],
+            "schema": {
+                "location": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/LocationTemplate.html",

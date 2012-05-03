@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "cataloging",
-             "schema": [
-                "namespaces",
-                "recordlist",
-                "recordtypes",
-                "cataloging"
-            ],
+            "schema": {
+                "cataloging": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/CatalogingTemplate.html",

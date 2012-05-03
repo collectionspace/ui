@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "media",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "media"
-            ],
+            "schema": {
+                "media": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/MediaTemplate.html",

@@ -70,6 +70,144 @@ cspace.tests.sampleSchema = {
             "media"
         ],
         "type": "array"
+    },
+    "namespaces": {
+        "properties": {
+            "person": {
+                "properties": {
+                    "person": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest1": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest2": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "concept": {
+                "properties": {
+                    "concept": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "activity": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "material": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest1": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest2": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "organization": {
+                "properties": {
+                    "organization": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "organizationtest": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "location": {
+                "properties": {
+                    "location": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
     }
 };
    
@@ -183,6 +321,12 @@ fluid.defaults("cspace.tests.testEnvironment", {
         },
         relationResolver: {
             type: "cspace.util.relationResolver"
+        },
+        vocab: {
+            type: "cspace.vocab",
+            options: {
+                schema: "{testEnvironment}.options.schema"
+            }
         },
         recordTypeManager: {
             type: "cspace.recordTypeManager"

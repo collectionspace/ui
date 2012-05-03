@@ -29,7 +29,19 @@ cspace = cspace || {};
                     permission: "{advancedSearch}.options.permission"
                 }
             },
-            fetcher: {
+            vocabSelector: {
+                type: "cspace.advancedSearch.vocabSelector",
+                container: "{cspace.advancedSearch}.dom.vocab",
+                createOnEvent: "afterRender",
+                options: {
+                    events: {
+                        recordTypeChanged: "{cspace.advancedSearch}.events.recordTypeChanged"
+                    },
+                    model: "{cspace.advancedSearch}.model",
+                    applier: "{cspace.advancedSearch}.applier"
+                }
+            },
+           fetcher: {
                 type: "cspace.advancedSearch.fetcher",
                 options: {
                     events: {
@@ -67,7 +79,9 @@ cspace = cspace || {};
             keywords: ""
         },
         permission: "list",
+        selectorsToIgnore: ["vocab"],
         selectors: {
+            vocab: ".csc-advancedSearch-vocabSelectorContainer",
             toggle: ".csc-advancedSearch-toggle",
             advancedSearch: ".csc-advancedSearch-template",
             step1: ".csc-advancedSearch-step1",
@@ -159,7 +173,8 @@ cspace = cspace || {};
         var searchModel = {};
         var rules = {
             "recordType": "recordType",
-            "keywords": "keywords"
+            "keywords": "keywords",
+            "vocab": "vocab"
         };
         if (fieldsModel) {
             rules.operation = "operation";
@@ -336,6 +351,95 @@ cspace = cspace || {};
         return fluid.transform(["or", "and"], function (value) {
             return messageBase["advancedSearch-" + value];
         });
+    };
+
+    fluid.defaults("cspace.advancedSearch.vocabSelector", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        selectors: {
+            selectVocab: ".csc-advancedSearch-selectVocab",
+            selectVocabLabel: ".csc-advancedSearch-selectVocabLabel"
+        },
+        mergePolicy: {
+            vocab: "nomerge"
+        },
+        vocab: "{vocab}",
+        events: {
+            recordTypeChanged: null
+        },
+        renderOnInit: true,
+        parentBundle: "{globalBundle}",
+        strings: {},
+        listeners: {
+            recordTypeChanged: "{cspace.advancedSearch.vocabSelector}.recordTypeChangedHandler",
+            prepareModelForRender: "{cspace.advancedSearch.vocabSelector}.prepareModelForRenderHandler",
+            afterRender: "{cspace.advancedSearch.vocabSelector}.afterRenderHandler"
+        },
+        styles: {
+            selectVocab: "cs-advancedSearch-selectVocab",
+            selectVocabLabel: "cs-advancedSearch-selectVocabLabel"
+        },
+        preInitFunction: "cspace.advancedSearch.vocabSelector.preInit",
+        protoTree: {
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: "${vocabs}",
+                trueTree: {
+                    selectVocab: {
+                        decorators: [{type: "jQuery", func: "hide"}, {"addClass": "{styles}.selectVocab"}],
+                        selection: "${vocab}",
+                        optionlist: "${vocabs}",
+                        optionnames: "${vocabNames}"
+                    },
+                    selectVocabLabel: {
+                        messagekey: "selectVocabLabel",
+                        decorators: [{type: "jQuery", func: "hide"}, {"addClass": "{styles}.selectVocabLabel"}]
+                    }
+                }
+            }
+        },
+        animationOpts: {
+            time: 300,
+            easing: "linear"
+        }
+    });
+
+    cspace.advancedSearch.vocabSelector.preInit = function (that) {
+        that.recordTypeChangedHandler = function () {
+            that.refreshView();
+        };
+        that.prepareModelForRenderHandler = function () {
+            var vocab = that.options.vocab,
+                applier = that.applier,
+                model = that.model,
+                vocabsExist;
+            if (!model.recordType || !vocab.hasVocabs(model.recordType)) {
+                that.applier.requestChange("vocabs", undefined);
+                return;
+            }
+            vocabsExist = vocab.authority[model.recordType].vocabs;
+            if (!vocabsExist) {
+                that.applier.requestChange("vocabs", undefined);
+                return;
+            }
+            var vocabs = [],
+                vocabNames = [];
+            fluid.each(vocabsExist, function (vocab) {
+                vocabs.push(vocab);
+                vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
+            });
+            applier.requestChange("vocabs", vocabs);
+            applier.requestChange("vocabNames", vocabNames);
+            if (!that.model.vocab) {
+                applier.requestChange("vocab", vocabs[0]);
+            }
+        };
+        that.afterRenderHandler = function () {
+            if (that.model.vocabs) {
+                that.locate("selectVocab")
+                    .add(that.locate("selectVocabLabel"))
+                    .show(that.options.animationOpts.time, that.options.animationOpts.easing);
+            }
+        };
     };
     
     fluid.defaults("cspace.advancedSearch.searchFields", {
