@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "person",
-            "namespace": "person",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "person"
-            ],
+            "schema": {
+                "person": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/PersonTemplate.html",

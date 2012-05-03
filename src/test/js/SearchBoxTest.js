@@ -70,8 +70,10 @@ var searchBoxTester = function ($) {
     
     searchBoxTest.test("Init and render with Label", function () {
         var searchBox = setupSearchBox({
-            strings: {
-                "searchBox-recordTypeSelectLabel": "Record Type"
+            model: {
+                messagekeys: {
+                    recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
+                }
             }
         });
         searchBox.refreshView();

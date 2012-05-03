@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "objectexit",
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "objectexit"
-            ],
+            "schema": {
+                "objectexit": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/ObjectexitTemplate.html",

@@ -127,7 +127,7 @@ cspace = cspace || {};
         
         // Go through all of resourceSpecs and move|map matched ones into the composite part.
         fluid.remove_if(resourceSpecs, function (resourceSpec, name) {
-            if ($.inArray(name, that.options.resources) < 0) {
+            if (typeof that.options.resources[name] === "undefined") {
                 return;
             }
             if (!resourceSpec) {
@@ -181,20 +181,19 @@ cspace = cspace || {};
     };
 
     var setTags = function (that, options) {
-        fluid.each([that.options.recordType, that.options.namespace], function (type) {
-            if (!type) {
-                return;
-            }
-            fluid.each(options.userLogin.permissions[type], function (permission) {
-                that[fluid.model.composeSegments(type, permission, "tag")] = fluid.typeTag(fluid.model.composeSegments(type, permission));
-            });
+        var type = that.options.recordType;
+        if (!type) {
+            return;
+        }
+        fluid.each(options.userLogin.permissions[type], function (permission) {
+            that[fluid.model.composeSegments(type, permission, "tag")] = fluid.typeTag(fluid.model.composeSegments(type, permission));
         });
     };
 
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
         fluid.instantiateFirers(that, that.options);
-        that.recordTypeTag = fluid.typeTag(that.options.namespace || that.options.recordType);
+        that.recordTypeTag = fluid.typeTag(that.options.recordType);
         fluid.initDependents(that);
         
         that.options.components = {
@@ -213,7 +212,7 @@ cspace = cspace || {};
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
                 readOnly: options.readOnly,
-                target: that.options.namespace || that.options.recordType
+                target: that.options.recordType
             });
             
             fluid.each(resourceSpecs, function (spec, key) {
@@ -230,8 +229,8 @@ cspace = cspace || {};
 
             options.schema = options.schema || {};
             fluid.each(that.options.schema, function (resource, key) {
-                var url = fluid.invoke("cspace.util.getDefaultSchemaURL", resource);
-                resourceSpecs[resource] = {
+                var url = fluid.invoke("cspace.util.getDefaultSchemaURL", key);
+                resourceSpecs[key] = {
                     href: url,
                     options: {
                         type: "GET",
@@ -317,11 +316,11 @@ cspace = cspace || {};
     };
     fluid.defaults("cspace.pageBuilderIO", {
         gradeNames: ["fluid.littleComponent"],
-        schema: [
-            "recordlist",
-            "recordtypes",
-            "namespaces"
-        ],
+        schema: {
+            "recordlist": null,
+            "recordtypes": null,
+            "namespaces": null
+        },
         model: {},
         mergePolicy: {
             model: "preserve",
@@ -438,8 +437,8 @@ cspace = cspace || {};
                     csid: "{pageBuilder}.options.userLogin.csid"
                 }
             },
-            namespaces: {
-                type: "cspace.namespaces",
+            vocab: {
+                type: "cspace.vocab",
                 options: {
                     schema: "{pageBuilder}.schema"
                 }

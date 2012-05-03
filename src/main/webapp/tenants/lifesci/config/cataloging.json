@@ -49,12 +49,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "cataloging",
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
+            "schema": {
                 "cataloging"
-            ],
+            },
             "components": {
                 "templateLocator": {
                     "type": "cspace.pageBuilderIO.templateLocator",

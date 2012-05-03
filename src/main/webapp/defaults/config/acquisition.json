@@ -50,12 +50,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "acquisition",
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "acquisition"
-            ],
+             "schema": {
+                "acquisition": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/AcquisitionTemplate.html",
