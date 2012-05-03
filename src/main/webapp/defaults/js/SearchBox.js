@@ -121,14 +121,6 @@ cspace = cspace || {};
         }
     };
 
-    var lookupNames = function (applier, messageBase, list, key, prefix) {
-        applier.requestChange(key, []);
-        fluid.each(list, function (value, index) {
-            applier.requestChange(fluid.model.composeSegments(key, index),
-                cspace.util.lookupMessage(messageBase, prefix + "-" + value));
-        });
-    };
-
     cspace.searchBox.preInit = function (that) {
         that.afterRenderHandler = function () {
             // Bind a click event on search button to trigger searchBox's navigateToSearch
@@ -156,13 +148,19 @@ cspace = cspace || {};
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
-            var vocabs = [];
+            var vocabs = [],
+                vocabNames = [];
             fluid.each(vocabsExist, function (vocab) {
                 vocabs.push(vocab);
+                vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });
+            if (vocabs.length > 1) {
+                vocabs = ["all"].concat(vocabs);
+                vocabNames = [that.options.parentBundle.resolve("vocab-all")].concat(vocabNames);
+            }
             applier.requestChange("vocabs", vocabs);
+            applier.requestChange("vocabNames", vocabNames);
             applier.requestChange("vocabSelection", vocabs[0]);
-            lookupNames(applier, that.options.parentBundle.messageBase, model.vocabs, "vocabNames", "vocab");
         };
     };
 
