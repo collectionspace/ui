@@ -1132,6 +1132,14 @@ fluid.registerNamespace("cspace.util");
             return !!fluid.get(that.list, recordType);
         };
 
+        that.isVocab = function (vocab) {
+            return fluid.find(that.list, function (vocabList) {
+                if (vocabList[vocab]) {
+                    return true;
+                }
+            }) || false;
+        };
+
         that.isDefault = function (vocab) {
             return !!fluid.get(that.list, vocab);
         };

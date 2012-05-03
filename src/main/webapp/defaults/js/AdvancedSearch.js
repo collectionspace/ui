@@ -427,6 +427,10 @@ cspace = cspace || {};
                 vocabs.push(vocab);
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });
+            if (vocabs.length > 1) {
+                vocabs = ["all"].concat(vocabs);
+                vocabNames = [that.options.parentBundle.resolve("vocab-all")].concat(vocabNames);
+            }
             applier.requestChange("vocabs", vocabs);
             applier.requestChange("vocabNames", vocabNames);
             if (!that.model.vocab) {
