@@ -17,14 +17,5 @@
                 }
             }
         }
-    },
-    "pageBuilderIO": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces"
-            ]
-        }
     }
 }

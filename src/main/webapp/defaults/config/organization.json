@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "organization",
-            "namespace": "organization",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "organization"
-            ],
+            "schema": {
+                "organization": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/OrganizationTemplate.html",

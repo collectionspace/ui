@@ -143,7 +143,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.container);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect"));
             
-            relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").val(testRelatedRecordType);
+            relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").val(testRelatedRecordType).change();
             searchDialog.search.mainSearch.locate("searchButton").click();
 
         };

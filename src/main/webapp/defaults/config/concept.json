@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "concept",
-            "namespace": "concept",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "concept"
-            ],
+            "schema": {
+                "concept": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/ConceptTemplate.html",

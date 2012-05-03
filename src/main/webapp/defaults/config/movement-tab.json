@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "movement",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "movement"
-            ],
+            "schema": {
+                "movement": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/MovementTemplate.html",

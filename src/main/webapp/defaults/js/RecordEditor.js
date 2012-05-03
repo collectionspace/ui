@@ -260,16 +260,18 @@ cspace = cspace || {};
      * it was successfully submitted.
      */
     cspace.recordEditor.requestSave = function (that) {
-        var ret = that.events.onSave.fire(that.model);
+        var ret = that.events.onSave.fire(that.model),
+            vocab = cspace.vocab.resolve({
+                model: that.model,
+                recordType: that.options.recordType,
+                vocab: that.vocab
+            });
         if (ret === false) {
             that.events.cancelSave.fire();
             return ret;
         }
-        if (that.namespaces) {
-            var namespace = cspace.util.getDefaultConfigURL.getRecordType();
-            if (that.namespaces.isNamespace(namespace)) {
-                that.options.applier.requestChange("namespace", namespace);
-            }
+        if (vocab) {
+            that.applier.requestChange("namespace", vocab);
         }
         if (that.validator) {
             var validatedModel = that.validator.validate(that.model);
@@ -517,7 +519,12 @@ cspace = cspace || {};
     
     cspace.recordEditor.reloadAndCloneRecord = function (that) {
         that.cloneAndStore();
-        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.options.recordType});
+        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {
+            recordType: that.options.recordType,
+            vocab: that.model.namespace ? ("?" + $.param({
+                vocab: that.model.namespace
+            })) : ""
+        });
     };
     
     cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
@@ -584,7 +591,6 @@ cspace = cspace || {};
         components: {
             messageBar: "{messageBar}",
             globalNavigator: "{globalNavigator}",
-            namespaces: "{namespaces}",
             confirmation: {
                 type: "cspace.confirmation"
             },
@@ -608,7 +614,8 @@ cspace = cspace || {};
             },
             validator: {
                 type: "cspace.validator"
-            }
+            },
+            vocab: "{vocab}"
         },
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",
@@ -668,7 +675,7 @@ cspace = cspace || {};
         strings: {},
         urls: cspace.componentUrlBuilder({
             deleteURL: "%webapp/html/findedit.html",
-            cloneURL: "%webapp/html/%recordType.html"
+            cloneURL: "%webapp/html/%recordType.html%vocab"
         })
     });
     

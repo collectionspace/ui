@@ -87,6 +87,13 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
+    cspace.util.getRecordShema = function (name) {
+        var recordType = cspace.util.getUrlParameter(name),
+            schema = {};
+        schema[recordType] = null;
+        return schema;
+    };
+
     cspace.resourceSpecExpander = function (options) {
         return {
             expander: {
@@ -737,13 +744,13 @@ fluid.registerNamespace("cspace.util");
         }
     });
 
-    cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
+    cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension, vocab) {
         if (operation === "addRelations") {
             return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
         } else if (operation === "removeRelations") {
             return cspace.util.addTrailingSlash(baseUrl) + "relationships/0";
         } else {
-            return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
+            return cspace.util.addTrailingSlash(baseUrl) + (vocab || recordType) + "/" + (csid ? csid + fileExtension : "");
         }
     };
 
@@ -1110,32 +1117,91 @@ fluid.registerNamespace("cspace.util");
         messageBar.show(message, Date(), true);
     };
     
-    fluid.defaults("cspace.namespaces", {
-        gradeNames: ["fluid.modelComponent", "autoInit"],
+    fluid.defaults("cspace.vocab", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
         mergePolicy: {
             schema: "nomerge"
         },
-        strategy: cspace.util.schemaStrategy,
-        postInitFunction: "cspace.namespaces.postInit",
-        invokers: {
-            isNamespace: {
-                funcName: "cspace.namespaces.isNamespace",
-                args: ["{namespaces}.namespaces", "{arguments}.0"]
-            }
-        }
+        preInitFunction: "cspace.vocab.preInit"
     });
-    cspace.namespaces.postInit = function (that) {
-        that.namespaces = fluid.get(that.model, fluid.model.composeSegments("namespaces", that.options.recordType), {
-            strategies: [that.options.strategy({
-                schema: that.options.schema
-            })]
+    cspace.vocab.preInit = function (that) {
+        that.list = cspace.util.getBeanValue({}, "namespaces", that.options.schema);
+        that.authority = {};
+
+        that.hasVocabs = function (recordType) {
+            return !!fluid.get(that.list, recordType);
+        };
+
+        that.isDefault = function (vocab) {
+            return !!fluid.get(that.list, vocab);
+        };
+
+        that.isNptAllowed = function (vocab, authority) {
+            var list;
+            if (authority) {
+                list = fluid.get(that.list, authority);
+            }
+            if (list) {
+                return fluid.get(list, fluid.model.composeSegments(vocab, "nptAllowed"));
+            }
+            return fluid.find(that.list, function (list) {
+                return fluid.get(list, fluid.model.composeSegments(vocab, "nptAllowed"));
+            }) || false;
+        };
+        // NOTE: This does not work in the <IE9.
+        Object.defineProperty(that, "authorities", {
+            get: function () {
+                return fluid.transform(that.list, function (list, authority) {
+                    return authority;
+                });
+            },
+            enumerable : true
+        });
+        fluid.each(that.authorities, function (authority) {
+            that.authority[authority] = {
+                nptAllowed: {}
+            };
+            Object.defineProperty(that.authority[authority], "vocabs", {
+                get: function () {
+                    return fluid.transform(fluid.get(that.list, authority), function (val, authority) {
+                        return authority;
+                    });
+                },
+                enumerable : true
+            });
+            Object.defineProperty(that.authority[authority].nptAllowed, "vocabs", {
+                get: function () {
+                    return fluid.transform(fluid.get(that.list, authority), function (val) {
+                        return val.nptAllowed;
+                    });
+                },
+                enumerable : true
+            });
         });
     };
-    cspace.namespaces.isNamespace = function (namespaces, namespace) {
-        if (!namespaces) {
-            return false;
+    cspace.vocab.ensureVocab = function (options) {
+        if (!options.vocab) {
+            options.vocab = cspace.vocab({schema: options.schema});
         }
-        return $.inArray(namespace, namespaces) > -1;
+    };
+    cspace.vocab.resolve = function (options) {
+        cspace.vocab.ensureVocab(options);
+        var vocab,
+            recType = options.recordType,
+            model = options.model;
+        if (model) {
+           vocab = model.namespace;
+        }
+        if (vocab) {
+            return vocab;
+        }
+        vocab = cspace.util.getUrlParameter("vocab");
+        if (vocab) {
+            return vocab;
+        }
+        if (recType && options.vocab.hasVocabs(recType)) {
+            return options.vocab.authority[recType].vocabs[recType];
+        }
     };
 
     cspace.recordTypes = function (options) {
@@ -1423,7 +1489,6 @@ fluid.registerNamespace("cspace.util");
             schema: "nomerge"
         },
         recordType: "",
-        namespace: "",
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",
             validatePrimitive: {
@@ -1478,7 +1543,7 @@ fluid.registerNamespace("cspace.util");
 
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
-        var schemaName = that.options.namespace || that.options.recordType;
+        var schemaName = that.options.recordType;
         // Only validate fields.
         schema = schema[schemaName].properties.fields.properties;
 
@@ -1511,14 +1576,6 @@ fluid.registerNamespace("cspace.util");
                 return oldPropertyValue || readOnly;
             });
         });
-    };
-    
-    cspace.util.merge = function () {
-        var togo = [];
-        fluid.each(arguments, function (arr) {
-            $.merge(togo, fluid.makeArray(arr));
-        });
-        return togo;
     };
     
     cspace.util.composeSegments = function (root, path) {

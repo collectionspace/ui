@@ -168,7 +168,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.newRecordLocalUrl", "{createNew}.options.urls.templateLocal"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordLocalUrl"]
         });
         
         // DataContext demands
@@ -437,7 +437,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.validator", "cspace.recordEditor", {
             options: {  
                 recordType: "{pageBuilderIO}.options.recordType",
-                namespace: "{pageBuilderIO}.options.namespace",
                 schema: "{pageBuilder}.schema"
             }
         });
@@ -450,13 +449,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
                 }
             }, "{arguments}.1"]
-        });
-
-        // Namespaces
-        fluid.demands("cspace.namespaces", ["cspace.pageBuilder", "cspace.pageBuilderIO"], {
-            options: {
-                recordType: "{pageBuilderIO}.options.recordType"
-            }
         });
 
         // Pagebuilder
@@ -864,11 +856,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.newRecordUrl", "{createNew}.options.urls.template"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordUrl"]
         });
         fluid.demands("createTemplate", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.model", "{createNew}.options.urls.templateUrl", "{createNew}.options.urls.template"]
+            args: ["{createNew}.model", "{createNew}.options.urls.templateUrl"]
         });
         fluid.demands("createNew", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.createNew"
@@ -880,7 +872,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.createNew.templateViewDataSource"
             }
         });
-        fluid.demands("cspace.createNew.recordTemplateBox", "cspace.createNew", {
+        fluid.demands("cspace.createNew.recordBox", "cspace.createNew", {
             container: "{arguments}.0",
             mergeAllOptions: [{
                 createNewModel: "{createNew}.model",
@@ -968,7 +960,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.dataContext.buildUrl", "cspace.dataContext", {
             funcName: "cspace.util.buildUrl",
-            args: ["{arguments}.0", "{dataContext}.options.baseUrl", "{dataContext}.options.recordType", "{arguments}.1", "{dataContext}.options.fileExtension"]
+            args: ["{arguments}.0", "{dataContext}.options.baseUrl", "{dataContext}.options.recordType", "{arguments}.1", "{dataContext}.options.fileExtension", "{arguments}.2"]
         });
         fluid.demands("cspace.dataContext.buildUrl", ["cspace.dataContext", "cspace.template"], {
             funcName: "cspace.dataContext.buildTemplateUrl",
@@ -2763,8 +2755,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 resources: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.util.merge",
-                        args: ["{pageBuilderIO}.options.schema", "uispec"]
+                        func: "fluid.merge",
+                        args: [null, {}, "{pageBuilderIO}.options.schema", {"uispec": null}]
                     }
                 },
                 urls: {
