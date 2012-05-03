@@ -11,6 +11,9 @@
             <fileset dir="./src/main/webapp">
             	<exclude name="defaults/js/*" />
             	<exclude name="defaults/css/*" />
+
+            	<exclude name="tenants/ucjeps/js/*" />
+            	<exclude name="tenants/ucjeps/css/*" />
             </fileset>
         </copy>
     </target>
@@ -24,6 +27,9 @@
         <replaceregexp file="${base-dir}/defaults/html/myCollectionSpace.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/myCollectionSpace.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/defaults/html/record.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/record.css&quot; />" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/template.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/template.css&quot; />" flags="g"></replaceregexp>
+
+        <replaceregexp file="${base-dir}/tenants/ucjeps/html/findedit.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/findedit.css&quot; />" flags="g"></replaceregexp>
+        <replaceregexp file="${base-dir}/tenants/ucjeps/html/record.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/record.css&quot; />" flags="g"></replaceregexp>
 		
 		<!--
         <replaceregexp match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../products/indexAll.css&quot; />" flags="g">
@@ -42,6 +48,10 @@
 	    <replaceregexp file="${base-dir}/defaults/html/myCollectionSpace.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/myCollectionSpace.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/record.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/record.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/template.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/template.js&quot;>&lt;/script>" flags="g"></replaceregexp>
+
+		<replaceregexp file="${base-dir}/tenants/ucjeps/html/findedit.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/findedit.js&quot;>&lt;/script>" flags="g"></replaceregexp>
+		<replaceregexp file="${base-dir}/tenants/ucjeps/html/record.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/record.js&quot;>&lt;/script>" flags="g"></replaceregexp>
+
 		<!--		
 		<replaceregexp match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../products/indexAll.js&quot;>&lt;/script>" flags="g">
             <fileset dir="${base-dir}/defaults/html" includes="*.html" />
