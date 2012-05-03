@@ -32,7 +32,9 @@ cspace = cspace || {};
             recordTypeSelectLabel: ".csc-searchBox-selectRecordTypeLabel",
             searchQuery: ".csc-searchBox-query",
             searchButton: ".csc-searchBox-button",
-            advancedSearch: ".csc-searchBox-advancedSearch"
+            advancedSearch: ".csc-searchBox-advancedSearch",
+            selectVocab: ".csc-searchBox-selectVocab",
+            selectVocabLabel: ".csc-searchBox-selectVocabLabel"
         },
         styles: {                   // Set of styles that the component will be adding onto selectors.
             searchBox: "cs-searchBox",
@@ -40,21 +42,23 @@ cspace = cspace || {};
             recordTypeSelectLabel: "cs-searchBox-selectRecordTypeLabel",
             searchQuery: "cs-searchBox-query",
             searchButton: "cs-searchBox-button",
-            advancedSearch: "cs-searchBox-advancedSearch"
+            advancedSearch: "cs-searchBox-advancedSearch",
+            selectVocab: "cs-searchBox-selectVocab",
+            selectVocabLabel: "cs-searchBox-selectVocabLabel"
         },
         strings: {},
         parentBundle: "{globalBundle}",
         model: {
-            messagekeys: {
-                recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
-            }
+            messagekeys: {},
+            keywords: ""
         },                  // A default data model object.
         produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
         rendererOptions: {
-            autoBind: false
+            autoBind: true
         },
         components: {
             globalNavigator: "{globalNavigator}",
+            vocab: "{vocab}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
                 options: {
@@ -70,7 +74,7 @@ cspace = cspace || {};
             navigateToSearch: "cspace.searchBox.navigateToSearch"
         },
         selfRender: false,          // An options that indicates whether the component needs to render on initialization.
-        searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
+        searchUrl: "findedit.html?recordtype=%recordtype%vocab&keywords=%keywords",   // Search page's url template.
         resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -81,15 +85,37 @@ cspace = cspace || {};
             })
         },
         listeners: {
-            afterRender: "{cspace.searchBox}.afterRenderHandler"
+            afterRender: "{cspace.searchBox}.afterRenderHandler",
+            prepareModelForRender: "{cspace.searchBox}.prepareModelForRenderHandler"
         },
         urls: cspace.componentUrlBuilder({
             advancedSearchURL: "%webapp/html/advancedsearch.html"
         }),
-        enableAdvancedSearch: true
+        enableAdvancedSearch: true,
+        animationOpts: {
+            time: 300,
+            easing: "linear"
+        }
     });
     
     cspace.searchBox.finalInit = function (that) {
+        that.subTree = that.recordTypeSelector.produceComponent();
+        if (that.subTree.recordTypeSelect) {
+            if (!that.model.recordType) {
+                that.applier.requestChange("recordType", that.subTree.recordTypeSelect.selection);
+            }
+            that.subTree.recordTypeSelect.selection = "${recordType}";
+        }
+
+        that.applier.modelChanged.addListener("recordType", function () {
+            that.refreshView();
+            if (that.model.vocabs) {
+                that.locate("selectVocab")
+                    .add(that.locate("selectVocabLabel"))
+                    .show(that.options.animationOpts.time, that.options.animationOpts.easing);
+            }
+        });
+
         if (that.options.selfRender) {
             that.refreshView();
         }
@@ -104,6 +130,37 @@ cspace = cspace || {};
                     that.navigateToSearch();
                 }
             });
+        };
+        that.prepareModelForRenderHandler = function () {
+            var vocab = that.vocab,
+                applier = that.applier,
+                model = that.model,
+                vocabsExist;
+            if (!model.recordType) {
+                return;
+            }
+            if (!vocab.hasVocabs(model.recordType)) {
+                that.applier.requestChange("vocabs", undefined);
+                return;
+            }
+            vocabsExist = vocab.authority[model.recordType].vocabs;
+            if (!vocabsExist) {
+                that.applier.requestChange("vocabs", undefined);
+                return;
+            }
+            var vocabs = [],
+                vocabNames = [];
+            fluid.each(vocabsExist, function (vocab) {
+                vocabs.push(vocab);
+                vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
+            });
+            if (vocabs.length > 1) {
+                vocabs = ["all"].concat(vocabs);
+                vocabNames = [that.options.parentBundle.resolve("vocab-all")].concat(vocabNames);
+            }
+            applier.requestChange("vocabs", vocabs);
+            applier.requestChange("vocabNames", vocabNames);
+            applier.requestChange("vocabSelection", vocabs[0]);
         };
     };
 
@@ -120,8 +177,11 @@ cspace = cspace || {};
     cspace.searchBox.navigateToSearch = function (that) {
         that.globalNavigator.events.onPerformNavigation.fire(function () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
-                recordtype: that.locate("recordTypeSelect").val(),
-                keywords: that.locate("searchQuery").val() || ""
+                recordtype: that.model.recordType,
+                vocab: that.model.vocabs ? ("&" + $.param({
+                    vocab: that.model.vocabSelection
+                })) : "",
+                keywords: that.model.keywords
             });
             window.location = url;
         });
@@ -133,13 +193,46 @@ cspace = cspace || {};
             searchButton: {
                 messagekey: "searchBox-searchButtonText"
             },
-            searchQuery: {},
-            recordTypeSelectLabel: {
-                messagekey: "${messagekeys.recordTypeSelectLabel}"
-            }
+            searchQuery: "${keywords}",
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${messagekeys.recordTypeSelectLabel}",
+                trueTree: {
+                    recordTypeSelectLabel: {
+                        messagekey: "${messagekeys.recordTypeSelectLabel}"
+                    }
+                }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: "${vocabs}",
+                trueTree: {
+                    selectVocab: {
+                        decorators: {
+                            type: "jQuery",
+                            func: "hide"
+                        },
+                        selection: "${vocabSelection}",
+                        optionlist: "${vocabs}",
+                        optionnames: "${vocabNames}"
+                    },
+                    expander: {
+                        type: "fluid.renderer.condition",
+                        condition: "${messagekeys.selectVocabLabel}",
+                        trueTree: {
+                            selectVocabLabel: {
+                                messagekey: "${messagekeys.selectVocabLabel}",
+                                decorators: {
+                                    type: "jQuery",
+                                    func: "hide"
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
         };
         
-        fluid.merge(null, tree, that.recordTypeSelector.produceComponent());
+        fluid.merge(null, tree, that.subTree);
         
         fluid.each(tree, function (child, key) {
             var decorator = {

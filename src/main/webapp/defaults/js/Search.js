@@ -30,12 +30,18 @@ cspace = cspace || {};
 
     fluid.registerNamespace("cspace.search");
 
-    cspace.search.colDefsGenerator = function (columnList, recordType, selectable, labels) {
+    cspace.search.colDefsGenerator = function (columnList, recordType, vocab, selectable, labels) {
         var colDefs = fluid.transform(columnList, function (key, index) {
-            var comp;
+            var comp,
+                vocabParam = "";
+            if (vocab && vocab !== "all") {
+                vocabParam = "&" + $.param({
+                    vocab: vocab
+                })
+            }
             if (key === "number") {
                 comp = {
-                    target: "${*.recordtype}.html?csid=${*.csid}",
+                    target: "${*.recordtype}.html?csid=${*.csid}" + vocabParam,
                     linktext: "${*.number}"
                 };
             } else if (key !== "csid") {
@@ -121,10 +127,25 @@ cspace = cspace || {};
                     if (!record) {
                         return;
                     }
+                    var vocab = cspace.vocab.resolve({
+                        model: record,
+                        recordType: record.recordType,
+                        vocab: that.vocab
+                    });
+                    if (!vocab && that.vocab.isVocab(record.recordtype)) {
+                        vocab = record.recordtype;
+                    }
+                    if (!vocab && that.vocab.hasVocabs(record.recordtype)) {
+                        vocab = record.recordtype;
+                    }
+                    if (vocab === "all") {
+                        vocab = record.recordtype;
+                    }
                     var expander = cspace.urlExpander({
                         vars: {
                             recordType: record.recordtype,
-                            csid: record.csid
+                            csid: record.csid,
+                            vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
                         }
                     });
                     if (that.searchReferenceStorage) {
@@ -149,8 +170,9 @@ cspace = cspace || {};
         that.messageBar.hide();
         that.applier.requestChange("results", []);
         that.updateModel({
-            keywords: searchBox.locate("searchQuery").val(),
-            recordType: searchBox.locate("recordTypeSelect").val(),
+            keywords: searchBox.model.keywords,
+            recordType: searchBox.model.recordType,
+            vocab: searchBox.model.vocabs ? searchBox.model.vocabSelection : undefined,
             sortKey: ""
         });
         that.resultsPager.applier.requestChange("pageCount", 1);
@@ -221,12 +243,14 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
+            vocab: "{vocab}",
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
                     model: {
                         messagekeys: {
-                            recordTypeSelectLabel: "mainSearch-recordTypeSelectLabel" 
+                            recordTypeSelectLabel: "mainSearch-recordTypeSelectLabel",
+                            selectVocabLabel: "selectVocabLabel"
                         }
                     },
                     selfRender: true,
@@ -259,7 +283,7 @@ cspace = cspace || {};
                         expander: {
                             type: "fluid.deferredCall",
                             func: "cspace.search.colDefsGenerator",
-                            args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable", "{searchView}.options.strings"]
+                            args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.model.searchModel.vocab", "{searchView}.options.resultsSelectable", "{searchView}.options.strings"]
                         }
                     },
                     listeners: {
@@ -286,14 +310,16 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
-            pivot: "%recordType.html?csid=%csid",
+            pivot: "%recordType.html?csid=%csid%vocab",
             pageNum: "&pageNum=%pageNum",
             pageSize: "&pageSize=%pageSize",
+            vocab: "&vocab=%vocab",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
-            localUrl: "%tenant/%tname/data/%recordType/search.json"
+            defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
+            localUrl: "%tenant/%tname/data/%recordType/search.json",
         }),
-        preInitFunction: "cspace.search.searchView.preInit"
+       preInitFunction: "cspace.search.searchView.preInit"
     });
 
     cspace.search.updateSearchHistory = function (storage, searchModel, hashtoken) {
@@ -420,7 +446,8 @@ cspace = cspace || {};
         } else {
             that.updateModel({
                 keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
-                recordType: cspace.util.getUrlParameter("recordtype")
+                recordType: cspace.util.getUrlParameter("recordtype"),
+                vocab: cspace.util.getUrlParameter("vocab")
             });
         }
         that.hideResults();
@@ -484,8 +511,9 @@ cspace = cspace || {};
     
     cspace.search.searchView.search = function (newPagerModel, that) {
         var searchModel = that.model.searchModel;
-        that.mainSearch.locate("searchQuery").val(searchModel.keywords);
-        that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType);
+        that.mainSearch.locate("searchQuery").val(searchModel.keywords).change();
+        that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType).change();
+        that.mainSearch.locate("selectVocab").val(searchModel.vocab).change();
         displayLookingMessage(that.dom, searchModel.keywords, that.options.strings);
         var pagerModel = newPagerModel || that.resultsPager.model;
         that.updateModel({
@@ -528,9 +556,10 @@ cspace = cspace || {};
     };
     
     cspace.search.searchView.buildUrlDefault = function (options, urls) {
-        var url = fluid.stringTemplate(urls.defaultUrl, {
+        var url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
             recordType: options.recordType,
             keywords: options.keywords,
+            vocab: options.vocab || "",
             pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
             pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
             sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
