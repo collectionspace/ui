@@ -1423,12 +1423,16 @@ input[disabled]:hover, input[disabled]:hover    {
     font-size:13px; 
     line-height:13px;
     margin-left: 10px;}
-.cs-searchBox .cs-searchBox-selectRecordTypeLabel, .cs-searchBox .cs-searchBox-selectVocabLabel {
+.cs-searchBox .cs-searchBox-selectRecordTypeLabel, .cs-searchBox .cs-searchBox-selectVocabLabel, .cs-advancedSearch-selectVocabLabel {
     padding: 3px 8px 0 15px; 
     font-size:12px; 
     color:#6D6E71;
     display: inline-table;
     vertical-align: middle;}
+.cs-advancedSearch-selectVocabLabel {
+    padding-right: 0;
+    vertical-align: inherit;
+}
 .cs-pivot-searchBox .cs-searchBox {
     width: 99%; 
     background-color:inherit; 
