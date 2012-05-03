@@ -63,12 +63,9 @@
     },
     "pageBuilderIO": {
         "options": {
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "users" 
-            ],
+            "schema": {
+                "users": null
+            },
             "recordType": "users"
         }
     }

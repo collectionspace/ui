@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "group",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "group"
-            ],
+            "schema": {
+                "group": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/GroupTemplate.html",

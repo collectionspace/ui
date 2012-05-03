@@ -71,7 +71,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
     
-    fluid.demands("cspace.createNew.recordTemplateBox", ["cspace.createNew", "cspace.test"], {
+    fluid.demands("cspace.createNew.recordBox", ["cspace.createNew", "cspace.test"], {
         container: "{arguments}.0",
         mergeAllOptions: [{
             createNewModel: "{createNew}.model",
