@@ -209,6 +209,7 @@ ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList select {
     width: auto;
 }
 
+input.cs-autocomplete-input,
 ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
 ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
 ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
