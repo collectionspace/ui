@@ -32,7 +32,7 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     position: relative; 
     float: right;
 /*     right: 31px; */
-    right: 11.5%;
+    right: 9%;
     top: -16px;
     padding:0}
 .info-pair-date input[type="button"].cs-repeatable-add {
@@ -137,18 +137,6 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
     padding:4px;
     float: left;
 }
-/*
-.infoDiv input[type="button"].cs-repeatable-add {
-    font-size:14px;
-    height:16px;
-    width:14px;
-    font-weight:bold;
-    position:absolute !important;
-    top: -16px;
-    right:2px !important;
-    padding:0;
-}
-*/
 .infoDiv input.cs-repeatable-delete {
     float:right;
     border:none;
@@ -186,12 +174,8 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 
 
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input,
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content textarea {
-    width: 100%;
-}
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content select {
-    width: auto;
-}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content textarea,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content select,
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content td select {
     width: 100%;
 }
@@ -266,9 +250,14 @@ div.infoGroup div.cs-repeatable-group {
     width: 20%;
 }
 
-div.info-pair-select {
+
+div.info-pair-select div {
     display: table;
 }
+div.info-pair-select div.content {
+    display: inherit;
+} 
+
 div.info-pair-select input.cs-repeatable-add {
     right: 40px;
 }
