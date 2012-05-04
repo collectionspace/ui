@@ -450,37 +450,6 @@
         },
         ".csc-contact-createdAt": "${fields.contact.createdAt}",
         ".csc-organization-createdBy": "${fields.createdBy}",
-        ".csc-organizationAuthority-subBodyName": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-organizationAuthority-subBodyName": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.autocomplete",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "queryUrl": "../../../tenant/core/vocabularies/organization/autocomplete/subBody",
-                                                    "vocabUrl": "../../../tenant/core/vocabularies/organization/source-vocab/subBody"
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.subBody}"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.subBodies"
-                    }
-                }
-            ]
-        },
         ".csc-contact-emailGroup": {
             "decorators": [
                 {
@@ -584,9 +553,6 @@
             "messagekey": "organization-shortIdentifierLabel"
         },
         ".csc-organization-tenantID": "${fields.tenantID}",
-        ".csc-organization-subBodies-label": {
-            "messagekey": "organization-subBodiesLabel"
-        },
         ".csc-contact-webAddress-label": {
             "messagekey": "contact-webAddressLabel"
         },

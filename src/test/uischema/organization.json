@@ -238,21 +238,6 @@
                     "dissolutionDate": {
                         "type": "date"
                     },
-                    "subBodies": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "subBody": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "foundingPlace": {
                         "type": "string"
                     },
