@@ -38,7 +38,8 @@ cspace = cspace || {};
             container = $(container);
             $("thead tr", container).addClass(options.repeatableClasses.headerRow);
         }
-        container.wrap($("<div />").css("display", "table-cell"));
+/*         container.wrap($("<div />").css("display", "table-cell")); */
+        container.wrap($("<div />"));
         return container.parent("div");
     };
 
