@@ -5,7 +5,8 @@
         "labels": [
             "Mayflower Photoplay Corp."
         ],
-        "type": "organization"
+        "type": "organization",
+        "namespace": "organization"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(OliverMoroscoPhotoplayCompany1334763683937)",
@@ -13,7 +14,8 @@
         "labels": [
             "Oliver Morosco Photoplay Company"
         ],
-        "type": "organization"
+        "type": "organization",
+        "namespace": "organizationtest"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(Photoplay1334763775670)",
@@ -21,7 +23,8 @@
         "labels": [
             "Photoplay"
         ],
-        "type": "organization"
+        "type": "organization",
+        "namespace": "organizationtest"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(ToppsCompanyInc1334763749665)",
@@ -29,7 +32,8 @@
         "labels": [
             "Topps Company, Inc."
         ],
-        "type": "organization"
+        "type": "organization",
+        "namespace": "organization"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(UtopiaEnterprisesInc1334763691997)",
@@ -37,12 +41,14 @@
         "labels": [
             "Utopia Enterprises, Inc."
         ],
-        "type": "organization"
+        "type": "organization",
+        "namespace": "organization"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherLee1334763571214)",
         "csid": "75f5ff26-ee75-4de5-a3ae",
         "type": "person",
+        "namespace": "person",
         "labels": [
             "Christopher Lee",
             "Chris Lee",
@@ -55,12 +61,14 @@
         "labels": [
             "Christopher Lloyd"
         ],
-        "type": "person"
+        "type": "person",
+        "namespace": "persontest1"
     },
     {
         "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)",
         "csid": "9c641934-5e59-4df7-a5ec",
         "type": "person",
+        "namespace": "persontest2",
         "labels": [
             "Christopher Plummer",
             "Chris Plummer",

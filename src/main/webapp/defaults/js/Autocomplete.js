@@ -396,7 +396,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     urn = that.options.elPaths.urn,
                     matches = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matches), function (match) {
-                    popupMatches = popupMatches.concat(fluid.transform(fluid.get(match, labels), function (thisLabel, index) {
+                    var vocab = cspace.vocab.resolve({
+                        recordType: match.type,
+                        model: match,
+                        vocab: that.vocab
+                    }), labelList = fluid.get(match, labels);
+
+                    if (!that.vocab.isNptAllowed(vocab, match.type)) {
+                        labelList = labelList.slice(0, 1);
+                    }
+
+                    popupMatches = popupMatches.concat(fluid.transform(labelList, function (thisLabel, index) {
                         var elem = {};
                         elem[urn] = match.urn.concat("'", thisLabel, "'");
                         elem[label] = thisLabel;
@@ -442,7 +452,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         components: {
-            eventHolder: "{eventHolder}"
+            eventHolder: "{eventHolder}",
+            vocab: "{vocab}"
         },
         strings: {},
         parentBundle: "{globalBundle}"
