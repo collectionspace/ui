@@ -34,7 +34,7 @@ cspace = cspace || {};
         var colDefs = fluid.transform(columnList, function (key, index) {
             var comp,
                 vocabParam = "";
-            if (vocab) {
+            if (vocab && vocab !== "all") {
                 vocabParam = "&" + $.param({
                     vocab: vocab
                 })
@@ -127,13 +127,25 @@ cspace = cspace || {};
                     if (!record) {
                         return;
                     }
+                    var vocab = cspace.vocab.resolve({
+                        model: record,
+                        recordType: record.recordType,
+                        vocab: that.vocab
+                    });
+                    if (!vocab && that.vocab.isVocab(record.recordtype)) {
+                        vocab = record.recordtype;
+                    }
+                    if (!vocab && that.vocab.hasVocabs(record.recordtype)) {
+                        vocab = record.recordtype;
+                    }
+                    if (vocab === "all") {
+                        vocab = record.recordtype;
+                    }
                     var expander = cspace.urlExpander({
                         vars: {
                             recordType: record.recordtype,
                             csid: record.csid,
-                            vocab: that.model.searchModel.vocab ? fluid.stringTemplate(that.options.urls.vocab, {
-                                vocab: that.model.searchModel.vocab
-                            }) : ""
+                            vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
                         }
                     });
                     if (that.searchReferenceStorage) {
@@ -231,6 +243,7 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
+            vocab: "{vocab}",
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
@@ -302,7 +315,8 @@ cspace = cspace || {};
             pageSize: "&pageSize=%pageSize",
             vocab: "&vocab=%vocab",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
-            defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort%vocab",
+            defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
+            defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
             localUrl: "%tenant/%tname/data/%recordType/search.json",
         }),
        preInitFunction: "cspace.search.searchView.preInit"
@@ -542,10 +556,10 @@ cspace = cspace || {};
     };
     
     cspace.search.searchView.buildUrlDefault = function (options, urls) {
-        var url = fluid.stringTemplate(urls.defaultUrl, {
+        var url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
             recordType: options.recordType,
             keywords: options.keywords,
-            vocab: options.vocab ? fluid.stringTemplate(urls.vocab, {vocab: options.vocab}) : "",
+            vocab: options.vocab || "",
             pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
             pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
             sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
