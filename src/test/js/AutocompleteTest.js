@@ -98,9 +98,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             chooseFunc(autocomplete);
             assertCloseVisible(autocomplete, false);
             var match = autocomplete.model.matches[0];
-            var matchLabel = match.labels[0];
-            var matchUrn = match.urn.concat("'", matchLabel , "'");
-            jqUnit.assertEquals("Visible field value", matchLabel, input.val());
+            var matchDisplayName = match.displayNames[0];
+            var matchUrn = match.baseUrn.concat("'", matchDisplayName , "'");
+            jqUnit.assertEquals("Visible field value", matchDisplayName, input.val());
             jqUnit.assertEquals("Hidden field value", matchUrn, autocomplete.hiddenInput.val());
             assertMatchCount("Dialog now empty", 0, autocomplete);
             start();

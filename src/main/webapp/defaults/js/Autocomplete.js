@@ -9,9 +9,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, cspace*/
-"use strict";
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("Autocomplete.js loaded");
 
     cspace.autocomplete = function () {
@@ -24,19 +26,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         if (!string) {
             return {
                 urn: "",
-                label: ""
+                displayName: ""
             };
         }
         else if (string.substring(0, 4) === "urn:") {
             return {
                 urn: string,
-                label: cspace.util.urnToString(string)
+                displayName: cspace.util.urnToString(string)
             };
         }
         else {
             return {
                 urn: "urn:error:in:application:layer:every:autocomplete:field:must:have:an:urn",
-                label: string
+                displayName: string
             };
         }
     };
@@ -143,9 +145,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var togo = [];
         var lowterm = directModel.term.toLowerCase();
         fluid.each(data, function (item) {
-            if (fluid.find(item.labels, function (label) {
-                if (label.toLowerCase().indexOf(lowterm) !== -1) {
-                    return label;
+            if (fluid.find(item.displayNames, function (displayName) {
+                if (displayName.toLowerCase().indexOf(lowterm) !== -1) {
+                    return displayName;
                 }
             })) {
                 togo.push(item);
@@ -177,7 +179,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             },
             put: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
-                callback({urn: "urn:" + fluid.allocateGuid(), label: model.fields.displayName});
+                callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
             }
         };
     };
@@ -227,8 +229,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.makePNPSelectionTree = function (elPaths, styles, tree, repeatID) {
         var preferred = elPaths.preferred,
-            urn = elPaths.urn,
-            label = elPaths.label;
+            displayName = elPaths.displayName;
         
         tree.expander = fluid.makeArray(tree.expander);
         
@@ -244,12 +245,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     condition: "${" + fluid.model.composeSegments("{row}", preferred) + "}",
                     trueTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", label) + "}"
+                            value: "${" + fluid.model.composeSegments("{row}", displayName) + "}"
                         }
                     },
                     falseTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", label) + "}",
+                            value: "${" + fluid.model.composeSegments("{row}", displayName) + "}",
                             decorators: {
                                 type: "addClass",
                                 classes: styles.nonPreferred
@@ -391,25 +392,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             prepareModelForRender: function (model, applier, that) {
                 var popupMatches = [],
                     preferred = that.options.elPaths.preferred,
-                    label = that.options.elPaths.label,
-                    labels = that.options.elPaths.labels,
+                    displayName = that.options.elPaths.displayName,
+                    displayNames = that.options.elPaths.displayNames,
                     urn = that.options.elPaths.urn,
+                    baseUrn = that.options.elPaths.baseUrn,
                     matches = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matches), function (match) {
                     var vocab = cspace.vocab.resolve({
                         recordType: match.type,
                         model: match,
                         vocab: that.vocab
-                    }), labelList = fluid.get(match, labels);
+                    }), displayNameList = fluid.get(match, displayNames);
 
                     if (!that.vocab.isNptAllowed(vocab, match.type)) {
-                        labelList = labelList.slice(0, 1);
+                        displayNameList = displayNameList.slice(0, 1);
                     }
 
-                    popupMatches = popupMatches.concat(fluid.transform(labelList, function (thisLabel, index) {
+                    popupMatches = popupMatches.concat(fluid.transform(displayNameList, function (thisDisplayName, index) {
                         var elem = {};
-                        elem[urn] = match.urn.concat("'", thisLabel, "'");
-                        elem[label] = thisLabel;
+                        elem[urn] = match[baseUrn].concat("'", thisDisplayName, "'");
+                        elem[displayName] = thisDisplayName;
                         elem[preferred] = index === 0;
                         return elem;
                     }));
@@ -464,15 +466,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     function updateAuthoritatively(that, termRecord) {
         if (that.hiddenInput.val() && 
             termRecord.urn === that.hiddenInput.val() && 
-            that.autocompleteInput.val() === termRecord.label) {
+            that.autocompleteInput.val() === termRecord.displayName) {
             return;
         }
         that.hiddenInput.val(termRecord.urn);
         that.hiddenInput.change();
-        fluid.log("New value " + termRecord.label);
-        that.autocompleteInput.val(termRecord.label);
+        fluid.log("New value " + termRecord.displayName);
+        that.autocompleteInput.val(termRecord.displayName);
         that.applier.requestChange("baseRecord", fluid.copy(termRecord));
-        that.applier.requestChange("term", termRecord.label);
+        that.applier.requestChange("term", termRecord.displayName);
         if (that.autocomplete) {
             that.autocomplete.suppress();
         }
@@ -501,7 +503,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options.oneOf = types;
         if (!fluid.invokeGlobalFunction(resolve, [options])) {
             selector.prop("disabled", true);
-        };
+        }
         var authorities = fluid.remove_if(fluid.copy(model.authorities), function (auth) {
             return !cspace.permissions.resolve({
                 resolver: options.resolver,
@@ -613,7 +615,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.buttonAdjustor = function (closeButton, model, hide) {
-        closeButton[model.term === model.baseRecord.label || hide ? "hide": "show"]();
+        closeButton[model.term === model.baseRecord.displayName || hide ? "hide": "show"]();
     };
     
     cspace.autocomplete.selectAuthority = function (that, key) {
@@ -756,9 +758,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         parentBundle: "{globalBundle}",
         elPaths: {
             preferred: "preferred",
-            label: "label",
+            displayName: "displayName",
             urn: "urn",
-            labels: "labels",
+            baseUrn: "baseUrn",
+            displayNames: "displayNames",
             matches: "matches"
         }
     });
