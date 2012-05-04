@@ -220,12 +220,6 @@ cspace = cspace || {};
             afterFetch: function (options) {
                 that.initSearchFields(options);
             },
-            recordTypeChanged: function () {
-                that.locate("searchFields").hide();
-            },
-            afterSearchFieldsInit: function () {
-                that.locate("searchFields").show();
-            },
             onSearch: function (searchModel) {
                 that.toggleControls(true);
             },
