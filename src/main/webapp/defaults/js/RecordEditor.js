@@ -47,11 +47,15 @@ cspace = cspace || {};
             if (required === container) {
                 return true;
             }
-            if ($.trim(required.val()) === "") {
-                messageBar.show(message, null, true);
-                return false;
-            }
-            return true;
+            var noId = true;
+            fluid.each(required, function (elem) {
+                if ($.trim($(elem).val()) === "") {
+                    messageBar.show(message, null, true);
+                    noId = false;
+                    return noId;
+                }
+            });
+            return noId;
         };
     };
     
