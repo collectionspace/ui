@@ -1,0 +1,67 @@
+{
+    "csid": "per111222333",
+    "fields": {
+        "preferredPersonGroup": [
+            {
+                "termDisplayName": "Fred Bloggs",
+                "termQualifier": "Person Qualifier",
+                "termType": "descriptor",
+                "termStatus": "provisional",
+                "termLanguage": "Value 1",
+                "termPrefForLang": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "termSourceNote": "Source Note",
+                "salutation": "My Darling",
+                "title": "Sir",
+                "foreName": "Fred",
+                "middleName": "Rick",
+                "surName": "Bloggs",
+                "nameAdditions": "III",
+                "initials": "FRB",
+                "_primary": true
+            }
+        ],
+        "referenceNumber": "1234",
+        "status": "accepted",
+        "gender": "male",
+        "occupations": [{
+            "occupation": "Musician",
+            "_primary": true
+        }, {
+            "occupation": "Singer",
+            "_primary": false
+        }],
+        "schoolsOrStyles": [{
+            "schoolOrStyle": "His own",
+            "_primary": true
+        }],
+        "groups": [{
+            "group": "Bloggs & Co.",
+            "_primary": true
+        }],
+        "nationalities": [{
+            "nationality": "English",
+            "_primary": false
+        }, {
+            "nationality": "Canadian",
+            "_primary": true
+        }],
+        "nameNote": "",
+        "bioNote": "",
+        "birthDate": "Dec. 7, 1971",
+        "birthPlace": "Brighton",
+        "deathDate": "",
+        "deathPlace": "",
+        "addressType1": "Work",
+        "addressText1": "22 Acacia Avenue",
+        "faxNumber1": "01223 123456",
+        "place": "Cambridge",
+        "telephoneNumber1": "01223 654321",
+        "postcode1": "CB1 2AZ",
+        "email1": ""
+    },
+    "termsUsed": [],
+    "relations": {}
+}

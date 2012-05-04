@@ -19,54 +19,35 @@
 		<div class="fl-container-flex fl-fix information-group info-column">
 			<div class="csc-recordEditor-header fl-container-flex header toggle">Concept Authority</div>
 			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left" >    
-						<div class="info-pair">
-							<div class="header"><span class="label required csc-concept-displayName-label"></span><span class="required">*</span></div>
-							<div class="content clearfix"><input type="text" class="csc-concept-displayName" /></div>
-						</div>
-					</div>
-					<div class="info-column2-50 fl-force-right" >    
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-concept-qualifier-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-concept-qualifier" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="info-column">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-concept-shortDisplayName-label"></div>
-						</div>
-						<div class="content">
-							<input type="text" class="csc-concept-shortDisplayName" />
-						</div>
-					</div>
-				</div>
+				
+            <div class="csc-preferred-conceptAuthority"></div>
+            
+            <div class="info-column">
 				<div class="info-pair">
-					<div class="header">
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr>
-									<td class="csc-concept-termType-label"></td>
-									<td class="csc-concept-termLanguage-label"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><select class="csc-concept-termType input-select"><option value="">Options not loaded</option></select></td>
-									<td><select class="csc-concept-termLanguage input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+                    <div class="header">
+                        <div class="label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+    								<td class="csc-concept-termScopeNote-label"></td>
+    								<td class="csc-concept-termScopeNoteSource-label"></td>
+    								<td class="csc-concept-termScopeNoteSourceDetail-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+    								<td><input type="text" class="csc-conceptAuthority-termScopeNote"/></td>
+    								<td><input type="text" class="csc-conceptAuthority-termScopeNoteSource"/></td>
+    								<td><input type="text" class="csc-conceptAuthority-termScopeNoteSourceDetail"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+			 </div>
+				
 			</div>
 		</div>
 		

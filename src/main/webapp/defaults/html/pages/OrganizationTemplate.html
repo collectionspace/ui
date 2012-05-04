@@ -19,66 +19,34 @@
 		<div class="fl-container-flex fl-fix information-group">
 			<div class="csc-recordEditor-header fl-container-flex header toggle csc-organization-organizationNameAuthorityInformation-label"></div>
 			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
-					<div class="info-column2-40 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<span class="label csc-organization-displayName-label required"></span><span class="required">*</span>
-							</div>
-							<div class="content clearfix">
-								<input type="text" class="csc-organizationAuthority-displayName" />
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column2-40 fl-force-right">
-						<div class="info-pair-select">
-							<div class="header">
-								<div class="label csc-organization-termStatus-label"> </div>
-							</div>
-							<div class="content">
-								<select class="csc-organizationAuthority-status input-select"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
-					</div>
-				</div>
-					
-				<div class="info-column">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-organization-mainBodyGroup-label"></div>
-						</div>
-						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td class="csc-organization-longName-label"></td>
-										<td class="csc-organization-shortName-label"></td>
-										<td class="csc-organization-nameAdditions-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="csc-organization-mainBodyGroup">
-										<td><input type="text" class="csc-organizationAuthority-longName" /></td>
-										<td><input type="text" class="csc-organizationAuthority-shortName" /></td>
-										<td><input type="text" class="csc-organizationAuthority-nameAdditions" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+			
+                 <div class="csc-preferred-organizationAuthority"></div>
 				
 				<div class="info-column">
 					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-organization-foundingDate-label"> </div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-organizationAuthority-foundingDate" />
-							</div>
-						</div>
+						
+                        <div class="info-column">
+                            <div class="info-column2-50 fl-force-left">
+                                <div class="info-pair-select">
+                                    <div class="header">
+                                        <div class="label csc-organization-termStatus-label"> </div>
+                                    </div>
+                                    <div class="content">
+                                        <select class="csc-organizationAuthority-status input-select"><option value="">Options not loaded</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column2-50 fl-force-right">
+                                <div class="info-pair-select">
+                                    <div class="header">
+                                        <div class="label csc-organization-foundingDate-label"> </div>
+                                    </div>
+                                    <div class="content">
+                                        <input type="text" class="csc-organizationAuthority-foundingDate" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 						
 						<div class="info-pair">
 							<div class="header">

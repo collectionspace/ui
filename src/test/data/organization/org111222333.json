@@ -1,7 +1,24 @@
 {
-    "csid": "987.654.321",
+    "csid": "org111222333",
     "fields": {
-        "displayName": "Bloggs & Co.",
+        "preferredOrganizationGroup": [
+            {
+                "termDisplayName": "Bloggs & Co.",
+                "termQualifier": "Epic Qualifier",
+                "termType": "descriptor",
+                "termStatus": "provisional",
+                "termName": "abc",
+                "termLanguage": "Value 1",
+                "termPrefForLang": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "termSourceNote": "Source Note",
+                "longName": "I am too long for you",
+                "nameAdditions": "Add 1+1",
+                "_primary": true
+            }
+        ],
         "referenceNumber": "1234",
         "status": "accepted",
         "shortIdentifier": "Bloggs",
