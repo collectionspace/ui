@@ -31,8 +31,7 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     font-weight:bold;
     position: relative; 
     float: right;
-/*     right: 31px; */
-    right: 11.5%;
+    right: 31px;
     top: -16px;
     padding:0}
 .info-pair-date input[type="button"].cs-repeatable-add {
@@ -180,81 +179,4 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 
 .infoDiv .info-column {
     margin-bottom: 18px;
-}
-
-
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input,
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content textarea {
-    width: 100%;
-}
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content select {
-    width: auto;
-}
-
-ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList input,
-ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList textarea {
-    width: 100%;
-}
-ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList select {
-    width: auto;
-}
-
-ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
-ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
-ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
-    width: 88.5%;
-}
-ul.cs-repeatable li.cs-repeatable-repeat select.cs-repeatable-content {
-    width: auto;
-}
-
-
-textarea.cs-repeatable-content,
-select.cs-repeatable-content {
-    width: 90%;
-}
-
-li.cs-repeatable-repeat {
-    width: 95%;
-    margin-bottom: 18px;
-    padding: 4px 4px 0px;
-}
-
-li.cs-repeatable-repeat div.cs-repeatable-content {
-/* li.cs-repeatable-repeat div.cs-termList { */
-/*     margin-bottom: 12px; */
-}
-td div.cs-termList {
-    width: 100%;
-}
-
-li.cs-repeatable-repeat div.cs-repeatable-content.cs-repeatable-stretched,
-li.cs-repeatable-repeat div.cs-termList.cs-repeatable-stretched {
-    width: 95%;
-}
-
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
-    width: 14px;
-}
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-delete {
-    width: 13px;
-}
-ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-primary {
-    width: 12px;
-}
-
-
-div.cs-repeatable-group div.cs-repeatable-content {
-    width: 95%;
-}
-div.infoGroup div.cs-repeatable-group {
-    display: table-cell;
-    width: 20%;
-}
-
-div.info-pair-select {
-    display: table;
-}
-div.info-pair-select input.cs-repeatable-add {
-    right: 40px;
 }
