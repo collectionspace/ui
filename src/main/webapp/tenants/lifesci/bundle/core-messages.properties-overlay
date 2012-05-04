@@ -19,7 +19,7 @@ collection-object-titleNoteLabel: Notes
 taxon: Taxon
 taxon-identificationNumberRequired: Please specify a Display Name
 taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
-taxon-displayNameLabel: Display Name
+taxon-termDisplayNameLabel: Display Name
 taxon-termStatusLabel: Term Status
 taxon-taxonFullNameLabel: Full Name
 taxon-taxonRankLabel: Rank
@@ -38,6 +38,14 @@ taxon-taxonNoteLabel: Note
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
+taxon-termQualifierLabel: Qualifier
+taxon-termTypeLabel: Term Type
+taxon-termLabel: Term
+taxon-termLanguageLabel: Lang
+taxon-termPrefForLangLabel: Pref for Lang
+taxon-termSourceLabel: Source
+taxon-termSourceDetailLabel: Source detail
+taxon-termSourceIDLabel: Source ID
 
 
 # -------------------------------------

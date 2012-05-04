@@ -1,9 +1,10 @@
 {
     "results": [
         {"number": "MST:1:4B", "csid": "11223344", "summary": "MST:1:4B", "recordtype": "location"},
-        {"number": "MST:2:4B", "csid": "11223345", "summary": "MST:2:4B", "recordtype": "location"}
+        {"number": "MST:2:4B", "csid": "11223345", "summary": "MST:2:4B", "recordtype": "location"},
+        {"number": "MST:3:4B", "csid": "loc111222333", "summary": "MST:3:4B", "recordtype": "location"}
     ],
     "pagination": {
-        "totalItems": 2
+        "totalItems": 3
     }
 }
