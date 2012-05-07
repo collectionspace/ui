@@ -188,3 +188,38 @@ loanout-transferPersonLabel: To Person
 loanout-transferDirectorLabel: Under Direction Of
 loanout-transferQuantityLabel: Quantity
 loanout-transferNotesLabel: Notes
+
+#loanin
+loanin-lenderLoanNumberLabel: Lender's No.
+loanin-geographyLabel: Geography
+loanin-taxonomyLabel: Taxonomy
+loanin-objKindLabel: Object Kind
+loanin-dueDateLabel: Due Date
+loanin-shipDateLabel: Loan Shipped Date
+loanin-manualCountsLabel: Manual Counts
+loanin-numReceivedLabel: Received
+loanin-numReturnedLabel: Returned
+loanin-numTransferredOutLabel: Transferred Out
+loanin-balanceLabel: Balance
+loanin-discrepancyLabel: Discrepancy
+loanin-transferInLabel: Transfer In
+loanin-transferInDateLabel: Date
+loanin-transferInOrgLabel: From
+loanin-transferInPersonLabel: Previous Borrower
+loanin-returnInformationLabel: Items Returned
+loanin-returnGroupLabel: Items Returned
+loanin-returnDateLabel: Date
+loanin-returnQuantityLabel: Quantity
+loanin-returnNotesLabel: Notes
+loanin-transferOutInformationLabel: Items Transferred Out
+loanin-transferOutDateLabel: Date
+loanin-transferOutQuantityLabel: Quantity
+loanin-transferOutOrgLabel: Institution
+loanin-transferOutPersonLabel: For Study By
+loanin-transferOutDirectorLabel: Under Direction Of
+loanin-transferOutNotesLabel: Notes
+loanin-transferOutReturnLabel: Transferred Items Returned
+loanin-transferOutReturnDateLabel: Date
+loanin-transferOutReturnQuantityLabel: Quantity
+loanin-transferOutReturnNotesLabel: Notes
+
