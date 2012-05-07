@@ -238,7 +238,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             type: "fluid.renderer.repeat",
             pathAs: "row",
             valueAs: "rowValue",
-            controlledBy: "popupMatches",
+            controlledBy: "matches",
             tree: {
                 expander: [{
                     type: "fluid.renderer.condition",
@@ -390,14 +390,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.popup.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             prepareModelForRender: function (model, applier, that) {
-                var popupMatches = [],
+                var matches = [],
                     preferred = that.options.elPaths.preferred,
                     displayName = that.options.elPaths.displayName,
                     displayNames = that.options.elPaths.displayNames,
                     urn = that.options.elPaths.urn,
                     baseUrn = that.options.elPaths.baseUrn,
-                    matches = that.options.elPaths.matches;
-                fluid.each(fluid.get(model, matches), function (match) {
+                    matchesPath = that.options.elPaths.matches;
+                fluid.each(fluid.get(model, matchesPath), function (match) {
                     var vocab = cspace.vocab.resolve({
                         recordType: match.type,
                         model: match,
@@ -408,7 +408,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         displayNameList = displayNameList.slice(0, 1);
                     }
 
-                    popupMatches = popupMatches.concat(fluid.transform(displayNameList, function (thisDisplayName, index) {
+                    matches = matches.concat(fluid.transform(displayNameList, function (thisDisplayName, index) {
                         var elem = {};
                         elem[urn] = match[baseUrn].concat("'", thisDisplayName, "'");
                         elem[displayName] = thisDisplayName;
@@ -416,7 +416,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         return elem;
                     }));
                 });
-                that.applier.requestChange("popupMatches", popupMatches);
+                that.applier.requestChange("matches", matches);
             }
         });
     };
@@ -649,7 +649,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.selectMatch = function (that, key) {
-        var match = that.model.popupMatches[key];
+        var match = that.model.matches[key];
         updateAuthoritatively(that, match);
         that.buttonAdjustor();
         that.eventHolder.events.afterSelectMatch.fire();
@@ -700,8 +700,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         minChars: 3,
         model: {
             authorities: [],
-            matches: [],
-            popupMatches: []
+            matches: []
         },
         delay: 500,
         invokers: {
