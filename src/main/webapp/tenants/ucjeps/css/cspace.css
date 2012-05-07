@@ -33,6 +33,10 @@ CollectionSpace 1.8 default CSS selectors
 .determinationHistory .cs-autocomplete-input {
 	width: 99.5%;
 }
+
+td .cs-autocomplete-input {
+	width: 99.5% !important;
+}
 /* ---------------------------------------*/
 
 /* core HTML elements*/
