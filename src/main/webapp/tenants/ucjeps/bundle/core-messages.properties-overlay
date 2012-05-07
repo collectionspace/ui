@@ -81,6 +81,9 @@ collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
 collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-localNameGroupLabel: Local Name
+collection-object-localNameLabel: Local Name
+collection-object-localNameLanguageLabel: Language
 collection-object-hybridParentGroupLabel: Hybrid Parent
 collection-object-hybridParentLabel: Hybrid Parent
 collection-object-hybridParentQualifierLabel: Parent Qualifier
