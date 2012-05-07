@@ -669,7 +669,7 @@ table tbody.highlight tr:focus td {
     margin:0; 
     color:#000; 
     cursor:default;}	
-.info-pair .label, .info-pair-date .label, .info-pair-select .label {
+.info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
     padding-bottom:4px; 
     font-weight:bold; 
     color:#333333; 
@@ -687,15 +687,15 @@ td.fl-date-group {
 	width:160px;}
 .info-pair-date .content {
     width:auto;}
-.info-pair .content > select,
-.info-pair-select .content > select {
+.info-pair .content > select {
     width:100%; 
     border-spacing:0; 
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width: 100%;
+    width: 90%;
     border-spacing:0; 
     background-color:#FFFFFF;
     margin-top:0; 
@@ -973,6 +973,7 @@ table.cs-admin-table td.checkbox {
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;
+    clear: both;
     /*float:left;*/}
 /*.info-pair:hover {
     -moz-border-radius:5px 5px 5px;

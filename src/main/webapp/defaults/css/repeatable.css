@@ -31,8 +31,7 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     font-weight:bold;
     position: relative; 
     float: right;
-/*     right: 31px; */
-    right: 9%;
+    right: 10%;
     top: -16px;
     padding:0}
 .info-pair-date input[type="button"].cs-repeatable-add {
@@ -95,7 +94,6 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .cs-repeatable-withSubgroup .cs-repeatable-repeat  {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
-/* 	padding:4px 4px 0 4px; */
 	float: left;
 }
 
@@ -103,16 +101,16 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
 	float:left;
-/* 	width:96%; */
 }
 
-/* From Jesse, 21Nov011 */
-.infoGroup { padding:4px 0 0 0; background-color:#E2E2E2;}
+.infoGroup { 
+    padding:16px 0 0 0;
+    background-color:#E2E2E2;
+}
 
 .infoGroup .cs-repeatable-group { position:relative;}
 
-.infoGroup .cs-repeatable-group .cs-repeatable-repeat { 
-/*     padding:16px 4px 10px 4px;  */
+.infoGroup .cs-repeatable-group .cs-repeatable-repeat {
     border:none; 
     background-color:inherit;
 }
@@ -214,6 +212,9 @@ li.cs-repeatable-repeat {
     margin-bottom: 18px;
     padding: 4px 4px 0px;
 }
+div.information-group li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
 
 div.info-pair-select li.cs-repeatable-repeat div.cs-repeatable-content {
     width: auto;
@@ -256,8 +257,11 @@ div.info-pair-select div {
 }
 div.info-pair-select div.content {
     display: inherit;
-} 
+}
+div.info-pair-select li.cs-repeatable-repeat {
+    margin-bottom: 1px;
+}
 
 div.info-pair-select input.cs-repeatable-add {
-    right: 40px;
+    right: 32px;
 }
