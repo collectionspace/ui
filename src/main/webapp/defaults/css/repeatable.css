@@ -31,7 +31,7 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     font-weight:bold;
     position: relative; 
     float: right;
-    right: 10%;
+    right: 11.5%;
     top: -16px;
     padding:0}
 .info-pair-date input[type="button"].cs-repeatable-add {
@@ -212,7 +212,10 @@ li.cs-repeatable-repeat {
     margin-bottom: 18px;
     padding: 4px 4px 0px;
 }
-div.information-group li.cs-repeatable-repeat {
+div.infoGroup li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
+div.info-pair-select li.cs-repeatable-repeat {
     padding: 0px 0px 0px;
 }
 
@@ -220,7 +223,7 @@ div.info-pair-select li.cs-repeatable-repeat div.cs-repeatable-content {
     width: auto;
 }
 li.cs-repeatable-repeat div.cs-repeatable-content {
-    width: 90%;
+    width: 88.5%;
 }
 td div.cs-termList,
 td select {

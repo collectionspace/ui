@@ -965,7 +965,7 @@ table.cs-admin-table td.checkbox {
     margin-right:auto;}
 .cataloging .fl-container-pivot {
     padding-top:0px;}
-.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
+.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
 /*     width:100%;  */
     position:relative; 
     margin-bottom:18px;
@@ -974,6 +974,7 @@ table.cs-admin-table td.checkbox {
     font-size:12px; 
     line-height:12px;
     clear: both;
+    min-height: 31px;
     /*float:left;*/}
 /*.info-pair:hover {
     -moz-border-radius:5px 5px 5px;
@@ -984,12 +985,12 @@ table.cs-admin-table td.checkbox {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
     padding-bottom:14px;}
-.info-pair-termlist  table, .info-pair-termlist tbody td{
+.info-pair-termList  table, .info-pair-termList tbody td{
     width:auto;  
     background-color:#E6E6E6;}
-/*.fl-container-left*/  .information-group .info-pair-termlist .info-pair .content {
+/*.fl-container-left*/  .information-group .info-pair-termList .info-pair .content {
     padding-bottom:4px;}
-.info-pair-termlist table select {
+.info-pair-termList table select {
     border:0;}
 /*.fl-container-left*/ .information-group .info-pair-date .info-pair .content  table {
     width:auto;}
@@ -2133,7 +2134,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .oocss .info-pair-table, 
 .oocss .info-pair-date,
 .oocss .info-pair-select,
-.oocss .info-pair-termlist
+.oocss .info-pair-termList
 {
 	width: auto;
 	padding-right: 1.5em;
@@ -2195,5 +2196,8 @@ li.cs-locked {
 }
 
 .cs-termList {
+    float: none;
+}
+li.cs-repeatable-repeat .cs-termList {
     float: left;
 }
