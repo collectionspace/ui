@@ -62,7 +62,7 @@ input[type="button"], input[type="submit"], input[type="checkbox"], input[type="
 input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    margin:0;
+    margin: 0;
     width: 100%;
 }
 table input[type="text"], table input[type="password"], table textarea {
@@ -678,9 +678,8 @@ table tbody.highlight tr:focus td {
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
 	display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
-/*     width:100%;  */
-    /*float:left; */
-    border:none;}
+    border:none;
+}
 .info-pair .content.fl-date-group {
 	width: 162px;}
 td.fl-date-group {
@@ -726,9 +725,6 @@ table.cs-admin-table td.checkbox {
     border: 1px solid #C7CFD4;
     /*padding-left: 2px;*/
     height: 19px;
-}
-.info-pair .content tbody td input {
-    /*margin:0 -2px 0 2px;*/
 }
 .info-pair .content tbody td .content {
     width:159px;}
@@ -964,8 +960,7 @@ table.cs-admin-table td.checkbox {
 .cataloging .fl-container-pivot {
     padding-top:0px;}
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
-/*     width:100%;  */
-    position:relative; 
+    position:relative;
     margin-bottom:18px;
 	padding-bottom:0px;
     padding-top:0px; 
@@ -973,12 +968,7 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
-    /*float:left;*/}
-/*.info-pair:hover {
-    -moz-border-radius:5px 5px 5px;
-    border:1px solid #C2D7EF;
-    background-color:#DEEFFF;
-    margin:-1px;}*/     
+}    
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
@@ -989,7 +979,8 @@ table.cs-admin-table td.checkbox {
 /*.fl-container-left*/  .information-group .info-pair-termList .info-pair .content {
     padding-bottom:4px;}
 .info-pair-termList table select {
-    border:0;}
+    border:0;
+}
 /*.fl-container-left*/ .information-group .info-pair-date .info-pair .content  table {
     width:auto;}
 /*.fl-container-left*/  .information-group .info-pair-select .info-pair .content  table {
@@ -1082,7 +1073,7 @@ table.cs-admin-table td.checkbox {
 .addrow {
     float:right; 
     margin:0; 
-    position:relative; 
+    position:relative;
     right:0px; 
     bottom:-3px;}
 .info-pair-table .info-value table.components, .info-pair-table .info-pair .content table.components {
@@ -1107,8 +1098,7 @@ table.cs-admin-table td.checkbox {
     height:19px; 
     padding-top:0; 
     border:none;}
-.content textarea { 
-/*     width:100%;  */
+.content textarea {
     height:75px;
     overflow:auto;
 }
