@@ -204,7 +204,7 @@
                                                                 ".csc-organizationAuthority-termSourceID": "${{row}.termSourceID}",
                                                                 ".csc-organizationAuthority-termSourceNote": "${{row}.termSourceNote}",
                                                                 ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
-                                                                ".csc-organizationAuthority-longName": "${{row}.longName}"
+                                                                ".csc-organizationAuthority-mainBodyName": "${{row}.mainBodyName}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -247,8 +247,8 @@
                                     ".csc-organization-termSourceNote-label": {
                                         "messagekey": "organization-termSourceNoteLabel"
                                     },
-                                    ".csc-organization-longName-label": {
-                                        "messagekey": "organization-longNameLabel"
+                                    ".csc-organization-mainBodyName-label": {
+                                        "messagekey": "organization-mainBodyNameLabel"
                                     },
                                     ".csc-organization-nameAdditions-label": {
                                         "messagekey": "organization-nameAdditionsLabel"
@@ -710,9 +710,6 @@
             "messagekey": "contact-webAddressTypeLabel"
         },
         ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
-        ".csc-organization-mainBodyGroup-label": {
-            "messagekey": "organization-mainBodyGroupLabel"
-        },
         ".csc-contact-addressGroup-label": {
             "messagekey": "contact-addressGroupLabel"
         },
