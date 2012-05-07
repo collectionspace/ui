@@ -498,7 +498,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission, selector) {
         var types = fluid.transform(model.authorities, function (auth) {
-            return auth.type;
+            // We only need an authority not the vocabulary.
+            return auth.type.split("-")[0];
         });
         options.oneOf = types;
         if (!fluid.invokeGlobalFunction(resolve, [options])) {
@@ -508,7 +509,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return !cspace.permissions.resolve({
                 resolver: options.resolver,
                 permission: permission,
-                target: auth.type
+                // We only need an authority not the vocabulary.
+                target: auth.type.split("-")[0]
             });
         });
         applier.requestChange("authorities", authorities);

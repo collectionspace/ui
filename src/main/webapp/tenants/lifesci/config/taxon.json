@@ -11,7 +11,7 @@
                     "options": {
                         "selectors": {
                             "hierarchy": ".csc-hierarchy",
-                            "identificationNumber": ".csc-taxon-displayName"
+                            "identificationNumber": ".csc-taxonAuthority-termDisplayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {

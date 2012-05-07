@@ -15,7 +15,7 @@
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
                             "hierarchy": ".csc-place-hierarchy",
-                            "identificationNumber": ".csc-place-displayName"
+                            "identificationNumber": ".csc-placeAuthority-termDisplayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
