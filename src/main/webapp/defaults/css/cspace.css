@@ -685,8 +685,6 @@ table tbody.highlight tr:focus td {
 	width: 162px;}
 td.fl-date-group {
 	width:160px;}
-.info-pair-date .content {
-    width:auto;}
 .info-pair .content > select {
     width:100%; 
     border-spacing:0; 
@@ -1589,8 +1587,6 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
-.info-pair-date .content {
-    background-color:#fff;}
 .info-pair-date .content input {
     border-right:none; 
     /*width:142px !important; */

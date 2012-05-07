@@ -24,7 +24,7 @@ tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {
     display:none;}
 #read-only .cs-repeatable-primary {}
-input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
+input[type="button"].cs-repeatable-add {
     font-size:14px; 
     height:16px; 
     width:14px; 
@@ -33,27 +33,12 @@ input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-
     float: right;
     right: 11.5%;
     top: -16px;
-    padding:0}
-.info-pair-date input[type="button"].cs-repeatable-add {
-    right:0; 
-    left:136px;}
+    padding:0
+}
 li.cs-repeatable-repeat {
     list-style-type: none; 
     margin-bottom:1px; 
-/*     width:99% */
 }
-/*
-.cs-repeatable-content {
-    width:89%;
-}
-*/
-/*
-.cs-repeatable-content > input {
-    width: 89.2%;}
-*/
-.cs-repeatable-content .ui-autocomplete-input {
-/*     width:100%; */
-    }
 input.cs-repeatable-primary {
     width: 11px; 
     position: relative; 
@@ -104,7 +89,7 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 }
 
 .infoGroup { 
-    padding:16px 4px 0;
+    padding: 20px 4px 0;
     background-color:#E2E2E2;
 }
 
@@ -255,16 +240,22 @@ div.infoGroup div.cs-repeatable-group {
 }
 
 
-div.info-pair-select div {
+div.info-pair-select div,
+div.info-pair-date div {
     display: table;
 }
-div.info-pair-select div.content {
+div.info-pair-select div.content,
+div.info-pair-date div.content {
     display: inherit;
 }
-div.info-pair-select li.cs-repeatable-repeat {
+div.info-pair-select li.cs-repeatable-repeat,
+div.info-pair-date li.cs-repeatable-repeat {
     margin-bottom: 1px;
 }
 
 div.info-pair-select input.cs-repeatable-add {
     right: 32px;
+}
+div.info-pair-date input.cs-repeatable-add {
+    right: 38px;
 }
