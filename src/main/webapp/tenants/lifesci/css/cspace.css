@@ -86,7 +86,8 @@ input[type="text"], input[type="password"], textarea {
     width:99.5%; 
     margin:0;}
 table input[type="text"], table input[type="password"], table textarea {
-    width:100%;}
+    width:100%;
+}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
