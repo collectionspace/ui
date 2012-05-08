@@ -14,7 +14,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     width: 14px;
     height: 14px;    
 }
-.cs-autocomplete-input {/*width:99.75%*/ width:99.5%;}
 .cs-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center; }
 .cs-autocomplete-loading { background: #fff url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif) right center no-repeat;}
 

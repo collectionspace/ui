@@ -58,7 +58,7 @@
                                 "termSourceNote": {
                                     "type": "string"
                                 },
-                                "longName": {
+                                "mainBodyName": {
                                     "type": "string"
                                 },
                                 "nameAdditions": {

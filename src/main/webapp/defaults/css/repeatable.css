@@ -1,4 +1,7 @@
 /*  styling repeatable fields  */
+.cs-repeatable {
+    display: inline;
+}
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
 .content .cs-repeatable-repeat {}
 .content li.cs-repeatable-repeat input,
@@ -10,37 +13,32 @@
 .content li.cs-repeatable-repeat .content select,
 .content li.cs-repeatable-repeat .content button,
 .content li.cs-repeatable-repeat .content textarea {
-	float:none;}
+	float:none;
+}
+.content li.cs-repeatable-repeat .content input.cs-repeatable-add {
+    float: right;
+}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
 .cs-repeatable-add {}
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {
     display:none;}
 #read-only .cs-repeatable-primary {}
-.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
-    width:88.5%;}
-input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
+input[type="button"].cs-repeatable-add {
     font-size:14px; 
     height:16px; 
     width:14px; 
-    font-weight:bold; 
-    position:absolute; 
-    top:0; 
-    padding:0}
-.info-pair-date input[type="button"].cs-repeatable-add {
-    right:0; 
-    left:136px;}
+    font-weight:bold;
+    position: relative; 
+    float: right;
+    right: 11.5%;
+    top: -16px;
+    padding:0
+}
 li.cs-repeatable-repeat {
     list-style-type: none; 
     margin-bottom:1px; 
-    width:99%}
-.cs-repeatable-content {
-    width:89%;
 }
-.cs-repeatable-content > input {
-    width: 89.2%;}
-.cs-repeatable-content .ui-autocomplete-input {
-    width:100%;}
 input.cs-repeatable-primary {
     width: 11px; 
     position: relative; 
@@ -81,21 +79,26 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .cs-repeatable-withSubgroup .cs-repeatable-repeat  {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
-	padding:4px 4px 0 4px;
+	float: left;
 }
 
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
 	float:left;
-	width:96%;}
+}
 
-/* From Jesse, 21Nov011 */
-.infoGroup { padding:4px 0 0 0; background-color:#E2E2E2;}
+.infoGroup { 
+    padding: 20px 4px 0;
+    background-color:#E2E2E2;
+}
 
 .infoGroup .cs-repeatable-group { position:relative;}
 
-.infoGroup .cs-repeatable-group .cs-repeatable-repeat { padding:16px 4px 10px 4px; border:none; background-color:inherit;}
+.infoGroup .cs-repeatable-group .cs-repeatable-repeat {
+    border:none; 
+    background-color:inherit;
+}
 
 /***************************************************************************************************************
  * Repeatable group in a div, rather than in a table (e.g., see block in Place/Georeference Information group) *
@@ -116,16 +119,6 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
     width:94%;
     padding:4px;
     float: left;
-}
-.infoDiv input[type="button"].cs-repeatable-add {
-    font-size:14px;
-    height:16px;
-    width:14px;
-    font-weight:bold;
-    position:absolute !important;
-    top: -16px;
-    right:2px !important;
-    padding:0;
 }
 .infoDiv input.cs-repeatable-delete {
     float:right;
@@ -160,4 +153,109 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 
 .infoDiv .info-column {
     margin-bottom: 18px;
+}
+
+
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content textarea,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content select,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content td select {
+    width: 100%;
+}
+
+.info-pair .content tbody td input.cs-autocomplete-input {
+    width: 100%;
+}
+
+
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList input,
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList textarea {
+    width: 100%;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList select {
+    width: auto;
+}
+
+input.cs-autocomplete-input,
+ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
+ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
+ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+    width: 88.5%;
+}
+ul.cs-repeatable li.cs-repeatable-repeat select.cs-repeatable-content {
+    width: auto;
+}
+
+
+textarea.cs-repeatable-content,
+select.cs-repeatable-content {
+    width: 90%;
+}
+
+li.cs-repeatable-repeat {
+    width: 95%;
+    margin-bottom: 18px;
+    padding: 4px 4px 0px;
+}
+div.infoGroup li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
+div.info-pair-select li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
+
+div.info-pair-select li.cs-repeatable-repeat div.cs-repeatable-content {
+    width: auto;
+}
+li.cs-repeatable-repeat div.cs-repeatable-content {
+    width: 88.5%;
+}
+td div.cs-termList,
+td select {
+    width: 100%;
+}
+
+li.cs-repeatable-repeat div.cs-repeatable-content.cs-repeatable-stretched,
+li.cs-repeatable-repeat div.cs-termList.cs-repeatable-stretched {
+    width: 95%;
+}
+
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
+    width: 14px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-delete {
+    width: 21px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-primary {
+    width: 12px;
+}
+
+
+div.cs-repeatable-group div.cs-repeatable-content {
+    width: 95%;
+}
+div.infoGroup div.cs-repeatable-group {
+    display: table-cell;
+    width: 20%;
+}
+
+
+div.info-pair-select div,
+div.info-pair-date div {
+    display: table;
+}
+div.info-pair-select div.content,
+div.info-pair-date div.content {
+    display: inherit;
+}
+div.info-pair-select li.cs-repeatable-repeat,
+div.info-pair-date li.cs-repeatable-repeat {
+    margin-bottom: 1px;
+}
+
+div.info-pair-select input.cs-repeatable-add {
+    right: 32px;
+}
+div.info-pair-date input.cs-repeatable-add {
+    right: 38px;
 }
