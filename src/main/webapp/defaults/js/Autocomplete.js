@@ -215,6 +215,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.button = button;
         return that;
     };
+
+    var buildValueBinding = function (fieldName) {
+        return "${" + fluid.model.composeSegments("{row}", fieldName) + "}";
+    };
     
     cspace.autocomplete.makeAuthoritySelectionTree = function (tree, repeatID, listPath, fieldName) {
         tree.expander = fluid.makeArray(tree.expander);
@@ -223,7 +227,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             type: "fluid.renderer.repeat",
             pathAs: "row",
             controlledBy: listPath,
-            tree: "${" + fluid.model.composeSegments("{row}", fieldName) + "}"
+            tree: buildValueBinding(fieldName)
         });
     };
     
@@ -242,15 +246,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             tree: {
                 expander: [{
                     type: "fluid.renderer.condition",
-                    condition: "${" + fluid.model.composeSegments("{row}", preferred) + "}",
+                    condition: buildValueBinding(preferred),
                     trueTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", displayName) + "}"
+                            value: buildValueBinding(displayName)
                         }
                     },
                     falseTree: {
                         matchItemContent: {
-                            value: "${" + fluid.model.composeSegments("{row}", displayName) + "}",
+                            value: buildValueBinding(displayName),
                             decorators: {
                                 type: "addClass",
                                 classes: styles.nonPreferred
@@ -434,7 +438,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
-            popupMatchesSelect: "cs-autocomplete-matchItem-select",
+            matchesSelect: "cs-autocomplete-matchItem-select",
             nonPreferred: "cs-autocomplete-nonPreferred"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
