@@ -24,40 +24,40 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     padding: 2px;
     margin-left:0px;
     display:block;
-    max-height:150px;
-    overflow-x:hidden; overflow-y:auto;
+    max-height:250px;
+    overflow-x:hidden; 
+    overflow-y:auto;
 }
 
 .cs-autocomplete-MatchItem {
-    margin:0;
+    margin:0px;
     padding-left: 5px;
     width: 100%;
     list-style-type: none;
-
 }
 
 .cs-autocomplete-addToPanel {
+    padding: 2px;
     list-style: none;
 }
 
 .cs-autocomplete-authorityItem {
     list-style-type: none;
     padding-left: 25px;
-    padding-right: 5px;
+    padding-right: 20px;
     background: url(../images/icnAdd_.png) no-repeat 5px center;
     color: #679B41;
 }
 
 .cs-autocomplete-matchItem:hover, .cs-autocomplete-matchItem-select {
-    background-color:#F0F5FB;
+    background-color:#CFE2F3;
     cursor:pointer;
 }
 
 .cs-autocomplete-authorityItem:hover, .cs-autocomplete-authorityItem-select {
-    background-color:#D7E9C8;
+    background-color:#D7E9C2;
     cursor:pointer;
 }
-
 
 .cs-autocomplete-popup {
     background-color:#FAFBF7;
@@ -67,7 +67,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     position:absolute;
     z-index:9999 !important;
     margin:2px 0 0 -2px;
-    overflow:auto;
     font-size: 1.2em;
     font-weight:bold;
     line-height:1.4;
@@ -75,19 +74,30 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
     box-shadow: 3px 3px 4px  #C7CFD4;
 }
-.cs-autocomplete-popup .inner {padding:5px 10px;}
-.cs-autocomplete-popup .cs-autocomplete-noMatches  {font-style:italic; color:#6E6E6E; padding-bottom:15px;}
+.cs-autocomplete-popup .cs-autocomplete-noMatches {
+     padding-left: 5px;
+    font-style:italic;
+    color:#6E6E6E;
+}
 .cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
 .cs-autocomplete-popup .pad-right {padding-right:10px;}
 .cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: solid 1px #AAA}
 
-/* An "invisible strut" consisting of the longest list item dumped at top level 
-in the dialog in order to ensure its "preferred width" is large enough. Otherwise
-the "overflow" properties on "Matches" prevent it being seen */
-
-.csc-autocomplete-longestMatch {
-    padding-right: 50px;
-    opacity: 0;
-    filter: alpha(opacity=0); /* For idiot IE */
-    height: 0px;
+.cs-autocomplete-matchItem-content {
+    display: block;
+    margin-left: 5px;
+    padding-right: 20px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.cs-autocomplete-MatchItem:focus {
+    color: red;
+    background-color: red;
+}
+.cs-autocomplete-matchItem-content.cs-autocomplete-nonPreferred {
+    color: #999999;
+    margin-left: 20px;
+}
+.cs-autocomplete-addTermTo {
+    margin-left: 5px;
 }
