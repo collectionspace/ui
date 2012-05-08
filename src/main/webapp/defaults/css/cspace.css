@@ -62,8 +62,9 @@ input[type="button"], input[type="submit"], input[type="checkbox"], input[type="
 input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    width:99.5%; 
-    margin:0;}
+    margin: 0;
+    width: 100%;
+}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
 input[type="submit"].logout {
@@ -362,7 +363,6 @@ li .flc-pager-pageLink {
     height:51px; 
     text-indent:-9999px;}
 .header-menu-right {
-    width:500px; 
     float:right; 
     padding-bottom:10px;}
 .header-menu-right input, .header-menu-right select {
@@ -450,6 +450,11 @@ li .flc-pager-pageLink {
 #administration #title-bar .record-type.cs-titleBar-recordType {
     color: #696565;
     float: left;
+}
+.cs-titleBar-vocab {
+    float: right;
+    padding: 9px 10px 0 0;
+    color: #74AC4D;
 }
 
 
@@ -664,7 +669,7 @@ table tbody.highlight tr:focus td {
     margin:0; 
     color:#000; 
     cursor:default;}	
-.info-pair .label, .info-pair-date .label, .info-pair-select .label {
+.info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
     padding-bottom:4px; 
     font-weight:bold; 
     color:#333333; 
@@ -673,28 +678,27 @@ table tbody.highlight tr:focus td {
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
 	display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
-    width:100%; 
-    /*float:left; */
-    border:none;}
+    border:none;
+}
 .info-pair .content.fl-date-group {
 	width: 162px;}
 td.fl-date-group {
 	width:160px;}
-.info-pair-date .content {
-    width:auto;}
 .info-pair .content > select {
     width:100%; 
     border-spacing:0; 
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width:100%; 
+    width: 90%;
     border-spacing:0; 
-    background-color:#FFF; 
+    background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
@@ -722,8 +726,6 @@ table.cs-admin-table td.checkbox {
     /*padding-left: 2px;*/
     height: 19px;
 }
-.info-pair .content tbody td input {
-    /*margin:0 -2px 0 2px;*/}
 .info-pair .content tbody td .content {
     width:159px;}
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {
@@ -743,7 +745,8 @@ table.cs-admin-table td.checkbox {
     line-height:120%; 
     background-color:#F0F5FB; 
     border:none; 
-    width:100%;}
+    width:100%;
+}
 .list-table  table thead tr td, .list-table  table thead tr th {
     font-size:11px; 
     background-color:#EFEFEF; 
@@ -956,31 +959,28 @@ table.cs-admin-table td.checkbox {
     margin-right:auto;}
 .cataloging .fl-container-pivot {
     padding-top:0px;}
-.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
-    width:100%; 
-    position:relative; 
+.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
+    position:relative;
     margin-bottom:18px;
 	padding-bottom:0px;
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;
-    /*float:left;*/}
-/*.info-pair:hover {
-    -moz-border-radius:5px 5px 5px;
-    border:1px solid #C2D7EF;
-    background-color:#DEEFFF;
-    margin:-1px;}*/     
+    clear: both;
+    min-height: 31px;
+}    
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
     padding-bottom:14px;}
-.info-pair-termlist  table, .info-pair-termlist tbody td{
+.info-pair-termList  table, .info-pair-termList tbody td{
     width:auto;  
     background-color:#E6E6E6;}
-/*.fl-container-left*/  .information-group .info-pair-termlist .info-pair .content {
+/*.fl-container-left*/  .information-group .info-pair-termList .info-pair .content {
     padding-bottom:4px;}
-.info-pair-termlist table select {
-    border:0;}
+.info-pair-termList table select {
+    border:0;
+}
 /*.fl-container-left*/ .information-group .info-pair-date .info-pair .content  table {
     width:auto;}
 /*.fl-container-left*/  .information-group .info-pair-select .info-pair .content  table {
@@ -1073,7 +1073,7 @@ table.cs-admin-table td.checkbox {
 .addrow {
     float:right; 
     margin:0; 
-    position:relative; 
+    position:relative;
     right:0px; 
     bottom:-3px;}
 .info-pair-table .info-value table.components, .info-pair-table .info-pair .content table.components {
@@ -1091,18 +1091,17 @@ table.cs-admin-table td.checkbox {
 .input-money-amount {
     width: 120px !important;}
 .content select {
-    width: auto; 
-    /*height:21px; */
-    /*border:1px solid #C7CFD4;*/}
+    width: auto;
+}
 .content table select {
     width: 100%; 
     height:19px; 
     padding-top:0; 
     border:none;}
-.content textarea { 
-    width:100%; 
-    height:75px; 
-    overflow:auto;}
+.content textarea {
+    height:75px;
+    overflow:auto;
+}
 .input-alpha-login {
     width: 120px; 
     height:18px;}
@@ -1252,6 +1251,20 @@ input[disabled]:hover, input[disabled]:hover    {
    height: 0;
    clear: both;
 }
+
+.clearfix:after, 
+.info-group:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.clearfix .cs-repeatable-content,
+.info-column .cs-repeatable-content {
+    float: left;
+}
 	
 .ui-tabs .ui-tabs-hide {
     display: none;}
@@ -1397,7 +1410,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
 .cs-searchBox-container {
-	width:580px;}
+	display: table-cell;}
 .cs-searchBox {
     padding:12px 14px 12px 0; 
     background-color:#F5F5F5; }
@@ -1417,11 +1430,17 @@ input[disabled]:hover, input[disabled]:hover    {
     width:200px !important; 
     border:1px solid #BCBDBD;
     font-size:13px; 
-    line-height:13px;}
-.cs-searchBox .cs-searchBox-selectRecordTypeLabel {
+    line-height:13px;
+    margin-left: 10px;}
+.cs-searchBox .cs-searchBox-selectRecordTypeLabel, .cs-searchBox .cs-searchBox-selectVocabLabel, .cs-advancedSearch-selectVocabLabel {
     padding: 3px 8px 0 15px; 
     font-size:12px; 
-    color:#6D6E71;}
+    color:#6D6E71;
+    display: inline-table;
+    vertical-align: middle;}
+.cs-advancedSearch-selectVocabLabel {
+    padding-right: 0;
+}
 .cs-pivot-searchBox .cs-searchBox {
     width: 99%; 
     background-color:inherit; 
@@ -1432,7 +1451,7 @@ input[disabled]:hover, input[disabled]:hover    {
     float: none;
 }
 .cs-searchBox .cs-searchBox-button {
-    float:right;}
+    margin-left: 5px;}
 a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
@@ -1558,8 +1577,6 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
-.info-pair-date .content {
-    background-color:#fff;}
 .info-pair-date .content input {
     border-right:none; 
     /*width:142px !important; */
@@ -2103,7 +2120,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .oocss .info-pair-table, 
 .oocss .info-pair-date,
 .oocss .info-pair-select,
-.oocss .info-pair-termlist
+.oocss .info-pair-termList
 {
 	width: auto;
 	padding-right: 1.5em;
@@ -2164,3 +2181,9 @@ li.cs-locked {
     height: inherit;
 }
 
+.cs-termList {
+    float: none;
+}
+li.cs-repeatable-repeat .cs-termList {
+    float: left;
+}

@@ -121,8 +121,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     findEditTests.test("FindEdit URL through form inputs", function () {
         findEditUrlTest(opts, ".././data/loanin/search.json", null, function (findEdit) {
-            jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle");
-            jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin");
+            jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle").change();
+            jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin").change();
             jQuery(findEdit.mainSearch.options.selectors.searchButton).click();
         });
     });

@@ -191,7 +191,7 @@ var searchToRelateDialogTester = function () {
         var testRecordType = "loanout";
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {
-                dialog.search.mainSearch.locate("recordTypeSelect").val(testRecordType);
+                dialog.search.mainSearch.locate("recordTypeSelect").val(testRecordType).change();
                 dialog.search.mainSearch.locate("searchButton").click();
             },
             addRelations: function (data) {

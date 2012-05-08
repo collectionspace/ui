@@ -15,7 +15,7 @@
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
                             "hierarchy": ".csc-place-hierarchy",
-                            "identificationNumber": ".csc-place-displayName"
+                            "identificationNumber": ".csc-placeAuthority-termDisplayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
@@ -56,12 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "place",
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "place"
-            ],
+            "schema": {
+                "place": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/PlaceTemplate.html",

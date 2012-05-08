@@ -11,7 +11,7 @@
                     "options": {
                         "selectors": {
                             "hierarchy": ".csc-hierarchy",
-                            "identificationNumber": ".csc-organizationAuthority-displayName" 
+                            "identificationNumber": ".csc-organizationAuthority-termDisplayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "organization",
-            "namespace": "organization",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "organization"
-            ],
+            "schema": {
+                "organization": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/OrganizationTemplate.html",

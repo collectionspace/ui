@@ -17,12 +17,9 @@
     },
     "pageBuilderIO": {
         "options": {
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "termlist" 
-            ],
+            "schema": {
+                "termlist": null
+            },
             "recordType": "termlist"
         }
     }

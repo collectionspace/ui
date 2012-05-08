@@ -15,7 +15,7 @@
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
                             "hierarchy": ".csc-concept-hierarchy",
-                            "identificationNumber": ".csc-concept-displayName"
+                            "identificationNumber": ".csc-conceptAuthority-termDisplayName"
                         },
                         "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
@@ -56,13 +56,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "concept",
-            "namespace": "concept",
-            "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "concept"
-            ],
+            "schema": {
+                "concept": null
+            },
             "pageSpec": {
                 "recordEditor": {
                     "href": "pages/ConceptTemplate.html",
