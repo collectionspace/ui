@@ -226,3 +226,9 @@ loanin-transferOutReturnDateLabel: Date
 loanin-transferOutReturnQuantityLabel: Quantity
 loanin-transferOutReturnNotesLabel: Notes
 
+#organization
+organization-termSourceLabel: Term Source
+organization-contactNamesLabel: Contact/Chair
+organization-associatedPersonGroupLabel: Associated People
+organization-associatedPersonLabel: Person
+organization-associatedPersonRoleLabel: Role
