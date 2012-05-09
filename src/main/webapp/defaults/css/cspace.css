@@ -2186,4 +2186,5 @@ li.cs-locked {
 }
 li.cs-repeatable-repeat .cs-termList {
     float: left;
+    width: 88.5%;
 }
