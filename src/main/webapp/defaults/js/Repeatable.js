@@ -456,7 +456,7 @@ cspace = cspace || {};
                        .wrap($("<li/>").addClass(getClass("repeat"))
                                        .addClass(getStyle("clearfix"))
                                        .addClass(getStyle("repeat"))
-                                       .css("display", "inline"))
+                                       .css("display", "block"))
                        .parent("li");
         }
     
