@@ -212,7 +212,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredConceptGroup"
+                                                    "elPath": "fields.conceptTermGroup"
                                                 }
                                             }
                                         ]

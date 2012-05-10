@@ -216,7 +216,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredLocationGroup"
+                                                    "elPath": "fields.locTermGroup"
                                                 }
                                             }
                                         ]

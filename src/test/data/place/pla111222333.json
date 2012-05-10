@@ -1,7 +1,7 @@
 {
 	"csid": "pla111222333",
     "fields": {        
-		"preferredPlaceGroup": [
+		"placeTermGroup": [
             {
                 "termDisplayName": "Fred Bloggs",
                 "termQualifier": "Person Qualifier",

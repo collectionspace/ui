@@ -1,7 +1,7 @@
 {
     "csid": "tax111222333",
     "fields": {
-        "preferredTaxonGroup": [
+        "taxonTermGroup": [
             {
                 "termDisplayName": "Fred Bloggs",
                 "termQualifier": "Person Qualifier",

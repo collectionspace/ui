@@ -165,6 +165,7 @@
                                                         "expander": {
                                                             "tree": {
                                                                 ".csc-personAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                                                ".csc-personAuthority-termName": "${{row}.termName}",
                                                                 ".csc-personAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-personAuthority-termType": {
                                                                     "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
@@ -223,13 +224,16 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredPersonGroup"
+                                                    "elPath": "fields.personTermGroup"
                                                 }
                                             }
                                         ]
                                     },
                                     ".csc-person-termDisplayName-label": {
                                         "messagekey": "person-termDisplayNameLabel"
+                                    },
+                                    ".csc-person-termName-label": {
+                                        "messagekey": "person-termNameLabel"
                                     },
                                     ".csc-person-termQualifier-label": {
                                         "messagekey": "person-termQualifierLabel"

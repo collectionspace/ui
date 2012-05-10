@@ -10,7 +10,7 @@
             },
             "fields": {
                 "properties": {
-                    "preferredLocationGroup": {
+                    "locTermGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
