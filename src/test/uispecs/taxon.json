@@ -155,7 +155,7 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-preferred-taxonGroup": {
+                                    ".csc-taxonTermGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
