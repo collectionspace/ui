@@ -10,7 +10,7 @@
             },
             "fields": {
                 "properties": {
-                    "preferredConceptGroup": {
+                    "conceptTermGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
