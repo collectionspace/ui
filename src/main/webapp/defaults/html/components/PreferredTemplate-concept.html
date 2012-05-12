@@ -2,7 +2,7 @@
 	<div class="header">
 		<div>&nbsp;</div>
 	</div>
-	<div class="content csc-preferred-conceptGroup">
+	<div class="content csc-preferredCA-conceptTermGroup">
 		<div class="info-column">
 			<div class="info-pair">
 				<div class="content">
@@ -34,10 +34,9 @@
 						<thead>
 							<tr>
 								<td class="csc-concept-termName-label"></td>
-								<td class="csc-concept-termType-label"></td>
 								<td class="csc-concept-termLanguage-label"></td>
-								<td class="csc-concept-historicalStatus-label"></td>
-								<td class="csc-concept-termPrefForLang-label"></td>
+                                                                <td class="csc-concept-termPrefForLang-label"></td>
+                                                                <td class="csc-concept-historicalStatus-label"></td>
 								<td class="csc-concept-termSource-label"></td>
 								<td class="csc-concept-termSourceDetail-label"></td>
 								<td class="csc-concept-termSourceID-label"></td>
@@ -47,14 +46,31 @@
 						<tbody>
 							<tr>
 								<td><input type="text" class="csc-concept-termName"/></td>
-								<td><select class="csc-conceptAuthority-termType input-select"><option value="">Options not loaded</option></select></td>
 								<td><select class="csc-conceptAuthority-termLanguage input-select"><option value="">Options not loaded</option></select></td>
+                                                                <td><input type="checkbox" class="csc-conceptAuthority-termPrefForLang"/></td>
 								<td><select class="csc-conceptAuthority-historicalStatus input-select"><option value="">Options not loaded</option></select></td>
-								<td><input type="checkbox" class="csc-conceptAuthority-termPrefForLang"/></td>
 								<td><input type="text" class="csc-conceptAuthority-termSource"/></td>
 								<td><input type="text" class="csc-conceptAuthority-termSourceDetail"/></td>
 								<td><input type="text" class="csc-conceptAuthority-termSourceID"/></td>
 								<td><input type="text" class="csc-conceptAuthority-termSourceNote"/></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+                                <div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="csc-concept-termScopeNote-label"></td>
+								<td class="csc-concept-termScopeNoteSource-label"></td>
+								<td class="csc-concept-termScopeNoteDetail-label"></td>
+							</tr>
+						</thead>                                                        
+						<tbody>
+							<tr>
+								<td><input type="text" class="csc-conceptAuthority-termScopeNote"/></td>
+								<td><input type="text" class="csc-conceptAuthority-termScopeNoteSource"/></td>
+								<td><input type="text" class="csc-conceptAuthority-termScopeNoteDetail"/></td>
 							</tr>
 						</tbody>
 					</table>
