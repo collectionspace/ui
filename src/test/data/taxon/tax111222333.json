@@ -1,0 +1,31 @@
+{
+    "csid": "tax111222333",
+    "fields": {
+        "preferredTaxonGroup": [
+            {
+                "termDisplayName": "Fred Bloggs",
+                "termQualifier": "Person Qualifier",
+                "termType": "descriptor",
+                "termStatus": "provisional",
+                "termLanguage": "Value 1",
+                "termPrefForLang": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "taxonAuthor": "Test",
+                "taxonAuthorType": "ascribed",
+                "_primary": true
+            }
+        ]
+    },
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "Fred Bloggs",
+            "sourceFieldName": "contactName",
+            "relationshiptype": "uses",
+            "recordtype": "person"
+        }
+    ],
+    "relations": {}
+}

@@ -1,5 +1,5 @@
 /*
-Copyright 2010 - 2012
+Copyright 2010 - 2011
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 You may not use this file except in compliance with this License.
@@ -54,16 +54,17 @@ input, textarea, select {
     overflow:visible; 
     height:19px;
     vertical-align: middle;}
-select {height:21px; padding:1px 0;}
+select {height:21px;}
 table select, table ~ select, table input {
     border:none;}
 input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
     height:auto;}
 input[type="checkbox"] {
-	padding:0 2px;}
+    padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    width:99.5%; 
-    margin:0;}
+    margin: 0;
+    width: 100%;
+}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
 input[type="submit"].logout {
@@ -114,7 +115,7 @@ input[type="button"].createFromExistingButton:focus, input[type="submit"].create
 input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
@@ -126,7 +127,7 @@ input[type="button"].cancelButton:focus, input[type="submit"].cancelButton:focus
 input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[disabled] {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background:transparent url('../images/icnCancelDisabled.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
@@ -160,7 +161,7 @@ input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus
 input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[disabled] {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background:transparent url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px;
@@ -386,12 +387,12 @@ li .flc-pager-pageLink {
     width:auto; 
     margin-bottom:2px; 
     border-bottom: 0px solid #4D4D4D;
-	background: #fff url("../images/header-menu-row-buffer.png") repeat-x right bottom;}
+    background: #fff url("../images/header-menu-row-buffer.png") repeat-x right bottom;}
 .header-menu-row .inner {
     float:left; 
     background-color:#fff; 
     margin-bottom:-2px;
-	line-height:1;}
+    line-height:1;}
 .menu-item {
     margin-right:3px; 
     margin-bottom:7px; 
@@ -492,8 +493,8 @@ li .flc-pager-pageLink {
     /*display:inline;*/}
 #secondary-nav-menu-sub  .button-row,
 #secondary-nav-footer-menu-sub .button-row {
-	/*float:right;*/
-	text-align:right;}
+    /*float:right;*/
+    text-align:right;}
 #secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
@@ -572,18 +573,18 @@ table tbody.highlight tr:focus td {
 
 .info-column     {width: 100%;}
 .info-column1    {width: 100%;}
-.info-column2    {width:  50%;} 
-.info-column2-20 {width:  20%;}
-.info-column2-25 {width:  25%;}
-.info-column2-30 {width:  30%;}
-.info-column2-40 {width:  40%;}
-.info-column2-45 {width:  45%;}
-.info-column2-50 {width:  50%;}
-.info-column2-55 {width:  55%;}
-.info-column2-60 {width:  60%;}
-.info-column2-70 {width:  70%;}
-.info-column2-75 {width:  75%;}
-.info-column2-80 {width:  80%;}
+.info-column2    {width:  49%;} 
+.info-column2-20 {width:  19%;}
+.info-column2-25 {width:  24%;}
+.info-column2-30 {width:  29%;}
+.info-column2-40 {width:  39%;}
+.info-column2-45 {width:  44%;}
+.info-column2-50 {width:  49%;}
+.info-column2-55 {width:  54%;}
+.info-column2-60 {width:  59%;}
+.info-column2-70 {width:  69%;}
+.info-column2-75 {width:  74%;}
+.info-column2-80 {width:  79%;}
 .info-column3    {width:  33%;}
 .info-column4    {width:  25%;}
 
@@ -607,7 +608,7 @@ table tbody.highlight tr:focus td {
 /*.fl-container-left*/  .information-subgroup {padding:10px 0;}
 /*.fl-container-left*/  .information-group .content.main, .information-group .content.main  {
     background-color: #F5F5F5; 
-    padding: 6px;
+    padding: 12px;
     width:auto; }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
@@ -667,43 +668,42 @@ table tbody.highlight tr:focus td {
     padding:0; 
     margin:0; 
     color:#000; 
-    cursor:default;}	
-.info-pair .label, .info-pair-date .label, .info-pair-select .label {
+    cursor:default;}    
+.info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
     padding-bottom:4px; 
     font-weight:bold; 
     color:#333333; 
     font-size:11px; 
     line-height:11px;}
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
-	display:inline-block;}
+    display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
-    width:100%; 
-    /*float:left; */
-    border:none;}
+    border:none;
+}
 .info-pair .content.fl-date-group {
-	width: 162px;}
+    width: 162px;}
 td.fl-date-group {
-	width:160px;}
-.info-pair-date .content {
-    width:auto;}
+    width:160px;}
 .info-pair .content > select {
     width:100%; 
     border-spacing:0; 
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    /*padding:0;*/}
+    padding:0;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width:100%; 
+    width: 90%;
     border-spacing:0; 
-    background-color:#FFF; 
+    background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
 table.cs-admin-table td {
-	padding:0 2px;}
+    padding:0 2px;}
 table.cs-admin-table td.checkbox {
-	width:13px; 
-	/*padding-top:2px;*/}
+    width:13px; 
+    /*padding-top:2px;*/}
 .info-pair .content table table, /* FIX */ /* info-pair-date doesn't use tables anymore*/
 .info-pair-date .content table  table,
 .info-pair-select table table {
@@ -716,18 +716,16 @@ table.cs-admin-table td.checkbox {
     border-bottom:1px solid #C7CFD4; 
     background-color:#E8E8E8;    
     padding:4px 2px 4px 3px;
-	font-weight:bold; 
+    font-weight:bold; 
     font-size:11px; 
     line-height:1;
-	color:#3B3B3C;}
+    color:#3B3B3C;}
 .info-pair .content tbody tr {}
 .info-pair .content tbody td {
     border: 1px solid #C7CFD4;
     /*padding-left: 2px;*/
     height: 19px;
 }
-.info-pair .content tbody td input {
-    /*margin:0 -2px 0 2px;*/}
 .info-pair .content tbody td .content {
     width:159px;}
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {
@@ -747,7 +745,8 @@ table.cs-admin-table td.checkbox {
     line-height:120%; 
     background-color:#F0F5FB; 
     border:none; 
-    width:100%;}
+    width:100%;
+}
 .list-table  table thead tr td, .list-table  table thead tr th {
     font-size:11px; 
     background-color:#EFEFEF; 
@@ -898,14 +897,14 @@ table.cs-admin-table td.checkbox {
     position:absolute;
     right:0;
     top:-25px;
-	float:none;}
+    float:none;}
 .cs-admin-details .info-pair {
     padding-bottom:16px;}
 .cs-admin-details .info-pair .label { 
     /*width:120px; */
     font-weight:bold; 
     padding-bottom:6px;
-	display:inline-block;}
+    display:inline-block;}
 /*.cs-admin-details .info-pair  {
     width:320px;}*/
 /*.cs-admin-details .info-pair  textarea {
@@ -960,30 +959,28 @@ table.cs-admin-table td.checkbox {
     margin-right:auto;}
 .cataloging .fl-container-pivot {
     padding-top:0px;}
-.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
-    /*width:100%;*/
-    position:relative; 
-    margin-bottom:8px;
-	padding:6px; 
+.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
+    position:relative;
+    margin-bottom:18px;
+    padding-bottom:0px;
+    padding-top:0px; 
     font-size:12px; 
     line-height:12px;
-    /*float:left;*/}
-/*.info-pair:hover {
-    -moz-border-radius:5px 5px 5px;
-    border:1px solid #C2D7EF;
-    background-color:#DEEFFF;
-    margin:-1px;}*/     
+    clear: both;
+    min-height: 31px;
+}    
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
     padding-bottom:14px;}
-.info-pair-termlist  table, .info-pair-termlist tbody td{
+.info-pair-termList  table, .info-pair-termList tbody td{
     width:auto;  
     background-color:#E6E6E6;}
-/*.fl-container-left*/  .information-group .info-pair-termlist .info-pair .content {
+/*.fl-container-left*/  .information-group .info-pair-termList .info-pair .content {
     padding-bottom:4px;}
-.info-pair-termlist table select {
-    border:0;}
+.info-pair-termList table select {
+    border:0;
+}
 /*.fl-container-left*/ .information-group .info-pair-date .info-pair .content  table {
     width:auto;}
 /*.fl-container-left*/  .information-group .info-pair-select .info-pair .content  table {
@@ -1076,7 +1073,7 @@ table.cs-admin-table td.checkbox {
 .addrow {
     float:right; 
     margin:0; 
-    position:relative; 
+    position:relative;
     right:0px; 
     bottom:-3px;}
 .info-pair-table .info-value table.components, .info-pair-table .info-pair .content table.components {
@@ -1090,22 +1087,21 @@ table.cs-admin-table td.checkbox {
     width: 120px !important;}
 .input-date {
     width: 142px !important;
-	border-right:none;}
+    border-right:none;}
 .input-money-amount {
     width: 120px !important;}
 .content select {
-    width: auto; 
-    /*height:21px; */
-    /*border:1px solid #C7CFD4;*/}
+    width: auto;
+}
 .content table select {
     width: 100%; 
     height:19px; 
-    /*padding-top:0;*/ 
+    padding-top:0; 
     border:none;}
-.content textarea { 
-    width:100%; 
-    height:75px; 
-    overflow:auto;}
+.content textarea {
+    height:75px;
+    overflow:auto;
+}
 .input-alpha-login {
     width: 120px; 
     height:18px;}
@@ -1255,7 +1251,21 @@ input[disabled]:hover, input[disabled]:hover    {
    height: 0;
    clear: both;
 }
-	
+
+.clearfix:after, 
+.info-group:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.clearfix .cs-repeatable-content,
+.info-column .cs-repeatable-content {
+    float: left;
+}
+    
 .ui-tabs .ui-tabs-hide {
     display: none;}
 
@@ -1296,8 +1306,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /*   styling the date pickers   */
 .cs-date-picker {
-	/*margin-top: 21px;*/
-    margin-top: 0;}
+    margin-top: 21px;}
 .cs-calendar-image {
     background: url('../images/cal.png') no-repeat center center;
 }
@@ -1353,31 +1362,31 @@ input[disabled]:hover, input[disabled]:hover    {
 .header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .cs-togglable-collapsed.header {
     -moz-border-radius:6px 6px 6px 6px; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .pivot-box .cs-togglable-expanded.header, 
 .pivot-box .cs-togglable-collapsed.header {
-	-moz-border-radius:0; 
+    -moz-border-radius:0; 
     -webkit-border-radius:0;
-	border-radius:0;}
+    border-radius:0;}
 
 .saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     line-height: 1.5;}
 .infopair .header { /* FIX */
-	-moz-border-radius:0; 
+    -moz-border-radius:0; 
     -webkit-border-radius:0;
-	border-radius:0;}
-	
+    border-radius:0;}
+    
 .cs-search-disabled {
     cursor: default !important;}
 .cs-search-disabled td {
@@ -1401,7 +1410,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
 .cs-searchBox-container {
-	display: table-cell;}
+    display: table-cell;}
 .cs-searchBox {
     padding:12px 14px 12px 0; 
     background-color:#F5F5F5; }
@@ -1503,7 +1512,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
 .cs-togglable-expanded {
     background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {
-    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;	}
+    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;  }
 .csc-related-mainheader {
     display:inline;}
 
@@ -1558,8 +1567,8 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     border-left:none;
     height:19px;
     width: 18px;
-	cursor:pointer;
-    float:right;}
+    cursor:pointer;
+    /*float:left;*/}
 table .cs-calendar-button { 
     border:none;}
 table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button { background-color:#fff;}
@@ -1567,10 +1576,7 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     margin:0 0 -1px 2px; 
     padding: 1px 1px 0 0; 
     width:16px; 
-    height:17px;
-	float:right;}
-.info-pair-date .content {
-    background-color:#fff;}
+    height:17px}
 .info-pair-date .content input {
     border-right:none; 
     /*width:142px !important; */
@@ -1608,14 +1614,14 @@ table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button
     margin-left: 5px;
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     display:table-cell;
     opacity: 1.0;
 }
 input[type=button].cs-mediaUploader-removeMedia {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background: url("../images/icnCancel.png") no-repeat scroll 8px 4px transparent;
     color: #669922;
     padding-left: 24px;
@@ -1702,7 +1708,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordList .cs-recordList-title-row {
     -moz-border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
-	border-radius: 4px 0 0 0;
+    border-radius: 4px 0 0 0;
     min-height: 13px;
     width: 100%;
     background-color: #EFEFEF;
@@ -1716,7 +1722,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .right-sidebar .cs-recordList .cs-recordList-title-row {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-	border-radius: 0;
+    border-radius: 0;
 }
 .cs-recordList-new {
     min-height: 13px;
@@ -1772,29 +1778,29 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
-	border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
 }
 .right-sidebar .cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-	border-radius: 0;
+    border-radius: 0;
 }
 .cs-recordList .cs-recordList-deleteRelation {
     background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;
     height: 14px;
-	vertical-align:top;
+    vertical-align:top;
 }
 .cs-recordList .cs-recordList-deleteRelation:hover,
 .cs-recordList .cs-recordList-deleteRelation:focus {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
-	height: 14px;
+    height: 14px;
 }
 .cs-recordList .cs-disabled {
     color: gray;
     cursor: default;
 }
 .cs-mediaUploader .cs-disabled {
-	background-color: #CCC;
+    background-color: #CCC;
 }
 
 .cs-recordList-thumbnail {
@@ -1841,8 +1847,8 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin-bottom: 10px;
     padding: 0 20px;
     -moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
     display: table-cell;
 }
 .cs-reportProducer .cs-reportProducer-reportType {
@@ -1869,7 +1875,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin: 8px 12px 0 0;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
 }
 .cs-reportProducer-loadingIndicator .csc-reportStatus-message {
     padding-left: 44px;
@@ -1882,7 +1888,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 .cs-advancedSearch-template {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1 .cs-advancedSearch-selectRecordType {
     margin-left: 15px;
@@ -1891,14 +1897,14 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin-right: 10px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1, .cs-advancedSearch-template .cs-advancedSearch-step2 {
-	border: 1px solid #6E9FCE;
-	margin-bottom: 20px;
-	-moz-border-radius:4px;
+    border: 1px solid #6E9FCE;
+    margin-bottom: 20px;
+    -moz-border-radius:4px;
     -webkit-border-radius:4px;
     background-color: #F5F5F5;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1-header, .cs-advancedSearch-template .cs-advancedSearch-step2-header {
-	background-color: #6E9FCE;
+    background-color: #6E9FCE;
     display: inline-block;
     padding: 15px;
     font-size: 14px;
@@ -2081,13 +2087,13 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 /* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
 /* example: 
    <div class="line">
-		<div class="unit size1of4"></div>
-		<div class="unit size1of2"></div>
-		<div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
-			<div class="unit size1of3"></div>
-			<div class="lastUnit size2of3"</div>
-		</div>
-	</div>
+        <div class="unit size1of4"></div>
+        <div class="unit size1of2"></div>
+        <div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
+            <div class="unit size1of3"></div>
+            <div class="lastUnit size2of3"</div>
+        </div>
+    </div>
 */
 .line, .lastUnit { overflow: hidden; _overflow: visible; _zoom:1; }
 .unit { float: left; _zoom: 1; }
@@ -2114,29 +2120,29 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .oocss .info-pair-table, 
 .oocss .info-pair-date,
 .oocss .info-pair-select,
-.oocss .info-pair-termlist
+.oocss .info-pair-termList
 {
-	width: auto;
-	padding-right: 1.5em;
+    width: auto;
+    padding-right: 1.5em;
 }
 
 .oocss .cs-repeatable-group li {
-	background-color: #E2E2E2 !important;
-	border: 1px solid #CCC !important;
-	padding: 4px 4px 0 4px !important;
-	margin-bottom: 4px !important;
+    background-color: #E2E2E2 !important;
+    border: 1px solid #CCC !important;
+    padding: 4px 4px 0 4px !important;
+    margin-bottom: 4px !important;
 }
 
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
-	top: -12px !important;
+    top: -12px !important;
 }
 
 .infoDiv .fieldgroup {
-	background: none !important;
+    background: none !important;
 }
 
 /*.csc-place .cs-repeatable-repeat input, .csc-place .cs-repeatable-repeat textarea {
-	width: 100% !important;
+    width: 100% !important;
 }
 */
 .remarks, .georefplacename {
@@ -2173,4 +2179,12 @@ li.cs-locked {
     display: list-item;
     width: inherit;
     height: inherit;
+}
+
+.cs-termList {
+    float: none;
+}
+li.cs-repeatable-repeat .cs-termList {
+    float: left;
+    width: 88.5%;
 }
