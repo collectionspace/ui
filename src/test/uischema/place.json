@@ -14,7 +14,7 @@
             },
             "fields": {
                 "properties": {
-                    "preferredPlaceGroup": {
+                    "placeTermGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {

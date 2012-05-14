@@ -1,7 +1,7 @@
 {
     "csid": "org111222333",
     "fields": {
-        "preferredOrganizationGroup": [
+        "orgTermGroup": [
             {
                 "termDisplayName": "Bloggs & Co.",
                 "termQualifier": "Epic Qualifier",
