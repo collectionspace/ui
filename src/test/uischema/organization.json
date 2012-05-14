@@ -14,7 +14,7 @@
             },
             "fields": {
                 "properties": {
-                    "preferredOrganizationGroup": {
+                    "orgTermGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {

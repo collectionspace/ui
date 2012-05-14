@@ -155,7 +155,7 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-preferred-organizationGroup": {
+                                    ".csc-orgTermGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
@@ -209,7 +209,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredOrganizationGroup"
+                                                    "elPath": "fields.orgTermGroup"
                                                 }
                                             }
                                         ]

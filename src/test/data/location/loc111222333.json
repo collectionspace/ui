@@ -1,7 +1,7 @@
 {
     "csid": "loc111222333",
     "fields": {
-        "preferredLocationGroup": [
+        "locTermGroup": [
             {
                 "termName": "Epic Drawer",
                 "termQualifier": "Drawer Qualifier",

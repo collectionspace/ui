@@ -14,7 +14,7 @@
             },
             "fields": {
                 "properties": {
-                    "preferredTaxonGroup": {
+                    "taxonTermGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
