@@ -1,9 +1,10 @@
 {
     "csid": "per111222333",
     "fields": {
-        "preferredPersonGroup": [
+        "personTermGroup": [
             {
                 "termDisplayName": "Fred Bloggs",
+                "termName": "Epic Drawer",
                 "termQualifier": "Person Qualifier",
                 "termType": "descriptor",
                 "termStatus": "provisional",

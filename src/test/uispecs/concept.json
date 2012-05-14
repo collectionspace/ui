@@ -155,7 +155,7 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-preferred-conceptGroup": {
+                                    ".csc-conceptTermGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
@@ -212,7 +212,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredConceptGroup"
+                                                    "elPath": "fields.conceptTermGroup"
                                                 }
                                             }
                                         ]

@@ -155,7 +155,7 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-preferred-placeGroup": {
+                                    ".csc-placeTermGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
@@ -251,7 +251,7 @@
                                                             "type": "fluid.noexpand"
                                                         }
                                                     },
-                                                    "elPath": "fields.preferredPlaceGroup"
+                                                    "elPath": "fields.placeTermGroup"
                                                 }
                                             }
                                         ]
