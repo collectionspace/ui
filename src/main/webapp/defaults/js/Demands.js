@@ -635,7 +635,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 url: "%queryUrl?q=%term",
                 termMap: {
                     queryUrl: "{autocomplete}.options.queryUrl",
-                    term: "encodeURIComponent:%term"
+                    term: "encodeURIComponent:%term",
+                    vocab: "vocab"
                 },
                 targetTypeName: "cspace.autocomplete.matchesDataSource"
             }
@@ -669,6 +670,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -683,6 +697,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "location", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -703,6 +730,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "place", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -723,6 +763,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "concept", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -743,6 +796,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "person", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -763,6 +829,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "organization", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
@@ -783,6 +862,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "taxon", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                model: {
+                    vocab: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.vocab.resolve",
+                            args: {
+                                model: "{cspace.recordEditor}.model",
+                                recordType: "{cspace.recordEditor}.options.recordType",
+                                vocab: "{vocab}"
+                            }
+                        }
+                    }
+                },
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
