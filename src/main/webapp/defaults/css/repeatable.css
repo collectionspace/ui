@@ -8,12 +8,12 @@
 .content li.cs-repeatable-repeat select,
 .content li.cs-repeatable-repeat button,
 .content li.cs-repeatable-repeat textarea {
-    float:left;}
+	float:left;}
 .content li.cs-repeatable-repeat .content input,
 .content li.cs-repeatable-repeat .content select,
 .content li.cs-repeatable-repeat .content button,
 .content li.cs-repeatable-repeat .content textarea {
-    float:none;
+	float:none;
 }
 .content li.cs-repeatable-repeat .content input.cs-repeatable-add {
     float: right;
@@ -54,9 +54,9 @@ input.cs-repeatable-delete {
     border:none; 
     vertical-align:top; 
     padding:0px;
-    width:16px;
+	width:16px;
     background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
-    }
+	}
 input.cs-repeatable-delete:hover, 
 input.cs-repeatable-delete:focus {
     color: white; 
@@ -72,20 +72,20 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
-    background-position:2px 1px; height:15px;}
-    
+	background-position:2px 1px; height:15px;}
+	
 .cs-repeatable-group .cs-repeatable-repeat ,
 .cs-repeatable-group .cs-repeatable-repeat ,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat  {
-    border:1px solid #CCC;
-    background-color:#E2E2E2;
-    float: left;
+	border:1px solid #CCC;
+	background-color:#E2E2E2;
+	float: left;
 }
 
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
-    float:left;
+	float:left;
 }
 
 .infoGroup { 
@@ -125,7 +125,7 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
     border:none;
     vertical-align:top;
     padding:0px;
-    width:16px;
+	width:16px;
     background-color:transparent !important;
     background:url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
 }
