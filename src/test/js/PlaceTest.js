@@ -70,7 +70,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 listeners: {
                                     "afterRender.placeTest": function (recordEditor) {
                                         var repeatableField = [
-                                            "placeNameGroup",
                                             "placeOwnerGroup",
                                             "placeGeoRefGroup"
                                         ];
