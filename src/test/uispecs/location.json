@@ -392,6 +392,9 @@
         },
         ".csc-location-securityNote-label": {
             "messagekey": "location-securityNoteLabel"
+        },
+        ".csc-location-locationAuthorityInformation-label": {
+            "messagekey": "location-locationAuthorityInformationLabel"
         }
     }
 }
