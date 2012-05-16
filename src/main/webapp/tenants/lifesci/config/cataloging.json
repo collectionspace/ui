@@ -50,7 +50,7 @@
         "options": {
             "recordType": "cataloging",
             "schema": {
-                "cataloging"
+                "cataloging": null
             },
             "components": {
                 "templateLocator": {
