@@ -10,61 +10,26 @@
             },
             "fields": {
                 "properties": {
-                    "preferredConceptGroup": {
+                    "tenantID": {
+                        "type": "string"
+                    },
+                    "citationGroup": {
                         "items": {
                             "properties": {
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "displayName": {
+                                "citationSourceDetail": {
                                     "type": "string"
                                 },
-                                "termType": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termStatus": {
-                                    "default": "provisional",
-                                    "type": "string"
-                                },
-                                "termName": {
-                                    "type": "string"
-                                },
-                                "termQualifier": {
-                                    "type": "string"
-                                },
-                                "termLanguage": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termPrefForLang": {
-                                    "default": false,
-                                    "type": "boolean"
-                                },
-                                "historicalStatus": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termSource": {
-                                    "type": "string"
-                                },
-                                "termSourceDetail": {
-                                    "type": "string"
-                                },
-                                "termSourceID": {
-                                    "type": "string"
-                                },
-                                "termSourceNote": {
+                                "citationSource": {
                                     "type": "string"
                                 }
                             },
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "tenantID": {
-                        "type": "string"
                     },
                     "relatedTerms": {
                         "items": {
@@ -81,37 +46,90 @@
                         },
                         "type": "array"
                     },
+                    "scopeNoteSource": {
+                        "type": "string"
+                    },
                     "csid": {
                         "type": "string"
                     },
                     "uri": {
                         "type": "string"
                     },
-                    "termScopeNote": {
-                        "type": "string"
-                    },
-                    "termScopeNoteSource": {
-                        "type": "string"
-                    },
-                    "termScopeNoteSourceDetail": {
-                        "type": "string"
-                    },
                     "updatedBy": {
+                        "type": "string"
+                    },
+                    "shortIdentifier": {
                         "type": "string"
                     },
                     "updatedAt": {
                         "type": "date"
                     },
-                    "shortIdentifier": {
+                    "scopeNoteSourceDetail": {
                         "type": "string"
                     },
                     "createdBy": {
                         "type": "string"
                     },
+                    "conceptTermGroup": {
+                        "items": {
+                            "properties": {
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "historicalStatus": {
+                                    "default": "current",
+                                    "type": "string"
+                                },
+                                "termPrefForLang": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "termDisplayName": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termQualifier": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "broaderContext": {
+                        "type": "string"
+                    },
                     "createdAt": {
                         "type": "string"
                     },
-                    "broaderContext": {
+                    "description": {
                         "type": "string"
                     },
                     "termStatus": {
@@ -120,15 +138,24 @@
                     "refName": {
                         "type": "string"
                     },
-                    "narrowerContexts": {
+                    "additionalSourceGroup": {
                         "items": {
                             "properties": {
-                                "narrowerContext": {
+                                "additionalSourceDetail": {
                                     "type": "string"
                                 },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
+                                },
+                                "additionalSource": {
+                                    "type": "string"
+                                },
+                                "additionalSourceID": {
+                                    "type": "string"
+                                },
+                                "additionalSourceNote": {
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -149,6 +176,27 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "narrowerContexts": {
+                        "items": {
+                            "properties": {
+                                "narrowerContext": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "recordType": {
+                        "type": "string"
+                    },
+                    "scopeNote": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

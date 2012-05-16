@@ -32,9 +32,13 @@
                 "titleBar": {
                     "type": "cspace.titleBar",
                     "options": {
-                        "fields": [
-                            "fields.displayName"
-                        ]
+                        "fields": [{
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.taxonTermGroup",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "termDisplayName"
+                        }]
                     }
                 },
                 "header": {
@@ -57,7 +61,7 @@
         "options": {
             "recordType": "taxon",
             "schema": {
-                "taxon"
+                "taxon": null
             },
             "pageSpec": {},
             "components": {

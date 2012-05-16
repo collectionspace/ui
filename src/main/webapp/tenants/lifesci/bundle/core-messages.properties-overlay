@@ -15,13 +15,15 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
+vocab-taxon: Default
+
 # Taxon record
 taxon: Taxon
 taxon-identificationNumberRequired: Please specify a Display Name
 taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
-taxon-termDisplayNameLabel: Display Name
-taxon-termStatusLabel: Term Status
-taxon-taxonFullNameLabel: Full Name
+preferredTA-termDisplayNameLabel: Display Name
+preferredTA-termStatusLabel: Term Status
+preferredTA-termNameLabel: Term
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Currency
 taxon-taxonAuthorGroupLabel: Author
@@ -38,14 +40,13 @@ taxon-taxonNoteLabel: Note
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
-taxon-termQualifierLabel: Qualifier
-taxon-termTypeLabel: Term Type
-taxon-termLabel: Term
-taxon-termLanguageLabel: Lang
-taxon-termPrefForLangLabel: Pref for Lang
-taxon-termSourceLabel: Source
-taxon-termSourceDetailLabel: Source detail
-taxon-termSourceIDLabel: Source ID
+preferredTA-termQualifierLabel: Qualifier
+preferredTA-termTypeLabel: Term Type
+preferredTA-termLanguageLabel: Language
+preferredTA-termPrefForLangLabel: Pref for Lang
+preferredTA-termSourceLabel: Source
+preferredTA-termSourceDetailLabel: Source Detail
+preferredTA-termSourceIDLabel: Source ID
 
 
 # -------------------------------------

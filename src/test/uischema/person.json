@@ -10,75 +10,6 @@
             },
             "fields": {
                 "properties": {
-                    "preferredPersonGroup": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "termDisplayName": {
-                                    "type": "string"
-                                },
-                                "termQualifier": {
-                                    "type": "string"
-                                },
-                                "termType": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termStatus": {
-                                    "default": "provisional",
-                                    "type": "string"
-                                },
-                                "termLanguage": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termPrefForLang": {
-                                    "default": false,
-                                    "type": "boolean"
-                                },
-                                "termSource": {
-                                    "type": "string"
-                                },
-                                "termSourceDetail": {
-                                    "type": "string"
-                                },
-                                "termSourceID": {
-                                    "type": "string"
-                                },
-                                "termSourceNote": {
-                                    "type": "string"
-                                },
-                                "salutation": {
-                                    "default": "dear",
-                                    "type": "string"
-                                },
-                                "title": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "foreName": {
-                                    "type": "string"
-                                },
-                                "middleName": {
-                                    "type": "string"
-                                },
-                                "surName": {
-                                    "type": "string"
-                                },
-                                "nameAdditions": {
-                                    "type": "string"
-                                },
-                                "initials": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "relatedTerms": {
                         "items": {
                             "properties": {
@@ -93,6 +24,84 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "personTermGroup": {
+                        "items": {
+                            "properties": {
+                                "middleName": {
+                                    "type": "string"
+                                },
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "surName": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termPrefForLang": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "title": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termDisplayName": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "initials": {
+                                    "type": "string"
+                                },
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termQualifier": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
+                                    "type": "string"
+                                },
+                                "salutation": {
+                                    "default": "dear",
+                                    "type": "string"
+                                },
+                                "foreName": {
+                                    "type": "string"
+                                },
+                                "nameAdditions": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "birthPlace": {
+                        "type": "string"
+                    },
+                    "deathDate": {
+                        "type": "date"
                     },
                     "contact": {
                         "properties": {
@@ -141,10 +150,10 @@
                                             "default": "",
                                             "type": "string"
                                         },
-                                        "addressPlace1": {
+                                        "addressCountry": {
                                             "type": "string"
                                         },
-                                        "addressCountry": {
+                                        "addressPlace1": {
                                             "type": "string"
                                         },
                                         "addressPlace2": {
@@ -183,13 +192,13 @@
                             "emailGroup": {
                                 "items": {
                                     "properties": {
-                                        "emailType": {
-                                            "default": "",
-                                            "type": "string"
-                                        },
                                         "_primary": {
                                             "default": true,
                                             "type": "boolean"
+                                        },
+                                        "emailType": {
+                                            "default": "",
+                                            "type": "string"
                                         },
                                         "email": {
                                             "type": "string"
@@ -206,11 +215,11 @@
                                             "default": true,
                                             "type": "boolean"
                                         },
-                                        "telephoneNumber": {
-                                            "type": "string"
-                                        },
                                         "telephoneNumberType": {
                                             "default": "",
+                                            "type": "string"
+                                        },
+                                        "telephoneNumber": {
                                             "type": "string"
                                         }
                                     },
@@ -224,16 +233,7 @@
                         },
                         "type": "object"
                     },
-                    "birthPlace": {
-                        "type": "string"
-                    },
-                    "deathDate": {
-                        "type": "date"
-                    },
                     "updatedBy": {
-                        "type": "string"
-                    },
-                    "shortIdentifier": {
                         "type": "string"
                     },
                     "nationalities": {
@@ -250,6 +250,9 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "shortIdentifier": {
+                        "type": "string"
                     },
                     "schoolsOrStyles": {
                         "items": {
@@ -312,12 +315,12 @@
                     "occupations": {
                         "items": {
                             "properties": {
-                                "occupation": {
-                                    "type": "string"
-                                },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
+                                },
+                                "occupation": {
+                                    "type": "string"
                                 }
                             },
                             "type": "object"

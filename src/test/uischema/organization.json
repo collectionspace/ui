@@ -1,73 +1,36 @@
 {
     "organization": {
         "properties": {
-            "termsUsed": {
-                "default": [],
-                "type": "array"
-            },
             "relations": {
                 "default": {},
                 "type": "object"
+            },
+            "termsUsed": {
+                "default": [],
+                "type": "array"
             },
             "csid": {
                 "type": "string"
             },
             "fields": {
                 "properties": {
-                    "preferredOrganizationGroup": {
+                    "functions": {
                         "items": {
                             "properties": {
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "termDisplayName": {
-                                    "type": "string"
-                                },
-                                "termQualifier": {
-                                    "type": "string"
-                                },
-                                "termType": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termStatus": {
-                                    "default": "provisional",
-                                    "type": "string"
-                                },
-                                "termName": {
-                                    "type": "string"
-                                },
-                                "termLanguage": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termPrefForLang": {
-                                    "default": false,
-                                    "type": "boolean"
-                                },
-                                "termSource": {
-                                    "type": "string"
-                                },
-                                "termSourceDetail": {
-                                    "type": "string"
-                                },
-                                "termSourceID": {
-                                    "type": "string"
-                                },
-                                "termSourceNote": {
-                                    "type": "string"
-                                },
-                                "mainBodyName": {
-                                    "type": "string"
-                                },
-                                "nameAdditions": {
+                                "function": {
                                     "type": "string"
                                 }
                             },
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "tenantID": {
+                        "type": "string"
                     },
                     "relatedTerms": {
                         "items": {
@@ -98,6 +61,15 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "foundingDate": {
+                        "type": "date"
+                    },
+                    "csid": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string"
                     },
                     "contact": {
                         "properties": {
@@ -146,10 +118,10 @@
                                             "default": "",
                                             "type": "string"
                                         },
-                                        "addressPlace1": {
+                                        "addressCountry": {
                                             "type": "string"
                                         },
-                                        "addressCountry": {
+                                        "addressPlace1": {
                                             "type": "string"
                                         },
                                         "addressPlace2": {
@@ -188,13 +160,13 @@
                             "emailGroup": {
                                 "items": {
                                     "properties": {
-                                        "emailType": {
-                                            "default": "",
-                                            "type": "string"
-                                        },
                                         "_primary": {
                                             "default": true,
                                             "type": "boolean"
+                                        },
+                                        "emailType": {
+                                            "default": "",
+                                            "type": "string"
                                         },
                                         "email": {
                                             "type": "string"
@@ -211,11 +183,11 @@
                                             "default": true,
                                             "type": "boolean"
                                         },
-                                        "telephoneNumber": {
-                                            "type": "string"
-                                        },
                                         "telephoneNumberType": {
                                             "default": "",
+                                            "type": "string"
+                                        },
+                                        "telephoneNumber": {
                                             "type": "string"
                                         }
                                     },
@@ -235,17 +207,80 @@
                     "shortIdentifier": {
                         "type": "string"
                     },
+                    "updatedAt": {
+                        "type": "date"
+                    },
                     "dissolutionDate": {
                         "type": "date"
                     },
                     "foundingPlace": {
                         "type": "string"
                     },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "broaderContext": {
+                        "type": "string"
+                    },
+                    "orgTermGroup": {
+                        "items": {
+                            "properties": {
+                                "additionsToName": {
+                                    "type": "string"
+                                },
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termPrefForLang": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "termDisplayName": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "mainBodyName": {
+                                    "type": "string"
+                                },
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termQualifier": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "createdAt": {
                         "type": "string"
                     },
-                    "termStatus": {
-                        "default": "provisional",
+                    "refName": {
                         "type": "string"
                     },
                     "historyNotes": {
@@ -256,6 +291,21 @@
                                     "type": "boolean"
                                 },
                                 "historyNote": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "equivalentContexts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "equivalentContext": {
                                     "type": "string"
                                 }
                             },
@@ -286,60 +336,6 @@
                                     "type": "boolean"
                                 },
                                 "group": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "functions": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "function": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "tenantID": {
-                        "type": "string"
-                    },
-                    "foundingDate": {
-                        "type": "date"
-                    },
-                    "csid": {
-                        "type": "string"
-                    },
-                    "uri": {
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "type": "date"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "broaderContext": {
-                        "type": "string"
-                    },
-                    "refName": {
-                        "type": "string"
-                    },
-                    "equivalentContexts": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "equivalentContext": {
                                     "type": "string"
                                 }
                             },
