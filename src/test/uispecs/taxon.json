@@ -3,19 +3,6 @@
         ".csc-hierarchy-narrowerContext-label": {
             "messagekey": "hierarchy-narrowerContextLabel"
         },
-        ".csc-hierarchy-broaderContext": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/lifesci/vocabularies/taxon/autocomplete/broaderContext",
-                        "vocabUrl": "../../../tenant/lifesci/vocabularies/taxon/source-vocab/broaderContext"
-                    }
-                }
-            ],
-            "value": "${fields.broaderContext}"
-        },
         ".csc-hierarchy-narrowerContext": {
             "decorators": [
                 {
@@ -55,23 +42,39 @@
                 }
             ]
         },
-        ".csc-hierarchy-broaderContext-label": {
-            "messagekey": "hierarchy-broaderContextLabel"
-        },
         ".csc-hierarchy-equivalentContext-label": {
             "messagekey": "hierarchy-equivalentContextLabel"
         },
+        ".csc-hierarchy-equivalentInformation-label": {
+            "messagekey": "hierarchy-equivalentInformationLabel"
+        },
+        ".csc-hierarchy-broaderContext": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/lifesci/vocabularies/taxon/autocomplete/broaderContext",
+                        "vocabUrl": "../../../tenant/lifesci/vocabularies/taxon/source-vocab/broaderContext"
+                    }
+                }
+            ],
+            "value": "${fields.broaderContext}"
+        },
+        ".csc-hierarchy-broaderContext-label": {
+            "messagekey": "hierarchy-broaderContextLabel"
+        },
         "expander": [
             {
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
+                    }
+                },
                 "condition": {
                     "funcName": "cspace.hierarchy.assertEquivalentContexts",
                     "args": {
                         "equivalentContexts": "${fields.equivalentContexts}"
-                    }
-                },
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "type": "fluid.renderer.condition",
@@ -106,6 +109,9 @@
         },
         ".csc-hierarchy-narrowerContexts-label": {
             "messagekey": "hierarchy-narrowerContextsLabel"
+        },
+        ".csc-hierarchy-hierarchyInformation-label": {
+            "messagekey": "hierarchy-hierarchyInformationLabel"
         },
         ".csc-hierarchy-relatedTerm": {
             "decorators": [
@@ -146,6 +152,67 @@
         }
     },
     "recordEditor": {
+        ".csc-taxon-uri": "${fields.uri}",
+        ".csc-taxon-commonNameGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-taxon-commonName": "${{row}.commonName}",
+                                    ".csc-taxon-commonNameLanguage": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "commonNameLanguage",
+                                                    "termListType": "commonNameLanguage"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-taxon-commonNameSourceDetail": "${{row}.commonNameSourceDetail}",
+                                    ".csc-taxon-commonNameSource": "${{row}.commonNameSource}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.commonNameGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-taxon-createdAt-label": {
+            "messagekey": "taxon-createdAtLabel"
+        },
+        ".csc-taxon-taxonRank-label": {
+            "messagekey": "taxon-taxonRankLabel"
+        },
+        ".csc-taxon-taxonCitation-label": {
+            "messagekey": "taxon-taxonCitationLabel"
+        },
+        ".csc-taxon-shortIdentifier-label": {
+            "messagekey": "taxon-shortIdentifierLabel"
+        },
+        ".csc-taxon-otherInformation-label": {
+            "messagekey": "taxon-otherInformationLabel"
+        },
+        ".csc-taxon-taxonAuthor-label": {
+            "messagekey": "taxon-taxonAuthorLabel"
+        },
+        ".csc-taxon-taxonNote-label": {
+            "messagekey": "taxon-taxonNoteLabel"
+        },
+        ".csc-taxon-tenantID-label": {
+            "messagekey": "taxon-tenantIDLabel"
+        },
+        ".csc-taxon-csid": "${fields.csid}",
+        ".csc-taxon-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-preferred-taxonAuthority": {
             "decorators": [
                 {
@@ -155,7 +222,37 @@
                         "protoTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-taxonTermGroup": {
+                                    ".csc-preferredTA-termType-label": {
+                                        "messagekey": "preferredTA-termTypeLabel"
+                                    },
+                                    ".csc-preferredTA-termStatus-label": {
+                                        "messagekey": "preferredTA-termStatusLabel"
+                                    },
+                                    ".csc-preferredTA-termPrefForLang-label": {
+                                        "messagekey": "preferredTA-termPrefForLangLabel"
+                                    },
+                                    ".csc-preferredTA-termSource-label": {
+                                        "messagekey": "preferredTA-termSourceLabel"
+                                    },
+                                    ".csc-preferredTA-termSourceNote-label": {
+                                        "messagekey": "preferredTA-termSourceNoteLabel"
+                                    },
+                                    ".csc-preferredTA-taxonTermGroup-label": {
+                                        "messagekey": "preferredTA-taxonTermGroupLabel"
+                                    },
+                                    ".csc-preferredTA-termName-label": {
+                                        "messagekey": "preferredTA-termNameLabel"
+                                    },
+                                    ".csc-preferredTA-termSourceDetail-label": {
+                                        "messagekey": "preferredTA-termSourceDetailLabel"
+                                    },
+                                    ".csc-preferredTA-termDisplayName-label": {
+                                        "messagekey": "preferredTA-termDisplayNameLabel"
+                                    },
+                                    ".csc-preferredTA-taxonomicStatus-label": {
+                                        "messagekey": "preferredTA-taxonomicStatusLabel"
+                                    },
+                                    ".csc-preferredTA-taxonTermGroup": {
                                         "decorators": [
                                             {
                                                 "func": "cspace.makeRepeatable",
@@ -164,13 +261,11 @@
                                                     "repeatTree": {
                                                         "expander": {
                                                             "tree": {
+                                                                ".csc-taxonAuthority-termPrefForLang": "${{row}.termPrefForLang}",
+                                                                ".csc-taxonAuthority-termSourceNote": "${{row}.termSourceNote}",
+                                                                ".csc-taxonAuthority-termSource": "${{row}.termSource}",
                                                                 ".csc-taxonAuthority-termDisplayName": "${{row}.termDisplayName}",
-                                                                ".csc-taxonAuthority-termQualifier": "${{row}.termQualifier}",
-                                                                ".csc-taxonAuthority-termType": {
-                                                                    "optionnames": ["Please select a value", "descriptor", "alternate descriptor", "used for term"],
-                                                                    "optionlist": ["", "descriptor", "alternate descriptor", "used for term"],
-                                                                    "selection": "${{row}.termType}"
-                                                                },
+                                                                ".csc-taxonAuthority-termSourceDetail": "${{row}.termSourceDetail}",
                                                                 ".csc-taxonAuthority-termStatus": {
                                                                     "default": "provisional",
                                                                     "optionnames": [
@@ -187,38 +282,54 @@
                                                                     ],
                                                                     "selection": "${{row}.termStatus}"
                                                                 },
-                                                                ".csc-taxonAuthority-termLanguage": {
-                                                                    "decorators": [{
-                                                                        "func": "cspace.termList",
-                                                                        "type": "fluid",
-                                                                        "options": {
-                                                                            "elPath": "${{row}.termLanguage}",
-                                                                            "termListType": "termLanguage"
-                                                                        }
-                                                                    }]
+                                                                ".csc-taxonAuthority-taxonomicStatus": {
+                                                                    "default": "",
+                                                                    "optionnames": [
+                                                                        "Please select a value",
+                                                                        "Valid",
+                                                                        "Invalid",
+                                                                        "Accepted",
+                                                                        "Misapplied Name"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "",
+                                                                        "valid",
+                                                                        "invalid",
+                                                                        "accepted",
+                                                                        "misapplied name"
+                                                                    ],
+                                                                    "selection": "${{row}.taxonomicStatus}"
                                                                 },
-                                                                ".csc-taxonAuthority-termPrefForLang": "${{row}.termPrefForLang}",
-                                                                ".csc-taxonAuthority-termSource": "${{row}.termSource}",
-                                                                ".csc-taxonAuthority-termSourceDetail": "${{row}.termSourceDetail}",
+                                                                ".csc-taxonAuthority-termType": {
+                                                                    "optionnames": [
+                                                                        "Please select a value",
+                                                                        "Descriptor",
+                                                                        "Alternate Descriptor",
+                                                                        "Used for Term"
+                                                                    ],
+                                                                    "optionlist": [
+                                                                        "",
+                                                                        "descriptor",
+                                                                        "alternate descriptor",
+                                                                        "used for term"
+                                                                    ],
+                                                                    "selection": "${{row}.termType}"
+                                                                },
+                                                                ".csc-taxonAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-taxonAuthority-termSourceID": "${{row}.termSourceID}",
-                                                                ".csc-taxonAuthority-taxonAuthor": {
+                                                                ".csc-taxonAuthority-termName": "${{row}.termName}",
+                                                                ".csc-taxonAuthority-termLanguage": {
                                                                     "decorators": [
                                                                         {
-                                                                            "func": "cspace.autocomplete",
+                                                                            "func": "cspace.termList",
                                                                             "type": "fluid",
                                                                             "options": {
-                                                                                "queryUrl": "../../../tenant/lifesci/vocabularies/taxon/autocomplete/taxonAuthor",
-                                                                                "vocabUrl": "../../../tenant/lifesci/vocabularies/taxon/source-vocab/taxonAuthor"
+                                                                                "root": "{row}",
+                                                                                "elPath": "termLanguage",
+                                                                                "termListType": "termLanguage"
                                                                             }
                                                                         }
-                                                                    ],
-                                                                    "value": "${{row}.taxonAuthor}"
-                                                                },
-                                                                ".csc-taxonAuthority-taxonAuthorType": {
-                                                                    "default": "",
-                                                                    "optionnames": [ "Please select a value", "ascribed", "parenthetical" ],
-                                                                    "optionlist": [ "", "ascribed", "parenthetical" ],
-                                                                    "selection": "${{row}.taxonAuthorType}"
+                                                                    ]
                                                                 }
                                                             },
                                                             "type": "fluid.noexpand"
@@ -229,38 +340,14 @@
                                             }
                                         ]
                                     },
-                                    ".csc-taxon-termDisplayName-label": {
-                                        "messagekey": "taxon-termDisplayNameLabel"
+                                    ".csc-preferredTA-termQualifier-label": {
+                                        "messagekey": "preferredTA-termQualifierLabel"
                                     },
-                                    ".csc-taxon-termQualifier-label": {
-                                        "messagekey": "taxon-termQualifierLabel"
+                                    ".csc-preferredTA-termSourceID-label": {
+                                        "messagekey": "preferredTA-termSourceIDLabel"
                                     },
-                                    ".csc-taxon-termType-label": {
-                                        "messagekey": "taxon-termTypeLabel"
-                                    },
-                                    ".csc-taxon-termStatus-label": {
-                                        "messagekey": "taxon-termStatusLabel"
-                                    },
-                                    ".csc-taxon-termLanguage-label": {
-                                        "messagekey": "taxon-termLanguageLabel"
-                                    },
-                                    ".csc-taxon-termPrefForLang-label": {
-                                        "messagekey": "taxon-termPrefForLangLabel"
-                                    },
-                                    ".csc-taxon-termSource-label": {
-                                        "messagekey": "taxon-termSourceLabel"
-                                    },
-                                    ".csc-taxon-termSourceDetail-label": {
-                                        "messagekey": "taxon-termSourceDetailLabel"
-                                    },
-                                    ".csc-taxon-termSourceID-label": {
-                                        "messagekey": "taxon-termSourceIDLabel"
-                                    },
-                                    ".csc-taxon-taxonAuthor-label": {
-                                        "messagekey": "taxon-taxonAuthorLabel"
-                                    },
-                                    ".csc-taxon-taxonAuthorType-label": {
-                                        "messagekey": "taxon-taxonAuthorTypeLabel"
+                                    ".csc-preferredTA-termLanguage-label": {
+                                        "messagekey": "preferredTA-termLanguageLabel"
                                     }
                                 },
                                 "type": "fluid.noexpand"
@@ -270,12 +357,9 @@
                 }
             ]
         },
-        ".csc-taxon-taxonNote-label": {
-            "messagekey": "taxon-taxonNoteLabel"
-        },
-        ".csc-taxon-csid": "${fields.csid}",
-        ".csc-taxon-taxonNameSource-label": {
-            "messagekey": "taxon-taxonNameSourceLabel"
+        ".csc-taxon-refName": "${fields.refName}",
+        ".csc-taxon-taxonCitationList-label": {
+            "messagekey": "taxon-taxonCitationListLabel"
         },
         ".csc-taxon-createdBy-label": {
             "messagekey": "taxon-createdByLabel"
@@ -283,93 +367,16 @@
         ".csc-taxon-refName-label": {
             "messagekey": "taxon-refNameLabel"
         },
-        ".csc-taxon-createdAt": "${fields.createdAt}",
-        ".csc-taxon-taxonIsNamedHybrid": {
-            "default": "",
-            "optionnames": [
-                "Please select a value",
-                "true",
-                "false"
-            ],
-            "optionlist": [
-                "",
-                "true",
-                "false"
-            ],
-            "selection": "${fields.taxonIsNamedHybrid}"
-        },
-        ".csc-taxon-taxonIsNamedHybrid-label": {
-            "messagekey": "taxon-taxonIsNamedHybridLabel"
-        },
-        ".csc-taxon-taxonomicStatus": {
-            "default": "",
-            "optionnames": [
-                "Please select a value",
-                "current",
-                "obsolete"
-            ],
-            "optionlist": [
-                "",
-                "valid",
-                "invalid"
-            ],
-            "selection": "${fields.taxonomicStatus}"
-        },
-        ".csc-taxon-taxonNameAuthorityInformation-label": {
-            "messagekey": "taxon-taxonNameAuthorityInformationLabel"
-        },
-        ".csc-taxon-taxonCurrency-label": {
-            "messagekey": "taxon-taxonCurrencyLabel"
-        },
-        ".csc-taxon-domaindata-label": {
-            "messagekey": "taxon-domaindataLabel"
-        },
-        ".csc-taxon-tenantID": "${fields.tenantID}",
-        ".csc-taxon-taxonNameSource": "${fields.taxonNameSource}",
-        ".csc-taxon-taxonomicStatus-label": {
-            "messagekey": "taxon-taxonomicStatusLabel"
-        },
-        ".csc-taxon-taxonAuthorGroup-label": {
-            "messagekey": "taxon-taxonAuthorGroupLabel"
-        },
-        ".csc-taxon-taxonGUID-label": {
-            "messagekey": "taxon-taxonGUIDLabel"
-        },
-        ".csc-taxon-taxonNote": "${fields.taxonNote}",
-        ".csc-taxon-taxonYear-label": {
-            "messagekey": "taxon-taxonYearLabel"
-        },
-        ".csc-taxon-uri": "${fields.uri}",
-        ".csc-taxon-createdAt-label": {
-            "messagekey": "taxon-createdAtLabel"
-        },
-        ".csc-taxon-taxonRank-label": {
-            "messagekey": "taxon-taxonRankLabel"
-        },
-        ".csc-taxon-taxonCitation-label": {
-            "messagekey": "taxon-taxonCitationLabel"
-        },
-        ".csc-taxon-shortIdentifier-label": {
-            "messagekey": "taxon-shortIdentifierLabel"
-        },
-        ".csc-taxon-taxonFullName-label": {
-            "messagekey": "taxon-taxonFullNameLabel"
-        },
-        ".csc-taxon-tenantID-label": {
-            "messagekey": "taxon-tenantIDLabel"
-        },
-        ".csc-taxon-shortIdentifier": "${fields.shortIdentifier}",
-        ".csc-taxon-refName": "${fields.refName}",
-        ".csc-taxon-taxonCitationList-label": {
-            "messagekey": "taxon-taxonCitationListLabel"
+        ".csc-taxon-commonNameLanguage-label": {
+            "messagekey": "taxon-commonNameLanguageLabel"
         },
         ".csc-taxon-taxonCurrency": {
             "default": "",
             "optionnames": [
                 "Please select a value",
-                "current",
-                "obsolete",
-                "archaic"
+                "Current",
+                "Obsolete",
+                "Archaic"
             ],
             "optionlist": [
                 "",
@@ -378,6 +385,12 @@
                 "archaic"
             ],
             "selection": "${fields.taxonCurrency}"
+        },
+        ".csc-taxon-commonNameGroup-label": {
+            "messagekey": "taxon-commonNameGroupLabel"
+        },
+        ".csc-taxon-commonName-label": {
+            "messagekey": "taxon-commonNameLabel"
         },
         ".csc-taxon-updatedAt": {
             "decorators": [
@@ -388,6 +401,7 @@
             ],
             "value": "${fields.updatedAt}"
         },
+        ".csc-taxon-createdAt": "${fields.createdAt}",
         ".csc-taxon-taxonCitation": {
             "decorators": [
                 {
@@ -407,16 +421,83 @@
                 }
             ]
         },
-        ".csc-taxon-taxonNameSourceCode": "${fields.taxonNameSourceCode}",
+        ".csc-taxon-taxonIsNamedHybrid-label": {
+            "messagekey": "taxon-taxonIsNamedHybridLabel"
+        },
+        ".csc-taxon-taxonIsNamedHybrid": "${fields.taxonIsNamedHybrid}",
+        ".csc-taxon-commonNameSourceDetail-label": {
+            "messagekey": "taxon-commonNameSourceDetailLabel"
+        },
+        ".csc-taxon-taxonAuthorGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-taxon-taxonAuthor": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/lifesci/vocabularies/taxon/autocomplete/taxonAuthor",
+                                                    "vocabUrl": "../../../tenant/lifesci/vocabularies/taxon/source-vocab/taxonAuthor"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.taxonAuthor}"
+                                    },
+                                    ".csc-taxon-taxonAuthorType": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Ascribed",
+                                            "Parenthetical"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "ascribed",
+                                            "parenthetical"
+                                        ],
+                                        "selection": "${{row}.taxonAuthorType}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.taxonAuthorGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-taxon-taxonNameAuthorityInformation-label": {
+            "messagekey": "taxon-taxonNameAuthorityInformationLabel"
+        },
+        ".csc-taxon-taxonCurrency-label": {
+            "messagekey": "taxon-taxonCurrencyLabel"
+        },
+        ".csc-taxon-coreInformation-label": {
+            "messagekey": "taxon-coreInformationLabel"
+        },
         ".csc-taxon-taxonYear": "${fields.taxonYear}",
+        ".csc-taxon-domaindata-label": {
+            "messagekey": "taxon-domaindataLabel"
+        },
         ".csc-taxon-uri-label": {
             "messagekey": "taxon-uriLabel"
         },
-        ".csc-taxon-taxonNameSourceCode-label": {
-            "messagekey": "taxon-taxonNameSourceCodeLabel"
+        ".csc-taxon-preferredTaxon-label": {
+            "messagekey": "taxon-preferredTaxonLabel"
         },
+        ".csc-taxon-tenantID": "${fields.tenantID}",
         ".csc-taxon-csid-label": {
             "messagekey": "taxon-csidLabel"
+        },
+        ".csc-taxon-commonNameSource-label": {
+            "messagekey": "taxon-commonNameSourceLabel"
         },
         ".csc-taxon-updatedBy-label": {
             "messagekey": "taxon-updatedByLabel"
@@ -425,15 +506,15 @@
             "default": "",
             "optionnames": [
                 "Please select a value",
-                "domain",
-                "kingdom",
-                "phylum",
-                "division",
-                "family",
-                "class",
-                "order",
-                "genus",
-                "species"
+                "Domain",
+                "Kingdom",
+                "Phylum",
+                "Division",
+                "Family",
+                "Class",
+                "Order",
+                "Genus",
+                "Species"
             ],
             "optionlist": [
                 "",
@@ -449,12 +530,20 @@
             ],
             "selection": "${fields.taxonRank}"
         },
+        ".csc-taxon-taxonAuthorGroup-label": {
+            "messagekey": "taxon-taxonAuthorGroupLabel"
+        },
         ".csc-taxon-updatedAt-label": {
             "messagekey": "taxon-updatedAtLabel"
         },
-        ".csc-taxon-taxonFullName": "${fields.taxonFullName}",
+        ".csc-taxon-taxonAuthorType-label": {
+            "messagekey": "taxon-taxonAuthorTypeLabel"
+        },
+        ".csc-taxon-taxonNote": "${fields.taxonNote}",
         ".csc-taxon-updatedBy": "${fields.updatedBy}",
-        ".csc-taxon-taxonGUID": "${fields.taxonGUID}",
+        ".csc-taxon-taxonYear-label": {
+            "messagekey": "taxon-taxonYearLabel"
+        },
         ".csc-taxon-createdBy": "${fields.createdBy}"
     }
 }
