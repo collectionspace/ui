@@ -22,6 +22,22 @@
                 "_primary": true
             }
         ],
+        "citationGroup": [
+            {
+                "citationSourceDetail": "Source Detail",
+                "citationSource": "Source",
+                "_primary": true
+            }
+        ],
+        "additionalSourceGroup": [
+            {
+                "additionalSourceDetail": "Source Detail",
+                "additionalSource": "Source",
+                "additionalSourceID": "Source ID",
+                "additionalSourceNote": "Source Note",
+                "_primary": true
+            }
+        ],
         "relatedTerms": [{
             "_primary": true
         }],
