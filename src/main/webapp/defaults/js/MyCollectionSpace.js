@@ -29,6 +29,7 @@ cspace = cspace || {};
             loanin: ".csc-myCollectionSpace-loanin-group",
             loanout: ".csc-myCollectionSpace-loanout-group",
             movement: ".csc-myCollectionSpace-movement-group",
+            claim: ".csc-myCollectionSpace-claim-group",
             objectexit: ".csc-myCollectionSpace-objectexit-group",
             media: ".csc-myCollectionSpace-media-group",
             group: ".csc-myCollectionSpace-group-group",
