@@ -2894,6 +2894,33 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+        // computedField demands
+        fluid.demands("cspace.computedField", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model",
+                events: {
+                    removeListeners: "{recordEditor}.events.onRefreshView"
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.computedField", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{repeatableImpl}.applier",
+                model: "{repeatableImpl}.model",
+                events: {
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView"
+                },
+                listeners: {
+                    repeatableOnRefreshView: "{computedField}.events.removeListeners.fire",
+                    recordEditorOnRefreshView: "{computedField}.events.removeListeners.fire"
+                }
+            }, "{arguments}.1"]
+        });
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {
