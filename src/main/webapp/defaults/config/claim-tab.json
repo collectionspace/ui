@@ -1,0 +1,57 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "claim",
+             "schema": {
+                "claim": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/ClaimTemplate.html",
+                    "templateSelector": ".csc-claim-template",
+                    "targetSelector": ".csc-relatedRecordsTab-claim .csc-relatedRecordsTab-recordEditor"
+                }
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "claim-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-claim"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit NAGPRA Claim Record",
+                            "recordList": "Related NAGPRA Claim Records",
+                            "newRecordRow": "New NAGPRA Claim Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-claim-claimNumber" 
+                                                } 
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
