@@ -324,6 +324,9 @@
         ".csc-movement-inventoryContact-label": {
             "messagekey": "movement-inventoryContactLabel"
         },
+        ".csc-movement-inventory-label": {
+            "messagekey": "movement-inventoryLabel"
+        },
         ".csc-movement-inventoryContact": {
             "decorators": [
                 {
