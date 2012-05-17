@@ -15,15 +15,24 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
-vocab-taxon: Default
+vocab-taxon: Local
 
 # Taxon record
 taxon: Taxon
 taxon-identificationNumberRequired: Please specify a Display Name
 taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
 preferredTA-termDisplayNameLabel: Display Name
-preferredTA-termStatusLabel: Term Status
 preferredTA-termNameLabel: Term
+preferredTA-termQualifierLabel: Qualifier
+preferredTA-termStatusLabel: Term Status
+preferredTA-termTypeLabel: Term Type
+preferredTA-termLanguageLabel: Language
+preferredTA-termPrefForLangLabel: Pref for Lang
+preferredTA-termSourceLabel: Source
+preferredTA-termSourceDetailLabel: Source Detail
+preferredTA-termSourceIDLabel: Source ID
+preferredTA-termSourceNoteLabel: Source Note
+preferredTA-taxonomicStatusLabel: Taxonomic Status
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Currency
 taxon-taxonAuthorGroupLabel: Author
@@ -32,22 +41,16 @@ taxon-taxonAuthorTypeLabel: Author Type
 taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is Named Hybrid
 taxon-taxonCitationLabel: Citations
-taxon-taxonomicStatusLabel: Taxonomic Status
-taxon-taxonNameSourceLabel: Name Source
-taxon-taxonNameSourceCodeLabel: Name Source Code
-taxon-taxonGUIDLabel: GUID
 taxon-taxonNoteLabel: Note
+# Common Name keys added in v2.4
+taxon-commonNameGroupLabel: Common Name
+taxon-commonNameLabel: Name
+taxon-commonNameLanguageLabel: Language
+taxon-commonNameSourceLabel: Source
+taxon-commonNameSourceDetailLabel: Source Detail
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
-preferredTA-termQualifierLabel: Qualifier
-preferredTA-termTypeLabel: Term Type
-preferredTA-termLanguageLabel: Language
-preferredTA-termPrefForLangLabel: Pref for Lang
-preferredTA-termSourceLabel: Source
-preferredTA-termSourceDetailLabel: Source Detail
-preferredTA-termSourceIDLabel: Source ID
-
 
 # -------------------------------------
 #Login

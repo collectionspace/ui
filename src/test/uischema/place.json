@@ -14,9 +14,51 @@
             },
             "fields": {
                 "properties": {
+                    "placeNote": {
+                        "type": "string"
+                    },
+                    "relatedTerms": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "relatedTerm": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "placeTermGroup": {
                         "items": {
                             "properties": {
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "historicalStatus": {
+                                    "default": "current",
+                                    "type": "string"
+                                },
+                                "termPrefForLang": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
@@ -24,41 +66,8 @@
                                 "termDisplayName": {
                                     "type": "string"
                                 },
-                                "termQualifier": {
-                                    "type": "string"
-                                },
-                                "termLanguage": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "termPrefForLang": {
-                                    "default": false,
-                                    "type": "boolean"
-                                },
-                                "nameAbbrev": {
-                                    "type": "string"
-                                },
-                                "historicalStatus": {
-                                    "default": "",
-                                    "type": "string"
-                                },
                                 "termType": {
                                     "default": "",
-                                    "type": "string"
-                                },
-                                "termSource": {
-                                    "type": "string"
-                                },
-                                "termSourceDetail": {
-                                    "type": "string"
-                                },
-                                "termSourceNote": {
-                                    "type": "string"
-                                },
-                                "termSourceID": {
-                                    "type": "string"
-                                },
-                                "nameNote": {
                                     "type": "string"
                                 },
                                 "nameDateGroup": {
@@ -148,23 +157,20 @@
                                     },
                                     "type": "object"
                                 },
+                                "nameAbbrev": {
+                                    "type": "string"
+                                },
+                                "nameNote": {
+                                    "type": "string"
+                                },
                                 "termStatus": {
                                     "default": "provisional",
                                     "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "relatedTerms": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
                                 },
-                                "relatedTerm": {
+                                "termQualifier": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
                                     "type": "string"
                                 }
                             },
@@ -172,10 +178,10 @@
                         },
                         "type": "array"
                     },
-                    "vLongitude": {
+                    "maxDepthInMeters": {
                         "type": "string"
                     },
-                    "maxDepthInMeters": {
+                    "vLongitude": {
                         "type": "string"
                     },
                     "vSpatialReferenceSystem": {
@@ -308,10 +314,13 @@
                     "vCoordSource": {
                         "type": "string"
                     },
+                    "createdAt": {
+                        "type": "string"
+                    },
                     "maxElevationInMeters": {
                         "type": "string"
                     },
-                    "createdAt": {
+                    "placeSource": {
                         "type": "string"
                     },
                     "narrowerContexts": {
@@ -337,9 +346,6 @@
                     },
                     "placeType": {
                         "default": "",
-                        "type": "string"
-                    },
-                    "note": {
                         "type": "string"
                     },
                     "tenantID": {
@@ -518,9 +524,6 @@
                     "createdBy": {
                         "type": "string"
                     },
-                    "source": {
-                        "type": "string"
-                    },
                     "broaderContext": {
                         "type": "string"
                     },
@@ -531,6 +534,9 @@
                         "type": "string"
                     },
                     "refName": {
+                        "type": "string"
+                    },
+                    "placeID": {
                         "type": "string"
                     },
                     "equivalentContexts": {
