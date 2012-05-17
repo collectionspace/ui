@@ -4,6 +4,7 @@
         "taxonTermGroup": [
             {
                 "termDisplayName": "Fred Bloggs",
+                "termName": "Frederic Bloggs",
                 "termQualifier": "Person Qualifier",
                 "termType": "descriptor",
                 "termStatus": "provisional",
@@ -12,8 +13,8 @@
                 "termSource": "Source",
                 "termSourceDetail": "Source Detail",
                 "termSourceID": "Source ID",
-                "taxonAuthor": "Test",
-                "taxonAuthorType": "ascribed",
+                "termSourceNote": "Source Note",
+                "taxonomicStatus": "valid",
                 "_primary": true
             }
         ]
