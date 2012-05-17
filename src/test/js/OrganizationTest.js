@@ -70,10 +70,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 listeners: {
                                     "afterRender.orgTest": function (recordEditor) {
                                         var repeatableField = [
-                                            "organizationAuthority-group",
-                                            "organizationAuthority-function",
-                                            "organizationAuthority-history",
-                                            "organizationAuthority-contactName"
+                                            "contact-addressGroup",
+                                            "contact-emailGroup",
+                                            "contact-faxNumberGroup",
+                                            "contact-telephoneNumberGroup",
+                                            "contact-webAddressGroup"
                                         ];
                                         fluid.each(repeatableField, function (repeatableName) {
                                             var found = fluid.find(recordEditor, function (property, name) {

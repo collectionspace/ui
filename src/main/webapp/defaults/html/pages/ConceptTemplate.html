@@ -1,68 +1,116 @@
 <div class="csc-concept-template csc-listEditor-details">
-	<div class="csc-concept">
-		<div id="secondary-nav">		
-			<div id="secondary-nav-menu-sub">
+    <div class="csc-concept">
+        <div id="secondary-nav">		
+            <div id="secondary-nav-menu-sub">
                 <span class="csc-recordTraverser"></span>
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
-				</div>
-				<div class="time-stamp"> </div>
-			</div>
-		</div>
-		
-		<div class="csc-templateEditor"></div>
-	
-		<div class="fl-container-flex fl-fix information-group info-column">
-			<div class="csc-recordEditor-header fl-container-flex header toggle">Concept Authority</div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
-				
-            <div class="csc-preferred-conceptAuthority"></div>
-            
-            <div class="info-column">
-				<div class="info-pair">
+                <div class="button-row">
+                    <a style="display:none;" class="csc-goto gotoButton"></a>
+                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
+                    <input type="button" class="csc-cancel cancelButton" />
+                    <input type="button" class="csc-delete deleteButton" />
+                    <input type="button" class="csc-save saveButton" />
+                </div>
+                <div class="time-stamp"> </div>
+            </div>
+        </div>
+
+        <div class="csc-templateEditor"></div>
+
+        <div class="fl-container-flex fl-fix information-group info-column">
+            <div class="csc-recordEditor-header fl-container-flex header toggle">Concept Authority</div>
+            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+
+                <div class="csc-preferred-conceptAuthority"></div>
+
+                <div class="info-column">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label"></div>
+                        </div>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="csc-concept-scopeNote-label"></td>
+                                        <td class="csc-concept-scopeNoteSource-label"></td>
+                                        <td class="csc-concept-scopeNoteSourceDetail-label"></td>
+                                    </tr>
+                                </thead>                                                        
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="csc-conceptAuthority-scopeNote"/></td>
+                                        <td><input type="text" class="csc-conceptAuthority-scopeNoteSource"/></td>
+                                        <td><input type="text" class="csc-conceptAuthority-scopeNoteSourceDetail"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-pair">
                     <div class="header">
-                        <div class="label"></div>
+                        <div class="csc-concept-citationGroup-label label"></div>
                     </div>
                     <div class="content">
                         <table>
                             <thead>
                                 <tr>
-    								<td class="csc-concept-termScopeNote-label"></td>
-    								<td class="csc-concept-termScopeNoteSource-label"></td>
-    								<td class="csc-concept-termScopeNoteSourceDetail-label"></td>
+                                    <td class="csc-concept-citationSource-label"></td>
+                                    <td class="csc-concept-citationSourceDetail-label"></td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-    								<td><input type="text" class="csc-conceptAuthority-termScopeNote"/></td>
-    								<td><input type="text" class="csc-conceptAuthority-termScopeNoteSource"/></td>
-    								<td><input type="text" class="csc-conceptAuthority-termScopeNoteSourceDetail"/></td>
+                                <tr class="csc-concept-citationGroup">
+                                    <td><input type="text" class="csc-concept-citationSource"/></td>
+                                    <td><input type="text" class="csc-concept-citationSourceDetail"/></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-			 </div>
-				
-			</div>
-		</div>
-		
-		<div class="csc-concept-hierarchy"></div>
+                
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="csc-concept-additionalSourceGroup-label label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-concept-additionalSourceDetail-label"></td>
+                                    <td class="csc-concept-additionalSourceID-label"></td>
+                                    <td class="csc-concept-additionalSource-label"></td>
+                                    <td class="csc-concept-additionalSourceNote-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="csc-concept-additionalSourceGroup">
+                                    <td><input type="text" class="csc-concept-additionalSourceDetail"/></td>
+                                    <td><input type="text" class="csc-concept-additionalSourceID"/></td>
+                                    <td><input type="text" class="csc-concept-additionalSource"/></td>
+                                    <td><input type="text" class="csc-concept-additionalSourceNote"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+            </div> 
+        </div>
 
-		<div id="secondary-nav-footer">
-			<div id="secondary-nav-menu-sub">
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="csc-concept-hierarchy"></div>
+
+        <div id="secondary-nav-footer">
+            <div id="secondary-nav-menu-sub">
+                <div class="button-row">
+                    <a style="display:none;" class="csc-goto gotoButton"></a>
+                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
+                    <input type="button" class="csc-cancel cancelButton" />
+                    <input type="button" class="csc-delete deleteButton" />
+                    <input type="button" class="csc-save saveButton" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
