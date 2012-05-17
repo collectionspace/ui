@@ -15,7 +15,7 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
-vocab-taxon: Default
+vocab-taxon: Local
 
 # Taxon record
 taxon: Taxon
