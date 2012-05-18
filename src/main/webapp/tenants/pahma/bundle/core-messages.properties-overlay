@@ -111,7 +111,7 @@ collection-object-pahmaFieldCollectionDatesLabel: Field collection date
 
 pageBuilder-header-myCollectionSpace: Recently Modified or Created Records
 
-# ---------------------------------- Top Tabs -------------------------- #
+# ---------------------------------- Procedure Names -------------------------- #
 loanin: In Loan
 loanout: Out Loan
 acquisition: Accession
@@ -121,7 +121,10 @@ objectexit: Object Exit
 intake: Object Entry
 group: Group
 media: Media
-#claim: NAGPRA Claim
+claim: NAGPRA Claim
+
+# ---------------------------------- Top Tabs -------------------------- #
+claim-tab: NAGRA Claim
 
 # ---------- What are these ? ----------- #
 person: Person
