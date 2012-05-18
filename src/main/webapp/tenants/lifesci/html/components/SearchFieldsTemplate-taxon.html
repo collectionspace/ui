@@ -4,18 +4,10 @@
             <div class="info-column2-50 fl-force-left">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-taxon-displayName-label"></div>
+                        <div class="label csc-preferredTA-termDisplayName-label"></div>
                     </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-taxon-displayName">
-                    </div>
-                </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-taxon-termStatus-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <select class="csc-taxon-termStatus input-select"><option value=""></option></select>
+                    <div class="content clearfix csc-taxon-taxonTermGroup">
+                        <input type="text" class="csc-taxon-termDisplayName">
                     </div>
                 </div>
                 <div class="info-pair">
@@ -58,6 +50,8 @@
                         <input type="text" class="csc-taxon-taxonYear" />
                     </div>
                 </div>
+                <!-- FIXME: Need to clarify what markup is needed for this now-Boolean field and -->
+                <!-- verify that the generated advanced search query is appropriate for this field type. -->
                 <div class="info-pair">
                     <div class="header">
                         <div class="csc-taxon-taxonIsNamedHybrid-label label"></div>
@@ -76,11 +70,27 @@
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="csc-taxon-taxonomicStatus-label label"></div>
+                        <div class="csc-taxon-commonName-label label"></div>
                     </div>
-                    <div class="content clearfix">
+                    <div class="content clearfix csc-taxon-commonNameGroup">
+                        <input type="text" class="csc-taxon-commonName" />
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="csc-preferredTA-taxonomicStatus-label label"></div>
+                    </div>
+                    <div class="content clearfix csc-taxon-taxonTermGroup">
                         <select class="csc-taxon-taxonomicStatus input-select"><option value="">Options not loaded</option></select>
                     </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-preferredTA-termStatus-label"></div>
+                    </div>
+                    <div class="content clearfix csc-taxon-taxonTermGroup">
+                        <select class="csc-person-termStatus input-select"><option value="">Options not loaded</option></select>
+                    </div>        
                 </div>
                 <div class="info-pair">
                     <div class="header">
