@@ -12,6 +12,15 @@
                             }
                         }
                     },
+                    "person-ulan_pa": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
                     "persontest1": {
                         "type": "object",
                         "properties": {
@@ -36,6 +45,24 @@
             "concept": {
                 "properties": {
                     "concept": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "associatedconcept_ca": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "material_ca": {
                         "type": "object",
                         "properties": {
                             "nptAllowed": {
@@ -76,6 +103,24 @@
                             }
                         }
                     },
+                    "local_place": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "tgn_place": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
                     "placetest1": {
                         "type": "object",
                         "properties": {
@@ -108,6 +153,15 @@
                             }
                         }
                     },
+                    "ulan_oa": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
                     "organizationtest": {
                         "type": "object",
                         "properties": {
@@ -123,6 +177,24 @@
             "location": {
                 "properties": {
                     "location": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "local_sla": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "offsite_sla": {
                         "type": "object",
                         "properties": {
                             "nptAllowed": {
