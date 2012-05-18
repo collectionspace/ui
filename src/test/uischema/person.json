@@ -158,12 +158,12 @@
                             "dateEarliestScalarValue": {
                                 "type": "date"
                             },
-                            "dateLatestMonth": {
-                                "type": "integer"
-                            },
                             "_primary": {
                                 "default": true,
                                 "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
                             },
                             "dateNote": {
                                 "type": "string"
@@ -183,6 +183,9 @@
                             }
                         },
                         "type": "object"
+                    },
+                    "birthPlace": {
+                        "type": "string"
                     },
                     "contact": {
                         "properties": {
@@ -231,10 +234,10 @@
                                             "default": "",
                                             "type": "string"
                                         },
-                                        "addressPlace1": {
+                                        "addressCountry": {
                                             "type": "string"
                                         },
-                                        "addressCountry": {
+                                        "addressPlace1": {
                                             "type": "string"
                                         },
                                         "addressPlace2": {
@@ -273,13 +276,13 @@
                             "emailGroup": {
                                 "items": {
                                     "properties": {
-                                        "emailType": {
-                                            "default": "",
-                                            "type": "string"
-                                        },
                                         "_primary": {
                                             "default": true,
                                             "type": "boolean"
+                                        },
+                                        "emailType": {
+                                            "default": "",
+                                            "type": "string"
                                         },
                                         "email": {
                                             "type": "string"
@@ -296,11 +299,11 @@
                                             "default": true,
                                             "type": "boolean"
                                         },
-                                        "telephoneNumber": {
-                                            "type": "string"
-                                        },
                                         "telephoneNumberType": {
                                             "default": "",
+                                            "type": "string"
+                                        },
+                                        "telephoneNumber": {
                                             "type": "string"
                                         }
                                     },
@@ -314,10 +317,10 @@
                         },
                         "type": "object"
                     },
-                    "birthPlace": {
+                    "updatedBy": {
                         "type": "string"
                     },
-                    "updatedBy": {
+                    "shortIdentifier": {
                         "type": "string"
                     },
                     "nationalities": {
@@ -334,9 +337,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "shortIdentifier": {
-                        "type": "string"
                     },
                     "schoolsOrStyles": {
                         "items": {
@@ -396,12 +396,12 @@
                     "occupations": {
                         "items": {
                             "properties": {
-                                "occupation": {
-                                    "type": "string"
-                                },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
+                                },
+                                "occupation": {
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -478,12 +478,12 @@
                             "dateEarliestScalarValue": {
                                 "type": "date"
                             },
-                            "dateLatestMonth": {
-                                "type": "integer"
-                            },
                             "_primary": {
                                 "default": true,
                                 "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
                             },
                             "dateNote": {
                                 "type": "string"

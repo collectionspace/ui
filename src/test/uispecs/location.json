@@ -3,9 +3,6 @@
         ".csc-hierarchy-narrowerContext-label": {
             "messagekey": "hierarchy-narrowerContextLabel"
         },
-        ".csc-hierarchy-broaderContext-label": {
-            "messagekey": "hierarchy-broaderContextLabel"
-        },
         ".csc-hierarchy-narrowerContext": {
             "decorators": [
                 {
@@ -45,6 +42,12 @@
                 }
             ]
         },
+        ".csc-hierarchy-equivalentContext-label": {
+            "messagekey": "hierarchy-equivalentContextLabel"
+        },
+        ".csc-hierarchy-equivalentInformation-label": {
+            "messagekey": "hierarchy-equivalentInformationLabel"
+        },
         ".csc-hierarchy-broaderContext": {
             "decorators": [
                 {
@@ -58,8 +61,8 @@
             ],
             "value": "${fields.broaderContext}"
         },
-        ".csc-hierarchy-equivalentContext-label": {
-            "messagekey": "hierarchy-equivalentContextLabel"
+        ".csc-hierarchy-broaderContext-label": {
+            "messagekey": "hierarchy-broaderContextLabel"
         },
         "expander": [
             {
@@ -98,14 +101,17 @@
                 "controlledBy": "fields.equivalentContexts"
             }
         ],
-        ".csc-hierarchy-domaindata-label": {
-            "messagekey": "hierarchy-domaindataLabel"
-        },
         ".csc-hierarchy-relatedTerms-label": {
             "messagekey": "hierarchy-relatedTermsLabel"
         },
+        ".csc-hierarchy-domaindata-label": {
+            "messagekey": "hierarchy-domaindataLabel"
+        },
         ".csc-hierarchy-narrowerContexts-label": {
             "messagekey": "hierarchy-narrowerContextsLabel"
+        },
+        ".csc-hierarchy-hierarchyInformation-label": {
+            "messagekey": "hierarchy-hierarchyInformationLabel"
         },
         ".csc-hierarchy-relatedTerm": {
             "decorators": [
@@ -305,6 +311,9 @@
         },
         ".csc-location-address": "${fields.address}",
         ".csc-location-tenantID": "${fields.tenantID}",
+        ".csc-location-otherInformation-label": {
+            "messagekey": "location-otherInformationLabel"
+        },
         ".csc-location-preferredLocation-label": {
             "messagekey": "location-preferredLocationLabel"
         },
@@ -379,6 +388,9 @@
         },
         ".csc-location-conditionNoteDate-label": {
             "messagekey": "location-conditionNoteDateLabel"
+        },
+        ".csc-location-coreInformation-label": {
+            "messagekey": "location-coreInformationLabel"
         },
         ".csc-location-securityNote-label": {
             "messagekey": "location-securityNoteLabel"

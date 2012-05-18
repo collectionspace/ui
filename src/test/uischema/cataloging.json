@@ -502,12 +502,12 @@
                                 "dateEarliestScalarValue": {
                                     "type": "date"
                                 },
-                                "dateLatestMonth": {
-                                    "type": "integer"
-                                },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
+                                },
+                                "dateLatestMonth": {
+                                    "type": "integer"
                                 },
                                 "dateNote": {
                                     "type": "string"
@@ -915,9 +915,6 @@
                     "contentDescription": {
                         "type": "string"
                     },
-                    "nhString": {
-                        "type": "string"
-                    },
                     "assocEventName": {
                         "type": "string"
                     },
@@ -1261,12 +1258,12 @@
                                 "dateEarliestScalarValue": {
                                     "type": "date"
                                 },
-                                "dateLatestMonth": {
-                                    "type": "integer"
-                                },
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
+                                },
+                                "dateLatestMonth": {
+                                    "type": "integer"
                                 },
                                 "dateNote": {
                                     "type": "string"
@@ -1448,12 +1445,6 @@
                                     "default": true,
                                     "type": "boolean"
                                 },
-                                "assocDateNote": {
-                                    "type": "string"
-                                },
-                                "assocDateType": {
-                                    "type": "string"
-                                },
                                 "assocStructuredDateGroup": {
                                     "properties": {
                                         "dateEarliestSingleQualifier": {
@@ -1540,6 +1531,12 @@
                                         }
                                     },
                                     "type": "object"
+                                },
+                                "assocDateNote": {
+                                    "type": "string"
+                                },
+                                "assocDateType": {
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -1613,9 +1610,6 @@
                         },
                         "type": "array"
                     },
-                    "viewersContributionNote": {
-                        "type": "string"
-                    },
                     "forms": {
                         "items": {
                             "properties": {
@@ -1631,6 +1625,9 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "viewersContributionNote": {
+                        "type": "string"
                     },
                     "editionNumber": {
                         "type": "string"
@@ -1729,12 +1726,6 @@
                                 "inscriptionContentInterpretation": {
                                     "type": "string"
                                 },
-                                "inscriptionContentInscriber": {
-                                    "type": "string"
-                                },
-                                "inscriptionContent": {
-                                    "type": "string"
-                                },
                                 "inscriptionContentDateGroup": {
                                     "properties": {
                                         "dateEarliestSingleQualifier": {
@@ -1821,6 +1812,12 @@
                                         }
                                     },
                                     "type": "object"
+                                },
+                                "inscriptionContentInscriber": {
+                                    "type": "string"
+                                },
+                                "inscriptionContent": {
+                                    "type": "string"
                                 },
                                 "inscriptionContentLanguage": {
                                     "default": "eng",

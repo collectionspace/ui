@@ -55,7 +55,7 @@ taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
 # Added v2.4. Label for repeatable term group.
 # SHOULD REALLY REPEAT WITH EACH INSTANCE, LIKE TEXTUAL INSCRIPTION GROUP IN CATALOGING.
-taxon-preferredTALabel: Taxon Term Group(s)
+taxon-preferredTaxonLabel: Taxon Term Group(s)
 
 # -------------------------------------
 #Login
