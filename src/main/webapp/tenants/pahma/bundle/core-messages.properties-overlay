@@ -121,7 +121,7 @@ objectexit: Object Exit
 intake: Object Entry
 group: Group
 media: Media
-claim: NAGPRA Claim
+#claim: NAGPRA Claim
 
 # ---------- What are these ? ----------- #
 person: Person
@@ -658,13 +658,9 @@ collection-object-viewersPersonalExperienceLabel: Viewer's personal experience
 collection-object-viewersContributionNoteLabel: Viewer's contribution note
 
 claim-claimInformationLabel: NAGPRA Claim Information
-claim-claimNumberLabel: Claim number
 claim-claimNameLabel: Claim name
 claim-claimTypeLabel: Claim type
 
-claim-claimReceivedGroupLabel: Date claim filed
-claim-claimReceivedDateLabel: Date
-claim-claimReceivedNoteLabel: Note
 claim-claimReceivedDateStartLabel: Earliest
 claim-claimReceivedDateEndLabel: Latest
 
@@ -673,12 +669,6 @@ claim-claimAltNameLabel: Name
 claim-claimAltNoteLabel: Note
 
 claim-claimNoteLabel: Notes on claim
-
-claim-claimClaimantGroupLabel: Claimant(s)
-claim-filedByLabel: Filed by
-claim-filedOnBehalfOfLabel: On behalf of
-claim-claimantNoteLabel: Note
-
 claim-claimAssociationInformationLabel: Claim Context
 
 claim-claimInventoryInvolvedGroupLabel: Inventory Involved
