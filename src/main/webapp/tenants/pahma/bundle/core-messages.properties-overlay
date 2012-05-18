@@ -44,24 +44,17 @@ collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
 
 # ******************* Taxonomy ******************* #
-taxon: Taxon
-taxon-taxonNameAuthorityInformationLabel: FIX-Taxonomic Name Authority Information
 taxon-displayNameLabel: Display name
 taxon-termStatusLabel: Term status
 taxon-taxonFullNameLabel: Full name
-taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Current?
-taxon-taxonAuthorGroupLabel: Author		
 taxon-taxonAuthorLabel: Name
 taxon-taxonAuthorTypeLabel: Author type
-taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is named hybrid?
 taxon-taxonCitationLabel: Citation
 taxon-taxonomicStatusLabel: Taxonomic status
 taxon-taxonNameSourceLabel: Name source
 taxon-taxonNameSourceCodeLabel: Name source code
-taxon-taxonGUIDLabel: GUID
-taxon-taxonNoteLabel: Note
 # ------------------------------------------------------------
 
 
