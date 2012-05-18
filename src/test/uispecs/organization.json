@@ -3,9 +3,6 @@
         ".csc-hierarchy-narrowerContext-label": {
             "messagekey": "hierarchy-narrowerContextLabel"
         },
-        ".csc-hierarchy-broaderContext-label": {
-            "messagekey": "hierarchy-broaderContextLabel"
-        },
         ".csc-hierarchy-narrowerContext": {
             "decorators": [
                 {
@@ -45,6 +42,12 @@
                 }
             ]
         },
+        ".csc-hierarchy-equivalentContext-label": {
+            "messagekey": "hierarchy-equivalentContextLabel"
+        },
+        ".csc-hierarchy-equivalentInformation-label": {
+            "messagekey": "hierarchy-equivalentInformationLabel"
+        },
         ".csc-hierarchy-broaderContext": {
             "decorators": [
                 {
@@ -58,20 +61,20 @@
             ],
             "value": "${fields.broaderContext}"
         },
-        ".csc-hierarchy-equivalentContext-label": {
-            "messagekey": "hierarchy-equivalentContextLabel"
+        ".csc-hierarchy-broaderContext-label": {
+            "messagekey": "hierarchy-broaderContextLabel"
         },
         "expander": [
             {
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
-                    }
-                },
                 "condition": {
                     "funcName": "cspace.hierarchy.assertEquivalentContexts",
                     "args": {
                         "equivalentContexts": "${fields.equivalentContexts}"
+                    }
+                },
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "type": "fluid.renderer.condition",
@@ -98,14 +101,17 @@
                 "controlledBy": "fields.equivalentContexts"
             }
         ],
-        ".csc-hierarchy-domaindata-label": {
-            "messagekey": "hierarchy-domaindataLabel"
-        },
         ".csc-hierarchy-relatedTerms-label": {
             "messagekey": "hierarchy-relatedTermsLabel"
         },
+        ".csc-hierarchy-domaindata-label": {
+            "messagekey": "hierarchy-domaindataLabel"
+        },
         ".csc-hierarchy-narrowerContexts-label": {
             "messagekey": "hierarchy-narrowerContextsLabel"
+        },
+        ".csc-hierarchy-hierarchyInformation-label": {
+            "messagekey": "hierarchy-hierarchyInformationLabel"
         },
         ".csc-hierarchy-relatedTerm": {
             "decorators": [
@@ -152,6 +158,9 @@
         ".csc-organization-organizationNameAuthorityInformation-label": {
             "messagekey": "organization-organizationNameAuthorityInformationLabel"
         },
+        ".csc-organization-otherInformation-label": {
+            "messagekey": "organization-otherInformationLabel"
+        },
         ".csc-organization-domaindata-label": {
             "messagekey": "organization-domaindataLabel"
         },
@@ -165,6 +174,7 @@
                             "expander": {
                                 "tree": {
                                     ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -180,9 +190,8 @@
                                         ],
                                         "selection": "${{row}.addressType}"
                                     },
-                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
-                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
                                     ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
                                     ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
                                     ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
                                 },
@@ -277,17 +286,66 @@
                 }
             ]
         },
-        ".csc-organization-foundingPlace-label": {
-            "messagekey": "organization-foundingPlaceLabel"
+        ".csc-organizationAuthority-dissolutionDate": {
+            "decorators": [
+                {
+                    "func": "cspace.structuredDate",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.dissolutionDateGroup.dateDisplayDate",
+                        "elPaths": {
+                            "dateEarliestSingleQualifier": "fields.dissolutionDateGroup.dateEarliestSingleQualifier",
+                            "scalarValuesComputed": "fields.dissolutionDateGroup.scalarValuesComputed",
+                            "dateLatestDay": "fields.dissolutionDateGroup.dateLatestDay",
+                            "dateLatestYear": "fields.dissolutionDateGroup.dateLatestYear",
+                            "dateAssociation": "fields.dissolutionDateGroup.dateAssociation",
+                            "dateEarliestSingleEra": "fields.dissolutionDateGroup.dateEarliestSingleEra",
+                            "dateDisplayDate": "fields.dissolutionDateGroup.dateDisplayDate",
+                            "dateEarliestSingleCertainty": "fields.dissolutionDateGroup.dateEarliestSingleCertainty",
+                            "dateLatestEra": "fields.dissolutionDateGroup.dateLatestEra",
+                            "dateEarliestSingleQualifierValue": "fields.dissolutionDateGroup.dateEarliestSingleQualifierValue",
+                            "dateLatestCertainty": "fields.dissolutionDateGroup.dateLatestCertainty",
+                            "dateEarliestSingleYear": "fields.dissolutionDateGroup.dateEarliestSingleYear",
+                            "dateLatestQualifier": "fields.dissolutionDateGroup.dateLatestQualifier",
+                            "dateLatestQualifierValue": "fields.dissolutionDateGroup.dateLatestQualifierValue",
+                            "dateEarliestSingleQualifierUnit": "fields.dissolutionDateGroup.dateEarliestSingleQualifierUnit",
+                            "datePeriod": "fields.dissolutionDateGroup.datePeriod",
+                            "dateEarliestScalarValue": "fields.dissolutionDateGroup.dateEarliestScalarValue",
+                            "dateLatestMonth": "fields.dissolutionDateGroup.dateLatestMonth",
+                            "dateNote": "fields.dissolutionDateGroup.dateNote",
+                            "dateLatestScalarValue": "fields.dissolutionDateGroup.dateLatestScalarValue",
+                            "dateLatestQualifierUnit": "fields.dissolutionDateGroup.dateLatestQualifierUnit",
+                            "dateEarliestSingleDay": "fields.dissolutionDateGroup.dateEarliestSingleDay",
+                            "dateEarliestSingleMonth": "fields.dissolutionDateGroup.dateEarliestSingleMonth"
+                        }
+                    }
+                }
+            ],
+            "value": "${fields.dissolutionDateGroup.dateDisplayDate}"
+        },
+        ".csc-contact-contactInformation-label": {
+            "messagekey": "contact-contactInformationLabel"
+        },
+        ".csc-contact-coreInformation-label": {
+            "messagekey": "contact-coreInformationLabel"
         },
         ".csc-organization-contact-label": {
             "messagekey": "organization-contactLabel"
         },
-        ".csc-contact-faxNumberType-label": {
-            "messagekey": "contact-faxNumberTypeLabel"
+        ".csc-organization-dissolutionDateGroup-label": {
+            "messagekey": "organization-dissolutionDateGroupLabel"
+        },
+        ".csc-organization-foundingPlace-label": {
+            "messagekey": "organization-foundingPlaceLabel"
         },
         ".csc-contact-tenantID-label": {
             "messagekey": "contact-tenantIDLabel"
+        },
+        ".csc-contact-faxNumberType-label": {
+            "messagekey": "contact-faxNumberTypeLabel"
+        },
+        ".csc-contact-faxNumberGroup-label": {
+            "messagekey": "contact-faxNumberGroupLabel"
         },
         ".csc-contact-faxNumberGroup": {
             "decorators": [
@@ -323,9 +381,6 @@
                 }
             ]
         },
-        ".csc-contact-faxNumberGroup-label": {
-            "messagekey": "contact-faxNumberGroupLabel"
-        },
         ".csc-contact-tenantID": "${fields.contact.tenantID}",
         ".csc-orgAuthority-group": {
             "decorators": [
@@ -357,6 +412,9 @@
         },
         ".csc-contact-createdAt": "${fields.contact.createdAt}",
         ".csc-orgAuthority-foundingPlace": "${fields.foundingPlace}",
+        ".csc-organization-coreInformation-label": {
+            "messagekey": "organization-coreInformationLabel"
+        },
         ".csc-organization-createdBy": "${fields.createdBy}",
         ".csc-contact-emailGroup": {
             "decorators": [
@@ -367,6 +425,7 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
+                                    ".csc-contact-email": "${{row}.email}",
                                     ".csc-contact-emailType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -381,8 +440,7 @@
                                             "other"
                                         ],
                                         "selection": "${{row}.emailType}"
-                                    },
-                                    ".csc-contact-email": "${{row}.email}"
+                                    }
                                 },
                                 "type": "fluid.noexpand"
                             }
@@ -421,6 +479,9 @@
         ".csc-contact-faxNumber-label": {
             "messagekey": "contact-faxNumberLabel"
         },
+        ".csc-organization-foundingDateGroup-label": {
+            "messagekey": "organization-foundingDateGroupLabel"
+        },
         ".csc-contact-updatedAt-label": {
             "messagekey": "contact-updatedAtLabel"
         },
@@ -445,9 +506,6 @@
         ".csc-contact-telephoneNumber-label": {
             "messagekey": "contact-telephoneNumberLabel"
         },
-        ".csc-organization-foundingDate-label": {
-            "messagekey": "organization-foundingDateLabel"
-        },
         ".csc-organization-uri-label": {
             "messagekey": "organization-uriLabel"
         },
@@ -457,6 +515,7 @@
         ".csc-organization-shortIdentifier-label": {
             "messagekey": "organization-shortIdentifierLabel"
         },
+        ".csc-organization-tenantID": "${fields.tenantID}",
         ".csc-preferred-orgAuthority": {
             "decorators": [
                 {
@@ -588,7 +647,6 @@
                 }
             ]
         },
-        ".csc-organization-tenantID": "${fields.tenantID}",
         ".csc-contact-webAddress-label": {
             "messagekey": "contact-webAddressLabel"
         },
@@ -602,6 +660,9 @@
             "messagekey": "organization-contactNamesLabel"
         },
         ".csc-contact-updatedBy": "${fields.contact.updatedBy}",
+        ".csc-contact-addressType-label": {
+            "messagekey": "contact-addressTypeLabel"
+        },
         ".csc-orgAuthority-history": {
             "decorators": [
                 {
@@ -621,19 +682,46 @@
                 }
             ]
         },
-        ".csc-contact-addressType-label": {
-            "messagekey": "contact-addressTypeLabel"
-        },
         ".csc-contact-addressPostCode-label": {
             "messagekey": "contact-addressPostCodeLabel"
         },
-        ".csc-organization-csid-label": {
-            "messagekey": "organization-csidLabel"
+        ".csc-organizationAuthority-foundingDate": {
+            "decorators": [
+                {
+                    "func": "cspace.structuredDate",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.foundingDateGroup.dateDisplayDate",
+                        "elPaths": {
+                            "dateEarliestSingleQualifier": "fields.foundingDateGroup.dateEarliestSingleQualifier",
+                            "scalarValuesComputed": "fields.foundingDateGroup.scalarValuesComputed",
+                            "dateLatestDay": "fields.foundingDateGroup.dateLatestDay",
+                            "dateLatestYear": "fields.foundingDateGroup.dateLatestYear",
+                            "dateAssociation": "fields.foundingDateGroup.dateAssociation",
+                            "dateEarliestSingleEra": "fields.foundingDateGroup.dateEarliestSingleEra",
+                            "dateDisplayDate": "fields.foundingDateGroup.dateDisplayDate",
+                            "dateEarliestSingleCertainty": "fields.foundingDateGroup.dateEarliestSingleCertainty",
+                            "dateLatestEra": "fields.foundingDateGroup.dateLatestEra",
+                            "dateEarliestSingleQualifierValue": "fields.foundingDateGroup.dateEarliestSingleQualifierValue",
+                            "dateLatestCertainty": "fields.foundingDateGroup.dateLatestCertainty",
+                            "dateEarliestSingleYear": "fields.foundingDateGroup.dateEarliestSingleYear",
+                            "dateLatestQualifier": "fields.foundingDateGroup.dateLatestQualifier",
+                            "dateLatestQualifierValue": "fields.foundingDateGroup.dateLatestQualifierValue",
+                            "dateEarliestSingleQualifierUnit": "fields.foundingDateGroup.dateEarliestSingleQualifierUnit",
+                            "datePeriod": "fields.foundingDateGroup.datePeriod",
+                            "dateEarliestScalarValue": "fields.foundingDateGroup.dateEarliestScalarValue",
+                            "dateLatestMonth": "fields.foundingDateGroup.dateLatestMonth",
+                            "dateNote": "fields.foundingDateGroup.dateNote",
+                            "dateLatestScalarValue": "fields.foundingDateGroup.dateLatestScalarValue",
+                            "dateLatestQualifierUnit": "fields.foundingDateGroup.dateLatestQualifierUnit",
+                            "dateEarliestSingleDay": "fields.foundingDateGroup.dateEarliestSingleDay",
+                            "dateEarliestSingleMonth": "fields.foundingDateGroup.dateEarliestSingleMonth"
+                        }
+                    }
+                }
+            ],
+            "value": "${fields.foundingDateGroup.dateDisplayDate}"
         },
-        ".csc-organization-functions-label": {
-            "messagekey": "organization-functionsLabel"
-        },
-        ".csc-organization-refName": "${fields.refName}",
         ".csc-contact-webAddressGroup": {
             "decorators": [
                 {
@@ -668,11 +756,18 @@
                 }
             ]
         },
-        ".csc-contact-addressCountry-label": {
-            "messagekey": "contact-addressCountryLabel"
+        ".csc-organization-refName": "${fields.refName}",
+        ".csc-organization-functions-label": {
+            "messagekey": "organization-functionsLabel"
+        },
+        ".csc-organization-csid-label": {
+            "messagekey": "organization-csidLabel"
         },
         ".csc-contact-domaindata-label": {
             "messagekey": "contact-domaindataLabel"
+        },
+        ".csc-contact-addressCountry-label": {
+            "messagekey": "contact-addressCountryLabel"
         },
         ".csc-organization-createdAt": "${fields.createdAt}",
         ".csc-organization-contactName-label": {
@@ -681,53 +776,32 @@
         ".csc-contact-updatedBy-label": {
             "messagekey": "contact-updatedByLabel"
         },
-        ".csc-organization-dissolutionDate-label": {
-            "messagekey": "organization-dissolutionDateLabel"
+        ".csc-contact-emailType-label": {
+            "messagekey": "contact-emailTypeLabel"
         },
         ".csc-contact-telephoneNumberType-label": {
             "messagekey": "contact-telephoneNumberTypeLabel"
         },
-        ".csc-contact-emailType-label": {
-            "messagekey": "contact-emailTypeLabel"
-        },
-        ".csc-orgAuthority-dissolutionDate": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.dissolutionDate}"
+        ".csc-contact-addressMunicipality-label": {
+            "messagekey": "contact-addressMunicipalityLabel"
         },
         ".csc-organization-function-label": {
             "messagekey": "organization-functionLabel"
-        },
-        ".csc-contact-addressMunicipality-label": {
-            "messagekey": "contact-addressMunicipalityLabel"
         },
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-organization-csid": "${fields.csid}",
         ".csc-contact-emailGroup-label": {
             "messagekey": "contact-emailGroupLabel"
         },
+        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-contact-webAddressType-label": {
             "messagekey": "contact-webAddressTypeLabel"
         },
-        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
-        ".csc-orgAuthority-foundingDate": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.foundingDate}"
+        ".csc-contact-addressGroup-label": {
+            "messagekey": "contact-addressGroupLabel"
         },
         ".csc-organization-historyNotes-label": {
             "messagekey": "organization-historyNotesLabel"
-        },
-        ".csc-contact-addressGroup-label": {
-            "messagekey": "contact-addressGroupLabel"
         },
         ".csc-contact-addressPlace1-label": {
             "messagekey": "contact-addressPlace1Label"
