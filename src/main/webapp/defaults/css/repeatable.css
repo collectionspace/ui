@@ -241,3 +241,17 @@ div.info-pair-date input.cs-repeatable-add {
 .infoDiv .info-column {
     margin-bottom: 18px;
 }
+/* Added to improve spacing of repeatable term group in authorities, 2012-05-18 by rj */
+div.cs-repeatable-group li.cs-repeatable-repeat input.cs-repeatable-primary {
+   margin-right:5px;
+   margin-top:0;
+}
+
+li.cs-repeatable-repeat:last-child {
+   margin-bottom: 18px!important;
+}
+
+.cs-repeatable-group li.cs-repeatable-repeat{
+   padding:15px 0 0 5px;
+   margin-bottom: 5px;
+}
