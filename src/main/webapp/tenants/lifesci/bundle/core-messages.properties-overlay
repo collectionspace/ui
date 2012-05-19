@@ -15,7 +15,9 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
-vocab-taxon: Local
+vocab-local_ta: Local
+vocab-common_ta: Common
+vocab-taxon: Default (v2.3)
 
 # Taxon record
 taxon: Taxon
@@ -51,6 +53,9 @@ taxon-commonNameSourceDetailLabel: Source Detail
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
+# Added v2.4. Label for repeatable term group.
+# SHOULD REALLY REPEAT WITH EACH INSTANCE, LIKE TEXTUAL INSCRIPTION GROUP IN CATALOGING.
+taxon-preferredTaxonLabel: Taxon Term Group(s)
 
 # -------------------------------------
 #Login

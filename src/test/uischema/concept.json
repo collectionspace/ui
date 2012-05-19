@@ -46,7 +46,7 @@
                         },
                         "type": "array"
                     },
-                    "scopeNoteSource": {
+                    "scopeNoteSourceDetail": {
                         "type": "string"
                     },
                     "csid": {
@@ -64,10 +64,10 @@
                     "updatedAt": {
                         "type": "date"
                     },
-                    "scopeNoteSourceDetail": {
+                    "createdBy": {
                         "type": "string"
                     },
-                    "createdBy": {
+                    "scopeNote": {
                         "type": "string"
                     },
                     "conceptTermGroup": {
@@ -195,7 +195,7 @@
                     "recordType": {
                         "type": "string"
                     },
-                    "scopeNote": {
+                    "scopeNoteSource": {
                         "type": "string"
                     }
                 },
