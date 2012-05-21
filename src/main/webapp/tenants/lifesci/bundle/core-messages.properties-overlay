@@ -43,7 +43,7 @@ taxon-taxonIsNamedHybridLabel: Is Named Hybrid
 taxon-taxonCitationLabel: Citations
 taxon-taxonNoteLabel: Note
 taxon-commonNameGroupLabel: Common Name
-taxon-commonNameLabel: Name
+taxon-commonNameLabel: Common Name
 taxon-commonNameLanguageLabel: Language
 taxon-commonNameSourceLabel: Source
 taxon-commonNameSourceDetailLabel: Source Detail
