@@ -66,15 +66,15 @@
         },
         "expander": [
             {
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
+                    }
+                },
                 "condition": {
                     "funcName": "cspace.hierarchy.assertEquivalentContexts",
                     "args": {
                         "equivalentContexts": "${fields.equivalentContexts}"
-                    }
-                },
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "type": "fluid.renderer.condition",
@@ -174,7 +174,6 @@
                             "expander": {
                                 "tree": {
                                     ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
-                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -190,8 +189,9 @@
                                         ],
                                         "selection": "${{row}.addressType}"
                                     },
-                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
+                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
                                     ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
                                     ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
                                 },
@@ -323,29 +323,26 @@
             ],
             "value": "${fields.dissolutionDateGroup.dateDisplayDate}"
         },
-        ".csc-contact-contactInformation-label": {
-            "messagekey": "contact-contactInformationLabel"
-        },
         ".csc-contact-coreInformation-label": {
             "messagekey": "contact-coreInformationLabel"
         },
-        ".csc-organization-contact-label": {
-            "messagekey": "organization-contactLabel"
-        },
-        ".csc-organization-dissolutionDateGroup-label": {
-            "messagekey": "organization-dissolutionDateGroupLabel"
+        ".csc-contact-contactInformation-label": {
+            "messagekey": "contact-contactInformationLabel"
         },
         ".csc-organization-foundingPlace-label": {
             "messagekey": "organization-foundingPlaceLabel"
         },
-        ".csc-contact-tenantID-label": {
-            "messagekey": "contact-tenantIDLabel"
+        ".csc-organization-dissolutionDateGroup-label": {
+            "messagekey": "organization-dissolutionDateGroupLabel"
+        },
+        ".csc-organization-contact-label": {
+            "messagekey": "organization-contactLabel"
         },
         ".csc-contact-faxNumberType-label": {
             "messagekey": "contact-faxNumberTypeLabel"
         },
-        ".csc-contact-faxNumberGroup-label": {
-            "messagekey": "contact-faxNumberGroupLabel"
+        ".csc-contact-tenantID-label": {
+            "messagekey": "contact-tenantIDLabel"
         },
         ".csc-contact-faxNumberGroup": {
             "decorators": [
@@ -380,6 +377,9 @@
                     }
                 }
             ]
+        },
+        ".csc-contact-faxNumberGroup-label": {
+            "messagekey": "contact-faxNumberGroupLabel"
         },
         ".csc-contact-tenantID": "${fields.contact.tenantID}",
         ".csc-orgAuthority-group": {
@@ -425,7 +425,6 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-contact-email": "${{row}.email}",
                                     ".csc-contact-emailType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -440,7 +439,8 @@
                                             "other"
                                         ],
                                         "selection": "${{row}.emailType}"
-                                    }
+                                    },
+                                    ".csc-contact-email": "${{row}.email}"
                                 },
                                 "type": "fluid.noexpand"
                             }
@@ -515,7 +515,6 @@
         ".csc-organization-shortIdentifier-label": {
             "messagekey": "organization-shortIdentifierLabel"
         },
-        ".csc-organization-tenantID": "${fields.tenantID}",
         ".csc-preferred-orgAuthority": {
             "decorators": [
                 {
@@ -647,6 +646,7 @@
                 }
             ]
         },
+        ".csc-organization-tenantID": "${fields.tenantID}",
         ".csc-contact-webAddress-label": {
             "messagekey": "contact-webAddressLabel"
         },
@@ -660,9 +660,6 @@
             "messagekey": "organization-contactNamesLabel"
         },
         ".csc-contact-updatedBy": "${fields.contact.updatedBy}",
-        ".csc-contact-addressType-label": {
-            "messagekey": "contact-addressTypeLabel"
-        },
         ".csc-orgAuthority-history": {
             "decorators": [
                 {
@@ -682,8 +679,52 @@
                 }
             ]
         },
+        ".csc-contact-addressType-label": {
+            "messagekey": "contact-addressTypeLabel"
+        },
         ".csc-contact-addressPostCode-label": {
             "messagekey": "contact-addressPostCodeLabel"
+        },
+        ".csc-organization-csid-label": {
+            "messagekey": "organization-csidLabel"
+        },
+        ".csc-organization-functions-label": {
+            "messagekey": "organization-functionsLabel"
+        },
+        ".csc-organization-refName": "${fields.refName}",
+        ".csc-contact-webAddressGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-contact-webAddressType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.webAddressType}"
+                                    },
+                                    ".csc-contact-webAddress": "${{row}.webAddress}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.contact.webAddressGroup"
+                    }
+                }
+            ]
         },
         ".csc-organizationAuthority-foundingDate": {
             "decorators": [
@@ -722,86 +763,45 @@
             ],
             "value": "${fields.foundingDateGroup.dateDisplayDate}"
         },
-        ".csc-contact-webAddressGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-contact-webAddressType": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "business",
-                                            "personal",
-                                            "other"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "business",
-                                            "personal",
-                                            "other"
-                                        ],
-                                        "selection": "${{row}.webAddressType}"
-                                    },
-                                    ".csc-contact-webAddress": "${{row}.webAddress}"
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.contact.webAddressGroup"
-                    }
-                }
-            ]
-        },
-        ".csc-organization-refName": "${fields.refName}",
-        ".csc-organization-functions-label": {
-            "messagekey": "organization-functionsLabel"
-        },
-        ".csc-organization-csid-label": {
-            "messagekey": "organization-csidLabel"
+        ".csc-organization-createdAt": "${fields.createdAt}",
+        ".csc-contact-addressCountry-label": {
+            "messagekey": "contact-addressCountryLabel"
         },
         ".csc-contact-domaindata-label": {
             "messagekey": "contact-domaindataLabel"
         },
-        ".csc-contact-addressCountry-label": {
-            "messagekey": "contact-addressCountryLabel"
-        },
-        ".csc-organization-createdAt": "${fields.createdAt}",
         ".csc-organization-contactName-label": {
             "messagekey": "organization-contactNameLabel"
         },
         ".csc-contact-updatedBy-label": {
             "messagekey": "contact-updatedByLabel"
         },
-        ".csc-contact-emailType-label": {
-            "messagekey": "contact-emailTypeLabel"
-        },
         ".csc-contact-telephoneNumberType-label": {
             "messagekey": "contact-telephoneNumberTypeLabel"
         },
-        ".csc-contact-addressMunicipality-label": {
-            "messagekey": "contact-addressMunicipalityLabel"
+        ".csc-contact-emailType-label": {
+            "messagekey": "contact-emailTypeLabel"
         },
         ".csc-organization-function-label": {
             "messagekey": "organization-functionLabel"
+        },
+        ".csc-contact-addressMunicipality-label": {
+            "messagekey": "contact-addressMunicipalityLabel"
         },
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-organization-csid": "${fields.csid}",
         ".csc-contact-emailGroup-label": {
             "messagekey": "contact-emailGroupLabel"
         },
-        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-contact-webAddressType-label": {
             "messagekey": "contact-webAddressTypeLabel"
         },
-        ".csc-contact-addressGroup-label": {
-            "messagekey": "contact-addressGroupLabel"
-        },
+        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-organization-historyNotes-label": {
             "messagekey": "organization-historyNotesLabel"
+        },
+        ".csc-contact-addressGroup-label": {
+            "messagekey": "contact-addressGroupLabel"
         },
         ".csc-contact-addressPlace1-label": {
             "messagekey": "contact-addressPlace1Label"
