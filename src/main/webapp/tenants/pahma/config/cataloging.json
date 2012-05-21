@@ -22,9 +22,9 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.objectNumber", {
+                            "fields.objectNumber", 
                             "fields.nametitle"
-                        }]
+                        ]
                     }
                 },
                 "header": {
