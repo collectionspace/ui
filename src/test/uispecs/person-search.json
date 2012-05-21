@@ -1,297 +1,254 @@
 {
-    ".csc-person-deathDateStart-label": {
-        "messagekey": "person-deathDateStartLabel"
-    },
-    ".csc-person-gender-label": {
-        "messagekey": "person-genderLabel"
-    },
-    ".csc-person-updatedBy-label": {
-        "messagekey": "person-updatedByLabel"
-    },
-    ".csc-person-birthDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
+  ".csc-person-foreName-label": {
+    "messagekey": "preferredPA-foreNameLabel"
+  }, 
+  ".csc-person-gender-label": {
+    "messagekey": "person-genderLabel"
+  }, 
+  ".csc-person-group-label": {
+    "messagekey": "person-groupLabel"
+  }, 
+  ".csc-person-initials-label": {
+    "messagekey": "preferredPA-initialsLabel"
+  }, 
+  ".csc-person-middleName-label": {
+    "messagekey": "preferredPA-middleNameLabel"
+  }, 
+  ".csc-person-nameAdditions-label": {
+    "messagekey": "preferredPA-nameAdditionsLabel"
+  }, 
+  ".csc-person-nationality-label": {
+    "messagekey": "person-nationalityLabel"
+  }, 
+  ".csc-person-occupation-label": {
+    "messagekey": "person-occupationLabel"
+  }, 
+  ".csc-person-salutation-label": {
+    "messagekey": "preferredPA-salutationLabel"
+  }, 
+  ".csc-person-schoolOrStyle-label": {
+    "messagekey": "person-schoolOrStyleLabel"
+  }, 
+  ".csc-person-surName-label": {
+    "messagekey": "preferredPA-surNameLabel"
+  }, 
+  ".csc-person-termDisplayName-label": {
+    "messagekey": "preferredPA-termDisplayNameLabel"
+  }, 
+  ".csc-person-termLanguage-label": {
+    "messagekey": "preferredPA-termLanguageLabel"
+  }, 
+  ".csc-person-termName-label": {
+    "messagekey": "preferredPA-termNameLabel"
+  }, 
+  ".csc-person-termPrefForLang-label": {
+    "messagekey": "preferredPA-termPrefForLangLabel"
+  }, 
+  ".csc-person-termQualifier-label": {
+    "messagekey": "preferredPA-termQualifierLabel"
+  }, 
+  ".csc-person-termSource-label": {
+    "messagekey": "preferredPA-termSourceLabel"
+  }, 
+  ".csc-person-termSourceDetail-label": {
+    "messagekey": "preferredPA-termSourceDetailLabel"
+  }, 
+  ".csc-person-termSourceID-label": {
+    "messagekey": "preferredPA-termSourceIDLabel"
+  }, 
+  ".csc-person-termSourceNote-label": {
+    "messagekey": "preferredPA-termSourceNoteLabel"
+  }, 
+  ".csc-person-termStatus-label": {
+    "messagekey": "preferredPA-termStatusLabel"
+  }, 
+  ".csc-person-termType-label": {
+    "messagekey": "preferredPA-termTypeLabel"
+  }, 
+  ".csc-person-title-label": {
+    "messagekey": "preferredPA-titleLabel"
+  }, 
+  ".csc-person-updatedAt-label": {
+    "messagekey": "person-updatedAtLabel"
+  }, 
+  ".csc-person-updatedAtEnd": {
+    "decorators": [
+      {
+        "func": "cspace.datePicker", 
+        "type": "fluid"
+      }
+    ], 
+    "value": "${updatedAtEnd}"
+  }, 
+  ".csc-person-updatedAtEnd-label": {
+    "messagekey": "person-updatedAtEndLabel"
+  }, 
+  ".csc-person-updatedAtStart": {
+    "decorators": [
+      {
+        "func": "cspace.datePicker", 
+        "type": "fluid"
+      }
+    ], 
+    "value": "${updatedAtStart}"
+  }, 
+  ".csc-person-updatedAtStart-label": {
+    "messagekey": "person-updatedAtStartLabel"
+  }, 
+  ".csc-person-updatedBy": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "updatedBys", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-person-updatedBy": "${{row}.updatedBy}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ],
-        "value": "${birthDateEnd}"
-    },
-    ".csc-personAuthority-status": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-status": {
-                                    "default": "",
-                                    "optionnames": [
-                                        "Provisional",
-                                        "Under Review",
-                                        "Accepted",
-                                        "Rejected",
-                                        "Please select a value"
-                                    ],
-                                    "optionlist": [
-                                        "provisional",
-                                        "under review",
-                                        "accepted",
-                                        "rejected",
-                                        ""
-                                    ],
-                                    "selection": "${{row}.termStatus}"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "termStatuss",
-                    "hidePrimary": true
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-person-updatedBy-label": {
+    "messagekey": "person-updatedByLabel"
+  }, 
+  ".csc-personAuthority-gender": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "genders", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-gender": {
+                  "default": "", 
+                  "optionlist": [
+                    "", 
+                    "male", 
+                    "female"
+                  ], 
+                  "optionnames": [
+                    "Please select a value", 
+                    "Male", 
+                    "Female"
+                  ], 
+                  "selection": "${{row}.gender}"
                 }
+              }, 
+              "type": "fluid.noexpand"
             }
-        ]
-    },
-    ".csc-person-deathDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-personAuthority-group": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "groups", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-group": "${{row}.group}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ],
-        "value": "${deathDateEnd}"
-    },
-    ".csc-person-deathDateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-personAuthority-nationality": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "nationalities", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-nationality": "${{row}.nationality}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ],
-        "value": "${deathDateStart}"
-    },
-    ".csc-person-updatedAtEnd-label": {
-        "messagekey": "person-updatedAtEndLabel"
-    },
-    ".csc-personAuthority-gender": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-gender": {
-                                    "default": "",
-                                    "optionnames": [
-                                        "Please select a value",
-                                        "Male",
-                                        "Female"
-                                    ],
-                                    "optionlist": [
-                                        "",
-                                        "male",
-                                        "female"
-                                    ],
-                                    "selection": "${{row}.gender}"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "genders",
-                    "hidePrimary": true
-                }
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-personAuthority-occupation": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "occupations", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-occupation": "${{row}.occupation}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ]
-    },
-    ".csc-person-updatedBy": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-person-updatedBy": "${{row}.updatedBy}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "updatedBys",
-                    "hidePrimary": true
-                }
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-personAuthority-schoolOrStyle": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "schoolsOrStyles", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ]
-    },
-    ".csc-person-birthDateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }, 
+  ".csc-preferredPA-personTermGroup": {
+    "decorators": [
+      {
+        "func": "cspace.makeRepeatable", 
+        "options": {
+          "elPath": "personTermGroup", 
+          "hidePrimary": true, 
+          "repeatTree": {
+            "expander": {
+              "tree": {
+                ".csc-personAuthority-termDisplayName": "${{row}.termDisplayName}"
+              }, 
+              "type": "fluid.noexpand"
             }
-        ],
-        "value": "${birthDateStart}"
-    },
-    ".csc-person-occupation-label": {
-        "messagekey": "person-occupationLabel"
-    },
-    ".csc-person-updatedAtEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${updatedAtEnd}"
-    },
-    ".csc-personAuthority-occupation": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-occupation": "${{row}.occupation}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "occupations",
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-person-deathDate-label": {
-        "messagekey": "person-deathDateLabel"
-    },
-    ".csc-person-birthDateEnd-label": {
-        "messagekey": "person-birthDateEndLabel"
-    },
-    ".csc-person-birthDate-label": {
-        "messagekey": "person-birthDateLabel"
-    },
-    ".csc-person-birthDateStart-label": {
-        "messagekey": "person-birthDateStartLabel"
-    },
-    ".csc-person-schoolOrStyle-label": {
-        "messagekey": "person-schoolOrStyleLabel"
-    },
-    ".csc-personAuthority-schoolOrStyle": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "schoolsOrStyles",
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-personAuthority-displayName": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-displayName": "${{row}.displayName}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "displayNames",
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-person-group-label": {
-        "messagekey": "person-groupLabel"
-    },
-    ".csc-person-deathDateEnd-label": {
-        "messagekey": "person-deathDateEndLabel"
-    },
-    ".csc-person-displayName-label": {
-        "messagekey": "person-displayNameLabel"
-    },
-    ".csc-person-nationality-label": {
-        "messagekey": "person-nationalityLabel"
-    },
-    ".csc-personAuthority-group": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-group": "${{row}.group}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "groups",
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-personAuthority-nationality": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "repeatTree": {
-                        "expander": {
-                            "tree": {
-                                ".csc-personAuthority-nationality": "${{row}.nationality}"
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "elPath": "nationalities",
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-person-termStatus-label": {
-        "messagekey": "person-termStatusLabel"
-    },
-    ".csc-person-updatedAtStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${updatedAtStart}"
-    },
-    ".csc-person-updatedAt-label": {
-        "messagekey": "person-updatedAtLabel"
-    },
-    ".csc-person-updatedAtStart-label": {
-        "messagekey": "person-updatedAtStartLabel"
-    }
+          }
+        }, 
+        "type": "fluid"
+      }
+    ]
+  }
 }
