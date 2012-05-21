@@ -7,8 +7,6 @@ collection-object-identByLabel: By
 collection-object-identDateLabel: Date
 collection-object-institutionLabel: Institution
 collection-object-identKindLabel: Kind
-# Inadvertently shares field name and label
-# with another entry below
 collection-object-referenceLabel: Reference
 collection-object-refPageLabel: Page
 collection-object-notesLabel: Notes
@@ -42,7 +40,6 @@ taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is Named Hybrid
 taxon-taxonCitationLabel: Citations
 taxon-taxonNoteLabel: Note
-# Common Name keys added in v2.4
 taxon-commonNameGroupLabel: Common Name
 taxon-commonNameLabel: Name
 taxon-commonNameLanguageLabel: Language
