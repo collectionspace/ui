@@ -1,155 +1,134 @@
 {
-    "location": {
-        "properties": {
-            "createdBys": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "createdBy": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "securityNotes": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "securityNote": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "locationTypes": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "locationType": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "termStatuss": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "termStatus": {
-                            "default": "provisional",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtEnd": {
-                "type": "string"
-            },
-            "conditionGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "conditionNote": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "displayNames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "displayName": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "names": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "accessNotes": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "accessNote": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedBys": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "updatedBy": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtStart": {
-                "type": "string"
-            },
-            "addresss": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "address": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+  "location": {
+    "properties": {
+      "accessNotes": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "accessNote": {
+              "type": "string"
             }
-        },
-        "type": "object"
-    }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "addresss": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "address": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "conditionGroup": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "conditionNote": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "createdBys": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "createdBy": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "locTermGroup": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "termDisplayName": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "locationTypes": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "locationType": {
+              "default": "", 
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "securityNotes": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "securityNote": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "updatedAtEnd": {
+        "type": "date"
+      }, 
+      "updatedAtStart": {
+        "type": "date"
+      }, 
+      "updatedBys": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "updatedBy": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }
+    }, 
+    "type": "object"
+  }
 }

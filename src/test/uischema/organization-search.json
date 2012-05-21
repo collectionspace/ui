@@ -1,110 +1,88 @@
 {
-    "organization": {
-        "properties": {
-            "functions": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "function": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "termStatuss": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "termStatus": {
-                            "default": "provisional",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtEnd": {
-                "type": "date"
-            },
-            "foundingDateEnd": {
-                "type": "date"
-            },
-            "dissolutionDateEnd": {
-                "type": "date"
-            },
-            "displayNames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "displayName": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "foundingPlaces": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "foundingPlace": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "dissolutionDateStart": {
-                "type": "date"
-            },
-            "foundingDateStart": {
-                "type": "date"
-            },
-            "updatedBys": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "updatedBy": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "groups": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "group": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtStart": {
-                "type": "date"
+  "organization": {
+    "properties": {
+      "foundingPlaces": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "foundingPlace": {
+              "type": "string"
             }
-        },
-        "type": "object"
-    }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "functions": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "function": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "groups": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "group": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "orgTermGroup": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "termDisplayName": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }, 
+      "updatedAtEnd": {
+        "type": "date"
+      }, 
+      "updatedAtStart": {
+        "type": "date"
+      }, 
+      "updatedBys": {
+        "items": {
+          "properties": {
+            "_primary": {
+              "default": true, 
+              "type": "boolean"
+            }, 
+            "updatedBy": {
+              "type": "string"
+            }
+          }, 
+          "type": "object"
+        }, 
+        "type": "array"
+      }
+    }, 
+    "type": "object"
+  }
 }

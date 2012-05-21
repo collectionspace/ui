@@ -4,43 +4,46 @@
             <div class="info-column2-50 fl-force-left">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-concept-displayName-label"></div>
+                        <div class="label csc-concept-termDisplayName-label"></div>
                     </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-concept-displayName"/>
+                    <div class="content clearfix csc-preferredCA-conceptTermGroup">
+                        <input type="text" class="csc-conceptAuthority-termDisplayName"/>
                     </div>        
                 </div>
-                <div class="info-pair">
+                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
+                <div class="info-pair" style="display:none;">
                     <div class="header">
-                        <div class="label csc-concept-qualifier-label"></div>
+                        <div class="label csc-concept-termName-label"></div>
                     </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-concept-qualifier"/>
-                    </div>        
+                    <div class="content clearfix csc-preferredCA-conceptTermGroup">
+                        <input type="text" class="csc-conceptAuthority-termName"/>
+                    </div>  
                 </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-concept-shortDisplayName-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-concept-shortDisplayName"/>
-                    </div>        
-                </div>
-                <div class="info-pair-select">
-                    <div class="header">
-                        <div class="label csc-concept-termType-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <select class="csc-concept-termType input-select"><option value="">Options not loaded</option></select>
-                    </div>        
-                </div>
-                <div class="info-pair-select">
+                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
+                <div class="info-pair-select" style="display:none;">
                     <div class="header">
                         <div class="label csc-concept-termLanguage-label"></div>
                     </div>
-                    <div class="content clearfix">
-                        <select class="csc-concept-termLanguage input-select"><option value="">Options not loaded</option></select>
+                    <div class="content clearfix csc-preferredCA-conceptTermGroup">
+                        <select class="csc-conceptAuthority-termLanguage input-select"><option value="">Options not loaded</option></select>
+                    </div>  
+                </div>
+                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
+                <div class="info-pair-select" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-concept-termStatus-label"></div>
+                    </div>
+                    <div class="content clearfix csc-preferredCA-conceptTermGroup">
+                        <select class="csc-conceptAuthority-termStatus input-select"><option value="">Options not loaded</option></select>
                     </div>        
+                </div>
+                <div class="info-pair" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-concept-editUsername-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-concept-editUsername"/>
+                    </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">

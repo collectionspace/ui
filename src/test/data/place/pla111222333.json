@@ -4,6 +4,7 @@
 		"placeTermGroup": [
             {
                 "termDisplayName": "Fred Bloggs",
+                "termName": "Fred",
                 "termQualifier": "Person Qualifier",
                 "termLanguage": "Value 1",
                 "termPrefForLang": true,

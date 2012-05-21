@@ -66,15 +66,15 @@
         },
         "expander": [
             {
+                "trueTree": {
+                    ".csc-hierarchy-equivalentContext-label": {
+                        "messagekey": "hierarchy-equivalentContextLabel"
+                    }
+                },
                 "condition": {
                     "funcName": "cspace.hierarchy.assertEquivalentContexts",
                     "args": {
                         "equivalentContexts": "${fields.equivalentContexts}"
-                    }
-                },
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "type": "fluid.renderer.condition",
@@ -217,7 +217,6 @@
                             "expander": {
                                 "tree": {
                                     ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
-                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -233,8 +232,9 @@
                                         ],
                                         "selection": "${{row}.addressType}"
                                     },
-                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
                                     ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
+                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
                                     ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
                                     ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
                                 },
@@ -298,6 +298,9 @@
                 }
             ]
         },
+        ".csc-person-birthDateGroup-label": {
+            "messagekey": "person-birthDateGroupLabel"
+        },
         ".csc-personAuthority-gender": {
             "default": "",
             "optionnames": [
@@ -312,24 +315,18 @@
             ],
             "selection": "${fields.gender}"
         },
-        ".csc-person-birthDateGroup-label": {
-            "messagekey": "person-birthDateGroupLabel"
+        ".csc-person-createdAt": "${fields.createdAt}",
+        ".csc-contact-coreInformation-label": {
+            "messagekey": "contact-coreInformationLabel"
         },
         ".csc-contact-contactInformation-label": {
             "messagekey": "contact-contactInformationLabel"
         },
-        ".csc-contact-coreInformation-label": {
-            "messagekey": "contact-coreInformationLabel"
-        },
-        ".csc-person-createdAt": "${fields.createdAt}",
-        ".csc-contact-tenantID-label": {
-            "messagekey": "contact-tenantIDLabel"
-        },
         ".csc-contact-faxNumberType-label": {
             "messagekey": "contact-faxNumberTypeLabel"
         },
-        ".csc-contact-faxNumberGroup-label": {
-            "messagekey": "contact-faxNumberGroupLabel"
+        ".csc-contact-tenantID-label": {
+            "messagekey": "contact-tenantIDLabel"
         },
         ".csc-contact-faxNumberGroup": {
             "decorators": [
@@ -364,6 +361,9 @@
                     }
                 }
             ]
+        },
+        ".csc-contact-faxNumberGroup-label": {
+            "messagekey": "contact-faxNumberGroupLabel"
         },
         ".csc-personAuthority-occupation": {
             "decorators": [
@@ -404,7 +404,6 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-contact-email": "${{row}.email}",
                                     ".csc-contact-emailType": {
                                         "optionnames": [
                                             "Please select a value",
@@ -419,7 +418,8 @@
                                             "other"
                                         ],
                                         "selection": "${{row}.emailType}"
-                                    }
+                                    },
+                                    ".csc-contact-email": "${{row}.email}"
                                 },
                                 "type": "fluid.noexpand"
                             }
@@ -557,8 +557,8 @@
                                                                 },
                                                                 ".csc-personAuthority-termQualifier": "${{row}.termQualifier}",
                                                                 ".csc-personAuthority-middleName": "${{row}.middleName}",
-                                                                ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}",
-                                                                ".csc-personAuthority-termPrefForLang": "${{row}.termPrefForLang}"
+                                                                ".csc-personAuthority-termPrefForLang": "${{row}.termPrefForLang}",
+                                                                ".csc-personAuthority-termSourceDetail": "${{row}.termSourceDetail}"
                                                             },
                                                             "type": "fluid.noexpand"
                                                         }
@@ -595,26 +595,26 @@
                                     ".csc-preferredPA-termType-label": {
                                         "messagekey": "preferredPA-termTypeLabel"
                                     },
-                                    ".csc-preferredPA-termLanguage-label": {
-                                        "messagekey": "preferredPA-termLanguageLabel"
+                                    ".csc-preferredPA-foreName-label": {
+                                        "messagekey": "preferredPA-foreNameLabel"
                                     },
                                     ".csc-preferredPA-termSourceDetail-label": {
                                         "messagekey": "preferredPA-termSourceDetailLabel"
                                     },
-                                    ".csc-preferredPA-foreName-label": {
-                                        "messagekey": "preferredPA-foreNameLabel"
+                                    ".csc-preferredPA-termLanguage-label": {
+                                        "messagekey": "preferredPA-termLanguageLabel"
                                     },
                                     ".csc-preferredPA-termDisplayName-label": {
                                         "messagekey": "preferredPA-termDisplayNameLabel"
                                     },
-                                    ".csc-preferredPA-title-label": {
-                                        "messagekey": "preferredPA-titleLabel"
+                                    ".csc-preferredPA-termName-label": {
+                                        "messagekey": "preferredPA-termNameLabel"
                                     },
                                     ".csc-preferredPA-termSourceID-label": {
                                         "messagekey": "preferredPA-termSourceIDLabel"
                                     },
-                                    ".csc-preferredPA-termName-label": {
-                                        "messagekey": "preferredPA-termNameLabel"
+                                    ".csc-preferredPA-title-label": {
+                                        "messagekey": "preferredPA-titleLabel"
                                     },
                                     ".csc-preferredPA-nameAdditions-label": {
                                         "messagekey": "preferredPA-nameAdditionsLabel"
@@ -700,11 +700,11 @@
         ".csc-person-createdBy-label": {
             "messagekey": "person-createdByLabel"
         },
-        ".csc-person-shortIdentifier-label": {
-            "messagekey": "person-shortIdentifierLabel"
-        },
         ".csc-person-csid-label": {
             "messagekey": "person-csidLabel"
+        },
+        ".csc-person-shortIdentifier-label": {
+            "messagekey": "person-shortIdentifierLabel"
         },
         ".csc-person-gender-label": {
             "messagekey": "person-genderLabel"
@@ -713,10 +713,10 @@
             "messagekey": "person-schoolsOrStylesLabel"
         },
         ".csc-person-tenantID": "${fields.tenantID}",
-        ".csc-person-uri": "${fields.uri}",
         ".csc-person-nationalities-label": {
             "messagekey": "person-nationalitiesLabel"
         },
+        ".csc-person-uri": "${fields.uri}",
         ".csc-contact-webAddress-label": {
             "messagekey": "contact-webAddressLabel"
         },
@@ -726,8 +726,8 @@
         ".csc-contact-email-label": {
             "messagekey": "contact-emailLabel"
         },
-        ".csc-person-updatedBy": "${fields.updatedBy}",
         ".csc-contact-updatedBy": "${fields.contact.updatedBy}",
+        ".csc-person-updatedBy": "${fields.updatedBy}",
         ".csc-person-occupation-label": {
             "messagekey": "person-occupationLabel"
         },
@@ -736,6 +736,9 @@
         },
         ".csc-contact-addressPostCode-label": {
             "messagekey": "contact-addressPostCodeLabel"
+        },
+        ".csc-person-contactInformation-label": {
+            "messagekey": "person-contactInformationLabel"
         },
         ".csc-contact-webAddressGroup": {
             "decorators": [
@@ -771,27 +774,24 @@
                 }
             ]
         },
-        ".csc-person-contactInformation-label": {
-            "messagekey": "person-contactInformationLabel"
+        ".csc-contact-addressCountry-label": {
+            "messagekey": "contact-addressCountryLabel"
         },
         ".csc-contact-domaindata-label": {
             "messagekey": "contact-domaindataLabel"
         },
-        ".csc-contact-addressCountry-label": {
-            "messagekey": "contact-addressCountryLabel"
+        ".csc-person-birthPlace-label": {
+            "messagekey": "person-birthPlaceLabel"
         },
         ".csc-contact-updatedBy-label": {
             "messagekey": "contact-updatedByLabel"
         },
-        ".csc-person-birthPlace-label": {
-            "messagekey": "person-birthPlaceLabel"
-        },
         ".csc-person-csid": "${fields.csid}",
-        ".csc-contact-emailType-label": {
-            "messagekey": "contact-emailTypeLabel"
-        },
         ".csc-contact-telephoneNumberType-label": {
             "messagekey": "contact-telephoneNumberTypeLabel"
+        },
+        ".csc-contact-emailType-label": {
+            "messagekey": "contact-emailTypeLabel"
         },
         ".csc-contact-addressMunicipality-label": {
             "messagekey": "contact-addressMunicipalityLabel"
@@ -818,11 +818,11 @@
                 }
             ]
         },
-        ".csc-person-contact-label": {
-            "messagekey": "person-contactLabel"
-        },
         ".csc-person-group-label": {
             "messagekey": "person-groupLabel"
+        },
+        ".csc-person-contact-label": {
+            "messagekey": "person-contactLabel"
         },
         ".csc-contact-emailGroup-label": {
             "messagekey": "contact-emailGroupLabel"
@@ -830,12 +830,18 @@
         ".csc-person-occupations-label": {
             "messagekey": "person-occupationsLabel"
         },
-        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-contact-webAddressType-label": {
             "messagekey": "contact-webAddressTypeLabel"
         },
+        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-person-deathDateGroup-label": {
             "messagekey": "person-deathDateGroupLabel"
+        },
+        ".csc-person-groups-label": {
+            "messagekey": "person-groupsLabel"
+        },
+        ".csc-person-preferredPerson-label": {
+            "messagekey": "person-preferredPersonLabel"
         },
         ".csc-personAuthority-group": {
             "decorators": [
@@ -856,15 +862,6 @@
                 }
             ]
         },
-        ".csc-person-preferredPerson-label": {
-            "messagekey": "person-preferredPersonLabel"
-        },
-        ".csc-person-groups-label": {
-            "messagekey": "person-groupsLabel"
-        },
-        ".csc-contact-addressGroup-label": {
-            "messagekey": "contact-addressGroupLabel"
-        },
         ".csc-personAuthority-nationality": {
             "decorators": [
                 {
@@ -884,10 +881,13 @@
                 }
             ]
         },
+        ".csc-contact-addressGroup-label": {
+            "messagekey": "contact-addressGroupLabel"
+        },
+        ".csc-personAuthority-bioNote": "${fields.bioNote}",
         ".csc-contact-addressPlace1-label": {
             "messagekey": "contact-addressPlace1Label"
         },
-        ".csc-personAuthority-bioNote": "${fields.bioNote}",
         ".csc-person-refName-label": {
             "messagekey": "person-refNameLabel"
         }
