@@ -204,13 +204,12 @@ acquisition-acquisitionProvisosLabel: Accession provisos
 acquisition-acquisitionAuthorizerHeaderLabel: Accession authorizer
 acquisition-acquisitionAuthorizerLabel: Person's name
 acquisition-acquisitionAuthorizerDateLabel: Authorization date
-acquisition-acquisitionDateLabel: Acquisition date
-acquisition-acquisitionDatesLabel: Acquisition date
+acquisitionDateGroup-acquisitionDateGroupLabel: Acquisition date
 acquisition-transferOfTitleNumberLabel: Transfer of title number
 acquisition-creditLineLabel: Credit line
 acquisition-acquisitionMethodLabel: Acquisition method
 acquisition-acquisitionReasonLabel: Accession reason
-acquisition-accessionDateLabel: Accession date
+acquisition-accessionDateGroupLabel: Accession date
 acquisition-acquisitionReferenceNumberLabel: Accession number
 acquisition-acquisitionNoteLabel: Accession note
 
