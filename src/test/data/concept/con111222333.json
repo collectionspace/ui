@@ -22,13 +22,29 @@
                 "_primary": true
             }
         ],
+        "citationGroup": [
+            {
+                "citationSourceDetail": "Source Detail",
+                "citationSource": "Source",
+                "_primary": true
+            }
+        ],
+        "additionalSourceGroup": [
+            {
+                "additionalSourceDetail": "Source Detail",
+                "additionalSource": "Source",
+                "additionalSourceID": "Source ID",
+                "additionalSourceNote": "Source Note",
+                "_primary": true
+            }
+        ],
         "relatedTerms": [{
             "_primary": true
         }],
         "csid": "8c7853a1-f1d3-4ae5-8511",
-        "termScopeNote": "Scope Note",
-        "termScopeNoteSource": "Scope Note Source",
-        "termScopeNoteSourceDetail": "Scope Note Source Detail",
+        "scopeNote": "Scope Note",
+        "scopeNoteSource": "Scope Note Source",
+        "scopeNoteSourceDetail": "Scope Note Source Detail",
         "termLanguage": "urn:cspace:core.collectionspace.org:vocabularies:name(languages):item:name(eng)'English'",
         "updatedBy": "admin@core.collectionspace.org",
         "shortIdentifier": "ConceptDisplayName1332900713944",

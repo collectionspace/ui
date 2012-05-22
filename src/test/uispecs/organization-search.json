@@ -1,245 +1,111 @@
 {
-    ".csc-organization-foundingDate-label": {
-        "messagekey": "organization-foundingDateLabel"
-    },
-    ".csc-organization-foundingDateStart-label": {
-        "messagekey": "organization-foundingDateStartLabel"
-    },
-    ".csc-organizationAuthority-displayName": {
+    ".csc-orgAuthority-foundingPlace": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
-                "type": "fluid",
                 "options": {
-                    "elPath": "displayNames",
-                    "protoTree": {
+                    "elPath": "foundingPlaces",
+                    "hidePrimary": true,
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organizationAuthority-displayName": "${{row}.displayName}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "displayNames"
-                                }
+                                ".csc-orgAuthority-foundingPlace": "${{row}.foundingPlace}"
                             },
                             "type": "fluid.noexpand"
                         }
-                    },
-                    "hidePrimary": true
-                }
+                    }
+                },
+                "type": "fluid"
             }
         ]
     },
-    ".csc-organization-group-label": {
-        "messagekey": "organization-groupLabel"
-    },
-    ".csc-organization-dissolutionDateEnd-label": {
-        "messagekey": "organization-dissolutionDateEndLabel"
-    },
-    ".csc-organization-dissolutionDateStart": {
+    ".csc-orgAuthority-function": {
         "decorators": [
             {
-                "func": "cspace.datePicker",
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "elPath": "functions",
+                    "hidePrimary": true,
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-orgAuthority-function": "${{row}.function}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                },
                 "type": "fluid"
             }
-        ],
-        "value": "${dissolutionDateStart}"
+        ]
+    },
+    ".csc-orgAuthority-group": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "elPath": "groups",
+                    "hidePrimary": true,
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-orgAuthority-group": "${{row}.group}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                },
+                "type": "fluid"
+            }
+        ]
+    },
+    ".csc-organization-additionsToName-label": {
+        "messagekey": "preferredOA-additionsToNameLabel"
     },
     ".csc-organization-foundingPlace-label": {
         "messagekey": "organization-foundingPlaceLabel"
     },
-    ".csc-organizationAuthority-group": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "groups",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organizationAuthority-group": "${{row}.group}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "groups"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-organization-dissolutionDateStart-label": {
-        "messagekey": "organization-dissolutionDateStartLabel"
-    },
-    ".csc-organization-updatedAtStart-label": {
-        "messagekey": "organization-updatedAtStartLabel"
-    },
-    ".csc-organization-foundingDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${foundingDateEnd}"
-    },
-    ".csc-organization-dissolutionDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${dissolutionDateEnd}"
-    },
-    ".csc-organization-dissolutionDate-label": {
-        "messagekey": "organization-dissolutionDateLabel"
-    },
-    ".csc-organization-displayName-label": {
-        "messagekey": "organization-displayNameLabel"
-    },
     ".csc-organization-function-label": {
         "messagekey": "organization-functionLabel"
     },
-    ".csc-organization-updatedAtEnd-label": {
-        "messagekey": "organization-updatedAtEndLabel"
+    ".csc-organization-group-label": {
+        "messagekey": "organization-groupLabel"
     },
-    ".csc-organization-foundingDateEnd-label": {
-        "messagekey": "organization-foundingDateEndLabel"
+    ".csc-organization-mainBodyName-label": {
+        "messagekey": "preferredOA-mainBodyNameLabel"
+    },
+    ".csc-organization-termDisplayName-label": {
+        "messagekey": "preferredOA-termDisplayNameLabel"
+    },
+    ".csc-organization-termLanguage-label": {
+        "messagekey": "preferredOA-termLanguageLabel"
+    },
+    ".csc-organization-termName-label": {
+        "messagekey": "preferredOA-termNameLabel"
+    },
+    ".csc-organization-termPrefForLang-label": {
+        "messagekey": "preferredOA-termPrefForLangLabel"
+    },
+    ".csc-organization-termQualifier-label": {
+        "messagekey": "preferredOA-termQualifierLabel"
+    },
+    ".csc-organization-termSource-label": {
+        "messagekey": "preferredOA-termSourceLabel"
+    },
+    ".csc-organization-termSourceDetail-label": {
+        "messagekey": "preferredOA-termSourceDetailLabel"
+    },
+    ".csc-organization-termSourceID-label": {
+        "messagekey": "preferredOA-termSourceIDLabel"
+    },
+    ".csc-organization-termSourceNote-label": {
+        "messagekey": "preferredOA-termSourceNoteLabel"
     },
     ".csc-organization-termStatus-label": {
-        "messagekey": "organization-termStatusLabel"
+        "messagekey": "preferredOA-termStatusLabel"
     },
-    ".csc-organizationAuthority-foundingPlace": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "foundingPlaces",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organizationAuthority-foundingPlace": "${{row}.foundingPlace}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "foundingPlaces"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-organization-foundingDateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${foundingDateStart}"
-    },
-    ".csc-organization-updatedBy-label": {
-        "messagekey": "organization-updatedByLabel"
-    },
-    ".csc-organization-updatedAtStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${updatedAtStart}"
-    },
-    ".csc-organizationAuthority-status": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "termStatuss",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organizationAuthority-status": {
-                                            "default": "provisional",
-                                            "optionnames": [
-                                                "Provisional",
-                                                "Under Review",
-                                                "Accepted",
-                                                "Rejected"
-                                            ],
-                                            "optionlist": [
-                                                "provisional",
-                                                "under review",
-                                                "accepted",
-                                                "rejected"
-                                            ],
-                                            "selection": "${{row}.termStatus}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "termStatuss"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
-    ".csc-organization-updatedBy": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organization-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
+    ".csc-organization-termType-label": {
+        "messagekey": "preferredOA-termTypeLabel"
     },
     ".csc-organization-updatedAt-label": {
         "messagekey": "organization-updatedAtLabel"
@@ -253,31 +119,61 @@
         ],
         "value": "${updatedAtEnd}"
     },
-    ".csc-organizationAuthority-function": {
+    ".csc-organization-updatedAtEnd-label": {
+        "messagekey": "organization-updatedAtEndLabel"
+    },
+    ".csc-organization-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
+    },
+    ".csc-organization-updatedAtStart-label": {
+        "messagekey": "organization-updatedAtStartLabel"
+    },
+    ".csc-organization-updatedBy": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
-                "type": "fluid",
                 "options": {
-                    "elPath": "functions",
-                    "protoTree": {
+                    "elPath": "updatedBys",
+                    "hidePrimary": true,
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-organizationAuthority-function": "${{row}.function}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "functions"
-                                }
+                                ".csc-organization-updatedBy": "${{row}.updatedBy}"
                             },
                             "type": "fluid.noexpand"
                         }
-                    },
-                    "hidePrimary": true
-                }
+                    }
+                },
+                "type": "fluid"
+            }
+        ]
+    },
+    ".csc-organization-updatedBy-label": {
+        "messagekey": "organization-updatedByLabel"
+    },
+    ".csc-preferredOA-orgTermGroup": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "elPath": "orgTermGroup",
+                    "hidePrimary": true,
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-orgAuthority-termDisplayName": "${{row}.termDisplayName}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                },
+                "type": "fluid"
             }
         ]
     }

@@ -10,11 +10,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*global cspace:true, jQuery, fluid*/
 
-"use strict";
-
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
     
     fluid.defaults("cspace.preferred", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
