@@ -789,6 +789,12 @@ td.fl-date-group {
     border:1px solid #C7CFD4; 
     padding:0;
 }
+.cs-repeatable-content .info-pair .content table,
+.cs-repeatable-content .info-pair-date .content table,
+.cs-repeatable-content .info-pair-select table {
+    width: 100%;
+}
+
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
@@ -2281,6 +2287,10 @@ li.cs-locked {
 li.cs-repeatable-repeat .cs-termList {
     float: left;
     width: 88.5%;
+}
+table li.cs-repeatable-repeat .cs-termList,
+li.cs-repeatable-repeat table .cs-termList {
+    width: 100%;
 }
 
 /* styling for scrollableTabs plugin */
