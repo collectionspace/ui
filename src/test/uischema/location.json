@@ -13,42 +13,45 @@
                     "locTermGroup": {
                         "items": {
                             "properties": {
-                                "_primary": {
-                                    "default": true,
+                                "termPrefForLang": {
+                                    "default": false,
                                     "type": "boolean"
                                 },
                                 "termName": {
                                     "type": "string"
                                 },
-                                "termQualifier": {
-                                    "type": "string"
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
                                 },
                                 "termType": {
                                     "default": "",
+                                    "type": "string"
+                                },
+                                "termDisplayName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
                                     "type": "string"
                                 },
                                 "termStatus": {
                                     "default": "provisional",
                                     "type": "string"
                                 },
-                                "termLanguage": {
-                                    "default": "",
+                                "termSourceID": {
                                     "type": "string"
                                 },
-                                "termPrefForLang": {
-                                    "default": false,
-                                    "type": "boolean"
-                                },
-                                "termSource": {
+                                "termQualifier": {
                                     "type": "string"
                                 },
                                 "termSourceDetail": {
                                     "type": "string"
                                 },
-                                "termSourceID": {
+                                "termSourceNote": {
                                     "type": "string"
                                 },
-                                "termSourceNote": {
+                                "termLanguage": {
+                                    "default": "",
                                     "type": "string"
                                 }
                             },
@@ -111,10 +114,6 @@
                         "default": "",
                         "type": "string"
                     },
-                    "termStatus": {
-                        "default": "provisional",
-                        "type": "string"
-                    },
                     "refName": {
                         "type": "string"
                     },
@@ -136,8 +135,20 @@
                         },
                         "type": "array"
                     },
-                    "displayName": {
-                        "type": "string"
+                    "equivalentContexts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "equivalentContext": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "narrowerContexts": {
                         "items": {
@@ -148,21 +159,6 @@
                                 "_primary": {
                                     "default": true,
                                     "type": "boolean"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "equivalentContexts": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                },
-                                "equivalentContext": {
-                                    "type": "string"
                                 }
                             },
                             "type": "object"

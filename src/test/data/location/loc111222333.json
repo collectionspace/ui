@@ -3,6 +3,7 @@
     "fields": {
         "locTermGroup": [
             {
+                "termDisplayName": "Epic D.",
                 "termName": "Epic Drawer",
                 "termQualifier": "Drawer Qualifier",
                 "termType": "descriptor",

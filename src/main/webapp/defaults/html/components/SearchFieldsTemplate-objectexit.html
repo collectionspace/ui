@@ -26,22 +26,24 @@
                         <input type="text" class="csc-objectexit-depositor" />
                     </div>
                 </div>
-                <div class="info-pair">
+                <!-- FIXME: Un-hide by removing 'style' attribute when range search -->
+                <!-- on structured date start and end scalar values is working -->
+                <div class="info-pair" style="display:none;">
                     <div class="header">
-                        <div class="label csc-objectexit-exitDate-label"></div>
+                        <div class="label csc-objectexit-exitDateGroup-label"></div>
                     </div>
                     <div class="content">
                         <table>
                             <thead>
                                 <tr>
-                                    <td class="csc-objectexit-exitDateStart-label"></td>
-                                    <td class="csc-objectexit-exitDateEnd-label"></td>
+                                    <td class="csc-objectexit-exitDateGroupStart-label"></td>
+                                    <td class="csc-objectexit-exitDateGroupEnd-label"></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" class="csc-objectexit-exitDateStart" /></td>
-                                    <td><input type="text" class="csc-objectexit-exitDateEnd" /></td>
+                                    <td><input type="text" class="csc-objectexit-exitDateGroupStart" /></td>
+                                    <td><input type="text" class="csc-objectexit-exitDateGroupEnd" /></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -91,6 +91,62 @@
             ],
             "value": "${fields.acquisitionAuthorizer}"
         },
+        ".csc-acquisitionDateGroup-acquisitionDateGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-acquisitionDateGroup-acquisitionDateGroup": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.structuredDate",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "dateDisplayDate",
+                                                    "elPaths": {
+                                                        "dateEarliestSingleQualifier": "dateEarliestSingleQualifier",
+                                                        "scalarValuesComputed": "scalarValuesComputed",
+                                                        "dateLatestDay": "dateLatestDay",
+                                                        "dateLatestYear": "dateLatestYear",
+                                                        "dateAssociation": "dateAssociation",
+                                                        "dateEarliestSingleEra": "dateEarliestSingleEra",
+                                                        "dateDisplayDate": "dateDisplayDate",
+                                                        "dateEarliestSingleCertainty": "dateEarliestSingleCertainty",
+                                                        "dateLatestEra": "dateLatestEra",
+                                                        "dateEarliestSingleQualifierValue": "dateEarliestSingleQualifierValue",
+                                                        "dateLatestCertainty": "dateLatestCertainty",
+                                                        "dateEarliestSingleYear": "dateEarliestSingleYear",
+                                                        "dateLatestQualifier": "dateLatestQualifier",
+                                                        "dateLatestQualifierValue": "dateLatestQualifierValue",
+                                                        "dateEarliestSingleQualifierUnit": "dateEarliestSingleQualifierUnit",
+                                                        "datePeriod": "datePeriod",
+                                                        "dateEarliestScalarValue": "dateEarliestScalarValue",
+                                                        "dateLatestMonth": "dateLatestMonth",
+                                                        "dateNote": "dateNote",
+                                                        "dateLatestScalarValue": "dateLatestScalarValue",
+                                                        "dateLatestQualifierUnit": "dateLatestQualifierUnit",
+                                                        "dateEarliestSingleDay": "dateEarliestSingleDay",
+                                                        "dateEarliestSingleMonth": "dateEarliestSingleMonth"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.dateDisplayDate}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.acquisitionDateGroup"
+                    }
+                }
+            ]
+        },
         ".csc-acquisition-acquisitionFundingCurrency-label": {
             "messagekey": "acquisition-acquisitionFundingCurrencyLabel"
         },
@@ -110,6 +166,9 @@
         ".csc-acquisition-updatedBy": "${fields.updatedBy}",
         ".csc-acquisition-summary-label": {
             "messagekey": "acquisition-summaryLabel"
+        },
+        ".csc-acquisitionDateGroup-acquisitionDateGroup-label": {
+            "messagekey": "acquisitionDateGroup-acquisitionDateGroupLabel"
         },
         ".csc-acquisition-tenantID-label": {
             "messagekey": "acquisition-tenantIDLabel"
@@ -131,15 +190,6 @@
                 "treasure"
             ],
             "selection": "${fields.acquisitionMethod}"
-        },
-        ".csc-acquisition-accession-date": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.accessionDate}"
         },
         ".csc-acquisition-owner": {
             "decorators": [
@@ -172,9 +222,6 @@
                 }
             ]
         },
-        ".csc-acquisition-acquisitionProvisos-label": {
-            "messagekey": "acquisition-acquisitionProvisosLabel"
-        },
         ".csc-acquisition-group-purchase-price-currency": {
             "decorators": [
                 {
@@ -186,6 +233,9 @@
                     }
                 }
             ]
+        },
+        ".csc-acquisition-acquisitionProvisos-label": {
+            "messagekey": "acquisition-acquisitionProvisosLabel"
         },
         ".csc-acquisition-objectPurchasePriceCurrency-label": {
             "messagekey": "acquisition-objectPurchasePriceCurrencyLabel"
@@ -218,11 +268,8 @@
             ],
             "value": "${fields.updatedAt}"
         },
-        ".csc-acquisition-acquisitionDates-label": {
-            "messagekey": "acquisition-acquisitionDatesLabel"
-        },
-        ".csc-acquisition-fieldCollectionEventNames-label": {
-            "messagekey": "acquisition-fieldCollectionEventNamesLabel"
+        ".csc-acquisition-coreInformation-label": {
+            "messagekey": "acquisition-coreInformationLabel"
         },
         ".csc-acquisition-acquisitionAuthorizerDate": {
             "decorators": [
@@ -232,6 +279,9 @@
                 }
             ],
             "value": "${fields.acquisitionAuthorizerDate}"
+        },
+        ".csc-acquisition-fieldCollectionEventNames-label": {
+            "messagekey": "acquisition-fieldCollectionEventNamesLabel"
         },
         ".csc-acquisition-createdBy-label": {
             "messagekey": "acquisition-createdByLabel"
@@ -271,9 +321,6 @@
         ".csc-acquisition-acquisitionSource-label": {
             "messagekey": "acquisition-acquisitionSourceLabel"
         },
-        ".csc-acquisition-objectPurchasePriceValue-label": {
-            "messagekey": "acquisition-objectPurchasePriceValueLabel"
-        },
         ".csc-acquisition-original-object-purchase-price-value": {
             "decorators": [
                 {
@@ -287,11 +334,51 @@
             ],
             "value": "${fields.originalObjectPurchasePriceValue}"
         },
-        ".csc-acquisition-objectPurchaseOfferPriceCurrency-label": {
-            "messagekey": "acquisition-objectPurchaseOfferPriceCurrencyLabel"
+        ".csc-acquisition-objectPurchasePriceValue-label": {
+            "messagekey": "acquisition-objectPurchasePriceValueLabel"
+        },
+        ".csc-acquisition-accessionDateGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.structuredDate",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.accessionDateGroup.dateDisplayDate",
+                        "elPaths": {
+                            "dateEarliestSingleQualifier": "fields.accessionDateGroup.dateEarliestSingleQualifier",
+                            "scalarValuesComputed": "fields.accessionDateGroup.scalarValuesComputed",
+                            "dateLatestDay": "fields.accessionDateGroup.dateLatestDay",
+                            "dateLatestYear": "fields.accessionDateGroup.dateLatestYear",
+                            "dateAssociation": "fields.accessionDateGroup.dateAssociation",
+                            "dateEarliestSingleEra": "fields.accessionDateGroup.dateEarliestSingleEra",
+                            "dateDisplayDate": "fields.accessionDateGroup.dateDisplayDate",
+                            "dateEarliestSingleCertainty": "fields.accessionDateGroup.dateEarliestSingleCertainty",
+                            "dateLatestEra": "fields.accessionDateGroup.dateLatestEra",
+                            "dateEarliestSingleQualifierValue": "fields.accessionDateGroup.dateEarliestSingleQualifierValue",
+                            "dateLatestCertainty": "fields.accessionDateGroup.dateLatestCertainty",
+                            "dateEarliestSingleYear": "fields.accessionDateGroup.dateEarliestSingleYear",
+                            "dateLatestQualifier": "fields.accessionDateGroup.dateLatestQualifier",
+                            "dateLatestQualifierValue": "fields.accessionDateGroup.dateLatestQualifierValue",
+                            "dateEarliestSingleQualifierUnit": "fields.accessionDateGroup.dateEarliestSingleQualifierUnit",
+                            "datePeriod": "fields.accessionDateGroup.datePeriod",
+                            "dateEarliestScalarValue": "fields.accessionDateGroup.dateEarliestScalarValue",
+                            "dateLatestMonth": "fields.accessionDateGroup.dateLatestMonth",
+                            "dateNote": "fields.accessionDateGroup.dateNote",
+                            "dateLatestScalarValue": "fields.accessionDateGroup.dateLatestScalarValue",
+                            "dateLatestQualifierUnit": "fields.accessionDateGroup.dateLatestQualifierUnit",
+                            "dateEarliestSingleDay": "fields.accessionDateGroup.dateEarliestSingleDay",
+                            "dateEarliestSingleMonth": "fields.accessionDateGroup.dateEarliestSingleMonth"
+                        }
+                    }
+                }
+            ],
+            "value": "${fields.accessionDateGroup.dateDisplayDate}"
         },
         ".csc-acquisition-domaindata-label": {
             "messagekey": "acquisition-domaindataLabel"
+        },
+        ".csc-acquisition-objectPurchaseOfferPriceCurrency-label": {
+            "messagekey": "acquisition-objectPurchaseOfferPriceCurrencyLabel"
         },
         ".csc-acquisition-object-purchase-price-value": {
             "decorators": [
@@ -320,20 +407,20 @@
             ],
             "value": "${fields.objectOfferPriceValue}"
         },
-        ".csc-acquisition-updatedAt-label": {
-            "messagekey": "acquisition-updatedAtLabel"
-        },
         ".csc-acquisition-number-label": {
             "messagekey": "acquisition-numberLabel"
+        },
+        ".csc-acquisition-updatedAt-label": {
+            "messagekey": "acquisition-updatedAtLabel"
         },
         ".csc-acquisition-objectOfferPriceValue-label": {
             "messagekey": "acquisition-objectOfferPriceValueLabel"
         },
-        ".csc-acquisition-owner-label": {
-            "messagekey": "acquisition-ownerLabel"
-        },
         ".csc-acquisition-acquisitionReason-label": {
             "messagekey": "acquisition-acquisitionReasonLabel"
+        },
+        ".csc-acquisition-owner-label": {
+            "messagekey": "acquisition-ownerLabel"
         },
         ".csc-acquisition-numberPatternChooser-reference-number": "${fields.acquisitionReferenceNumber}",
         ".csc-acquisition-acquisitionFundingValue-label": {
@@ -361,6 +448,9 @@
         ".csc-acquisition-originalObjectPurchasePriceCurrency-label": {
             "messagekey": "acquisition-originalObjectPurchasePriceCurrencyLabel"
         },
+        ".csc-acquisition-updatedBy-label": {
+            "messagekey": "acquisition-updatedByLabel"
+        },
         ".csc-acquisition-object-purchase-offer-price-currency": {
             "decorators": [
                 {
@@ -373,8 +463,8 @@
                 }
             ]
         },
-        ".csc-acquisition-updatedBy-label": {
-            "messagekey": "acquisition-updatedByLabel"
+        ".csc-acquisition-groupPurchasePriceCurrency-label": {
+            "messagekey": "acquisition-groupPurchasePriceCurrencyLabel"
         },
         ".csc-acquisition-fieldCollectionEventName": {
             "decorators": [
@@ -395,12 +485,6 @@
                 }
             ]
         },
-        ".csc-acquisition-groupPurchasePriceCurrency-label": {
-            "messagekey": "acquisition-groupPurchasePriceCurrencyLabel"
-        },
-        ".csc-acquisition-acquisitionDate-label": {
-            "messagekey": "acquisition-acquisitionDateLabel"
-        },
         ".csc-acquisition-original-object-purchase-price-currency": {
             "decorators": [
                 {
@@ -413,14 +497,14 @@
                 }
             ]
         },
-        ".csc-acquisition-accessionDate-label": {
-            "messagekey": "acquisition-accessionDateLabel"
-        },
-        ".csc-acquisition-acquisitionReferenceNumber-label": {
-            "messagekey": "acquisition-acquisitionReferenceNumberLabel"
+        ".csc-acquisition-accessionDateGroup-label": {
+            "messagekey": "acquisition-accessionDateGroupLabel"
         },
         ".csc-acquisition-acquisitionFundingSource-label": {
             "messagekey": "acquisition-acquisitionFundingSourceLabel"
+        },
+        ".csc-acquisition-acquisitionReferenceNumber-label": {
+            "messagekey": "acquisition-acquisitionReferenceNumberLabel"
         },
         ".csc-acquisition-acquisitionSource": {
             "decorators": [
@@ -456,6 +540,9 @@
         ".csc-acquisition-acquisitionNote-label": {
             "messagekey": "acquisition-acquisitionNoteLabel"
         },
+        ".csc-acquisition-createdAt-label": {
+            "messagekey": "acquisition-createdAtLabel"
+        },
         ".csc-acquisition-reference-number-patternChooserContainer": {
             "decorators": [
                 {
@@ -486,44 +573,14 @@
                 }
             ]
         },
-        ".csc-acquisition-createdAt-label": {
-            "messagekey": "acquisition-createdAtLabel"
-        },
         ".csc-acquisition-acquisition-note": "${fields.acquisitionNote}",
-        ".csc-acquisition-date": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-acquisition-date": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.datePicker",
-                                                "type": "fluid"
-                                            }
-                                        ],
-                                        "value": "${{row}.acquisitionDate}"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.acquisitionDates"
-                    }
-                }
-            ]
-        },
         ".csc-acquisition-createdBy": "${fields.createdBy}",
         ".csc-acquisition-transfer-of-title-number": "${fields.transferOfTitleNumber}",
-        ".csc-acquisition-objectOfferPriceCurrency-label": {
-            "messagekey": "acquisition-objectOfferPriceCurrencyLabel"
-        },
         ".csc-acquisition-acquisitionAuthorizerDate-label": {
             "messagekey": "acquisition-acquisitionAuthorizerDateLabel"
+        },
+        ".csc-acquisition-objectOfferPriceCurrency-label": {
+            "messagekey": "acquisition-objectOfferPriceCurrencyLabel"
         }
     }
 }

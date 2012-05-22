@@ -7,21 +7,32 @@ collection-object-identByLabel: By
 collection-object-identDateLabel: Date
 collection-object-institutionLabel: Institution
 collection-object-identKindLabel: Kind
-# Inadvertently shares field name and label
-# with another entry below
 collection-object-referenceLabel: Reference
 collection-object-refPageLabel: Page
 collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
+vocab-local_ta: Local
+vocab-common_ta: Common
+vocab-taxon: Default (v2.3)
+
 # Taxon record
 taxon: Taxon
 taxon-identificationNumberRequired: Please specify a Display Name
 taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
-taxon-termDisplayNameLabel: Display Name
-taxon-termStatusLabel: Term Status
-taxon-taxonFullNameLabel: Full Name
+preferredTA-termDisplayNameLabel: Display Name
+preferredTA-termNameLabel: Term
+preferredTA-termQualifierLabel: Qualifier
+preferredTA-termStatusLabel: Term Status
+preferredTA-termTypeLabel: Term Type
+preferredTA-termLanguageLabel: Language
+preferredTA-termPrefForLangLabel: Pref for Lang
+preferredTA-termSourceLabel: Source
+preferredTA-termSourceDetailLabel: Source Detail
+preferredTA-termSourceIDLabel: Source ID
+preferredTA-termSourceNoteLabel: Source Note
+preferredTA-taxonomicStatusLabel: Taxonomic Status
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Currency
 taxon-taxonAuthorGroupLabel: Author
@@ -30,23 +41,16 @@ taxon-taxonAuthorTypeLabel: Author Type
 taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is Named Hybrid
 taxon-taxonCitationLabel: Citations
-taxon-taxonomicStatusLabel: Taxonomic Status
-taxon-taxonNameSourceLabel: Name Source
-taxon-taxonNameSourceCodeLabel: Name Source Code
-taxon-taxonGUIDLabel: GUID
 taxon-taxonNoteLabel: Note
+taxon-commonNameGroupLabel: Common Name
+taxon-commonNameLabel: Common Name
+taxon-commonNameLanguageLabel: Language
+taxon-commonNameSourceLabel: Source
+taxon-commonNameSourceDetailLabel: Source Detail
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
-taxon-termQualifierLabel: Qualifier
-taxon-termTypeLabel: Term Type
-taxon-termLabel: Term
-taxon-termLanguageLabel: Lang
-taxon-termPrefForLangLabel: Pref for Lang
-taxon-termSourceLabel: Source
-taxon-termSourceDetailLabel: Source detail
-taxon-termSourceIDLabel: Source ID
-
+taxon-preferredTaxonLabel: Taxon Term Group(s)
 
 # -------------------------------------
 #Login
@@ -55,7 +59,7 @@ login-emailRequired: You must enter a valid email address
 login-passwordsMustMatch: Passwords must match
 login-invalid: Invalid email/password combination
 login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 2.3 Information
+login-current: Current Release 2.4 Information
 login-current-info: Welcome to the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
 login-current-details:
 login-login-info: To view the CollectionSpace Life Science tenant, use the login box on the right with the login:
