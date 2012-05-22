@@ -1,13 +1,13 @@
 {
     "organization": {
         "properties": {
-            "termsUsed": {
-                "default": [],
-                "type": "array"
-            },
             "relations": {
                 "default": {},
                 "type": "object"
+            },
+            "termsUsed": {
+                "default": [],
+                "type": "array"
             },
             "csid": {
                 "type": "string"
@@ -115,10 +115,10 @@
                                             "default": "",
                                             "type": "string"
                                         },
-                                        "addressPlace1": {
+                                        "addressCountry": {
                                             "type": "string"
                                         },
-                                        "addressCountry": {
+                                        "addressPlace1": {
                                             "type": "string"
                                         },
                                         "addressPlace2": {
@@ -157,13 +157,13 @@
                             "emailGroup": {
                                 "items": {
                                     "properties": {
-                                        "emailType": {
-                                            "default": "",
-                                            "type": "string"
-                                        },
                                         "_primary": {
                                             "default": true,
                                             "type": "boolean"
+                                        },
+                                        "emailType": {
+                                            "default": "",
+                                            "type": "string"
                                         },
                                         "email": {
                                             "type": "string"
@@ -180,11 +180,11 @@
                                             "default": true,
                                             "type": "boolean"
                                         },
-                                        "telephoneNumber": {
-                                            "type": "string"
-                                        },
                                         "telephoneNumberType": {
                                             "default": "",
+                                            "type": "string"
+                                        },
+                                        "telephoneNumber": {
                                             "type": "string"
                                         }
                                     },
@@ -268,12 +268,12 @@
                             "dateEarliestScalarValue": {
                                 "type": "date"
                             },
-                            "dateLatestMonth": {
-                                "type": "integer"
-                            },
                             "_primary": {
                                 "default": true,
                                 "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
                             },
                             "dateNote": {
                                 "type": "string"
@@ -358,12 +358,12 @@
                             "dateEarliestScalarValue": {
                                 "type": "date"
                             },
-                            "dateLatestMonth": {
-                                "type": "integer"
-                            },
                             "_primary": {
                                 "default": true,
                                 "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
                             },
                             "dateNote": {
                                 "type": "string"
@@ -387,7 +387,7 @@
                     "createdBy": {
                         "type": "string"
                     },
-                    "createdAt": {
+                    "broaderContext": {
                         "type": "string"
                     },
                     "orgTermGroup": {
@@ -445,7 +445,7 @@
                         },
                         "type": "array"
                     },
-                    "broaderContext": {
+                    "createdAt": {
                         "type": "string"
                     },
                     "refName": {
@@ -466,21 +466,6 @@
                         },
                         "type": "array"
                     },
-                    "narrowerContexts": {
-                        "items": {
-                            "properties": {
-                                "narrowerContext": {
-                                    "type": "string"
-                                },
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "equivalentContexts": {
                         "items": {
                             "properties": {
@@ -490,6 +475,21 @@
                                 },
                                 "equivalentContext": {
                                     "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "narrowerContexts": {
+                        "items": {
+                            "properties": {
+                                "narrowerContext": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
                                 }
                             },
                             "type": "object"

@@ -1,52 +1,64 @@
 {
-    "recordtypes": {
-        "properties": {
-            "all": {
-                "default": [
-                    "all"
-                ],
-                "type": "array"
-            },
-            "vocabularies": {
-                "default": [
-                    "persontest1",
-                    "person",
-                    "persontest2",
-                    "location",
-                    "organization",
-                    "place",
-                    "concept"
-                ],
-                "type": "array"
-            },
-            "administration": {
-                "default": [
-                    "users",
-                    "termlist",
-                    "role"
-                ],
-                "type": "array"
-            },
-            "cataloging": {
-                "default": [
-                    "cataloging"
-                ],
-                "type": "array"
-            },
-            "procedures": {
-                "default": [
-                    "loanin",
-                    "loanout",
-                    "acquisition",
-                    "movement",
-                    "objectexit",
-                    "intake",
-                    "group",
-                    "media"
-                ],
-                "type": "array"
-            }
-        },
-        "type": "object"
-    }
+  "recordtypes": {
+    "properties": {
+      "administration": {
+        "default": [
+          "users", 
+          "termlist", 
+          "role"
+        ], 
+        "type": "array"
+      }, 
+      "all": {
+        "default": [
+          "all"
+        ], 
+        "type": "array"
+      }, 
+      "cataloging": {
+        "default": [
+          "cataloging"
+        ], 
+        "type": "array"
+      }, 
+      "procedures": {
+        "default": [
+          "loanin", 
+          "loanout", 
+          "acquisition", 
+          "movement", 
+          "objectexit", 
+          "intake", 
+          "group", 
+          "media"
+        ], 
+        "type": "array"
+      }, 
+      "vocabularies": {
+        "default": [
+          "ulan_pa", 
+          "persontest1", 
+          "persontest2", 
+          "person", 
+          "activity", 
+          "associatedconcept_ca", 
+          "concept", 
+          "material_ca", 
+          "local_sla", 
+          "offsite_sla", 
+          "location", 
+          "ulan_oa", 
+          "organization", 
+          "organizationtest", 
+          "placetest1", 
+          "local_place", 
+          "placetest2", 
+          "place", 
+          "tgn_place"
+        ], 
+        "type": "array"
+      }
+    }, 
+    "type": "object"
+  }
 }

@@ -1,19 +1,6 @@
 {
     "place": {
         "properties": {
-            "nameDateGroupStart": {
-                "properties": {
-                    "scalarValuesComputed": {
-                        "default": "",
-                        "type": "string"
-                    },
-                    "_primary": {
-                        "default": true,
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "createdBys": {
                 "items": {
                     "properties": {
@@ -29,65 +16,20 @@
                 },
                 "type": "array"
             },
-            "ownershipDateGroupEnd": {
-                "properties": {
-                    "scalarValuesComputed": {
-                        "default": "",
-                        "type": "string"
-                    },
-                    "_primary": {
-                        "default": true,
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
-            "termStatuss": {
+            "placeNotes": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "default": true,
                             "type": "boolean"
                         },
-                        "termStatus": {
-                            "default": "",
+                        "placeNote": {
                             "type": "string"
                         }
                     },
                     "type": "object"
                 },
                 "type": "array"
-            },
-            "placeNameGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
-                        },
-                        "nameDateGroup": {
-                            "properties": {
-                                "scalarValuesComputed": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "placeName": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtEnd": {
-                "type": "date"
             },
             "placeOwnerGroup": {
                 "items": {
@@ -95,19 +37,6 @@
                         "_primary": {
                             "default": true,
                             "type": "boolean"
-                        },
-                        "ownershipDateGroup": {
-                            "properties": {
-                                "scalarValuesComputed": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "_primary": {
-                                    "default": true,
-                                    "type": "boolean"
-                                }
-                            },
-                            "type": "object"
                         },
                         "owner": {
                             "type": "string"
@@ -117,21 +46,20 @@
                 },
                 "type": "array"
             },
-            "updatedAtStart": {
-                "type": "date"
-            },
-            "nameDateGroupEnd": {
-                "properties": {
-                    "scalarValuesComputed": {
-                        "default": "",
-                        "type": "string"
+            "placeTermGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "termDisplayName": {
+                            "type": "string"
+                        }
                     },
-                    "_primary": {
-                        "default": true,
-                        "type": "boolean"
-                    }
+                    "type": "object"
                 },
-                "type": "object"
+                "type": "array"
             },
             "placeTypes": {
                 "items": {
@@ -149,33 +77,11 @@
                 },
                 "type": "array"
             },
-            "displayNames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
-                        },
-                        "displayName": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+            "updatedAtEnd": {
+                "type": "date"
             },
-            "ownershipDateGroupStart": {
-                "properties": {
-                    "scalarValuesComputed": {
-                        "default": "",
-                        "type": "string"
-                    },
-                    "_primary": {
-                        "default": true,
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
+            "updatedAtStart": {
+                "type": "date"
             },
             "updatedBys": {
                 "items": {

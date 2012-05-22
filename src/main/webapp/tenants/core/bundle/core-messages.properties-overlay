@@ -4,8 +4,8 @@ login-emailRequired: You must enter a valid email address
 login-passwordsMustMatch: Passwords must match
 login-invalid: Invalid email/password combination
 login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 2.3 Information
-login-current-info: The CollectionSpace project team is pleased to announce the release of CollectionSpace 2.3. For the full release announcement, please visit the project's website.
+login-current: Current Release 2.4 Information
+login-current-info: The CollectionSpace project team is pleased to announce the release of CollectionSpace 2.4. For the full release announcement, please visit the project's website.
 login-current-details: A major deliverable for this release is increased support for multi-tenancy, or the means by which a single CollectionSpace instance can support disparate tenants. This work is foundational to supporting CollectionSpace in a hosted environment. This demo site now supports two tenants.
 login-login-info: To view the CollectionSpace Core tenant, use the login box on the right with the login:
 login-login: admin@core.collectionspace.org
