@@ -17,7 +17,7 @@ taxon-taxonomicDeterminationHistoryGroupLabel: FIX-Taxonomic determination histo
 taxon-taxonLabel: Name
 taxon-qualifierLabel: Qualifier
 taxon-identByLabel: By
-taxon-identDateLabel: Date
+taxonomicIdentGroup-identDateGroupLabel: Date
 taxon-institutionLabel: Institution
 taxon-identKindLabel: Kind
 taxon-referenceLabel: FIX-Taxonomic reference
@@ -438,7 +438,6 @@ collection-object-inscriptionContentMethodLabel: Inscription method
 collection-object-inscriptionContentScriptLabel: Script
 collection-object-inscriptionContentTransliterationLabel: Transliteration
 collection-object-inscriptionContentTypeLabel: Type
-collection-object-inscriptionContentDateLabel: Date
 collection-object-inscriptionContentInscriberLabel: Inscriber
 collection-object-inscriptionContentLabel: Inscription content
 collection-object-inscriptionContentPositionLabel: Inscription position
@@ -480,7 +479,7 @@ collection-object-assocCulturalContextNoteLabel: Note
 
 # ---------------- Associated Date ---------------- #
 collection-object-assocDateGroupLabel: Associated date
-collection-object-assocDateLabel: Date
+assocDateGroup-assocStructuredDateGroupLabel: Date
 collection-object-assocDateTypeLabel: Type of association
 collection-object-assocDateNoteLabel: Note 
 
@@ -585,7 +584,7 @@ collection-object-objectStatusLabel: Object status
 collection-object-ownershipHistoryInformationLabel: FIX-Object History and Ownership Details
 collection-object-ownershipHistoryGroupLabel: Previous owners
 collection-object-previousOwnerLabel: Name
-collection-object-ownershipDateLabel: Date(s)
+ownershipHistoryGroup-ownershipDateGroupLabel: Date(s)
 collection-object-ownershipCategoryLabel: Category
 collection-object-ownershipPlaceLabel: Place
 collection-object-ownershipMethodLabel: Exchg. meth.
