@@ -2292,6 +2292,11 @@ table li.cs-repeatable-repeat .cs-termList,
 li.cs-repeatable-repeat table .cs-termList {
     width: 100%;
 }
+div.label.cs-preferred-label {
+    vertical-align: middle;
+    display: inline-block;
+    padding-top: 6px;
+}
 
 /* styling for scrollableTabs plugin */
 #stTabswrapper {
