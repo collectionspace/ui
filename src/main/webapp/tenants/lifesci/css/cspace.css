@@ -2134,13 +2134,13 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .oocss .info-pair-table, 
 .oocss .info-pair-date,
 .oocss .info-pair-select,
-.oocss .info-pair-termlist
+.oocss .info-pair-termList
 {
 	width: auto;
 	padding-right: 1.5em;
 }
 
-.oocss li {
+.oocss .cs-repeatable-group li {
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
@@ -2195,3 +2195,19 @@ li.cs-locked {
     height: inherit;
 }
 
+.cs-termList {
+    float: none;
+}
+li.cs-repeatable-repeat .cs-termList {
+    float: left;
+    width: 88.5%;
+}
+table li.cs-repeatable-repeat .cs-termList,
+li.cs-repeatable-repeat table .cs-termList {
+    width: 100%;
+}
+div.label.cs-preferred-label {
+    vertical-align: middle;
+    display: inline-block;
+    padding-top: 6px;
+}
