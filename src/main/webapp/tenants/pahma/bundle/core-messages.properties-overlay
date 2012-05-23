@@ -281,13 +281,12 @@ loanout-createdAtLabel:
 loanout-tenantIDLabel:
 
 # Organization
-organization-foundingDateLabel: Founding date
+organization-foundingDateGroupLabel: Founding date
 organization-contactInformationLabel: Contact information
 organization-contactNamesLabel: Related Persons
 organization-orgTypeLabel: Organization Type
 organization-orgNoteLabel: Notes
 organization-foundingPlaceLabel: Founding place
-organization-dissolutionDateLabel: Dissolution date
 organization-displayNameLabel: Display name
 organization-longNameLabel: Main body name
 organization-displayName-label: Display name
