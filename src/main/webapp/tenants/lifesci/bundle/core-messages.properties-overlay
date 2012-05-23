@@ -13,9 +13,9 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
-vocab-local_ta: Local
-vocab-common_ta: Common
-vocab-taxon: Default (v2.3)
+# Vocabularies
+vocab-common_ta: Common Taxa
+vocab-taxon: Local Taxa
 
 # Taxon record
 taxon: Taxon
