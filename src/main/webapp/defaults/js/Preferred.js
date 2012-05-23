@@ -79,15 +79,28 @@ cspace = cspace || {};
             protoTree: "noexpand"
         },
         readOnly: false,
-        selectors: {},
         strings: {},
         parentBundle: "{globalBundle}",
         rendererFnOptions: {
             cutpointGenerator: "cspace.preferred.renderer.cutpointGenerator"
         },
+        selectors: {
+            preferredLabel: ".csc-preferred-label"
+        },
+        styles: {
+            preferredLabel: "cs-preferred-label"
+        },
+        preInitFunction: "cspace.preferred.renderer.preInit",
         finalInitFunction: "cspace.preferred.renderer.finalInit",
         renderOnInit: true
     });
+
+    cspace.preferred.renderer.preInit = function (that) {
+        that.options.protoTree.preferredLabel = {
+            messagekey: "preferred",
+            decorators: {"addClass": "{styles}.preferredLabel"}
+        };
+    };
     
     cspace.preferred.renderer.finalInit = function (that) {
         cspace.util.processReadOnly(that.container, that.options.readOnly);
@@ -97,7 +110,8 @@ cspace = cspace || {};
     };
 
     cspace.preferred.renderer.cutpointGenerator = function (selectors, options) {
-        return cspace.renderUtils.cutpointsFromUISpec(options.protoTree);
+        var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
+        return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.protoTree));
     };
     
 })(jQuery, fluid);
