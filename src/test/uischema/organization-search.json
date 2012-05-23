@@ -1,88 +1,88 @@
 {
-  "organization": {
-    "properties": {
-      "foundingPlaces": {
-        "items": {
-          "properties": {
-            "_primary": {
-              "default": true, 
-              "type": "boolean"
-            }, 
-            "foundingPlace": {
-              "type": "string"
+    "organization": {
+        "properties": {
+            "foundingPlaces": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "foundingPlace": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "functions": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "function": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "groups": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "group": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "orgTermGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "termDisplayName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "updatedBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "updatedBy": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
             }
-          }, 
-          "type": "object"
-        }, 
-        "type": "array"
-      }, 
-      "functions": {
-        "items": {
-          "properties": {
-            "_primary": {
-              "default": true, 
-              "type": "boolean"
-            }, 
-            "function": {
-              "type": "string"
-            }
-          }, 
-          "type": "object"
-        }, 
-        "type": "array"
-      }, 
-      "groups": {
-        "items": {
-          "properties": {
-            "_primary": {
-              "default": true, 
-              "type": "boolean"
-            }, 
-            "group": {
-              "type": "string"
-            }
-          }, 
-          "type": "object"
-        }, 
-        "type": "array"
-      }, 
-      "orgTermGroup": {
-        "items": {
-          "properties": {
-            "_primary": {
-              "default": true, 
-              "type": "boolean"
-            }, 
-            "termDisplayName": {
-              "type": "string"
-            }
-          }, 
-          "type": "object"
-        }, 
-        "type": "array"
-      }, 
-      "updatedAtEnd": {
-        "type": "date"
-      }, 
-      "updatedAtStart": {
-        "type": "date"
-      }, 
-      "updatedBys": {
-        "items": {
-          "properties": {
-            "_primary": {
-              "default": true, 
-              "type": "boolean"
-            }, 
-            "updatedBy": {
-              "type": "string"
-            }
-          }, 
-          "type": "object"
-        }, 
-        "type": "array"
-      }
-    }, 
-    "type": "object"
-  }
+        },
+        "type": "object"
+    }
 }
