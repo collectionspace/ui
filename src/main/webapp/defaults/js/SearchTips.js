@@ -39,7 +39,8 @@ cspace = cspace || {};
 	            "searchTips-instructionsSecond",
 	            "searchTips-instructionsThird",
 	            "searchTips-instructionsFourth",
-	            "searchTips-instructionsFifth"
+	            "searchTips-instructionsFifth",
+	            "searchTips-instructionsSixth"
 	        ]
 	    },
         selectors: {
