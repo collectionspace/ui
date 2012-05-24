@@ -144,7 +144,7 @@ hierarchy-relatedTermsLabel: Related term
 # ---------------------------------- Object Exit Information (Cataloging) -------------------------- #
 objectexit-exitNumberLabel: Exit number
 objectexit-exitDateLabel: Exit date
-objectexit-currentOwnerLabel: New owner
+objectexit-newOwnerLabel: New owner
 objectexit-exitMethodsLabel: Exit method
 objectexit-exitMethodLabel: Exit method
 objectexit-exitReasonLabel: Exit reason
@@ -181,6 +181,7 @@ person-birthPlaceLabel: Place of birth
 person-deathPlaceLabel: Place of death
 person-identificationNumberRequired: Please specify a display name
 person-altNameNotesLabel: Alternate name notes
+person-groupsLabel: Cultural group
 
 contact-telephoneNumberGroupLabel: Telephone number
 contact-webAddressGroupLabel: Web address

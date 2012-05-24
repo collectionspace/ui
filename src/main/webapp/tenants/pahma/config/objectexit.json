@@ -1,0 +1,65 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "objectexit",
+            "selectors": {
+                "recordEditor": ".csc-objectexit-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-objectexit-exitNumber"
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.exitNumber"]
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.exitNumber", {
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.newOwnerList",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "newOwner"
+                        }]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "objectexit",
+            "schema": {
+                "objectexit": null
+            },
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "pages/ObjectexitTemplate.html",
+                    "templateSelector": ".csc-objectexit-template",
+                    "targetSelector": ".csc-record-edit-container"
+                }
+            }
+        }
+    }
+}
