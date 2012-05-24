@@ -134,7 +134,7 @@ loanin-number: Loan number
 loanout-number: Loan number
 claim-number: Claim number
 movement-number: Current location
-media-number: Identification number
+media-number: Museum number
 
 hierarchy-broaderContextLabel: Broader context
 hierarchy-equivalentContextsLabel: Equivalent context
@@ -332,7 +332,7 @@ location-moveableContainerLabel: Moveable/Container
 media-fileInformationHeaderLabel: Media file information
 media-mediaInformationLabel: Media handling information
 media-fileInformationLabel: File information
-media-identificationNumberLabel: Identification number
+media-identificationNumberLabel: Museum number
 media-dimensionSummaryLabel: Dimension summary
 media-dateLabel: Dates
 media-identificationNumberRequired: Please specify an identification number
@@ -341,8 +341,9 @@ media-updatedAtLabel: Modified date
 media-editUsername: Record modified by
 mediaUploader-uploadMediaLabel: Upload media
 mediaUploader-linkMediaLabel: Link to external media
-media-approvedForWebLabel: Approved for web?
+media-approvedForWebLabel: Approved for public?
 media-primaryDisplayLabel: Primary display?
+media-descriptionLabel: Notes
 
 # ******************* Intake (=Object Entry) ******************* #
 intake-objectEntryInformationLabel: Object Entry Information
