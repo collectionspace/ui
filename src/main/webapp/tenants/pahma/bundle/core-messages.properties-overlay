@@ -181,6 +181,7 @@ person-birthPlaceLabel: Place of birth
 person-deathPlaceLabel: Place of death
 person-identificationNumberRequired: Please specify a display name
 person-altNameNotesLabel: Alternate name notes
+person-groupsLabel: Cultural group
 
 contact-telephoneNumberGroupLabel: Telephone number
 contact-webAddressGroupLabel: Web address
