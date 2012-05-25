@@ -71,7 +71,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
     
-    fluid.demands("cspace.createNew.recordTemplateBox", ["cspace.createNew", "cspace.test"], {
+    fluid.demands("cspace.createNew.recordBox", ["cspace.createNew", "cspace.test"], {
         container: "{arguments}.0",
         mergeAllOptions: [{
             createNewModel: "{createNew}.model",
@@ -113,6 +113,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
     });
     fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "organization", "cspace.relatedRecordsList"], {
+        funcName: "cspace.tests.selectNavigateVocab",
+        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
+    });
+    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "place", "cspace.relatedRecordsList"], {
+    	funcName: "cspace.tests.selectNavigateVocab",
+        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
+    });
+    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "concept", "cspace.relatedRecordsList"], {
         funcName: "cspace.tests.selectNavigateVocab",
         args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
     });

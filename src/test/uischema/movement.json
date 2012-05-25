@@ -14,6 +14,10 @@
             },
             "fields": {
                 "properties": {
+                    "frequencyForInventory": {
+                        "default": "",
+                        "type": "string"
+                    },
                     "normalLocation": {
                         "type": "string"
                     },
@@ -23,10 +27,32 @@
                     "movementReferenceNumber": {
                         "type": "string"
                     },
+                    "inventoryContactList": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "inventoryContact": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "inventoryNote": {
+                        "type": "string"
+                    },
+                    "inventoryDate": {
+                        "type": "date"
+                    },
                     "movementMethods": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "movementMethod": {
@@ -38,15 +64,21 @@
                         },
                         "type": "array"
                     },
+                    "workflow": {
+                        "type": "string"
+                    },
                     "reasonForMove": {
                         "default": "",
+                        "type": "string"
+                    },
+                    "updatedBy": {
                         "type": "string"
                     },
                     "currentLocation": {
                         "type": "string"
                     },
                     "updatedAt": {
-                        "type": "string"
+                        "type": "date"
                     },
                     "movementContact": {
                         "type": "string"
@@ -55,17 +87,27 @@
                         "default": "",
                         "type": "string"
                     },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "nextInventoryDate": {
+                        "type": "date"
+                    },
                     "createdAt": {
                         "type": "string"
                     },
                     "removalDate": {
                         "type": "date"
                     },
+                    "plannedRemovalDate": {
+                        "type": "date"
+                    },
                     "locationDate": {
                         "type": "date"
                     },
-                    "plannedRemovalDate": {
-                        "type": "date"
+                    "inventoryActionRequired": {
+                        "default": "",
+                        "type": "string"
                     },
                     "movementNote": {
                         "type": "string"

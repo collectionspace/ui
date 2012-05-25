@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "acquisition",
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces",
-                "acquisition"
-            ],
+             "schema": {
+                "acquisition": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/AcquisitionTemplate.html",

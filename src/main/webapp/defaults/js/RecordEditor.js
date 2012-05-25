@@ -47,11 +47,15 @@ cspace = cspace || {};
 //            if (required === container) {
 //                return true;
 //            }
-//            if ($.trim(required.val()) === "") {
-//                messageBar.show(message, null, true);
-//                return false;
-//            }
-//            return true;
+//            var noId = true;
+//            fluid.each(required, function (elem) {
+//                if ($.trim($(elem).val()) === "") {
+//                    messageBar.show(message, null, true);
+//                    noId = false;
+//                    return noId;
+//                }
+//            });
+//            return noId;
 //        };
 //    };
 //    
@@ -80,7 +84,6 @@ cspace = cspace || {};
 //            record: that.lookupMessage(that.options.recordType)
 //        }), Date());
 //        processChanges(that, false);
-//        that.locate("save").prop("disabled", false);
 //    };
 //
 //    var bindEventHandlers = function (that) {
@@ -156,7 +159,6 @@ cspace = cspace || {};
 //        components: {
 //            messageBar: "{messageBar}",
 //            globalNavigator: "{globalNavigator}",
-//            namespaces: "{namespaces}",
 //            recordDataSource: {
 //                type: "cspace.recordEditor.dataSource",
 //                options: {
@@ -183,7 +185,8 @@ cspace = cspace || {};
 //            },
 //            validator: {
 //                type: "cspace.validator"
-//            }
+//            },
+//            vocab: "{vocab}"
 //        },
 //        invokers: {
 //            lookupMessage: "cspace.util.lookupMessage",
@@ -191,6 +194,7 @@ cspace = cspace || {};
 //                funcName: "cspace.recordEditor.rollback",
 //                args: "{recordEditor}"
 //            },
+//            requestSave: "cspace.recordEditor.requestSave",
 //            remove: "remove",
 //            afterDeleteAction: "afterDelete",
 //            checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
@@ -440,7 +444,7 @@ cspace = cspace || {};
             onCreateFromExisting: "{cspace.recordEditor.cloner}.clone"
         },
         preInitFunction: "cspace.recordEditor.cloner.preInit",
-        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html")
+        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%vocab")
     });
 
     cspace.recordEditor.cloner.preInit = function (that) {
@@ -1233,7 +1237,8 @@ cspace = cspace || {};
 //    cspace.recordEditor.navigateToFullImage = function (that) {
 //        window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
 //            height: that.options.originalMediaDimensions.height,
-//            width: that.options.originalMediaDimensions.width
+//            width: that.options.originalMediaDimensions.width,
+//            scrollbars: "yes"
 //        }));
 //    };
 //    
@@ -1258,7 +1263,12 @@ cspace = cspace || {};
 //    
 //    cspace.recordEditor.reloadAndCloneRecord = function (that) {
 //        that.cloneAndStore();
-//        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.options.recordType});
+//        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {
+//            recordType: that.options.recordType,
+//            vocab: that.model.namespace ? ("?" + $.param({
+//                vocab: that.model.namespace
+//            })) : ""
+//        });
 //    };
 //    
 //    cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
@@ -1275,6 +1285,7 @@ cspace = cspace || {};
 //
 //    cspace.recordEditor.finalInit = function (that) {
 //        that.refreshView = function () {
+//            that.options.readOnly = cspace.util.isReadOnly(that.options.readOnly, that.model);
 //            fluid.log("RecordEditor.js before render");
 //            that.events.onRefreshView.fire();
 //            that.renderer.refreshView();
@@ -1293,39 +1304,70 @@ cspace = cspace || {};
 //            bindHandlers(that);
 //            fluid.log("RecordEditor.js renderPage end");
 //        };
-//        /*
-//         * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
-//         * Note that a return value of true does not necessarily indicate that the save was successful, only that
-//         * it was successfully submitted.
-//         */
-//        that.requestSave = function (callback) {
-//            var ret = that.events.onSave.fire(that.model);
-//            if (ret === false) {
-//                that.events.cancelSave.fire();
-//                return ret;
-//            }
-//            if (that.namespaces) {
-//                var namespace = cspace.util.getDefaultConfigURL.getRecordType();
-//                if (that.namespaces.isNamespace(namespace)) {
-//                    that.options.applier.requestChange("namespace", namespace);
+//    };
+//
+//    cspace.recordEditor.requestSaveMovement = function (that) {
+//        that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+//            model: {
+//                messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
+//                messagekeys: {
+//                    actText: "lockDialog-actText",
+//                    actAlt: "lockDialog-actAlt",
+//                    proceedText: "lockDialog-proceedText",
+//                    proceedAlt: "lockDialog-proceedAlt"
 //                }
-//            }
-//            if (that.validator) {
-//                var validatedModel = that.validator.validate(that.model);
-//                if (!validatedModel) {
-//                    that.events.cancelSave.fire();
-//                    return false;
+//            },
+//            listeners: {
+//                onClose: function (userAction) {
+//                    if (userAction === "act") {
+//                        cspace.recordEditor.requestSave(that);
+//                    } else if (userAction === "proceed") {
+//                        that.applier.requestChange("workflowTransition", "lock");
+//                        cspace.recordEditor.requestSave(that);
+//                    }
 //                }
-//                else {
-//                    that.applier.requestChange("", validatedModel)
-//                }
-//            }
-//            that.locate("save").prop("disabled", true);
-//            that.recordDataSource.set(that.model, function (data) {
-//                callback(data);
+//            },
+//            parentBundle: that.options.parentBundle
+//        });
+//    };
+//
+//    /*
+//     * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
+//     * Note that a return value of true does not necessarily indicate that the save was successful, only that
+//     * it was successfully submitted.
+//     */
+//    cspace.recordEditor.requestSave = function (that) {
+//        var ret = that.events.onSave.fire(that.model),
+//            vocab = cspace.vocab.resolve({
+//                model: that.model,
+//                recordType: that.options.recordType,
+//                vocab: that.vocab
 //            });
-//           return true;
-//        };
+//        if (ret === false) {
+//            that.events.cancelSave.fire();
+//            return ret;
+//       }
+//        if (vocab) {
+//            that.applier.requestChange("namespace", vocab);
+//        }
+//        if (that.validator) {
+//            var validatedModel = that.validator.validate(that.model);
+//            if (!validatedModel) {
+//                that.events.cancelSave.fire();
+//                return false;
+//            }
+//            else {
+//                that.applier.requestChange("", validatedModel)
+//            }
+//        }
+//        that.locate("save").prop("disabled", true);
+//        if (that.model.csid) {
+//            that.options.dataContext.update();
+//        } else {
+//            that.options.applier.requestChange("csid", "");
+//            that.options.dataContext.create();
+//        }
+//        return true;
 //    };
 //
 //    cspace.recordEditor.preInit = function (that) {

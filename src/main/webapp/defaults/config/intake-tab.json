@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "intake",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "intake"
-            ],
+            "schema": {
+                "intake": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/IntakeTemplate.html",

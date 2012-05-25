@@ -38,12 +38,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "objectexit",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "objectexit"
-            ]
+            "schema": {
+                "objectexit": null
+            }
         }
     }
 }

@@ -13,7 +13,145 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var utilitiesTester = function ($) {
     
-    var uispec, expectedBase, schema;
+    var uispec, expectedBase, schema,
+        namespaces = {
+            "properties": {
+                "person": {
+                    "properties": {
+                        "person": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "persontest1": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "persontest2": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "concept": {
+                    "properties": {
+                        "concept": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "activity": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "material": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "place": {
+                    "properties": {
+                        "place": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "placetest1": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "placetest2": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "organization": {
+                    "properties": {
+                        "organization": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "organizationtest": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "location": {
+                    "properties": {
+                        "location": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        };
     
     var baserUtilitiesTest = new jqUnit.TestCase("Utilities Tests", function () {
         cspace.util.isTest = true;
@@ -73,6 +211,8 @@ var utilitiesTester = function ($) {
         "loanin": ["read", "list"],
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
+        "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
         "objects": ["create", "read", "update", "delete", "list"]
@@ -251,6 +391,8 @@ var utilitiesTester = function ($) {
             "loanout",
             "acquisition",
             "organization",
+            "place",
+            "concept",
             "cataloging",
             "movement",
             "objectexit",
@@ -270,7 +412,9 @@ var utilitiesTester = function ($) {
         ], recTypes.procedures);
         jqUnit.assertDeepEq("vocabularies should contain", [
             "person",
-            "organization"
+            "organization",
+            "place",
+            "concept"
         ], recTypes.vocabularies);
     });
     
@@ -282,6 +426,54 @@ var utilitiesTester = function ($) {
         jqUnit.isVisible("Indicator is visible", indicator.indicator);
         indicator.events.hideOn.fire();
         jqUnit.notVisible("Indicator is invisible", indicator.indicator);
+    });
+
+    utilitiesTest.test("Vocab test", function () {
+        var namespace = fluid.copy(namespaces);
+        var vocab = cspace.vocab({
+            schema: {
+                namespaces: namespaces
+            }
+        });
+        jqUnit.assertValue("Vocab component iniialized", vocab);
+
+        jqUnit.assertDeepEq("Authorities", {
+            "person": "person",
+            "concept": "concept",
+            "place": "place",
+            "organization": "organization",
+            "location": "location"
+        }, vocab.authorities);
+
+        jqUnit.assertDeepEq("Person vocabs", {
+            person: "person",
+            persontest1: "persontest1",
+            persontest2: "persontest2"
+        }, vocab.authority.person.vocabs);
+
+        jqUnit.assertDeepEq("Person nptAllowed vocabs", {
+            person: true,
+            persontest1: true,
+            persontest2: true
+        }, vocab.authority.person.nptAllowed.vocabs);
+
+        jqUnit.assertTrue("Person is default", vocab.isDefault("person"));
+        jqUnit.assertFalse("Persontest1 is not default", vocab.isDefault("persontest1"));
+
+        jqUnit.assertEquals("Resolve namespace", "person", cspace.vocab.resolve({
+            model: {
+                namespace: "person"
+            },
+            vocab: vocab
+        }));
+        jqUnit.assertEquals("Resolve namespace", "place", cspace.vocab.resolve({
+            recordType: "place",
+            vocab: vocab
+        }));
+        jqUnit.assertUndefined("Resolve namespace", cspace.vocab.resolve({
+            recordType: "objectexit",
+            vocab: vocab
+        }));
     });
 };
 

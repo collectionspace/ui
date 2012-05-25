@@ -190,11 +190,7 @@ cspace = cspace || {};
                 falseTree: {
                     add: {
                         messagekey: "repeatable-add",
-                        decorators: [{"addClass": "{styles}.add"}, {
-                            type: "jQuery",
-                            func: "css",
-                            args: ["position", "absolute"]
-                        }]
+                        decorators: [{"addClass": "{styles}.add"}]
                     }
                 }
             }, {
@@ -234,10 +230,6 @@ cspace = cspace || {};
             processDeleteInput: {
                 funcName: "cspace.repeatableImpl.processDeleteInput",
                 args: ["{repeatableImpl}.dom.delete", "{repeatableImpl}.fetchModel"]
-            },
-            positionAddButton: {
-                funcName: "cspace.repeatableImpl.positionAddButton",
-                args: ["{repeatableImpl}.dom.add", "{repeatableImpl}.dom.delete"]
             },
             setupPrimary: {
                 funcName: "cspace.repeatableImpl.setupPrimary",
@@ -305,7 +297,6 @@ cspace = cspace || {};
         if (isGroup(that.options.repeatTree)) {
             that.container.addClass(that.options.styles.repeatableGroup);
         }
-        that.positionAddButton();
     };
 
     cspace.repeatableImpl.expandSelectors = function (selectors, id) {
@@ -373,19 +364,6 @@ cspace = cspace || {};
         });
     };
     
-    cspace.repeatableImpl.positionAddButton = function (button, target) {
-        var offset = target.offset();
-        button = button[0];
-        target = target[0];
-        var offsetParent = button.offsetParent;
-        if (!offsetParent) {
-            // Button is display=none, do not position.
-            return;
-        }
-        var tleft = offset.left - $(offsetParent).offset().left;
-        $(button).css("left", (tleft - button.offsetWidth) / offsetParent.offsetWidth * 100 + "%");
-    };
-    
     cspace.repeatableImpl.processDeleteInput = function (inputs, fetchModel) {
         inputs.eq(0).prop("disabled", fetchModel().length <= 1);
     };
@@ -393,7 +371,6 @@ cspace = cspace || {};
     cspace.repeatableImpl.refreshView = function (that) {
         that.events.onRefreshView.fire();
         that.renderer.refreshView();
-        that.positionAddButton();
         that.setupPrimary();
     };
     
@@ -478,7 +455,8 @@ cspace = cspace || {};
                        .wrap($("<ul></ul>").addClass(getStyle("repeatable")))
                        .wrap($("<li/>").addClass(getClass("repeat"))
                                        .addClass(getStyle("clearfix"))
-                                       .addClass(getStyle("repeat")))
+                                       .addClass(getStyle("repeat"))
+                                       .css("display", "block"))
                        .parent("li");
         }
     

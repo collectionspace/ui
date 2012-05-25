@@ -5,18 +5,6 @@
         "referenceNumber": "1234",
         "status": "accepted",
         "shortIdentifier": "Bloggs",
-        "subBodies": [
-            { "subBody": "",
-              "_primary": true }
-        ],
-        "mainBodyGroup": [
-            {
-                "_primary": true,
-                "longName": "Bloggs & Co.",
-                "shortName": "Bloggs",
-                "nameAdditions": ""
-            }
-        ],
         "contactNames": [
             { "contactName": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person(Fred Bloggs)'Fred Bloggs'",
               "_primary": true }

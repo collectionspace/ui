@@ -1,25 +1,131 @@
 {
-    "properties": {
-        "person": {
-            "default": [
-                "persontest1",
-                "person",
-                "persontest2"
-            ],
-            "type": "array"
+    "namespaces": {
+        "properties": {
+            "person": {
+                "properties": {
+                    "person": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "ulan_pa": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "concept": {
+                "properties": {
+                    "concept": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "material_ca": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "activity": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "organization": {
+                "properties": {
+                    "ulan_oa": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "organization": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "location": {
+                "properties": {
+                    "location": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "offsite_sla": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "tgn_place": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
         },
-        "organization": {
-            "default": [
-                "organization"
-            ],
-            "type": "array"
-        },
-        "location": {
-            "default": [
-                "location"
-            ],
-            "type": "array"
-        }
-    },
-    "type": "object"
+        "type": "object"
+    }
 }

@@ -46,12 +46,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "intake",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "intake"
-            ],
+            "schema": {
+                "intake": null
+            },
             "components": {
                 "templateLocator": {
                     "type": "cspace.pageBuilderIO.templateLocator",

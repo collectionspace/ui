@@ -1,0 +1,63 @@
+{
+    "csid": "org111222333",
+    "fields": {
+        "orgTermGroup": [
+            {
+                "termDisplayName": "Bloggs & Co.",
+                "termQualifier": "Epic Qualifier",
+                "termType": "descriptor",
+                "termStatus": "provisional",
+                "termName": "abc",
+                "termLanguage": "Value 1",
+                "termPrefForLang": true,
+                "termSource": "Source",
+                "termSourceDetail": "Source Detail",
+                "termSourceID": "Source ID",
+                "termSourceNote": "Source Note",
+                "mainBodyName": "I am too long for you",
+                "additionsToName": "Add 1+1",
+                "_primary": true
+            }
+        ],
+        "referenceNumber": "1234",
+        "status": "accepted",
+        "shortIdentifier": "Bloggs",
+        "contactNames": [
+            { "contactName": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person(Fred Bloggs)'Fred Bloggs'",
+              "_primary": true }
+        ],
+        "foundingDate": "",
+        "foundingPlace": "Cambridge",
+        "dissolutionDate": "",
+        "groups": [
+            { "group": "Cool people"},
+            { "group": "Musicians",
+              "_primary": true }
+        ],
+        "functions": [
+            {"function": "to make beautiful music",
+             "_primary": true }
+        ],
+        "historyNotes": [
+            { "historyNote": "history notes here",
+              "_primary": true }
+        ],
+        "addressType1": "Work",
+        "addressText1": "22 Acacia Avenue",
+        "faxNumber1": "01223 123456",
+        "place": "Cambridge",
+        "telephoneNumber1": "01223 654321",
+        "postcode1": "CB1 2AZ",
+        "email1": ""
+    },
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "Fred Bloggs",
+            "sourceFieldName": "contactName",
+            "relationshiptype": "uses",
+            "recordtype": "person"
+        }
+    ],
+    "relations": {}
+}

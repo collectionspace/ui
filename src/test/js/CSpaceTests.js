@@ -28,7 +28,9 @@ cspace.tests.sampleSchema = {
             "vocabularies": {
                 "default": [
                     "person",
-                    "organization"
+                    "organization",
+                    "place",
+                    "concept"
                 ],
                 "type": "array"
             },
@@ -60,12 +62,152 @@ cspace.tests.sampleSchema = {
             "loanout",
             "acquisition",
             "organization",
+            "place",
+            "concept",
             "cataloging",
             "movement",
             "objectexit",
             "media"
         ],
         "type": "array"
+    },
+    "namespaces": {
+        "properties": {
+            "person": {
+                "properties": {
+                    "person": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest1": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "persontest2": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "concept": {
+                "properties": {
+                    "concept": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "activity": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "material": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest1": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "placetest2": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "organization": {
+                "properties": {
+                    "organization": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    },
+                    "organizationtest": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "location": {
+                "properties": {
+                    "location": {
+                        "type": "object",
+                        "properties": {
+                            "nptAllowed": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
     }
 };
    
@@ -75,6 +217,8 @@ cspace.tests.sampleUserPerms = {
         "loanin": ["read", "list"],
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
+        "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "cataloging": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
@@ -91,6 +235,8 @@ cspace.tests.fullPerms = {
         "objectexit": ["create", "read", "update", "delete", "list"],
         "person": ["create", "read", "update", "delete", "list"],
         "organization": ["create", "read", "update", "delete", "list"],
+        "place": ["create", "read", "update", "delete", "list"],
+        "concept": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
         "users": ["create", "read", "update", "delete", "list"]
 };
@@ -175,6 +321,12 @@ fluid.defaults("cspace.tests.testEnvironment", {
         },
         relationResolver: {
             type: "cspace.util.relationResolver"
+        },
+        vocab: {
+            type: "cspace.vocab",
+            options: {
+                schema: "{testEnvironment}.options.schema"
+            }
         },
         recordTypeManager: {
             type: "cspace.recordTypeManager"

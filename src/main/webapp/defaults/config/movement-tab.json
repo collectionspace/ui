@@ -2,12 +2,9 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "movement",
-             "schema": [
-                "recordlist",
-                "namespaces",
-                "recordtypes",
-                "movement"
-            ],
+            "schema": {
+                "movement": null
+            },
             "pageSpec": {
                 "details": {
                     "href": "pages/MovementTemplate.html",
@@ -44,8 +41,23 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-movement-currentLocation" 
-                                                } 
+                                                    "identificationNumber": ".csc-movement-currentLocation",
+                                                    "recordLockContainer": ".csc-recordLock"
+                                                },
+                                                "selectorsToIgnore": [
+                                                    "recordLockContainer",
+                                                    "recordTraverser",
+                                                    "requiredFields",
+                                                    "identificationNumber",
+                                                    "header",
+                                                    "togglable"
+                                                ],
+                                                "components": {
+                                                    "recordLock": {
+                                                        "type": "cspace.util.recordLock",
+                                                        "createOnEvent": "afterRender"
+                                                    }
+                                                }
                                             }
                                         }
                                     }

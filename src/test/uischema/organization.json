@@ -18,6 +18,7 @@
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "function": {
@@ -31,19 +32,14 @@
                     "tenantID": {
                         "type": "string"
                     },
-                    "mainBodyGroup": {
+                    "relatedTerms": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
-                                "longName": {
-                                    "type": "string"
-                                },
-                                "shortName": {
-                                    "type": "string"
-                                },
-                                "nameAdditions": {
+                                "relatedTerm": {
                                     "type": "string"
                                 }
                             },
@@ -55,6 +51,7 @@
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "contactName": {
@@ -65,28 +62,382 @@
                         },
                         "type": "array"
                     },
-                    "foundingDate": {
-                        "type": "date"
+                    "csid": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string"
+                    },
+                    "contact": {
+                        "properties": {
+                            "updatedAt": {
+                                "type": "string"
+                            },
+                            "faxNumberGroup": {
+                                "items": {
+                                    "properties": {
+                                        "_primary": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        },
+                                        "faxNumber": {
+                                            "type": "string"
+                                        },
+                                        "faxNumberType": {
+                                            "default": "",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "tenantID": {
+                                "type": "string"
+                            },
+                            "createdBy": {
+                                "type": "string"
+                            },
+                            "addressGroup": {
+                                "items": {
+                                    "properties": {
+                                        "_primary": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        },
+                                        "addressStateOrProvince": {
+                                            "type": "string"
+                                        },
+                                        "addressPostCode": {
+                                            "type": "string"
+                                        },
+                                        "addressType": {
+                                            "default": "",
+                                            "type": "string"
+                                        },
+                                        "addressCountry": {
+                                            "type": "string"
+                                        },
+                                        "addressPlace1": {
+                                            "type": "string"
+                                        },
+                                        "addressPlace2": {
+                                            "type": "string"
+                                        },
+                                        "addressMunicipality": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "createdAt": {
+                                "type": "string"
+                            },
+                            "webAddressGroup": {
+                                "items": {
+                                    "properties": {
+                                        "_primary": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        },
+                                        "webAddress": {
+                                            "type": "string"
+                                        },
+                                        "webAddressType": {
+                                            "default": "",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "emailGroup": {
+                                "items": {
+                                    "properties": {
+                                        "_primary": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        },
+                                        "emailType": {
+                                            "default": "",
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "telephoneNumberGroup": {
+                                "items": {
+                                    "properties": {
+                                        "_primary": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        },
+                                        "telephoneNumberType": {
+                                            "default": "",
+                                            "type": "string"
+                                        },
+                                        "telephoneNumber": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "updatedBy": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "updatedBy": {
+                        "type": "string"
                     },
                     "shortIdentifier": {
                         "type": "string"
                     },
                     "updatedAt": {
-                        "type": "string"
-                    },
-                    "dissolutionDate": {
                         "type": "date"
+                    },
+                    "dissolutionDateGroup": {
+                        "properties": {
+                            "dateEarliestSingleQualifier": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "scalarValuesComputed": {
+                                "default": "true",
+                                "type": "string"
+                            },
+                            "dateLatestDay": {
+                                "type": "integer"
+                            },
+                            "dateLatestYear": {
+                                "type": "integer"
+                            },
+                            "dateAssociation": {
+                                "type": "string"
+                            },
+                            "dateEarliestSingleEra": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateDisplayDate": {
+                                "type": "string"
+                            },
+                            "dateEarliestSingleCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestEra": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleQualifierValue": {
+                                "type": "integer"
+                            },
+                            "dateLatestCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleYear": {
+                                "type": "integer"
+                            },
+                            "dateLatestQualifier": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestQualifierValue": {
+                                "type": "integer"
+                            },
+                            "dateEarliestSingleQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "datePeriod": {
+                                "type": "string"
+                            },
+                            "dateEarliestScalarValue": {
+                                "type": "date"
+                            },
+                            "_primary": {
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
+                            },
+                            "dateNote": {
+                                "type": "string"
+                            },
+                            "dateLatestScalarValue": {
+                                "type": "date"
+                            },
+                            "dateLatestQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleDay": {
+                                "type": "integer"
+                            },
+                            "dateEarliestSingleMonth": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
                     },
                     "foundingPlace": {
                         "type": "string"
                     },
-                    "subBodies": {
+                    "foundingDateGroup": {
+                        "properties": {
+                            "dateEarliestSingleQualifier": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "scalarValuesComputed": {
+                                "default": "true",
+                                "type": "string"
+                            },
+                            "dateLatestDay": {
+                                "type": "integer"
+                            },
+                            "dateLatestYear": {
+                                "type": "integer"
+                            },
+                            "dateAssociation": {
+                                "type": "string"
+                            },
+                            "dateEarliestSingleEra": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateDisplayDate": {
+                                "type": "string"
+                            },
+                            "dateEarliestSingleCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestEra": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleQualifierValue": {
+                                "type": "integer"
+                            },
+                            "dateLatestCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleYear": {
+                                "type": "integer"
+                            },
+                            "dateLatestQualifier": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestQualifierValue": {
+                                "type": "integer"
+                            },
+                            "dateEarliestSingleQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "datePeriod": {
+                                "type": "string"
+                            },
+                            "dateEarliestScalarValue": {
+                                "type": "date"
+                            },
+                            "_primary": {
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "dateLatestMonth": {
+                                "type": "integer"
+                            },
+                            "dateNote": {
+                                "type": "string"
+                            },
+                            "dateLatestScalarValue": {
+                                "type": "date"
+                            },
+                            "dateLatestQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleDay": {
+                                "type": "integer"
+                            },
+                            "dateEarliestSingleMonth": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "broaderContext": {
+                        "type": "string"
+                    },
+                    "orgTermGroup": {
                         "items": {
                             "properties": {
-                                "_primary": {
+                                "additionsToName": {
+                                    "type": "string"
+                                },
+                                "termName": {
+                                    "type": "string"
+                                },
+                                "termSource": {
+                                    "type": "string"
+                                },
+                                "termSourceID": {
+                                    "type": "string"
+                                },
+                                "termSourceNote": {
+                                    "type": "string"
+                                },
+                                "termLanguage": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "termPrefForLang": {
+                                    "default": false,
                                     "type": "boolean"
                                 },
-                                "subBody": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "termDisplayName": {
+                                    "type": "string"
+                                },
+                                "termType": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "mainBodyName": {
+                                    "type": "string"
+                                },
+                                "termStatus": {
+                                    "default": "provisional",
+                                    "type": "string"
+                                },
+                                "termQualifier": {
+                                    "type": "string"
+                                },
+                                "termSourceDetail": {
                                     "type": "string"
                                 }
                             },
@@ -97,14 +448,14 @@
                     "createdAt": {
                         "type": "string"
                     },
-                    "termStatus": {
-                        "default": "",
+                    "refName": {
                         "type": "string"
                     },
                     "historyNotes": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "historyNote": {
@@ -115,13 +466,41 @@
                         },
                         "type": "array"
                     },
-                    "displayName": {
-                        "type": "string"
+                    "equivalentContexts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "equivalentContext": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "narrowerContexts": {
+                        "items": {
+                            "properties": {
+                                "narrowerContext": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "groups": {
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "group": {

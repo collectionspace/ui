@@ -18,6 +18,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.createNew", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         finalInitFunction: "cspace.createNew.finalInit",
+        preInitFunction: "cspace.createNew.preInit",
         parentBundle: "{globalBundle}",
         model: {
             categories: [{
@@ -105,12 +106,10 @@ cspace = cspace || {};
             lookupMessage: "cspace.util.lookupMessage"
         },
         urls: cspace.componentUrlBuilder({
-            newRecordUrl: "%webapp/html/%recordType.html%template",
-            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType%template",
+            newRecordUrl: "%webapp/html/%recordType.html?%params",
+            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType&%params",
             templateUrl: "%webapp/html/template.html?recordtype=%recordType",
-            templateViewsUrl: "%webapp/config/templateViews.json",
-            template: "?template=%template",
-            templateLocal: "&template=%template"
+            templateViewsUrl: "%webapp/config/templateViews.json"
         }),
         newRecordUrl: "%recordUrl.html",
         resources: {
@@ -125,14 +124,36 @@ cspace = cspace || {};
         components: {
             templateSource: {
                 type: "cspace.createNew.templateViewDataSource"
-            }
+            },
+            vocab: "{vocab}"
         },
         events: {
             collapseAll: null,
             updateModel: null,
             onReady: null
+        },
+        listeners: {
+            prepareModelForRender: "{cspace.createNew}.prepareModelForRender"
         }
     });
+
+    cspace.createNew.preInit = function (that) {
+        that.prepareModelForRender = function () {
+            var permittedAuth = fluid.find(that.model.categories, function (category) {
+                if (category.name === "vocabulariesCategory") {
+                    return category.arr;
+                }
+            });
+            if (!permittedAuth) {
+                return;
+            }
+            var vocabs = {};
+            fluid.each(permittedAuth, function (auth) {
+                vocabs[auth] = that.vocab.authority[auth].vocabs;
+            });
+            that.applier.requestChange("vocabs", vocabs);
+        };
+    };
     
     cspace.createNew.updateModel = function (that, model) {
         fluid.each(model, function (value, key) {
@@ -145,12 +166,24 @@ cspace = cspace || {};
     // Note that the record isn't actually created until the user clicks the save button. This
     // function will simply redirect user to a page where he is presented with an empty
     // record
-    cspace.createNew.createRecord = function (model, url, templateUrl) {
-        var template = model.createFromSelection === "fromTemplate" ? model.templateSelection : "";
-        window.location = fluid.stringTemplate(url, {
+    cspace.createNew.createRecord = function (model, url) {
+        var template = model.createFromSelection === "fromTemplate" ? model.templateSelection : "",
+            vocab = model.vocabSelection,
+            params = {};
+        if (template) {
+            params.template = template;
+        }
+        if (vocab) {
+            params.vocab = vocab;
+        }
+        var url = fluid.stringTemplate(url, {
             recordType: model.currentSelection,
-            template: template ? fluid.stringTemplate(templateUrl, {template: template}) : ""
+            params: $.param(params)
         });
+        if (url[url.length - 1] === "&" || url[url.length - 1] === "?") {
+            url = url.slice(0, url.length - 1);
+        }
+        window.location = url;
     };
 
     cspace.createNew.stylefy = function (that) {
@@ -221,11 +254,12 @@ cspace = cspace || {};
                             row: {
                                 decorators: [{
                                     type: "fluid",
-                                    func: "cspace.createNew.recordTemplateBox",
+                                    func: "cspace.createNew.recordBox",
                                     options: {
                                         model: {
                                             recordType: "${{rowdyVal}}",
-                                            templates: "${templateViews}"
+                                            templates: "${templateViews}",
+                                            vocabs: "${vocabs}"
                                         }
                                     }
                                 }, {"addClass": "{styles}.row"}]
@@ -272,7 +306,7 @@ cspace = cspace || {};
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");
     
-    fluid.defaults("cspace.createNew.recordTemplateBox", {
+    fluid.defaults("cspace.createNew.recordBox", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
             "rendererOptions.applier": "applier",
@@ -284,7 +318,7 @@ cspace = cspace || {};
             collapseOn: null,
             updateModel: null
         },
-        produceTree: "cspace.createNew.recordTemplateBox.produceTree",
+        produceTree: "cspace.createNew.recordBox.produceTree",
         renderOnInit: true,
         selectors: {
             radio: ".csc-createNew-recordRadio",
@@ -293,14 +327,16 @@ cspace = cspace || {};
             createFrom: ".csc-createNew-createFrom",
             createInput: ".csc-createNew-createFrom-input",
             createLabel: ".csc-createNew-createFrom-label",
-            templateSelection: ".csc-createNew-templateSelection"
+            templateSelection: ".csc-createNew-templateSelection",
+            vocabs: ".csc-createNew-vocabs"
         },
         repeatingSelectors: ["createFrom"],
         styles: {
             radio: "cs-createNew-recordRadio",
             "label": "cs-createNew-recordLabel",
             templates: "cs-createNew-templates",
-            templateSelection: "cs-createNew-templateSelection"
+            templateSelection: "cs-createNew-templateSelection",
+            vocabs: "cs-createNew-vocabs"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -313,19 +349,21 @@ cspace = cspace || {};
         },
         invokers: {
             updateCurrentSelection: {
-                funcName: "cspace.createNew.recordTemplateBox.updateCurrentSelection",
-                args: "{recordTemplateBox}"
+                funcName: "cspace.createNew.recordBox.updateCurrentSelection",
+                args: "{recordBox}"
             }
         },
         strings: {},
         parentBundle: "{globalBundle}",
-        preInitFunction: "cspace.createNew.recordTemplateBox.preInit",
+        preInitFunction: "cspace.createNew.recordBox.preInit",
         model: {
             createFromList: ["fromScratch", "fromTemplate"],
             createFromNames: [],
             createFromSelection: "fromScratch",
             templateSelection: "",
-            templateNames: []
+            templateNames: [],
+            vocabSelection: "",
+            vocabNames: []
         },
         animationOpts: {
             time: 300,
@@ -337,21 +375,25 @@ cspace = cspace || {};
         that.events.updateModel.fire({
             currentSelection: that.locate("radio").val(),
             createFromSelection: that.model.createFromSelection,
-            templateSelection: that.model.templateSelection
+            templateSelection: that.model.templateSelection,
+            vocabSelection: that.model.vocabSelection
         });
     };
     
-    cspace.createNew.recordTemplateBox.updateCurrentSelection = function (that) {
+    cspace.createNew.recordBox.updateCurrentSelection = function (that) {
         that.events.onShowTemplate.fire();
         if (that.model.templates) {
             that.refreshView();
             that.locate("radio").prop("checked", true);
             that.locate("templates").show(that.options.animationOpts.time, that.options.animationOpts.easing);
         }
+        if (that.model.vocabs) {
+            that.locate("vocabs").show(that.options.animationOpts.time, that.options.animationOpts.easing);
+        }
         updateModel(that);
     };
     
-    cspace.createNew.recordTemplateBox.produceTree = function (that) {
+    cspace.createNew.recordBox.produceTree = function (that) {
         return {
             "label": {
                 messagekey: "${recordType}",
@@ -370,7 +412,18 @@ cspace = cspace || {};
                     }
                 }, {"addClass": "{styles}.radio"}]
             }, 
-            expander: {
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${vocabs}",
+                trueTree: {
+                    vocabs: {
+                        decorators: {"addClass": "{styles}.vocabs"},
+                        selection: "${vocabSelection}",
+                        optionlist: "${vocabs}",
+                        optionnames: "${vocabNames}"
+                    }
+                }
+            }, {
                 type: "fluid.renderer.condition",
                 condition: "${templates}",
                 trueTree: {
@@ -405,7 +458,7 @@ cspace = cspace || {};
                         }
                     }
                 }
-            }
+            }]
         };
     };
     
@@ -424,12 +477,29 @@ cspace = cspace || {};
         }
         lookupNames(applier, messageBase, model.createFromList, "createFromNames", "createnew");
         lookupNames(applier, messageBase, model.templates, "templateNames", "template");
+
+        var allVocabs = fluid.get(model, "vocabs");
+        if (!allVocabs) {
+            return;
+        }
+        var vocabsExist = allVocabs[model.recordType];
+        if (!vocabsExist) {
+            return applier.requestChange("vocabs", undefined);
+        }
+        var vocabs = [];
+        fluid.each(vocabsExist, function (vocab) {
+            vocabs.push(vocab);
+        });
+        applier.requestChange("vocabs", vocabs);
+        applier.requestChange("vocabSelection", vocabs[0]);
+        lookupNames(applier, messageBase, model.vocabs, "vocabNames", "vocab");
     };
     
-    cspace.createNew.recordTemplateBox.preInit = function (that) {
+    cspace.createNew.recordBox.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             collapseOn: function () {
                 that.locate("templates").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
+                that.locate("vocabs").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
             }
         });
         fixupModel(that.model, that.applier, that.options.parentBundle.messageBase);
@@ -438,8 +508,11 @@ cspace = cspace || {};
                 updateModel(that);
             });
         });
+        that.applier.modelChanged.addListener("vocabSelection", function () {
+            updateModel(that);
+        });
     };
     
-    fluid.fetchResources.primeCacheFromResources("cspace.createNew.recordTemplateBox");
+    fluid.fetchResources.primeCacheFromResources("cspace.createNew.recordBox");
     
 })(jQuery, fluid);

@@ -784,7 +784,7 @@ var repeatableTester = function ($) {
         expect(71);
         var repeatableGrandParent = cspace.tests.repeatableGrandParent("#repeatableGrandParent");
         var repeatable = repeatableGrandParent["**-renderer-csc-repeatable-group-0"].repeatableImpl;
-        var nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
+        var nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-1"].repeatableImpl;
         jqUnit.assertTrue("Newly prepared main model should have a set primary field", repeatableGrandParent.model.myTexts[0]._primary);
         jqUnit.assertTrue("Newly prepared main model should have a set primary field for nested", repeatableGrandParent.model.myTexts[0].myNestedTexts[0]._primary);
         jqUnit.assertEquals("Repeatable and main models should be the same object", repeatableGrandParent.model, repeatable.model);
@@ -796,8 +796,8 @@ var repeatableTester = function ($) {
         basicMarkupGenerateTest(nested1, ".csc-nested-repeatable-li-text", "", false);
         
         repeatable.locate("add").click();
-        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
-        var nested2 = repeatable["**-renderer-repeat:1:csc-nested-repeatable-li-text-4"].repeatableImpl;
+        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-1"].repeatableImpl;
+        var nested2 = repeatable["**-renderer-repeat:1:csc-nested-repeatable-li-text-3"].repeatableImpl;
         
         basicMarkupGenerateTest(nested2, ".csc-nested-repeatable-li-text", "", false);
         jqUnit.assertEquals("Size of repeatable should be 2", 2, repeatableGrandParent.model.myTexts.length);
@@ -811,7 +811,7 @@ var repeatableTester = function ($) {
         jqUnit.assertEquals("Size of nested repeatable should be 2", 2, repeatableGrandParent.model.myTexts[0].myNestedTexts.length);
         
         repeatable.locate("delete").eq(1).click();
-        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
+        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-1"].repeatableImpl;
         
         jqUnit.assertEquals("Size of repeatable should now be 1", 1, repeatableGrandParent.model.myTexts.length);
         jqUnit.assertEquals("Size of nested repeatable should be 2", 2, repeatableGrandParent.model.myTexts[0].myNestedTexts.length);
@@ -828,8 +828,8 @@ var repeatableTester = function ($) {
         jqUnit.assertTrue("Second primary should be true", repeatableGrandParent.model.myTexts[0].myNestedTexts[1]._primary);
         
         repeatable.locate("add").click();
-        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
-        nested2 = repeatable["**-renderer-repeat:1:csc-nested-repeatable-li-text-4"].repeatableImpl;
+        nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-1"].repeatableImpl;
+        nested2 = repeatable["**-renderer-repeat:1:csc-nested-repeatable-li-text-3"].repeatableImpl;
         
         jqUnit.assertEquals("Repeatable value should still be", "TEST", repeatableGrandParent.model.myTexts[0].myText);
         jqUnit.assertEquals("Nested Repeatable value should still be", "NESTED TEST", repeatableGrandParent.model.myTexts[0].myNestedTexts[1].myNestedTexts);

@@ -9,11 +9,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid, window*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
     
     fluid.defaults("cspace.recordTraverser", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
@@ -133,6 +134,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordTraverser.prepareModel",
                 args: [
                     ["{cspace.recordTraverser}.searchHistoryStorage", "{cspace.recordTraverser}.findeditHistoryStorage"],
+                    "{vocab}",
                     "{cspace.recordTraverser}.model",
                     "{cspace.recordTraverser}.applier",
                     "{cspace.recordTraverser}.options.elPaths",
@@ -141,7 +143,7 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             adjacentRecords: "%tenant/%tname/adjacentRecords/%token/%index",
             returnToSearch: "%webapp/html/%source.html?hashtoken=%hashtoken"
         }),
@@ -161,7 +163,8 @@ cspace = cspace || {};
             previous: "adjacentRecords.previous",
             next: "adjacentRecords.next",
             recordType: "recordtype",
-            source: "source"
+            source: "source",
+            vocab: "namespace"
         }
     });
 
@@ -196,14 +199,20 @@ cspace = cspace || {};
         return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
     
-    cspace.recordTraverser.prepareModel = function (storages, model, applier, elPaths, urls) {
+    cspace.recordTraverser.prepareModel = function (storages, vocabComponent, model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
             if (!get(model, rec, elPaths.csid)) {
                 return;
             }
+            var vocab = cspace.vocab.resolve({
+                model: get(model, rec),
+                recordType: get(model, rec, elPaths.recordType),
+                vocab: vocabComponent
+            });
             applier.requestChange(rec + ".target", fluid.stringTemplate(urls.navigate, {
                 recordType: get(model, rec, elPaths.recordType),
-                csid: get(model, rec, elPaths.csid)
+                csid: get(model, rec, elPaths.csid),
+                vocab: vocab ? ("?" + $.param({vocab: vocab})) : ""
             }));
         });
         applier.requestChange(fluid.model.composeSegments(elPaths.adjacentRecords, elPaths.userIndex),
@@ -235,6 +244,20 @@ cspace = cspace || {};
     };
 
     cspace.recordTraverser.preInitFunction = function (that) {
+        that.save = function (increment) {
+            var model = that.model,
+                elPaths = that.options.elPaths,
+                searchReference = elPaths.searchReference;
+
+            if (typeof increment !== "number") {
+                increment = 0;
+            }
+            that.searchReferenceStorage.set({
+                token: get(model, searchReference, elPaths.token),
+                index: get(model, searchReference, elPaths.index) + increment,
+                source: get(model, searchReference, elPaths.source)
+            });
+        };
         that.prepareModelForRenderListener = function () {
             that.prepareModel();
         };
@@ -269,19 +292,15 @@ cspace = cspace || {};
             if (target.length === 0) {
                 return;
             }
-            searchReferenceStorage.set(fluid.find({
+            that.save(fluid.find({
                 "linkNext": 1,
                 "linkPrevious": -1
             }, function (increment, selector) {
                 if (that.locate(selector).attr("href") === target.attr("href")) {
-                    return {
-                        token: get(model, searchReference, elPaths.token),
-                        index: get(model, searchReference, elPaths.index) + increment,
-                        source: get(model, searchReference, elPaths.source)
-                    };
+                    return increment;
                 }
             }));
-        });
+        }, "recordTraverser");
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");

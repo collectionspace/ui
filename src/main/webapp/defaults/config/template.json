@@ -61,17 +61,13 @@
                     "args": "recordtype"
                 }
             },
-             "schema": [
-                "recordlist",
-                "recordtypes",
-                "namespaces", {
-                    "expander": {
-                        "type": "fluid.deferredInvokeCall",
-                        "func": "cspace.util.getUrlParameter",
-                        "args": "recordtype"
-                    }
+            "schema": {
+                "expander": {
+                    "type": "fluid.deferredInvokeCall",
+                    "func": "cspace.util.getRecordShema",
+                    "args": "recordtype"
                 }
-            ],
+            },
             "pageSpec": {}
         }
     }

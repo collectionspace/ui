@@ -54,6 +54,9 @@ cspace = cspace || {};
             afterFetch: null,
             ready: null
         },
+        styles: {
+            termList: "cs-termList"
+        },
         postInitFunction: "cspace.termList.postInit",
         finalInitFunction: "cspace.termList.finalInit"
     });
@@ -84,7 +87,7 @@ cspace = cspace || {};
     };
 
     cspace.termList.postInit = function (that) {
-        that.container.wrap("<div />");
+        that.container.wrap($("<div />").addClass(that.options.styles.termList));
         that.termListImplContainer = that.container.parent();
         that.termListSelector = "." + that.container.attr("class").split(" ").join(".");
     };
