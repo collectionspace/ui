@@ -108,7 +108,7 @@ pageBuilder-header-myCollectionSpace: Recently Modified or Created Records
 loanin: In Loan
 loanout: Out Loan
 acquisition: Accession
-movement: Object Inventory
+movement: Inventory/Movement
 /*movement: Storage and Movement*/
 objectexit: Object Exit
 intake: Object Entry
@@ -299,13 +299,14 @@ organization-createdAtLabel:
 organization-tenantIDLabel: 
 
 #Movement
-movement-movementControlInformationLabel: Movement Control Information
+movement-tab: Mov/Inv...
+/*movement-movementControlInformationLabel: Movement Control Information*/
 movement-movementReferenceNumberLabel: Reference number
-/*movement-locationMovementInformationLabel: Storage and Movement*/
-movement-locationMovementInformationLabel: Object Inventory
+movement-locationMovementInformationLabel: Inventory/Movement
 movement-currentLocationLabel: Storage location
 movement-currentLocationMISSINGLabel: Storage location
-movement-locationDateLabel: Location date
+movement-currentLocationNoteLabel: Storage note
+movement-locationDateLabel: Inventory/Move date
 movement-normalLocationLabel: Home location
 movement-plannedRemovalDateLabel: Planned move date
 movement-removalDateLabel: Move date
