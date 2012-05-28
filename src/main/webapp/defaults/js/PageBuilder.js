@@ -117,11 +117,11 @@ cspace = cspace || {};
         gradeNames: ["fluid.eventedComponent", "autoInit"],
         preInitFunction: "cspace.pageBuilderIO.preInit",
         finalInitFunction: "cspace.pageBuilderIO.finalInit",
-        schema: [
-            "recordlist",
-            "recordtypes",
-            "namespaces"
-        ],
+        schema: {
+            "recordlist": null,
+            "recordtypes": null,
+            "namespaces": null
+        },
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
@@ -139,7 +139,6 @@ cspace = cspace || {};
             },
             instantiator: "{instantiator}"
         },
-        pageSpec: {},
         events: {
             pageReady: null,
             onError: null

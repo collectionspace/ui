@@ -215,8 +215,7 @@ cspace = cspace || {};
 //            cancelSave: null,
 //            afterRemove: null, // params: textStatus
 //            onError: null, // params: operation
-//            afterRenderRefresh: null,
-//            onRefreshView: null
+//            afterRenderRefresh: null
 //        },
 //        listeners: {
 //            afterFetch: "{cspace.recordEditor}.afterFetchHandler"
@@ -1287,7 +1286,6 @@ cspace = cspace || {};
 //        that.refreshView = function () {
 //            that.options.readOnly = cspace.util.isReadOnly(that.options.readOnly, that.model);
 //            fluid.log("RecordEditor.js before render");
-//            that.events.onRefreshView.fire();
 //            that.renderer.refreshView();
 //            cspace.util.processReadOnly(that.container, that.options.readOnly);
 //            processChanges(that, false);
@@ -1298,7 +1296,6 @@ cspace = cspace || {};
 //        };
 //        that.refreshNoSave = function () {
 //            fluid.log("RecordEditor.js before render");
-//            that.events.onRefreshView.fire();
 //            that.renderer.refreshView();
 //            that.messageBar.hide();
 //            bindHandlers(that);

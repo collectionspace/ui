@@ -2055,7 +2055,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 applier: "{recordEditor}.applier",
                 model: "{recordEditor}.model",
                 events: {
-                    removeListeners: "{recordEditor}.events.onRefreshView"
+                    removeListeners: "{recordEditor}.events.onRenderTree"
                 }
             }, "{arguments}.1"]
         });
@@ -2067,11 +2067,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{repeatableImpl}.model",
                 events: {
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
-                    recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView"
+                    recordEditorOnRenderTree: "{recordEditor}.events.onRenderTree"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{structuredDate}.events.removeListeners.fire",
-                    recordEditorOnRefreshView: "{structuredDate}.events.removeListeners.fire"
+                    recordEditorOnRenderTree: "{structuredDate}.events.removeListeners.fire"
                 }
             }, "{arguments}.1"]
         });
