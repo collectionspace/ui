@@ -407,19 +407,8 @@ cspace = cspace || {};
             that.events.afterFetch.fire();
         } else {
             that.recordDataSource.get(function (data) {
-                if (!data) {
-                    var resolve = that.options.parentBundle.resolve;
-                    that.events.onError.fire({
-                        isError: true,
-                        message: resolve("recordEditor-fetchFailedMessage", [
-                            resolve(that.options.recordType),
-                            resolve("recordEditor-unknownError")
-                        ])
-                    });
-                    return;
-                }
                 if (data.isError) {
-                    that.events.onError.fire(data);
+                    that.events.onError.fire(data, "fetch");
                     return;
                 }
                 that.applier.requestChange("", data);
@@ -577,7 +566,11 @@ cspace = cspace || {};
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        recordDataSource.remove(function () {
+                        recordDataSource.remove(function (data) {
+                            if (data.isError) {
+                                that.events.onError.fire(data, "delete");
+                                return;
+                            }
                             that.events.afterRemove.fire();
                         });
                     }
@@ -735,16 +728,28 @@ cspace = cspace || {};
         },
         preInitFunction: "cspace.recordEditor.messanger.preInit",
         components: {
-            messageBar: "{messageBar}"
-        }
+            messageBar: "{messageBar}",
+            globalBundle: "{globalBundle}"
+        },
+        recordType: "{cspace.recordEditor}.options.recordType"
     });
 
     cspace.recordEditor.messanger.preInit = function (that) {
-        that.onErrorHandler = function (data) {
+        that.onErrorHandler = function (data, operation) {
             if (!data) {
                 return;
             }
-            that.messageBar.show(data.message, Date.today(), data.isError);
+            if (!data.messages) {
+                var resolve = that.globalBundle.resolve;
+                data.messages = fluid.makeArray(resolve("recordEditor-" + operation + "FailedMessage", [
+                    resolve(that.options.recordType),
+                    resolve("recordEditor-unknownError")
+                ]));
+            }
+            var messages = data.messages || fluid.makeArray(data.message);
+            fluid.each(messages, function (message) {
+                that.messageBar.show(message, Date.today(), data.isError);
+            });
         };
     };
 

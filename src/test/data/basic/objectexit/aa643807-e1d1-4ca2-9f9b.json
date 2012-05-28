@@ -5,7 +5,9 @@
         "currentOwner": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ClaraYoung1331894758909)'Clara Young'",
         "createdBy": "admin@core.collectionspace.org",
         "createdAt": "2012-03-16T14:21:40Z",
-        "exitDate": "2012-02-28T00:00:00Z",
+        "exitDateGroup": {
+            "dateDisplayDate": "2012-02-28T00:00:00Z"
+        },
         "exitMethods": [
             {
                 "_primary": true,
