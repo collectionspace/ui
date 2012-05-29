@@ -17,58 +17,6 @@ cspace = cspace || {};
     "use strict";
 
     fluid.log("RecordEditor.js loaded");
-
-//    var bindEventHandlers = function (that) {
-//        
-//        that.events.afterRenderRefresh.addListener(function () {
-//            clearLocalStorage(that); 
-//        });
-//        
-//        that.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
-//            processChanges(that, true);
-//        });
-//        
-//        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
-//            if (that.unsavedChanges) {
-//                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
-//                    listeners: {
-//                        onClose: function (userAction) {
-//                            if (userAction === "act") {
-//                                that.options.dataContext.events.afterSave.addListener(function () {
-//                                    processChanges(that, false);
-//                                    callback();
-//                                }, undefined, undefined, "last");
-//                                that.requestSave(function () {
-//                                    
-//                                });
-//                            } else if (userAction === "proceed") {
-//                                that.rollback();
-//                                callback();
-//                            }
-//                        }
-//                    },
-//                    parentBundle: that.options.parentBundle
-//                });
-//                return false;
-//            }
-//        }, that.options.navigationEventNamespace);
-//    };
-//
-//    var setupRecordEditor = function (that) {
-//        bindEventHandlers(that);
-//        if (!that.options.deferRendering) {
-//            that.refreshView();
-//        }
-//        that.events.afterRenderRefresh.fire(that);
-//    };
-//    
-//    var clearLocalStorage = function (that) {
-//        var modelToClone = that.localStorage.get(that.localStorage.options.elPath);
-//        if (modelToClone) {
-//            that.localStorage.set();
-//            processChanges(that, true);
-//        }
-//    }; 
 //    
 //    fluid.defaults("cspace.recordEditor", {
 //        gradeNames: ["fluid.rendererComponent", "autoInit"],
@@ -82,54 +30,18 @@ cspace = cspace || {};
 //            "uispec": "nomerge",
 //            "resolver": "nomerge"
 //        },
-//        components: {
-//            messageBar: "{messageBar}",
-//            globalNavigator: "{globalNavigator}",
-//            recordDataSource: {
-//                type: "cspace.recordEditor.dataSource",
-//                options: {
-//                    recordType: "{cspace.recordEditor}.options.recordType"
-//                }
-//            },
-//            confirmation: {
-//                type: "cspace.confirmation"
-//            },
-//            recordEditorTogglable: {
-//                type: "cspace.util.togglable",
-//                options: {
-//                    selectors: {
-//                        header: "{recordEditor}.options.selectors.header",
-//                        togglable: "{recordEditor}.options.selectors.togglable"
-//                    }
-//                }
-//            },
-//            localStorage: {
-//                type: "cspace.util.localStorageDataSource",
-//                options: {
-//                    elPath: "modelToClone"
-//                }
-//            }
-//        },
 //        invokers: {
 //            lookupMessage: "cspace.util.lookupMessage",
-//            rollback: {
-//                funcName: "cspace.recordEditor.rollback",
-//                args: "{recordEditor}"
-//            },
-//            requestSave: "cspace.recordEditor.requestSave",
 //            remove: "remove",
 //            afterDeleteAction: "afterDelete",
 //            checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
 //            checkCreateFromExistingDisabling: "checkCreateFromExistingDisabling", //whether to disable createFromExisting button
 //            reloadAndCloneRecord: "reloadAndCloneRecord",
 //            createNewFromExistingRecord: "createNewFromExistingRecord",
-//            cancel: "cancel",
 //            hasMediaAttached: "hasMediaAttached",
 //            hasRelations: "hasRelations",
-//            cloneAndStore: "cspace.recordEditor.cloneAndStore"
 //        },
 //        navigationEventNamespace: undefined,
-//        produceTree: "cspace.recordEditor.produceTree",
 //        events: {
 //            afterFetch: null,
 //            onSave: "preventable",
@@ -141,32 +53,9 @@ cspace = cspace || {};
 //        listeners: {
 //            afterFetch: "{cspace.recordEditor}.afterFetchHandler"
 //        },
-//        showDeleteButton: false,
-//        showCreateFromExistingButton: false,
 //        saveCancelPermission: "update",
-//        selectors: {
-//            save: ".csc-save",
-//            recordTraverser: ".csc-recordTraverser",
-//            cancel: ".csc-cancel",
-//            deleteButton: ".csc-delete",
-//            createFromExistingButton: ".csc-createFromExisting",
-//            requiredFields: ".csc-required:visible",
-//            header: ".csc-recordEditor-header",
-//            togglable: ".csc-recordEditor-togglable"
-//        },
-//        selectorsToIgnore: ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
 //        fieldsToIgnore: ["csid", "fields.csid"],
-//        rendererFnOptions: {
-//            cutpointGenerator: "cspace.recordEditor.cutpointGenerator"
-//        },
-//        rendererOptions: {
-//            autoBind: true,
-//            instantiator: "{instantiator}",
-//            parentComponent: "{recordEditor}"
-//        },
-//        parentBundle: "{globalBundle}",
 //        resolver: "{permissionsResolver}",
-//        strings: {},
 //        urls: cspace.componentUrlBuilder({
 //            deleteURL: "%webapp/html/findedit.html",
 //            cloneURL: "%webapp/html/%recordType.html"
@@ -313,7 +202,8 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}",
         showCreateFromExistingButton: false,
-        showDeleteButton: false
+        showDeleteButton: false,
+        deferRendering: false
     });
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
@@ -346,7 +236,8 @@ cspace = cspace || {};
         gradeNames: ["fluid.modelComponent", "fluid.eventedComponent", "autoInit"],
         components: {
             localStorage: "{localStorage}",
-            globalNavigator: "{globalNavigator}"
+            globalNavigator: "{globalNavigator}",
+            vocab: "{vocab}"
         },
         events: {
             onCreateFromExisting: {
@@ -368,7 +259,17 @@ cspace = cspace || {};
                     fluid.set(modelToClone, fieldPath);
                 });
                 that.localStorage.set(modelToClone);
-                window.location = fluid.stringTemplate(that.options.cloneURL, {recordType: that.options.recordType});
+                var vocab = cspace.vocab.resolve({
+                    model: that.model,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                });
+                window.location = fluid.stringTemplate(that.options.cloneURL, {
+                    recordType: that.options.recordType,
+                    vocab: vocab ? ("?" + $.param({
+                        vocab: vocab
+                    })) : ""
+                });
             });
         };
     };
@@ -1018,27 +919,6 @@ cspace = cspace || {};
         if (rModel.fields.email === "admin@collectionspace.org") {
             return true;
         }
-//        //check whether we need to disable delete button due to related records
-//        //that we do not have update permission to (which we need since we will
-//        //be modifying their relations when deleting the record)
-//        var relations = that.model.relations;
-//        //if relations isn't set, no need to check any further
-//        if (!relations || relations.length < 1 || $.isEmptyObject(relations)) {
-//            return false;
-//        }
-//        var relatedTypes = [];
-//        fluid.each(relations, function (val, recordType) {
-//            relatedTypes.push({
-//                target: recordType,
-//                permission: "update"
-//            });
-//        });
-//        //now build opts for checking permissions
-//        return (!cspace.permissions.resolveMultiple({
-//            recordTypeManager: that.options.recordTypeManager,
-//            resolver: that.options.resolver,
-//            allOf: relatedTypes
-//        }));
         return false;
     };
 
@@ -1131,11 +1011,21 @@ cspace = cspace || {};
             instantiator: "{instantiator}",
             parentComponent: "{recordRenderer}"
         },
-        renderOnInit: true,
+        renderOnInit: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.recordEditor.renderOnInit",
+                args: "{recordEditor}.options.deferRendering"
+            }
+        },
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {}
     });
+
+    cspace.recordEditor.renderOnInit = function (deferRendering) {
+        return !deferRendering;
+    };
 
     cspace.recordEditor.recordRenderer.provideProduceTree = function (recordType) {
         return recordType === "media" ? "cspace.recordEditor.recordRenderer.produceTreeMedia" : "cspace.recordEditor.recordRenderer.produceTree";
@@ -1293,11 +1183,6 @@ cspace = cspace || {};
 //            ],
 //            parentBundle: that.options.parentBundle
 //        });
-//    };
-//    
-//    cspace.recordEditor.rollback = function (that) {
-//        that.options.applier.requestChange("fields", that.rollbackModel);
-//        that.refreshView();
 //    };
 //
 //    /*
