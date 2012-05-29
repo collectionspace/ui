@@ -539,6 +539,9 @@ cspace = cspace || {};
             },
             catalogingDataSource: {
                 type: "cspace.recordEditor.remover.catalogingDataSource"
+            },
+            refobjsDataSource: {
+                type: "cspace.recordEditor.remover.refobjsDataSource"
             }
         },
         invokers: {
@@ -549,7 +552,8 @@ cspace = cspace || {};
         preInitFunction: "cspace.recordEditor.remover.preInit",
         urls: cspace.componentUrlBuilder({
             proceduresURL: "%tenant/%tname/%recordType/procedure/%csid",
-            catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid"
+            catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid",
+            refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid"
         }),
         csid: {
             expander: {
@@ -654,6 +658,32 @@ cspace = cspace || {};
     });
     cspace.recordEditor.remover.testCatalogingDataSource = cspace.URLDataSource;
 
+    fluid.demands("cspace.recordEditor.remover.refobjsDataSource",  ["cspace.localData", "cspace.recordEditor.remover"], {
+        funcName: "cspace.recordEditor.remover.testRefobjsDataSource",
+        args: {
+            targetTypeName: "cspace.recordEditor.remover.testRefobjsDataSource",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            }
+        }
+    });
+    fluid.demands("cspace.recordEditor.remover.refobjsDataSource", "cspace.recordEditor.remover", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.recordEditor.remover}.options.urls.refobjsURL",
+            termMap: {
+                recordType: "%recordType",
+                csid: "%csid"
+            },
+            targetTypeName: "cspace.recordEditor.remover.refobjsDataSource"
+        }
+    });
+    fluid.defaults("cspace.recordEditor.remover.testRefobjsDataSource", {
+        url: "%test/data/%recordType/refobjs/%csid.json"
+    });
+    cspace.recordEditor.remover.testRefobjsDataSource = cspace.URLDataSource;
+
     fluid.demands("cspace.recordEditor.remover.hasMediaAttached", "cspace.recordEditor", {
         funcName: "cspace.recordEditor.remover.hasMediaAttached",
         args: "{cspace.recordEditor}.model"
@@ -680,6 +710,42 @@ cspace = cspace || {};
             csid: that.options.csid
         }, function (data) {
             that.events.afterFetchCataloging.fire(data);
+        });
+    };
+
+    cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle) {
+        var removeMessage;
+        that.refobjsDataSource.get({
+            recordType: that.options.recordType,
+            csid: that.options.csid
+        }, function (data) {
+            if (fluid.makeArray(data.refobjs.results.length) > 0) {
+                removeMessage = "deleteDialog-usedByMessage";
+            }
+            if (fluid.find(model.fields.narrowerContexts, function (element) {
+                return element.narrowerContext || undefined;
+            })) {
+                removeMessage = "deleteDialog-hasNarrowerContextsMessage";
+            } else if (model.fields.broaderContext) {
+                removeMessage = "deleteDialog-hasBroaderContextMessage";
+            }
+            if (removeMessage) {
+                confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                    enableButtons: ["act"],
+                    model: {
+                        messages: [removeMessage],
+                        messagekeys: {
+                            actText: "alertDialog-actText"
+                        }
+                    },
+                    termMap: [
+                        parentBundle.resolve(that.options.recordType)
+                    ],
+                    parentBundle: parentBundle
+                });
+            } else {
+                cspace.recordEditor.remover.remove(that);
+            }
         });
     };
 
@@ -1129,39 +1195,6 @@ cspace = cspace || {};
         url: "%test/data/basic/%recordType/%csid.json"
     });
     cspace.recordEditor.dataSource.testDataSource = cspace.URLDataSource;
-
-//    cspace.recordEditor.removeWithCheck = function (that) {
-//        // If our record is used by any other record then we do not want to allow to
-//        // delete it. Just notify a user about it.
-//        var removeMessage;
-//        if (fluid.makeArray(that.model.refobjs.length) > 0) {
-//            removeMessage = "deleteDialog-usedByMessage";
-//        } else if (fluid.find(that.model.fields.narrowerContexts, function (element) {
-//            return element.narrowerContext || undefined;
-//        })) {
-//            removeMessage = "deleteDialog-hasNarrowerContextsMessage";
-//        } else if (that.model.fields.broaderContext) {
-//            removeMessage = "deleteDialog-hasBroaderContextMessage";
-//        }
-//        
-//        if (removeMessage) {
-//            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-//                enableButtons: ["act"],
-//                model: {
-//                    messages: [removeMessage],
-//                    messagekeys: {
-//                        actText: "alertDialog-actText"
-//                    }
-//                },
-//                termMap: [
-//                    that.lookupMessage(that.options.recordType)
-//                ],
-//                parentBundle: that.options.parentBundle
-//            });
-//        } else {
-//            cspace.recordEditor.remove(that);
-//        }
-//    };
 //    
 //    cspace.recordEditor.remove = function (that) {
 //        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {

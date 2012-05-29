@@ -1251,39 +1251,39 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: "{recordEditor}"
         });
         
-        fluid.demands("remove", ["cspace.recordEditor", "person"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "person"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("remove", ["cspace.recordEditor", "organization"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "organization"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("remove", ["cspace.recordEditor", "taxon"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "taxon"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("remove", ["cspace.recordEditor", "location"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "location"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
 
-        fluid.demands("remove", ["cspace.recordEditor", "concept"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "concept"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("remove", ["cspace.recordEditor", "place"], {
-            funcName: "cspace.recordEditor.removeWithCheck",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "place"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheck",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("remove", "cspace.recordEditor", {
-            funcName: "cspace.recordEditor.remove",
-            args: "{recordEditor}"
+        fluid.demands("cspace.recordEditor.remover.remove", "cspace.recordEditor.remover", {
+            funcName: "cspace.recordEditor.remover.remove",
+            args: "{cspace.recordEditor.remover}"
         });
         
         fluid.demands("cspace.recordEditor.cloneAndStore", "cspace.recordEditor", {
