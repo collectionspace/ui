@@ -9,6 +9,9 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-objectexit-exitNumber"
+                        },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.exitNumber"]
                     }

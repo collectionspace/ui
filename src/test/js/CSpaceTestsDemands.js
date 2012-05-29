@@ -50,21 +50,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     })
     
     // Validator
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{detailsDC}.options.schema"
         }
     });
     
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor", "cspace.relatedRecordsTab"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor", "cspace.relatedRecordsTab"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{pageBuilder}.schema"
         }
     });
     
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{pageBuilder}.schema"

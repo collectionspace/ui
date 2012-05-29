@@ -444,7 +444,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     
         // Validator
-        fluid.demands("cspace.validator", "cspace.recordEditor", {
+        fluid.demands("cspace.modelValidator", "cspace.recordEditor", {
             options: {  
                 recordType: "{pageBuilderIO}.options.recordType",
                 schema: "{pageBuilder}.schema"
@@ -1155,7 +1155,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
                     onSave: "{loadingIndicator}.events.showOn.fire",
                     onCancel: "{loadingIndicator}.events.showOn.fire"
                 },
@@ -1206,7 +1206,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
                     onSave: "{loadingIndicator}.events.showOn.fire",
                     onCancel: "{loadingIndicator}.events.showOn.fire"
                 },
@@ -1336,7 +1336,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
                     afterRemove: "{loadingIndicator}.events.hideOn.fire",
                     onSave: "{loadingIndicator}.events.showOn.fire",
                     onCancel: "{loadingIndicator}.events.showOn.fire"
@@ -1388,7 +1388,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
                     afterRemove: "{loadingIndicator}.events.hideOn.fire",
                     onSave: "{loadingIndicator}.events.showOn.fire",
                     onCancel: "{loadingIndicator}.events.showOn.fire"

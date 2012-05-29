@@ -9,90 +9,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
  */
 
 /*global jQuery, fluid, cspace:true*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("RecordEditor.js loaded");
-//
-//    // operation = one of "create", "delete", "fetch", "update"
-//    var makeDCErrorHandler = function (that) {
-//        return function (operation, message, data) {
-//            if (data && data.messages) {
-//                // TODO: expand this branch as sophistication increases for CSPACE-3142
-//                fluid.each(data.messages, function (message) {
-//                    that.messageBar.show(message.message, null, data.isError);
-//                });
-//            } else {
-//                var msgKey = operation + "FailedMessage";
-//                var msg = that.options.strings[msgKey] + message;
-//                that.messageBar.show(fluid.stringTemplate(msg, {
-//                    record: that.lookupMessage(that.options.recordType)
-//                }), null, true);
-//            }
-//            that.locate("save").prop("disabled", false);
-//            that.events.onError.fire(operation);
-//            if (operation === "create") {
-//                // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
-//                // is resolved
-//                that.options.applier.requestChange("csid", undefined);
-//            }
-//        };
-//    };
-//
-//    var validateIdentificationNumber = function (domBinder, container, messageBar, message) {
-//        return function () {
-//            var required = domBinder.locate("identificationNumber");
-//            if (required === container) {
-//                return true;
-//            }
-//            var noId = true;
-//            fluid.each(required, function (elem) {
-//                if ($.trim($(elem).val()) === "") {
-//                    messageBar.show(message, null, true);
-//                    noId = false;
-//                    return noId;
-//                }
-//            });
-//            return noId;
-//        };
-//    };
-//    
-//    var validateRequiredFields = function (domBinder, messageBar, message) {
-//        var required = domBinder.locate("requiredFields");
-//        var i;
-//        for (i = 0; i < required.length; i++) {
-//            if (required[i].value === "") {
-//                messageBar.show(fluid.stringTemplate(message, {field: cspace.util.findLabel(required[i])}), null, true);
-//                return false;
-//            }
-//        }
-//        return true;
-//    };
-//    
-//    var processChanges = function (that, revert) {
-//        that.unsavedChanges = revert;
-//        that.locate("cancel").prop("disabled", !revert);
-//    };
-//    
-//    var recordSaveHandler = function (that, data, action) {
-//        var message = action.toLowerCase() + "SuccessfulMessage";
-//        that.options.applier.requestChange("", data);
-//        that.refreshView();
-//        that.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
-//            record: that.lookupMessage(that.options.recordType)
-//        }), Date());
-//        processChanges(that, false);
-//    };
-//
+
 //    var bindEventHandlers = function (that) {
-//        
-//        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.messageBar, that.lookupMessage(fluid.stringTemplate("%recordtype-identificationNumberRequired", { recordtype: that.options.recordType }))));
-//        
-//        that.events.onSave.addListener(function () {
-//            return validateRequiredFields(that.dom, that.messageBar, that.options.strings.missingRequiredFields);
-//        });
 //        
 //        that.events.afterRenderRefresh.addListener(function () {
 //            clearLocalStorage(that); 
@@ -182,11 +108,7 @@ cspace = cspace || {};
 //                options: {
 //                    elPath: "modelToClone"
 //                }
-//            },
-//            validator: {
-//                type: "cspace.validator"
-//            },
-//            vocab: "{vocab}"
+//            }
 //        },
 //        invokers: {
 //            lookupMessage: "cspace.util.lookupMessage",
@@ -212,7 +134,6 @@ cspace = cspace || {};
 //            afterFetch: null,
 //            onSave: "preventable",
 //            onCancel: null,
-//            cancelSave: null,
 //            afterRemove: null, // params: textStatus
 //            onError: null, // params: operation
 //            afterRenderRefresh: null
@@ -275,7 +196,7 @@ cspace = cspace || {};
                 }
             }
         },
-        selectorsToIgnore: ["recordRendererContainer", "header", "togglable"],
+        selectorsToIgnore: ["recordRendererContainer", "header", "togglable", "identificationNumber"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -385,8 +306,7 @@ cspace = cspace || {};
             onCancel: null,
             onCreateFromExisting: null,
 
-            onError: null,
-            cancelSave: null
+            onError: null
         },
         listeners: {
             ready: "{cspace.recordEditor}.onReady"
@@ -510,6 +430,85 @@ cspace = cspace || {};
         };
     };
 
+    fluid.defaults("cspace.recordEditor.validator", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        selectors: {
+            identificationNumber: "{cspace.recordEditor}.options.selectors.identificationNumber",
+            requiredFields: ".csc-required:visible"
+        },
+        components: {
+            globalBundle: "{globalBundle}",
+            modelValidator: {
+                type: "cspace.modelValidator"
+            }
+        },
+        events: {
+            onValidate: {
+                event: "{cspace.recordEditor.saver}.events.onValidate"
+            },
+            afterValidate: {
+                event: "{cspace.recordEditor.saver}.events.afterValidate"
+            },
+            onError: {
+                event: "{cspace.recordEditor}.events.onError"
+            }
+        },
+        recordType: "{cspace.recordEditor}.options.recordType",
+        listeners: {
+            onValidate: "{cspace.recordEditor.validator}.validate"
+        },
+        preInitFunction: "cspace.recordEditor.validator.preInit"
+    });
+
+    cspace.recordEditor.validator.preInit = function (that) {
+
+        function validate (selector, message) {
+            return function () {
+                var required = that.locate(selector),
+                    valid = true;
+                if (required === that.container) {
+                    return valid;
+                }
+                fluid.find(required, function (elem) {
+                    if ($.trim($(elem).val()) !== "") {
+                        return;
+                    }
+                    that.events.onError.fire({
+                        isError: true,
+                        messages: fluid.makeArray(that.globalBundle.resolve(message, [
+                            cspace.util.findLabel(elem)
+                        ]))
+                    });
+                    valid = false;
+                    return elem;
+                });
+                return valid;
+            };
+        }
+
+        that.validateRequired = validate("requiredFields", "recordEditor-missingRequiredFields");
+        that.validateIdentificationNumber = validate("identificationNumber", that.options.recordType + "-identificationNumberRequired");
+
+        that.validate = function (model, applier) {
+            var valFunctions = ["validateRequired", "validateIdentificationNumber"],
+                i;
+            for (i = 0; i < valFunctions.length; ++i) {
+                if (!that[valFunctions[i]]()) {
+                    return;
+                }
+            }
+
+            var validatedModel = that.modelValidator.validate(model);
+            if (!validatedModel) {
+                that.events.onError.fire();
+                return;
+            }
+            that.applier.requestChange("", validatedModel);
+
+            that.events.afterValidate.fire();
+        };
+    };
+
     fluid.defaults("cspace.recordEditor.saver", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
@@ -527,6 +526,12 @@ cspace = cspace || {};
         invokers: {
             save: "cspace.recordEditor.saver.save",
             afterValidate: "cspace.recordEditor.saver.afterValidate"
+        },
+        components: {
+            validator: {
+                type: "cspace.recordEditor.validator",
+                container: "{cspace.recordEditor}.container"
+            }
         }
     });
 
@@ -542,7 +547,7 @@ cspace = cspace || {};
 
     fluid.demands("cspace.recordEditor.saver.afterValidate", "cspace.recordEditor.saver", {
         funcName: "cspace.recordEditor.saver.afterValidate",
-        args: ["{recordEditor}", "{arguments}.0"]
+        args: "{recordEditor}"
     });
 
     cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
@@ -571,14 +576,10 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.saver.save = function (that, recordEditor) {
-        that.events.onValidate.fire(recordEditor.model);
+        that.events.onValidate.fire(recordEditor.model, recordEditor.applier);
     };
 
-    cspace.recordEditor.saver.afterValidate = function (recordEditor, valid) {
-        if (!valid) {
-            recordEditor.events.cancelSave.fire();
-            return valid;
-        }
+    cspace.recordEditor.saver.afterValidate = function (recordEditor) {
         var vocab = cspace.vocab.resolve({
             model: recordEditor.model,
             recordType: recordEditor.options.recordType,
@@ -600,8 +601,8 @@ cspace = cspace || {};
         that.onSaveHandler = function () {
             that.save();
         };
-        that.afterValidateHandler = function (valid) {
-            that.afterValidate(valid);
+        that.afterValidateHandler = function () {
+            that.afterValidate();
         };
     };
 
@@ -882,7 +883,7 @@ cspace = cspace || {};
         finalInitFunction: "cspace.recordEditor.controlPanel.finalInit",
         mergePolicy: {
             recordModel: "preserve",
-            recordApplier: "nomerge",
+            recordApplier: "nomerge"
         },
         components: {
             changeTracker: "{changeTracker}",
@@ -913,17 +914,14 @@ cspace = cspace || {};
             afterSave: {
                 event: "{cspace.recordEditor}.events.afterSave"
             },
-            cancelSave: {
-                event: "{cspace.recordEditor}.events.cancelSave"
-            },
             onError: {
                 event: "{cspace.recordEditor}.events.onError"
             },
-            onRemove: {
-                event: "{cspace.recordEditor}.events.onRemove"
-            },
             onCancel: {
                 event: "{cspace.recordEditor}.events.onCancel"
+            },
+            onRemove: {
+                event: "{cspace.recordEditor}.events.onRemove"
             },
             onCreateFromExisting: {
                 event: "{cspace.recordEditor}.events.onCreateFromExisting"
@@ -932,8 +930,7 @@ cspace = cspace || {};
         listeners: {
             onSave: "{cspace.recordEditor.controlPanel}.disableSave",
             afterSave: "{cspace.recordEditor.controlPanel}.enableSave",
-            cancelSave: "{cspace.recordEditor.controlPanel}.enableSave",
-            onError: "{cspace.recordEditor.controlPanel}.enableSave",
+            onError: "{cspace.recordEditor.controlPanel}.enableSave"
         },
         produceTree: "cspace.recordEditor.controlPanel.produceTree",
         parentBundle: "{globalBundle}",
@@ -1199,7 +1196,7 @@ cspace = cspace || {};
                     that.options.csid = that.options.csid || data.csid;
                 }
                 callback(data);
-            })
+            });
         };
         that.remove = function (callback) {
             if (!that.options.csid) {

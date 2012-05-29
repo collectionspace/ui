@@ -1498,9 +1498,9 @@ fluid.registerNamespace("cspace.util");
         return valid;
     };
     
-    fluid.defaults("cspace.validator", {
+    fluid.defaults("cspace.modelValidator", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
-        finalInitFunction: "cspace.validator.finalInit",
+        finalInitFunction: "cspace.modelValidator.finalInit",
         mergePolicy: {
             schema: "nomerge"
         },
@@ -1557,7 +1557,7 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
-    cspace.validator.finalInit = function (that) {
+    cspace.modelValidator.finalInit = function (that) {
         var schema = that.options.schema;
         var schemaName = that.options.recordType;
         // Only validate fields.
