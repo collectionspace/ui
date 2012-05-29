@@ -196,9 +196,11 @@ contact-webAddressLabel: Web address
 contact-addressNoteLabel: Address note
 
 #Acquisition:
+acquisition-ownersLabel: Previous owner
 acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
 acquisition-acquisitionSourcesLabel: Acquisition source
+acquisition-acquisitionSourceLabel: Acquisition source
 
 # ---------------------------------- Object Collection Information (Acquisition) -------------------------- #
 acquisition-acquisitionProvisosLabel: Accession provisos
