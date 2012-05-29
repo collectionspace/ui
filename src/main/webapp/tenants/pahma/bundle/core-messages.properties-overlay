@@ -144,7 +144,7 @@ hierarchy-relatedTermsLabel: Related term
 # ---------------------------------- Object Exit Information (Cataloging) -------------------------- #
 objectexit-exitNumberLabel: Exit number
 objectexit-exitDateLabel: Exit date
-objectexit-newOwnerLabel: New owner
+objectexit-newOwnerLabel: Current or new owner
 objectexit-exitMethodsLabel: Exit method
 objectexit-exitMethodLabel: Exit method
 objectexit-exitReasonLabel: Exit reason
