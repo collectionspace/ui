@@ -399,7 +399,7 @@ cataloging-identificationNumberRequired: Please specify a museum number
 # ---------------- Alternate Numbers ---------------- #
 collection-object-pahmaAltNumGroupListLabel: FIX1-Alternate numbers
 collection-object-pahmaAltNumGroupLabel: FIX2-Alternate numbers
-collection-object-pahmaAltNumLabel: Number
+collection-object-pahmaAltNumLabel: Alternate number
 collection-object-pahmaAltNumTypeLabel: Type
 collection-object-pahmaAltNumNoteLabel: Note				
 
@@ -576,11 +576,13 @@ collection-object-objectNameNoteLabel: Note
 
 # ---------------------------------- Object Collection Information (Cataloging) -------------------------- #
 collection-object-fieldCollectionSourcesLabel: Field collection source (person)
+collection-object-fieldCollectionSourceLabel: Field collection source (person)
 collection-object-fieldCollectionPlaceLabel: Field collection place
 collection-object-fieldCollectionMethodsLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Field collection note
 collection-object-fieldCollectionNumberLabel: Field collection number
 collection-object-fieldCollectorsLabel: Field collector
+collection-object-fieldCollectorLabel: Field collector
 collection-object-fieldCollectionDateLabel: Field collection date
 collection-object-objectStatusLabel: Object status
 
