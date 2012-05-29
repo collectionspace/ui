@@ -318,6 +318,7 @@ movement-updatedAtLabel: Modified date
 movement-editNameLabel: Record modified by
 movement-identificationNumberRequired: Please specify a storage Location
 movement-locationHandlersLabel: Location handler
+movement-locationHandlerLabel: Handler
 
 #Location
 location-accessNoteLabel: Access note
