@@ -1084,6 +1084,9 @@ cspace = cspace || {};
                 args: "{recordEditor}.options.deferRendering"
             }
         },
+        invokers: {
+            navigateToFullImage: "cspace.recordEditor.recordRenderer.navigateToFullImage"
+        },
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {}
@@ -1097,8 +1100,53 @@ cspace = cspace || {};
         return recordType === "media" ? "cspace.recordEditor.recordRenderer.produceTreeMedia" : "cspace.recordEditor.recordRenderer.produceTree";
     };
 
+    cspace.recordEditor.recordRenderer.produceTreeMedia = function (that) {
+        var tree = cspace.recordEditor.recordRenderer.produceTree(that);
+        fluid.merge(null, tree.expander.trueTree, {
+            mediaImage: {
+                decorators: [{
+                    type: "attrs",
+                    attributes: {
+                        src: "${fields.blobs.0.imgThumb}"
+                    }
+                }, {
+                    addClass: "{styles}.mediaImage"
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.navigateToFullImage
+                }]
+            }
+        });
+        return tree;
+    };
+
+    fluid.demands("cspace.recordEditor.recordRenderer.navigateToFullImage", "cspace.recordEditor.recordRenderer", {
+        funcName: "cspace.recordEditor.recordRenderer.navigateToFullImage",
+        args: ["{recordEditor}.model", "{recordEditor}.options.originalMediaDimensions", "{globalBundle}"]
+    });
+
+    cspace.recordEditor.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
+        window.open(model.fields.blobs[0].imgOrig, "_blank", parentBundle.resolve("media-originalMediaOptions", [
+            originalMediaDimensions.height,
+            originalMediaDimensions.width,
+            "yes"
+        ]));
+    };
+
     cspace.recordEditor.recordRenderer.produceTree = function (that) {
         return fluid.copy(that.options.uispec);
+    };
+
+    cspace.recordEditor.recordRenderer.produceTreeTemplate = function (that) {
+        var tree = cspace.recordEditor.recordRenderer.produceTree(that);
+        tree.templateEditor = {
+            decorators: {
+                type: "fluid",
+                func: "cspace.templateEditor"
+            }
+        };
+        return tree;
     };
 
     cspace.recordEditor.recordRenderer.cutpointGenerator = function (selectors, options) {
@@ -1195,29 +1243,7 @@ cspace = cspace || {};
         url: "%test/data/basic/%recordType/%csid.json"
     });
     cspace.recordEditor.dataSource.testDataSource = cspace.URLDataSource;
-//    
-//    cspace.recordEditor.remove = function (that) {
-//        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-//            listeners: {
-//                onClose: function (userAction) {
-//                    if (userAction === "act") {
-//                        that.options.dataContext.remove(that.model.csid);
-//                        processChanges(that, false);
-//                    }
-//                }
-//            },
-//            model: {
-//                messages: ["recordEditor-dialog-deletePrimaryMessage"]
-//            },
-//            termMap: [
-//                that.lookupMessage(that.options.recordType),
-//                that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
-//                that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
-//            ],
-//            parentBundle: that.options.parentBundle
-//        });
-//    };
-//
+
 //    /*
 //     * Opens an alert box informing user printing the string defined in
 //     * options.strings.removeSuccessfulMessage. After user dismisses dialog,
@@ -1252,66 +1278,6 @@ cspace = cspace || {};
 //        that.messageBar.show(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
 //            record: that.lookupMessage(that.options.recordType)
 //        }), null, false);
-//    };
-//    
-//    // NOTE: THIS IS A HACK BECAUSE THE SERVER DOES NOT RETURN ANY PAYLOAD RELATED TO THE MEDIA ATTACHED (CSPACE-3757).
-//    cspace.recordEditor.produceTreeMedia = function (that) {
-//        var tree = cspace.recordEditor.produceTree(that);
-//        fluid.merge(null, tree.expander[1].trueTree, {
-//            mediaImage: {
-//                decorators: [{
-//                    type: "attrs",
-//                    attributes: {
-//                        src: "${fields.blobs.0.imgThumb}"
-//                    }
-//                }, {
-//                    type: "addClass",
-//                    classes: that.options.styles.mediaImage
-//                }, {
-//                    type: "jQuery",
-//                    func: "click",
-//                    args: that.navigateToFullImage
-//                }]
-//            }
-//        });
-//        return tree;
-//    };
-//    
-//    cspace.recordEditor.navigateToFullImage = function (that) {
-//        window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
-//            height: that.options.originalMediaDimensions.height,
-//            width: that.options.originalMediaDimensions.width,
-//            scrollbars: "yes"
-//        }));
-//    };
-//    
-//    cspace.recordEditor.produceTreeTemplate = function (that) {
-//        var tree = cspace.recordEditor.produceTree(that);
-//        tree.templateEditor = {
-//            decorators: {
-//                type: "fluid",
-//                func: "cspace.templateEditor"
-//            }
-//        };
-//        return tree;
-//    };
-//    
-//    cspace.recordEditor.cloneAndStore = function (that) {
-//        var modelToClone = fluid.copy(that.model);
-//        fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
-//            fluid.set(modelToClone, fieldPath);
-//        });
-//        that.localStorage.set(modelToClone);
-//    };
-//    
-//    cspace.recordEditor.reloadAndCloneRecord = function (that) {
-//        that.cloneAndStore();
-//        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {
-//            recordType: that.options.recordType,
-//            vocab: that.model.namespace ? ("?" + $.param({
-//                vocab: that.model.namespace
-//            })) : ""
-//        });
 //    };
 //    
 //    cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
