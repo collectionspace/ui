@@ -42,14 +42,6 @@
                         <select class="csc-object-identification-responsible-department"><option value="">Options not loaded</option></select>
                     </div>        
                 </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-collection-object-pahmaEthnographicFileCode-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-collection-object-pahmaEthnographicFileCode"/>
-                    </div>        
-                </div>
                 <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-collection-label"></div>
@@ -60,10 +52,10 @@
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-collection-object-title-label"></div>
+                        <div class="label csc-collection-object-pahmaEthnographicFileCode-label"></div>
                     </div>
-                    <div class="content clearfix csc-collection-object-titleGroup">
-                        <input type="text" class="csc-object-identification-object-title"/>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-collection-object-pahmaEthnographicFileCode"/>
                     </div>        
                 </div>
                 <div class="info-pair-select">
@@ -72,6 +64,31 @@
                     </div>
                     <div class="content clearfix">
                         <select class="csc-object-identification-record-status input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated cultural group / <span class="csc-collection-object-assocPeople-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPeopleGroup">
+                        <input type="text" class="csc-collection-object-assocPeople"/>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-material-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-materialGroup">
+                        <input type="text" class="csc-object-description-material"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-title-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-titleGroup">
+                        <input type="text" class="csc-object-identification-object-title"/>
                     </div>        
                 </div>
                 <div class="info-pair-select">
@@ -89,6 +106,38 @@
                     <div class="content clearfix">
                         <select class="csc-collection-object-pahmaTmsLegacyDepartment input-select"><option value="">Options not loaded</option></select>
                     </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldCollectionPlace-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldCollectionPlace" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldCollectionSource-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldCollectionSource" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldCollector-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldCollector" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldColEventName-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldColEventName" />
+                    </div>
                 </div>
                 <div class="info-pair-select">
                     <div class="header">
@@ -122,6 +171,14 @@
                         <select class="csc-object-description-form input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectComponentName-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectComponentGroup">
+                        <input type="text" class="csc-object-description-object-component-name input-select"/>
+                    </div>
+                </div>
                 <!-- FIXME: Can unhide by removing style after CSPACE-5185 (and hence CSPACE-4903 / CSPACE-5184) is fixed -->
                 <div class="info-pair" style="display:none;">
                     <div class="header">
@@ -140,12 +197,12 @@
                         <input type="text" class="csc-object-description-inscription-description-method"/>
                     </div>
                 </div>
-                <div class="info-pair">
+                <div class="info-pair-select">
                     <div class="header">
-                        <div class="label csc-collection-object-material-label"></div>
+                        <div class="label csc-collection-object-sex-label"></div>
                     </div>
-                    <div class="content clearfix csc-collection-object-materialGroup">
-                        <input type="text" class="csc-object-description-material"/>
+                    <div class="content clearfix">
+                        <select class="csc-object-description-sex input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
                 <div class="info-pair-select">
@@ -156,14 +213,6 @@
                         <select class="csc-object-description-phase input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
-                <div class="info-pair-select">
-                    <div class="header">
-                        <div class="label csc-collection-object-sex-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <select class="csc-object-description-sex input-select"><option value="">Options not loaded</option></select>
-                    </div>
-                </div>
                 <div class="info-pair">
                     <div class="header">
                         <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
@@ -171,14 +220,6 @@
                     </div>
                     <div class="content clearfix csc-collection-object-taxonomicIdentGroup">
                         <input type="text" class="csc-taxonomic-identification-taxon"/>
-                    </div>
-                </div>
-                <div class="info-pair-select">
-                    <div class="header">
-                        <div class="label csc-collection-object-objectComponentName-label"></div>
-                    </div>
-                    <div class="content clearfix csc-collection-object-objectComponentGroup">
-                        <select class="csc-object-description-object-component-name input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
                 <!-- FIXME: Can unhide by removing style after CSPACE-5185 (and hence CSPACE-4903 / CSPACE-5184) is fixed -->
@@ -193,19 +234,18 @@
                 <div class="info-pair">
                     <div class="header">
                         <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
-                        <div class="label">Production organization / <span class="csc-collection-object-objectProductionOrganization-label"/></div>
-                    </div>
-                    <div class="content clearfix csc-collection-object-objectProductionOrganizationGroup">
-                        <input type="text" class="csc-object-production-organization"/>
-                    </div>
-                </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
                         <div class="label">Production cultural group / <span class="csc-collection-object-objectProductionPeople-label"/></div>
                     </div>
                     <div class="content clearfix csc-collection-object-objectProductionPeopleGroup">
                         <input type="text" class="csc-object-production-people"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label">Production technique / <span class="csc-collection-object-technique-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-techniqueGroup">
+                        <input type="text" class="csc-object-production-technique"/>
                     </div>
                 </div>
                 <div class="info-pair">
@@ -228,42 +268,47 @@
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-collection-object-technique-label"></div>
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Production organization / <span class="csc-collection-object-objectProductionOrganization-label"/></div>
                     </div>
-                    <div class="content clearfix csc-collection-object-techniqueGroup">
-                        <input type="text" class="csc-object-production-technique"/>
-                    </div>
-                </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-collection-object-fieldCollectionPlace-label"></div>
-                    </div>                            
-                    <div class="content clearfix">
-                        <input type="text" class="input-alpha csc-collection-object-fieldCollectionPlace" />
+                    <div class="content clearfix csc-collection-object-objectProductionOrganizationGroup">
+                        <input type="text" class="csc-object-production-organization"/>
                     </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-collection-object-fieldCollectionSource-label"></div>
-                    </div>                            
-                    <div class="content clearfix">
-                        <input type="text" class="input-alpha csc-collection-object-fieldCollectionSource" />
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated cultural affinity / <span class="csc-collection-object-assocCulturalContext-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocCulturalContextGroup">
+                        <input type="text" class="csc-collection-object-assocCulturalContext"/>
                     </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-collection-object-fieldCollector-label"></div>
-                    </div>                            
-                    <div class="content clearfix">
-                        <input type="text" class="input-alpha csc-collection-object-fieldCollector" />
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated organization / <span class="csc-collection-object-assocOrganization-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocOrganizationGroup">
+                        <input type="text" class="csc-collection-object-assocOrganization"/>
                     </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-collection-object-fieldColEventName-label"></div>
-                    </div>                            
-                    <div class="content clearfix">
-                        <input type="text" class="input-alpha csc-collection-object-fieldColEventName" />
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated person / <span class="csc-collection-object-assocPerson-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPersonGroup">
+                        <input type="text" class="csc-collection-object-assocPerson"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated place / <span class="csc-collection-object-assocPlace-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPlaceGroup">
+                        <input type="text" class="csc-collection-object-assocPlace"/>
                     </div>
                 </div>
                 <div class="info-pair" style="display:none;">
