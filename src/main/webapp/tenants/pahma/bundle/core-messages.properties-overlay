@@ -197,6 +197,7 @@ contact-addressNoteLabel: Address note
 
 #Acquisition:
 acquisition-ownersLabel: Previous owner
+acquisition-ownerLabel: Previous owner
 acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
 acquisition-acquisitionSourcesLabel: Acquisition source
