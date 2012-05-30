@@ -24,6 +24,11 @@ taxon-referenceLabel: FIX-Taxonomic reference
 taxon-refPageLabel: Page
 taxon-notesLabel: Notes
 
+# Vocabularies
+vocab-concept: Ethnographic Field Codes
+vocab-ethusecode: Ethnographic Cultures
+vocab-archculture: Archaeological Cultures
+
 # Cataloging record
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history
