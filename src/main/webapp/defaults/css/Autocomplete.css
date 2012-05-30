@@ -65,7 +65,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     float:left; 
     border:2px solid #C7CFD4;
     position:absolute;
-    z-index:9999 !important;
+    z-index:1000 !important;
     margin:2px 0 0 -2px;
     font-size: 1.2em;
     font-weight:bold;
