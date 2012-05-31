@@ -400,6 +400,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayNames = that.options.elPaths.displayNames,
                     urn = that.options.elPaths.urn,
                     baseUrn = that.options.elPaths.baseUrn,
+                    csid = that.options.elPaths.csid,
+                    type = that.options.elPaths.type,
                     matchesPath = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
                     var vocab = cspace.vocab.resolve({
@@ -417,6 +419,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[urn] = match[baseUrn].concat("'", thisDisplayName, "'");
                         elem[displayName] = thisDisplayName;
                         elem[preferred] = index === 0;
+                        elem[type] = match.type;
+                        elem[csid] = match.csid;
                         return elem;
                     }));
                 });
@@ -767,7 +771,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             urn: "urn",
             baseUrn: "baseUrn",
             displayNames: "displayNames",
-            matches: "matches"
+            matches: "matches",
+            type: "type",
+            csid: "csid"
         }
     });
     
