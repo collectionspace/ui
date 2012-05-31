@@ -412,7 +412,7 @@ collection-object-pahmaAltNumNoteLabel: Note
 # ---------------- Dimensions ---------------- #
 dimension-measuredPartGroupLabel: Dimensions
 dimension-dimensionLabel: Dimension
-dimension-measurementMethodLabel: Measurement notes
+dimension-dimensionNoteLabel: Measurement notes
 dimension-dimensionSummaryLabel: Dimension summary
 dimension-measuredPartLabel: Part measured
 dimension-valueLabel: Value
