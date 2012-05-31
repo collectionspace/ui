@@ -172,6 +172,7 @@ concept-concept: Label Text
 
 #loanout
 loanout-collectionLabel: Collection
+loanout-majorGroupLabel: Major Group
 loanout-geographyLabel: Geography
 loanout-taxonomyLabel: Taxonomy
 loanout-objKindLabel: Object Kind
@@ -205,6 +206,7 @@ loanout-transferNotesLabel: Notes
 
 #loanin
 loanin-lenderLoanNumberLabel: Lender's No.
+loanin-majorGroupLabel: Major Group
 loanin-geographyLabel: Geography
 loanin-taxonomyLabel: Taxonomy
 loanin-objKindLabel: Object Kind
