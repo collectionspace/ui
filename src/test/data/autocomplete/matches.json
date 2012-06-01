@@ -15,7 +15,7 @@
             "Oliver Morosco Photoplay Company"
         ],
         "type": "organization",
-        "namespace": "organizationtest"
+        "namespace": "ulan_oa"
     },
     {
         "baseUrn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(Photoplay1334763775670)",
@@ -24,7 +24,7 @@
             "Photoplay"
         ],
         "type": "organization",
-        "namespace": "organizationtest"
+        "namespace": "ulan_oa"
     },
     {
         "baseUrn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(ToppsCompanyInc1334763749665)",
@@ -62,13 +62,13 @@
             "Christopher Lloyd"
         ],
         "type": "person",
-        "namespace": "persontest1"
+        "namespace": "ulan_pa"
     },
     {
         "baseUrn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ChristopherPlummer1334763614341)",
         "csid": "9c641934-5e59-4df7-a5ec",
         "type": "person",
-        "namespace": "persontest2",
+        "namespace": "ulan_pa",
         "displayNames": [
             "Christopher Plummer",
             "Chris Plummer",

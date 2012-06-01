@@ -62,10 +62,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     function submitTest(name, func) {
-        autocompleteTests.test(name + " new markup", function () {            
+        autocompleteTests.test(name + " new markup", function () {
             func("#autocomplete1");
         });
-        autocompleteTests.test(name + " old markup", function () {            
+        autocompleteTests.test(name + " old markup", function () {
             func("#autocomplete2");
         });
     }
@@ -114,6 +114,39 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     submitTest("Choose match interaction with mouse item click", makeArgumentedTest(chooseMatchInteraction, clickMatch));
     submitTest("Choose match interaction with ENTER key", makeArgumentedTest(chooseMatchInteraction, enterMatch));
     
+    function clickDisabledMatch(autocomplete) {
+        var popup = autocomplete.popup;
+        popup.dom.locate("matchItemContent")[1].click();
+    }
+
+    var chooseMatchInteractionDisabled = function (container, chooseFunc) {
+        expect(6);
+        var autocomplete = cspace.autocomplete(container);
+        var input = autocomplete.autocompleteInput;
+        autocomplete.autocomplete.events.onSearchDone.addListener(function() {
+            assertMatchCount("\"Plummer\" results count in markup", 5, autocomplete);
+            assertCloseVisible(autocomplete, true);
+            chooseFunc(autocomplete);
+            assertCloseVisible(autocomplete, true);
+            var match = autocomplete.model.matches[1],
+                matchDisplayName = match.displayName,
+                matchUrn = match.urn;
+            jqUnit.assertNotEquals("Visible field value not equal to the one which was clicked", matchDisplayName, input.val());
+            jqUnit.assertEquals("Hidden field value is empty", "", autocomplete.hiddenInput.val());
+            assertMatchCount("Dialog is still open with its options", 5, autocomplete);
+            autocomplete.closeButton.button.click();
+            start();
+        });
+
+        input.keydown();
+        input.val("Plummer");
+        stop();
+    };
+    
+    submitTest("Choose match interaction with mouse item click for disabled NP item", makeArgumentedTest(chooseMatchInteractionDisabled, clickDisabledMatch));
+    
+    return;
+    
     var focusBlurable = function (autocomplete) {
         autocomplete.autocompleteInput.blur();
         $("#blurable").focus();
@@ -121,7 +154,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var focusMatch = function (autocomplete) {
         var popup = autocomplete.popup;
-        popup.dom.locate("matchItemContent").focus();        
+        popup.dom.locate("matchItemContent").focus();
     };
     
     var assertPopupOpen = function (autocomplete, state) {
@@ -138,7 +171,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     function clickAuthority(autocomplete) {
         var popup = autocomplete.popup;
-        popup.dom.locate("authorityItem").eq(0).click();        
+        popup.dom.locate("authorityItem").eq(0).click();
     }
     
     var gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
