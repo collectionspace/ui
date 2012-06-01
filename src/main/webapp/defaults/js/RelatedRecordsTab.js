@@ -51,6 +51,7 @@ cspace = cspace || {};
                                     }, "afterListUpdate", undefined, "last");
                                     that.listEditor.details.requestSave();
                                 } else if (userAction === "proceed") {
+                                    that.listEditor.details.rollback();
                                     callback();
                                 }
                             },
