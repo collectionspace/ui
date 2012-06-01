@@ -1015,8 +1015,12 @@ fluid.registerNamespace("cspace.util");
                                 return;
                             }
                             
-                            fluid.each([data.login, cspace.globalSetup.hasPermissions(data.permissions)], function (check) {
-                                if (check && !that.noLogin) {
+                            fluid.find([data.login, cspace.globalSetup.hasPermissions(data.permissions)], function (check) {
+                                if (that.noLogin) {
+                                    return;
+                                }
+                                
+                                if (!check) {
                                     var currentUrl = document.location.href;
                                     var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
                                     window.location = loginUrl;
@@ -1062,12 +1066,11 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.globalSetup.hasPermissions = function (permissions) {
-        var hasPermissions = false;
-        fluid.each(permissions, function (permission) {
-            hasPermissions = hasPermissions || (permission.length > 0);
+        return !!fluid.find(permissions, function (permission) {
+            if (permission.length > 0) {
+                return true;
+            }
         });
-        
-        return hasPermissions;
     };
 
     cspace.globalSetup.noLogin = function (options) {
