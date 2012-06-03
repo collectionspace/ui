@@ -525,6 +525,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var setupAutocomplete = function (that) {
+        fluid.each(["vocab", "vocabSingle"], function (url) {
+            var urls = that.options.urls;
+            if (!that.model.vocab) {
+                urls[url] = "";
+                return;
+            }
+            urls[url] = fluid.stringTemplate(urls[url], {
+                vocab: that.model.vocab
+            })
+        });
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
@@ -763,6 +773,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             closeButton: {
                 type: "cspace.autocomplete.closeButton"
             }
+        },
+        urls: {
+            vocab: "&vocab=%vocab",
+            vocabSingle: "?vocab=%vocab"
         },
         parentBundle: "{globalBundle}",
         elPaths: {
