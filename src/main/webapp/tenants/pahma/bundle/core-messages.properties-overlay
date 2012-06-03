@@ -158,10 +158,12 @@ objectexit-packingNoteLabel: Packing note
 objectexit-updatedAtLabel: Modified date
 objectexit-editUsername: Record modified by
 objectexit-identificationNumberRequired: Please specify an exit number
+
+# ---------------------------------- Groups -------------------------- #
 group-groupInformationLabel: Group information
 group-scopeNoteLabel: Scope note
 group-ownerLabel: Group owner
-group-responsibleDepartmentLabel: Responsible department
+group-responsibleDepartmentLabel: Purpose
 group-updatedAtLabel: Modified date
 group-editUsername: Record modified by
 group-identificationNumberRequired: Please specify a title
