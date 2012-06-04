@@ -17,50 +17,6 @@ cspace = cspace || {};
     "use strict";
 
     fluid.log("RecordEditor.js loaded");
-//    
-//    fluid.defaults("cspace.recordEditor", {
-//        gradeNames: ["fluid.rendererComponent", "autoInit"],
-//        preInitFunction: "cspace.recordEditor.preInit",
-//        finalInitFunction: "cspace.recordEditor.finalInit",
-//        mergePolicy: {
-//            fieldsToIgnore: "replace",
-//            "rendererOptions.instantiator": "nomerge",
-//            "rendererOptions.parentComponent": "nomerge",
-//            "rendererFnOptions.uispec": "uispec",
-//            "uispec": "nomerge",
-//            "resolver": "nomerge"
-//        },
-//        invokers: {
-//            lookupMessage: "cspace.util.lookupMessage",
-//            remove: "remove",
-//            afterDeleteAction: "afterDelete",
-//            checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
-//            checkCreateFromExistingDisabling: "checkCreateFromExistingDisabling", //whether to disable createFromExisting button
-//            reloadAndCloneRecord: "reloadAndCloneRecord",
-//            createNewFromExistingRecord: "createNewFromExistingRecord",
-//            hasMediaAttached: "hasMediaAttached",
-//            hasRelations: "hasRelations",
-//        },
-//        navigationEventNamespace: undefined,
-//        events: {
-//            afterFetch: null,
-//            onSave: "preventable",
-//            onCancel: null,
-//            afterRemove: null, // params: textStatus
-//            onError: null, // params: operation
-//            afterRenderRefresh: null
-//        },
-//        listeners: {
-//            afterFetch: "{cspace.recordEditor}.afterFetchHandler"
-//        },
-//        saveCancelPermission: "update",
-//        fieldsToIgnore: ["csid", "fields.csid"],
-//        resolver: "{permissionsResolver}",
-//        urls: cspace.componentUrlBuilder({
-//            deleteURL: "%webapp/html/findedit.html",
-//            cloneURL: "%webapp/html/%recordType.html"
-//        })
-//    });
 
     fluid.defaults("cspace.recordEditor", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
@@ -108,7 +64,7 @@ cspace = cspace || {};
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier"
                 },
-                createOnEvent: "afterFetch"
+                createOnEvent: "afterRecordRender"
             },
             saver: {
                 type: "cspace.recordEditor.saver",
@@ -147,7 +103,10 @@ cspace = cspace || {};
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier",
                     uispec: "{cspace.recordEditor}.options.uispec",
-                    resources: "{cspace.recordEditor.templateFetcher}.options.resources"
+                    resources: "{cspace.recordEditor.templateFetcher}.options.resources",
+                    events: {
+                        afterRender: "{cspace.recordEditor}.events.afterRecordRender"
+                    }
                 },
                 createOnEvent: "ready"
             },
@@ -175,7 +134,12 @@ cspace = cspace || {};
                         togglable: "{cspace.recordEditor}.options.selectors.togglable"
                     }
                 },
-                createOnEvent: "ready"
+                createOnEvent: "afterRecordRender"
+            },
+            readOnly: {
+                type: "cspace.recordEditor.readOnly",
+                container: "{recordEditor}.container",
+                createOnEvent: "afterRecordRender"
             },
             vocab: "{vocab}"
         },
@@ -194,11 +158,19 @@ cspace = cspace || {};
             afterRemove: null,
             onCancel: null,
             onCreateFromExisting: null,
-
+            afterRecordRender: null,
             onError: null
         },
         listeners: {
-            ready: "{cspace.recordEditor}.onReady"
+            ready: "{cspace.recordEditor}.onReady",
+            afterRecordRender: [
+                "{loadingIndicator}.events.hideOn.fire",
+                "{messageBar}.hide"
+            ],
+            onError: "{loadingIndicator}.events.hideOn.fire",
+            onSave: "{loadingIndicator}.events.showOn.fire",
+            onCancel: "{loadingIndicator}.events.showOn.fire",
+            afterRemove: "{loadingIndicator}.events.hideOn.fire"
         },
         parentBundle: "{globalBundle}",
         showCreateFromExistingButton: false,
@@ -230,6 +202,16 @@ cspace = cspace || {};
                 that.events.afterFetch.fire();
             });
         }
+    };
+
+    fluid.defaults("cspace.recordEditor.readOnly", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        readOnly: "{cspace.recordEditor}.options.readOnly",
+        postInitFunction: "cspace.recordEditor.readOnly.postInit"
+    });
+
+    cspace.recordEditor.readOnly.postInit = function (that) {
+        cspace.util.processReadOnly(that.container, that.options.readOnly);
     };
 
     fluid.defaults("cspace.recordEditor.cloner", {
@@ -494,6 +476,7 @@ cspace = cspace || {};
                 recordEditor.events.onError.fire(data, "save");
                 return;
             }
+            recordEditor.applier.requestChange("", data);
             recordEditor.events.afterSave.fire();
         });
     };
@@ -531,7 +514,8 @@ cspace = cspace || {};
         },
         listeners: {
             afterFetch: "{cspace.recordEditor.remover}.onAfterFetch",
-            onRemove: "{cspace.recordEditor.remover}.onRemoveHandler"
+            onRemove: "{cspace.recordEditor.remover}.onRemoveHandler",
+            afterRemove: "{cspace.recordEditor.remover}.afterRemoveHandler"
         },
         components: {
             proceduresDataSource: {
@@ -546,6 +530,7 @@ cspace = cspace || {};
         },
         invokers: {
             remove: "cspace.recordEditor.remover.remove",
+            afterRemove: "cspace.recordEditor.remover.afterRemove",
             hasMediaAttached: "cspace.recordEditor.remover.hasMediaAttached",
             openConfirmation: "cspace.recordEditor.remover.openConfirmation"
         },
@@ -553,7 +538,8 @@ cspace = cspace || {};
         urls: cspace.componentUrlBuilder({
             proceduresURL: "%tenant/%tname/%recordType/procedure/%csid",
             catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid",
-            refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid"
+            refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid",
+            deleteURL: "%webapp/html/findedit.html"
         }),
         csid: {
             expander: {
@@ -563,6 +549,57 @@ cspace = cspace || {};
             }
         }
     });
+
+    fluid.demands("cspace.recordEditor.remover.afterRemove", "cspace.recordEditor.remover", {
+        funcName: "cspace.recordEditor.remover.redirectAfterDelete",
+        args: ["{confirmation}", "{globalBundle}", "{remover}.options.urls.deleteURL", "{recordEditor}.options.recordType"]
+    });
+
+    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.listEditor", "cspace.admin"], {
+        funcName: "cspace.recordEditor.remover.statusAfterDelete",
+        args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
+    });
+
+    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.listEditor", "cspace.tab"], {
+        funcName: "cspace.recordEditor.remover.statusAfterDelete",
+        args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
+    });
+
+    /*
+     * Opens an alert box informing user printing the string defined in
+     * options.strings.removeSuccessfulMessage. After user dismisses dialog,
+     * user is redirected to the URL defined in: options.urls.deleteURL
+     * Note that deletion should already have taken place before this function is
+     * called. This function merely shows dialog to user and redirects.
+     */
+    cspace.recordEditor.remover.redirectAfterDelete = function (confirmation, parentBundle, url, recordType) {
+        confirmation.open("cspace.confirmation.alertDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    window.location = url;
+                }
+            },
+            parentBundle: parentBundle,
+            model: {
+                 messages: [ "recordEditor-dialog-removeSuccessfulMessage" ]
+            },
+            termMap: [
+                parentBundle.resolve(recordType)
+            ]
+        });
+    };
+
+    /*
+     * Dismisses the record that the user was in (now deleted) and displays
+     * a message in the messagebar, informing the user that the record was
+     * deleted.
+     */
+    cspace.recordEditor.remover.statusAfterDelete = function (messageBar, strings, parentBundle, recordType) {
+        //show messagebar
+        messageBar.show(parentBundle.resolve(strings.removeSuccessfulMessage, [
+            parentBundle.resolve(recordType)
+        ]), null, false);
+    };
 
     fluid.demands("cspace.recordEditor.remover.openConfirmation", "cspace.recordEditor.remover", {
         funcName: "cspace.recordEditor.remover.openConfirmation",
@@ -603,6 +640,9 @@ cspace = cspace || {};
         };
         that.onRemoveHandler = function () {
             that.remove();
+        };
+        that.afterRemoveHandler = function () {
+            that.afterRemove();
         };
     };
 
@@ -1087,10 +1127,37 @@ cspace = cspace || {};
         invokers: {
             navigateToFullImage: "cspace.recordEditor.recordRenderer.navigateToFullImage"
         },
+        events: {
+            afterSave: {
+                event: "{cspace.recordEditor}.events.afterSave"
+            },
+            onRenderTreePublic: {
+                event: "onRenderTree"
+            }
+        },
+        listeners: {
+            afterSave: "{recordRenderer}.afterSaveHandler",
+            onRenderTreePublic: "{recordRenderer}.onRenderTreeHandler"
+        },
+        preInitFunction: "cspace.recordEditor.recordRenderer.preInit",
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {}
     });
+
+    fluid.demands("onRenderTreePublic", "cspace.recordEditor.recordRenderer", [
+        "{recordEditor}.options",
+        "{recordEditor}.model"
+    ]);
+
+    cspace.recordEditor.recordRenderer.preInit = function (that) {
+        that.afterSaveHandler = function () {
+            that.refreshView();
+        };
+        that.onRenderTreeHandler = function (options, model) {
+            options.readOnly = cspace.util.isReadOnly(options.readOnly, model);
+        };
+    };
 
     cspace.recordEditor.renderOnInit = function (deferRendering) {
         return !deferRendering;
@@ -1243,81 +1310,5 @@ cspace = cspace || {};
         url: "%test/data/basic/%recordType/%csid.json"
     });
     cspace.recordEditor.dataSource.testDataSource = cspace.URLDataSource;
-
-//    /*
-//     * Opens an alert box informing user printing the string defined in
-//     * options.strings.removeSuccessfulMessage. After user dismisses dialog,
-//     * user is redirected to the URL defined in: options.urls.deleteURL
-//     * Note that deletion should already have taken place before this function is
-//     * called. This function merely shows dialog to user and redirects.
-//     */
-//    cspace.recordEditor.redirectAfterDelete = function (that) {
-//        that.confirmation.open("cspace.confirmation.alertDialog", undefined, {
-//            listeners: {
-//                onClose: function (userAction) {
-//                    window.location = that.options.urls.deleteURL;
-//                }
-//            },
-//            parentBundle: that.options.parentBundle,
-//            model: {
-//                 messages: [ "recordEditor-dialog-removeSuccessfulMessage" ]
-//            },
-//            termMap: [
-//                that.lookupMessage(that.options.recordType)
-//            ]
-//        });
-//    };
-//
-//    /*
-//     * Dismisses the record that the user was in (now deleted) and displays
-//     * a message in the messagebar, informing the user that the record was
-//     * deleted.
-//     */
-//    cspace.recordEditor.statusAfterDelete = function (that) {
-//        //show messagebar
-//        that.messageBar.show(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
-//            record: that.lookupMessage(that.options.recordType)
-//        }), null, false);
-//    };
-//    
-//    cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
-//        globalNavigator.events.onPerformNavigation.fire(callback);
-//    };
-//
-//    cspace.recordEditor.hasMediaAttached = function (that) {
-//        return (that.model.fields && that.model.fields.blobCsid);
-//    };
-//
-//    cspace.recordEditor.hasRelations = function (that) {
-//        return (that.model.csid && that.model.relations && !$.isEmptyObject(that.model.relations));
-//    };
-//
-//    cspace.recordEditor.finalInit = function (that) {
-//        that.refreshView = function () {
-//            that.options.readOnly = cspace.util.isReadOnly(that.options.readOnly, that.model);
-//            fluid.log("RecordEditor.js before render");
-//            that.renderer.refreshView();
-//            cspace.util.processReadOnly(that.container, that.options.readOnly);
-//            processChanges(that, false);
-//            that.rollbackModel = fluid.copy(that.model.fields);
-//            that.messageBar.hide();
-//            bindHandlers(that);
-//            fluid.log("RecordEditor.js renderPage end");
-//        };
-//        that.refreshNoSave = function () {
-//            fluid.log("RecordEditor.js before render");
-//            that.renderer.refreshView();
-//            that.messageBar.hide();
-//            bindHandlers(that);
-//            fluid.log("RecordEditor.js renderPage end");
-//        };
-//    };
-//
-//    cspace.recordEditor.preInit = function (that) {
-//        that.afterFetchHandler = function () {
-//            that.rollbackModel = fluid.copy(that.model.fields);
-//            setupRecordEditor(that);
-//        };
-//    };
     
 })(jQuery, fluid);

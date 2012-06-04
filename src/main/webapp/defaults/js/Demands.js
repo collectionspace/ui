@@ -1153,12 +1153,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 },
-                listeners: {
-                    afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSave: "{loadingIndicator}.events.showOn.fire",
-                    onCancel: "{loadingIndicator}.events.showOn.fire"
-                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 showDeleteButton: {
@@ -1204,12 +1198,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.template"], {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
-                listeners: {
-                    afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSave: "{loadingIndicator}.events.showOn.fire",
-                    onCancel: "{loadingIndicator}.events.showOn.fire"
-                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 produceTree: "cspace.recordEditor.produceTreeTemplate",
@@ -1334,13 +1322,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.administration"], {
             container: "{listEditor}.dom.details",
             options: {
-                listeners: {
-                    afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    afterRemove: "{loadingIndicator}.events.hideOn.fire",
-                    onSave: "{loadingIndicator}.events.showOn.fire",
-                    onCancel: "{loadingIndicator}.events.showOn.fire"
-                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
                 showDeleteButton: {
@@ -1386,13 +1367,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.tab"], {
             container: "{listEditor}.dom.details",
             options: {
-                listeners: {
-                    afterRender: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    afterRemove: "{loadingIndicator}.events.hideOn.fire",
-                    onSave: "{loadingIndicator}.events.showOn.fire",
-                    onCancel: "{loadingIndicator}.events.showOn.fire"
-                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
                 showDeleteButton: {
