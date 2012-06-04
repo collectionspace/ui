@@ -4,13 +4,6 @@
             "recordType": "objectexit",
             "schema": {
                 "objectexit": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/ObjectexitTemplate.html",
-                    "templateSelector": ".csc-objectexit-template",
-                    "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
-                }
             }
         }
     },

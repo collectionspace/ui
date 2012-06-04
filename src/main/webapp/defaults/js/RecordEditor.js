@@ -141,7 +141,8 @@ cspace = cspace || {};
                 container: "{recordEditor}.container",
                 createOnEvent: "afterRecordRender"
             },
-            vocab: "{vocab}"
+            vocab: "{vocab}",
+            globalNavigator: "{globalNavigator}"
         },
         events: {
             afterFetch: null,
@@ -187,6 +188,28 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.finalInit = function (that) {
+
+        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            if (that.changeTracker.unsavedChanges) {
+                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+                    listeners: {
+                        onClose: function (userAction) {
+                            if (userAction === "act") {
+                                that.events.afterSave.addListener(function () {
+                                    callback();
+                                }, undefined, undefined, "last");
+                                that.events.onSave.fire();
+                            } else if (userAction === "proceed") {
+                                callback();
+                            }
+                        }
+                    },
+                    parentBundle: that.parentBundle
+                });
+                return false;
+            }
+        });
+
         var modelToClone = that.localStorage.get();
         if (modelToClone) {
             that.localStorage.set();
@@ -259,45 +282,10 @@ cspace = cspace || {};
     fluid.defaults("cspace.recordEditor.changeTracker", {
         gradeNames: ["autoInit", "fluid.modelComponent", "fluid.eventedComponent"],
         preInitFunction: "cspace.recordEditor.changeTracker.preInit",
-        finalInitFunction: "cspace.recordEditor.changeTracker.finalInit",
         events: {
-            onChange: null,
-            afterSave: {
-                event: "{cspace.recordEditor}.events.afterSave"
-            },
-            onSave: {
-                event: "{cspace.recordEditor}.events.onSave"
-            }
-        },
-        components: {
-            globalNavigator: "{globalNavigator}",
-            parentBundle: "{globalBundle}",
-            confirmation: "{confirmation}"
+            onChange: null
         }
     });
-
-    cspace.recordEditor.changeTracker.finalInit = function (that) {
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
-            if (that.unsavedChanges) {
-                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
-                    listeners: {
-                        onClose: function (userAction) {
-                            if (userAction === "act") {
-                                that.events.afterSave.addListener(function () {
-                                    callback();
-                                }, undefined, undefined, "last");
-                                that.events.onSave.fire();
-                            } else if (userAction === "proceed") {
-                                callback();
-                            }
-                        }
-                    },
-                    parentBundle: that.parentBundle
-                });
-                return false;
-            }
-        });
-    };
 
     cspace.recordEditor.changeTracker.preInit = function (that) {
         that.rollbackModel = fluid.copy(that.model);
