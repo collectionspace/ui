@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "acquisition",
-            "selectors": {
-                "recordEditor": ".csc-acquisition-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -52,13 +49,6 @@
             "recordType": "acquisition",
              "schema": {
                 "acquisition": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/AcquisitionTemplate.html",
-                    "templateSelector": ".csc-acquisition-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                }
             }
         }
     }

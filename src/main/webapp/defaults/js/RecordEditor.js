@@ -1258,7 +1258,7 @@ cspace = cspace || {};
             }, callback);
         };
         that.set = function (model, callback) {
-            that.options.csid = that.options.csid || model.csid;
+            that.options.csid = model.csid = model.csid || that.options.csid || "";
             that.source.set(model, {
                 csid: that.options.csid,
                 recordType: that.options.recordType

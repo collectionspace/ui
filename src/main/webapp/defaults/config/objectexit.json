@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "objectexit",
-            "selectors": {
-                "recordEditor": ".csc-record-edit-container"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",

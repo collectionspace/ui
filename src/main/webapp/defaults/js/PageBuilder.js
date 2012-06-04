@@ -258,7 +258,8 @@ cspace = cspace || {};
             titleBar: ".csc-titleBar-container",
             pivotSearch: ".csc-pivot-searchBox",
             tabs: ".csc-tabs-template",
-            sidebar: ".csc-sidebar-container"
+            sidebar: ".csc-sidebar-container",
+            recordEditor: ".csc-record-edit-container"
         },
         components: {
             instantiator: "{instantiator}",
