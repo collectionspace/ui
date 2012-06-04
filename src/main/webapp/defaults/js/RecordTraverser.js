@@ -247,14 +247,19 @@ cspace = cspace || {};
         that.save = function (increment) {
             var model = that.model,
                 elPaths = that.options.elPaths,
-                searchReference = elPaths.searchReference;
+                searchReference = elPaths.searchReference,
+                index = get(model, searchReference, elPaths.index);
 
-            if (typeof increment !== "number") {
-                increment = 0;
+            if (typeof increment !== "number" || typeof index !== "number") {
+                index = undefined;
+            } else {
+                index = (typeof index !== "number") ? 0 : index +
+                    (typeof increment !== "number") ? 0 : increment;
             }
+            
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
-                index: get(model, searchReference, elPaths.index) + increment,
+                index: index,
                 source: get(model, searchReference, elPaths.source)
             });
         };
