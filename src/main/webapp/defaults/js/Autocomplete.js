@@ -400,6 +400,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayNames = that.options.elPaths.displayNames,
                     urn = that.options.elPaths.urn,
                     baseUrn = that.options.elPaths.baseUrn,
+                    csid = that.options.elPaths.csid,
+                    type = that.options.elPaths.type,
                     matchesPath = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
                     var vocab = cspace.vocab.resolve({
@@ -417,6 +419,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[urn] = match[baseUrn].concat("'", thisDisplayName, "'");
                         elem[displayName] = thisDisplayName;
                         elem[preferred] = index === 0;
+                        elem[type] = match.type;
+                        elem[csid] = match.csid;
                         return elem;
                     }));
                 });
@@ -521,6 +525,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var setupAutocomplete = function (that) {
+        fluid.each(["vocab", "vocabSingle"], function (url) {
+            var urls = that.options.urls;
+            if (!that.model.vocab) {
+                urls[url] = "";
+                return;
+            }
+            urls[url] = fluid.stringTemplate(urls[url], {
+                vocab: that.model.vocab
+            })
+        });
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
@@ -760,6 +774,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 type: "cspace.autocomplete.closeButton"
             }
         },
+        urls: {
+            vocab: "&vocab=%vocab",
+            vocabSingle: "?vocab=%vocab"
+        },
         parentBundle: "{globalBundle}",
         elPaths: {
             preferred: "preferred",
@@ -767,7 +785,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             urn: "urn",
             baseUrn: "baseUrn",
             displayNames: "displayNames",
-            matches: "matches"
+            matches: "matches",
+            type: "type",
+            csid: "csid"
         }
     });
     
