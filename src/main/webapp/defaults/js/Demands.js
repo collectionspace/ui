@@ -2906,7 +2906,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 applier: "{recordEditor}.applier",
                 model: "{recordEditor}.model",
                 events: {
-                    removeListeners: "{recordEditor}.events.onRefreshView"
+                    removeListeners: "{recordEditor}.events.onRefreshView",
+                    onSave: "{recordEditor}.events.onSave"
                 }
             }, "{arguments}.1"]
         });
@@ -2917,7 +2918,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{repeatableImpl}.model",
                 events: {
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
-                    recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView"
+                    recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView",
+                    onSave: "{recordEditor}.events.onSave"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{computedField}.events.removeListeners.fire",

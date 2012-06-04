@@ -61,11 +61,15 @@ cspace = cspace || {};
             }
         },
         events: {
-            removeListeners: null
+            removeListeners: null,
+            onSave: null
         },
         listeners: {
             removeListeners: {
                 listener: "{computedField}.removeApplierListeners"
+            },
+            onSave: {
+                listener: "{computedField}.refreshValue"
             }
         },
 
@@ -97,6 +101,10 @@ cspace = cspace || {};
                 that.applier.modelChanged.removeListener(namespace);
             });
         };
+
+        that.refreshValue = function() {
+            that.refresh();
+        }
     };
 
     cspace.computedField.postInit = function (that) {
@@ -214,7 +222,9 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-        return cspace.util.composeSegments(that.options.root, elPath);
+        var root = that.options.root || "fields";
+
+        return cspace.util.composeSegments(root, elPath);
     };
     
     /*
@@ -224,7 +234,7 @@ cspace = cspace || {};
         // The arguments to a javascript function are stored in the variable named arguments, which is
         // Array-like, but not an Array. Convert it to an Array using Array.prototype.slice.
         var args = Array.prototype.slice.call(arguments);
-        return args.join(", ");
+        return ("[" + args.join(", ") + "]");
     };
 
     /*
