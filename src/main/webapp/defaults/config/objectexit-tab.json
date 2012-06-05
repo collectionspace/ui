@@ -23,9 +23,8 @@
                         "model": "{pageBuilder}.model",
                         "uispec": "{pageBuilder}.options.uispec",
                         "strings": {
-                            "editRecord": "Edit Object Exit Record",
-                            "recordList": "Related Object Exit Records",
-                            "newRecordRow": "New Object Exit Record"
+                            "editRecord": "objectexit-editRecord",
+                            "recordList": "objectexit-recordList"
                         },
                         "components": {
                             "listEditor": {

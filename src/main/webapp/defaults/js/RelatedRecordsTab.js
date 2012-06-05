@@ -126,12 +126,13 @@ cspace = cspace || {};
     };
     
     cspace.relatedRecordsTab.produceTree = function (that) {
+        var strings = that.options.strings;
         return {
             recordHeader: {
-                messagekey: "editRecord"
+                messagekey: strings.editRecord
             },
             listHeader: {
-                messagekey: "recordList"
+                messagekey: strings.recordList
             },
             goToRecord: {
                 messagekey: "relatedRecordsTab-goToRecord"
