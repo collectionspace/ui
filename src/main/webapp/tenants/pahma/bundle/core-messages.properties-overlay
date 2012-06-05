@@ -402,6 +402,7 @@ intake-identificationNumberRequired: Please specify an object entry number
 
 # ******************* Cataloging ******************* #
 collection-object-objectNumberLabel: Museum number
+collection-object-sortableObjectNumberLabel: Sort as
 cataloging-identificationNumberRequired: Please specify a museum number
 
 # ---------------- Alternate Numbers ---------------- #

@@ -72,7 +72,21 @@ CollectionSpace 1.8 default CSS selectors
     color:#606060;
     font-style:italic;
     font-weight:normal;
-    font-size:smaller;}
+    font-size:11px;}
+
+.pahma-note input[disabled] {
+    background-color: inherit;
+    border: none;
+    font-size: 11px;
+    font-style: italic;
+    vertical-align: baseline;
+    line-height: 12px;
+    width: 70%;
+}
+
+.pahma-note input[disabled]:hover {
+    background-color: inherit !important;
+}
 
 .pahma-fix {
     color:#700000;
