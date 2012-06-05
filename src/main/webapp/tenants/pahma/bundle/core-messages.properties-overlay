@@ -365,7 +365,7 @@ intake-entryReasonLabel: Entry reason
 intake-currentLocationGroupLabel: Storage location
 intake-valuationInformationLabel: Valuation Information
 intake-conditionCheckReasonsLabel: Condition check reason
-intake-normalLocationLabel: Normal location
+intake-normalLocationLabel: Home location
 intake-entryNoteLabel: Entry note
 intake-returnDateLabel: Return date
 intake-conditionInformationLabel: Condition Information
