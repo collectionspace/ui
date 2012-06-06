@@ -190,8 +190,8 @@ person-identificationNumberRequired: Please specify a display name
 person-altNameNotesLabel: Alternate name notes
 person-groupsLabel: Cultural group
 
+# ---------------------------------- Contact -------------------------- #
 contact-telephoneNumberGroupLabel: Telephone number
-contact-webAddressGroupLabel: Web address
 contact-addressPostCodeLabel: Postal code
 contact-updatedByLabel: Updated by
 contact-addressStateOrProvinceLabel: State/province
@@ -199,8 +199,11 @@ contact-createdByLabel: Created by
 contact-faxNumberGroupLabel: Fax number
 contact-updatedAtLabel: Updated at
 contact-createdAtLabel: Created at
+contact-webAddressGroupLabel: Web address
 contact-webAddressLabel: Web address
 contact-addressNoteLabel: Address note
+contact-emailGroupLabel: Email address
+contact-addressGroupLabel: Postal address
 
 #Acquisition:
 acquisition-ownersLabel: Previous owner
@@ -293,9 +296,10 @@ loanout-tenantIDLabel:
 
 # Organization
 organization-foundingDateGroupLabel: Founding date
+organization-dissolutionDateGroupLabel:  Dissolution date
 organization-contactInformationLabel: Contact information
-organization-contactNamesLabel: Related Persons
-organization-orgTypeLabel: Organization Type
+organization-contactNamesLabel: Related persons
+organization-orgTypeLabel: Organization type
 organization-orgNoteLabel: Notes
 organization-foundingPlaceLabel: Founding place
 organization-displayNameLabel: Display name
@@ -306,7 +310,16 @@ organization-updatedAtLabel: Modified date
 organization-identificationNumberRequired: Please specify a display name
 organization-shortIdentifierLabel: 
 organization-createdAtLabel:
-organization-tenantIDLabel: 
+organization-tenantIDLabel:
+organization-groupsLabel: Cultural group
+organization-groupLabel: Cultural group
+preferredOA-termDisplayNameLabel: Display name
+preferredOA-termTypeLabel: Term type
+preferredOA-termPrefForLangLabel: Pref for lang
+preferredOA-termSourceNoteLabel: Source note
+preferredOA-termSourceDetailLabel: Source detail
+preferredOA-mainBodyNameLabel: Main body name
+preferredOA-additionsToNameLabel: Additions to name
 
 #Movement
 movement-tab: Mov/Inv...
