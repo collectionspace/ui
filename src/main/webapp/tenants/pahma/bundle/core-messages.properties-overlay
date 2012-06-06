@@ -667,6 +667,7 @@ collection-object-viewersReferencesLabel: Viewer's reference
 collection-object-viewersPersonalExperienceLabel: Viewer's personal experience
 collection-object-viewersContributionNoteLabel: Viewer's contribution note
 
+# ---------------- NAGPRA Claim ---------------- #
 claim-claimInformationLabel: NAGPRA Claim Information
 claim-claimNameLabel: Claim name
 claim-claimTypeLabel: Claim type
@@ -741,6 +742,23 @@ claim-responseFromNationalNagpraDateLabel: Date
 claim-responseFromNationalNagpraNoteLabel: Response
 
 claim-identificationNumberRequired: Please specify a Claim Number
+
+claim-claimTaskInformationLabel: Tasks to be completed
+claim-claimTaskHeaderLabel: Task
+claim-claimTaskNotesHeaderLabel: Notes
+claim-dispositionPossibilitiesDiscussedLabel: Disposition possibilities discussed
+claim-surroundingTribesContactedLabel: Surrounding tribes contacted
+claim-workingTeamNotifiedLabel: PAHMA-NAGPRA team notified
+claim-siteFileResearchCompletedLabel: Site file research completed
+claim-accessionFileResearchCompletedLabel: Accession file research completed
+claim-objectsLocatedAndCountedLabel: Objects located and counted
+claim-objectsConsolidatedLabel: Objects consolidated
+claim-objectsPhotographedLabel: Objects photographed
+claim-registrationDocumentsDraftedLabel: Registration documents drawn up
+claim-tribeContactedForPackingPreferencesLabel: Tribe contacted for packing/storage instr
+claim-dateArrangedForTransferLabel: Date arranged for pickup/transfer
+claim-objectsMarkedAsDeaccessionedLabel: Objects marked as deaccessioned
+claim-documentsArchivedLabel: Claim documents archived
 
 # ---------------------------------- Record Metadata (Cataloging) -------------------------- #
 collection-object-updatedAtLabel: Modified date

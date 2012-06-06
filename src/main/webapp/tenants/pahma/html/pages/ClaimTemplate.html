@@ -247,7 +247,7 @@
 			<div class="csc-recordEditor-header fl-container-flex header toggle csc-claim-claimProcessingInformation-label"></div>
 			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main pahmaCustomColumnWidth" >
 				<div class="info-column">
-					<div class="info-column2-50 fl-force-left"> <!-- Date of initial response to claimant(s) -->
+					<div class="info-column2-50 fl-force-left">
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-dateOfInitialResponseGroup-label"></div>
@@ -269,9 +269,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Date sent to UCB-NAGPRA committee -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-sentToLocalCommitteeGroup-label"></div>
@@ -293,9 +290,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Recommendation of UCB-NAGPRA committee -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-recommendationOfLocalCommitteeGroup-label"></div>
@@ -317,9 +311,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Date sent to UC systemwide committee -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-sentToOversightCommitteeGroup-label"></div>
@@ -341,9 +332,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Recommendation of UC systemwide committee -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-recommendationOfOversightCommitteeGroup-label"></div>
@@ -365,9 +353,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Date sent to national NAGPRA -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-sentToNationalNagpraGroup-label"></div>
@@ -389,9 +374,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Response from national NAGPRA -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-responseFromNationalNagpraGroup-label"></div>
@@ -413,9 +395,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Date of national NAGPRA approval -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-dateOfNationalNagpraApprovalGroup-label"></div>
@@ -437,9 +416,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Begin and end dates of 30-day notice -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-dateOfThirtyDayNoticeGroup-label"></div>
@@ -463,9 +439,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="info-column2-50 fl-force-left"> <!-- Date of transfer to claimant(s) -->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-claim-transferGroup-label"></div>
@@ -488,11 +461,95 @@
 							</div>
 						</div>
 					</div>
-					<div class="clear"></div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-claim-claimTaskInformation-label"></div>
+							</div>
+							<div class="content">
+								<table class="checklist">
+									<thead>
+										<tr>
+											<td class="csc-claim-claimTaskHeader-label"></td>
+											<td></td>
+											<td class="csc-claim-claimTaskNotesHeader-label"></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><label for=".csc-claim-dispositionPossibilitiesDiscussed"><span class="label csc-claim-dispositionPossibilitiesDiscussed-label"/>:</label></td>
+											<td><input class="csc-claim-dispositionPossibilitiesDiscussed" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-dispositionPossibilitiesDiscussedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-surroundingTribesContacted"><span class="label csc-claim-surroundingTribesContacted-label"/>:</label></td>
+											<td><input class="csc-claim-surroundingTribesContacted" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-surroundingTribesContactedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-workingTeamNotified"><span class="label csc-claim-workingTeamNotified-label"/>:</label></td>
+											<td><input class="csc-claim-workingTeamNotified" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-workingTeamNotifiedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-siteFileResearchCompleted"><span class="label csc-claim-siteFileResearchCompleted-label"/>:</label></td>
+											<td><input class="csc-claim-siteFileResearchCompleted" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-siteFileResearchCompletedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-accessionFileResearchCompleted"><span class="label csc-claim-accessionFileResearchCompleted-label"/>:</label></td>
+											<td><input class="csc-claim-accessionFileResearchCompleted" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-accessionFileResearchCompletedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-objectsLocatedAndCounted"><span class="label csc-claim-objectsLocatedAndCounted-label"/>:</label></td>
+											<td><input class="csc-claim-objectsLocatedAndCounted" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-objectsLocatedAndCountedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-objectsConsolidated"><span class="label csc-claim-objectsConsolidated-label"/>:</label></td>
+											<td><input class="csc-claim-objectsConsolidated" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-objectsConsolidatedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-objectsPhotographed"><span class="label csc-claim-objectsPhotographed-label"/>:</label></td>
+											<td><input class="csc-claim-objectsPhotographed" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-objectsPhotographedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-registrationDocumentsDrafted"><span class="label csc-claim-registrationDocumentsDrafted-label"/>:</label></td>
+											<td><input class="csc-claim-registrationDocumentsDrafted" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-registrationDocumentsDraftedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-tribeContactedForPackingPreferences"><span class="label csc-claim-tribeContactedForPackingPreferences-label"/>:</label></td>
+											<td><input class="csc-claim-tribeContactedForPackingPreferences" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-tribeContactedForPackingPreferencesNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-dateArrangedForTransfer"><span class="label csc-claim-dateArrangedForTransfer-label"/>:</label></td>
+											<td><input class="csc-claim-dateArrangedForTransfer" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-dateArrangedForTransferNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-objectsMarkedAsDeaccessioned"><span class="label csc-claim-objectsMarkedAsDeaccessioned-label"/>:</label></td>
+											<td><input class="csc-claim-objectsMarkedAsDeaccessioned" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-objectsMarkedAsDeaccessionedNote"/></td>
+										</tr>
+										<tr>
+											<td><label for=".csc-claim-documentsArchived"><span class="label csc-claim-documentsArchived-label"/>:</label></td>
+											<td><input class="csc-claim-documentsArchived" type="checkbox"/></td>
+											<td><input type="text" class="csc-claim-documentsArchivedNote"/></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-				 
+		
 		<div id="secondary-nav-footer">
 			<div id="secondary-nav-menu-sub">
 				<div class="button-row">

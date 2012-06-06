@@ -105,6 +105,16 @@ CollectionSpace 1.8 default CSS selectors
     border:2px solid gray;
     margin:0px;}
 
+table.checklist td:first-child {
+    text-align: right;
+    padding: 1px 4px;
+}
+
+table.checklist input[type='checkbox'] {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 /* ---------------------------------------*/
 
 /* core HTML elements*/
