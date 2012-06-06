@@ -147,7 +147,8 @@ hierarchy-narrowerContextsLabel: Narrower context
 hierarchy-relatedTermsLabel: Related term
 
 # ---------------------------------- Object Exit Information (Cataloging) -------------------------- #
-objectexit-exitNumberLabel: Exit number
+objectexit-exitNumberLabel: Object exit number
+objectexit-exitDateGroupLabel: Exit date
 objectexit-exitDateLabel: Exit date
 objectexit-newOwnerLabel: Current or new owner
 objectexit-exitMethodsLabel: Exit method
@@ -158,6 +159,7 @@ objectexit-packingNoteLabel: Packing note
 objectexit-updatedAtLabel: Modified date
 objectexit-editUsername: Record modified by
 objectexit-identificationNumberRequired: Please specify an exit number
+objectexit-depositorLabel: Recipient
 
 # ---------------------------------- Groups -------------------------- #
 group-groupInformationLabel: Group information
