@@ -872,7 +872,8 @@ claim-sentToNationalNagpraGroupLabel: Date sent to National NAGPRA
 claim-sentToNationalNagpraDateLabel: Date
 claim-sentToNationalNagpraNoteLabel: Note
 
-claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval
+/*claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval*/
+claim-dateOfNationalNagpraApprovalGroupLabel: Publication by National NAGPRA
 claim-dateOfNationalNagpraApprovalDateLabel: Date
 claim-dateOfNationalNagpraApprovalNoteLabel: Note
 
