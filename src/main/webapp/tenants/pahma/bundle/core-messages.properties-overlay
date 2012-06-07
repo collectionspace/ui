@@ -48,6 +48,14 @@ collection-object-annotationNoteLabel: Note
 collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
 
+collection-object-objectProductionDateGroupLabel: Production date
+collection-object-dateEarliestSingleYearLabel: Year, Earliest date
+collection-object-dateLatestYearLabel: Year, Latest date
+collection-object-dateEarliestSingleMonthLabel: Month, Earliest date
+collection-object-dateLatestMonthLabel: Month, Latest date
+collection-object-dateEarliestSingleDayLabel: Day, Earliest date
+collection-object-dateLatestDayLabel: Day, Latest date
+
 # ******************* Taxonomy ******************* #
 taxon-displayNameLabel: Display name
 taxon-termStatusLabel: Term status
