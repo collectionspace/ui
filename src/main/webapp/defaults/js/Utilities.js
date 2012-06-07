@@ -1093,6 +1093,9 @@ fluid.registerNamespace("cspace.util");
                 createOnEvent: "afterFetch",
                 priority: "first"
             },
+            globalModel: {
+                type: "cspace.model"
+            },
             globalNavigator: {
                 type: "cspace.util.globalNavigator"
             },
@@ -1686,6 +1689,15 @@ fluid.registerNamespace("cspace.util");
 
     cspace.util.resolveDeleteRelation = function (options) {
         return !cspace.util.resolveLocked(options.recordModel) && cspace.permissions.resolveMultiple(options);
+    };
+
+    fluid.defaults("cspace.model", {
+        gradeNames: ["autoInit", "fluid.modelComponent"],
+        preInitFunction: "cspace.model.preInit"
+    });
+    cspace.model.preInit = function (that) {
+        that.applier = fluid.makeChangeApplier(that.model, {thin: true});
+        that.requestChange = that.applier.requestChange;
     };
     
 })(jQuery, fluid);

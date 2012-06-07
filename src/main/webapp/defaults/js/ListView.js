@@ -197,7 +197,8 @@ cspace = cspace || {};
             }
         },
         invokers: {
-            select: "cspace.listView.select"
+            select: "cspace.listView.select",
+            styleAndActivate: "cspace.listView.styleAndActivate"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -231,6 +232,13 @@ cspace = cspace || {};
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {
+        fluid.each(that.model.columns, function (column) {
+            fluid.each(["id", "name"], function (key) {
+                column[key] = fluid.stringTemplate(column[key], {
+                    recordType: that.options.recordType
+                });
+            });
+        });
         that.bindEvents = function () {
             $("a", that.locate("rows")).focus(function () {
                 $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
@@ -239,7 +247,6 @@ cspace = cspace || {};
                 $(that.options.selectors["row"]).removeClass(that.options.styles.selecting);
             });
             that.locate("row").click(function () {
-                $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
                 that.styleAndActivate($(this), that.locate("row"));
             });
         };
@@ -272,33 +279,7 @@ cspace = cspace || {};
                 that.events[initialUpdate ? "ready" : "afterUpdate"].fire(that);
             }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
         };
-        that.styleAndActivate = function (row, rows) {
-            var index = that.model.offset + rows.index(row),
-                record = that.model.list[index];
-            if (!cspace.permissions.resolve({
-                permission: "read",
-                target: record.recordtype || record.sourceFieldType,
-                resolver: that.permissionsResolver
-            })) {
-                return;
-            }
-            row.addClass(that.options.styles.selected);
-            that.applier.requestChange("selectonIndex", index);
-            that.events.onSelect.fire();
-        };
     };
-
-    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.localData"], {
-        options: {
-            url: "{cspace.listView}.options.urls.navigateLocal"
-        }
-    });
-
-    fluid.demands("cspace.listView.listNavigator", "cspace.listView", {
-        options: {
-            url: "{cspace.listView}.options.urls.navigate"
-        }
-    });
 
     cspace.listView.finalInit = function (that) {
         that.refreshView();
@@ -311,14 +292,102 @@ cspace = cspace || {};
         });
     };
 
+    cspace.listView.styleAndActivate = function (that, row, rows) {
+        $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
+        var index = that.model.offset + rows.index(row),
+            record = that.model.list[index],
+            recordtype = record.recordtype || record.sourceFieldType;
+        if (!cspace.permissions.resolve({
+            permission: "read",
+            target: recordtype,
+            resolver: that.permissionsResolver
+        })) {
+            return;
+        }
+        row.addClass(that.options.styles.selected);
+        that.applier.requestChange("selectonIndex", index);
+        that.events.onSelect.fire({
+            recordType: recordtype,
+            csid: record.csid
+        });
+    };
+
+    fluid.demands("cspace.listView.styleAndActivate", "cspace.listView", {
+        funcName: "cspace.listView.styleAndActivate",
+        args: ["{cspace.listView}", "{arguments}.0", "{arguments}.1"]
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInit",
+            url: "{cspace.listView}.options.urls.navigateLocal"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", "cspace.listView", {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInit",
+            url: "{cspace.listView}.options.urls.navigate"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            events: {
+                onSelect: "{cspace.listView}.events.onSelect"
+            },
+            components: {
+                globalNavigator: "{globalNavigator}"
+            },
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate"
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            events: {
+                onSelect: "{cspace.listView}.events.onSelect"
+            },
+            components: {
+                globalNavigator: "{globalNavigator}"
+            },
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate"
+            },
+            url: "#"
+        }
+    });
+
     fluid.defaults("cspace.listView.listNavigator", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
-        finalInitFunction: "cspace.listView.listNavigator.finalInit",
         typePath: "recordtype",
         selectors: {
             column: ".csc-listView-column"
         }
     });
+
+    cspace.listView.listNavigator.finalInitEdit = function (that) {
+        cspace.listView.listNavigator.finalInit(that);
+        var rows = that.locate("row");
+        fluid.each(that.options.list, function (record, index) {
+            var link = $("a", that.locate("column", rows.eq(index)));
+            link.click(function (evt) {
+                var row = $(this).parents(that.options.selectors.row);
+                if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
+                    return;
+                }
+                that.globalNavigator.events.onPerformNavigation.fire(function () {
+                    that.styleAndActivate(row, rows);
+                }, evt);
+                return false;
+            });
+        });
+    };
 
     cspace.listView.listNavigator.finalInit = function (that) {
         var rows = that.locate("row");

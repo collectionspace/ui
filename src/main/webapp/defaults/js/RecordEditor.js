@@ -142,6 +142,7 @@ cspace = cspace || {};
                 createOnEvent: "afterRecordRender"
             },
             vocab: "{vocab}",
+            globalModel: "{globalModel}",
             globalNavigator: "{globalNavigator}"
         },
         events: {
@@ -176,7 +177,8 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         showCreateFromExistingButton: false,
         showDeleteButton: false,
-        deferRendering: false
+        deferRendering: false,
+        globalRef: "primaryModel"
     });
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
@@ -214,6 +216,7 @@ cspace = cspace || {};
         if (modelToClone) {
             that.localStorage.set();
             that.applier.requestChange("", modelToClone);
+            that.globalModel.requestChange(that.options.globalRef, modelToClone);
             that.events.afterFetch.fire();
         } else {
             that.recordDataSource.get(function (data) {
@@ -222,6 +225,7 @@ cspace = cspace || {};
                     return;
                 }
                 that.applier.requestChange("", data);
+                that.globalModel.requestChange(that.options.globalRef, data);
                 that.events.afterFetch.fire();
             });
         }
@@ -375,6 +379,7 @@ cspace = cspace || {};
                 return;
             }
             that.applier.requestChange("", validatedModel);
+            that.globalModel.requestChange(that.options.globalRef, validatedModel);
 
             that.events.afterValidate.fire();
         };
@@ -438,6 +443,7 @@ cspace = cspace || {};
                         cspace.recordEditor.saver.save(that, recordEditor);
                     } else if (userAction === "proceed") {
                         recordEditor.applier.requestChange("workflowTransition", "lock");
+                        recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "workflowTransition"), "lock");
                         cspace.recordEditor.saver.save(that, recordEditor);
                     }
                 }
@@ -458,6 +464,7 @@ cspace = cspace || {};
         });
         if (vocab) {
             recordEditor.applier.requestChange("namespace", vocab);
+            recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "namespace"), vocab);
         }
         recordEditor.recordDataSource.set(recordEditor.model, function (data) {
             if (data.isError) {
@@ -465,6 +472,7 @@ cspace = cspace || {};
                 return;
             }
             recordEditor.applier.requestChange("", data);
+            recordEditor.globalModel.requestChange("", data);
             recordEditor.events.afterSave.fire();
         });
     };
@@ -529,13 +537,7 @@ cspace = cspace || {};
             refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid",
             deleteURL: "%webapp/html/findedit.html"
         }),
-        csid: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.getUrlParameter",
-                args: "csid"
-            }
-        }
+        csid: "{recordDataSource}.options.csid"
     });
 
     fluid.demands("cspace.recordEditor.remover.afterRemove", "cspace.recordEditor.remover", {
@@ -1225,13 +1227,17 @@ cspace = cspace || {};
         csid: {
             expander: {
                 type: "fluid.deferredInvokeCall",
-                func: "cspace.util.getUrlParameter",
-                args: "csid"
+                func: "cspace.recordEditor.dataSource.resolveCsid",
+                args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
             }
         },
         schema: "{pageBuilder}.schema",
         finalInitFunction: "cspace.recordEditor.dataSource.finalInit"
     });
+
+    cspace.recordEditor.dataSource.resolveCsid = function (modelCsid, optionsCsid) {
+        return modelCsid || optionsCsid || cspace.util.getUrlParameter("csid")
+    };
 
     cspace.recordEditor.dataSource.finalInit = function (that) {
         //TODO: Think about error callbacks.
