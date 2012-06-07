@@ -419,6 +419,84 @@ location-editUsername: Record modified by
 location-identificationNumberRequired: Please specify a display name
 location-moveableContainerLabel: Moveable/Container
 
+# Place
+place-placeAuthorityInformationLabel: Place Authority Term Information
+place-placeTypeLabel: Place type
+place-placeIdentifierLabel: Identifier
+place-placeNameGroupLabel: Place names
+preferredPlace-termDisplayNameLabel: Display name
+preferredPlace-termNameLabel: Name
+preferredPlace-termQualifierLabel: Qualifier
+preferredPlace-termTypeLabel: Type
+preferredPlace-termStatusLabel: Status
+preferredPlace-termLanguageLabel: Language
+preferredPlace-termPrefForLangLabel: Pref for lang
+preferredPlace-termSourceLabel: Source
+preferredPlace-termSourceDetailLabel: Source detail
+preferredPlace-termSourceIDLabel: Source ID
+preferredPlace-termSourceNoteLabel: Source note
+preferredPlace-nameAbbrevLabel: Abbreviation
+preferredPlace-historicalStatusLabel: Current?
+preferredPlace-nameNoteLabel: Note
+placeTermGroup-nameDateGroupLabel: Date
+place-placeOwnerGroupLabel: Place owners
+place-ownerLabel: Owner
+placeOwnerGroup-ownershipDateGroupLabel: Date
+place-ownershipNoteLabel: Note
+place-placeSourceLabel: Place source
+place-placeNoteLabel: Place note
+place-localityInformationLabel: Locality Information
+place-vCoordinatesLabel: Verbatim coordinates
+place-vLatitudeLabel: Verbatim latitude
+place-vLongitudeLabel: Verbatim longitude
+place-vCoordSysLabel: Coordinate system
+place-vSpatialReferenceSystemLabel: Spatial reference system
+place-vCoordSourceLabel: Source
+place-vCoordSourceRefIdLabel: Source detail
+place-vUnitofMeasureLabel:Unit of measure
+place-vElevationLabel: Elevation
+place-minElevationInMetersLabel: Min. elevation (m)
+place-maxElevationInMetersLabel: Max. elevation (m)
+place-vDepthLabel: Depth
+place-minDepthInMetersLabel: Min. depth (m)
+place-maxDepthInMetersLabel: Max. depth (m)
+place-vDistanceAboveSurfaceLabel: Distance above surface
+place-minDistanceAboveSurfaceInMetersLabel: Min. distance above surface (m)
+place-maxDistanceAboveSurfaceInMetersLabel: Max. distance above surface (m)
+place-geoReferenceInformationLabel: Georeference Information
+place-decimalLatitudeLabel: Decimal latitude
+place-decimalLongitudeLabel: Decimal longitude
+place-geodeticDatumLabel: Datum
+place-coordUncertaintyInMetersLabel: Uncertainty
+place-coordPrecisionLabel: Precision
+place-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+place-footprintWKTLabel: Footprint WKT
+place-footprintSRSLabel: Footprint SRS
+place-footprintSpatialFitLabel: Footprint sp. fit
+place-geoReferencedByLabel: Georeferenced by
+placeGeoRefGroup-geoRefDateGroupLabel: Date
+place-geoRefProtocolLabel: Protocol
+place-geoRefSourceLabel: Source
+place-geoRefVerificationStatusLabel: Verification
+place-geoRefRemarksLabel: Remarks
+place-geoRefPlaceNameLabel: Georeference place name
+place-updatedAtLabel: Modified date
+place-updatedAtStartLabel: Earliest
+place-updatedAtEndLabel: Latest
+place-editUsername: Record Modified By
+place-identificationNumberRequired: Please specify a Display Name
+place-termQualifierLabel: Qualifier
+place-termTypeLabel: Term type
+place-termLabel: Term
+place-termLanguageLabel: Lang
+place-termPrefForLangLabel: Pref for lang
+place-termSourceLabel: Source
+place-termSourceDetailLabel: Source detail
+place-termSourceIDLabel: Source ID
+place-termSourceNoteLabel: Source note
+place-historicalStatusLabel: Historical status
+place-preferredPlaceLabel: Place Term(s)
+
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
 media-mediaInformationLabel: Media handling information
