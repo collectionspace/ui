@@ -856,7 +856,7 @@ claim-claimPeriodInvolvedNoteLabel: Note
 
 claim-claimProcessingInformationLabel: Claim Processing Information
 
-claim-dateOfInitialResponseGroupLabel: Date of Initial Response
+claim-dateOfInitialResponseGroupLabel: Date of initial response
 claim-initialResponseDateLabel: Date
 claim-initialResponseNoteLabel: Note
 
@@ -877,7 +877,7 @@ claim-dateOfNationalNagpraApprovalGroupLabel: Publication by National NAGPRA
 claim-dateOfNationalNagpraApprovalDateLabel: Date
 claim-dateOfNationalNagpraApprovalNoteLabel: Note
 
-claim-dateOfThirtyDayNoticeGroupLabel: Start and end dates for National NAGPRA's 30-Day notice
+claim-dateOfThirtyDayNoticeGroupLabel: Start and end dates for National NAGPRA's 30-day notice
 claim-dateOfThirtyDayNoticeDateLabel: Date
 claim-dateOfThirtyDayNoticeTypeLabel: Type
 claim-dateOfThirtyDayNoticeNoteLabel: Note
