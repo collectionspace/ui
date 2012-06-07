@@ -48,20 +48,61 @@ collection-object-annotationNoteLabel: Note
 collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
 
+collection-object-objectProductionDateGroupLabel: Production date
+collection-object-dateEarliestSingleYearLabel: Year, Earliest date
+collection-object-dateLatestYearLabel: Year, Latest date
+collection-object-dateEarliestSingleMonthLabel: Month, Earliest date
+collection-object-dateLatestMonthLabel: Month, Latest date
+collection-object-dateEarliestSingleDayLabel: Day, Earliest date
+collection-object-dateLatestDayLabel: Day, Latest date
+
 # ******************* Taxonomy ******************* #
+# ======== Are these now obsolete? {begin} ========
 taxon-displayNameLabel: Display name
 taxon-termStatusLabel: Term status
 taxon-taxonFullNameLabel: Full name
 taxon-taxonCurrencyLabel: Current?
-taxon-taxonAuthorLabel: Name
-taxon-taxonAuthorTypeLabel: Author type
-taxon-taxonIsNamedHybridLabel: Is named hybrid?
 taxon-taxonCitationLabel: Citation
 taxon-taxonomicStatusLabel: Taxonomic status
 taxon-taxonNameSourceLabel: Name source
 taxon-taxonNameSourceCodeLabel: Name source code
-# ------------------------------------------------------------
+# ======== Are these now obsolete? {end} ========
 
+# Taxon record
+taxon: Taxon
+taxon-identificationNumberRequired: Please specify a Display Name
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
+preferredTA-termDisplayNameLabel: Display name
+preferredTA-termNameLabel: Term
+preferredTA-termQualifierLabel: Qualifier
+preferredTA-termStatusLabel: Term status
+preferredTA-termTypeLabel: Term type
+preferredTA-termLanguageLabel: Language
+preferredTA-termPrefForLangLabel: Pref for lang
+preferredTA-termSourceLabel: Source
+preferredTA-termSourceDetailLabel: Source detail
+preferredTA-termSourceIDLabel: Source ID
+preferredTA-termSourceNoteLabel: Source note
+preferredTA-taxonomicStatusLabel: Taxonomic status
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Currency
+taxon-taxonAuthorGroupLabel: Author
+taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorTypeLabel: Author type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is named hybrid?
+taxon-taxonCitationLabel: Citations
+taxon-taxonNoteLabel: Note
+taxon-commonNameGroupLabel: Common name
+taxon-commonNameLabel: Name
+taxon-commonNameLanguageLabel: Language
+taxon-commonNameSourceLabel: Source
+taxon-commonNameSourceDetailLabel: Source detail
+taxon-updatedAtLabel: Modified date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
+taxon-preferredTaxonLabel: Taxononomic Term(s)
+# ------------------------------------------------------------
 
 # ------------------------------------------------------------
 # Added to support the collectionobjects_anthropology domain schema extensions
@@ -791,3 +832,23 @@ searchTips-instructionsThird: To perform a field-based search, enter terms into 
 
 #Reporting
 reporting-message: Creating %reportName report...
+
+#Structured Date
+structuredDate-close: Close
+structuredDate-dateDisplayDateLabel: Display date
+structuredDate-datePeriodLabel: Date period
+structuredDate-dateAssociationLabel: Association
+structuredDate-dateNoteLabel: Note
+structuredDate-dateHeaderLabel: Date
+structuredDate-dateYearLabel: Year
+structuredDate-dateMonthLabel: Month
+structuredDate-dateDayLabel: Day
+structuredDate-dateEraLabel: Era
+structuredDate-dateCertaintyHeaderLabel: Certainty term OR Qualifier, Value and Unit
+structuredDate-dateCertaintyLabel: Certainty
+structuredDate-dateQualifierLabel: Qualifier
+structuredDate-dateQualifierValueLabel: Value
+structuredDate-dateQualifierUnitLabel: Unit
+structuredDate-dateEarliestSingleRowLabel: Earliest date
+structuredDate-dateLatestRowLabel: Latest date
+structuredDate-scalarValueLabel: Scalar value
