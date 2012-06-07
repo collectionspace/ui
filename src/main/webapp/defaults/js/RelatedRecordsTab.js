@@ -102,7 +102,10 @@ relationManager: {
                 options: {
                     csid: "{relatedRecordsTab}.selectedRecirdCsid",
                     recordType: "{relatedRecordsTab}.options.related",
-                    globalRef: "relatedModel"
+                    globalRef: "relatedModel",
+                    listeners: {
+                        afterRecordRender: "{loadingIndicator}.events.hideOn.fire"
+                    }
                 },
                 createOnEvent: "onSelect"
             }
@@ -111,7 +114,10 @@ relationManager: {
             onSelect: null
         },
         listeners: {
-            onSelect: "{relatedRecordsTab}.onSelectHandler"
+            onSelect: [
+                "{loadingIndicator}.events.showOn.fire",
+                "{relatedRecordsTab}.onSelectHandler"
+            ]
         },
         protoTree: {
             recordHeader: {
@@ -210,19 +216,34 @@ relationManager: {
         },
         selectors: {
             banner: ".csc-relatedRecordsTab-record-banner",
+            bannerMessageTop: ".csc-relatedRecordsTab-record-banner-messageTop",
+            bannerMessageBotton: ".csc-relatedRecordsTab-record-banner-messageBottom",
             header: ".csc-relatedRecordsTab-recordHeader"
         },
         selectorsToIgnore: ["header", "recordEditor"],
         styles: {
-            banner: "cs-relatedRecordsTab-record-banner"
+            banner: "cs-relatedRecordsTab-record-banner",
+            bannerMessageBotton: "cs-relatedRecordsTab-record-banner-messageBottom"
         },
+        strings: {},
+        parentBundle: "{globalBundle}",
         protoTree: {
             banner: {
                 decorators: {
                     addClass: "{styles}.banner"
                 }
+            },
+            bannerMessageTop: {
+                messagekey: "relatedRecordsTab-bannerTop"
+            },
+            bannerMessageBotton: {
+                messagekey: "relatedRecordsTab-bannerBottom",
+                decorators: {
+                    addClass: "{styles}.bannerMessageBotton"
+                }
             }
         },
+        renderOnInit: true,
         preInitFunction: "cspace.relatedRecordsTab.record.preInit"
     });
 

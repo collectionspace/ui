@@ -51,6 +51,9 @@ cspace = cspace || {};
                         target: "${{tabInfo}.href}",
                         linktext: {
                             messagekey: "${{tabInfo}.title}"
+                        },
+                        decorators: {
+                            addClass: "{styles}.tabLink"
                         }
                     }
                 },

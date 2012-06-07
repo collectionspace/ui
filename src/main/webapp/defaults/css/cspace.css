@@ -605,6 +605,7 @@ table tbody.highlight tr:focus td {
 .find-edit .fl-container-left-inner  {margin-right:15px;}
 
 /*.fl-container-left*/  .information-group       {padding:0 0 20px 0;}
+.cs-relatedRecords-tab .information-group {padding: 0;}
 /*.fl-container-left*/  .information-subgroup {padding:10px 0;}
 /*.fl-container-left*/  .information-group .content.main, .information-group .content.main  {
     background-color: #F5F5F5; 
@@ -926,20 +927,24 @@ table.cs-admin-table td.checkbox {
     background-color:#FFE7E3;}
 .csc-role-list {
     /*padding-top:12px;*/}
-.csc-listEditor-details-none {
+.csc-listEditor-details-none, .cs-relatedRecordsTab-record-banner {
     background-color:#C2D7EC; 
     padding:30px; 
     color:white; 
     font-size:40px; 
     font-weight:bold; 
     line-height:110%;}
-.details-none {
+.details-none, .cs-relatedRecordsTab-record-banner-messageBottom {
     background:transparent url("../images/whiteArrow.png") no-repeat 0 center; 
     padding: 5px 0 0 45px; 
     margin-top:15px; 
     height: 35px; 
     font-size:26px; 
     line-height:110%;}
+.cs-relatedRecordsTab-record-banner-messageBottom {
+    background: transparent;
+    padding: 5px 0 15px 5px;
+}
 .create-new .fl-container-left  .information-group {
     padding:0;}
 .create-new .fl-container-left  .information-group .info-column  {
@@ -976,7 +981,10 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
-}    
+}
+.info-pair.cs-listView {
+    margin-bottom: 0;
+}
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
@@ -1276,7 +1284,11 @@ input[disabled]:hover, input[disabled]:hover    {
 	
 .ui-tabs .ui-tabs-hide {
     display: none;}
-
+.cs-tabs-tab-link {
+    -moz-border-radius:6px 6px 0 0;
+    -webkit-border-radius:6px 6px 0 0;
+	border-radius:6px 6px 0 0;
+}
 .cs-add-related-records-dialog {
     background-color:#fff;}
 
@@ -1371,6 +1383,16 @@ input[disabled]:hover, input[disabled]:hover    {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
 	border-radius:6px 6px 0 0;}
+.cs-relatedRecords-tab .header:nth-child(2) {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+	border-radius: 0;
+	padding: 15px 0 15px 20px;
+}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2) {
+    background:#666666 url('../images/toggle-less.png') no-repeat 4px 15px;}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2) {
+    background:#666666 url('../images/toggle-more.png') no-repeat 4px 15px;	}
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
