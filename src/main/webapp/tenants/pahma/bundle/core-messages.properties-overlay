@@ -180,7 +180,7 @@ loanin-number: Loan number
 loanout-number: Loan number
 claim-number: Claim number
 movement-number: Current location
-media-number: Museum number
+media-number: Media rendition number (or Museum number)
 
 hierarchy-broaderContextLabel: Broader context
 hierarchy-equivalentContextsLabel: Equivalent context
