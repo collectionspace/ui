@@ -799,3 +799,23 @@ searchTips-instructionsThird: To perform a field-based search, enter terms into 
 
 #Reporting
 reporting-message: Creating %reportName report...
+
+#Structured Date
+structuredDate-close: Close
+structuredDate-dateDisplayDateLabel: Display date
+structuredDate-datePeriodLabel: Date period
+structuredDate-dateAssociationLabel: Association
+structuredDate-dateNoteLabel: Note
+structuredDate-dateHeaderLabel: Date
+structuredDate-dateYearLabel: Year
+structuredDate-dateMonthLabel: Month
+structuredDate-dateDayLabel: Day
+structuredDate-dateEraLabel: Era
+structuredDate-dateCertaintyHeaderLabel: Certainty term OR Qualifier, Value and Unit
+structuredDate-dateCertaintyLabel: Certainty
+structuredDate-dateQualifierLabel: Qualifier
+structuredDate-dateQualifierValueLabel: Value
+structuredDate-dateQualifierUnitLabel: Unit
+structuredDate-dateEarliestSingleRowLabel: Earliest date
+structuredDate-dateLatestRowLabel: Latest date
+structuredDate-scalarValueLabel: Scalar value
