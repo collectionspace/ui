@@ -214,11 +214,33 @@ persontest1: Person test 1
 persontest2: Person test 2
 
 # ---------------------------------- Person Name Authority -------------------------- #
-person-contactInformationLabel: Contact information
+person-contactInformationLabel: Contact Information
+# ======== Are these obsolete? {begin} ========
 person-displayNameLabel: Display name
 person-foreNameLabel: First name
 person-middleNameLabel: Middle name(s)
 person-surNameLabel: Last name
+# ======== Are these obsolete? {end} ========
+
+preferredPA-termDisplayNameLabel: Display name
+preferredPA-termQualifierLabel: Qualifier
+preferredPA-termTypeLabel: Term type
+preferredPA-termNameLabel: Term
+preferredPA-termLanguageLabel: Language
+preferredPA-termPrefForLangLabel: Pref for lang
+preferredPA-termSourceLabel: Source
+preferredPA-termSourceDetailLabel: Source detail
+preferredPA-termSourceIDLabel: Source ID
+preferredPA-termSourceNoteLabel: Source note
+preferredPA-termStatusLabel: Status
+preferredPA-salutationLabel: Salutation
+preferredPA-titleLabel: Title
+preferredPA-foreNameLabel: Forename
+preferredPA-middleNameLabel: Middle name
+preferredPA-surNameLabel: Surname
+preferredPA-nameAdditionsLabel: Additions to name
+preferredPA-initialsLabel: Initials
+person-preferredPersonLabel: Person Term(s)
 person-schoolsOrStylesLabel: School/style
 person-schoolOrStyleLabel: School/style
 person-nameNoteLabel: Name notes
