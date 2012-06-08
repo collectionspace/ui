@@ -293,6 +293,7 @@ loanin-loanStatusLabel: Status
 loanin-lendersAuthorizerLabel: Lender's authorizer
 loanin-lendersAuthorizationDateLabel: Authorization date
 loanin-loanReturnDateLabel: Loan return date
+loanin-loanReturnDateGroupLabel: Loan return date
 loanin-borrowersContactLabel: PAHMA contact
 loanin-borrowersAuthorizerLabel: PAHMA authorizer
 loanin-borrowersAuthorizationDateLabel: Authorization date
@@ -300,6 +301,7 @@ loanin-loanInNoteLabel: Loan note
 loanin-loanPurposeLabel: Loan purpose
 loanin-loanRenewalApplicationDateLabel: Loan renewal application date
 loanin-loanInDateLabel: Loan receipt date
+loanin-loanInDateGroupLabel: Loan receipt date
 loanin-loanInConditionsLabel: Loan conditions
 loanin-loanInContactLabel: PAHMA contact
 loanin-updatedAtLabel: Modified date
