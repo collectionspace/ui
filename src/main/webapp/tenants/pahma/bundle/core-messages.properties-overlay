@@ -330,9 +330,11 @@ loanout-loanedObjectStatusNoteLabel: Status note
 loanout-loanRenewalApplicationDateLabel: Loan renewal application date
 loanout-loanPurposeLabel: Loan purpose
 loanout-loanReturnDateLabel: Loan return date 
+loanout-loanReturnDateGroupLabel: Loan return date 
 loanout-loanOutNoteLabel: Loan note
 loanout-loanedObjectStatusGroupLabel: Loaned object status
 loanout-loanOutDateLabel: Loan date
+loanout-loanOutDateGroupLabel: Loan date
 loanout-updatedAtLabel: Modified date
 loanout-editNameLabel: Record modified by
 loanout-identificationNumberRequired: Please specify a loan number
