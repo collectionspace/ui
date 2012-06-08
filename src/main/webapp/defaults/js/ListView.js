@@ -334,14 +334,12 @@ cspace = cspace || {};
     fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab"], {
         options: {
             finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
-            events: {
-                onSelect: "{cspace.listView}.events.onSelect"
-            },
-            components: {
-                globalNavigator: "{globalNavigator}"
-            },
             invokers: {
-                styleAndActivate: "cspace.listView.styleAndActivate"
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
             },
             url: "#"
         }
@@ -350,14 +348,12 @@ cspace = cspace || {};
     fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab", "cspace.localData"], {
         options: {
             finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
-            events: {
-                onSelect: "{cspace.listView}.events.onSelect"
-            },
-            components: {
-                globalNavigator: "{globalNavigator}"
-            },
             invokers: {
-                styleAndActivate: "cspace.listView.styleAndActivate"
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
             },
             url: "#"
         }
@@ -371,6 +367,16 @@ cspace = cspace || {};
         }
     });
 
+    cspace.listView.listNavigator.navigate = function (that, recordEditor, row, rows, evt) {
+        if (!recordEditor) {
+            that.styleAndActivate(row, rows);
+            return;
+        }
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.styleAndActivate(row, rows);
+        }, evt);
+    };
+
     cspace.listView.listNavigator.finalInitEdit = function (that) {
         cspace.listView.listNavigator.finalInit(that);
         var rows = that.locate("row");
@@ -381,9 +387,7 @@ cspace = cspace || {};
                 if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
                     return;
                 }
-                that.globalNavigator.events.onPerformNavigation.fire(function () {
-                    that.styleAndActivate(row, rows);
-                }, evt);
+                that.navigate(row, rows, evt);
                 return false;
             });
         });

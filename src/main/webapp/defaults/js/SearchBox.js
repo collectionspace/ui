@@ -57,7 +57,7 @@ cspace = cspace || {};
             autoBind: true
         },
         components: {
-            globalNavigator: "{globalNavigator}",
+            globalNavigator: "{recordEditor}.globalNavigator",
             vocab: "{vocab}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",

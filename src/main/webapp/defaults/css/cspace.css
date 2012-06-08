@@ -1390,9 +1390,15 @@ input[disabled]:hover, input[disabled]:hover    {
 	padding: 15px 0 15px 20px;
 }
 .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2) {
-    background:#666666 url('../images/toggle-less.png') no-repeat 4px 15px;}
+    background:#6E9FCE url('../images/toggle-less.png') no-repeat 4px 15px;}
 .cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2) {
-    background:#666666 url('../images/toggle-more.png') no-repeat 4px 15px;	}
+    background:#6E9FCE url('../images/toggle-more.png') no-repeat 4px 15px;	}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-less.png') no-repeat 4px 15px;
+}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-more.png') no-repeat 4px 15px;
+}
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;

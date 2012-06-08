@@ -21,7 +21,6 @@ cspace = cspace || {};
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
-            globalNavigator: "{globalNavigator}",
             confirmation: {
                 type: "cspace.confirmation"
             },

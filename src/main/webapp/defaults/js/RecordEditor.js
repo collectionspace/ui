@@ -143,7 +143,9 @@ cspace = cspace || {};
             },
             vocab: "{vocab}",
             globalModel: "{globalModel}",
-            globalNavigator: "{globalNavigator}"
+            globalNavigator: {
+                type: "cspace.util.globalNavigator"
+            }
         },
         events: {
             afterFetch: null,

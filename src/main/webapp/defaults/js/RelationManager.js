@@ -139,7 +139,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         components: {
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
+            globalNavigator: "{recordEditor}.globalNavigator",
             dataContext: {
                 type: "cspace.dataContext",
                 options: {

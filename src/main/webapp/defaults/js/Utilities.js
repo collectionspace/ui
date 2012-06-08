@@ -1096,9 +1096,6 @@ fluid.registerNamespace("cspace.util");
             globalModel: {
                 type: "cspace.model"
             },
-            globalNavigator: {
-                type: "cspace.util.globalNavigator"
-            },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
             },

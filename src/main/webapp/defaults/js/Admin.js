@@ -174,6 +174,7 @@ cspace = cspace || {};
     };
 
     cspace.admin.bindEventHandlers = function (that) {
+        that.globalNavigator = that.adminListEditor.details.globalNavigator;
         that.locate("unSearchButton").click(function () {
             that.globalNavigator.events.onPerformNavigation.fire(function () {
                 that.locate("searchField").val("")

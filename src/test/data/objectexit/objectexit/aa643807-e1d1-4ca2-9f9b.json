@@ -14,6 +14,19 @@
                     "relid": "f93855c5-6372-4f7a-89e2",
                     "relationshiptype": "affects",
                     "recordtype": "objectexit"
+                },
+                {
+                    "summary": "Some summary",
+                    "summarylist": {
+                        "nametitle": "",
+                        "updatedAt": "2012-03-16T14:22:33Z",
+                        "objectNumber": "2012.1.4"
+                    },
+                    "csid": "ba97ae73-1016-4c62-b4eb",
+                    "number": "2012.1.4",
+                    "relid": "f93855c5-6372-4f7a-89e2",
+                    "relationshiptype": "affects",
+                    "recordtype": "objectexit"
                 }
             ]
         },
@@ -24,9 +37,9 @@
                     "f93855c5-6372-4f7a-89e2"
                 ]
             ],
-            "totalItems": "1",
+            "totalItems": "2",
             "pageSize": "40",
-            "itemsInPage": "1",
+            "itemsInPage": "2",
             "recordtypes": [
                 "cataloging"
             ],

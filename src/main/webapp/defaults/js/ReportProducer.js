@@ -51,7 +51,7 @@ cspace = cspace || {};
                 }
             },
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
+            globalNavigator: "{recordEditor}.globalNavigator",
             reportTypesSource: {
                 type: "cspace.reportProducer.reportTypesSource"
             }
