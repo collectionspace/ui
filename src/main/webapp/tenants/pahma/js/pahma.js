@@ -25,15 +25,26 @@ var pahma = {};
 	}
 	
 	pahma.createSortableObjectNumber = function(objnum) {
-		var objRe = /^([cC](ons|ONS)?[\-\. ]?)?([\d\w]+)[\-\. ](\d+)([\.\- ]+)?(.*)$/;
-		var objTokens = objRe.exec(objnum);
-		if (objTokens == null) {
+  		//            1    2                   3        4         5    6         7    8          9     10         11   
+  		var objRe = /^([cC](ons|ONS)?[\-\. ]?)?([A-Z]+)?([\-\. ])?(\d+)([\-\. ])?(\d+)?([\.\- ]+)?(\d+)?([\.\- ]+)?(.*)$/;
+  		var objTokens = objRe.exec(objnum);
+  		if (objTokens == null) {
 			return objnum;
+		  }
+		  else {
+			for ( i = 0 ; i < objTokens.length ; i = i+1 ) {
+				if (!objTokens[i]) {
+					objTokens[i] = '';
+				}
+      				else {
+        				if (isNumber(objTokens[i])) {
+					objTokens[i] = pad(objTokens[i],6);
+        			}
+			}
+			objTokens[i] = objTokens[i] + ' ';
 		}
-		else {
-			// pad first element only if it is numeric
-			if (isNumber(objTokens[3])) objTokens[3] = pad(objTokens[3],4);
-			return objTokens[3]+'-'+pad(objTokens[4],6)+' '+objTokens[6];
+		if (objTokens[3] == ' ') objTokens[3] == ''; // zap empty alphabetic prefix
+		return objTokens[3]+objTokens[5]+objTokens[7]+objTokens[9]+objTokens[11];
 		}
 	}
 }(jQuery, fluid));

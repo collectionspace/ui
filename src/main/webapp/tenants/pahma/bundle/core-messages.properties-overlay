@@ -180,7 +180,7 @@ loanin-number: Loan number
 loanout-number: Loan number
 claim-number: Claim number
 movement-number: Current location
-media-number: Museum number
+media-number: Media rendition number (or Museum number)
 
 hierarchy-broaderContextLabel: Broader context
 hierarchy-equivalentContextsLabel: Equivalent context
@@ -214,11 +214,33 @@ persontest1: Person test 1
 persontest2: Person test 2
 
 # ---------------------------------- Person Name Authority -------------------------- #
-person-contactInformationLabel: Contact information
+person-contactInformationLabel: Contact Information
+# ======== Are these obsolete? {begin} ========
 person-displayNameLabel: Display name
 person-foreNameLabel: First name
 person-middleNameLabel: Middle name(s)
 person-surNameLabel: Last name
+# ======== Are these obsolete? {end} ========
+
+preferredPA-termDisplayNameLabel: Display name
+preferredPA-termQualifierLabel: Qualifier
+preferredPA-termTypeLabel: Term type
+preferredPA-termNameLabel: Term
+preferredPA-termLanguageLabel: Language
+preferredPA-termPrefForLangLabel: Pref for lang
+preferredPA-termSourceLabel: Source
+preferredPA-termSourceDetailLabel: Source detail
+preferredPA-termSourceIDLabel: Source ID
+preferredPA-termSourceNoteLabel: Source note
+preferredPA-termStatusLabel: Status
+preferredPA-salutationLabel: Salutation
+preferredPA-titleLabel: Title
+preferredPA-foreNameLabel: Forename
+preferredPA-middleNameLabel: Middle name
+preferredPA-surNameLabel: Surname
+preferredPA-nameAdditionsLabel: Additions to name
+preferredPA-initialsLabel: Initials
+person-preferredPersonLabel: Person Term(s)
 person-schoolsOrStylesLabel: School/style
 person-schoolOrStyleLabel: School/style
 person-nameNoteLabel: Name notes
@@ -293,6 +315,7 @@ loanin-loanStatusLabel: Status
 loanin-lendersAuthorizerLabel: Lender's authorizer
 loanin-lendersAuthorizationDateLabel: Authorization date
 loanin-loanReturnDateLabel: Loan return date
+loanin-loanReturnDateGroupLabel: Loan return date
 loanin-borrowersContactLabel: PAHMA contact
 loanin-borrowersAuthorizerLabel: PAHMA authorizer
 loanin-borrowersAuthorizationDateLabel: Authorization date
@@ -300,6 +323,7 @@ loanin-loanInNoteLabel: Loan note
 loanin-loanPurposeLabel: Loan purpose
 loanin-loanRenewalApplicationDateLabel: Loan renewal application date
 loanin-loanInDateLabel: Loan receipt date
+loanin-loanInDateGroupLabel: Loan receipt date
 loanin-loanInConditionsLabel: Loan conditions
 loanin-loanInContactLabel: PAHMA contact
 loanin-updatedAtLabel: Modified date
@@ -328,9 +352,11 @@ loanout-loanedObjectStatusNoteLabel: Status note
 loanout-loanRenewalApplicationDateLabel: Loan renewal application date
 loanout-loanPurposeLabel: Loan purpose
 loanout-loanReturnDateLabel: Loan return date 
+loanout-loanReturnDateGroupLabel: Loan return date 
 loanout-loanOutNoteLabel: Loan note
 loanout-loanedObjectStatusGroupLabel: Loaned object status
 loanout-loanOutDateLabel: Loan date
+loanout-loanOutDateGroupLabel: Loan date
 loanout-updatedAtLabel: Modified date
 loanout-editNameLabel: Record modified by
 loanout-identificationNumberRequired: Please specify a loan number
@@ -396,6 +422,84 @@ location-updatedAtLabel: Modified date
 location-editUsername: Record modified by
 location-identificationNumberRequired: Please specify a display name
 location-moveableContainerLabel: Moveable/Container
+
+# Place
+place-placeAuthorityInformationLabel: Place Authority Term Information
+place-placeTypeLabel: Place type
+place-placeIdentifierLabel: Identifier
+place-placeNameGroupLabel: Place names
+preferredPlace-termDisplayNameLabel: Display name
+preferredPlace-termNameLabel: Name
+preferredPlace-termQualifierLabel: Qualifier
+preferredPlace-termTypeLabel: Type
+preferredPlace-termStatusLabel: Status
+preferredPlace-termLanguageLabel: Language
+preferredPlace-termPrefForLangLabel: Pref for lang
+preferredPlace-termSourceLabel: Source
+preferredPlace-termSourceDetailLabel: Source detail
+preferredPlace-termSourceIDLabel: Source ID
+preferredPlace-termSourceNoteLabel: Source note
+preferredPlace-nameAbbrevLabel: Abbreviation
+preferredPlace-historicalStatusLabel: Current?
+preferredPlace-nameNoteLabel: Note
+placeTermGroup-nameDateGroupLabel: Date
+place-placeOwnerGroupLabel: Place owners
+place-ownerLabel: Owner
+placeOwnerGroup-ownershipDateGroupLabel: Date
+place-ownershipNoteLabel: Note
+place-placeSourceLabel: Place source
+place-placeNoteLabel: Place note
+place-localityInformationLabel: Locality Information
+place-vCoordinatesLabel: Verbatim coordinates
+place-vLatitudeLabel: Verbatim latitude
+place-vLongitudeLabel: Verbatim longitude
+place-vCoordSysLabel: Coordinate system
+place-vSpatialReferenceSystemLabel: Spatial reference system
+place-vCoordSourceLabel: Source
+place-vCoordSourceRefIdLabel: Source detail
+place-vUnitofMeasureLabel:Unit of measure
+place-vElevationLabel: Elevation
+place-minElevationInMetersLabel: Min. elevation (m)
+place-maxElevationInMetersLabel: Max. elevation (m)
+place-vDepthLabel: Depth
+place-minDepthInMetersLabel: Min. depth (m)
+place-maxDepthInMetersLabel: Max. depth (m)
+place-vDistanceAboveSurfaceLabel: Distance above surface
+place-minDistanceAboveSurfaceInMetersLabel: Min. distance above surface (m)
+place-maxDistanceAboveSurfaceInMetersLabel: Max. distance above surface (m)
+place-geoReferenceInformationLabel: Georeference Information
+place-decimalLatitudeLabel: Decimal latitude
+place-decimalLongitudeLabel: Decimal longitude
+place-geodeticDatumLabel: Datum
+place-coordUncertaintyInMetersLabel: Uncertainty
+place-coordPrecisionLabel: Precision
+place-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+place-footprintWKTLabel: Footprint WKT
+place-footprintSRSLabel: Footprint SRS
+place-footprintSpatialFitLabel: Footprint sp. fit
+place-geoReferencedByLabel: Georeferenced by
+placeGeoRefGroup-geoRefDateGroupLabel: Date
+place-geoRefProtocolLabel: Protocol
+place-geoRefSourceLabel: Source
+place-geoRefVerificationStatusLabel: Verification
+place-geoRefRemarksLabel: Remarks
+place-geoRefPlaceNameLabel: Georeference place name
+place-updatedAtLabel: Modified date
+place-updatedAtStartLabel: Earliest
+place-updatedAtEndLabel: Latest
+place-editUsername: Record Modified By
+place-identificationNumberRequired: Please specify a Display Name
+place-termQualifierLabel: Qualifier
+place-termTypeLabel: Term type
+place-termLabel: Term
+place-termLanguageLabel: Lang
+place-termPrefForLangLabel: Pref for lang
+place-termSourceLabel: Source
+place-termSourceDetailLabel: Source detail
+place-termSourceIDLabel: Source ID
+place-termSourceNoteLabel: Source note
+place-historicalStatusLabel: Historical status
+place-preferredPlaceLabel: Place Term(s)
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
@@ -756,7 +860,7 @@ claim-claimPeriodInvolvedNoteLabel: Note
 
 claim-claimProcessingInformationLabel: Claim Processing Information
 
-claim-dateOfInitialResponseGroupLabel: Date of Initial Response
+claim-dateOfInitialResponseGroupLabel: Date of initial response
 claim-initialResponseDateLabel: Date
 claim-initialResponseNoteLabel: Note
 
@@ -772,11 +876,12 @@ claim-sentToNationalNagpraGroupLabel: Date sent to National NAGPRA
 claim-sentToNationalNagpraDateLabel: Date
 claim-sentToNationalNagpraNoteLabel: Note
 
-claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval
+/*claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval*/
+claim-dateOfNationalNagpraApprovalGroupLabel: Publication by National NAGPRA
 claim-dateOfNationalNagpraApprovalDateLabel: Date
 claim-dateOfNationalNagpraApprovalNoteLabel: Note
 
-claim-dateOfThirtyDayNoticeGroupLabel: Start and end dates for National NAGPRA's 30-Day notice
+claim-dateOfThirtyDayNoticeGroupLabel: Start and end dates for National NAGPRA's 30-day notice
 claim-dateOfThirtyDayNoticeDateLabel: Date
 claim-dateOfThirtyDayNoticeTypeLabel: Type
 claim-dateOfThirtyDayNoticeNoteLabel: Note
