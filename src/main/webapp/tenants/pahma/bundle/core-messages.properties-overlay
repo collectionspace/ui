@@ -428,7 +428,15 @@ location-conditionNoteLabel: Condition note
 location-updatedAtLabel: Modified date
 location-editUsername: Record modified by
 location-identificationNumberRequired: Please specify a display name
-location-moveableContainerLabel: Moveable/Container
+location-moveableContainerLabel: Moveable/container
+preferredSLA-termDisplayNameLabel: Display name
+preferredSLA-termStatusLabel: Term status
+preferredSLA-termTypeLabel: Term type
+preferredSLA-termLanguageLabel: Language
+preferredSLA-termPrefForLangLabel: Pref for lang
+preferredSLA-termSourceDetailLabel: Source detail
+preferredSLA-termSourceNoteLabel: Source note
+location-preferredLocationLabel: Storage location term(s)
 
 # Place
 place-placeAuthorityInformationLabel: Place Authority Term Information
