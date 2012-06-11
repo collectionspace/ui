@@ -282,8 +282,8 @@ contact-emailGroupLabel: Email address
 contact-addressGroupLabel: Postal address
 
 #Acquisition:
-acquisition-ownersLabel: Previous owner
-acquisition-ownerLabel: Previous owner
+acquisition-ownersLabel: Previous owner (donor)
+acquisition-ownerLabel: Previous owner (donor)
 acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
 acquisition-acquisitionSourcesLabel: Acquisition source
