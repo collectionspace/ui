@@ -923,22 +923,24 @@
 							<div class="info-column2-50 fl-force-right"> <!-- Age estimate -->
 								<div class="info-pair">
 									<div class="header">
-										<div class="label csc-collection-object-ageGroup-label">Age estimates</div> <!-- Move label to core-messages.properties  -->
+										<div class="label csc-collection-object-ageEstimateGroup-label"></div>
 									</div>
 									<div class="content">
 										<table>
 											<thead>
 												<tr>
-													<td class="csc-collection-object-age-label"></td>
-													<td class="csc-collection-object-ageQualifier-label"></td>
-													<td class="csc-collection-object-ageUnit-label"></td>
+													<td class="csc-collection-object-ageEstimate-label"></td>
+													<td class="csc-collection-object-ageEstimateQualifier-label"></td>
+													<td class="csc-collection-object-ageEstimateUnit-label"></td>
+													<td class="csc-collection-object-ageEstimateNote-label"></td>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td><input type="text" class="csc-object-description-age"/></td>
-													<td><select class="csc-object-description-age-qualifier input-select"><option value="">Options not loaded</option></select></td>
-													<td><select class="csc-object-description-age-unit input-select"><option value="">Options not loaded</option></select></td>
+												<tr class="csc-collection-object-ageEstimateGroup">
+													<td><input type="text" class="csc-collection-object-ageEstimate"/></td>
+													<td><select class="csc-collection-object-ageEstimateQualifier input-select"><option value="">Options not loaded</option></select></td>
+													<td><select class="csc-collection-object-ageEstimateUnit input-select"><option value="">Options not loaded</option></select></td>
+													<td><input type="text" class="csc-collection-object-ageEstimateNote"/></td>
 												</tr>
 											</tbody>
 										</table>

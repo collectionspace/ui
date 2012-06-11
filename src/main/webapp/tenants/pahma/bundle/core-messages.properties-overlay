@@ -586,10 +586,11 @@ dimension-valueDateLabel: Value date
 
 
 # ---------------------------------- Object Viewer's Contribution Information (Cataloging) -------------------------- #
-collection-object-ageGroupLabel: FIX-te
-collection-object-ageLabel: Estimate
-collection-object-ageQualifierLabel: Qualifier
-collection-object-ageUnitLabel: Unit
+collection-object-ageEstimateGroupLabel: Age estimate
+collection-object-ageEstimateLabel: Estimate
+collection-object-ageEstimateQualifierLabel: Qualifier
+collection-object-ageEstimateUnitLabel: Unit
+collection-object-ageEstimateNoteLabel: Notes
 collection-object-phaseLabel: Phase or biological age group
 collection-object-numberOfObjectsLabel: Number of pieces
 collection-object-sexLabel: Sex determination
