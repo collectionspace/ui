@@ -438,6 +438,24 @@ preferredSLA-termSourceDetailLabel: Source detail
 preferredSLA-termSourceNoteLabel: Source note
 location-preferredLocationLabel: Storage location term(s)
 
+#concept
+concept-scopeNoteLabel: Scope note
+concept-scopeNoteSourceLabel: Scope note source
+concept-scopeNoteSourceDetailLabel: Scope note source detail
+preferredCA-termDisplayNameLabel: Display name
+preferredCA-termTypeLabel: Term type
+preferredCA-termPrefForLangLabel: Pref for lang
+preferredCA-historicalStatusLabel: Current?
+preferredCA-termSourceDetailLabel: Source detail
+preferredCA-termSourceNoteLabel: Source note
+concept-citationSourceDetailLabel: Citation source detail
+concept-additionalSourceGroupLabel: Additional sources
+concept-additionalSourceDetailLabel: Additional source
+concept-additionalSourceIDLabel: Additional source detail
+concept-additionalSourceLabel: Additional source unique ID
+concept-additionalSourceNoteLabel: Additional source note
+concept-preferredConceptLabel: Concept Term(s)
+
 # Place
 place-placeAuthorityInformationLabel: Place Authority Term Information
 place-placeTypeLabel: Place type
