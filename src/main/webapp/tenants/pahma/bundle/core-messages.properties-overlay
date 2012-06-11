@@ -142,7 +142,7 @@ collection-object-pahmaCollectionLabel: Collection
 collection-object-pahmaObjectStatusLabel: Object status
 collection-object-inventoryCountLabel: Inventory count
 collection-object-portfolioSeriesLabel: R. Keeling audio series
-collection-object-fieldLocVerbatimLabel: Field collection place (verbatim)
+collection-object-pahmaFieldLocVerbatimLabel: Field collection place (verbatim)
 collection-object-isComponentLabel: Is component?
 collection-object-pahmaFieldCollectionDateGroupLabel: Field collection date
 
@@ -746,7 +746,7 @@ collection-object-objectNameNoteLabel: Note
 # ---------------------------------- Object Collection Information (Cataloging) -------------------------- #
 collection-object-fieldCollectionSourcesLabel: Field collection source (person)
 collection-object-fieldCollectionSourceLabel: Field collection source (person)
-collection-object-fieldCollectionPlaceLabel: Field collection place
+collection-object-pahmaFieldCollectionPlaceLabel: Field collection place
 collection-object-fieldCollectionMethodsLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Field collection note
 collection-object-fieldCollectionNumberLabel: Field collection number
