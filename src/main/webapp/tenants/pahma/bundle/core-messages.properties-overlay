@@ -542,7 +542,7 @@ intake-currentOwnerLabel: Current owner
 intake-conditionCheckMethodsLabel: Condition check method
 intake-locationDateLabel: Location date
 intake-valuationReferenceNumberLabel: Reference number
-intake-fieldCollectionSourcesLabel: Field collection source (person)
+intake-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
 intake-entryNumberLabel: Object entry number
 intake-conditionCheckDateLabel: Condition check date
 intake-insuranceInformationLabel: Insurance Information
@@ -750,8 +750,8 @@ collection-object-objectNameNoteLabel: Note
 
 
 # ---------------------------------- Object Collection Information (Cataloging) -------------------------- #
-collection-object-fieldCollectionSourcesLabel: Field collection source (person)
-collection-object-fieldCollectionSourceLabel: Field collection source (person)
+collection-object-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
+collection-object-fieldCollectionSourceLabel: Field collection source (person or cultural group)
 collection-object-fieldCollectionPlaceLabel: Field collection place
 collection-object-fieldCollectionMethodsLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Field collection note
