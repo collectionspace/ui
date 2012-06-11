@@ -16,6 +16,10 @@ login-rologin-pwd: with your specifics as well as the levels of access that you'
 login-forgot: Forgot password?\t
 login-reset-label: Click here to reset your password.
 
+proceduresCategory: Action Records
+vocabulariesCategory: Authority Terms
+cataloging: Catalog Object
+
 # ------------------------------------------------------------
 # Added to support the collectionobjects_naturalhistory domain schema extensions
 # Taxon record
