@@ -120,7 +120,7 @@ taxon-preferredTaxonLabel: Taxononomic Term(s)
 # ******************* Cataloging ******************* #
 collection-object-repatriationNagpraComplianceInformationLabel: Repatriation and NAGPRA Compliance Information
 collection-object-nagpraInventoryNameLabel: NAGPRA inventory
-collection-object-nagpraApplicabilityLabel: NAGPRA applicability
+collection-object-nagpraApplicabilityLabel: Museum's NAGPRA category det.
 collection-object-nagpraCulturalDeterminationLabel: NAGPRA cultural determination
 collection-object-repatriationNoteLabel: Repatriation note
 
