@@ -40,6 +40,7 @@ vocab-ethusecode: Ethnographic File Codes
 vocab-archculture: Archaeological Cultures
 
 # Cataloging record
+collection-object-commentsLabel: Object comments
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history
 collection-object-taxonLabel: Name
