@@ -401,7 +401,7 @@ preferredOA-additionsToNameLabel: Additions to name
 movement-tab: Mov/Inv...
 /*movement-movementControlInformationLabel: Movement Control Information*/
 movement-movementReferenceNumberLabel: Reference number
-movement-locationMovementInformationLabel: Inventory/Movement
+movement-locationMovementInformationLabel: Inventory/Movement Information
 movement-currentLocationLabel: Storage location
 movement-currentLocationMISSINGLabel: Storage location
 movement-currentLocationNoteLabel: Storage note
@@ -512,7 +512,7 @@ place-preferredPlaceLabel: Place Term(s)
 media-fileInformationHeaderLabel: Media file information
 media-mediaInformationLabel: Media handling information
 media-fileInformationLabel: File information
-media-identificationNumberLabel: Museum number
+media-identificationNumberLabel: Media rendition number (or Museum number)
 media-dimensionSummaryLabel: Dimension summary
 media-dateLabel: Dates
 media-identificationNumberRequired: Please specify an identification number
