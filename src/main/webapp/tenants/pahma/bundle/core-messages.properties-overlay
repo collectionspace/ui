@@ -1,12 +1,18 @@
 #Login
-login-current: CollectionSpace 2.4: PAHMA prototype
-login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
-login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
-login-login: admin@pahma.cspace.berkeley.edu
-login-login-pwd: and the password 
-login-rologin-info: To view CollectionSpace PAHMA tenant as a read-only user, enter the login
-login-rologin: reader@pahma.cspace.berkeley.edu
-login-rologin-pwd: and the password
+/*login-current: CollectionSpace 2.4: PAHMA prototype*/
+/*login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.*/
+/*login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login*/
+login-current: PAHMA-CollectionSpace 2.4
+login-current-info: Welcome to PAHMA's new collection management system, CollectionSpace.  PAHMA-CSpace has been configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
+login-login-info: To sign in, enter your email and passphrase in the Sign In box on the right.
+/*login-login: admin@pahma.cspace.berkeley.edu*/
+/*login-login-pwd: and the password */
+/*login-rologin-info: To view CollectionSpace PAHMA tenant as a read-only user, enter the login */
+/*login-rologin: reader@pahma.cspace.berkeley.edu */
+/*login-rologin-pwd: and the password */
+login-rologin-info: If you do not yet have access to PAHMA-CollectionSpace, have your supervisor send a request on your behalf to
+login-rologin: pahma-cspace@berkeley.edu
+login-rologin-pwd: with your specifics as well as the levels of access that you'll be needing.
 login-forgot: Forgot password?\t
 login-reset-label: Click here to reset your password.
 
