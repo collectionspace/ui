@@ -39,9 +39,16 @@ taxon-refPageLabel: Page
 taxon-notesLabel: Notes
 
 # Vocabularies
+vocab-material_ca: Materials
+vocab-activity: Activities
 vocab-concept: Ethnographic Cultures
 vocab-ethusecode: Ethnographic File Codes
 vocab-archculture: Archaeological Cultures
+vocab-organization: PAHMA Organization Authority
+vocab-person: PAHMA Person Authority
+vocab-place: PAHMA Place Authority
+vocab-location: PAHMA Storage Locations
+vocab-taxon: PAHMA Taxon Authority
 
 # Cataloging record
 collection-object-commentsLabel: Object comments
