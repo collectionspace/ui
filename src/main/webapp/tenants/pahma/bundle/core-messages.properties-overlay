@@ -896,7 +896,9 @@ claim-claimGroupInvolvedGroupLabel: Cultural groups involved
 claim-groupInvolvedNameLabel: Name
 claim-groupInvolvedNoteLabel: Note
 
-claim-claimPeriodInvolvedDateGroupLabel: Time period(s) represented
+claim-claimPeriodInvolvedGroupLabel: Time period(s) represented
+claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroupLabel: Period or date
+claim-claimPeriodInvolvedNoteLabel: Note
 
 claim-claimProcessingInformationLabel: Claim Processing Information
 
