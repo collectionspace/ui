@@ -24,19 +24,17 @@ cspace = cspace || {};
             confirmation: {
                 type: "cspace.confirmation"
             },
-            /*
-relationManager: {
+            relationManager: {
                 type: "cspace.relationManager",
+                container: "{relatedRecordsTab}.dom.relationManager",
                 options: {
-                    relationsElPath: "relations",
-                    primary: "{relatedRecordsTab}.primary",
-                    related: "{relatedRecordsTab}.related",
-                    messagekeys: {
+                    primary: "{relatedRecordsTab}.options.primary",
+                    related: "{relatedRecordsTab}.options.related",
+                    model: {
                         addButton: "relatedRecordsTab-addButton"
                     }
                 }
             },
-*/
             togglable: {
                 type: "cspace.util.togglable",
                 options: {
@@ -52,7 +50,7 @@ relationManager: {
                 options: {
                     recordType: "{relatedRecordsTab}.options.related",
                     urls: cspace.componentUrlBuilder({
-                        listUrl: "%tenant/%tname/%primary/%related/%csid"
+                        listUrl: "%tenant/%tname/%primary/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
                     }),
                     elPath: {
                         expander: {
@@ -130,6 +128,7 @@ relationManager: {
             }
         },
         selectors: {
+            relationManager: ".csc-relatedRecordsTab-relationManager",
             relatedRecordsList: ".csc-listView",
             record: ".csc-relatedRecordsTab-record",
             recordEditor: ".csc-relatedRecordsTab-recordEditor",
@@ -139,7 +138,7 @@ relationManager: {
             listHeader: ".csc-relatedRecordsTab-listHeader",
             header: ".csc-relatedRecordsTab-header"
         },
-        selectorsToIgnore: ["togglable", "header", "relatedRecordsList", "record", "recordEditor"],
+        selectorsToIgnore: ["togglable", "header", "relatedRecordsList", "record", "recordEditor", "relationManager"],
         parentBundle: "{globalBundle}",
         strings: {},
         urls: cspace.componentUrlBuilder({

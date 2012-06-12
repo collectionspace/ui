@@ -9,15 +9,150 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace:true, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("RelationManager.js loaded");
-    
-    fluid.registerNamespace("cspace.relationManager");
-    
+
+    fluid.defaults("cspace.relationManager", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        selectors: {
+            searchDialog: ".csc-search-related-dialog",
+            addButton: ".csc-add-related-record-button"
+        },
+        styles: {
+            addButton: "cs-add-related-record-button"
+        },
+        produceTree: "cspace.relationManager.produceTree",
+        strings: {},
+        parentBundle: "{globalBundle}",
+        selectorsToIgnore: "searchDialog",
+        components: {
+            // TODO: this should really not be a component but in fact it requires access to 
+            // already merged option values and so cannot use an expander - also, the 
+            // indirection on recordType cannot be performed directly via IoC
+            showAddButton: {
+                type: "cspace.relationManager.permissionResolver",
+                options: {
+                    locked: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.util.resolveLocked",
+                            args: "{globalModel}.model.primaryModel"
+                        }
+                    },
+                    model: "{relationManager}.model",
+                    applier: "{relationManager}.applier"
+                }
+            },
+            searchToRelateDialog: {
+                type: "cspace.searchToRelateDialog",
+                createOnEvent: "onSearchToRelateDialog",
+                options: {
+                    /*
+listeners: {
+                        addRelations: "{relationManager}.dataContext.addRelations",
+                        onCreateNewRecord: "{relationManager}.events.onCreateNewRecord.fire"
+                    }
+*/
+                }
+            }
+        },
+        invokers: {
+            add: "cspace.relationManager.add"
+        },
+        events: {
+            onSearchToRelateDialog: null,
+            onAddRelation: null,
+            onRemoveRelation: null,
+            afterAddRelation: null,
+            afterRemoveRelation: null
+        },
+        model: {
+            showAddButton: false
+        },
+        finalInitFunction: "cspace.relationManager.finalInit"
+    });
+
+    cspace.relationManager.finalInit = function (that) {
+        that.refreshView();
+        if (!that.model.showAddButton) {
+            return;
+        }
+        that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
+        that.events.onSearchToRelateDialog.fire();
+    };
+
+    cspace.relationManager.addFromTab = function (that, globalNavigator, globalBundle, messageBar, csid) {
+        globalNavigator.events.onPerformNavigation.fire(function () {
+            cspace.relationManager.add(that, globalBundle, messageBar, csid);
+        });
+    };
+
+    cspace.relationManager.add = function (that, globalBundle, messageBar, csid) {
+        if (csid) {
+            messageBar.hide();
+            that.searchToRelateDialog.open();
+        } else {
+            messageBar.show(globalBundle.resolve("relationManager-pleaseSaveFirst"), null, true);
+        }
+    };
+
+    cspace.relationManager.produceTree = function (that) {
+        return {
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: "${showAddButton}",
+                trueTree: {
+                    addButton: {
+                        messagekey: "${addButton}",
+                        decorators: [{
+                            addClass: "{styles}.addButton"
+                        }, {
+                            type: "jQuery",
+                            func: "click",
+                            args: that.add
+                        }]
+                    }
+                }
+            }
+        };
+    };
+
+    fluid.defaults("cspace.relationManager.permissionResolver", {
+        gradeNames: ["fluid.modelComponent", "autoInit"],
+        components: {
+            recordTypeManager: "{recordTypeManager}",
+            resolver: "{permissionsResolver}"
+        },
+        recordType: "{relationManager}.options.related",
+        recordTypePermission: "update",
+        allOf: [{
+            target: "{relationManager}.options.primary",
+            permission: "update"
+        }],
+        finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
+    });
+
+    cspace.relationManager.permissionResolver.finalInit = function (that) {
+        if (that.options.locked) {
+            that.applier.requestChange("showAddButton", false);
+            return;
+        }
+        that.options.resolver = that.resolver;
+        that.options.allOf.push({
+            permission: that.options.recordTypePermission,
+            oneOf: that.recordTypeManager.recordTypesForCategory(that.options.recordType)
+        });
+        that.applier.requestChange("showAddButton", cspace.permissions.resolveMultiple(that.options));
+    };
+
+    /*
+
     var bindEventHandlers = function (that) {
         if (that.showAddButton.visible) {
             that.locate("addButton").click(that.add);
@@ -39,27 +174,6 @@ cspace = cspace || {};
         
         bindEventHandlers(that);
         return that;
-    };
-    
-    cspace.relationManager.addFromTab = function (that) {
-        that.globalNavigator.events.onPerformNavigation.fire(function () {
-            if (that.model.csid) {
-                that.messageBar.hide();
-                that.searchToRelateDialog.open();
-            } else {
-                that.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
-            }
-        });
-    };
-
-    cspace.relationManager.add = function (that) {
-        if (that.model.csid) {
-            that.messageBar.hide();
-            that.searchToRelateDialog.open();
-        } else {
-            that.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
-        }
-        return false;
     };
     
     cspace.relationManager.addRelations = function (relationsElPath, applier, model, relations) {
@@ -89,35 +203,6 @@ cspace = cspace || {};
         applier.requestChange(elPath, newModelRelations);
     };
 
-    fluid.defaults("cspace.relationManager.permissionResolver", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
-        components: {
-            recordTypeManager: "{recordTypeManager}",
-            resolver: "{permissionsResolver}"
-        },
-        finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
-    });
-    cspace.relationManager.permissionResolver.finalInit = function (that) {
-        if (that.options.locked) {
-            that.visible = false;
-            return;
-        }
-        that.options.resolver = that.resolver;
-        that.options.allOf.push({
-            permission: that.options.recordClassPermission,
-            oneOf: that.recordTypeManager.recordTypesForCategory(that.options.recordClass)
-        });
-        that.visible = cspace.permissions.resolveMultiple(that.options);
-    };
-    
-    cspace.relationManager.produceTree = function (that) {
-        return {
-            addButton: {
-                messagekey: that.options.messagekeys.addButton
-            }
-        };
-    };
-    
     fluid.defaults("cspace.relationManager", {
         gradeNames: "fluid.rendererComponent",
         produceTree: cspace.relationManager.produceTree,
@@ -158,27 +243,6 @@ cspace = cspace || {};
                     related: "{relationManager}.options.related",
                     primary: "{relationManager}.options.primary"
                 }
-            },
-    // TODO: this should really not be a component but in fact it requires access to 
-    // already merged option values and so cannot use an expander - also, the 
-    // indirection on recordClass cannot be performed directly via IoC
-            showAddButton: {
-                type: "cspace.relationManager.permissionResolver",
-                options: {
-                    locked: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.util.resolveLocked",
-                            args: "{cspace.relationManager}.model"
-                        }
-                    },
-                    recordClass: "{relationManager}.options.related",
-                    recordClassPermission: "update",
-                    allOf: [{
-                        target: "{relationManager}.options.primary",
-                        permission: "update"
-                    }]
-                }
             }
         },
         selectors: {
@@ -199,5 +263,6 @@ cspace = cspace || {};
             applier: "nomerge"
         }
     });
+*/
     
 })(jQuery, fluid);

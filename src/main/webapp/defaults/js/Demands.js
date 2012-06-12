@@ -235,10 +235,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 strings: {
                     closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
                 },
-                showCreate: true,
-                listeners: {
-                    addRelations: "{relationManager}.addRelations"
-                }
+                showCreate: true
             }
         });
 
@@ -247,9 +244,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {                
                 strings: {
                     closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
-                },
-                listeners: {
-                    addRelations: "{relationManager}.addRelations"
                 }
             }
         });
@@ -405,12 +399,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
         fluid.demands("cspace.relationManager.add", "cspace.relationManager", {
             funcName: "cspace.relationManager.add",
-            args: "{relationManager}"
+            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid"]
         });
         
         fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.relatedRecordsTab"], {
             funcName: "cspace.relationManager.addFromTab",
-            args: "{relationManager}"
+            args: ["{relationManager}", "{recordEditor}.globalNavigator", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid"]
         });
     
         // Validator
@@ -1872,14 +1866,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        fluid.demands("relationManager", ["cspace.relatedRecordsTab", "cspace.tab"], {
-            container: "{relatedRecordsTab}.container"
-        });
         
         // relationResolver demands
         fluid.demands("cspace.util.relationResolver", "cspace.pageBuilder", {
             options: {
-                model: "{pageBuilder}.model"
+                model: "{globalModel}.model.primaryModel"
             }
         });
         
@@ -2211,7 +2202,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.searchBox.navigateToSearch", "cspace.searchBox", {
             funcName: "cspace.searchBox.navigateToSearch",
-            args: ["{searchBox}"]
+            args: ["{searchBox}", "{recordEditor}"]
         });
         fluid.demands("cspace.searchBox.navigateToSearch", ["cspace.searchBox", "cspace.search.searchView"], {
             funcName: "cspace.search.handleSubmitSearch",

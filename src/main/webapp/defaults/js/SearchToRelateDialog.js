@@ -158,6 +158,8 @@ cspace = cspace || {};
         mergePolicy: {
             model: "preserve"
         },
+        related: "{relationManager}.options.related",
+        primary: "{relationManager}.options.primary",
         selectors: {
             dialog: { // See comments for Confirmation.js - we adopt a common strategy now
             // since the problem in THIS component is that it invokes jquery.dialog on startup, thus
