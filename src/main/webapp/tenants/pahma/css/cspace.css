@@ -115,6 +115,10 @@ table.checklist input[type='checkbox'] {
     margin-right: 4px;
 }
 
+textarea.cs-repeatable-content.narrow, select.cs-repeatable-content.narrow {
+	width: 80%;
+}
+
 /* ---------------------------------------*/
 
 /* core HTML elements*/
@@ -401,10 +405,14 @@ a.header-focus {
     color:inherit;}
 
 /* table selectors */
+td.claimLabel {
+    width:50px;}
 td.label {
     background-color:#F3F3F4; 
     padding:0 4px 0 1px; 
     color:#3B3B3C;}
+td.claimCheck {
+    width:10px;}
 td textarea {
     border:none;}
 td.checkbox {
