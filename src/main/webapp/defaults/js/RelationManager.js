@@ -32,6 +32,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
         components: {
+            messageBar: "{messageBar}",
             // TODO: this should really not be a component but in fact it requires access to 
             // already merged option values and so cannot use an expander - also, the 
             // indirection on recordType cannot be performed directly via IoC
@@ -50,8 +51,12 @@ cspace = cspace || {};
                 }
             },
             searchToRelateDialog: {
+                container: "{relationManager}.dom.searchDialog",
                 type: "cspace.searchToRelateDialog",
                 createOnEvent: "onSearchToRelateDialog"
+            },
+            relationDataSource: {
+                type: "cspace.relationManager.relationDataSource"
             }
         },
         invokers: {
@@ -60,16 +65,54 @@ cspace = cspace || {};
         events: {
             onSearchToRelateDialog: null,
             onAddRelation: null,
-            onRemoveRelation: null,
             afterAddRelation: null,
-            afterRemoveRelation: null,
             onCreateNewRecord: null
+        },
+        listeners: {
+            onAddRelation: "{cspace.relationManager}.onAddRelation"
         },
         model: {
             showAddButton: false
         },
+        relationURL: cspace.componentUrlBuilder("%tenant/%tname/relationships"),
+        preInitFunction: "cspace.relationManager.preInit",
         finalInitFunction: "cspace.relationManager.finalInit"
     });
+
+    fluid.demands("cspace.relationManager.relationDataSource",  ["cspace.localData", "cspace.relationManager"], {
+        funcName: "cspace.relationManager.TestRelationDataSource",
+        args: {
+            writeable: true,
+            targetTypeName: "cspace.relationManager.TestRelationDataSource"
+        }
+    });
+    fluid.demands("cspace.relationManager.relationDataSource", "cspace.relationManager", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            writeable: true,
+            url: "{cspace.relationManager}.options.relationURL",
+            targetTypeName: "cspace.relationManager.relationDataSource"
+        }
+    });
+
+    fluid.defaults("cspace.relationManager.TestRelationDataSource", {
+        url: "%test/data/relationships.json"
+    });
+    cspace.relationManager.TestRelationDataSource = cspace.URLDataSource;
+
+    cspace.relationManager.preInit = function (that) {
+        that.onAddRelation = function (relations) {
+            that.relationDataSource.set(relations, null, function (data) {
+                if (!data || data.isError) {
+                    fluid.each(data.messages, function (message) {
+                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-addRelationsFailedMessage", [message]), null, true);
+                    });
+                    return;
+                }
+                that.events.afterAddRelation.fire();
+            });
+        };
+    };
 
     cspace.relationManager.finalInit = function (that) {
         that.refreshView();

@@ -13,155 +13,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("SearchToRelateDialog.js loaded");
 
-    var handleAddClick = function (that) {
-        return function () {
-            var data = that.search.model.results;
-            var i, newIndex = 0;
-            var newRelations = [];
-            var source = {
-                csid: that.model.csid,
-                recordtype: that.options.primary
-            };
-            // NOTE: using for in so that we don't loop through data that we haven't actually fetched yet. 
-            for (i in data) {
-                if (data[i].selected) {
-                    newRelations[newIndex] = {
-                        source: source,
-                        target: data[i],
-                        type: "affects",
-                        "one-way": false
-                    };
-                    ++newIndex;
-                }
-            }
-            that.events.addRelations.fire({
-                items: newRelations
-            });
-            that.close();
-        };
-    };
-    
-    var bindEventHandlers = function (that, addDialog) {
-        that.locate("addButton", addDialog).click(handleAddClick(that));
-        that.locate("closeButton", addDialog).click(function () {
-            that.close();
-        });
-        that.locate("createNewButton", addDialog).click(function () {
-            that.events.onCreateNewRecord.fire();
-            that.close();
-        });
-        that.search.events.afterSearch.addListener(function () {
-            that.locate("addButton").show();
-        });
-    };
-    
-    cspace.searchToRelateDialog = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.searchToRelateDialog", container, options);
-        
-        that.open = function () {
-            that.search.hideResults();
-            that.locate("addButton").hide();
-            that.container.dialog("open");        
-        };
-        that.close = function () {
-            that.container.dialog("close");
-        };
-        that.renderer.refreshView();
-        fluid.initDependents(that);
-
-        var recordName = that.lookupMessage((that.options.related == "procedures") ? "searchToRelateDialog-procedures" : that.options.related);
-        var title = fluid.stringTemplate(that.lookupMessage("searchToRelateDialog-title"), {recordType: recordName});        
-        that.container.dialog({
-            autoOpen: false,
-            modal: true,
-            minWidth: 700,
-            draggable: true,
-            dialogClass: "cs-search-dialog " + that.setupDialogClass(),
-            position: ["center", 100],
-            title: title                
-        });
-
-        that.locate("addButton", that.container).hide();
-
-        that.events.afterRender.fire(that);
-
-        bindEventHandlers(that, that.container);
-        that.events.afterSetup.fire(that);
-        return that;
-    };
-
-    cspace.searchToRelateDialog.setupDialogClass = function (dialogTrigger) {
-        var dialog = "cs-search-dialogFor-" + dialogTrigger;
-        return dialog;
-    };
-
-    cspace.searchToRelateDialog.produceTree = function (that) {
-        return {
-            closeButtonImg: {
-                decorators: {
-                    type: "attrs",
-                    attributes: {
-                        alt: that.options.strings.closeAlt
-                    }
-                }
-            },
-            relationshipType: {
-                messagekey: "searchToRelateDialog-relationshipType"
-            },
-            expander: {
-                type: "fluid.renderer.condition",
-                condition: that.options.showCreate || false,
-                trueTree: {
-                    createNew: {
-                        messagekey: "searchToRelateDialog-createNew"
-                    },
-                    createNewButton: {
-                        messagekey: "searchToRelateDialog-createNewButton",
-                        decorators: [{
-                            type: "addClass",
-                            classes: that.options.styles.createNewButton
-                        }]
-                    },
-                    multipleRelate: {
-                        decorators: [{
-                            type: "addClass",
-                            classes: that.options.styles.multipleRelate
-                        }]
-                    }
-                },
-                falseTree: {
-                    multipleRelate: {}
-                }
-            },
-            addButton: {
-                messagekey: "searchToRelateDialog-addButton"
-            },
-            next: {
-                messagekey: "searchToRelateDialog-next"
-            },
-            previous: {
-                messagekey: "searchToRelateDialog-previous"
-            }
-        };
-    };
-    
-    cspace.searchToRelateDialog.getDialogGetter = function (that) {
-        return function () {
-            return that.container;
-        };
-    };
-    
     fluid.defaults("cspace.searchToRelateDialog", {
-        gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve"
-        },
-        related: "{relationManager}.options.related",
-        primary: "{relationManager}.options.primary",
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
         selectors: {
-            dialog: { // See comments for Confirmation.js - we adopt a common strategy now
+            dialog: { 
+            // See comments for Confirmation.js - we adopt a common strategy now
             // since the problem in THIS component is that it invokes jquery.dialog on startup, thus
             // causing its container to move.
                 expander: {
@@ -180,34 +41,20 @@ cspace = cspace || {};
             next: ".csc-searchToRelate-next",
             multipleRelate: ".csc-related-steps"
         },
+        selectorsToIgnore: ["closeButton", "dialog"],
         styles: {
             multipleRelate: "cs-related-steps",
             createNewButton: "cs-searchToRelate-createButton"
         },
-        selectorsToIgnore: ["closeButton", "dialog"],
-        events: {
-            addRelations: null,
-            onCreateNewRecord: null,
-            afterRender: null,
-            afterSetup: null
+        produceTree: "cspace.searchToRelateDialog.produceTree",
+        renderOnInit: true,
+        model: {
+            showCreate: false
         },
-        rendererFnOptions: {
-            rendererTargetSelector: "dialog"
-        },
-        produceTree: cspace.searchToRelateDialog.produceTree,
-        invokers: {
-            setupDialogClass: {
-                funcName: "cspace.searchToRelateDialog.setupDialogClass",
-                args: "{searchToRelateDialog}.options.related"          
-            },
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{searchToRelateDialog}.options.parentBundle.messageBase", "{arguments}.0"]
-            }
-        },
-        parentBundle: "{globalBundle}",
-        strings: { },
+        related: "{relationManager}.options.related",
+        primary: "{relationManager}.options.primary",
         components: {
+            globalModel: "{globalModel}",
             search: {
                 type: "cspace.search.searchView",
                 options: {
@@ -235,10 +82,21 @@ cspace = cspace || {};
                                 }
                             }
                         }
+                    },
+                    listeners: {
+                        afterSearch: "{cspace.searchToRelateDialog}.afterSearchHandler"
                     }
                 }
             }
         },
+        invokers: {
+            setupDialogClass: {
+                funcName: "cspace.searchToRelateDialog.setupDialogClass",
+                args: "{searchToRelateDialog}.options.related"
+            }
+        },
+        parentBundle: "{globalBundle}",
+        strings: { },
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
@@ -247,9 +105,146 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
-        }
+        },
+        rendererFnOptions: {
+            rendererTargetSelector: "dialog"
+        },
+        events: {
+            onAddRelation: {
+                event: "{cspace.relationManager}.events.onAddRelation"
+            },
+            onCreateNewRecord: {
+                event: "{cspace.relationManager}.events.onCreateNewRecord"
+            }
+        },
+        preInitFunction: "cspace.searchToRelateDialog.preInit",
+        finalInitFunction: "cspace.searchToRelateDialog.finalInit"
     });
-    
+
+    cspace.searchToRelateDialog.preInit = function (that) {
+        that.open = function () {
+            that.search.hideResults();
+            that.locate("addButton").hide();
+            that.container.dialog("open");
+        };
+        that.close = function () {
+            that.container.dialog("close");
+        };
+        that.afterSearchHandler = function () {
+            that.locate("addButton").show();
+        };
+        that.createNew = function () {
+            that.events.onCreateNewRecord.fire();
+            that.close();
+        };
+        that.add = function () {
+            var newRelations = [],
+                source = {
+                csid: that.globalModel.model.primaryModel.csid,
+                recordtype: that.options.primary
+            };
+            fluid.each(that.search.model.results, function (result) {
+                if (!result.selected) {
+                    return;
+                }
+                newRelations.push({
+                    source: source,
+                    target: result,
+                    type: "affects",
+                    "one-way": false
+                });
+            });
+            that.events.onAddRelation.fire({
+                items: newRelations
+            });
+            that.close();
+        };
+    };
+
+    cspace.searchToRelateDialog.finalInit = function (that) {
+        var resolve = that.options.parentBundle.resolve,
+            title = resolve("searchToRelateDialog-title", [resolve(that.options.related === "procedures" ? "searchToRelateDialog-procedures" : that.options.related)]);
+        that.container.dialog({
+            autoOpen: false,
+            modal: true,
+            minWidth: 700,
+            draggable: true,
+            dialogClass: "cs-search-dialog " + that.setupDialogClass(),
+            position: ["center", 100],
+            title: title
+        });
+    };
+
+    cspace.searchToRelateDialog.produceTree = function (that) {
+        return {
+            closeButtonImg: {
+                decorators: [{
+                    type: "attrs",
+                    attributes: {
+                        alt: "searchToRelateDialog-closeAlt"
+                    }
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.close
+                }]
+            },
+            relationshipType: {
+                messagekey: "searchToRelateDialog-relationshipType"
+            },
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: "${showCreate}",
+                trueTree: {
+                    createNew: {
+                        messagekey: "searchToRelateDialog-createNew"
+                    },
+                    createNewButton: {
+                        messagekey: "searchToRelateDialog-createNewButton",
+                        decorators: [{addClass: "{styles}.createNewButton"}, {
+                            type: "jQuery",
+                            func: "click",
+                            args: that.createNew
+                        }]
+                    },
+                    multipleRelate: {
+                        decorators: {addClass: "{styles}.multipleRelate"}
+                    }
+                },
+                falseTree: {
+                    multipleRelate: {}
+                }
+            },
+            addButton: {
+                messagekey: "searchToRelateDialog-addButton",
+                decorators: [{
+                    addClass: "hidden"
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.add
+                }]
+            },
+            next: {
+                messagekey: "searchToRelateDialog-next"
+            },
+            previous: {
+                messagekey: "searchToRelateDialog-previous"
+            }
+        };
+    }
+
+    cspace.searchToRelateDialog.getDialogGetter = function (that) {
+        return function () {
+            return that.container;
+        };
+    };
+
+    cspace.searchToRelateDialog.setupDialogClass = function (dialogTrigger) {
+        var dialog = "cs-search-dialogFor-" + dialogTrigger;
+        return dialog;
+    };
+
     fluid.fetchResources.primeCacheFromResources("cspace.searchToRelateDialog");
     
 })(jQuery, fluid);

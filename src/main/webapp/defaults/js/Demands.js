@@ -228,26 +228,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // Search To Relate Dialog
-        fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData"], {
-            container: "{relationManager}.dom.searchDialog",
-            options: {
-                strings: {
-                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
-                },
-                showCreate: true
-            }
-        });
-
-        fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData", "cspace.sidebar"], {
-            container: "{relationManager}.dom.searchDialog",
-            options: {                
-                strings: {
-                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
-                }
-            }
-        });
-        
         fluid.demands("cspace.createTemplateBox", ["cspace.localData", "cspace.pageBuilder"], {
             container: "{pageBuilder}.options.selectors.createTemplateBox",
             options: {
@@ -1881,21 +1861,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Search To Relate Dialog demands
         fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", {
-            container: "{relationManager}.dom.searchDialog",
-            options: {                
-                strings: {
-                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
-                },                
-                showCreate: true
+            options: {
+                model: {
+                    showCreate: true
+                }
             }
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
-            container: "{relationManager}.dom.searchDialog",
-            options: {              
-                strings: {
-                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
-                }                
-            }
+            options: {}
         });
         
         // Repeatable demands
@@ -1998,11 +1971,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     searchResultsResolver: {
                         type: "cspace.search.searchResultsResolver"
                     }
-                },
-                listeners: {
-                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSearch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -2021,10 +1989,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 listeners: {
-                    ready: "{loadingIndicator}.events.hideOn.fire",
-                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSearch: "{loadingIndicator}.events.showOn.fire"
+                    ready: "{loadingIndicator}.events.hideOn.fire"
                 },
                 components: {
                     searchReferenceStorage: {
@@ -2117,10 +2082,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
                 },
                 listeners: {
-                	ready: "{loadingIndicator}.events.hideOn.fire",
-                	afterSearch: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSearch: "{loadingIndicator}.events.showOn.fire"
+                    ready: "{loadingIndicator}.events.hideOn.fire"
                 },
                 invokers: {
                     updateSearch: {

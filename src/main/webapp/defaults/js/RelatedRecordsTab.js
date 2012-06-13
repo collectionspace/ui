@@ -32,6 +32,11 @@ cspace = cspace || {};
                     related: "{relatedRecordsTab}.options.related",
                     model: {
                         addButton: "relatedRecordsTab-addButton"
+                    },
+                    events: {
+                        onAddRelation: "{cspace.relatedRecordsTab}.events.onAddRelation",
+                        afterAddRelation: "{cspace.relatedRecordsTab}.events.afterAddRelation",
+                        onCreateNewRecord: "{cspace.relatedRecordsTab}.events.onCreateNewRecord"
                     }
                 }
             },
@@ -97,20 +102,26 @@ cspace = cspace || {};
                 type: "cspace.recordEditor",
                 container: "{relatedRecordsTab}.dom.recordEditor",
                 options: {
-                    csid: "{relatedRecordsTab}.selectedRecirdCsid",
+                    csid: "{relatedRecordsTab}.selectedRecordCsid",
                     recordType: "{relatedRecordsTab}.options.related",
                     globalRef: "relatedModel",
                     listeners: {
-                        afterRecordRender: "{loadingIndicator}.events.hideOn.fire"
+                        afterRecordRender: "{loadingIndicator}.events.hideOn.fire",
+                        afterCreate: "{relatedRecordsTab}.afterRelatedRecordCreate"
                     }
                 },
                 createOnEvent: "onSelect"
             }
         },
         events: {
-            onSelect: null
+            onSelect: null,
+            onAddRelation: null,
+            afterAddRelation: null,
+            onCreateNewRecord: null
         },
         listeners: {
+            afterAddRelation: "{relatedRecordsTab}.afterAddRelation",
+            onCreateNewRecord: "{relatedRecordsTab}.onCreateNewRecord",
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
                 "{relatedRecordsTab}.onSelectHandler"
@@ -157,8 +168,32 @@ cspace = cspace || {};
     });
 
     cspace.relatedRecordsTab.preInit = function (that) {
+        that.afterRelatedRecordCreate = function (model) {
+            that.events.onAddRelation.fire({
+                items: [{
+                    source: {
+                        csid: that.options.csid,
+                        recordtype: that.options.primary
+                    },
+                    target: {
+                        csid: model.csid,
+                        recordtype: that.options.related
+                    },
+                    type: "affects",
+                    "one-way": false
+                }]
+            });
+        };
+        that.onCreateNewRecord = function () {
+            that.events.onSelect.fire({
+                recordType: that.options.related
+            });
+        };
+        that.afterAddRelation = function () {
+            that.relatedRecordsList.updateModel();
+        };
         that.onSelectHandler = function (record) {
-            that.selectedRecirdCsid = record.csid;
+            that.selectedRecordCsid = record.csid;
         };
         fluid.each(that.options.messagekeys, function (message, key) {
             var expanded = fluid.stringTemplate(message, {
@@ -256,24 +291,6 @@ cspace = cspace || {};
     fluid.registerNamespace("cspace.relatedRecordsTab");
 
     var bindEventHandlers = function (that) {
-        var elPath = "relations." + that.related;
-        that.applier.modelChanged.addListener(elPath, that.listEditor.updateList);
-        that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
-        that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
-            var newRelation = [{
-                source: {
-                    csid: that.model.csid,
-                    recordtype: that.primary
-                },
-                target: {
-                    csid: data.csid,
-                    recordtype: that.related
-                },
-                type: "affects",
-                "one-way": false
-            }];
-            that.relationManager.dataContext.addRelations({items: newRelation});
-        });
         
         that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
             if (that.listEditor.details.unsavedChanges) {

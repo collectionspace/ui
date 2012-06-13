@@ -157,6 +157,7 @@ cspace = cspace || {};
                 }
             },
             onSave: "preventable",
+            afterCreate: null,
             afterSave: null,
             onRemove: "preventable",
             afterRemove: null,
@@ -472,6 +473,9 @@ cspace = cspace || {};
             if (data.isError) {
                 recordEditor.events.onError.fire(data, "save");
                 return;
+            }
+            if (!recordEditor.model.csid) {
+                recordEditor.events.afterCreate.fire(data);
             }
             recordEditor.applier.requestChange("", data);
             recordEditor.globalModel.requestChange("", data);
