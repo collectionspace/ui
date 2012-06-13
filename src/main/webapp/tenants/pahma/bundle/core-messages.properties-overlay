@@ -186,6 +186,12 @@ claim: NAGPRA Claim
 
 # ---------------------------------- Top Tabs -------------------------- #
 claim-tab: NAGRA Claim
+loanin-tab: In Loan
+loanout-tab: Out Loan
+acquisition-tab: Accession
+movement-tab: Mov/Inv...
+intake-tab: Object Entry
+media-tab: Media
 
 # ---------- What are these ? ----------- #
 person: Person
@@ -413,7 +419,6 @@ preferredOA-mainBodyNameLabel: Main body name
 preferredOA-additionsToNameLabel: Additions to name
 
 #Movement
-movement-tab: Mov/Inv...
 #movement-movementControlInformationLabel: Movement Control Information*/
 movement-movementReferenceNumberLabel: Reference number
 movement-locationMovementInformationLabel: Inventory/Movement Information
