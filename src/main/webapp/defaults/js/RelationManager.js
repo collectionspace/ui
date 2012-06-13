@@ -191,26 +191,5 @@ cspace = cspace || {};
         });
         that.applier.requestChange("showAddButton", cspace.permissions.resolveMultiple(that.options));
     };
-
-    /*
-
-    fluid.defaults("cspace.relationManager", {
-        components: {
-            searchToRelateDialog: {
-                type: "cspace.searchToRelateDialog",
-                createOnEvent: "afterInitDependents",
-                options: {
-                    listeners: {
-                        addRelations: "{relationManager}.dataContext.addRelations",
-                        onCreateNewRecord: "{relationManager}.events.onCreateNewRecord.fire"
-                    },
-                    model: "{relationManager}.model",
-                    related: "{relationManager}.options.related",
-                    primary: "{relationManager}.options.primary"
-                }
-            }
-        }
-    });
-*/
     
 })(jQuery, fluid);

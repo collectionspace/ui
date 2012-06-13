@@ -937,14 +937,36 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
-    cspace.util.globalNavigator = function (options) {
-        var that = fluid.initView("cspace.util.globalNavigator", "body", options);
-        fluid.initDependents(that);
-        that.bindEvents();
-        return that;
+    fluid.defaults("cspace.util.globalNavigator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        selectors: {
+            include: "a",
+            exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+            forms: ".csc-header-logout-form"
+        },
+        events: {
+            onPerformNavigation: {
+                event: "{navigationEventHolder}.events.onPerformNavigation"
+            }
+        },
+        listeners: {
+            onPerformNavigation: {
+                listener: "{cspace.util.globalNavigator}.onPerformNavigation",
+                priority: "last",
+                namespace: "onPerformNavigationFinal"
+            }
+        },
+        preInitFunction: "cspace.util.globalNavigator.preInit",
+        postInitFunction: "cspace.util.globalNavigator.postInit"
+    });
+
+    cspace.util.globalNavigator.preInit = function (that) {
+        that.onPerformNavigation = function (callback) {
+            callback();
+        };
     };
 
-    cspace.util.globalNavigator.bindEvents = function (that) {
+    cspace.util.globalNavigator.postInit = function (that) {
         that.container.delegate(that.options.selectors.include, "click", function (evt) {
             // IF shift or ctrl is pressed - not a navigation away so no need to fire onPerformNavigation
             if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
@@ -968,24 +990,10 @@ fluid.registerNamespace("cspace.util");
             });
             return false;
         });
-        that.events.onPerformNavigation.addListener(function (callback) {
-            callback();
-        }, "onPerformNavigationFinal", undefined, "last");
     };
 
-    fluid.defaults("cspace.util.globalNavigator", {
-        gradeNames: ["fluid.viewComponent"],
-        selectors: {
-            include: "a",
-            exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
-            forms: ".csc-header-logout-form"
-        },
-        invokers: {
-            bindEvents: {
-                funcName: "cspace.util.globalNavigator.bindEvents",
-                args: ["{globalNavigator}"]
-            }
-        },
+    fluid.defaults("cspace.navigationEventHolder", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
             onPerformNavigation: "preventable"
         }
@@ -1092,6 +1100,9 @@ fluid.registerNamespace("cspace.util");
                 type: "cspace.globalBundle",
                 createOnEvent: "afterFetch",
                 priority: "first"
+            },
+            navigationEventHolder: {
+                type: "cspace.navigationEventHolder"
             },
             globalModel: {
                 type: "cspace.model"

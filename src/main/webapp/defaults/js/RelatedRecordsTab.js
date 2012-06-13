@@ -292,33 +292,6 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
-            if (that.listEditor.details.unsavedChanges) {
-                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
-                    listeners: {
-                        onClose: {
-                            listener: function (userAction) {
-                                if (userAction === "act") {
-                                    that.listEditor.events.afterListUpdate.addListener(function () {
-                                        that.listEditor.events.afterListUpdate.removeListener("afterListUpdate");
-                                        callback();
-                                    }, "afterListUpdate", undefined, "last");
-                                    that.listEditor.details.requestSave();
-                                } else if (userAction === "proceed") {
-                                    callback();
-                                }
-                            },
-                            // http://issues.collectionspace.org/browse/CSPACE-4412:
-                            // Need to wait till confirmation dialog is closed.
-                            priority: "last"
-                        }
-                    },
-                    parentBundle: that.options.parentBundle
-                });
-                return false;
-            }
-        }, null, null, "first");
-        
         that.listEditor.details.events.afterRender.addListener(function () {
             var csid = that.listEditor.details.model.csid;
             if (csid) {

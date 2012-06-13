@@ -316,6 +316,7 @@ cspace = cspace || {};
         },
         components: {
             globalBundle: "{globalBundle}",
+            globalModel: "{globalModel}",
             modelValidator: {
                 type: "cspace.modelValidator"
             }
@@ -332,6 +333,7 @@ cspace = cspace || {};
             }
         },
         recordType: "{cspace.recordEditor}.options.recordType",
+        globalRef: "{cspace.recordEditor}.options.globalRef",
         listeners: {
             onValidate: "{cspace.recordEditor.validator}.validate"
         },

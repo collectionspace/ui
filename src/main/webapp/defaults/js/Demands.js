@@ -305,6 +305,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeDemands = function () {
 
+        fluid.demands("cspace.util.globalNavigator", null, {
+            container: "body"
+        });
+
         fluid.demands("cspace.util.recordLock", "cspace.recordList", {
             options: fluid.COMPONENT_OPTIONS
         });
