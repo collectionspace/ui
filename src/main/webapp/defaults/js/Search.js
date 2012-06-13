@@ -412,9 +412,10 @@ cspace = cspace || {};
         that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
             
         displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
-        if (that.searchResultsResolver) {
-            that.searchResultsResolver.resolve(that.model);
-        }
+        // DISABLING FOR NOW , THERE S NO WAY TO DETERMINE THIS WITH CURRENT MODEL.
+        //if (that.searchResultsResolver) {
+        //    that.searchResultsResolver.resolve(that.model);
+        //}
         that.locate("resultsContainer").show();
         that.events.afterSearch.fire(that.model.searchModel);
     };

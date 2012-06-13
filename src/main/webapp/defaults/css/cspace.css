@@ -2248,3 +2248,7 @@ div.label.cs-preferred-label {
     display: inline-block;
     padding-top: 6px;
 }
+
+.cs-relatedRecords-tab .cs-add-related-record-button {
+    margin-bottom: 10px;
+}

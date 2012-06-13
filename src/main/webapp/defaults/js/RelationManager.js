@@ -51,15 +51,7 @@ cspace = cspace || {};
             },
             searchToRelateDialog: {
                 type: "cspace.searchToRelateDialog",
-                createOnEvent: "onSearchToRelateDialog",
-                options: {
-                    /*
-listeners: {
-                        addRelations: "{relationManager}.dataContext.addRelations",
-                        onCreateNewRecord: "{relationManager}.events.onCreateNewRecord.fire"
-                    }
-*/
-                }
+                createOnEvent: "onSearchToRelateDialog"
             }
         },
         invokers: {
@@ -70,7 +62,8 @@ listeners: {
             onAddRelation: null,
             onRemoveRelation: null,
             afterAddRelation: null,
-            afterRemoveRelation: null
+            afterRemoveRelation: null,
+            onCreateNewRecord: null
         },
         model: {
             showAddButton: false
@@ -81,14 +74,19 @@ listeners: {
     cspace.relationManager.finalInit = function (that) {
         that.refreshView();
         if (!that.model.showAddButton) {
+            // No need to instantiate search to relate dialog.
             return;
         }
         that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
         that.events.onSearchToRelateDialog.fire();
     };
 
-    cspace.relationManager.addFromTab = function (that, globalNavigator, globalBundle, messageBar, csid) {
-        globalNavigator.events.onPerformNavigation.fire(function () {
+    cspace.relationManager.addFromTab = function (that, recordEditor, globalBundle, messageBar, csid) {
+        if (!recordEditor) {
+            cspace.relationManager.add(that, globalBundle, messageBar, csid);
+            return;
+        }
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
             cspace.relationManager.add(that, globalBundle, messageBar, csid);
         });
     };
@@ -153,84 +151,8 @@ listeners: {
 
     /*
 
-    var bindEventHandlers = function (that) {
-        if (that.showAddButton.visible) {
-            that.locate("addButton").click(that.add);
-        }
-        else {
-            that.locate("addButton").hide();
-        }
-        that.dataContext.events.afterAddRelations.addListener(that.addRelations);
-        that.dataContext.events.afterRemoveRelations.addListener(that.removeRelations);
-    };
-    
-    cspace.relationManager = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relationManager", container, options);
-        that.renderer.refreshView();
-        
-        that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
-        fluid.initDependents(that);
-        that.events.afterInitDependents.fire();
-        
-        bindEventHandlers(that);
-        return that;
-    };
-    
-    cspace.relationManager.addRelations = function (relationsElPath, applier, model, relations) {
-        if (!relations.items || !relations.items[0] || !relations.items[0].target) {
-            return;
-        }
-        var related = relations.items[0].target.recordtype;
-        var newModelRelations = fluid.copy(model[relationsElPath][related]) || [];
-        var elPath = relationsElPath + "." + related;
-        var relIndex = newModelRelations.length;
-        fluid.each(relations.items, function (relation) {
-            newModelRelations[relIndex] = relation.target;
-            newModelRelations[relIndex].relationshiptype = relation.type;
-            ++relIndex;
-        });
-        applier.requestChange(elPath, newModelRelations);
-    };
-    
-    cspace.relationManager.removeRelations = function (relationsElPath, applier, model, relations) {
-        var related = relations.target.recordtype;
-        var elPath = relationsElPath + "." + related;
-        var csid = relations.target.csid;
-        var newModelRelations = fluid.copy(model[relationsElPath][related]);
-        fluid.remove_if(newModelRelations, function (relation) {
-            return relation.csid === csid;
-        });
-        applier.requestChange(elPath, newModelRelations);
-    };
-
     fluid.defaults("cspace.relationManager", {
-        gradeNames: "fluid.rendererComponent",
-        produceTree: cspace.relationManager.produceTree,
-        invokers: {
-            add: "cspace.relationManager.add",            
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{searchToRelateDialog}.options.parentBundle.messageBase", "{arguments}.0"]
-            },
-            addRelations: {
-                funcName: "cspace.relationManager.addRelations",
-                args: ["{relationManager}.options.relationsElPath", "{relationManager}.options.applier", "{relationManager}.model", "{arguments}.0"]
-            },
-            removeRelations: {
-                funcName: "cspace.relationManager.removeRelations",
-                args: ["{relationManager}.options.relationsElPath", "{relationManager}.options.applier", "{relationManager}.model", "{arguments}.0"]
-            }
-        },
-        parentBundle: "{globalBundle}",
         components: {
-            messageBar: "{messageBar}",
-            globalNavigator: "{recordEditor}.globalNavigator",
-            dataContext: {
-                type: "cspace.dataContext",
-                options: {
-                    recordType: "relationships"
-                }
-            },
             searchToRelateDialog: {
                 type: "cspace.searchToRelateDialog",
                 createOnEvent: "afterInitDependents",
@@ -244,23 +166,6 @@ listeners: {
                     primary: "{relationManager}.options.primary"
                 }
             }
-        },
-        selectors: {
-            searchDialog: ".csc-search-related-dialog",
-            addButton: ".csc-add-related-record-button"
-        },
-        selectorsToIgnore: "searchDialog",
-        strings: { },
-        messagekeys: {
-            addButton: "relationManager-addButton"
-        },
-        events: {
-            onCreateNewRecord: null,
-            afterInitDependents: null
-        },
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge"
         }
     });
 */
