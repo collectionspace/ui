@@ -119,6 +119,9 @@ textarea.cs-repeatable-content.narrow, select.cs-repeatable-content.narrow {
 	width: 80%;
 }
 
+.narrow li.cs-repeatable-repeat .cs-termList {
+	width: 75%;
+}
 /* ---------------------------------------*/
 
 /* core HTML elements*/
