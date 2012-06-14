@@ -1334,19 +1334,41 @@ cspace = cspace || {};
         urls: cspace.componentUrlBuilder({
             recordURL: "%tenant/%tname/basic/%recordType/%csid"
         }),
-        csid: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.recordEditor.dataSource.resolveCsid",
-                args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
-            }
-        },
+        csid: "",
         schema: "{pageBuilder}.schema",
         finalInitFunction: "cspace.recordEditor.dataSource.finalInit"
     });
 
+    fluid.demands("cspace.recordEditor.dataSource", "cspace.recordEditor", {
+        options: {
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsid",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.relatedRecordsTab"], {
+        options: {
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsidTab",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            }
+        }
+    });
+
+    cspace.recordEditor.dataSource.resolveCsidTab = function (modelCsid, optionsCsid) {
+        return modelCsid || optionsCsid;
+    };
+
     cspace.recordEditor.dataSource.resolveCsid = function (modelCsid, optionsCsid) {
-        return modelCsid || optionsCsid || cspace.util.getUrlParameter("csid")
+        return modelCsid || optionsCsid || cspace.util.getUrlParameter("csid");
     };
 
     cspace.recordEditor.dataSource.finalInit = function (that) {
