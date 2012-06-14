@@ -335,8 +335,8 @@ fluid.registerNamespace("cspace.util");
             };
         }
         if (that.options.removable) {
-            that.remove = function (directModel, callback) {
-                var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "DELETE");
+            that.remove = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "DELETE");
                 wrapper(function () {
                     $.ajax(ajaxOpts);
                 });

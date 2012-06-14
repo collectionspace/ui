@@ -104,6 +104,7 @@ cspace = cspace || {};
         that.onAddRelation = function (relations) {
             that.relationDataSource.set(relations, null, function (data) {
                 if (!data || data.isError) {
+                    data.messages = data.messages || fluid.makeArray("");
                     fluid.each(data.messages, function (message) {
                         that.messageBar.show(that.options.parentBundle.resolve("recordEditor-addRelationsFailedMessage", [message]), null, true);
                     });

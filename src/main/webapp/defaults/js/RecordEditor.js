@@ -882,6 +882,38 @@ cspace = cspace || {};
         }, "{arguments}.1"]
     });
 
+    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.recordEditor", "cspace.relatedRecordsTab"], {
+        mergeAllOptions: [{
+            recordModel: "{cspace.recordEditor}.model",
+            recordApplier: "{cspace.recordEditor}.applier",
+            model: {
+                showCreateFromExistingButton: false,
+                showDeleteButton: false,
+                showDeleteRelationButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolveMultiple",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            allOf: [{
+                                target: "{cspace.relatedRecordsTab}.options.related",
+                                permission: "update"
+                            }, {
+                                target: "{cspace.relatedRecordsTab}.options.primary",
+                                permission: "update"
+                            }]
+                        }
+                    }
+                }
+            },
+            produceTree: "cspace.recordEditor.controlPanel.produceTreeTabs",
+            events: {
+                onDeleteRelation: "{cspace.relatedRecordsTab}.events.onDeleteRelation"
+            },
+            recordType: "{cspace.recordEditor}.options.recordType"
+        }, "{arguments}.1"]
+    });
+
     fluid.defaults("cspace.recordEditor.controlPanel", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: "cspace.recordEditor.controlPanel.preInit",
@@ -910,7 +942,8 @@ cspace = cspace || {};
             createFromExistingButton: ".csc-createFromExisting",
             deleteButton: ".csc-delete",
             save: ".csc-save",
-            cancel: ".csc-cancel"
+            cancel: ".csc-cancel",
+            deleteRelationButton: ".csc-deleteRelation"
         },
         events: {
             onSave: {
@@ -942,6 +975,58 @@ cspace = cspace || {};
         strings: {},
         saveCancelPermission: "update"
     });
+
+    cspace.recordEditor.controlPanel.produceTreeTabs = function (that) {
+        return {
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${showDeleteRelationButton}",
+                trueTree: {
+                    deleteRelationButton: {
+                        messagekey: "tab-list-deleteRelation",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableDeleteRelationButton}"
+                            }
+                        }, {
+                            type: "jQuery",
+                            func: "click",
+                            args: that.events.onDeleteRelation.fire
+                        }]
+                    }
+                }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: "${showSaveCancelButtons}",
+                trueTree: {
+                    save: {
+                        messagekey: "recordEditor-save",
+                        decorators: {
+                            type: "jQuery",
+                            func: "click",
+                            args: that.events.onSave.fire
+                        }
+                    },
+                    cancel: {
+                        messagekey: "recordEditor-cancel",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "click",
+                            args: that.events.onCancel.fire
+                        }, {
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableCancelButton}"
+                            }
+                        }]
+                    }
+                }
+            }]
+        };
+    };
 
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {
@@ -1026,10 +1111,18 @@ cspace = cspace || {};
         return false;
     };
 
+    cspace.recordEditor.controlPanel.notSaved = function (rModel) {
+        //disable if: model.csid is not set (new record)
+        return !!(rModel && !rModel.csid);
+    };
+
     cspace.recordEditor.controlPanel.preInit = function (that) {
+        var rModel = that.options.recordModel;
         that.onChangeHandler = function (unsavedChanges) {
             that.locate("cancel").prop("disabled", !unsavedChanges);
-            that.locate("createFromExistingButton").prop("disabled", !unsavedChanges);
+            that.locate("createFromExistingButton").prop("disabled", cspace.recordEditor.controlPanel.notSaved(rModel));
+            that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
+            that.locate("deleteRelationButton").prop("disabled", cspace.recordEditor.controlPanel.notSaved(rModel));
         };
         that.disableSave = function () {
             that.locate("save").prop("disabled", true);
@@ -1041,14 +1134,17 @@ cspace = cspace || {};
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel;
-        that.applier.requestChange("disableCreateFromExistingButton", !!(rModel && !rModel.csid));
+        that.applier.requestChange("disableCreateFromExistingButton", cspace.recordEditor.controlPanel.notSaved(rModel));
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
+        that.applier.requestChange("disableDeleteRelationButton", cspace.recordEditor.controlPanel.notSaved(rModel));
+        that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
+
         that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
             permission: that.options.saveCancelPermission,
             target: that.options.recordType,
             resolver: that.resolver
         }));
-        that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
+
         that.refreshView();
     };
 
@@ -1275,7 +1371,7 @@ cspace = cspace || {};
             if (!that.options.csid) {
                 return callback();
             }
-            that.source.remove({
+            that.source.remove(null, {
                 csid: that.options.csid,
                 recordType: that.options.recordType
             }, callback);

@@ -24,6 +24,7 @@ cspace = cspace || {};
             confirmation: {
                 type: "cspace.confirmation"
             },
+            messageBar: "{messageBar}",
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsTab}.dom.relationManager",
@@ -111,17 +112,24 @@ cspace = cspace || {};
                     }
                 },
                 createOnEvent: "onSelect"
+            },
+            deleteRelationDataSource: {
+                type: "cspace.relatedRecordsTab.deleteRelationDataSource"
             }
         },
         events: {
             onSelect: null,
             onAddRelation: null,
+            onDeleteRelation: null,
             afterAddRelation: null,
+            afterDeleteRelation: null,
             onCreateNewRecord: null
         },
         listeners: {
             afterAddRelation: "{relatedRecordsTab}.afterAddRelation",
+            afterDeleteRelation: "{relatedRecordsTab}.afterDeleteRelation",
             onCreateNewRecord: "{relatedRecordsTab}.onCreateNewRecord",
+            onDeleteRelation: "{relatedRecordsTab}.onDeleteRelation",
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
                 "{relatedRecordsTab}.onSelectHandler"
@@ -153,7 +161,8 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {},
         urls: cspace.componentUrlBuilder({
-            "goTo": "%webapp/html/%related.html?csid=%csid"
+            goTo: "%webapp/html/%related.html?csid=%csid",
+            deleteRelation: "%tenant/%tname/relationships/0"
         }),
         mergePolicy: {
             uispec: "nomerge",
@@ -167,7 +176,51 @@ cspace = cspace || {};
         preInitFunction: "cspace.relatedRecordsTab.preInit"
     });
 
+    fluid.demands("cspace.relatedRecordsTab.deleteRelationDataSource",  ["cspace.localData", "cspace.relatedRecordsTab"], {
+        funcName: "cspace.relatedRecordsTab.testDeleteRelationDataSource",
+        args: {
+            removable: true,
+            targetTypeName: "cspace.relatedRecordsTab.testDeleteRelationDataSource"
+        }
+    });
+    fluid.demands("cspace.relatedRecordsTab.deleteRelationDataSource", "cspace.relatedRecordsTab", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            removable: true,
+            url: "{cspace.relatedRecordsTab}.options.urls.deleteRelation",
+            targetTypeName: "cspace.relatedRecordsTab.deleteRelationDataSource"
+        }
+    });
+
+    fluid.defaults("cspace.relatedRecordsTab.testDeleteRelationDataSource", {
+        url: "%test/data/relationships.json"
+    });
+    cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
+
     cspace.relatedRecordsTab.preInit = function (that) {
+        that.onDeleteRelation = function () {
+            that.deleteRelationDataSource.remove({
+                source: {
+                    csid: that.options.csid,
+                    recordtype: that.options.primary
+                },
+                target: {
+                    csid: that.selectedRecordCsid,
+                    recordtype: that.options.related
+                },
+                type: "affects",
+                "one-way": false
+            }, null, function (data) {
+                if (!data || data.isError) {
+                    data.messages = data.messages || fluid.makeArray("");
+                    fluid.each(data.messages, function (message) {
+                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-removeRelationsFailedMessage", [message]), null, true);
+                    });
+                    return;
+                }
+                that.events.afterDeleteRelation.fire();
+            });
+        };
         that.afterRelatedRecordCreate = function (model) {
             that.events.onAddRelation.fire({
                 items: [{
@@ -191,6 +244,9 @@ cspace = cspace || {};
         };
         that.afterAddRelation = function () {
             that.relatedRecordsList.updateModel();
+        };
+        that.afterDeleteRelation = function () {
+            // TODO: Update the tab
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
@@ -365,54 +421,6 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: "fluid.rendererComponent",
-        components: {
-            globalNavigator: "{globalNavigator}",
-            confirmation: {
-                type: "cspace.confirmation"
-            },
-            relationManager: {
-                type: "cspace.relationManager",
-                options: {
-                    relationsElPath: "relations",
-                    primary: "{relatedRecordsTab}.primary",
-                    related: "{relatedRecordsTab}.related",
-                    model: "{relatedRecordsTab}.model",
-                    applier: "{relatedRecordsTab}.applier",
-                    messagekeys: {
-                        addButton: "relatedRecordsTab-addButton"
-                    }
-                }
-            },
-            togglable: {
-                type: "cspace.util.togglable",
-                options: {
-                    selectors: {
-                        header: "{relatedRecordsTab}.options.selectors.header",
-                        togglable: "{relatedRecordsTab}.options.selectors.togglable"
-                    }
-                }
-            },
-            listEditor: {
-                type: "cspace.listEditor",
-                options: {
-                    recordType: "{relatedRecordsTab}.related",
-                    listModel: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.relatedRecordsTab.provideData",
-                            args: [
-                                "{relatedRecordsTab}.model.relations",
-                                "{relatedRecordsTab}.related"
-                            ]
-                        }
-                    },
-                    listeners: {
-                        pageReady: "{relatedRecordsTab}.events.afterRender.fire"
-                    }
-                }
-            }
-        },
-        produceTree: cspace.relatedRecordsTab.produceTree,
         selectors: {
             goToRecord: ".csc-goto",
             recordHeader: ".csc-relatedRecordsTab-recordHeader",

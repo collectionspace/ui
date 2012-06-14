@@ -154,7 +154,10 @@ input[type="button"].deleteButton, input[type="submit"].deleteButton {
     background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
-    color:#669922;}
+    color:#669922;
+    -moz-border-radius:4px; 
+    -webkit-border-radius:4px;
+	border-radius:4px;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover,
 input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus {
     background-color:#DAEDD1;}
