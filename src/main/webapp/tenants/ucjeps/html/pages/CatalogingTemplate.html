@@ -61,13 +61,33 @@
 						<div class="header">
 							<div class="label csc-collection-object-taxonomicIdentGroup-label"></div>
 						</div>
-						<div class="content csc-collection-object-taxonomicIdentGroup determinationHistory">
+						<div class="content csc-collection-object-taxonomicIdentGroup determinationHistory oocss">
 							<div class="info-column">
 								<table style="margin-bottom: 12px">
 									<thead>
 										<tr>
 											<td class="csc-collection-object-taxon-label"/>
-											<td class="csc-collection-object-qualifier-label"/>
+											<td class="csc-collection-object-qualifier-label"/>                                                                          
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="flc-inlineEdit-text taxon size2of3">
+												<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
+											</td>
+											<td class="flc-inlineEdit-text">
+												<select class="csc-taxonomic-identification-qualifier">
+													<option value="">Options not loaded</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>							
+                                                        <div class="info-column indent">
+								<table style="margin-bottom: 12px">
+									<thead>
+										<tr>
 											<td class="csc-collection-object-identBy-label"/>
 											<td class="csc-taxonomicIdentGroup-identDateGroup-label"/>
 											<td class="csc-collection-object-institution-label"/>
@@ -75,14 +95,6 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td class="flc-inlineEdit-text taxon">
-												<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
-											</td>
-											<td class="flc-inlineEdit-text">
-												<select class="csc-taxonomic-identification-qualifier input-select-shorter">
-													<option value="">Options not loaded</option>
-												</select>
-											</td>
 											<!-- add options -->
 											<td class="flc-inlineEdit-text">
 												<input type="text" class="csc-taxonomic-identification-ident-by editableText"/>
@@ -227,7 +239,7 @@
 				</div>
 				
 				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
+					<!--<div class="info-column2-50 fl-force-left">-->
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-collection-object-labelHeader-label"></div>
@@ -238,8 +250,10 @@
 								<!-- add selector... make this an authority field -->
 							</div>
 						</div>
-					</div>
-					<div class="info-column2-50 fl-force-right">
+					<!--</div>-->
+                                </div>
+                                <div class="info-column">
+					<div class="info-column2-50 fl-force-left">
 						<div class="info-pair">
 							<div class="header">
 								<div class="label csc-collection-object-labelFooter-label"></div>
