@@ -187,7 +187,7 @@ cspace = cspace || {};
                 that.applier.requestChange("reportlist", data.reportlist);
             }
             that.refreshView();
-            that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            that.globalNavigator.addListener(function (callback) {
                 if (that.model.reportInProgress) {
                     that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                         model: {

@@ -11157,7 +11157,8 @@ var fluid = fluid || fluid_1_5;
     fluid.lifecycleFunctions = {
         preInitFunction: true,
         postInitFunction: true,
-        finalInitFunction: true
+        finalInitFunction: true,
+        clearFunction: false
     };
     
     fluid.rootMergePolicy = fluid.transform(fluid.lifecycleFunctions, function () {
@@ -11275,11 +11276,26 @@ var fluid = fluid || fluid_1_5;
             options: 0
         }
     });
+
+    fluid.clearEventedComponent = function (that) {
+        // Remove all declaratively attached event listeners that have a namespace.
+        fluid.each(that.options.listeners, function (listener, eventName) {
+            var namespace = listener.namespace;
+            if (!namespace) {
+                return;
+            }
+            that.events[eventName].removeListener(namespace);
+        });
+    };
     
     fluid.defaults("fluid.eventedComponent", {
         gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
             listeners: fluid.mergeListenersPolicy
+        },
+        clearFunction: {
+            namespace: "clearEventedComponent",
+            listener: "fluid.clearEventedComponent"
         }
     });
     
@@ -11556,6 +11572,9 @@ var fluid = fluid || fluid_1_5;
     
     fluid.clearLifecycleFunctions = function (options) {
         fluid.each(fluid.lifecycleFunctions, function (value, key) {
+            if (!value) {
+                return;
+            }
             delete options[key];
         });
         delete options.initFunction; 
@@ -14710,6 +14729,7 @@ var fluid_1_5 = fluid_1_5 || {};
         that.clearComponent = function(component, name, child, options, noModTree) {
             options = options || {visited: {}, flat: true};
             child = child || component[name];
+            fluid.fireEvent(child.options.clearFunction, child);
             fluid.visitComponentChildren(child, function(gchild, gchildname) {
                 that.clearComponent(child, gchildname, null, options, noModTree);
             }, options);

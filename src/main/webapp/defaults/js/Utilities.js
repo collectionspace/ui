@@ -957,13 +957,30 @@ fluid.registerNamespace("cspace.util");
             }
         },
         preInitFunction: "cspace.util.globalNavigator.preInit",
-        postInitFunction: "cspace.util.globalNavigator.postInit"
+        postInitFunction: "cspace.util.globalNavigator.postInit",
+        clearFunction: "cspace.util.globalNavigator.clear"
     });
 
     cspace.util.globalNavigator.preInit = function (that) {
         that.onPerformNavigation = function (callback) {
             callback();
         };
+        var listeners = {},
+            index = 0;
+        that.addListener = function (listener, namespace) {
+            var namespace = namespace || fluid.model.composeSegments(that.id, index++);
+            that.events.onPerformNavigation.addListener(listener, namespace);
+            listeners[namespace] = null;
+        };
+        that.clearListeners = function () {
+            fluid.each(listeners, function (val, namespace) {
+                that.events.onPerformNavigation.removeListener(namespace);
+            });
+        };
+    };
+
+    cspace.util.globalNavigator.clear = function (that) {
+        that.clearListeners();
     };
 
     cspace.util.globalNavigator.postInit = function (that) {

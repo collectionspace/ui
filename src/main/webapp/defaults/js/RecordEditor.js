@@ -144,7 +144,15 @@ cspace = cspace || {};
             vocab: "{vocab}",
             globalModel: "{globalModel}",
             globalNavigator: {
-                type: "cspace.util.globalNavigator"
+                type: "cspace.util.globalNavigator",
+                options: {
+                    listeners: {
+                        onPerformNavigation: {
+                            listener: "{recordEditor}.onPerformNavigation",
+                            namespace: "onPerformNavigationRecordEditor"
+                        }
+                    }
+                }
             }
         },
         events: {
@@ -190,11 +198,7 @@ cspace = cspace || {};
         that.onReady = function () {
             that.refreshView();
         };
-    };
-
-    cspace.recordEditor.finalInit = function (that) {
-
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+        that.onPerformNavigation = function (callback) {
             if (that.changeTracker.unsavedChanges) {
                 that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
                     listeners: {
@@ -213,8 +217,10 @@ cspace = cspace || {};
                 });
                 return false;
             }
-        });
+        };
+    };
 
+    cspace.recordEditor.finalInit = function (that) {
         var modelToClone = that.localStorage.get();
         if (modelToClone) {
             that.localStorage.set();
