@@ -142,9 +142,6 @@ cspace = cspace || {};
             },
             listHeader: {
                 messagekey: "recordList"
-            },
-            goToRecord: {
-                messagekey: "relatedRecordsTab-goToRecord"
             }
         },
         selectors: {
@@ -152,7 +149,6 @@ cspace = cspace || {};
             relatedRecordsList: ".csc-listView",
             record: ".csc-relatedRecordsTab-record",
             recordEditor: ".csc-relatedRecordsTab-recordEditor",
-            goToRecord: ".csc-goto",
             recordHeader: ".csc-relatedRecordsTab-recordHeader",
             togglable: ".csc-relatedRecordsTab-togglable",
             listHeader: ".csc-relatedRecordsTab-listHeader",
@@ -162,7 +158,6 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {},
         urls: cspace.componentUrlBuilder({
-            goTo: "%webapp/html/%related.html?csid=%csid",
             deleteRelation: "%tenant/%tname/relationships/0"
         }),
         mergePolicy: {
@@ -362,37 +357,6 @@ cspace = cspace || {};
 /*
     fluid.registerNamespace("cspace.relatedRecordsTab");
 
-    var bindEventHandlers = function (that) {
-        
-        that.listEditor.details.events.afterRender.addListener(function () {
-            var csid = that.listEditor.details.model.csid;
-            if (csid) {
-                var gotoLink = that.locate("goToRecord");
-                gotoLink.attr("href", fluid.stringTemplate(that.options.urls.goTo, {related: that.related, csid: csid}));
-                gotoLink.show();
-            }
-        });
-    };
-
-    cspace.relatedRecordsTab = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
-        that.primary = that.options.primary;
-        that.related = that.options.related;
-
-        that.renderer.refreshView();
-        fluid.initDependents(that);
-
-        bindEventHandlers(that);
-
-        return that;
-    };
-
-    cspace.relatedRecordsTab.provideData = function (relations, related) {
-        return {
-            items: relations[related]
-        };
-    };
-
     cspace.relatedRecordsTab.deleteRelation = function (that, recordEditor) {
         recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
@@ -419,44 +383,6 @@ cspace = cspace || {};
             parentBundle: that.options.parentBundle
         });
     };
-    
-    cspace.relatedRecordsTab.produceTree = function (that) {
-        var strings = that.options.strings;
-        return {
-            recordHeader: {
-                messagekey: strings.editRecord
-            },
-            listHeader: {
-                messagekey: strings.recordList
-            },
-            goToRecord: {
-                messagekey: "relatedRecordsTab-goToRecord"
-            }
-        };
-    };
-
-    fluid.defaults("cspace.relatedRecordsTab", {
-        gradeNames: "fluid.rendererComponent",
-        selectors: {
-            goToRecord: ".csc-goto",
-            recordHeader: ".csc-relatedRecordsTab-recordHeader",
-            togglable: ".csc-relatedRecordsTab-togglable",
-            listHeader: ".csc-relatedRecordsTab-listHeader",
-            header: ".csc-relatedRecordsTab-header"
-        },
-        selectorsToIgnore: ["togglable", "header"],
-        events: {
-            afterRender: null
-        },
-        parentBundle: "{globalBundle}",
-        strings: {},
-        urls: cspace.componentUrlBuilder({
-            "goTo": "%webapp/html/%related.html?csid=%csid"
-        }),
-        mergePolicy: {
-            uispec: "nomerge"
-        }
-    });
 */
 
 })(jQuery, fluid);

@@ -949,7 +949,8 @@ cspace = cspace || {};
             deleteButton: ".csc-delete",
             save: ".csc-save",
             cancel: ".csc-cancel",
-            deleteRelationButton: ".csc-deleteRelation"
+            deleteRelationButton: ".csc-deleteRelation",
+            goTo: ".csc-goto"
         },
         events: {
             onSave: {
@@ -976,14 +977,25 @@ cspace = cspace || {};
             afterSave: "{cspace.recordEditor.controlPanel}.enableSave",
             onError: "{cspace.recordEditor.controlPanel}.enableSave"
         },
+        urls: cspace.componentUrlBuilder({
+            goTo: "%webapp/html/%recordType.html?csid=%csid"
+        }),
         produceTree: "cspace.recordEditor.controlPanel.produceTree",
         parentBundle: "{globalBundle}",
         strings: {},
-        saveCancelPermission: "update"
+        saveCancelPermission: "update",
+        goToPermission: "read"
     });
 
     cspace.recordEditor.controlPanel.produceTreeTabs = function (that) {
         return {
+            goTo: {
+                messagekey: "relatedRecordsTab-goToRecord",
+                decorators: {
+                    type: "jQuery",
+                    func: "hide"
+                }
+            },
             expander: [{
                 type: "fluid.renderer.condition",
                 condition: "${showDeleteRelationButton}",
@@ -1125,10 +1137,25 @@ cspace = cspace || {};
     cspace.recordEditor.controlPanel.preInit = function (that) {
         var rModel = that.options.recordModel;
         that.onChangeHandler = function (unsavedChanges) {
+            var notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
             that.locate("cancel").prop("disabled", !unsavedChanges);
-            that.locate("createFromExistingButton").prop("disabled", cspace.recordEditor.controlPanel.notSaved(rModel));
+            that.locate("createFromExistingButton").prop("disabled", notSaved);
             that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
-            that.locate("deleteRelationButton").prop("disabled", cspace.recordEditor.controlPanel.notSaved(rModel));
+            that.locate("deleteRelationButton").prop("disabled", notSaved);
+            that.renderGoTo();
+        };
+        that.renderGoTo = function () {
+            var rModel = that.options.recordModel,
+                goTo = that.locate("goTo"),
+                notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
+            if (goTo.length < 1) {
+                return;
+            }
+            goTo[!that.model.showGoto || notSaved ? "hide" : "show"]();
+            if (notSaved) {
+                return;
+            }
+            goTo.attr("href", fluid.stringTemplate(that.options.urls.goTo, {recordType: that.options.recordType, csid: rModel.csid}));
         };
         that.disableSave = function () {
             that.locate("save").prop("disabled", true);
@@ -1139,10 +1166,11 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
-        var rModel = that.options.recordModel;
-        that.applier.requestChange("disableCreateFromExistingButton", cspace.recordEditor.controlPanel.notSaved(rModel));
+        var rModel = that.options.recordModel,
+            notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
+        that.applier.requestChange("disableCreateFromExistingButton", notSaved);
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
-        that.applier.requestChange("disableDeleteRelationButton", cspace.recordEditor.controlPanel.notSaved(rModel));
+        that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
 
         that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
@@ -1151,7 +1179,14 @@ cspace = cspace || {};
             resolver: that.resolver
         }));
 
+        that.applier.requestChange("showGoto", cspace.permissions.resolve({
+            permission: that.options.goToPermission,
+            target: that.options.recordType,
+            resolver: that.resolver
+        }));
+
         that.refreshView();
+        that.renderGoTo();
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");

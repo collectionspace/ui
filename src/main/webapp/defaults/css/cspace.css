@@ -209,12 +209,22 @@ input[type="button"].add {
     margin-top:1px;
     /*float:right;*/
     font-weight:bold;
-    line-height:1.65;
     font-size:13px;
-    color:#669922;}
+    color:#669922;
+    height: 21px;
+    line-height: 13px;
+    display: table-cell;
+    vertical-align: middle;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	border-radius:4px;
+    }
 .gotoButton:hover {
     background-color:#DAEDD1;}
-.button-row input[type="button"], .button-row-right input[type="button"] {
+.button-row {
+    display: table-row;
+}
+.button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
     margin-left:10px; 
     /*float:right; */
     margin-bottom:0px;}
@@ -474,6 +484,9 @@ li .flc-pager-pageLink {
     padding-bottom:10px;}
 .secondary-nav-footer {
     padding-bottom:0;}
+.cs-relatedRecordsTab-record .secondary-nav-footer {
+    padding-top: 10px;
+}
 .secondary-nav-menu {
     /*padding-top:6px;*/ 
     width:100%;     
