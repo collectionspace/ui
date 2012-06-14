@@ -14,7 +14,6 @@
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -22,7 +21,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -39,13 +38,12 @@
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -67,14 +65,13 @@
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/TermList.js</js>
@@ -101,13 +98,12 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -122,7 +118,6 @@
     <css>/tenants/ucjeps/css/cspace.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -131,7 +126,7 @@
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   
@@ -151,13 +146,12 @@
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/DataSource.js</js>
@@ -201,7 +195,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -213,7 +207,6 @@
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/tenants/ucjeps/js/RecordEditor.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/RelationManager.js</js>
@@ -256,13 +249,12 @@
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
-    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
