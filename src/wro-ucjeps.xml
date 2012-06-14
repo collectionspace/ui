@@ -14,6 +14,7 @@
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -38,6 +39,7 @@
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -65,6 +67,7 @@
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -98,6 +101,7 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -118,6 +122,7 @@
     <css>/tenants/ucjeps/css/cspace.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -146,6 +151,7 @@
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -207,6 +213,7 @@
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/tenants/ucjeps/js/RecordEditor.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/RelationManager.js</js>
@@ -249,6 +256,7 @@
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
+    <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
