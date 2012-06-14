@@ -21,6 +21,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
+            instantiator: "{instantiator}",
             confirmation: {
                 type: "cspace.confirmation"
             },
@@ -246,7 +247,16 @@ cspace = cspace || {};
             that.relatedRecordsList.updateModel();
         };
         that.afterDeleteRelation = function () {
-            // TODO: Update the tab
+            var resolve = that.options.parentBundle.resolve,
+                recordEditor = "relatedRecordsRecordEditor",
+                record = "record",
+                instantiator = that.instantiator;
+            if (that[recordEditor]) {
+                instantiator.clearComponent(that, recordEditor);
+            }
+            that.instantiator.clearComponent(that, record);
+            fluid.initDependent(that, record, instantiator);
+            that.relatedRecordsList.updateModel();
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
@@ -333,14 +343,20 @@ cspace = cspace || {};
             }
         },
         renderOnInit: true,
-        preInitFunction: "cspace.relatedRecordsTab.record.preInit"
+        preInitFunction: "cspace.relatedRecordsTab.record.preInit",
+        postInitFunction: "cspace.relatedRecordsTab.record.postInit"
     });
 
     cspace.relatedRecordsTab.record.preInit = function (that) {
         that.onSelectHandler = function () {
-            that.locate("header").add(that.locate("recordEditor")).show();
+            that.recordUnion.show();
             that.locate("banner").hide();
         };
+    };
+
+    cspace.relatedRecordsTab.record.postInit = function (that) {
+        that.recordUnion = that.locate("header").add(that.locate("recordEditor"));
+        that.recordUnion.hide();
     };
 
 /*
