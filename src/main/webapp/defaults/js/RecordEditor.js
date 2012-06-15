@@ -952,7 +952,8 @@ cspace = cspace || {};
             save: ".csc-save",
             cancel: ".csc-cancel",
             deleteRelationButton: ".csc-deleteRelation",
-            goTo: ".csc-goto"
+            goTo: ".csc-goto",
+            recordLock: ".csc-recordLock"
         },
         events: {
             onSave: {
@@ -996,6 +997,12 @@ cspace = cspace || {};
                 decorators: {
                     type: "jQuery",
                     func: "hide"
+                }
+            },
+            recordLock: {
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.util.recordLock"
                 }
             },
             expander: [{

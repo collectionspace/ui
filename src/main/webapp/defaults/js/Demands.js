@@ -309,20 +309,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "body"
         });
 
-        fluid.demands("cspace.util.recordLock", "cspace.recordList", {
+        fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
             options: fluid.COMPONENT_OPTIONS
         });
 
-        fluid.demands("cspace.util.recordLock", ["cspace.recordEditor", "cspace.recordList"], {
-            container: "{cspace.recordEditor}.dom.recordLockContainer",
-            options: {
-                model: "{cspace.recordEditor}.model",
-                applier: "{cspace.recordEditor}.applier"
-            }
-        });
-
-        fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
-            container: "{cspace.recordEditor}.dom.recordLockContainer",
+        fluid.demands("cspace.util.recordLock", ["cspace.recordEditor", "cspace.recordEditor.controlPanel"], {
             options: {
                 model: "{cspace.recordEditor}.model",
                 applier: "{cspace.recordEditor}.applier"
