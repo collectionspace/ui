@@ -1248,14 +1248,27 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
-    cspace.recordTypes = function (options) {
-        var that = fluid.initLittleComponent("cspace.recordTypes", options);
-        fluid.initDependents(that);
-        that.setup();
-        return that;
-    };
+    fluid.defaults("cspace.recordTypes", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        events: {
+            ready: null
+        },
+        mergePolicy: {
+            schema: "nomerge",
+            model: "preserve"
+        },
+        invokers: {
+            getRecordTypes: {
+                funcName: "fluid.get",
+                args: ["{recordTypes}.options.model", "@0", "{recordTypes}.config"]
+            }
+        },
+        model: {},
+        strategy: cspace.util.schemaStrategy,
+        finalInitFunction: "cspace.recordTypes.finalInit"
+    });
 
-    cspace.recordTypes.setup = function (that) {
+    cspace.recordTypes.finalInit = function (that) {
         that.config = {
             strategies: [that.options.strategy(that.options)]
         };
@@ -1267,27 +1280,8 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
+        that.events.ready.fire(that);
     };
-
-    fluid.defaults("cspace.recordTypes", {
-        gradeNames: ["fluid.littleComponent"],
-        mergePolicy: {
-            schema: "nomerge",
-            model: "preserve"
-        },
-        invokers: {
-            setup: {
-                funcName: "cspace.recordTypes.setup",
-                args: "{recordTypes}"
-            },
-            getRecordTypes: {
-                funcName: "fluid.get",
-                args: ["{recordTypes}.options.model", "@0", "{recordTypes}.config"]
-            }
-        },
-        model: {},
-        strategy: cspace.util.schemaStrategy
-    });
 
     cspace.util.togglable = function (container, options) {
         var that = fluid.initView("cspace.util.togglable", container, options);

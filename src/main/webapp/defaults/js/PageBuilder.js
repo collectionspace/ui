@@ -9,11 +9,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, cspace:true, fluid, window*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("PageBuilder.js loaded");
     
     fluid.registerNamespace("cspace.pageBuilder");
@@ -292,7 +294,12 @@ cspace = cspace || {};
             recordTypes: {
                 type: "cspace.recordTypes",
                 options: {
-                    schema: "{pageBuilder}.schema"
+                    schema: "{pageBuilder}.schema",
+                    listeners: {
+                        ready: {
+                            listener: "{pageBuilder}.recordTypesReady"
+                        }
+                    }
                 }
             },
             footer: {
@@ -310,6 +317,11 @@ cspace = cspace || {};
     });
     
     cspace.pageBuilder.preInit = function (that) {
+        that.recordTypesReady = function (recordTypes) {
+            if (fluid.get(recordTypes, fluid.model.composeSegments("vocabularies", that.options.recordType))) {
+                that.authorityTag = fluid.typeTag("cspace.authority");
+            }
+        };
         that.schema = that.options.schema;
         that.permissions = that.options.userLogin.permissions;
         fluid.instantiateFirers(that, that.options);

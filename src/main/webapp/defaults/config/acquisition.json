@@ -9,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.acquisitionReferenceNumber"]
                     }
                 },
