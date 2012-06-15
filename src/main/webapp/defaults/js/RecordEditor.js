@@ -1392,6 +1392,15 @@ cspace = cspace || {};
                     func: "cspace.recordEditor.dataSource.resolveCsid",
                     args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
                 }
+            },
+            // TODO: BELOW IS A HACK UNTIL WE CAN POST/PUT TO BASIC.
+            urls: cspace.componentUrlBuilder({
+                recordURLFull: "%tenant/%tname/%recordType/%csid"
+            }),
+            components: {
+                sourceFull: {
+                    type: "cspace.recordEditor.dataSource.sourceFull"
+                }
             }
         }
     });
@@ -1403,6 +1412,15 @@ cspace = cspace || {};
                     type: "fluid.deferredInvokeCall",
                     func: "cspace.recordEditor.dataSource.resolveCsidTab",
                     args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            // TODO: BELOW IS A HACK UNTIL WE CAN POST/PUT TO BASIC.
+            urls: cspace.componentUrlBuilder({
+                recordURLFull: "%tenant/%tname/%recordType/%csid"
+            }),
+            components: {
+                sourceFull: {
+                    type: "cspace.recordEditor.dataSource.sourceFull"
                 }
             }
         }
@@ -1417,8 +1435,15 @@ cspace = cspace || {};
                     args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
                 }
             },
+            // TODO: BELOW IS A HACK UNTIL WE CAN POST/PUT TO BASIC.
+            components: {
+                sourceFull: {
+                    type: "cspace.recordEditor.dataSource.sourceFull"
+                }
+            },
             urls: cspace.componentUrlBuilder({
-                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid"
+                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid",
+                recordURLFull: "%tenant/%tname/vocabularies/%vocab/%csid"
             })
         }
     });
@@ -1432,8 +1457,15 @@ cspace = cspace || {};
                     args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
                 }
             },
+            // TODO: BELOW IS A HACK UNTIL WE CAN POST/PUT TO BASIC.
+            components: {
+                sourceFull: {
+                    type: "cspace.recordEditor.dataSource.sourceFull"
+                }
+            },
             urls: cspace.componentUrlBuilder({
-                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid"
+                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid",
+                recordURLFull: "%tenant/%tname/vocabularies/%vocab/%csid"
             })
         }
     });
@@ -1464,7 +1496,8 @@ cspace = cspace || {};
         };
         that.set = function (model, callback) {
             that.options.csid = model.csid = model.csid || that.options.csid || "";
-            that.source.set(model, {
+            var source = that.sourceFull || that.source;
+            source.set(model, {
                 csid: that.options.csid,
                 vocab: cspace.vocab.resolve({
                     model: null,
@@ -1482,7 +1515,8 @@ cspace = cspace || {};
             if (!that.options.csid) {
                 return callback();
             }
-            that.source.remove(null, {
+            var source = that.sourceFull || that.source;
+            source.remove(null, {
                 csid: that.options.csid,
                 vocab: cspace.vocab.resolve({
                     model: null,
@@ -1525,5 +1559,38 @@ cspace = cspace || {};
         url: "%test/data/basic/%recordType/%csid.json"
     });
     cspace.recordEditor.dataSource.testDataSource = cspace.URLDataSource;
+
+    fluid.demands("cspace.recordEditor.dataSource.sourceFull",  ["cspace.localData", "cspace.recordEditor.dataSource"], {
+        funcName: "cspace.recordEditor.dataSource.testDataSourceFull",
+        args: {
+            writeable: true,
+            removable: true,
+            targetTypeName: "cspace.recordEditor.dataSource.testDataSourceFull",
+            termMap: {
+                recordType: "{cspace.recordEditor.dataSource}.options.recordType",
+                csid: "%csid",
+                vocab: "%vocab"
+            }
+        }
+    });
+    fluid.demands("cspace.recordEditor.dataSource.sourceFull", ["cspace.recordEditor.dataSource"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            writeable: true,
+            removable: true,
+            url: "{cspace.recordEditor.dataSource}.options.urls.recordURLFull",
+            termMap: {
+                recordType: "{cspace.recordEditor.dataSource}.options.recordType",
+                csid: "%csid",
+                vocab: "%vocab"
+            },
+            targetTypeName: "cspace.recordEditor.dataSource.sourceFull"
+        }
+    });
+
+    fluid.defaults("cspace.recordEditor.dataSource.testDataSourceFull", {
+        url: "%test/data/basic/%recordType/%csid.json"
+    });
+    cspace.recordEditor.dataSource.testDataSourceFull = cspace.URLDataSource;
     
 })(jQuery, fluid);
