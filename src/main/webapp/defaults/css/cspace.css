@@ -2268,3 +2268,19 @@ div.label.cs-preferred-label {
 .cs-relatedRecords-tab .cs-add-related-record-button {
     margin-bottom: 10px;
 }
+input[type="button"].cs-deleteRelationButton {
+    position: absolute;
+    right: 0;
+    background-image: url(../images/icnDelete.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: transparent;
+    line-height: inherit;
+    height: inherit;
+    font: inherit;
+    cursor: inherit;
+    color: inherit;
+    padding: 0 0 0 10px;
+    margin: 0 5px 0 0;
+    border: none;
+}

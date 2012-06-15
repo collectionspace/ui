@@ -1712,8 +1712,87 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
+    fluid.defaults("cspace.util.relationRemover", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "cspace.util.relationRemover.finalInit",
+        components: {
+            permissionsResolver: "{permissionsResolver}",
+            globalModel: "{globalModel}",
+            instantiator: "{instantiator}"
+        },
+        offset: 0,
+        removeRelationPermission: "update"
+    });
+
+    cspace.util.relationRemover.getRemoverWidgetConatiner = function (rows, index) {
+        return $("a", $("td", rows.eq(index)).last());
+    };
+
+    cspace.util.relationRemover.finalInit = function (that) {
+        fluid.each(that.options.rows, function (row, index) {
+            var model = fluid.get(that.options.list, fluid.model.composeSegments(that.options.offset + index, "summarylist")),
+                fullModel = fluid.get(that.options, fluid.model.composeSegments("list", that.options.offset + index)),
+                locked = cspace.util.resolveLocked(model);
+            if (locked) {
+                return;
+            }
+            var canRemoveRelation = cspace.util.resolveDeleteRelation({
+                resolver: that.permissionsResolver,
+                allOf: [{
+                    target: that.options.primary,
+                    permission: that.options.removeRelationPermission
+                }, {
+                    target: that.options.related,
+                    permission: that.options.removeRelationPermission
+                }],
+                primaryModel: that.globalModel.model.primaryModel,
+                relatedModel: fullModel
+            });
+            if (!canRemoveRelation) {
+                return;
+            }
+            var name = "removerWidget-" + index;
+            that.options.components[name] = {
+                type: "cspace.util.removerWidget",
+                container: cspace.util.relationRemover.getRemoverWidgetConatiner(that.options.rows, index),
+                options: {
+                    related: that.options.related,
+                    csid: fullModel.csid
+                }
+            };
+            fluid.initDependent(that, name, that.instantiator);
+        });
+    };
+
+    fluid.defaults("cspace.util.removerWidget", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        events: {
+            onDeleteRelation: {
+                events: "{cspace.relatedRecordsTab}.events.onDeleteRelation"
+            }
+        },
+        styles: {
+            deleteRelationButton: "cs-deleteRelationButton"
+        },
+        finalInitFunction: "cspace.util.removerWidget.finalInit",
+        deleteRelationButtonMarkup: '<input type="button"></input>'
+    });
+
+    cspace.util.removerWidget.finalInit = function (that) {
+        that.deleteRelationButton = $(that.options.deleteRelationButtonMarkup)
+            .addClass(that.options.styles.deleteRelationButton)
+            .click(function (event) {
+                event.stopPropagation();
+                that.events.onDeleteRelation.fire({
+                    recordtype: that.options.related,
+                    csid: that.options.csid
+                });
+            });
+        that.container.append(that.deleteRelationButton);
+    };
+
     cspace.util.resolveDeleteRelation = function (options) {
-        return !cspace.util.resolveLocked(options.recordModel) && cspace.permissions.resolveMultiple(options);
+        return !cspace.util.resolveLocked(options.primaryModel) && !cspace.util.resolveLocked(options.relatedModel) && cspace.permissions.resolveMultiple(options);
     };
 
     fluid.defaults("cspace.model", {

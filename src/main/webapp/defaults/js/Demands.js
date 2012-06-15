@@ -1495,6 +1495,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.listView", "cspace.relatedRecordsTab", {
+            options: {
+                components: {
+                    relationRemover: {
+                        type: "cspace.util.relationRemover",
+                        createOnEvent: "pagerAfterRender",
+                        options: {
+                            offset: "{cspace.listView}.model.offset",
+                            rows: "{cspace.listView}.dom.row",
+                            list: "{cspace.listView}.model.list",
+                            primary: "{cspace.relatedRecordsTab}.options.primary",
+                            related: "{cspace.relatedRecordsTab}.options.related"
+                        }
+                    }
+                }
+            }
+        });
         fluid.demands("cspace.recordList", ["cspace.relatedRecordsList", "person"], {
             container: "{relatedRecordsList}.dom.recordListSelector",
             options: {

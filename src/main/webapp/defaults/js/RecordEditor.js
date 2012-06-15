@@ -898,7 +898,7 @@ cspace = cspace || {};
                 showDeleteRelationButton: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.permissions.resolveMultiple",
+                        func: "cspace.util.resolveDeleteRelation",
                         args: {
                             resolver: "{permissionsResolver}",
                             allOf: [{
@@ -907,7 +907,9 @@ cspace = cspace || {};
                             }, {
                                 target: "{cspace.relatedRecordsTab}.options.primary",
                                 permission: "update"
-                            }]
+                            }],
+                            primaryModel: "{globalModel}.model.primaryModel",
+                            relatedModel: "{cspace.recordEditor}.model"
                         }
                     }
                 }

@@ -194,7 +194,7 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
-        that.onDeleteRelation = function () {
+        that.onDeleteRelation = function (target) {
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 listeners: {
                     onClose: function (userAction) {
@@ -204,7 +204,7 @@ cspace = cspace || {};
                                     csid: that.options.csid,
                                     recordtype: that.options.primary
                                 },
-                                target: {
+                                target: target || {
                                     csid: that.selectedRecordCsid,
                                     recordtype: that.options.related
                                 },

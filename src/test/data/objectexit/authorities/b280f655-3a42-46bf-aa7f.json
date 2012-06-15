@@ -1,0 +1,31 @@
+{
+    "termsUsed": {
+        "results": [
+            {
+                "sourceFieldName": "currentOwner",
+                "sourceFieldType": "objectexit",
+                "sourceFieldselector": "objectexit-currentOwner",
+                "number": "some owner",
+                "csid": "urn:cspace:name(someowner1339769733856)",
+                "recordtype": "person",
+                "namespace": "person"
+            },
+            {
+                "sourceFieldName": "depositor",
+                "sourceFieldType": "objectexit",
+                "sourceFieldselector": "objectexit-depositor",
+                "number": "some depositor",
+                "csid": "urn:cspace:name(somedepositor1339769741271)",
+                "recordtype": "organization",
+                "namespace": "organization"
+            }
+        ],
+        "pagination": {
+            "totalItems": "2",
+            "pageSize": "40",
+            "itemsInPage": "2",
+            "pageNum": "0"
+        }
+    },
+    "csid": "b280f655-3a42-46bf-aa7f"
+}
