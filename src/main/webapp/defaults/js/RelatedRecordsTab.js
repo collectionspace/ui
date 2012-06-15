@@ -51,9 +51,9 @@ cspace = cspace || {};
                     }
                 }
             },
-            relatedRecordsList: {
+            relatedRecordsListView: {
                 type: "cspace.listView",
-                container: "{relatedRecordsTab}.dom.relatedRecordsList",
+                container: "{relatedRecordsTab}.dom.relatedRecordsListView",
                 options: {
                     recordType: "{relatedRecordsTab}.options.related",
                     urls: cspace.componentUrlBuilder({
@@ -146,7 +146,7 @@ cspace = cspace || {};
         },
         selectors: {
             relationManager: ".csc-relatedRecordsTab-relationManager",
-            relatedRecordsList: ".csc-listView",
+            relatedRecordsListView: ".csc-listView",
             record: ".csc-relatedRecordsTab-record",
             recordEditor: ".csc-relatedRecordsTab-recordEditor",
             recordHeader: ".csc-relatedRecordsTab-recordHeader",
@@ -154,7 +154,7 @@ cspace = cspace || {};
             listHeader: ".csc-relatedRecordsTab-listHeader",
             header: ".csc-relatedRecordsTab-header"
         },
-        selectorsToIgnore: ["togglable", "header", "relatedRecordsList", "record", "recordEditor", "relationManager"],
+        selectorsToIgnore: ["togglable", "header", "relatedRecordsListView", "record", "recordEditor", "relationManager"],
         parentBundle: "{globalBundle}",
         strings: {},
         urls: cspace.componentUrlBuilder({
@@ -251,7 +251,7 @@ cspace = cspace || {};
             });
         };
         that.afterAddRelation = function () {
-            that.relatedRecordsList.updateModel();
+            that.relatedRecordsListView.updateModel();
         };
         that.afterDeleteRelation = function () {
             var resolve = that.options.parentBundle.resolve,
@@ -263,7 +263,7 @@ cspace = cspace || {};
             }
             that.instantiator.clearComponent(that, record);
             fluid.initDependent(that, record, instantiator);
-            that.relatedRecordsList.updateModel();
+            that.relatedRecordsListView.updateModel();
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
