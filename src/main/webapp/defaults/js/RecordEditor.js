@@ -1371,6 +1371,7 @@ cspace = cspace || {};
             schema: "nomerge"
         },
         components: {
+            vocab: "{vocab}",
             source: {
                 type: "cspace.recordEditor.dataSource.source"
             }
@@ -1407,6 +1408,36 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.authority"], {
+        options: {
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsid",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            urls: cspace.componentUrlBuilder({
+                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid"
+            })
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.relatedRecordsTab", "cspace.authority"], {
+        options: {
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsidTab",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            urls: cspace.componentUrlBuilder({
+                recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid"
+            })
+        }
+    });
+
     cspace.recordEditor.dataSource.resolveCsidTab = function (modelCsid, optionsCsid) {
         return modelCsid || optionsCsid;
     };
@@ -1424,14 +1455,22 @@ cspace = cspace || {};
             }
             that.source.get({
                 csid: that.options.csid,
-                recordType: that.options.recordType
+                vocab: cspace.vocab.resolve({
+                    model: that.model,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                })
             }, callback);
         };
         that.set = function (model, callback) {
             that.options.csid = model.csid = model.csid || that.options.csid || "";
             that.source.set(model, {
                 csid: that.options.csid,
-                recordType: that.options.recordType
+                vocab: cspace.vocab.resolve({
+                    model: null,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                })
             }, function (data) {
                 if (data.csid) {
                     that.options.csid = that.options.csid || data.csid;
@@ -1445,7 +1484,11 @@ cspace = cspace || {};
             }
             that.source.remove(null, {
                 csid: that.options.csid,
-                recordType: that.options.recordType
+                vocab: cspace.vocab.resolve({
+                    model: null,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                })
             }, callback);
         };
     };
@@ -1457,8 +1500,9 @@ cspace = cspace || {};
             removable: true,
             targetTypeName: "cspace.recordEditor.dataSource.testDataSource",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                recordType: "{cspace.recordEditor.dataSource}.options.recordType",
+                csid: "%csid",
+                vocab: "%vocab"
             }
         }
     });
@@ -1469,8 +1513,9 @@ cspace = cspace || {};
             removable: true,
             url: "{cspace.recordEditor.dataSource}.options.urls.recordURL",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                recordType: "{cspace.recordEditor.dataSource}.options.recordType",
+                csid: "%csid",
+                vocab: "%vocab"
             },
             targetTypeName: "cspace.recordEditor.dataSource.source"
         }
