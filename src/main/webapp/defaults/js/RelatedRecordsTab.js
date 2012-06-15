@@ -195,26 +195,38 @@ cspace = cspace || {};
 
     cspace.relatedRecordsTab.preInit = function (that) {
         that.onDeleteRelation = function () {
-            that.deleteRelationDataSource.remove({
-                source: {
-                    csid: that.options.csid,
-                    recordtype: that.options.primary
+            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                listeners: {
+                    onClose: function (userAction) {
+                        if (userAction === "act") {
+                            that.deleteRelationDataSource.remove({
+                                source: {
+                                    csid: that.options.csid,
+                                    recordtype: that.options.primary
+                                },
+                                target: {
+                                    csid: that.selectedRecordCsid,
+                                    recordtype: that.options.related
+                                },
+                                type: "affects",
+                                "one-way": false
+                            }, null, function (data) {
+                                if (!data || data.isError) {
+                                    data.messages = data.messages || fluid.makeArray("");
+                                    fluid.each(data.messages, function (message) {
+                                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-removeRelationsFailedMessage", [message]), null, true);
+                                    });
+                                    return;
+                                }
+                                that.events.afterDeleteRelation.fire();
+                            });
+                        }
+                    }
                 },
-                target: {
-                    csid: that.selectedRecordCsid,
-                    recordtype: that.options.related
+                model: {
+                    messages: [ "tab-re-deletePrimaryMessage" ]
                 },
-                type: "affects",
-                "one-way": false
-            }, null, function (data) {
-                if (!data || data.isError) {
-                    data.messages = data.messages || fluid.makeArray("");
-                    fluid.each(data.messages, function (message) {
-                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-removeRelationsFailedMessage", [message]), null, true);
-                    });
-                    return;
-                }
-                that.events.afterDeleteRelation.fire();
+                parentBundle: that.options.parentBundle
             });
         };
         that.afterRelatedRecordCreate = function (model) {
