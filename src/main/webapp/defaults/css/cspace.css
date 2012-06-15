@@ -2118,10 +2118,10 @@ tbody.csc-listView-rows tr.cs-listView-row td a {
     color: #000;
     display: block;
     min-height: 14.4px;
-    background-color: inherit;
+    background: inherit;
 }
 tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
-    background-color: inherit;
+    background: inherit;
 }
 .list-table .cs-disabled.cs-listView-row:hover > td,
 .list-table .cs-disabled.cs-listView-row:focus > td {
