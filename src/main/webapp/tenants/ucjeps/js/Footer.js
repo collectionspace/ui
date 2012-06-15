@@ -75,7 +75,7 @@ cspace = cspace || {};
             currentRelease: "http://www.collectionspace.org/current_release",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+2.3+Feedback",
             version: "2.3",
-            support: "mailto:cspace-support@lists.berkeley.edu"
+            support: "mailto:cspace-support@lists.berkeley.edu?subject=%5BUCJEPS%5D%20"
         },
         resources: {
             template: {
