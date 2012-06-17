@@ -2907,7 +2907,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model",
                 events: {
                     removeListeners: "{recordEditor}.events.onRefreshView",
-                    onSave: "{recordEditor}.events.onSave"
+                    onSubmit: "{recordEditor}.events.onSave"
                 }
             }, "{arguments}.1"]
         });
@@ -2919,12 +2919,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 events: {
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
                     recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView",
-                    onSave: "{recordEditor}.events.onSave"
+                    onSubmit: "{recordEditor}.events.onSave"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{computedField}.events.removeListeners.fire",
                     recordEditorOnRefreshView: "{computedField}.events.removeListeners.fire"
                 }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.computedField", "cspace.advancedSearch.searchFields", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{searchFields}.applier",
+                model: "{searchFields}.model",
+                events: {
+                    removeListeners: "{advancedSearch}.events.recordTypeChanged",
+                    onSubmit: "{searchView}.events.onAdvancedSearch"
+                },
             }, "{arguments}.1"]
         });
     };

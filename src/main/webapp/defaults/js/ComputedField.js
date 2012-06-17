@@ -62,13 +62,13 @@ cspace = cspace || {};
         },
         events: {
             removeListeners: null,
-            onSave: null
+            onSubmit: null
         },
         listeners: {
             removeListeners: {
                 listener: "{computedField}.removeApplierListeners"
             },
-            onSave: {
+            onSubmit: {
                 listener: "{computedField}.refreshValue"
             }
         },
@@ -222,7 +222,11 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-        var root = that.options.root || "fields";
+        var root = that.options.root;
+        
+        if (that.fullElPath.match(/^fields\./) && !root) {
+            root = "fields";
+        }
 
         return cspace.util.composeSegments(root, elPath);
     };
