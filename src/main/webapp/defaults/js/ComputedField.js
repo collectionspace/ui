@@ -61,11 +61,15 @@ cspace = cspace || {};
             }
         },
         events: {
-            removeListeners: null
+            removeListeners: null,
+            onSubmit: null
         },
         listeners: {
             removeListeners: {
                 listener: "{computedField}.removeApplierListeners"
+            },
+            onSubmit: {
+                listener: "{computedField}.refreshValue"
             }
         },
 
@@ -210,7 +214,17 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
+<<<<<<< HEAD
         return cspace.util.composeSegments(that.options.root, elPath);
+=======
+        var root = that.options.root;
+        
+        if (that.fullElPath.match(/^fields\./) && !root) {
+            root = "fields";
+        }
+
+        return cspace.util.composeSegments(root, elPath);
+>>>>>>> db0d991... PAHMA-321: Add support for using computed fields on the advanced search form.
     };
     
     /*
