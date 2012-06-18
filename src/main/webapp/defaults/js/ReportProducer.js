@@ -17,26 +17,23 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.reportProducer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        mergePolicy: {
-            recordModel: "preserve",
-            recordApplier: "nomerge"
-        },
         produceTree: "cspace.reportProducer.produceTree",
         invokers: {
             generateReport: "cspace.reportProducer.generateReport",
             requestReport: {
                 funcName: "cspace.reportProducer.requestReport",
-                args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
+                args: ["{reportProducer}.model", "{globalModel}", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
             },
             checkReportButtonDisabling: {
                 funcName: "cspace.reportProducer.checkReportButtonDisabling",
-                args: ["{reportProducer}.model", "{reportProducer}.options.recordModel"]
+                args: ["{reportProducer}.model", "{globalModel}"]
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
         },
         parentBundle: "{globalBundle}",
         components: {
+            globalModel: "{globalModel}",
             confirmation: {
                 type: "cspace.confirmation"
             },
@@ -121,8 +118,8 @@ cspace = cspace || {};
     
     fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
     
-    cspace.reportProducer.checkReportButtonDisabling = function (model, recordModel) {
-        if (!recordModel.csid) {
+    cspace.reportProducer.checkReportButtonDisabling = function (model, globalModel) {
+        if (!globalModel.model.primaryModel.csid) {
             return true;
         }
         return model.reportlist.length < 2 && !model.reportlist[0];
@@ -153,9 +150,6 @@ cspace = cspace || {};
                 that.requestReport(true);
             }
         };
-        that.options.recordApplier.modelChanged.addListener("csid", function () {
-            that.refreshView();
-        });
     };
     
     cspace.reportProducer.postInit = function (that) {
@@ -167,6 +161,9 @@ cspace = cspace || {};
     };
     
     cspace.reportProducer.finalInit = function (that) {
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            that.refreshView();
+        });
         that.reportTypesSource.get({
             recordType: that.options.recordType
         }, function (data) {
@@ -215,14 +212,14 @@ cspace = cspace || {};
         }, cspace.util.provideErrorCallback(that, that.reportTypesSource.options.url, "errorFetching"));
     };
     
-    cspace.reportProducer.requestReport = function (model, options, events, stop, callback) {
+    cspace.reportProducer.requestReport = function (model, globalModel, options, events, stop, callback) {
         if (!stop) {
             events.reportStarted.fire();
         }
         var href = fluid.stringTemplate(options.urls.reportUrl, {
             reportcsid: model.reportTypeSelection,
             recordType: options.recordType,
-            csid: options.recordModel.csid
+            csid: globalModel.model.primaryModel.csid
         });
         fluid.fetchResources({
             report: {

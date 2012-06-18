@@ -1124,6 +1124,14 @@ fluid.registerNamespace("cspace.util");
             globalModel: {
                 type: "cspace.model"
             },
+            globalEvents: {
+                type: "cspace.util.eventBinder",
+                options: {
+                    events: {
+                        relationsUpdated: null
+                    }
+                }
+            },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
             },

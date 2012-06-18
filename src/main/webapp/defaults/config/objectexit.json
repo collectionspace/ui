@@ -31,6 +31,9 @@
                 },
                 "tabs": {
                     "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
                 }
             }
         }

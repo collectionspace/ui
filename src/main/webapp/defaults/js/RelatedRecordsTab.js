@@ -127,13 +127,27 @@ cspace = cspace || {};
             onDeleteRelation: null,
             afterAddRelation: null,
             afterDeleteRelation: null,
-            onCreateNewRecord: null
+            onCreateNewRecord: null,
+            relationsUpdated: {
+                event: "{globalEvents}.events.relationsUpdated",
+                args: "{relatedRecordsTab}.options.related"
+            }
         },
         listeners: {
-            afterAddRelation: "{relatedRecordsTab}.afterAddRelation",
-            afterDeleteRelation: "{relatedRecordsTab}.afterDeleteRelation",
+            afterAddRelation: [
+                "{relatedRecordsTab}.afterAddRelation",
+                "{relatedRecordsTab}.events.relationsUpdated.fire"
+            ],
+            afterDeleteRelation: [
+                "{relatedRecordsTab}.afterDeleteRelation",
+                "{loadingIndicator}.events.hideOn.fire",
+                "{relatedRecordsTab}.events.relationsUpdated.fire"
+            ],
             onCreateNewRecord: "{relatedRecordsTab}.onCreateNewRecord",
-            onDeleteRelation: "{relatedRecordsTab}.onDeleteRelation",
+            onDeleteRelation: [
+                "{relatedRecordsTab}.onDeleteRelation",
+                "{loadingIndicator}.events.showOn.fire"
+            ],
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
                 "{relatedRecordsTab}.onSelectHandler"

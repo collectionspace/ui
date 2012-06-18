@@ -9,78 +9,45 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace:true, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("Sidebar.js loaded");
     
-    fluid.registerNamespace("cspace.sidebar");
-    
-    var setupSideBar = function (that) {
-        that.locate("numOfTerms").text(fluid.stringTemplate(that.lookupMessage("sidebar-numOfTerms"), {
-            numOfTerms: that.termsUsed.calculateRecordListSize()
-        }));
-    }; 
-
-    cspace.sidebar = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.sidebar", container, options);
-        restrictRelatedRecordLists(that);
-        fluid.initDependents(that);
-        that.renderer.refreshView();
-        
-        that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
-            that.termsUsed.applier.requestChange("items", model.termsUsed);
-            that.termsUsed.refreshView();
-            setupSideBar(that);
-        });
-        
-        setupSideBar(that);
-        
-        return that;
-    };
-    
-    /**
-     * Checks whether user has "list" permissions to the record types listed by the
-     * relatedRecordLists in this sidebar. If this is not the case, remove them from
-     * options.components.
-     * @param that the sidebar component
-     * @return modified that.options.component based on permissions
-     */
-    var restrictRelatedRecordLists = function (that) {
-        cspace.util.modelBuilder.fixupModel(that.model);
-        //TODO: alternatively have the relatedRecordListcomponents
-        // call this function before rendering, so we can avoid
-        // looking through each component:
-        var components = that.options.components;
-        fluid.remove_if(components, function (val, key) {
-            //search compoents for relatedRecordList components
-            if (val !== undefined && val.type === "cspace.relatedRecordsList") {
-                //check if we have list perms to record category defined by key
-                return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
-            }
-        });
-    };
-    
-    cspace.sidebar.buildModel = function (options, records) {
-        if (!records || records.length < 1) {
-            return;
-        }
-        return {
-            "name": options.related,
-            categoryClass: "csc-related-" + options.related,
-            list: records
-        };
-    };
-
-    /**
-     * produce tree based on model. Create as many repeats of the
-     * categoryContainer field as dictated by the categories object in the model.
-     * For each repeat add a class as defined in the {categoryName}.categoryClass
-     */
-    cspace.sidebar.produceTree = function (that) {
-        return {
+    fluid.defaults("cspace.sidebar", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        preInitFunction: "cspace.sidebar.preInit",
+        parentBundle: "{globalBundle}",
+        strings: {},
+        selectors: {
+            media: ".csc-sidebar-media",
+            numOfTerms: ".csc-num-items-terms",
+            termsUsed: ".csc-integrated-authorities",
+            categoryContainer: ".csc-related-record",
+            relatedCataloging: ".csc-related-cataloging",
+            relatedProcedures: ".csc-related-procedures",
+            termsHeader: ".csc-sidebar-termsHeader",
+            header: ".csc-sidebar-header",
+            togglable: ".csc-sidebar-togglable",
+            report: ".csc-sidebar-report"
+        },
+        renderOnInit: true,
+        repeatingSelectors: ["categoryContainer"],
+        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/SidebarTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        protoTree: {
             media: {
                 decorators: {
                     type: "fluid",
@@ -103,147 +70,50 @@ cspace = cspace || {};
                     }]
                 }
             }]
-        };
-    };
-    
-    fluid.defaults("cspace.sidebar.media", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"],
-        preInitFunction: "cspace.sidebar.media.preInit",
-        finalInitFunction: "cspace.sidebar.media.finalInit",
-        produceTree: "cspace.sidebar.media.produceTree",
-        invokers: {
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
-            }
         },
-        components: {
-            togglable: {
-                type: "cspace.util.togglable",
-                createOnEvent: "afterRender",
-                options: {
-                    selectors: {
-                        header: "{media}.options.selectors.header",
-                        togglable: "{media}.options.selectors.togglable"
+        mergePolicy: {
+            recordModel: "preserve",
+            recordApplier: "nomerge",
+            recordTypeManager: "nomerge",
+            resolver: "nomerge"
+        },
+        model: {
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
                     }
                 }
-            }
-        },
-        selectors: {
-            mediaHeader: ".csc-sidebar-mediaHeader",
-            mediaSnapshot: ".csc-media-snapshot",
-            mediumImage: ".csc-sidebar-mediumImage",
-            header: ".csc-media-header",
-            togglable: ".csc-media-togglable"
-        },
-        parentBundle: "{globalBundle}",
-        selectorsToIgnore: ["header", "togglable"],
-        styles: {
-            mediumImage: "cs-sidebar-mediumImage",
-            mediaSnapshot: "cs-media-snapshot-image"
-        },
-        strings: { }
-    });
-        
-    cspace.sidebar.media.finalInit = function (that) {
-        that.refreshView();
-    };
-    
-    cspace.sidebar.media.preInit = function (that) {
-        that.formatMedia = function (url, format) {
-            var bool = !!url;
-            if (format === "bool") {
-                return bool;
-            }
-            if (!url) {
-                return url;
-            }
-            return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
-        };
-        
-        that.getMedia = function (format) {
-            if (!that.model.fields) {
-                return that.formatMedia("", format);
-            }
-            var imgThumb;
-            if (fluid.get(that.model, "fields.blobCsid")) {
-                imgThumb = fluid.get(that.model, "fields.blobs.0.imgThumb");
-            }
-            if (imgThumb) {
-                return that.formatMedia(imgThumb, format);
-            }
-            imgThumb = fluid.get(that.model, "relations.media.0.summarylist.imgThumb");
-            if (imgThumb) {
-                return that.formatMedia(imgThumb, format);
-            }
-            return that.formatMedia("", format);
-        };
-
-		that.getOriginalImage = function () {
-            var src = that.getMedia("Original");
-				
-			window.open(src, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
-				height: "600",
-				width: "800",
-				scrollbars: "yes"
-			}));
-		};
-				
-		that.applier.modelChanged.addListener("fields.blobCsid", function () {
-            that.refreshView();
-        });
-        
-        that.applier.modelChanged.addListener("relations.media", function () {
-            that.refreshView();
-        });
-        
-    };
-    
-    cspace.sidebar.media.produceTree = function (that) {
-        return {
-            mediaHeader: {
-                messagekey: "sidebar-mediaHeader"
-            },
-            expander: {
-                type: "fluid.renderer.condition",
-                condition: that.getMedia("bool"),
-                trueTree: {
-                    mediumImage: {
-                        decorators: [{
-                            addClass: "{styles}.mediumImage"
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                alt: that.lookupMessage("sidebar-mediumImage"),
-                                src: that.getMedia("Medium")
-                            }
-                        }, {
-                            type: "jQuery",
-                            func: "click", 
-                            args: that.getOriginalImage
-                        }]
-                    },
-                    mediaSnapshot: {
-                        decorators: {
-                            addClass: "{styles}.mediaSnapshot"
-                        }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
                     }
-                },
-                falseTree: {
-                    mediaSnapshot: {}
                 }
-            }
-        };
-    };
-    
-    fluid.defaults("cspace.sidebar", {
-        gradeNames: "fluid.rendererComponent",
+            }]
+        },
+        recordTypeManager: "{recordTypeManager}",
+        resolver: "{permissionsResolver}",
         components: {
+            globalModel: "{globalModel}",
             report: {
                 type: "cspace.reportProducer",
-                createOnEvent: "afterRender"
+                container: "{sidebar}.dom.report"
             },
-            termsUsed: {
+            /*
+termsUsed: {
                 type: "cspace.recordList",
                 createOnEvent: "afterRender",
                 options: {
@@ -287,9 +157,10 @@ cspace = cspace || {};
                     relationsElPath: "{sidebar}.options.relationsElPath"
                 }
             },
+*/
             togglable: {
                 type: "cspace.util.togglable",
-                createOnEvent: "afterRender",
+                container: "{sidebar}.container",
                 options: {
                     selectors: {
                         header: "{sidebar}.options.selectors.header",
@@ -297,75 +168,241 @@ cspace = cspace || {};
                     }
                 }
             }
-        },
-        invokers: {
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
+        }
+    });
+
+    cspace.sidebar.preInit = function (that) {
+        /**
+         * Checks whether user has "list" permissions to the record types listed by the
+         * relatedRecordLists in this sidebar. If this is not the case, remove them from
+         * options.components.
+         * @param that the sidebar component
+         * @return modified that.options.component based on permissions
+         */
+        cspace.util.modelBuilder.fixupModel(that.model);
+        //TODO: alternatively have the relatedRecordListcomponents
+        // call this function before rendering, so we can avoid
+        // looking through each component:
+        var components = that.options.components;
+        fluid.remove_if(components, function (val, key) {
+            //search compoents for relatedRecordList components
+            if (val !== undefined && val.type === "cspace.relatedRecordsList") {
+                //check if we have list perms to record category defined by key
+                return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
+            }
+        });
+    };
+
+    cspace.sidebar.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return {
+            "name": options.related,
+            categoryClass: "csc-related-" + options.related,
+            list: records
+        };
+    };
+
+    fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
+
+    /*
+var setupSideBar = function (that) {
+        that.locate("numOfTerms").text(fluid.stringTemplate(that.lookupMessage("sidebar-numOfTerms"), {
+            numOfTerms: that.termsUsed.calculateRecordListSize()
+        }));
+    }; 
+
+    cspace.sidebar = function (container, options) {
+        var that = fluid.initRendererComponent("cspace.sidebar", container, options);
+        restrictRelatedRecordLists(that);
+        fluid.initDependents(that);
+        that.renderer.refreshView();
+        
+        that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
+            that.termsUsed.applier.requestChange("items", model.termsUsed);
+            that.termsUsed.refreshView();
+            setupSideBar(that);
+        });
+        
+        setupSideBar(that);
+        
+        return that;
+    };
+*/
+
+    fluid.defaults("cspace.sidebar.media", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        preInitFunction: "cspace.sidebar.media.preInit",
+        finalInitFunction: "cspace.sidebar.media.finalInit",
+        produceTree: "cspace.sidebar.media.produceTree",
+        components: {
+            globalModel: "{globalModel}",
+            globalEvents: "{globalEvents}",
+            relatedMedia: {
+                type: "cspace.sidebar.media.dataSource"
+            },
+            togglable: {
+                type: "cspace.util.togglable",
+                createOnEvent: "afterRender",
+                container: "{media}.container",
+                options: {
+                    selectors: {
+                        header: "{media}.options.selectors.header",
+                        togglable: "{media}.options.selectors.togglable"
+                    }
+                }
             }
         },
-        model: {
-            categories: [{
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.modelBuilder",
-                    args: {
-                        callback: "cspace.sidebar.buildModel",
-                        related: "cataloging",
-                        resolver: "{permissionsResolver}",
-                        recordTypeManager: "{recordTypeManager}",
-                        permission: "list"
-                    }
-                }
-            }, {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.modelBuilder",
-                    args: {
-                        callback: "cspace.sidebar.buildModel",
-                        related: "procedures",
-                        resolver: "{permissionsResolver}",
-                        recordTypeManager: "{recordTypeManager}",
-                        permission: "list"
-                    }
-                }
-            }]
-        },
-        produceTree: cspace.sidebar.produceTree,
-        mergePolicy: {
-            recordModel: "preserve",
-            recordApplier: "nomerge",
-            recordTypeManager: "nomerge",
-            resolver: "nomerge"
-        },
-        recordTypeManager: "{recordTypeManager}",
-        resolver: "{permissionsResolver}",
         selectors: {
-            media: ".csc-sidebar-media",
-            numOfTerms: ".csc-num-items-terms",
-            termsUsed: ".csc-integrated-authorities",
-            "categoryContainer:": ".csc-related-record", //to be repeated
-            relatedCataloging: ".csc-related-cataloging",
-            relatedProcedures: ".csc-related-procedures",
-            termsHeader: ".csc-sidebar-termsHeader",
-            header: ".csc-sidebar-header",
-            togglable: ".csc-sidebar-togglable",
-            report: ".csc-sidebar-report"
+            mediaHeader: ".csc-sidebar-mediaHeader",
+            mediaSnapshot: ".csc-media-snapshot",
+            mediumImage: ".csc-sidebar-mediumImage",
+            header: ".csc-media-header",
+            togglable: ".csc-media-togglable"
         },
         parentBundle: "{globalBundle}",
-        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
-        resources: {
-            template: cspace.resourceSpecExpander({
-                fetchClass: "fastTemplate",
-                url: "%webapp/html/components/SidebarTemplate.html",
-                options: {
-                    dataType: "html"
-                }
-            })
+        selectorsToIgnore: ["header", "togglable"],
+        styles: {
+            mediumImage: "cs-sidebar-mediumImage",
+            mediaSnapshot: "cs-media-snapshot-image"
         },
-        strings: { }
+        strings: {},
+        events: {
+            onRender: null
+        },
+        listeners: {
+            onRender: "{cspace.sidebar.media}.onRender"
+        },
+        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
     });
+
+    fluid.demands("cspace.sidebar.media.dataSource",  ["cspace.localData", "cspace.sidebar.media"], {
+        funcName: "cspace.sidebar.media.testDataSource",
+        args: {
+            targetTypeName: "cspace.sidebar.media.testDataSource",
+            termMap: {
+                recordType: "%recordType"
+            }
+        }
+    });
+    fluid.demands("cspace.sidebar.media.dataSource", "cspace.sidebar.media", {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.sidebar.media}.options.relatedMediaUrl",
+            termMap: {
+                primary: "{cspace.sidebar}.options.primary",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            targetTypeName: "cspace.sidebar.media.dataSource"
+        }
+    });
+
+    fluid.defaults("cspace.sidebar.media.testDataSource", {
+        url: "%test/data/relationships.json"
+    });
+    cspace.sidebar.media.testDataSource = cspace.URLDataSource;
         
-    fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
+    cspace.sidebar.media.finalInit = function (that) {
+        that.getRelatedMedia();
+        that.globalEvents.events.relationsUpdated.addListener(function (related) {
+            if (related !== "media") {
+                return;
+            }
+            that.getRelatedMedia();
+        });
+    };
+    
+    cspace.sidebar.media.preInit = function (that) {
+        that.onRender = function () {
+            that.refreshView();
+        };
+
+        that.formatMedia = function (url, format) {
+            var bool = !!url;
+            if (format === "bool") {
+                return bool;
+            }
+            if (!url) {
+                return url;
+            }
+            return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
+        };
+
+        that.getRelatedMedia = function () {
+            that.relatedMedia.get(null, function (data) {
+                that.applier.requestChange("relatedMedia", fluid.get(data, "relations.media"));
+                that.events.onRender.fire();
+            });
+        };
         
+        that.getMedia = function (format) {
+            var model = that.globalModel.model.primaryModel;
+            if (!model.fields) {
+                return that.formatMedia("", format);
+            }
+            var imgThumb;
+            if (fluid.get(model, "fields.blobCsid")) {
+                imgThumb = fluid.get(model, "fields.blobs.0.imgThumb");
+            }
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            imgThumb = fluid.find(that.model.relatedMedia, function (thisMedia) {
+                thisMedia = fluid.get(thisMedia, "summarylist.imgThumb");
+                if (thisMedia) {return thisMedia;}
+            });
+            if (imgThumb) {
+                return that.formatMedia(imgThumb, format);
+            }
+            return that.formatMedia("", format);
+        };
+
+		that.getOriginalImage = function () {
+            var src = that.getMedia("Original");
+			window.open(src, "_blank", that.options.parentBundle.resolve("media-originalMediaOptions", ["600", "800", "yes"]));
+		};
+				
+		that.applier.modelChanged.addListener("fields.blobCsid", function () {
+            that.refreshView();
+        });
+    };
+
+    cspace.sidebar.media.produceTree = function (that) {
+        return {
+            mediaHeader: {
+                messagekey: "sidebar-mediaHeader"
+            },
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: that.getMedia("bool"),
+                trueTree: {
+                    mediumImage: {
+                        decorators: [{
+                            addClass: "{styles}.mediumImage"
+                        }, {
+                            type: "attrs",
+                            attributes: {
+                                alt: that.options.parentBundle.resolve("sidebar-mediumImage"),
+                                src: that.getMedia("Medium")
+                            }
+                        }, {
+                            type: "jQuery",
+                            func: "click", 
+                            args: that.getOriginalImage
+                        }]
+                    },
+                    mediaSnapshot: {
+                        decorators: {
+                            addClass: "{styles}.mediaSnapshot"
+                        }
+                    }
+                },
+                falseTree: {
+                    mediaSnapshot: {}
+                }
+            }
+        };
+    };
+
 })(jQuery, fluid);
