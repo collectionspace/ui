@@ -39,13 +39,14 @@ cspace = cspace || {};
         },
         selectors: {
             tabList: ".csc-tabs-tabList",
-            "tab:": ".csc-tabs-tab",
+            tab: ".csc-tabs-tab",
             tabLink: ".csc-tabs-tab-link"
         },
+        repeatingSelectors: ["tab"],
         selectorsToIgnore: ["tabList"],
         protoTree: {
             expander: {
-                repeatID: "tab:",
+                repeatID: "tab",
                 tree: {
                     tabLink: {
                         target: "${{tabInfo}.href}",
@@ -146,7 +147,8 @@ cspace = cspace || {};
             globalNavigator: "{recordEditor}.globalNavigator",
             tabsList: {
                 type: "cspace.tabsList"
-            }
+            },
+            globalModel: "{globalModel}"
         },
         invokers: {
             tabify: {
@@ -196,6 +198,26 @@ cspace = cspace || {};
     
     cspace.tabs.finalInit = function (that) {
         that.tabify();
+
+        // Disable tabs unless record is saved.
+        var globalModel = that.globalModel,
+            tabs = that.locate("tabs"),
+            tabsToDisable = fluid.transform(that.tabsList.model.tabs, function (val, index) {return index;}).slice(1);
+        function processTabs (operation) {
+            fluid.each(tabsToDisable, function (tab) {
+                tabs.tabs(operation, tab);
+            });
+        }
+        if (!fluid.get(globalModel.model, "primaryModel.csid")) {
+            processTabs("disable");
+            globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+                if (!fluid.get(globalModel.model, "primaryModel.csid")) {
+                    return;
+                }
+                processTabs("enable");
+                globalModel.applier.modelChanged.removeListener("cspace.tabs.finalInit");
+            }, "cspace.tabs.finalInit");
+        }
     };
     
     cspace.tabs.tabsSuccess = function (data, textStatus, XMLHttpRequest, tabsList, tabContainer, setupTab) {
