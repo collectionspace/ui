@@ -667,6 +667,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                delay: 2000,
                 invokers: {
                     handlePermissions: {
                         funcName: "cspace.autocomplete.handlePermissions",
