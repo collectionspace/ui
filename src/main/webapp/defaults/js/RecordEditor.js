@@ -486,7 +486,7 @@ cspace = cspace || {};
                 recordEditor.events.afterCreate.fire(data);
             }
             recordEditor.applier.requestChange("", data);
-            recordEditor.globalModel.requestChange("", data);
+            recordEditor.globalModel.requestChange(recordEditor.options.globalRef, data);
             recordEditor.events.afterSave.fire();
         });
     };
@@ -1584,9 +1584,17 @@ cspace = cspace || {};
                 csid: "%csid",
                 vocab: "%vocab"
             },
+            responseParser: "cspace.recordEditor.dataSource.responseParser",
             targetTypeName: "cspace.recordEditor.dataSource.sourceFull"
         }
     });
+
+    cspace.recordEditor.dataSource.responseParser = function (data) {
+        delete data.relations;
+        delete data.refobjs;
+        delete data.termsUsed;
+        return data;
+    };
 
     fluid.defaults("cspace.recordEditor.dataSource.testDataSourceFull", {
         url: "%test/data/basic/%recordType/%csid.json"

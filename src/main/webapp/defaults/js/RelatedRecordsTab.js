@@ -295,7 +295,11 @@ cspace = cspace || {};
             termMap: {
                 primary: "{cspace.relatedRecordsTab}.options.primary",
                 related: "{cspace.relatedRecordsTab}.options.related",
-                csid: "{cspace.relatedRecordsTab}.options.csid"
+                csid: "{cspace.relatedRecordsTab}.options.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
             },
             targetTypeName: "cspace.listView.dataSource",
             responseParser: "cspace.listView.responseParserTab"
@@ -365,36 +369,5 @@ cspace = cspace || {};
         that.recordUnion = that.locate("header").add(that.locate("recordEditor"));
         that.recordUnion.hide();
     };
-
-/*
-    fluid.registerNamespace("cspace.relatedRecordsTab");
-
-    cspace.relatedRecordsTab.deleteRelation = function (that, recordEditor) {
-        recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-            listeners: {
-                onClose: function (userAction) {
-                    if (userAction === "act") {
-                        that.relationManager.dataContext.removeRelations({
-                            source: {
-                                csid: that.model.csid,
-                                recordtype: that.primary
-                            },
-                            target: {
-                                csid: recordEditor.model.csid,
-                                recordtype: that.related
-                            },
-                            "one-way": false,
-                            type: "affects"
-                        });
-                    }
-                }
-            },
-            model: {
-                messages: [ "tab-re-deletePrimaryMessage" ]
-            },
-            parentBundle: that.options.parentBundle
-        });
-    };
-*/
 
 })(jQuery, fluid);
