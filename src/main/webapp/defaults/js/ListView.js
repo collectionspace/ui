@@ -284,9 +284,26 @@ cspace = cspace || {};
     cspace.listView.finalInit = function (that) {
         that.refreshView();
         that.updateModel();
+
+        function validChange (oldModel, newModel) {
+            var valid = fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "sortKey", "totalRange"], function (field) {
+                var oldVal = oldModel[field],
+                    newVal = newModel[field];
+                if (isNaN(oldVal)) {
+                    return false;
+                }
+                if (isNaN(newVal)) {
+                    return false;
+                }
+                if (oldVal !== newVal) {
+                    return true;
+                }
+            });
+            return !!valid;
+        }
+
         that.pager.events.onModelChange.addListener(function (model, oldModel) {
-            if (model.pageCount !== oldModel.pageCount || model.pageIndex !== oldModel.pageIndex || model.pageSize !== oldModel.pageSize ||
-                model.sortDir !== oldModel.sortDir || model.sortKey !== oldModel.sortKey || model.totalRange !== oldModel.totalRange) {
+            if (validChange(model, oldModel)) {
                 that.updateModel(model);
             }
         });
@@ -418,6 +435,9 @@ cspace = cspace || {};
     cspace.listView.listPermissionStyler.finalInit = function (that) {
         fluid.each(that.options.rows, function (row, index) {
             var record = that.options.list[that.options.offset + index];
+            if (!record) {
+                return;
+            }
             if (!cspace.permissions.resolve({
                 permission: "read",
                 target: record.recordtype || record.sourceFieldType,

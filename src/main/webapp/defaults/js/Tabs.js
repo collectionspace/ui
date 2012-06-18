@@ -195,7 +195,7 @@ cspace = cspace || {};
             fluid.staticEnvironment.cspaceRecordType = fluid.typeTag("cspace." + that.options.primaryRecordType);
         }
     };
-    
+
     cspace.tabs.finalInit = function (that) {
         that.tabify();
 

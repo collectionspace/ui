@@ -69,6 +69,7 @@ cspace = cspace || {};
                         }
                     },
                     model: {
+                        pageSizeList: ["5", "10", "20", "50"],
                         columns: [{
                             sortable: true,
                             id: "number",
@@ -87,7 +88,9 @@ cspace = cspace || {};
                         onSelect: "{relatedRecordsTab}.events.onSelect"
                     },
                     listeners: {
-                        ready: "{loadingIndicator}.events.hideOn.fire"
+                        ready: "{loadingIndicator}.events.hideOn.fire",
+                        onModelChange: "{loadingIndicator}.events.showOn.fire",
+                        afterUpdate: "{loadingIndicator}.events.hideOn.fire"
                     }
                 }
             },
@@ -211,7 +214,7 @@ cspace = cspace || {};
                                 type: "affects",
                                 "one-way": false
                             }, null, function (data) {
-                                if (!data || data.isError) {
+                                if (data && data.isError) {
                                     data.messages = data.messages || fluid.makeArray("");
                                     fluid.each(data.messages, function (message) {
                                         that.messageBar.show(that.options.parentBundle.resolve("recordEditor-removeRelationsFailedMessage", [message]), null, true);
@@ -311,7 +314,9 @@ cspace = cspace || {};
     });
     cspace.listView.testDataSourceTab = cspace.URLDataSource;
     cspace.listView.responseParserTab = function (data) {
-        return data.relations;
+        data = data.relations;
+        data.pagination = fluid.makeArray(data.pagination)[0];
+        return data;
     };
 
     fluid.defaults("cspace.relatedRecordsTab.record", {
@@ -366,6 +371,7 @@ cspace = cspace || {};
     };
 
     cspace.relatedRecordsTab.record.postInit = function (that) {
+        that.locate("banner").show();
         that.recordUnion = that.locate("header").add(that.locate("recordEditor"));
         that.recordUnion.hide();
     };
