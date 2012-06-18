@@ -630,7 +630,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.matchesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource", 
             args: {
-                url: "%queryUrl?pageSize=60&q=%term",
+                url: "%queryUrl?pageSize=100&q=%term",
                 termMap: {
                     queryUrl: "{autocomplete}.options.queryUrl",
                     term: "encodeURIComponent:%term"
