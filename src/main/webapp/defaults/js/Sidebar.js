@@ -112,10 +112,15 @@ cspace = cspace || {};
         recordTypeManager: "{recordTypeManager}",
         resolver: "{permissionsResolver}",
         components: {
+            instantiator: "{instantiator}",
             globalModel: "{globalModel}",
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report"
+            },
+            numberOfTerms: {
+                type: "cspace.sidebar.numberOfTerms",
+                container: "{sidebar}.dom.numOfTerms"
             },
             termsUsed: {
                 type: "cspace.listView",
@@ -143,6 +148,23 @@ cspace = cspace || {};
                             id: "sourceFieldName",
                             name: "sourceFieldName"
                         }]
+                    },
+                    components: {
+                        pager: {
+                            options: {
+                                summary: {
+                                    options: {
+                                        message: {
+                                            expander: {
+                                                type: "fluid.deferredInvokeCall",
+                                                func: "cspace.util.resolveMessage",
+                                                args: ["{globalBundle}", "listView-total-short"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -192,6 +214,78 @@ cspace = cspace || {};
         }
     });
 
+    cspace.sidebar.finalInit = function (that) {
+        function isPrimaryCreated () {
+            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                that.events.recordCreated.fire();
+                return true;
+            }
+            return false;
+        }
+
+        var created = isPrimaryCreated();
+        if (created) {
+            return;
+        }
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            isPrimaryCreated();
+        });
+    };
+
+    cspace.sidebar.preInit = function (that) {
+        /**
+         * Checks whether user has "list" permissions to the record types listed by the
+         * relatedRecordLists in this sidebar. If this is not the case, remove them from
+         * options.components.
+         * @param that the sidebar component
+         * @return modified that.options.component based on permissions
+         */
+        cspace.util.modelBuilder.fixupModel(that.model);
+        //TODO: alternatively have the relatedRecordListcomponents
+        // call this function before rendering, so we can avoid
+        // looking through each component:
+        var components = that.options.components;
+        fluid.remove_if(components, function (val, key) {
+            //search compoents for relatedRecordList components
+            if (val !== undefined && val.type === "cspace.relatedRecordsList") {
+                //check if we have list perms to record category defined by key
+                return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
+            }
+        });
+
+        that.updateNumOfTerms = function () {
+            var name = "numberOfTerms";
+            if (that[name]) {
+                that.instantiator.clearComponent(that, name);
+            }
+            fluid.initDependent(that, name, that.instantiator);
+        };
+    };
+
+    fluid.defaults("cspace.sidebar.numberOfTerms", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        finalInitFunction: "cspace.sidebar.numberOfTerms.finalInit",
+        invokers: {
+            calculateSize: "cspace.sidebar.numberOfTerms.calculateSize"
+        },
+        components: {
+            globalBundle: "{globalBundle}"
+        }
+    });
+
+    fluid.demands("cspace.sidebar.numberOfTerms.calculateSize", "cspace.sidebar.numberOfTerms", {
+        funcName: "cspace.sidebar.numberOfTerms.calculateSize",
+        args: "{cspace.sidebar}"
+    });
+
+    cspace.sidebar.numberOfTerms.calculateSize = function (sidebar) {
+        return fluid.get(sidebar, "termsUsed.pager.model.totalRange") || 0;
+    };
+
+    cspace.sidebar.numberOfTerms.finalInit = function (that) {
+         that.container.text(that.globalBundle.resolve("sidebar-numOfTerms", [that.calculateSize()]));
+    };
+
     fluid.defaults("cspace.sidebar.banner", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         events: {
@@ -204,7 +298,7 @@ cspace = cspace || {};
         },
         selectors: {
             banner: ".csc-sidebar-banner",
-            bannerMessage: ".csc-sidebar-banner-message",
+            bannerMessage: ".csc-sidebar-banner-message"
         },
         selectorsToIgnore: ["list"],
         styles: {
@@ -280,46 +374,6 @@ cspace = cspace || {};
         data = data.termsUsed;
         data.pagination = fluid.makeArray(data.pagination)[0];
         return data;
-    };
-
-    cspace.sidebar.finalInit = function (that) {
-        function isPrimaryCreated () {
-            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                that.events.recordCreated.fire();
-                return true;
-            }
-            return false;
-        }
-
-        var created = isPrimaryCreated();
-        if (created) {
-            return;
-        }
-        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
-            isPrimaryCreated();
-        });
-    };
-
-    cspace.sidebar.preInit = function (that) {
-        /**
-         * Checks whether user has "list" permissions to the record types listed by the
-         * relatedRecordLists in this sidebar. If this is not the case, remove them from
-         * options.components.
-         * @param that the sidebar component
-         * @return modified that.options.component based on permissions
-         */
-        cspace.util.modelBuilder.fixupModel(that.model);
-        //TODO: alternatively have the relatedRecordListcomponents
-        // call this function before rendering, so we can avoid
-        // looking through each component:
-        var components = that.options.components;
-        fluid.remove_if(components, function (val, key) {
-            //search compoents for relatedRecordList components
-            if (val !== undefined && val.type === "cspace.relatedRecordsList") {
-                //check if we have list perms to record category defined by key
-                return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
-            }
-        });
     };
 
     cspace.sidebar.buildModel = function (options, records) {

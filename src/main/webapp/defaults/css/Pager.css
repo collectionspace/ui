@@ -98,6 +98,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*****pasted from cspace.css*****/
 .fl-pager .fl-pager-ui li.flc-pager-summary  {float:right; color:#6D6E71; width: 300px !important;}
+.right-sidebar .fl-pager .fl-pager-ui li.flc-pager-summary  {width:auto !important; min-width: 105px;}
 .fl-pager .fl-pager-ui li.flc-per-page {float:left; color:#6D6E71; width:200px; margin-top:-3px;}
 .right-sidebar .fl-pager .fl-pager-ui li.flc-per-page {width:auto; min-width: 105px;}
 .pager-links {display:inline; padding-top:5px;}

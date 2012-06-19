@@ -191,6 +191,10 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
+    cspace.util.resolveMessage = function (resolver, key, args) {
+        return resolver.resolve(key, args);
+    };
+
     cspace.util.lookupMessage = function (messageBase, key) {
         return messageBase[key] || fluid.stringTemplate("[String for key: %key is missing. Please, add it to messageBundle.]", {key: key});
     };

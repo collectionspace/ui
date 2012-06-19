@@ -1482,6 +1482,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.listView", "cspace.sidebar", {
+            options: {
+                listeners: {
+                    afterUpdate: "{sidebar}.updateNumOfTerms",
+                    ready: "{sidebar}.updateNumOfTerms"
+                }
+            }
+        });
         fluid.demands("cspace.listView", "cspace.relatedRecordsTab", {
             options: {
                 components: {
