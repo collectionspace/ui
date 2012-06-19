@@ -13,117 +13,95 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("RelatedRecordsList.js loaded");
     
-    fluid.registerNamespace("cspace.relatedRecordsList");
-    
-    var addModelChangeListener = function (that, recordTypes, applier, recordList, recordType, related) {
-        applier.modelChanged.addListener(that.options.relationsElPath + "." + recordType, function (model) {
-            var instantiator = that.options.instantiator;
-            that.renderer.refreshView();
-            fluid.each(that.options.components, function (component, name) {
-                if (that[name]) {
-                    instantiator.clearComponent(that, name);
-                }
-                fluid.initDependent(that, name, instantiator);
-            });
-            setupRelatedRecordsList(that);
-        });
-    };
-
-    var bindEventHandlers = function (that) {
-        fluid.each(that.recordTypes[that.options.related], function (value) {
-            addModelChangeListener(that, that.recordTypes, that.options.applier, that.recordList, value, that.options.related);
-        });
-    };
-    
-    var setupRelatedRecordsList = function (that) {
-        that.locate("numOfRelated").text(fluid.stringTemplate(that.options.strings.numOfRelated, {
-            numOfRelated: that.recordList.calculateRecordListSize()
-        }));
-    };
-
-    cspace.relatedRecordsList = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relatedRecordsList", container, options);
-        that.renderer.refreshView();
-        fluid.initDependents(that);        
-        bindEventHandlers(that);
-        setupRelatedRecordsList(that);
-        that.events.afterSetup.fire(that);
-        return that;
-    };
-    
-    cspace.relatedRecordsList.buildRelationsList = function (recordTypes, relations, related) {
-        var relationList = [];
-        fluid.each(recordTypes[related], function (value) {
-            relationList = relationList.concat(relations[value] || []);
-        });   
-        return relationList;
-    };
-    
-    cspace.relatedRecordsList.buildRelationsListColumns = function (related) {
-        if (related !== "cataloging") {
-            return ["number", "recordtype", "summarylist.updatedAt"];
-        }
-        return ["number", "summary", "summarylist.updatedAt"];
-    };
-    
-    cspace.relatedRecordsList.buildRelationsListNames = function (related) {
-        if (related !== "cataloging") {
-            return ["number", "recordtype", "updatedAt"];
-        }
-        return ["number", "summary", "updatedAt"];
-    };
-    
-    cspace.relatedRecordsList.produceTree = function(that) {
-        return {
-            mainHeader: {
-                messagekey: that.options.related //holds key for stringBundle lookup
-            }
-        };
-    };
-
     fluid.defaults("cspace.relatedRecordsList", {
-        gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge",
-            instantiator: "nomerge"
-        },
-        instantiator: "{instantiator}",
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
             recordTypes: "{recordTypes}",
-            recordList: {
-                type: "cspace.recordList",
-                options: {
-                    elPaths: {
-                        items: "items"
-                    },
-                    strings: {
-                        number: "Number",
-                        summary: "Summary",
-                        recordtype: "Type"
-                    },
-                    model: {
-                        messagekeys: {
-                            nothingYet: "relatedRecordsList-nothingYet"
-                        }
-                    },
-                    showNumberOfItems: false
-                }
-            },
             relationManager: {
                 type: "cspace.relationManager",
+                container: "{relatedRecordsList}.dom.relationManagerSelector",
                 options: {
                     primary: "{relatedRecordsList}.options.primary",
                     related: "{relatedRecordsList}.options.related",
-                    applier: "{relatedRecordsList}.options.applier",
-                    model: "{relatedRecordsList}.model",
-                    relationsElPath: "{relatedRecordsList}.options.relationsElPath"
+                    model: {
+                        addButton: "relationManager-addButton"
+                    },
+                    events: {
+                        afterAddRelation: "{cspace.relatedRecordsList}.events.afterAddRelation"
+                    }
+                }
+            },
+            rrlListView: {
+                type: "cspace.listView",
+                container: "{relatedRecordsList}.dom.listViewSelector",
+                createOnEvent: "primaryRecordCreated",
+                options: {
+                    recordType: "{relatedRecordsList}.options.related",
+                    urls: cspace.componentUrlBuilder({
+                        listUrl: "%tenant/%tname/%primary/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
+                    }),
+                    produceTree: "cspace.listView.produceTreeSidebar",
+                    elPath: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "fluid.stringTemplate",
+                            args: ["results.%recordType", {
+                                recordType: "{relatedRecordsList}.options.related"
+                            }]
+                        }
+                    },
+                    model: {
+                        pageSizeList: ["5", "10", "20", "50"],
+                        columns: [{
+                            sortable: true,
+                            id: "number",
+                            name: "%recordType-number"
+                        }, {
+                            sortable: true,
+                            id: "summary",
+                            name: "title"
+                        }, {
+                            sortable: true,
+                            id: "summarylist.updatedAt",
+                            name: "updatedAt"
+                        }]
+                    },
+                    components: {
+                        pager: {
+                            options: {
+                                summary: {
+                                    options: {
+                                        message: {
+                                            expander: {
+                                                type: "fluid.deferredInvokeCall",
+                                                func: "cspace.util.resolveMessage",
+                                                args: ["{globalBundle}", "listView-total-short"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            listBanner: {
+                type: "cspace.sidebar.banner",
+                container: "{relatedRecordsList}.dom.banner",
+                options: {
+                    selectors: {
+                        list: "{relatedRecordsList}.dom.recordListSelector"
+                    }
                 }
             },
             togglableRelated: {
                 type: "cspace.util.togglable",
+                container: "{relatedRecordsList}.container",
                 options: {
                     selectors: {
                         header: "{relatedRecordsList}.options.selectors.header",
@@ -133,23 +111,40 @@ cspace = cspace || {};
             }
         },
         events: {
-            afterSetup: null  
+            afterAddRelation: null,
+            relationsUpdated: {
+                event: "{globalEvents}.events.relationsUpdated",
+                args: "{relatedRecordsList}.options.related"
+            },
+            primaryRecordCreated: {
+                event: "{globalEvents}.events.primaryRecordCreated"
+            },
+            relatedRelationsUpdated: null
         },
-        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
+        listeners: {
+            relationsUpdated: "{relatedRecordsList}.relationsUpdatedHandler",
+            relatedRelationsUpdated: "{relatedRecordsList}.relatedRelationsUpdatedHandler",
+            afterAddRelation: [
+                "{relatedRecordsList}.events.relationsUpdated.fire"
+            ]
+        },
         parentBundle: "{globalBundle}",
-        produceTree: cspace.relatedRecordsList.produceTree,
+        protoTree: {
+            mainHeader: {
+                messagekey: "${related}"
+            }
+        },
         selectors: {
-            numOfRelated: ".csc-num-items",
             relationManagerSelector: ".csc-relatedRecordsList-relationManager",
-            recordListSelector: ".csc-relatedRecordsList-recordList",
+            listViewSelector: ".csc-listViewSelector",
             mainHeader: ".csc-related-mainheader",
             header: ".csc-related-header",
-            togglable: ".csc-related-togglable"
+            togglable: ".csc-related-togglable",
+            banner: ".csc-sidebar-bannerContainer"
         },
-        selectorsToIgnore: ["relationManagerSelector", "recordListSelector", "header", "togglable", "numOfRelated"],
-        strings: {
-            numOfRelated: "(%numOfRelated)"
-        },
+        selectorsToIgnore: ["relationManagerSelector", "listViewSelector", "header", "togglable", "banner"],
+        strings: {},
+        renderOnInit: true,
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -158,8 +153,57 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
+        },
+        preInitFunction: "cspace.relatedRecordsList.preInit"
+    });
+
+    cspace.relatedRecordsList.preInit = function (that) {
+        that.relatedListTag = fluid.typeTag("cspace.relatedRecordsList.related");
+        that.relationsUpdatedHandler = function (related) {
+            if (related !== that.options.related) {
+                return;
+            }
+            that.events.relatedRelationsUpdated.fire();
+        };
+        that.relatedRelationsUpdatedHandler = function () {
+            that.rrlListView.updateModel();
+        };
+    };
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            responseParser: "cspace.listView.responseParserTab"
         }
     });
+    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{cspace.relatedRecordsTab}.options.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource",
+            responseParser: "cspace.listView.responseParserTab"
+        }
+    });
+
+    fluid.defaults("cspace.relatedRecordsList.testDataSourceRelatedRecordsList", {
+        url: "%test/data/%primary/%related/%csid.json"
+    });
+    cspace.relatedRecordsList.testDataSourceRelatedRecordsList = cspace.URLDataSource;
 
     fluid.fetchResources.primeCacheFromResources("cspace.relatedRecordsList");
 })(jQuery, fluid);

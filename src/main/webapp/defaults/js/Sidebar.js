@@ -25,7 +25,6 @@ cspace = cspace || {};
         strings: {},
         selectors: {
             media: ".csc-sidebar-media",
-            numOfTerms: ".csc-num-items-terms",
             termsUsed: ".csc-integrated-authorities",
             termsUsedBanner: ".csc-sidebar-termsUsed",
             categoryContainer: ".csc-related-record",
@@ -38,7 +37,7 @@ cspace = cspace || {};
         },
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
-        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
+        selectorsToIgnore: ["report", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -73,8 +72,6 @@ cspace = cspace || {};
             }]
         },
         mergePolicy: {
-            recordModel: "preserve",
-            recordApplier: "nomerge",
             recordTypeManager: "nomerge",
             resolver: "nomerge"
         },
@@ -124,10 +121,6 @@ cspace = cspace || {};
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report"
-            },
-            numberOfTerms: {
-                type: "cspace.sidebar.numberOfTerms",
-                container: "{sidebar}.dom.numOfTerms"
             },
             termsUsed: {
                 type: "cspace.listView",
@@ -184,30 +177,33 @@ cspace = cspace || {};
                     }
                 }
             },
-            /*
             cataloging: {
                 type: "cspace.relatedRecordsList",
-                createOnEvent: "afterRender",
                 options: {
-                    primary: "{sidebar}.options.primaryRecordType",
-                    related: "cataloging",
-                    applier: "{sidebar}.options.recordApplier",
-                    model: "{sidebar}.options.recordModel",
-                    relationsElPath: "{sidebar}.options.relationsElPath"
+                    primary: "{sidebar}.options.primary",
+                    model: {
+                        related: "cataloging"
+                    },
+                    related: "cataloging"
                 }
             },
             procedures: {
                 type: "cspace.relatedRecordsList",
-                createOnEvent: "afterRender",
                 options: {
-                    primary: "{sidebar}.options.primaryRecordType",
+                    primary: "{sidebar}.options.primary",
                     related: "procedures",
-                    applier: "{sidebar}.options.recordApplier",
-                    model: "{sidebar}.options.recordModel",
-                    relationsElPath: "{sidebar}.options.relationsElPath"
+                    model: {
+                        related: "procedures"
+                    },
+                    components: {
+                        rrlListView: {
+                            options: {
+                                elPath: "results"
+                            }
+                        }
+                    }
                 }
             },
-*/
             togglable: {
                 type: "cspace.util.togglable",
                 container: "{sidebar}.container",
@@ -242,52 +238,20 @@ cspace = cspace || {};
             }
         });
 
-        that.updateNumOfTerms = function () {
-            var name = "numberOfTerms";
-            if (that[name]) {
-                that.instantiator.clearComponent(that, name);
-            }
-            fluid.initDependent(that, name, that.instantiator);
-        };
-
         that.primaryRecordSavedHandler = function () {
             that.termsUsed.updateModel();
         };
     };
 
-    fluid.defaults("cspace.sidebar.numberOfTerms", {
-        gradeNames: ["autoInit", "fluid.viewComponent"],
-        finalInitFunction: "cspace.sidebar.numberOfTerms.finalInit",
-        invokers: {
-            calculateSize: "cspace.sidebar.numberOfTerms.calculateSize"
-        },
-        components: {
-            globalBundle: "{globalBundle}"
-        }
-    });
-
-    fluid.demands("cspace.sidebar.numberOfTerms.calculateSize", "cspace.sidebar.numberOfTerms", {
-        funcName: "cspace.sidebar.numberOfTerms.calculateSize",
-        args: "{cspace.sidebar}"
-    });
-
-    cspace.sidebar.numberOfTerms.calculateSize = function (sidebar) {
-        return fluid.get(sidebar, "termsUsed.pager.model.totalRange") || 0;
-    };
-
-    cspace.sidebar.numberOfTerms.finalInit = function (that) {
-         that.container.text(that.globalBundle.resolve("sidebar-numOfTerms", [that.calculateSize()]));
-    };
-
     fluid.defaults("cspace.sidebar.banner", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         events: {
-            primaryRecordCreated: {
+            hide: {
                 event: "{cspace.sidebar}.events.primaryRecordCreated"
             }
         },
         listeners: {
-            primaryRecordCreated: "{cspace.sidebar.banner}.primaryRecordCreatedHandler"
+            hide: "{cspace.sidebar.banner}.hideHandler"
         },
         selectors: {
             banner: ".csc-sidebar-banner",
@@ -320,7 +284,7 @@ cspace = cspace || {};
     });
 
     cspace.sidebar.banner.preInit = function (that) {
-        that.primaryRecordCreatedHandler = function () {
+        that.hideHandler = function () {
             that.locate("list").show();
             that.locate("banner").hide();
         };
@@ -342,7 +306,7 @@ cspace = cspace || {};
             responseParser: "cspace.sidebar.responseParserTermsUsed"
         }
     });
-    fluid.demands("cspace.sidebar.termsUsedDataSource", ["cspace.listView", "cspace.sidebar"], {
+    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar"], {
         funcName: "cspace.URLDataSource",
         args: {
             url: "{cspace.listView}.options.urls.listUrl",
@@ -354,7 +318,7 @@ cspace = cspace || {};
                 sortDir: "%sortDir",
                 sortKey: "%sortKey"
             },
-            targetTypeName: "cspace.sidebar.termsUsedDataSource",
+            targetTypeName: "cspace.listView.dataSource",
             responseParser: "cspace.sidebar.responseParserTermsUsed"
         }
     });
