@@ -42,10 +42,14 @@ CollectionSpace 1.8 default CSS selectors
     width: 90% !important;}
 .pahmaCustomColumnWidth .fixedwidth80 {
     width: 80% !important;}
+.pahmaCustomColumnWidth .fixedwidth50 {
+    width: 50% !important;}
 .pahmaCustomColumnWidth .fixedwidth40 {
     width: 40% !important;} /* USED TO REGULARIZE COLUMNS IN OBJECT PRODUCTION INFO*/
 .pahmaCustomColumnWidth .fixedwidth30 {
     width: 30% !important;} /* USED TO REGULARIZE COLUMNS IN OBJECT ASSOCIATIONS */
+.pahmaCustomColumnWidth .fixedwidth15 {
+    width: 15% !important;}
 .pahmaCustomColumnWidth .fixedwidth12 {
     width: 12% !important;} /* USED ON COPY NUMBER AND EDITION NUMBER FIELDS */
     
@@ -113,6 +117,18 @@ table.checklist td:first-child {
 table.checklist input[type='checkbox'] {
     margin-left: 4px;
     margin-right: 4px;
+}
+
+/* 
+	This is a fix for repeatable delete buttons wrapping to the next line on narrow fields.
+	Apply the narrow class to the containing info-pair.
+*/
+.narrow .cs-repeatable-content,
+.narrow li.cs-repeatable-repeat .cs-termList,
+.narrow ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, 
+.narrow ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
+.narrow ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+	width: 75%;
 }
 
 /* ---------------------------------------*/

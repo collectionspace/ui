@@ -47,4 +47,43 @@ var pahma = {};
 		return objTokens[3]+objTokens[5]+objTokens[7]+objTokens[9]+objTokens[11];
 		}
 	}
+	
+	pahma.concatenateFields = function(a, b) {
+	    var result = "";
+	    
+	    if (a && b) {
+	        result = a + " - " + b;
+	    } else if (a) {
+	        result = a;
+	    } else if (b) {
+	        result = b;
+	    } else if (c) {
+	        result = c;
+	    }
+	    
+	    return result;
+	}
+
+	pahma.computeReferenceNumber = function(c) {
+	    var url = "../../../tenant/pahma/id/movement"
+	    
+        // jQuery.ajax({
+        //     url: url,
+        //     type: "GET",
+        //     dataType: "json",
+        //     success: function(data, status) {
+        //         alert("success");
+        //         console.log(data);
+        //         return;
+        //     },
+        //     error: function(xhr, textStatus, errorThrown) {
+        //         alert("error");
+        //         console.log(errorThrown);
+        //         return;
+        //     }
+        // });
+	    
+	    return "foo";
+	}
+	
 }(jQuery, fluid));

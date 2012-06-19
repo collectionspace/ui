@@ -103,7 +103,7 @@ cspace = cspace || {};
         };
 
         that.refreshValue = function() {
-            that.refresh();
+            cspace.computedField.refresh(that);
         }
     };
 

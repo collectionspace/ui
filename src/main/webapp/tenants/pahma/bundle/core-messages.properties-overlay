@@ -1,14 +1,28 @@
 #Login
-login-current: CollectionSpace 2.4: PAHMA prototype
-login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
-login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
-login-login: admin@pahma.cspace.berkeley.edu
-login-login-pwd: and the password 
-login-rologin-info: To view CollectionSpace PAHMA tenant as a read-only user, enter the login
-login-rologin: reader@pahma.cspace.berkeley.edu
-login-rologin-pwd: and the password
+#login-current: CollectionSpace 2.4: PAHMA prototype
+#login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
+#login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
+login-current: PAHMA-CollectionSpace 2.4
+login-current-info: Welcome to PAHMA's new collection management system, CollectionSpace.  PAHMA-CSpace has been configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
+login-login-info: To sign in, enter your email and passphrase in the Sign In box on the right.
+#login-login: admin@pahma.cspace.berkeley.edu
+#login-login-pwd: and the password 
+#login-rologin-info: To view CollectionSpace PAHMA tenant as a read-only user, enter the login 
+#login-rologin: reader@pahma.cspace.berkeley.edu 
+#login-rologin-pwd: and the password 
+login-login: 
+login-login-pwd: 
+login-login-pwdValue: 
+login-rologin-info: If you do not yet have access to PAHMA-CollectionSpace, have your supervisor send a request on your behalf to
+login-rologin: pahma-cspace@berkeley.edu
+login-rologin-pwd: with your specifics as well as the levels of access that you'll be needing.
+login-rologin-pwdValue: 
 login-forgot: Forgot password?\t
 login-reset-label: Click here to reset your password.
+
+proceduresCategory: Action Records
+vocabulariesCategory: Authority Terms
+cataloging: Catalog Object
 
 # ------------------------------------------------------------
 # Added to support the collectionobjects_naturalhistory domain schema extensions
@@ -25,11 +39,19 @@ taxon-refPageLabel: Page
 taxon-notesLabel: Notes
 
 # Vocabularies
+vocab-material_ca: Materials
+vocab-activity: Activities
 vocab-concept: Ethnographic Cultures
 vocab-ethusecode: Ethnographic File Codes
 vocab-archculture: Archaeological Cultures
+vocab-organization: PAHMA Organization Authority
+vocab-person: PAHMA Person Authority
+vocab-place: PAHMA Place Authority
+vocab-location: PAHMA Storage Locations
+vocab-taxon: PAHMA Taxon Authority
 
 # Cataloging record
+collection-object-commentsLabel: Object comments
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history
 collection-object-taxonLabel: Name
@@ -109,7 +131,7 @@ taxon-preferredTaxonLabel: Taxononomic Term(s)
 # ******************* Cataloging ******************* #
 collection-object-repatriationNagpraComplianceInformationLabel: Repatriation and NAGPRA Compliance Information
 collection-object-nagpraInventoryNameLabel: NAGPRA inventory
-collection-object-nagpraApplicabilityLabel: NAGPRA applicability
+collection-object-nagpraApplicabilityLabel: Museum's NAGPRA category det.
 collection-object-nagpraCulturalDeterminationLabel: NAGPRA cultural determination
 collection-object-repatriationNoteLabel: Repatriation note
 
@@ -142,7 +164,7 @@ collection-object-pahmaCollectionLabel: Collection
 collection-object-pahmaObjectStatusLabel: Object status
 collection-object-inventoryCountLabel: Inventory count
 collection-object-portfolioSeriesLabel: R. Keeling audio series
-collection-object-fieldLocVerbatimLabel: Field collection place (verbatim)
+collection-object-pahmaFieldLocVerbatimLabel: Field collection place (verbatim)
 collection-object-isComponentLabel: Is component?
 collection-object-pahmaFieldCollectionDateGroupLabel: Field collection date
 
@@ -155,7 +177,7 @@ loanin: In Loan
 loanout: Out Loan
 acquisition: Accession
 movement: Inventory/Movement
-/*movement: Storage and Movement*/
+#movement: Storage and Movement
 objectexit: Object Exit
 intake: Object Entry
 group: Group
@@ -164,6 +186,12 @@ claim: NAGPRA Claim
 
 # ---------------------------------- Top Tabs -------------------------- #
 claim-tab: NAGRA Claim
+loanin-tab: In Loan
+loanout-tab: Out Loan
+acquisition-tab: Accession
+movement-tab: Mov/Inv...
+intake-tab: Object Entry
+media-tab: Media
 
 # ---------- What are these ? ----------- #
 person: Person
@@ -271,8 +299,8 @@ contact-emailGroupLabel: Email address
 contact-addressGroupLabel: Postal address
 
 #Acquisition:
-acquisition-ownersLabel: Previous owner
-acquisition-ownerLabel: Previous owner
+acquisition-ownersLabel: Previous owner (donor)
+acquisition-ownerLabel: Previous owner (donor)
 acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
 acquisition-acquisitionSourcesLabel: Acquisition source
@@ -391,10 +419,9 @@ preferredOA-mainBodyNameLabel: Main body name
 preferredOA-additionsToNameLabel: Additions to name
 
 #Movement
-movement-tab: Mov/Inv...
-/*movement-movementControlInformationLabel: Movement Control Information*/
+#movement-movementControlInformationLabel: Movement Control Information*/
 movement-movementReferenceNumberLabel: Reference number
-movement-locationMovementInformationLabel: Inventory/Movement
+movement-locationMovementInformationLabel: Inventory/Movement Information
 movement-currentLocationLabel: Storage location
 movement-currentLocationMISSINGLabel: Storage location
 movement-currentLocationNoteLabel: Storage note
@@ -421,7 +448,33 @@ location-conditionNoteLabel: Condition note
 location-updatedAtLabel: Modified date
 location-editUsername: Record modified by
 location-identificationNumberRequired: Please specify a display name
-location-moveableContainerLabel: Moveable/Container
+location-moveableContainerLabel: Moveable/container
+preferredSLA-termDisplayNameLabel: Display name
+preferredSLA-termStatusLabel: Term status
+preferredSLA-termTypeLabel: Term type
+preferredSLA-termLanguageLabel: Language
+preferredSLA-termPrefForLangLabel: Pref for lang
+preferredSLA-termSourceDetailLabel: Source detail
+preferredSLA-termSourceNoteLabel: Source note
+location-preferredLocationLabel: Storage location term(s)
+
+#concept
+concept-scopeNoteLabel: Scope note
+concept-scopeNoteSourceLabel: Scope note source
+concept-scopeNoteSourceDetailLabel: Scope note source detail
+preferredCA-termDisplayNameLabel: Display name
+preferredCA-termTypeLabel: Term type
+preferredCA-termPrefForLangLabel: Pref for lang
+preferredCA-historicalStatusLabel: Current?
+preferredCA-termSourceDetailLabel: Source detail
+preferredCA-termSourceNoteLabel: Source note
+concept-citationSourceDetailLabel: Citation source detail
+concept-additionalSourceGroupLabel: Additional sources
+concept-additionalSourceDetailLabel: Additional source
+concept-additionalSourceIDLabel: Additional source detail
+concept-additionalSourceLabel: Additional source unique ID
+concept-additionalSourceNoteLabel: Additional source note
+concept-preferredConceptLabel: Concept Term(s)
 
 # Place
 place-placeAuthorityInformationLabel: Place Authority Term Information
@@ -505,7 +558,7 @@ place-preferredPlaceLabel: Place Term(s)
 media-fileInformationHeaderLabel: Media file information
 media-mediaInformationLabel: Media handling information
 media-fileInformationLabel: File information
-media-identificationNumberLabel: Museum number
+media-identificationNumberLabel: Media rendition number (or Museum number)
 media-dimensionSummaryLabel: Dimension summary
 media-dateLabel: Dates
 media-identificationNumberRequired: Please specify an identification number
@@ -536,7 +589,7 @@ intake-currentOwnerLabel: Current owner
 intake-conditionCheckMethodsLabel: Condition check method
 intake-locationDateLabel: Location date
 intake-valuationReferenceNumberLabel: Reference number
-intake-fieldCollectionSourcesLabel: Field collection source (person)
+intake-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
 intake-entryNumberLabel: Object entry number
 intake-conditionCheckDateLabel: Condition check date
 intake-insuranceInformationLabel: Insurance Information
@@ -586,10 +639,11 @@ dimension-valueDateLabel: Value date
 
 
 # ---------------------------------- Object Viewer's Contribution Information (Cataloging) -------------------------- #
-collection-object-ageGroupLabel: FIX-te
-collection-object-ageLabel: Estimate
-collection-object-ageQualifierLabel: Qualifier
-collection-object-ageUnitLabel: Unit
+collection-object-ageEstimateGroupLabel: Age estimate
+collection-object-ageEstimateLabel: Estimate
+collection-object-ageEstimateQualifierLabel: Qualifier
+collection-object-ageEstimateUnitLabel: Unit
+collection-object-ageEstimateNoteLabel: Notes
 collection-object-phaseLabel: Phase or biological age group
 collection-object-numberOfObjectsLabel: Number of pieces
 collection-object-sexLabel: Sex determination
@@ -744,9 +798,9 @@ collection-object-objectNameNoteLabel: Note
 
 
 # ---------------------------------- Object Collection Information (Cataloging) -------------------------- #
-collection-object-fieldCollectionSourcesLabel: Field collection source (person)
-collection-object-fieldCollectionSourceLabel: Field collection source (person)
-collection-object-fieldCollectionPlaceLabel: Field collection place
+collection-object-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
+collection-object-fieldCollectionSourceLabel: Field collection source (person or cultural group)
+collection-object-pahmaFieldCollectionPlaceLabel: Field collection place
 collection-object-fieldCollectionMethodsLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Field collection note
 collection-object-fieldCollectionNumberLabel: Field collection number
@@ -854,8 +908,8 @@ claim-claimGroupInvolvedGroupLabel: Cultural groups involved
 claim-groupInvolvedNameLabel: Name
 claim-groupInvolvedNoteLabel: Note
 
-claim-claimPeriodInvolvedGroupGroupLabel: Time period(s) represented
-claim-claimPeriodInvolvedGroupLabel: Period or date
+claim-claimPeriodInvolvedGroupLabel: Time period(s) represented
+claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroupLabel: Period or date
 claim-claimPeriodInvolvedNoteLabel: Note
 
 claim-claimProcessingInformationLabel: Claim Processing Information
@@ -876,7 +930,7 @@ claim-sentToNationalNagpraGroupLabel: Date sent to National NAGPRA
 claim-sentToNationalNagpraDateLabel: Date
 claim-sentToNationalNagpraNoteLabel: Note
 
-/*claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval*/
+#claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval
 claim-dateOfNationalNagpraApprovalGroupLabel: Publication by National NAGPRA
 claim-dateOfNationalNagpraApprovalDateLabel: Date
 claim-dateOfNationalNagpraApprovalNoteLabel: Note

@@ -216,22 +216,22 @@
 							</div>
 						</div>
 					</div>
-					<div class="info-column2-50 fl-force-right"> <!-- Time periods involved --> <!-- STRUCTURED DATE NEEDED -->
+					<div class="info-column2-50 fl-force-right"> <!-- Time periods involved -->
 						<div class="info-pair">
 							<div class="header">
-								<div class="label csc-claim-claimPeriodInvolvedGroupGroup-label"></div>
+								<div class="label csc-claim-claimPeriodInvolvedGroup-label"></div>
 							</div>
 							<div class="content">
 								<table>
 									<thead>
 										<tr>
-											<td class="csc-claim-claimPeriodInvolvedGroup-label"></td>
+											<td class="csc-claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroup-label"></td>
 											<td class="csc-claim-claimPeriodInvolvedNote-label"></td>
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="csc-claim-claimPeriodInvolvedGroupGroup">
-											<td><input type="text" class="csc-claim-claimPeriodInvolvedGroup" /></td> <!-- MAKE INTO STRUCTURED DATE -->
+										<tr class="csc-claim-claimPeriodInvolvedGroup">
+											<td><input type="text" class="csc-claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroup" /></td>
 											<td><input type="text" class="csc-claim-claimPeriodInvolvedNote" /></td>
 										</tr>
 									</tbody>
@@ -482,62 +482,64 @@
 											<td><textarea class="input-textarea csc-claim-dispositionPossibilitiesDiscussedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-surroundingTribesContacted"><span class="label csc-claim-surroundingTribesContacted-label"/>:</label></td>
+
+											<td class="claimLabel"><label for=".csc-claim-surroundingTribesContacted"><span class="label csc-claim-surroundingTribesContacted-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-surroundingTribesContacted" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-surroundingTribesContactedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-workingTeamNotified"><span class="label csc-claim-workingTeamNotified-label"/>:</label></td>
+
+											<td class="claimLabel"><label for=".csc-claim-workingTeamNotified"><span class="label csc-claim-workingTeamNotified-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-workingTeamNotified" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-workingTeamNotifiedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-siteFileResearchCompleted"><span class="label csc-claim-siteFileResearchCompleted-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-siteFileResearchCompleted"><span class="label csc-claim-siteFileResearchCompleted-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-siteFileResearchCompleted" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-siteFileResearchCompletedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-accessionFileResearchCompleted"><span class="label csc-claim-accessionFileResearchCompleted-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-accessionFileResearchCompleted"><span class="label csc-claim-accessionFileResearchCompleted-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-accessionFileResearchCompleted" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-accessionFileResearchCompletedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-objectsLocatedAndCounted"><span class="label csc-claim-objectsLocatedAndCounted-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-objectsLocatedAndCounted"><span class="label csc-claim-objectsLocatedAndCounted-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-objectsLocatedAndCounted" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-objectsLocatedAndCountedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-objectsConsolidated"><span class="label csc-claim-objectsConsolidated-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-objectsConsolidated"><span class="label csc-claim-objectsConsolidated-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-objectsConsolidated" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-objectsConsolidatedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-objectsPhotographed"><span class="label csc-claim-objectsPhotographed-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-objectsPhotographed"><span class="label csc-claim-objectsPhotographed-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-objectsPhotographed" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-objectsPhotographedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-registrationDocumentsDrafted"><span class="label csc-claim-registrationDocumentsDrafted-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-registrationDocumentsDrafted"><span class="label csc-claim-registrationDocumentsDrafted-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-registrationDocumentsDrafted" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-registrationDocumentsDraftedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-tribeContactedForPackingPreferences"><span class="label csc-claim-tribeContactedForPackingPreferences-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-tribeContactedForPackingPreferences"><span class="label csc-claim-tribeContactedForPackingPreferences-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-tribeContactedForPackingPreferences" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-tribeContactedForPackingPreferencesNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-dateArrangedForTransfer"><span class="label csc-claim-dateArrangedForTransfer-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-dateArrangedForTransfer"><span class="label csc-claim-dateArrangedForTransfer-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-dateArrangedForTransfer" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-dateArrangedForTransferNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-objectsMarkedAsDeaccessioned"><span class="label csc-claim-objectsMarkedAsDeaccessioned-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-objectsMarkedAsDeaccessioned"><span class="label csc-claim-objectsMarkedAsDeaccessioned-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-objectsMarkedAsDeaccessioned" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-objectsMarkedAsDeaccessionedNote"/></td>
 										</tr>
 										<tr>
-											<td class="claimLabel><label for=".csc-claim-documentsArchived"><span class="label csc-claim-documentsArchived-label"/>:</label></td>
+											<td class="claimLabel"><label for=".csc-claim-documentsArchived"><span class="label csc-claim-documentsArchived-label"/>:</label></td>
 											<td class="claimCheck"><input class="csc-claim-documentsArchived" type="checkbox"/></td>
 											<td><textarea class="input-textarea csc-claim-documentsArchivedNote"/></td>
 										</tr>
