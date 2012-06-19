@@ -21,7 +21,6 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         preInitFunction: "cspace.sidebar.preInit",
-        finalInitFunction: "cspace.sidebar.finalInit",
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {
@@ -80,7 +79,15 @@ cspace = cspace || {};
             resolver: "nomerge"
         },
         events: {
-            recordCreated: null
+            primaryRecordCreated: {
+                event: "{globalEvents}.events.primaryRecordCreated"
+            },
+            primaryRecordSaved: {
+                event: "{globalEvents}.events.primaryRecordSaved"
+            }
+        },
+        listeners: {
+            primaryRecordSaved: "{cspace.sidebar}.primaryRecordSavedHandler"
         },
         model: {
             categories: [{
@@ -124,7 +131,7 @@ cspace = cspace || {};
             },
             termsUsed: {
                 type: "cspace.listView",
-                createOnEvent: "recordCreated",
+                createOnEvent: "primaryRecordCreated",
                 container: "{sidebar}.dom.termsUsed",
                 options: {
                     recordType: "authorities",
@@ -214,24 +221,6 @@ cspace = cspace || {};
         }
     });
 
-    cspace.sidebar.finalInit = function (that) {
-        function isPrimaryCreated () {
-            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                that.events.recordCreated.fire();
-                return true;
-            }
-            return false;
-        }
-
-        var created = isPrimaryCreated();
-        if (created) {
-            return;
-        }
-        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
-            isPrimaryCreated();
-        });
-    };
-
     cspace.sidebar.preInit = function (that) {
         /**
          * Checks whether user has "list" permissions to the record types listed by the
@@ -259,6 +248,10 @@ cspace = cspace || {};
                 that.instantiator.clearComponent(that, name);
             }
             fluid.initDependent(that, name, that.instantiator);
+        };
+
+        that.primaryRecordSavedHandler = function () {
+            that.termsUsed.updateModel();
         };
     };
 
@@ -289,12 +282,12 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar.banner", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         events: {
-            recordCreated: {
-                event: "{cspace.sidebar}.events.recordCreated"
+            primaryRecordCreated: {
+                event: "{cspace.sidebar}.events.primaryRecordCreated"
             }
         },
         listeners: {
-            recordCreated: "{cspace.sidebar.banner}.recordCreatedHandler"
+            primaryRecordCreated: "{cspace.sidebar.banner}.primaryRecordCreatedHandler"
         },
         selectors: {
             banner: ".csc-sidebar-banner",
@@ -327,7 +320,7 @@ cspace = cspace || {};
     });
 
     cspace.sidebar.banner.preInit = function (that) {
-        that.recordCreatedHandler = function () {
+        that.primaryRecordCreatedHandler = function () {
             that.locate("list").show();
             that.locate("banner").hide();
         };
@@ -388,31 +381,6 @@ cspace = cspace || {};
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
-
-    /*
-var setupSideBar = function (that) {
-        that.locate("numOfTerms").text(fluid.stringTemplate(that.lookupMessage("sidebar-numOfTerms"), {
-            numOfTerms: that.termsUsed.calculateRecordListSize()
-        }));
-    }; 
-
-    cspace.sidebar = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.sidebar", container, options);
-        restrictRelatedRecordLists(that);
-        fluid.initDependents(that);
-        that.renderer.refreshView();
-        
-        that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
-            that.termsUsed.applier.requestChange("items", model.termsUsed);
-            that.termsUsed.refreshView();
-            setupSideBar(that);
-        });
-        
-        setupSideBar(that);
-        
-        return that;
-    };
-*/
 
     fluid.defaults("cspace.sidebar.media", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],

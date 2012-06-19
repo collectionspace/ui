@@ -143,6 +143,7 @@ cspace = cspace || {};
             },
             vocab: "{vocab}",
             globalModel: "{globalModel}",
+            globalEvents: "{globalEvents}",
             globalNavigator: {
                 type: "cspace.util.globalNavigator",
                 options: {
@@ -175,6 +176,7 @@ cspace = cspace || {};
             onError: null
         },
         listeners: {
+            afterSave: "{cspace.recordEditor}.afterSaveHandler",
             ready: "{cspace.recordEditor}.onReady",
             afterRecordRender: [
                 "{loadingIndicator}.events.hideOn.fire",
@@ -195,6 +197,12 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
 
     cspace.recordEditor.preInit = function (that) {
+        that.afterSaveHandler = function () {
+            if (that.options.globalRef !== "primaryModel") {
+                return;
+            }
+            that.globalEvents.events.primaryRecordSaved.fire();
+        };
         that.onReady = function () {
             that.refreshView();
         };

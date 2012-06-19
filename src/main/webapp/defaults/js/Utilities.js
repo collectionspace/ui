@@ -1100,6 +1100,27 @@ fluid.registerNamespace("cspace.util");
         return that.options.tag === "cspace.login";
     };
 
+    fluid.defaults("cspace.globalEvents", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        components: {
+            globalModel: "{globalModel}"
+        },
+        events: {
+            relationsUpdated: null,
+            primaryRecordCreated: null,
+            primaryRecordSaved: null
+        },
+        finalInitFunction: "cspace.globalEvents.finalInit"
+    });
+
+    cspace.globalEvents.finalInit = function (that) {
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                that.events.primaryRecordCreated.fire();
+            }
+        });
+    };
+
     fluid.defaults("cspace.globalSetup", {
         gradeNames: ["fluid.eventedComponent"],
         events: {
@@ -1129,12 +1150,7 @@ fluid.registerNamespace("cspace.util");
                 type: "cspace.model"
             },
             globalEvents: {
-                type: "cspace.util.eventBinder",
-                options: {
-                    events: {
-                        relationsUpdated: null
-                    }
-                }
+                type: "cspace.globalEvents"
             },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
