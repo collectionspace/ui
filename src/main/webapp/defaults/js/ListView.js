@@ -58,59 +58,7 @@ cspace = cspace || {};
             selected: "cs-selected",
             selecting: "cs-selecting"
         },
-        protoTree: {
-            headers: {
-                decorators: [{
-                    type: "fluid",
-                    func: "cspace.listView.headers",
-                    options: {
-                        model: {
-                            columns: "${columns}"
-                        }
-                    }
-                }, {
-                    type: "attrs",
-                    attributes: {
-                        "rsf:id": "header:"                        
-                    }
-                }]
-            },
-            row: {
-                decorators: [{
-                    "addClass": "{styles}.row"
-                }, {
-                    type: "attrs",
-                    attributes: {
-                        "rsf:id": "row:"                        
-                    }
-                }, {
-                    type: "fluid",
-                    func: "cspace.listView.columns",
-                    options: {
-                        model: {
-                            columns: "${columns}"
-                        }
-                    }
-                }]
-            },
-            show: {
-                messagekey: "listView-show"
-            },
-            perPage: {
-                messagekey: "listView-perPage"
-            },
-            pageSize: {
-                optionlist: "${pageSizeList}",
-                optionnames: "${pageSizeList}",
-                selection: "${pagerModel}.pageSize"
-            },
-            next: {
-                messagekey: "listView-next"
-            },
-            previous: {
-                messagekey: "listView-previous"
-            }
-        },
+        produceTree: "cspace.listView.produceTree",
         components: {
             dataSource: {
                 type: "cspace.listView.dataSource"
@@ -228,7 +176,71 @@ cspace = cspace || {};
         elPath: "items",
         recordType: ""
     });
-    
+
+    cspace.listView.produceTree = function (that) {
+        return {
+            headers: {
+                decorators: [{
+                    type: "fluid",
+                    func: "cspace.listView.headers",
+                    options: {
+                        model: {
+                            columns: "${columns}"
+                        }
+                    }
+                }, {
+                    type: "attrs",
+                    attributes: {
+                        "rsf:id": "header:"
+                    }
+                }]
+            },
+            row: {
+                decorators: [{
+                    "addClass": "{styles}.row"
+                }, {
+                    type: "attrs",
+                    attributes: {
+                        "rsf:id": "row:"
+                    }
+                }, {
+                    type: "fluid",
+                    func: "cspace.listView.columns",
+                    options: {
+                        model: {
+                            columns: "${columns}"
+                        }
+                    }
+                }]
+            },
+            show: {
+                messagekey: "listView-show"
+            },
+            perPage: {
+                messagekey: "listView-perPage"
+            },
+            pageSize: {
+                optionlist: "${pageSizeList}",
+                optionnames: "${pageSizeList}",
+                selection: "${pagerModel}.pageSize"
+            },
+            next: {
+                messagekey: "listView-next"
+            },
+            previous: {
+                messagekey: "listView-previous"
+            }
+        };
+    };
+
+    cspace.listView.produceTreeSidebar = function (that) {
+        var tree = cspace.listView.produceTree(that);
+        tree.show.messagekey = "listView-show-short";
+        tree.next.messagekey = "listView-next-short";
+        tree.previous.messagekey = "listView-previous-short";
+        return tree;
+    };
+
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {

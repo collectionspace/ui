@@ -21,6 +21,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         preInitFunction: "cspace.sidebar.preInit",
+        finalInitFunction: "cspace.sidebar.finalInit",
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {
@@ -77,6 +78,9 @@ cspace = cspace || {};
             recordTypeManager: "nomerge",
             resolver: "nomerge"
         },
+        events: {
+            recordCreated: null
+        },
         model: {
             categories: [{
                 expander: {
@@ -111,6 +115,35 @@ cspace = cspace || {};
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report"
+            },
+            termsUsed: {
+                type: "cspace.listView",
+                createOnEvent: "recordCreated",
+                container: "{sidebar}.dom.termsUsed",
+                options: {
+                    recordType: "authorities",
+                    urls: cspace.componentUrlBuilder({
+                        listUrl: "%tenant/%tname/%primary/authorities/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
+                    }),
+                    produceTree: "cspace.listView.produceTreeSidebar",
+                    elPath: "results",
+                    model: {
+                        pageSizeList: ["5", "10", "20", "50"],
+                        columns: [{
+                            sortable: true,
+                            id: "number",
+                            name: "%recordType-number"
+                        }, {
+                            sortable: true,
+                            id: "recordtype",
+                            name: "recordType"
+                        }, {
+                            sortable: true,
+                            id: "sourceFieldName",
+                            name: "sourceFieldName"
+                        }]
+                    }
+                }
             },
             /*
 termsUsed: {
@@ -170,6 +203,62 @@ termsUsed: {
             }
         }
     });
+
+    fluid.demands("cspace.listView.dataSource", ["cspace.localData", "cspace.listView", "cspace.sidebar"], {
+        funcName: "cspace.sidebar.termsUsedDataSourceTest",
+        args: {
+            targetTypeName: "cspace.sidebar.termsUsedDataSourceTest",
+            termMap: {
+                primary: "{cspace.sidebar}.options.primary",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            responseParser: "cspace.sidebar.responseParserTermsUsed"
+        }
+    });
+    fluid.demands("cspace.sidebar.termsUsedDataSource", ["cspace.listView", "cspace.sidebar"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                primary: "{cspace.sidebar}.options.primary",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.sidebar.termsUsedDataSource",
+            responseParser: "cspace.sidebar.responseParserTermsUsed"
+        }
+    });
+
+    fluid.defaults("cspace.sidebar.termsUsedDataSourceTest", {
+        url: "%test/data/%primary/authorities/%csid.json"
+    });
+    cspace.sidebar.termsUsedDataSourceTest = cspace.URLDataSource;
+    cspace.sidebar.responseParserTermsUsed = function (data) {
+        data = data.termsUsed;
+        data.pagination = fluid.makeArray(data.pagination)[0];
+        return data;
+    };
+
+    cspace.sidebar.finalInit = function (that) {
+        function isPrimaryCreated () {
+            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                that.events.recordCreated.fire();
+                return true;
+            }
+            return false;
+        }
+
+        var created = isPrimaryCreated();
+        if (created) {
+            return;
+        }
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            isPrimaryCreated();
+        });
+    };
 
     cspace.sidebar.preInit = function (that) {
         /**
