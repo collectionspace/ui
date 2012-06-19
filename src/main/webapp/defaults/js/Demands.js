@@ -354,12 +354,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
         fluid.demands("cspace.relationManager.add", "cspace.relationManager", {
             funcName: "cspace.relationManager.add",
-            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid"]
+            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
         
         fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.relatedRecordsTab"], {
             funcName: "cspace.relationManager.addFromTab",
-            args: ["{relationManager}", "{recordEditor}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid"]
+            args: ["{relationManager}", "{recordEditor}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
     
         // Validator

@@ -125,17 +125,18 @@ cspace = cspace || {};
         that.events.onSearchToRelateDialog.fire();
     };
 
-    cspace.relationManager.addFromTab = function (that, recordEditor, globalBundle, messageBar, csid) {
+    cspace.relationManager.addFromTab = function (that, recordEditor, globalBundle, messageBar, csid, event) {
         if (!recordEditor) {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid);
+            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
             return;
         }
         recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid);
+            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
         });
     };
 
-    cspace.relationManager.add = function (that, globalBundle, messageBar, csid) {
+    cspace.relationManager.add = function (that, globalBundle, messageBar, csid, event) {
+        event.stopPropagation();
         if (csid) {
             messageBar.hide();
             that.searchToRelateDialog.open();
