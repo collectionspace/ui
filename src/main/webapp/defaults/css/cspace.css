@@ -1612,7 +1612,14 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     background-color:#9E0022;}
 .cs-sidebar-header {
     padding-right: 5px;}
-
+.cs-sidebar-banner-message {
+    background-color: #C2D7EC;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 110%;
+    padding: 20px;
+}
 /*  Unifying and cleaning up the calendar date picker widget */
 .cs-calendar-button { 
     border:1px solid #C7CFD4;

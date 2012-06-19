@@ -28,6 +28,7 @@ cspace = cspace || {};
             media: ".csc-sidebar-media",
             numOfTerms: ".csc-num-items-terms",
             termsUsed: ".csc-integrated-authorities",
+            termsUsedBanner: ".csc-sidebar-termsUsed",
             categoryContainer: ".csc-related-record",
             relatedCataloging: ".csc-related-cataloging",
             relatedProcedures: ".csc-related-procedures",
@@ -38,7 +39,7 @@ cspace = cspace || {};
         },
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
-        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -145,29 +146,16 @@ cspace = cspace || {};
                     }
                 }
             },
-            /*
-termsUsed: {
-                type: "cspace.recordList",
-                createOnEvent: "afterRender",
+            termsUsedBanner: {
+                type: "cspace.sidebar.banner",
+                container: "{sidebar}.dom.termsUsedBanner",
                 options: {
-                    model: {
-                        items: "{sidebar}.options.recordModel.termsUsed",
-                        messagekeys: {
-                            nothingYet: "sidebar-nothingYet"
-                        }
-                    },
-                    elPaths: {
-                        items: "items"
-                    },
-                    columns: ["number", "recordtype", "sourceFieldName"],
-                    strings: {
-                        number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
-                        sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
-                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
-                    },
-                    showNumberOfItems: false
+                    selectors: {
+                        list: "{sidebar}.dom.termsUsed"
+                    }
                 }
             },
+            /*
             cataloging: {
                 type: "cspace.relatedRecordsList",
                 createOnEvent: "afterRender",
@@ -203,6 +191,58 @@ termsUsed: {
             }
         }
     });
+
+    fluid.defaults("cspace.sidebar.banner", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        events: {
+            recordCreated: {
+                event: "{cspace.sidebar}.events.recordCreated"
+            }
+        },
+        listeners: {
+            recordCreated: "{cspace.sidebar.banner}.recordCreatedHandler"
+        },
+        selectors: {
+            banner: ".csc-sidebar-banner",
+            bannerMessage: ".csc-sidebar-banner-message",
+        },
+        selectorsToIgnore: ["list"],
+        styles: {
+            banner: "cs-sidebar-banner",
+            bannerMessage: "cs-sidebar-banner-message"
+        },
+        strings: {},
+        parentBundle: "{globalBundle}",
+        protoTree: {
+            banner: {
+                decorators: {
+                    addClass: "{styles}.banner"
+                }
+            },
+            bannerMessage: {
+                messagekey: "sidebar-banner-message",
+                args: [],
+                decorators: {
+                    addClass: "{styles}.bannerMessage"
+                }
+            }
+        },
+        renderOnInit: true,
+        preInitFunction: "cspace.sidebar.banner.preInit",
+        postInitFunction: "cspace.sidebar.banner.postInit"
+    });
+
+    cspace.sidebar.banner.preInit = function (that) {
+        that.recordCreatedHandler = function () {
+            that.locate("list").show();
+            that.locate("banner").hide();
+        };
+    };
+
+    cspace.sidebar.banner.postInit = function (that) {
+        that.locate("banner").show();
+        that.locate("list").hide();
+    };
 
     fluid.demands("cspace.listView.dataSource", ["cspace.localData", "cspace.listView", "cspace.sidebar"], {
         funcName: "cspace.sidebar.termsUsedDataSourceTest",
