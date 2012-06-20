@@ -59,15 +59,7 @@ cspace = cspace || {};
                     urls: cspace.componentUrlBuilder({
                         listUrl: "%tenant/%tname/%primary/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
                     }),
-                    elPath: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "fluid.stringTemplate",
-                            args: ["results.%recordType", {
-                                recordType: "{relatedRecordsTab}.options.related"
-                            }]
-                        }
-                    },
+                    elPath: "items",
                     model: {
                         pageSizeList: ["5", "10", "20", "50"],
                         columns: [{
@@ -301,8 +293,7 @@ cspace = cspace || {};
                 primary: "{cspace.relatedRecordsTab}.options.primary",
                 related: "{cspace.relatedRecordsTab}.options.related",
                 csid: "{cspace.relatedRecordsTab}.options.csid"
-            },
-            responseParser: "cspace.listView.responseParserTab"
+            }
         }
     });
     fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.relatedRecordsTab"], {
@@ -318,8 +309,7 @@ cspace = cspace || {};
                 sortDir: "%sortDir",
                 sortKey: "%sortKey"
             },
-            targetTypeName: "cspace.listView.dataSource",
-            responseParser: "cspace.listView.responseParserTab"
+            targetTypeName: "cspace.listView.dataSource"
         }
     });
 
@@ -327,11 +317,6 @@ cspace = cspace || {};
         url: "%test/data/%primary/%related/%csid.json"
     });
     cspace.listView.testDataSourceTab = cspace.URLDataSource;
-    cspace.listView.responseParserTab = function (data) {
-        data = data.relations;
-        data.pagination = fluid.makeArray(data.pagination)[0];
-        return data;
-    };
 
     fluid.defaults("cspace.relatedRecordsTab.record", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],

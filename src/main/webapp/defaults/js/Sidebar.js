@@ -135,7 +135,6 @@ cspace = cspace || {};
                     components: {
                         rrlListView: {
                             options: {
-                                elPath: "results",
                                 model: {
                                     columns: [{
                                         sortable: true,
@@ -163,7 +162,14 @@ cspace = cspace || {};
                     model: {
                         related: "cataloging"
                     },
-                    related: "cataloging"
+                    related: "cataloging",
+                    components: {
+                        rrlListView: {
+                            options: {
+                                elPath: "items"
+                            }
+                        }
+                    }
                 }
             },
             procedures: {
@@ -173,13 +179,6 @@ cspace = cspace || {};
                     related: "procedures",
                     model: {
                         related: "procedures"
-                    },
-                    components: {
-                        rrlListView: {
-                            options: {
-                                elPath: "results"
-                            }
-                        }
                     }
                 }
             },
