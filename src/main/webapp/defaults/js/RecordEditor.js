@@ -1233,11 +1233,12 @@ cspace = cspace || {};
 
     cspace.recordEditor.templateFetcher.finalInit = function (that) {
         var template = that.options.resources.template,
-            recordType = that.options.recordType;
+            recordType = that.options.recordType,
+            templateName = that.options.template ? "-" + that.options.template : "";
         recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
         template.url = fluid.stringTemplate(template.url, {
             recordType: recordType,
-            template: that.options.template
+            template: templateName
         });
         fluid.fetchResources(that.options.resources, function () {
             that.events.afterFetch.fire(that.options.resources.template.resourceText);
