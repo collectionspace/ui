@@ -204,17 +204,14 @@ input[type="button"].add {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 .gotoButton {
-    background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
-    padding-left:28px; 
-    padding-right:8px;
-    margin-top:1px;
-    /*float:right;*/
+    display: inline;
+    background:transparent url('../images/icnGoTo.png') no-repeat 8px 3px;
+    padding: 3px 8px 3px 28px;
     font-weight:bold;
     font-size:13px;
     color:#669922;
     height: 21px;
     line-height: 13px;
-    display: table-cell;
     vertical-align: middle;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
@@ -223,7 +220,8 @@ input[type="button"].add {
 .gotoButton:hover {
     background-color:#DAEDD1;}
 .button-row {
-    display: table-row;
+    display: table-cell;
+    vertical-align: middle;
 }
 .button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
     margin-left:10px; 
@@ -2076,6 +2074,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 /* recordTraverser styling */
+.cs-recordTraverser {
+    display: table-cell;
+}
 .cs-recordTraverser-template {
     display: table;
 }

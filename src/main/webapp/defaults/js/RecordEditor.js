@@ -955,6 +955,7 @@ cspace = cspace || {};
             })
         },
         selectors: {
+            recordTraverser: ".csc-recordTraverser",
             createFromExistingButton: ".csc-createFromExisting",
             deleteButton: ".csc-delete",
             save: ".csc-save",
@@ -962,6 +963,9 @@ cspace = cspace || {};
             deleteRelationButton: ".csc-deleteRelation",
             goTo: ".csc-goto",
             recordLock: ".csc-recordLock"
+        },
+        styles: {
+            recordTraverser: "cs-recordTraverser"
         },
         events: {
             onSave: {
@@ -1066,8 +1070,31 @@ cspace = cspace || {};
         };
     };
 
+    fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
+        options: {
+            events: {
+                onSave: "{recordEditor}.events.onSave"
+            },
+            listeners: {
+                onSave: {
+                    namespace: "recordTraverser",
+                    listener: "{recordTraverser}.save",
+                    priority: "last"
+                }
+            }
+        }
+    });
+
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {
+            recordTraverser: {
+                decorators: [{
+                    addClass: "{styles}.recordTraverser"
+                }, {
+                    type: "fluid",
+                    func: "cspace.recordTraverser"
+                }]
+            },
             expander: [{
                 type: "fluid.renderer.condition",
                 condition: "${showCreateFromExistingButton}",

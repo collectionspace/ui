@@ -300,10 +300,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-        fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
-            container: "{cspace.recordEditor}.dom.recordTraverser"
-        });
-
         fluid.demands("cspace.dimension", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
@@ -880,24 +876,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
-                components: {
-                    recordTraverser: {
-                        type: "cspace.recordTraverser",
-                        createOnEvent: "afterRender",
-                        options: {
-                            events: {
-                                onSave: "{cspace.recordEditor}.events.onSave"
-                            },
-                            listeners: {
-                                onSave: {
-                                    namespace: "recordTraverser",
-                                    listener: "{cspace.recordTraverser}.save",
-                                    priority: "last"
-                                }
-                            }
-                        }
-                    }
-                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 showDeleteButton: {
