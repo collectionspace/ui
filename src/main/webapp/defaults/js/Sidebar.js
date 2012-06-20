@@ -28,6 +28,7 @@ cspace = cspace || {};
             termsUsed: ".csc-integrated-authorities",
             termsUsedBanner: ".csc-sidebar-termsUsed",
             categoryContainer: ".csc-related-record",
+            relatedVocabularies: ".csc-related-vocabularies",
             relatedCataloging: ".csc-related-cataloging",
             relatedProcedures: ".csc-related-procedures",
             termsHeader: ".csc-sidebar-termsHeader",
@@ -37,7 +38,7 @@ cspace = cspace || {};
         },
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
-        selectorsToIgnore: ["report", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
+        selectorsToIgnore: ["report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -75,19 +76,20 @@ cspace = cspace || {};
             recordTypeManager: "nomerge",
             resolver: "nomerge"
         },
-        events: {
-            primaryRecordCreated: {
-                event: "{globalEvents}.events.primaryRecordCreated"
-            },
-            primaryRecordSaved: {
-                event: "{globalEvents}.events.primaryRecordSaved"
-            }
-        },
-        listeners: {
-            primaryRecordSaved: "{cspace.sidebar}.primaryRecordSavedHandler"
-        },
         model: {
             categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "vocabularies",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
                 expander: {
                     type: "fluid.deferredInvokeCall",
                     func: "cspace.util.modelBuilder",
@@ -122,58 +124,35 @@ cspace = cspace || {};
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report"
             },
-            termsUsed: {
-                type: "cspace.listView",
-                createOnEvent: "primaryRecordCreated",
-                container: "{sidebar}.dom.termsUsed",
+            vocabularies: {
+                type: "cspace.relatedRecordsList",
                 options: {
-                    recordType: "authorities",
-                    urls: cspace.componentUrlBuilder({
-                        listUrl: "%tenant/%tname/%primary/authorities/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
-                    }),
-                    produceTree: "cspace.listView.produceTreeSidebar",
-                    elPath: "results",
+                    primary: "{sidebar}.options.primary",
                     model: {
-                        pageSizeList: ["5", "10", "20", "50"],
-                        columns: [{
-                            sortable: true,
-                            id: "number",
-                            name: "%recordType-number"
-                        }, {
-                            sortable: true,
-                            id: "recordtype",
-                            name: "recordType"
-                        }, {
-                            sortable: true,
-                            id: "sourceFieldName",
-                            name: "sourceFieldName"
-                        }]
+                        related: "authorities"
                     },
+                    related: "authorities",
                     components: {
-                        pager: {
+                        rrlListView: {
                             options: {
-                                summary: {
-                                    options: {
-                                        message: {
-                                            expander: {
-                                                type: "fluid.deferredInvokeCall",
-                                                func: "cspace.util.resolveMessage",
-                                                args: ["{globalBundle}", "listView-total-short"]
-                                            }
-                                        }
-                                    }
+                                elPath: "results",
+                                model: {
+                                    columns: [{
+                                        sortable: true,
+                                        id: "number",
+                                        name: "%recordType-number"
+                                    }, {
+                                        sortable: true,
+                                        id: "recordtype",
+                                        name: "recordType"
+                                    }, {
+                                        sortable: true,
+                                        id: "sourceFieldName",
+                                        name: "sourceFieldName"
+                                    }]
                                 }
                             }
                         }
-                    }
-                }
-            },
-            termsUsedBanner: {
-                type: "cspace.sidebar.banner",
-                container: "{sidebar}.dom.termsUsedBanner",
-                options: {
-                    selectors: {
-                        list: "{sidebar}.dom.termsUsed"
                     }
                 }
             },
@@ -237,100 +216,6 @@ cspace = cspace || {};
                 return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
             }
         });
-
-        that.primaryRecordSavedHandler = function () {
-            that.termsUsed.updateModel();
-        };
-    };
-
-    fluid.defaults("cspace.sidebar.banner", {
-        gradeNames: ["autoInit", "fluid.rendererComponent"],
-        events: {
-            hide: {
-                event: "{cspace.sidebar}.events.primaryRecordCreated"
-            }
-        },
-        listeners: {
-            hide: "{cspace.sidebar.banner}.hideHandler"
-        },
-        selectors: {
-            banner: ".csc-sidebar-banner",
-            bannerMessage: ".csc-sidebar-banner-message"
-        },
-        selectorsToIgnore: ["list"],
-        styles: {
-            banner: "cs-sidebar-banner",
-            bannerMessage: "cs-sidebar-banner-message"
-        },
-        strings: {},
-        parentBundle: "{globalBundle}",
-        protoTree: {
-            banner: {
-                decorators: {
-                    addClass: "{styles}.banner"
-                }
-            },
-            bannerMessage: {
-                messagekey: "sidebar-banner-message",
-                args: [],
-                decorators: {
-                    addClass: "{styles}.bannerMessage"
-                }
-            }
-        },
-        renderOnInit: true,
-        preInitFunction: "cspace.sidebar.banner.preInit",
-        postInitFunction: "cspace.sidebar.banner.postInit"
-    });
-
-    cspace.sidebar.banner.preInit = function (that) {
-        that.hideHandler = function () {
-            that.locate("list").show();
-            that.locate("banner").hide();
-        };
-    };
-
-    cspace.sidebar.banner.postInit = function (that) {
-        that.locate("banner").show();
-        that.locate("list").hide();
-    };
-
-    fluid.demands("cspace.listView.dataSource", ["cspace.localData", "cspace.listView", "cspace.sidebar"], {
-        funcName: "cspace.sidebar.termsUsedDataSourceTest",
-        args: {
-            targetTypeName: "cspace.sidebar.termsUsedDataSourceTest",
-            termMap: {
-                primary: "{cspace.sidebar}.options.primary",
-                csid: "{globalModel}.model.primaryModel.csid"
-            },
-            responseParser: "cspace.sidebar.responseParserTermsUsed"
-        }
-    });
-    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar"], {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{cspace.listView}.options.urls.listUrl",
-            termMap: {
-                primary: "{cspace.sidebar}.options.primary",
-                csid: "{globalModel}.model.primaryModel.csid",
-                pageNum: "%pageNum",
-                pageSize: "%pageSize",
-                sortDir: "%sortDir",
-                sortKey: "%sortKey"
-            },
-            targetTypeName: "cspace.listView.dataSource",
-            responseParser: "cspace.sidebar.responseParserTermsUsed"
-        }
-    });
-
-    fluid.defaults("cspace.sidebar.termsUsedDataSourceTest", {
-        url: "%test/data/%primary/authorities/%csid.json"
-    });
-    cspace.sidebar.termsUsedDataSourceTest = cspace.URLDataSource;
-    cspace.sidebar.responseParserTermsUsed = function (data) {
-        data = data.termsUsed;
-        data.pagination = fluid.makeArray(data.pagination)[0];
-        return data;
     };
 
     cspace.sidebar.buildModel = function (options, records) {
@@ -407,7 +292,7 @@ cspace = cspace || {};
             url: "{cspace.sidebar.media}.options.relatedMediaUrl",
             termMap: {
                 primary: "{cspace.sidebar}.options.primary",
-                csid: "{globalModel}.model.primaryModel.csid"
+                csid: "%csid"
             },
             targetTypeName: "cspace.sidebar.media.dataSource"
         }
@@ -445,15 +330,23 @@ cspace = cspace || {};
         };
 
         that.getRelatedMedia = function () {
-            that.relatedMedia.get(null, function (data) {
+            function getMedia (data) {
                 that.applier.requestChange("relatedMedia", fluid.get(data, "relations.media"));
                 that.events.onRender.fire();
-            });
+            }
+
+            var csid = fluid.get(that.globalModel.model, "primaryModel.csid");
+            if (!csid) {
+                getMedia();
+            }
+            that.relatedMedia.get({
+                csid: csid
+            }, getMedia);
         };
         
         that.getMedia = function (format) {
-            var model = that.globalModel.model.primaryModel;
-            if (!model.fields) {
+            var model = fluid.get(that.globalModel.model, "primaryModel");
+            if (!model || !model.fields) {
                 return that.formatMedia("", format);
             }
             var imgThumb;

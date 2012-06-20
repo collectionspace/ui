@@ -1638,6 +1638,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Related records list demands
+        fluid.demands("vocabularies", "cspace.sidebar", {
+            container: "{sidebar}.options.selectors.relatedVocabularies"
+        });
         fluid.demands("procedures", "cspace.sidebar", {
             container: "{sidebar}.options.selectors.relatedProcedures"
         });
