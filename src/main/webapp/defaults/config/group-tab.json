@@ -4,13 +4,6 @@
             "recordType": "group",
             "schema": {
                 "group": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/GroupTemplate.html",
-                    "templateSelector": ".csc-group-template",
-                    "targetSelector": ".csc-relatedRecordsTab-group .csc-relatedRecordsTab-recordEditor"
-                }
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Group Record",
-                            "recordList": "Related Group Records",
-                            "newRecordRow": "New Group Record"
+                            "editRecord": "group-editRecord",
+                            "recordList": "group-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-group-title"
-                                                }
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-group-title"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }
