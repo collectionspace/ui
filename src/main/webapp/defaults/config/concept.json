@@ -14,26 +14,6 @@
                         ],
                         "selectors": {
                             "identificationNumber": ".csc-conceptAuthority-termDisplayName"
-                        },
-                        "components": {
-                            "recordRenderer": {
-                                "options": {
-                                    "selectors": {
-                                        "hierarchy": ".csc-concept-hierarchy"
-                                    },
-                                    "selectorsToIgnore": "hierarchy",
-                                    "components": {
-                                        "hierarchy": {
-                                            "type": "cspace.hierarchy",
-                                            "container": "{recordRenderer}.dom.hierarchy",
-                                            "options": {
-                                                "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                            },
-                                            "createOnEvent": "afterRender"
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 },

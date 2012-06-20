@@ -318,7 +318,9 @@ cspace = cspace || {};
     
     cspace.pageBuilder.preInit = function (that) {
         that.recordTypesReady = function (recordTypes) {
-            if (fluid.get(recordTypes, fluid.model.composeSegments("vocabularies", that.options.recordType))) {
+            if (fluid.find(recordTypes.vocabularies, function (vocab) {
+                if (that.options.recordType === vocab) {return true;}
+            })) {
                 that.authorityTag = fluid.typeTag("cspace.authority");
             }
         };
