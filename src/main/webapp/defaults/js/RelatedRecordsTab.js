@@ -117,6 +117,7 @@ cspace = cspace || {};
             onSelect: null,
             onAddRelation: null,
             onDeleteRelation: null,
+            deleteRelation: null,
             afterAddRelation: null,
             afterDeleteRelation: null,
             onCreateNewRecord: null,
@@ -130,6 +131,7 @@ cspace = cspace || {};
                 "{relatedRecordsTab}.afterAddRelation",
                 "{relatedRecordsTab}.events.relationsUpdated.fire"
             ],
+            deleteRelation: "{loadingIndicator}.events.showOn.fire",
             afterDeleteRelation: [
                 "{relatedRecordsTab}.afterDeleteRelation",
                 "{loadingIndicator}.events.hideOn.fire",
@@ -137,8 +139,7 @@ cspace = cspace || {};
             ],
             onCreateNewRecord: "{relatedRecordsTab}.onCreateNewRecord",
             onDeleteRelation: [
-                "{relatedRecordsTab}.onDeleteRelation",
-                "{loadingIndicator}.events.showOn.fire"
+                "{relatedRecordsTab}.onDeleteRelation"
             ],
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
@@ -208,6 +209,7 @@ cspace = cspace || {};
                 listeners: {
                     onClose: function (userAction) {
                         if (userAction === "act") {
+                            that.events.deleteRelation.fire();
                             that.deleteRelationDataSource.remove({
                                 source: {
                                     csid: that.options.csid,
