@@ -1525,8 +1525,9 @@ cspace = cspace || {};
         };
         that.set = function (model, callback) {
             that.options.csid = model.csid = model.csid || that.options.csid || "";
-            var source = that.sourceFull || that.source;
-            source.set(model, {
+            var source = that.sourceFull || that.source,
+                save = that.options.csid ? "put" : "set";
+            source[save](model, {
                 csid: that.options.csid,
                 vocab: cspace.vocab.resolve({
                     model: null,

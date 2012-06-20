@@ -337,6 +337,10 @@ fluid.registerNamespace("cspace.util");
                 var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
             };
+            that.put = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "PUT");
+                $.ajax(ajaxOpts);
+            };
         }
         if (that.options.removable) {
             that.remove = function (model, directModel, callback) {
