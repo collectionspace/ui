@@ -398,7 +398,7 @@ cspace = cspace || {};
                 return;
             }
             that.applier.requestChange("", validatedModel);
-            that.globalModel.requestChange(that.options.globalRef, validatedModel);
+            that.globalModel.requestChange(fluid.model.composeSegments(that.options.globalRef, "fields"), fluid.get(validatedModel, "fields"));
 
             that.events.afterValidate.fire();
         };
