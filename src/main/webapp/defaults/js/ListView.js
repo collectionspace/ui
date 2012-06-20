@@ -69,6 +69,7 @@ cspace = cspace || {};
                 createOnEvent: "pagerAfterRender",
                 container: "{cspace.listView}.dom.rows",
                 options: {
+                    offset: "{cspace.listView}.model.offset",
                     selectors: {
                         row: "{cspace.listView}.options.selectors.row"
                     },
@@ -301,7 +302,8 @@ cspace = cspace || {};
         that.updateModel();
 
         function validChange (oldModel, newModel) {
-            var valid = fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "sortKey", "totalRange"], function (field) {
+            var valid = oldModel["sortKey"] !== newModel["sortKey"];
+            valid = valid || fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "totalRange"], function (field) {
                 var oldVal = oldModel[field],
                     newVal = newModel[field];
                 if (isNaN(oldVal)) {
@@ -396,7 +398,8 @@ cspace = cspace || {};
         typePath: "recordtype",
         selectors: {
             column: ".csc-listView-column"
-        }
+        },
+        offset: 0
     });
 
     cspace.listView.listNavigator.navigate = function (that, recordEditor, row, rows, evt) {
@@ -412,7 +415,7 @@ cspace = cspace || {};
     cspace.listView.listNavigator.finalInitEdit = function (that) {
         cspace.listView.listNavigator.finalInit(that);
         var rows = that.locate("row");
-        fluid.each(that.options.list, function (record, index) {
+        fluid.each(rows, function (row, index) {
             var link = $("a", that.locate("column", rows.eq(index)));
             link.click(function (evt) {
                 var row = $(this).parents(that.options.selectors.row);
@@ -427,7 +430,8 @@ cspace = cspace || {};
 
     cspace.listView.listNavigator.finalInit = function (that) {
         var rows = that.locate("row");
-        fluid.each(that.options.list, function (record, index) {
+        fluid.each(rows, function (row, index) {
+            var record = that.options.list[that.options.offset + index];
             that.locate("column", rows.eq(index)).wrapInner($("<a/>").attr("href", fluid.stringTemplate(that.options.url, {
                 recordType: record[that.options.typePath].toLowerCase(),
                 csid: record.csid
