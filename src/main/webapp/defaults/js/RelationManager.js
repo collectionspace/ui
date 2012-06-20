@@ -110,7 +110,7 @@ cspace = cspace || {};
                     });
                     return;
                 }
-                that.events.afterAddRelation.fire();
+                that.events.afterAddRelation.fire(that.options.related);
             });
         };
     };

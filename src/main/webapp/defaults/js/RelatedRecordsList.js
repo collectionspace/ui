@@ -107,8 +107,7 @@ cspace = cspace || {};
         events: {
             afterAddRelation: null,
             relationsUpdated: {
-                event: "{globalEvents}.events.relationsUpdated",
-                args: "{relatedRecordsList}.options.related"
+                event: "{globalEvents}.events.relationsUpdated"
             },
             primaryRecordCreated: {
                 event: "{globalEvents}.events.primaryRecordCreated"

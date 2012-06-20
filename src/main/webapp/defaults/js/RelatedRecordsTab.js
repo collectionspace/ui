@@ -122,8 +122,7 @@ cspace = cspace || {};
             afterDeleteRelation: null,
             onCreateNewRecord: null,
             relationsUpdated: {
-                event: "{globalEvents}.events.relationsUpdated",
-                args: "{relatedRecordsTab}.options.related"
+                event: "{globalEvents}.events.relationsUpdated"
             }
         },
         listeners: {
@@ -229,7 +228,7 @@ cspace = cspace || {};
                                     });
                                     return;
                                 }
-                                that.events.afterDeleteRelation.fire();
+                                that.events.afterDeleteRelation.fire(that.options.related);
                             });
                         }
                     }
