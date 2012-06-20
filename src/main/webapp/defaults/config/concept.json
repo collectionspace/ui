@@ -2,29 +2,37 @@
     "pageBuilder": {
         "options": {
             "pageType": "concept",
-            "selectors": {
-                "recordEditor": ".csc-concept-template"
-            },
             "components": {
                 "recordEditor": {
-                    "type":  "cspace.recordEditor",
+                    "type": "cspace.recordEditor",
                     "options": {
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
+                        "fieldsToIgnore": [
+                            "csid",
+                            "fields.csid",
+                            "fields.shortIdentifier"
+                        ],
                         "selectors": {
-                            "hierarchy": ".csc-concept-hierarchy",
                             "identificationNumber": ".csc-conceptAuthority-termDisplayName"
                         },
-                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
-                            "hierarchy": {
-                                "type": "cspace.hierarchy",
+                            "recordRenderer": {
                                 "options": {
-                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                },
-                                "createOnEvent": "afterRender"
+                                    "selectors": {
+                                        "hierarchy": ".csc-concept-hierarchy"
+                                    },
+                                    "selectorsToIgnore": "hierarchy",
+                                    "components": {
+                                        "hierarchy": {
+                                            "type": "cspace.hierarchy",
+                                            "container": "{recordRenderer}.dom.hierarchy",
+                                            "options": {
+                                                "uispec": "{pageBuilder}.options.uispec.hierarchy"
+                                            },
+                                            "createOnEvent": "afterRender"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -32,13 +40,15 @@
                 "titleBar": {
                     "type": "cspace.titleBar",
                     "options": {
-                        "fields": [{
-                            "type": "repeatableMatch",
-                            "queryPath": "fields.conceptTermGroup",
-                            "childPath": "_primary",
-                            "value": true,
-                            "path": "termDisplayName"
-                        }]
+                        "fields": [
+                            {
+                                "type": "repeatableMatch",
+                                "queryPath": "fields.conceptTermGroup",
+                                "childPath": "_primary",
+                                "value": true,
+                                "path": "termDisplayName"
+                            }
+                        ]
                     }
                 },
                 "header": {
@@ -62,26 +72,6 @@
             "recordType": "concept",
             "schema": {
                 "concept": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/ConceptTemplate.html",
-                    "templateSelector": ".csc-concept-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                }
-            },
-            "components": {
-                "dataContext": {
-                    "options": {
-                        "baseUrl": {
-                            "expander": {
-                                "type": "fluid.deferredInvokeCall",
-                                "func": "cspace.util.urlBuilder",
-                                "args": "%tenant/%tname/vocabularies"
-                            }
-                        }
-                    }
-                }
             }
         }
     }

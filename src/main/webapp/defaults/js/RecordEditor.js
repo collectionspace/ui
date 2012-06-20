@@ -1269,13 +1269,7 @@ cspace = cspace || {};
             instantiator: "{instantiator}",
             parentComponent: "{recordRenderer}"
         },
-        renderOnInit: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.recordEditor.renderOnInit",
-                args: "{recordEditor}.options.deferRendering"
-            }
-        },
+        deferRendering: "{recordEditor}.options.deferRendering",
         invokers: {
             navigateToFullImage: "cspace.recordEditor.recordRenderer.navigateToFullImage"
         },
@@ -1292,6 +1286,7 @@ cspace = cspace || {};
             onRenderTreePublic: "{recordRenderer}.onRenderTreeHandler"
         },
         preInitFunction: "cspace.recordEditor.recordRenderer.preInit",
+        finalInitFunction: "cspace.recordEditor.recordRenderer.finalInit",
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {}
@@ -1311,8 +1306,11 @@ cspace = cspace || {};
         };
     };
 
-    cspace.recordEditor.renderOnInit = function (deferRendering) {
-        return !deferRendering;
+    cspace.recordEditor.recordRenderer.finalInit = function (that) {
+        if (that.options.deferRendering) {
+            return;
+        }
+        that.refreshView();
     };
 
     cspace.recordEditor.recordRenderer.provideProduceTree = function (recordType) {

@@ -202,7 +202,7 @@ cspace = cspace || {};
         // Disable tabs unless record is saved.
         var globalModel = that.globalModel,
             tabs = that.locate("tabs"),
-            tabsToDisable = fluid.transform(that.tabsList.model.tabs, function (val, index) {return index;}).slice(1);
+            tabsToDisable = fluid.makeArray(fluid.transform(that.tabsList.model.tabs, function (val, index) {return index;})).slice(1);
         function processTabs (operation) {
             fluid.each(tabsToDisable, function (tab) {
                 tabs.tabs(operation, tab);
