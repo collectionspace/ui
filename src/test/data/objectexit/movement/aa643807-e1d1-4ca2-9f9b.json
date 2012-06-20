@@ -1,37 +1,33 @@
 {
-    "relations": {
-        "results": {
-            "movement": [
-                {
-                    "summary": "",
-                    "summarylist": {
-                        "nametitle": "",
-                        "updatedAt": "2012-03-16T14:22:33Z",
-                        "objectNumber": "MOV.1.3",
-                        "workflow": "locked"
-                    },
-                    "csid": "ba97ae73-1016-4c62-0000",
-                    "number": "MOV.1.3",
-                    "relid": "f93855c5-6372-4f7a-89e2",
-                    "relationshiptype": "affects",
-                    "recordtype": "movement"
-                }
-            ]
-        },
-        "pagination": {
-            "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
-            "separatelists": [
-                [
-                    "ba97ae73-1016-4c62-0000"
-                ]
-            ],
-            "totalItems": "1",
-            "pageSize": "5",
-            "itemsInPage": "1",
-            "recordtypes": [
-                "cataloging"
-            ],
-            "pageNum": "0"
+    "items": [
+        {
+            "summary": "",
+            "summarylist": {
+                "nametitle": "",
+                "updatedAt": "2012-03-16T14:22:33Z",
+                "objectNumber": "MOV.1.3",
+                "workflow": "locked"
+            },
+            "csid": "ba97ae73-1016-4c62-0000",
+            "number": "MOV.1.3",
+            "relid": "f93855c5-6372-4f7a-89e2",
+            "relationshiptype": "affects",
+            "recordtype": "movement"
         }
+    ],
+    "pagination": {
+        "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
+        "separatelists": [
+            [
+                "ba97ae73-1016-4c62-0000"
+            ]
+        ],
+        "totalItems": "1",
+        "pageSize": "5",
+        "itemsInPage": "1",
+        "recordtypes": [
+            "cataloging"
+        ],
+        "pageNum": "0"
     }
 }
