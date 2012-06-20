@@ -984,7 +984,10 @@ cspace = cspace || {};
             }
         },
         listeners: {
-            onSave: "{cspace.recordEditor.controlPanel}.disableSave",
+            onSave: {
+                listener: "{cspace.recordEditor.controlPanel}.disableSave",
+                priority: "first"
+            },
             afterSave: "{cspace.recordEditor.controlPanel}.enableSave",
             onError: "{cspace.recordEditor.controlPanel}.enableSave"
         },
