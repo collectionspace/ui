@@ -45,7 +45,7 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "acquisition",
-             "schema": {
+            "schema": {
                 "acquisition": null
             }
         }

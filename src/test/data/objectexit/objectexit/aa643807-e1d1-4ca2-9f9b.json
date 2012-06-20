@@ -1,50 +1,45 @@
 {
-    "relations": {
-        "results": {
-            "objectexit": [
-                {
-                    "summary": "",
-                    "summarylist": {
-                        "nametitle": "",
-                        "updatedAt": "2012-03-16T14:22:33Z",
-                        "objectNumber": "2012.1.3"
-                    },
-                    "csid": "ba97ae73-1016-4c62-b4ea",
-                    "number": "2012.1.3",
-                    "relid": "f93855c5-6372-4f7a-89e2",
-                    "relationshiptype": "affects",
-                    "recordtype": "objectexit"
-                },
-                {
-                    "summary": "Some summary",
-                    "summarylist": {
-                        "nametitle": "",
-                        "updatedAt": "2012-03-16T14:22:33Z",
-                        "objectNumber": "2012.1.4"
-                    },
-                    "csid": "ba97ae73-1016-4c62-b4eb",
-                    "number": "2012.1.4",
-                    "relid": "f93855c5-6372-4f7a-89e2",
-                    "relationshiptype": "affects",
-                    "recordtype": "objectexit"
-                }
-            ]
+    "items": [
+        {
+            "summary": "",
+            "summarylist": {
+                "nametitle": "",
+                "updatedAt": "2012-03-16T14:22:33Z",
+                "objectNumber": "2012.1.3"
+            },
+            "csid": "ba97ae73-1016-4c62-b4ea",
+            "number": "2012.1.3",
+            "relid": "f93855c5-6372-4f7a-89e2",
+            "relationshiptype": "affects",
+            "recordtype": "objectexit"
         },
-        "pagination": {
-            "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
-            "separatelists": [
-                [
-                    "f93855c5-6372-4f7a-89e2"
-                ]
-            ],
-            "totalItems": "2",
-            "pageSize": "5",
-            "itemsInPage": "2",
-            "recordtypes": [
-                "cataloging"
-            ],
-            "pageNum": "0"
+        {
+            "summary": "Some summary",
+            "summarylist": {
+                "nametitle": "",
+                "updatedAt": "2012-03-16T14:22:33Z",
+                "objectNumber": "2012.1.4"
+            },
+            "csid": "ba97ae73-1016-4c62-b4eb",
+            "number": "2012.1.4",
+            "relid": "f93855c5-6372-4f7a-89e2",
+            "relationshiptype": "affects",
+            "recordtype": "objectexit"
         }
-    },
-    "csid": "aa643807-e1d1-4ca2-9f9b"
+    ],
+    "pagination": {
+        "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
+        "separatelists": [
+            [
+                "f93855c5-6372-4f7a-89e2"
+            ]
+        ],
+        "totalItems": "2",
+        "pageSize": "5",
+        "itemsInPage": "2",
+        "recordtypes": [
+            "cataloging"
+        ],
+        "pageNum": "0"
+    }
 }
