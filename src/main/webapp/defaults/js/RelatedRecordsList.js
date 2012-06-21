@@ -21,7 +21,6 @@ cspace = cspace || {};
     fluid.defaults("cspace.relatedRecordsList", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
-            recordTypes: "{recordTypes}",
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsList}.dom.relationManagerSelector",
@@ -123,6 +122,7 @@ cspace = cspace || {};
                 "{relatedRecordsList}.events.relationsUpdated.fire"
             ]
         },
+        category: [],
         parentBundle: "{globalBundle}",
         protoTree: {
             mainHeader: {
@@ -156,7 +156,9 @@ cspace = cspace || {};
         that.relatedListTag = fluid.typeTag("cspace.relatedRecordsList.related");
         that.relatedListTypeTag = fluid.typeTag(fluid.model.composeSegments("cspace.relatedRecordsList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
-            if (related !== that.options.related) {
+            if (related !== that.options.related && !fluid.find(that.options.category, function (recordType) {
+                if (recordType === related) {return true;}
+            })) {
                 return;
             }
             that.events.relatedRelationsUpdated.fire();

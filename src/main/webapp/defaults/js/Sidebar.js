@@ -165,6 +165,13 @@ cspace = cspace || {};
                     model: {
                         related: "cataloging"
                     },
+                    category: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.permissions.getPermissibleRelatedRecords",
+                            args: ["cataloging", "{permissionsResolver}", "{recordTypeManager}", "list"]
+                        }
+                    },
                     related: "cataloging",
                     components: {
                         rrlListView: {
@@ -180,6 +187,13 @@ cspace = cspace || {};
                 options: {
                     primary: "{sidebar}.options.primary",
                     related: "procedures",
+                    category: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.permissions.getPermissibleRelatedRecords",
+                            args: ["procedures", "{permissionsResolver}", "{recordTypeManager}", "list"]
+                        }
+                    },
                     model: {
                         related: "procedures"
                     }
