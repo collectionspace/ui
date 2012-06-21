@@ -218,6 +218,7 @@ cspace = cspace || {};
                                 }, undefined, undefined, "last");
                                 that.events.onSave.fire();
                             } else if (userAction === "proceed") {
+                                that.changeTracker.revert();
                                 callback();
                             }
                         }

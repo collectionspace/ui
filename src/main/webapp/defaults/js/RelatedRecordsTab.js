@@ -82,7 +82,8 @@ cspace = cspace || {};
                     listeners: {
                         ready: "{loadingIndicator}.events.hideOn.fire",
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
-                        afterUpdate: "{loadingIndicator}.events.hideOn.fire"
+                        afterUpdate: "{loadingIndicator}.events.hideOn.fire",
+                        onError: "{loadingIndicator}.events.hideOn.fire"
                     }
                 }
             },

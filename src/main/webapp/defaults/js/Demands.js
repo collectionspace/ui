@@ -1243,7 +1243,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 listeners: {
                     onModelChange: "{loadingIndicator}.events.showOn.fire",
                     afterUpdate: "{loadingIndicator}.events.hideOn.fire",
-                    ready: "{loadingIndicator}.events.hideOn.fire"
+                    ready: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire"
                 }
             }
         });
