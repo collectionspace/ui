@@ -50,21 +50,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     })
     
     // Validator
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{detailsDC}.options.schema"
         }
     });
     
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor", "cspace.relatedRecordsTab"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor", "cspace.relatedRecordsTab"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{pageBuilder}.schema"
         }
     });
     
-    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test"], {
+    fluid.demands("cspace.modelValidator", ["cspace.recordEditor", "cspace.test"], {
         options: {  
             recordType: "{recordEditor}.options.recordType",
             schema: "{pageBuilder}.schema"
@@ -97,40 +97,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.demands("afterDelete", ["cspace.recordEditor", "cspace.test"], {
         funcName: "cspace.tests.testAfterDelete",
         args: "{recordEditor}"
-    });
-    
-    // Record list demands
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test"], {
-        funcName: "cspace.tests.selectNavigate",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "person", "cspace.relatedRecordsList"], {
-        funcName: "cspace.tests.selectNavigateVocab",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "location", "cspace.relatedRecordsList"], {
-        funcName: "cspace.tests.selectNavigateVocab",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "organization", "cspace.relatedRecordsList"], {
-        funcName: "cspace.tests.selectNavigateVocab",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "place", "cspace.relatedRecordsList"], {
-    	funcName: "cspace.tests.selectNavigateVocab",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "concept", "cspace.relatedRecordsList"], {
-        funcName: "cspace.tests.selectNavigateVocab",
-        args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "cspace.tab"], {
-        funcName: "cspace.recordList.selectFromList",
-        args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
-    });
-    fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "cspace.users"], {
-        funcName: "cspace.recordList.selectFromList",
-        args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
     });
     
     // DataContext demands

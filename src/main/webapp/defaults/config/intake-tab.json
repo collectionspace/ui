@@ -4,13 +4,6 @@
             "recordType": "intake",
             "schema": {
                 "intake": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/IntakeTemplate.html",
-                    "templateSelector": ".csc-intake-template",
-                    "targetSelector": ".csc-relatedRecordsTab-intake .csc-relatedRecordsTab-recordEditor"
-                } 
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Intake Record",
-                            "recordList": "Related Intake Records",
-                            "newRecordRow": "New Intake Record"
+                            "editRecord": "intake-editRecord",
+                            "recordList": "intake-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-intake-entry-number"
-                                                } 
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-intake-entry-number"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

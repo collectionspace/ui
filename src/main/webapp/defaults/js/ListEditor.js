@@ -73,7 +73,6 @@ cspace = cspace || {};
         urls: {},
         components: {
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
             listSource: {
                 type: "cspace.listEditor.listDataSource"
             },
@@ -231,7 +230,7 @@ cspace = cspace || {};
     };
     
     cspace.listEditor.addNewListRow = function (that) {
-        that.globalNavigator.events.onPerformNavigation.fire(function () {
+        that.details.globalNavigator.events.onPerformNavigation.fire(function () {
             that.list.handleNewRow("show");
             that.detailsDC.fetch();
             that.events.afterAddNewListRow.fire();

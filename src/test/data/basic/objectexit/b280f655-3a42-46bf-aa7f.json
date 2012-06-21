@@ -1,0 +1,46 @@
+{
+    "csid": "b280f655-3a42-46bf-aa7f",
+    "fields": {
+        "updatedAt": "2012-06-15T14:15:48Z",
+        "currentOwner": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(someowner1339769733856)'some owner'",
+        "exitDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "true",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "createdBy": "admin@core.collectionspace.org",
+        "createdAt": "2012-06-15T14:15:48Z",
+        "exitMethods": [
+            {
+                "_primary": true,
+                "exitMethod": ""
+            }
+        ],
+        "exitNumber": "EX2012.1",
+        "csid": "b280f655-3a42-46bf-aa7f",
+        "de-urned-currentOwner": "some owner",
+        "depositor": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(somedepositor1339769741271)'some depositor'",
+        "de-urned-depositor": "some depositor",
+        "updatedBy": "admin@core.collectionspace.org"
+    }
+}

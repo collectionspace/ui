@@ -42,8 +42,7 @@
                         "components": {
                             "passwordValidator": {
                                 "type": "cspace.passwordValidator"
-                            },
-                            "globalNavigator": "{globalNavigator}"
+                            }
                         },
                         "invokers": {
                             "validate": {
