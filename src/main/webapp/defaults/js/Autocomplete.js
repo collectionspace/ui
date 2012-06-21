@@ -177,7 +177,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 replaced = expander(replaced);
                 return replaced;
             },
-            put: function (model, directModel, callback) {
+            set: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
                 callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
             }
@@ -544,6 +544,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var setupAutocomplete = function (that) {
+        fluid.each(["vocab", "vocabSingle"], function (url) {
+            var urls = that.options.urls;
+            if (!that.model.vocab) {
+                urls[url] = "";
+                return;
+            }
+            urls[url] = fluid.stringTemplate(urls[url], {
+                vocab: that.model.vocab
+            })
+        });
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
@@ -651,7 +661,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var authority = that.model.authorities[key],
             newTermUrl = that.newTermSource.resolveUrl({termUrl: authority.url});
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
-        that.newTermSource.put({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
+        that.newTermSource.set({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
             if (!response) {
                 that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
                     url: newTermUrl
@@ -786,6 +796,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             closeButton: {
                 type: "cspace.autocomplete.closeButton"
             }
+        },
+        urls: {
+            vocab: "&vocab=%vocab",
+            vocabSingle: "?vocab=%vocab"
         },
         parentBundle: "{globalBundle}",
         elPaths: {

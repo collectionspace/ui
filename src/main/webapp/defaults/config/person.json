@@ -2,30 +2,14 @@
     "pageBuilder": {
         "options": {
             "pageType": "person",
-            "selectors": {
-                "recordEditor": ".csc-person-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "hierarchy": ".csc-hierarchy",
                             "identificationNumber": ".csc-personAuthority-termDisplayName"
                         },
-                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
-                        "components": {
-                            "hierarchy": {
-                                "type": "cspace.hierarchy",
-                                "options": {
-                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                },
-                                "createOnEvent": "afterRender"
-                            }
-                        },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"]
                     }
                 },
@@ -62,26 +46,6 @@
             "recordType": "person",
             "schema": {
                 "person": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/PersonTemplate.html",
-                    "templateSelector": ".csc-person-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
-            },
-            "components": {
-                "dataContext": {
-                    "options": {
-                        "baseUrl": {
-                            "expander": {
-                                "type": "fluid.deferredInvokeCall",
-                                "func": "cspace.util.urlBuilder",
-                                "args": "%tenant/%tname/vocabularies"
-                            }
-                        }
-                    }
-                }
             }
         }
     }

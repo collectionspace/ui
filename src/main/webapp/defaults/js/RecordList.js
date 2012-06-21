@@ -20,8 +20,7 @@ cspace = cspace || {};
 		preInitFunction: "cspace.recordList.preInit",
 		finalInitFunction: "cspace.recordList.finalInit",
         mergePolicy: {
-            "rendererOptions.applier": "applier",
-            globalNavigator: "nomerge"
+            "rendererOptions.applier": "applier"
         },
         rendererOptions: {
             autoBind: true
@@ -98,7 +97,6 @@ cspace = cspace || {};
             disabled: "cs-disabled"
         },
         parentBundle: "{globalBundle}",
-        globalNavigator: "{globalNavigator}",
         produceTree: "cspace.recordList.produceTree",
         resources: {
             template: cspace.resourceSpecExpander({
@@ -412,42 +410,13 @@ cspace = cspace || {};
         var item = model[elPath][segs[segs.length - 1]];
         return !!(item && item.imgThumb);
     };
-    
-    var selectNavigate = function (model, options, url, permissionsResolver, dom, typePath) {
+
+    cspace.recordList.selectFromList = function (model, options, dataContext, globalNavigator) {
         var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
             return;
         }
-        if (!cspace.permissions.resolve({
-            permission: "read",
-            target: record.recordtype,
-            resolver: permissionsResolver
-        })) {
-            dom.locate("row").removeClass(options.styles.selected);
-            return;
-        }
-        options.globalNavigator.events.onPerformNavigation.fire(function () {
-            window.location = fluid.stringTemplate(url, {
-                recordType: record[typePath].toLowerCase(),
-                csid: record.csid
-            });
-        });
-    };
-
-    cspace.recordList.selectNavigateVocab = function (model, options, url, permissionsResolver, dom) {
-        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
-    };
-
-    cspace.recordList.selectNavigate = function (model, options, url, permissionsResolver, dom) {
-        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
-    };
-
-    cspace.recordList.selectFromList = function (model, options, dataContext) {
-        var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
-        if (!record) {
-            return;
-        }
-        options.globalNavigator.events.onPerformNavigation.fire(function () {
+        globalNavigator.events.onPerformNavigation.fire(function () {
             dataContext.fetch(record.csid);
         });
     };

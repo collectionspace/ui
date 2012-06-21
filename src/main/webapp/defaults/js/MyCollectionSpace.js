@@ -111,7 +111,6 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
             togglable: {
                 type: "cspace.util.togglable",
                 createOnEvent: "afterRender"

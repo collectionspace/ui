@@ -4,13 +4,6 @@
             "recordType": "cataloging",
             "schema": {
                 "cataloging": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/CatalogingTemplate.html",
-                    "templateSelector": ".csc-cataloging-template",
-                    "targetSelector": ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor" 
-                } 
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Cataloging Record",
-                            "recordList": "Related Cataloging Records",
-                            "newRecordRow": "New Cataloging Record"
+                            "editRecord": "cataloging-editRecord",
+                            "recordList": "cataloging-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-object-identification-object-number" 
-                                                }
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-object-identification-object-number"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }
