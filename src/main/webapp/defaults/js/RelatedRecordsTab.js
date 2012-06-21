@@ -126,10 +126,8 @@ cspace = cspace || {};
             }
         },
         listeners: {
-            afterAddRelation: [
-                "{relatedRecordsTab}.afterAddRelation",
-                "{relatedRecordsTab}.events.relationsUpdated.fire"
-            ],
+            relationsUpdated: "{relatedRecordsTab}.relationsUpdatedHandler",
+            afterAddRelation: "{relatedRecordsTab}.events.relationsUpdated.fire",
             deleteRelation: "{loadingIndicator}.events.showOn.fire",
             afterDeleteRelation: [
                 "{relatedRecordsTab}.afterDeleteRelation",
@@ -203,6 +201,12 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
+        that.relationsUpdatedHandler = function (related) {
+            if (related !== that.options.related) {
+                return;
+            }
+            that.relatedRecordsListView.updateModel();
+        };
         that.onDeleteRelation = function (target) {
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 listeners: {
@@ -260,9 +264,6 @@ cspace = cspace || {};
                 recordType: that.options.related
             });
         };
-        that.afterAddRelation = function () {
-            that.relatedRecordsListView.updateModel();
-        };
         that.afterDeleteRelation = function () {
             var resolve = that.options.parentBundle.resolve,
                 recordEditor = "relatedRecordsRecordEditor",
@@ -273,7 +274,6 @@ cspace = cspace || {};
             }
             that.instantiator.clearComponent(that, record);
             fluid.initDependent(that, record, instantiator);
-            that.relatedRecordsListView.updateModel();
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
