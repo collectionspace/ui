@@ -555,7 +555,7 @@ cspace = cspace || {};
         },
         preInitFunction: "cspace.recordEditor.remover.preInit",
         urls: cspace.componentUrlBuilder({
-            proceduresURL: "%tenant/%tname/%recordType/procedure/%csid",
+            proceduresURL: "%tenant/%tname/%recordType/procedures/%csid",
             catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid",
             refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid",
             deleteURL: "%webapp/html/findedit.html"

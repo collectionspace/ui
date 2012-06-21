@@ -69,7 +69,8 @@ cspace = cspace || {};
             onCreateNewRecord: null
         },
         listeners: {
-            onAddRelation: "{cspace.relationManager}.onAddRelation"
+            onAddRelation: "{cspace.relationManager}.onAddRelation",
+            afterAddRelation: "{cspace.relationManager}.afterAddRelation"
         },
         model: {
             showAddButton: false
@@ -112,6 +113,9 @@ cspace = cspace || {};
                 }
                 that.events.afterAddRelation.fire(that.options.related);
             });
+        };
+        that.afterAddRelation = function () {
+            that.messageBar.show(that.options.parentBundle.resolve("relationManager-afterAddRelation"), null, false);
         };
     };
 

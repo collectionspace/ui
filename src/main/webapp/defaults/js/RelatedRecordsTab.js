@@ -278,6 +278,7 @@ cspace = cspace || {};
                 that.instantiator.clearComponent(that, record);
                 fluid.initDependent(that, record, instantiator);
             }
+            that.messageBar.show(that.options.parentBundle.resolve("relationManager-afterDeleteRelation"), null, false);
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
