@@ -175,7 +175,10 @@ input[type="button"].deleteButton, input[type="submit"].deleteButton {
     background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
-    color:#669922;}
+    color:#669922;
+    -moz-border-radius:4px; 
+    -webkit-border-radius:4px;
+	border-radius:4px;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover,
 input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus {
     background-color:#DAEDD1;}
@@ -219,20 +222,29 @@ input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
     background-color:#48722D;}
 input[type="button"].add {
     height:16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 .gotoButton {
-    background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
-    padding-left:28px; 
-    padding-right:8px;
-    margin-top:1px;
-    /*float:right;*/
+    display: inline;
+    background:transparent url('../images/icnGoTo.png') no-repeat 8px 3px;
+    padding: 3px 8px 3px 28px;
     font-weight:bold;
-    line-height:1.65;
     font-size:13px;
-    color:#669922;}
+    color:#669922;
+    height: 21px;
+    line-height: 13px;
+    vertical-align: middle;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	border-radius:4px;
+    }
 .gotoButton:hover {
     background-color:#DAEDD1;}
-.button-row input[type="button"], .button-row-right input[type="button"] {
+.button-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+.button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
     margin-left:10px; 
     /*float:right; */
     margin-bottom:0px;}
@@ -488,39 +500,42 @@ li .flc-pager-pageLink {
 
 
 /* secondary navigation menu */
-#secondary-nav {
+.secondary-nav {
     padding-bottom:10px;}
-#secondary-nav-footer {
+.secondary-nav-footer {
     padding-bottom:0;}
-#secondary-nav-menu {
+.cs-relatedRecordsTab-record .secondary-nav-footer {
+    padding-top: 10px;
+}
+.secondary-nav-menu {
     /*padding-top:6px;*/ 
     width:100%;     
     margin-bottom:0px;}
-#secondary-nav.pivot {
+.secondary-nav.pivot {
     padding-bottom:0;}
-#secondary-nav.pivot .menu-record {}
-#secondary-nav.pivot ul.menu-record { 
+.secondary-nav.pivot .menu-record {}
+.secondary-nav.pivot ul.menu-record { 
     white-space:nowrap;}
-#secondary-nav.pivot ul.menu-record li {
+.secondary-nav.pivot ul.menu-record li {
     display:inline; 
     list-style-type:none; 
     margin-right:3px;}
-#secondary-nav.pivot ul.menu-record li a {
+.secondary-nav.pivot ul.menu-record li a {
     width:100%;}
-#secondary-nav-menu .menu-record ul {
+.secondary-nav-menu .menu-record ul {
     margin:0; 
     padding:0;}
-#secondary-nav-menu .menu-record li {
+.secondary-nav-menu .menu-record li {
     /*display:inline;*/}
 #secondary-nav-menu-sub  .button-row,
 #secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
-#secondary-nav-menu-sub .upper-save {
+.secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
     margin-left:15px;}
-#secondary-nav-menu-sub .time-stamp {
+.secondary-nav-menu-sub .time-stamp {
     float:right; 
     /*padding-top:6px; */
     font-size:10px; 
@@ -626,11 +641,16 @@ table tbody.highlight tr:focus td {
 .find-edit .fl-container-left-inner  {margin-right:15px;}
 
 /*.fl-container-left*/  .information-group       {padding:0 0 20px 0;}
+.cs-relatedRecords-tab .information-group {padding: 0;}
 /*.fl-container-left*/  .information-subgroup {padding:10px 0;}
 /*.fl-container-left*/  .information-group .content.main, .information-group .content.main  {
     background-color: #F5F5F5; 
     padding: 12px;
     width:auto; }
+.information-group .cs-relatedRecordsTab-record.content.main {
+    background-color: white;
+    border: 2px solid #F5F5F5;
+}
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
     background-color: #e2e2e2; 
@@ -713,9 +733,9 @@ td.fl-date-group {
     padding:0;
 }
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width: 90%; 
+    width: 90%;
     border-spacing:0; 
-    background-color:#FFFFFF; 
+    background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
     padding:0;
@@ -725,6 +745,7 @@ td.fl-date-group {
 .cs-repeatable-content .info-pair-select table {
     width: 100%;
 }
+
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
@@ -789,9 +810,7 @@ table.cs-admin-table td.checkbox {
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
-.list-table  table tbody tr td a:focus {
-    background-color:#C3D9E9;}
-.list-table  table tbody tr:hover td {
+.list-table  table tbody tr td a:focus, .cs-selecting, .list-table table tbody tr:hover td, .list-table table tbody tr.cs-selecting td {
     background-color:#C3D9E9;}
 .list-table  table tbody tr.cs-search-disabled:hover td,
 .list-table  table tbody tr.cs-search-disabled:focus td {
@@ -944,20 +963,24 @@ table.cs-admin-table td.checkbox {
     background-color:#FFE7E3;}
 .csc-role-list {
     /*padding-top:12px;*/}
-.csc-listEditor-details-none {
+.csc-listEditor-details-none, .cs-relatedRecordsTab-record-banner {
     background-color:#C2D7EC; 
     padding:30px; 
     color:white; 
     font-size:40px; 
     font-weight:bold; 
     line-height:110%;}
-.details-none {
+.details-none, .cs-relatedRecordsTab-record-banner-messageBottom {
     background:transparent url("../images/whiteArrow.png") no-repeat 0 center; 
     padding: 5px 0 0 45px; 
     margin-top:15px; 
     height: 35px; 
     font-size:26px; 
     line-height:110%;}
+.cs-relatedRecordsTab-record-banner-messageBottom {
+    background: transparent;
+    padding: 5px 0 15px 5px;
+}
 .create-new .fl-container-left  .information-group {
     padding:0;}
 .create-new .fl-container-left  .information-group .info-column  {
@@ -986,7 +1009,7 @@ table.cs-admin-table td.checkbox {
 .cataloging .fl-container-pivot {
     padding-top:0px;}
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
-    position:relative; 
+    position:relative;
     margin-bottom:18px;
 	padding-bottom:0px;
     padding-top:0px; 
@@ -994,7 +1017,10 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
-} 
+}
+.info-pair.cs-listView {
+    margin-bottom: 0;
+}
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
@@ -1099,7 +1125,7 @@ table.cs-admin-table td.checkbox {
 .addrow {
     float:right; 
     margin:0; 
-    position:relative; 
+    position:relative;
     right:0px; 
     bottom:-3px;}
 .info-pair-table .info-value table.components, .info-pair-table .info-pair .content table.components {
@@ -1117,7 +1143,7 @@ table.cs-admin-table td.checkbox {
 .input-money-amount {
     width: 120px !important;}
 .content select {
-    width: auto; 
+    width: auto;
 }
 .content table select {
     width: 100%; 
@@ -1294,7 +1320,11 @@ input[disabled]:hover, input[disabled]:hover    {
 
 .ui-tabs .ui-tabs-hide {
     display: none;}
-
+.cs-tabs-tab-link {
+    -moz-border-radius:6px 6px 0 0;
+    -webkit-border-radius:6px 6px 0 0;
+	border-radius:6px 6px 0 0;
+}
 .cs-add-related-records-dialog {
     background-color:#fff;}
 
@@ -1389,6 +1419,22 @@ input[disabled]:hover, input[disabled]:hover    {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
 	border-radius:6px 6px 0 0;}
+.cs-relatedRecords-tab .header:nth-child(2) {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+	border-radius: 0;
+	padding: 15px 0 15px 20px;
+}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2) {
+    background:#6E9FCE url('../images/toggle-less.png') no-repeat 4px 15px;}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2) {
+    background:#6E9FCE url('../images/toggle-more.png') no-repeat 4px 15px;	}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-less.png') no-repeat 4px 15px;
+}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-more.png') no-repeat 4px 15px;
+}
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
@@ -1586,7 +1632,14 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     background-color:#9E0022;}
 .cs-sidebar-header {
     padding-right: 5px;}
-
+.cs-sidebar-banner-message {
+    background-color: #C2D7EC;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 110%;
+    padding: 10px 10px 10px 20px;
+}
 /*  Unifying and cleaning up the calendar date picker widget */
 .cs-calendar-button { 
     border:1px solid #C7CFD4;
@@ -2042,6 +2095,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 /* recordTraverser styling */
+.cs-recordTraverser {
+    display: table-cell;
+}
 .cs-recordTraverser-template {
     display: table;
 }
@@ -2081,6 +2137,21 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 
 .cs-listView-row:hover {
     cursor:pointer;
+}
+tbody.csc-listView-rows tr.cs-listView-row td {
+    padding: 0;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a {
+    cursor:pointer;
+    padding: 5px 2px 4px 4px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    min-height: 14.4px;
+    background: inherit;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
+    background: inherit;
 }
 .list-table .cs-disabled.cs-listView-row:hover > td,
 .list-table .cs-disabled.cs-listView-row:focus > td {
@@ -2222,4 +2293,24 @@ div.label.cs-preferred-label {
     vertical-align: middle;
     display: inline-block;
     padding-top: 6px;
+}
+
+.cs-relatedRecords-tab .cs-add-related-record-button {
+    margin-bottom: 10px;
+}
+input[type="button"].cs-deleteRelationButton {
+    position: absolute;
+    right: 0;
+    background-image: url(../images/icnDelete.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: transparent;
+    line-height: inherit;
+    height: inherit;
+    font: inherit;
+    cursor: inherit;
+    color: inherit;
+    padding: 0 0 0 14px;
+    margin: 0 5px 0 0;
+    border: none;
 }
