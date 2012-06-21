@@ -98,27 +98,38 @@
 				</div>
 				<div class="info-column">
 				    <div class="info-column2-50 fl-force-left">
-				        <div class="info-pair">
-                            <!-- <div class="pahma-note"> -->
-				            <div class="header">
-				                <div class="label">computed summary</div>
-				            </div>
-				            <div class="content">
-                                <input type="text" class="csc-movement-computedSummary"/>
-							</div>
-						</div>
-					</div>
-					<div class="info-column2-50 fl-force-right">
-					    <div class="info-pair">
-					        <div class="header">
-					            <div class="label csc-movement-movementReferenceNumber-label"></div>
-					        <div>
-                            <div class="content csc-movement-movementReferenceNumber-container">
-                                <input type="text" class="input-numeric-long csc-movement-movementReferenceNumber pattern-chooser-input" />
-					        </div>
+				        <div class="info-column2-50 fl-force-left">
+    				        <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-movement-plannedRemovalDate-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-movement-plannedRemovalDate" />
+                                </div>
+                            </div>
                         </div>
-                    </div>                    
-				</div>
+                        <div class="info-column2-50 fl-force-right">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-movement-removalDate-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-movement-removalDate" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-movement-normalLocation-label"></div>
+                            </div>
+                            <div class="content">
+                                <input type="text" class="input-alpha csc-movement-normalLocation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div> <!-- information-group -->
 
@@ -133,18 +144,14 @@
 
         
 	        HIDDEN FIELDS
+	            COMPUTED SUMMARY
+                    <input type="text" class="csc-movement-computedSummary"/>
+                REFERENCE NUMBER
+                    <div class="label csc-movement-movementReferenceNumber-label"></div>
+	                <input type="text" class="input-numeric-long csc-movement-movementReferenceNumber pattern-chooser-input" />
 	            MOVEMENT CONTACT
                     <div class="label csc-movement-movementContact-label"></div>
                     <input type="text" class="input-alpha csc-movement-movementContact" />
-                NORMAL LOCATION
-                    <div class="label csc-movement-normalLocation-label"></div>
-                    <input type="text" class="input-alpha csc-movement-normalLocation" />
-                PLANNED REMOVAL DATE
-                    <div class="label csc-movement-plannedRemovalDate-label"></div>
-                    <input type="text" class="csc-movement-plannedRemovalDate" />
-                REMOVAL DATE
-                    <div class="label csc-movement-removalDate-label"></div>
-                    <input type="text" class="csc-movement-removalDate" />
                 INVENTORY ACTION REQUIRED
                     <div class="label csc-movement-inventoryActionRequired-label"></div>
                     <select class="csc-movement-inventoryActionRequired input-select"><option value="">Options not loaded</option></select>

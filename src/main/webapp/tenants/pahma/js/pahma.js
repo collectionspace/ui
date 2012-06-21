@@ -52,7 +52,7 @@ var pahma = {};
 	    var result = "";
 	    
 	    if (a && b) {
-	        result = a + " - " + b;
+	        result = a + " (" + b + ")";
 	    } else if (a) {
 	        result = a;
 	    } else if (b) {
@@ -64,26 +64,30 @@ var pahma = {};
 	    return result;
 	}
 
-	pahma.computeReferenceNumber = function(c) {
-	    var url = "../../../tenant/pahma/id/movement"
-	    
-        // jQuery.ajax({
-        //     url: url,
-        //     type: "GET",
-        //     dataType: "json",
-        //     success: function(data, status) {
-        //         alert("success");
-        //         console.log(data);
-        //         return;
-        //     },
-        //     error: function(xhr, textStatus, errorThrown) {
-        //         alert("error");
-        //         console.log(errorThrown);
-        //         return;
-        //     }
-        // });
-	    
-	    return "foo";
-	}
+    // pahma.computeReferenceNumber = function(c) {
+    //     var url = "../../../tenant/pahma/id/movement"
+    //     pahma.movementRefNum = "";
+    //     
+    //     var populateRefNum = function (that) {
+    //         return function(data, status) {
+    //             alert("success");
+    //             console.log(that);
+    //             console.log(data.next);
+    //         }
+    //     }
+    //     
+    //         jQuery.ajax({
+    //             url: url,
+    //             type: "GET",
+    //             dataType: "json",
+    //             success: populateRefNum,
+    //             error: function(xhr, textStatus, errorThrown) {
+    //                 alert("error");
+    //                 console.log(errorThrown);
+    //                 pahma.movementRefNum = "errors";
+    //                 return "errors";
+    //             }
+    //         });
+    // }
 	
 }(jQuery, fluid));
