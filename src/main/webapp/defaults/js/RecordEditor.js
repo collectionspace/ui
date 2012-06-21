@@ -885,6 +885,7 @@ cspace = cspace || {};
             }
             var messages = data.messages || fluid.makeArray(data.message);
             fluid.each(messages, function (message) {
+                message = message.message || message;
                 that.messageBar.show(message, Date.today(), data.isError);
             });
         };
