@@ -845,10 +845,17 @@ cspace = cspace || {};
         events: {
             onError: {
                 event: "{cspace.recordEditor}.events.onError"
+            },
+            afterSave: {
+                event: "{cspace.recordEditor}.events.afterSave"
             }
         },
         listeners: {
-            onError: "{cspace.recordEditor.messanger}.onErrorHandler"
+            onError: "{cspace.recordEditor.messanger}.onErrorHandler",
+            afterSave: {
+                listener: "{cspace.recordEditor.messanger}.afterSaveHandler",
+                priority: "last"
+            }
         },
         preInitFunction: "cspace.recordEditor.messanger.preInit",
         components: {
@@ -859,6 +866,10 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.messanger.preInit = function (that) {
+        that.afterSaveHandler = function () {
+            var resolve = that.globalBundle.resolve;
+            that.messageBar.show(resolve("recordEditor-saveSuccessfulMessage", [resolve(that.options.recordType)]), Date.today(), false);
+        };
         that.onErrorHandler = function (data, operation) {
             if (!data) {
                 return;
