@@ -15,7 +15,7 @@
                     "ulan_pa": {
                         "properties": {
                             "nptAllowed": {
-                                "default": true,
+                                "default": false,
                                 "type": "boolean"
                             }
                         },
