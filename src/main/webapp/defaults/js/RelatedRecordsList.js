@@ -81,7 +81,8 @@ cspace = cspace || {};
                     },
                     listeners: {
                         afterUpdate: "{relatedRecordsList}.events.listUpdated.fire",
-                        ready: "{relatedRecordsList}.events.listUpdated.fire"
+                        ready: "{relatedRecordsList}.events.listUpdated.fire",
+                        onError: "{loadingIndicator}.events.hideOn.fire"
                     }
                 }
             },

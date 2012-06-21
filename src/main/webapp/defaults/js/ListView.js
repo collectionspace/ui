@@ -60,6 +60,7 @@ cspace = cspace || {};
         },
         produceTree: "cspace.listView.produceTree",
         components: {
+            messageBar: "{messageBar}",
             dataSource: {
                 type: "cspace.listView.dataSource"
             },
@@ -162,6 +163,7 @@ cspace = cspace || {};
             onModelChange: null,
             afterUpdate: null,
             ready: null,
+            onError: null,
             onSelect: null,
             pagerAfterRender: null
         },
@@ -289,6 +291,20 @@ cspace = cspace || {};
                 sortKey: model.sortKey || cspace.listView.getColumnRange(that.model.columns)
             };
             that.dataSource.get(directModel, function (data) {
+                if (data.isError) {
+                    if (!data.messages) {
+                        var resolve = that.options.parentBundle.resolve;
+                        data.messages = fluid.makeArray(resolve("listView-error", [
+                            resolve("listView-unknownError")
+                        ]));
+                    }
+                    var messages = data.messages || fluid.makeArray(data.message);
+                    fluid.each(messages, function (message) {
+                        that.messageBar.show(message.message, Date.today(), data.isError);
+                    });
+                    that.events.onError.fire();
+                    return;
+                }
                 that.updateList(fluid.get(data, that.options.elPath));
                 that.pager.applier.requestChange("totalRange", parseInt(fluid.get(data, "pagination.totalItems"), 10));
                 that.pager.events.initiatePageChange.fire({pageIndex: model.pageIndex, forceUpdate: true});
