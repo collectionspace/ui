@@ -1084,21 +1084,6 @@ cspace = cspace || {};
         };
     };
 
-    fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
-        options: {
-            events: {
-                onSave: "{recordEditor}.events.onSave"
-            },
-            listeners: {
-                onSave: {
-                    namespace: "recordTraverser",
-                    listener: "{recordTraverser}.save",
-                    priority: "last"
-                }
-            }
-        }
-    });
-
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {
             recordTraverser: {

@@ -250,13 +250,20 @@ cspace = cspace || {};
                 searchReference = elPaths.searchReference,
                 index = get(model, searchReference, elPaths.index);
 
-            if (typeof increment !== "number" || typeof index !== "number") {
+            if (typeof increment !== "number") {
+                increment = 0;
+            }
+
+            if (typeof index !== "number") {
                 index = undefined;
             } else {
-                index = (typeof index !== "number") ? 0 : index +
-                    (typeof increment !== "number") ? 0 : increment;
+                index += increment;
             }
-            
+            console.log("SAVING: ", JSON.stringify({
+                token: get(model, searchReference, elPaths.token),
+                index: index,
+                source: get(model, searchReference, elPaths.source)
+            }));
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
                 index: index,
@@ -276,7 +283,12 @@ cspace = cspace || {};
             searchReferenceStorage = that.searchReferenceStorage;
 
         applier.requestChange(searchReference, searchReferenceStorage.get());
-        if (!fluid.get(model, searchReference)) {
+        var searchRef = fluid.get(model, searchReference);
+        if (!searchRef) {
+            return;
+        }
+        if ($.isEmptyObject(searchRef)) {
+            searchReferenceStorage.set();
             return;
         }
         searchReferenceStorage.set();
@@ -305,7 +317,7 @@ cspace = cspace || {};
                     return increment;
                 }
             }));
-        }, "recordTraverser");
+        }, "recordTraverser", "first");
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");

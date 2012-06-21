@@ -975,9 +975,9 @@ fluid.registerNamespace("cspace.util");
         };
         var listeners = {},
             index = 0;
-        that.addListener = function (listener, namespace) {
+        that.addListener = function (listener, namespace, priority) {
             var namespace = namespace || fluid.model.composeSegments(that.id, index++);
-            that.events.onPerformNavigation.addListener(listener, namespace);
+            that.events.onPerformNavigation.addListener(listener, namespace, undefined, priority);
             listeners[namespace] = null;
         };
         that.clearListeners = function () {
