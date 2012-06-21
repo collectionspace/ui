@@ -61,15 +61,16 @@ cspace = cspace || {};
             }
         },
         events: {
-            removeListeners: null,
-            onSave: null
+            removeAllListeners: null,
+            removeApplierListeners: null,
+            onSubmit: null
         },
         listeners: {
-            removeListeners: {
-                listener: "{computedField}.removeApplierListeners"
+            removeAllListeners: {
+                listener: "{computedField}.removeAllListeners"
             },
-            onSave: {
-                listener: "{computedField}.refreshValue"
+            removeApplierListeners: {
+                listener: "{computedField}.removeApplierListeners"
             }
         },
 
@@ -102,6 +103,11 @@ cspace = cspace || {};
             });
         };
 
+        that.removeAllListeners = function() {
+            that.removeApplierListeners();
+            that.events.onSubmit.removeListener(that.id);
+        };
+        
         that.refreshValue = function() {
             cspace.computedField.refresh(that);
         }
@@ -144,6 +150,8 @@ cspace = cspace || {};
         fluid.each(that.options.args, function(argElPath) {
             that.fullArgElPaths.push(that.resolveElPath(argElPath));
         });
+
+        that.events.onSubmit.addListener(that.refreshValue, that.id);
 
         that.bindModelEvents();
     };
@@ -222,7 +230,11 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-        var root = that.options.root || "fields";
+        var root = that.options.root;
+        
+        if (that.fullElPath.match(/^fields\./) && !root) {
+            root = "fields";
+        }
 
         return cspace.util.composeSegments(root, elPath);
     };

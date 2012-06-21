@@ -185,7 +185,7 @@ media: Media
 claim: NAGPRA Claim
 
 # ---------------------------------- Top Tabs -------------------------- #
-claim-tab: NAGRA Claim
+claim-tab: NAGPRA Claim
 loanin-tab: In Loan
 loanout-tab: Out Loan
 acquisition-tab: Accession
@@ -616,6 +616,10 @@ intake-identificationNumberRequired: Please specify an object entry number
 # ******************* Cataloging ******************* #
 collection-object-objectNumberLabel: Museum number
 collection-object-sortableObjectNumberLabel: Sort as
+collection-object-objectNumberRangeSearchLabel: Museum number (range)
+collection-object-objectNumberRangeSearchStartLabel: From
+collection-object-objectNumberRangeSearchEndLabel: To
+
 cataloging-identificationNumberRequired: Please specify a museum number
 
 # ---------------- Alternate Numbers ---------------- #

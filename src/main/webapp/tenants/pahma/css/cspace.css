@@ -85,11 +85,19 @@ CollectionSpace 1.8 default CSS selectors
     font-style: italic;
     vertical-align: baseline;
     line-height: 12px;
-    width: 70%;
 }
 
 .pahma-note input[disabled]:hover {
     background-color: inherit !important;
+}
+
+.info-pair .content table.pahma-note {
+    background-color: inherit;
+    border: none;
+}
+
+.info-pair .content table.pahma-note tbody td {
+	border: none;
 }
 
 .pahma-fix {
