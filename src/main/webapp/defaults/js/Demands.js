@@ -532,18 +532,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.authoritiesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
-                url: "{autocomplete}.options.vocabUrl",
+                url: "%vocabUrl%vocab",
+                termMap: {
+                    vocabUrl: "{autocomplete}.options.vocabUrl",
+                    vocab: "{autocomplete}.options.urls.vocabSingle"
+                },
                 targetTypeName: "cspace.autocomplete.authoritiesDataSource"
             }
         });
         fluid.demands("cspace.autocomplete.matchesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource", 
             args: {
-                url: "%queryUrl?q=%term",
+                url: "%queryUrl?q=%term%vocab",
                 termMap: {
                     queryUrl: "{autocomplete}.options.queryUrl",
                     term: "encodeURIComponent:%term",
-                    vocab: "vocab"
+                    vocab: "{autocomplete}.options.urls.vocab"
                 },
                 targetTypeName: "cspace.autocomplete.matchesDataSource"
             }
