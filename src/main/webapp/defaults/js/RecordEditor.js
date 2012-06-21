@@ -207,7 +207,8 @@ cspace = cspace || {};
             that.refreshView();
         };
         that.onPerformNavigation = function (callback) {
-            if (that.changeTracker.unsavedChanges) {
+            // TODO: This is a hack, the listener is not cleared in some cases.
+            if (fluid.get(that, "changeTracker.unsavedChanges")) {
                 that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
                     listeners: {
                         onClose: function (userAction) {

@@ -208,6 +208,9 @@ cspace = cspace || {};
             that.relatedRecordsListView.updateModel();
         };
         that.onDeleteRelation = function (target) {
+            if (!target.csid || !target.recordtype) {
+                target = undefined;
+            }
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 listeners: {
                     onClose: function (userAction) {
@@ -232,7 +235,7 @@ cspace = cspace || {};
                                     });
                                     return;
                                 }
-                                that.events.afterDeleteRelation.fire(that.options.related);
+                                that.events.afterDeleteRelation.fire(that.options.related, fluid.get(target, "csid") || that.selectedRecordCsid);
                             });
                         }
                     }
@@ -264,16 +267,17 @@ cspace = cspace || {};
                 recordType: that.options.related
             });
         };
-        that.afterDeleteRelation = function () {
+        that.afterDeleteRelation = function (related, csid) {
             var resolve = that.options.parentBundle.resolve,
                 recordEditor = "relatedRecordsRecordEditor",
+                recordEditorComponent = that[recordEditor],
                 record = "record",
                 instantiator = that.instantiator;
-            if (that[recordEditor]) {
+            if (recordEditorComponent && recordEditorComponent.model.csid === csid) {
                 instantiator.clearComponent(that, recordEditor);
+                that.instantiator.clearComponent(that, record);
+                fluid.initDependent(that, record, instantiator);
             }
-            that.instantiator.clearComponent(that, record);
-            fluid.initDependent(that, record, instantiator);
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
