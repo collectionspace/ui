@@ -4,13 +4,6 @@
             "recordType": "loanin",
             "schema": {
                 "loanin": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/LoaninTemplate.html",
-                    "templateSelector": ".csc-loanin-template",
-                    "targetSelector": ".csc-relatedRecordsTab-loanin .csc-relatedRecordsTab-recordEditor"
-                } 
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Loan In Record",
-                            "recordList": "Related Loan In Records",
-                            "newRecordRow": "New Loan In Record"
+                            "editRecord": "loanin-editRecord",
+                            "recordList": "loanin-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-loanIn-loanInNumber"
-                                                } 
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-loanIn-loanInNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

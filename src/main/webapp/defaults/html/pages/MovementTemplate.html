@@ -1,250 +1,218 @@
-<div class="csc-movement-template csc-listEditor-details">
-	<div class="csc-movement">
-		<div id="secondary-nav">
-			<div id="secondary-nav-menu-sub">
-                <span class="csc-recordTraverser"></span>
-                <div class="csc-recordLock"></div>
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-locationMovementInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+		<div class="info-column">
+		    <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-movement-movementReferenceNumber-label"></div>
+                    </div>
+                    <div class="content csc-movement-movementReferenceNumber-container">
+                        <input type="text" class="input-numeric-long csc-movement-movementReferenceNumber pattern-chooser-input" />
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-movement-normalLocation-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="input-alpha csc-movement-normalLocation" />
+                    </div>
+                </div>
+            </div>
+		</div>
+		<div class="info-column">
+			<div class="info-pair">
+				<div class="header">
+					<div class="label required csc-movement-currentLocationHeader-label"></div>
+				</div>
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td><span class="csc-movement-currentLocation-label"></span><span class="required">*</span></td>
+								<td class="csc-movement-currentLocationFitness-label"></td>
+								<td class="csc-movement-currentLocationNote-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="text" class="csc-movement-currentLocation" /></td>
+								<td><select class="csc-movement-currentLocationFitness input-select"><option value="">Options not loaded</option></select></td>
+								<td><input type="text" class="csc-movement-currentLocationNote" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair-date">
+					<div class="header">
+						<div class="label csc-movement-locationDate-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-movement-locationDate" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> <!-- information-group -->
+
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-movementControlInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+		<div class="info-column">
+			
+			<div class="info-column2-50 fl-force-left">
+			   <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair-select">
+                        <div class="header">
+                            <div class="label csc-movement-reasonForMove-label"></div>
+                        </div>
+                        <div class="content">
+                            <select class="csc-movement-reasonForMove input-select"><option value="">Options not loaded</option></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair-select">
+                        <div class="header">
+                            <div class="label csc-movement-movementMethods-label"></div>
+                        </div>
+                        <div class="content repeatable">
+                            <select class="csc-movement-movementMethods input-select"><option value="">Options not loaded</option></select>
+                        </div>
+                    </div>
+                </div>
+			</div>
+			
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-movement-movementContact-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="input-alpha csc-movement-movementContact" />
+					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div class="csc-templateEditor"></div>
-		
-		<div class="fl-container-flex fl-fix information-group">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-locationMovementInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
-				    <div class="info-column2-50 fl-force-left">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="label csc-movement-movementReferenceNumber-label"></div>
-                            </div>
-                            <div class="content csc-movement-movementReferenceNumber-container">
-                                <input type="text" class="input-numeric-long csc-movement-movementReferenceNumber pattern-chooser-input" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-column2-50 fl-force-right">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="label csc-movement-normalLocation-label"></div>
-                            </div>
-                            <div class="content">
-                                <input type="text" class="input-alpha csc-movement-normalLocation" />
-                            </div>
-                        </div>
-                    </div>
-				</div>
-				<div class="info-column">
-					<div class="info-pair">
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-column2-50 fl-force-left">
+					<div class="info-pair-date">
 						<div class="header">
-							<div class="label required csc-movement-currentLocationHeader-label"></div>
+							<div class="label csc-movement-plannedRemovalDate-label"></div>
 						</div>
 						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td><span class="csc-movement-currentLocation-label"></span><span class="required">*</span></td>
-										<td class="csc-movement-currentLocationFitness-label"></td>
-										<td class="csc-movement-currentLocationNote-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><input type="text" class="csc-movement-currentLocation" /></td>
-										<td><select class="csc-movement-currentLocationFitness input-select"><option value="">Options not loaded</option></select></td>
-										<td><input type="text" class="csc-movement-currentLocationNote" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair-date">
-							<div class="header">
-								<div class="label csc-movement-locationDate-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-movement-locationDate" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> <!-- information-group -->
-		
-		<div class="fl-container-flex fl-fix information-group">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-movementControlInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
-					
-					<div class="info-column2-50 fl-force-left">
-					   <div class="info-column2-50 fl-force-left">
-	                        <div class="info-pair-select">
-	                            <div class="header">
-	                                <div class="label csc-movement-reasonForMove-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-movement-reasonForMove input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="info-column2-50 fl-force-right">
-	                        <div class="info-pair-select">
-	                            <div class="header">
-	                                <div class="label csc-movement-movementMethods-label"></div>
-	                            </div>
-	                            <div class="content repeatable">
-	                                <select class="csc-movement-movementMethods input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-	                    </div>
-					</div>
-					
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-movement-movementContact-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="input-alpha csc-movement-movementContact" />
-							</div>
+							<input type="text" class="csc-movement-plannedRemovalDate" />
 						</div>
 					</div>
 				</div>
 				
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-column2-50 fl-force-left">
-							<div class="info-pair-date">
-								<div class="header">
-									<div class="label csc-movement-plannedRemovalDate-label"></div>
-								</div>
-								<div class="content">
-									<input type="text" class="csc-movement-plannedRemovalDate" />
-								</div>
-							</div>
+				<div class="info-column2-50 fl-force-right">
+					<div class="info-pair-date">
+						<div class="header">
+							<div class="label csc-movement-removalDate-label"></div>
 						</div>
-						
-						<div class="info-column2-50 fl-force-right">
-							<div class="info-pair-date">
-								<div class="header">
-									<div class="label csc-movement-removalDate-label"></div>
-								</div>
-								<div class="content">
-									<input type="text" class="csc-movement-removalDate" />
-								</div>
-							</div>
+						<div class="content">
+							<input type="text" class="csc-movement-removalDate" />
 						</div>
 					</div>
-					<div class="info-column2-50 fl-force-right">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="label csc-movement-movementNote-label"></div>
-                            </div>
-                            <div class="content">
-                                <textarea rows="4" cols="30" class="input-textarea csc-movement-movementNote"></textarea>
-                            </div>
-                        </div>
-                    </div>
 				</div>
 			</div>
-		</div> <!-- information-group -->
-		
-		<!-- Inventory section -->
-		<div class="fl-container-flex fl-fix information-group">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-inventory-label"></div>
-            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                <div class="info-column">
-                    <div class="info-column2-50 fl-force-left">
-                        <div class="info-column2-50 fl-force-left">
-                            <div class="info-pair-select">
-	                            <div class="header">
-	                                <div class="label csc-movement-inventoryActionRequired-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-movement-inventoryActionRequired input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-                        </div>
-                        <div class="info-column2-50 fl-force-right">
-                            <div class="info-pair-select">
-	                            <div class="header">
-	                                <div class="label csc-movement-frequencyForInventory-label"></div>
-	                            </div>
-	                            <div class="content">
-	                                <select class="csc-movement-frequencyForInventory input-select"><option value="">Options not loaded</option></select>
-	                            </div>
-	                        </div>
-                        </div>
+			<div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-movement-movementNote-label"></div>
                     </div>
-                    <div class="info-column2-50 fl-force-right">
-                        <div class="info-column2-50 fl-force-left">
-                            <div class="info-pair-date">
-                                <div class="header">
-                                    <div class="label csc-movement-inventoryDate-label"></div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-movement-inventoryDate" />
-                                </div>
-                            </div>
+                    <div class="content">
+                        <textarea rows="4" cols="30" class="input-textarea csc-movement-movementNote"></textarea>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div> <!-- information-group -->
+
+<!-- Inventory section -->
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-inventory-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair-select">
+                        <div class="header">
+                            <div class="label csc-movement-inventoryActionRequired-label"></div>
                         </div>
-                        <div class="info-column2-50 fl-force-right">
-                            <div class="info-pair-date">
-                                <div class="header">
-                                    <div class="label csc-movement-nextInventoryDate-label"></div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-movement-nextInventoryDate" />
-                                </div>
-                            </div>
+                        <div class="content">
+                            <select class="csc-movement-inventoryActionRequired input-select"><option value="">Options not loaded</option></select>
                         </div>
                     </div>
                 </div>
-                <div class="info-column">
-                    <div class="info-column2-50 fl-force-left">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="label csc-movement-inventoryContact-label"></div>
-                            </div>
-                            <div class="content">
-                                <input type="text" class="input-alpha csc-movement-inventoryContact" />
-                            </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair-select">
+                        <div class="header">
+                            <div class="label csc-movement-frequencyForInventory-label"></div>
+                        </div>
+                        <div class="content">
+                            <select class="csc-movement-frequencyForInventory input-select"><option value="">Options not loaded</option></select>
                         </div>
                     </div>
-                    <div class="info-column2-50 fl-force-right">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="label csc-movement-inventoryNote-label"></div>
-                            </div>
-                            <div class="content">
-                                <textarea rows="4" cols="30" class="input-textarea csc-movement-inventoryNote"></textarea>
-                            </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair-date">
+                        <div class="header">
+                            <div class="label csc-movement-inventoryDate-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-movement-inventoryDate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair-date">
+                        <div class="header">
+                            <div class="label csc-movement-nextInventoryDate-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-movement-nextInventoryDate" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Inventory section -->
-
-		<div id="secondary-nav-footer">
-			<div id="secondary-nav-menu-sub">
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-movement-inventoryContact-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="input-alpha csc-movement-inventoryContact" />
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-movement-inventoryNote-label"></div>
+                    </div>
+                    <div class="content">
+                        <textarea rows="4" cols="30" class="input-textarea csc-movement-inventoryNote"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Inventory section -->
