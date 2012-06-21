@@ -245,25 +245,19 @@ cspace = cspace || {};
 
     cspace.recordTraverser.preInitFunction = function (that) {
         that.save = function (increment) {
+            if (!increment) {
+                return;
+            }
             var model = that.model,
                 elPaths = that.options.elPaths,
                 searchReference = elPaths.searchReference,
                 index = get(model, searchReference, elPaths.index);
-
-            if (typeof increment !== "number") {
-                increment = 0;
-            }
 
             if (typeof index !== "number") {
                 index = undefined;
             } else {
                 index += increment;
             }
-            console.log("SAVING: ", JSON.stringify({
-                token: get(model, searchReference, elPaths.token),
-                index: index,
-                source: get(model, searchReference, elPaths.source)
-            }));
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
                 index: index,
