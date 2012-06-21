@@ -289,7 +289,7 @@ cspace = cspace || {};
             that.refreshView();
         });
 
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback, evt) {
+        that.globalNavigator.addListener(function (callback, evt) {
             if (!evt) {
                 return;
             }

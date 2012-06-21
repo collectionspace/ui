@@ -1,0 +1,24 @@
+{
+    "csid": "aa643807-e1d1-4ca2-9f9b",
+    "fields": {
+        "updatedAt": "2012-03-16T14:21:40Z",
+        "currentOwner": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(ClaraYoung1331894758909)'Clara Young'",
+        "createdBy": "admin@core.collectionspace.org",
+        "createdAt": "2012-03-16T14:21:40Z",
+        "exitDateGroup": {
+            "dateDisplayDate": "2012-02-28T00:00:00Z"
+        },
+        "exitMethods": [
+            {
+                "_primary": true,
+                "exitMethod": "courier"
+            }
+        ],
+        "exitNumber": "EX2012.1",
+        "csid": "aa643807-e1d1-4ca2-9f9b",
+        "de-urned-currentOwner": "Clara Young",
+        "depositor": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(NationalMaskPuppetCorp1331894762396)'National Mask & Puppet Corp.'",
+        "de-urned-depositor": "National Mask & Puppet Corp.",
+        "updatedBy": "admin@core.collectionspace.org"
+    }
+}

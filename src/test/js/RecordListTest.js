@@ -86,10 +86,6 @@ var recordListTester = function ($) {
     testEmptyModel("Initialization with undefined array model", {items: undefined});
     testEmptyModel("Initialization with undefined model", undefined);
     
-    cspace.tests.selectNavigate = function (model, options, url) {
-        jqUnit.assertEquals("Url should be correct", "this is test url", url);
-    };
-    
     recordListTest.test("Selecting", function () {
         expect(2);
         var model = {

@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "group",
-            "selectors": {
-                "recordEditor": ".csc-group-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-group-title"
                         },
-                        "applier": "{pageBuilder}.applier",
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model"
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor"
                     }
                 },
                 "titleBar": {
@@ -47,13 +42,6 @@
             "recordType": "group",
             "schema": {
                 "group": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/GroupTemplate.html",
-                    "templateSelector": ".csc-group-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }
