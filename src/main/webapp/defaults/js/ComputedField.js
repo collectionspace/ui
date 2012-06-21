@@ -61,15 +61,16 @@ cspace = cspace || {};
             }
         },
         events: {
-            removeListeners: null,
+            removeAllListeners: null,
+            removeApplierListeners: null,
             onSubmit: null
         },
         listeners: {
-            removeListeners: {
-                listener: "{computedField}.removeApplierListeners"
+            removeAllListeners: {
+                listener: "{computedField}.removeAllListeners"
             },
-            onSubmit: {
-                listener: "{computedField}.refreshValue"
+            removeApplierListeners: {
+                listener: "{computedField}.removeApplierListeners"
             }
         },
 
@@ -101,6 +102,15 @@ cspace = cspace || {};
                 that.applier.modelChanged.removeListener(namespace);
             });
         };
+
+        that.removeAllListeners = function() {
+            that.removeApplierListeners();
+            that.events.onSubmit.removeListener(that.id);
+        };
+        
+        that.refreshValue = function() {
+            cspace.computedField.refresh(that);
+        }
     };
 
     cspace.computedField.postInit = function (that) {
@@ -135,6 +145,14 @@ cspace = cspace || {};
         }
         
         that.fullElPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
+        that.fullArgElPaths = [];
+
+        fluid.each(that.options.args, function(argElPath) {
+            that.fullArgElPaths.push(that.resolveElPath(argElPath));
+        });
+
+        that.events.onSubmit.addListener(that.refreshValue, that.id);
+
         that.bindModelEvents();
     };
 
