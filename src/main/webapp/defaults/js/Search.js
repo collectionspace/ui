@@ -9,11 +9,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid, window*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("Search.js loaded");
     
     var displayLookingMessage = function (domBinder, keywords, strings) {
@@ -37,7 +39,7 @@ cspace = cspace || {};
             if (vocab && vocab !== "all") {
                 vocabParam = "&" + $.param({
                     vocab: vocab
-                })
+                });
             }
             if (key === "number") {
                 comp = {
@@ -218,7 +220,10 @@ cspace = cspace || {};
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
         listeners: {
-            onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler"
+            onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler",
+            afterSearch: "{loadingIndicator}.events.hideOn.fire",
+            onError: "{loadingIndicator}.events.hideOn.fire",
+            onSearch: "{loadingIndicator}.events.showOn.fire"
         },
         invokers: {
             buildUrl: "cspace.search.searchView.buildUrl",
@@ -317,7 +322,7 @@ cspace = cspace || {};
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
             defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
-            localUrl: "%tenant/%tname/data/%recordType/search.json",
+            localUrl: "%tenant/%tname/data/%recordType/search.json"
         }),
        preInitFunction: "cspace.search.searchView.preInit"
     });
@@ -381,7 +386,7 @@ cspace = cspace || {};
             search.options.defaultFieldsModel = fields;
         }
         fluid.each(currentSearch, function (value, path) {
-            search.applier.requestChange(path, value)
+            search.applier.requestChange(path, value);
         });
         search.refreshView();
         search.toggleControls(true);
@@ -412,9 +417,10 @@ cspace = cspace || {};
         that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
             
         displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
-        if (that.searchResultsResolver) {
-            that.searchResultsResolver.resolve(that.model);
-        }
+        // DISABLING FOR NOW , THERE S NO WAY TO DETERMINE THIS WITH CURRENT MODEL.
+        //if (that.searchResultsResolver) {
+        //    that.searchResultsResolver.resolve(that.model);
+        //}
         that.locate("resultsContainer").show();
         that.events.afterSearch.fire(that.model.searchModel);
     };

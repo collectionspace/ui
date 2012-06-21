@@ -2,15 +2,8 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "acquisition",
-             "schema": {
+            "schema": {
                 "acquisition": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/AcquisitionTemplate.html",
-                    "templateSelector": ".csc-acquisition-template",
-                    "targetSelector": ".csc-relatedRecordsTab-acquisition .csc-relatedRecordsTab-recordEditor"
-                }
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Acquisition Record",
-                            "recordList": "Related Acquisition Records",
-                            "newRecordRow": "New Acquisition Record"
+                            "editRecord": "acquisition-editRecord",
+                            "recordList": "acquisition-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
-                                                }
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

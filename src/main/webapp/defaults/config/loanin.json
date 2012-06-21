@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "loanin",
-            "selectors": {
-                "recordEditor": ".csc-loanin-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-loanIn-loanInNumber"
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.loanInNumber"]
                     }
                 },
@@ -52,13 +47,6 @@
             "recordType": "loanin",
             "schema": {
                 "loanin": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/LoaninTemplate.html",
-                    "templateSelector": ".csc-loanin-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }

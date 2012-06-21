@@ -191,6 +191,10 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
+    cspace.util.resolveMessage = function (resolver, key, args) {
+        return resolver.resolve(key, args);
+    };
+
     cspace.util.lookupMessage = function (messageBase, key) {
         return messageBase[key] || fluid.stringTemplate("[String for key: %key is missing. Please, add it to messageBundle.]", {key: key});
     };
@@ -293,7 +297,7 @@ fluid.registerNamespace("cspace.util");
             return replaced;
         };
 
-        that.makeAjaxOpts = function (model, directModel, callback, type, errorCallback) {
+        that.makeAjaxOpts = function (model, directModel, callback, type) {
             var togo = {
                 type: type,
                 url: that.resolveUrl(directModel),
@@ -311,9 +315,9 @@ fluid.registerNamespace("cspace.util");
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.log("Data fetch error for url " + togo.url + " - textStatus: " + textStatus);
                     fluid.log("ErrorThrown: " + errorThrown);
-                    if (errorCallback) {
-                        errorCallback(xhr, textStatus, errorThrown);
-                    }
+                    callback({
+                        isError: true
+                    });
                 }
             };
             if (model) {
@@ -322,16 +326,28 @@ fluid.registerNamespace("cspace.util");
             return togo;
         };
 
-        that.get = function (directModel, callback, errorCallback) {
-            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET", errorCallback);
+        that.get = function (directModel, callback) {
+            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
             wrapper(function () {
                 $.ajax(ajaxOpts);
             });
         };
         if (that.options.writeable) {
-            that.put = function (model, directModel, callback, errorCallback) {
-                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST", errorCallback);
+            that.set = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
+            };
+            that.put = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "PUT");
+                $.ajax(ajaxOpts);
+            };
+        }
+        if (that.options.removable) {
+            that.remove = function (model, directModel, callback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "DELETE");
+                wrapper(function () {
+                    $.ajax(ajaxOpts);
+                });
             };
         }
         return that;
@@ -929,14 +945,53 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
-    cspace.util.globalNavigator = function (options) {
-        var that = fluid.initView("cspace.util.globalNavigator", "body", options);
-        fluid.initDependents(that);
-        that.bindEvents();
-        return that;
+    fluid.defaults("cspace.util.globalNavigator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        selectors: {
+            include: "a",
+            exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+            forms: ".csc-header-logout-form"
+        },
+        events: {
+            onPerformNavigation: {
+                event: "{navigationEventHolder}.events.onPerformNavigation"
+            }
+        },
+        listeners: {
+            onPerformNavigation: {
+                listener: "{cspace.util.globalNavigator}.onPerformNavigation",
+                priority: "last",
+                namespace: "onPerformNavigationFinal"
+            }
+        },
+        preInitFunction: "cspace.util.globalNavigator.preInit",
+        postInitFunction: "cspace.util.globalNavigator.postInit",
+        clearFunction: "cspace.util.globalNavigator.clear"
+    });
+
+    cspace.util.globalNavigator.preInit = function (that) {
+        that.onPerformNavigation = function (callback) {
+            callback();
+        };
+        var listeners = {},
+            index = 0;
+        that.addListener = function (listener, namespace) {
+            var namespace = namespace || fluid.model.composeSegments(that.id, index++);
+            that.events.onPerformNavigation.addListener(listener, namespace);
+            listeners[namespace] = null;
+        };
+        that.clearListeners = function () {
+            fluid.each(listeners, function (val, namespace) {
+                that.events.onPerformNavigation.removeListener(namespace);
+            });
+        };
     };
 
-    cspace.util.globalNavigator.bindEvents = function (that) {
+    cspace.util.globalNavigator.clear = function (that) {
+        that.clearListeners();
+    };
+
+    cspace.util.globalNavigator.postInit = function (that) {
         that.container.delegate(that.options.selectors.include, "click", function (evt) {
             // IF shift or ctrl is pressed - not a navigation away so no need to fire onPerformNavigation
             if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
@@ -960,24 +1015,10 @@ fluid.registerNamespace("cspace.util");
             });
             return false;
         });
-        that.events.onPerformNavigation.addListener(function (callback) {
-            callback();
-        }, "onPerformNavigationFinal", undefined, "last");
     };
 
-    fluid.defaults("cspace.util.globalNavigator", {
-        gradeNames: ["fluid.viewComponent"],
-        selectors: {
-            include: "a",
-            exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
-            forms: ".csc-header-logout-form"
-        },
-        invokers: {
-            bindEvents: {
-                funcName: "cspace.util.globalNavigator.bindEvents",
-                args: ["{globalNavigator}"]
-            }
-        },
+    fluid.defaults("cspace.navigationEventHolder", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
             onPerformNavigation: "preventable"
         }
@@ -1063,6 +1104,27 @@ fluid.registerNamespace("cspace.util");
         return that.options.tag === "cspace.login";
     };
 
+    fluid.defaults("cspace.globalEvents", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        components: {
+            globalModel: "{globalModel}"
+        },
+        events: {
+            relationsUpdated: null,
+            primaryRecordCreated: null,
+            primaryRecordSaved: null
+        },
+        finalInitFunction: "cspace.globalEvents.finalInit"
+    });
+
+    cspace.globalEvents.finalInit = function (that) {
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                that.events.primaryRecordCreated.fire();
+            }
+        });
+    };
+
     fluid.defaults("cspace.globalSetup", {
         gradeNames: ["fluid.eventedComponent"],
         events: {
@@ -1085,8 +1147,14 @@ fluid.registerNamespace("cspace.util");
                 createOnEvent: "afterFetch",
                 priority: "first"
             },
-            globalNavigator: {
-                type: "cspace.util.globalNavigator"
+            navigationEventHolder: {
+                type: "cspace.navigationEventHolder"
+            },
+            globalModel: {
+                type: "cspace.model"
+            },
+            globalEvents: {
+                type: "cspace.globalEvents"
             },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
@@ -1212,14 +1280,27 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
-    cspace.recordTypes = function (options) {
-        var that = fluid.initLittleComponent("cspace.recordTypes", options);
-        fluid.initDependents(that);
-        that.setup();
-        return that;
-    };
+    fluid.defaults("cspace.recordTypes", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        events: {
+            ready: null
+        },
+        mergePolicy: {
+            schema: "nomerge",
+            model: "preserve"
+        },
+        invokers: {
+            getRecordTypes: {
+                funcName: "fluid.get",
+                args: ["{recordTypes}.options.model", "@0", "{recordTypes}.config"]
+            }
+        },
+        model: {},
+        strategy: cspace.util.schemaStrategy,
+        finalInitFunction: "cspace.recordTypes.finalInit"
+    });
 
-    cspace.recordTypes.setup = function (that) {
+    cspace.recordTypes.finalInit = function (that) {
         that.config = {
             strategies: [that.options.strategy(that.options)]
         };
@@ -1231,27 +1312,8 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
+        that.events.ready.fire(that);
     };
-
-    fluid.defaults("cspace.recordTypes", {
-        gradeNames: ["fluid.littleComponent"],
-        mergePolicy: {
-            schema: "nomerge",
-            model: "preserve"
-        },
-        invokers: {
-            setup: {
-                funcName: "cspace.recordTypes.setup",
-                args: "{recordTypes}"
-            },
-            getRecordTypes: {
-                funcName: "fluid.get",
-                args: ["{recordTypes}.options.model", "@0", "{recordTypes}.config"]
-            }
-        },
-        model: {},
-        strategy: cspace.util.schemaStrategy
-    });
 
     cspace.util.togglable = function (container, options) {
         var that = fluid.initView("cspace.util.togglable", container, options);
@@ -1490,9 +1552,9 @@ fluid.registerNamespace("cspace.util");
         return valid;
     };
     
-    fluid.defaults("cspace.validator", {
+    fluid.defaults("cspace.modelValidator", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
-        finalInitFunction: "cspace.validator.finalInit",
+        finalInitFunction: "cspace.modelValidator.finalInit",
         mergePolicy: {
             schema: "nomerge"
         },
@@ -1549,7 +1611,7 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
-    cspace.validator.finalInit = function (that) {
+    cspace.modelValidator.finalInit = function (that) {
         var schema = that.options.schema;
         var schemaName = that.options.recordType;
         // Only validate fields.
@@ -1591,6 +1653,10 @@ fluid.registerNamespace("cspace.util");
             if (!arg) {return true;}
         }) : [path]);
     };
+
+    fluid.defaults("cspace.util.eventBinder", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"]
+    });
 
     cspace.util.resolveLocked = function (model) {
         // Checking whether workflow is present in model.fields or model.
@@ -1672,8 +1738,96 @@ fluid.registerNamespace("cspace.util");
         });
     };
 
+    fluid.defaults("cspace.util.relationRemover", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "cspace.util.relationRemover.finalInit",
+        components: {
+            permissionsResolver: "{permissionsResolver}",
+            globalModel: "{globalModel}",
+            instantiator: "{instantiator}"
+        },
+        offset: 0,
+        removeRelationPermission: "update"
+    });
+
+    cspace.util.relationRemover.getRemoverWidgetConatiner = function (rows, index) {
+        return $("a", $("td", rows.eq(index)).last());
+    };
+
+    cspace.util.relationRemover.finalInit = function (that) {
+        fluid.each(that.options.rows, function (row, index) {
+            var model = fluid.get(that.options.list, fluid.model.composeSegments(that.options.offset + index, "summarylist")),
+                fullModel = fluid.get(that.options, fluid.model.composeSegments("list", that.options.offset + index)),
+                locked = cspace.util.resolveLocked(model);
+            if (locked) {
+                return;
+            }
+            var canRemoveRelation = cspace.util.resolveDeleteRelation({
+                resolver: that.permissionsResolver,
+                allOf: [{
+                    target: that.options.primary,
+                    permission: that.options.removeRelationPermission
+                }, {
+                    target: that.options.related,
+                    permission: that.options.removeRelationPermission
+                }],
+                primaryModel: that.globalModel.model.primaryModel,
+                relatedModel: fullModel
+            });
+            if (!canRemoveRelation) {
+                return;
+            }
+            var name = "removerWidget-" + index;
+            that.options.components[name] = {
+                type: "cspace.util.removerWidget",
+                container: cspace.util.relationRemover.getRemoverWidgetConatiner(that.options.rows, index),
+                options: {
+                    related: that.options.related,
+                    csid: fullModel.csid
+                }
+            };
+            fluid.initDependent(that, name, that.instantiator);
+        });
+    };
+
+    fluid.defaults("cspace.util.removerWidget", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        events: {
+            onDeleteRelation: {
+                events: "{cspace.relatedRecordsTab}.events.onDeleteRelation"
+            }
+        },
+        styles: {
+            deleteRelationButton: "cs-deleteRelationButton"
+        },
+        finalInitFunction: "cspace.util.removerWidget.finalInit",
+        deleteRelationButtonMarkup: '<input type="button"></input>'
+    });
+
+    cspace.util.removerWidget.finalInit = function (that) {
+        that.deleteRelationButton = $(that.options.deleteRelationButtonMarkup)
+            .addClass(that.options.styles.deleteRelationButton)
+            .click(function (event) {
+                event.stopPropagation();
+                that.events.onDeleteRelation.fire({
+                    recordtype: that.options.related,
+                    csid: that.options.csid
+                });
+            });
+        that.container.append(that.deleteRelationButton);
+    };
+
     cspace.util.resolveDeleteRelation = function (options) {
-        return !cspace.util.resolveLocked(options.recordModel) && cspace.permissions.resolveMultiple(options);
+        return !cspace.util.resolveLocked(options.primaryModel) && !cspace.util.resolveLocked(options.relatedModel) && cspace.permissions.resolveMultiple(options);
+    };
+
+    fluid.defaults("cspace.model", {
+        gradeNames: ["autoInit", "fluid.modelComponent"],
+        preInitFunction: "cspace.model.preInit"
+    });
+    cspace.model.preInit = function (that) {
+        that.applier = fluid.makeChangeApplier(that.model, {thin: true});
+        that.requestChange = that.applier.requestChange;
     };
     
 })(jQuery, fluid);
