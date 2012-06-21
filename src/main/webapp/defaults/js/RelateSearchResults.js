@@ -22,19 +22,8 @@ cspace = cspace || {};
 		styles: {
 			relateButton: "cs-relateSearchResults-relateButton"
 		},
-		components: {
-			searchToRelateDialog: {
-				type: "cspace.searchToRelateDialog",
-				options: {
-					
-				}
-			}
-		},
-		invokers: {
-			showDialog: {
-				funcName: "cspace.relateSearchResults.showDialog",
-				args: ["{relateSearchResults}"]
-			}
+		events: {
+			onRelateButtonClick: null
 		},
 		parentBundle: "{globalBundle}",
 		finalInitFunction: "cspace.relateSearchResults.finalInit"
@@ -55,15 +44,11 @@ cspace = cspace || {};
 				}, {
 					type: "jQuery",
 					func: "click",
-					args: that.showDialog
+					args: that.events.onRelateButtonClick.fire
 				}, {
 					addClass: "{styles}.relateButton"
 				}]
 			}
 		};
-	};
-	
-	cspace.relateSearchResults.showDialog = function(that) {
-		that.searchToRelateDialog.open();
 	};
 })(jQuery, fluid);
