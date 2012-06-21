@@ -45,7 +45,7 @@ cspace = cspace || {};
                         listUrl: "%tenant/%tname/%primary/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
                     }),
                     produceTree: "cspace.listView.produceTreeSidebar",
-                    elPath: "results",
+                    elPath: "items",
                     model: {
                         pageSizeList: ["5", "10", "20", "50"],
                         columns: [{
@@ -285,51 +285,13 @@ cspace = cspace || {};
         }
     });
 
-    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.procedures"], {
-        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
-        args: {
-            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
-            termMap: {
-                primary: "{cspace.relatedRecordsList}.options.primary",
-                related: "{cspace.relatedRecordsList}.options.related",
-                csid: "{globalModel}.model.primaryModel.csid"
-            },
-            responseParser: "cspace.relatedRecordsList.responseParserProcedures"
-        }
-    });
-    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.procedures"], {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{cspace.listView}.options.urls.listUrl",
-            termMap: {
-                primary: "{cspace.relatedRecordsList}.options.primary",
-                related: "{cspace.relatedRecordsList}.options.related",
-                csid: "{globalModel}.model.primaryModel.csid",
-                pageNum: "%pageNum",
-                pageSize: "%pageSize",
-                sortDir: "%sortDir",
-                sortKey: "%sortKey"
-            },
-            targetTypeName: "cspace.listView.dataSource",
-            responseParser: "cspace.relatedRecordsList.responseParserProcedures"
-        }
-    });
-
     fluid.defaults("cspace.relatedRecordsList.testDataSourceRelatedRecordsList", {
         url: "%test/data/%primary/%related/%csid.json"
     });
     cspace.relatedRecordsList.testDataSourceRelatedRecordsList = cspace.URLDataSource;
 
     cspace.relatedRecordsList.responseParserAuth = function (data) {
-        data = data.termsUsed;
-        data.pagination = fluid.makeArray(data.pagination)[0];
-        return data;
-    };
-
-    cspace.relatedRecordsList.responseParserProcedures = function (data) {
-        data = data.relations;
-        data.pagination = fluid.makeArray(data.pagination)[0];
-        return data;
+        return data.termsUsed;
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.relatedRecordsList");

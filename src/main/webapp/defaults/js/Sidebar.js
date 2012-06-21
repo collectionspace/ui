@@ -138,6 +138,7 @@ cspace = cspace || {};
                     components: {
                         rrlListView: {
                             options: {
+                                elPath: "results",
                                 model: {
                                     columns: [{
                                         sortable: true,
@@ -172,14 +173,7 @@ cspace = cspace || {};
                             args: ["cataloging", "{permissionsResolver}", "{recordTypeManager}", "list"]
                         }
                     },
-                    related: "cataloging",
-                    components: {
-                        rrlListView: {
-                            options: {
-                                elPath: "items"
-                            }
-                        }
-                    }
+                    related: "cataloging"
                 }
             },
             procedures: {

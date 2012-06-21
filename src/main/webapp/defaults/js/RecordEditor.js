@@ -545,7 +545,8 @@ cspace = cspace || {};
             },
             refobjsDataSource: {
                 type: "cspace.recordEditor.remover.refobjsDataSource"
-            }
+            },
+            globalModel: "{globalModel}"
         },
         invokers: {
             remove: "cspace.recordEditor.remover.remove",
@@ -555,12 +556,11 @@ cspace = cspace || {};
         },
         preInitFunction: "cspace.recordEditor.remover.preInit",
         urls: cspace.componentUrlBuilder({
-            proceduresURL: "%tenant/%tname/%recordType/procedures/%csid",
-            catalogingURL: "%tenant/%tname/%recordType/cataloging/%csid",
-            refobjsURL: "%tenant/%tname/%recordType/refobjs/%csid",
+            proceduresURL: '%tenant/%tname/%recordType/procedures/%csid?pageNum=0&pageSize=5&sortDir=1',
+            catalogingURL: '%tenant/%tname/%recordType/cataloging/%csid?pageNum=0&pageSize=5&sortDir=1',
+            refobjsURL: '%tenant/%tname/%recordType/refobjs/%csid?pageNum=0&pageSize=5&sortDir=1',
             deleteURL: "%webapp/html/findedit.html"
-        }),
-        csid: "{recordDataSource}.options.csid"
+        })
     });
 
     fluid.demands("cspace.recordEditor.remover.afterRemove", "cspace.recordEditor.remover", {
@@ -620,13 +620,13 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.remover.openConfirmation = function (confirmation, recordDataSource, parentBundle, that, procedures, cataloging) {
-        var hasRelations = procedures.relations.pagination.length + cataloging.relations.pagination.length > 0;
+        var hasRelations = procedures.items.length + cataloging.items.length > 0;
         confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
                         recordDataSource.remove(function (data) {
-                            if (data.isError) {
+                            if (data && data.isError) {
                                 that.events.onError.fire(data, "delete");
                                 return;
                             }
@@ -752,15 +752,16 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.remover.remove = function (that) {
+        var csid = fluid.get(that.globalModel.model, "primaryModel.csid");
         that.proceduresDataSource.get({
             recordType: that.options.recordType,
-            csid: that.options.csid
+            csid: csid
         }, function (data) {
             that.events.afterFetchProcedures.fire(data);
         });
         that.catalogingDataSource.get({
             recordType: that.options.recordType,
-            csid: that.options.csid
+            csid: csid
         }, function (data) {
             that.events.afterFetchCataloging.fire(data);
         });
@@ -770,7 +771,7 @@ cspace = cspace || {};
         var removeMessage;
         that.refobjsDataSource.get({
             recordType: that.options.recordType,
-            csid: that.options.csid
+            csid: fluid.get(that.globalModel.model, "primaryModel.csid")
         }, function (data) {
             if (fluid.makeArray(data.refobjs.results.length) > 0) {
                 removeMessage = "deleteDialog-usedByMessage";
@@ -1700,6 +1701,9 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.dataSource.responseParser = function (data) {
+        if (!data) {
+            return data;
+        }
         delete data.relations;
         delete data.refobjs;
         delete data.termsUsed;
