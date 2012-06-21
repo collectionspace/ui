@@ -4,13 +4,6 @@
             "recordType": "media",
             "schema": {
                 "media": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/MediaTemplate.html",
-                    "templateSelector": ".csc-media-template",
-                    "targetSelector": ".csc-relatedRecordsTab-media .csc-relatedRecordsTab-recordEditor"
-                } 
             }
         }
     },
@@ -26,56 +19,22 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Media Handling Record",
-                            "recordList": "Related Media Handling Records",
-                            "newRecordRow": "New Media Handling Record"
+                            "editRecord": "media-editRecord",
+                            "recordList": "media-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-media-identificationNumber",
-                                                    "uploader": ".csc-media-upload",
-                                                    "mediaImage": ".csc-media-image"
-                                                },
-                                                "originalMediaDimensions": {
-                                                    "width": "800",
-                                                    "height": "600"
-                                                },
-                                                "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "uploader"],
-                                                "invokers": {
-                                                    "navigateToFullImage": "navigateToFullImage"
-                                                },
-                                                "styles": {
-                                                    "mediaImage": "cs-media-image"
-                                                },
-                                                "components": {
-                                                    "uploader": {
-                                                        "type": "cspace.mediaUploader",
-                                                        "options": {
-                                                            "urls": {
-                                                                "expander": {
-                                                                    "type": "fluid.deferredInvokeCall",
-                                                                    "func": "cspace.util.urlBuilder",
-                                                                    "args": {
-                                                                        "upload": "%tenant/%tname/uploads/"
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "createOnEvent": "afterRender"
-                                                    }
-                                                }
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-media-identificationNumber",
+                                    },
+                                    "originalMediaDimensions": {
+                                        "width": "800",
+                                        "height": "600"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

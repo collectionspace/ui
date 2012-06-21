@@ -941,11 +941,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        
-        fluid.demands("navigateToFullImage", "cspace.recordEditor", {
-            funcName: "cspace.recordEditor.navigateToFullImage",
-            args: "{recordEditor}"
-        });
 
         fluid.demands("cspace.recordEditor.requestSave", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.requestSave",
@@ -1323,17 +1318,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Media upload demands
-        fluid.demands("uploader", "cspace.recordEditor", {
-            container: "{recordEditor}.dom.uploader",
-            options: {
-                model: "{recordEditor}.model",
-                applier: "{recordEditor}.options.applier",
-                listeners: {
-                    onLink: "{recordEditor}.requestSave",
-                    onRemove: "{recordEditor}.refreshNoSave"
-                }
-            }
-        });
 
         fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.singleFile"], {
             options: fluid.COMPONENT_OPTIONS
