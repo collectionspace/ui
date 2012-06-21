@@ -2949,7 +2949,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 applier: "{recordEditor}.applier",
                 model: "{recordEditor}.model",
                 events: {
-                    removeListeners: "{recordEditor}.events.onRefreshView",
+                    removeApplierListeners: "{recordEditor}.events.onRefreshView",
                     onSubmit: "{recordEditor}.events.onSave"
                 }
             }, "{arguments}.1"]
@@ -2965,8 +2965,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     onSubmit: "{recordEditor}.events.onSave"
                 },
                 listeners: {
-                    repeatableOnRefreshView: "{computedField}.events.removeListeners.fire",
-                    recordEditorOnRefreshView: "{computedField}.events.removeListeners.fire"
+                    repeatableOnRefreshView: "{computedField}.events.removeApplierListeners.fire",
+                    recordEditorOnRefreshView: "{computedField}.events.removeApplierListeners.fire"
                 }
             }, "{arguments}.1"]
         });
@@ -2976,7 +2976,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 applier: "{searchFields}.applier",
                 model: "{searchFields}.model",
                 events: {
-                    removeListeners: "{advancedSearch}.events.recordTypeChanged",
+                    removeAllListeners: "{advancedSearch}.events.recordTypeChanged",
                     onSubmit: "{searchView}.events.onAdvancedSearch"
                 },
             }, "{arguments}.1"]
