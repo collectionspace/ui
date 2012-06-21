@@ -291,16 +291,19 @@ cspace = cspace || {};
                 sortKey: model.sortKey || cspace.listView.getColumnRange(that.model.columns)
             };
             that.dataSource.get(directModel, function (data) {
-                if (data.isError) {
+                if (!data || data.isError) {
+                    data = data || {};
                     if (!data.messages) {
                         var resolve = that.options.parentBundle.resolve;
-                        data.messages = fluid.makeArray(resolve("listView-error", [
-                            resolve("listView-unknownError")
-                        ]));
+                        data.messages = fluid.makeArray({
+                            message: resolve("listView-error", [
+                                resolve("listView-unknownError")
+                            ])
+                        });
                     }
                     var messages = data.messages || fluid.makeArray(data.message);
                     fluid.each(messages, function (message) {
-                        that.messageBar.show(message.message, Date.today(), data.isError);
+                        that.messageBar.show(message.message, Date.today(), true);
                     });
                     that.events.onError.fire();
                     return;

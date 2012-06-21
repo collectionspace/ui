@@ -328,6 +328,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
                 permissions: "{testEnvironment}.options.permissions"
             }
         },
+        navigationEventHolder: {
+            type: "cspace.navigationEventHolder"
+        },
         relationResolver: {
             type: "cspace.util.relationResolver"
         },
@@ -342,9 +345,6 @@ fluid.defaults("cspace.tests.testEnvironment", {
         },
         globalBundle: {
             type: "cspace.globalBundle"
-        },
-        globalNavigator: {
-            type: "cspace.util.globalNavigator",
         },
         userLogin: {
             type: "cspace.util.login",
