@@ -218,6 +218,7 @@ cspace = cspace || {};
                                 }, undefined, undefined, "last");
                                 that.events.onSave.fire();
                             } else if (userAction === "proceed") {
+                                that.changeTracker.revert();
                                 callback();
                             }
                         }
@@ -1082,21 +1083,6 @@ cspace = cspace || {};
             }]
         };
     };
-
-    fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
-        options: {
-            events: {
-                onSave: "{recordEditor}.events.onSave"
-            },
-            listeners: {
-                onSave: {
-                    namespace: "recordTraverser",
-                    listener: "{recordTraverser}.save",
-                    priority: "last"
-                }
-            }
-        }
-    });
 
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {

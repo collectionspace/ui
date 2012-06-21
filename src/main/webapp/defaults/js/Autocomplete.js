@@ -233,7 +233,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.makePNPSelectionTree = function (elPaths, styles, tree, repeatID) {
         var preferred = elPaths.preferred,
-            displayName = elPaths.displayName;
+            displayName = elPaths.displayName,
+            rowDisabled = elPaths.rowDisabled;
         
         tree.expander = fluid.makeArray(tree.expander);
         
@@ -253,13 +254,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     },
                     falseTree: {
-                        matchItemContent: {
-                            value: buildValueBinding(displayName),
-                            decorators: {
-                                type: "addClass",
-                                classes: styles.nonPreferred
+                        expander: [{
+                            type: "fluid.renderer.condition",
+                            condition: buildValueBinding(rowDisabled),
+                            trueTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName),
+                                    decorators: {
+                                        type: "addClass",
+                                        classes: styles.nonPreferredDisabled
+                                    }
+                                }
+                            },
+                            falseTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName),
+                                    decorators: {
+                                        type: "addClass",
+                                        classes: styles.nonPreferred
+                                    }
+                                }
                             }
-                        }
+                        }]
                     }
                 }]
             }
@@ -402,16 +418,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     baseUrn = that.options.elPaths.baseUrn,
                     csid = that.options.elPaths.csid,
                     type = that.options.elPaths.type,
+                    rowDisabled = that.options.elPaths.rowDisabled,
                     matchesPath = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
                     var vocab = cspace.vocab.resolve({
                         recordType: match.type,
                         model: match,
                         vocab: that.vocab
-                    }), displayNameList = fluid.get(match, displayNames);
+                    }), displayNameList = fluid.get(match, displayNames), disabled = false;
 
                     if (!that.vocab.isNptAllowed(vocab, match.type)) {
-                        displayNameList = displayNameList.slice(0, 1);
+                        disabled = true;
                     }
 
                     matches = matches.concat(fluid.transform(displayNameList, function (thisDisplayName, index) {
@@ -421,6 +438,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[preferred] = index === 0;
                         elem[type] = match.type;
                         elem[csid] = match.csid;
+                        elem[rowDisabled] = (!elem[preferred] && (disabled === true));
                         return elem;
                     }));
                 });
@@ -443,7 +461,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
             matchesSelect: "cs-autocomplete-matchItem-select",
-            nonPreferred: "cs-autocomplete-nonPreferred"
+            nonPreferred: "cs-autocomplete-nonPreferred",
+            nonPreferredDisabled: "cs-autocomplete-nonPreferredDisabled"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
         preInitFunction: "cspace.autocomplete.popup.preInit",
@@ -667,7 +686,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.selectMatch = function (that, key) {
-        var match = that.model.matches[key];
+        var match = that.model.matches[key],
+            rowDisabled = that.options.elPaths.rowDisabled;
+        if (match[rowDisabled]) {
+            return;
+        }
         updateAuthoritatively(that, match);
         that.buttonAdjustor();
         that.eventHolder.events.afterSelectMatch.fire();
@@ -787,7 +810,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             displayNames: "displayNames",
             matches: "matches",
             type: "type",
-            csid: "csid"
+            csid: "csid",
+            rowDisabled: "disabled"
         }
     });
     

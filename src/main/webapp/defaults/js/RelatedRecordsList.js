@@ -81,7 +81,8 @@ cspace = cspace || {};
                     },
                     listeners: {
                         afterUpdate: "{relatedRecordsList}.events.listUpdated.fire",
-                        ready: "{relatedRecordsList}.events.listUpdated.fire"
+                        ready: "{relatedRecordsList}.events.listUpdated.fire",
+                        onError: "{loadingIndicator}.events.hideOn.fire"
                     }
                 }
             },
@@ -293,6 +294,109 @@ cspace = cspace || {};
     cspace.relatedRecordsList.responseParserAuth = function (data) {
         return data.termsUsed;
     };
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            }
+        }
+    });
+    fluid.demands("cspace.listView.dataSource", ["cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource"
+        }
+    });
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+    fluid.demands("cspace.listView.dataSource", ["cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource",
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+
+    fluid.defaults("cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab", {
+        url: "%test/data/%vocab/%related/%csid.json"
+    });
+    cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab = cspace.URLDataSource;
 
     fluid.fetchResources.primeCacheFromResources("cspace.relatedRecordsList");
 })(jQuery, fluid);

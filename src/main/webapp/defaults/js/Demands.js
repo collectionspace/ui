@@ -1243,12 +1243,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 listeners: {
                     onModelChange: "{loadingIndicator}.events.showOn.fire",
                     afterUpdate: "{loadingIndicator}.events.hideOn.fire",
-                    ready: "{loadingIndicator}.events.hideOn.fire"
+                    ready: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire"
                 }
             }
         });
         fluid.demands("cspace.listView", "cspace.sidebar", {
             options: fluid.COMPONENT_OPTIONS
+        });
+        fluid.demands("cspace.listView", ["cspace.sidebar", "cspace.authority"], {
+            options: {
+                urls: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: {
+                            listUrl: "%tenant/%tname/vocabularies/%vocab/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
+                        }
+                    }
+                }
+            }
         });
         fluid.demands("cspace.listView", "cspace.relatedRecordsTab", {
             options: {
@@ -1827,9 +1841,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "cspace.relatedRecordsList",
                         options: {
                             primary: "{sidebar}.options.primary",
-                            related: "nonVocabularies",
+                            related: "refobjs",
                             model: {
-                                related: "nonVocabularies"
+                                related: "refobjs"
                             },
                             components: {
                                 rrlListView: {

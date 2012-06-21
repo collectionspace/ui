@@ -44,6 +44,15 @@ var utilitiesTester = function ($) {
                                     "default": true
                                 }
                             }
+                        },
+                        "ulan_pa": {
+                            "properties": {
+                                "nptAllowed": {
+                                    "default": false,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
                         }
                     },
                     "type": "object"
@@ -448,13 +457,15 @@ var utilitiesTester = function ($) {
         jqUnit.assertDeepEq("Person vocabs", {
             person: "person",
             persontest1: "persontest1",
-            persontest2: "persontest2"
+            persontest2: "persontest2",
+            ulan_pa: "ulan_pa"
         }, vocab.authority.person.vocabs);
 
         jqUnit.assertDeepEq("Person nptAllowed vocabs", {
             person: true,
             persontest1: true,
-            persontest2: true
+            persontest2: true,
+            ulan_pa: false
         }, vocab.authority.person.nptAllowed.vocabs);
 
         jqUnit.assertTrue("Person is default", vocab.isDefault("person"));

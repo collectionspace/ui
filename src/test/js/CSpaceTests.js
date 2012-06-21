@@ -101,6 +101,15 @@ cspace.tests.sampleSchema = {
                                 "default": true
                             }
                         }
+                    },
+                    "ulan_pa": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -318,6 +327,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
             options: {
                 permissions: "{testEnvironment}.options.permissions"
             }
+        },
+        navigationEventHolder: {
+            type: "cspace.navigationEventHolder"
         },
         relationResolver: {
             type: "cspace.util.relationResolver"

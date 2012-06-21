@@ -975,9 +975,9 @@ fluid.registerNamespace("cspace.util");
         };
         var listeners = {},
             index = 0;
-        that.addListener = function (listener, namespace) {
+        that.addListener = function (listener, namespace, priority) {
             var namespace = namespace || fluid.model.composeSegments(that.id, index++);
-            that.events.onPerformNavigation.addListener(listener, namespace);
+            that.events.onPerformNavigation.addListener(listener, namespace, undefined, priority);
             listeners[namespace] = null;
         };
         that.clearListeners = function () {
@@ -1055,11 +1055,18 @@ fluid.registerNamespace("cspace.util");
                                 });
                                 return;
                             }
-                            if (!data.login && !that.noLogin) {
-                                var currentUrl = document.location.href;
-                                var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                                window.location = loginUrl;
-                            }
+                            
+                            fluid.find([data.login, cspace.globalSetup.hasPermissions(data.permissions)], function (check) {
+                                if (that.noLogin) {
+                                    return;
+                                }
+                                
+                                if (!check) {
+                                    var currentUrl = document.location.href;
+                                    var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                                    window.location = loginUrl;
+                                }
+                            });
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             that.displayErrorMessage("PageBuilder was not able to retrieve login information and user permissions: " + textStatus);
@@ -1097,6 +1104,14 @@ fluid.registerNamespace("cspace.util");
         };
         that.init(tag, options);
         return that;
+    };
+    
+    cspace.globalSetup.hasPermissions = function (permissions) {
+        return !!fluid.find(permissions, function (permission) {
+            if (permission.length > 0) {
+                return true;
+            }
+        });
     };
 
     cspace.globalSetup.noLogin = function (options) {

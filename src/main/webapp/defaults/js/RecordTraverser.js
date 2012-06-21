@@ -247,14 +247,26 @@ cspace = cspace || {};
         that.save = function (increment) {
             var model = that.model,
                 elPaths = that.options.elPaths,
-                searchReference = elPaths.searchReference;
+                searchReference = elPaths.searchReference,
+                index = get(model, searchReference, elPaths.index);
 
             if (typeof increment !== "number") {
                 increment = 0;
             }
+
+            if (typeof index !== "number") {
+                index = undefined;
+            } else {
+                index += increment;
+            }
+            console.log("SAVING: ", JSON.stringify({
+                token: get(model, searchReference, elPaths.token),
+                index: index,
+                source: get(model, searchReference, elPaths.source)
+            }));
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
-                index: get(model, searchReference, elPaths.index) + increment,
+                index: index,
                 source: get(model, searchReference, elPaths.source)
             });
         };
@@ -271,7 +283,12 @@ cspace = cspace || {};
             searchReferenceStorage = that.searchReferenceStorage;
 
         applier.requestChange(searchReference, searchReferenceStorage.get());
-        if (!fluid.get(model, searchReference)) {
+        var searchRef = fluid.get(model, searchReference);
+        if (!searchRef) {
+            return;
+        }
+        if ($.isEmptyObject(searchRef)) {
+            searchReferenceStorage.set();
             return;
         }
         searchReferenceStorage.set();
@@ -300,7 +317,7 @@ cspace = cspace || {};
                     return increment;
                 }
             }));
-        }, "recordTraverser");
+        }, "recordTraverser", "first");
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");
