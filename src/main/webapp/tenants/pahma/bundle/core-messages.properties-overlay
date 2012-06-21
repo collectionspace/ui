@@ -185,7 +185,7 @@ media: Media
 claim: NAGPRA Claim
 
 # ---------------------------------- Top Tabs -------------------------- #
-claim-tab: NAGRA Claim
+claim-tab: NAGPRA Claim
 loanin-tab: In Loan
 loanout-tab: Out Loan
 acquisition-tab: Accession
