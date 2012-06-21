@@ -1823,16 +1823,52 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "cspace.relatedRecordsList",
                         options: {
                             primary: "{sidebar}.options.primary",
-                            related: "nonVocabularies"
+                            related: "nonVocabularies",
+                            model: {
+                                related: "nonVocabularies"
+                            },
+                            components: {
+                                rrlListView: {
+                                    options: {
+                                        model: {
+                                            columns: [{
+                                                sortable: true,
+                                                id: "number",
+                                                name: "%recordType-number"
+                                            }, {
+                                                sortable: true,
+                                                id: "summary",
+                                                name: "title"
+                                            }, {
+                                                sortable: true,
+                                                id: "sourceFieldName",
+                                                name: "rl-rrl-sourceFieldName"
+                                            }]
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 },
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner", "relatedNonVocabularies"],
                 model: {
                     categories: [{
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.util.modelBuilder",
+                            args: {
+                                callback: "cspace.sidebar.buildModel",
+                                related: "vocabularies",
+                                resolver: "{permissionsResolver}",
+                                recordTypeManager: "{recordTypeManager}",
+                                permission: "list"
+                            }
+                        }
+                    }, {
                         expander: {
                             type: "fluid.deferredInvokeCall",
                             func: "cspace.util.modelBuilder",
