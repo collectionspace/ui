@@ -122,7 +122,10 @@ cspace = cspace || {};
             globalModel: "{globalModel}",
             report: {
                 type: "cspace.reportProducer",
-                container: "{sidebar}.dom.report"
+                container: "{sidebar}.dom.report",
+                options: {
+                    recordType: "{sidebar}.options.primary"
+                }
             },
             vocabularies: {
                 type: "cspace.relatedRecordsList",

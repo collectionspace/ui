@@ -119,7 +119,7 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
     
     cspace.reportProducer.checkReportButtonDisabling = function (model, globalModel) {
-        if (!globalModel.model.primaryModel.csid) {
+        if (!fluid.get(globalModel.model, "primaryModel.csid")) {
             return true;
         }
         return model.reportlist.length < 2 && !model.reportlist[0];
@@ -271,10 +271,10 @@ cspace = cspace || {};
             parentBundle,
             function (userAction) {
                 if (userAction === "act") {
-                    recordEditor.options.dataContext.events.afterSave.addListener(function () {
+                    recordEditor.events.afterSave.addListener(function () {
                         requestReport(false);
                     }, undefined, undefined, "last");
-                    recordEditor.requestSave();
+                    recordEditor.events.onSave.fire();
                 } else if (userAction === "proceed") {
                     requestReport(false);
                 }

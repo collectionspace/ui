@@ -55,13 +55,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // Report producer
-        fluid.demands("cspace.reportProducer", ["cspace.sidebar", "cspace.localData"], {
-            options: {
-                recordType: "{sidebar}.options.primary"
-            }
-        });
-        
         // getDefaultConfigURL demands
         fluid.demands("getRecordType", ["cspace.util.getDefaultConfigURL", "cspace.localData"], {
             funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
@@ -659,12 +652,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // Report producer  
-        fluid.demands("cspace.reportProducer", ["cspace.sidebar", "cspace.pageBuilder"], {
-            options: {
-                recordType: "{sidebar}.options.primary"
-            }
-        });
+        // Report producer
         
         fluid.demands("cspace.reportProducer.reportTypesSource", "cspace.reportProducer", {
             funcName: "cspace.URLDataSource",
@@ -940,16 +928,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     deleteMessageMediaAttached: "{globalBundle}.messageBase.recordEditor-deleteMessageMediaAttached"
                 }
             }
-        });
-
-        fluid.demands("cspace.recordEditor.requestSave", "cspace.recordEditor", {
-            funcName: "cspace.recordEditor.requestSave",
-            args: "{recordEditor}"
-        });
-
-        fluid.demands("cspace.recordEditor.requestSave", ["cspace.recordEditor", "movement.lock"], {
-            funcName: "cspace.recordEditor.requestSaveMovement",
-            args: "{recordEditor}"
         });
         
         fluid.demands("cancel", "cspace.recordEditor", {
