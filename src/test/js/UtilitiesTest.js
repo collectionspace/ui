@@ -44,6 +44,15 @@ var utilitiesTester = function ($) {
                                     "default": true
                                 }
                             }
+                        },
+                        "ulan_pa": {
+                            "properties": {
+                                "nptAllowed": {
+                                    "default": false,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
                         }
                     },
                     "type": "object"
