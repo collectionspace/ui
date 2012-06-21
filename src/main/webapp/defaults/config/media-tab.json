@@ -28,7 +28,7 @@
                             "relatedRecordsRecordEditor": {
                                 "options": {
                                     "selectors": {
-                                        "identificationNumber": ".csc-media-identificationNumber",
+                                        "identificationNumber": ".csc-media-identificationNumber"
                                     },
                                     "originalMediaDimensions": {
                                         "width": "800",
