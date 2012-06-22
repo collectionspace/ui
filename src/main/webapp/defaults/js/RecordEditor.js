@@ -183,7 +183,6 @@ cspace = cspace || {};
                 "{messageBar}.hide"
             ],
             onError: "{loadingIndicator}.events.hideOn.fire",
-            onSave: "{loadingIndicator}.events.showOn.fire",
             onCancel: "{loadingIndicator}.events.showOn.fire",
             afterRemove: "{loadingIndicator}.events.hideOn.fire"
         },
@@ -412,11 +411,13 @@ cspace = cspace || {};
             onSave: {
                 event: "{cspace.recordEditor}.events.onSave"
             },
+            beforeSave: null,
             onValidate: null,
             afterValidate: null
         },
         listeners: {
             onSave: "{cspace.recordEditor.saver}.onSaveHandler",
+            beforeSave: "{loadingIndicator}.events.showOn.fire",
             afterValidate: "{cspace.recordEditor.saver}.afterValidateHandler"
         },
         preInitFunction: "cspace.recordEditor.saver.preInit",
@@ -474,6 +475,7 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.saver.save = function (that, recordEditor) {
+        that.events.beforeSave.fire();
         that.events.onValidate.fire(recordEditor.model, recordEditor.applier);
     };
 
@@ -1087,6 +1089,12 @@ cspace = cspace || {};
 
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {
+            recordLock: {
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.util.recordLock"
+                }
+            },
             recordTraverser: {
                 decorators: [{
                     addClass: "{styles}.recordTraverser"
