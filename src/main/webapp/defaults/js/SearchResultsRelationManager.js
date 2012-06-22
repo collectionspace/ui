@@ -179,7 +179,7 @@ cspace = cspace || {};
 		
 		sourceNumbers = sourceNumbers.sort();
 		
-		that.showMessage(count + " " + (count == 1 ? "record" : "records") + " added to " + sourceNumbers.join(", ")); // FIXME: Move to message bundle
+		that.showMessage("Added " + count + " " + (count == 1 ? "record" : "records") + " to " + sourceNumbers.join(", ")); // FIXME: Move to message bundle
 	}
 	
 	var onError = function(that, operation, message, data) {
