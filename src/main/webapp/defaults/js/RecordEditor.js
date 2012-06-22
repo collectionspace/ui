@@ -1510,6 +1510,21 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.admin"], {
+        options: {
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsidTab",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            urls: cspace.componentUrlBuilder({
+                recordURL: "%tenant/%tname/%recordType/%csid"
+            })
+        }
+    });
+
     fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.relatedRecordsTab"], {
         options: {
             csid: {

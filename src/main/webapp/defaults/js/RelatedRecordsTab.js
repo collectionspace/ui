@@ -338,13 +338,13 @@ cspace = cspace || {};
         selectors: {
             banner: ".csc-relatedRecordsTab-record-banner",
             bannerMessageTop: ".csc-relatedRecordsTab-record-banner-messageTop",
-            bannerMessageBotton: ".csc-relatedRecordsTab-record-banner-messageBottom",
+            bannerMessageBottom: ".csc-relatedRecordsTab-record-banner-messageBottom",
             header: ".csc-relatedRecordsTab-recordHeader"
         },
         selectorsToIgnore: ["header", "recordEditor"],
         styles: {
             banner: "cs-relatedRecordsTab-record-banner",
-            bannerMessageBotton: "cs-relatedRecordsTab-record-banner-messageBottom"
+            bannerMessageBottom: "cs-relatedRecordsTab-record-banner-messageBottom"
         },
         strings: {},
         parentBundle: "{globalBundle}",
@@ -357,10 +357,10 @@ cspace = cspace || {};
             bannerMessageTop: {
                 messagekey: "relatedRecordsTab-bannerTop"
             },
-            bannerMessageBotton: {
+            bannerMessageBottom: {
                 messagekey: "relatedRecordsTab-bannerBottom",
                 decorators: {
-                    addClass: "{styles}.bannerMessageBotton"
+                    addClass: "{styles}.bannerMessageBottom"
                 }
             }
         },

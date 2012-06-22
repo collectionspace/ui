@@ -1,0 +1,173 @@
+{
+    "csid": "a0d7de95-b7f1-404c-9a02-5d804445107d",
+    "fields": {
+        "description": "Generated tenant read only role.",
+        "permissions": [
+            {
+                "permission": "read",
+                "resourceName": "cataloging"
+            },
+            {
+                "permission": "read",
+                "resourceName": "acquisition"
+            },
+            {
+                "permission": "read",
+                "resourceName": "group"
+            },
+            {
+                "permission": "read",
+                "resourceName": "intake"
+            },
+            {
+                "permission": "read",
+                "resourceName": "loanin"
+            },
+            {
+                "permission": "read",
+                "resourceName": "loanout"
+            },
+            {
+                "permission": "read",
+                "resourceName": "media"
+            },
+            {
+                "permission": "read",
+                "resourceName": "movement"
+            },
+            {
+                "permission": "read",
+                "resourceName": "objectexit"
+            },
+            {
+                "permission": "read",
+                "resourceName": "concept"
+            },
+            {
+                "permission": "read",
+                "resourceName": "location"
+            },
+            {
+                "permission": "read",
+                "resourceName": "organization"
+            },
+            {
+                "permission": "read",
+                "resourceName": "person"
+            },
+            {
+                "permission": "read",
+                "resourceName": "place"
+            },
+            {
+                "permission": "read",
+                "resourceName": "role"
+            },
+            {
+                "permission": "read",
+                "resourceName": "termlist"
+            },
+            {
+                "permission": "read",
+                "resourceName": "users"
+            },
+            {
+                "permission": "read",
+                "resourceName": "concept"
+            },
+            {
+                "permission": "read",
+                "resourceName": "location"
+            },
+            {
+                "permission": "read",
+                "resourceName": "organization"
+            },
+            {
+                "permission": "read",
+                "resourceName": "person"
+            },
+            {
+                "permission": "read",
+                "resourceName": "place"
+            },
+            {
+                "permission": "read",
+                "resourceName": "/dimensions/workflow/"
+            },
+            {
+                "permission": "read",
+                "resourceName": "idgenerators"
+            },
+            {
+                "permission": "read",
+                "resourceName": "taxonomyauthority"
+            },
+            {
+                "permission": "read",
+                "resourceName": "locations"
+            },
+            {
+                "permission": "read",
+                "resourceName": "dimensions"
+            },
+            {
+                "permission": "read",
+                "resourceName": "taxon"
+            },
+            {
+                "permission": "read",
+                "resourceName": "vocabularyitems"
+            },
+            {
+                "permission": "read",
+                "resourceName": "organizations"
+            },
+            {
+                "permission": "read",
+                "resourceName": "places"
+            },
+            {
+                "permission": "read",
+                "resourceName": "concepts"
+            },
+            {
+                "permission": "read",
+                "resourceName": "workflow"
+            },
+            {
+                "permission": "read",
+                "resourceName": "persons"
+            },
+            {
+                "permission": "read",
+                "resourceName": "imports"
+            },
+            {
+                "permission": "read",
+                "resourceName": "relations"
+            },
+            {
+                "permission": "read",
+                "resourceName": "batch"
+            },
+            {
+                "permission": "read",
+                "resourceName": "authorization/permissions/permroles"
+            },
+            {
+                "permission": "read",
+                "resourceName": "notes"
+            }
+        ],
+        "csid": "a0d7de95-b7f1-404c-9a02-5d804445107d",
+        "roleName": "ROLE_1_TENANT_READER",
+        "displayName": "TENANT_READER",
+        "usedBy": [
+            {
+                "accountId": "5d199caa-7ec4-4d15-a633-222c53094cb1",
+                "userId": "reader@core.collectionspace.org"
+            }
+        ]
+    }
+}

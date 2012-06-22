@@ -24,6 +24,8 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.listView", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
+        disablePageSize: false,
+        stubbPagination: false,
         model: {
             columns: [{
                 sortable: true,
@@ -225,7 +227,14 @@ cspace = cspace || {};
             pageSize: {
                 optionlist: "${pageSizeList}",
                 optionnames: "${pageSizeList}",
-                selection: "${pagerModel}.pageSize"
+                selection: "${pagerModel}.pageSize",
+                decorators: {
+                    type: "jQuery",
+                    func: "prop",
+                    args: {
+                        disabled: that.options.disablePageSize
+                    }
+                }
             },
             next: {
                 messagekey: "listView-next"
@@ -309,6 +318,12 @@ cspace = cspace || {};
                     return;
                 }
                 that.updateList(fluid.get(data, that.options.elPath));
+
+                // TODO: THIS IS A HACK UNTIL THE SERVER SUPPORTS PAGINATION EVERYWHERE.
+                if (that.options.stubbPagination) {
+                    fluid.set(data, "pagination.totalItems", that.model.list.length.toString())
+                }
+
                 that.pager.applier.requestChange("totalRange", parseInt(fluid.get(data, "pagination.totalItems"), 10));
                 that.pager.events.initiatePageChange.fire({pageIndex: model.pageIndex, forceUpdate: true});
                 that.events[initialUpdate ? "ready" : "afterUpdate"].fire(that);
@@ -399,6 +414,34 @@ cspace = cspace || {};
     });
 
     fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.admin"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.admin", "cspace.localData"], {
         options: {
             finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
             invokers: {

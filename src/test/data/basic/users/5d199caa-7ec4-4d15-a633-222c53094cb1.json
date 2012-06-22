@@ -1,0 +1,26 @@
+{
+    "relations": [],
+    "csid": "5d199caa-7ec4-4d15-a633-222c53094cb1",
+    "isError": false,
+    "messages": [
+        {
+            "message": "",
+            "severity": "info"
+        }
+    ],
+    "fields": {
+        "email": "reader@core.collectionspace.org",
+        "status": "active",
+        "createdAt": "2012-05-30T00:41:01.794",
+        "userId": "reader@core.collectionspace.org",
+        "screenName": "Reader",
+        "role": [
+            {
+                "roleSelected": "true",
+                "roleName": "ROLE_1_TENANT_READER",
+                "roleId": "a0d7de95-b7f1-404c-9a02-5d804445107d"
+            }
+        ],
+        "csid": "5d199caa-7ec4-4d15-a633-222c53094cb1"
+    }
+}

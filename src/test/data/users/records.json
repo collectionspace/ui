@@ -1,8 +1,84 @@
 {
-    "items": [
-        {"csid": "963852741", "screenName": "Carl Hogsden", "status": "active"},
-        {"csid": "369258147", "screenName": "Megan Forbes", "status": "active"},
-        {"csid": "147258369", "screenName": "Anastasia Cheetham", "status": "inactive"},
-        {"csid": "741852963", "screenName": "Jesse Martinez", "status": "active"}
-    ]
+    "results": [
+        {
+            "email": "admin@core.collectionspace.org",
+            "status": "active",
+            "createdAt": "2012-05-30T00:41:01.794",
+            "userId": "admin@core.collectionspace.org",
+            "screenName": "Administrator",
+            "csid": "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
+            "recordtype": "users"
+        },
+        {
+            "email": "reader@core.collectionspace.org",
+            "status": "active",
+            "createdAt": "2012-05-30T00:41:01.794",
+            "userId": "reader@core.collectionspace.org",
+            "screenName": "Reader",
+            "csid": "5d199caa-7ec4-4d15-a633-222c53094cb1",
+            "recordtype": "users"
+        },
+        {
+            "email": "test@test.com",
+            "status": "active",
+            "createdAt": "2012-06-01T14:26:22.183",
+            "userId": "test@test.com",
+            "screenName": "test",
+            "csid": "401b8069-1c5a-4fde-99c7-a6249d76f4df",
+            "recordtype": "users"
+        },
+        {
+            "email": "jmartinez@movingimage.us",
+            "status": "active",
+            "createdAt": "2012-06-04T12:17:44.326",
+            "userId": "jmartinez@movingimage.us",
+            "screenName": "Jesse",
+            "csid": "fa33db90-08fe-4679-8b85-12d49d20c7ca",
+            "recordtype": "users"
+        },
+        {
+            "email": "pschmitz@berkeley.edu",
+            "status": "active",
+            "createdAt": "2012-06-04T12:30:00.646",
+            "userId": "pschmitz@berkeley.edu",
+            "screenName": "Patrick",
+            "csid": "c63bb7b4-8d61-4c2c-8fd5-32137f9350cd",
+            "recordtype": "users"
+        },
+        {
+            "email": "aronroberts@gmail.com",
+            "status": "active",
+            "createdAt": "2012-06-04T12:36:41.523",
+            "userId": "aronroberts@gmail.com",
+            "screenName": "Aron",
+            "csid": "2cb3c626-eb57-4ef1-9fbe-f3447497342d",
+            "recordtype": "users"
+        },
+        {
+            "email": "chris.hoffman@berkeley.edu",
+            "status": "active",
+            "createdAt": "2012-06-04T13:03:59.291",
+            "userId": "chris.hoffman@berkeley.edu",
+            "screenName": "Chris Hoffman",
+            "csid": "faf89dbe-9635-4803-bbce-128b71d3b8e5",
+            "recordtype": "users"
+        }
+    ],
+    "pagination": {
+        "separatelists": [
+            [
+                "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
+                "5d199caa-7ec4-4d15-a633-222c53094cb1",
+                "401b8069-1c5a-4fde-99c7-a6249d76f4df",
+                "fa33db90-08fe-4679-8b85-12d49d20c7ca",
+                "c63bb7b4-8d61-4c2c-8fd5-32137f9350cd",
+                "2cb3c626-eb57-4ef1-9fbe-f3447497342d",
+                "faf89dbe-9635-4803-bbce-128b71d3b8e5"
+            ]
+        ],
+        "totalItems": "7",
+        "pageSize": "40",
+        "itemsInPage": "7",
+        "pageNum": "0"
+    }
 }
