@@ -23,7 +23,16 @@ var pahma = {};
 	var isNumber = function(n) {
 		return !isNaN(parseFloat(n)) && isFinite(n);
 	}
-	
+
+        var trim = function(s) {
+	    var l=0; var r=s.length -1;
+	    while(l < s.length && s[l] == ' ')
+	      { l++; }
+	    while(r > l && s[r] == ' ')
+	      { r-=1; }
+	    return s.substring(l, r+1);
+	}
+
 	pahma.createSortableObjectNumber = function(objnum) {
   		//            1    2                   3        4         5    6         7    8          9     10         11   
   		var objRe = /^([cC](ons|ONS)?[\-\. ]?)?([A-Z]+)?([\-\. ])?(\d+)([\-\. ])?(\d+)?([\.\- ]+)?(\d+)?([\.\- ]+)?(.*)$/;
@@ -44,7 +53,7 @@ var pahma = {};
 			objTokens[i] = objTokens[i] + ' ';
 		}
 		if (objTokens[3] == ' ') objTokens[3] == ''; // zap empty alphabetic prefix
-		return objTokens[3]+objTokens[5]+objTokens[7]+objTokens[9]+objTokens[11];
+		return trim(objTokens[3]+objTokens[5]+objTokens[7]+objTokens[9]+objTokens[11]);
 		}
 	}
 	
