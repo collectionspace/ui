@@ -2214,9 +2214,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-		fluid.demands("cspace.searchResultsRelationManager", "cspace.advancedSearch", {
+		fluid.demands("cspace.searchResultsRelationManager", ["cspace.pageBuilder", "cspace.advancedSearch"], { // FIXME: This isn't right
 			options: {
-				searchModel: "{search}.model",
 				events: {
 					onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
 				}
