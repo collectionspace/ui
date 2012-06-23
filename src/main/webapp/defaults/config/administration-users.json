@@ -24,7 +24,13 @@
                             "adminRecordEditor": {
                                 "options": {
                                     "uispec": "{pageBuilder}.options.uispec.details",
-                                    "showDeleteButton": true
+                                    "showDeleteButton": {
+                                        "expander": {
+                                            "type": "fluid.deferredInvokeCall",
+                                            "func": "cspace.admin.isCurrentUser",
+                                            "args": ["{userLogin}.options.csid", "{admin}.selectedRecordCsid"]
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -293,6 +293,10 @@ cspace = cspace || {};
         globalNavigator.events.onPerformNavigation.fire(unSearch);
     };
 
+    cspace.admin.isCurrentUser = function (sessionUser, currentUser) {
+        return sessionUser !== currentUser;
+    };
+
     fluid.defaults("cspace.admin.showAddButton", {
         gradeNames: ["autoInit", "fluid.modelComponent"],
         components: {
@@ -408,11 +412,6 @@ cspace = cspace || {};
     cspace.listView.testDataSourceAdmin = cspace.URLDataSource;
 
     /*
-
-    cspace.admin.finalInit = function (that) {
-        that.bindEvents();
-        that.events.afterSetup.fire(that);
-    };
     
     cspace.admin.validate = function (messageBar, dom, applier, passwordValidator, strings) {
         // In the default configuration, the email address used as the userid.
@@ -435,27 +434,7 @@ cspace = cspace || {};
     };
 
     cspace.admin.bindEventHandlers = function (that) {
-        that.globalNavigator = that.adminListEditor.details.globalNavigator;
-        that.locate("unSearchButton").click(function () {
-            that.globalNavigator.events.onPerformNavigation.fire(function () {
-                that.locate("searchField").val("")
-                that.locate("unSearchButton").hide();
-                that.adminListEditor.updateList();
-            });
-        }).hide();
-
         that.adminListEditor.details.events.onSave.addListener(that.validate);
-        that.adminListEditor.events.pageReady.addListener(function () {
-            that.events.afterTreeRender.fire(that);
-        });
-        
-        that.adminListEditor.events.afterAddNewListRow.addListener(function () {
-            that.passwordValidator.bindEvents();
-        });
-        
-        that.adminListEditor.details.events.afterRender.addListener(function () {
-            that.locate("deleteButton")[that.options.login.options.csid === that.adminListEditor.details.model.csid ? "hide" : "show"]();
-        });
     };
 */
     
