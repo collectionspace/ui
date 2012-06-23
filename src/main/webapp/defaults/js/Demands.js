@@ -1263,7 +1263,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 },
                 elPath: "results",
+                // TODO: Disabling pagintaion related things, since it does not work yet for users.
+                disablePageSize: true,
                 model: {
+                    // TODO: Disabling pagintaion related things, since it does not work yet for users.
+                    pageSizeList: ["40"],
+                    pagerModel: {
+                        pageSize: 40
+                    },
                     columns: [{
                         sortable: false,
                         id: "screenName",
