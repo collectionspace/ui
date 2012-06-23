@@ -186,6 +186,13 @@ cspace = cspace || {};
         };
     };
 
+    cspace.admin.preInitUserAdmin = function (that) {
+        cspace.admin.preInit(that);
+        that.onSave = function () {
+            return that.validate();
+        };
+    };
+
     cspace.admin.finalInit = function (that) {
         that.refreshView();
     };
@@ -293,6 +300,21 @@ cspace = cspace || {};
         globalNavigator.events.onPerformNavigation.fire(unSearch);
     };
 
+    cspace.admin.validate = function (that, messageBar, passwordValidator) {
+        var password = that.locate("password");
+        if (password.is(":visible")) {
+            var pwd = password.val();
+            if (pwd !== that.locate("passwordConfirm").val()) {
+                messageBar.show(that.options.parentBundle.resolve("admin-passwordsDoNotMatch"), null, true);
+                return false;
+            }
+            if (!passwordValidator.validateLength(pwd)) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     cspace.admin.isCurrentUser = function (sessionUser, currentUser) {
         return sessionUser !== currentUser;
     };
@@ -381,6 +403,11 @@ cspace = cspace || {};
         args: ["{admin}"]
     });
 
+    fluid.demands("cspace.admin.validate", "cspace.admin", {
+        funcName: "cspace.admin.validate",
+        args: ["{admin}", "{messageBar}", "{passwordValidator}"]
+    });
+
     fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.admin"], {
         funcName: "cspace.listView.testDataSourceAdmin",
         args: {
@@ -410,32 +437,5 @@ cspace = cspace || {};
         url: "%test/data/%recordType/records.json"
     });
     cspace.listView.testDataSourceAdmin = cspace.URLDataSource;
-
-    /*
-    
-    cspace.admin.validate = function (messageBar, dom, applier, passwordValidator, strings) {
-        // In the default configuration, the email address used as the userid.
-        // If all required fields are present and the userid is not set, use the email
-        if (!dom.locate("userId").val()) {
-            applier.requestChange("fields.userId", dom.locate("email").val());
-        }
-        var password = dom.locate("password");
-        if (password.is(":visible")) {
-            var pwd = password.val();
-            if (pwd !== dom.locate("passwordConfirm").val()) {
-                messageBar.show(strings["admin-passwordsDoNotMatch"], null, true);
-                return false;
-            }
-            if (!passwordValidator.validateLength(pwd)) {
-                return false;
-            }
-        }
-        return true;
-    };
-
-    cspace.admin.bindEventHandlers = function (that) {
-        that.adminListEditor.details.events.onSave.addListener(that.validate);
-    };
-*/
     
 })(jQuery, fluid);
