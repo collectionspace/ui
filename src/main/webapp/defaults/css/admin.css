@@ -30,3 +30,10 @@
 .fl-container-admin .information-subgroup {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+#administration #search-box {
+    background-color: #E6E6E6;
+    padding: 12px;
+}
+#administration #search-box input {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}

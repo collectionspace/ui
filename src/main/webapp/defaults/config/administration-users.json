@@ -9,6 +9,16 @@
                 "admin": {
                     "type": "cspace.admin",
                     "options": {
+                        "produceTree": "cspace.admin.produceAdminUserTree",
+                        "selectors": {
+                            "searchField": ".csc-user-searchField",
+                            "searchNote": ".csc-users-searchNote",
+                            "searchButton": ".csc-user-searchButton",
+                            "unSearchButton": ".csc-user-unSearchButton"
+                        },
+                        "invokers": {
+                            "search": "cspace.admin.search"
+                        },
                         "components": {
                             "adminRecordEditor": {
                                 "options": {

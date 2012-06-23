@@ -215,8 +215,54 @@ cspace = cspace || {};
         };
     };
 
+    cspace.admin.produceAdminUserTree = function (that) {
+        return fluid.merge(null, cspace.admin.produceTree(that), {
+            searchField: "${query}",
+            searchNote: {
+                messagekey: "users-searchNote"
+            },
+            searchButton: {
+                messagekey: "users-search",
+                decorators: {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.search
+                }
+            },
+            unSearchButton: {
+                messagekey: "users-unsearch",
+                decorators: {
+                    addClass: "hidden"
+                }
+            }
+        });
+    };
+
     cspace.admin.assertRoleDisplay = function (displayString) {
         return displayString !== "none";
+    };
+
+    cspace.admin.search = function (that) {
+        var globalNavigator = fluid.get(that, "adminRecordEditor.globalNavigator"),
+            instantiator = that.instantiator,
+            listView = "adminListView",
+            recordEditor = "adminRecordEditor",
+            banner = "banner";
+        function search () {
+            if (that[recordEditor]) {
+                instantiator.clearComponent(that, recordEditor);
+            }
+            instantiator.clearComponent(that, banner);
+            instantiator.clearComponent(that, listView);
+            fluid.initDependent(that, banner, instantiator);
+            fluid.initDependent(that, listView, instantiator);
+            that.locate("unSearchButton").show();
+        }
+        if (!globalNavigator) {
+            search();
+            return;
+        }
+        globalNavigator.events.onPerformNavigation.fire(search);
     };
 
     fluid.defaults("cspace.admin.showAddButton", {
@@ -293,6 +339,11 @@ cspace = cspace || {};
         that.options.recordEditor.hide();
     };
 
+    fluid.demands("cspace.admin.search", "cspace.admin", {
+        funcName: "cspace.admin.search",
+        args: ["{admin}"]
+    });
+
     fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.admin"], {
         funcName: "cspace.listView.testDataSourceAdmin",
         args: {
@@ -324,121 +375,7 @@ cspace = cspace || {};
     cspace.listView.testDataSourceAdmin = cspace.URLDataSource;
 
     /*
-fluid.defaults("cspace.admin", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"],
-        produceTree: "cspace.admin.produceTree",
-        renderOnInit: true,
-        components: {
-            adminListEditor: {
-                type: "cspace.listEditor"
-            }
-        },
-        preInitFunction: "cspace.admin.preInit",
-        parentBundle: "{globalBundle}",
-        selectors: {
-            listHeader: ".csc-admin-listHeader",
-            add: ".csc-admin-add",
-            detailsHeader: ".csc-admin-detailsHeader",
-            detailsNone: ".csc-admin-detailsNone",
-            detaulsNoneSelected: ".csc-admin-detailsNoneSelected"
-        },
-        model: {
-            strings: {
-                add: "%recordType-admin-add",
-                listHeader: "%recordType-admin-listHeader",
-                detailsHeader: "%recordType-admin-detailsHeader",
-                detailsNone: "%recordType-admin-detailsNone",
-                detaulsNoneSelected: "%recordType-admin-detaulsNoneSelected"
-            }
-        },
-        permissionsResolver: "{permissionsResolver}",
-        addButtonPermission: "create",
-        strings: {}
-    });
-    
-    cspace.admin.preInit = function (that) {
-        that.model.strings = cspace.util.stringBuilder(that.model.strings, {
-            vars: {
-                recordType: that.options.recordType
-            }
-        });
-    };
-    
-    cspace.admin.produceTree = function (that) {
-        return {
-            listHeader: {
-                messagekey: "${strings.listHeader}"
-            },
-            detailsHeader: {
-                messagekey: "${strings.detailsHeader}"
-            },
-            detailsNone: {
-                messagekey: "${strings.detailsNone}"
-            },
-            detaulsNoneSelected: {
-                messagekey: "${strings.detaulsNoneSelected}"
-            },
-            expander: {
-                type: "fluid.renderer.condition",
-                condition: {
-                    funcName: "cspace.permissions.resolve",
-                    args: {
-                        permission: that.options.addButtonPermission,
-                        target: that.options.recordType,
-                        resolver: that.options.permissionsResolver
-                    }
-                },
-                trueTree: {
-                    add: {
-                        decorators: {
-                            type: "attrs",
-                            attributes: {
-                                value: that.options.parentBundle.messageBase[that.model.strings.add]
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    };
-    
-    cspace.admin.produceAdminUserTree = function (that) {
-        return fluid.merge(null, cspace.admin.produceTree(that), {
-            passwordLabel: {
-                messagekey: "users-passwordLabel"
-            },
-            passwordConfirmLabel: {
-                messagekey: "users-confirmPasswordLabel"
-            },
-            passwordInstructionsLabel: {
-                messagekey: "users-passwordInstructionsLabel"
-            },
-            searchNote: {
-                messagekey: "users-searchNote"
-            },
-            searchButton: {
-                decorators: {
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.parentBundle.messageBase["users-search"]
-                    } 
-                }
-            },
-            unSearchButton: {
-                decorators: {
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.parentBundle.messageBase["users-unsearch"]
-                    } 
-                }
-            }
-        });
-    };
-    
-    cspace.admin.assertRoleDisplay = function (displayString) {
-        return displayString !== "none";
-    };
-    
+
     cspace.admin.finalInit = function (that) {
         that.bindEvents();
         that.events.afterSetup.fire(that);
