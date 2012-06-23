@@ -22,7 +22,7 @@ cspace = cspace || {};
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         produceTree: "cspace.admin.produceTree",
         components: {
-            globalSetup: "{globalSetup}",
+            instantiator: "{instantiator}",
             showAddButton: {
                 type: "cspace.admin.showAddButton",
                 options: {
@@ -99,8 +99,12 @@ cspace = cspace || {};
                     listeners: {
                         afterRecordRender: "{loadingIndicator}.events.hideOn.fire",
                         afterSave: "{admin}.afterRecordSave",
-                        afterRemove: "{admin}.afterRecordRemove"
-                    }
+                        afterRemove: {
+                            listener: "{admin}.afterRecordRemove",
+                            priority: "last"
+                        }
+                    },
+                    strings: "{admin}.model.strings"
                 },
                 createOnEvent: "onSelect"
             }
@@ -113,10 +117,7 @@ cspace = cspace || {};
             onCreateNewRecord: "{admin}.onCreateNewRecord",
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
-                "{admin}.onSelectHandler", {
-                    listener: "{admin}.applyGlobalNavigator",
-                    priority: "last"
-                }
+                "{admin}.onSelectHandler"
             ]
         },
         preInitFunction: "cspace.admin.preInit",
@@ -138,7 +139,10 @@ cspace = cspace || {};
                 listViewHeader: "%recordType-admin-listHeader",
                 recordEditorHeader: "%recordType-admin-detailsHeader",
                 bannerTop: "%recordType-admin-detailsNone",
-                bannerBottom: "%recordType-admin-detaulsNoneSelected"
+                bannerBottom: "%recordType-admin-detaulsNoneSelected",
+                removeSuccessfulMessage: "recordEditor-removeSuccessfulMessage",
+                deleteFailedMessage: "recordEditor-deleteFailedMessage",
+                fetchFailedMessage: "recordEditor-fetchFailedMessage"
             }
         },
         addButtonPermission: "create",
@@ -155,13 +159,15 @@ cspace = cspace || {};
             that.adminListView.updateModel();
         };
         that.afterRecordRemove = function () {
+            var instantiator = that.instantiator,
+                banner = "banner";
             that.adminListView.updateModel();
+            instantiator.clearComponent(that, "adminRecordEditor");
+            instantiator.clearComponent(that, banner);
+            fluid.initDependent(that, banner, instantiator);
         };
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
-        };
-        that.applyGlobalNavigator = function () {
-            that.globalSetup.globalNavigator = that.adminRecordEditor.globalNavigator;
         };
         that.onCreateNewRecord = function () {
             that.events.onSelect.fire({
