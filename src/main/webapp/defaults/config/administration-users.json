@@ -17,7 +17,8 @@
                             "unSearchButton": ".csc-user-unSearchButton"
                         },
                         "invokers": {
-                            "search": "cspace.admin.search"
+                            "search": "cspace.admin.search",
+                            "unSearch": "cspace.admin.unSearch"
                         },
                         "components": {
                             "adminRecordEditor": {

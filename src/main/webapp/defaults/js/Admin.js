@@ -231,9 +231,13 @@ cspace = cspace || {};
             },
             unSearchButton: {
                 messagekey: "users-unsearch",
-                decorators: {
+                decorators: [{
                     addClass: "hidden"
-                }
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.unSearch
+                }]
             }
         });
     };
@@ -263,6 +267,30 @@ cspace = cspace || {};
             return;
         }
         globalNavigator.events.onPerformNavigation.fire(search);
+    };
+
+    cspace.admin.unSearch = function (that) {
+        var globalNavigator = fluid.get(that, "adminRecordEditor.globalNavigator"),
+            instantiator = that.instantiator,
+            listView = "adminListView",
+            recordEditor = "adminRecordEditor",
+            banner = "banner";
+        function unSearch () {
+            that.locate("searchField").val("").change();
+            that.locate("unSearchButton").hide();
+            if (that[recordEditor]) {
+                instantiator.clearComponent(that, recordEditor);
+            }
+            instantiator.clearComponent(that, banner);
+            instantiator.clearComponent(that, listView);
+            fluid.initDependent(that, banner, instantiator);
+            fluid.initDependent(that, listView, instantiator);
+        }
+        if (!globalNavigator) {
+            unSearch();
+            return;
+        }
+        globalNavigator.events.onPerformNavigation.fire(unSearch);
     };
 
     fluid.defaults("cspace.admin.showAddButton", {
@@ -344,6 +372,11 @@ cspace = cspace || {};
         args: ["{admin}"]
     });
 
+    fluid.demands("cspace.admin.unSearch", "cspace.admin", {
+        funcName: "cspace.admin.unSearch",
+        args: ["{admin}"]
+    });
+
     fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.admin"], {
         funcName: "cspace.listView.testDataSourceAdmin",
         args: {
@@ -410,12 +443,6 @@ cspace = cspace || {};
                 that.adminListEditor.updateList();
             });
         }).hide();
-        that.locate("searchButton").click(function () {
-            that.globalNavigator.events.onPerformNavigation.fire(function () {
-                that.adminListEditor.updateList();
-                that.locate("unSearchButton").show();
-            });
-        });
 
         that.adminListEditor.details.events.onSave.addListener(that.validate);
         that.adminListEditor.events.pageReady.addListener(function () {
