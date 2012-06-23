@@ -1355,6 +1355,16 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.users"], {
+        options: {
+            selectors: {
+                passwordConfirmLabel: ".csc-users-passwordConfirm-label",
+                passwordInstructionsLabel: ".csc-users-passwordInstructions-label"
+            },
+            produceTree: "cspace.recordEditor.recordRenderer.produceTreeUsersAdmin"
+        }
+    });
+
     fluid.defaults("cspace.recordEditor.recordRenderer", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -1477,6 +1487,17 @@ cspace = cspace || {};
         return tree;
     };
 
+    cspace.recordEditor.recordRenderer.produceTreeUsersAdmin = function (that) {
+        var tree = cspace.recordEditor.recordRenderer.produceTree(that);
+        tree.passwordConfirmLabel = {
+            messagekey: "users-confirmPasswordLabel"
+        };
+        tree.passwordInstructionsLabel = {
+            messagekey: "users-passwordInstructionsLabel"
+        };
+        return tree;
+    };
+
     cspace.recordEditor.recordRenderer.produceTreeRoleAdmin = function (that) {
         var tree = cspace.recordEditor.recordRenderer.produceTree(that);
         tree.noneLabel = {
@@ -1500,7 +1521,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.recordEditor.dataSource", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
         mergePolicy: {
             schema: "nomerge"
         },
@@ -1551,6 +1572,43 @@ cspace = cspace || {};
             urls: cspace.componentUrlBuilder({
                 recordURL: "%tenant/%tname/%recordType/%csid"
             })
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.admin", "cspace.users"], {
+        options: {
+            finalInitFunction: "cspace.recordEditor.dataSource.finalInitUserAdmin",
+            preInitFunction: "cspace.recordEditor.dataSource.preInitUserAdmin",
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsidTab",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            urls: cspace.componentUrlBuilder({
+                recordURL: "%tenant/%tname/%recordType/%csid",
+                roleUrl: "%tenant/%tname/role/"
+            }),
+            components: {
+                sourceRole: {
+                    type: "cspace.recordEditor.dataSource.sourceRole"
+                }
+            },
+            events: {
+                afterGetSource: null,
+                afterGetSourceRole: null,
+                afterGet: {
+                    events: {
+                        source: "{that}.events.afterGetSource",
+                        sourceRole: "{that}.events.afterGetSourceRole"
+                    },
+                    args: ["{arguments}.source.0", "{arguments}.source.1", "{arguments}.sourceRole.0"]
+                }
+            },
+            listeners: {
+                afterGet: "{that}.afterGet"
+            }
         }
     });
 
@@ -1625,6 +1683,39 @@ cspace = cspace || {};
 
     cspace.recordEditor.dataSource.resolveCsid = function (modelCsid, optionsCsid) {
         return modelCsid || optionsCsid || cspace.util.getUrlParameter("csid");
+    };
+
+    cspace.recordEditor.dataSource.preInitUserAdmin = function (that) {
+        that.afterGet = function (callback, user, roles) {
+            var roles = fluid.transform(roles, function (role) {
+                return {
+                    roleId: role.csid,
+                    roleName: role.number,
+                    roleSelected: fluid.find(fluid.get(user, "fields.role"), function (roleSelected) {
+                        if (role.csid === roleSelected.roleId) {return true;}
+                    }) || false
+                };
+            });
+            fluid.set(user, "fields.role", roles);
+            callback(user);
+        };
+    };
+
+    cspace.recordEditor.dataSource.finalInitUserAdmin = function (that) {
+        that.get = function (callback) {
+            that.sourceRole.get({}, function (data) {
+                that.events.afterGetSourceRole.fire(data);
+            });
+            if (!that.options.csid) {
+                that.events.afterGetSource.fire(callback, cspace.util.getBeanValue({}, that.options.recordType, that.options.schema));
+                return;
+            }
+            that.source.get({
+                csid: that.options.csid
+            }, function (data) {
+                that.events.afterGetSource.fire(callback, data);
+            });
+        };
     };
 
     cspace.recordEditor.dataSource.finalInit = function (that) {
@@ -1753,5 +1844,32 @@ cspace = cspace || {};
         url: "%test/data/basic/%recordType/%csid.json"
     });
     cspace.recordEditor.dataSource.testDataSourceFull = cspace.URLDataSource;
+
+    fluid.demands("cspace.recordEditor.dataSource.sourceRole",  ["cspace.localData", "cspace.recordEditor.dataSource"], {
+        funcName: "cspace.recordEditor.dataSource.testDataSourceRole",
+        args: {
+            targetTypeName: "cspace.recordEditor.dataSource.testDataSourceRole",
+            termMap: {},
+            responseParser: "cspace.recordEditor.dataSource.responseParserRole"
+        }
+    });
+    fluid.demands("cspace.recordEditor.dataSource.sourceRole", ["cspace.recordEditor.dataSource"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.recordEditor.dataSource}.options.urls.roleUrl",
+            termMap: {},
+            responseParser: "cspace.recordEditor.dataSource.responseParserRole",
+            targetTypeName: "cspace.recordEditor.dataSource.sourceRole"
+        }
+    });
+
+    cspace.recordEditor.dataSource.responseParserRole = function (data) {
+        return data.items;
+    };
+
+    fluid.defaults("cspace.recordEditor.dataSource.testDataSourceRole", {
+        url: "%test/data/role/records.json"
+    });
+    cspace.recordEditor.dataSource.testDataSourceRole = cspace.URLDataSource;
     
 })(jQuery, fluid);

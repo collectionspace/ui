@@ -429,23 +429,6 @@ fluid.defaults("cspace.admin", {
         });
     };
     
-    cspace.admin.produceAdminRoleTree = function (that) {
-        return fluid.merge(null, cspace.admin.produceTree(that), {
-            noneLabel: {
-                messagekey: "role-none"
-            },
-            readLabel: {
-                messagekey: "role-read"
-            },
-            writeLabel: {
-                messagekey: "role-write"
-            },
-            deleteLabel: {
-                messagekey: "role-delete"
-            }
-        });
-    };
-    
     cspace.admin.assertRoleDisplay = function (displayString) {
         return displayString !== "none";
     };
