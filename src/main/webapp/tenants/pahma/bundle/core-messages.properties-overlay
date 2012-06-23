@@ -51,6 +51,7 @@ vocab-location: PAHMA Storage Locations
 vocab-taxon: PAHMA Taxon Authority
 
 # Cataloging record
+collection-object-homeLocationLabel: Home location
 collection-object-commentsLabel: Object comments
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history

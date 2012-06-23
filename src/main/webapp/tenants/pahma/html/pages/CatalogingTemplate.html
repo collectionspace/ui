@@ -33,7 +33,7 @@
 										<input type="text" class="csc-object-identification-object-number pattern-chooser-input" />
 									</div>
 									<div class="clear"></div>
-									<div class="pahma-note">
+									<div class="hidden pahma-note">
 										<span class="csc-collection-object-sortableObjectNumber-label"></span>: <input type="text" class="csc-collection-object-sortableObjectNumber" style="width: 75%"/>
 									</div>
 								</div>
@@ -73,29 +73,37 @@
 							</div>
 						</div>
 						-->
-            			<div class="info-pair"> <!-- Alternate numbers (PAHMA replacement until notes added to otherNumbers) -->
-            				<div class="header">
-            					<div class="label csc-collection-object-pahmaAltNumGroupList-label">Alternate numbers</div> <!-- Move label to core-messages.properties  -->
-            				</div>
-            				<div class="content pahmaCustomColumnWidth">
-            					<table>
-            						<thead>
-            							<tr>
-            								<td class="csc-collection-object-pahmaAltNum-label"></td>
-            								<td class="csc-collection-object-pahmaAltNumType-label fixedwidth30"></td>
-            								<td class="csc-collection-object-pahmaAltNumNote-label"></td>
-            							</tr>
-            						</thead>
-            						<tbody>
-            							<tr class="csc-collection-object-pahmaAltNumGroup">
-            								<td><input type="text" class="csc-collection-object-pahmaAltNum"/></td>
-            								<td><select class="csc-collection-object-pahmaAltNumType input-select"><option value="">Options not loaded</option></select></td>
-            								<td><input type="text" class="csc-collection-object-pahmaAltNumNote"/></td>
-            							</tr>
-            						</tbody>
-            					</table>
-            				</div>
-            			</div>
+						<div class="info-pair"> <!-- Alternate numbers (PAHMA replacement until notes added to otherNumbers) -->
+							<div class="header">
+								<div class="label csc-collection-object-pahmaAltNumGroupList-label">Alternate numbers</div> <!-- Move label to core-messages.properties	 -->
+							</div>
+							<div class="content pahmaCustomColumnWidth">
+								<table>
+									<thead>
+										<tr>
+											<td class="csc-collection-object-pahmaAltNum-label"></td>
+											<td class="csc-collection-object-pahmaAltNumType-label fixedwidth30"></td>
+											<td class="csc-collection-object-pahmaAltNumNote-label"></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="csc-collection-object-pahmaAltNumGroup">
+											<td><input type="text" class="csc-collection-object-pahmaAltNum"/></td>
+											<td><select class="csc-collection-object-pahmaAltNumType input-select"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="csc-collection-object-pahmaAltNumNote"/></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-homeLocation-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-collection-object-homeLocation"/>
+							</div>
+						</div>
 					</div>
 
 					<div class="info-column2-50 fl-force-right">  <!-- Inventory count, Object status, Brief description -->
