@@ -942,14 +942,14 @@ table.cs-admin-table td.checkbox {
     background-color:#FFE7E3;}
 .csc-role-list {
     /*padding-top:12px;*/}
-.csc-listEditor-details-none, .cs-relatedRecordsTab-record-banner {
+.csc-listEditor-details-none, .cs-relatedRecordsTab-record-banner, .cs-admin-banner {
     background-color:#C2D7EC; 
     padding:30px; 
     color:white; 
     font-size:40px; 
     font-weight:bold; 
     line-height:110%;}
-.details-none, .cs-relatedRecordsTab-record-banner-messageBottom {
+.details-none, .cs-relatedRecordsTab-record-banner-messageBottom, .cs-admin-bannerBottom {
     background:transparent url("../images/whiteArrow.png") no-repeat 0 center; 
     padding: 5px 0 0 45px; 
     margin-top:15px; 

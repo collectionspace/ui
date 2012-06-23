@@ -135,6 +135,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/defaults/css/cspace.css</css>
+    <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/cabinet.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/search.css</css>
@@ -163,9 +164,14 @@
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/ListEditor.js</js>
     <js>/defaults/js/TitleBar.js</js>
+    <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Tabs.js</js>
     <js>/defaults/js/Admin.js</js>
     <js>/defaults/js/Search.js</js>
+    <js>/defaults/js/RecordTraverser.js</js>
+    <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
+    <js>/defaults/lib/datejs/src/core.js</js>
+    <js>/defaults/lib/datejs/src/parser.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   

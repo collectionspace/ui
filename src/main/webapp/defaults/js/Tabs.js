@@ -142,9 +142,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.tabs", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         postInitFunction: "cspace.tabs.postInit",
-        finalInitFunction: "cspace.tabs.finalInit",
         components: {
-            globalNavigator: "{recordEditor}.globalNavigator",
             tabsList: {
                 type: "cspace.tabsList"
             },
@@ -196,9 +194,9 @@ cspace = cspace || {};
         }
     };
 
-    cspace.tabs.finalInit = function (that) {
-        that.tabify();
-
+    cspace.tabs.finalInitSecondary = function (that) {
+        cspace.tabs.finalInit(that);
+        
         // Disable tabs unless record is saved.
         var globalModel = that.globalModel,
             tabs = that.locate("tabs"),
@@ -219,7 +217,11 @@ cspace = cspace || {};
             }, "cspace.tabs.finalInit");
         }
     };
-    
+
+    cspace.tabs.finalInit = function (that) {
+        that.tabify();
+    };
+
     cspace.tabs.tabsSuccess = function (data, textStatus, XMLHttpRequest, tabsList, tabContainer, setupTab) {
         var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
         setupTab(tabModel.type || tabModel["name"]);
@@ -272,6 +274,22 @@ cspace = cspace || {};
                 }, function () {
                     tabsSelect(ui);
                 });
+            });
+            return false;
+        }
+    };
+
+    cspace.tabs.tabsSelectWrapperAdmin = function (event, ui, tabsList, styles, tabsSelect) {
+        // noPrevent environment is set when user selects an option on the dialog
+        // at the point we don't want the dialog to show again.
+        if (!fluid.resolveEnvironment("{noPrevent}", {fetcher: fluid.makeEnvironmentFetcher()})) {
+            tabsList.locate("tabLink").removeClass(styles.current);
+            $(ui.tab).addClass(styles.current);
+            // set the noPrevent environment and trigger the select on the tab.
+            fluid.withEnvironment({
+                noPrevent: true
+            }, function () {
+                tabsSelect(ui);
             });
             return false;
         }

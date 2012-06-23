@@ -1248,6 +1248,59 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.listView", ["cspace.admin", "cspace.termlist"], {
+            options: fluid.COMPONENT_OPTIONS
+        });
+        fluid.demands("cspace.listView", ["cspace.admin", "cspace.users"], {
+            options: {
+                urls: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: {
+                            listUrl: "%tenant/%tname/%recordType/search?query=%query&pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
+                        }
+                    }
+                },
+                elPath: "results",
+                // TODO: Disabling pagintaion related things, since it does not work yet for users.
+                disablePageSize: true,
+                model: {
+                    // TODO: Disabling pagintaion related things, since it does not work yet for users.
+                    pageSizeList: ["40"],
+                    pagerModel: {
+                        pageSize: 40
+                    },
+                    columns: [{
+                        sortable: false,
+                        id: "screenName",
+                        name: "%recordType-screenName"
+                    }, {
+                        sortable: false,
+                        id: "status",
+                        name: "%recordType-status"
+                    }]
+                }
+            }
+        });
+        fluid.demands("cspace.listView", ["cspace.admin", "cspace.role"], {
+            options: {
+                elPath: "items",
+                disablePageSize: true,
+                stubbPagination: true,
+                model: {
+                    pageSizeList: ["40"],
+                    pagerModel: {
+                        pageSize: 40
+                    },
+                    columns: [{
+                        sortable: false,
+                        id: "number",
+                        name: "%recordType-number"
+                    }]
+                }
+            }
+        });
         fluid.demands("cspace.listView", "cspace.sidebar", {
             options: fluid.COMPONENT_OPTIONS
         });
@@ -1907,6 +1960,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("tabs", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.tabs",
             options: {
+                finalInitFunction: "cspace.tabs.finalInitSecondary",
                 primaryRecordType: "{pageBuilder}.options.pageType",
                 applier: "{pageBuilder}.applier",
                 model: "{pageBuilder}.model"
@@ -1915,6 +1969,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("tabs", ["cspace.pageBuilder", "cspace.administration"], {
             container: "{pageBuilder}.options.selectors.tabs",
             options: {
+                finalInitFunction: "cspace.tabs.finalInit",
                 configURLTemplate: "%webapp/config/administration-%record.json"
             }
         });
@@ -1931,7 +1986,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("cspace.tabs.tabsSelectWrapper", "cspace.tabs", {
             funcName: "cspace.tabs.tabsSelectWrapper",
-            args: ["{arguments}.0", "{arguments}.1", "{tabs}.globalNavigator", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
+            args: ["{arguments}.0", "{arguments}.1", "{recordEditor}.globalNavigator", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
+        });
+
+        fluid.demands("cspace.tabs.tabsSelectWrapper", ["cspace.tabs" ,"cspace.administration"], {
+            funcName: "cspace.tabs.tabsSelectWrapperAdmin",
+            args: ["{arguments}.0", "{arguments}.1", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
         });
         
         fluid.demands("cspace.tabs.setupTab", "cspace.tabs", {

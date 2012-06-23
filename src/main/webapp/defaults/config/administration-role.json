@@ -9,13 +9,13 @@
                 "admin": {
                     "type": "cspace.admin",
                     "options": {
-                        "uispec": "{pageBuilder}.options.uispec",
-                        "produceTree": "cspace.admin.produceAdminRoleTree",
-                        "selectors": {
-                            "noneLabel": ".csc-role-none",
-                            "readLabel": ".csc-role-read",
-                            "writeLabel": ".csc-role-write",
-                            "deleteLabel": ".csc-role-delete"
+                        "components": {
+                            "adminRecordEditor": {
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "showDeleteButton": true
+                                }
+                            }
                         }
                     }
                 }

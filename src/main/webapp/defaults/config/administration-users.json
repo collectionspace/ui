@@ -9,52 +9,45 @@
                 "admin": {
                     "type": "cspace.admin",
                     "options": {
-                        "uispec": "{pageBuilder}.options.uispec",
-                        "login": "{userLogin}",
-                        "queryURL": {
-                            "expander": {
-                                "type": "fluid.deferredInvokeCall",
-                                "func": "cspace.util.urlBuilder",
-                                "args": "%tenant/%tname/users/search?query="
-                            }
-                        },
                         "produceTree": "cspace.admin.produceAdminUserTree",
-                        "events": {
-                            "afterTreeRender": null,
-                            "afterSetup": null
-                        },
-                        "selectorsToIgnore": ["searchField", "deleteButton", "userId", "email", "userName", "password", "passwordConfirm"],
                         "selectors": {
                             "searchField": ".csc-user-searchField",
-                            "deleteButton": ".csc-delete",
-                            "searchButton": ".csc-user-searchButton",
                             "searchNote": ".csc-users-searchNote",
+                            "searchButton": ".csc-user-searchButton",
                             "unSearchButton": ".csc-user-unSearchButton",
-                            "userId": ".csc-user-userID",
-                            "email": ".csc-user-email",
-                            "userName": ".csc-user-userName",
                             "password": ".csc-user-password",
-                            "passwordConfirm": ".csc-user-passwordConfirm",
-                            "passwordLabel": ".csc-users-password-label",
-                            "passwordConfirmLabel": ".csc-users-passwordConfirm-label",
-                            "passwordInstructionsLabel": ".csc-users-passwordInstructions-label"
+                            "passwordConfirm": ".csc-user-passwordConfirm"
                         },
+                        "selectorsToIgnore": ["recordEditor", "listView", "banner", "password", "passwordConfirm"],
+                        "invokers": {
+                            "search": "cspace.admin.search",
+                            "unSearch": "cspace.admin.unSearch",
+                            "validate": "cspace.admin.validate"
+                        },
+                        "preInitFunction": "cspace.admin.preInitUserAdmin",
                         "components": {
                             "passwordValidator": {
                                 "type": "cspace.passwordValidator"
-                            }
-                        },
-                        "invokers": {
-                            "validate": {
-                                "funcName": "cspace.admin.validate",
-                                "args": ["{messageBar}", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
                             },
-                            "bindEvents": {
-                                "funcName": "cspace.admin.bindEventHandlers",
-                                "args": "{admin}"
+                            "adminRecordEditor": {
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "showDeleteButton": {
+                                        "expander": {
+                                            "type": "fluid.deferredInvokeCall",
+                                            "func": "cspace.admin.isCurrentUser",
+                                            "args": ["{userLogin}.options.csid", "{admin}.selectedRecordCsid"]
+                                        }
+                                    },
+                                    "listeners": {
+                                        "onSave": {
+                                            "listener": "{admin}.onSave",
+                                            "priority": "first"
+                                        }
+                                    }
+                                }
                             }
-                        },
-                        "finalInitFunction": "cspace.admin.finalInit"
+                        }
                     }
                 }
             }
