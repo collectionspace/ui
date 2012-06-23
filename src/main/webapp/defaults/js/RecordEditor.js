@@ -571,12 +571,12 @@ cspace = cspace || {};
         args: ["{confirmation}", "{globalBundle}", "{remover}.options.urls.deleteURL", "{recordEditor}.options.recordType"]
     });
 
-    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.listEditor", "cspace.admin"], {
+    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.recordEditor.remover", "cspace.admin"], {
         funcName: "cspace.recordEditor.remover.statusAfterDelete",
         args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
     });
 
-    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.listEditor", "cspace.tab"], {
+    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.recordEditor.remover", "cspace.tab"], {
         funcName: "cspace.recordEditor.remover.statusAfterDelete",
         args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
     });
@@ -623,7 +623,7 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.remover.openConfirmation = function (confirmation, recordDataSource, parentBundle, that, procedures, cataloging) {
-        var hasRelations = procedures.items.length + cataloging.items.length > 0;
+        var hasRelations = fluid.get(procedures, "items.length") || 0 + fluid.get(cataloging, "items.length") || 0 > 0;
         confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
                 onClose: function (userAction) {
@@ -1343,6 +1343,18 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.role"], {
+        options: {
+            selectors: {
+                noneLabel: ".csc-role-none",
+                readLabel: ".csc-role-read",
+                writeLabel: ".csc-role-write",
+                deleteLabel: ".csc-role-delete"
+            },
+            produceTree: "cspace.recordEditor.recordRenderer.produceTreeRoleAdmin"
+        }
+    });
+
     fluid.defaults("cspace.recordEditor.recordRenderer", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -1461,6 +1473,23 @@ cspace = cspace || {};
                 type: "fluid",
                 func: "cspace.templateEditor"
             }
+        };
+        return tree;
+    };
+
+    cspace.recordEditor.recordRenderer.produceTreeRoleAdmin = function (that) {
+        var tree = cspace.recordEditor.recordRenderer.produceTree(that);
+        tree.noneLabel = {
+            messagekey: "role-none"
+        };
+        tree.readLabel = {
+            messagekey: "role-read"
+        };
+        tree.writeLabel = {
+            messagekey: "role-write"
+        };
+        tree.deleteLabel = {
+            messagekey: "role-delete"
         };
         return tree;
     };
