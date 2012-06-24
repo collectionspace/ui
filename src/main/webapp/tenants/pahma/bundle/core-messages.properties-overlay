@@ -49,6 +49,7 @@ vocab-person: PAHMA Person Authority
 vocab-place: PAHMA Place Authority
 vocab-location: PAHMA Storage Locations
 vocab-taxon: PAHMA Taxon Authority
+vocab-crate: Crates
 
 # Cataloging record
 collection-object-homeLocationLabel: Home location
