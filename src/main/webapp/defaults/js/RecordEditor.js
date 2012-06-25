@@ -24,7 +24,7 @@ cspace = cspace || {};
             fieldsToIgnore: "replace",
             "uispec": "nomerge"
         },
-        fieldsToIgnore: ["fields.csid"],
+        fieldsToIgnore: ["csid", "fields.csid"],
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
         selectors: {
