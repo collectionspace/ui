@@ -75,7 +75,7 @@ cspace = cspace || {};
             currentRelease: "http://www.collectionspace.org/current_release",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+2.4+Feedback",
             version: "2.4",
-            support: "mailto:cspace-support@lists.berkeley.edu?subject=%5BPAHMA%5D%20"
+            support: "mailto:cspace-support@lists.berkeley.edu?subject=%5BPAHMA-CSpace%5D%20"
         },
         resources: {
             template: {
