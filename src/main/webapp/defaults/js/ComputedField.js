@@ -162,9 +162,8 @@ cspace = cspace || {};
      * When the value of the field is updated in the model, update it in the view.
      */
     cspace.computedField.bindModelEvents = function (that) {
-        fluid.each(that.options.args, function(argElPath) {
-            var fullArgElPath = that.resolveElPath(argElPath);
-            var namespace = that.getArgListenerNamespace(argElPath);
+        fluid.each(that.fullArgElPaths, function(fullArgElPath) {
+            var namespace = that.getArgListenerNamespace(fullArgElPath);
             
             that.applier.modelChanged.addListener(fullArgElPath, function(model) {
                 that.refresh();
@@ -217,9 +216,8 @@ cspace = cspace || {};
     cspace.computedField.calculateFieldValue = function (that) {
         var args = [];
 
-        fluid.each(that.options.args, function(argElPath) {
-            var fullElPath = that.resolveElPath(argElPath);
-            args.push(fluid.get(that.model, fullElPath));
+        fluid.each(that.fullArgElPaths, function(fullArgElPath) {
+            args.push(fluid.get(that.model, fullArgElPath));
         });
 
         return fluid.invoke(that.options.func, args);
@@ -232,9 +230,6 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-<<<<<<< HEAD
-        return cspace.util.composeSegments(that.options.root, elPath);
-=======
         var root = that.options.root;
         
         if (that.fullElPath.match(/^fields\./) && !root) {
@@ -242,15 +237,16 @@ cspace = cspace || {};
         }
 
         return cspace.util.composeSegments(root, elPath);
->>>>>>> db0d991... PAHMA-321: Add support for using computed fields on the advanced search form.
     };
     
     /*
-     * Returns the passed arguments as a comma separated string. This is useful as a default calculation function.
+     * Returns the passed arguments as a comma-separated string. This is useful as a default calculation function.
      */
     cspace.computedField.joinArgs = function () {
+        // The arguments to a javascript function are stored in the variable named arguments, which is
+        // Array-like, but not an Array. Convert it to an Array using Array.prototype.slice.
         var args = Array.prototype.slice.call(arguments);
-        return args.join(", ");
+        return ("[" + args.join(", ") + "]");
     };
 
     /*
