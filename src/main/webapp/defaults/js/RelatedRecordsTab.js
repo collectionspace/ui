@@ -202,6 +202,7 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
+        that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
             if (related !== that.options.related) {
                 return;
