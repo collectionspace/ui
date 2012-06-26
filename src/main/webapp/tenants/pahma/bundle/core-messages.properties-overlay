@@ -49,6 +49,7 @@ vocab-person: PAHMA Person Authority
 vocab-place: PAHMA Place Authority
 vocab-location: PAHMA Storage Locations
 vocab-taxon: PAHMA Taxon Authority
+vocab-crate: Crates
 
 # Cataloging record
 collection-object-homeLocationLabel: Home location
@@ -424,6 +425,7 @@ preferredOA-additionsToNameLabel: Additions to name
 movement-movementReferenceNumberLabel: Reference number
 movement-locationMovementInformationLabel: Inventory/Movement Information
 movement-currentLocationLabel: Storage location
+movement-crateLabel: Crate
 movement-currentLocationMISSINGLabel: Storage location
 movement-currentLocationNoteLabel: Storage note
 movement-locationDateLabel: Inventory/Move date
