@@ -258,7 +258,7 @@ cspace = cspace || {};
     };
     
     cspace.reportProducer.generateReport = function (confirmation, parentBundle, requestReport, recordEditor) {
-        if (recordEditor && recordEditor.unsavedChanges) {
+        if (fluid.get(recordEditor, "changeTracker.unsavedChanges")) {
             openConfirmation(confirmation, "saveDialog", {
                 messages: [ "reporting-dialog-primaryMessageSave" ],
                 messagekeys: {
