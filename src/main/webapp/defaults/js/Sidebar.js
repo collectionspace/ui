@@ -279,10 +279,12 @@ cspace = cspace || {};
         },
         strings: {},
         events: {
-            onRender: null
+            onRender: null,
+            primaryRecordSaved: "{globalEvents}.events.primaryRecordSaved"
         },
         listeners: {
-            onRender: "{cspace.sidebar.media}.onRender"
+            onRender: "{cspace.sidebar.media}.onRender",
+            primaryRecordSaved: "{cspace.sidebar.media}.onRender"
         },
         relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
     });
