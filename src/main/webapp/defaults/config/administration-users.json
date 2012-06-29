@@ -16,15 +16,18 @@
                             "searchButton": ".csc-user-searchButton",
                             "unSearchButton": ".csc-user-unSearchButton",
                             "password": ".csc-user-password",
-                            "passwordConfirm": ".csc-user-passwordConfirm"
+                            "passwordConfirm": ".csc-user-passwordConfirm",
+                            "status": ".csc-user-status",
+                            "statusLabel": ".csc-users-status-label"
                         },
-                        "selectorsToIgnore": ["recordEditor", "listView", "banner", "password", "passwordConfirm"],
+                        "selectorsToIgnore": ["recordEditor", "listView", "banner", "password", "passwordConfirm", "status", "statusLabel"],
                         "invokers": {
                             "search": "cspace.admin.search",
                             "unSearch": "cspace.admin.unSearch",
                             "validate": "cspace.admin.validate"
                         },
                         "preInitFunction": "cspace.admin.preInitUserAdmin",
+                        "userId": "{userLogin}.options.userId",
                         "components": {
                             "passwordValidator": {
                                 "type": "cspace.passwordValidator"
@@ -43,6 +46,9 @@
                                         "onSave": {
                                             "listener": "{admin}.onSave",
                                             "priority": "first"
+                                        },
+                                        "afterRecordRender": {
+                                            "listener": "{admin}.processStatus"
                                         }
                                     }
                                 }

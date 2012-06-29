@@ -191,6 +191,12 @@ cspace = cspace || {};
         that.onSave = function () {
             return that.validate();
         };
+        that.processStatus = function () {
+            if (that.options.userId !== fluid.get(that.adminRecordEditor.model, "fields.userId")) {
+                return;
+            }
+            that.locate("status").add(that.locate("statusLabel")).hide();
+        };
     };
 
     cspace.admin.finalInit = function (that) {
