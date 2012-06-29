@@ -617,32 +617,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: "{recordEditor}"
         });
         
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "person"], {
-            funcName: "cspace.recordEditor.remover.removeWithCheck",
-            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
-        });
-        
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "organization"], {
-            funcName: "cspace.recordEditor.remover.removeWithCheck",
-            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
-        });
-        
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "taxon"], {
-            funcName: "cspace.recordEditor.remover.removeWithCheck",
-            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
-        });
-        
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "location"], {
-            funcName: "cspace.recordEditor.remover.removeWithCheck",
-            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
-        });
-
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "concept"], {
-            funcName: "cspace.recordEditor.remover.removeWithCheck",
-            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
-        });
-        
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "place"], {
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "cspace.authority"], {
             funcName: "cspace.recordEditor.remover.removeWithCheck",
             args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });

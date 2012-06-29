@@ -555,6 +555,7 @@ cspace = cspace || {};
             afterRemove: "{cspace.recordEditor.remover}.afterRemoveHandler"
         },
         components: {
+            vocab: "{vocab}",
             proceduresDataSource: {
                 type: "cspace.recordEditor.remover.proceduresDataSource"
             },
@@ -576,7 +577,7 @@ cspace = cspace || {};
         urls: cspace.componentUrlBuilder({
             proceduresURL: '%tenant/%tname/%recordType/procedures/%csid?pageNum=0&pageSize=5&sortDir=1',
             catalogingURL: '%tenant/%tname/%recordType/cataloging/%csid?pageNum=0&pageSize=5&sortDir=1',
-            refobjsURL: '%tenant/%tname/%recordType/refobjs/%csid?pageNum=0&pageSize=5&sortDir=1',
+            refobjsURL: '%tenant/%tname/vocabularies/%vocab/refobjs/%csid?pageNum=0&pageSize=5&sortDir=1',
             deleteURL: "%webapp/html/findedit.html"
         })
     });
@@ -744,8 +745,8 @@ cspace = cspace || {};
         args: {
             url: "{cspace.recordEditor.remover}.options.urls.refobjsURL",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                csid: "%csid",
+                vocab: "%vocab"
             },
             targetTypeName: "cspace.recordEditor.remover.refobjsDataSource"
         }
@@ -788,10 +789,14 @@ cspace = cspace || {};
     cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle) {
         var removeMessage;
         that.refobjsDataSource.get({
-            recordType: that.options.recordType,
+            vocab: cspace.vocab.resolve({
+                model: model,
+                recordType: that.options.recordType,
+                vocab: that.vocab
+            }),
             csid: fluid.get(that.globalModel.model, "primaryModel.csid")
         }, function (data) {
-            if (fluid.makeArray(data.refobjs.results.length) > 0) {
+            if (fluid.makeArray(data.items.length) > 0) {
                 removeMessage = "deleteDialog-usedByMessage";
             }
             if (fluid.find(model.fields.narrowerContexts, function (element) {
