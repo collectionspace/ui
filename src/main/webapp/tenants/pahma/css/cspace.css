@@ -23,7 +23,7 @@ CollectionSpace 1.8 default CSS selectors
     width: 93px !important;}
 .determinationHistory .input-date {
     width: 67px !important; padding:0;}
-.determinationHistory .input-select-shorter {
+.determinationHistory .input-select-shorter, .pahmaCustomColumnWidth .input-select-shorter {
     width: 90px !important;}
 .determinationHistory .input-select-longer {
     width: 145px !important;}
