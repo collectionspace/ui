@@ -1747,7 +1747,7 @@ cspace = cspace || {};
         that.afterGetSourcePermissions = function (data) {
             that.permissions = data;
         };
-        that.afterGet = function (callback, role) {
+        that.responseParser = function (role) {
             var permissions = fluid.transform(fluid.copy(that.permissions), function (permission) {
                 return {
                     resourceName: permission.summary,
@@ -1760,6 +1760,9 @@ cspace = cspace || {};
                 };
             });
             fluid.set(role, "fields.permissions", permissions);
+        };
+        that.afterGet = function (callback, role) {
+            that.responseParser(role);
             callback(role);
         };
     };
@@ -1779,6 +1782,31 @@ cspace = cspace || {};
                 csid: that.options.csid
             }, function (data) {
                 that.events.afterGetSource.fire(callback, data);
+            });
+        };
+
+        that.set = function (model, callback) {
+            // Wrap callback with response parser.
+            var wrappedCallback = function (role) {
+                that.responseParser(role);
+                callback(role);
+            };
+
+            that.options.csid = model.csid = model.csid || that.options.csid || "";
+            var source = that.sourceFull || that.source,
+                save = that.options.csid ? "put" : "set";
+            source[save](model, {
+                csid: that.options.csid,
+                vocab: cspace.vocab.resolve({
+                    model: null,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                })
+            }, function (data) {
+                if (data.csid) {
+                    that.options.csid = that.options.csid || data.csid;
+                }
+                wrappedCallback(data);
             });
         };
     };
