@@ -1127,16 +1127,32 @@ fluid.registerNamespace("cspace.util");
         events: {
             relationsUpdated: null,
             primaryRecordCreated: null,
-            primaryRecordSaved: null
+            primaryRecordSaved: null,
+            primaryRecordMediaChanged: null
         },
         finalInitFunction: "cspace.globalEvents.finalInit"
     });
 
     cspace.globalEvents.finalInit = function (that) {
-        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
-            if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                that.events.primaryRecordCreated.fire();
+        
+        cspace.globalEvents.setListeners({
+            applier: that.globalModel.applier,
+            model: that.globalModel.model,
+            eventMap: {
+                "primaryModel.csid": that.events.primaryRecordCreated,
+                "primaryModel.fields.blobs": that.events.primaryRecordMediaChanged
             }
+        });
+    
+    };
+    
+    cspace.globalEvents.setListeners = function (options) {
+        fluid.each(options.eventMap, function (event, path) {
+            options.applier.modelChanged.addListener(path, function () {
+                if (fluid.get(options.model, path)) {
+                    event.fire();
+                }
+            });
         });
     };
 
