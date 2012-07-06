@@ -275,6 +275,9 @@ cspace = cspace || {};
             });
         };
         that.updateList = function (list) {
+            if (!list) {
+                return;
+            }
             var pagerModel = that.pager.model;
             var offset = pagerModel.pageIndex * pagerModel.pageSize;
             that.applier.requestChange("offset", offset);

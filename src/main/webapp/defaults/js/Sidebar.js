@@ -371,7 +371,7 @@ cspace = cspace || {};
         };
         
         that.getMedia = function (format) {
-            var model = fluid.get(that.globalModel.model, "primaryModel");
+            var model = that.options.recordModel;
             if (!model || !model.fields) {
                 return that.formatMedia("", format);
             }
