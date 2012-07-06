@@ -280,13 +280,21 @@ cspace = cspace || {};
         strings: {},
         events: {
             onRender: null,
-            primaryRecordSaved: "{globalEvents}.events.primaryRecordSaved"
+            primaryRecordMediaChanged: {
+                event: "{globalEvents}.events.primaryRecordMediaChanged"
+            }
         },
         listeners: {
             onRender: "{cspace.sidebar.media}.onRender",
-            primaryRecordSaved: "{cspace.sidebar.media}.onRender"
+            primaryRecordMediaChanged: "{cspace.sidebar.media}.onRender"
         },
-        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
+        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0"),
+        mergePolicy: {
+            recordApplier: "nomerge",
+            recordModel: "preserve"
+        },
+        recordApplier: "{cspace.recordEditor}.applier",
+        recordModel: "{cspace.recordEditor}.model"
     });
 
     fluid.demands("cspace.sidebar.media.dataSource",  ["cspace.localData", "cspace.sidebar.media"], {
@@ -323,6 +331,12 @@ cspace = cspace || {};
             }
             that.getRelatedMedia();
         });
+        
+        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
+            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
+                that.onRender();
+            }
+        });
     };
     
     cspace.sidebar.media.preInit = function (that) {
@@ -357,7 +371,7 @@ cspace = cspace || {};
         };
         
         that.getMedia = function (format) {
-            var model = fluid.get(that.globalModel.model, "primaryModel");
+            var model = that.options.recordModel;
             if (!model || !model.fields) {
                 return that.formatMedia("", format);
             }
@@ -384,7 +398,13 @@ cspace = cspace || {};
 		};
 				
 		that.applier.modelChanged.addListener("fields.blobCsid", function () {
-            that.refreshView();
+            that.onRender();
+        });
+        
+        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
+            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
+                that.onRender();
+            }
         });
     };
 
