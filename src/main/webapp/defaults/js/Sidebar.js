@@ -288,7 +288,13 @@ cspace = cspace || {};
             onRender: "{cspace.sidebar.media}.onRender",
             primaryRecordMediaChanged: "{cspace.sidebar.media}.onRender"
         },
-        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
+        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0"),
+        mergePolicy: {
+            recordApplier: "nomerge",
+            recordModel: "preserve"
+        },
+        recordApplier: "{cspace.recordEditor}.applier",
+        recordModel: "{cspace.recordEditor}.model"
     });
 
     fluid.demands("cspace.sidebar.media.dataSource",  ["cspace.localData", "cspace.sidebar.media"], {
@@ -324,6 +330,12 @@ cspace = cspace || {};
                 return;
             }
             that.getRelatedMedia();
+        });
+        
+        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
+            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
+                that.onRender();
+            }
         });
     };
     
@@ -386,7 +398,13 @@ cspace = cspace || {};
 		};
 				
 		that.applier.modelChanged.addListener("fields.blobCsid", function () {
-            that.refreshView();
+            that.onRender();
+        });
+        
+        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
+            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
+                that.onRender();
+            }
         });
     };
 

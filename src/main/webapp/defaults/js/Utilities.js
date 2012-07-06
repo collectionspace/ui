@@ -1139,8 +1139,7 @@ fluid.registerNamespace("cspace.util");
             applier: that.globalModel.applier,
             model: that.globalModel.model,
             eventMap: {
-                "primaryModel.csid": that.events.primaryRecordCreated,
-                "primaryModel.fields.blobs": that.events.primaryRecordMediaChanged
+                "primaryModel.csid": that.events.primaryRecordCreated
             }
         });
     
