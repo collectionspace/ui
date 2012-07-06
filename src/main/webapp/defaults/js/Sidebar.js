@@ -241,13 +241,23 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
 
+    fluid.demands("cspace.sidebar.media", "cspace.recordEditor", {
+        options: {
+            recordModel: "{recordEditor}.model",
+            recordApplier: "{recordEditor}.applier"
+        }
+    });
+
     fluid.defaults("cspace.sidebar.media", {
+        mergePolicy: {
+            recordModel: "preserve",
+            recordApplier: "nomerge"
+        },
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: "cspace.sidebar.media.preInit",
         finalInitFunction: "cspace.sidebar.media.finalInit",
         produceTree: "cspace.sidebar.media.produceTree",
         components: {
-            globalModel: "{globalModel}",
             globalEvents: "{globalEvents}",
             relatedMedia: {
                 type: "cspace.sidebar.media.dataSource"
@@ -279,22 +289,12 @@ cspace = cspace || {};
         },
         strings: {},
         events: {
-            onRender: null,
-            primaryRecordMediaChanged: {
-                event: "{globalEvents}.events.primaryRecordMediaChanged"
-            }
+            onRender: null
         },
         listeners: {
-            onRender: "{cspace.sidebar.media}.onRender",
-            primaryRecordMediaChanged: "{cspace.sidebar.media}.onRender"
+            onRender: "{cspace.sidebar.media}.onRender"
         },
-        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0"),
-        mergePolicy: {
-            recordApplier: "nomerge",
-            recordModel: "preserve"
-        },
-        recordApplier: "{cspace.recordEditor}.applier",
-        recordModel: "{cspace.recordEditor}.model"
+        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
     });
 
     fluid.demands("cspace.sidebar.media.dataSource",  ["cspace.localData", "cspace.sidebar.media"], {
@@ -331,12 +331,6 @@ cspace = cspace || {};
             }
             that.getRelatedMedia();
         });
-        
-        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
-            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
-                that.onRender();
-            }
-        });
     };
     
     cspace.sidebar.media.preInit = function (that) {
@@ -361,7 +355,7 @@ cspace = cspace || {};
                 that.events.onRender.fire();
             }
 
-            var csid = fluid.get(that.globalModel.model, "primaryModel.csid");
+            var csid = fluid.get(that.options.recordModel, "csid");
             if (!csid) {
                 getMedia();
             }
@@ -396,15 +390,9 @@ cspace = cspace || {};
             var src = that.getMedia("Original");
 			window.open(src, "_blank", that.options.parentBundle.resolve("media-originalMediaOptions", ["600", "800", "yes"]));
 		};
-				
-		that.applier.modelChanged.addListener("fields.blobCsid", function () {
-            that.onRender();
-        });
         
         that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
-            if (fluid.get(that.options.recordModel, "fields.blobCsid")) {
-                that.onRender();
-            }
+            that.refreshView();
         });
     };
 

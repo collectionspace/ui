@@ -1127,8 +1127,7 @@ fluid.registerNamespace("cspace.util");
         events: {
             relationsUpdated: null,
             primaryRecordCreated: null,
-            primaryRecordSaved: null,
-            primaryRecordMediaChanged: null
+            primaryRecordSaved: null
         },
         finalInitFunction: "cspace.globalEvents.finalInit"
     });
