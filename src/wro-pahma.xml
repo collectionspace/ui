@@ -8,7 +8,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/createNew.css</css>
     <css>/defaults/css/pivot.css</css>
@@ -21,7 +21,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -33,7 +33,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
@@ -43,7 +43,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -57,8 +57,9 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
+    <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/repeatable.css</css>
@@ -71,29 +72,35 @@
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
+    <js>/defaults/js/RelateSearchResults.js</js>
+    <js>/defaults/js/SearchResultsRelationManager.js</js>
+    <js>/defaults/js/SearchToRelateDialog.js/js>
     <js>/defaults/js/SearchTips.js</js>
     <js>/defaults/js/SearchTools.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/pahma/js/StructuredDate.js</js>
     <js>/defaults/js/PageBuilder.js</js>
+    <js>/defaults/js/ComputedField.js</js>
+    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
+    <js>/tenants/pahma/js/pahma.js</js>
   </group>
   
   <group name='findedit'>
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
@@ -103,7 +110,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -115,7 +122,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
@@ -126,7 +133,7 @@
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   
@@ -134,7 +141,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/cabinet.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/search.css</css>
@@ -151,7 +158,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/DataSource.js</js>
@@ -174,7 +181,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -195,14 +202,16 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
+    <js>/defaults/js/ComputedField.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/pahma/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
+    <js>/defaults/js/Preferred.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>
@@ -228,7 +237,7 @@
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
     <js>/defaults/js/RecordTraverser.js</js>
-    <js>/defaults/js/Preferred.js</js>
+    <js>/tenants/pahma/js/pahma.js</js>
   </group>
   
   <group name='template'>
@@ -236,7 +245,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/pahma/css/cspace.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
@@ -252,13 +261,13 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/pahma/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
