@@ -767,7 +767,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: {
                     pagerModel: {
                         sortDir: -1,
-                        sortKey: "summarylist.updatedAt"
+                        sortKey: "movements_common.locationDate"
                     }
                 },
                 components: {
