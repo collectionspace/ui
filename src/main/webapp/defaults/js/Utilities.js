@@ -1788,7 +1788,7 @@ fluid.registerNamespace("cspace.util");
             var model = fluid.get(that.options.list, fluid.model.composeSegments(that.options.offset + index, "summarylist")),
                 fullModel = fluid.get(that.options, fluid.model.composeSegments("list", that.options.offset + index)),
                 locked = cspace.util.resolveLocked(model);
-            if (locked) {
+            if (locked || !fullModel) {
                 return;
             }
             var canRemoveRelation = cspace.util.resolveDeleteRelation({
