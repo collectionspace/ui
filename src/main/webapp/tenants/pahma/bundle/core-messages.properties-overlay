@@ -53,6 +53,7 @@ vocab-crate: Crates
 
 # Cataloging record
 collection-object-homeLocationLabel: Home location
+collection-object-homeCrateLabel: Home crate
 collection-object-commentsLabel: Object comments
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
 collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history
