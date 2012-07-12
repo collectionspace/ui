@@ -314,7 +314,7 @@ cspace = cspace || {};
                 messageBar.show(that.options.parentBundle.resolve("admin-passwordsDoNotMatch"), null, true);
                 return false;
             }
-            if (!passwordValidator.validateLength(pwd)) {
+            if (pwd.length > 0 && !passwordValidator.validateLength(pwd)) {
                 return false;
             }
         }
