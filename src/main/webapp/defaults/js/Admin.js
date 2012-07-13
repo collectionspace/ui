@@ -97,7 +97,10 @@ cspace = cspace || {};
                     recordType: "{admin}.options.recordType",
                     globalRef: "adminModel",
                     listeners: {
-                        afterRecordRender: "{loadingIndicator}.events.hideOn.fire",
+                        afterRecordRender: [
+                            "{loadingIndicator}.events.hideOn.fire",
+                            "{admin}.events.recordEditorReady.fire"
+                        ],
                         afterSave: "{admin}.afterRecordSave",
                         afterRemove: {
                             listener: "{admin}.afterRecordRemove",
@@ -111,9 +114,17 @@ cspace = cspace || {};
         },
         events: {
             onSelect: null,
-            onCreateNewRecord: null
+            onCreateNewRecord: null,
+            recordEditorReady: null,
+            cleanPassword: {
+                events: {
+                    recordEditorReady: "{admin}.events.recordEditorReady"
+                },
+                args: ["{admin}"]
+            }
         },
         listeners: {
+            cleanPassword: "{admin}.cleanPassword",
             onCreateNewRecord: "{admin}.onCreateNewRecord",
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
@@ -155,6 +166,9 @@ cspace = cspace || {};
                 recordType: that.options.recordType
             }
         });
+        that.cleanPassword = function (that) {
+            that.locate("password").val("");
+        };
         that.afterRecordSave = function (model) {
             that.adminListView.updateModel();
         };
