@@ -115,16 +115,10 @@ cspace = cspace || {};
         events: {
             onSelect: null,
             onCreateNewRecord: null,
-            recordEditorReady: null,
-            cleanPassword: {
-                events: {
-                    recordEditorReady: "{admin}.events.recordEditorReady"
-                },
-                args: ["{admin}"]
-            }
+            recordEditorReady: null
         },
         listeners: {
-            cleanPassword: "{admin}.cleanPassword",
+            recordEditorReady: "{admin}.clearPassword",
             onCreateNewRecord: "{admin}.onCreateNewRecord",
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
@@ -157,6 +151,9 @@ cspace = cspace || {};
             }
         },
         addButtonPermission: "create",
+        elPaths: {
+            adminRecordEditorCsid: "csid"
+        },
         strings: {}
     });
 
@@ -166,11 +163,12 @@ cspace = cspace || {};
                 recordType: that.options.recordType
             }
         });
-        that.cleanPassword = function (that) {
+        that.clearPassword = function () {
             that.locate("password").val("");
         };
         that.afterRecordSave = function (model) {
             that.adminListView.updateModel();
+            that.selectedRecordCsid = fluid.get(that.adminRecordEditor.model, that.options.elPaths.adminRecordEditorCsid);
         };
         that.afterRecordRemove = function () {
             var instantiator = that.instantiator,
@@ -427,6 +425,11 @@ cspace = cspace || {};
 
     fluid.demands("cspace.admin.unSearch", "cspace.admin", {
         funcName: "cspace.admin.unSearch",
+        args: ["{admin}"]
+    });
+    
+    fluid.demands("cspace.admin.clearPassword", "cspace.admin", {
+        funcName: "cspace.admin.clearPassword",
         args: ["{admin}"]
     });
 
