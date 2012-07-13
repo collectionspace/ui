@@ -151,6 +151,9 @@ cspace = cspace || {};
             }
         },
         addButtonPermission: "create",
+        elPaths: {
+            adminRecordEditorCsid: "csid"
+        },
         strings: {}
     });
 
@@ -165,6 +168,7 @@ cspace = cspace || {};
         };
         that.afterRecordSave = function (model) {
             that.adminListView.updateModel();
+            that.selectedRecordCsid = fluid.get(that.adminRecordEditor.model, that.options.elPaths.adminRecordEditorCsid);
         };
         that.afterRecordRemove = function () {
             var instantiator = that.instantiator,
