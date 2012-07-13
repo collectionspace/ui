@@ -575,6 +575,10 @@ mediaUploader-linkMediaLabel: Link to external media
 media-approvedForWebLabel: Approved for public?
 media-primaryDisplayLabel: Primary display?
 media-descriptionLabel: Notes
+media-createdAtLabel: Created Date
+media-createdAtStartLabel: Earliest
+media-createdAtEndLabel: Latest
+media-subjectLabel: Subject(s)
 
 # ******************* Intake (=Object Entry) ******************* #
 intake-objectEntryInformationLabel: Object Entry Information
