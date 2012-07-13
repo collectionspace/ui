@@ -322,6 +322,7 @@ acquisition-acquisitionReasonLabel: Accession reason
 acquisition-accessionDateGroupLabel: Accession date
 acquisition-acquisitionReferenceNumberLabel: Accession number
 acquisition-acquisitionNoteLabel: Accession note
+acquisition-acquisitionDescriptionLabel: Accession description
 
 acquisition-originalObjectPurchasePriceValueLabel: Original object purch. price 
 acquisition-originalObjectPurchasePriceCurrencyLabel: Original object purch. price
