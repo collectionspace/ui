@@ -24,7 +24,7 @@ cspace = cspace || {};
             fieldsToIgnore: "replace",
             "uispec": "nomerge"
         },
-        fieldsToIgnore: ["csid", "fields.csid"],
+        fieldsToIgnore: ["csid", "fields.csid", "fields.workflow"],
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
         selectors: {
@@ -192,7 +192,10 @@ cspace = cspace || {};
         showCreateFromExistingButton: false,
         showDeleteButton: false,
         deferRendering: false,
-        globalRef: "primaryModel"
+        globalRef: "primaryModel",
+        neverReadOnlySelectors: {
+            createFromExistingButton: ".csc-createFromExisting"
+        }
     });
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
@@ -254,11 +257,12 @@ cspace = cspace || {};
     fluid.defaults("cspace.recordEditor.readOnly", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         readOnly: "{cspace.recordEditor}.options.readOnly",
-        postInitFunction: "cspace.recordEditor.readOnly.postInit"
+        postInitFunction: "cspace.recordEditor.readOnly.postInit",
+        neverReadOnlySelectors: "{cspace.recordEditor}.options.neverReadOnlySelectors"
     });
 
     cspace.recordEditor.readOnly.postInit = function (that) {
-        cspace.util.processReadOnly(that.container, that.options.readOnly);
+        cspace.util.processReadOnly(that.container, that.options.readOnly, that.options.neverReadOnlySelectors);
     };
 
     fluid.defaults("cspace.recordEditor.cloner", {

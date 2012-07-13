@@ -1668,12 +1668,16 @@ fluid.registerNamespace("cspace.util");
         return $(required).parents(".info-pair").find(".label").text();
     };
     
-    cspace.util.processReadOnly = function (container, readOnly) {
+    cspace.util.processReadOnly = function (container, readOnly, neverReadOnly) {
         fluid.each(["input", "select", "textarea"], function (tag) {
             container.find(tag).prop("disabled", function (index, oldPropertyValue) {
                 // if oldPropertyValue is "disabled" or true: leave it unchanged.
                 return oldPropertyValue || readOnly;
             });
+        });
+        // Now lets enable back selectors which should not be disabled
+        fluid.each(neverReadOnly, function (selector) {
+            container.find(selector).removeAttr('disabled');
         });
     };
     
