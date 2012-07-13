@@ -328,6 +328,13 @@ cspace = cspace || {};
                 messageBar.show(that.options.parentBundle.resolve("admin-passwordsDoNotMatch"), null, true);
                 return false;
             }
+            
+            if (!that.selectedRecordCsid) {
+                if (!passwordValidator.validateLength(pwd)) {
+                    return false;
+                }
+            }
+            
             if (pwd.length > 0 && !passwordValidator.validateLength(pwd)) {
                 return false;
             }
