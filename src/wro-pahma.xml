@@ -13,7 +13,7 @@
     <css>/defaults/css/createNew.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -37,7 +37,7 @@
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -65,7 +65,7 @@
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -104,7 +104,7 @@
     <css>/defaults/css/Pager.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -124,7 +124,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/tenants/pahma/css/cspace.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -152,7 +152,7 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -196,7 +196,7 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -255,7 +255,7 @@
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/pahma/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
