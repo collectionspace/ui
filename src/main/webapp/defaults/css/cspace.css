@@ -2132,16 +2132,16 @@ tbody.csc-listView-rows tr.cs-listView-row td a {
 tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
     background: inherit;
 }
-.list-table .cs-disabled.cs-listView-row:hover > td,
-.list-table .cs-disabled.cs-listView-row:focus > td {
+.list-table .cs-disabled.cs-listView-row:hover > td a,
+.list-table .cs-disabled.cs-listView-row:focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td,
-.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td {
+.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td a,
+.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled, .cs-disabled > td {
-    color: gray !important;
+.list-table .cs-disabled, .cs-disabled > td a {
+    color: #7f7f7f !important;
     cursor: default !important;
 }
 
