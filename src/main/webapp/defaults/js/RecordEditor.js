@@ -1436,15 +1436,16 @@ cspace = cspace || {};
 
     fluid.demands("onRenderTreePublic", "cspace.recordEditor.recordRenderer", [
         "{recordEditor}.options",
-        "{recordEditor}.model"
+        "{recordEditor}.model",
+        "{pageBuilderIO}.options.readOnly"
     ]);
 
     cspace.recordEditor.recordRenderer.preInit = function (that) {
         that.refreshViewHandler = function () {
             that.refreshView();
         };
-        that.onRenderTreeHandler = function (options, model) {
-            options.readOnly = cspace.util.isReadOnly(options.readOnly, model);
+        that.onRenderTreeHandler = function (options, model, readOnly) {
+            options.readOnly = cspace.util.isReadOnly(readOnly, model);
         };
     };
 
