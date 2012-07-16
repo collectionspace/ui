@@ -2141,7 +2141,7 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
     background-color: #F0F5FB;
 }
 .list-table .cs-disabled, .cs-disabled > td a {
-    color: #7f7f7f !important;
+    color: gray !important;
     cursor: default !important;
 }
 
