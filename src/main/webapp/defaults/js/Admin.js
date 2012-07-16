@@ -163,8 +163,10 @@ cspace = cspace || {};
                 recordType: that.options.recordType
             }
         });
+        // Clearing password fields once Admin page is loaded. NOTE: We might want to get rid of this once server is changed NOT to return password back.
         that.clearPassword = function () {
             that.locate("password").val("");
+            that.locate("passwordConfirm").val("");
         };
         that.afterRecordSave = function (model) {
             that.adminListView.updateModel();
