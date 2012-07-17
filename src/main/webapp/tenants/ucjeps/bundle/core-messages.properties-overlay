@@ -1,4 +1,4 @@
-# Added for ucjeps tenant
+# Added for botgarden tenant
 media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
 
 # Schema extensions to Cataloging record
@@ -73,8 +73,8 @@ taxon-relatedTermSourceDetailLabel: Source Detail
 
 #Login
 login-current-info: 
-login-login: admin@ucjeps.cspace.berkeley.edu
-login-rologin: reader@ucjeps.cspace.berkeley.edu
+login-login: admin@botgarden.cspace.berkeley.edu
+login-rologin: reader@botgarden.cspace.berkeley.edu
 
 #Records:
 cataloging-number: Accession number
