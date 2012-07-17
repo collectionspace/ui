@@ -4,13 +4,6 @@
             "recordType": "loanout",
             "schema": {
                 "loanout": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/LoanoutTemplate.html",
-                    "templateSelector": ".csc-loanout-template",
-                    "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
-                } 
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Loan Out Record",
-                            "recordList": "Related Loan Out Records",
-                            "newRecordRow": "New Loan Out Record"
+                            "editRecord": "loanout-editRecord",
+                            "recordList": "loanout-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-loanOut-loanOutNumber"
-                                                } 
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-loanOut-loanOutNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

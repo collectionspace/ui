@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "acquisition",
-            "selectors": {
-                "recordEditor": ".csc-acquisition-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.acquisitionReferenceNumber"]
                     }
                 },
@@ -50,15 +45,8 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "acquisition",
-             "schema": {
+            "schema": {
                 "acquisition": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/AcquisitionTemplate.html",
-                    "templateSelector": ".csc-acquisition-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                }
             }
         }
     }

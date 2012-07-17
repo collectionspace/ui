@@ -57,7 +57,6 @@ cspace = cspace || {};
             autoBind: true
         },
         components: {
-            globalNavigator: "{globalNavigator}",
             vocab: "{vocab}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
@@ -175,8 +174,8 @@ cspace = cspace || {};
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
     // the search results page.    
-    cspace.searchBox.navigateToSearch = function (that) {
-        that.globalNavigator.events.onPerformNavigation.fire(function () {
+    cspace.searchBox.navigateToSearch = function (that, recordEditor) {
+        function navigate () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
                 recordtype: that.model.recordType,
                 vocab: that.model.vocabs ? ("&" + $.param({
@@ -185,6 +184,13 @@ cspace = cspace || {};
                 keywords: that.model.keywords
             });
             window.location = url;
+        }
+        if (!recordEditor) {
+            navigate();
+            return;
+        }
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
+            navigate();
         });
     };
     

@@ -1,0 +1,90 @@
+{
+    "csid": "15923fd6-3576-42a4-926a",
+    "fields": {
+        "shortIdentifier": "collectionmethod",
+        "usedBys": [
+            {
+                "usedBy": "intake:intake-fieldCollectionMethod"
+            },
+            {
+                "usedBy": "cataloging:collection-object-fieldCollectionMethod"
+            }
+        ],
+        "terms": [
+            {
+                "shortIdentifier": "commissioned",
+                "_subrecordcsid": "4d9f61c1-ba5a-4870-a6af",
+                "termStatus": "active",
+                "displayName": "commissioned"
+            },
+            {
+                "shortIdentifier": "dumbluck1337965947213",
+                "_subrecordcsid": "536cede1-8d48-4677-9872",
+                "termStatus": "active",
+                "displayName": "dumb luck"
+            },
+            {
+                "shortIdentifier": "exchanged",
+                "_subrecordcsid": "1fb1e6e3-40f9-4f71-985c",
+                "termStatus": "active",
+                "displayName": "exchanged"
+            },
+            {
+                "shortIdentifier": "founddead",
+                "_subrecordcsid": "8d724f29-528e-4431-9f0c",
+                "termStatus": "active",
+                "displayName": "found dead"
+            },
+            {
+                "shortIdentifier": "metaldetector",
+                "_subrecordcsid": "07faa0f4-fc8a-47c9-a7ae",
+                "termStatus": "active",
+                "displayName": "metal detector"
+            },
+            {
+                "shortIdentifier": "netted",
+                "_subrecordcsid": "ad27fbc1-b544-4580-b7bd",
+                "termStatus": "active",
+                "displayName": "netted"
+            },
+            {
+                "shortIdentifier": "photographed",
+                "_subrecordcsid": "9396bb7c-450f-437d-8733",
+                "termStatus": "active",
+                "displayName": "photographed"
+            },
+            {
+                "shortIdentifier": "purchased",
+                "_subrecordcsid": "ddd21497-66a8-404b-bd06",
+                "termStatus": "active",
+                "displayName": "purchased"
+            },
+            {
+                "shortIdentifier": "pursesnatching1328062647609",
+                "_subrecordcsid": "476e14a3-feca-4366-a654",
+                "termStatus": "active",
+                "displayName": "purse snatching"
+            },
+            {
+                "shortIdentifier": "salvaged",
+                "_subrecordcsid": "e097a1df-7b9f-424a-aad2",
+                "termStatus": "active",
+                "displayName": "salvaged"
+            },
+            {
+                "shortIdentifier": "shot",
+                "_subrecordcsid": "1d8fca94-ba63-46af-b91e",
+                "termStatus": "active",
+                "displayName": "shot"
+            },
+            {
+                "shortIdentifier": "trapped",
+                "_subrecordcsid": "3a264e17-bcd3-4bad-a00d",
+                "termStatus": "active",
+                "displayName": "trapped"
+            }
+        ],
+        "csid": "15923fd6-3576-42a4-926a",
+        "displayName": "Collection Method"
+    }
+}

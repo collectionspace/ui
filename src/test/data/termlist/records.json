@@ -1,5 +1,113 @@
 {
     "items": [
-        {"csid": "142753869", "number": "Currency"}
-    ]
+        {
+            "summary": "Temporary Vocab whilst none exist",
+            "csid": "208a28d0-f911-4bcd-b322",
+            "number": "xxx",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Collection Method",
+            "csid": "15923fd6-3576-42a4-926a",
+            "number": "collectionmethod",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Date Certainty",
+            "csid": "6606d997-3784-4204-a93d",
+            "number": "datecertainty",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Age Qualifier",
+            "csid": "43d86cc9-464a-4e69-89f6",
+            "number": "agequalifier",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Languages",
+            "csid": "74f884e9-d407-4ad1-8784",
+            "number": "languages",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "loaned Object Status",
+            "csid": "2168b620-f829-4091-9eb2",
+            "number": "loanoutstatus",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Entry Method",
+            "csid": "a284a55f-5697-4bf1-9578",
+            "number": "entrymethod",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Standard Currency",
+            "csid": "4b6d1bf1-8118-4a7d-82be",
+            "number": "currency",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Location Type",
+            "csid": "e4e35683-fb67-4cc6-9354",
+            "number": "locationtype",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Date Era",
+            "csid": "665b89d1-d5a9-48e5-b507",
+            "number": "dateera",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Date Qualifier",
+            "csid": "9a823baf-d327-4cc7-a634",
+            "number": "datequalifier",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Condition Check Reason",
+            "csid": "55068d84-e642-4ee6-8ea2",
+            "number": "conditioncheckreason",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Condition Check Method",
+            "csid": "9d1ddcbf-0d86-49c6-b246",
+            "number": "conditioncheckmethod",
+            "recordtype": "termlist"
+        },
+        {
+            "summary": "Condition Fitness",
+            "csid": "29335461-2f2d-478b-b5f0",
+            "number": "conditionfitness",
+            "recordtype": "termlist"
+        }
+    ],
+    "pagination": {
+        "fieldsReturned": "csid|uri|updatedAt|displayName|refName|shortIdentifier|vocabType",
+        "separatelists": [
+            [
+                "208a28d0-f911-4bcd-b322",
+                "15923fd6-3576-42a4-926a",
+                "6606d997-3784-4204-a93d",
+                "43d86cc9-464a-4e69-89f6",
+                "74f884e9-d407-4ad1-8784",
+                "2168b620-f829-4091-9eb2",
+                "a284a55f-5697-4bf1-9578",
+                "4b6d1bf1-8118-4a7d-82be",
+                "e4e35683-fb67-4cc6-9354",
+                "665b89d1-d5a9-48e5-b507",
+                "9a823baf-d327-4cc7-a634",
+                "55068d84-e642-4ee6-8ea2",
+                "9d1ddcbf-0d86-49c6-b246",
+                "29335461-2f2d-478b-b5f0"
+            ]
+        ],
+        "totalItems": "14",
+        "pageSize": "40",
+        "itemsInPage": "14",
+        "pageNum": "0"
+    }
 }

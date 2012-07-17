@@ -245,16 +245,22 @@ cspace = cspace || {};
 
     cspace.recordTraverser.preInitFunction = function (that) {
         that.save = function (increment) {
+            if (!increment) {
+                return;
+            }
             var model = that.model,
                 elPaths = that.options.elPaths,
-                searchReference = elPaths.searchReference;
+                searchReference = elPaths.searchReference,
+                index = get(model, searchReference, elPaths.index);
 
-            if (typeof increment !== "number") {
-                increment = 0;
+            if (typeof index !== "number") {
+                index = undefined;
+            } else {
+                index += increment;
             }
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
-                index: get(model, searchReference, elPaths.index) + increment,
+                index: index,
                 source: get(model, searchReference, elPaths.source)
             });
         };
@@ -271,7 +277,12 @@ cspace = cspace || {};
             searchReferenceStorage = that.searchReferenceStorage;
 
         applier.requestChange(searchReference, searchReferenceStorage.get());
-        if (!fluid.get(model, searchReference)) {
+        var searchRef = fluid.get(model, searchReference);
+        if (!searchRef) {
+            return;
+        }
+        if ($.isEmptyObject(searchRef)) {
+            searchReferenceStorage.set();
             return;
         }
         searchReferenceStorage.set();
@@ -284,7 +295,7 @@ cspace = cspace || {};
             that.refreshView();
         });
 
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback, evt) {
+        that.globalNavigator.addListener(function (callback, evt) {
             if (!evt) {
                 return;
             }
@@ -300,7 +311,7 @@ cspace = cspace || {};
                     return increment;
                 }
             }));
-        }, "recordTraverser");
+        }, "recordTraverser", "first");
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");

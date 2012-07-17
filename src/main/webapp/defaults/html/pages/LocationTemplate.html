@@ -1,123 +1,89 @@
-<div class="csc-location-template csc-listEditor-details">
-	<div class="csc-location">
-		<div id="secondary-nav">		
-			<div id="secondary-nav-menu-sub">
-                <span class="csc-recordTraverser"></span>
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
+<div class="csc-recordEditor-header fl-container-flex header toggle csc-location-locationTermInformation-label"></div>
+<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+                
+                    <div class="info-column">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-location-preferredLocation-label"></div>
+                            </div>
+                            <div class="content">
+                                <div class="csc-preferred-locationAuthority"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                				
+	<div class="info-column">
+		<div class="info-column2-50 fl-force-left" >
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-location-locationType-label"></div>
 				</div>
-				<div class="time-stamp"> </div>
+				<div class="content">
+					<select class="csc-location-type input-select"><option value="">Options not loaded</option></select>
+				</div>
 			</div>
 		</div>
 		
-		<div class="csc-templateEditor"></div>
-	
-		<div class="fl-container-flex fl-fix information-group info-column">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-location-locationTermInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                            
-                                <div class="info-column">
-                                    <div class="info-pair">
-                                        <div class="header">
-                                            <div class="label csc-location-preferredLocation-label"></div>
-                                        </div>
-                                        <div class="content">
-                                            <div class="csc-preferred-locationAuthority"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            				
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left" >
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-location-locationType-label"></div>
-							</div>
-							<div class="content">
-								<select class="csc-location-type input-select"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-location-address-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-location-address" />
-							</div>
-						</div>
-					</div>
+		<div class="info-column2-50 fl-force-right">
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-location-address-label"></div>
 				</div>
-				
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left" >    
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-location-securityNote-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-location-securityNote" ></textarea>
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-location-accessNote-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-location-accessNote" ></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="info-column">				
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-location-conditionGroup-label"></div>
-						</div>
-						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td class="csc-location-conditionNote-label"></td>
-										<td class="csc-location-conditionNoteDate-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="csc-location-conditionGroup">
-										<td><input type="text" class="csc-location-conditionNote" /></td>
-										<td><input type="text" class="csc-location-conditionNoteDate" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>				
-				</div>   
-			</div>
-		</div>
-		
-		<div class="csc-location-hierarchy"></div>
-
-		<div id="secondary-nav-footer">
-			<div id="secondary-nav-footer-menu-sub">
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
+				<div class="content">
+					<input type="text" class="csc-location-address" />
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div class="info-column">
+		<div class="info-column2-50 fl-force-left" >    
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-location-securityNote-label"></div>
+				</div>
+				<div class="content">
+					<textarea rows="4" cols="30" class="input-textarea csc-location-securityNote" ></textarea>
+				</div>
+			</div>
+		</div>
+		
+		<div class="info-column2-50 fl-force-right">
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-location-accessNote-label"></div>
+				</div>
+				<div class="content">
+					<textarea rows="4" cols="30" class="input-textarea csc-location-accessNote" ></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="info-column">				
+		<div class="info-pair">
+			<div class="header">
+				<div class="label csc-location-conditionGroup-label"></div>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<td class="csc-location-conditionNote-label"></td>
+							<td class="csc-location-conditionNoteDate-label"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="csc-location-conditionGroup">
+							<td><input type="text" class="csc-location-conditionNote" /></td>
+							<td><input type="text" class="csc-location-conditionNoteDate" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>				
+	</div>   
 </div>
+
+<div class="csc-record-hierarchy"></div>
