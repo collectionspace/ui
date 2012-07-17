@@ -358,6 +358,7 @@ cspace = cspace || {};
             var csid = fluid.get(that.options.recordModel, "csid");
             if (!csid) {
                 getMedia();
+                return;
             }
             that.relatedMedia.get({
                 csid: csid
