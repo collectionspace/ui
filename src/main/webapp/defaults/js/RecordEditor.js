@@ -1042,9 +1042,11 @@ cspace = cspace || {};
         produceTree: "cspace.recordEditor.controlPanel.produceTree",
         parentBundle: "{globalBundle}",
         strings: {},
-        saveCancelPermission: "update",
-        deletePermission: "delete",
-        goToPermission: "read"
+        requiredPermissions: {
+            saveCancelPermission: "update",
+            deletePermission: "delete",
+            goToPermission: "read"
+        }
     });
 
     cspace.recordEditor.controlPanel.produceTreeTabs = function (that) {
@@ -1249,28 +1251,31 @@ cspace = cspace || {};
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel,
-            notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
+            notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
+            requiredPermissions = that.options.requiredPermissions,
+            recordType = that.options.recordType,
+            resolver = that.resolver;
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
 
         that.applier.requestChange("showDeleteButton", cspace.permissions.resolve({
-            permission: that.options.deletePermission,
-            target: that.options.recordType,
-            resolver: that.resolver
+            permission: requiredPermissions.deletePermission,
+            target: recordType,
+            resolver: resolver
         }));
         
         that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
-            permission: that.options.saveCancelPermission,
-            target: that.options.recordType,
-            resolver: that.resolver
+            permission: requiredPermissions.saveCancelPermission,
+            target: recordType,
+            resolver: resolver
         }));
 
         that.applier.requestChange("showGoto", cspace.permissions.resolve({
-            permission: that.options.goToPermission,
-            target: that.options.recordType,
-            resolver: that.resolver
+            permission: requiredPermissions.goToPermission,
+            target: recordType,
+            resolver: resolver
         }));
 
         that.refreshView();
