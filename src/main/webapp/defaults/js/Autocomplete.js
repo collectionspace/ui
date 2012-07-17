@@ -529,9 +529,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return auth.type.split("-")[0];
         });
         options.oneOf = types;
-        if (!fluid.invokeGlobalFunction(resolve, [options])) {
-            selector.prop("disabled", true);
-        }
+
         var authorities = fluid.remove_if(fluid.copy(model.authorities), function (auth) {
             return !cspace.permissions.resolve({
                 resolver: options.resolver,
