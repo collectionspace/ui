@@ -171,6 +171,7 @@ cspace = cspace || {};
             onRemove: "preventable",
             afterRemove: null,
             onCancel: null,
+            onCancelSave: null,
             afterCancel: null,
             onCreateFromExisting: null,
             afterRecordRender: null,
@@ -486,6 +487,8 @@ cspace = cspace || {};
                         recordEditor.applier.requestChange("workflowTransition", "lock");
                         recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "workflowTransition"), "lock");
                         cspace.recordEditor.saver.save(that, recordEditor);
+                    } else if (userAction === "cancel") {
+                        recordEditor.events.onCancelSave.fire();
                     }
                 }
             },
@@ -1010,6 +1013,9 @@ cspace = cspace || {};
             onCancel: {
                 event: "{cspace.recordEditor}.events.onCancel"
             },
+            onCancelSave: {
+                event: "{cspace.recordEditor}.events.onCancelSave"
+            },
             onRemove: {
                 event: "{cspace.recordEditor}.events.onRemove"
             },
@@ -1022,12 +1028,13 @@ cspace = cspace || {};
         },
         listeners: {
             onSave: {
-                listener: "{cspace.recordEditor.controlPanel}.disableSave",
+                listener: "{cspace.recordEditor.controlPanel}.disableControlButtons",
                 priority: "first"
             },
-            afterSave: "{cspace.recordEditor.controlPanel}.enableSave",
-            onError: "{cspace.recordEditor.controlPanel}.enableSave",
-            onChange: "{cspace.recordEditor.controlPanel}.onChangeHandler"
+            afterSave: "{cspace.recordEditor.controlPanel}.enableControlButtons",
+            onError: "{cspace.recordEditor.controlPanel}.enableControlButtons",
+            onChange: "{cspace.recordEditor.controlPanel}.onChangeHandler",
+            onCancelSave: "{cspace.recordEditor.controlPanel}.enableControlButtons"
         },
         urls: cspace.componentUrlBuilder({
             goTo: "%webapp/html/%recordType.html?csid=%csid"
@@ -1229,11 +1236,13 @@ cspace = cspace || {};
             }
             goTo.attr("href", fluid.stringTemplate(that.options.urls.goTo, {recordType: that.options.recordType, csid: rModel.csid}));
         };
-        that.disableSave = function () {
+        that.disableControlButtons = function () {
             that.locate("save").prop("disabled", true);
+            that.locate("createFromExistingButton").prop("disabled", true);
         };
-        that.enableSave = function () {
+        that.enableControlButtons = function () {
             that.locate("save").prop("disabled", false);
+            that.locate("createFromExistingButton").prop("disabled", false);
         };
     };
 
