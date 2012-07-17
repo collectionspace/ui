@@ -1043,6 +1043,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {},
         saveCancelPermission: "update",
+        deletePermission: "delete",
         goToPermission: "read"
     });
 
@@ -1254,6 +1255,12 @@ cspace = cspace || {};
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
 
+        that.applier.requestChange("showDeleteButton", cspace.permissions.resolve({
+            permission: that.options.deletePermission,
+            target: that.options.recordType,
+            resolver: that.resolver
+        }));
+        
         that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
             permission: that.options.saveCancelPermission,
             target: that.options.recordType,
