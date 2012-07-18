@@ -144,7 +144,7 @@ cspace = cspace || {};
                 recordtype: that.options.primary
             };
             fluid.each(that.search.model.results, function (result) {
-                if (!result.selected) {
+                if (!result || !result.selected) {
                     return;
                 }
                 newRelations.push({
