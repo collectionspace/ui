@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html manifest="../cspace.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>CollectionSpace</title>
+
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/components/uploader/css/Uploader.css" />
+		<link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
+        <link rel="stylesheet" type="text/css" href="../css/NumberPatternChooser.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Confirmation.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Autocomplete.css" />
+        <link rel="stylesheet" type="text/css" href="../css/StructuredDate.css" />
+        <link rel="stylesheet" type="text/css" href="../css/search.css" />
+        <link rel="stylesheet" type="text/css" href="../css/pivot.css" />
+        <link rel="stylesheet" type="text/css" href="../css/authority.css" />
+        <link rel="stylesheet" type="text/css" href="../css/repeatable.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/goog/demos/css/datepicker.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css" />
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+        
+        <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="../lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js"></script>
+        <script type="text/javascript" src="../js/Demands.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/InputValidator.js"></script>
+        <script type="text/javascript" src="../js/ComputedField.js"></script>
+        <script type="text/javascript" src="../js/Footer.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
+        <script type="text/javascript" src="../js/DataSource.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Confirmation.js"></script>
+        <script type="text/javascript" src="../js/StructuredDate.js"></script>
+        <script type="text/javascript" src="../js/Dimension.js"></script>
+        <script type="text/javascript" src="../js/Preferred.js"></script>
+        <script type="text/javascript" src="../js/Autocomplete.js"></script>
+        <script type="text/javascript" src="../js/TermList.js"></script>
+        <script type="text/javascript" src="../js/RecordEditor.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/SearchToRelateDialog.js"></script>
+        <script type="text/javascript" src="../js/RelationManager.js"></script>
+        <script type="text/javascript" src="../js/RecordList.js"></script>
+        <script type="text/javascript" src="../js/RelatedRecordsList.js"></script>
+        <script type="text/javascript" src="../js/NumberPatternChooser.js"></script>
+        <script type="text/javascript" src="../js/Repeatable.js"></script>
+        <script type="text/javascript" src="../js/Sidebar.js"></script>
+        <script type="text/javascript" src="../js/TitleBar.js"></script>
+        <script type="text/javascript" src="../js/Tabs.js"></script>
+        <script type="text/javascript" src="../js/MediaUploader.js"></script>
+        <script type="text/javascript" src="../js/Hierarchy.js"></script>
+        <script type="text/javascript" src="../js/ReportProducer.js"></script>
+        <script type="text/javascript" src="../js/ListEditor.js"></script>
+        <script type="text/javascript" src="../js/RelatedRecordsTab.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        <script type="text/javascript" src="../js/Georef.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/globalization/en-US.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/core.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/parser.js"></script>
+        <script type="text/javascript" src="../lib/georef-js/georef.js"></script>
+        <script type="text/javascript" src="../lib/goog/js/goog.ui.DatePicker.js"></script>
+        <script type="text/javascript" src="../js/DatePicker.js"></script>
+        <script type="text/javascript" src="../js/RecordTraverser.js"></script>
+        <script type="text/javascript" src="../tools/uispecVerifier/js/uispecVerifier.js"></script>
+    </head>
+
+    <body class="record">
+        <div class="fl-container-1024 fl-centered">
+            <!-- CSpace logo and right-side search box -->
+            <div id="name-header" class="csc-header-container"></div>
+            <div class="fl-container-1024-inner">
+                <div class="csc-titleBar-container"></div>
+                <!-- main content -->
+                <div id="all-content" class="fl-fix">
+                    <!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+                    <div class="fl-fix fl-container-flex fl-col-mixed2">
+                        <!-- left-side container. Contains bulk of forms and fields -->
+                        <div class="fl-container-left fl-force-left">
+                            <div class="csc-tabs-container">
+                                <div id="secondary-nav" class="csc-tabs-template">
+                                    <div id="secondary-nav-menu" class="csc-tabs-container">
+                                        <div class="csc-tabs-tabsList-container"></div>
+                                        <div id="primaryTab" class="csc-record-edit-container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl-container-pivot fl-force-left">
+                            <div class="csc-sidebar-container"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <!-- END main content -->
+            </div>
+            <div class="csc-footer-container" id="footer"></div>
+        </div> <!-- END body content -->
+        <script type="text/javascript">
+            cspace.globalSetup("cspace.record");
+        </script>
+    </body>
+</html>

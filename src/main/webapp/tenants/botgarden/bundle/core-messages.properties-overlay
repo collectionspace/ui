@@ -1,0 +1,247 @@
+# Added for botgarden tenant
+media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
+
+# Schema extensions to Cataloging record
+collection-object-taxonLabel: Name
+collection-object-qualifierLabel: Qualifier
+collection-object-identByLabel: By
+taxonomicIdentGroup-identDateGroupLabel: Date
+collection-object-institutionLabel: Institution
+collection-object-identKindLabel: Kind
+collection-object-objectCountNumberLabel: Sheet
+
+# Inadvertently shares field name and label
+# with another entry below
+collection-object-referenceLabel: Reference
+collection-object-refPageLabel: Page
+collection-object-notesLabel: Notes
+
+collection-object-objectCollectionInformationLabel: Field Collection Information
+collection-object-fieldCollectionDateLabel: Field collection date
+collection-object-fieldCollectorLabel: Field collection collector
+collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-fieldCollectionNumberAssignorLabel: Field collection number assignor
+collection-object-fieldCollectionMethodLabel: Field collection method
+collection-object-fieldCollectionNoteLabel: Habitat information
+collection-object-fieldCollectionSourceLabel: Field collection source
+collection-object-fieldColEventNameLabel: Field collection event name
+ccollection-object-fieldAssociatedTaxaLabel: Associated taxa
+
+
+# From Type Specimen fieldgroup
+collection-object-typeSpecimenGroupLabel: Type Specimen
+collection-object-typeSpecimenKindLabel: Kind of Type
+collection-object-typeSpecimenAssertionByLabel: Asserted By
+collection-object-typeSpecimenReferenceLabel: Reference
+collection-object-typeSpecimenRefPageLabel: Page
+collection-object-typeSpecimenBasionymLabel: Verified Basionym
+collection-object-typeSpecimenNotesLabel: Notes
+
+# Taxon record
+taxon: Taxon
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
+taxon-displayNameLabel: Display name (with authors)
+taxon-termStatusLabel: Term status (admin)
+taxon-taxonFullNameLabel: Short name (without authors)
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Current?
+taxon-taxonAuthorGroupLabel: Authors
+taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorTypeLabel: Author type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is named hybrid
+taxon-taxonCitationLabel: Citations
+taxon-taxonomicStatusLabel: Taxonomic status
+taxon-taxonNameSourceLabel: Name source
+taxon-taxonNameSourceCodeLabel: Name source code
+taxon-taxonGUIDLabel: Name GUID
+taxon-taxonNoteLabel: Notes
+taxon-updatedAtLabel: Modified Date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
+taxon-taxonBasionymLabel: Basionym
+taxon-commonNameGroupLabel: Common Names
+taxon-commonNameLabel: Common Name
+taxon-commonNameLanguageLabel: Language
+taxon-commonNameSourceLabel: Source
+taxon-commonNameSourceDetailLabel: Source Detail
+taxon-relatedTermGroupLabel: Related Terms
+taxon-relatedTermLabel: Related Term
+taxon-relatedTermTypeLabel: Type
+taxon-relatedTermSourceLabel: Source
+taxon-relatedTermSourceDetailLabel: Source Detail
+
+#Login
+login-current-info: 
+login-login: admin@botgarden.cspace.berkeley.edu
+login-rologin: reader@botgarden.cspace.berkeley.edu
+
+#Records:
+cataloging-number: Accession number
+cataloging-identificationNumberRequired: Please specify an Accession Number
+
+#media
+media-scientificTaxonomyLabel: Scientific name
+media-handwrittenLabel: Handwritten label
+media-postToPublicLabel: Post to public
+media-identificationNumberLabel: Accession number
+
+#cataloging
+collection-object-objectNumberLabel: Accession Number
+collection-object-basicStorageLocationLabel: Filed in Cabinet
+collection-object-otherNumberLabel: Other Number
+collection-object-otherNumberGroupLabel: Other Number
+collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-localNameGroupLabel: Local Name
+collection-object-localNameLabel: Local Name
+collection-object-localNameLanguageLabel: Language
+collection-object-hybridParentGroupLabel: Hybrid Parent
+collection-object-hybridParentLabel: Hybrid Parent
+collection-object-hybridParentQualifierLabel: Parent Qualifier
+collection-object-hybridNameLabel: Hybrid Name
+collection-object-donorGroupLabel: Donor
+collection-object-donorLabel: Donor
+collection-object-donorDateLabel: Date
+collection-object-donorNoteLabel: Note
+collection-object-labelHeaderLabel: Label Header
+collection-object-labelFooterLabel: Label Footer
+collection-object-numberOfObjectsLabel: Number of Sheets
+collection-object-handwrittenLabel: Handwritten label
+collection-object-postToPublicLabel: Post to public
+collection-object-cultivatedLabel: Cultivated
+
+collection-object-associatedTaxaGroupLabel: Associated Taxa
+collection-object-commonNameLabel: Common Name
+collection-object-interactionLabel: Interaction
+
+collection-object-annotationGroupLabel: Annotations
+collection-object-annotationTypeLabel: Type
+collection-object-annotationNoteLabel: Note
+collection-object-annotationDateLabel: Date
+collection-object-annotationAuthorLabel: Author
+
+collection-object-localityInformationLabel: Locality Information
+collection-object-fieldLocVerbatimLabel: Field collection location verbatim
+collection-object-fieldLocPlaceLabel: Field collection place
+collection-object-fieldLocCountyLabel: Field location county
+collection-object-fieldLocCountryLabel: Field location country
+collection-object-fieldLocStateLabel: Field location state
+collection-object-fieldLocHigherGeographyLabel: Field location higher geography
+collection-object-decimalLatitudeLabel: Decimal latitude
+collection-object-decimalLongitudeLabel: Decimal longitude
+collection-object-geodeticDatumLabel: Datum
+collection-object-coordUncertaintyLabel: Uncertainty
+collection-object-coordUncertaintyUnitLabel: Uncertainty units
+collection-object-vCoordinatesLabel: Verbatim coords
+collection-object-vLatitudeLabel: Verbatim latitude
+collection-object-vLongitudeLabel: Verbatim longitude
+collection-object-vCoordSysLabel: Coordinate system
+collection-object-vSpatialReferenceSystemLabel: Verbatim SRS
+collection-object-vDepthLabel: Depth
+collection-object-minDepthLabel: Min
+collection-object-maxDepthLabel: Max
+collection-object-depthUnitLabel: Unit
+collection-object-vElevationLabel: Elevation
+collection-object-minElevationLabel: Min
+collection-object-maxElevationLabel: Max
+collection-object-elevationUnitLabel: Unit
+collection-object-vDistanceAboveSurfaceLabel: Above surface
+collection-object-minDistanceAboveSurfaceLabel: Min
+collection-object-maxDistanceAboveSurfaceLabel: Max
+collection-object-distanceAboveSurfaceUnitLabel: Unit
+collection-object-localityNoteLabel: Locality note
+collection-object-localitySourceLabel: Source
+collection-object-localitySourceDetailLabel: Source detail
+collection-object-geoRefDetailLabel: Georeference Detail
+collection-object-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+collection-object-footprintWKTLabel: Footprint WKT
+collection-object-footprintSRSLabel: Footprint SRS
+collection-object-footprintSpatialFitLabel: Footprint sp. fit
+collection-object-coordPrecisionLabel: Precision
+collection-object-geoRefencedByLabel: Georeference by
+localityGroup-geoRefDateGroupLabel: Date
+collection-object-geoRefProtocolLabel: Protocol
+collection-object-geoRefSourceLabel: Source
+collection-object-geoRefVerificationStatusLabel: Verification
+collection-object-geoRefRemarksLabel: Remarks
+collection-object-geoRefPlaceNameLabel: Georeference place name
+
+#concept
+concept: Label Text
+concept-concept: Label Text
+
+#loanout
+loanout-collectionLabel: Collection
+loanout-majorGroupLabel: Major Group
+loanout-geographyLabel: Geography
+loanout-taxonomyLabel: Taxonomy
+loanout-objKindLabel: Object Kind
+loanout-shipDateLabel: Shipping Form Date
+loanout-transportMethodLabel: Transportation
+loanout-numPackagesLabel: # Packages
+loanout-acknowledgeDateLabel: Acknowledge Date
+loanout-manualCountsLabel: Manual Counts
+loanout-numLentLabel: Lent
+loanout-numReturnedLabel: Returned
+loanout-balanceLabel: Balance
+loanout-discrepancyLabel: Discrepancy
+loanout-objectInformationLabel: Loan Out Items
+loanout-objectNumbersLabel: Object number(s)
+loanout-objectQuantityLabel: Quantity
+loanout-objectConditionsLabel: Loan Conditions
+loanout-objectNotesLabel: Notes
+loanout-returnInformationLabel: Loan Return Items
+loanout-returnObjectNumbersLabel: Object number(s)
+loanout-returnQuantityLabel: Quantity
+loanout-returnDateLabel: Return Date
+loanout-returnDeterminationLabel: New Determination
+loanout-returnNotesLabel: Notes
+loanout-transferInformationLabel: Loan Transfers
+loanout-transferDateLabel: Transfer Date
+loanout-transferOrgLabel: To Institution
+loanout-transferPersonLabel: To Person
+loanout-transferDirectorLabel: Under Direction Of
+loanout-transferQuantityLabel: Quantity
+loanout-transferNotesLabel: Notes
+
+#loanin
+loanin-lenderLoanNumberLabel: Lender's No.
+loanin-majorGroupLabel: Major Group
+loanin-geographyLabel: Geography
+loanin-taxonomyLabel: Taxonomy
+loanin-objKindLabel: Object Kind
+loanin-dueDateLabel: Due Date
+loanin-shipDateLabel: Loan Shipped Date
+loanin-manualCountsLabel: Manual Counts
+loanin-numReceivedLabel: Received
+loanin-numReturnedLabel: Returned
+loanin-numTransferredOutLabel: Transferred Out
+loanin-balanceLabel: Balance
+loanin-discrepancyLabel: Discrepancy
+loanin-transferInLabel: Transfer In
+loanin-transferInDateLabel: Date
+loanin-transferInOrgLabel: From
+loanin-transferInPersonLabel: Previous Borrower
+loanin-returnInformationLabel: Items Returned
+loanin-returnGroupLabel: Items Returned
+loanin-returnDateLabel: Date
+loanin-returnQuantityLabel: Quantity
+loanin-returnNotesLabel: Notes
+loanin-transferOutInformationLabel: Items Transferred Out
+loanin-transferOutDateLabel: Date
+loanin-transferOutQuantityLabel: Quantity
+loanin-transferOutOrgLabel: Institution
+loanin-transferOutPersonLabel: For Study By
+loanin-transferOutDirectorLabel: Under Direction Of
+loanin-transferOutNotesLabel: Notes
+loanin-transferOutReturnLabel: Transferred Items Returned
+loanin-transferOutReturnDateLabel: Date
+loanin-transferOutReturnQuantityLabel: Quantity
+loanin-transferOutReturnNotesLabel: Notes
+
+#organization
+organization-termSourceLabel: Term Source
+organization-contactNamesLabel: Contact/Chair
+organization-associatedPersonGroupLabel: Associated People
+organization-associatedPersonLabel: Person
+organization-associatedPersonRoleLabel: Role

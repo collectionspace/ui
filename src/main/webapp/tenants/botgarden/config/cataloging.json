@@ -1,0 +1,65 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "cataloging",
+            "selectors": {
+                "recordEditor": ".csc-cataloging-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber"]
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.objectNumber", {
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.taxonomicIdentGroup",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "taxon"
+                        }]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "cataloging",
+            "schema": {
+                "cataloging": null
+            },
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
+                }
+            },
+            "pageSpec": {}
+        }
+    }
+}

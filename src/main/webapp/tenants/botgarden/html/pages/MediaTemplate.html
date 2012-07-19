@@ -1,0 +1,303 @@
+<div class="csc-media-template csc-listEditor-details">
+	<div class="csc-media">
+		<div id="secondary-nav">
+			<div id="secondary-nav-menu-sub">
+                <span class="csc-recordTraverser"></span>
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />
+				</div>
+				<div class="time-stamp"> </div>
+			</div>
+		</div>
+		
+		<div class="csc-templateEditor"></div>
+			
+		<div class="fl-container-flex fl-fix information-group info-column">
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-media-fileInformationHeader-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-media-identificationNumber-label label"/>
+							</div>
+							<div class="content csc-media-identificationNumber-container">
+								<input type="text" class="input-numeric-long csc-media-identificationNumber pattern-chooser-input"/>
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-media-scientificTaxonomy-label label"/>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-media-scientificTaxonomy"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-media-title-label"></div>
+						</div>
+						<div class="content">
+							<input type="text" class="csc-media-title"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-media-handwritten-label label"/>
+							</div>
+							<div class="content">
+								<select class="csc-media-handwritten input-select">
+									<option value="">Options not loaded</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-media-postToPublic-label label"/>
+							</div>
+							<div class="content">
+								<select class="csc-media-postToPublic input-select">
+									<option value="">Options not loaded</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="content">
+							<div class="csc-media-upload"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="csc-media-blobs">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-media-fileInformation-label"></div>
+						</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td class="csc-media-imgThumb-label"></td>
+										<td class="csc-media-filename-label"></td>
+										<td class="csc-media-location-label"></td>
+										<td class="csc-media-format-label"></td>
+										<td class="csc-media-dateCreated-label"></td>
+										<td class="csc-media-dateModified-label"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><img class="csc-media-image" alt="" src="" /></td>
+										<td><span class="csc-blobs-name"/></td>
+										<td><span class="csc-blobs-location"/></td>
+										<td><span class="csc-blobs-mimeType"/></td>
+										<td><span class="csc-blobs-createdAt"/></td>
+										<td><span class="csc-blobs-updatedAt"/></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div class="csc-blobs-dimension"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="fl-container-flex fl-fix information-group info-column">
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-media-mediaInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
+				<div class="info-column">
+					<div class="csc-media-dimension"></div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-contributor-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-contributor" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair-select">
+								<div class="header">
+									<div class="label csc-media-types-label"></div>
+								</div>
+								<div class="content">
+									<select class="csc-media-type input-select"><option value="">Options not loaded</option></select>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-creator-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-creator" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-coverage-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-coverage" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair-select">
+								<div class="header">
+									<div class="label csc-media-language-label"></div>
+								</div>
+								<div class="content">
+									<select class="csc-media-language input-select"><option value="">Options not loaded</option></select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-dateGroup-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-dateGroup-date" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-publisher-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-publisher" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-source-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-source" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-relation-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-relation" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-subject-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-subject" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left" >    
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-copyrightStatement-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-copyrightStatement" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column2-50 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-media-rightsHolder-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-media-rightsHolder" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column fl-force-left">   
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-media-description-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-media-description" ></textarea>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+
+		<div id="secondary-nav-footer">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
