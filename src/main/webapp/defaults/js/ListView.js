@@ -335,7 +335,6 @@ cspace = cspace || {};
 
     cspace.listView.finalInit = function (that) {
         that.refreshView();
-        that.updateModel();
 
         function validChange (oldModel, newModel) {
             var valid = oldModel["sortKey"] !== newModel["sortKey"];
@@ -360,6 +359,8 @@ cspace = cspace || {};
                 that.updateModel(model);
             }
         });
+        
+        that.updateModel();
     };
 
     cspace.listView.styleAndActivate = function (that, row, rows) {
