@@ -1043,9 +1043,12 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {},
         requiredPermissions: {
-            saveCancelPermission: "update",
-            deletePermission: "delete",
-            goToPermission: "read"
+            showSaveCancelButtons: "update",
+            showDeleteButton: "delete",
+            showGoto: "read"
+        },
+        hideButtonMap: {
+            showDeleteButton: ["termlist"]
         }
     });
 
@@ -1247,36 +1250,42 @@ cspace = cspace || {};
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
         };
+        // Function which sets the flag to be false whenever recordType matches one of the elements in the map for this flag
+        that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
+            fluid.each(hideButtonMap, function(hideRecordTypes, flag) {
+                 if(fluid.find(hideRecordTypes, function(hideRecordType) {
+                        return hideRecordType === recordType
+                    })) {
+                     that.applier.requestChange(flag, false);
+                 }
+            });  
+        };
+        // Function which sets the flag to be false if there are no permissions for the recordType
+        that.hideButtonsByPermission = function (recordType, requiredPermissions, resolver) {
+             fluid.each(requiredPermissions, function(permission, flag) {
+                 that.applier.requestChange(flag, cspace.permissions.resolve({
+                    permission: permission,
+                    target: recordType,
+                    resolver: resolver
+                }));
+            }); 
+        };
     };
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel,
             notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
-            requiredPermissions = that.options.requiredPermissions,
-            recordType = that.options.recordType,
-            resolver = that.resolver;
+            recordType = that.options.recordType;
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
-
-        that.applier.requestChange("showDeleteButton", cspace.permissions.resolve({
-            permission: requiredPermissions.deletePermission,
-            target: recordType,
-            resolver: resolver
-        }));
         
-        that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
-            permission: requiredPermissions.saveCancelPermission,
-            target: recordType,
-            resolver: resolver
-        }));
-
-        that.applier.requestChange("showGoto", cspace.permissions.resolve({
-            permission: requiredPermissions.goToPermission,
-            target: recordType,
-            resolver: resolver
-        }));
+        // Hide buttons if user does not have specific permissions for the recordType
+        that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
+        
+        // Hide buttons for specific recordType
+        that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
 
         that.refreshView();
         that.renderGoTo();
