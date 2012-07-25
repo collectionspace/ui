@@ -1516,7 +1516,7 @@ cspace = cspace || {};
         args: ["{recordEditor}.model", "{recordEditor}.options.originalMediaDimensions", "{globalBundle}"]
     });
 
-    cspace.recordEditor.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
+    cspace.recordEditor.recordRenderer.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
         window.open(model.fields.blobs[0].imgOrig, "_blank", parentBundle.resolve("media-originalMediaOptions", [
             originalMediaDimensions.height,
             originalMediaDimensions.width,
