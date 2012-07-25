@@ -112,7 +112,7 @@ var listViewTester = function ($) {
         }, undefined);
     });
 };
-
-(function () {
-    listViewTester(jQuery);
-}());
+$(document).ready(function () {
+    listViewTester($);
+    }
+);
