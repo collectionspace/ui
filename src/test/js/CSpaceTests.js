@@ -347,10 +347,10 @@ fluid.defaults("cspace.tests.testEnvironment", {
             type: "cspace.globalBundle"
         },
         globalNavigator: {
-            type: "cspace.util.globalNavigator",
+            type: "cspace.util.globalNavigator"
         },
         userLogin: {
-            type: "cspace.util.login",
+            type: "cspace.util.login"
         },
         recordTypes: {
             type: "cspace.recordTypes",
