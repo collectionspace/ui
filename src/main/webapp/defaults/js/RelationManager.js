@@ -31,6 +31,7 @@ cspace = cspace || {};
         strings: {},
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
+        primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
             messageBar: "{messageBar}",
             // TODO: this should really not be a component but in fact it requires access to 
@@ -55,7 +56,7 @@ cspace = cspace || {};
                 type: "cspace.searchToRelateDialog",
                 createOnEvent: "onSearchToRelateDialog",
                 options: {
-                    primaryCSID: "{globalModel}.model.primaryModel.csid"
+                    primaryCSID: "{relationManager}.options.primaryCSID"
                 }
             },
             relationDataSource: {
