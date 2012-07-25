@@ -53,7 +53,10 @@ cspace = cspace || {};
             searchToRelateDialog: {
                 container: "{relationManager}.dom.searchDialog",
                 type: "cspace.searchToRelateDialog",
-                createOnEvent: "onSearchToRelateDialog"
+                createOnEvent: "onSearchToRelateDialog",
+                options: {
+                    primaryCSID: "{globalModel}.model.primaryModel.csid"
+                }
             },
             relationDataSource: {
                 type: "cspace.relationManager.relationDataSource"
