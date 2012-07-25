@@ -76,9 +76,25 @@ login-current-info:
 login-login: admin@botgarden.cspace.berkeley.edu
 login-rologin: reader@botgarden.cspace.berkeley.edu
 
+#Vocabularies
+vocab-person: Default Persons
+vocab-organization: Collector Authority
+vocab-nomenclature: Nomenclature Organization Authority
+vocab-typeassertion: Type Assertion Organization Authority
+vocab-determination: Determination Organization Authority
+vocab-institution: Institution Authority
+vocab-place: Default Places
+vocab-taxon: Default Scientific Taxonomy Authority
+vocab-concept: Label Text Authority
+vocab-common: Common Taxonomy Authority
+vocab-unverified: Unverified Taxonomy Authority
+
 #Records:
 cataloging-number: Accession number
 cataloging-identificationNumberRequired: Please specify an Accession Number
+
+#place
+preferredPlace-termStatusLabel: Admin Status
 
 #media
 media-scientificTaxonomyLabel: Scientific name
@@ -167,8 +183,8 @@ collection-object-geoRefRemarksLabel: Remarks
 collection-object-geoRefPlaceNameLabel: Georeference place name
 
 #concept
-concept: Label Text
-concept-concept: Label Text
+concept: Concept
+concept-concept: Concept
 
 #loanout
 loanout-collectionLabel: Collection
