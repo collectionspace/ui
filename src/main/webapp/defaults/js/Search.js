@@ -388,9 +388,12 @@ cspace = cspace || {};
             var offset = model.pagination.pageSize * model.pagination.pageNum;
             var index;
             for (index = offset; index < fluid.pager.computePageLimit(that.resultsPager.model); ++ index) {
-                var result = model.results[index];
-                var row = that.locate("resultsRow").eq(index - offset);
-                var disable = result.related || false;
+                var result = model.results[index],
+                    row = that.locate("resultsRow").eq(index - offset),
+                    disable = false;
+                if (result.related === "true") {
+                    disable = true;
+                }
                 row.prop("disabled", disable);
                 row.toggleClass(that.options.styles.disabled, disable);
             }
