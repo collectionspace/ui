@@ -59,6 +59,7 @@ cspace = cspace || {};
                 type: "cspace.search.searchView",
                 options: {
                     resultsSelectable: true,
+                    primaryCSID: "{searchToRelateDialog}.options.primaryCSID",
                     recordType: "{searchToRelateDialog}.options.related",
                     components: {
                         mainSearch: {

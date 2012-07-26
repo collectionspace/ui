@@ -1058,11 +1058,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
-                },
-                components: {
-                    searchResultsResolver: {
-                        type: "cspace.search.searchResultsResolver"
-                    }
                 }
             }
         });
