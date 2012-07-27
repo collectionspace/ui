@@ -51,7 +51,10 @@ var listViewTester = function ($) {
                 pageSizeList: ["1", "5", "10", "20", "50"]
             },
             recordType: "person",
-            elPath: "results"
+            elPath: "results",
+            nonSortableColumns: {
+                person: ["summary", "random-stuff"]
+            }
         });
         options.listeners = options.listeners || {};
         fluid.each(callbacks, function (callback, eventName) {
@@ -67,7 +70,7 @@ var listViewTester = function ($) {
     };
     
     listViewTest.asyncTest("Init and render", function () {
-        expect(28);
+        expect(31);
         setupListView({
             "afterRender.first": function (listView) {
                 var headers = listView["**-renderer-headers-0"],
@@ -75,7 +78,8 @@ var listViewTester = function ($) {
                     headersList = headers.locate("header"),
                     columnList = row.locate("column"),
                     child,
-                    pageSizeList = $("option", listView.locate("pageSize"));
+                    pageSizeList = $("option", listView.locate("pageSize")),
+                    nonSortableColumns = fluid.get(listView.options.nonSortableColumns, listView.options.recordType) || [];
 
                 jqUnit.assertEquals("Headers block is rendered", 1, listView.locate("headers").length);
                 jqUnit.assertEquals("Headers block has rsf:id", "header:", listView.locate("headers").attr("rsf:id"));
@@ -85,6 +89,7 @@ var listViewTester = function ($) {
                 fluid.each(listView.model.columns, function (column, index) {
                     jqUnit.assertEquals("Sortable class should match the model", column.sortable, headersList.eq(index).hasClass("flc-pager-sort-header"));
                     child = headersList.eq(index).children();
+                    jqUnit.assertEquals("Header column has a proper sorting functionality", column.sortable, $.inArray(column["id"], nonSortableColumns) === -1);
                     jqUnit.assertEquals("Sortable header column should be ", column.sortable ? "A" : "SPAN", child[0].tagName);
                     jqUnit.assertEquals("Header column has rsf:id", column.id, child.attr("rsf:id"));
                 });
