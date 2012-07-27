@@ -84,11 +84,6 @@ cspace = cspace || {};
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
                         afterUpdate: "{loadingIndicator}.events.hideOn.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
-                    },
-                    nonSortableColumns: {
-                        loanin: ["summary"],
-                        acquisition: ["summary"],
-                        cataloging: ["summary"]
                     }
                 }
             },
