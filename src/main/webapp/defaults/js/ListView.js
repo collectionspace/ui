@@ -179,7 +179,16 @@ cspace = cspace || {};
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         }),
         elPath: "items",
-        recordType: ""
+        recordType: "",
+        // Object with pair of recordType name : Array of column names which won't be sorted
+        // CSPACE-5366. Not sure if it is a proper place for this structure. Since ListView utilizes a generic way of renedering by making all columns sortable for ANY type of record
+        // we want to disable filter functionality for some of the record types.
+        nonSortableColumns: {
+            loanin: ["summary"],
+            acquisition: ["summary"],
+            cataloging: ["summary"],
+            procedures: ["number", "summary", "summarylist.updatedAt"]
+        }
     });
 
     cspace.listView.produceTree = function (that) {
@@ -256,11 +265,18 @@ cspace = cspace || {};
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {
+        // get a non sortable array of column names by recordType
+        var nonSortable = fluid.get(that.options.nonSortableColumns, that.options.recordType) || [];
+        
         fluid.each(that.model.columns, function (column) {
             fluid.each(["id", "name"], function (key) {
                 column[key] = fluid.stringTemplate(column[key], {
                     recordType: that.options.recordType
                 });
+                // If column id in the nonSortable array then make the column non sortable
+                if ($.inArray(column["id"], nonSortable) !== -1) {
+                    column["sortable"] = false;
+                }
             });
         });
         that.bindEvents = function () {
