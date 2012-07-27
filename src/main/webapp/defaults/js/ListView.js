@@ -183,12 +183,7 @@ cspace = cspace || {};
         // Object with pair of recordType name : Array of column names which won't be sorted
         // CSPACE-5366. Not sure if it is a proper place for this structure. Since ListView utilizes a generic way of renedering by making all columns sortable for ANY type of record
         // we want to disable filter functionality for some of the record types.
-        nonSortableColumns: {
-            loanin: ["summary"],
-            acquisition: ["summary"],
-            cataloging: ["summary"],
-            procedures: ["number", "summary", "summarylist.updatedAt"]
-        }
+        nonSortableColumns: {}
     });
 
     cspace.listView.produceTree = function (that) {
