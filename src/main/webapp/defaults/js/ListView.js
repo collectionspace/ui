@@ -241,7 +241,8 @@ cspace = cspace || {};
             },
             previous: {
                 messagekey: "listView-previous"
-            }
+            },
+            nonSortableColumns: {} // Object with pair of recordType name : Array of column names which won't be sorted
         };
     };
 
@@ -256,11 +257,18 @@ cspace = cspace || {};
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {
+        // get a non sortable array of column names by recordType
+        var nonSortable = fluid.get(that.options.nonSortableColumns, that.options.recordType) || [];
+        
         fluid.each(that.model.columns, function (column) {
             fluid.each(["id", "name"], function (key) {
                 column[key] = fluid.stringTemplate(column[key], {
                     recordType: that.options.recordType
                 });
+                // If column id in the nonSortable array then make the column non sortable
+                if ($.inArray(column["id"], nonSortable) !== -1) {
+                    column["sortable"] = false;
+                }
             });
         });
         that.bindEvents = function () {
