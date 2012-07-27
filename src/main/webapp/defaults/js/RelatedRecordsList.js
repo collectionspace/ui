@@ -83,10 +83,6 @@ cspace = cspace || {};
                         afterUpdate: "{relatedRecordsList}.events.listUpdated.fire",
                         ready: "{relatedRecordsList}.events.listUpdated.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
-                    },
-                    nonSortableColumns: {
-                        cataloging: ["summary"],
-                        procedures: ["number", "summary", "summarylist.updatedAt"]
                     }
                 }
             },
