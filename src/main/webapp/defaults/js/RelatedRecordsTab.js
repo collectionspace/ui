@@ -202,10 +202,6 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
-        // THIS IS A HACK FOR CSPACE-5366!!! It should be removed once App layer is fixed
-        if ($.inArray(that.options.related, ["loanin", "acquisition", "cataloging"]) !== -1) {
-            that.options.components.relatedRecordsListView.options.model.columns[1].sortable = false;
-        }
         
         that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
