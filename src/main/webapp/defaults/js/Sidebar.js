@@ -248,6 +248,7 @@ cspace = cspace || {};
                 messagekey: "sidebar-mediaHeader"
             }
         },
+        renderOnInit: true,
         components: {
             mediaView: {
                 type: "cspace.mediaView",
@@ -255,7 +256,6 @@ cspace = cspace || {};
             },
             togglable: {
                 type: "cspace.util.togglable",
-                createOnEvent: "afterRender",
                 container: "{media}.container",
                 options: {
                     selectors: {

@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace:true, fluid*/
+/*global jQuery, cspace:true, fluid, window*/
 
 cspace = cspace || {};
 
@@ -36,7 +36,8 @@ cspace = cspace || {};
         },
         model: {
             primaryMedia: {},
-            relatedMedia: []
+            relatedMedia: [],
+            currentMedia: 0
         },
         preInitFunction: "cspace.mediaView.preInit",
         finalInitFunction: "cspace.mediaView.finalInit",
@@ -121,7 +122,7 @@ cspace = cspace || {};
         };
 
         that.getPrimaryMedia = function (callback) {
-            that.applier.requestChange("primaryMedia", fluid.get(that.globalModel, "primaryModel.fields.blobs.0");
+            that.applier.requestChange("primaryMedia", fluid.get(that.globalModel.model, "primaryModel.fields.blobs.0"));
             callback();
         };
 
