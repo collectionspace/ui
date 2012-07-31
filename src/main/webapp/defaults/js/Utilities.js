@@ -1127,21 +1127,31 @@ fluid.registerNamespace("cspace.util");
         events: {
             relationsUpdated: null,
             primaryRecordCreated: null,
-            primaryRecordSaved: null
+            primaryRecordSaved: null,
+            primaryMediaUpdated: null
         },
+        listeners: {
+            primaryRecordCreated: "{cspace.globalEvents}.updatePrimaryCsid"
+        },
+        preInitFunction: "cspace.globalEvents.preInit",
         finalInitFunction: "cspace.globalEvents.finalInit"
     });
 
+    cspace.globalEvents.preInit = function (that) {
+        that.updatePrimaryCsid = function () {
+            that.globalModel.applier.requestChange("primaryCsid", fluid.get(that.globalModel, "primaryModel.csid"));
+        };
+    };
+
     cspace.globalEvents.finalInit = function (that) {
-        
         cspace.globalEvents.setListeners({
             applier: that.globalModel.applier,
             model: that.globalModel.model,
             eventMap: {
-                "primaryModel.csid": that.events.primaryRecordCreated
+                "primaryModel.csid": that.events.primaryRecordCreated,
+                "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated
             }
         });
-    
     };
     
     cspace.globalEvents.setListeners = function (options) {
@@ -1856,7 +1866,16 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.model", {
         gradeNames: ["autoInit", "fluid.modelComponent"],
-        preInitFunction: "cspace.model.preInit"
+        preInitFunction: "cspace.model.preInit",
+        model: {
+            primaryCsid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.getUrlParameter",
+                    args: "csid"
+                }
+            }
+        }
     });
     cspace.model.preInit = function (that) {
         that.applier = fluid.makeChangeApplier(that.model, {thin: true});
