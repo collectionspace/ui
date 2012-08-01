@@ -1,7 +1,7 @@
 /*
 Copyright 2009-2010 University of Toronto
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 ou may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
@@ -59,15 +59,9 @@ cspace = cspace || {};
     
     cspace.externalURL.preInit = function (that) {
         that.styleControl = function (error, errorStyle, controls) {
-            if (error) {
-                fluid.each(controls, function(control) {
-                    control.addClass(errorStyle);
-                });
-            } else {
-                fluid.each(controls, function(control) {
-                    control.removeClass(errorStyle);
-                });
-            }
+            fluid.each(controls, function(control) {
+                control[error ? "addClass" : "removeClass"](errorStyle);
+            });
         };
         
         that.validateURL = function (url) {
@@ -103,6 +97,7 @@ cspace = cspace || {};
                 if (messageBar) {
                     messageBar.show(that.options.strings.invalidURLMessage, null, true);
                 }
+                that.options.externalURLButton.prop("href", "#");
                 return;
             }
             // Set a proper link href for the button
@@ -113,9 +108,9 @@ cspace = cspace || {};
     };
     
     cspace.externalURL.postInit = function (that) {
-        that.parent = that.container.parent();
-        that.parent.addClass(that.options.styles.parent);
+        // Style input plus add all neccessary classes
         that.container.addClass([that.options.styles.externalURL, that.options.selectors.externalURL.slice(1)].join(" "));
+        // Render a button beside the input
         fluid.invokeGlobalFunction(that.options.buildMarkup, [that, "externalURLButton"]);
     };
     
