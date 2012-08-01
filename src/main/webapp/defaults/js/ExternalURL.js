@@ -1,5 +1,5 @@
 /*
-Copyright 2009-2010 University of Toronto
+Copyright Museum of Moving Image 2012
 
 Licensed under the Educational Community License (ECL), Version 2.0.
 ou may not use this file except in compliance with this License.
@@ -66,7 +66,7 @@ cspace = cspace || {};
         
         that.validateURL = function (url) {
             var selectors = that.options.selectors,
-                regex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+                regex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-\/]))?/);
             
             that.options.hasError = !url.match(regex) && url.length > 0;
             
@@ -91,19 +91,16 @@ cspace = cspace || {};
                 messageBar.hide();
             }
             // Get a string value for a field.
-            var URLValue = that.container.val();
+            var URLValue = that.container.val(),
+                error = !that.validateURL(URLValue);
             // Get a validated string value for the same field.
-            if(!that.validateURL(URLValue)) {
+            if(error) {
                 if (messageBar) {
                     messageBar.show(that.options.strings.invalidURLMessage, null, true);
                 }
-                that.options.externalURLButton.prop("href", "#");
-                return;
             }
             // Set a proper link href for the button
-            if (URLValue.length > 0) {
-                that.options.externalURLButton.prop("href", URLValue);
-            }
+            that.options.externalURLButton.prop("href", (URLValue.length === 0 || error) ? "#" : URLValue);
         });
     };
     
