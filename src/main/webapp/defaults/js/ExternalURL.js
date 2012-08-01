@@ -80,6 +80,7 @@ cspace = cspace || {};
     
     cspace.externalURL.finalInit = function (that) {
         if (that.options.readOnly) {
+            that.container.prop("disabled", true);
             return;
         }
         

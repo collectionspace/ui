@@ -17,6 +17,7 @@ var externalURLTester = function ($) {
         cspace.util.isTest = true;
     });
     
+    // Function to loop through all available testOptions of type {url : ifItIsValid} and see that component reacts accordingly
     var checkURLValidity = function (urls, input, button, externalURL) {
         var url, validURL,
             errorClass = externalURL.options.styles.error;
@@ -34,20 +35,8 @@ var externalURLTester = function ($) {
         });
     };
     
-    datePickerTest.test("Initialization", function () {
-        // IMPROVE REGEX to parse such fail urls like
-        // http://jsonlint..com or http://www1.cbc.ca/
-        
-        expect(28);
-        
-        var inputSelector = ".csc-input",
-            externalURL = cspace.externalURL(inputSelector, {
-                messageBar: cspace.messageBar("body")
-            }),
-            input = $(inputSelector),
-            selectors = externalURL.options.selectors,
-            button = $(selectors.externalURLButton);
-        
+    // Function to test proper styling of a freshly created component and check for URL validation
+    var initAndURLCheck = function (externalURL, selectors, button, input) {
         jqUnit.assertNotUndefined("ExternalURL component should not be undefined", externalURL);
         jqUnit.assertEquals("Input has a proper class", true, input.hasClass(selectors.externalURL.slice(1)));
         jqUnit.assertNotUndefined("There is a link button beside the input with a proper class", button);
@@ -68,6 +57,50 @@ var externalURLTester = function ($) {
         ];
         
         checkURLValidity(urls, input, button, externalURL);
+    };
+    
+    // Function to check UI elements and component if it was created with readOnly flag
+    var readOnlyCheck = function (externalURL, selectors, button, input) {
+        var defaultURL = "some.url";
+        
+        button.prop("href", defaultURL);
+        
+        jqUnit.assertEquals("Link button has URL ", defaultURL, button.attr("href"));
+        jqUnit.assertEquals("Input is disabled", "disabled", input.attr("disabled"));
+        
+        input.val("some.other.url");
+        input.change();
+        jqUnit.assertEquals("Link button has URL", defaultURL, button.attr("href"));
+    };
+    
+    // Function to create ExternalURL, variables which link to the related UI elements. Then call testFunction
+    var setupAndTest = function (extraOptions, testFunction) {
+        var inputSelector = ".csc-input",
+            options = {
+                messageBar: cspace.messageBar("body")
+            },
+            externalURL = cspace.externalURL(inputSelector, $.extend({}, options, extraOptions)),
+            input = $(inputSelector),
+            selectors = externalURL.options.selectors,
+            button = $(selectors.externalURLButton);
+        
+        testFunction(externalURL, selectors, button, input);
+    };
+    
+    // TESTING PART ->
+    
+    datePickerTest.test("Initialization", function () {
+        // IMPROVE REGEX to parse such fail urls like
+        // http://jsonlint..com or http://www1.cbc.ca/
+        expect(28);
+        setupAndTest({}, initAndURLCheck);
+    });
+    
+    datePickerTest.test("Read only", function () {
+        expect(3);
+        setupAndTest({
+            readOnly: true
+        }, readOnlyCheck);   
     });
 };
 
