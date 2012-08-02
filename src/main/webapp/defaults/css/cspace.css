@@ -2297,3 +2297,14 @@ input[type="button"].cs-deleteRelationButton {
     min-height: 190px;
     background: url("../images/sample.png") no-repeat scroll center center transparent;
 }
+.cs-mediaView-mediumImage {
+    max-height: 165px;
+    display: block;
+    margin: auto;
+    padding: 12.5px 0;
+}
+.cs-mediaView-snapshot {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}

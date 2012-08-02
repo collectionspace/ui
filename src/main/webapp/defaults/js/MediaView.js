@@ -35,10 +35,12 @@ cspace = cspace || {};
             }
         },
         model: {
-            primaryMedia: {},
+            primaryMedia: undefined,
             relatedMedia: [],
-            currentMedia: 0
+            index: 0
         },
+        strings: {},
+        parentBundle: "{globalBundle}",
         preInitFunction: "cspace.mediaView.preInit",
         finalInitFunction: "cspace.mediaView.finalInit",
         events: {
@@ -68,10 +70,11 @@ cspace = cspace || {};
     });
 
     cspace.mediaView.produceTree = function (that) {
+        var model = that.model;
         return {
             expander: {
                 type: "fluid.renderer.condition",
-                condition: that.getMedia("bool"),
+                condition: that.getMedia(model.currentMedia, "bool"),
                 trueTree: {
                     mediumImage: {
                         decorators: [{
@@ -80,7 +83,7 @@ cspace = cspace || {};
                             type: "attrs",
                             attributes: {
                                 alt: that.options.parentBundle.resolve("sidebar-mediumImage"),
-                                src: that.getMedia("Medium")
+                                src: that.getMedia(model.currentMedia, "Medium")
                             }
                         }, {
                             type: "jQuery",
@@ -93,9 +96,6 @@ cspace = cspace || {};
                             addClass: "{styles}.mediaSnapshot"
                         }
                     }
-                },
-                falseTree: {
-                    mediaSnapshot: {}
                 }
             }
         };
@@ -103,7 +103,16 @@ cspace = cspace || {};
 
     cspace.mediaView.preInit = function (that) {
         that.prepareModelForRender = function () {
-            that = that;
+            var media = [];
+            if (that.model.primaryMedia) {
+                media.push(that.model.primaryMedia);
+            }
+            fluid.each(that.model.relatedMedia, function (thisMedia) {
+                media.push(thisMedia);
+            });
+            that.applier.requestChange("currentMedia", fluid.get(media, that.model.index));
+            that.applier.requestChange("nextMedia", fluid.get(media, (that.model.index + 1).toString()));
+            that.applier.requestChange("previousMedia", fluid.get(media, (that.model.index - 1).toString()));
         };
 
         that.render = function () {
@@ -157,8 +166,8 @@ cspace = cspace || {};
             return that.formatMedia("", format);
         };
 
-		that.getOriginalImage = function (model) {
-            var src = that.getMedia(model, "Original");
+		that.getOriginalImage = function () {
+            var src = that.getMedia(that.model.currentMedia, "Original");
 			window.open(src, "_blank", that.options.parentBundle.resolve("media-originalMediaOptions", ["600", "800", "yes"]));
 		};
     };
