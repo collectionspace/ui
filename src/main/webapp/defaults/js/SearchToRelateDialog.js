@@ -141,7 +141,7 @@ cspace = cspace || {};
         that.add = function () {
             var newRelations = [],
                 source = {
-                csid: that.globalModel.model.primaryModel.csid,
+                csid: fluid.get(that.globalModel.model, "primaryModel.csid"),
                 recordtype: that.options.primary
             };
             fluid.each(that.search.model.results, function (result) {

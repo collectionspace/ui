@@ -30,6 +30,7 @@ cspace = cspace || {};
         components: {
             globalModel: "{globalModel}",
             globalEvents: "{globalEvents}",
+            recordTypes: "{recordTypes}",
             relatedMedia: {
                 type: "cspace.mediaView.dataSource"
             }
@@ -72,7 +73,7 @@ cspace = cspace || {};
     cspace.mediaView.produceTree = function (that) {
         var model = that.model;
         return {
-            expander: {
+            expander: [{
                 type: "fluid.renderer.condition",
                 condition: that.getMedia(model.currentMedia, "bool"),
                 trueTree: {
@@ -97,7 +98,19 @@ cspace = cspace || {};
                         }
                     }
                 }
-            }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: that.getMedia(model.nextMedia, "bool"),
+                trueTree: {
+                    
+                }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: that.getMedia(model.previousMedia, "bool"),
+                trueTree: {
+                    
+                }
+            }]
         };
     };
 
@@ -130,24 +143,28 @@ cspace = cspace || {};
             return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
         };
 
+        that.hasPrimaryMedia = function () {
+            return !!fluid.get(that.globalModel.model, "primaryModel.fields.blobCsid");
+        };
+
         that.getPrimaryMedia = function (callback) {
-            that.applier.requestChange("primaryMedia", fluid.get(that.globalModel.model, "primaryModel.fields.blobs.0"));
+            that.applier.requestChange("primaryMedia", that.hasPrimaryMedia() ? fluid.get(that.globalModel.model, "primaryModel.fields.blobs.0") : undefined);
             callback();
         };
 
         that.getRelatedMedia = function (callback) {
             that.relatedMedia.get({
-                csid: fluid.get(that.globalModel, "primaryCsid")
+                csid: fluid.get(that.globalModel.model, "baseModel.primaryCsid")
             }, function (data) {
-                that.applier.requestChange("relatedMedia", fluid.transform(fluid.get(data, "items")), function (item) {
+                that.applier.requestChange("relatedMedia", fluid.transform(fluid.get(data, "items"), function (item) {
                     return item.summarylist;
-                });
+                }));
                 callback();
             });
         };
 
         that.getAllMedia = function () {
-            if (!fluid.get(that.globalModel, "primaryCsid")) {
+            if (!fluid.get(that.globalModel.model, "baseModel.primaryCsid")) {
                 return;
             }
             that.getPrimaryMedia(function () {
@@ -174,7 +191,7 @@ cspace = cspace || {};
 
     cspace.mediaView.finalInit = function (that) {
         that.globalEvents.events.relationsUpdated.addListener(function (related) {
-            if (related !== "media") {
+            if (related !== "media" && $.inArray("media", that.recordTypes[related]) < 0) {
                 return;
             }
             that.getRelatedMedia(that.render);

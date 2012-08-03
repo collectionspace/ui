@@ -26,6 +26,7 @@ cspace = cspace || {};
                 type: "cspace.confirmation"
             },
             messageBar: "{messageBar}",
+            recordTypes: "{recordTypes}",
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsTab}.dom.relationManager",
@@ -210,7 +211,7 @@ cspace = cspace || {};
         
         that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
-            if (related !== that.options.related) {
+            if (related !== that.options.related && $.inArray(that.options.related, that.recordTypes[related]) < 0) {
                 return;
             }
             that.relatedRecordsListView.updateModel();

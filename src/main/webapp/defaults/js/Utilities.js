@@ -606,8 +606,8 @@ fluid.registerNamespace("cspace.util");
                     category[index] = categoryHash[name];
                 });
 
-                optionlist = optionlist.concat(category)
-                optionnames = optionnames.concat(categoryNames)
+                optionlist = optionlist.concat(category);
+                optionnames = optionnames.concat(categoryNames);
             });
 
             if (optionlist.length > 0) {
@@ -976,7 +976,7 @@ fluid.registerNamespace("cspace.util");
         var listeners = {},
             index = 0;
         that.addListener = function (listener, namespace, priority) {
-            var namespace = namespace || fluid.model.composeSegments(that.id, index++);
+            namespace = namespace || fluid.model.composeSegments(that.id, index++);
             that.events.onPerformNavigation.addListener(listener, namespace, undefined, priority);
             listeners[namespace] = null;
         };
@@ -1139,28 +1139,27 @@ fluid.registerNamespace("cspace.util");
 
     cspace.globalEvents.preInit = function (that) {
         that.updatePrimaryCsid = function () {
-            that.globalModel.applier.requestChange("primaryCsid", fluid.get(that.globalModel, "primaryModel.csid"));
+            that.globalModel.applier.requestChange("baseModel.primaryCsid", fluid.get(that.globalModel.model, "primaryModel.csid"));
         };
     };
 
     cspace.globalEvents.finalInit = function (that) {
         cspace.globalEvents.setListeners({
             applier: that.globalModel.applier,
-            model: that.globalModel.model,
             eventMap: {
-                "primaryModel.csid": that.events.primaryRecordCreated,
-                "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated
+                "primaryModel.csid": function () {
+                    if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                        that.events.primaryRecordCreated.fire();
+                    }
+                },
+                "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
             }
         });
     };
     
     cspace.globalEvents.setListeners = function (options) {
-        fluid.each(options.eventMap, function (event, path) {
-            options.applier.modelChanged.addListener(path, function () {
-                if (fluid.get(options.model, path)) {
-                    event.fire();
-                }
-            });
+        fluid.each(options.eventMap, function (callback, path) {
+            options.applier.modelChanged.addListener(path, callback);
         });
     };
 
@@ -1205,12 +1204,12 @@ fluid.registerNamespace("cspace.util");
             loadingIndicator: {
                 type: "cspace.util.loadingIndicator",
                 options: {
-                	loadOnInit: true,
+                    loadOnInit: true,
                     hideOn: [
                         "{globalSetup}.events.onError"
                     ],
                     showOn: [
-                    	"{globalSetup}.events.onFetch"
+                        "{globalSetup}.events.onFetch"
                     ]
                 }
             }
@@ -1671,7 +1670,7 @@ fluid.registerNamespace("cspace.util");
     cspace.util.getLabel = function (key, recordType) {
         // TODO: This is a hack, since cataloging is also called collection-object in other layers.
         var prefix = recordType === "cataloging" ? "collection-object-" : (recordType + "-");
-        return prefix + key + "Label"
+        return prefix + key + "Label";
     };
     
     cspace.util.findLabel = function (required) {
@@ -1878,8 +1877,21 @@ fluid.registerNamespace("cspace.util");
         }
     });
     cspace.model.preInit = function (that) {
-        that.applier = fluid.makeChangeApplier(that.model, {thin: true});
-        that.requestChange = that.applier.requestChange;
+        var togo = fluid.assembleModel({
+            baseModel: {
+                model: that.model,
+                applier: that.applier
+            }
+        });
+        that.model = togo.model;
+        that.applier = togo.applier;
+        that.attachModel = function (modelSpec) {
+            for (var path in modelSpec) {
+                var rec = modelSpec[path];
+                fluid.attachModel(that.model, path, rec.model);
+                that.applier.addSubApplier(path, rec.applier);
+            }
+        };
     };
     
 })(jQuery, fluid);

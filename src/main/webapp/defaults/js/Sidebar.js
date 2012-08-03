@@ -119,7 +119,6 @@ cspace = cspace || {};
         resolver: "{permissionsResolver}",
         components: {
             instantiator: "{instantiator}",
-            globalModel: "{globalModel}",
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report",
