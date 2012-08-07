@@ -266,11 +266,16 @@ cspace = cspace || {};
     };
 
     cspace.mediaView.finalInit = function (that) {
+
+        function hasMedia (related) {
+            var category = that.recordTypes[related] || [];
+            return $.inArray("media", category) > -1;
+        }
+
         that.globalEvents.events.relationsUpdated.addListener(function (related) {
-            if (related !== "media" && $.inArray("media", that.recordTypes[related]) < 0) {
-                return;
+            if (related === "media" || hasMedia(related)) {
+                that.getRelatedMedia(that.render);
             }
-            that.getRelatedMedia(that.render);
         });
         that.globalEvents.events.primaryMediaUpdated.addListener(function () {
             that.getPrimaryMedia(that.render);

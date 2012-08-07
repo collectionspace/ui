@@ -209,13 +209,18 @@ cspace = cspace || {};
 
     cspace.relatedRecordsTab.preInit = function (that) {
         
+        function hasRelated (related) {
+            var category = that.recordTypes[related] || [];
+            return $.inArray(that.options.related, category) > -1;
+        }
+
         that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
-            if (related !== that.options.related && $.inArray(that.options.related, that.recordTypes[related]) < 0) {
-                return;
+            if (related === that.options.related || hasRelated(related)) {
+                that.relatedRecordsListView.updateModel();
             }
-            that.relatedRecordsListView.updateModel();
         };
+
         that.onDeleteRelation = function (target) {
             if (!target.csid || !target.recordtype) {
                 target = undefined;
