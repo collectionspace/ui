@@ -2135,12 +2135,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
-                components: {
-                    // TODO: Maybe make a searchResultsResolver that can calculate if all advanced search results are already related to the target record?
-                    //searchResultsResolver: {
-                    //    type: "cspace.search.searchResultsResolver"
-                    //}
-                },
                 listeners: {
                     afterSearch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
@@ -2215,13 +2209,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-		fluid.demands("cspace.searchResultsRelationManager", ["cspace.pageBuilder", "cspace.advancedSearch"], { // FIXME: This isn't right
-			options: {
-				events: {
-					onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
-				}
-			}
-		});
+        fluid.demands("cspace.searchResultsRelationManager", ["cspace.relateSearchResults"], {
+            options: {
+                events: {
+                    onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
+                }
+            }
+        });
 
         fluid.demands("cspace.advancedSearch.updateSearchHistory", ["cspace.advancedSearch", "cspace.search.searchView"], {
             funcName: "cspace.search.updateSearchHistory",
@@ -2239,8 +2233,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.searchToRelateDialog", "cspace.search.searchView"], {
-            funcName: "cspace.search.searchView.onInitialSearch",
-            args: "{cspace.search.searchView}"
+            // The search component in the Add to Record dialog should not perform any search when the page initially loads.
+            funcName: "jQuery.noop"
         });
 
         fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.search.searchView"], {
