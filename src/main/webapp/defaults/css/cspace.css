@@ -1880,6 +1880,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 } 
 .cs-media-image {
     cursor:pointer;
+    max-height: 50px;
 }
 .cs-hierarchy-equivalentContext {
     background: #FFF;
