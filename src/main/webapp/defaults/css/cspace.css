@@ -2294,7 +2294,7 @@ input[type="button"].cs-deleteRelationButton {
     border: none;
 }
 .cs-mediaView {
-    min-height: 190px;
+    height: 190px;
     background: url("../images/sample.png") no-repeat scroll center center transparent;
 }
 .cs-mediaView-mediumImage {
@@ -2308,20 +2308,24 @@ input[type="button"].cs-deleteRelationButton {
     background-color: white;
     width: 100%;
     height: 100%;
-    display: table;
 }
-.cs-mediaView-snapshot a {
-    display: table-cell;
-    vertical-align: middle;
+.cs-mediaView-snapshot .cs-mediaView-panelTop {
+    background: rgba(216,216,216, 0.9);
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 11px;
 }
-.cs-mediaView-next {
-    max-height: 50px;
-    max-width: 50px;
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+.cs-mediaView-snapshot .cs-mediaView-panel {
+    width: 297px;
+    margin-right: auto;
+    margin-left: auto;
 }
-.cs-mediaView-previous {
-    max-height: 50px;
-    max-width: 50px;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
-    float: right;
+.cs-mediaView-snapshot div .cs-mediaView-oneOf {
+    margin: 0 20px;
+    display: inline-block;
+}
+.cs-mediaView-snapshot div a {
+    color: #6F9ECD;
+    font-weight: bold;
 }

@@ -19,8 +19,8 @@ cspace = cspace || {};
     fluid.defaults("cspace.mediaView", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         selectors: {
-            previous: ".csc-mediaView-previous",
-            next: ".csc-mediaView-next",
+            empty: ".csc-mediaView-empty",
+            oneOf: ".csc-mediaView-oneOf",
             mediaSnapshot: ".csc-mediaView-snapshot",
             mediumImage: ".csc-mediaView-mediumImage",
             previousLink: ".csc-mediaView-previous-link",
@@ -29,8 +29,8 @@ cspace = cspace || {};
         },
         produceTree: "cspace.mediaView.produceTree",
         styles: {
-            previous: "cs-mediaView-previous",
-            next: "cs-mediaView-next",
+            empty: "cs-mediaView",
+            oneOf: "cs-mediaView-oneOf",
             mediumImage: "cs-mediaView-mediumImage",
             previousLink: "cs-mediaView-previous-link",
             nextLink: "cs-mediaView-next-link",
@@ -83,9 +83,16 @@ cspace = cspace || {};
     cspace.mediaView.produceTree = function (that) {
         var model = that.model;
         return {
-            expander: [{
+            expander: {
                 type: "fluid.renderer.condition",
                 condition: that.getMedia(model.currentMedia, "bool"),
+                falseTree: {
+                    empty: {
+                        decorators: {
+                            addClass: "{styles}.empty"
+                        }
+                    }
+                },
                 trueTree: {
                     mediumImageLink: {
                         decorators: [{
@@ -113,63 +120,53 @@ cspace = cspace || {};
                         decorators: {
                             addClass: "{styles}.mediaSnapshot"
                         }
-                    }
-                }
-            }, {
-                type: "fluid.renderer.condition",
-                condition: that.getMedia(model.nextMedia, "bool"),
-                trueTree: {
-                    nextLink: {
-                        decorators: [{
-                            type: "jQuery",
-                            func: "click",
-                            args: that.getNext
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                label: that.options.parentBundle.resolve("sidebar-nextImage")
-                            }
-                        }]
                     },
-                    next: {
-                        decorators: [{
-                            addClass: "{styles}.next"
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                src: that.getMedia(model.nextMedia, "Thumbnail")
-                            }
-                        }]
-                    }
-                }
-            }, {
-                type: "fluid.renderer.condition",
-                condition: that.getMedia(model.previousMedia, "bool"),
-                trueTree: {
-                    previousLink: {
-                        decorators: [{
-                            type: "jQuery",
-                            func: "click",
-                            args: that.getPrevious
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                label: that.options.parentBundle.resolve("sidebar-previousImage")
-                            }
-                        }]
+                    oneOf: {
+                        messagekey: "sidebar-oneOf",
+                        args: ["${humanIndex}", "${total}"],
+                        decorators: {
+                            addClass: "{styles}.oneOf"
+                        }
                     },
-                    previous: {
-                        decorators: [{
-                            addClass: "{styles}.previous"
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                src: that.getMedia(model.previousMedia, "Thumbnail")
+                    expander: [{
+                        type: "fluid.renderer.condition",
+                        condition: that.getMedia(model.nextMedia, "bool"),
+                        trueTree: {
+                            nextLink: {
+                                target: "#",
+                                linktext: {
+                                    messagekey: "sidebar-next"
+                                },
+                                decorators: [{
+                                    type: "jQuery",
+                                    func: "click",
+                                    args: that.getNext
+                                }, {
+                                    addClass: "{styles}.nextLink"
+                                }]
                             }
-                        }]
-                    }
+                        }
+                    }, {
+                        type: "fluid.renderer.condition",
+                        condition: that.getMedia(model.previousMedia, "bool"),
+                        trueTree: {
+                            previousLink: {
+                                target: "#",
+                                linktext: {
+                                    messagekey: "sidebar-previous"
+                                },
+                                decorators: [{
+                                    type: "jQuery",
+                                    func: "click",
+                                    args: that.getPrevious
+                                }, {
+                                    addClass: "{styles}.previousLink"
+                                }]
+                            }
+                        }
+                    }]
                 }
-            }]
+            }
         };
     };
 
@@ -185,7 +182,10 @@ cspace = cspace || {};
             var current = fluid.get(media, that.model.index);
             if (!current) {
                 that.applier.requestChange("index", 0);
+                current = fluid.get(media, that.model.index);
             }
+            that.applier.requestChange("total", media.length);
+            that.applier.requestChange("humanIndex", that.model.index + 1);
             that.applier.requestChange("currentMedia", current);
             that.applier.requestChange("nextMedia", fluid.get(media, (that.model.index + 1).toString()));
             that.applier.requestChange("previousMedia", fluid.get(media, (that.model.index - 1).toString()));
@@ -241,6 +241,7 @@ cspace = cspace || {};
 
         that.getAllMedia = function () {
             if (!fluid.get(that.globalModel.model, "baseModel.primaryCsid")) {
+                that.refreshView();
                 return;
             }
             that.getPrimaryMedia(function () {
