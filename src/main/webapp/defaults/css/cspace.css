@@ -2293,3 +2293,40 @@ input[type="button"].cs-deleteRelationButton {
     margin: 0 5px 0 0;
     border: none;
 }
+.cs-mediaView {
+    height: 190px;
+    background: url("../images/sample.png") no-repeat scroll center center transparent;
+}
+.cs-mediaView-mediumImage {
+    max-height: 165px;
+    display: block;
+    margin: auto;
+    padding: 12.5px 0;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.cs-mediaView-snapshot {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+.cs-mediaView-snapshot .cs-mediaView-panelTop {
+    background: rgba(216,216,216, 0.9);
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 11px;
+}
+.cs-mediaView-snapshot .cs-mediaView-panel {
+    width: 297px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.cs-mediaView-snapshot div .cs-mediaView-oneOf {
+    margin: 0 20px;
+    display: inline-block;
+}
+.cs-mediaView-snapshot div a {
+    color: #6F9ECD;
+    font-weight: bold;
+}

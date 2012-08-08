@@ -236,11 +236,18 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.finalInit = function (that) {
-        var modelToClone = that.localStorage.get();
+        var modelSpec = {},
+            modelToClone = that.localStorage.get();
+
+        modelSpec[that.options.globalRef] = {
+            model: that.model,
+            applier: that.applier
+        };
+        that.globalModel.attachModel(modelSpec);
+
         if (modelToClone) {
             that.localStorage.set();
             that.applier.requestChange("", modelToClone);
-            that.globalModel.requestChange(that.options.globalRef, modelToClone);
             that.events.afterFetch.fire();
         } else {
             that.recordDataSource.get(function (data) {
@@ -249,7 +256,6 @@ cspace = cspace || {};
                     return;
                 }
                 that.applier.requestChange("", data);
-                that.globalModel.requestChange(that.options.globalRef, data);
                 that.events.afterFetch.fire();
             });
         }
@@ -419,7 +425,6 @@ cspace = cspace || {};
                 return;
             }
             that.applier.requestChange("", validatedModel);
-            that.globalModel.requestChange(fluid.model.composeSegments(that.options.globalRef, "fields"), fluid.get(validatedModel, "fields"));
 
             that.events.afterValidate.fire();
         };
@@ -485,7 +490,6 @@ cspace = cspace || {};
                         cspace.recordEditor.saver.save(that, recordEditor);
                     } else if (userAction === "proceed") {
                         recordEditor.applier.requestChange("workflowTransition", "lock");
-                        recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "workflowTransition"), "lock");
                         cspace.recordEditor.saver.save(that, recordEditor);
                     } else if (userAction === "cancel") {
                         recordEditor.events.onCancelSave.fire();
@@ -509,7 +513,6 @@ cspace = cspace || {};
         });
         if (vocab) {
             recordEditor.applier.requestChange("namespace", vocab);
-            recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "namespace"), vocab);
         }
         recordEditor.recordDataSource.set(recordEditor.model, function (data) {
             if (data.isError) {
@@ -520,7 +523,6 @@ cspace = cspace || {};
                 recordEditor.events.afterCreate.fire(data);
             }
             recordEditor.applier.requestChange("", data);
-            recordEditor.globalModel.requestChange(recordEditor.options.globalRef, data);
             recordEditor.events.afterSave.fire(data);
         });
     };
