@@ -431,6 +431,9 @@ cspace = cspace || {};
             // Only present on findedit and advanced search pages.
             var searchData;
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
+                if (!storage) {
+                    return;
+                }
                 if (storage.options.source !== that.options.source) {
                     return;
                 }
