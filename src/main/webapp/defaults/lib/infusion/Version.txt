@@ -135,11 +135,13 @@ TO:
         that.addSubApplier = function (path, subApplier) {
             subAppliers[path] = subApplier;
             fluid.remove_if(listeners, function (thisListeners, seg) {
-                if (seg !== path) {
+                var matchedPath = fluid.pathUtil.matchPath(path, seg);
+                if (!matchedPath) {
                     return;
                 }
                 fluid.each(thisListeners, function (listener) {
-                    subApplier.modelChanged.addListener(listener.spec, listener.listener, listener.namespace);
+                    var subSpec = buildSubSpec(listener.spec, matchedPath);
+                    subApplier.modelChanged.addListener(subSpec, listener.listener, listener.namespace);
                 });
                 return true;
             });
@@ -160,28 +162,35 @@ TO:
         };
         bindRequestChange(that);
 
-        that.modelChanged.addListener = function (spec, listener, namespace) {
-            var path = spec.path || spec,
-                seg = fluid.model.parseEL(path)[0],
-                subApplier = fluid.find(subAppliers, function (subApplier, path) {
-                    if (path.indexOf(seg) === 0) {
-                        return subApplier;
-                    }
-                });
-            var subpath = path.substring(seg.length + 1);
-            var subSpec = fluid.copy(spec);
+        function buildSubSpec (spec, matchedPath) {
+            var specPath = spec.path || spec,
+                subpath = specPath.substring(matchedPath.length + 1),
+                subSpec = fluid.copy(spec);
             if (subSpec.path) {
                 subSpec.path = subpath;
             } else {
                 subSpec = subpath;
             }
+            return subSpec;
+        }
+
+        that.modelChanged.addListener = function (spec, listener, namespace) {
+            var specPath = spec.path || spec,
+                matchedPath, subSpec,
+                subApplier = fluid.find(subAppliers, function (subApplier, path) {
+                    matchedPath = fluid.pathUtil.matchPath(path, specPath);
+                    if (matchedPath) {
+                        return subApplier;
+                    }
+                });
             if (subApplier) {
+                subSpec = buildSubSpec(spec, matchedPath);
                 subApplier.modelChanged.addListener(subSpec, listener, namespace);
                 return;
             }
-            listeners[seg] = fluid.makeArray(listeners[seg]);
-            listeners[seg].push({
-                spec: subSpec,
+            listeners[specPath] = fluid.makeArray(listeners[specPath]);
+            listeners[specPath].push({
+                spec: spec,
                 listener: listener,
                 namespace: namespace
             });
@@ -196,12 +205,15 @@ TO:
             if (typeof (listener) !== "string") {
                 return;
             }
-            fluid.find(listeners, function (thisListeners) {
-                fluid.remove_if(thisListeners, function (listener) {
-                    if (listener.namespace === listener) {
+            fluid.remove_if(listeners, function (thisListeners) {
+                fluid.remove_if(thisListeners, function (thisListener) {
+                    if (thisListener.namespace === listener) {
                         return true;
                     }
                 });
+                if (thisListeners.length < 1) {
+                    return true;
+                }
             });
         };
 
