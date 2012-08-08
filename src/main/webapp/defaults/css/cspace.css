@@ -2303,6 +2303,7 @@ input[type="button"].cs-deleteRelationButton {
     margin: auto;
     padding: 12.5px 0;
     cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 .cs-mediaView-snapshot {
     background-color: white;
