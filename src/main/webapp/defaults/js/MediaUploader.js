@@ -57,8 +57,9 @@ cspace = cspace || {};
         },
         elPaths: {
             blobCsid: "fields.blobCsid",
-            srcUri: "fields.srcUri",
-            blobs: "fields.blobs"
+            sourceUrl: "fields.sourceUrl",
+            blobs: "fields.blobs",
+            externalUrl: "fields.externalUrl"
         },
         mergePolicy: {
             model: "preserve",
@@ -188,7 +189,7 @@ cspace = cspace || {};
     
     cspace.mediaUploader.onFileSuccess = function (that, input, file, responseText, xhr) {
         var response = JSON.parse(responseText);
-        that.applier.requestChange(that.options.elPaths.srcUri, response.file);
+        that.applier.requestChange(that.options.elPaths.sourceUrl, response.file);
         delete response.file;
         that.applier.requestChange(that.options.elPaths.blobs, [response]);
         that.applier.requestChange(that.options.elPaths.blobCsid, response.csid);
@@ -272,8 +273,9 @@ cspace = cspace || {};
     };
     
     cspace.mediaUploader.linkMedia = function (that) {
-        var srcUri = that.locate("linkInput").val();
-        that.options.applier.requestChange(that.options.elPaths.srcUri, srcUri);
+        var sourceUrl = that.locate("linkInput").val();
+        that.options.applier.requestChange(that.options.elPaths.sourceUrl, sourceUrl);
+        that.options.applier.requestChange(that.options.elPaths.externalUrl, sourceUrl);
         that.events.onLink.fire();
     };
     
