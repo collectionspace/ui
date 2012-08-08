@@ -66,19 +66,11 @@ cspace = cspace || {};
             // Style control depending on if there was an error in its content
             that.styleControls(error, that.options.styles.error, [that.locate(that.options.selectors.externalURL), that.externalURLButton]);
             return !error;
-        };  
-    };
-    
-    cspace.externalURL.finalInit = function (that) {
-        if (that.options.readOnly) {
-            that.container.prop("disabled", true);
-            return;
-        }
-        
-        var messageBar = that.messageBar,
-            externalURLButton = that.externalURLButton;
-        
-        that.container.change(function () {
+        };
+
+        that.validateAndRender = function () {
+            var messageBar = that.messageBar,
+                externalURLButton = that.externalURLButton;
             // If there is an error message clear it.
             if (messageBar) {
                 messageBar.hide();
@@ -93,7 +85,18 @@ cspace = cspace || {};
             // Set a proper link href for the button
             externalURLButton.attr("href", (urlValue.length === 0 || error) ? "#" : urlValue);
             externalURLButton.attr("label", that.options.parentBundle.resolve("externalUrl-label"));
-        });
+        };
+    };
+
+    cspace.externalURL.finalInit = function (that) {
+        if (that.options.readOnly) {
+            that.container.prop("disabled", true);
+            return;
+        }
+
+        that.container.change(that.validateAndRender);
+
+        that.validateAndRender();
     };
     
     cspace.externalURL.postInit = function (that) {
