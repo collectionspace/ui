@@ -23,9 +23,7 @@ cspace = cspace || {};
         preInitFunction: "cspace.externalURL.preInit",
         postInitFunction: "cspace.externalURL.postInit",
         finalInitFunction: "cspace.externalURL.finalInit",
-        strings: {
-            invalidURLMessage: "Provided URL has invalid format."
-        },
+        strings: {},
         parentBundle: "{globalBundle}",
         components: {
             messageBar: "{messageBar}"
@@ -44,36 +42,29 @@ cspace = cspace || {};
             externalURLButton: "<a href=\"#\" />"
         },
         buildMarkup: "cspace.externalURL.buildMarkup",
-        hasError: false,
-        readOnly: false,
-        externalURLButton: null
+        readOnly: false
     });
     
     cspace.externalURL.buildMarkup = function (that, control) {
         // Create Navigate Away button
-        that.options.externalURLButton = $(that.options.markup[control])
+        that[control] = $(that.options.markup[control])
             .addClass([that.options.selectors[control].slice(1), that.options.styles[control]].join(" "));
         // Add it to the DOM
-        that.container.after(that.options.externalURLButton);
+        that.container.after(that[control]);
     };
     
     cspace.externalURL.preInit = function (that) {
-        that.styleControl = function (error, errorStyle, controls) {
+        that.styleControls = function (error, errorStyle, controls) {
             fluid.each(controls, function(control) {
                 control[error ? "addClass" : "removeClass"](errorStyle);
             });
         };
         
         that.validateURL = function (url) {
-            var selectors = that.options.selectors,
-                regex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-\/]))?/);
-            
-            that.options.hasError = !url.match(regex) && url.length > 0;
-            
-            var error = that.options.hasError;
+            var regex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!-\/]))?/),
+                error = !url.match(regex) && url.length > 0;
             // Style control depending on if there was an error in its content
-            that.styleControl(error, that.options.styles.error, [that.locate(selectors.externalURL), that.options.externalURLButton]);
-            
+            that.styleControls(error, that.options.styles.error, [that.locate(that.options.selectors.externalURL), that.externalURLButton]);
             return !error;
         };  
     };
@@ -84,7 +75,8 @@ cspace = cspace || {};
             return;
         }
         
-        var messageBar = that.messageBar;
+        var messageBar = that.messageBar,
+            externalURLButton = that.externalURLButton;
         
         that.container.change(function () {
             // If there is an error message clear it.
@@ -92,16 +84,15 @@ cspace = cspace || {};
                 messageBar.hide();
             }
             // Get a string value for a field.
-            var URLValue = that.container.val(),
-                error = !that.validateURL(URLValue);
+            var urlValue = that.container.val(),
+                error = !that.validateURL(urlValue);
             // Get a validated string value for the same field.
-            if(error) {
-                if (messageBar) {
-                    messageBar.show(that.options.strings.invalidURLMessage, null, true);
-                }
+            if(error && messageBar) {
+                messageBar.show(that.options.parentBundle.resolve("externalUrl-invalidURLMessage"), null, true);
             }
             // Set a proper link href for the button
-            that.options.externalURLButton.prop("href", (URLValue.length === 0 || error) ? "#" : URLValue);
+            externalURLButton.attr("href", (urlValue.length === 0 || error) ? "#" : urlValue);
+            externalURLButton.attr("label", that.options.parentBundle.resolve("externalUrl-label"));
         });
     };
     

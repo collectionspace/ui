@@ -1636,7 +1636,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     padding: 10px 10px 10px 20px;
 }
 /*  Unifying and cleaning up the calendar date picker widget */
-.cs-calendar-button, .cs-externalURL-button { 
+.cs-calendar-button, .cs-externalURL-button {
     border:1px solid #C7CFD4;
     border-left:none;
     height:19px;

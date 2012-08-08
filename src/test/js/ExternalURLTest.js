@@ -12,9 +12,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 var externalURLTester = function ($) {
+
+    var bareExternalURLTest = new jqUnit.TestCase("ExternalURL Tests");
     
-    var datePickerTest = new jqUnit.TestCase("ExternalURL Tests", function () {
-        cspace.util.isTest = true;
+    var externalURLTest = cspace.tests.testEnvironment({
+        testCase: bareExternalURLTest
     });
     
     // Function to loop through all available testOptions of type {url : ifItIsValid} and see that component reacts accordingly
@@ -76,10 +78,7 @@ var externalURLTester = function ($) {
     // Function to create ExternalURL, variables which link to the related UI elements. Then call testFunction
     var setupAndTest = function (extraOptions, testFunction) {
         var inputSelector = ".csc-input",
-            options = {
-                messageBar: cspace.messageBar("body")
-            },
-            externalURL = cspace.externalURL(inputSelector, $.extend({}, options, extraOptions)),
+            externalURL = cspace.externalURL(inputSelector, $.extend(true, {}, extraOptions)),
             input = $(inputSelector),
             selectors = externalURL.options.selectors,
             button = $(selectors.externalURLButton);
@@ -89,14 +88,14 @@ var externalURLTester = function ($) {
     
     // TESTING PART ->
     
-    datePickerTest.test("Initialization", function () {
+    externalURLTest.test("Initialization", function () {
         // IMPROVE REGEX to parse such fail urls like
         // http://jsonlint..com or http://www1.cbc.ca/
         expect(28);
         setupAndTest({}, initAndURLCheck);
     });
     
-    datePickerTest.test("Read only", function () {
+    externalURLTest.test("Read only", function () {
         expect(3);
         setupAndTest({
             readOnly: true
