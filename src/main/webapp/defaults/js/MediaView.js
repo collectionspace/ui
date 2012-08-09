@@ -216,7 +216,7 @@ cspace = cspace || {};
             if (!url) {
                 return url;
             }
-            return url.replace(/Thumbnail/, format || "OriginalJpeg");
+            return url.replace(/Thumbnail/, format || "Original");
         };
 
         that.hasPrimaryMedia = function () {
