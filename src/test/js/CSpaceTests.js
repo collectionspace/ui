@@ -358,6 +358,12 @@ fluid.defaults("cspace.tests.testEnvironment", {
                 schema: "{testEnvironment}.options.schema"
             }
         },
+        globalModel: {
+            type: "cspace.model"
+        },
+        globalEvents: {
+            type: "cspace.globalEvents"
+        },
         loadingIndicator: {
             type: "cspace.util.loadingIndicator"
         },
