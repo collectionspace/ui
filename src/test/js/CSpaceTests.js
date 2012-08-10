@@ -331,9 +331,6 @@ fluid.defaults("cspace.tests.testEnvironment", {
         navigationEventHolder: {
             type: "cspace.navigationEventHolder"
         },
-        relationResolver: {
-            type: "cspace.util.relationResolver"
-        },
         vocab: {
             type: "cspace.vocab",
             options: {
