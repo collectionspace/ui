@@ -39,12 +39,7 @@ cspace = cspace || {};
 			dataContext: {
 				type: "cspace.dataContext",
 				options: {
-					recordType: "relationships",
-					listeners: {
-						onSave: "{loadingIndicator}.events.showOn.fire",
-						onError: "{loadingIndicator}.events.hideOn.fire",
-						afterSave: "{loadingIndicator}.events.hideOn.fire"
-					}
+					recordType: "relationships"
 				}
 			},
 			searchToRelateDialog: {
@@ -68,7 +63,16 @@ cspace = cspace || {};
 		},
 		events: {
 			afterInitDependents: null,
-			onRelateButtonClick: null
+			onRelateButtonClick: null,
+			onFetchExistingRelations: null,
+			onSave: null,
+			onError: null,
+			afterSave: null
+		},
+		listeners: {
+			onFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
+			onError: "{loadingIndicator}.events.hideOn.fire",
+			afterSave: "{loadingIndicator}.events.hideOn.fire"
 		},
 		invokers: {
 			add: {
@@ -138,6 +142,8 @@ cspace = cspace || {};
 		 * the record selected in the dialog, and the target is the search result. We also need to
 		 * filter out existing relations.
 		 */
+		that.events.onFetchExistingRelations.fire();
+		
 		var results = searchModel.results;
 
 		if (dialogRelations.items.length > 0 && results.length > 0) {
@@ -177,8 +183,9 @@ cspace = cspace || {};
 								filterAndAddRelations(that, dialogRelations, searchModel, relationResolvers);
 							}
 						},
-						onError: function() {
-							
+						onError: function(operation, message, data) {
+							onError(that, operation, message, data);
+							that.events.onError.fire();
 						}
 					}
 				});
@@ -195,6 +202,8 @@ cspace = cspace || {};
 		var alreadyRelatedRecords = {};
 		var start = searchModel.offset;
 		var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
+	
+		that.events.onSave.fire();
 		
 		fluid.each(dialogRelations.items, function(dialogRelation) {
 			var source = dialogRelation.target;
@@ -260,10 +269,11 @@ cspace = cspace || {};
 		});
 		
 		that.showMessage(messages.join(" "));
+		that.events.afterSave.fire();
 	};
 	
 	var onError = function(that, operation, message, data) {
-		that.showError("Error: " + message + ((typeof(data) != "undefined") ? (": " + data) : ""));
+		that.showError("Error on " + operation + ": " + message + ((typeof(data) != "undefined") ? (": " + data) : ""));
 	};
 	
 	cspace.searchResultsRelationManager.showMessage = function (messageBar, message) {
