@@ -135,17 +135,23 @@ cspace = cspace || {};
 		 * The searchToRelateDialog returns a list of relations in which the targets are the records
 		 * that were checked in the dialog. For each record checked in the dialog, we want to create
 		 * a relation with each record in the current page of search results, in which the source is 
-		 * the record selected in the dialog, and the target is the search result.
+		 * the record selected in the dialog, and the target is the search result. We also need to
+		 * filter out existing relations.
 		 */
 		var results = searchModel.results;
 
 		if (dialogRelations.items.length > 0 && results.length > 0) {
 			var relationResolvers = {};
 
-			for (var i=0; i<dialogRelations.items.length; i++) {
-				var dialogRelation = dialogRelations.items[i];
+			fluid.each(dialogRelations.items, function(dialogRelation) {
+				/*
+				 * Create a relationResolver for each record selected in the dialog, so we
+				 * can filter out records that are already related. Load the data via
+				 * dataContext components, and proceed when all of the dataContexts have
+				 * completed loading the necessary data.
+				 */
+				
 				var target = dialogRelation.target;
-				var model = {};
 				
 				relationResolvers[target.csid] = null;
 
@@ -178,27 +184,28 @@ cspace = cspace || {};
 				});
 				
 				dataContext.fetch(target.csid);
-			}
+			});
 		}
 	};
 	
 	var filterAndAddRelations = function(that, dialogRelations, searchModel, relationResolvers) {
 		var results = searchModel.results;
 		var transformedItems = [];
-		var alreadyRelatedItems = [];
+		var selectedRecords = [];
+		var alreadyRelatedRecords = {};
 		var start = searchModel.offset;
 		var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
 		
-		for (var i=0; i<dialogRelations.items.length; i++) {
-			var dialogRelation = dialogRelations.items[i];
+		fluid.each(dialogRelations.items, function(dialogRelation) {
 			var source = dialogRelation.target;
 			var relationResolver = relationResolvers[source.csid];
-			
-			for (var j=start; j<end; j++) {
-				var target = results[j];
 
+			selectedRecords.push(source);
+			alreadyRelatedRecords[source.csid] = [];
+			
+			fluid.each(results, function(target) {
 				if (relationResolver.isRelated(target.recordtype, target.csid)) {
-					alreadyRelatedItems.push(target);
+					alreadyRelatedRecords[source.csid].push(target);
 				}
 				else {
 					transformedItems.push({
@@ -208,8 +215,11 @@ cspace = cspace || {};
 						type: dialogRelation.type
 					});
 				}
-			}
-		}
+			});
+		});
+		
+		that.selectedRecords = selectedRecords;
+		that.alreadyRelatedRecords = alreadyRelatedRecords;
 		
 		that.dataContext.addRelations({
 			items: transformedItems
@@ -217,34 +227,39 @@ cspace = cspace || {};
 	};
 	
 	var afterAddRelations = function(that, relations) {
-		var items = relations.items;
-		var sources = {};
+		var alreadyRelatedRecords = that.alreadyRelatedRecords;
 		var counts = {};
-		
-		for (var i=0; i<items.length; i++) {
-			var item = items[i];
+				
+		fluid.each(relations.items, function(item) {
 			var source= item.source;
-			var sourceCsid = source.csid;
+			var csid = source.csid;
+
+			counts[csid] = ((csid in counts) ? counts[csid] : 0) + 1;
+		});
+
+		var sources = that.selectedRecords.sort(function(a, b) {
+			return a.number.localeCompare(b.number);
+		});
+		
+		var messages = [];
+		
+		// FIXME: Move message text to the message bundle.
+
+		fluid.each(sources, function(source) {
+			var csid = source.csid;
+			var count = (csid in counts) ? counts[csid] : 0;
+			var alreadyRelatedCount = alreadyRelatedRecords[csid].length;
 			
-			if (!sources[sourceCsid]) {
-				sources[sourceCsid] = source;
+			var message = "Added " + count + " " + (count == 1 ? "record" : "records") + " to " + source.number;
+			
+			if (alreadyRelatedCount > 0) {
+				message = message + " (" + alreadyRelatedCount + " " + (alreadyRelatedCount == 1 ? "was" : "were") + " already related)";
 			}
-						
-			var count = (sourceCsid in counts) ? counts[sourceCsid] : 0;
-			counts[sourceCsid] = count + 1;
-		}
+			
+			messages.push(message + ".");
+		});
 		
-		var sourceNumbers = [];
-		var count = 0;
-		
-		for (var csid in sources) {
-			sourceNumbers.push(sources[csid].number);
-			count = counts[csid];
-		}
-		
-		sourceNumbers = sourceNumbers.sort();
-		
-		that.showMessage("Added " + count + " " + (count == 1 ? "record" : "records") + " to " + sourceNumbers.join(", ")); // FIXME: Move to message bundle
+		that.showMessage(messages.join(" "));
 	};
 	
 	var onError = function(that, operation, message, data) {
