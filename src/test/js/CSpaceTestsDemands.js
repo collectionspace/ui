@@ -279,6 +279,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     fluid.demands("mainSearch", "cspace.search.searchView", ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
     fluid.demands("structuredDate", "cspace.test", [".csc-structuredDate-container-field", "{options}"]);
+
+    fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.test"], {
+            funcName: "cspace.relationManager.add",
+            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{relationManager}.options.primaryCSID", "{arguments}.0"]
+        });
     
     // Report producer  
     fluid.demands("report", ["cspace.sidebar", "cspace.test"], {
