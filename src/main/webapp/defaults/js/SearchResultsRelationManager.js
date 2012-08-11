@@ -140,27 +140,80 @@ cspace = cspace || {};
 		var results = searchModel.results;
 
 		if (dialogRelations.items.length > 0 && results.length > 0) {
-			var transformedItems = [];
-			var start = searchModel.offset;
-			var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
-		
+			var relationResolvers = {};
+
 			for (var i=0; i<dialogRelations.items.length; i++) {
 				var dialogRelation = dialogRelations.items[i];
+				var target = dialogRelation.target;
+				var model = {};
+				
+				relationResolvers[target.csid] = null;
+
+				var dataContext = cspace.dataContext({
+					model: {},
+					recordType: target.recordtype,
+					listeners: {
+						afterFetch: function(data) {
+							relationResolvers[target.csid] = cspace.util.relationResolver({
+								model: data
+							});
+							
+							var allRelationsLoaded = true;
+
+							for (var csid in relationResolvers) {
+								if (relationResolvers[csid] == null) {
+									allRelationsLoaded = false;
+									break;
+								}
+							}
+							
+							if (allRelationsLoaded) {
+								filterAndAddRelations(that, dialogRelations, searchModel, relationResolvers);
+							}
+						},
+						onError: function() {
+							
+						}
+					}
+				});
+				
+				dataContext.fetch(target.csid);
+			}
+		}
+	};
+	
+	var filterAndAddRelations = function(that, dialogRelations, searchModel, relationResolvers) {
+		var results = searchModel.results;
+		var transformedItems = [];
+		var alreadyRelatedItems = [];
+		var start = searchModel.offset;
+		var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
+		
+		for (var i=0; i<dialogRelations.items.length; i++) {
+			var dialogRelation = dialogRelations.items[i];
+			var source = dialogRelation.target;
+			var relationResolver = relationResolvers[source.csid];
 			
-				for (var j=start; j<end; j++) {
+			for (var j=start; j<end; j++) {
+				var target = results[j];
+
+				if (relationResolver.isRelated(target.recordtype, target.csid)) {
+					alreadyRelatedItems.push(target);
+				}
+				else {
 					transformedItems.push({
-						source: dialogRelation.target,
-						target: results[j],
+						source: source,
+						target: target,
 						"one-way": dialogRelation["one-way"],
 						type: dialogRelation.type
 					});
 				}
 			}
-
-			that.dataContext.addRelations({
-				items: transformedItems
-			});
 		}
+		
+		that.dataContext.addRelations({
+			items: transformedItems
+		});
 	};
 	
 	var afterAddRelations = function(that, relations) {
