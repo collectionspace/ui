@@ -2135,9 +2135,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 components: {
-                    searchResultsResolver: {
-                        type: "cspace.search.searchResultsResolver"
-                    }
+                    // TODO: Maybe make a searchResultsResolver that can calculate if all advanced search results are already related to the target record?
+                    //searchResultsResolver: {
+                    //    type: "cspace.search.searchResultsResolver"
+                    //}
                 },
                 listeners: {
                     afterSearch: "{loadingIndicator}.events.hideOn.fire",
@@ -2215,6 +2216,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 		fluid.demands("cspace.searchResultsRelationManager", "cspace.advancedSearch", {
 			options: {
+				searchModel: "{search}.model",
 				events: {
 					onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
 				}

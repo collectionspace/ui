@@ -21,10 +21,25 @@ cspace = cspace || {};
 		},
 		selectorsToIgnore: "searchDialog",
 		components: {
+			dataContext: {
+				type: "cspace.dataContext",
+				options: {
+					recordType: "relationships"
+				}
+			},
 			searchToRelateDialog: {
 				type: "cspace.searchToRelateDialog",
 				createOnEvent: "afterInitDependents",
 				container: "{searchResultsRelationManager}.dom.searchDialog",
+				options: {
+					related: "nonVocabularies",
+					model: "{pageBuilder}.model",
+					applier: "{pageBuilder}.applier",
+					relationsElPath: "relations",
+					listeners: {
+						addRelations: "{searchResultsRelationManager}.addRelations"
+					}
+				}
 			}
 		},
 		events: {
@@ -35,6 +50,10 @@ cspace = cspace || {};
 			add: {
 				funcName: "cspace.searchResultsRelationManager.add",
 				args: "{searchResultsRelationManager}"
+			},
+			addRelations: {
+				funcName: "cspace.searchResultsRelationManager.addRelations",
+				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"] // FIXME: This should be in demands, since we don't know if we're in the context of search.
 			}
 		},
 		parentBundle: "{globalBundle}",
@@ -70,5 +89,31 @@ cspace = cspace || {};
 	
 	cspace.searchResultsRelationManager.add = function(that) {
 		that.searchToRelateDialog.open();
+	};
+
+	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
+		/*
+		 * The searchToRelateDialog returns relations with the source/target swapped from what we want.
+		 * We also need to create a relation for each record in the result set.
+		 */
+		var transformedItems = [];
+		var results = searchModel.results;
+		
+		for (var i=0; i<dialogRelations.items.length; i++) {
+			var dialogRelation = dialogRelations.items[i];
+			
+			for (var j in results) {
+				transformedItems.push({
+					source: dialogRelation.target,
+					target: results[j],
+					"one-way": dialogRelation["one-way"],
+					type: dialogRelation.type
+				});
+			}
+		}
+		
+		that.dataContext.addRelations({
+			items: transformedItems
+		});
 	};
 })(jQuery, fluid);
