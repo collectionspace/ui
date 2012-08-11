@@ -1,12 +1,28 @@
-/*
-Copyright 2010 University of California, Berkeley
+/**
+ *  This document is a part of the source code and related artifacts
+ *  for CollectionSpace, an open source collections management system
+ *  for museums and related institutions:
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
-You may not use this file except in compliance with this License.
+ *  http://www.collectionspace.org
+ *  http://wiki.collectionspace.org
 
-You may obtain a copy of the ECL 2.0 License at
-https://source.collectionspace.org/collection-space/LICENSE.txt
-*/
+ *  Copyright 2009 University of California at Berkeley
+
+ *  Licensed under the Educational Community License (ECL), Version 2.0.
+ *  You may not use this file except in compliance with this License.
+
+ *  You may obtain a copy of the ECL 2.0 License at
+
+ *  https://source.collectionspace.org/collection-space/LICENSE.txt
+
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *  
+ *  $LastChangedRevision$
+ */
 
 /*global jQuery, cspace:true, fluid*/
 
@@ -15,7 +31,6 @@ cspace = cspace || {};
 (function ($, fluid) {
 	fluid.defaults("cspace.searchResultsRelationManager", {
 		gradeNames: "fluid.rendererComponent",
-		produceTree: "cspace.searchResultsRelationManager.produceTree",
 		selectors: {
 			searchDialog: ".csc-search-related-dialog",
 		},
@@ -62,7 +77,7 @@ cspace = cspace || {};
 			},
 			addRelations: {
 				funcName: "cspace.searchResultsRelationManager.addRelations",
-				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"] // FIXME: This should be in demands, since we don't know if we're in the context of search.
+				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"]  
 			},
 			showMessage: {
 				funcName: "cspace.searchResultsRelationManager.showMessage",
@@ -109,11 +124,6 @@ cspace = cspace || {};
 	
 	cspace.searchResultsRelationManager.finalInit = function(that) {
 		that.refreshView();
-	}
-
-	cspace.searchResultsRelationManager.produceTree = function(that) {
-		return {
-		};
 	};
 	
 	cspace.searchResultsRelationManager.add = function(that) {
@@ -122,8 +132,10 @@ cspace = cspace || {};
 
 	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
 		/*
-		 * The searchToRelateDialog returns relations with the source/target swapped from what we want (although I'm not sure it matters, since the relation isn't one-way).
-		 * We also need to create a relation for each record in the result set (on the current page).
+		 * The searchToRelateDialog returns a list of relations in which the targets are the records
+		 * that were checked in the dialog. For each record checked in the dialog, we want to create
+		 * a relation with each record in the current page of search results, in which the source is 
+		 * the record selected in the dialog, and the target is the search result.
 		 */
 		var results = searchModel.results;
 
@@ -180,19 +192,19 @@ cspace = cspace || {};
 		sourceNumbers = sourceNumbers.sort();
 		
 		that.showMessage("Added " + count + " " + (count == 1 ? "record" : "records") + " to " + sourceNumbers.join(", ")); // FIXME: Move to message bundle
-	}
+	};
 	
 	var onError = function(that, operation, message, data) {
 		that.showError("Error: " + message + ((typeof(data) != "undefined") ? (": " + data) : ""));
-	}
+	};
 	
 	cspace.searchResultsRelationManager.showMessage = function (messageBar, message) {
 		messageBar.show(message, null, false);
-	}
+	};
 	
 	cspace.searchResultsRelationManager.showError = function (messageBar, message) {
 		messageBar.show(message, null, true);
-	}
+	};
 
 	cspace.searchResultsRelationManager.clearMessage = function (messageBar) {
 		messageBar.hide();
