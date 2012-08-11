@@ -29,6 +29,8 @@
         <script type="text/javascript" src="../js/TermList.js"></script>
         <script type="text/javascript" src="../js/Repeatable.js"></script>
         <script type="text/javascript" src="../js/AdvancedSearch.js"></script>
+        <script type="text/javascript" src="../js/RelateSearchResults.js"></script>
+        <script type="text/javascript" src="../js/SearchToRelateDialog.js"></script>
         <script type="text/javascript" src="../js/SearchTips.js"></script>
         <script type="text/javascript" src="../js/SearchTools.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
@@ -55,6 +57,7 @@
                         <div class="fl-container-content fl-container-left info-column fl-force-left">
                             <div class="main-search-page fl-container-left-inner">
                                 <div class="csc-advancedsearch-container"></div>
+
                                 <div class="csc-search-loadingIndicator">
 	                                <div class="fl-container-flex header static found-records-box csc-search-lookingContainer">
 	                                    <span class="found-records-content-looking">
@@ -63,9 +66,10 @@
 	                                </div>
 	
 	                                <div class="csc-search-results">
-	                                    <div class="fl-container-flex header static found-records-box">
-	                                        <span class="found-records-content csc-search-resultsCountContainer">
+	                                    <div class="fl-container-flex header static button found-records-box">
+	                                        <span class="found-records-content csc-search-resultsCountContainer csc-relateSearchResults">
 	                                            <span class="csc-search-results-count cs-search-highlight"></span>
+	                                            <input type="button" class="csc-relateSearchResults-relateButton button add fl-force-right" />
 	                                        </span>
 	                                    </div>
 	

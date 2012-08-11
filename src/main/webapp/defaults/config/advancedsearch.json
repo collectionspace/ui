@@ -32,7 +32,11 @@
                         "schema": "{pageBuilder}.schema",
                         "permissions": "{pageBuilder}.permissions" 
                     } 
-                } 
+                },
+                "relateSearchResults": {
+                    "type": "cspace.relateSearchResults",
+                    "container": ".csc-relateSearchResults"
+                }
             } 
         }
     },
