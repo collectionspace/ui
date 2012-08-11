@@ -23,13 +23,29 @@ cspace = cspace || {};
 			relateButton: "cs-relateSearchResults-relateButton"
 		},
 		events: {
-			onRelateButtonClick: null
+			onRelateButtonClick: null,
+			recordTypeChanged: null
+		},
+		invokers: {
+			recordTypeChanged: {
+				funcName: "cspace.relateSearchResults.recordTypeChanged",
+				args: ["{relateSearchResults}", "{arguments}.0", "{advancedSearch}.vocabSelector.model"]
+			}
 		},
 		parentBundle: "{globalBundle}",
+		preInitFunction: "cspace.relateSearchResults.preInit",		
 		finalInitFunction: "cspace.relateSearchResults.finalInit"
 	});
 	
+	cspace.relateSearchResults.preInit = function (that) {
+		that.handleRecordTypeChanged = function(recordType) {
+			that.recordTypeChanged(recordType);
+		}
+	}
+	
 	cspace.relateSearchResults.finalInit = function(that) {
+		that.events.recordTypeChanged.addListener(that.handleRecordTypeChanged);
+		
 		that.refreshView();
 	}
 
@@ -51,4 +67,8 @@ cspace = cspace || {};
 			}
 		};
 	};
+	
+	cspace.relateSearchResults.recordTypeChanged = function(that, recordType, vocabSelectorModel) {
+		var foo = "";
+	}
 })(jQuery, fluid);

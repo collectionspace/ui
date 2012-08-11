@@ -92,7 +92,7 @@ cspace = cspace || {};
 		
 		that.dataContext.events.onError.addListener(function(operation, message, data) {
 			onError(that, operation, message, data);
-		});        
+		});
     };
 	
 	cspace.searchResultsRelationManager = function(container, options) {
