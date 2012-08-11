@@ -72,7 +72,7 @@ cspace = cspace || {};
         fluid.initDependents(that);
 
         var recordName = that.lookupMessage((that.options.related == "procedures") ? "searchToRelateDialog-procedures" : that.options.related);
-        var title = fluid.stringTemplate(that.lookupMessage("searchToRelateDialog-title"), {recordType: recordName});        
+        var title = fluid.stringTemplate(that.lookupMessage(that.options.strings.title || "searchToRelateDialog-title"), {recordType: recordName});        
         that.container.dialog({
             autoOpen: false,
             modal: true,
@@ -136,7 +136,7 @@ cspace = cspace || {};
                 }
             },
             addButton: {
-                messagekey: "searchToRelateDialog-addButton"
+                messagekey: that.options.strings.addButton || "searchToRelateDialog-addButton"
             },
             next: {
                 messagekey: "searchToRelateDialog-next"
