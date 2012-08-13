@@ -1309,13 +1309,10 @@ fluid.registerNamespace("cspace.util");
         if (vocab) {
             return vocab;
         }
-        vocab = cspace.util.getUrlParameter("vocab");
-        if (vocab) {
-            return vocab;
-        }
         if (recType && options.vocab.hasVocabs(recType)) {
-            return options.vocab.authority[recType].vocabs[recType];
+            vocab = cspace.util.getUrlParameter("vocab") || options.vocab.authority[recType].vocabs[recType];
         }
+        return vocab;
     };
 
     fluid.defaults("cspace.recordTypes", {
