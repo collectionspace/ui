@@ -175,7 +175,7 @@ cspace = cspace || {};
         finalInitFunction: "cspace.listView.finalInit",
         urls: cspace.componentUrlBuilder({
             listUrl: "%tenant/%tname/%recordType?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey",
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         }),
         elPath: "items",
@@ -475,6 +475,12 @@ cspace = cspace || {};
         selectors: {
             column: ".csc-listView-column"
         },
+        components: {
+            vocab: "{vocab}"
+        },
+        urls: {
+            vocab: "&vocab=%vocab"
+        },
         offset: 0
     });
 
@@ -512,9 +518,15 @@ cspace = cspace || {};
                 $(row).hide();
                 return;
             }
+            var vocab = cspace.vocab.resolve({
+                model: record,
+                recordType: record[that.options.typePath].toLowerCase(),
+                vocab: that.vocab
+            });
             that.locate("column", rows.eq(index)).wrapInner($("<a/>").attr("href", fluid.stringTemplate(that.options.url, {
                 recordType: record[that.options.typePath].toLowerCase(),
-                csid: record.csid
+                csid: record.csid,
+                vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
             })));
         });
     };
