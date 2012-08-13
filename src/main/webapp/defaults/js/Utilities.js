@@ -1417,33 +1417,6 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"]
     });
 
-    fluid.defaults("cspace.util.relationResolver", {
-        gradeNames: ["fluid.modelComponent", "autoInit"],
-        invokers: {
-            isPrimary: {
-                funcName: "cspace.util.relationResolver.isPrimary",
-                args: ["{relationResolver}.model", "{arguments}.0"]
-            },
-            isRelated: {
-                funcName: "cspace.util.relationResolver.isRelated",
-                args: ["{relationResolver}.model", "{arguments}.0", "{arguments}.1"]
-            }
-        }
-    });
-    cspace.util.relationResolver.isPrimary = function (model, csid) {
-        return model.csid === csid;
-    };
-    cspace.util.relationResolver.isRelated = function (model, recordtype, csid) {
-        if (!model.relations[recordtype]) {
-            return false;
-        }
-        return fluid.find(model.relations[recordtype], function (related) {
-            if (related.csid === csid) {
-                return true;
-            }
-        }) || false;
-    };
-
     cspace.pageCategory = function (options) {
         var that = fluid.initLittleComponent("cspace.pageCategory", options);
         return fluid.typeTag(that.options.pageCategory);

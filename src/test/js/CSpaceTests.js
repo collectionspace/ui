@@ -331,9 +331,6 @@ fluid.defaults("cspace.tests.testEnvironment", {
         navigationEventHolder: {
             type: "cspace.navigationEventHolder"
         },
-        relationResolver: {
-            type: "cspace.util.relationResolver"
-        },
         vocab: {
             type: "cspace.vocab",
             options: {
@@ -357,6 +354,12 @@ fluid.defaults("cspace.tests.testEnvironment", {
             options: {
                 schema: "{testEnvironment}.options.schema"
             }
+        },
+        globalModel: {
+            type: "cspace.model"
+        },
+        globalEvents: {
+            type: "cspace.globalEvents"
         },
         loadingIndicator: {
             type: "cspace.util.loadingIndicator"
