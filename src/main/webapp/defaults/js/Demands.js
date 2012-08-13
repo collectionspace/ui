@@ -939,13 +939,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // relationResolver demands
-        fluid.demands("cspace.util.relationResolver", "cspace.pageBuilder", {
-            options: {
-                model: "{globalModel}.model.primaryModel"
-            }
-        });
-        
         // Related records tab demands
         fluid.demands("relatedRecordsTab", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.relatedRecordsTab"
