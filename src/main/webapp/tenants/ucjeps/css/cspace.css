@@ -94,7 +94,8 @@ input[type="text"], input[type="password"], textarea {
     width:99.5%; 
     margin:0;}
 table input[type="text"], table input[type="password"], table textarea {
-    width:100%;}
+    width:100%;
+}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -394,7 +395,7 @@ li .flc-pager-pageLink {
     height:51px; 
     text-indent:-9999px;}
 .header-menu-right {
-    width:500px; 
+/*    width:500px; */
     float:right; 
     padding-bottom:10px;}
 .header-menu-right input, .header-menu-right select {
@@ -482,6 +483,11 @@ li .flc-pager-pageLink {
 #administration #title-bar .record-type.cs-titleBar-recordType {
     color: #696565;
     float: left;
+}
+.cs-titleBar-vocab {
+    float: right;
+    padding: 9px 10px 0 0;
+    color: #74AC4D;
 }
 
 
