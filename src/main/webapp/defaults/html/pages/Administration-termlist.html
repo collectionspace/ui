@@ -1,101 +1,23 @@
 <div class="fl-fix fl-container-flex fl-col-mixed2">
-    <div class="fl-container-admin csc-admin-termlist">        
-		<div class="fl-container-flex fl-fix information-group info-column admin">
-			<div class="info-column2-20 fl-force-left">
-				<div class="fl-container-flex header">
-					<div class="csc-admin-listHeader fl-force-left"></div>
-				</div>
-				<div class="overflow-list csc-listEditor-list"></div>
-			</div>
-			
-			<div class="info-column2-80 fl-force-right">
-				<div class="csc-admin-detailsHeader fl-container-flex header"></div>
-				<div class="csc-admin-details cs-admin-details fl-container-admin">
-					<div class="csc-listEditor-details-none">
-						<div class="csc-admin-detailsNoneSelected"></div>
-						<div class="csc-admin-detailsNone details-none"></div>
-					</div>
-					
-					<div class="fl-container-flex fl-fix information-subgroup csc-listEditor-details">
-						<div class="button-row details">
-							<input type="button" class="csc-cancel cancelButton" />
-							<input type="button" class="saveButton csc-save" />
-						</div>
-						
-						<div class="info-column">
-							<div class="info-column2-50 fl-force-left" >
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-termlist-displayName-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-termlist-displayName" />
-									</div>
-								</div>
-							</div>
-							
-							<div class="info-column2-50 fl-force-right" >
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-termlist-source-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-termlist-source" />
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-termlist-description-label"></div>
-								</div>
-								<div class="content">
-									<textarea rows="4" cols="30" class="input-textarea csc-termlist-description"></textarea>
-								</div>
-							</div>
-								
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-termlist-terms-label"></div>
-								</div>
-								<div class="content">
-									<table>
-										<thead>
-											<tr>
-												<td class="csc-termlistitem-displayName-label"></td>
-												<td class="csc-termlistitem-description-label"></td>
-												<td class="csc-termlistitem-source-label"></td>
-												<td class="csc-termlistitem-sourcePage-label"></td>
-												<td class="csc-termlistitem-termStatus-label"></td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="csc-termlist-terms">
-												<td><input type="text" class="csc-termlistitem-displayName" /></td>
-												<td><input type="text" class="csc-termlistitem-description" /></td>
-												<td><input type="text" class="csc-termlistitem-source" /></td>
-												<td><input type="text" class="csc-termlistitem-sourcePage" /></td>
-												<td><select class="csc-termlistitem-termStatus input-select"><option value="">Options not loaded</option></select></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-termlist-usedBys-label"></div>
-								</div>
-								<div class="content">
-									<span class="csc-termlist-usedBy"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>        
+    <div class="fl-container-admin csc-admin-termlist">
+        <div class="fl-container-flex fl-fix information-group info-column admin">
+            <div class="info-column2-25 fl-force-left">
+                <div class="fl-container-flex header">
+                    <div class="csc-admin-listViewHeader fl-force-left"></div>
+                    <input type="button" class="csc-admin-add button fl-force-right" value="" />
+                </div>
+                <div class="content csc-admin-listView"></div>
+            </div>
+            <div class="info-column2-75 fl-force-right">
+                <div class="fl-container-flex header">
+                    <div class="csc-admin-recordEditorHeader fl-container-flex header"></div>
+                </div>
+                <div class="csc-admin-recordEditor cs-admin-recordEditor"></div>
+                <div class="csc-admin-banner cs-admin-banner">
+                    <div class="csc-admin-bannerTop"></div>
+                    <div class="csc-admin-bannerBottom"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

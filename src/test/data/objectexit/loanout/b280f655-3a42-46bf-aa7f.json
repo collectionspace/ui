@@ -1,0 +1,38 @@
+{
+    "relations": {
+        "results": {
+            "loanout": [
+                {
+                    "summary": "",
+                    "summarylist": {
+                        "updatedAt": "2012-06-15T14:16:35Z",
+                        "loanOutNumber": "LO2012.1.2"
+                    },
+                    "csid": "3ddced5f-a2a9-4081-8397",
+                    "number": "LO2012.1.2",
+                    "relid": "e4e3edfc-4158-44c1-aae3",
+                    "relationshiptype": "affects",
+                    "recordtype": "loanout"
+                }
+            ]
+        },
+        "pagination": [
+            {
+                "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
+                "separatelists": [
+                    [
+                        "e4e3edfc-4158-44c1-aae3"
+                    ]
+                ],
+                "totalItems": "1",
+                "pageSize": "40",
+                "itemsInPage": "1",
+                "recordtypes": [
+                    "loanout"
+                ],
+                "pageNum": "0"
+            }
+        ]
+    },
+    "csid": "b280f655-3a42-46bf-aa7f"
+}

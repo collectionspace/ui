@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "objectexit",
-            "selectors": {
-                "recordEditor": ".csc-objectexit-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-objectexit-exitNumber"
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.exitNumber"]
                     }
                 },
@@ -48,13 +43,6 @@
             "recordType": "objectexit",
             "schema": {
                 "objectexit": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/ObjectexitTemplate.html",
-                    "templateSelector": ".csc-objectexit-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }

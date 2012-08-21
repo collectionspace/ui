@@ -1,8 +1,45 @@
 {
     "items": [
-        {"csid": "784951623", "number": "Scanning Intern"},
-        {"csid": "142753869", "number": "Media Intern"},
-        {"csid": "362951847", "number": "Curator"},
-        {"csid": "986753421", "number": "Director"}
-    ]
+        {
+            "summary": "77 test role",
+            "csid": "2ce964c6-fcdd-4d7c-873b-1ac3f89c562f",
+            "number": "TestRole77",
+            "recordtype": "role"
+        },
+        {
+            "summary": "Testing12",
+            "csid": "687b1a1b-ce77-4224-9d4f-bf1e18a95f22",
+            "number": "TestRole88",
+            "recordtype": "role"
+        },
+        {
+            "summary": "Role33",
+            "csid": "b8b98976-283d-4787-9203-dfe0fad29edc",
+            "number": "TestRole33",
+            "recordtype": "role"
+        },
+        {
+            "summary": "Generated tenant read only role.",
+            "csid": "a0d7de95-b7f1-404c-9a02-5d804445107d",
+            "number": "TENANT_READER",
+            "recordtype": "role"
+        },
+        {
+            "summary": "Generated tenant admin role.",
+            "csid": "2771b1f7-4998-4dee-a2b7-5d3c6da8d999",
+            "number": "TENANT_ADMINISTRATOR",
+            "recordtype": "role"
+        }
+    ],
+    "pagination": {
+        "separatelists": [
+            [
+                "2ce964c6-fcdd-4d7c-873b-1ac3f89c562f",
+                "687b1a1b-ce77-4224-9d4f-bf1e18a95f22",
+                "b8b98976-283d-4787-9203-dfe0fad29edc",
+                "a0d7de95-b7f1-404c-9a02-5d804445107d",
+                "2771b1f7-4998-4dee-a2b7-5d3c6da8d999"
+            ]
+        ]
+    }
 }

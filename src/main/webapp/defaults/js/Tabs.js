@@ -39,18 +39,22 @@ cspace = cspace || {};
         },
         selectors: {
             tabList: ".csc-tabs-tabList",
-            "tab:": ".csc-tabs-tab",
+            tab: ".csc-tabs-tab",
             tabLink: ".csc-tabs-tab-link"
         },
+        repeatingSelectors: ["tab"],
         selectorsToIgnore: ["tabList"],
         protoTree: {
             expander: {
-                repeatID: "tab:",
+                repeatID: "tab",
                 tree: {
                     tabLink: {
                         target: "${{tabInfo}.href}",
                         linktext: {
                             messagekey: "${{tabInfo}.title}"
+                        },
+                        decorators: {
+                            addClass: "{styles}.tabLink"
                         }
                     }
                 },
@@ -138,12 +142,11 @@ cspace = cspace || {};
     fluid.defaults("cspace.tabs", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         postInitFunction: "cspace.tabs.postInit",
-        finalInitFunction: "cspace.tabs.finalInit",
         components: {
-            globalNavigator: "{globalNavigator}",
             tabsList: {
                 type: "cspace.tabsList"
-            }
+            },
+            globalModel: "{globalModel}"
         },
         invokers: {
             tabify: {
@@ -190,11 +193,35 @@ cspace = cspace || {};
             fluid.staticEnvironment.cspaceRecordType = fluid.typeTag("cspace." + that.options.primaryRecordType);
         }
     };
-    
+
+    cspace.tabs.finalInitSecondary = function (that) {
+        cspace.tabs.finalInit(that);
+        
+        // Disable tabs unless record is saved.
+        var globalModel = that.globalModel,
+            tabs = that.locate("tabs"),
+            tabsToDisable = fluid.makeArray(fluid.transform(that.tabsList.model.tabs, function (val, index) {return index;})).slice(1);
+        function processTabs (operation) {
+            fluid.each(tabsToDisable, function (tab) {
+                tabs.tabs(operation, tab);
+            });
+        }
+        if (!fluid.get(globalModel.model, "primaryModel.csid")) {
+            processTabs("disable");
+            globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+                if (!fluid.get(globalModel.model, "primaryModel.csid")) {
+                    return;
+                }
+                processTabs("enable");
+                globalModel.applier.modelChanged.removeListener("cspace.tabs.finalInit");
+            }, "cspace.tabs.finalInit");
+        }
+    };
+
     cspace.tabs.finalInit = function (that) {
         that.tabify();
     };
-    
+
     cspace.tabs.tabsSuccess = function (data, textStatus, XMLHttpRequest, tabsList, tabContainer, setupTab) {
         var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
         setupTab(tabModel.type || tabModel["name"]);
@@ -247,6 +274,22 @@ cspace = cspace || {};
                 }, function () {
                     tabsSelect(ui);
                 });
+            });
+            return false;
+        }
+    };
+
+    cspace.tabs.tabsSelectWrapperAdmin = function (event, ui, tabsList, styles, tabsSelect) {
+        // noPrevent environment is set when user selects an option on the dialog
+        // at the point we don't want the dialog to show again.
+        if (!fluid.resolveEnvironment("{noPrevent}", {fetcher: fluid.makeEnvironmentFetcher()})) {
+            tabsList.locate("tabLink").removeClass(styles.current);
+            $(ui.tab).addClass(styles.current);
+            // set the noPrevent environment and trigger the select on the tab.
+            fluid.withEnvironment({
+                noPrevent: true
+            }, function () {
+                tabsSelect(ui);
             });
             return false;
         }

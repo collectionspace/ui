@@ -1,0 +1,24 @@
+{
+    "csid": "208a28d0-f911-4bcd-b322",
+    "fields": {
+        "shortIdentifier": "xxx",
+        "usedBys": [],
+        "description": "xx",
+        "terms": [
+            {
+                "shortIdentifier": "deux1331223060502",
+                "_subrecordcsid": "292e4733-bf53-49b8-8743",
+                "termStatus": "active",
+                "displayName": "deux"
+            },
+            {
+                "shortIdentifier": "un1331223060363",
+                "_subrecordcsid": "b06c5504-d9ab-410e-96cc",
+                "termStatus": "active",
+                "displayName": "un"
+            }
+        ],
+        "csid": "208a28d0-f911-4bcd-b322",
+        "displayName": "Temporary Vocab whilst none exist"
+    }
+}
