@@ -9,11 +9,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
     
     fluid.registerNamespace("cspace.hierarchy");
     
@@ -21,7 +22,41 @@ cspace = cspace || {};
         return fluid.merge(null, {
             header: {
                 messagekey: "hierarchy-header"
-            }
+            },
+            narrowerContextsLabel: {
+                messagekey: "hierarchy-narrowerContextsLabel"
+            },
+            broaderContextLabel: {
+                messagekey: "hierarchy-broaderContextLabel"
+            },
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: {
+                    funcName: "cspace.hierarchy.assertEquivalentContexts",
+                    args: {
+                        equivalentContexts: "${fields.equivalentContexts}"
+                    }
+                },
+                trueTree: {
+                    equivalentContextsLabel: {
+                        messagekey: "hierarchy-equivalentContextsLabel"
+                    }
+                },
+                falseTree: {
+                    equivalentContextsLabel: {
+                        decorators: {addClass: "{styles}.hidden"}
+                    }
+                }
+            }, {
+                repeatID: "equivalentContext",
+                tree: {
+                    decorators: {addClass: "{styles}.equivalentContext"},
+                    value: "${{row}.equivalentContext}"
+                },
+                type: "fluid.renderer.repeat",
+                pathAs: "row",
+                controlledBy: "fields.equivalentContexts"
+            }]
         }, that.options.uispec);
     };
     
@@ -34,9 +69,18 @@ cspace = cspace || {};
         },
         selectors: {
             header: ".csc-hierarchy-header",
-            togglable: ".csc-hierarchy-togglable"
+            togglable: ".csc-hierarchy-togglable",
+            narrowerContextsLabel: ".csc-hierarchy-narrowerContexts-label",
+            broaderContextLabel: ".csc-hierarchy-broaderContext-label",
+            equivalentContextsLabel: ".csc-hierarchy-equivalentContexts-label",
+            equivalentContext: ".csc-hierarchy-equivalentContext"
         },
-        selectorsToIgnore: ["togglable"],
+        styles: {
+            equivalentContext: "cs-hierarchy-equivalentContext",
+            hidden: "hidden"
+        },
+        selectorsToIgnore: "togglable",
+        repeatingSelectors: ["equivalentContext"],
         strings: {},
         parentBundle: "{globalBundle}",
         produceTree: cspace.hierarchy.produceTree,
@@ -57,16 +101,12 @@ cspace = cspace || {};
                 }
             })
         },
-        postInitFunction: "cspace.hierarchy.postInitFunction"
+        renderOnInit: true
     });
     
     cspace.hierarchy.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
-    };
-    
-    cspace.hierarchy.postInitFunction = function (that) {
-        that.renderer.refreshView();
     };
     
     cspace.hierarchy.assertEquivalentContexts = function (options) {
