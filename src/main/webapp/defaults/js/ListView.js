@@ -175,11 +175,15 @@ cspace = cspace || {};
         finalInitFunction: "cspace.listView.finalInit",
         urls: cspace.componentUrlBuilder({
             listUrl: "%tenant/%tname/%recordType?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey",
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         }),
         elPath: "items",
-        recordType: ""
+        recordType: "",
+        // Object with pair of recordType name : Array of column names which won't be sorted
+        // CSPACE-5366. Not sure if it is a proper place for this structure. Since ListView utilizes a generic way of renedering by making all columns sortable for ANY type of record
+        // we want to disable filter functionality for some of the record types.
+        nonSortableColumns: {}
     });
 
     cspace.listView.produceTree = function (that) {
@@ -256,11 +260,18 @@ cspace = cspace || {};
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {
+        // get a non sortable array of column names by recordType
+        var nonSortable = fluid.get(that.options.nonSortableColumns, that.options.recordType) || [];
+        
         fluid.each(that.model.columns, function (column) {
             fluid.each(["id", "name"], function (key) {
                 column[key] = fluid.stringTemplate(column[key], {
                     recordType: that.options.recordType
                 });
+                // If column id in the nonSortable array then make the column non sortable
+                if ($.inArray(column["id"], nonSortable) !== -1) {
+                    column["sortable"] = false;
+                }
             });
         });
         that.bindEvents = function () {
@@ -335,7 +346,6 @@ cspace = cspace || {};
 
     cspace.listView.finalInit = function (that) {
         that.refreshView();
-        that.updateModel();
 
         function validChange (oldModel, newModel) {
             var valid = oldModel["sortKey"] !== newModel["sortKey"];
@@ -360,6 +370,8 @@ cspace = cspace || {};
                 that.updateModel(model);
             }
         });
+        
+        that.updateModel();
     };
 
     cspace.listView.styleAndActivate = function (that, row, rows) {
@@ -463,6 +475,12 @@ cspace = cspace || {};
         selectors: {
             column: ".csc-listView-column"
         },
+        components: {
+            vocab: "{vocab}"
+        },
+        urls: {
+            vocab: "&vocab=%vocab"
+        },
         offset: 0
     });
 
@@ -500,9 +518,15 @@ cspace = cspace || {};
                 $(row).hide();
                 return;
             }
+            var vocab = cspace.vocab.resolve({
+                model: record,
+                recordType: record[that.options.typePath].toLowerCase(),
+                vocab: that.vocab
+            });
             that.locate("column", rows.eq(index)).wrapInner($("<a/>").attr("href", fluid.stringTemplate(that.options.url, {
                 recordType: record[that.options.typePath].toLowerCase(),
-                csid: record.csid
+                csid: record.csid,
+                vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
             })));
         });
     };

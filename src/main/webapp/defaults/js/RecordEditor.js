@@ -236,11 +236,18 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.finalInit = function (that) {
-        var modelToClone = that.localStorage.get();
+        var modelSpec = {},
+            modelToClone = that.localStorage.get();
+
+        modelSpec[that.options.globalRef] = {
+            model: that.model,
+            applier: that.applier
+        };
+        that.globalModel.attachModel(modelSpec);
+
         if (modelToClone) {
             that.localStorage.set();
             that.applier.requestChange("", modelToClone);
-            that.globalModel.requestChange(that.options.globalRef, modelToClone);
             that.events.afterFetch.fire();
         } else {
             that.recordDataSource.get(function (data) {
@@ -249,7 +256,6 @@ cspace = cspace || {};
                     return;
                 }
                 that.applier.requestChange("", data);
-                that.globalModel.requestChange(that.options.globalRef, data);
                 that.events.afterFetch.fire();
             });
         }
@@ -419,7 +425,6 @@ cspace = cspace || {};
                 return;
             }
             that.applier.requestChange("", validatedModel);
-            that.globalModel.requestChange(fluid.model.composeSegments(that.options.globalRef, "fields"), fluid.get(validatedModel, "fields"));
 
             that.events.afterValidate.fire();
         };
@@ -485,7 +490,6 @@ cspace = cspace || {};
                         cspace.recordEditor.saver.save(that, recordEditor);
                     } else if (userAction === "proceed") {
                         recordEditor.applier.requestChange("workflowTransition", "lock");
-                        recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "workflowTransition"), "lock");
                         cspace.recordEditor.saver.save(that, recordEditor);
                     } else if (userAction === "cancel") {
                         recordEditor.events.onCancelSave.fire();
@@ -509,7 +513,6 @@ cspace = cspace || {};
         });
         if (vocab) {
             recordEditor.applier.requestChange("namespace", vocab);
-            recordEditor.globalModel.requestChange(fluid.model.composeSegments(recordEditor.options.globalRef, "namespace"), vocab);
         }
         recordEditor.recordDataSource.set(recordEditor.model, function (data) {
             if (data.isError) {
@@ -520,7 +523,6 @@ cspace = cspace || {};
                 recordEditor.events.afterCreate.fire(data);
             }
             recordEditor.applier.requestChange("", data);
-            recordEditor.globalModel.requestChange(recordEditor.options.globalRef, data);
             recordEditor.events.afterSave.fire(data);
         });
     };
@@ -1043,9 +1045,12 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {},
         requiredPermissions: {
-            saveCancelPermission: "update",
-            deletePermission: "delete",
-            goToPermission: "read"
+            showSaveCancelButtons: "update",
+            showDeleteButton: "delete",
+            showGoto: "read"
+        },
+        hideButtonMap: {
+            showDeleteButton: ["termlist"]
         }
     });
 
@@ -1247,36 +1252,42 @@ cspace = cspace || {};
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
         };
+        // Function which sets the flag to be false whenever recordType matches one of the elements in the map for this flag
+        that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
+            fluid.each(hideButtonMap, function(hideRecordTypes, flag) {
+                 if(fluid.find(hideRecordTypes, function(hideRecordType) {
+                        return hideRecordType === recordType
+                    })) {
+                     that.applier.requestChange(flag, false);
+                 }
+            });  
+        };
+        // Function which sets the flag to be false if there are no permissions for the recordType
+        that.hideButtonsByPermission = function (recordType, requiredPermissions, resolver) {
+             fluid.each(requiredPermissions, function(permission, flag) {
+                 that.applier.requestChange(flag, cspace.permissions.resolve({
+                    permission: permission,
+                    target: recordType,
+                    resolver: resolver
+                }));
+            }); 
+        };
     };
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel,
             notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
-            requiredPermissions = that.options.requiredPermissions,
-            recordType = that.options.recordType,
-            resolver = that.resolver;
+            recordType = that.options.recordType;
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
-
-        that.applier.requestChange("showDeleteButton", cspace.permissions.resolve({
-            permission: requiredPermissions.deletePermission,
-            target: recordType,
-            resolver: resolver
-        }));
         
-        that.applier.requestChange("showSaveCancelButtons", cspace.permissions.resolve({
-            permission: requiredPermissions.saveCancelPermission,
-            target: recordType,
-            resolver: resolver
-        }));
-
-        that.applier.requestChange("showGoto", cspace.permissions.resolve({
-            permission: requiredPermissions.goToPermission,
-            target: recordType,
-            resolver: resolver
-        }));
+        // Hide buttons if user does not have specific permissions for the recordType
+        that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
+        
+        // Hide buttons for specific recordType
+        that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
 
         that.refreshView();
         that.renderGoTo();
@@ -1507,7 +1518,7 @@ cspace = cspace || {};
         args: ["{recordEditor}.model", "{recordEditor}.options.originalMediaDimensions", "{globalBundle}"]
     });
 
-    cspace.recordEditor.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
+    cspace.recordEditor.recordRenderer.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
         window.open(model.fields.blobs[0].imgOrig, "_blank", parentBundle.resolve("media-originalMediaOptions", [
             originalMediaDimensions.height,
             originalMediaDimensions.width,

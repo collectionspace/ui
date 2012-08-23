@@ -606,8 +606,8 @@ fluid.registerNamespace("cspace.util");
                     category[index] = categoryHash[name];
                 });
 
-                optionlist = optionlist.concat(category)
-                optionnames = optionnames.concat(categoryNames)
+                optionlist = optionlist.concat(category);
+                optionnames = optionnames.concat(categoryNames);
             });
 
             if (optionlist.length > 0) {
@@ -976,7 +976,7 @@ fluid.registerNamespace("cspace.util");
         var listeners = {},
             index = 0;
         that.addListener = function (listener, namespace, priority) {
-            var namespace = namespace || fluid.model.composeSegments(that.id, index++);
+            namespace = namespace || fluid.model.composeSegments(that.id, index++);
             that.events.onPerformNavigation.addListener(listener, namespace, undefined, priority);
             listeners[namespace] = null;
         };
@@ -1127,30 +1127,39 @@ fluid.registerNamespace("cspace.util");
         events: {
             relationsUpdated: null,
             primaryRecordCreated: null,
-            primaryRecordSaved: null
+            primaryRecordSaved: null,
+            primaryMediaUpdated: null
         },
+        listeners: {
+            primaryRecordCreated: "{cspace.globalEvents}.updatePrimaryCsid"
+        },
+        preInitFunction: "cspace.globalEvents.preInit",
         finalInitFunction: "cspace.globalEvents.finalInit"
     });
 
+    cspace.globalEvents.preInit = function (that) {
+        that.updatePrimaryCsid = function () {
+            that.globalModel.applier.requestChange("baseModel.primaryCsid", fluid.get(that.globalModel.model, "primaryModel.csid"));
+        };
+    };
+
     cspace.globalEvents.finalInit = function (that) {
-        
         cspace.globalEvents.setListeners({
             applier: that.globalModel.applier,
-            model: that.globalModel.model,
             eventMap: {
-                "primaryModel.csid": that.events.primaryRecordCreated
+                "primaryModel.csid": function () {
+                    if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
+                        that.events.primaryRecordCreated.fire();
+                    }
+                },
+                "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
             }
         });
-    
     };
     
     cspace.globalEvents.setListeners = function (options) {
-        fluid.each(options.eventMap, function (event, path) {
-            options.applier.modelChanged.addListener(path, function () {
-                if (fluid.get(options.model, path)) {
-                    event.fire();
-                }
-            });
+        fluid.each(options.eventMap, function (callback, path) {
+            options.applier.modelChanged.addListener(path, callback);
         });
     };
 
@@ -1195,12 +1204,12 @@ fluid.registerNamespace("cspace.util");
             loadingIndicator: {
                 type: "cspace.util.loadingIndicator",
                 options: {
-                	loadOnInit: true,
+                    loadOnInit: true,
                     hideOn: [
                         "{globalSetup}.events.onError"
                     ],
                     showOn: [
-                    	"{globalSetup}.events.onFetch"
+                        "{globalSetup}.events.onFetch"
                     ]
                 }
             }
@@ -1300,13 +1309,10 @@ fluid.registerNamespace("cspace.util");
         if (vocab) {
             return vocab;
         }
-        vocab = cspace.util.getUrlParameter("vocab");
-        if (vocab) {
-            return vocab;
-        }
         if (recType && options.vocab.hasVocabs(recType)) {
-            return options.vocab.authority[recType].vocabs[recType];
+            vocab = cspace.util.getUrlParameter("vocab") || options.vocab.authority[recType].vocabs[recType];
         }
+        return vocab;
     };
 
     fluid.defaults("cspace.recordTypes", {
@@ -1410,33 +1416,6 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.util.login", {
         gradeNames: ["fluid.littleComponent"]
     });
-
-    fluid.defaults("cspace.util.relationResolver", {
-        gradeNames: ["fluid.modelComponent", "autoInit"],
-        invokers: {
-            isPrimary: {
-                funcName: "cspace.util.relationResolver.isPrimary",
-                args: ["{relationResolver}.model", "{arguments}.0"]
-            },
-            isRelated: {
-                funcName: "cspace.util.relationResolver.isRelated",
-                args: ["{relationResolver}.model", "{arguments}.0", "{arguments}.1"]
-            }
-        }
-    });
-    cspace.util.relationResolver.isPrimary = function (model, csid) {
-        return model.csid === csid;
-    };
-    cspace.util.relationResolver.isRelated = function (model, recordtype, csid) {
-        if (!model.relations[recordtype]) {
-            return false;
-        }
-        return fluid.find(model.relations[recordtype], function (related) {
-            if (related.csid === csid) {
-                return true;
-            }
-        }) || false;
-    };
 
     cspace.pageCategory = function (options) {
         var that = fluid.initLittleComponent("cspace.pageCategory", options);
@@ -1661,7 +1640,7 @@ fluid.registerNamespace("cspace.util");
     cspace.util.getLabel = function (key, recordType) {
         // TODO: This is a hack, since cataloging is also called collection-object in other layers.
         var prefix = recordType === "cataloging" ? "collection-object-" : (recordType + "-");
-        return prefix + key + "Label"
+        return prefix + key + "Label";
     };
     
     cspace.util.findLabel = function (required) {
@@ -1856,11 +1835,33 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.model", {
         gradeNames: ["autoInit", "fluid.modelComponent"],
-        preInitFunction: "cspace.model.preInit"
+        preInitFunction: "cspace.model.preInit",
+        model: {
+            primaryCsid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.getUrlParameter",
+                    args: "csid"
+                }
+            }
+        }
     });
     cspace.model.preInit = function (that) {
-        that.applier = fluid.makeChangeApplier(that.model, {thin: true});
-        that.requestChange = that.applier.requestChange;
+        var togo = fluid.assembleModel({
+            baseModel: {
+                model: that.model,
+                applier: that.applier
+            }
+        });
+        that.model = togo.model;
+        that.applier = togo.applier;
+        that.attachModel = function (modelSpec) {
+            for (var path in modelSpec) {
+                var rec = modelSpec[path];
+                fluid.attachModel(that.model, path, rec.model);
+                that.applier.addSubApplier(path, rec.applier);
+            }
+        };
     };
     
 })(jQuery, fluid);

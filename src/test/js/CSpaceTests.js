@@ -331,9 +331,6 @@ fluid.defaults("cspace.tests.testEnvironment", {
         navigationEventHolder: {
             type: "cspace.navigationEventHolder"
         },
-        relationResolver: {
-            type: "cspace.util.relationResolver"
-        },
         vocab: {
             type: "cspace.vocab",
             options: {
@@ -347,16 +344,22 @@ fluid.defaults("cspace.tests.testEnvironment", {
             type: "cspace.globalBundle"
         },
         globalNavigator: {
-            type: "cspace.util.globalNavigator",
+            type: "cspace.util.globalNavigator"
         },
         userLogin: {
-            type: "cspace.util.login",
+            type: "cspace.util.login"
         },
         recordTypes: {
             type: "cspace.recordTypes",
             options: {
                 schema: "{testEnvironment}.options.schema"
             }
+        },
+        globalModel: {
+            type: "cspace.model"
+        },
+        globalEvents: {
+            type: "cspace.globalEvents"
         },
         loadingIndicator: {
             type: "cspace.util.loadingIndicator"

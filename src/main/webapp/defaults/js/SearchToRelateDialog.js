@@ -59,6 +59,7 @@ cspace = cspace || {};
                 type: "cspace.search.searchView",
                 options: {
                     resultsSelectable: true,
+                    primaryCSID: "{searchToRelateDialog}.options.primaryCSID",
                     recordType: "{searchToRelateDialog}.options.related",
                     components: {
                         mainSearch: {
@@ -140,11 +141,11 @@ cspace = cspace || {};
         that.add = function () {
             var newRelations = [],
                 source = {
-                csid: that.globalModel.model.primaryModel.csid,
+                csid: fluid.get(that.globalModel.model, "primaryModel.csid"),
                 recordtype: that.options.primary
             };
             fluid.each(that.search.model.results, function (result) {
-                if (!result.selected) {
+                if (!result || !result.selected) {
                     return;
                 }
                 newRelations.push({

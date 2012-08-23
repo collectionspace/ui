@@ -13113,24 +13113,95 @@ var fluid_1_5 = fluid_1_5 || {};
     };
     
     fluid.makeSuperApplier = function () {
-        var subAppliers = [];
-        var that = {};
+        var subAppliers = {},
+            listeners = {};
+            var that = fluid.makeChangeApplier();
+
         that.addSubApplier = function (path, subApplier) {
-            subAppliers.push({path: path, subApplier: subApplier});
-        };
-        that.fireChangeRequest = function (request) {
-            for (var i = 0; i < subAppliers.length; ++i) {
-                var path = subAppliers[i].path;
-                if (request.path.indexOf(path) === 0) {
-                    var subpath = request.path.substring(path.length + 1);
-                    var subRequest = fluid.copy(request);
-                    subRequest.path = subpath;
-                    // TODO: Deal with the as yet unsupported case of an EL rvalue DAR
-                    subAppliers[i].subApplier.fireChangeRequest(subRequest);
+            subAppliers[path] = subApplier;
+            fluid.remove_if(listeners, function (thisListeners, seg) {
+                var matchedPath = fluid.pathUtil.matchPath(path, seg);
+                if (!matchedPath) {
+                    return;
                 }
-            }
+                fluid.each(thisListeners, function (listener) {
+                    var subSpec = buildSubSpec(listener.spec, matchedPath);
+                    subApplier.modelChanged.addListener(subSpec, listener.listener, listener.namespace);
+                });
+                return true;
+            });
+        };
+
+        that.fireChangeRequest = function (request) {
+            fluid.find(subAppliers, function (subApplier, path) {
+                if (request.path.indexOf(path) !== 0) {
+                    return;
+                }
+                var subpath = request.path.substring(path.length + 1);
+                var subRequest = fluid.copy(request);
+                subRequest.path = subpath;
+                // TODO: Deal with the as yet unsupported case of an EL rvalue DAR
+                subApplier.fireChangeRequest(subRequest);
+                return true;
+            });
         };
         bindRequestChange(that);
+
+        function buildSubSpec (spec, matchedPath) {
+            var specPath = spec.path || spec,
+                subpath = specPath.substring(matchedPath.length + 1),
+                subSpec = fluid.copy(spec);
+            if (subSpec.path) {
+                subSpec.path = subpath;
+            } else {
+                subSpec = subpath;
+            }
+            return subSpec;
+        }
+
+        that.modelChanged.addListener = function (spec, listener, namespace) {
+            var specPath = spec.path || spec,
+                matchedPath, subSpec,
+                subApplier = fluid.find(subAppliers, function (subApplier, path) {
+                    matchedPath = fluid.pathUtil.matchPath(path, specPath);
+                    if (matchedPath) {
+                        return subApplier;
+                    }
+                });
+            if (subApplier) {
+                subSpec = buildSubSpec(spec, matchedPath);
+                subApplier.modelChanged.addListener(subSpec, listener, namespace);
+                return;
+            }
+            listeners[specPath] = fluid.makeArray(listeners[specPath]);
+            listeners[specPath].push({
+                spec: spec,
+                listener: listener,
+                namespace: namespace
+            });
+        };
+
+        that.modelChanged.removeListener = function (listener) {
+            fluid.each(subAppliers, function (subApplier) {
+                subApplier.modelChanged.removeListener(listener);
+            });
+            // Here we still don't know if the listener is removed so we need to check
+            // the ones that are registered but not attached.
+            if (typeof (listener) !== "string") {
+                return;
+            }
+            fluid.remove_if(listeners, function (thisListeners) {
+                fluid.remove_if(thisListeners, function (thisListener) {
+                    if (thisListener.namespace === listener) {
+                        return true;
+                    }
+                });
+                if (thisListeners.length < 1) {
+                    return true;
+                }
+            });
+        };
+
         return that;
     };
     

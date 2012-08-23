@@ -1339,6 +1339,22 @@ input[disabled]:hover, input[disabled]:hover    {
 .csc-related-field {
     overflow:hidden;}
 
+/*   styling the externalURL  */
+input[type="text"].cs-externalURL {
+    width: 90%;
+}
+input[type="text"].cs-externalURL.cs-externalURL-error{
+    border-color: red;
+    border-width: 2px;
+    background-color: #fbf7f7;
+}
+.cs-externalURL-button.cs-externalURL-error{
+    border-width: 2px 2px 2px medium;
+    border-color: red red red -moz-use-text-color;
+}
+.cs-externalURL-image {
+    background: url('../images/eURL.png') no-repeat center center;
+}
 /*   styling the date pickers   */
 .cs-date-picker {
     margin-top: 21px;}
@@ -1620,17 +1636,18 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     padding: 10px 10px 10px 20px;
 }
 /*  Unifying and cleaning up the calendar date picker widget */
-.cs-calendar-button { 
+.cs-calendar-button, .cs-externalURL-button {
     border:1px solid #C7CFD4;
     border-left:none;
     height:19px;
     width: 18px;
 	cursor:pointer;
     /*float:left;*/}
-table .cs-calendar-button { 
+table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
-table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button { background-color:#fff;}
-.cs-calendar-button img {
+table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button,
+table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-button { background-color:#fff;}
+.cs-calendar-button img, .cs-externalURL-button img {
     margin:0 0 -1px 2px; 
     padding: 1px 1px 0 0; 
     width:16px; 
@@ -1880,6 +1897,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 } 
 .cs-media-image {
     cursor:pointer;
+    max-height: 50px;
 }
 .cs-hierarchy-equivalentContext {
     background: #FFF;
@@ -2292,4 +2310,41 @@ input[type="button"].cs-deleteRelationButton {
     padding: 0 0 0 14px;
     margin: 0 5px 0 0;
     border: none;
+}
+.cs-mediaView {
+    height: 190px;
+    background: url("../images/sample.png") no-repeat scroll center center transparent;
+}
+.cs-mediaView-mediumImage {
+    max-height: 165px;
+    display: block;
+    margin: auto;
+    padding: 12.5px 0;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.cs-mediaView-snapshot {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+.cs-mediaView-snapshot .cs-mediaView-panelTop {
+    background: rgba(216,216,216, 0.9);
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 11px;
+}
+.cs-mediaView-snapshot .cs-mediaView-panel {
+    width: 297px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.cs-mediaView-snapshot div .cs-mediaView-oneOf {
+    margin: 0 20px;
+    display: inline-block;
+}
+.cs-mediaView-snapshot div a {
+    color: #6F9ECD;
+    font-weight: bold;
 }

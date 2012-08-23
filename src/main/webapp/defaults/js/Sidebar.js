@@ -119,7 +119,6 @@ cspace = cspace || {};
         resolver: "{permissionsResolver}",
         components: {
             instantiator: "{instantiator}",
-            globalModel: "{globalModel}",
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report",
@@ -241,30 +240,21 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
 
-    fluid.demands("cspace.sidebar.media", "cspace.recordEditor", {
-        options: {
-            recordModel: "{recordEditor}.model",
-            recordApplier: "{recordEditor}.applier"
-        }
-    });
-
     fluid.defaults("cspace.sidebar.media", {
-        mergePolicy: {
-            recordModel: "preserve",
-            recordApplier: "nomerge"
-        },
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        preInitFunction: "cspace.sidebar.media.preInit",
-        finalInitFunction: "cspace.sidebar.media.finalInit",
-        produceTree: "cspace.sidebar.media.produceTree",
+        protoTree: {
+            mediaHeader: {
+                messagekey: "sidebar-mediaHeader"
+            }
+        },
+        renderOnInit: true,
         components: {
-            globalEvents: "{globalEvents}",
-            relatedMedia: {
-                type: "cspace.sidebar.media.dataSource"
+            mediaView: {
+                type: "cspace.mediaView",
+                container: "{cspace.sidebar.media}.dom.mediaViewContainer"
             },
             togglable: {
                 type: "cspace.util.togglable",
-                createOnEvent: "afterRender",
                 container: "{media}.container",
                 options: {
                     selectors: {
@@ -275,162 +265,14 @@ cspace = cspace || {};
             }
         },
         selectors: {
+            mediaViewContainer: ".csc-mediaView-container",
             mediaHeader: ".csc-sidebar-mediaHeader",
-            mediaSnapshot: ".csc-media-snapshot",
-            mediumImage: ".csc-sidebar-mediumImage",
             header: ".csc-media-header",
             togglable: ".csc-media-togglable"
         },
         parentBundle: "{globalBundle}",
-        selectorsToIgnore: ["header", "togglable"],
-        styles: {
-            mediumImage: "cs-sidebar-mediumImage",
-            mediaSnapshot: "cs-media-snapshot-image"
-        },
-        strings: {},
-        events: {
-            onRender: null
-        },
-        listeners: {
-            onRender: "{cspace.sidebar.media}.onRender"
-        },
-        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
+        selectorsToIgnore: ["header", "togglable", "mediaViewContainer"],
+        strings: {}
     });
-
-    fluid.demands("cspace.sidebar.media.dataSource",  ["cspace.localData", "cspace.sidebar.media"], {
-        funcName: "cspace.sidebar.media.testDataSource",
-        args: {
-            targetTypeName: "cspace.sidebar.media.testDataSource",
-            termMap: {
-                recordType: "%recordType"
-            }
-        }
-    });
-    fluid.demands("cspace.sidebar.media.dataSource", "cspace.sidebar.media", {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{cspace.sidebar.media}.options.relatedMediaUrl",
-            termMap: {
-                primary: "{cspace.sidebar}.options.primary",
-                csid: "%csid"
-            },
-            targetTypeName: "cspace.sidebar.media.dataSource"
-        }
-    });
-
-    fluid.defaults("cspace.sidebar.media.testDataSource", {
-        url: "%test/data/relationships.json"
-    });
-    cspace.sidebar.media.testDataSource = cspace.URLDataSource;
-        
-    cspace.sidebar.media.finalInit = function (that) {
-        that.getRelatedMedia();
-        that.globalEvents.events.relationsUpdated.addListener(function (related) {
-            if (related !== "media") {
-                return;
-            }
-            that.getRelatedMedia();
-        });
-    };
-    
-    cspace.sidebar.media.preInit = function (that) {
-        that.onRender = function () {
-            that.refreshView();
-        };
-
-        that.formatMedia = function (url, format) {
-            var bool = !!url;
-            if (format === "bool") {
-                return bool;
-            }
-            if (!url) {
-                return url;
-            }
-            return url.replace(/Thumbnail/, format === "Medium" ? "Medium": "OriginalJpeg");
-        };
-
-        that.getRelatedMedia = function () {
-            function getMedia (data) {
-                that.applier.requestChange("relatedMedia", fluid.get(data, "relations.media"));
-                that.events.onRender.fire();
-            }
-
-            var csid = fluid.get(that.options.recordModel, "csid");
-            if (!csid) {
-                getMedia();
-            }
-            that.relatedMedia.get({
-                csid: csid
-            }, getMedia);
-        };
-        
-        that.getMedia = function (format) {
-            var model = that.options.recordModel;
-            if (!model || !model.fields) {
-                return that.formatMedia("", format);
-            }
-            var imgThumb;
-            if (fluid.get(model, "fields.blobCsid")) {
-                imgThumb = fluid.get(model, "fields.blobs.0.imgThumb");
-            }
-            if (imgThumb) {
-                return that.formatMedia(imgThumb, format);
-            }
-            imgThumb = fluid.find(that.model.relatedMedia, function (thisMedia) {
-                thisMedia = fluid.get(thisMedia, "summarylist.imgThumb");
-                if (thisMedia) {return thisMedia;}
-            });
-            if (imgThumb) {
-                return that.formatMedia(imgThumb, format);
-            }
-            return that.formatMedia("", format);
-        };
-
-		that.getOriginalImage = function () {
-            var src = that.getMedia("Original");
-			window.open(src, "_blank", that.options.parentBundle.resolve("media-originalMediaOptions", ["600", "800", "yes"]));
-		};
-        
-        that.options.recordApplier.modelChanged.addListener("fields.blobCsid", function () {
-            that.refreshView();
-        });
-    };
-
-    cspace.sidebar.media.produceTree = function (that) {
-        return {
-            mediaHeader: {
-                messagekey: "sidebar-mediaHeader"
-            },
-            expander: {
-                type: "fluid.renderer.condition",
-                condition: that.getMedia("bool"),
-                trueTree: {
-                    mediumImage: {
-                        decorators: [{
-                            addClass: "{styles}.mediumImage"
-                        }, {
-                            type: "attrs",
-                            attributes: {
-                                alt: that.options.parentBundle.resolve("sidebar-mediumImage"),
-                                src: that.getMedia("Medium")
-                            }
-                        }, {
-                            type: "jQuery",
-                            func: "click", 
-                            args: that.getOriginalImage
-                        }]
-                    },
-                    mediaSnapshot: {
-                        decorators: {
-                            addClass: "{styles}.mediaSnapshot"
-                        }
-                    }
-                },
-                falseTree: {
-                    mediaSnapshot: {}
-                }
-            }
-        };
-    };
 
 })(jQuery, fluid);

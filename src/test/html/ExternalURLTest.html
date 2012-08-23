@@ -2,30 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>DataContext Test Suite</title>
+        <title>ExternalURL Suite</title>
         <link rel="stylesheet" media="screen" href="../lib/qunit/css/qunit.css" />
         
         <script type="text/javascript" src="../../main/webapp/defaults/lib/infusion/CSpaceInfusion.js"></script>
 
         <script type="text/javascript" src="../lib/qunit/js/qunit.js"></script>
         <script type="text/javascript" src="../lib/jqUnit/js/jqUnit.js"></script>
-        <script type="text/javascript" src="../lib/jqMock/js/jqMock.js"></script>
+        
+        <script type="text/javascript" src="../js/CSpaceTests.js"></script>
         
         <script type="text/javascript" src="../../main/webapp/defaults/js/Demands.js"></script>
         <script type="text/javascript" src="../js/CSpaceTestsDemands.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/Permissions.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Utilities.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/DataContext.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/MessageBar.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/ExternalURL.js"></script>
         
-        <script type="text/javascript" src="../js/DataContextTest.js"></script>
+        <script type="text/javascript" src="../js/ExternalURLTest.js"></script>
     </head>
     <body>
-        <h1 id="qunit-header">DataContext Test Suite</h1>
+        <h1 id="qunit-header">ExternalURL Test Suite</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"><li></li></ol>
-
+ 
         <!-- Test HTML -->
-        <div id="main"></div>
+        <div id="main">
+            <div class="csc-container">
+                <input type="text" class="csc-input" />
+            </div>
+        </div>
     </body>
 </html>

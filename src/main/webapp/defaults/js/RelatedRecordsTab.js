@@ -26,6 +26,7 @@ cspace = cspace || {};
                 type: "cspace.confirmation"
             },
             messageBar: "{messageBar}",
+            recordTypes: "{recordTypes}",
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsTab}.dom.relationManager",
@@ -84,6 +85,11 @@ cspace = cspace || {};
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
                         afterUpdate: "{loadingIndicator}.events.hideOn.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
+                    },
+                    nonSortableColumns: {
+                        loanin: ["summary"],
+                        acquisition: ["summary"],
+                        cataloging: ["summary"]
                     }
                 }
             },
@@ -202,13 +208,19 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
+        
+        function hasRelated (related) {
+            var category = that.recordTypes[related] || [];
+            return $.inArray(that.options.related, category) > -1;
+        }
+
         that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
-            if (related !== that.options.related) {
-                return;
+            if (related === that.options.related || hasRelated(related)) {
+                that.relatedRecordsListView.updateModel();
             }
-            that.relatedRecordsListView.updateModel();
         };
+
         that.onDeleteRelation = function (target) {
             if (!target.csid || !target.recordtype) {
                 target = undefined;

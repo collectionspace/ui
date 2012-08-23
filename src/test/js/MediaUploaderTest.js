@@ -84,7 +84,7 @@ var mediaUploaderTester = function ($) {
             applier: fluid.makeChangeApplier(model),
             listeners: {
                 onLink: function () {
-                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.srcUri));
+                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.sourceUrl));
                     jqUnit.assertTrue("Linking performed successfully", true);
                     start();
                 }
@@ -97,7 +97,7 @@ var mediaUploaderTester = function ($) {
         linkInput.val(url);
         linkInput.keyup();
         jqUnit.assertFalse("Link button is enabled", linkButton.attr("disabled"));
-        jqUnit.assertUndefined("Model has no srcUri", fluid.get(model, mediaUploader.options.elPaths.srcUri));
+        jqUnit.assertUndefined("Model has no sourceUrl", fluid.get(model, mediaUploader.options.elPaths.sourceUrl));
         linkButton.click();
     });
     
