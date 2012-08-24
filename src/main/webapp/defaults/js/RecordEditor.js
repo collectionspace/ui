@@ -1384,7 +1384,8 @@ cspace = cspace || {};
                     type: "cspace.hierarchy",
                     container: "{recordRenderer}.dom.hierarchy",
                     options: {
-                        uispec: "{pageBuilder}.options.uispec.hierarchy"
+                        uispec: "{pageBuilder}.options.uispec.hierarchy",
+                        produceTree: "cspace.hierarchy.produceTreeCataloging"
                     },
                     createOnEvent: "afterRender"
                 }

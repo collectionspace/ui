@@ -17,9 +17,56 @@ cspace = cspace || {};
     "use strict";
     
     fluid.registerNamespace("cspace.hierarchy");
+
+    cspace.hierarchy.treeUispecMerge = function (tree, uispec) {
+        return fluid.merge(null, tree, uispec);
+    };
+
+    cspace.hierarchy.produceTreeCataloging = function (that) {
+        return cspace.hierarchy.treeUispecMerge({
+            header: {
+                messagekey: "hierarchy-headerCataloging"
+            },
+            narrowerContextsLabel: {
+                messagekey: "hierarchy-narrowerContextsCatalogingLabel"
+            },
+            broaderContextLabel: {
+                messagekey: "hierarchy-broaderContextCatalogingLabel"
+            },
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: {
+                    funcName: "cspace.hierarchy.assertEquivalentContexts",
+                    args: {
+                        equivalentContexts: "${fields.equivalentContexts}"
+                    }
+                },
+                trueTree: {
+                    equivalentContextsLabel: {
+                        messagekey: "hierarchy-equivalentContextsCatalogingLabel"
+                    },
+                    expander: {
+                        repeatID: "equivalentContext",
+                        tree: {
+                            decorators: {addClass: "{styles}.equivalentContext"},
+                            value: "${{row}.equivalentContext}"
+                        },
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "fields.equivalentContexts"
+                    }
+                },
+                falseTree: {
+                    equivalentContextsLabel: {
+                        decorators: {addClass: "{styles}.hidden"}
+                    }
+                }
+            }
+        }, that.options.uispec);
+    };
     
     cspace.hierarchy.produceTree = function (that) {
-        return fluid.merge(null, {
+        return cspace.hierarchy.treeUispecMerge({
             header: {
                 messagekey: "hierarchy-header"
             },
