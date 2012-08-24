@@ -103,7 +103,7 @@ cspace = cspace || {};
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier",
                     uispec: "{cspace.recordEditor}.options.uispec",
-                    resources: "{cspace.recordEditor.templateFetcher}.options.resources",
+                    resources: "{cspace.templateFetcher}.options.resources",
                     events: {
                         afterRender: "{cspace.recordEditor}.events.afterRecordRender"
                     }
@@ -111,7 +111,7 @@ cspace = cspace || {};
                 createOnEvent: "ready"
             },
             templateFetcher: {
-                type: "cspace.recordEditor.templateFetcher",
+                type: "cspace.templateFetcher",
                 priority: "first",
                 options: {
                     recordType: "{cspace.recordEditor}.options.recordType",
@@ -1295,7 +1295,7 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
 
-    fluid.defaults("cspace.recordEditor.templateFetcher", {
+    fluid.defaults("cspace.templateFetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         resources: {
             template: cspace.resourceSpecExpander({
@@ -1315,14 +1315,16 @@ cspace = cspace || {};
         events: {
             afterFetch: null
         },
-        finalInitFunction: "cspace.recordEditor.templateFetcher.finalInit"
+        finalInitFunction: "cspace.templateFetcher.finalInit"
     });
 
-    cspace.recordEditor.templateFetcher.finalInit = function (that) {
+    cspace.templateFetcher.finalInit = function (that) {
         var template = that.options.resources.template,
             recordType = that.options.recordType,
             templateName = that.options.template ? "-" + that.options.template : "";
-        recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        if (recordType) {
+            recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        }
         template.url = fluid.stringTemplate(template.url, {
             recordType: recordType,
             template: templateName
@@ -1385,7 +1387,21 @@ cspace = cspace || {};
                     container: "{recordRenderer}.dom.hierarchy",
                     options: {
                         uispec: "{pageBuilder}.options.uispec.hierarchy",
-                        produceTree: "cspace.hierarchy.produceTreeCataloging"
+                        produceTree: "cspace.hierarchy.produceTreeCataloging",
+                        components: {
+                            templateFetcher: {
+                                options: {
+                                    resources: {
+                                        template: cspace.resourceSpecExpander({
+                                            url: "%webapp/html/components/HierarchyObjectTemplate.html",
+                                            options: {
+                                                dataType: "html"
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        }
                     },
                     createOnEvent: "afterRender"
                 }

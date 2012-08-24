@@ -33,6 +33,12 @@ cspace = cspace || {};
             broaderContextLabel: {
                 messagekey: "hierarchy-broaderContextCatalogingLabel"
             },
+            narrowerContextsTypeLabel: {
+                messagekey: "hierarchy-narrowerContextsTypeLabel"
+            },
+            broaderContextTypeLabel: {
+                messagekey: "hierarchy-broaderContextTypeLabel"
+            },
             expander: {
                 type: "fluid.renderer.condition",
                 condition: {
@@ -118,7 +124,9 @@ cspace = cspace || {};
             header: ".csc-hierarchy-header",
             togglable: ".csc-hierarchy-togglable",
             narrowerContextsLabel: ".csc-hierarchy-narrowerContexts-label",
+            narrowerContextsTypeLabel: ".csc-hierarchy-narrowerContextsType-label",
             broaderContextLabel: ".csc-hierarchy-broaderContext-label",
+            broaderContextTypeLabel: ".csc-hierarchy-broaderContextType-label",
             equivalentContextsLabel: ".csc-hierarchy-equivalentContexts-label",
             equivalentContext: ".csc-hierarchy-equivalentContext"
         },
@@ -134,22 +142,49 @@ cspace = cspace || {};
         rendererFnOptions: {
             cutpointGenerator: "cspace.hierarchy.cutpointGenerator"
         },
+        events: {
+            afterFetchTemplate: null
+        },
+        listeners: {
+            afterFetchTemplate: "{that}.refreshView"
+        },
         components: {
             hierarchyTogglable: {
-                type: "cspace.util.togglable"
+                type: "cspace.util.togglable",
+                createOnEvent: "afterRender"
+            },
+            templateFetcher: {
+                type: "cspace.templateFetcher",
+                priority: "first",
+                options: {
+                    events: {
+                        afterFetch: {
+                            event: "{cspace.hierarchy}.events.afterFetchTemplate"
+                        }
+                    },
+                    template: "",
+                    resources: {
+                        template: cspace.resourceSpecExpander({
+                            url: "%webapp/html/components/HierarchyTemplate.html",
+                            options: {
+                                dataType: "html"
+                            }
+                        })
+                    }
+                }
             }
         },
-        resources: {
-            template: cspace.resourceSpecExpander({
-                fetchClass: "fastTemplate",
-                url: "%webapp/html/components/HierarchyTemplate.html",
-                options: {
-                    dataType: "html"
-                }
-            })
-        },
-        renderOnInit: true
+        preInitFunction: "cspace.hierarchy.preInit"
     });
+
+    cspace.hierarchy.preInit = function (that) {
+        that.options.rendererFnOptions.templateSource = function () {
+            return that.templateFetcher.options.resources.template.resourceText;
+        };
+        that.refreshView = function () {
+            that.refreshView();
+        };
+    };
     
     cspace.hierarchy.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
@@ -159,7 +194,5 @@ cspace = cspace || {};
     cspace.hierarchy.assertEquivalentContexts = function (options) {
         return options.equivalentContexts && options.equivalentContexts.length > 0;
     };
-    
-    fluid.fetchResources.primeCacheFromResources("cspace.hierarchy");
     
 })(jQuery, fluid);
