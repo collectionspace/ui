@@ -34,7 +34,8 @@ cspace = cspace || {};
                     rows: "{cspace.recordList}.dom.row",
                     list: "{cspace.recordList}.model.items"
                 }
-            }
+            },
+            vocab: "{vocab}"
         },
         invokers: {
             bindEvents: {
@@ -110,7 +111,7 @@ cspace = cspace || {};
             })
         },
         urls: cspace.componentUrlBuilder({
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         })
     });
@@ -413,7 +414,7 @@ cspace = cspace || {};
         return !!(item && item.imgThumb);
     };
     
-    var selectNavigate = function (model, options, url, permissionsResolver, dom, typePath) {
+    var selectNavigate = function (model, options, url, permissionsResolver, dom, typePath, vocab) {
         var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
             return;
@@ -426,20 +427,26 @@ cspace = cspace || {};
             dom.locate("row").removeClass(options.styles.selected);
             return;
         }
+        var vocabName = cspace.vocab.resolve({
+            model: record,
+            recordType: record[typePath].toLowerCase(),
+            vocab: vocab
+        });
         options.globalNavigator.events.onPerformNavigation.fire(function () {
             window.location = fluid.stringTemplate(url, {
                 recordType: record[typePath].toLowerCase(),
-                csid: record.csid
+                csid: record.csid,
+                vocab: vocabName ? ("&vocab=" + vocabName) : ""
             });
         });
     };
 
-    cspace.recordList.selectNavigateVocab = function (model, options, url, permissionsResolver, dom) {
-        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
+    cspace.recordList.selectNavigateVocab = function (model, options, url, permissionsResolver, dom, vocab) {
+        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype", vocab);
     };
 
-    cspace.recordList.selectNavigate = function (model, options, url, permissionsResolver, dom) {
-        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
+    cspace.recordList.selectNavigate = function (model, options, url, permissionsResolver, dom, vocab) {
+        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype", vocab);
     };
 
     cspace.recordList.selectFromList = function (model, options, dataContext) {

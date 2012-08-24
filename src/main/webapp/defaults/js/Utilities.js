@@ -1208,8 +1208,9 @@ fluid.registerNamespace("cspace.util");
             return vocab;
         }
         if (recType && options.vocab.hasVocabs(recType)) {
-            return options.vocab.authority[recType].vocabs[recType];
+            vocab = cspace.util.getUrlParameter("vocab") || options.vocab.authority[recType].vocabs[recType];
         }
+        return vocab;
     };
 
     cspace.recordTypes = function (options) {
