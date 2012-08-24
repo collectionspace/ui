@@ -1373,6 +1373,25 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cataloging.read"], {
+        options: {
+            selectors: {
+                hierarchy: ".csc-record-hierarchy"
+            },
+            selectorsToIgnore: "hierarchy",
+            components: {
+                hierarchy: {
+                    type: "cspace.hierarchy",
+                    container: "{recordRenderer}.dom.hierarchy",
+                    options: {
+                        uispec: "{pageBuilder}.options.uispec.hierarchy"
+                    },
+                    createOnEvent: "afterRender"
+                }
+            }
+        }
+    });
+
     fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.authority"], {
         options: {
             selectors: {
