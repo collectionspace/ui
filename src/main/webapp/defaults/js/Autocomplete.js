@@ -809,7 +809,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             directModel = {termUrl: authority.type},
             newTermUrl = that.newTermSource.resolveUrl(directModel),
             model;
-        that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
         if (authority.createFromExisting) {
             model = fluid.copy(recordModel);
             fluid.each(fieldsToIgnore, function (fieldPath) {
