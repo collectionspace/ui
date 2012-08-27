@@ -408,6 +408,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             set: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
                 callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
+            },
+            put: function (model, directModel, callback) {
+                fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
+                callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
             }
         };
     };
@@ -775,6 +779,39 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             newTermUrl = that.newTermSource.resolveUrl({termUrl: authority.url});
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
         that.newTermSource.set({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
+            if (!response) {
+                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                    url: newTermUrl
+                }));
+                return;
+            }
+            if (response.isError === true) {
+                fluid.each(response.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
+            updateAuthoritatively(that, response);
+            that.eventHolder.events.afterSelectAuthority.fire();
+        }, cspace.util.provideErrorCallback(that, newTermUrl, "errorWriting"));
+    };
+
+    cspace.autocomplete.selectAuthorityStructuredObjects = function (that, recordModel, fieldsToIgnore, schema, key) {
+        var authority = that.model.authorities[key],
+            directModel = {termUrl: authority.type},
+            newTermUrl = that.newTermSource.resolveUrl(directModel),
+            model;
+        that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
+        if (authority.createFromExisting) {
+            model = fluid.copy(recordModel);
+            fluid.each(fieldsToIgnore, function (fieldPath) {
+                fluid.set(model, fieldPath);
+            });
+        } else {
+            model = cspace.util.getBeanValue({}, authority.type, schema)
+        }
+        model.csid = "";
+        that.newTermSource.put(model, directModel, function (response) {
             if (!response) {
                 that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
                     url: newTermUrl

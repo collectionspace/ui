@@ -444,6 +444,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     broaderDataSource: {
                         type: "cspace.autocomplete.broaderDataSource"
                     }
+                },
+                invokers: {
+                    selectAuthority: {
+                        funcName: "cspace.autocomplete.selectAuthorityStructuredObjects",
+                        args: ["{autocomplete}", "{cspace.recordEditor}.model", "{cspace.recordEditor}.options.fieldsToIgnore", "{pageBuilder}.schema", "{arguments}.0"]
+                    }
                 }
             }, "{arguments}.1"]
         });
