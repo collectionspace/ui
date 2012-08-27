@@ -408,10 +408,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             set: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
                 callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
-            },
-            put: function (model, directModel, callback) {
-                fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
-                callback({urn: "urn:" + fluid.allocateGuid(), displayName: model.fields.displayName});
             }
         };
     };
@@ -773,12 +769,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.buttonAdjustor = function (closeButton, model, hide) {
         closeButton[model.term === model.baseRecord.displayName || hide ? "hide": "show"]();
     };
-    
-    cspace.autocomplete.selectAuthority = function (that, key) {
-        var authority = that.model.authorities[key],
-            newTermUrl = that.newTermSource.resolveUrl({termUrl: authority.url});
+
+    var selectAuthority = function (that, model, directModel, newTermUrl) {
+        fluid.merge(null, model, {
+            fields: {
+                displayName: that.model.term
+            },
+            _view: "autocomplete"
+        });
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
-        that.newTermSource.set({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
+        that.newTermSource.set(model, directModel, function (response) {
             if (!response) {
                 that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
                     url: newTermUrl
@@ -796,6 +796,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, cspace.util.provideErrorCallback(that, newTermUrl, "errorWriting"));
     };
 
+    cspace.autocomplete.selectAuthority = function (that, key) {
+        var authority = that.model.authorities[key],
+            directModel = {termUrl: authority.url},
+            newTermUrl = that.newTermSource.resolveUrl(directModel),
+            model = {};
+        selectAuthority(that, model, directModel, newTermUrl);
+    };
+
     cspace.autocomplete.selectAuthorityStructuredObjects = function (that, recordModel, fieldsToIgnore, schema, key) {
         var authority = that.model.authorities[key],
             directModel = {termUrl: authority.type},
@@ -810,23 +818,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         } else {
             model = cspace.util.getBeanValue({}, authority.type, schema)
         }
-        model.csid = "";
-        that.newTermSource.put(model, directModel, function (response) {
-            if (!response) {
-                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
-                    url: newTermUrl
-                }));
-                return;
-            }
-            if (response.isError === true) {
-                fluid.each(response.messages, function (message) {
-                    that.displayErrorMessage(message);
-                });
-                return;
-            }
-            updateAuthoritatively(that, response);
-            that.eventHolder.events.afterSelectAuthority.fire();
-        }, cspace.util.provideErrorCallback(that, newTermUrl, "errorWriting"));
+        selectAuthority(that, model, directModel, newTermUrl);
     };
     
     cspace.autocomplete.revertState = function (that) {
