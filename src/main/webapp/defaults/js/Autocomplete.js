@@ -98,6 +98,44 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         finalInitFunction: "cspace.autocomplete.finalInit"
     });
 
+    fluid.demands("authoritiesSource", ["cspace.hierarchy", "cspace.autocomplete", "cspace.nonAuthority"], {
+        funcName: "cspace.autocomplete.structuredObjectsAuthoritiesSource",
+        options: {
+            recordType: "{cspace.recordEditor}.options.recordType"
+        }
+    });
+
+    fluid.defaults("cspace.autocomplete.structuredObjectsAuthoritiesSource", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "cspace.autocomplete.structuredObjectsAuthoritiesSource.finalInit",
+        permission: "create",
+        components: {
+            permissionsResolver: "{permissionsResolver}",
+            recordTypeManager: "{recordTypeManager}",
+            globalBundle: "{globalBundle}"
+        }
+    });
+
+    cspace.autocomplete.structuredObjectsAuthoritiesSource.finalInit = function (that) {
+        that.resolveUrl = function () {return "";};
+        that.get = function (directModel, callback) {
+            var permitted = cspace.permissions.getPermissibleRelatedRecords(that.options.recordType, that.permissionsResolver, that.recordTypeManager, that.options.permission),
+                togo = [];
+            fluid.each(permitted, function (recordType) {
+                togo.push({
+                    type: recordType,
+                    fullName: that.globalBundle.resolve("hierarchy-createNew")
+                });
+                togo.push({
+                    type: recordType,
+                    fullName: that.globalBundle.resolve("hierarchy-createFromExisting"),
+                    createFromExisting: true
+                });
+            });
+            callback(togo);
+        };
+    };
+
     cspace.autocomplete.preInit = function (that) {
         fluid.each(["vocab", "vocabSingle"], function (url) {
             var urls = that.options.urls;

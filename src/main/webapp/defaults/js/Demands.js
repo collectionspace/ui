@@ -436,6 +436,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }, "{arguments}.1"]
         });
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.nonAuthority", "cspace.hierarchy"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                components: {
+                    confirmation: "{confirmation}",
+                    broaderDataSource: {
+                        type: "cspace.autocomplete.broaderDataSource"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
         fluid.demands("cspace.autocomplete.broaderDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
