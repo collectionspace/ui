@@ -46,6 +46,20 @@
             <version>1.3.8</version>
             <executions>
               <execution>
+                <id>ucjeps</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <targetGroups></targetGroups>
+                  <minimize>true</minimize>
+                  <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/tenants/ucjeps/css/</cssDestinationFolder>
+                  <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/tenants/ucjeps/js/</jsDestinationFolder>
+                  <wroFile>${basedir}/src/wro-ucjeps.xml</wroFile>
+                </configuration>
+              </execution>
+              <execution>
                 <id>lifesci</id>
                 <phase>compile</phase>
                 <goals>
