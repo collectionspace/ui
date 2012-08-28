@@ -231,6 +231,7 @@
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
     <js>/defaults/js/RecordTraverser.js</js>
+    <js>/defaults/js/Preferred.js</js>
   </group>
   
   <group name='template'>
