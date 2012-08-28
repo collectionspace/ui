@@ -2122,6 +2122,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.advancedSearch"], {
+            container: "{searchToRelateDialog}.container",
+            options: {
+                strings: {
+                    errorMessage: "{globalBundle}.messageBase.search-errorMessage",
+                    resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    looking: "{globalBundle}.messageBase.search-looking",
+                    selected: "{globalBundle}.messageBase.search-selected",
+                    number: "{globalBundle}.messageBase.search-number",
+                    summary: "{globalBundle}.messageBase.search-summary",
+                    recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
+                },
+                listeners: {
+                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onSearch: "{loadingIndicator}.events.showOn.fire"
+                }
+            }
+        });
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search",
             options: {
@@ -2189,6 +2209,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
+        fluid.demands("cspace.searchResultsRelationManager", ["cspace.relateSearchResults"], {
+            options: {
+                events: {
+                    onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
+                }
+            }
+        });
+
         fluid.demands("cspace.advancedSearch.updateSearchHistory", ["cspace.advancedSearch", "cspace.search.searchView"], {
             funcName: "cspace.search.updateSearchHistory",
             args: ["{advancedSearch}.searchHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
@@ -2202,6 +2230,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.search.searchView"], {
             funcName: "cspace.search.searchView.onInitialSearchAdvanced",
             args: "{cspace.search.searchView}"
+        });
+
+        fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.searchToRelateDialog", "cspace.search.searchView"], {
+            // The search component in the Add to Record dialog should not perform any search when the page initially loads.
+            funcName: "jQuery.noop"
         });
 
         fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.search.searchView"], {
@@ -2292,6 +2325,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         fluid.demands("cspace.search.searchView.search", "cspace.search.searchView", {
+            funcName: "cspace.search.searchView.search",
+            args: ["{arguments}.0", "{searchView}"]
+        });
+        
+        fluid.demands("cspace.search.searchView.search", ["cspace.search.searchView", "cspace.searchToRelateDialog", "cspace.advancedSearch"], {
             funcName: "cspace.search.searchView.search",
             args: ["{arguments}.0", "{searchView}"]
         });
