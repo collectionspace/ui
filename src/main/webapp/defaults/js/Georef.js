@@ -11,24 +11,24 @@ fluid.registerNamespace("cspace.georef");
 	cspace.georef.isValidDMS = function(dmsString) {
 		return dmsString.match(/\d/);
 	}
-
+	
 	/*
 	 * Wrap georefjs.dms2deg with some format checking.
 	 */
 	cspace.georef.dms2decimal = function(dmsString) {
 		var result = "";
-
+		
 		if (dmsString) {
 			if (!cspace.georef.isValidDMS(dmsString)) {
 				throw new Error("The DMS value is incorrectly formatted");
 			}
-
+			
 			result = georefjs.dms2deg(dmsString);
 		}
-
+		
 		return result;
 	};
-
+	
 	fluid.defaults("cspace.georef.dms2decimal", {
 	});
 })(jQuery, fluid);
