@@ -55,7 +55,10 @@ var externalURLTester = function ($) {
             [ "http://jsonlint..com", false ],
             [ "-", false ],
             [ "htt/#!@#\"/stackov&^%&%^*flow.com//////3809401/what-is-a-good-regular-expression-to-match-a-url", false ],
-            [ "http://www1.cbc.ca/", true ]
+            [ "http://www1.cbc.ca/", true ],
+            [ "http://upload.wikimedia.org/wikipedia/en/7/78/Trollface.svg", true],
+            [ "http://upload.wikimedia.org/wikipedia/en/thumb/7/78/Trollface.svg/200px-Trollface.svg.png", true],
+            [ "http://www.nasa.gov/images/content/674789main_pia16021-full_full.jpg", true]
         ];
         
         checkURLValidity(urls, input, button, externalURL);
@@ -91,7 +94,7 @@ var externalURLTester = function ($) {
     externalURLTest.test("Initialization", function () {
         // IMPROVE REGEX to parse such fail urls like
         // http://jsonlint..com or http://www1.cbc.ca/
-        expect(34);
+        expect(43);
         setupAndTest({}, initAndURLCheck);
     });
     
