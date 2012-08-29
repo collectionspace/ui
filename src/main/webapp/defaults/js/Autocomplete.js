@@ -145,7 +145,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
             urls[url] = fluid.stringTemplate(urls[url], {
                 vocab: that.model.vocab
-            })
+            });
         });
     };
 
@@ -671,6 +671,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     };
+
+    cspace.autocomplete.produceTreeStructuredObjects = function (that) {
+        var tree = cspace.autocomplete.produceTree(that);
+        fluid.merge({
+            addTermTo: "replace"
+        }, tree, {
+            addTermTo: {},
+            newTermNamePrefix: {
+                messagekey: "autocomplete-newTermNamePrefix"
+            },
+            newTermName: {
+                value: "${term}"
+            },
+            newTermNamePostfix: {
+                messagekey: "autocomplete-newTermNamePostfix"
+            }
+        });
+        return tree;
+    };
     
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
@@ -815,7 +834,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 fluid.set(model, fieldPath);
             });
         } else {
-            model = cspace.util.getBeanValue({}, authority.type, schema)
+            model = cspace.util.getBeanValue({}, authority.type, schema);
         }
         selectAuthority(that, model, directModel, newTermUrl);
     };
