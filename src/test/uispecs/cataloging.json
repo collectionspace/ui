@@ -26,6 +26,9 @@
                                                         "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
                                                     }
                                                 }
+                                            }, {
+                                                "func": "cspace.externalURL",
+                                                "type": "fluid"
                                             }
                                         ],
                                         "value": "${{row}.narrowerContext}"
@@ -61,6 +64,9 @@
                         "queryUrl": "../../../tenant/core/cataloging/autocomplete/broaderContext",
                         "vocabUrl": "../../../tenant/core/cataloging/source-vocab/broaderContext"
                     }
+                }, {
+                    "func": "cspace.externalURL",
+                    "type": "fluid"
                 }
             ],
             "value": "${fields.broaderContext}"

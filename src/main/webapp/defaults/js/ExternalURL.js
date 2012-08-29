@@ -33,7 +33,7 @@ cspace = cspace || {};
             externalURLButton: ".csc-externalURL-button"
         },
         styles: {
-            parent: "fl-table clearfix",
+            parent: "cs-externalURL-parent",
             externalURL: "fl-force-left cs-externalURL",
             externalURLButton: "fl-table-cell fl-force-left cs-externalURL-button cs-externalURL-image",
             error: "cs-externalURL-error"
@@ -42,7 +42,8 @@ cspace = cspace || {};
             externalURLButton: "<a href=\"#\" />"
         },
         buildMarkup: "cspace.externalURL.buildMarkup",
-        readOnly: false
+        readOnly: false,
+        validation: true
     });
     
     cspace.externalURL.buildMarkup = function (that, control) {
@@ -62,25 +63,28 @@ cspace = cspace || {};
         
         that.validateURL = function (url) {
             // Using a regex created by Diego Perini: https://gist.github.com/729294
-            var regex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
-                error = !url.match(regex) && url.length > 0;
-            // Style control depending on if there was an error in its content
-            that.styleControls(error, that.options.styles.error, [that.locate(that.options.selectors.externalURL), that.externalURLButton]);
-            return !error;
+            var regex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+            return url.match(regex) || url.length < 1;
         };
 
         that.validateAndRender = function () {
             var messageBar = that.messageBar,
-                externalURLButton = that.externalURLButton;
+                externalURLButton = that.externalURLButton,
+                // Get a string value for a field.
+                urlValue = that.container.val(),
+                error;
+
             // If there is an error message clear it.
             if (messageBar) {
                 messageBar.hide();
             }
-            // Get a string value for a field.
-            var urlValue = that.container.val(),
+            if (that.options.validation) {
                 error = !that.validateURL(urlValue);
+            }
+            // Style control depending on if there was an error in its content
+            that.styleControls(error, that.options.styles.error, [that.locate(that.options.selectors.externalURL), that.externalURLButton]);
             // Get a validated string value for the same field.
-            if(error && messageBar) {
+            if (error && messageBar) {
                 messageBar.show(that.options.parentBundle.resolve("externalUrl-invalidURLMessage"), null, true);
             }
             // Set a proper link href for the button
@@ -105,6 +109,7 @@ cspace = cspace || {};
         that.container.addClass([that.options.styles.externalURL, that.options.selectors.externalURL.slice(1)].join(" "));
         // Render a button beside the input
         fluid.invokeGlobalFunction(that.options.buildMarkup, [that, "externalURLButton"]);
+        that.container.parent().addClass(that.options.styles.parent);
     };
     
 })(jQuery, fluid);
