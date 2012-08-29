@@ -293,4 +293,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }
     });
+    
+    fluid.demands("cspace.autocomplete.popup", ["cspace.autocomplete", "cspace.autocompleteTests"], {
+        container: "{autocomplete}.popupElement",
+        options: {
+            produceTree: "cspace.autocomplete.produceTreeStructuredObjects",
+            selectors: {
+                newTermName: ".csc-autocomplete-newTermName",
+                newTermNamePrefix: ".csc-autocomplete-newTermName-prefix",
+                newTermNamePostfix: ".csc-autocomplete-newTermName-postfix"
+            }
+        }
+    });
 })(jQuery, fluid);
