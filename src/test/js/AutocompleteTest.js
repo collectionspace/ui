@@ -46,10 +46,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
         openAndCloseInteraction = function(container, closeFunc) {
             expect(10);
-            var autocomplete = cspace.autocomplete(container);
-            jqUnit.assertValue("Constructed", autocomplete);
-            var input = autocomplete.autocompleteInput,
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
                 events = autocomplete.autocomplete.events;
+            jqUnit.assertValue("Constructed", autocomplete);
             jqUnit.assertValue("Found input", input);
             events.onSearch.addListener(function(newValue, permitted) {
                 jqUnit.assertEquals("Search performed", "top", newValue);
@@ -80,8 +80,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         chooseMatchInteraction = function (container, chooseFunc) {
             expect(6);
-            var autocomplete = cspace.autocomplete(container);
-            var input = autocomplete.autocompleteInput;
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput;
             autocomplete.autocomplete.events.onSearchDone.addListener(function() {
                 assertMatchCount("\"Utopia\" results count in markup", 1, autocomplete);
                 assertCloseVisible(autocomplete, true);
@@ -111,8 +111,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         chooseMatchInteractionDisabled = function (container, chooseFunc) {
             expect(6);
-            var autocomplete = cspace.autocomplete(container);
-            var input = autocomplete.autocompleteInput;
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput;
             autocomplete.autocomplete.events.onSearchDone.addListener(function() {
                 assertMatchCount("\"Plummer\" results count in markup", 5, autocomplete);
                 assertCloseVisible(autocomplete, true);
@@ -156,8 +156,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
         gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
             expect(6);
-            var autocomplete = cspace.autocomplete(container);
-            var input = autocomplete.autocompleteInput;
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput;
             autocomplete.autocomplete.events.onSearchDone.addListener(function() {
                 assertPopupOpen(autocomplete, true);
                 assertInputFocused(autocomplete, true);
@@ -193,6 +193,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         gdInteractionExclude = function (container, focusFunc) {
             gdInteraction(container, focusFunc, true, false, "Utopia");
         },
+        
+        newTermNameNotPresent = function(container, closeFunc) {
+            expect(1);
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
+                events = autocomplete.autocomplete.events;
+            events.onSearchDone.addListener(function() {
+                var addTermTo = autocomplete.popup.dom.locate("addTermTo");
+                jqUnit.assertEquals("addTerm line has text only", "Add \"top\" to:", addTermTo.html());
+                closeFunc(autocomplete);
+                start();
+            });
+            input.keydown();
+            input.val("top");
+            stop();
+        },
+        
+        newTermNamePresent = function(container, closeFunc) {
+            expect(2);
+            fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.autocompleteTests");
+            
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
+                events = autocomplete.autocomplete.events;
+            events.onSearchDone.addListener(function() {
+                var newTermName = autocomplete.popup.dom.locate("newTermName");
+                jqUnit.assertEquals("newTermName is present", 1, newTermName.length);
+                jqUnit.assertEquals("newTermName has a proper name set", "top", newTermName[0].value);
+                closeFunc(autocomplete);
+                delete fluid.staticEnvironment.cspaceTestEnv;
+                start();
+            });
+            input.keydown();
+            input.val("top");
+            stop();
+        },
     
         makeArgumentedTest = function (testFunc, argFunc) {
             return function(container) {
@@ -212,6 +248,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         
         testScenario = {
+            "Input newTerm is NOT present in autocomplete by default": {
+                testFunc: newTermNameNotPresent,
+                argFunc: clickCloseButton
+            },
+            "Input newTerm is present in autocomplete by default": {
+                testFunc: newTermNamePresent,
+                argFunc: clickCloseButton
+            },
             "Open and close interaction with close button": {
                 testFunc: openAndCloseInteraction,
                 argFunc: clickCloseButton
