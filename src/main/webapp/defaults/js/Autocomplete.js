@@ -823,12 +823,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         selectAuthority(that, model, directModel, newTermUrl);
     };
 
-    cspace.autocomplete.selectAuthorityStructuredObjects = function (that, recordModel, fieldsToIgnore, schema, key) {
+    cspace.autocomplete.selectAuthorityStructuredObjects = function (that, recordModel, changeTracker, messageBar, fieldsToIgnore, schema, key) {
         var authority = that.model.authorities[key],
             directModel = {termUrl: authority.type},
             newTermUrl = that.newTermSource.resolveUrl(directModel),
             model;
         if (authority.createFromExisting) {
+            if (changeTracker.unsavedChanges) {
+                that.revertState();
+                messageBar.show(that.options.parentBundle.resolve("autocomplete-structuredObjects-save"), null, true);
+                that.eventHolder.events.afterSelectAuthority.fire();
+                return;
+            }
             model = fluid.copy(recordModel);
             fluid.each(fieldsToIgnore, function (fieldPath) {
                 fluid.set(model, fieldPath);

@@ -459,7 +459,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 invokers: {
                     selectAuthority: {
                         funcName: "cspace.autocomplete.selectAuthorityStructuredObjects",
-                        args: ["{autocomplete}", "{cspace.recordEditor}.model", "{cspace.recordEditor}.options.fieldsToIgnore", "{pageBuilder}.schema", "{arguments}.0"]
+                        args: ["{autocomplete}", "{cspace.recordEditor}.model", "{changeTracker}", "{messageBar}", "{cspace.recordEditor}.options.fieldsToIgnore", "{pageBuilder}.schema", "{arguments}.0"]
                     }
                 }
             }, "{arguments}.1"]
