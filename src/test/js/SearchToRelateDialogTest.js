@@ -11,42 +11,54 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
 "use strict";
 
-fluid.setLogging(true);
+fluid.setLogging(false);
 
 var searchToRelateDialogTester = function () {
+
+    fluid.defaults("cspace.test.RelationManager", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"]
+    });
+
     var baseModel = {
-        csid : "123.456.789",
-        relations : []
-    };
+            csid : "123.456.789",
+            relations : []
+        },
+        searchToRelateDialog,
 
-    var searchToRelateDialog;
+        bareSearchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests"),
 
-    var bareSearchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests");
-        
-    var searchToRelateDialogTest = cspace.tests.testEnvironment({testCase: bareSearchToRelateDialogTest});
-    
-    var createSearchToRelate = function (primary, related, listeners, searchOpts) {
-        var testOpts = {};
-        var testModel = {};
-        var applier = fluid.makeChangeApplier(testModel);
-        
-        fluid.merge(null, testOpts, {
-            related: related,
-            primary: primary,
-            applier: applier,
-            model: testModel,
-            listeners: listeners,
-            showCreate: true,
+        searchToRelateDialogTest = cspace.tests.testEnvironment({
+            testCase: bareSearchToRelateDialogTest,
             components: {
-                search: {
-                    options: searchOpts
+                RelationManager: {
+                    type: "cspace.test.RelationManager"
                 }
             }
-        });
-        // The dialog may now render synchronously - acquire its object reference using this listener
-        function acquireDialogListener(dialog) {
-            searchToRelateDialog = dialog;
-        }
+        }),
+
+        createSearchToRelate = function (primary, related, listeners, searchOpts) {
+            var testOpts = {};
+            var testModel = {};
+            var applier = fluid.makeChangeApplier(testModel);
+
+            fluid.merge(null, testOpts, {
+                related: related,
+                primary: primary,
+                applier: applier,
+                model: testModel,
+                listeners: listeners,
+                showCreate: true,
+                components: {
+                    search: {
+                        options: searchOpts
+                    }
+                }
+            }),
+            // The dialog may now render synchronously - acquire its object reference using this listener
+            acquireDialogListener = function (dialog) {
+                searchToRelateDialog = dialog;
+            };
+
         testOpts.listeners.afterSetup = [acquireDialogListener].concat(fluid.makeArray(testOpts.listeners.afterSetup));
         cspace.searchToRelateDialog("#main .csc-search-related-dialog", testOpts);
     };
@@ -54,15 +66,15 @@ var searchToRelateDialogTester = function () {
     searchToRelateDialogTest.asyncTest("Creation for particular record type (cataloging, relating to acquisition)", function () {
         createSearchToRelate("acquisition", "cataloging", {
             afterSetup: function (dialog) {
+                var mainSearch = dialog.search.mainSearch;
                 dialog.open();
-                jqUnit.assertTrue("Searching for a particular record type, the drop-down should not be enabled", 
-                    dialog.search.mainSearch.locate("recordTypeSelect").is(":disabled"));
-                dialog.search.mainSearch.locate("searchButton").click();
+                jqUnit.assertTrue("Searching for a particular record type, the drop-down should not be enabled", mainSearch.locate("recordTypeSelect").is(":disabled"));
+                mainSearch.locate("searchButton").click();
             }
         }, {
             listeners: {
                 onSearch: function () {
-                    jqUnit.assertEquals("Search should be set up to search for the correct record type", 
+                    jqUnit.assertEquals("Search should be set up to search for the correct record type",
                           searchToRelateDialog.options.related, searchToRelateDialog.search.model.searchModel.recordType);
                 },
                 afterSearch: function () {
@@ -78,11 +90,11 @@ var searchToRelateDialogTester = function () {
         createSearchToRelate("movement", "procedures", {
             afterSetup: function (dialog) {
                 dialog.open();
-                var recordType = dialog.search.mainSearch.locate("recordTypeSelect");
+                var recordType = dialog.search.mainSearch.locate("recordTypeSelect"),
+                    options = $("option", recordType),
+                    values = {};
                 jqUnit.assertTrue("Searching for all procedure types, the drop-down should be enabled", recordType.is(":enabled"));
                 // Check that missing permissions for "intake" record type have removed it from rendering
-                var options = $("option", recordType);
-                var values = {};
                 fluid.each(options, function(option) {
                     values[$(option).attr("value")] = true;
                 });
@@ -130,22 +142,18 @@ var searchToRelateDialogTester = function () {
         }, {
             listeners: {
                 onSearch : function () {
-                    jqUnit.notVisible("When search submitted, search results should be hidden",
-                        jQuery(searchToRelateDialog.search.options.selectors.resultsContainer));
-                    jqUnit.notVisible("When search submitted, results count should be hidden - http://issues.collectionspace.org/browse/CSPACE-2290",
-                        jQuery(searchToRelateDialog.search.options.selectors.resultsCountContainer));
-                    jqUnit.isVisible("When search submitted, 'looking' message should be visible - http://issues.collectionspace.org/browse/CSPACE-2289",
-                        jQuery(searchToRelateDialog.search.options.selectors.lookingContainer));
+                    var selectors = searchToRelateDialog.search.options.selectors;
+                    jqUnit.notVisible("When search submitted, search results should be hidden", $(selectors.resultsContainer));
+                    jqUnit.notVisible("When search submitted, results count should be hidden - http://issues.collectionspace.org/browse/CSPACE-2290", $(selectors.resultsCountContainer));
+                    jqUnit.isVisible("When search submitted, 'looking' message should be visible - http://issues.collectionspace.org/browse/CSPACE-2289", $(selectors.lookingContainer));
                 },
                 afterSearch : function () {
                     // 2) Search results should be displayed
+                    var selectors = searchToRelateDialog.search.options.selectors;
                     jqUnit.assertEquals("After clicking search, search results should be of the expected type", testRecordType, searchToRelateDialog.search.model.results[0].recordtype);
-                    jqUnit.isVisible("After clicking search, search results are visible",
-                        jQuery(searchToRelateDialog.search.options.selectors.resultsContainer));
-                    jqUnit.isVisible("After clicking search, search results count container is visible - http://issues.collectionspace.org/browse/CSPACE-2290",
-                        jQuery(searchToRelateDialog.search.options.selectors.resultsCountContainer));
-                    jqUnit.notVisible("After clicking search, 'looking' message should be hidden - http://issues.collectionspace.org/browse/CSPACE-2289",
-                        jQuery(searchToRelateDialog.search.options.selectors.lookingContainer));
+                    jqUnit.isVisible("After clicking search, search results are visible", $(selectors.resultsContainer));
+                    jqUnit.isVisible("After clicking search, search results count container is visible - http://issues.collectionspace.org/browse/CSPACE-2290", $(selectors.resultsCountContainer));
+                    jqUnit.notVisible("After clicking search, 'looking' message should be hidden - http://issues.collectionspace.org/browse/CSPACE-2289", $(selectors.lookingContainer));
                     searchToRelateDialog.locate("closeButton").click();
                     start();
                 }
@@ -187,17 +195,20 @@ var searchToRelateDialogTester = function () {
     });
 
     readPermsTest.asyncTest("Create relationship from search results", function () {
-        var primaryRecordType = "intake";
-        var testRecordType = "loanout";
+        var primaryRecordType = "intake",
+            testRecordType = "loanout";
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {
-                dialog.search.mainSearch.locate("recordTypeSelect").val(testRecordType).change();
-                dialog.search.mainSearch.locate("searchButton").click();
+                var mainSearch = dialog.search.mainSearch;
+                mainSearch.locate("recordTypeSelect").val(testRecordType).change();
+                mainSearch.locate("searchButton").click();
             },
             addRelations: function (data) {
-                jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 1, data.items.length);
-                jqUnit.assertEquals("On creation of new relation, source recordType should be correct", primaryRecordType, data.items[0].source.recordtype);
-                jqUnit.assertEquals("On creation of new relation, target recordType should be correct", testRecordType, data.items[0].target.recordtype);
+                var items = data.items,
+                    firstItem = items[0];
+                jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 1, items.length);
+                jqUnit.assertEquals("On creation of new relation, source recordType should be correct", primaryRecordType, firstItem.source.recordtype);
+                jqUnit.assertEquals("On creation of new relation, target recordType should be correct", testRecordType, firstItem.target.recordtype);
                 searchToRelateDialog.locate("closeButton").click();
                 start();
             }
@@ -212,27 +223,31 @@ var searchToRelateDialogTester = function () {
     });
 
     readPermsTest.asyncTest("Create multiple relationships from search results", function () {
-        var primaryRecordType = "movement";
-        var testRecordType = "intake";
+        var primaryRecordType = "movement",
+            testRecordType = "intake";
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {
                 dialog.locate("recordType").val(testRecordType);
                 dialog.search.mainSearch.locate("searchButton").click();
             },
             addRelations: function (data) {
-                jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 2, data.items.length);
-                jqUnit.assertEquals("On creation of new relation, first source recordType should be correct", primaryRecordType, data.items[0].source.recordtype);
-                jqUnit.assertEquals("On creation of new relation, first target recordType should be correct", testRecordType, data.items[0].target.recordtype);
-                jqUnit.assertEquals("On creation of new relation, second source recordType should be correct", primaryRecordType, data.items[1].source.recordtype);
-                jqUnit.assertEquals("On creation of new relation, second target recordType should be correct", testRecordType, data.items[1].target.recordtype);
+                var items = data.items,
+                    firstItem = items[0],
+                    secondItem = items[1];
+                jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 2, items.length);
+                jqUnit.assertEquals("On creation of new relation, first source recordType should be correct", primaryRecordType, firstItem.source.recordtype);
+                jqUnit.assertEquals("On creation of new relation, first target recordType should be correct", testRecordType, firstItem.target.recordtype);
+                jqUnit.assertEquals("On creation of new relation, second source recordType should be correct", primaryRecordType, secondItem.source.recordtype);
+                jqUnit.assertEquals("On creation of new relation, second target recordType should be correct", testRecordType, secondItem.target.recordtype);
                 searchToRelateDialog.locate("closeButton").click();
                 start();
             }
         }, {
             listeners: {
                 afterSearch : function () {
-                    searchToRelateDialog.search.model.results[0].selected = true;
-                    searchToRelateDialog.search.model.results[1].selected = true;
+                    var results = searchToRelateDialog.search.model.results;
+                    results[0].selected = true;
+                    results[1].selected = true;
                     searchToRelateDialog.locate("addButton").click();
                 }
             }
