@@ -109,7 +109,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var testConfig = {
-        "Creation": {
+        "Creation of new record": {
             testType: "asyncTest",
             recordEditorOptions: {
                 selectors: {
@@ -127,6 +127,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     // This event is fired within the recordRenderer component.
                     if (subcomponentName === "recordRenderer") {return;}
                     jqUnit.assertValue(subcomponentName + " should be initialized", recordEditor[subcomponentName]);
+                });
+                fluid.each(recordEditor.options.uispec, function (val, selector) {
+                    if (!val.messagekey) {
+                        return;
+                    }
+                    var field = $(selector);
+                    if (field.length < 1) {
+                        return;
+                    }
+                    jqUnit.assertEquals("The record data should be rendered correctly", recordEditor.options.parentBundle.resolve(val.messagekey), field.text());
+                });
+            }
+        },
+        "Creation when the record exists": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            testBody: function (recordEditor) {
+                fluid.each(recordEditor.options.uispec, function (val, selector) {
+                    if (typeof val !== "string") {
+                        return;
+                    }
+                    var elPath = val.replace("${", "").replace("}", ""),
+                        field = $(selector);
+                    if (field.length < 1) {
+                        return;
+                    }
+                    jqUnit.assertEquals("The record data should be rendered correctly", fluid.get(recordEditor.model, elPath) || "", field.val());
                 });
             }
         }
