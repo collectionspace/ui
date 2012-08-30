@@ -536,8 +536,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.popup = function (container, options) {
         var that = fluid.initRendererComponent("cspace.autocomplete.popup", container, options);
         fluid.initDependents(that);
-        var input = fluid.unwrap(that.options.inputField);
-        that.union = $(container).add(input);
+        that.union = $(container).add(fluid.unwrap(that.options.inputField));
         
         var decodeItem = function (item) { // TODO: make a generic utility for this (integrate with ViewParameters for URLs)
             var togo = {
@@ -551,36 +550,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return togo;
         };
         
-        var activateFunction = function (item) {
+        that.activateFunction = function (item) {
             var decoded = decodeItem(item.target);
             if (decoded.type) {
                 that.eventHolder.events[decoded.type === "authorities" ? "selectAuthority" : "selectMatch"].fire(decoded.index);
             }
         };
-        that.container.click(activateFunction);
-        
-        that.open = function () {
-            that.renderer.refreshView();
-            
-            var activatables = that.locate("authorityItem").add(that.locate("matchItemContent"));
-            fluid.activatable(activatables, activateFunction);
-            
-            var selectables = $(activatables).add(input);
-            that.selectable.selectables = selectables;
-            that.selectable.selectablesUpdated();
-            var container = that.container;
-            container.show();
-            container.dialog("open");
-// NB: on IE8, the above creates a cyclically linked DOM structure! The following
-// or variant may help with styling issues            
-//            container.appendTo(document.body);
-            container.position({
-                my: "left top",
-                at: "left bottom",
-                of: that.options.inputField,
-                collision: "none"
-            });
-        };
+        that.container.click(that.activateFunction);
         
         that.close = function () {
             that.container.dialog("close");
@@ -702,6 +678,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matchItemContent: ".csc-autocomplete-matchItem-content",
             addTermTo: ".csc-autocomplete-addTermTo"
         },
+        invokers: {
+            open: "cspace.autocomplete.popup.open"
+        },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
             matchesSelect: "cs-autocomplete-matchItem-select",
@@ -731,6 +710,41 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         strings: {},
         parentBundle: "{globalBundle}"
     });
+
+    fluid.demands("cspace.autocomplete.popup.open", "cspace.autocomplete.popup", {
+        funcName: "cspace.autocomplete.popup.open",
+        args: "{cspace.autocomplete.popup}"
+    });
+
+    fluid.demands("cspace.autocomplete.popup.open", ["cspace.autocomplete.popup", "cspace.hierarchy", "cspace.nonAuthority"], {
+        funcName: "cspace.autocomplete.popup.open",
+        args: ["{cspace.autocomplete.popup}", "newTermName"]
+    });
+
+    cspace.autocomplete.popup.open = function (that, extraSelectables) {
+        var input = fluid.unwrap(that.options.inputField),
+            container = that.container,
+            activatables, selectables;
+        that.renderer.refreshView();
+        activatables = that.locate("authorityItem").add(that.locate("matchItemContent"));
+        fluid.activatable(activatables, that.activateFunction);
+        selectables = $(activatables).add(input);
+        if (extraSelectables) {
+            selectables = selectables.add(that.locate(extraSelectables));
+        }
+        that.selectable.selectables = selectables;
+        that.selectable.selectablesUpdated();
+        container.show();
+        container.dialog("open");
+        // NB: on IE8, the above creates a cyclically linked DOM structure! The following
+        // or variant may help with styling issues container.appendTo(document.body);
+        container.position({
+            my: "left top",
+            at: "left bottom",
+            of: that.options.inputField,
+            collision: "none"
+        });
+    };
 
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");
 
@@ -828,6 +842,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             directModel = {termUrl: authority.type},
             newTermUrl = that.newTermSource.resolveUrl(directModel),
             model;
+        if (!that.model.term) {
+            that.revertState();
+            messageBar.show(that.options.parentBundle.resolve("autocomplete-structuredObjects-enterName"), null, true);
+            that.eventHolder.events.afterSelectAuthority.fire();
+            return;
+        }
         if (authority.createFromExisting) {
             if (changeTracker.unsavedChanges) {
                 that.revertState();
