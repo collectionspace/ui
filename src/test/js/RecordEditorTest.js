@@ -9,53 +9,153 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
-"use strict";
 
 (function () {
-    //fluid.setLogging(true);
 
-    var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
-        $(".ui-dialog").detach();
+    "use strict";
+
+    var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests");
+
+    // Stub for pageBuilderIO
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        recordType: "objectexit",
+        readOnly: false
     });
 
-    var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
-    
-    var recordEditorTestUsedBy = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
-        someComponent: fluid.typeTag("person")
-    }});
-
-    var setupRecordEditor = function (options, callback) {
-        fluid.merge(null, options, {
-            applier: fluid.makeChangeApplier(options.model),
-            listeners: {
-                "afterRender.initialRender": callback
-            },
-            showDeleteButton: true,
-            components: {
-                validator: {
-                    type: "fluid.emptySubcomponent"
+    fluid.defaults("cspace.pageBuilder", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        resources: {
+            objectexit: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
                 }
-            },
-            strings: {
-                updateSuccessfulMessage: "%record successfully saved",
-                createSuccessfulMessage: "New %record successfully created",
-                removeSuccessfulMessage: "%record successfully deleted",
-                updateFailedMessage: "Error saving %record: ",
-                createFailedMessage: "Error creating %record: ",
-                deleteFailedMessage: "Error deleting %record: ",
-                fetchFailedMessage: "Error retriving %record: ",
-                addRelationsFailedMessage: "Error adding related records: ",
-                removeRelationsFailedMessage: "Error removing related records: ",
-                missingRequiredFields: "Required field is empty: %field",
-                deleteButton: "Delete",
-                deleteMessageWithRelated: " and its relationships",
-                deleteMessageMediaAttached: " and its attached media"
-            }
+            }),
+            namespaces: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordtypes: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordlist: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            uispec: cspace.resourceSpecExpander({
+                url: "%test/uispecs/objectexit.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            })
+        },
+        selectors: {
+            recordEditor: "#main"
+        },
+        preInitFunction: "cspace.pageBuilder.preInit"
+    });
+
+    cspace.pageBuilder.preInit = function (that) {
+        fluid.each(that.options.resources, function (resource, name) {
+            resource.url = fluid.stringTemplate(resource.url, {schemaName: name});
         });
-        cspace.recordEditor("#main", options);
+        fluid.fetchResources(that.options.resources, function (resources) {
+            that.schema = {};
+            fluid.each(["objectexit", "namespaces", "recordtypes", "recordlist"], function (schemaName) {
+                that.schema[schemaName] = resources[schemaName].resourceText[schemaName];
+            });
+            that.options.uispec = resources.uispec.resourceText;
+        });
     };
 
-    recordEditorTest.asyncTest("Creation", function () {
+    fluid.demands("afterRecordRender", ["cspace.recordEditor", "cspace.test"], {
+        args: ["{cspace.recordEditor}"]
+    });
+
+    var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
+    var setupRecordEditor = function (options) {
+        var instantiator = recordEditorTest.instantiator;
+        if (recordEditorTest.recordEditor) {
+            instantiator.clearComponent(recordEditorTest, "recordEditor");
+        }
+        recordEditorTest.options.components["recordEditor"] = {
+            type: "cspace.recordEditor",
+            options: fluid.merge(null, options, {})
+        };
+        fluid.fetchResources({}, function () {
+            fluid.initDependent(recordEditorTest, "recordEditor", instantiator);
+        }, {amalgamateClasses: ["testResource"]});
+    };
+
+    var testConfig = {
+        "Creation": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            testBody: function (recordEditor) {
+                jqUnit.assertValue("Record editor should be created", recordEditor);
+                jqUnit.assertDeepEq("Model should be properly obtained using schema",
+                    cspace.util.getBeanValue({}, recordEditor.options.recordType,
+                    recordEditor.recordDataSource.options.schema), recordEditor.model);
+                fluid.each(recordEditor.options.components, function (val, subcomponentName) {
+                    // This event is fired within the recordRenderer component.
+                    if (subcomponentName === "recordRenderer") {return;}
+                    jqUnit.assertValue(subcomponentName + " should be initialized", recordEditor[subcomponentName]);
+                });
+            }
+        }
+    };
+
+    var testRunner = function (testsConfig) {
+        fluid.each(testsConfig, function (config, testName) {
+            recordEditorTest[config.testType](testName, function () {
+                var options = fluid.merge(null, {
+                    listeners: {
+                        afterRecordRender: {
+                            priority: "last",
+                            listener: function (recordEditor) {
+                                config.testBody(recordEditor);
+                                if (config.testType === "test") {return;}
+                                start();
+                            }
+                        }
+                    }
+                }, config.recordEditorOptions);
+                setupRecordEditor(options);
+            });
+        });
+    };
+
+    testRunner(testConfig);
+
+    /*
+recordEditorTest.asyncTest("Creation", function () {
         var model = {
             fields: {
                 field1: "A",
@@ -401,5 +501,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             start();
         });
     });
+*/
 
 }());
