@@ -319,6 +319,8 @@ cspace = cspace || {};
                 if (that.options.recordType === vocab) {return true;}
             })) {
                 that.authorityTag = fluid.typeTag("cspace.authority");
+            } else {
+                that.nonAuthorityTag = fluid.typeTag("cspace.nonAuthority");
             }
         };
         that.schema = that.options.schema;
