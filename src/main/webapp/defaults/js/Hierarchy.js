@@ -179,9 +179,10 @@ cspace = cspace || {};
 
     cspace.hierarchy.preInit = function (that) {
         that.options.rendererFnOptions.templateSource = function () {
-            return that.templateFetcher.options.resources.template.resourceText;
+            return that.template;
         };
-        that.refreshView = function () {
+        that.refreshView = function (resourceText) {
+            that.template = resourceText;
             that.refreshView();
         };
     };
