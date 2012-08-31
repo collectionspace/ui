@@ -158,10 +158,11 @@ cspace = cspace || {};
         },
         events: {
             afterFetch: null,
+            afterFetchLocal: null,
             afterFetchTemplate: null,
             ready: {
                 events: {
-                    data: "{cspace.recordEditor}.events.afterFetch",
+                    data: "{cspace.recordEditor}.events.afterFetchLocal",
                     template: "{cspace.recordEditor}.events.afterFetchTemplate"
                 }
             },
@@ -180,6 +181,10 @@ cspace = cspace || {};
         },
         listeners: {
             afterSave: "{cspace.recordEditor}.afterSaveHandler",
+            afterFetch: {
+                listener: "{cspace.recordEditor}.events.afterFetchLocal.fire",
+                priority: "last"
+            },
             ready: "{cspace.recordEditor}.onReady",
             afterRecordRender: [
                 "{loadingIndicator}.events.hideOn.fire",
