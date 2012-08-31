@@ -92,12 +92,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             path: "test"
         }
     });
-    
-    // Record editor demands
-    fluid.demands("afterDelete", ["cspace.recordEditor", "cspace.test"], {
-        funcName: "cspace.tests.testAfterDelete",
-        args: "{recordEditor}"
-    });
 
     // Messagebar demands
     fluid.demands("messageBar", "cspace.test", {
