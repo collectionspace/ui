@@ -80,7 +80,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     font-style:italic;
     color:#6E6E6E;
 }
-.cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
+.cs-autocomplete-popup .content {
+    color:#6E6E6E;
+    padding-bottom:5px; 
+    display: inline-block;
+    width: 98%;
+}
 .cs-autocomplete-popup .pad-right {padding-right:10px;}
 .cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: solid 1px #AAA}
 
@@ -104,4 +109,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 }
 .cs-autocomplete-addTermTo {
     margin-left: 5px;
+}
+
+.cs-autocomplete-addTermTo .cs-autocomplete-newTermName {
+    float: left;
+    width: 75%;
+    margin-right: 4px;
+}
+.cs-autocomplete-addTermTo .cs-autocomplete-addTermTo-content {
+    float: left;
+    margin-right: 4px;
+    margin-top: 2px;
 }
