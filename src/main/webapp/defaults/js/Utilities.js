@@ -1203,13 +1203,22 @@ fluid.registerNamespace("cspace.util");
         if (vocab) {
             return vocab;
         }
-        vocab = cspace.util.getUrlParameter("vocab");
-        if (vocab) {
-            return vocab;
+        // This needs to come out as part of the patch for CSPACE-5462, so that pivoting to a collectionobject from an authority item doesn't break.
+        // vocab = cspace.util.getUrlParameter("vocab");
+        // if (vocab) {
+        //     return vocab;
+        // }
+
+        // Putting in a hack as part of the patch for CSPACE-5462, so that commenting out the above doesn't break pivoting to a non-default vocabulary.
+        if (recType) {
+            if (options.vocab.hasVocabs(recType)) {
+                vocab = cspace.util.getUrlParameter("vocab") || options.vocab.authority[recType].vocabs[recType];
+            }
         }
-        if (recType && options.vocab.hasVocabs(recType)) {
-            return options.vocab.authority[recType].vocabs[recType];
+        else {
+            vocab = cspace.util.getUrlParameter("vocab");
         }
+        return vocab;
     };
 
     cspace.recordTypes = function (options) {
