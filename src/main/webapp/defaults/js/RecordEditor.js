@@ -103,7 +103,7 @@ cspace = cspace || {};
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier",
                     uispec: "{cspace.recordEditor}.options.uispec",
-                    resources: "{cspace.recordEditor.templateFetcher}.options.resources",
+                    resources: "{cspace.templateFetcher}.options.resources",
                     events: {
                         afterRender: "{cspace.recordEditor}.events.afterRecordRender"
                     }
@@ -111,7 +111,7 @@ cspace = cspace || {};
                 createOnEvent: "ready"
             },
             templateFetcher: {
-                type: "cspace.recordEditor.templateFetcher",
+                type: "cspace.templateFetcher",
                 priority: "first",
                 options: {
                     recordType: "{cspace.recordEditor}.options.recordType",
@@ -158,10 +158,11 @@ cspace = cspace || {};
         },
         events: {
             afterFetch: null,
+            afterFetchLocal: null,
             afterFetchTemplate: null,
             ready: {
                 events: {
-                    data: "{cspace.recordEditor}.events.afterFetch",
+                    data: "{cspace.recordEditor}.events.afterFetchLocal",
                     template: "{cspace.recordEditor}.events.afterFetchTemplate"
                 }
             },
@@ -180,6 +181,10 @@ cspace = cspace || {};
         },
         listeners: {
             afterSave: "{cspace.recordEditor}.afterSaveHandler",
+            afterFetch: {
+                listener: "{cspace.recordEditor}.events.afterFetchLocal.fire",
+                priority: "last"
+            },
             ready: "{cspace.recordEditor}.onReady",
             afterRecordRender: [
                 "{loadingIndicator}.events.hideOn.fire",
@@ -1295,7 +1300,7 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
 
-    fluid.defaults("cspace.recordEditor.templateFetcher", {
+    fluid.defaults("cspace.templateFetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         resources: {
             template: cspace.resourceSpecExpander({
@@ -1315,14 +1320,16 @@ cspace = cspace || {};
         events: {
             afterFetch: null
         },
-        finalInitFunction: "cspace.recordEditor.templateFetcher.finalInit"
+        finalInitFunction: "cspace.templateFetcher.finalInit"
     });
 
-    cspace.recordEditor.templateFetcher.finalInit = function (that) {
+    cspace.templateFetcher.finalInit = function (that) {
         var template = that.options.resources.template,
             recordType = that.options.recordType,
             templateName = that.options.template ? "-" + that.options.template : "";
-        recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        if (recordType) {
+            recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        }
         template.url = fluid.stringTemplate(template.url, {
             recordType: recordType,
             template: templateName
@@ -1363,6 +1370,40 @@ cspace = cspace || {};
                                 func: "cspace.util.urlBuilder",
                                 args: {
                                     upload: "%tenant/%tname/uploads/"
+                                }
+                            }
+                        }
+                    },
+                    createOnEvent: "afterRender"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cataloging.read"], {
+        options: {
+            selectors: {
+                hierarchy: ".csc-record-hierarchy"
+            },
+            selectorsToIgnore: "hierarchy",
+            components: {
+                hierarchy: {
+                    type: "cspace.hierarchy",
+                    container: "{recordRenderer}.dom.hierarchy",
+                    options: {
+                        uispec: "{pageBuilder}.options.uispec.hierarchy",
+                        produceTree: "cspace.hierarchy.produceTreeCataloging",
+                        components: {
+                            templateFetcher: {
+                                options: {
+                                    resources: {
+                                        template: cspace.resourceSpecExpander({
+                                            url: "%webapp/html/components/HierarchyObjectTemplate.html",
+                                            options: {
+                                                dataType: "html"
+                                            }
+                                        })
+                                    }
                                 }
                             }
                         }

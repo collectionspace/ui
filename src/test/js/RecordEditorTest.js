@@ -9,98 +9,242 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
-"use strict";
 
 (function () {
-    //fluid.setLogging(true);
 
-    var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
-        $(".ui-dialog").detach();
+    "use strict";
+
+    var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests");
+
+    // Stub for pageBuilderIO
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        recordType: "objectexit",
+        readOnly: false
     });
 
-    var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
-    
-    var recordEditorTestUsedBy = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
-        someComponent: fluid.typeTag("person")
+    fluid.defaults("cspace.pageBuilder", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        resources: {
+            objectexit: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            namespaces: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordtypes: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordlist: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            }),
+            uispec: cspace.resourceSpecExpander({
+                url: "%test/uispecs/objectexit.json",
+                fetchClass: "testResource",
+                options: {
+                    dataType: "json"
+                }
+            })
+        },
+        selectors: {
+            recordEditor: "#main"
+        },
+        preInitFunction: "cspace.pageBuilder.preInit"
+    });
+
+    cspace.pageBuilder.preInit = function (that) {
+        fluid.each(that.options.resources, function (resource, name) {
+            resource.url = fluid.stringTemplate(resource.url, {schemaName: name});
+        });
+        fluid.fetchResources(that.options.resources, function (resources) {
+            that.schema = {};
+            fluid.each(["objectexit", "namespaces", "recordtypes", "recordlist"], function (schemaName) {
+                that.schema[schemaName] = resources[schemaName].resourceText[schemaName];
+            });
+            that.options.uispec = resources.uispec.resourceText;
+        });
+    };
+
+    fluid.each(["afterRecordRender", "afterRemove"], function (eventName) {
+        fluid.demands(eventName, ["cspace.recordEditor", "cspace.test"], {
+            args: ["{cspace.recordEditor}"]
+        });
+    });
+
+    var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
     }});
 
-    var setupRecordEditor = function (options, callback) {
-        fluid.merge(null, options, {
-            applier: fluid.makeChangeApplier(options.model),
-            listeners: {
-                "afterRender.initialRender": callback
+    var setupRecordEditor = function (options) {
+        var instantiator = recordEditorTest.instantiator;
+        if (recordEditorTest.recordEditor) {
+            instantiator.clearComponent(recordEditorTest, "recordEditor");
+        }
+        recordEditorTest.options.components["recordEditor"] = {
+            type: "cspace.recordEditor",
+            options: fluid.merge(null, options, {})
+        };
+        fluid.fetchResources({}, function () {
+            fluid.initDependent(recordEditorTest, "recordEditor", instantiator);
+        }, {amalgamateClasses: ["testResource"]});
+    };
+
+    var testConfig = {
+        "Creation of new record": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
             },
-            showDeleteButton: true,
-            components: {
-                validator: {
-                    type: "fluid.emptySubcomponent"
+            afterRecordRenderTest: {
+                start: true,
+                test: function (recordEditor) {
+                    jqUnit.assertValue("Record editor should be created", recordEditor);
+                    jqUnit.assertDeepEq("Model should be properly obtained using schema",
+                        cspace.util.getBeanValue({}, recordEditor.options.recordType,
+                        recordEditor.recordDataSource.options.schema), recordEditor.model);
+                    fluid.each(recordEditor.options.components, function (val, subcomponentName) {
+                        // This event is fired within the recordRenderer component.
+                        if ($.inArray(subcomponentName, ["recordRenderer", "readOnly", "recordEditorTogglable"]) > -1) {return;}
+                        jqUnit.assertValue(subcomponentName + " should be initialized", recordEditor[subcomponentName]);
+                    });
+                    fluid.each(recordEditor.options.uispec, function (val, selector) {
+                        if (!val.messagekey) {
+                            return;
+                        }
+                        var field = $(selector);
+                        if (field.length < 1) {
+                            return;
+                        }
+                        jqUnit.assertEquals("The record data should be rendered correctly", recordEditor.options.parentBundle.resolve(val.messagekey), field.text());
+                    });
                 }
+            }
+        },
+        "Creation when the record exists": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
             },
-            strings: {
-                updateSuccessfulMessage: "%record successfully saved",
-                createSuccessfulMessage: "New %record successfully created",
-                removeSuccessfulMessage: "%record successfully deleted",
-                updateFailedMessage: "Error saving %record: ",
-                createFailedMessage: "Error creating %record: ",
-                deleteFailedMessage: "Error deleting %record: ",
-                fetchFailedMessage: "Error retriving %record: ",
-                addRelationsFailedMessage: "Error adding related records: ",
-                removeRelationsFailedMessage: "Error removing related records: ",
-                missingRequiredFields: "Required field is empty: %field",
-                deleteButton: "Delete",
-                deleteMessageWithRelated: " and its relationships",
-                deleteMessageMediaAttached: " and its attached media"
+            afterRecordRenderTest: {
+                start: true,
+                test: function (recordEditor) {
+                    fluid.each(recordEditor.options.uispec, function (val, selector) {
+                        if (typeof val !== "string") {
+                            return;
+                        }
+                        var elPath = val.replace("${", "").replace("}", ""),
+                            field = $(selector);
+                        if (field.length < 1) {
+                            return;
+                        }
+                        jqUnit.assertEquals("The record data should be rendered correctly", fluid.get(recordEditor.model, elPath) || "", field.val());
+                    });
+                }
             }
-        });
-        cspace.recordEditor("#main", options);
+        },
+        "Remove": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                events: {
+                    afterRemove: "preventable"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            afterRecordRenderTest: function (recordEditor) {
+                recordEditor.confirmation.popup.bind("dialogopen", function () {
+                    recordEditor.confirmation.confirmationDialog.locate("act").click();
+                });
+                recordEditor.events.onRemove.fire();
+            },
+            afterRemoveTest: {
+                test: function (recordEditor) {
+                    jqUnit.assertTrue("Successfully executed remove", true);
+                },
+                priority: "first",
+                prevent: true,
+                start: true
+            }
+        }
     };
 
-    recordEditorTest.asyncTest("Creation", function () {
-        var model = {
-            fields: {
-                field1: "A",
-                field2: "B",
-                field3: "C"
-            }
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: ".", model: model}),
-            uispec: {
-                ".csc-test-1": "${fields.field1}",
-                ".csc-test-2": "${fields.field2}",
-                ".csc-test-3": "${fields.field3}"
-            }
-        }, function (re) {
-            jqUnit.assertEquals("foo", model.fields.field1, jQuery(".csc-test-1").val());
-            start();
-        });
-    });
-    
-    cspace.tests.testAfterDelete = function (that) {
-        jqUnit.assertTrue("Successfully executed remove", true);
-        start();
-    };
-
-    recordEditorTest.asyncTest("Delete", function () {
-        var model = {
-            csid: "1984.068.0335b",
-            fields: {}
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "../data", recordType: "cataloging", model: model, fileExtension: ".json"}),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                re.confirmation.confirmationDialog.locate("act").click();
+    var testRunner = function (testsConfig) {
+        fluid.each(testsConfig, function (config, testName) {
+            recordEditorTest[config.testType](testName, function () {
+                var listeners = {};
+                fluid.each(["afterRecordRender", "afterRemove"], function (eventName) {
+                    var test = config[eventName + "Test"];
+                    if (!test) {
+                        return;
+                    }
+                    listeners[eventName] = {};
+                    if (test.priority) {
+                        listeners[eventName].priority = test.priority;
+                    }
+                    listeners[eventName].listener = function (recordEditor) {
+                        if (typeof test === "function") {
+                            test(recordEditor);
+                        } else {
+                            test.test(recordEditor);
+                        }
+                        if (config.testType === "test") {return;}
+                        if (test.start) {
+                            start();
+                        }
+                        if (test.prevent) {
+                            return false;
+                        }
+                    };
+                });
+                var options = fluid.merge(null, {
+                    listeners: listeners
+                }, config.recordEditorOptions);
+                setupRecordEditor(options);
             });
-            re.remove();
         });
-    });
+    };
 
+    testRunner(testConfig);
+
+    /*
     recordEditorTest.asyncTest("Rollback test", function () {
         var model = {
             csid: "123.456.789",
@@ -401,5 +545,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             start();
         });
     });
+*/
 
 }());

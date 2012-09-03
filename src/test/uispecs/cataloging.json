@@ -1,4 +1,89 @@
 {
+    "hierarchy": {
+        ".csc-object-identification-narrowerContextsGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-hierarchy-narrowerContext": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/narrowerContext",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/narrowerContext",
+                                                    "invokers": {
+                                                        "selectMatch": {
+                                                            "funcName": "cspace.autocomplete.selectMatchConfirm"
+                                                        }
+                                                    },
+                                                    "strings": {
+                                                        "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
+                                                    }
+                                                }
+                                            }, {
+                                                "func": "cspace.externalURL",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.narrowerContext}"
+                                    },
+                                    ".csc-hierarchy-narrowerContextType": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "narrowerContextType",
+                                                    "termListType": "narrowerContextType"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.narrowerContexts"
+                    }
+                }
+            ]
+        },
+        ".csc-hierarchy-broaderContext": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/broaderContext",
+                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/broaderContext"
+                    }
+                }, {
+                    "func": "cspace.externalURL",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.broaderContext}"
+        },
+        ".csc-hierarchy-broaderContextType": {
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.broaderContextType",
+                        "termListType": "broaderContextType"
+                    }
+                }
+            ]
+        }
+    },
     "recordEditor": {
         ".csc-collection-object-assocPeopleGroup-label": {
             "messagekey": "collection-object-assocPeopleGroupLabel"
