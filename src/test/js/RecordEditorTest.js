@@ -189,6 +189,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 uispec: "{pageBuilder}.options.uispec.recordEditor",
                 fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
             },
+            expect: 1,
             afterRecordRenderTest: function (recordEditor) {
                 recordEditor.confirmation.popup.bind("dialogopen", function () {
                     recordEditor.confirmation.confirmationDialog.locate("act").click();
@@ -203,15 +204,79 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 prevent: true,
                 start: true
             }
+        },
+        "Rollback test": {
+            testType: "asyncTest",
+            expect: 3,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                events: {
+                    afterRemove: "preventable"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            onCancelTest: {
+                test: function () {
+                    jqUnit.assertEquals("Original value of the exitNumber field should be again", "EX2012.1", jQuery(".csc-objectexit-exitNumber").val());
+                },
+                priority: "last",
+                start: true
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    var field = jQuery(".csc-objectexit-exitNumber");
+                    jqUnit.assertEquals("Original value of the exitNumber field is", "EX2012.1", field.val());
+                    field.val("NEW VALUE").change();
+                    jqUnit.assertEquals("New value of the exitNumber field is", "NEW VALUE", field.val());
+                    recordEditor.events.onCancel.fire();
+                },
+                once: true
+            }
+        },
+        "Test delete-confirmation text - media and related": {
+            testType: "asyncTest",
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                events: {
+                    afterRemove: "preventable"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "Delete this Object Exit  and its relationships?",
+                            recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                    });
+                    recordEditor.events.onRemove.fire();
+                },
+                start: true
+            }
         }
     };
 
     var testRunner = function (testsConfig) {
         fluid.each(testsConfig, function (config, testName) {
             recordEditorTest[config.testType](testName, function () {
+                if (config.expect) {
+                    expect(config.expect);
+                }
                 var listeners = {};
-                fluid.each(["afterRecordRender", "afterRemove"], function (eventName) {
-                    var test = config[eventName + "Test"];
+                fluid.each(["afterRecordRender", "afterRemove", "onCancel"], function (eventName) {
+                    var testName = eventName + "Test",
+                        test = config[testName];
                     if (!test) {
                         return;
                     }
@@ -219,7 +284,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     if (test.priority) {
                         listeners[eventName].priority = test.priority;
                     }
+                    if (test.once) {
+                        listeners[eventName].namespace = testName;
+                    }
                     listeners[eventName].listener = function (recordEditor) {
+                        if (test.once) {
+                            recordEditor.events[eventName].removeListener(testName);
+                        }
                         if (typeof test === "function") {
                             test(recordEditor);
                         } else {
@@ -243,40 +314,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     testRunner(testConfig);
-
-    /*
-    recordEditorTest.asyncTest("Rollback test", function () {
-        var model = {
-            csid: "123.456.789",
-            fields: {
-                testField: "TEST"
-            }
-        };
-        var field = ".csc-test-1";
-        var uispec = {};
-        uispec[field] = "${fields.testField}";
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            uispec: uispec,
-            recordType: "cataloging"
-        }, function (re) {
-            re.events.afterRender.removeListener("initialRender");
-            fluid.log("RETest: afterRender");
-            jqUnit.assertEquals("Original value of the field is", "TEST", jQuery(field).val());
-            jQuery(field).val("NEW VALUE").change();
-            jqUnit.assertEquals("New value of the field is", "NEW VALUE", jQuery(field).val());
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("The value of the field should still be", "NEW VALUE", jQuery(field).val());
-                re.confirmation.confirmationDialog.locate("proceed").click();
-            });
-            re.globalNavigator.events.onPerformNavigation.fire(function () {
-                jqUnit.assertEquals("The value of the field should roll back to", "TEST", jQuery(field).val());
-                start();
-            });
-        });
-    });
-
+/*
     recordEditorTest.asyncTest("Test delete-confirmation text - media and related", function () {
          var model = {
             csid: "somecsid",
