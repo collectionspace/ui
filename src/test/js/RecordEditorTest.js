@@ -65,7 +65,74 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         selectors: {
             recordEditor: "#main"
         },
+        schema: ["objectexit", "namespaces", "recordtypes", "recordlist"],
         preInitFunction: "cspace.pageBuilder.preInit"
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", "cspace.test", {
+        options: fluid.COMPONENT_OPTIONS
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", ["cspace.test", "cspace.testMedia"], {
+        options: {
+            recordType: "media"
+        }
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", ["cspace.test", "cspace.testPerson"], {
+        options: {
+            recordType: "person"
+        }
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", ["cspace.test", "cspace.testReadOnly"], {
+        options: {
+            readOnly: true
+        }
+    });
+
+    fluid.demands("cspace.pageBuilder", ["cspace.pageBuilderIO", "cspace.testPerson"], {
+        options: {
+            schema: ["person", "namespaces", "recordtypes", "recordlist"],
+            resources: {
+                person: cspace.resourceSpecExpander({
+                    url: "%test/uischema/%schemaName.json",
+                    fetchClass: "testResource",
+                    options: {
+                        dataType: "json"
+                    }
+                }),
+                uispec: cspace.resourceSpecExpander({
+                    url: "%test/uispecs/person.json",
+                    fetchClass: "testResource",
+                    options: {
+                        dataType: "json"
+                    }
+                })
+            }
+        }
+    });
+
+    fluid.demands("cspace.pageBuilder", ["cspace.pageBuilderIO", "cspace.testMedia"], {
+        options: {
+            schema: ["media", "namespaces", "recordtypes", "recordlist"],
+            resources: {
+                media: cspace.resourceSpecExpander({
+                    url: "%test/uischema/%schemaName.json",
+                    fetchClass: "testResource",
+                    options: {
+                        dataType: "json"
+                    }
+                }),
+                uispec: cspace.resourceSpecExpander({
+                    url: "%test/uispecs/media.json",
+                    fetchClass: "testResource",
+                    options: {
+                        dataType: "json"
+                    }
+                })
+            }
+        }
     });
 
     cspace.pageBuilder.preInit = function (that) {
@@ -74,7 +141,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.fetchResources(that.options.resources, function (resources) {
             that.schema = {};
-            fluid.each(["objectexit", "namespaces", "recordtypes", "recordlist"], function (schemaName) {
+            fluid.each(that.options.schema, function (schemaName) {
                 that.schema[schemaName] = resources[schemaName].resourceText[schemaName];
             });
             that.options.uispec = resources.uispec.resourceText;
@@ -96,17 +163,69 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     }});
 
-    var setupRecordEditor = function (options) {
-        var instantiator = recordEditorTest.instantiator;
-        if (recordEditorTest.recordEditor) {
-            instantiator.clearComponent(recordEditorTest, "recordEditor");
+    var recordEditorMediaTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        testMedia: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.testMedia"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
         }
-        recordEditorTest.options.components["recordEditor"] = {
+    }});
+
+    var recordEditorPersonTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        testPerson: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.testPerson"
+            }
+        },
+        authority: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.authority"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
+    var recordEditorReadonlyTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        testReadOnly: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.testReadOnly"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
+    var setupRecordEditor = function (options, testEnv) {
+        testEnv = testEnv || recordEditorTest;
+        var instantiator = testEnv.instantiator;
+        if (testEnv.recordEditor) {
+            instantiator.clearComponent(testEnv, "recordEditor");
+        }
+        testEnv.options.components["recordEditor"] = {
             type: "cspace.recordEditor",
             options: fluid.merge(null, options, {})
         };
         fluid.fetchResources({}, function () {
-            fluid.initDependent(recordEditorTest, "recordEditor", instantiator);
+            fluid.initDependent(testEnv, "recordEditor", instantiator);
         }, {amalgamateClasses: ["testResource"]});
     };
 
@@ -241,6 +360,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Test delete-confirmation text - media and related": {
             testType: "asyncTest",
+            expect: 1,
             recordEditorOptions: {
                 selectors: {
                     identificationNumber: ".csc-objectexit-exitNumber"
@@ -264,12 +384,92 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 start: true
             }
+        },
+        "Test delete-confirmation text - media only": {
+            testType: "asyncTest",
+            testEnv: recordEditorMediaTest,
+            expect: 1,
+            recordEditorOptions: {
+                fieldsToIgnore: ["csid", "fields.csid", "fields.identificationNumber"],
+                selectors: {
+                    "identificationNumber": ".csc-media-identificationNumber"
+                },
+                originalMediaDimensions: {
+                    width: "800",
+                    height: "600"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                model: {
+                    csid: "5a03b49b-7861-4ff9-a73d"
+                }
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "Delete this Media Handling and its attached media ?", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                    });
+                    recordEditor.events.onRemove.fire();
+                },
+                start: true
+            }
+        },
+        "Test delete-confirmation text - no media and no related": {
+            testType: "asyncTest",
+            expect: 1,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                events: {
+                    afterRemove: "preventable"
+                },
+                model: {
+                    csid: "ba97ae73-1016-4c62-b4eb"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "Delete this Object Exit  ?",
+                            recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                    });
+                    recordEditor.events.onRemove.fire();
+                },
+                start: true
+            }
+        },
+        "Test cannot delete-confirmation text - record is used by other records. Record of type person": {
+            testType: "asyncTest",
+            expect: 1,
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"],
+                model: {
+                    csid: "a8d3d7c1-9e51-4151-8ffe"
+                }
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It is used by other records.", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                    });
+                    recordEditor.events.onRemove.fire();
+                },
+                start: true
+            }
         }
     };
 
     var testRunner = function (testsConfig) {
         fluid.each(testsConfig, function (config, testName) {
-            recordEditorTest[config.testType](testName, function () {
+            var testEnv = config.testEnv || recordEditorTest;
+            testEnv[config.testType](testName, function () {
                 if (config.expect) {
                     expect(config.expect);
                 }
@@ -297,9 +497,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             test.test(recordEditor);
                         }
                         if (config.testType === "test") {return;}
-                        if (test.start) {
-                            start();
-                        }
+                        if (test.start) {start();}
                         if (test.prevent) {
                             return false;
                         }
@@ -308,142 +506,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 var options = fluid.merge(null, {
                     listeners: listeners
                 }, config.recordEditorOptions);
-                setupRecordEditor(options);
+                setupRecordEditor(options, testEnv);
             });
         });
     };
 
     testRunner(testConfig);
 /*
-    recordEditorTest.asyncTest("Test delete-confirmation text - media and related", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {
-                cataloging: "etc"
-            },
-            fields: {
-                blobCsid: "abcdefg"
-            }
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its attached media and its relationships?", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-
-    recordEditorTest.asyncTest("Test delete-confirmation text - media only", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {
-                blobCsid: "abcdefg"
-            }
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-
-    recordEditorTest.asyncTest("Test delete-confirmation text - related only", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {
-                cataloging: "etc"
-            },
-            fields: {}
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its relationships?", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-
-    recordEditorTest.asyncTest("Test delete-confirmation text - no media and no related", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {}
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging?", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-    
-    /////
-    // This test block is responsible for record Deletion tests of the records which potentially could be used by other records
-    /////
-    // Test for the removal of the record which is referenced somewhere else but it is not Person/Location/Organization  
-    recordEditorTest.asyncTest("Test cannot delete-confirmation text - record is used by other records. Not Person/Location/Organization", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {},
-            refobjs: [
-                {someobj: "This record "}
-            ]
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "cataloging"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertNotEquals("Checking correct text: ", "This Cataloging record can not be removed. It is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
     
     // Test for the removal of the record which is referenced somewhere else and it is a Person  
     recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record is used by other records. Record of type person", function () {

@@ -1,0 +1,135 @@
+{
+    "csid": "5a03b49b-7861-4ff9-a73d",
+    "fields": {
+        "subjects": [
+            {
+                "_primary": true,
+                "subject": ""
+            }
+        ],
+        "blobCsid": "7d44c723-226b-4c4b-b3df",
+        "csid": "5a03b49b-7861-4ff9-a73d",
+        "updatedBy": "admin@core.collectionspace.org",
+        "updatedAt": "2012-09-04T14:56:35Z",
+        "languages": [
+            {
+                "_primary": true,
+                "language": "eng"
+            }
+        ],
+        "title": "Test Media",
+        "createdBy": "admin@core.collectionspace.org",
+        "relations": [
+            {
+                "_primary": true,
+                "relation": ""
+            }
+        ],
+        "createdAt": "2012-09-04T14:56:35Z",
+        "dateGroup": [
+            {
+                "dateEarliestSingleQualifier": "",
+                "scalarValuesComputed": "true",
+                "dateLatestYear": "",
+                "dateLatestDay": "",
+                "dateAssociation": "",
+                "dateEarliestSingleEra": "",
+                "dateDisplayDate": "",
+                "dateEarliestSingleCertainty": "",
+                "dateLatestEra": "",
+                "dateEarliestSingleQualifierValue": "",
+                "dateLatestCertainty": "",
+                "dateEarliestSingleYear": "",
+                "dateLatestQualifier": "",
+                "dateLatestQualifierValue": "",
+                "dateEarliestSingleQualifierUnit": "",
+                "datePeriod": "",
+                "dateEarliestScalarValue": "",
+                "_primary": true,
+                "dateLatestMonth": "",
+                "dateNote": "",
+                "dateLatestScalarValue": "",
+                "dateLatestQualifierUnit": "",
+                "dateEarliestSingleDay": "",
+                "dateEarliestSingleMonth": ""
+            }
+        ],
+        "measuredPartGroup": [
+            {
+                "_primary": true,
+                "dimensionSummary": "",
+                "measuredPart": "",
+                "dimensionSubGroup": [
+                    {
+                        "_primary": true,
+                        "measuredBy": "",
+                        "dimension": "",
+                        "valueDate": "",
+                        "measurementUnit": "",
+                        "value": "",
+                        "valueQualifier": "",
+                        "measurementMethod": ""
+                    }
+                ]
+            }
+        ],
+        "blobs": [
+            {
+                "updatedAt": "2012-09-04T14:56:34Z",
+                "imgMedium": "http://nightly.collectionspace.org:8180/collectionspace/tenant/core/download/7d44c723-226b-4c4b-b3df/Medium",
+                "imgOrig": "http://nightly.collectionspace.org:8180/collectionspace/tenant/core/download/7d44c723-226b-4c4b-b3df/Original",
+                "createdBy": "admin@core.collectionspace.org",
+                "createdAt": "2012-09-04T14:56:34Z",
+                "name": "200px-Trollface.png",
+                "length": "12378",
+                "imgThumb": "http://nightly.collectionspace.org:8180/collectionspace/tenant/core/download/7d44c723-226b-4c4b-b3df/Thumbnail",
+                "measuredPartGroup": [
+                    {
+                        "_primary": true,
+                        "dimensionSummary": "The dimensions of a digital image -width, height, and pixel depth.",
+                        "measuredPart": "digitalImage",
+                        "dimensionSubGroup": [
+                            {
+                                "_primary": true,
+                                "measuredBy": "",
+                                "dimension": "width",
+                                "valueDate": "2012-09-04T14:56:34Z",
+                                "measurementUnit": "pixels",
+                                "value": "200",
+                                "valueQualifier": "",
+                                "measurementMethod": ""
+                            },
+                            {
+                                "measuredBy": "",
+                                "dimension": "height",
+                                "valueDate": "2012-09-04T14:56:34Z",
+                                "measurementUnit": "pixels",
+                                "value": "159",
+                                "valueQualifier": "",
+                                "measurementMethod": ""
+                            },
+                            {
+                                "measuredBy": "",
+                                "dimension": "depth",
+                                "valueDate": "2012-09-04T14:56:34Z",
+                                "measurementUnit": "bits",
+                                "value": "8",
+                                "valueQualifier": "",
+                                "measurementMethod": ""
+                            }
+                        ]
+                    }
+                ],
+                "mimeType": "image/png",
+                "updatedBy": "admin@core.collectionspace.org"
+            }
+        ],
+        "types": [
+            {
+                "_primary": true,
+                "type": ""
+            }
+        ],
+        "identificationNumber": "MR2012.1.1"
+    }
+}

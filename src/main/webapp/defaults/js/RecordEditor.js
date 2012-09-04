@@ -749,8 +749,8 @@ cspace = cspace || {};
         args: {
             targetTypeName: "cspace.recordEditor.remover.testRefobjsDataSource",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                csid: "%csid",
+                vocab: "%vocab"
             }
         }
     });
@@ -766,7 +766,7 @@ cspace = cspace || {};
         }
     });
     fluid.defaults("cspace.recordEditor.remover.testRefobjsDataSource", {
-        url: "%test/data/%recordType/refobjs/%csid.json"
+        url: "%test/data/%vocab/refobjs/%csid.json"
     });
     cspace.recordEditor.remover.testRefobjsDataSource = cspace.URLDataSource;
 
