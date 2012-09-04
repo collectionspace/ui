@@ -264,6 +264,80 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         },
+        "Creation of new record - media": {
+            testType: "asyncTest",
+            testEnv: recordEditorMediaTest,
+            recordEditorOptions: {
+                fieldsToIgnore: ["csid", "fields.csid", "fields.identificationNumber"],
+                selectors: {
+                    "identificationNumber": ".csc-media-identificationNumber"
+                },
+                originalMediaDimensions: {
+                    width: "800",
+                    height: "600"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor"
+            },
+            afterRecordRenderTest: {
+                start: true,
+                test: function (recordEditor) {
+                    jqUnit.assertValue("Record editor should be created", recordEditor);
+                    jqUnit.assertDeepEq("Model should be properly obtained using schema",
+                        cspace.util.getBeanValue({}, recordEditor.options.recordType,
+                        recordEditor.recordDataSource.options.schema), recordEditor.model);
+                    fluid.each(recordEditor.options.components, function (val, subcomponentName) {
+                        // This event is fired within the recordRenderer component.
+                        if ($.inArray(subcomponentName, ["recordRenderer", "readOnly", "recordEditorTogglable"]) > -1) {return;}
+                        jqUnit.assertValue(subcomponentName + " should be initialized", recordEditor[subcomponentName]);
+                    });
+                    fluid.each(recordEditor.options.uispec, function (val, selector) {
+                        if (!val.messagekey) {
+                            return;
+                        }
+                        var field = $(selector);
+                        if (field.length < 1) {
+                            return;
+                        }
+                        jqUnit.assertEquals("The record data should be rendered correctly", recordEditor.options.parentBundle.resolve(val.messagekey), field.text());
+                    });
+                }
+            }
+        },
+        "Creation of new record - person": {
+            testType: "asyncTest",
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"]
+            },
+            afterRecordRenderTest: {
+                start: true,
+                test: function (recordEditor) {
+                    jqUnit.assertValue("Record editor should be created", recordEditor);
+                    jqUnit.assertDeepEq("Model should be properly obtained using schema",
+                        cspace.util.getBeanValue({}, recordEditor.options.recordType,
+                        recordEditor.recordDataSource.options.schema), recordEditor.model);
+                    fluid.each(recordEditor.options.components, function (val, subcomponentName) {
+                        // This event is fired within the recordRenderer component.
+                        if ($.inArray(subcomponentName, ["recordRenderer", "readOnly", "recordEditorTogglable"]) > -1) {return;}
+                        jqUnit.assertValue(subcomponentName + " should be initialized", recordEditor[subcomponentName]);
+                    });
+                    fluid.each(recordEditor.options.uispec, function (val, selector) {
+                        if (!val.messagekey) {
+                            return;
+                        }
+                        var field = $(selector);
+                        if (field.length < 1) {
+                            return;
+                        }
+                        jqUnit.assertEquals("The record data should be rendered correctly", recordEditor.options.parentBundle.resolve(val.messagekey), field.text());
+                    });
+                }
+            }
+        },
         "Creation when the record exists": {
             testType: "asyncTest",
             recordEditorOptions: {
@@ -275,6 +349,36 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 uispec: "{pageBuilder}.options.uispec.recordEditor",
                 fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            afterRecordRenderTest: {
+                start: true,
+                test: function (recordEditor) {
+                    fluid.each(recordEditor.options.uispec, function (val, selector) {
+                        if (typeof val !== "string") {
+                            return;
+                        }
+                        var elPath = val.replace("${", "").replace("}", ""),
+                            field = $(selector);
+                        if (field.length < 1) {
+                            return;
+                        }
+                        jqUnit.assertEquals("The record data should be rendered correctly", fluid.get(recordEditor.model, elPath) || "", field.val());
+                    });
+                }
+            }
+        },
+        "Creation when the record exists - person": {
+            testType: "asyncTest",
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"],
+                model: {
+                    csid: "a8d3d7c1-9e51-4151-8ffe"
+                }
             },
             afterRecordRenderTest: {
                 start: true,
@@ -458,10 +562,122 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 test: function (recordEditor) {
                     recordEditor.confirmation.popup.bind("dialogopen", function () {
                         jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It is used by other records.", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                        start();
                     });
-                    recordEditor.events.onRemove.fire();
+                }
+            }
+        },
+        "Test delete-confirmation text - NO Narrower and NO Broader Contexts": {
+            testType: "asyncTest",
+            expect: 1,
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
                 },
-                start: true
+                events: {
+                    onHierarchy: null
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"],
+                model: {
+                    csid: "3c584a53-f5e0-4096-9681"
+                }
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "Delete this Person  ?", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                        start();
+                    });
+                }
+            }
+        },
+        "Test cannot delete-confirmation text - record has Narrower context.": {
+            testType: "asyncTest",
+            expect: 1,
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
+                },
+                events: {
+                    onHierarchy: null
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"],
+                model: {
+                    csid: "3c238b1b-1163-471c-98e4"
+                }
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Narrower Context.", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                        start();
+                    });
+                }
+            }
+        },
+        "Test cannot delete-confirmation text - record has Broader context.": {
+            testType: "asyncTest",
+            expect: 1,
+            testEnv: recordEditorPersonTest,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-personAuthority-termDisplayName"
+                },
+                events: {
+                    onHierarchy: null
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.shortIdentifier"],
+                model: {
+                    csid: "dc25f99e-70fd-48a1-8907"
+                }
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    recordEditor.confirmation.popup.bind("dialogopen", function () {
+                        jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Broader Context.", recordEditor.confirmation.confirmationDialog.locate("message:").text());
+                        start();
+                    });
+                }
+            }
+        },
+        "Record editor's fields to ignore (cloneAndStore)": {
+            testType: "asyncTest",
+            expect: 8,
+            recordEditorOptions: {
+                selectors: {
+                    identificationNumber: ".csc-objectexit-exitNumber"
+                },
+                events: {
+                    afterRemove: "preventable"
+                },
+                model: {
+                    csid: "aa643807-e1d1-4ca2-9f9b"
+                },
+                uispec: "{pageBuilder}.options.uispec.recordEditor",
+                fieldsToIgnore: ["csid", "fields.csid", "fields.exitNumber"]
+            },
+            afterRecordRenderTest: {
+                test: function (recordEditor) {
+                    fluid.each(recordEditor.options.fieldsToIgnore, function (fieldToIgnore) {
+                        jqUnit.assertValue("Model should contain fieldToIgnore", fluid.get(recordEditor.model, fieldToIgnore));
+                    });
+                    jqUnit.assertUndefined("Local storage should have nothing there", recordEditor.localStorage.get());
+                    recordEditor.cloner.copyAndStore();
+                    var modelToClone = recordEditor.localStorage.get();
+                    jqUnit.assertValue("Model to clone exists", modelToClone);
+                    fluid.each(recordEditor.options.fieldsToIgnore, function (fieldToIgnore) {
+                        jqUnit.assertUndefined("Ignored fields are removed", modelToClone[fieldToIgnore]);
+                    });
+                    // Clear
+                    recordEditor.localStorage.set();
+                },
+                start: true,
+                once: true
             }
         }
     };
@@ -474,7 +690,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     expect(config.expect);
                 }
                 var listeners = {};
-                fluid.each(["afterRecordRender", "afterRemove", "onCancel"], function (eventName) {
+                fluid.each(["afterRecordRender", "afterRemove", "onRemove", "onCancel"], function (eventName) {
                     var testName = eventName + "Test",
                         test = config[testName];
                     if (!test) {
@@ -512,146 +728,5 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     testRunner(testConfig);
-/*
-    
-    // Test for the removal of the record which is referenced somewhere else and it is a Person  
-    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record is used by other records. Record of type person", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {},
-            refobjs: [
-                {someobj: "This record "}
-            ]
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "person"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-    /////
-    // End of the test block
-    /////
-    
-    // Test if there is Narrower Context
-    recordEditorTestUsedBy.asyncTest("Test delete-confirmation text - NO Narrower and NO Broader Contexts", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {
-                broaderContext: "",
-                narrowerContexts: [ { _primary : 0} ]
-            },
-            refobjs: []
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "person"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Person?", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-    
-    // Test if there is Narrower Context
-    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record has Narrower context.", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {
-                broaderContext: "",
-                narrowerContexts: [ { narrowerContext : "some narrower context"} ]
-            },
-            refobjs: []
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "person"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Narrower Context.", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-    
-    // Test if there is Broader Context
-    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record has Broader context.", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {
-                broaderContext: "some stuff here",
-                narrowerContexts: [ ]
-            },
-            refobjs: []
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            recordType: "person"
-        }, function (re) {
-            fluid.log("RETest: afterRender");
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Broader Context.", re.confirmation.confirmationDialog.locate("message:").text());
-                start();
-            });
-            re.remove();
-        });
-    });
-
-    recordEditorTest.asyncTest("Record editor's fields to ignore (cloneAndStore)", function () {
-         var model = {
-            csid: "somecsid",
-            relations: {},
-            fields: {},
-            fieldToIgnore: "IGNORE"
-        };
-        setupRecordEditor({
-            model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            showDeleteButton: true,
-            applier: fluid.makeChangeApplier(model),
-            uispec: {},
-            fieldsToIgnore: ["fieldToIgnore"]
-        }, function (recordEditor) {
-            jqUnit.assertValue("Model should contain fieldToIgnore", recordEditor.model.fieldToIgnore);
-            jqUnit.assertUndefined("Local storage should have nothing there", recordEditor.localStorage.get());
-            recordEditor.cloneAndStore();
-            var modelToClone = recordEditor.localStorage.get();
-            jqUnit.assertValue("Model to clone exists", modelToClone);
-            jqUnit.assertUndefined("Ignored fields are removed", modelToClone.fieldToIgnore);
-            start();
-        });
-    });
-*/
 
 }());
