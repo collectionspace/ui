@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "summary": "Some owner",
+            "sourceFieldName": "currentOwner",
+            "summarylist": {
+                "docName": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Someowner1346774360758)'Some owner'",
+                "docType": "ObjectExit",
+                "sourceField": "objectexit_common:currentOwner",
+                "docId": "764024a6-18dd-491c-aa66",
+                "docNumber": "EX2012.1",
+                "uri": "objectexit/764024a6-18dd-491c-aa66"
+            },
+            "sourceFieldType": "ObjectExit",
+            "sourceFieldselector": "objectexit-currentOwner",
+            "csid": "764024a6-18dd-491c-aa66",
+            "number": "EX2012.1",
+            "recordtype": "objectexit"
+        }
+    ],
+    "pagination": {
+        "totalItems": "1",
+        "pageSize": "5",
+        "itemsInPage": "1",
+        "pageNum": "0"
+    }
+}

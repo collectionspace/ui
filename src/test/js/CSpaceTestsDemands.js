@@ -150,6 +150,47 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }
     });
+
+    fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.test"], {
+        container: "{arguments}.0",
+        mergeAllOptions: [{
+            model: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{cspace.recordEditor}.model",
+                            recordType: "{cspace.recordEditor}.options.recordType",
+                            vocab: "{vocab}"
+                        }
+                    }
+                }
+            }
+        }, "{arguments}.1"]
+    });
+
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.authority", "cspace.test"], {
+        options: {
+            selectors: {
+                hierarchy: ".csc-record-hierarchy"
+            },
+            selectorsToIgnore: "hierarchy",
+            components: {
+                hierarchy: {
+                    type: "cspace.hierarchy",
+                    container: "{recordRenderer}.dom.hierarchy",
+                    options: {
+                        uispec: "{pageBuilder}.options.uispec.hierarchy",
+                        listeners: {
+                            afterRender: "{recordEditor}.events.onRemove.fire"
+                        }
+                    },
+                    createOnEvent: "afterRender"
+                }
+            }
+        }
+    });
     
     fluid.demands("cspace.autocomplete.popup", ["cspace.autocomplete", "cspace.autocompleteTests"], {
         container: "{autocomplete}.popupElement",
