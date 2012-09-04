@@ -297,13 +297,16 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.cloner.preInit = function (that) {
+        that.copyAndStore = function () {
+            var modelToClone = fluid.copy(that.model);
+            fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
+                fluid.set(modelToClone, fieldPath);
+            });
+            that.localStorage.set(modelToClone);
+        };
         that.clone = function () {
             that.globalNavigator.events.onPerformNavigation.fire(function () {
-                var modelToClone = fluid.copy(that.model);
-                fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
-                    fluid.set(modelToClone, fieldPath);
-                });
-                that.localStorage.set(modelToClone);
+                that.copyAndStore();
                 var vocab = cspace.vocab.resolve({
                     model: that.model,
                     recordType: that.options.recordType,
@@ -749,8 +752,8 @@ cspace = cspace || {};
         args: {
             targetTypeName: "cspace.recordEditor.remover.testRefobjsDataSource",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                csid: "%csid",
+                vocab: "%vocab"
             }
         }
     });
@@ -766,7 +769,7 @@ cspace = cspace || {};
         }
     });
     fluid.defaults("cspace.recordEditor.remover.testRefobjsDataSource", {
-        url: "%test/data/%recordType/refobjs/%csid.json"
+        url: "%test/data/%vocab/refobjs/%csid.json"
     });
     cspace.recordEditor.remover.testRefobjsDataSource = cspace.URLDataSource;
 
