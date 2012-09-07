@@ -1340,7 +1340,7 @@ input[disabled]:hover, input[disabled]:hover    {
     overflow:hidden;}
 
 /*   styling the externalURL  */
-input[type="text"].cs-externalURL {
+input[type="text"].cs-externalURL, .cs-externalURL-parent input.cs-autocomplete-input, .info-pair .content tbody td.cs-externalURL-parent input.cs-autocomplete-input {
     width: 90%;
 }
 input[type="text"].cs-externalURL.cs-externalURL-error{

@@ -1,0 +1,181 @@
+{
+    "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Personwithbroader1346788624616)'Person with broader'",
+    "csid": "dc25f99e-70fd-48a1-8907",
+    "namespace": "person",
+    "fields": {
+        "relatedTerms": [
+            {
+                "_primary": true
+            }
+        ],
+        "personTermGroup": [
+            {
+                "middleName": "",
+                "termName": "",
+                "termSource": "",
+                "surName": "",
+                "termSourceID": "",
+                "termSourceNote": "",
+                "termLanguage": "",
+                "termPrefForLang": false,
+                "_primary": true,
+                "title": "",
+                "termDisplayName": "Person with broader",
+                "termType": "",
+                "initials": "",
+                "termStatus": "provisional",
+                "termQualifier": "",
+                "termSourceDetail": "",
+                "salutation": "dear",
+                "foreName": "",
+                "nameAdditions": ""
+            }
+        ],
+        "deathDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "true",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "contact": {
+            "updatedAt": "2012-09-04T19:57:04Z",
+            "faxNumberGroup": [
+                {
+                    "_primary": true,
+                    "faxNumber": "",
+                    "faxNumberType": ""
+                }
+            ],
+            "_subrecordcsid": "348d2d77-2cb2-4abd-92ee",
+            "createdBy": "admin@core.collectionspace.org",
+            "addressGroup": [
+                {
+                    "_primary": true,
+                    "addressStateOrProvince": "",
+                    "addressPostCode": "",
+                    "addressType": "",
+                    "addressCountry": "",
+                    "addressPlace1": "",
+                    "addressPlace2": "",
+                    "addressMunicipality": ""
+                }
+            ],
+            "createdAt": "2012-09-04T19:57:04Z",
+            "webAddressGroup": [
+                {
+                    "_primary": true,
+                    "webAddress": "",
+                    "webAddressType": ""
+                }
+            ],
+            "emailGroup": [
+                {
+                    "_primary": true,
+                    "emailType": "",
+                    "email": ""
+                }
+            ],
+            "telephoneNumberGroup": [
+                {
+                    "_primary": true,
+                    "telephoneNumberType": "",
+                    "telephoneNumber": ""
+                }
+            ],
+            "updatedBy": "admin@core.collectionspace.org"
+        },
+        "updatedBy": "admin@core.collectionspace.org",
+        "namespace": "person",
+        "shortIdentifier": "Personwithbroader1346788624616",
+        "nationalities": [
+            {
+                "_primary": true,
+                "nationality": ""
+            }
+        ],
+        "schoolsOrStyles": [
+            {
+                "_primary": true,
+                "schoolOrStyle": ""
+            }
+        ],
+        "termDisplayName": "Person with broader",
+        "createdAt": "2012-09-04T19:57:04Z",
+        "termStatus": "",
+        "narrowerContexts": [
+            {
+                "_primary": true
+            }
+        ],
+        "groups": [
+            {
+                "_primary": true,
+                "group": ""
+            }
+        ],
+        "recordtype": "person",
+        "occupations": [
+            {
+                "occupation": "",
+                "_primary": true
+            }
+        ],
+        "csid": "dc25f99e-70fd-48a1-8907",
+        "birthDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "true",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "updatedAt": "2012-09-04T19:57:04Z",
+        "urn": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Personwithbroader1346788624616)'Person with broader'",
+        "createdBy": "admin@core.collectionspace.org",
+        "broaderContext": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(test1346788621839)'test'",
+        "refName": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Personwithbroader1346788624616)'Person with broader'",
+        "authorityid": "831e1486-82a2-414b-b903",
+        "equivalentContexts": [
+            {
+                "_primary": true
+            }
+        ],
+        "refid": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Personwithbroader1346788624616)'Person with broader'"
+    }
+}
