@@ -60,15 +60,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
         });
         
-        // Admin demands
-        fluid.demands("admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.localData"], {
-            container: "{pageBuilder}.options.selectors.admin",
-            options: {
-                queryURL: "../../../../test/data/users/search.json",
-                recordType: "{pageBuilderIO}.options.recordType"
-            }
-        });
-        
         // Report Producer
         fluid.demands("cspace.reportProducer.reportTypesSource", ["cspace.reportProducer", "cspace.localData"], {
             funcName: "cspace.reportProducer.testReportTypesSource",

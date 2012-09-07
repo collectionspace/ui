@@ -1,240 +1,399 @@
 /*
 Copyright 2010 University of Toronto
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 ou may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
-"use strict";
+/*global jqUnit, cspace, fluid, start, expect*/
 
-var adminUsersTester = function () {
+(function () {
 
-    var testUISpec = {};
-    var schema = {};
-    fluid.fetchResources({
-        uispec: {
-            href: "../uispecs/users.json",
-            options: {
-                dataType: "json",
-                success: function (data) {
-                    testUISpec = data;
-                },
-                async: false
-            }
-        },
-        schema: {
-            href: "../uischema/users.json",
-            options: {
-                dataType: "json",
-                success: function (data) {
-                    schema = data;
-                },
-                async: false
-            }
+    "use strict";
+
+    var bareAdminTest = new jqUnit.TestCase("Admin Tests", function () {
+            $("#main").html(template);
+        }),
+        template;
+
+    jQuery.ajax({
+        url: "../../main/webapp/defaults/html/pages/Administration-users.html",
+        dataType: "html",
+        success: function (data) {
+            template = data;
         }
     });
-    
-    var baseTestOpts = {
-        recordType: "users",
-        uispec: testUISpec,
-        components: {
-            globalNavigator: {
-                type: "cspace.util.globalNavigator",
-            },
-            adminListEditor: {
+
+    // Stub for pageBuilderIO
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        schema: {
+            users: null
+        },
+        async: false,
+        recordType: "users"
+    });
+
+    fluid.defaults("cspace.pageBuilder", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        resources: {
+            users: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
                 options: {
-                    components: {
-                        detailsDC: {
-                            options: {
-                                schema: schema
-                            } 
-                        },
-                        details: {
-                            options: {
-                                navigationEventNamespace: "onPerformNavigationRecordEditor"
+                    dataType: "json"
+                }
+            }),
+            namespaces: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordtypes: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordlist: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            }),
+            uispec: cspace.resourceSpecExpander({
+                url: "%test/uispecs/users.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            })
+        },
+        selectors: {
+            admin: ".csc-admin-users"
+        },
+        schema: ["users", "namespaces", "recordtypes", "recordlist"],
+        preInitFunction: "cspace.pageBuilder.preInit"
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", "cspace.test", {
+        options: fluid.COMPONENT_OPTIONS
+    });
+
+    cspace.pageBuilder.preInit = function (that) {
+        fluid.each(that.options.resources, function (resource, name) {
+            resource.url = fluid.stringTemplate(resource.url, {schemaName: name});
+        });
+        fluid.fetchResources(that.options.resources, function (resources) {
+            that.schema = {};
+            fluid.each(that.options.schema, function (schemaName) {
+                that.schema[schemaName] = resources[schemaName].resourceText[schemaName];
+            });
+            that.options.uispec = resources.uispec.resourceText;
+        });
+    };
+
+    var adminTest = cspace.tests.testEnvironment({testCase: bareAdminTest, components: {
+        users: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.users"
+            }
+        },
+        userLogin: {
+            type: "cspace.util.login",
+            options: {
+                userId: "123123123",
+                csid: "123123123"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
+    var setupAdmin = function (options, testEnv) {
+        testEnv = testEnv || adminTest;
+        var instantiator = testEnv.instantiator;
+        if (testEnv.admin) {
+            instantiator.clearComponent(testEnv, "admin");
+        }
+        testEnv.options.components.admin = {
+            type: "cspace.admin",
+            container: "{pageBuilder}.options.selectors.admin",
+            options: fluid.merge(null, {
+                recordType: "{pageBuilderIO}.options.recordType",
+                produceTree: "cspace.admin.produceAdminUserTree",
+                selectors: {
+                    searchField: ".csc-user-searchField",
+                    searchNote: ".csc-users-searchNote",
+                    searchButton: ".csc-user-searchButton",
+                    unSearchButton: ".csc-user-unSearchButton",
+                    password: ".csc-user-password",
+                    passwordConfirm: ".csc-user-passwordConfirm",
+                    status: ".csc-user-status",
+                    statusLabel: ".csc-users-status-label"
+                },
+                selectorsToIgnore: ["recordEditor", "listView", "banner", "password", "passwordConfirm", "status", "statusLabel"],
+                invokers: {
+                    search: "cspace.admin.search",
+                    unSearch: "cspace.admin.unSearch",
+                    validate: "cspace.admin.validate"
+                },
+                preInitFunction: "cspace.admin.preInitUserAdmin",
+                userId: "{userLogin}.options.userId",
+                components: {
+                    passwordValidator: {
+                        type: "cspace.passwordValidator"
+                    },
+                    adminRecordEditor: {
+                        options: {
+                            uispec: "{pageBuilder}.options.uispec.details",
+                            showDeleteButton: {
+                                expander: {
+                                    type: "fluid.deferredInvokeCall",
+                                    func: "cspace.admin.isCurrentUser",
+                                    args: ["{userLogin}.options.csid", "{admin}.selectedRecordCsid"]
+                                }
+                            },
+                            listeners: {
+                                onSave: {
+                                    listener: "{admin}.onSave",
+                                    priority: "first"
+                                },
+                                "afterRecordRender.test": {
+                                    listener: "{admin}.processStatus"
+                                }
                             }
                         }
                     }
                 }
-            },
-            passwordValidator: {
-                type: "cspace.passwordValidator"
-            }
-        },
-        login: cspace.util.login(cspace.tests.userLogin),
-        queryURL: "../../../tenant/core/users/search?query=",
-        events: {
-            afterTreeRender: null,
-            afterSetup: null
-        },
-        selectorsToIgnore: ["searchField", "deleteButton", "searchButton", "unSearchButton", "userId", "email", "userName", "password", "passwordConfirm"],
-        selectors: {
-            searchField: ".csc-user-searchField",
-            deleteButton: ".csc-delete",
-            searchButton: ".csc-user-searchButton",
-            unSearchButton: ".csc-user-unSearchButton",
-            userId: ".csc-user-userID",
-            email: ".csc-user-email",
-            userName: ".csc-user-userName",
-            password: ".csc-user-password",
-            passwordConfirm: ".csc-user-passwordConfirm"
-        },
-        invokers: {
-            validate: {
-                funcName: "cspace.admin.validate",
-                args: ["{admin}.adminListEditor.messageBar", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
-            },
-            bindEvents: {
-                funcName: "cspace.admin.bindEventHandlers",
-                args: "{admin}"
-            }
-        },
-        finalInitFunction: "cspace.admin.finalInit"
+            }, options)
+        };
+        fluid.fetchResources({}, function () {
+            fluid.initDependent(testEnv, "admin", instantiator);
+        }, {amalgamateClasses: ["testResource"]});
     };
-    
+
+    var locateSelector = function (component, field) {
+        var uispec = component.options.uispec;
+        if (!uispec) {
+            return component.locate(field);
+        }
+        return fluid.find(uispec, function (valuebinding, selector) {
+            if (typeof valuebinding !== "string") {
+                return;
+            }
+            var elPath = valuebinding.replace("${", "").replace("}", ""),
+                elPath = elPath.split("."),
+                fieldd = elPath[elPath.length - 1];
+            if (field === fieldd) {
+                return $(selector, component.container);
+            }
+        });
+    };
+
     var testDataCreateUser = {
         email: "rj@dio.com",
         userName: "R J Dio",
         validPassword: "123456789",
         invalidPassword: "123"
     };
-    
-    cspace.tests.onTearDown = fluid.event.getEventFirer();
-    
-    cspace.tests.updateListUsers = function (that, searchField, callback) {
-        callback = (typeof callback === "function") ? callback : function (listModel) {
-            that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.list.options.elPaths.items] || listModel.results);
-            that.refreshView();
-        };
-        that.events.onListUpdate.fire();
-        var query = searchField.val();
-        that[query ? "listSearchSource" : "listSource"].get({
-            recordType: that.options.recordType
-        }, callback);
+
+    var changeDetails = function (admin, recordRenderer, confPassword) {
+        locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
+        locateSelector(recordRenderer, "screenName").val(testDataCreateUser.userName).change();
+        locateSelector(recordRenderer, "password").val(testDataCreateUser.validPassword).change();
+        locateSelector(admin, "passwordConfirm").val(testDataCreateUser[confPassword]).change();
     };
 
-    var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-admin-users");
-        cspace.tests.onTearDown.addListener(function (re) {
-            re.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
-            re.confirmation.popup.dialog("destroy").remove();
-        }, "tearDown");
-    }, cspace.tests.onTearDown.removeListener("tearDown"));
-    
-    fluid.defaults("cspace.tests.pageBuilderIO", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
-        recordType: "users"
-    });
-    var adminUsersTest = cspace.tests.testEnvironment({testCase: bareAdminUsersTest, components: {
-        pageBuilderIO: {
-            type: "cspace.tests.pageBuilderIO"
-        }
-    }});
-    
-    var changeDetails = function (adminUsersSelectors, testDataCreateUser, confPassword) {
-        jQuery(adminUsersSelectors.email).val(testDataCreateUser.email).change();
-        jQuery(adminUsersSelectors.userName).val(testDataCreateUser.userName).change();
-        jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
-        jQuery(adminUsersSelectors.passwordConfirm).val(confPassword).change();
-    };
-    
-    var basicAdminUsersSetup = function (callback, opts) {
-        var adminUsers;
-        var testOpts = fluid.copy(baseTestOpts);
-        fluid.merge(null, testOpts, opts);
-        fluid.model.setBeanValue(testOpts, "listeners", {
-            afterTreeRender: function () {
-                callback(adminUsers, adminUsers.adminListEditor, adminUsers.adminListEditor.details);
+    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Creation"], {
+        options: {
+            listeners: {
+                ready: function (admin) {
+                    var list = admin.adminListView.model.list;
+                    jqUnit.assertEquals("User list model should have right number of entries", 7, list.length);
+                    jqUnit.assertEquals("User list model should contain expected user", "Reader", list[1].screenName);
+                    jqUnit.assertEquals("Rendered table has 4 data rows visible", 7, admin.adminListView.locate("row").length);
+                    jqUnit.isVisible("banner is visible", admin.banner.container);
+                    jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
+                    jqUnit.notVisible("recordEditor is not visible", admin.locate("recordEditor"));
+                    start();
+                }
             }
-        });
-        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
-        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        adminUsers = cspace.admin(".csc-admin-users", testOpts);
+        }
+    });
+    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Click new user button"], {
+        options: {
+            listeners: {
+                ready: function (admin) {
+                    admin.locate("add").click();
+                }
+            },
+            components: {
+                adminRecordEditor: {
+                    options: {
+                        listeners: {
+                            "afterRecordRender.test": {
+                                listener: function (admin, recordRenderer) {
+                                    jqUnit.assertEquals("Email is blank", locateSelector(recordRenderer, "email").val(), "");
+                                    jqUnit.assertEquals("Full name is blank", locateSelector(recordRenderer, "screenName").val(), "");
+                                    jqUnit.assertEquals("Password is blank", admin.locate("password").val(), "");
+                                    jqUnit.assertEquals("Password confirm is blank", admin.locate("passwordConfirm").val(), "");
+                                    var controlPanels = fluid.renderer.getDecoratorComponents(admin.adminRecordEditor);
+                                    fluid.each(controlPanels, function (controlPanel) {
+                                        jqUnit.assertTrue("Delete button is disabled", controlPanel.locate("deleteButton").attr("disabled"));
+                                    })
+                                    jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
+                                    jqUnit.notVisible("banner is hidden", admin.banner.container);
+                                    jqUnit.isVisible("recordEditor is visible", admin.locate("recordEditor"));
+                                    start();
+                                },
+                                priority: "last",
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Save new user - successful save"], {
+        options: {
+            listeners: {
+                ready: function (admin) {
+                    admin.locate("add").click();
+                }
+            },
+            components: {
+                adminRecordEditor: {
+                    options: {
+                        listeners: {
+                            "onSave.test": {
+                                listener: function (admin) {
+                                    jqUnit.assertEquals("Model should be updated when about save - email", testDataCreateUser.email, admin.adminRecordEditor.model.fields.email);
+                                    jqUnit.assertEquals("Model should be updated when about save - userName", testDataCreateUser.userName, admin.adminRecordEditor.model.fields.screenName);
+                                    jqUnit.assertEquals("Model should be updated when about save - password", testDataCreateUser.validPassword, admin.adminRecordEditor.model.fields.password);
+                                    start();
+                                    return false;
+                                },
+                                priority: "first"
+                            },
+                            "afterRecordRender.test": {
+                                listener: function (admin, recordRenderer) {
+                                    changeDetails(admin, recordRenderer, "validPassword");
+                                    admin.adminRecordEditor.events.onSave.fire();
+                                },
+                                priority: "last",
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Save new user - empty form field"], {
+        options: {
+            listeners: {
+                ready: function (admin) {
+                    admin.locate("add").click();
+                }
+            },
+            components: {
+                adminRecordEditor: {
+                    options: {
+                        listeners: {
+                            "onSave.test": {
+                                listener: function (admin) {
+                                    jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
+                                    admin.adminListView.messageBar.hide();
+                                    start();
+                                },
+                                priority: "last"
+                            },
+                            "afterRecordRender.test": {
+                                listener: function (admin, recordRenderer) {
+                                    changeDetails(admin, recordRenderer, "validPassword");
+                                    locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
+                                    admin.adminRecordEditor.events.onSave.fire();
+                                },
+                                priority: "last",
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    var testConfig = {
+        "Creation": {
+            testType: "asyncTest"
+        },
+        "Click new user button": {
+            testType: "asyncTest"
+        },
+        "Save new user - successful save": {
+            testType: "asyncTest"
+        },
+        "Save new user - empty form field": {
+            testType: "asyncTest"
+        }
     };
-    
-    var setupSaveNewUserInvalidPassword = function (confPassword, message) {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            le.events.afterAddNewListRow.addListener(function () {
-                changeDetails(adminUsers.options.selectors, testDataCreateUser, confPassword);
-                var saveResult = re.requestSave();
-                jqUnit.assertFalse("details.save returns false if " + message, saveResult);
-                jqUnit.isVisible("message container is visible", le.messageBar.container);
-                cspace.tests.onTearDown.fire(re);
-                start();
+
+    fluid.each(["ready", "onSelect"], function (eventName) {
+        fluid.demands(eventName, ["cspace.admin", "cspace.test"], {
+            args: ["{cspace.admin}"]
+        });
+    });
+    fluid.demands("afterRecordRender", ["cspace.admin", "cspace.test"], {
+        args: ["{cspace.admin}", "{arguments}.0"]
+    });
+
+    fluid.demands("onSave", ["cspace.admin", "cspace.test"], {
+        args: ["{cspace.admin}"]
+    });
+
+    var testRunner = function (testsConfig) {
+        fluid.each(testsConfig, function (config, testName) {
+            var testEnv = config.testEnv || adminTest;
+            testEnv[config.testType](testName, function () {
+                var instantiator = testEnv.instantiator;
+                if (testEnv.testContext) {
+                    instantiator.clearComponent(testEnv, "testContext");
+                }
+                testEnv.options.components.testContext = {
+                    type: "fluid.typeFount",
+                    options: {
+                        targetTypeName: testName
+                    }
+                };
+                fluid.initDependent(testEnv, "testContext", instantiator);
+                setupAdmin(config.adminOptions, testEnv);
             });
-            le.locate("addNewListRowButton").click();
         });
     };
-    
-    adminUsersTest.asyncTest("Creation", function () {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            var list =le.list.model.items;
-            var selectors = le.options.selectors;
-            jqUnit.assertEquals("User list model should have right number of entries", 4, list.length);
-            jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", list[1].screenName);
-            jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, le.list.locate("row").length);
-            jqUnit.notVisible("message container is hidden", le.messageBar.container);
-            jqUnit.isVisible("details none is visible", selectors.detailsNone);
-            jqUnit.notVisible("details is not visible", selectors.details);
-            jqUnit.notVisible("hide on edit is visible", selectors.hideOnEdit);
-            jqUnit.notVisible("new list row is hidden", le.list.options.selectors.newRow);
-            cspace.tests.onTearDown.fire(re);
-            start();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Click new user button", function () {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            var selectors = le.options.selectors;
-            le.events.afterShowDetails.addListener(function () {
-                jqUnit.assertEquals("Email is blank", adminUsers.locate("email").val(), "");
-                jqUnit.assertEquals("Full name is blank", adminUsers.locate("userName").val(), "");
-                jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
-                jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
-                jqUnit.assertTrue("Delete button is disabled", re.locate("deleteButton").attr("disabled"));
-                jqUnit.notVisible("message container is hidden", le.messageBar.container);
-                jqUnit.notVisible("details none is hidden", selectors.detailsNone);
-                jqUnit.isVisible("details is visible", selectors.details);
-                jqUnit.isVisible("hide on edit is visible", selectors.hideOnEdit);
-                jqUnit.isVisible("new list row is visible", le.list.options.selectors.newRow);
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            le.locate("addNewListRowButton").click();
-        });
-    });
-        
-    adminUsersTest.asyncTest("Save new user - successful save - save function returns true", function () {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            le.events.afterAddNewListRow.addListener(function () {
-                changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
-                var preSaveResult = re.events.onSave.fire(re.model);
-                jqUnit.assertNotEquals("details.save returns true for successful save", preSaveResult, false);
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            le.locate("addNewListRowButton").click();
-        });
-    });  
-    
-    adminUsersTest.asyncTest("Save new user - empty form field - expect save to return false", function () {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            le.events.afterAddNewListRow.addListener(function () {
-                changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
-                adminUsers.locate("email").val("").change();
-                var saveResult = re.requestSave();
-                jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
-                jqUnit.isVisible("message container is visible", le.messageBar.container);
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            le.locate("addNewListRowButton").click();
-        });
-    });
+
+    testRunner(testConfig);
+
+}());
+/*
     
     adminUsersTest.asyncTest("Save new user - mismatched passwords - expect save to return false", function () {
         setupSaveNewUserInvalidPassword("1234567890", "passwords do not match");
@@ -488,3 +647,4 @@ var adminUsersTester = function () {
 jQuery(document).ready(function () {
     adminUsersTester();
 });
+*/

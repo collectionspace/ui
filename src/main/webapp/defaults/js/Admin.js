@@ -65,7 +65,10 @@ cspace = cspace || {};
                         onSelect: "{admin}.events.onSelect"
                     },
                     listeners: {
-                        ready: "{loadingIndicator}.events.hideOn.fire",
+                        ready: [
+                            "{loadingIndicator}.events.hideOn.fire",
+                            "{admin}.events.ready.fire"
+                        ],
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
                         afterUpdate: "{loadingIndicator}.events.hideOn.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
@@ -113,6 +116,7 @@ cspace = cspace || {};
             }
         },
         events: {
+            ready: null,
             onSelect: null,
             onCreateNewRecord: null,
             recordEditorReady: null
