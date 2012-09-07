@@ -181,23 +181,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         container: "body"
     });
     
-    // search demands
-    fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
-       container: "{searchToRelateDialog}.container",
-       options: {
-           strings: {
-                errorMessage: "{globalBundle}.messageBase.search-errorMessage",
-                resultsCount: "{globalBundle}.messageBase.search-resultsCount",
-                looking: "{globalBundle}.messageBase.search-looking",
-                selected: "{globalBundle}.messageBase.search-selected",
-                number: "{globalBundle}.messageBase.search-number",
-                summary: "{globalBundle}.messageBase.search-summary",
-                recordtype: "{globalBundle}.messageBase.search-recordtype",
-                "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
-            }
-       }
-    });
-    
     // ListEditor demands
     fluid.demands("adminListEditor", ["cspace.userAdminTests", "cspace.admin", "cspace.localData", "cspace.test"], {
         container: "{admin}.container",

@@ -15,29 +15,41 @@ fluid.setLogging(false);
 
 var searchToRelateDialogTester = function () {
 
-    fluid.defaults("cspace.test.RelationManager", {
-        gradeNames: ["fluid.littleComponent", "autoInit"]
+    fluid.defaults("cspace.relationManager", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        related: "",
+        primary: ""
     });
+
+    fluid.demands("cspace.searchToRelateDialog", ["cspace.tests", "cspace.relationManager"], {
+        options: {
+            events: {
+                afterSetup: null
+            },
+            finalInitFunction: "cspace.searchToRelateDialog.testFinalInit"
+        }
+    });
+
+    cspace.searchToRelateDialog.testFinalInit = function (that) {
+        cspace.searchToRelateDialog.finalInit(that);
+        searchToRelateDialog = that;
+        that.events.afterSetup.fire(that);
+    };
 
     var searchToRelateDialog,
         bareSearchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests"),
         searchToRelateDialogTest = cspace.tests.testEnvironment({
             testCase: bareSearchToRelateDialogTest,
             components: {
-                RelationManager: {
-                    type: "cspace.test.RelationManager"
+                relationManager: {
+                    type: "cspace.relationManager"
                 }
             }
         }),
         createSearchToRelate = function (testScenario) {
             var testOpts = {},
                 testModel = {},
-                applier = fluid.makeChangeApplier(testModel),
-
-                // The dialog may now render synchronously - acquire its object reference using this listener
-                acquireDialogListener = function (dialog) {
-                    searchToRelateDialog = dialog;
-                };
+                applier = fluid.makeChangeApplier(testModel);
 
             fluid.merge(null, testOpts, {
                 related: testScenario.related,
@@ -50,9 +62,14 @@ var searchToRelateDialogTester = function () {
                     search: {
                         options: testScenario.searchOpts
                     }
-                }
+                },
+                events: {
+                    onAddRelation: null,
+                    onCreateNewRecord: null,
+                    afterSetup: null
+                },
+                finalInitFunction: "cspace.searchToRelateDialog.testFinalInit"
             }),
-            testOpts.listeners.afterSetup = [acquireDialogListener].concat(fluid.makeArray(testOpts.listeners.afterSetup));
             cspace.searchToRelateDialog("#main .csc-search-related-dialog", testOpts);
         },
         readAllPermissions = {
@@ -62,7 +79,12 @@ var searchToRelateDialogTester = function () {
         },
         readPermsTest = cspace.tests.testEnvironment({
             testCase: bareSearchToRelateDialogTest,
-            permissions: readAllPermissions
+            permissions: readAllPermissions,
+            components: {
+                relationManager: {
+                    type: "cspace.relationManager"
+                }
+            }
         }),
 
         testScenarios = {
@@ -85,7 +107,7 @@ var searchToRelateDialogTester = function () {
                                   searchToRelateDialog.options.related, searchToRelateDialog.search.model.searchModel.recordType);
                         },
                         afterSearch: function () {
-                            searchToRelateDialog.locate("closeButton").click();
+                            searchToRelateDialog.locate("closeButtonImg").click();
                             start();
                         }
                     }
@@ -119,7 +141,7 @@ var searchToRelateDialogTester = function () {
                             jqUnit.assertEquals("Search should be set up to search for the correct record type", "loanout", searchToRelateDialog.search.model.searchModel.recordType);
                         },
                         afterSearch: function () {
-                            searchToRelateDialog.locate("closeButton").click();
+                            searchToRelateDialog.locate("closeButtonImg").click();
                             start();
                         }
                     }
@@ -153,7 +175,7 @@ var searchToRelateDialogTester = function () {
                             jqUnit.isVisible("After clicking search, search results are visible", $(selectors.resultsContainer));
                             jqUnit.isVisible("After clicking search, search results count container is visible - http://issues.collectionspace.org/browse/CSPACE-2290", $(selectors.resultsCountContainer));
                             jqUnit.notVisible("After clicking search, 'looking' message should be hidden - http://issues.collectionspace.org/browse/CSPACE-2289", $(selectors.lookingContainer));
-                            searchToRelateDialog.locate("closeButton").click();
+                            searchToRelateDialog.locate("closeButtonImg").click();
                             start();
                         }
                     }
@@ -174,7 +196,7 @@ var searchToRelateDialogTester = function () {
                     listeners : {
                         onError : function () {
                             jqUnit.assertTrue("On error should be triggered", true);
-                            searchToRelateDialog.locate("closeButton").click();
+                            searchToRelateDialog.locate("closeButtonImg").click();
                             start();
                         }
                     }
@@ -190,13 +212,13 @@ var searchToRelateDialogTester = function () {
                         mainSearch.locate("recordTypeSelect").val("loanout").change();
                         mainSearch.locate("searchButton").click();
                     },
-                    addRelations: function (data) {
+                    onAddRelation: function (data) {
                         var items = data.items,
                             firstItem = items[0];
                         jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 1, items.length);
                         jqUnit.assertEquals("On creation of new relation, source recordType should be correct", "intake", firstItem.source.recordtype);
                         jqUnit.assertEquals("On creation of new relation, target recordType should be correct", "loanout", firstItem.target.recordtype);
-                        searchToRelateDialog.locate("closeButton").click();
+                        searchToRelateDialog.locate("closeButtonImg").click();
                         start();
                     }
                 },
@@ -218,7 +240,7 @@ var searchToRelateDialogTester = function () {
                         dialog.locate("recordType").val("intake");
                         dialog.search.mainSearch.locate("searchButton").click();
                     },
-                    addRelations: function (data) {
+                    onAddRelation: function (data) {
                         var items = data.items,
                             firstItem = items[0],
                             secondItem = items[1];
@@ -227,7 +249,7 @@ var searchToRelateDialogTester = function () {
                         jqUnit.assertEquals("On creation of new relation, first target recordType should be correct", "intake", firstItem.target.recordtype);
                         jqUnit.assertEquals("On creation of new relation, second source recordType should be correct", "movement", secondItem.source.recordtype);
                         jqUnit.assertEquals("On creation of new relation, second target recordType should be correct", "intake", secondItem.target.recordtype);
-                        searchToRelateDialog.locate("closeButton").click();
+                        searchToRelateDialog.locate("closeButtonImg").click();
                         start();
                     }
                 },
