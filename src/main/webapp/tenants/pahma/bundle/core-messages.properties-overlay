@@ -558,6 +558,9 @@ place-termSourceIDLabel: Source ID
 place-termSourceNoteLabel: Source note
 place-historicalStatusLabel: Historical status
 place-preferredPlaceLabel: Place Term(s)
+place-createdAtLabel: Created date
+place-createdAtStartLabel: Earliest
+place-createdAtEndLabel: Latest
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
