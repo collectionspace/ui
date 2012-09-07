@@ -285,6 +285,10 @@ person-deathPlaceLabel: Place of death
 person-identificationNumberRequired: Please specify a display name
 person-altNameNotesLabel: Alternate name notes
 person-groupsLabel: Cultural group
+person-createdAtLabel: Created date
+person-createdAtStartLabel: Earliest
+person-createdAtEndLabel: Latest
+
 
 # ---------------------------------- Contact -------------------------- #
 contact-telephoneNumberGroupLabel: Telephone number
