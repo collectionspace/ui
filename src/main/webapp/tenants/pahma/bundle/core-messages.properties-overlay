@@ -904,6 +904,10 @@ collection-object-viewersReferencesLabel: Viewer's reference
 collection-object-viewersPersonalExperienceLabel: Viewer's personal experience
 collection-object-viewersContributionNoteLabel: Viewer's contribution note
 
+collection-object-createdAtLabel: Created date
+collection-object-createdAtStartLabel: Earliest
+collection-object-createdAtEndLabel: Latest
+
 # ---------------- NAGPRA Claim ---------------- #
 claim-claimInformationLabel: NAGPRA Claim Information
 claim-claimNameLabel: Claim name
