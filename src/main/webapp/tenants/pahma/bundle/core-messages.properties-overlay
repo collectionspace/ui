@@ -312,6 +312,9 @@ acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
 acquisition-acquisitionSourcesLabel: Acquisition source
 acquisition-acquisitionSourceLabel: Acquisition source
+acquisition-createdAtLabel: Created date
+acquisition-createdAtStartLabel: Earliest
+acquisition-createdAtEndLabel: Latest
 
 # ---------------------------------- Object Collection Information (Acquisition) -------------------------- #
 acquisition-acquisitionProvisosLabel: Accession provisos
