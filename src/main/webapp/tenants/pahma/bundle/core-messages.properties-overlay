@@ -469,6 +469,9 @@ preferredSLA-termPrefForLangLabel: Pref for lang
 preferredSLA-termSourceDetailLabel: Source detail
 preferredSLA-termSourceNoteLabel: Source note
 location-preferredLocationLabel: Storage location term(s)
+location-createdAtLabel: Created date
+location-createdAtStartLabel: Earliest
+location-createdAtEndLabel: Latest
 
 #concept
 concept-scopeNoteLabel: Scope note
