@@ -2133,6 +2133,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 listeners: {
@@ -2154,6 +2155,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 listeners: {
@@ -2254,6 +2256,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 selectors: {
