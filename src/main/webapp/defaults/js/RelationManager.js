@@ -29,7 +29,8 @@ cspace = cspace || {};
         },
         produceTree: "cspace.relationManager.produceTree",
         strings: {
-            addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage"
+            addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage",
+            pleaseSaveFirst: "relationManager-pleaseSaveFirst"
         },
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
@@ -159,7 +160,7 @@ cspace = cspace || {};
             messageBar.hide();
             that.searchToRelateDialog.open();
         } else {
-            messageBar.show(that.options.parentBundle.resolve("relationManager-pleaseSaveFirst"), null, true);
+            messageBar.show(that.options.parentBundle.resolve(that.options.pleaseSaveFirst), null, true);
         }
     };
 
