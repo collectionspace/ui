@@ -33,6 +33,7 @@ cspace = cspace || {};
         selectorsToIgnore: "searchDialog",
         primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
+            globalBundle: "{globalBundle}",
             messageBar: "{messageBar}",
             // TODO: this should really not be a component but in fact it requires access to 
             // already merged option values and so cannot use an expander - also, the 
