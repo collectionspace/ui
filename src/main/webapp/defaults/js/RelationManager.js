@@ -28,7 +28,8 @@ cspace = cspace || {};
             addButton: "cs-add-related-record-button"
         },
         produceTree: "cspace.relationManager.produceTree",
-        strings: {
+        strings: {},
+        messageKeys: {
             addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage",
             pleaseSaveFirst: "relationManager-pleaseSaveFirst"
         },
@@ -109,11 +110,11 @@ cspace = cspace || {};
     cspace.relationManager.TestRelationDataSource = cspace.URLDataSource;
 
     cspace.relationManager.preInit = function (that) {
+        var options = that.options,
+            addRelationsFailedMessage = options.messageKeys.addRelationsFailedMessage;
+
         that.onAddRelation = function (relations) {
             that.relationDataSource.set(relations, null, function (data) {
-                var options = that.options,
-                    addRelationsFailedMessage = options.strings.addRelationsFailedMessage;
-
                 if (!data || data.isError) {
                     data.messages = data.messages || fluid.makeArray("");
                     fluid.each(data.messages, function (message) {
@@ -126,8 +127,6 @@ cspace = cspace || {};
             });
         };
         that.afterAddRelation = function () {
-            var options = that.options,
-                addRelationsFailedMessage = options.strings.addRelationsFailedMessage;
             that.messageBar.show(options.parentBundle.resolve(addRelationsFailedMessage), null, false);
         };
     };
@@ -155,12 +154,13 @@ cspace = cspace || {};
     };
 
     cspace.relationManager.add = function (that, messageBar, csid, event) {
+        var options = that.options;
         event.stopPropagation();
         if (csid) {
             messageBar.hide();
             that.searchToRelateDialog.open();
         } else {
-            messageBar.show(that.options.parentBundle.resolve(that.options.pleaseSaveFirst), null, true);
+            messageBar.show(options.parentBundle.resolve(options.messageKeys.pleaseSaveFirst), null, true);
         }
     };
 
