@@ -28,12 +28,13 @@ cspace = cspace || {};
             addButton: "cs-add-related-record-button"
         },
         produceTree: "cspace.relationManager.produceTree",
-        strings: {},
+        strings: {
+            addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage"
+        },
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
         primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
-            globalBundle: "{globalBundle}",
             messageBar: "{messageBar}",
             // TODO: this should really not be a component but in fact it requires access to 
             // already merged option values and so cannot use an expander - also, the 
@@ -109,19 +110,24 @@ cspace = cspace || {};
     cspace.relationManager.preInit = function (that) {
         that.onAddRelation = function (relations) {
             that.relationDataSource.set(relations, null, function (data) {
+                var options = that.options,
+                    addRelationsFailedMessage = options.strings.addRelationsFailedMessage;
+
                 if (!data || data.isError) {
                     data.messages = data.messages || fluid.makeArray("");
                     fluid.each(data.messages, function (message) {
                         message = message.message || message;
-                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-addRelationsFailedMessage", [message]), null, true);
+                        that.messageBar.show(options.parentBundle.resolve(addRelationsFailedMessage, [message]), null, true);
                     });
                     return;
                 }
-                that.events.afterAddRelation.fire(that.options.related);
+                that.events.afterAddRelation.fire(options.related);
             });
         };
         that.afterAddRelation = function () {
-            that.messageBar.show(that.options.parentBundle.resolve("relationManager-afterAddRelation"), null, false);
+            var options = that.options,
+                addRelationsFailedMessage = options.strings.addRelationsFailedMessage;
+            that.messageBar.show(options.parentBundle.resolve(addRelationsFailedMessage), null, false);
         };
     };
 
@@ -135,23 +141,25 @@ cspace = cspace || {};
         that.events.onSearchToRelateDialog.fire();
     };
 
-    cspace.relationManager.addFromTab = function (that, recordEditor, globalBundle, messageBar, csid, event) {
+    cspace.relationManager.addFromTab = function (that, recordEditor, messageBar, csid, event) {
+        var callback = function () {
+            cspace.relationManager.add(that, messageBar, csid, event);
+        };
+
         if (!recordEditor) {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
+            callback();
             return;
         }
-        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
-        });
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(callback);
     };
 
-    cspace.relationManager.add = function (that, globalBundle, messageBar, csid, event) {
+    cspace.relationManager.add = function (that, messageBar, csid, event) {
         event.stopPropagation();
         if (csid) {
             messageBar.hide();
             that.searchToRelateDialog.open();
         } else {
-            messageBar.show(globalBundle.resolve("relationManager-pleaseSaveFirst"), null, true);
+            messageBar.show(that.options.parentBundle.resolve("relationManager-pleaseSaveFirst"), null, true);
         }
     };
 
