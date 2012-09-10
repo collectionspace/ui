@@ -31,7 +31,8 @@ cspace = cspace || {};
         strings: {},
         messageKeys: {
             addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage",
-            pleaseSaveFirst: "relationManager-pleaseSaveFirst"
+            pleaseSaveFirst: "relationManager-pleaseSaveFirst",
+            afterAddRelation: "relationManager-afterAddRelation"
         },
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
@@ -111,7 +112,8 @@ cspace = cspace || {};
 
     cspace.relationManager.preInit = function (that) {
         var options = that.options,
-            addRelationsFailedMessage = options.messageKeys.addRelationsFailedMessage;
+            messageKeys = options.messageKeys,
+            resolve = options.parentBundle.resolve;
 
         that.onAddRelation = function (relations) {
             that.relationDataSource.set(relations, null, function (data) {
@@ -119,7 +121,7 @@ cspace = cspace || {};
                     data.messages = data.messages || fluid.makeArray("");
                     fluid.each(data.messages, function (message) {
                         message = message.message || message;
-                        that.messageBar.show(options.parentBundle.resolve(addRelationsFailedMessage, [message]), null, true);
+                        that.messageBar.show(resolve(messageKeys.addRelationsFailedMessage, [message]), null, true);
                     });
                     return;
                 }
@@ -127,7 +129,7 @@ cspace = cspace || {};
             });
         };
         that.afterAddRelation = function () {
-            that.messageBar.show(options.parentBundle.resolve(addRelationsFailedMessage), null, false);
+            that.messageBar.show(resolve(messageKeys.afterAddRelation), null, false);
         };
     };
 
