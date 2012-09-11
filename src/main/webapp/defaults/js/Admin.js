@@ -284,6 +284,7 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function search () {
+            that.events.onSearch.fire();
             if (that[recordEditor]) {
                 instantiator.clearComponent(that, recordEditor);
             }
@@ -292,6 +293,7 @@ cspace = cspace || {};
             fluid.initDependent(that, banner, instantiator);
             fluid.initDependent(that, listView, instantiator);
             that.locate("unSearchButton").show();
+            that.events.afterSearch.fire();
         }
         if (!globalNavigator) {
             search();
@@ -307,6 +309,7 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function unSearch () {
+            that.events.onUnSearch.fire();
             that.locate("searchField").val("").change();
             that.locate("unSearchButton").hide();
             if (that[recordEditor]) {
@@ -316,6 +319,7 @@ cspace = cspace || {};
             instantiator.clearComponent(that, listView);
             fluid.initDependent(that, banner, instantiator);
             fluid.initDependent(that, listView, instantiator);
+            that.events.afterUnSearch.fire();
         }
         if (!globalNavigator) {
             unSearch();

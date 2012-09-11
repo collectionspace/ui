@@ -149,6 +149,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     status: ".csc-user-status",
                     statusLabel: ".csc-users-status-label"
                 },
+                events: {
+                    onSearch: null,
+                    onUnSearch: null,
+                    afterSearch: null,
+                    afterUnSearch: null
+                },
                 selectorsToIgnore: ["recordEditor", "listView", "banner", "password", "passwordConfirm", "status", "statusLabel"],
                 invokers: {
                     search: "cspace.admin.search",
@@ -200,8 +206,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 return;
             }
             var elPath = valuebinding.replace("${", "").replace("}", ""),
-                elPath = elPath.split("."),
-                fieldd = elPath[elPath.length - 1];
+                fieldd;
+            elPath = elPath.split("."),
+            fieldd = elPath[elPath.length - 1];
             if (field === fieldd) {
                 return $(selector, component.container);
             }
@@ -222,142 +229,247 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         locateSelector(admin, "passwordConfirm").val(testDataCreateUser[confPassword]).change();
     };
 
-    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Creation"], {
-        options: {
-            listeners: {
-                ready: function (admin) {
-                    var list = admin.adminListView.model.list;
-                    jqUnit.assertEquals("User list model should have right number of entries", 7, list.length);
-                    jqUnit.assertEquals("User list model should contain expected user", "Reader", list[1].screenName);
-                    jqUnit.assertEquals("Rendered table has 4 data rows visible", 7, admin.adminListView.locate("row").length);
-                    jqUnit.isVisible("banner is visible", admin.banner.container);
-                    jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
-                    jqUnit.notVisible("recordEditor is not visible", admin.locate("recordEditor"));
-                    start();
-                }
-            }
-        }
-    });
-    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Click new user button"], {
-        options: {
-            listeners: {
-                ready: function (admin) {
-                    admin.locate("add").click();
-                }
-            },
-            components: {
-                adminRecordEditor: {
-                    options: {
-                        listeners: {
-                            "afterRecordRender.test": {
-                                listener: function (admin, recordRenderer) {
-                                    jqUnit.assertEquals("Email is blank", locateSelector(recordRenderer, "email").val(), "");
-                                    jqUnit.assertEquals("Full name is blank", locateSelector(recordRenderer, "screenName").val(), "");
-                                    jqUnit.assertEquals("Password is blank", admin.locate("password").val(), "");
-                                    jqUnit.assertEquals("Password confirm is blank", admin.locate("passwordConfirm").val(), "");
-                                    var controlPanels = fluid.renderer.getDecoratorComponents(admin.adminRecordEditor);
-                                    fluid.each(controlPanels, function (controlPanel) {
-                                        jqUnit.assertTrue("Delete button is disabled", controlPanel.locate("deleteButton").attr("disabled"));
-                                    })
-                                    jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
-                                    jqUnit.notVisible("banner is hidden", admin.banner.container);
-                                    jqUnit.isVisible("recordEditor is visible", admin.locate("recordEditor"));
-                                    start();
-                                },
-                                priority: "last",
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Save new user - successful save"], {
-        options: {
-            listeners: {
-                ready: function (admin) {
-                    admin.locate("add").click();
-                }
-            },
-            components: {
-                adminRecordEditor: {
-                    options: {
-                        listeners: {
-                            "onSave.test": {
-                                listener: function (admin) {
-                                    jqUnit.assertEquals("Model should be updated when about save - email", testDataCreateUser.email, admin.adminRecordEditor.model.fields.email);
-                                    jqUnit.assertEquals("Model should be updated when about save - userName", testDataCreateUser.userName, admin.adminRecordEditor.model.fields.screenName);
-                                    jqUnit.assertEquals("Model should be updated when about save - password", testDataCreateUser.validPassword, admin.adminRecordEditor.model.fields.password);
-                                    start();
-                                    return false;
-                                },
-                                priority: "first"
-                            },
-                            "afterRecordRender.test": {
-                                listener: function (admin, recordRenderer) {
-                                    changeDetails(admin, recordRenderer, "validPassword");
-                                    admin.adminRecordEditor.events.onSave.fire();
-                                },
-                                priority: "last",
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    fluid.demands("cspace.admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.test", "Save new user - empty form field"], {
-        options: {
-            listeners: {
-                ready: function (admin) {
-                    admin.locate("add").click();
-                }
-            },
-            components: {
-                adminRecordEditor: {
-                    options: {
-                        listeners: {
-                            "onSave.test": {
-                                listener: function (admin) {
-                                    jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
-                                    admin.adminListView.messageBar.hide();
-                                    start();
-                                },
-                                priority: "last"
-                            },
-                            "afterRecordRender.test": {
-                                listener: function (admin, recordRenderer) {
-                                    changeDetails(admin, recordRenderer, "validPassword");
-                                    locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
-                                    admin.adminRecordEditor.events.onSave.fire();
-                                },
-                                priority: "last",
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-
     var testConfig = {
         "Creation": {
-            testType: "asyncTest"
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var list = admin.adminListView.model.list;
+                        jqUnit.assertEquals("User list model should have right number of entries", 7, list.length);
+                        jqUnit.assertEquals("User list model should contain expected user", "Reader", list[1].screenName);
+                        jqUnit.assertEquals("Rendered table has 4 data rows visible", 7, admin.adminListView.locate("row").length);
+                        jqUnit.isVisible("banner is visible", admin.banner.container);
+                        jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
+                        jqUnit.notVisible("recordEditor is not visible", admin.locate("recordEditor"));
+                        start();
+                    }
+                }
+            }
         },
         "Click new user button": {
-            testType: "asyncTest"
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        jqUnit.assertEquals("Email is blank", locateSelector(recordRenderer, "email").val(), "");
+                        jqUnit.assertEquals("Full name is blank", locateSelector(recordRenderer, "screenName").val(), "");
+                        jqUnit.assertEquals("Password is blank", admin.locate("password").val(), "");
+                        jqUnit.assertEquals("Password confirm is blank", admin.locate("passwordConfirm").val(), "");
+                        var controlPanels = fluid.renderer.getDecoratorComponents(admin.adminRecordEditor);
+                        fluid.each(controlPanels, function (controlPanel) {
+                            jqUnit.assertTrue("Delete button is disabled", controlPanel.locate("deleteButton").attr("disabled"));
+                        });
+                        jqUnit.notVisible("message container is hidden", admin.adminListView.messageBar.container);
+                        jqUnit.notVisible("banner is hidden", admin.banner.container);
+                        jqUnit.isVisible("recordEditor is visible", admin.locate("recordEditor"));
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
         },
         "Save new user - successful save": {
-            testType: "asyncTest"
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        changeDetails(admin, recordRenderer, "validPassword");
+                        admin.adminRecordEditor.events.onSave.fire();
+                    },
+                    priority: "last"
+                },
+                "onSave.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin) {
+                        jqUnit.assertEquals("Model should be updated when about save - email", testDataCreateUser.email, admin.adminRecordEditor.model.fields.email);
+                        jqUnit.assertEquals("Model should be updated when about save - userName", testDataCreateUser.userName, admin.adminRecordEditor.model.fields.screenName);
+                        jqUnit.assertEquals("Model should be updated when about save - password", testDataCreateUser.validPassword, admin.adminRecordEditor.model.fields.password);
+                        start();
+                        return false;
+                    },
+                    priority: "first"
+                }
+            }
         },
         "Save new user - empty form field": {
-            testType: "asyncTest"
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        changeDetails(admin, recordRenderer, "validPassword");
+                        locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
+                        admin.adminRecordEditor.events.onSave.fire();
+                    },
+                    priority: "last"
+                },
+                "onSave.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin) {
+                        jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
+                        admin.adminListView.messageBar.hide();
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Save new user - mismatched passwords": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        changeDetails(admin, recordRenderer, "invalidPassword");
+                        jqUnit.assertFalse("validator fails", admin.validate());
+                        jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
+                        admin.adminListView.messageBar.hide();
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Save new user - invalid length passwords": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        changeDetails(admin, recordRenderer, "invalidPassword");
+                        locateSelector(admin, "passwordConfirm").val(testDataCreateUser.invalidPassword).change();
+                        jqUnit.assertFalse("validator fails", admin.validate());
+                        jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
+                        admin.adminListView.messageBar.hide();
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Valid edit of existing user: validation passes": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.locate("add").click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        changeDetails(admin, recordRenderer, "validPassword");
+                        admin.adminRecordEditor.events.onSave.fire();
+                    },
+                    priority: "last"
+                },
+                "onSave.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin) {
+                        jqUnit.assertTrue("validator fails", admin.validate());
+                        jqUnit.notVisible("message container is invisible", admin.adminListView.messageBar.container);
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Test search/unsearch functionality": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.events.ready.addListener(function () {
+                            admin.events.ready.removeListener("afterSearch");
+                            admin.events.ready.addListener(function () {
+                                start();
+                            });
+                            admin.locate("searchField").val("TEST").change();
+                            admin.locate("unSearchButton").click();
+                        }, "afterSearch");
+                        admin.locate("searchButton").click();
+                    },
+                    once: true
+                },
+                onUnSearch: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        jqUnit.isVisible("Unsearch button is available ", admin.locate("unSearchButton"));
+                        jqUnit.assertEquals("earch Field should be filled", "TEST", admin.locate("searchField").val());
+                        admin.events.ready.addListener(function () {
+                            start();
+                        });
+                    }
+                },
+                afterUnSearch: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        jqUnit.assertValue("list view component should be present", admin.adminListView);
+                        jqUnit.isVisible("banner is visible", admin.banner.container);
+                        jqUnit.assertValue("banner component should be present", admin.banner);
+                        jqUnit.notVisible("recordEditor is not visible", admin.locate("recordEditor"));
+                        jqUnit.assertNoValue("banner component should be present", admin.adminRecordEditor);
+                        jqUnit.notVisible("Unsearch button is not available ", admin.locate("unSearchButton"));
+                    }
+                },
+                onSearch: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        jqUnit.notVisible("Unsearch button is not available ", admin.locate("unSearchButton"));
+                    }
+                },
+                afterSearch: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        jqUnit.assertValue("list view component should be present", admin.adminListView);
+                        jqUnit.isVisible("banner is visible", admin.banner.container);
+                        jqUnit.assertValue("banner component should be present", admin.banner);
+                        jqUnit.notVisible("recordEditor is not visible", admin.locate("recordEditor"));
+                        jqUnit.assertNoValue("banner component should be present", admin.adminRecordEditor);
+                        jqUnit.isVisible("Unsearch button is available ", admin.locate("unSearchButton"));
+                    }
+                }
+            }
         }
     };
 
-    fluid.each(["ready", "onSelect"], function (eventName) {
+    fluid.each(["ready", "onSelect", "onSearch", "afterSearch", "onUnSearch", "afterUnSearch"], function (eventName) {
         fluid.demands(eventName, ["cspace.admin", "cspace.test"], {
             args: ["{cspace.admin}"]
         });
@@ -372,7 +484,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var testRunner = function (testsConfig) {
         fluid.each(testsConfig, function (config, testName) {
-            var testEnv = config.testEnv || adminTest;
+            var options = {},
+                testEnv = config.testEnv || adminTest;
+            fluid.each(config.listeners, function (listener, eventName) {
+                var listeners = fluid.get(options, listener.path),
+                    originalListener = listener.listener;
+                if (!listeners) {
+                    fluid.set(options, listener.path, {});
+                    listeners = fluid.get(options, listener.path);
+                }
+                if (listener.once) {
+                    listener.listener = function (admin) {
+                        admin.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
+                        originalListener(admin);
+                    };
+                }
+                listeners[eventName] = {
+                    listener: listener.listener,
+                    priority: listener.priority
+                };
+            });
             testEnv[config.testType](testName, function () {
                 var instantiator = testEnv.instantiator;
                 if (testEnv.testContext) {
@@ -385,7 +516,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 };
                 fluid.initDependent(testEnv, "testContext", instantiator);
-                setupAdmin(config.adminOptions, testEnv);
+                setupAdmin(options, testEnv);
             });
         });
     };
@@ -394,61 +525,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 }());
 /*
-    
-    adminUsersTest.asyncTest("Save new user - mismatched passwords - expect save to return false", function () {
-        setupSaveNewUserInvalidPassword("1234567890", "passwords do not match");
-    });  
-
-    adminUsersTest.asyncTest("Save new user - invalid length passwords - expect save to return false", function () {
-        setupSaveNewUserInvalidPassword(testDataCreateUser.invalidPassword, "passwords are invalid");
-    });    
-    
-    adminUsersTest.asyncTest("Valid edit of existing user: save should succeed", function () {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            le.events.afterShowDetails.addListener(function () {
-                le.events.afterShowDetails.removeListener("initialSelect");
-                re.options.dataContext.events.afterSave.addListener(function () {
-                    jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                    jqUnit.isVisible("message container is visible", le.messageBar.container);
-                    cspace.tests.onTearDown.fire(re);
-                    start();
-                });      
-                var saveResult = re.requestSave();
-            }, "initialSelect");
-            adminUsers.adminListEditor.list.locate("row").eq(2).click();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Test search/unsearch functionality", function () {
-        var adminUsers;
-        var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "queryURL", "../data/users/search.json");
-        fluid.model.setBeanValue(testOpts, "components.adminListEditor.options.listeners", {
-            "afterListUpdate.initalEvent": function () {
-                adminUsers.adminListEditor.events.afterListUpdate.removeListener("initalEvent");
-                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.adminListEditor.list.model.items.length);
-                jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
-                adminUsers.locate("searchField").val("test").change();
-                jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.locate("searchField").val());
-                adminUsers.adminListEditor.events.afterListUpdate.addListener(function () {
-                    adminUsers.adminListEditor.events.afterListUpdate.removeListener("afterListUpdate");
-                    jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
-                    jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.adminListEditor.list.model.items.length);
-                    adminUsers.adminListEditor.list.events.afterRender.addListener(function () {
-                        jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
-                        jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.adminListEditor.list.model.items.length);
-                        cspace.tests.onTearDown.fire(adminUsers.adminListEditor.details);
-                        start();
-                    });
-                    adminUsers.locate("unSearchButton").click();
-                }, "afterListUpdate");
-                adminUsers.locate("searchButton").click();
-            }
-        });
-        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
-        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        adminUsers = cspace.admin(".csc-admin-users", testOpts);
-    });
     
     var setupConfirmation = function (testFunc) {
         var waitMultiple;
