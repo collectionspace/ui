@@ -432,9 +432,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     listener: function (admin) {
                         jqUnit.isVisible("Unsearch button is available ", admin.locate("unSearchButton"));
                         jqUnit.assertEquals("earch Field should be filled", "TEST", admin.locate("searchField").val());
-                        admin.events.ready.addListener(function () {
-                            start();
-                        });
                     }
                 },
                 afterUnSearch: {
@@ -466,13 +463,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
+        },
+        "Confirmation": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                "afterRecordRender.test": {
+                    path: "components.adminRecordEditor.options.listeners",
+                    listener: function (admin, recordRenderer) {
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            jqUnit.isVisible("Confirmation dialog should now be visible", admin.adminRecordEditor.confirmation.popup);
+                            admin.adminRecordEditor.confirmation.confirmationDialog.events.onClose.fire();
+                            start();
+                        });
+                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                    },
+                    priority: "last"
+                }
+            }
         }
     };
 
-    fluid.each(["ready", "onSelect", "onSearch", "afterSearch", "onUnSearch", "afterUnSearch"], function (eventName) {
+    fluid.each(["ready", "onSearch", "afterSearch", "onUnSearch", "afterUnSearch"], function (eventName) {
         fluid.demands(eventName, ["cspace.admin", "cspace.test"], {
             args: ["{cspace.admin}"]
         });
+    });
+    fluid.demands("onSelect", ["cspace.admin", "cspace.test"], {
+        args: ["{arguments}.0", "{cspace.admin}"]
     });
     fluid.demands("afterRecordRender", ["cspace.admin", "cspace.test"], {
         args: ["{cspace.admin}", "{arguments}.0"]
@@ -480,6 +506,43 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.demands("onSave", ["cspace.admin", "cspace.test"], {
         args: ["{cspace.admin}"]
+    });
+
+    fluid.demands("cspace.recordEditor.dataSource", ["cspace.recordEditor", "cspace.admin", "cspace.users", "cspace.test"], {
+        options: {
+            finalInitFunction: "cspace.recordEditor.dataSource.finalInitUserAdmin",
+            preInitFunction: "cspace.recordEditor.dataSource.preInitUserAdmin",
+            csid: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.recordEditor.dataSource.resolveCsidTab",
+                    args: ["{recordEditor}.model.csid", "{recordEditor}.options.csid"]
+                }
+            },
+            urls: cspace.componentUrlBuilder({
+                recordURL: "%test/data/%recordType/%csid.json",
+                roleUrl: "%test/data/role/records.json"
+            }),
+            components: {
+                sourceRole: {
+                    type: "cspace.recordEditor.dataSource.sourceRole"
+                }
+            },
+            events: {
+                afterGetSource: null,
+                afterGetSourceRole: null,
+                afterGet: {
+                    events: {
+                        source: "{that}.events.afterGetSource",
+                        sourceRole: "{that}.events.afterGetSourceRole"
+                    },
+                    args: ["{arguments}.source.0", "{arguments}.source.1", "{arguments}.sourceRole.0"]
+                }
+            },
+            listeners: {
+                afterGet: "{that}.afterGet"
+            }
+        }
     });
 
     var testRunner = function (testsConfig) {
