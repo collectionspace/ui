@@ -3,13 +3,13 @@
         "options": {
             "recordType": "propagation",
             "schema": {
-                "loanin": null
+                "propagation": null
             },
             "pageSpec": {
                 "details": {
                     "href": "pages/PropagationTemplate.html",
                     "templateSelector": ".csc-propagation-template",
-                    "targetSelector": ".csc-relatedRecordsTab-loanin .csc-relatedRecordsTab-recordEditor"
+                    "targetSelector": ".csc-relatedRecordsTab-propagation .csc-relatedRecordsTab-recordEditor"
                 } 
             }
         }

@@ -290,3 +290,9 @@ propagation-fungicideLabel: Fungicide
 propagation-activityCommentsLabel: Comments
 propagation-germinationDateLabel: Germination/Rooting Date
 propagation-successRateLabel: Success Rate
+propagation-propDateStartLabel: Earliest
+propagation-propDateEndLabel: Latest
+propagation-updatedAtLabel: Updated At
+propagation-updatedAtStartLabel: Earliest
+propagation-updatedAtEndLabel: Latest
+propagation-updatedByLabel: Updated By
