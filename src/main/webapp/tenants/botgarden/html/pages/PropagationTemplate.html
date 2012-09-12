@@ -1,0 +1,323 @@
+<div class="csc-propagation-template csc-listEditor-details">
+    <div class="csc-propagation">
+        <div id="secondary-nav">		
+			<div id="secondary-nav-menu-sub">
+                <span class="csc-recordTraverser"></span>
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="time-stamp"> </div>
+			</div>
+		</div>
+		
+		<div class="csc-templateEditor"></div>
+        
+		<div class="fl-container-flex fl-fix information-group">			
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-propagation-propagationInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<span class="label required csc-propagation-propNumber-label"></span><span class="required">*</span>
+							<div class="content">
+							    <input type="text" class="csc-propagation-propNumber" />
+                            </div>
+                            <!-- <div class="content csc-propagation-propNumber-patternChooserContainer clearfix">
+                                <input type="text" class="input-numeric-long csc-propagation-propagationNumber pattern-chooser-input" />
+                            </div> -->
+						</div>
+					</div>
+
+					<div class="info-column2-50 fl-force-right">
+					    <div class="info-column2-50 fl-force-left">
+    						<div class="info-pair">
+    							<div class="header">
+    								<div class="label csc-propagation-propDate-label"></div>
+    							</div>
+    							<div class="content">
+    								<input type="text" class="csc-propagation-propDate" />
+    							</div>
+    						</div>
+    					</div>
+					    <div class="info-column2-50 fl-force-right">
+    						<div class="info-pair">
+    							<div class="header">
+    								<div class="label csc-propagation-propReason-label"></div>
+    							</div>
+    							<div class="content">
+    								<select class="csc-propagation-propReason input-select"><option value="">Options not loaded</option></select>
+    							</div>
+    						</div>
+    					</div>
+
+					</div>
+				</div>
+
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label csc-propagation-propType-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-propagation-propType input-select"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Seeds</div>
+                            </div>
+                            <div class="content">
+                                <div class="info-column csc-callout-group">
+                					<div class="info-column2-70 fl-force-left">
+                						<div class="info-pair-select">
+                							<div class="header">
+                								<div class="label csc-propagation-scarStrat-label"></div>
+                							</div>
+                							<div class="content">
+                								<select class="csc-propagation-scarStrat input-select"><option value="">Options not loaded</option></select>
+                							</div>
+                						</div>
+                					</div>
+                					<div class="info-column2-30 fl-force-right">
+                						<div class="info-pair">
+                							<div class="header">
+                								<div class="label csc-propagation-extraSeeds-label"></div>
+                							</div>
+                							<div class="content">
+                							    <input type="checkbox" class="csc-propagation-extraSeeds"/>
+                							</div>
+                						</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+					</div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-propagation-propComments-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-propagation-propComments" />
+							</div>
+						</div>					    
+					</div>
+				</div>
+				
+				<div class="info-column">
+    				<div class="info-pair">
+    				    <div class="header">
+    				        <div class="label">Cuttings</div>
+    				    </div>
+    				    <div class="content">
+            				<div class="info-column csc-callout-group">
+            					<div class="info-column2-25 fl-force-left">
+            						<div class="info-pair-select">
+            							<div class="header">
+            								<div class="label csc-propagation-cuttingType-label"></div>
+            							</div>
+            							<div class="content">
+            							    <select class="csc-propagation-cuttingType input-select"><option value="">Options not loaded</option></select>
+            							</div>
+            						</div>
+            					</div>
+            					<div class="info-column2-25 fl-force-left">
+            						<div class="info-pair-select">
+            							<div class="header">
+            								<div class="label csc-propagation-hormone-label"></div>
+            							</div>
+            							<div class="content">
+            							    <select class="csc-propagation-hormone input-select"><option value="">Options not loaded</option></select>
+            							</div>
+            						</div>
+            					</div>
+            					<div class="info-column2-25 fl-force-left">
+            						<div class="info-pair">
+            							<div class="header">
+            								<div class="label csc-propagation-concentration-label"></div>
+            							</div>
+            							<div class="content">
+            								<input type="text" class="csc-propagation-concentration"/>
+            							</div>
+            						</div>
+            					</div>
+            					<div class="info-column2-25 fl-force-left">
+            						<div class="info-pair">
+            							<div class="header">
+            								<div class="label csc-propagation-wounded-label"></div>
+            							</div>
+            							<div class="content">
+            								<input type="checkbox" class="csc-propagation-wounded"/>
+            							</div>
+            						</div>
+            					</div>
+            				</div>
+    				    </div>
+    				</div>
+				</div>
+				
+				<div class="info-column">
+				    <div class="info-pair">
+						<div class="header">
+							<div class="csc-propagation-propActivityGroup-label label"></div>
+						</div>
+						<div class="content">
+							<div class="info-column csc-propagation-propActivityGroup">
+								<div class="info-column">
+								    <div class="info-column2-10 fl-force-left">
+    									<div class="info-pair">
+    										<div class="header">
+    											<div class="csc-propagation-order-label label"></div>
+    										</div>
+    										<div class="content">
+    											<input type="text" class="csc-propagation-order"/>
+    										</div>
+    									</div>
+									</div>
+									<div class="info-column2-90 fl-force-right">
+    									<div class="info-column2-25 fl-force-left">
+        									<div class="info-pair">
+        										<div class="header">
+        											<div class="csc-propagation-activityDate-label label"></div>
+        										</div>
+        										<div class="content">
+        											<input type="text" class="csc-propagation-activityDate"/>
+        										</div>
+        									</div>
+        								</div>
+    									<div class="info-column2-25 fl-force-left">
+        									<div class="info-pair-select">
+        										<div class="header">
+        											<div class="csc-propagation-activityType-label label"></div>
+        										</div>
+        										<div class="content">
+        											<select class="csc-propagation-activityType input-select"><option value="">Options not loaded</option></select>
+        										</div>
+        									</div>
+    									</div>
+    									<div class="info-column2-25 fl-force-left">
+    										<div class="info-pair">
+        										<div class="header">
+        											<div class="csc-propagation-propCount-label label"></div>
+        										</div>
+        										<div class="content">
+        											<input type="text" class="csc-propagation-propCount"/>
+        										</div>
+        									</div>
+        								</div>
+        								<div class="info-column2-25 fl-force-left">
+        								    <div class="info-pair">
+        										<div class="header">
+        											<div class="csc-propagation-medium-label label"></div>
+        										</div>
+        										<div class="content">
+        											<input type="text" class="csc-propagation-medium"/>
+        										</div>
+        									</div>
+        								</div>
+                                    </div>
+    							</div>
+    							<div class="info-column">
+    							    <div class="info-column2-30 fl-force-left">
+    									<div class="info-pair-select">
+    										<div class="header">
+    											<div class="csc-propagation-potSize-label label"></div>
+    										</div>
+    										<div class="content">
+            							        <select class="csc-propagation-potSize input-select"><option value="">Options not loaded</option></select>
+    										</div>
+    									</div>
+    							    </div>
+    							    <div class="info-column2-30 fl-force-left">
+    									<div class="info-pair">
+    										<div class="header">
+    											<div class="csc-propagation-nurseryLocation-label label"></div>
+    										</div>
+    										<div class="content">
+    											<input type="text" class="csc-propagation-nurseryLocation"/>
+    										</div>
+    									</div>
+    							    </div>
+    							    <div class="info-column2-30 fl-force-left">
+    									<div class="info-pair">
+    										<div class="header">
+    											<div class="csc-propagation-conditions-label label"></div>
+    										</div>
+    										<div class="content">
+    											<input type="text" class="csc-propagation-conditions"/>
+    										</div>
+    									</div>
+    							    </div>
+    							</div>
+    							<div class="info-column">
+    							    <div class="info-column2-50 fl-force-left">
+    									<div class="info-pair-select">
+    										<div class="header">
+    											<div class="csc-propagation-fungicide-label label"></div>
+    										</div>
+    										<div class="content">
+            							        <select class="csc-propagation-fungicide input-select"><option value="">Options not loaded</option></select>
+    										</div>
+    									</div>
+    							    </div>
+    							    <div class="info-column2-50 fl-force-right">
+    									<div class="info-pair">
+    										<div class="header">
+    											<div class="csc-propagation-activityComments-label label"></div>
+    										</div>
+    										<div class="content">
+    											<input type="text" class="csc-propagation-activityComments"/>
+    										</div>
+    									</div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="info-column">
+					<div class="info-column2-25 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-propagation-germinationDate-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-propagation-germinationDate" />
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-25 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-propagation-successRate-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-propagation-successRate" />
+							</div>
+						</div>
+					</div>
+				</div>				
+				
+			</div>
+		</div>        
+
+        <div id="secondary-nav-footer">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

@@ -76,10 +76,27 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	
 .cs-repeatable-group .cs-repeatable-repeat ,
 .cs-repeatable-group .cs-repeatable-repeat ,
-.cs-repeatable-withSubgroup .cs-repeatable-repeat  {
+.cs-repeatable-withSubgroup .cs-repeatable-repeat,
+.csc-callout-group  {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
 	float: left;
+	margin: 0 0 20px 0;
+}
+
+.cs-repeatable-group .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-select,
+.cs-repeatable-group .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-select,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair-select,
+.csc-callout-group .info-pair, 
+.csc-callout-group .info-pair-date, 
+.csc-callout-group .info-pair-select {
+    margin: 5px 10px 10px 10px;
 }
 
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,

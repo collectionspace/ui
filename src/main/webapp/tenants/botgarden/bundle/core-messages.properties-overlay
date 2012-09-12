@@ -261,3 +261,32 @@ organization-contactNamesLabel: Contact/Chair
 organization-associatedPersonGroupLabel: Associated People
 organization-associatedPersonLabel: Person
 organization-associatedPersonRoleLabel: Role
+
+#propagation
+propagation: Propagation
+propagation-tab: Propagation
+propagation-propagationInformationLabel: Propagation Information
+propagation-propNumberLabel: Propagation ID
+propagation-propDateLabel: Propagation Date
+propagation-propReasonLabel: Reason for Propagation
+propagation-propTypeLabel: Propagation Type
+propagation-propCommentsLabel: Comments
+propagation-scarStratLabel: Scar/Stratification
+propagation-extraSeedsLabel: Extra Seeds?
+propagation-cuttingTypeLabel: Cutting Type
+propagation-hormoneLabel: Hormone
+propagation-concentrationLabel: Concentration
+propagation-woundedLabel: Wounded?
+propagation-propActivityGroupLabel: Propagation Activities
+propagation-orderLabel: Order
+propagation-propCountLabel: Propagule Count
+propagation-activityDateLabel: Activity Date
+propagation-mediumLabel: Medium
+propagation-activityTypeLabel: Type
+propagation-potSizeLabel: Pot Size
+propagation-conditionsLabel: Conditions
+propagation-nurseryLocationLabel: Location in Nursery
+propagation-fungicideLabel: Fungicide
+propagation-activityCommentsLabel: Comments
+propagation-germinationDateLabel: Germination/Rooting Date
+propagation-successRateLabel: Success Rate
