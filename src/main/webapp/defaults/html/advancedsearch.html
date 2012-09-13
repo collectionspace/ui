@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
         <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Confirmation.css" />
         <link rel="stylesheet" type="text/css" href="../css/Autocomplete.css" />
         <link rel="stylesheet" type="text/css" href="../css/pivot.css" />
         <link rel="stylesheet" type="text/css" href="../css/repeatable.css" />
@@ -29,11 +30,15 @@
         <script type="text/javascript" src="../js/TermList.js"></script>
         <script type="text/javascript" src="../js/Repeatable.js"></script>
         <script type="text/javascript" src="../js/AdvancedSearch.js"></script>
+        <script type="text/javascript" src="../js/RelateSearchResults.js"></script>
+        <script type="text/javascript" src="../js/SearchResultsRelationManager.js"></script>
+        <script type="text/javascript" src="../js/SearchToRelateDialog.js"></script>
         <script type="text/javascript" src="../js/SearchTips.js"></script>
         <script type="text/javascript" src="../js/SearchTools.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
         <script type="text/javascript" src="../js/StructuredDate.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/globalization/en-US.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/core.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/parser.js"></script>
@@ -55,6 +60,7 @@
                         <div class="fl-container-content fl-container-left info-column fl-force-left">
                             <div class="main-search-page fl-container-left-inner">
                                 <div class="csc-advancedsearch-container"></div>
+
                                 <div class="csc-search-loadingIndicator">
 	                                <div class="fl-container-flex header static found-records-box csc-search-lookingContainer">
 	                                    <span class="found-records-content-looking">
@@ -63,9 +69,10 @@
 	                                </div>
 	
 	                                <div class="csc-search-results">
-	                                    <div class="fl-container-flex header static found-records-box">
-	                                        <span class="found-records-content csc-search-resultsCountContainer">
+	                                    <div class="fl-container-flex header static button found-records-box">
+	                                        <span class="found-records-content csc-search-resultsCountContainer csc-relateSearchResults">
 	                                            <span class="csc-search-results-count cs-search-highlight"></span>
+	                                            <input type="button" class="csc-relateSearchResults-relateButton button add fl-force-right" />
 	                                        </span>
 	                                    </div>
 	
@@ -77,6 +84,7 @@
 	                                                    <th class="flc-pager-sort-header"><a rsf:id="number" href="#"></a></th>
 	                                                    <th class="flc-pager-sort-header"><a rsf:id="summary" href="#"></a></th>
 	                                                    <th><span rsf:id="recordtype"></span></th>
+	                                                    <th><span rsf:id="namespace"></span></th>
 	                                                    <th class="flc-pager-sort-header"><a rsf:id="summarylist.updatedAt" href="#"></a></th>
 	                                                </tr>
 	                                            </thead>
@@ -85,6 +93,7 @@
 	                                                    <td><a rsf:id="number" href="#" class="link"></a></td>
 	                                                    <td rsf:id="summary"></td>
 	                                                    <td rsf:id="recordtype"></td>
+	                                                    <td rsf:id="namespace"></td>
 	                                                    <td rsf:id="summarylist.updatedAt"></td>
 	                                                </tr>
 	                                            </tbody>
@@ -121,6 +130,9 @@
 	                                </div>
 	                                <!-- end search results -->
 	                            </div>
+                            </div>
+                            <div class="hidden csc-searchResultsRelationManager">
+                                <div class="csc-search-related-dialog"></div>
                             </div>
                         </div>
                         <div class="fl-container-pivot fl-force-left">

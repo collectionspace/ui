@@ -256,11 +256,12 @@ cspace = cspace || {};
                     elPaths: {
                         items: "items"
                     },
-                    columns: ["number", "recordtype", "sourceFieldName"],
+                    columns: ["number", "namespace", "sourceFieldName"],
                     strings: {
                         number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
                         sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
-                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
+                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype",
+                        namespace: "{globalBundle}.messageBase.rl-rrl-termsUsed-namespace"
                     },
                     showNumberOfItems: false
                 }
