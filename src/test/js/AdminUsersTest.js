@@ -257,8 +257,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         jqUnit.assertEquals("Email is blank", locateSelector(recordRenderer, "email").val(), "");
                         jqUnit.assertEquals("Full name is blank", locateSelector(recordRenderer, "screenName").val(), "");
@@ -286,8 +286,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         changeDetails(admin, recordRenderer, "validPassword");
                         admin.adminRecordEditor.events.onSave.fire();
@@ -316,8 +316,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         changeDetails(admin, recordRenderer, "validPassword");
                         locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
@@ -345,8 +345,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         changeDetails(admin, recordRenderer, "invalidPassword");
                         jqUnit.assertFalse("validator fails", admin.validate());
@@ -367,8 +367,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         changeDetails(admin, recordRenderer, "invalidPassword");
                         locateSelector(admin, "passwordConfirm").val(testDataCreateUser.invalidPassword).change();
@@ -390,8 +390,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.locate("add").click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         changeDetails(admin, recordRenderer, "validPassword");
                         admin.adminRecordEditor.events.onSave.fire();
@@ -473,8 +473,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         admin.adminListView.locate("row").eq(1).click();
                     }
                 },
-                "afterRecordRender.test": {
-                    path: "components.adminRecordEditor.options.listeners",
+                recordEditorReady: {
+                    path: "listeners",
                     listener: function (admin, recordRenderer) {
                         jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
                         jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
@@ -489,7 +489,71 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     priority: "last"
                 }
             }
+        },
+        "Confirmation cancel": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (admin, recordRenderer) {
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            jqUnit.isVisible("Confirmation dialog should now be visible", admin.adminRecordEditor.confirmation.popup);
+                            admin.adminRecordEditor.confirmation.popup.bind("dialogclose", function () {
+                                jqUnit.notVisible("Confirmation dialog is now invisible", admin.adminRecordEditor.confirmation.popup);
+                                jqUnit.assertEquals("User Name should still be", "New Name", locateSelector(recordRenderer, "screenName").val());
+                                start();
+                            });
+                            admin.adminRecordEditor.confirmation.confirmationDialog.locate("cancel").click();
+                        });
+                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                    },
+                    priority: "last"
+                }
+            }
+        }/*
+,
+        "Confirmation proceed": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (admin, recordRenderer) {
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            jqUnit.isVisible("Confirmation dialog should now be visible", admin.adminRecordEditor.confirmation.popup);
+                            admin.events.recordEditorReady.addListener(function () {
+                                jqUnit.notVisible("Confirmation dialog is now invisible", admin.adminRecordEditor.confirmation.popup);
+                                jqUnit.assertEquals("User Name should now be", "Administrator", locateSelector(recordRenderer, "screenName").val());
+                                start();
+                            });
+                            admin.adminRecordEditor.confirmation.confirmationDialog.locate("proceed").click();
+                        });
+                        $("a", admin.adminListView.locate("row").eq(0)).eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
         }
+*/
     };
 
     fluid.each(["ready", "onSearch", "afterSearch", "onUnSearch", "afterUnSearch"], function (eventName) {
@@ -500,7 +564,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.demands("onSelect", ["cspace.admin", "cspace.test"], {
         args: ["{arguments}.0", "{cspace.admin}"]
     });
-    fluid.demands("afterRecordRender", ["cspace.admin", "cspace.test"], {
+    fluid.demands("recordEditorReady", ["cspace.admin", "cspace.test"], {
         args: ["{cspace.admin}", "{arguments}.0"]
     });
 
@@ -587,70 +651,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     testRunner(testConfig);
 
 }());
-/*
-    
-    var setupConfirmation = function (testFunc) {
-        var waitMultiple;
-        fluid.log("Begin setupConfirmation");
-        var callback = function() {
-            fluid.log("Final test callback firing"); 
-            var pageReadyArgs = waitMultiple.waitSet.pageReady.args;
-            var setupArgs = waitMultiple.waitSet.afterSetup.args;
-            var adminUsers = setupArgs[0];
-            adminUsers.adminListEditor.events.afterShowDetails.addListener(waitMultiple.getListener("afterShowDetails"));
-            waitMultiple.clear(function() {
-                testFunc.apply(null, [pageReadyArgs[0].details, adminUsers]);
-            });
-            delete waitMultiple.waitSet["pageReady"];
-            delete waitMultiple.waitSet["afterSetup"];
-            $(adminUsers.adminListEditor.list.locate("row")[2]).click();
-        }; 
-        waitMultiple = cspace.util.waitMultiple(
-            {outerKey: "pageReady",
-             callback: callback,
-             once: true}); 
-        var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "components.adminListEditor.options.listeners", {
-            pageReady: waitMultiple.getListener("pageReady")
-        });
-        fluid.model.setBeanValue(testOpts, "listeners", {
-            afterSetup: waitMultiple.getListener("afterSetup")
-        });
-        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
-        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        cspace.admin(".csc-admin-users", testOpts);
-    };
-    
-    adminUsersTest.asyncTest("Confirmation", function () {
-        setupConfirmation(function (re, adminUsers) {
-            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-            jqUnit.notVisible("Confiration dialog is invisible initially", re.confirmation.popup);
-            adminUsers.locate("userName").val("New Name").change();
-            re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.isVisible("Confirmation dialog should now be visible", re.confirmation.popup);
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation cancel", function () {
-        setupConfirmation(function (re, adminUsers) {
-            adminUsers.locate("userName").val("New Name").change();
-            re.confirmation.popup.bind("dialogopen", function () {
-                re.confirmation.popup.bind("dialogclose", function () {
-                    jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
-                    jqUnit.assertEquals("User Name should still be", "New Name", adminUsers.locate("userName").val());
-                    cspace.tests.onTearDown.fire(re);
-                    start();
-                });
-                re.confirmation.confirmationDialog.locate("cancel").click();                        
-            });
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-         });
-    });
-    
+/*    
     adminUsersTest.asyncTest("Confirmation proceed", function () {
         setupConfirmation(function (re, adminUsers) {
             adminUsers.locate("userName").val("New Name").change();
