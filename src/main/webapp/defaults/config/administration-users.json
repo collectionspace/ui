@@ -26,6 +26,12 @@
                             "unSearch": "cspace.admin.unSearch",
                             "validate": "cspace.admin.validate"
                         },
+                        "events": {
+                            "onSearch": null,
+                            "onUnSearch": null,
+                            "afterSearch": null,
+                            "afterUnSearch": null
+                        },
                         "preInitFunction": "cspace.admin.preInitUserAdmin",
                         "userId": "{userLogin}.options.userId",
                         "components": {
