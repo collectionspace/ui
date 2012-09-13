@@ -1,6 +1,6 @@
 {
     "hierarchy": {
-        ".csc-hierarchy-narrowerContext": {
+        ".csc-hierarchy-narrowerContexts": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
