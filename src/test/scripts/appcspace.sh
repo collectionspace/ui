@@ -51,5 +51,4 @@ echo "-> Script end."
 # 1. Copy the script somewhere outsife of the gitlocation so it won't be overwritten
 # 2. Ensure that script works as intended after it is set up
 # 3. Add the following line in your ~/.bash_profile without double quotes "alias appcspace='/path to your script file/appcspace.sh'"
-# 4. Run this command without double quotes "source ~/.bash_profile"
-# 5. Now any new terminal window with bash will recognize appcspace as a command pointing to our useful .sh script
+# 4. Now any new terminal window with bash will recognize appcspace as a command pointing to our useful .sh script
