@@ -50,6 +50,20 @@ cspace = cspace || {};
         options: fluid.COMPONENT_OPTIONS
     });
 
+    fluid.demands("cspace.externalURL", ["cspace.hierarchy", "cspace.recordEditor", "cspace.authority"], {
+        options: {
+            validation: false,
+            url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid&vocab=%vocab"),
+            recordType: "{cspace.recordEditor}.options.recordType",
+            invokers: {
+                processUrl: {
+                    funcName: "cspace.externalURL.processUrlAuth",
+                    args: ["{cspace.externalURL}.options.url", "{cspace.externalURL}.options.recordType", "{vocab}", "{arguments}.0"]
+                }
+            }
+        }
+    });
+
     fluid.demands("cspace.externalURL", ["cspace.hierarchy", "cspace.recordEditor", "cspace.nonAuthority"], {
         options: {
             validation: false,
@@ -64,10 +78,22 @@ cspace = cspace || {};
         }
     });
 
+    cspace.externalURL.processUrlAuth = function (url, recordType, vocab, original) {
+        return fluid.stringTemplate(url, {
+            recordType: recordType,
+            csid: original,
+            vocab: cspace.vocab.resolve({
+                model: {},
+                recordType: recordType,
+                vocab: vocab
+            })
+        });
+    };
+
     cspace.externalURL.processUrl = function (url, recordType, original) {
         return fluid.stringTemplate(url, {
             recordType: recordType,
-            csid: original
+            csid: cspace.util.urnToCSID(original)
         });
     };
     
