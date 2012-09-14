@@ -818,6 +818,13 @@ fluid.registerNamespace("cspace.util");
         return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");
     };
 
+    cspace.util.urnToCSID = function (urn) {
+        if (!urn) {
+            return "";
+        }
+        return decodeURIComponent(urn.slice(urn.indexOf("id(") + 3, urn.indexOf(")")));
+    };
+
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
         gradeNames: ["fluid.viewComponent"],
         convert: cspace.util.urnToString
