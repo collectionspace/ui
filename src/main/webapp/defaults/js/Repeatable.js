@@ -437,7 +437,14 @@ cspace = cspace || {};
                 _primary: true
             });
         }
-        that.applier.requestChange(that.options.fullPath, list);
+        // Here we do a silent model update. Since repeatable is asynchronous we do not want changeRequest trigger modelChanged simply because it is loading 
+        // of initial data into the repeatable for RecordEditor
+        that.applier.fireChangeRequest({
+            path: that.options.fullPath,
+            type: "ADD",
+            value: list,
+            silent: true
+        });
     };
     
     cspace.repeatableImpl.postInitGenerateMarkup = function (that) {
