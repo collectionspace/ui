@@ -439,6 +439,7 @@ cspace = cspace || {};
         }
         // Here we do a silent model update. Since repeatable is asynchronous we do not want changeRequest trigger modelChanged simply because it is loading 
         // of initial data into the repeatable for RecordEditor
+        // Important!!  ->  Implementation should use source tracking when it is available in a newer version of Infusion
         that.applier.fireChangeRequest({
             path: that.options.fullPath,
             type: "ADD",
