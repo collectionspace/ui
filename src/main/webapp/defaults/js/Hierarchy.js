@@ -149,6 +149,12 @@ cspace = cspace || {};
             afterFetchTemplate: "{that}.refreshView"
         },
         components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "cspace.hierarchyAutocomplete"
+                }
+            },
             hierarchyTogglable: {
                 type: "cspace.util.togglable",
                 createOnEvent: "afterRender"

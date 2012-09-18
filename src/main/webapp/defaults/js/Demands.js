@@ -364,7 +364,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup", "cspace.autocomplete", {
             container: "{autocomplete}.popupElement"
         });
-        fluid.demands("cspace.autocomplete.popup", ["cspace.hierarchy", "cspace.autocomplete", "cspace.nonAuthority"], {
+        fluid.demands("cspace.autocomplete.popup", ["cspace.hierarchyAutocomplete", "cspace.autocomplete", "cspace.nonAuthority"], {
             container: "{autocomplete}.popupElement",
             options: {
                 produceTree: "cspace.autocomplete.produceTreeStructuredObjects",
@@ -405,7 +405,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }, "{arguments}.1"]
         });
-        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.authority", "cspace.hierarchy"], {
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.authority", "cspace.hierarchyAutocomplete"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
                 model: {
@@ -438,7 +438,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }, "{arguments}.1"]
         });
-        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.nonAuthority", "cspace.hierarchy"], {
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.nonAuthority", "cspace.hierarchyAutocomplete"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
                 components: {
@@ -912,7 +912,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("togglable", "cspace.relatedRecordsTab", {
             container: "{relatedRecordsTab}.container"
         });
-        fluid.demands("hierarchyTogglable", "cspace.hierarchy", {
+        fluid.demands("hierarchyTogglable", "cspace.hierarchyAutocomplete", {
             container: "{hierarchy}.container",
             options: {
                 selectors: {

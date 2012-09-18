@@ -50,7 +50,7 @@ cspace = cspace || {};
         options: fluid.COMPONENT_OPTIONS
     });
 
-    fluid.demands("cspace.externalURL", ["cspace.hierarchy", "cspace.recordEditor", "cspace.authority"], {
+    fluid.demands("cspace.externalURL", ["cspace.hierarchyAutocomplete", "cspace.recordEditor", "cspace.authority"], {
         options: {
             validation: false,
             url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid&vocab=%vocab"),
@@ -64,7 +64,7 @@ cspace = cspace || {};
         }
     });
 
-    fluid.demands("cspace.externalURL", ["cspace.hierarchy", "cspace.recordEditor", "cspace.nonAuthority"], {
+    fluid.demands("cspace.externalURL", ["cspace.hierarchyAutocomplete", "cspace.recordEditor", "cspace.nonAuthority"], {
         options: {
             validation: false,
             url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid"),
