@@ -341,7 +341,12 @@ cspace = cspace || {};
     cspace.recordEditor.changeTracker.preInit = function (that) {
         that.rollbackModel = fluid.copy(that.model);
         that.unsavedChanges = false;
-        that.applier.modelChanged.addListener("fields", function () {
+        that.applier.modelChanged.addListener("fields", function (model, newModel, changeRequest) {
+            // This case is specifically for Repeatable which populates Narrower/Broader contexts. We do not want to set that record was changed
+            // Important!!  ->  Implementation should use source tracking when it is available in a newer version of Infusion
+            if (changeRequest[0].silent) {
+                return;
+            }
             that.unsavedChanges = true;
             that.events.onChange.fire(that.unsavedChanges);
         });
