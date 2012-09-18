@@ -60,15 +60,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
         });
         
-        // Admin demands
-        fluid.demands("admin", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.localData"], {
-            container: "{pageBuilder}.options.selectors.admin",
-            options: {
-                queryURL: "../../../../test/data/users/search.json",
-                recordType: "{pageBuilderIO}.options.recordType"
-            }
-        });
-        
         // Report Producer
         fluid.demands("cspace.reportProducer.reportTypesSource", ["cspace.reportProducer", "cspace.localData"], {
             funcName: "cspace.reportProducer.testReportTypesSource",
@@ -248,12 +239,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
         fluid.demands("cspace.relationManager.add", "cspace.relationManager", {
             funcName: "cspace.relationManager.add",
-            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
+            args: ["{relationManager}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
         
         fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.relatedRecordsTab"], {
             funcName: "cspace.relationManager.addFromTab",
-            args: ["{relationManager}", "{recordEditor}", "{globalBundle}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
+            args: ["{relationManager}", "{recordEditor}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
     
         // Validator

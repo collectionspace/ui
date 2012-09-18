@@ -98,23 +98,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         container: "body"
     });
     
-    // search demands
-    fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
-       container: "{searchToRelateDialog}.container",
-       options: {
-           strings: {
-                errorMessage: "{globalBundle}.messageBase.search-errorMessage",
-                resultsCount: "{globalBundle}.messageBase.search-resultsCount",
-                looking: "{globalBundle}.messageBase.search-looking",
-                selected: "{globalBundle}.messageBase.search-selected",
-                number: "{globalBundle}.messageBase.search-number",
-                summary: "{globalBundle}.messageBase.search-summary",
-                recordtype: "{globalBundle}.messageBase.search-recordtype",
-                "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
-            }
-       }
-    });
-
     fluid.demands("cspace.specBuilderImpl", "cspace.test", {
         mergeAllOptions: [{
             spec: {
@@ -139,7 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.test"], {
             funcName: "cspace.relationManager.add",
-            args: ["{relationManager}", "{globalBundle}", "{messageBar}", "{relationManager}.options.primaryCSID", "{arguments}.0"]
+            args: ["{relationManager}", "{messageBar}", "{relationManager}.options.primaryCSID", "{arguments}.0"]
         });
     
     // Report producer  

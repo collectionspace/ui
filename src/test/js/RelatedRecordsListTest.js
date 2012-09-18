@@ -12,75 +12,83 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 var rrlTester = function ($) {
-    
-    var testModel = {
-        csid: "123456789",
-        relations: [{
-            summary: "Stamp albums. Famous stars series stamp album.",
-            csid: "1984.068.0338",
-            number: "1984.068.0338",
-            relid: "19ba9f30-75c3-41c8-b3e6",
-            relationshiptype: "affects",
-            recordtype: "cataloging"
-        }, {
-            summary: "Souvenir books. Molly O' Play Book.",
-            csid: "2005.018.1383",
-            number: "2005.018.1383",
-            relid: "e8d20612-e1f5-4e90-bc36",
-            relationshiptype: "affects",
-            recordtype: "cataloging"
-        }]
+
+    cspace.relatedRecordsList.testFinalInit = function (that) {
+        that.events.afterSetup.fire(that);
     };
-    
+
     var bareRelatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
-        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/defaults/html/components/SidebarTemplate.html", ".csc-right-sidebar");
-    }, function () {
-        $(".ui-dialog").detach();
-    });
-    
-    var relatedRecordsListTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsListTest});
-    
-    var createRelatedRecordsList = function (model, primary, related, opts, inApplier) {
-        var applier = inApplier || fluid.makeChangeApplier(model);
-        var defaultOpts = {
-            related: related,
-            primary: primary,
-            model: model,
-            applier: applier
-        };
-        fluid.merge(null, defaultOpts, opts);
-        var relatedRecordsList = cspace.relatedRecordsList(".csc-related-record", defaultOpts);
-    };
-    
-    var configureSTRDialog = function (handler, primary, related) {
-        var opts = {
-            listeners: {
-                afterSetup: handler
+            bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/defaults/html/components/SidebarTemplate.html", ".csc-right-sidebar");
+        }, function () {
+            $(".ui-dialog").detach();
+        }),
+        relatedRecordsListTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsListTest}),
+        createRelatedRecordsList = function (model, primary, related, opts, inApplier) {
+            var applier = inApplier || fluid.makeChangeApplier(model),
+                defaultOpts = {
+                    related: related,
+                    primary: primary,
+                    model: model,
+                    applier: applier
+                },
+                glModel = {
+                    csid: "123456789"
+                },
+                glApplier = fluid.makeChangeApplier(model);
+            fluid.merge(null, defaultOpts, opts);
+            relatedRecordsListTest.globalModel.attachModel({
+                primaryModel: {
+                    model: glModel,
+                    applier: glApplier
+                }
+            });
+            var relatedRecordsList = cspace.relatedRecordsList(".csc-related-record", defaultOpts);
+        },
+        configureSTRDialog = function (handler, primary, related) {
+            var opts = {
+                listeners: {
+                    afterSetup: handler
+                },
+                events: {
+                    afterSetup: null
+                },
+                finalInitFunction: "cspace.relatedRecordsList.testFinalInit"
+            };
+            createRelatedRecordsList({}, primary, related, opts);
+        },
+        basicConfigureTest = function (options) {
+            configureSTRDialog(function (relatedRecordsList) {
+                var sel = options.sel,
+                    condition = options.condition,
+                    relationManager = relatedRecordsList.relationManager,
+                    searchToRelateDialog = relationManager.searchToRelateDialog,
+                    uiDialog = $(".ui-dialog");
+                relationManager.locate("addButton").click();
+                jqUnit.isVisible("Search to relate Dialog is visible after click", uiDialog);
+                jqUnit.assertEquals("Record-type drop-down is " + sel + " - " + condition, 
+                    condition, searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").is(sel));
+                searchToRelateDialog.close();
+                jqUnit.notVisible("Search to relate Dialog is invisible after close", uiDialog);
+                start();
+            }, "cataloging", options.related);
+        },
+        testScenarios = {
+            "Configure SearchToRelate Dialog for cataloging": {
+                sel: ":disabled",
+                condition: true,
+                related: "cataloging"
+            },
+            "Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)": {
+                sel: ":disabled",
+                condition: false,
+                related: "procedures"
             }
         };
-        createRelatedRecordsList(testModel, primary, related, opts);
-        stop();
-    };
-    
-    var basicConfigureTest = function (sel, condition, related) {
-        configureSTRDialog(function (relatedRecordsList) {
-            relatedRecordsList.relationManager.locate("addButton").click();
-            jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-            jqUnit.assertEquals("Record-type drop-down is " +sel + " - " + condition, 
-                condition, relatedRecordsList.relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").is(sel));
-            relatedRecordsList.relationManager.searchToRelateDialog.close();
-            jqUnit.notVisible("Search to relate Dialog is invisible after close", $(".ui-dialog"));
-            start();
-        }, "cataloging", related);
-    };
 
-    relatedRecordsListTest.test("Configure SearchToRelate Dialog for cataloging", function () {
-        //expect drop down to be disabled since cataloging is the only record type in this category
-        basicConfigureTest(":disabled", true, "cataloging");
-    });
-
-    relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)", function () {
-        basicConfigureTest(":disabled", false, "procedures");
+    $.each(testScenarios, function(message, testScenario) {
+        relatedRecordsListTest.asyncTest(message, function () {
+            basicConfigureTest(testScenario);
+        });
     });
 };
 

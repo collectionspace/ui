@@ -27,14 +27,14 @@ cspace = cspace || {};
             header: {
                 messagekey: "hierarchy-headerCataloging"
             },
-            narrowerContextsLabel: {
-                messagekey: "hierarchy-narrowerContextsCatalogingLabel"
+            narrowerContextLabel: {
+                messagekey: "hierarchy-narrowerContextCatalogingLabel"
             },
             broaderContextLabel: {
                 messagekey: "hierarchy-broaderContextCatalogingLabel"
             },
-            narrowerContextsTypeLabel: {
-                messagekey: "hierarchy-narrowerContextsTypeLabel"
+            narrowerContextTypeLabel: {
+                messagekey: "hierarchy-narrowerContextTypeLabel"
             },
             broaderContextTypeLabel: {
                 messagekey: "hierarchy-broaderContextTypeLabel"
@@ -76,8 +76,8 @@ cspace = cspace || {};
             header: {
                 messagekey: "hierarchy-header"
             },
-            narrowerContextsLabel: {
-                messagekey: "hierarchy-narrowerContextsLabel"
+            narrowerContextLabel: {
+                messagekey: "hierarchy-narrowerContextLabel"
             },
             broaderContextLabel: {
                 messagekey: "hierarchy-broaderContextLabel"
@@ -123,8 +123,8 @@ cspace = cspace || {};
         selectors: {
             header: ".csc-hierarchy-header",
             togglable: ".csc-hierarchy-togglable",
-            narrowerContextsLabel: ".csc-hierarchy-narrowerContexts-label",
-            narrowerContextsTypeLabel: ".csc-hierarchy-narrowerContextsType-label",
+            narrowerContextLabel: ".csc-hierarchy-narrowerContext-label",
+            narrowerContextTypeLabel: ".csc-hierarchy-narrowerContextType-label",
             broaderContextLabel: ".csc-hierarchy-broaderContext-label",
             broaderContextTypeLabel: ".csc-hierarchy-broaderContextType-label",
             equivalentContextsLabel: ".csc-hierarchy-equivalentContexts-label",
