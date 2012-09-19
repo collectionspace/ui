@@ -9,6 +9,57 @@ taxonomicIdentGroup-identDateGroupLabel: Date
 collection-object-institutionLabel: Institution
 collection-object-identKindLabel: Kind
 collection-object-objectCountNumberLabel: Sheet
+collection-object-briefDescriptionsLabel: Material Type
+collection-object-commentsLabel: Accession Notes
+collection-object-accessionDateLabel: Accession Date
+collection-object-deadFlagLabel: Dead Flag
+collection-object-deadDateLabel: Dead Date
+collection-object-requestedByLabel: Requested By
+collection-object-vegetationTypeLabel: Vegetation Type
+collection-object-cbdRestrictionLabel: CBD Restriction
+collection-object-rareLabel: Rare
+collection-object-accessionAttributesGroupLabel: Accession Attributes
+collection-object-flowerColorLabel: Flower Color
+collection-object-fruitColorLabel: Fruit Color
+collection-object-provenanceTypeLabel: Provenance Type
+collection-object-propagationHistoryLabel: Propagation History
+collection-object-classUseLabel: Class Use
+collection-object-researchUseLabel: Research Use
+collection-object-distributionLabel: Distribution
+collection-object-ignoreRedDotLabel: Ignore Red Dot
+collection-object-securityRiskLabel: Security Risk
+collection-object-flowersJanLabel: Flowers Jan
+collection-object-flowersFebLabel: Flowers Feb
+collection-object-flowersMarLabel: Flowers Mar
+collection-object-flowersAprLabel: Flowers Apr
+collection-object-flowersMayLabel: Flowers May
+collection-object-flowersJunLabel: Flowers Jun
+collection-object-flowersJulLabel: Flowers Jul
+collection-object-flowersAugLabel: Flowers Aug
+collection-object-flowersSepLabel: Flowers Sep
+collection-object-flowersOctLabel: Flowers Oct
+collection-object-flowersNovLabel: Flowers Nov
+collection-object-flowersDecLabel: Flowers Dec
+collection-object-fruitsJanLabel: Fruits Jan
+collection-object-fruitsFebLabel: Fruits Feb
+collection-object-fruitsMarLabel: Fruits Mar
+collection-object-fruitsAprLabel: Fruits Apr
+collection-object-fruitsMayLabel: Fruits May
+collection-object-fruitsJunLabel: Fruits Jun
+collection-object-fruitsJulLabel: Fruits Jul
+collection-object-fruitsAugLabel: Fruits Aug
+collection-object-fruitsSepLabel: Fruits Sep
+collection-object-fruitsOctLabel: Fruits Oct
+collection-object-fruitsNovLabel: Fruits Nov
+collection-object-fruitsDecLabel: Fruits Dec
+collection-object-accessionUseInformationLabel: Accession Use Information
+collection-object-accessionUseGroupLabel: Accession Use
+collection-object-useTypeLabel: Use Type
+collection-object-usedInLabel: Used In
+collection-object-materialTypeLabel: Material Type
+collection-object-requestDateLabel: Request Date
+collection-object-filledDateLabel: Filled Date
+collection-object-useNotesLabel: Use Notes
 
 # Inadvertently shares field name and label
 # with another entry below
