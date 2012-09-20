@@ -22,6 +22,17 @@ cspace = cspace || {};
         return fluid.merge(null, tree, uispec);
     };
 
+    cspace.hierarchy.filterUISpec = function (uispec) {
+        // NOTE: This is to fix an issue of not necessary things in uisoec
+        // for hierarchy. As soon as uispec is cleaned up - this needs to
+        // be removed.
+        return fluid.filterKeys(uispec, [
+            ".csc-hierarchy-broaderContext",
+            ".csc-hierarchy-broaderContextType",
+            ".csc-hierarchy-narrowerContexts"
+        ], false);
+    };
+
     cspace.hierarchy.produceTreeCataloging = function (that) {
         return cspace.hierarchy.treeUispecMerge({
             header: {
