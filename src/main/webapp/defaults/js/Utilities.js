@@ -1156,7 +1156,7 @@ fluid.registerNamespace("cspace.util");
             eventMap: {
                 "primaryModel.csid": function () {
                     if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                        that.events.primaryRecordCreated.fire();
+                        that.events.primaryRecordCreated.fire(fluid.get(that.globalModel.model, "primaryModel"));
                     }
                 },
                 "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
