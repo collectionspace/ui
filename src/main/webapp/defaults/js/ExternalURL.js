@@ -81,7 +81,7 @@ cspace = cspace || {};
     cspace.externalURL.processUrlAuth = function (url, recordType, vocab, original) {
         return fluid.stringTemplate(url, {
             recordType: recordType,
-            csid: original,
+            csid: cspace.util.shortIdentifierToCSID(original),
             vocab: cspace.vocab.resolve({
                 model: {},
                 recordType: recordType,

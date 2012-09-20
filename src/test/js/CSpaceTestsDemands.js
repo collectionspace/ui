@@ -122,7 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.test"], {
             funcName: "cspace.relationManager.add",
-            args: ["{relationManager}", "{messageBar}", "{relationManager}.options.primaryCSID", "{arguments}.0"]
+            args: ["{relationManager}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
     
     // Report producer  

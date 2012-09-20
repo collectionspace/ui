@@ -825,6 +825,16 @@ fluid.registerNamespace("cspace.util");
         return decodeURIComponent(urn.slice(urn.indexOf("id(") + 3, urn.indexOf(")")));
     };
 
+    cspace.util.shortIdentifierToCSID = function (urn) {
+        var shortIdentifier;
+        if (!urn) {
+            return "";
+        }
+        urn = urn.slice(urn.indexOf("item:name(") + 10);
+        shortIdentifier = decodeURIComponent(urn.slice(0, urn.indexOf(")")));
+        return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
+    };
+
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
         gradeNames: ["fluid.viewComponent"],
         convert: cspace.util.urnToString
@@ -1156,7 +1166,7 @@ fluid.registerNamespace("cspace.util");
             eventMap: {
                 "primaryModel.csid": function () {
                     if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                        that.events.primaryRecordCreated.fire();
+                        that.events.primaryRecordCreated.fire(fluid.get(that.globalModel.model, "primaryModel"));
                     }
                 },
                 "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire

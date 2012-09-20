@@ -300,7 +300,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("hierarchy", "cspace.recordEditor", {
             options: {
                 model: "{recordEditor}.model",
-                applier: "{recordEditor}.applier"
+                applier: "{recordEditor}.applier",
+                uispec: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.hierarchy.filterUISpec",
+                        args: "{pageBuilder}.options.uispec.hierarchy"
+                    }
+                }
             }
         });
         
