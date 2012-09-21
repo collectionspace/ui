@@ -65,8 +65,11 @@ cspace = cspace || {};
                     expander: {
                         repeatID: "equivalentContext",
                         tree: {
-                            decorators: {addClass: "{styles}.equivalentContext"},
-                            value: "${{row}.equivalentContext}"
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
                         },
                         type: "fluid.renderer.repeat",
                         pathAs: "row",
@@ -93,7 +96,7 @@ cspace = cspace || {};
             broaderContextLabel: {
                 messagekey: "hierarchy-broaderContextLabel"
             },
-            expander: [{
+            expander: {
                 type: "fluid.renderer.condition",
                 condition: {
                     funcName: "cspace.hierarchy.assertEquivalentContexts",
@@ -104,6 +107,19 @@ cspace = cspace || {};
                 trueTree: {
                     equivalentContextsLabel: {
                         messagekey: "hierarchy-equivalentContextsLabel"
+                    },
+                    expander: {
+                        repeatID: "equivalentContext",
+                        tree: {
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
+                        },
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "fields.equivalentContexts"
                     }
                 },
                 falseTree: {
@@ -111,16 +127,7 @@ cspace = cspace || {};
                         decorators: {addClass: "{styles}.hidden"}
                     }
                 }
-            }, {
-                repeatID: "equivalentContext",
-                tree: {
-                    decorators: {addClass: "{styles}.equivalentContext"},
-                    value: "${{row}.equivalentContext}"
-                },
-                type: "fluid.renderer.repeat",
-                pathAs: "row",
-                controlledBy: "fields.equivalentContexts"
-            }]
+            }
         }, that.options.uispec);
     };
     
@@ -142,7 +149,6 @@ cspace = cspace || {};
             equivalentContext: ".csc-hierarchy-equivalentContext"
         },
         styles: {
-            equivalentContext: "cs-hierarchy-equivalentContext",
             hidden: "hidden"
         },
         selectorsToIgnore: "togglable",
