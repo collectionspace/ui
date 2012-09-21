@@ -189,6 +189,7 @@ concept-concept: Concept
 #loanout
 loanout-collectionLabel: Collection
 loanout-majorGroupLabel: Major Group
+loanout-loanoutItemsLabel: Accession Numbers
 loanout-geographyLabel: Geography
 loanout-taxonomyLabel: Taxonomy
 loanout-objKindLabel: Object Kind
