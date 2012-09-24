@@ -1,5 +1,5 @@
 /*
-Copyright 2011 Museum of Moving Image
+Copyright 2012 University of California at Berkeley
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 You may not use this file except in compliance with this License.
@@ -15,22 +15,22 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     
-    fluid.defaults("cspace.reportProducer", {
+    fluid.defaults("cspace.batchRunner", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
             recordModel: "preserve",
             recordApplier: "nomerge"
         },
-        produceTree: "cspace.reportProducer.produceTree",
+        produceTree: "cspace.batchRunner.produceTree",
         invokers: {
-            generateReport: "cspace.reportProducer.generateReport",
-            requestReport: {
-                funcName: "cspace.reportProducer.requestReport",
-                args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
+            runBatch: "cspace.batchRunner.runBatch",
+            requestBatch: {
+                funcName: "cspace.batchRunner.requestBatch",
+                args: ["{batchRunner}.model", "{batchRunner}.options", "{batchRunner}.events", "{arguments}.0", "{arguments}.1"]
             },
-            checkReportButtonDisabling: {
-                funcName: "cspace.reportProducer.checkReportButtonDisabling",
-                args: ["{reportProducer}.model", "{reportProducer}.options.recordModel"]
+            checkBatchButtonDisabling: {
+                funcName: "cspace.batchRunner.checkBatchButtonDisabling",
+                args: ["{batchRunner}.model", "{batchRunner}.options.recordModel"]
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
@@ -40,117 +40,121 @@ cspace = cspace || {};
             confirmation: {
                 type: "cspace.confirmation"
             },
-            reportStatus: {
-                type: "cspace.reportProducer.reportStatus",
+            batchStatus: {
+                type: "cspace.batchRunner.batchStatus",
                 createOnEvent: "ready",
-                container: "{reportProducer}.reportLoadingIndicatorContainer",
+                container: "{batchRunner}.batchLoadingIndicatorContainer",
                 options: {
                     events: {
-                        onStop: "{reportProducer}.events.onStop"
+                        onStop: "{batchRunner}.events.onStop"
                     }
                 }
             },
             messageBar: "{messageBar}",
             globalNavigator: "{globalNavigator}",
-            reportTypesSource: {
-                type: "cspace.reportProducer.reportTypesSource"
+            batchTypesSource: {
+                type: "cspace.batchRunner.batchTypesSource"
             }
         },
         events: {
             onError: null,
             onStop: null,
-            reportStarted: null,
-            reportFinished: null,
+            batchStarted: null,
+            batchFinished: null,
             ready: null
         },
         selectors: {
-            reportHeader: ".csc-reportProducer-header",
-            reportButton: ".csc-reportProducer-button",
-            reportType: ".csc-reportProducer-type",
-            report: ".csc-reportProducer",
-            reportLoadingIndicatorContainer: ".csc-reportProducer-loadingIndicatorContainer"
+            batchHeader: ".csc-batchRunner-header",
+            batchButton: ".csc-batchRunner-button",
+            batchType: ".csc-batchRunner-type",
+            batch: ".csc-batchRunner",
+            batchLoadingIndicatorContainer: ".csc-batchRunner-loadingIndicatorContainer"
         },
-        selectorsToIgnore: ["reportLoadingIndicatorContainer"],
+        selectorsToIgnore: ["batchLoadingIndicatorContainer"],
         strings: {},
         styles: {
-            reportHeader: "cs-reportProducer-header",
-            reportButton: "cs-reportProducer-button",
-            report: "cs-reportProducer",
-            reportType: "cs-reportProducer-reportType",
-            reportLoadingIndicatorContainer: "cs-reportProducer-loadingIndicator"
+            batchHeader: "cs-batchRunner-header",
+            batchButton: "cs-batchRunner-button",
+            batch: "cs-batchRunner",
+            batchType: "cs-batchRunner-batchType",
+            batchLoadingIndicatorContainer: "cs-batchRunner-loadingIndicator"
         },
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/ReportProducerTemplate.html",
+                url: "%webapp/html/components/BatchRunnerTemplate.html",
                 options: {
                     dataType: "html"
                 }
             })
         },
         model: {
-            reportnames: ["Please select a value"],
-            reportlist: [""],
-            reportTypeSelection: "",
-            reportInProgress: false,
-            enableReporting: {
+            batchnames: ["Please select a value"],
+            batchlist: [""],
+            batchTypeSelection: "",
+            batchInProgress: false,
+            enableBatch: {
                 expander: {
                     type: "fluid.deferredInvokeCall",
                     func: "cspace.permissions.resolve",
                     args: {
                         resolver: "{permissionsResolver}",
                         permission: "read",
-                        target: "reporting"
+                        target: "batch"
                     }
                 }
             }
         },
         urls: cspace.componentUrlBuilder({
-            reportTypesUrl: "%tenant/%tname/reporting/search/%recordType",
-            reportUrl: "%tenant/%tname/invokereport/%reportcsid/%recordType/%csid"
+            batchTypesUrl: "%tenant/%tname/batch/search/%recordType",
+            batchUrl: "%tenant/%tname/invokebatch/%batchcsid/%recordType/%csid"
         }),
-        finalInitFunction: "cspace.reportProducer.finalInit",
-        postInitFunction: "cspace.reportProducer.postInit",
-        preInitFunction: "cspace.reportProducer.preInit"
+        finalInitFunction: "cspace.batchRunner.finalInit",
+        postInitFunction: "cspace.batchRunner.postInit",
+        preInitFunction: "cspace.batchRunner.preInit"
     });
     
-    fluid.defaults("cspace.reportProducer.testReportTypesSource", {
-        url: "%test/data/%recordType/reporting.json"
+    fluid.defaults("cspace.batchRunner.testBatchTypesSource", {
+        url: "%test/data/%recordType/batch.json"
     });
-    cspace.reportProducer.testReportTypesSource = cspace.URLDataSource;
+    cspace.batchRunner.testBatchTypesSource = cspace.URLDataSource;
     
-    fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
+    fluid.fetchResources.primeCacheFromResources("cspace.batchRunner");
     
-    cspace.reportProducer.checkReportButtonDisabling = function (model, recordModel) {
+    cspace.batchRunner.checkBatchButtonDisabling = function (model, recordModel) {
         if (!recordModel.csid) {
             return true;
         }
-        return model.reportlist.length < 2 && !model.reportlist[0];
+        return model.batchlist.length < 2 && !model.batchlist[0];
     };
     
-    cspace.reportProducer.preInit = function (that) {
+    cspace.batchRunner.preInit = function (that) {
         that.options.listeners = {
-            reportStarted: function () {
-                that.applier.requestChange("reportInProgress", true);
-                that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportlist[0]);
-                that.reportStatus.show({
-                    reportType: that.model.reportTypeSelection,
-                    reportName: that.model.reportnames[$.inArray(that.model.reportTypeSelection, that.model.reportlist)]
+            batchStarted: function () {
+                that.applier.requestChange("batchInProgress", true);
+                that.applier.requestChange("batchTypeSelection", that.model.batchTypeSelection || that.model.batchlist[0]);
+                that.batchStatus.show({
+                    batchType: that.model.batchTypeSelection,
+                    batchName: that.model.batchnames[$.inArray(that.model.batchTypeSelection, that.model.batchlist)]
                 });
             },
-            reportFinished: function () {
-                that.applier.requestChange("reportInProgress", false);
-                that.reportStatus.hide();
+            batchFinished: function (data) {
+                that.applier.requestChange("batchInProgress", false);
+                that.batchStatus.hide();
+                that.messageBar.show(fluid.stringTemplate(that.lookupMessage("batch-batchComplete"), {
+                    batchName: data.batchName,
+                    userNote: data.response.userNote
+                }), null, false);
             },
             onError: function (message) {
-                that.applier.requestChange("reportInProgress", false);
-                that.reportStatus.hide();
-                that.messageBar.show(that.lookupMessage("reporting-reportError") + message, null, true)
+                that.applier.requestChange("batchInProgress", false);
+                that.batchStatus.hide();
+                that.messageBar.show(that.lookupMessage("batch-batchError") + message, null, true)
             },
-            onStop: function (reportType) {
-                that.applier.requestChange("reportInProgress", false);
-                that.applier.requestChange("reportTypeSelection", reportType);
-                that.requestReport(true);
+            onStop: function (batchType) {
+                that.applier.requestChange("batchInProgress", false);
+                that.applier.requestChange("batchTypeSelection", batchType);
+                that.requestBatch(true);
             }
         };
         that.options.recordApplier.modelChanged.addListener("csid", function () {
@@ -158,21 +162,21 @@ cspace = cspace || {};
         });
     };
     
-    cspace.reportProducer.postInit = function (that) {
-        that.reportLoadingIndicatorContainer = $("<div/>")
-            .addClass(that.options.selectors.reportLoadingIndicatorContainer.substr(1))
-            .addClass(that.options.styles.reportLoadingIndicatorContainer)
+    cspace.batchRunner.postInit = function (that) {
+        that.batchLoadingIndicatorContainer = $("<div/>")
+            .addClass(that.options.selectors.batchLoadingIndicatorContainer.substr(1))
+            .addClass(that.options.styles.batchLoadingIndicatorContainer)
             .hide();
-        $("body").append(that.reportLoadingIndicatorContainer);
+        $("body").append(that.batchLoadingIndicatorContainer);
     };
     
-    cspace.reportProducer.finalInit = function (that) {
-        that.reportTypesSource.get({
+    cspace.batchRunner.finalInit = function (that) {
+        that.batchTypesSource.get({
             recordType: that.options.recordType
         }, function (data) {
             if (!data) {
                     that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                        url: that.reportTypesSource.options.url
+                        url: that.batchTypesSource.options.url
                     }));
                     return;
                 }
@@ -182,27 +186,27 @@ cspace = cspace || {};
                     });
                     return;
                 }
-            if (data.reportlist.length > 0) {
-                that.applier.requestChange("reportnames", data.reportnames);
-                that.applier.requestChange("reportlist", data.reportlist);
+            if (data.batchlist.length > 0) {
+                that.applier.requestChange("batchnames", data.batchnames);
+                that.applier.requestChange("batchlist", data.batchlist);
             }
             that.refreshView();
             that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
-                if (that.model.reportInProgress) {
+                if (that.model.batchInProgress) {
                     that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                         model: {
-                            messages: ["reporting-dialog-primaryMessage", "reporting-dialog-secondaryMessage"],
+                            messages: ["batch-dialog-primaryMessage", "batch-dialog-secondaryMessage"],
                             messagekeys: {
-                                primaryMessage: "reporting-dialog-stopPrimaryMessage",
-                                secondaryMessage: "reporting-dialog-stopSecondaryMessage",
-                                actText: "reporting-dialog-stopActText",
-                                actAlt: "reporting-dialog-stopActAlt"
+                                primaryMessage: "batch-dialog-stopPrimaryMessage",
+                                secondaryMessage: "batch-dialog-stopSecondaryMessage",
+                                actText: "batch-dialog-stopActText",
+                                actAlt: "batch-dialog-stopActAlt"
                             }
                         },
                         listeners: {
                             onClose: function (userAction) {
                                 if (userAction === "act") {
-                                    that.requestReport(true, callback);
+                                    that.requestBatch(true, callback);
                                 }
                             }
                         },
@@ -212,42 +216,59 @@ cspace = cspace || {};
                 }
             });
             that.events.ready.fire();
-        }, cspace.util.provideErrorCallback(that, that.reportTypesSource.options.url, "errorFetching"));
+        }, cspace.util.provideErrorCallback(that, that.batchTypesSource.options.url, "errorFetching"));
     };
     
-    cspace.reportProducer.requestReport = function (model, options, events, stop, callback) {
+    cspace.batchRunner.requestBatch = function (model, options, events, stop, callback) {
         if (!stop) {
-            events.reportStarted.fire();
+            events.batchStarted.fire();
         }
-        var href = fluid.stringTemplate(options.urls.reportUrl, {
-            reportcsid: model.reportTypeSelection,
+        var href = fluid.stringTemplate(options.urls.batchUrl, {
+            batchcsid: model.batchTypeSelection,
             recordType: options.recordType,
             csid: options.recordModel.csid
         });
-        fluid.fetchResources({
-            report: {
-                href: href,
-                options: {
-                    type: "GET",
-                    success: function (data) {
-                        if (data.isError) {
-                            fluid.each(data.messages, function(message) {
-                                events.onError.fire(message.message);
-                            });
-                            return;
-                        }
-                        window.location = href;
-                        events.reportFinished.fire();
-                        if (callback) {
-                            callback();
-                        }
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        events.onError.fire(textStatus);
-                    }
-                }
-            }
+
+        var batchType = model.batchTypeSelection;
+        var batchName = model.batchnames[$.inArray(batchType, model.batchlist)]
+
+        var invocationSource = cspace.URLDataSource({
+            value: {
+                targetTypeName: "cspace.batchRunner.invocationSource"
+            },
+            //writeable: true,
+            url: href
         });
+        
+        invocationSource.get(
+            {},
+            function (data) {
+                if (!data) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                        url: that.batchTypesSource.options.url
+                    }));
+                    return;
+                }
+                if (data.isError === true) {
+                    fluid.each(data.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
+                
+                events.batchFinished.fire({
+                    batchName: batchName,
+                    response: data
+                });
+                
+                if (callback) {
+                    callback();
+                }
+            },
+            function (xhr, textStatus, errorThrown) {
+                events.onError.fire(textStatus);
+            }
+        );
     };
     
     var openConfirmation = function (confirmation, name, model, parentBundle, onClose) {
@@ -260,92 +281,92 @@ cspace = cspace || {};
         });
     };
     
-    cspace.reportProducer.generateReport = function (confirmation, parentBundle, requestReport, recordEditor) {
+    cspace.batchRunner.runBatch = function (confirmation, parentBundle, requestBatch, recordEditor) {
         if (recordEditor && recordEditor.unsavedChanges) {
             openConfirmation(confirmation, "saveDialog", {
-                messages: [ "reporting-dialog-primaryMessageSave" ],
+                messages: [ "batch-dialog-primaryMessageSave" ],
                 messagekeys: {
-                    actText: "reporting-dialog-actTextSave",
-                    actAlt: "reporting-dialog-actAltSave",
-                    proceedText: "reporting-dialog-proceedTextSave",
-                    proceedAlt: "reporting-dialog-proceedAltSave"
+                    actText: "batch-dialog-actTextSave",
+                    actAlt: "batch-dialog-actAltSave",
+                    proceedText: "batch-dialog-proceedTextSave",
+                    proceedAlt: "batch-dialog-proceedAltSave"
                 }
             }, 
             parentBundle,
             function (userAction) {
                 if (userAction === "act") {
                     recordEditor.options.dataContext.events.afterSave.addListener(function () {
-                        requestReport(false);
+                        requestBatch(false);
                     }, undefined, undefined, "last");
                     recordEditor.requestSave();
                 } else if (userAction === "proceed") {
-                    requestReport(false);
+                    requestBatch(false);
                 }
             });
         }
         else {
             openConfirmation(confirmation, "deleteDialog", {
-                messages: [ "reporting-dialog-primaryMessage" ],
+                messages: [ "batch-dialog-primaryMessage" ],
                 messagekeys: {
-                    actText: "reporting-dialog-actText",
-                    actAlt: "reporting-dialog-actAlt"
+                    actText: "batch-dialog-actText",
+                    actAlt: "batch-dialog-actAlt"
                 }
             }, 
             parentBundle,
             function (userAction) {
                 if (userAction === "act") {
-                    requestReport(false);
+                    requestBatch(false);
                 }
             });
         }
     };
     
-    cspace.reportProducer.produceTree = function (that) {
+    cspace.batchRunner.produceTree = function (that) {
         return {
             expander: {
                 type: "fluid.renderer.condition",
-                condition: "${enableReporting}",
+                condition: "${enableBatch}",
                 trueTree: {
-                    report: {
-                        decorators: {"addClass": "{styles}.report"}
+                    batch: {
+                        decorators: {"addClass": "{styles}.batch"}
                     }
                 }
             },
-            reportHeader: {
-                messagekey: "reporting-reportHeader",
-                decorators: {"addClass": "{styles}.reportHeader"}
+            batchHeader: {
+                messagekey: "batch-batchHeader",
+                decorators: {"addClass": "{styles}.batchHeader"}
             },
-            reportType: {
-                optionnames: "${reportnames}",
-                optionlist: "${reportlist}",
-                selection: "${reportTypeSelection}",
-                decorators: {"addClass": "{styles}.reportType"}
+            batchType: {
+                optionnames: "${batchnames}",
+                optionlist: "${batchlist}",
+                selection: "${batchTypeSelection}",
+                decorators: {"addClass": "{styles}.batchType"}
             },
-            reportButton: {
-                messagekey: "reporting-reportButton",
+            batchButton: {
+                messagekey: "batch-batchButton",
                 decorators: [{
-                    addClass: "{styles}.reportButton"
+                    addClass: "{styles}.batchButton"
                 }, {
                     type: "jQuery",
                     func: "click",
-                    args: that.generateReport
+                    args: that.runBatch
                 }, {
                     type: "jQuery",
                     func: "prop",
                     args: {
-                        disabled: that.checkReportButtonDisabling
+                        disabled: that.checkBatchButtonDisabling
                     }
                 }]
             }
         };
     };
     
-    fluid.defaults("cspace.reportProducer.reportStatus", {
+    fluid.defaults("cspace.batchRunner.batchStatus", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
-                url: "%webapp/html/components/ReportStatusTemplate.html",
+                url: "%webapp/html/components/BatchStatusTemplate.html",
                 options: {
                     dataType: "html"
                 }
@@ -354,44 +375,44 @@ cspace = cspace || {};
         events: {
             onStop: null
         },
-        produceTree: "cspace.reportProducer.reportStatus.produceTree",
-        finalInitFunction: "cspace.reportProducer.reportStatus.finalInit",
+        produceTree: "cspace.batchRunner.batchStatus.produceTree",
+        finalInitFunction: "cspace.batchRunner.batchStatus.finalInit",
         selectors: {
-            message: ".csc-reportStatus-message", 
-            stop: ".csc-reportStatus-stop"
+            message: ".csc-batchStatus-message", 
+            stop: ".csc-batchStatus-stop"
         },
         styles: {
-            message: "cs-reportStatus-message", 
-            stop: "cs-reportStatus-stop"
+            message: "cs-batchStatus-message", 
+            stop: "cs-batchStatus-stop"
         },
         parentBundle: "{globalBundle}",
         strings: { }
     });
     
-    fluid.fetchResources.primeCacheFromResources("cspace.reportProducer.reportStatus");
+    fluid.fetchResources.primeCacheFromResources("cspace.batchRunner.batchStatus");
     
-    cspace.reportProducer.reportStatus.produceTree = function (that) {
+    cspace.batchRunner.batchStatus.produceTree = function (that) {
         return {
             message: {
-                messagekey: "reporting-message",
-                args: ["${reportName}"],
+                messagekey: "batch-message",
+                args: ["${batchName}"],
                 decorators: {"addClass": "{styles}.message"}
             },
             stop: {
-                messagekey: "reporting-stop",
+                messagekey: "batch-stop",
                 decorators: [{
                     "addClass": "{styles}.stop"
                 }, {
                     type: "jQuery",
                     func: "click",
                     args: function () {
-                        that.events.onStop.fire(that.model.reportType);
+                        that.events.onStop.fire(that.model.batchType);
                     }
                 }]
             }
         };
     };
-    cspace.reportProducer.reportStatus.finalInit = function (that) {
+    cspace.batchRunner.batchStatus.finalInit = function (that) {
         that.show = function (model) {
             that.applier.requestChange("", model);
             that.refreshView();
