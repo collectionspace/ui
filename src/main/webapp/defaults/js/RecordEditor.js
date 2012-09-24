@@ -812,9 +812,9 @@ cspace = cspace || {};
         if (fluid.find(model.fields.narrowerContexts, function (element) {
             return element.narrowerContext || undefined;
         })) {
-            removeMessage = "deleteDialog-hasNarrowerContextsMessage";
+            removeMessage = removeMessage || "deleteDialog-hasNarrowerContextsMessage";
         } else if (model.fields.broaderContext) {
-            removeMessage = "deleteDialog-hasBroaderContextMessage";
+            removeMessage = removeMessage || "deleteDialog-hasBroaderContextMessage";
         }
         if (removeMessage) {
             confirmation.open("cspace.confirmation.deleteDialog", undefined, {
