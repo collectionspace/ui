@@ -644,6 +644,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "cspace.authority"], {
+            funcName: "cspace.recordEditor.remover.removeWithCheckRefobjs",
+            args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
+        });
+        
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "cataloging"], {
             funcName: "cspace.recordEditor.remover.removeWithCheck",
             args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });

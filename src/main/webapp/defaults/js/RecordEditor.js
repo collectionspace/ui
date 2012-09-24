@@ -808,7 +808,34 @@ cspace = cspace || {};
         });
     };
 
-    cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle) {
+    cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle, removeMessage) {
+        if (fluid.find(model.fields.narrowerContexts, function (element) {
+            return element.narrowerContext || undefined;
+        })) {
+            removeMessage = "deleteDialog-hasNarrowerContextsMessage";
+        } else if (model.fields.broaderContext) {
+            removeMessage = "deleteDialog-hasBroaderContextMessage";
+        }
+        if (removeMessage) {
+            confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                enableButtons: ["act"],
+                model: {
+                    messages: [removeMessage],
+                    messagekeys: {
+                        actText: "alertDialog-actText"
+                    }
+                },
+                termMap: [
+                    parentBundle.resolve(that.options.recordType)
+                ],
+                parentBundle: parentBundle
+            });
+        } else {
+            cspace.recordEditor.remover.remove(that);
+        }
+    };
+
+    cspace.recordEditor.remover.removeWithCheckRefobjs = function (that, model, confirmation, parentBundle) {
         var removeMessage;
         that.refobjsDataSource.get({
             vocab: cspace.vocab.resolve({
@@ -821,30 +848,7 @@ cspace = cspace || {};
             if (fluid.makeArray(data.items.length) > 0) {
                 removeMessage = "deleteDialog-usedByMessage";
             }
-            if (fluid.find(model.fields.narrowerContexts, function (element) {
-                return element.narrowerContext || undefined;
-            })) {
-                removeMessage = "deleteDialog-hasNarrowerContextsMessage";
-            } else if (model.fields.broaderContext) {
-                removeMessage = "deleteDialog-hasBroaderContextMessage";
-            }
-            if (removeMessage) {
-                confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                    enableButtons: ["act"],
-                    model: {
-                        messages: [removeMessage],
-                        messagekeys: {
-                            actText: "alertDialog-actText"
-                        }
-                    },
-                    termMap: [
-                        parentBundle.resolve(that.options.recordType)
-                    ],
-                    parentBundle: parentBundle
-                });
-            } else {
-                cspace.recordEditor.remover.remove(that);
-            }
+            cspace.recordEditor.remover.removeWithCheck(that, model, confirmation, parentBundle, removeMessage);
         });
     };
 
