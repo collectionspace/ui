@@ -1366,7 +1366,8 @@ fluid.registerNamespace("cspace.util");
         },
         mergePolicy: {
             schema: "nomerge",
-            model: "preserve"
+            model: "preserve",
+            sortRecords: "replace"
         },
         invokers: {
             getRecordTypes: {
@@ -1375,6 +1376,9 @@ fluid.registerNamespace("cspace.util");
             }
         },
         model: {},
+        sortRecords: [
+            "nonVocabularies"
+        ],
         strategy: cspace.util.schemaStrategy,
         finalInitFunction: "cspace.recordTypes.finalInit"
     });
@@ -1391,6 +1395,11 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
+        
+        fluid.each(that.options.sortRecords, function(elPath) {
+            that[elPath] = (that[elPath]) ? that[elPath].sort() : undefined;
+        });
+        
         that.events.ready.fire(that);
     };
 
