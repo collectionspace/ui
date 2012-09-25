@@ -806,6 +806,33 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
 
+    fluid.defaults("cspace.util.urnCSIDConverter", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        strategy: "cspace.util.urnToString",
+        postInitFunction: "cspace.util.urnCSIDConverter.postInit",
+        components: {
+            externalURL: {
+                type: "cspace.externalURL",
+                container: "{cspace.util.urnCSIDConverter}.container"
+            }
+        },
+        styles: {
+            parent: "cs-urnCSIDConverter"
+        }
+    });
+
+    cspace.util.urnCSIDConverter.postInit = function (that) {
+        var strategy = fluid.getGlobalValue(that.options.strategy);
+        that.container.hide();
+        that.parent = $("<div/>");
+        that.parent.addClass(that.options.styles.parent);
+        that.container.wrap(that.parent);
+        that.input = $("<input/>");
+        that.input.prop("disabled", true);
+        that.input.val(strategy(that.container.val()));
+        that.container.after(that.input);
+    };
+
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format

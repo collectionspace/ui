@@ -79,6 +79,9 @@ cspace = cspace || {};
     });
 
     cspace.externalURL.processUrlAuth = function (url, recordType, vocab, original) {
+        if (!original) {
+            return "";
+        }
         return fluid.stringTemplate(url, {
             recordType: recordType,
             csid: cspace.util.shortIdentifierToCSID(original),
@@ -91,6 +94,9 @@ cspace = cspace || {};
     };
 
     cspace.externalURL.processUrl = function (url, recordType, original) {
+        if (!original) {
+            return "";
+        }
         return fluid.stringTemplate(url, {
             recordType: recordType,
             csid: cspace.util.urnToCSID(original)
