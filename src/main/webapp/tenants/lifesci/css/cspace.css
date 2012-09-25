@@ -1361,6 +1361,15 @@ input[disabled]:hover, input[disabled]:hover    {
     overflow:hidden;}
 
 /*   styling the externalURL  */
+li.cs-repeatable-repeat div.cs-repeatable-content.cs-externalURL-parent {
+    min-width: 300px;
+}
+td.cs-externalURL-parent {
+    min-width: 182px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
+    width: 93%;
+}
 input[type="text"].cs-externalURL, .cs-externalURL-parent input.cs-autocomplete-input, .info-pair .content tbody td.cs-externalURL-parent input.cs-autocomplete-input {
     width: 90%;
 }
@@ -1920,14 +1929,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     cursor:pointer;
     max-height: 50px;
 }
-.cs-hierarchy-equivalentContext {
-    background: #FFF;
-    display: block;
-    width: 100%;
-    border: 1px solid #C7CFD4;
-    height: 19px;
-    line-height: 15px;
-}
 .cs-sidebar-mediumImage {
     max-height: 165px;
 }
@@ -2368,4 +2369,8 @@ input[type="button"].cs-deleteRelationButton {
 .cs-mediaView-snapshot div a {
     color: #6F9ECD;
     font-weight: bold;
+}
+.cs-urnCSIDConverter {
+    display: block;
+    padding-bottom: 3px;
 }

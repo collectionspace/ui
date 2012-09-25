@@ -1908,14 +1908,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     cursor:pointer;
     max-height: 50px;
 }
-.cs-hierarchy-equivalentContext {
-    background: #FFF;
-    display: block;
-    width: 100%;
-    border: 1px solid #C7CFD4;
-    height: 19px;
-    line-height: 15px;
-}
 .cs-sidebar-mediumImage {
     max-height: 165px;
 }
@@ -2356,4 +2348,8 @@ input[type="button"].cs-deleteRelationButton {
 .cs-mediaView-snapshot div a {
     color: #6F9ECD;
     font-weight: bold;
+}
+.cs-urnCSIDConverter {
+    display: block;
+    padding-bottom: 3px;
 }

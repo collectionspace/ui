@@ -22,6 +22,17 @@ cspace = cspace || {};
         return fluid.merge(null, tree, uispec);
     };
 
+    cspace.hierarchy.filterUISpec = function (uispec) {
+        // NOTE: This is to fix an issue of not necessary things in uisoec
+        // for hierarchy. As soon as uispec is cleaned up - this needs to
+        // be removed.
+        return fluid.filterKeys(uispec, [
+            ".csc-hierarchy-broaderContext",
+            ".csc-hierarchy-broaderContextType",
+            ".csc-hierarchy-narrowerContexts"
+        ], false);
+    };
+
     cspace.hierarchy.produceTreeCataloging = function (that) {
         return cspace.hierarchy.treeUispecMerge({
             header: {
@@ -54,8 +65,11 @@ cspace = cspace || {};
                     expander: {
                         repeatID: "equivalentContext",
                         tree: {
-                            decorators: {addClass: "{styles}.equivalentContext"},
-                            value: "${{row}.equivalentContext}"
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
                         },
                         type: "fluid.renderer.repeat",
                         pathAs: "row",
@@ -82,7 +96,7 @@ cspace = cspace || {};
             broaderContextLabel: {
                 messagekey: "hierarchy-broaderContextLabel"
             },
-            expander: [{
+            expander: {
                 type: "fluid.renderer.condition",
                 condition: {
                     funcName: "cspace.hierarchy.assertEquivalentContexts",
@@ -93,6 +107,19 @@ cspace = cspace || {};
                 trueTree: {
                     equivalentContextsLabel: {
                         messagekey: "hierarchy-equivalentContextsLabel"
+                    },
+                    expander: {
+                        repeatID: "equivalentContext",
+                        tree: {
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
+                        },
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "fields.equivalentContexts"
                     }
                 },
                 falseTree: {
@@ -100,16 +127,7 @@ cspace = cspace || {};
                         decorators: {addClass: "{styles}.hidden"}
                     }
                 }
-            }, {
-                repeatID: "equivalentContext",
-                tree: {
-                    decorators: {addClass: "{styles}.equivalentContext"},
-                    value: "${{row}.equivalentContext}"
-                },
-                type: "fluid.renderer.repeat",
-                pathAs: "row",
-                controlledBy: "fields.equivalentContexts"
-            }]
+            }
         }, that.options.uispec);
     };
     
@@ -131,7 +149,6 @@ cspace = cspace || {};
             equivalentContext: ".csc-hierarchy-equivalentContext"
         },
         styles: {
-            equivalentContext: "cs-hierarchy-equivalentContext",
             hidden: "hidden"
         },
         selectorsToIgnore: "togglable",
@@ -149,6 +166,12 @@ cspace = cspace || {};
             afterFetchTemplate: "{that}.refreshView"
         },
         components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "cspace.hierarchyAutocomplete"
+                }
+            },
             hierarchyTogglable: {
                 type: "cspace.util.togglable",
                 createOnEvent: "afterRender"

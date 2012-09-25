@@ -209,6 +209,9 @@ cspace = cspace || {};
         },
         strings: {},
         events: {
+            primaryRecordCreated: {
+                event: "{globalEvents}.events.primaryRecordCreated"
+            },
             modelChanged: null,
             onSearch: null,
             onInitialSearch: null,
@@ -220,6 +223,7 @@ cspace = cspace || {};
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
         listeners: {
+            primaryRecordCreated: "{that}.primaryRecordCreated",
             onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler",
             afterSearch: "{loadingIndicator}.events.hideOn.fire",
             onError: "{loadingIndicator}.events.hideOn.fire",
@@ -246,6 +250,7 @@ cspace = cspace || {};
             },
             onInitialSearch: "cspace.search.searchView.onInitialSearch"
         },
+        primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
             messageBar: "{messageBar}",
             vocab: "{vocab}",
@@ -379,6 +384,10 @@ cspace = cspace || {};
         that.onInitialSearchHandler = function () {
             that.onInitialSearch();
         };
+
+        that.primaryRecordCreated = function (primaryRecordModel) {
+            that.options.primaryCSID = fluid.get(primaryRecordModel, "csid");
+        };
         
         // Function which won't allow a user to select already related records
         that.disableRelated = function (model) {
@@ -390,7 +399,7 @@ cspace = cspace || {};
             for (index = offset; index < fluid.pager.computePageLimit(that.resultsPager.model); ++ index) {
                 var result = model.results[index],
                     row = that.locate("resultsRow").eq(index - offset),
-                    disable = result.related === "true";
+                    disable = result.related === "true" || result.csid === that.options.primaryCSID;
                 row.prop("disabled", disable);
                 row.toggleClass(that.options.styles.disabled, disable);
             }

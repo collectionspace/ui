@@ -98,7 +98,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         finalInitFunction: "cspace.autocomplete.finalInit"
     });
 
-    fluid.demands("authoritiesSource", ["cspace.hierarchy", "cspace.autocomplete", "cspace.nonAuthority"], {
+    fluid.demands("authoritiesSource", ["cspace.hierarchyAutocomplete", "cspace.autocomplete", "cspace.nonAuthority"], {
         funcName: "cspace.autocomplete.structuredObjectsAuthoritiesSource",
         options: {
             recordType: "{cspace.recordEditor}.options.recordType"
@@ -716,7 +716,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         args: "{cspace.autocomplete.popup}"
     });
 
-    fluid.demands("cspace.autocomplete.popup.open", ["cspace.autocomplete.popup", "cspace.hierarchy", "cspace.nonAuthority"], {
+    fluid.demands("cspace.autocomplete.popup.open", ["cspace.autocomplete.popup", "cspace.hierarchyAutocomplete", "cspace.nonAuthority"], {
         funcName: "cspace.autocomplete.popup.open",
         args: ["{cspace.autocomplete.popup}", "newTermName"]
     });

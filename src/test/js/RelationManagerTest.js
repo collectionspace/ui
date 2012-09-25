@@ -14,47 +14,61 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 (function ($, fluid) {
 
     var baseCSID = "123456798",
-        relationManagerTest = new jqUnit.TestCase("RelationManager Tests"),
-        createRelationManager = function (options, permissions) {
-            var model = {},
-                applier = fluid.makeChangeApplier(model),
-                defaultOpts = {
-                    applier: applier,
-                    model: model
-                };
-
-            fluid.merge({
-                model: "preserve",
-                applier: "nomerge"
-            }, defaultOpts, options);
-
-            var testEnv = cspace.tests.testEnvironment({permissions: permissions}),
-                relationManager = fluid.withEnvironment(testEnv.environment, function() {
-                    return cspace.relationManager("#main", defaultOpts);
+        bareRelationManagerTest = new jqUnit.TestCase("RelationManager Tests"),
+        createRelationManager = function (options, testEnv, notSaved) {
+            var primaryModel = {
+                    csid: baseCSID
+                }, instantiator;
+            if (notSaved) {
+                testEnv.globalModel.applier.requestChange("primaryModel.csid", undefined);
+            } else {
+                testEnv.globalModel.attachModel({
+                    primaryModel: {
+                        model: primaryModel,
+                        applier: fluid.makeChangeApplier(primaryModel)
+                    }
                 });
-            return relationManager;
+            }
+
+            instantiator = testEnv.instantiator;
+            if (testEnv.relationManager) {
+                instantiator.clearComponent(testEnv, "relationManager");
+            }
+            testEnv.options.components["relationManager"] = {
+                type: "cspace.relationManager",
+                container: "#main",
+                options: options
+            };
+            fluid.initDependent(testEnv, "relationManager", instantiator);
+            return testEnv.relationManager;
         },
         relationDialogSetup = function (options) {
-            var csid = (options.hasPrimaryCSID) ? baseCSID : undefined,
-                manager = createRelationManager({
-                    primary: options.primary,
-                    related: options.related,
-                    primaryCSID: csid
-                }, options.permissions);
+            var manager = createRelationManager({
+                primary: options.primary,
+                related: options.related,
+            }, options.testEnv || relationManagerTestSomePerms, options.notSaved);
             options.callback(manager);
-        };
+        },
+        relationManagerTestNoPerms = cspace.tests.testEnvironment({testCase: bareRelationManagerTest, permissions: {}}),
+        relationManagerTestSomePerms = cspace.tests.testEnvironment({testCase: bareRelationManagerTest}),
+        relationManagerTestSpecific = cspace.tests.testEnvironment({testCase: bareRelationManagerTest, permissions: {
+            loanin: ["read", "update", "create"],
+            cataloging: ["update", "create"]
+        }});
+
 
     cspace.tests.testRelationInit = function (anyPerms) {
-        relationManagerTest.test("Initialization: user permissions " + anyPerms, function() {
+        var testEnv = anyPerms ? relationManagerTestSomePerms : relationManagerTestNoPerms;
+        testEnv.test("Initialization: user permissions " + anyPerms, function() {
             var recordType = "cataloging",
                 relationManager = createRelationManager({
                     primary: recordType,
-                    related: recordType
-                }),
+                    related: recordType,
+                }, testEnv),
                 addVisible = anyPerms;
             jqUnit.assertDeepEq("Related record is properly initalized", recordType, relationManager.options.related);
-            jqUnit.assertTrue("Add button is visible: " + addVisible, relationManager.locate("addButton").is(":visible"));
-        }, anyPerms ? undefined : {});
+            jqUnit.assertEquals("Add button is visible: " + addVisible, addVisible, relationManager.locate("addButton").is(":visible"));
+        });
     };
     cspace.tests.testRelationInit(true);
     cspace.tests.testRelationInit(false);
@@ -72,7 +86,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 start();
             },
             primary: "cataloging",
-            related: "cataloging"
+            related: "cataloging",
+            notSaved: true
         },
         "Add Relation Dialog, for specific record type": {
             callback: function (relationManager) {
@@ -90,11 +105,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             },
             primary: "cataloging",
             related: "loanin",
-            permissions: {
-                loanin: ["read", "update", "create"],
-                cataloging: ["update", "create"]
-            },
-            hasPrimaryCSID: true
+            testEnv: relationManagerTestSpecific
         },
         "Add Relation Dialog, for all procedural records (using 'procedures' option)": {
             callback: function (relationManager) {
@@ -111,8 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 start();
             },
             primary: "cataloging",
-            related: "procedures",
-            hasPrimaryCSID: true
+            related: "procedures"
         },
         "Fire create new record event": {
             callback: function (relationManager) {
@@ -128,16 +138,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             },
             primary: "cataloging",
             related: "loanin",
-            permissions: {
-                loanin: ["read", "update", "create"],
-                cataloging: ["update", "create"]
-            },
-            hasPrimaryCSID: true
+            testEnv: relationManagerTestSpecific
         }
     };
 
     $.each(testScenarios, function(message, testScenario) {
-        relationManagerTest.asyncTest(message, function () {
+        var testEnv = testScenario.testEnv || relationManagerTestSomePerms;
+        testEnv.asyncTest(message, function () {
             relationDialogSetup(testScenario);
         });
     });

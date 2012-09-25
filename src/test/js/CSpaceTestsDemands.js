@@ -122,7 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.demands("cspace.relationManager.add", ["cspace.relationManager", "cspace.test"], {
             funcName: "cspace.relationManager.add",
-            args: ["{relationManager}", "{messageBar}", "{relationManager}.options.primaryCSID", "{arguments}.0"]
+            args: ["{relationManager}", "{messageBar}", "{globalModel}.model.primaryModel.csid", "{arguments}.0"]
         });
     
     // Report producer  
@@ -132,6 +132,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 globalNavigator: "{globalNavigator}"
             }
         }
+    });
+
+    fluid.demands("cspace.autocomplete", ["cspace.tests.repeatableAutoCompleteParent", "cspace.test"], {
+        container: "{arguments}.0",
+        options: fluid.COMPONENT_OPTIONS
     });
 
     fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "cspace.test"], {
@@ -185,5 +190,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 newTermNamePostfix: ".csc-autocomplete-newTermName-postfix"
             }
         }
+    });
+
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.authority", "cspace.test"], {
+        options: fluid.COMPONENT_OPTIONS
+    });
+
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cataloging.read", "cspace.test"], {
+        options: fluid.COMPONENT_OPTIONS
     });
 })(jQuery, fluid);

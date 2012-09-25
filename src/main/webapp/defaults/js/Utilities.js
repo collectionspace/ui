@@ -806,6 +806,33 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
 
+    fluid.defaults("cspace.util.urnCSIDConverter", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        strategy: "cspace.util.urnToString",
+        postInitFunction: "cspace.util.urnCSIDConverter.postInit",
+        components: {
+            externalURL: {
+                type: "cspace.externalURL",
+                container: "{cspace.util.urnCSIDConverter}.container"
+            }
+        },
+        styles: {
+            parent: "cs-urnCSIDConverter"
+        }
+    });
+
+    cspace.util.urnCSIDConverter.postInit = function (that) {
+        var strategy = fluid.getGlobalValue(that.options.strategy);
+        that.container.hide();
+        that.parent = $("<div/>");
+        that.parent.addClass(that.options.styles.parent);
+        that.container.wrap(that.parent);
+        that.input = $("<input/>");
+        that.input.prop("disabled", true);
+        that.input.val(strategy(that.container.val()));
+        that.container.after(that.input);
+    };
+
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -823,6 +850,16 @@ fluid.registerNamespace("cspace.util");
             return "";
         }
         return decodeURIComponent(urn.slice(urn.indexOf("id(") + 3, urn.indexOf(")")));
+    };
+
+    cspace.util.shortIdentifierToCSID = function (urn) {
+        var shortIdentifier;
+        if (!urn) {
+            return "";
+        }
+        urn = urn.slice(urn.indexOf("item:name(") + 10);
+        shortIdentifier = decodeURIComponent(urn.slice(0, urn.indexOf(")")));
+        return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
     };
 
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
@@ -1156,7 +1193,7 @@ fluid.registerNamespace("cspace.util");
             eventMap: {
                 "primaryModel.csid": function () {
                     if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                        that.events.primaryRecordCreated.fire();
+                        that.events.primaryRecordCreated.fire(fluid.get(that.globalModel.model, "primaryModel"));
                     }
                 },
                 "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
