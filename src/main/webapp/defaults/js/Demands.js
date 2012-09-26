@@ -648,7 +648,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
         
-        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "cataloging"], {
+        fluid.demands("cspace.recordEditor.remover.remove", ["cspace.recordEditor.remover", "cataloging.delete"], {
             funcName: "cspace.recordEditor.remover.removeWithCheck",
             args: ["{cspace.recordEditor.remover}", "{cspace.recordEditor}.model", "{confirmation}", "{globalBundle}"]
         });
