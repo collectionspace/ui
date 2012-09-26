@@ -401,8 +401,8 @@ var utilitiesTester = function ($) {
             });
         });
     };
-    
-    recordSortingTest({
+
+    fluid.each([{
         sortRecords: null,
         recordTypes: {
             "all": [
@@ -436,9 +436,7 @@ var utilitiesTester = function ($) {
                 "concept"
             ]
         }
-    });
-    
-    recordSortingTest({
+    }, {
         recordTypes: {
             "all": [
                 "person",
@@ -471,9 +469,7 @@ var utilitiesTester = function ($) {
                 "concept"
             ]
         }
-    });
-    
-    recordSortingTest({
+    }, {
         sortRecords: ["cataloging", "procedures", "vocabularies"],
         recordTypes: {
             "all": [
@@ -507,6 +503,8 @@ var utilitiesTester = function ($) {
                 "place"
             ]
         }
+    }], function (test) {
+        recordSortingTest(test);
     });
     
     utilitiesTest.test("Loading Indicator basic", function () {
