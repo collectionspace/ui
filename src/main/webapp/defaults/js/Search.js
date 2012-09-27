@@ -399,7 +399,9 @@ cspace = cspace || {};
             for (index = offset; index < fluid.pager.computePageLimit(that.resultsPager.model); ++ index) {
                 var result = model.results[index],
                     row = that.locate("resultsRow").eq(index - offset),
-                    disable = result.related === "true" || result.csid === that.options.primaryCSID;
+                    disable = result.related === "true" ||
+                              result.csid === that.options.primaryCSID ||
+                              fluid.get(result, "summarylist.workflow") === "locked";
                 row.prop("disabled", disable);
                 row.toggleClass(that.options.styles.disabled, disable);
             }
