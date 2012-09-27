@@ -2354,3 +2354,10 @@ input[type="button"].cs-deleteRelationButton {
     display: block;
     padding-bottom: 3px;
 }
+.cs-relatedRecordsTab-newRecordBannder-banner {
+    background-color: #EEF4D7;
+    color: #696565;
+    padding: 15px 0 15px 20px;
+    font-size: 13px;
+    font-weight: bold;
+}

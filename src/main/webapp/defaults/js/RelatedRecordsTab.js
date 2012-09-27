@@ -102,6 +102,18 @@ cspace = cspace || {};
                     }
                 }
             },
+            newRecordBannder: {
+                type: "cspace.relatedRecordsTab.newRecordBannder",
+                container: "{relatedRecordsTab}.dom.newRecordBannder",
+                createOnEvent: "onCreateNewRecord",
+                options: {
+                    events: {
+                        hideOn: {
+                            event: "{relatedRecordsTab}.events.onAddRelation"
+                        }
+                    }
+                }
+            },
             relatedRecordsRecordEditor: {
                 type: "cspace.recordEditor",
                 container: "{relatedRecordsTab}.dom.recordEditor",
@@ -162,13 +174,14 @@ cspace = cspace || {};
             relationManager: ".csc-relatedRecordsTab-relationManager",
             relatedRecordsListView: ".csc-listView",
             record: ".csc-relatedRecordsTab-record",
+            newRecordBannder: ".csc-relatedRecordsTab-newRecordBannder",
             recordEditor: ".csc-relatedRecordsTab-recordEditor",
             recordHeader: ".csc-relatedRecordsTab-recordHeader",
             togglable: ".csc-relatedRecordsTab-togglable",
             listHeader: ".csc-relatedRecordsTab-listHeader",
             header: ".csc-relatedRecordsTab-header"
         },
-        selectorsToIgnore: ["togglable", "header", "relatedRecordsListView", "record", "recordEditor", "relationManager"],
+        selectorsToIgnore: ["togglable", "header", "relatedRecordsListView", "record", "newRecordBannder", "recordEditor", "relationManager"],
         parentBundle: "{globalBundle}",
         strings: {},
         urls: cspace.componentUrlBuilder({
@@ -337,6 +350,44 @@ cspace = cspace || {};
         url: "%test/data/%primary/%related/%csid.json"
     });
     cspace.listView.testDataSourceTab = cspace.URLDataSource;
+
+    fluid.defaults("cspace.relatedRecordsTab.newRecordBannder", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        parentBundle: "{globalBundle}",
+        strings: {},
+        selectors: {
+            banner: ".csc-relatedRecordsTab-newRecordBannder-banner"
+        },
+        styles: {
+            banner: "cs-relatedRecordsTab-newRecordBannder-banner"
+        },
+        events: {
+            hideOn: null
+        },
+        listeners: {
+            hideOn: "{that}.hide",
+            afterRender: "{that}.show"
+        },
+        renderOnInit: true,
+        preInitFunction: "cspace.relatedRecordsTab.newRecordBannder.preInit",
+        protoTree: {
+            banner: {
+                messagekey: "relatedRecordsTab-newRecordBannder-banner",
+                decorators: {
+                    addClass: "{styles}.banner"
+                }
+            }
+        }
+    });
+
+    cspace.relatedRecordsTab.newRecordBannder.preInit = function (that) {
+        that.hide = function () {
+            that.container.hide();
+        };
+        that.show = function () {
+            that.container.show();
+        };
+    };
 
     fluid.defaults("cspace.relatedRecordsTab.record", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
