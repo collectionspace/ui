@@ -123,7 +123,8 @@ cspace = cspace || {};
                     globalRef: "relatedModel",
                     listeners: {
                         afterRecordRender: "{loadingIndicator}.events.hideOn.fire",
-                        afterCreate: "{relatedRecordsTab}.afterRelatedRecordCreate"
+                        afterCreate: "{relatedRecordsTab}.afterRelatedRecordCreate",
+                        afterSave: "{relatedRecordsTab}.afterRecordSave"
                     }
                 },
                 createOnEvent: "onSelect"
@@ -232,6 +233,10 @@ cspace = cspace || {};
             if (related === that.options.related || hasRelated(related)) {
                 that.relatedRecordsListView.updateModel();
             }
+        };
+
+        that.afterRecordSave = function () {
+            that.events.relationsUpdated.fire(that.options.related);
         };
 
         that.onDeleteRelation = function (target) {

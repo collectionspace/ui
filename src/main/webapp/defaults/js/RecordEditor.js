@@ -481,12 +481,17 @@ cspace = cspace || {};
         args: ["{cspace.recordEditor.saver}", "{recordEditor}"]
     });
 
+    fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock", "cspace.relatedRecordsTab"], {
+        funcName: "cspace.recordEditor.saver.saveMovementTab",
+        args: ["{cspace.recordEditor.saver}", "{recordEditor}", "{relatedRecordsTab}.events.afterAddRelation"]
+    });
+
     fluid.demands("cspace.recordEditor.saver.afterValidate", "cspace.recordEditor.saver", {
         funcName: "cspace.recordEditor.saver.afterValidate",
         args: "{recordEditor}"
     });
 
-    cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
+    var openConfirmationMovement = function (that, recordEditor, proceedCallback) {
         recordEditor.confirmation.open("cspace.confirmation.saveDialog", undefined, {
             model: {
                 messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
@@ -499,17 +504,37 @@ cspace = cspace || {};
             },
             listeners: {
                 onClose: function (userAction) {
-                    if (userAction === "act") {
-                        cspace.recordEditor.saver.save(that, recordEditor);
-                    } else if (userAction === "proceed") {
-                        recordEditor.applier.requestChange("workflowTransition", "lock");
-                        cspace.recordEditor.saver.save(that, recordEditor);
-                    } else if (userAction === "cancel") {
+                    if (userAction === "cancel") {
                         recordEditor.events.onCancelSave.fire();
+                        return;
                     }
+                    if (userAction === "proceed") {
+                        proceedCallback();
+                    }
+                    cspace.recordEditor.saver.save(that, recordEditor);
                 }
             },
             parentBundle: recordEditor.options.parentBundle
+        });
+    };
+
+    cspace.recordEditor.saver.saveMovementTab = function (that, recordEditor, afterAddRelation) {
+        openConfirmationMovement(that, recordEditor, function () {
+            if (fluid.get(recordEditor.model, "csid")) {
+                recordEditor.applier.requestChange("workflowTransition", "lock");
+                return;
+            }
+            afterAddRelation.addListener(function () {
+                afterAddRelation.removeListener("saveMovementTab");
+                recordEditor.applier.requestChange("workflowTransition", "lock");
+                cspace.recordEditor.saver.save(that, recordEditor);
+            }, "saveMovementTab", undefined, "last");
+        });
+    };
+
+    cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
+        openConfirmationMovement(that, recordEditor, function () {
+            recordEditor.applier.requestChange("workflowTransition", "lock");
         });
     };
 
