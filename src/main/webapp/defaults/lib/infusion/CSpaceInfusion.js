@@ -15983,7 +15983,7 @@ var fluid_1_5 = fluid_1_5 || {};
                  }
                  pendingClass[fetchClass][canon] = resourceSpec;
              }
-             options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+             // options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
              $.ajax(options);
          }
          else {
