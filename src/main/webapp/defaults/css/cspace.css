@@ -12,6 +12,7 @@ CollectionSpace 1.8 default CSS selectors
 
 /* core HTML elements*/
 html{
+    overflow-y: scroll;
     font-size: 100%;} 
 body {
     font-size: 12px; 
