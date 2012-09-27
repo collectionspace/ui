@@ -371,10 +371,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup", "cspace.autocomplete", {
             container: "{autocomplete}.popupElement"
         });
+        fluid.demands("cspace.autocomplete.popup", ["cspace.hierarchyAutocomplete", "cspace.autocomplete", "cspace.authority"], {
+            container: "{autocomplete}.popupElement",
+            options: {
+                recordModel: "{cspace.recordEditor}.model"
+            }
+        });
         fluid.demands("cspace.autocomplete.popup", ["cspace.hierarchyAutocomplete", "cspace.autocomplete", "cspace.nonAuthority"], {
             container: "{autocomplete}.popupElement",
             options: {
                 produceTree: "cspace.autocomplete.produceTreeStructuredObjects",
+                recordModel: "{cspace.recordEditor}.model",
                 selectors: {
                     newTermName: ".csc-autocomplete-newTermName",
                     newTermNamePrefix: ".csc-autocomplete-newTermName-prefix",

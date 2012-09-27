@@ -622,6 +622,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     rowDisabled = that.options.elPaths.rowDisabled,
                     matchesPath = that.options.elPaths.matches;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
+                    var recordCSID = fluid.get(that.options, "recordModel.csid");
+                    if (recordCSID && recordCSID === match[csid]) {
+                        return;
+                    }
                     var vocab = cspace.vocab.resolve({
                         recordType: match.type,
                         model: match,
