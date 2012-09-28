@@ -806,7 +806,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     pagerModel: {
                         sortDir: -1,
                         sortKey: "movements_common.locationDate"
-                    }
+                    },
+                    columns: [{
+                        sortable: true,
+                        id: "number",
+                        name: "%recordType-number"
+                    }, {
+                        sortable: true,
+                        id: "summary",
+                        name: "summary"
+                    }, {
+                        sortable: true,
+                        id: "summarylist.locationDate",
+                        name: "listView-locationDate"
+                    }]
                 },
                 components: {
                     relationRemover: {
