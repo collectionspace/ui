@@ -62,6 +62,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "{sidebar}.options.primaryRecordType"
             }
         });
+
+        // Batch runner
+        fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.localData"], {
+            container: "{sidebar}.dom.batch",
+            options: {
+                recordType: "{sidebar}.options.primaryRecordType"
+            }
+        });
         
         // getDefaultConfigURL demands
         fluid.demands("getRecordType", ["cspace.util.getDefaultConfigURL", "cspace.localData"], {
@@ -117,7 +125,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        
+
+        // Batch Runner
+        fluid.demands("cspace.batchRunner.batchTypesSource", ["cspace.batchRunner", "cspace.localData"], {
+            funcName: "cspace.batchRunner.testBatchTypesSource",
+            args: {
+                targetTypeName: "cspace.batchRunner.testBatchTypesSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+       
         // List editor's demands
         fluid.demands("cspace.listEditor.listDataSource",  ["cspace.users", "cspace.localData", "cspace.listEditor"], {
             funcName: "cspace.listEditor.testListDataSource",
@@ -934,6 +953,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+        // Batch runner  
+        fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.pageBuilder"], {
+            container: "{sidebar}.dom.batch",
+            options: {
+                recordType: "{sidebar}.options.primaryRecordType",
+                recordModel: "{pageBuilder}.model",
+                recordApplier: "{pageBuilder}.applier"
+            }
+        });
+
+        fluid.demands("cspace.batchRunner.batchTypesSource", "cspace.batchRunner", {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{batchRunner}.options.urls.batchTypesUrl",
+                targetTypeName: "cspace.batchRunner.batchTypesSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+        
+        fluid.demands("cspace.batchRunner.runBatch", ["cspace.batchRunner", "cspace.recordEditor"], {
+            funcName: "cspace.batchRunner.runBatch",
+            args: ["{batchRunner}.confirmation", "{batchRunner}.options.parentBundle", "{batchRunner}.requestBatch", "{recordEditor}"]
+        });
         
         fluid.demands("cspace.reportProducer.generateReport", ["cspace.reportProducer", "cspace.recordEditor"], {
             funcName: "cspace.reportProducer.generateReport",
@@ -958,6 +1003,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         fluid.demands("confirmation", "cspace.reportProducer", "{options}");
+        fluid.demands("confirmation", "cspace.batchRunner", "{options}");
 
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
@@ -2442,7 +2488,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2489,7 +2535,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2536,7 +2582,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2583,7 +2629,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2630,7 +2676,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2677,7 +2723,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
