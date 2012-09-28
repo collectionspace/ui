@@ -1397,7 +1397,10 @@ fluid.registerNamespace("cspace.util");
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
         
         fluid.each(that.options.sortRecords, function(elPath) {
-            that[elPath] = (that[elPath]) ? that[elPath].sort() : undefined;
+            if (!that[elPath]) {
+                return;
+            }
+            that[elPath] = that[elPath].sort();
         });
         
         that.events.ready.fire(that);
