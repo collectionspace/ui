@@ -60,6 +60,9 @@ collection-object-materialTypeLabel: Material Type
 collection-object-requestDateLabel: Request Date
 collection-object-filledDateLabel: Filled Date
 collection-object-useNotesLabel: Use Notes
+collection-object-affinityTaxonLabel: Affinity Taxon
+collection-object-hybridFlagLabel: Hybrid Flag
+taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
 
 # Inadvertently shares field name and label
