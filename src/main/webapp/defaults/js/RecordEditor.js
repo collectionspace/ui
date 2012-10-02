@@ -1264,7 +1264,7 @@ cspace = cspace || {};
         };
     };
 
-    cspace.recordEditor.controlPanel.disableDeleteButton = function (rModel, userLogin) {
+    cspace.recordEditor.controlPanel.disableDeleteButton = function (rModel) {
         //disable if: model.csid is not set (new record)
         if (!rModel || !rModel.csid) {
             return true;
@@ -1287,7 +1287,7 @@ cspace = cspace || {};
             var notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
             that.locate("cancel").prop("disabled", !unsavedChanges);
             that.locate("createFromExistingButton").prop("disabled", notSaved);
-            that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel, that.options.userLogin));
+            that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
             that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
             that.locate("deleteRelationButton").prop("disabled", notSaved);
             that.renderGoTo();
@@ -1346,7 +1346,7 @@ cspace = cspace || {};
             notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
             recordType = that.options.recordType;
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
-        that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel, that.options.userLogin));
+        that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
         
