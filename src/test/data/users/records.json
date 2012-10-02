@@ -1,10 +1,10 @@
 {
     "results": [
         {
-            "email": "admin@core.collectionspace.org",
+            "email": "admin@collectionspace.org",
             "status": "active",
             "createdAt": "2012-05-30T00:41:01.794",
-            "userId": "admin@core.collectionspace.org",
+            "userId": "admin@collectionspace.org",
             "screenName": "Administrator",
             "csid": "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
             "recordtype": "users"
