@@ -1015,7 +1015,7 @@ cspace = cspace || {};
         }, "{arguments}.1"]
     });
     
-    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.admin", "cspace.users"], {
+    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.recordEditor", "cspace.admin", "cspace.users"], {
         mergeAllOptions: [{
             recordModel: "{cspace.recordEditor}.model",
             recordApplier: "{cspace.recordEditor}.applier",
