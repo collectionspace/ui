@@ -100,7 +100,7 @@ cspace = cspace || {};
                     recordType: "{admin}.options.recordType",
                     globalRef: "adminModel",
                     listeners: {
-                        afterRecordRender: [
+                        afterInit: [
                             "{loadingIndicator}.events.hideOn.fire",
                             "{admin}.events.recordEditorReady.fire"
                         ],

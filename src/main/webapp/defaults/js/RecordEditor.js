@@ -166,6 +166,7 @@ cspace = cspace || {};
                     template: "{cspace.recordEditor}.events.afterFetchTemplate"
                 }
             },
+            afterInit: null,
             onSave: "preventable",
             afterCreate: null,
             afterSave: null,
@@ -185,7 +186,11 @@ cspace = cspace || {};
                 listener: "{cspace.recordEditor}.events.afterFetchLocal.fire",
                 priority: "last"
             },
-            ready: "{cspace.recordEditor}.onReady",
+            ready: [
+                "{cspace.recordEditor}.onReady", {
+                listener: "{cspace.recordEditor}.events.afterInit.fire",
+                priority: "last"
+            }],
             afterRecordRender: [
                 "{loadingIndicator}.events.hideOn.fire",
                 "{messageBar}.hide"
