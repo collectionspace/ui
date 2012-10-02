@@ -1014,6 +1014,19 @@ cspace = cspace || {};
             recordType: "{cspace.recordEditor}.options.recordType"
         }, "{arguments}.1"]
     });
+    
+    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.admin", "cspace.users"], {
+        mergeAllOptions: [{
+            recordModel: "{cspace.recordEditor}.model",
+            recordApplier: "{cspace.recordEditor}.applier",
+            model: {
+                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
+            },
+            recordType: "{cspace.recordEditor}.options.recordType",
+            userLogin: "{pageBuilder}.options.userLogin"
+        }, "{arguments}.1"]
+    });
 
     fluid.defaults("cspace.recordEditor.controlPanel", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
@@ -1257,7 +1270,7 @@ cspace = cspace || {};
             return true;
         }
         //disable if: if we are looking at admin account
-        if (rModel.fields.email === "admin@collectionspace.org") {
+        if (rModel.fields.email === "admin@core.collectionspace.org") {
             return true;
         }
         return false;
@@ -1275,6 +1288,7 @@ cspace = cspace || {};
             that.locate("cancel").prop("disabled", !unsavedChanges);
             that.locate("createFromExistingButton").prop("disabled", notSaved);
             that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
+            that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
             that.locate("deleteRelationButton").prop("disabled", notSaved);
             that.renderGoTo();
         };
@@ -1298,6 +1312,12 @@ cspace = cspace || {};
         that.enableControlButtons = function () {
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
+        };
+        that.hideDeleteButtonForCurrentUser = function (userId) {
+            var userLogin = that.options.userLogin;
+            if (userLogin && userId && (userLogin.userId === userId)) {
+                that.applier.requestChange("showDeleteButton", false);
+            }
         };
         // Function which sets the flag to be false whenever recordType matches one of the elements in the map for this flag
         that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
@@ -1335,6 +1355,8 @@ cspace = cspace || {};
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
+        
+        that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
 
         that.refreshView();
         that.renderGoTo();
