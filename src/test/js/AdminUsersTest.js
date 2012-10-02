@@ -112,18 +112,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.users"
             }
         },
-        userLogin: {
-            type: "cspace.util.login",
-            options: {
-                userId: "123123123",
-                csid: "123123123"
-            }
-        },
         pageBuilderIO: {
             type: "cspace.tests.pageBuilderIO"
         },
         pageBuilder: {
-            type: "cspace.pageBuilder"
+            type: "cspace.pageBuilder",
+            options: {
+                userLogin: {
+                    userId: "123123123",
+                    csid: "123123123"
+                }
+            }
         }
     }});
 
@@ -134,18 +133,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.users"
             }
         },
-        userLogin: {
-            type: "cspace.util.login",
-            options: {
-                userId: "reader@core.collectionspace.org",
-                csid: "5d199caa-7ec4-4d15-a633-222c53094cb1"
-            }
-        },
         pageBuilderIO: {
             type: "cspace.tests.pageBuilderIO"
         },
         pageBuilder: {
-            type: "cspace.pageBuilder"
+            type: "cspace.pageBuilder",
+            options: {
+                userLogin: {
+                    userId: "reader@core.collectionspace.org",
+                    csid: "5d199caa-7ec4-4d15-a633-222c53094cb1"
+                }
+            }
         }
     }});
 
@@ -843,7 +841,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
                             return decorator;
                         });
-                        jqUnit.notVisible("Delete button is invisible for current user", controlPanel.locate("deleteButton"));
+                        jqUnit.assertEquals("Delete button is not rendered for current user", 0, controlPanel.locate("deleteButton").length);
                         start();
                     },
                     priority: "last"
