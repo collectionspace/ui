@@ -1270,7 +1270,7 @@ cspace = cspace || {};
             return true;
         }
         // disable if screenName is the same as the user selected. Preventing users from deleting themselves
-        if (fields.userId === userLogin.userId) {
+        if (userLogin && (fields.userId === userLogin.userId)) {
             return true;
         }
         return false;
