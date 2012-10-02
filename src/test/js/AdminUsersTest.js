@@ -127,6 +127,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     }});
 
+    var adminTestCurrent = cspace.tests.testEnvironment({testCase: bareAdminTest, components: {
+        users: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.users"
+            }
+        },
+        userLogin: {
+            type: "cspace.util.login",
+            options: {
+                userId: "reader@core.collectionspace.org",
+                csid: "5d199caa-7ec4-4d15-a633-222c53094cb1"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
     var setupAdmin = function (options, testEnv) {
         testEnv = testEnv || adminTest;
         var instantiator = testEnv.instantiator;
@@ -259,7 +281,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         jqUnit.assertEquals("Email is blank", locateSelector(recordRenderer, "email").val(), "");
                         jqUnit.assertEquals("Full name is blank", locateSelector(recordRenderer, "screenName").val(), "");
                         jqUnit.assertEquals("Password is blank", admin.locate("password").val(), "");
@@ -288,8 +311,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
-                        changeDetails(admin, recordRenderer, "validPassword");
+                    listener: function (admin) {
+                        changeDetails(admin, admin.adminRecordEditor.recordRenderer, "validPassword");
                         admin.adminRecordEditor.events.onSave.fire();
                     },
                     priority: "last"
@@ -318,7 +341,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         changeDetails(admin, recordRenderer, "validPassword");
                         locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
                         admin.adminRecordEditor.events.onSave.fire();
@@ -347,8 +371,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
-                        changeDetails(admin, recordRenderer, "invalidPassword");
+                    listener: function (admin) {
+                        changeDetails(admin, admin.adminRecordEditor.recordRenderer, "invalidPassword");
                         jqUnit.assertFalse("validator fails", admin.validate());
                         jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
                         admin.adminListView.messageBar.hide();
@@ -369,8 +393,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
-                        changeDetails(admin, recordRenderer, "invalidPassword");
+                    listener: function (admin) {
+                        changeDetails(admin, admin.adminRecordEditor.recordRenderer, "invalidPassword");
                         locateSelector(admin, "passwordConfirm").val(testDataCreateUser.invalidPassword).change();
                         jqUnit.assertFalse("validator fails", admin.validate());
                         jqUnit.isVisible("message container is visible", admin.adminListView.messageBar.container);
@@ -392,8 +416,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
-                        changeDetails(admin, recordRenderer, "validPassword");
+                    listener: function (admin) {
+                        changeDetails(admin, admin.adminRecordEditor.recordRenderer, "validPassword");
                         admin.adminRecordEditor.events.onSave.fire();
                     },
                     priority: "last"
@@ -475,7 +499,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
                         jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
                         locateSelector(recordRenderer, "screenName").val("New Name").change();
@@ -501,7 +526,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 recordEditorReady: {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
                         jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
                         locateSelector(recordRenderer, "screenName").val("New Name").change();
@@ -519,8 +545,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     priority: "last"
                 }
             }
-        }/*
-,
+        },
         "Confirmation proceed": {
             testType: "asyncTest",
             listeners: {
@@ -533,16 +558,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 "recordEditorReady.test": {
                     path: "listeners",
-                    listener: function (admin, recordRenderer) {
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
                         jqUnit.notVisible("Confiration dialog is invisible initially", admin.adminRecordEditor.confirmation.popup);
                         locateSelector(recordRenderer, "screenName").val("New Name").change();
                         admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
                             jqUnit.isVisible("Confirmation dialog should now be visible", admin.adminRecordEditor.confirmation.popup);
-                            admin.events.recordEditorReady.addListener(function () {
+                            admin.events.onSelect.addListener(function () {
+                                admin.events.recordEditorReady.addListener(function (admin) {
+                                    jqUnit.assertEquals("User Name should now be", "Administrator", locateSelector(admin.adminRecordEditor.recordRenderer, "screenName").val());
+                                    start();
+                                }, undefined, undefined, "last");
+                            });
+                            admin.adminRecordEditor.confirmation.popup.bind("dialogclose", function () {
                                 jqUnit.notVisible("Confirmation dialog is now invisible", admin.adminRecordEditor.confirmation.popup);
-                                jqUnit.assertEquals("User Name should now be", "Administrator", locateSelector(recordRenderer, "screenName").val());
-                                start();
                             });
                             admin.adminRecordEditor.confirmation.confirmationDialog.locate("proceed").click();
                         });
@@ -552,8 +582,274 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     once: true
                 }
             }
+        },
+        "Confirmation delete": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            var confirmation = admin.adminRecordEditor.confirmation;
+                            jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User  ?", confirmation.confirmationDialog.locate("message:").text());
+                            jqUnit.isVisible("Delete button should be visible", confirmation.confirmationDialog.locate("act"));
+                            jqUnit.isVisible("Cancel button should be visible", confirmation.confirmationDialog.locate("cancel"));
+                            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
+                            confirmation.confirmationDialog.events.onClose.fire();
+                            start();
+                        });
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("deleteButton").eq(0).click();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Confirmation delete + cancel": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            var confirmation = admin.adminRecordEditor.confirmation;
+                            jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                            confirmation.popup.bind("dialogclose", function () {
+                                jqUnit.notVisible("Confirmation dialog is now invisible", confirmation.popup);
+                                jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                                start();
+                            });
+                            confirmation.confirmationDialog.locate("cancel").click();
+                        });
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("deleteButton").eq(0).click();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Confirmation delete + proceed": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            var confirmation = admin.adminRecordEditor.confirmation;
+                            jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                            admin.adminListView.events.ready.addListener(function () {
+                                jqUnit.notVisible("Confirmation dialog is now invisible", confirmation.popup);
+                                jqUnit.notVisible("No record is currently selected", locateSelector(recordRenderer, "screenName"));
+                                start();
+                            }, undefined, undefined, "last");
+                            confirmation.confirmationDialog.locate("act").click();
+                        });
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("deleteButton").eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        },
+        "Confirmation navigate + delete": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
+                        var confirmation = admin.adminRecordEditor.confirmation;
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+
+                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                        jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", confirmation.confirmationDialog.locate("message:").eq(0).text());
+                        jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", confirmation.confirmationDialog.locate("message:").eq(1).text());
+                        confirmation.confirmationDialog.locate("close").click();
+
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User  ?", confirmation.confirmationDialog.locate("message:").text());
+                            jqUnit.isVisible("Delete button should be visible", confirmation.confirmationDialog.locate("act"));
+                            jqUnit.isVisible("Cancel button should be visible", confirmation.confirmationDialog.locate("cancel"));
+                            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
+                            confirmation.confirmationDialog.events.onClose.fire();
+                            start();
+                        });
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("deleteButton").eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        },
+        "Confirmation delete + navigate (CSPACE-2646)": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
+                        var confirmation = admin.adminRecordEditor.confirmation;
+
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("deleteButton").eq(0).click();
+                        jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                        jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User  ?", confirmation.confirmationDialog.locate("message:").text());
+                        jqUnit.isVisible("Delete button should be visible", confirmation.confirmationDialog.locate("act"));
+                        jqUnit.isVisible("Cancel button should be visible", confirmation.confirmationDialog.locate("cancel"));
+                        jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
+                        confirmation.confirmationDialog.locate("close").click();
+
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+
+                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                        jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", confirmation.confirmationDialog.locate("message:").eq(0).text());
+                        jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", confirmation.confirmationDialog.locate("message:").eq(1).text());
+                        confirmation.confirmationDialog.locate("close").click();
+                        start();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        },
+        "Confirmation on navigation away after canceled changes": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.initial": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var recordRenderer = admin.adminRecordEditor.recordRenderer;
+                        var confirmation = admin.adminRecordEditor.confirmation;
+                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        jqUnit.notVisible("Confiration dialog is invisible initially", confirmation.popup);
+                        locateSelector(recordRenderer, "screenName").val("New Name").change();
+
+                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                        jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                        jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", confirmation.confirmationDialog.locate("message:").eq(0).text());
+                        jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", confirmation.confirmationDialog.locate("message:").eq(1).text());
+                        confirmation.confirmationDialog.locate("close").click();
+                        jqUnit.notVisible("Dialog should close", confirmation.popup);
+                        jqUnit.assertEquals("Record name should still be changed.", "New Name", locateSelector(recordRenderer, "screenName").val());
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        controlPanel.locate("cancel").eq(0).click();
+                        jqUnit.assertEquals("Record should be rolled back.", "Reader", locateSelector(recordRenderer, "screenName").val());
+                        start();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        },
+        "Currently logged in user should see delete button for other users": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        jqUnit.isVisible("Delete button is visible for other users", controlPanel.locate("deleteButton"));
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Currently logged in user should have invisible delete button": {
+            testType: "asyncTest",
+            testEnv: adminTestCurrent,
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        admin.adminListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (admin) {
+                        var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
+                            return decorator;
+                        });
+                        jqUnit.notVisible("Delete button is invisible for current user", controlPanel.locate("deleteButton"));
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
         }
-*/
     };
 
     fluid.each(["ready", "onSearch", "afterSearch", "onUnSearch", "afterUnSearch"], function (eventName) {
@@ -563,9 +859,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     fluid.demands("onSelect", ["cspace.admin", "cspace.test"], {
         args: ["{arguments}.0", "{cspace.admin}"]
-    });
-    fluid.demands("recordEditorReady", ["cspace.admin", "cspace.test"], {
-        args: ["{cspace.admin}", "{arguments}.0"]
     });
 
     fluid.demands("onSave", ["cspace.admin", "cspace.test"], {
@@ -623,7 +916,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 if (listener.once) {
                     listener.listener = function (admin) {
                         admin.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
-                        originalListener(admin);
+                        originalListener.apply(null, fluid.makeArray(arguments));
                     };
                 }
                 listeners[eventName] = {
@@ -651,140 +944,3 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     testRunner(testConfig);
 
 }());
-/*    
-    adminUsersTest.asyncTest("Confirmation proceed", function () {
-        setupConfirmation(function (re, adminUsers) {
-            adminUsers.locate("userName").val("New Name").change();
-            re.confirmation.popup.bind("dialogopen", function () {
-                adminUsers.adminListEditor.detailsDC.events.afterFetch.addListener(function () {
-                    jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
-                    jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
-                    cspace.tests.onTearDown.fire(re);
-                    start();
-                });
-                re.confirmation.confirmationDialog.locate("proceed").click();
-            });
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation delete", function () {
-        setupConfirmation(function (re) {
-            re.events.afterRender.removeListener("initialSelect");
-            re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
-            jqUnit.isVisible("Delete button should be visible", re.confirmation.confirmationDialog.locate("act"));
-            jqUnit.isVisible("Cancel button should be visible", re.confirmation.confirmationDialog.locate("cancel"));
-            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.confirmationDialog.locate("proceed").length);
-            cspace.tests.onTearDown.fire(re);
-            start();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation delete + cancel", function () {
-        setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");
-            re.remove();
-            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-            jqUnit.isVisible("Confirmation Dialog is now visible", re.confirmation.popup);
-            re.confirmation.confirmationDialog.locate("cancel").click();
-            jqUnit.notVisible("Confirmation Dialog is now invisible", re.confirmation.popup);
-            jqUnit.assertEquals("Selected username is still", "Anastasia Cheethem", adminUsers.locate("userName").val());
-            cspace.tests.onTearDown.fire(re);
-            start();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation delete + proceed", function () {
-        setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");
-            re.remove();
-            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
-            re.options.dataContext.events.afterSave.addListener(function () {                        
-                jqUnit.assertTrue("Successfully executed remove", true);
-                jqUnit.notVisible("Confirmation Dialog is now invisible", re.confirmation.popup);
-                jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
-                cspace.tests.onTearDown.fire(re);
-                start();
-            }, undefined, undefined, "last");
-            re.confirmation.confirmationDialog.locate("act").click();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation navigate + delete", function () {
-        setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");                    
-            adminUsers.locate("userName").val("New Name").change();
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
-            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
-            re.confirmation.confirmationDialog.locate("close").click();
-            re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
-            cspace.tests.onTearDown.fire(re);
-            start();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation delete + navigate (CSPACE-2646)", function () {
-        setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");                    
-            re.remove();
-            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
-            re.confirmation.confirmationDialog.locate("close").click();
-            adminUsers.locate("userName").val("New Name").change();
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-            jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
-            jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
-            cspace.tests.onTearDown.fire(re);
-            start();
-        });
-    });
-    
-    adminUsersTest.asyncTest("Confirmation on navigation away after canceled changes", function () {
-        setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");                    
-            adminUsers.locate("userName").val("New Name").change();
-            re.confirmation.popup.bind("dialogopen", function () {
-                re.confirmation.popup.unbind("dialogopen");
-                jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", re.confirmation.popup);
-                jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
-                jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
-                re.confirmation.confirmationDialog.locate("close").click();
-                jqUnit.notVisible("Dialog should close", re.confirmation.popup);
-                jqUnit.assertEquals("Record name should still be changed.", "New Name", adminUsers.locate("userName").val());
-                re.locate("cancel").click();
-                jqUnit.assertEquals("Record should be rolled back.", "Anastasia Cheethem", adminUsers.locate("userName").val());
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            adminUsers.adminListEditor.list.locate("row").eq(1).click();
-        });
-    });
-    
-    var currentUserTests = function (userCSID, index, visibility) {
-        basicAdminUsersSetup(function (adminUsers, le, re) {
-            le.events.afterShowDetails.addListener(function () {
-                jqUnit[visibility]("Delete button is " + visibility + " current user", adminUsers.options.selectors.deleteButton);
-                cspace.tests.onTearDown.fire(re);
-                start();
-            });
-            adminUsers.adminListEditor.list.locate("row").eq(index).click();
-        }, {
-            login: cspace.util.login({csid: userCSID})
-        });
-    };
-    
-    adminUsersTest.asyncTest("Currently logged in user should have invisible delete button", function () {
-        currentUserTests("147258369", 2, "notVisible");
-    });
-    
-    adminUsersTest.asyncTest("Currently logged in user should see delete button for other users", function () {
-        currentUserTests("1111", 1, "isVisible");
-    }); 
-};
-
-jQuery(document).ready(function () {
-    adminUsersTester();
-});
-*/
