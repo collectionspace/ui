@@ -9,10 +9,10 @@
         }
     ],
     "fields": {
-        "email": "admin@collectionspace.org",
+        "email": "admin@core.collectionspace.org",
         "status": "active",
         "createdAt": "2012-05-30T00:41:01.794",
-        "userId": "admin@collectionspace.org",
+        "userId": "admin@core.collectionspace.org",
         "screenName": "Administrator",
         "role": [
             {

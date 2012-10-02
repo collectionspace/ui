@@ -1269,13 +1269,8 @@ cspace = cspace || {};
         if (!rModel || !rModel.csid) {
             return true;
         }
-        var fields = rModel.fields;
         //disable if: if we are looking at admin account
-        if (fields.email === "admin@collectionspace.org") {
-            return true;
-        }
-        // disable if screenName is the same as the user selected. Preventing users from deleting themselves
-        if (userLogin && (fields.userId === userLogin.userId)) {
+        if (rModel.fields.email === "admin@core.collectionspace.org") {
             return true;
         }
         return false;
@@ -1293,6 +1288,7 @@ cspace = cspace || {};
             that.locate("cancel").prop("disabled", !unsavedChanges);
             that.locate("createFromExistingButton").prop("disabled", notSaved);
             that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel, that.options.userLogin));
+            that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
             that.locate("deleteRelationButton").prop("disabled", notSaved);
             that.renderGoTo();
         };
@@ -1316,6 +1312,12 @@ cspace = cspace || {};
         that.enableControlButtons = function () {
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
+        };
+        that.hideDeleteButtonForCurrentUser = function (userId) {
+            var userLogin = that.options.userLogin;
+            if (userLogin && userId && (userLogin.userId === userId)) {
+                that.applier.requestChange("showDeleteButton", false);
+            }
         };
         // Function which sets the flag to be false whenever recordType matches one of the elements in the map for this flag
         that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
@@ -1353,6 +1355,8 @@ cspace = cspace || {};
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
+        
+        that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
 
         that.refreshView();
         that.renderGoTo();
