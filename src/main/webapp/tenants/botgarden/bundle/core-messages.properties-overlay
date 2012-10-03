@@ -64,6 +64,7 @@ collection-object-affinityTaxonLabel: Affinity Taxon
 collection-object-hybridFlagLabel: Hybrid Flag
 taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
+collection-object-taxonomicRangeLabel: Taxonomic range
 
 # Inadvertently shares field name and label
 # with another entry below
