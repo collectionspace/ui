@@ -1,0 +1,67 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "movement",
+            "selectors": {
+                "recordEditor": ".csc-movement-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-movement-currentLocation",
+                            "recordLockContainer": ".csc-recordLock"
+                        },
+                        "selectorsToIgnore": ["recordLockContainer", "recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
+                        "components": {
+                            "recordLock": {
+                                "type": "cspace.util.recordLock",
+                                "createOnEvent": "afterRender"
+                            }
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.currentLocation"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "movement",
+            "schema": {
+                "movement": null
+            },
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "pages/MovementTemplate.html",
+                    "templateSelector": ".csc-movement-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                }
+            }
+        }
+    }
+}
