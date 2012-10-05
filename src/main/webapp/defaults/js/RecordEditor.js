@@ -1323,7 +1323,7 @@ cspace = cspace || {};
         that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
             fluid.each(hideButtonMap, function(hideRecordTypes, flag) {
                  if(fluid.find(hideRecordTypes, function(hideRecordType) {
-                        return hideRecordType === recordType
+                        return hideRecordType === recordType;
                     })) {
                      that.applier.requestChange(flag, false);
                  }
@@ -1650,6 +1650,14 @@ cspace = cspace || {};
         tree.passwordInstructionsLabel = {
             messagekey: "users-passwordInstructionsLabel"
         };
+
+        // Do not render userId unless the user was already created.
+        if (!fluid.get(that.model, "fields.userId")) {
+            fluid.remove_if(tree, function (val, key) {
+                if (key.toLowerCase().indexOf("userid") > -1) {return true;}
+            });
+        }
+
         return tree;
     };
 
