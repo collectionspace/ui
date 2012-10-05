@@ -1,285 +1,280 @@
 /*
 Copyright 2010 University of Toronto
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
-You may not use this file except in compliance with this License.
+Licensed under the Educational Community License (ECL), Version 2.0.
+ou may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, jQuery, cspace, fluid, start, stop, expect*/
-"use strict";
+/*global jqUnit, cspace, fluid, start, expect*/
 
-var relatedRecordsTabTester = function ($) {
-    var testApplier = {};
-    var model, applier, objTab;
+(function () {
 
-    $.ajax({
-        url: "../data/cataloging/1984.068.0338.json",
-        async: false,
-        dataType: "json",
+    "use strict";
+
+    var bareRRTTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
+            $("#main").html(template);
+        }),
+        template;
+
+    jQuery.ajax({
+        url: "../../main/webapp/defaults/html/pages/RelatedRecordsTabTemplate.html",
+        dataType: "html",
         success: function (data) {
-            model = data;
-            applier = fluid.makeChangeApplier(model);
-        },
-        error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load cataloging data for testing");
+            template = data;
         }
     });
-    
-    var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/defaults/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
-        fluid.model.copyModel(testApplier, applier);
-    });
-    
-    var relatedRecordsTabTest = cspace.tests.testEnvironment({
-        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
-        instantiator: "{instantiator}",
-        modelHolder: {
-            type: "cspace.tests.modelHolder"
-        }
-    }});
 
-    var setupTab = function (opts) {
-        var testPrimaryType = "intake";
-        var testRelatedType = "cataloging";
-        var options = {
-            pageBuilder: {
+    // Stub for pageBuilderIO
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        schema: {
+            objectexit: null
+        },
+        recordType: "objectexit"
+    });
+
+    fluid.defaults("cspace.pageBuilder", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        resources: {
+            objectexit: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
                 options: {
-                    userLogin: cspace.tests.userLogin,
-                    model: "{modelHolder}.options.model",
-                    applier: "{modelHolder}.options.applier",
-                    primary: testPrimaryType,
-                    related: testRelatedType,
-                    pageType: "cataloging-tab",
-                    listeners: {
-                        onDependencySetup: function (uispec) {
-                            // Change the template URL for the number pattern chooser.
-                            uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
-                                = "../../main/webapp/defaults/html/components/NumberPatternChooser.html";
-                        }
-                    },
-                    components: {
-                        relatedRecordsTab: {
-                            options: {
-                                components: {
-                                    relationManager: {
-                                        options: {
-                                            components: {
-                                                searchToRelateDialog: {
-                                                    options: {
-                                                        listeners: opts.searchToRelateListeners
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    listEditor: {
-                                        options: {
-                                            listeners: opts.listEditorListeners,
-                                            components: {
-                                                detailsDC: {
-                                                    options: {
-                                                        recordType: testRelatedType
-                                                    }
-                                                },
-                                                list: {
-                                                    options: {
-                                                        listeners: opts.listListeners
-                                                    }
-                                                },
-                                                details: {
-                                                    options: {
-                                                        listeners: opts.detailsListeners,
-                                                        selectors: {
-                                                            identificationNumber: ".csc-object-identification-object-number"
-                                                        },
-                                                        strings: {
-                                                            identificationNumberRequired: "Please specify an Identification Number" 
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    dataType: "json"
                 }
-            },
-            pageBuilderIO: {
+            }),
+            namespaces: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
                 options: {
-                    uispecUrl: "../uispecs/cataloging-tab.json",
-                    pageSpec: {
-                        details: {
-                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
-                        }
-                    },
-                    listeners: {
-                        pageReady: opts.pageReadyListener
-                    }
+                    dataType: "json"
                 }
-            },
-            configURL: "../../main/webapp/defaults/config/cataloging-tab.json"
-        };
-        objTab = cspace.globalSetup("cspace.tab", options);
+            }),
+            recordtypes: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            }),
+            recordlist: cspace.resourceSpecExpander({
+                url: "%test/uischema/%schemaName.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            }),
+            uispec: cspace.resourceSpecExpander({
+                url: "%test/uispecs/objectexit-tab.json",
+                fetchClass: "testResource",
+                forceCache: true,
+                options: {
+                    dataType: "json"
+                }
+            })
+        },
+        pageType: "objectexit-tab",
+        selectors: {
+            relatedRecordsTab: "#main"
+        },
+        schema: ["objectexit", "namespaces", "recordtypes", "recordlist"],
+        preInitFunction: "cspace.pageBuilder.preInit"
+    });
+
+    fluid.demands("cspace.tests.pageBuilderIO", "cspace.test", {
+        options: fluid.COMPONENT_OPTIONS
+    });
+
+    cspace.pageBuilder.preInit = function (that) {
+        fluid.each(that.options.resources, function (resource, name) {
+            resource.url = fluid.stringTemplate(resource.url, {schemaName: name});
+        });
+        fluid.fetchResources(that.options.resources, function (resources) {
+            that.schema = {};
+            fluid.each(that.options.schema, function (schemaName) {
+                that.schema[schemaName] = resources[schemaName].resourceText[schemaName];
+            });
+            that.options.uispec = resources.uispec.resourceText;
+        });
     };
-    
-    relatedRecordsTabTest.asyncTest("Initialization", function () {
-        setupTab({
-            pageReadyListener: function () {
-                var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
-                var le = tab.listEditor;
-                le.events.afterShowDetails.addListener(function () {
-                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
-                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
-                    start();
-                });
-                le.list.locate("row").eq(1).click();
-            }
-        });
-    });
-    
-    // Creating a different testEntivronment to be able to create a new
-    // clean tree of components (clean from the previous test).
-    var relatedRecordsTabTest2 = cspace.tests.testEnvironment({
-        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
-        instantiator: "{instantiator}",
-        modelHolder: {
-            type: "cspace.tests.modelHolder"
-        }
-    }});
-    
-    relatedRecordsTabTest2.asyncTest("Changing Record", function () {
-        setupTab({
-            pageReadyListener: function () {
-                var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
-                var le = tab.listEditor;
-                le.events.afterShowDetails.addListener(function () {
-                    le.events.afterShowDetails.removeListener("firstSelect");
-                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
-                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/defaults/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
-                    le.events.afterShowDetails.addListener(function () {
-                        jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", tab.locate("goToRecord"));
-                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/defaults/html/cataloging.html?csid=1984.068.0338", tab.locate("goToRecord").attr("href"));
-                        start();
-                    });
-                    le.list.locate("row").eq(0).click();
-                }, "firstSelect");
-                le.list.locate("row").eq(1).click();
-            }
-        });
-    });
-    
-    $.ajax({
-        url: "../data/intake/IN2004.002.json",
-        async: false,
-        dataType: "json",
-        success: function (data) {
-            model = data;
-            applier = fluid.makeChangeApplier(model);
-        },
-        error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load cataloging data for testing");
-        }
-    });
-    
-    var relatedRecordsTabTestIntegrity = cspace.tests.testEnvironment({
-        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
-        instantiator: "{instantiator}",
-        modelHolder: {
-            type: "cspace.tests.modelHolder"
-        }
-    }});
-    
-    relatedRecordsTabTestIntegrity.asyncTest("Validation of required fields in related records (CSPACE-2294)", function () {
-        var options = {
-            pageBuilder: {
-                options: {
-                    userLogin: cspace.tests.userLogin,
-                    model: "{modelHolder}.options.model",
-                    applier: "{modelHolder}.options.applier",
-                    related: "cataloging",
-                    primary: "intake",
-                    pageType: "cataloging-tab",
-                    listeners: {
-                        onDependencySetup: function (uispec) {
-                            // Change the template URL for the number pattern chooser.
-                            uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
-                                = "../../main/webapp/defaults/html/components/NumberPatternChooser.html";
-                        }
-                    },
-                    components: {
-                        relatedRecordsTab: {
-                            options: {
-                                components: {
-                                    listEditor: {
-                                        options: {
-                                            components: {
-                                                detailsDC: {
-                                                    options: {
-                                                        recordType: "cataloging"
-                                                    }
-                                                },
-                                                details: {
-                                                    options: {
-                                                        selectors: {
-                                                            identificationNumber: ".csc-object-identification-object-number"
-                                                        },
-                                                        strings: {
-                                                            identificationNumberRequired: "Please specify an Identification Number" 
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            pageBuilderIO: {
-                options: {
-                    uispecUrl: "../uispecs/cataloging-tab.json",
-                    pageSpec: {
-                        details: {
-                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
-                        }
-                    },
-                    listeners: {
-                        pageReady: function () {
-                            var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
-                            var le = tab.listEditor;
-                            var details = le.details;
-                            le.events.afterShowDetails.addListener(function () {
-                                var reSelectors = details.options.selectors;
-                                jqUnit.notVisible("Before testing, message should not be visible", details.messageBar.container);
-                                $(".csc-object-identification-object-number", details.container).val("");
-                                var ret = details.requestSave();
-                                jqUnit.isVisible("After clicking save, message should be visible", details.messageBar.container);
-                                jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", details.messageBar.locate("message").text());
-                                details.events.afterRender.removeListener("testFunc");
-                                start();
-                            }, "testFunc");
-                            jqUnit.assertEquals("Verify that the model is still primary model", 
-                                model, cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab.model);
-                            jqUnit.assertEquals("Verify that the model is still primary applier", 
-                                applier, cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab.applier);
-                            $(".csc-recordList-row:first").click();
-                        }
-                    }
-                }
-            },
-            configURL: "../../main/webapp/defaults/config/cataloging-tab.json"
-        };
-        objTab = cspace.globalSetup("cspace.tab", options);
-    });
-};
 
-jQuery(document).ready(function () {
-    relatedRecordsTabTester(jQuery);
-});
+    var rrtTest = cspace.tests.testEnvironment({testCase: bareRRTTest, permissions: cspace.tests.fullPerms, components: {
+        tabs: {
+            type: "fluid.typeFount",
+            options: {
+                targetTypeName: "cspace.tabs"
+            }
+        },
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        },
+        pageBuilder: {
+            type: "cspace.pageBuilder"
+        }
+    }});
+
+    var setupRRT = function (options, testEnv) {
+        testEnv = testEnv || rrtTest;
+        var instantiator = testEnv.instantiator;
+        if (testEnv.relatedRecordsTab) {
+            instantiator.clearComponent(testEnv, "relatedRecordsTab");
+        }
+        testEnv.options.components.relatedRecordsTab = {
+            type: "cspace.relatedRecordsTab",
+            options: fluid.merge(null, {
+                primary: "objectexit",
+                related: "objectexit",
+                csid: "aa643807-e1d1-4ca2-9f9b",
+                strings: {
+                    editRecord: "objectexit-editRecord",
+                    recordList: "objectexit-recordList"
+                },
+                components: {
+                    relatedRecordsRecordEditor: {
+                        options: {
+                            selectors: {
+                                identificationNumber: ".csc-objectexit-exitNumber"
+                            },
+                            uispec: "{pageBuilder}.options.uispec.details"
+                        }
+                    }
+                }
+            }, options)
+        };
+        fluid.fetchResources({}, function () {
+            fluid.initDependent(testEnv, "relatedRecordsTab", instantiator);
+        }, {amalgamateClasses: ["testResource"]});
+    };
+
+    var testConfig = {
+        "Creation": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        jqUnit.isVisible("List view is visible", relatedRecordsTab.locate("relatedRecordsListView"));
+                        jqUnit.assertEquals("Related records list is initialized", 2, relatedRecordsTab.relatedRecordsListView.locate("row").length);
+                        jqUnit.notVisible("Record editor is invisible", relatedRecordsTab.locate("recordEditor"));
+                        jqUnit.isVisible("Banner message is visible", relatedRecordsTab.locate("record"));
+                        start();
+                    }
+                }
+            }
+        },
+        "Selection": {
+            testType: "asyncTest",
+            listeners: {
+                ready: {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        relatedRecordsTab.relatedRecordsListView.locate("row").eq(1).click();
+                    }
+                },
+                recordEditorReady: {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
+                        fluid.each(controlPanels, function (controlPanel) {
+                            var goTo = controlPanel.locate("goTo");
+                            jqUnit.isVisible("Delete button is disabled", goTo);
+                            jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/objectexit.html?csid=ba97ae73-1016-4c62-b4eb", goTo.attr("href"));
+                        });
+                        start();
+                    },
+                    priority: "last"
+                }
+            }
+        },
+        "Selection Again": {
+            testType: "asyncTest",
+            listeners: {
+                "ready.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        relatedRecordsTab.relatedRecordsListView.locate("row").eq(1).click();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
+                        fluid.each(controlPanels, function (controlPanel) {
+                            var goTo = controlPanel.locate("goTo");
+                            jqUnit.isVisible("Delete button is disabled", goTo);
+                            jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/objectexit.html?csid=ba97ae73-1016-4c62-b4eb", goTo.attr("href"));
+                        });
+                        relatedRecordsTab.events.recordEditorReady.addListener(function (relatedRecordsTab) {
+                            var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
+                            fluid.each(controlPanels, function (controlPanel) {
+                                var goTo = controlPanel.locate("goTo");
+                                jqUnit.isVisible("Delete button is disabled", goTo);
+                                jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/objectexit.html?csid=ba97ae73-1016-4c62-b4ea", goTo.attr("href"));
+                            });
+                            start();
+                        });
+                        relatedRecordsTab.relatedRecordsListView.locate("row").eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        }
+    };
+
+    fluid.each(["ready"], function (eventName) {
+        fluid.demands(eventName, ["cspace.relatedRecordsTab", "cspace.test"], {
+            args: ["{cspace.relatedRecordsTab}"]
+        });
+    });
+
+    var testRunner = function (testsConfig) {
+        fluid.each(testsConfig, function (config, testName) {
+            var options = {},
+                testEnv = config.testEnv || rrtTest;
+            fluid.each(config.listeners, function (listener, eventName) {
+                var listeners = fluid.get(options, listener.path),
+                    originalListener = listener.listener;
+                if (!listeners) {
+                    fluid.set(options, listener.path, {});
+                    listeners = fluid.get(options, listener.path);
+                }
+                if (listener.once) {
+                    listener.listener = function (relatedRecordsTab) {
+                        relatedRecordsTab.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
+                        originalListener.apply(null, fluid.makeArray(arguments));
+                    };
+                }
+                listeners[eventName] = {
+                    listener: listener.listener,
+                    priority: listener.priority
+                };
+            });
+            testEnv[config.testType](testName, function () {
+                var instantiator = testEnv.instantiator;
+                if (testEnv.testContext) {
+                    instantiator.clearComponent(testEnv, "testContext");
+                }
+                testEnv.options.components.testContext = {
+                    type: "fluid.typeFount",
+                    options: {
+                        targetTypeName: testName
+                    }
+                };
+                fluid.initDependent(testEnv, "testContext", instantiator);
+                setupRRT(options, testEnv);
+            });
+        });
+    };
+
+    testRunner(testConfig);
+
+}());

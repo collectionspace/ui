@@ -4,12 +4,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>RelatedRecordsTab Test Suite</title>
         <link rel="stylesheet" media="screen" href="../lib/qunit/css/qunit.css" />
-        
+        <link rel="stylesheet" media="screen" href="../../main/webapp/defaults/css/cspace.css" />
+
         <script type="text/javascript" src="../../main/webapp/defaults/lib/infusion/CSpaceInfusion.js"></script>
 
         <script type="text/javascript" src="../lib/qunit/js/qunit.js"></script>
         <script type="text/javascript" src="../lib/jqUnit/js/jqUnit.js"></script>
-        
+
         <script type="text/javascript" src="../js/CSpaceTests.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Demands.js"></script>
         <script type="text/javascript" src="../js/CSpaceTestsDemands.js"></script>
@@ -17,41 +18,36 @@
         <script type="text/javascript" src="../../main/webapp/defaults/lib/jquery/ui/js/jquery.ui.tabs.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/lib/jquery/plugins/corner/js/jquery.corner.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/lib/goog/js/goog.ui.DatePicker.js"></script>
-        
+
         <script type="text/javascript" src="../js/CSpaceTests.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/Demands.js"></script>
+        <script type="text/javascript" src="../js/CSpaceTestsDemands.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Permissions.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Utilities.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Renderer.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/SearchBox.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Header.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/InputValidator.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Footer.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/MessageBar.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/DataSource.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/DataContext.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/NumberPatternChooser.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Repeatable.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Confirmation.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/TermList.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/RecordList.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/RecordEditor.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/PasswordValidator.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/Repeatable.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/TitleBar.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/ListView.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/Autocomplete.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/DatePicker.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/StructuredDate.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Search.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/SearchToRelateDialog.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/RelationManager.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/RelatedRecordsList.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Autocomplete.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/RecordEditor.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/ReportProducer.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Sidebar.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/TitleBar.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Tabs.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/ListEditor.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/RecordTraverser.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/RelatedRecordsTab.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/Dimension.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/DatePicker.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/StructuredDate.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../../main/webapp/defaults/js/PageSetup.js"></script>
-        
+        <script type="text/javascript" src="../../main/webapp/defaults/lib/datejs/src/globalization/en-US.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/lib/datejs/src/core.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/lib/datejs/src/parser.js"></script>
+
         <script type="text/javascript" src="../js/RelatedRecordsTabTests.js"></script>
     </head>
     <body>
@@ -61,58 +57,6 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"><li></li></ol>
         <!-- Test HTML -->
-        <div id="main">
-            <div class="csc-header-container"></div>
-            <div id="all-content">
-                <div class="template1"></div>
-                <div class="csc-relatedRecordsTab-cataloging">
-                    <div class="fl-container-flex fl-fix information-group">
-					    <div class="info-column">
-					        <div class="hidden csc-search-related-dialog"></div>
-					        <div id="secondary-nav">
-					            <div id="secondary-nav-menu-sub">
-					                <div class="upper-save"><input class="csc-add-related-record-button addButton" type="button" value="Add record" /></div>
-					                <div class="clear"></div>
-					            </div>
-					        </div>
-					        <div class="csc-related-records related-records">
-					            <div class="fl-container-flex fl-fix information-group">
-					                <div class="info-column">
-					                    <div class="csc-relatedRecordsTab-listHeader csc-relatedRecordsTab-header fl-container-flex header toggle"></div>
-					                    <div class="csc-relatedRecordsTab-togglable content main related-procedures">
-					                        <div class="info-pair overflowdiv list-table csc-listEditor-list">
-					                                <table>
-					                                    <thead>
-					                                        <tr>
-					                                            <td class="csc-relatedRecordsTab-idNumber"></td>
-					                                            <td class="csc-relatedRecordsTab-summary"></td>
-					                                        </tr>
-					                                    </thead>
-					                                    <tbody>
-					                                        <tr class="add-new-record csc-listEditor-addNew" style="display:none;">
-					                                            <td class="csc-relatedRecordsTab-newRecordRow"></td>                                                
-					                                        </tr>
-					                                        <tr class="csc-recordList-row">
-					                                            <td class="csc-related-number"></td>
-					                                            <td class="csc-related-summary"></td>
-					                                            <td class="csc-no-items-message"></td>
-					                                        </tr>
-					                                    </tbody>
-					                                </table>
-					                            <div class="clear"></div>
-					                        </div>
-					                        <div class="clear"></div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="csc-relatedRecordsTab-recordHeader csc-relatedRecordsTab-header fl-container-flex header toggle"></div>
-					        <div class="csc-relatedRecordsTab-recordEditor csc-relatedRecordsTab-togglable content main"></div>
-					    </div>
-					</div>
-                </div>
-            </div>
-            <div class="csc-footer-container" id="footer"></div>
-        </div>
+        <div id="main"></div>
     </body>
 </html>

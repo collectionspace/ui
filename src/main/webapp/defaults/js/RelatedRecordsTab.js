@@ -81,7 +81,10 @@ cspace = cspace || {};
                         onSelect: "{relatedRecordsTab}.events.onSelect"
                     },
                     listeners: {
-                        ready: "{loadingIndicator}.events.hideOn.fire",
+                        ready: [
+                            "{loadingIndicator}.events.hideOn.fire",
+                            "{relatedRecordsTab}.events.ready.fire"
+                        ],
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
                         afterUpdate: "{loadingIndicator}.events.hideOn.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
@@ -122,7 +125,10 @@ cspace = cspace || {};
                     recordType: "{relatedRecordsTab}.options.related",
                     globalRef: "relatedModel",
                     listeners: {
-                        afterRecordRender: "{loadingIndicator}.events.hideOn.fire",
+                        afterInit: [
+                            "{loadingIndicator}.events.hideOn.fire",
+                            "{relatedRecordsTab}.events.recordEditorReady.fire"
+                        ],
                         afterCreate: "{relatedRecordsTab}.afterRelatedRecordCreate",
                         afterSave: "{relatedRecordsTab}.afterRecordSave"
                     }
@@ -134,6 +140,7 @@ cspace = cspace || {};
             }
         },
         events: {
+            ready: null,
             onSelect: null,
             onAddRelation: null,
             onDeleteRelation: null,
@@ -143,7 +150,8 @@ cspace = cspace || {};
             onCreateNewRecord: null,
             relationsUpdated: {
                 event: "{globalEvents}.events.relationsUpdated"
-            }
+            },
+            recordEditorReady: null
         },
         listeners: {
             relationsUpdated: "{relatedRecordsTab}.relationsUpdatedHandler",
