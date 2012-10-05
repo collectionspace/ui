@@ -76,16 +76,6 @@ cspace = cspace || {};
         that.locate("cancel").prop("disabled", !revert);
     };
     
-    var recordSaveHandler = function (that, data, action) {
-        var message = action.toLowerCase() + "SuccessfulMessage";
-        that.options.applier.requestChange("", data);
-        that.refreshView();
-        that.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
-            record: that.lookupMessage(that.options.recordType)
-        }), Date());
-        processChanges(that, false);
-    };
-
 	//Set Cookie
 	var setCookie = function (name, value, days) {
 		var ex;
@@ -140,11 +130,11 @@ cspace = cspace || {};
         });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
-            recordSaveHandler(that, data, "Create");
+            that.finishSave(data, "Create");
         });
 
         that.options.dataContext.events.afterUpdate.addListener(function (data) {
-            recordSaveHandler(that, data, "Update");
+            that.finishSave(data, "Update");
         });
 
         that.options.dataContext.events.afterRemove.addListener(function () {
@@ -272,6 +262,31 @@ cspace = cspace || {};
         setupRecordEditor(that);
 
         return that;
+    };
+
+    cspace.recordEditor.finishSave = function (that, data, action) {
+        var message = action.toLowerCase() + "SuccessfulMessage";
+        that.options.applier.requestChange("", data);
+        that.refreshView();
+        that.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
+            record: that.lookupMessage(that.options.recordType)
+        }), Date());
+        processChanges(that, false);
+    };
+
+    cspace.recordEditor.finishSaveMovement = function (that, data, action) {
+        var message = action.toLowerCase() + "SuccessfulMessage";
+        that.options.applier.requestChange("", data);
+        that.refreshView();
+        that.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
+            record: that.lookupMessage(that.options.recordType)
+        }), Date());
+    
+        if (data.fields.reasonForMove == "Dead") {
+            that.options.dataContext.remove(that.model.csid);
+        }
+
+        processChanges(that, false);
     };
 
     cspace.recordEditor.requestSaveMovement = function (that) {
@@ -669,6 +684,7 @@ cspace = cspace || {};
                 args: "{recordEditor}"
             },
             requestSave: "cspace.recordEditor.requestSave",
+            finishSave: "cspace.recordEditor.finishSave",
             remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
