@@ -126,6 +126,17 @@ taxon-relatedTermLabel: Related Term
 taxon-relatedTermTypeLabel: Type
 taxon-relatedTermSourceLabel: Source
 taxon-relatedTermSourceDetailLabel: Source Detail
+taxon-accessRestrictionsLabel: Access Restrictions
+taxon-familyLabel: Family
+taxon-plantAttributesGroupLabel: Plant Attributes
+taxon-attributeDateLabel: Attribute Date
+taxon-recordedByLabel: Recorded By
+taxon-habitatLabel: Habitat
+taxon-climateRatingLabel: Climate Rating
+taxon-conservationCategoryLabel: Conservation Category
+taxon-frostSensitiveLabel: Frost Sensitive
+taxon-medicinalUseLabel: Medicinal Use
+taxon-economicUseLabel: Economic Use
 
 #Login
 login-current-info: 
