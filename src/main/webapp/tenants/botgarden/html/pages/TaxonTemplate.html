@@ -42,6 +42,26 @@
                         </div>
                     </div>
                     <div class="info-column2-50 fl-force-right">
+						<div class="info-column2-50 fl-force-left">
+							<div class="info-pair-select">
+	                            <div class="header">
+	                                <div class="csc-taxon-accessRestrictions-label label"></div>
+	                            </div>
+	                            <div class="content">
+	                                <select class="csc-taxon-accessRestrictions input-select"><option value="">Options not loaded</option></select>
+	                            </div>
+	                        </div>
+						</div>
+						<div class="info-column2-50 fl-force-right">
+	                        <div class="info-pair">
+	                            <div class="header">
+	                                <div class="csc-taxon-family-label label"></div>
+	                            </div>
+	                            <div class="content">
+	                                <input type="text" class="csc-taxon-family" />
+	                            </div>
+	                        </div>
+						</div>
                         <!-- <div class="info-pair">
                             <div class="header">
                                 <div class="csc-taxon-taxonCurrency-label label"></div>
@@ -108,7 +128,8 @@
                     </div>
                 </div>
                 <div class="info-column">
-                        <div class="info-pair">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
                             <div class="header">
                                 <div class="csc-taxon-taxonBasionym-label label"></div>
                             </div>
@@ -176,6 +197,42 @@
                                         <td><select class="csc-taxon-relatedTermType input-select"><option value="">Options not loaded</option></select></td>
                                         <td><input type="text" class="csc-taxon-relatedTermSource" /></td>
                                         <td><input type="text" class="csc-taxon-relatedTermSourceDetail" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-column">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="csc-taxon-plantAttributesGroup-label label"></div>
+                        </div>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="csc-taxon-attributeDate-label label"></td>
+                                        <td class="csc-taxon-recordedBy-label label"></td>
+                                        <td class="csc-taxon-habitat-label label"></td>
+                                        <td class="csc-taxon-climateRating-label label"></td>
+                                        <td class="csc-taxon-conservationCategory-label label"></td>
+                                        <td class="csc-taxon-frostSensitive-label label"></td>
+                                        <td class="csc-taxon-medicinalUse-label label"></td>
+                                        <td class="csc-taxon-economicUse-label label"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="csc-taxon-plantAttributesGroup">
+                                        <td><input type="text" class="csc-taxon-attributeDate" /></td>
+                                        <td><input type="text" class="csc-taxon-recordedBy" /></td>
+                                        <td><select class="csc-taxon-habitat input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-taxon-climateRating input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-taxon-conservationCategory input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><input type="checkbox" class="csc-taxon-frostSensitive" /></td>
+                                        <td><input type="checkbox" class="csc-taxon-medicinalUse" /></td>
+                                        <td><input type="checkbox" class="csc-taxon-economicUse" /></td>
                                     </tr>
                                 </tbody>
                             </table>
