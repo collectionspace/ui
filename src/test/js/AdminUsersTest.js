@@ -252,6 +252,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var testConfig = {
         "Creation": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -270,6 +272,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Click new user button": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -300,6 +304,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Save new user - successful save": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -330,6 +336,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Save new user - empty form field": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -360,6 +368,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Save new user - mismatched passwords": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -382,6 +392,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Save new user - invalid length passwords": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -405,6 +417,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Valid edit of existing user: validation passes": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -433,6 +447,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Test search/unsearch functionality": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -488,6 +504,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -515,6 +533,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation cancel": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -546,6 +566,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation proceed": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -583,6 +605,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation delete": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -614,6 +638,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation delete + cancel": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -647,6 +673,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation delete + proceed": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -682,6 +710,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation navigate + delete": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -725,6 +755,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation delete + navigate (CSPACE-2646)": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -767,6 +799,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Confirmation on navigation away after canceled changes": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 "ready.initial": {
                     path: "listeners",
@@ -805,6 +839,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Currently logged in user should see delete button for other users": {
             testType: "asyncTest",
+            testEnv: adminTest,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -828,6 +864,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         "Currently logged in user should have invisible delete button": {
             testType: "asyncTest",
             testEnv: adminTestCurrent,
+            setup: setupAdmin,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -900,45 +937,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
 
-    var testRunner = function (testsConfig) {
-        fluid.each(testsConfig, function (config, testName) {
-            var options = {},
-                testEnv = config.testEnv || adminTest;
-            fluid.each(config.listeners, function (listener, eventName) {
-                var listeners = fluid.get(options, listener.path),
-                    originalListener = listener.listener;
-                if (!listeners) {
-                    fluid.set(options, listener.path, {});
-                    listeners = fluid.get(options, listener.path);
-                }
-                if (listener.once) {
-                    listener.listener = function (admin) {
-                        admin.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
-                        originalListener.apply(null, fluid.makeArray(arguments));
-                    };
-                }
-                listeners[eventName] = {
-                    listener: listener.listener,
-                    priority: listener.priority
-                };
-            });
-            testEnv[config.testType](testName, function () {
-                var instantiator = testEnv.instantiator;
-                if (testEnv.testContext) {
-                    instantiator.clearComponent(testEnv, "testContext");
-                }
-                testEnv.options.components.testContext = {
-                    type: "fluid.typeFount",
-                    options: {
-                        targetTypeName: testName
-                    }
-                };
-                fluid.initDependent(testEnv, "testContext", instantiator);
-                setupAdmin(options, testEnv);
-            });
-        });
-    };
-
-    testRunner(testConfig);
+    cspace.tests.testRunner(testConfig);
 
 }());

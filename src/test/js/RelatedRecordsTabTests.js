@@ -156,6 +156,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var testConfig = {
         "Creation": {
             testType: "asyncTest",
+            testEnv: rrtTest,
+            setup: setupRRT,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -171,6 +173,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Selection": {
             testType: "asyncTest",
+            testEnv: rrtTest,
+            setup: setupRRT,
             listeners: {
                 ready: {
                     path: "listeners",
@@ -195,6 +199,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         "Selection Again": {
             testType: "asyncTest",
+            testEnv: rrtTest,
+            setup: setupRRT,
             listeners: {
                 "ready.test": {
                     path: "listeners",
@@ -236,45 +242,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
 
-    var testRunner = function (testsConfig) {
-        fluid.each(testsConfig, function (config, testName) {
-            var options = {},
-                testEnv = config.testEnv || rrtTest;
-            fluid.each(config.listeners, function (listener, eventName) {
-                var listeners = fluid.get(options, listener.path),
-                    originalListener = listener.listener;
-                if (!listeners) {
-                    fluid.set(options, listener.path, {});
-                    listeners = fluid.get(options, listener.path);
-                }
-                if (listener.once) {
-                    listener.listener = function (relatedRecordsTab) {
-                        relatedRecordsTab.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
-                        originalListener.apply(null, fluid.makeArray(arguments));
-                    };
-                }
-                listeners[eventName] = {
-                    listener: listener.listener,
-                    priority: listener.priority
-                };
-            });
-            testEnv[config.testType](testName, function () {
-                var instantiator = testEnv.instantiator;
-                if (testEnv.testContext) {
-                    instantiator.clearComponent(testEnv, "testContext");
-                }
-                testEnv.options.components.testContext = {
-                    type: "fluid.typeFount",
-                    options: {
-                        targetTypeName: testName
-                    }
-                };
-                fluid.initDependent(testEnv, "testContext", instantiator);
-                setupRRT(options, testEnv);
-            });
-        });
-    };
-
-    testRunner(testConfig);
+    cspace.tests.testRunner(testConfig);
 
 }());
