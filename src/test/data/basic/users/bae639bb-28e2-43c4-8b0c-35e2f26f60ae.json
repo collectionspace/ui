@@ -9,6 +9,8 @@
         }
     ],
     "fields": {
+        "metadataProtection": "immutable",
+        "rolesProtection": "immutable",
         "email": "admin@core.collectionspace.org",
         "status": "active",
         "createdAt": "2012-05-30T00:41:01.794",

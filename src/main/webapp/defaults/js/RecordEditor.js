@@ -1658,6 +1658,33 @@ cspace = cspace || {};
             });
         }
 
+        function disable (tree, selector) {
+            var valuebinding = tree[selector],
+                value = {
+                    decorators: {
+                        type: "jQuery",
+                        func: "prop",
+                        args: ["disabled", "disabled"]
+                    }
+                };
+            if (typeof valuebinding === "string") {
+                value.value = valuebinding;
+            } else {
+                fluid.merge(null, value, valuebinding);
+            }
+            tree[selector] = value;
+        }
+
+        // CSPACE-5632: Adding extra protection for admin users.
+        if (fluid.get(that.model, "fields.metadataProtection") === "immutable") {
+            fluid.each(["email", "userName", "status"], function (field) {
+                disable(tree, ".csc-user-" + field);
+            });
+            disable(tree.expander.tree, ".csc-users-roleSelected");
+        } else if (fluid.get(that.model, "fields.rolesProtection") === "immutable") {
+            disable(tree.expander.tree, ".csc-users-roleSelected");
+        }
+
         return tree;
     };
 
