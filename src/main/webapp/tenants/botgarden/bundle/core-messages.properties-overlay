@@ -363,3 +363,16 @@ propagation-updatedAtLabel: Updated At
 propagation-updatedAtStartLabel: Earliest
 propagation-updatedAtEndLabel: Latest
 propagation-updatedByLabel: Updated By
+
+objectexit: Distribution
+objectexit-tab: Distribution
+objectexit-depositorLabel: Organization
+objectexit-exitDateGroupLabel: Date
+objectexit-countLabel: Count
+objectexit-exitNumberLabel: Distribution Number
+objectexit-objectexitInformationLabel: Distribution Information
+objectexit-exitMethodsLabel: Distribution Method
+objectexit-exitMethodLabel: Distribution Method
+objectexit-exitReasonLabel: Distribution Reason
+objectexit-exitNoteLabel: Distribution Note
+objectexit-identificationNumberRequired: Please specify a Distribution Number
