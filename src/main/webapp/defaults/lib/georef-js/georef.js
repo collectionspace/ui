@@ -25,12 +25,20 @@ georefjs.Georef = function(decimalLatitude, decimalLongitude, coordinateUncertai
 
     this.print = print;
     function print() {
+        // Print using appropriate RDFa tags
         var resultsString = "";
-        resultsString += "<p>" + this.decimalLatitude + "/" + this.decimalLongitude;
-        resultsString += " (" + this.coordinateUncertaintyInMeters + " meter uncertainty)";
-        resultsString += "<br>geodeticDatum=" + this.geodeticDatum;
-        resultsString += "<br>georeferenceProtocol=" + this.georeferenceProtocol;
-        resultsString += "<br>georeferenceRemarks=" + this.georeferenceRemarks;
+        //resultsString = "<div " +
+        //    "id=\"content\" about=\"" + aboutID + "\" typeof=\"http://purl.org/dc/terms/Location\">";
+
+        resultsString += "<li>Coordinate: " +
+            "<span property=\"http://rs.tdwg.org/dwc/terms/decimalLatitude\">" + this.decimalLatitude + "</span>" +
+            " / " +
+            "<span property=\"http://rs.tdwg.org/dwc/terms/decimalLongitude\">" + this.decimalLongitude + "</span>" +
+            " (<span property=\"http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters\">" + this.coordinateUncertaintyInMeters + "</span> meters radius)</li>" +
+            "<li>Datum: <span property=\"http://rs.tdwg.org/dwc/terms/geodeticDatum\">" + this.geodeticDatum + " </span></li>" +
+            "<li>Protocol: <span property=\"http://rs.tdwg.org/dwc/terms/georeferenceProtocol\">" + this.georeferenceProtocol + "</span></li>" +
+            "<li>Remarks: <span property=\"http://rs.tdwg.org/dwc/terms/georeferenceRemarks\">" + this.georeferenceRemarks + "</span></li>" +
+            "</div>";
         return resultsString;
     }
 }
@@ -40,16 +48,16 @@ georefjs.Georef = function(decimalLatitude, decimalLongitude, coordinateUncertai
  * @param s
  */
 georefjs.dms2deg = function g(s) {
-  var sw = /[sw]/i.test(s);
-  var f = sw? -1 : 1;
-  var bits = s.match(/[\d.]+/g);
+    var sw = /[sw-]/i.test(s);
+    var f = sw ? -1 : 1;
+    var bits = s.match(/[\d.]+/g);
 
-  var result = 0;
-  for (var i=0, iLen=bits.length; i<iLen; i++) {
-    result += bits[i]/f;
-    f *= 60;
+    var result = 0;
+    for (var i = 0, iLen = bits.length; i < iLen; i++) {
+        result += bits[i] / f;
+        f *= 60;
     }
-  return result.toFixed(6);
+    return result.toFixed(6);
 }
 
 /**
