@@ -137,6 +137,9 @@ taxon-conservationCategoryLabel: Conservation Category
 taxon-frostSensitiveLabel: Frost Sensitive
 taxon-medicinalUseLabel: Medicinal Use
 taxon-economicUseLabel: Economic Use
+taxon-heightLabel: Height
+taxon-widthLabel: Width
+taxon-diameterBreastHeightLabel: DBH
 
 #Login
 login-current-info: 
