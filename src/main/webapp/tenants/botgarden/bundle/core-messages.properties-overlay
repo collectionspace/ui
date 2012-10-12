@@ -255,6 +255,8 @@ collection-object-geoRefPlaceNameLabel: Georeference place name
 #concept
 concept: Concept
 concept-concept: Concept
+concept-associatedPersonLabel: Associated Person
+concept-associatedOrganizationLabel: Associated Organization
 
 #loanout
 loanout-collectionLabel: Collection
