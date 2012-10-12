@@ -334,6 +334,22 @@ organization-associatedPersonGroupLabel: Associated People
 organization-associatedPersonLabel: Person
 organization-associatedPersonRoleLabel: Role
 
+#movement
+movement-tab: Current Location
+movement: Current Location
+movement-number: Garden Location
+movement-locationMovementInformationLabel: Current Location Information
+movement-locationDateLabel: Action Date
+movement-reasonForMoveLabel: Action Code
+movement-currentLocationLabel: Garden Location
+movement-currentLocationMISSINGLabel: Garden Location
+movement-identificationNumberRequired: Please specify a Garden Location
+movement-labelInformationLabel: Label Information
+movement-labelRequestedLabel: Label Requested
+movement-labelSizeLabel: Label Size
+movement-labelStandTypeLabel: Stand Type
+movement-labelCountLabel: Label Count
+
 #propagation
 propagation: Propagation
 propagation-tab: Propagation
