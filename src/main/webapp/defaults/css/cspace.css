@@ -2361,3 +2361,11 @@ input[type="button"].cs-deleteRelationButton {
     font-size: 13px;
     font-weight: bold;
 }
+
+/* This code is only for particular working for L\M\I repeatable Method select */
+.cs-fixedRepeatableSelect {
+    min-width: 230px;
+}
+.cs-fixedRepeatableSelect select.cs-repeatable-content {
+    width: 85%;
+}
