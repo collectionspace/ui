@@ -155,9 +155,11 @@ vocab-determination: Determination Organization Authority
 vocab-institution: Institution Authority
 vocab-place: Default Places
 vocab-taxon: Default Scientific Taxonomy Authority
-vocab-concept: Label Text Authority
+vocab-concept: Medium
 vocab-common: Common Taxonomy Authority
 vocab-unverified: Unverified Taxonomy Authority
+vocab-research_ca: Research
+vocab-class_ca: Class
 
 #Records:
 cataloging-number: Accession number
@@ -255,6 +257,8 @@ collection-object-geoRefPlaceNameLabel: Georeference place name
 #concept
 concept: Concept
 concept-concept: Concept
+concept-associatedPersonLabel: Associated Person
+concept-associatedOrganizationLabel: Associated Organization
 
 #loanout
 loanout-collectionLabel: Collection
