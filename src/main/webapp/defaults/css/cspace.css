@@ -64,7 +64,7 @@ input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
     margin: 0;
-    width: 100%;
+    width: 95%;
 }
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
@@ -706,10 +706,10 @@ table tbody.highlight tr:focus td {
 td.fl-date-group {
 	width:160px;}
 .info-pair .content > select {
-    width:100%; 
-    border-spacing:0; 
-    margin-top:0; 
-    border:1px solid #C7CFD4; 
+    width: 95%;
+    border-spacing:0;
+    margin-top:0;
+    border:1px solid #C7CFD4;
     padding:0;
 }
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
