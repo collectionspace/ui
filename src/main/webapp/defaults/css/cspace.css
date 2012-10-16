@@ -2168,7 +2168,6 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 .cs-search-highlight {
     display:inline-block;
     overflow:hidden;
-    width:99%;
     text-overflow:ellipsis;
     -o-text-overflow:ellipsis;
     white-space: nowrap;
