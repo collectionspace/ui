@@ -769,8 +769,7 @@ table.cs-admin-table td.checkbox {
     padding:0 !important;}
 .list-table  table {
     font-size:12px; 
-    line-height:120%; 
-    background-color:#F0F5FB; 
+    line-height:120%;
     border:none; 
     width:100%;
 }
@@ -782,11 +781,16 @@ table.cs-admin-table td.checkbox {
     color:#333; 
     border-bottom:2px solid #C7CACE;}
 .list-table  table tbody tr td {
-    background-color:#F0F5FB; 
     padding: 5px 2px 4px 4px; 
     border-bottom:0px solid #ADADAD; 
     color:#000; 
     vertical-align:top;}
+.list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(240,245,251,.5);
+}
+.list-table table tbody tr:nth-child(even) {
+    background-color: #F0F5FB;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
