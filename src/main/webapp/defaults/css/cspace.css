@@ -2361,3 +2361,8 @@ input[type="button"].cs-deleteRelationButton {
     font-size: 13px;
     font-weight: bold;
 }
+
+.cs-multipleEdit li.cs-repeatable-repeat {
+    padding-left: 4px;
+    padding-top: 4px;
+}
