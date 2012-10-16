@@ -712,7 +712,8 @@ table tbody.highlight tr:focus td {
     color:#000; 
     cursor:default;}	
 .info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
-    padding-bottom:4px; 
+    padding-bottom:4px;
+    min-height: 12px;
     font-weight:bold; 
     color:#333333; 
     font-size:11px; 
