@@ -363,16 +363,6 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
-    cspace.util.setZIndex = function () {
-        if ($.browser.msie) {
-            var zIndexNumber = 999;
-            $("div").each(function () {
-                $(this).css('zIndex', zIndexNumber);
-                zIndexNumber -= 1;
-            });
-        }
-    };
-
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
         fluid.initDependents(that);
