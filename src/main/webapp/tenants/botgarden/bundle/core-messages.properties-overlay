@@ -336,6 +336,7 @@ organization-contactNamesLabel: Contact/Chair
 organization-associatedPersonGroupLabel: Associated People
 organization-associatedPersonLabel: Person
 organization-associatedPersonRoleLabel: Role
+organization-historyNotesLabel: Organization Notes
 
 #movement
 movement-tab: Current Location
