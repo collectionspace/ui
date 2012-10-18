@@ -243,6 +243,10 @@ cspace = cspace || {};
                 type: "cspace.reportProducer",
                 createOnEvent: "afterRender"
             },
+            batch: {
+                type: "cspace.batchRunner",
+                createOnEvent: "afterRender"
+            },
             termsUsed: {
                 type: "cspace.recordList",
                 createOnEvent: "afterRender",
@@ -256,11 +260,12 @@ cspace = cspace || {};
                     elPaths: {
                         items: "items"
                     },
-                    columns: ["number", "recordtype", "sourceFieldName"],
+                    columns: ["number", "namespace", "sourceFieldName"],
                     strings: {
                         number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
                         sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
-                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
+                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype",
+                        namespace: "{globalBundle}.messageBase.rl-rrl-termsUsed-namespace"
                     },
                     showNumberOfItems: false
                 }
@@ -350,10 +355,11 @@ cspace = cspace || {};
             termsHeader: ".csc-sidebar-termsHeader",
             header: ".csc-sidebar-header",
             togglable: ".csc-sidebar-togglable",
-            report: ".csc-sidebar-report"
+            report: ".csc-sidebar-report",
+            batch: ".csc-sidebar-batch"
         },
         parentBundle: "{globalBundle}",
-        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        selectorsToIgnore: ["batch", "report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",

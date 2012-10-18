@@ -219,6 +219,7 @@
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/ReportProducer.js</js>
+    <js>/defaults/js/BatchRunner.js</js>
     <js>/defaults/js/ListEditor.js</js>
     <js>/defaults/js/RelatedRecordsTab.js</js>
     <js>/defaults/js/PageBuilder.js</js>
