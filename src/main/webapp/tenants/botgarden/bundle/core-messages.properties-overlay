@@ -346,6 +346,7 @@ movement-labelCountLabel: Label Count
 
 #location
 location: Garden Location
+vocab-location: Garden Locations
 
 #propagation
 propagation: Propagation
