@@ -354,6 +354,9 @@ movement-labelSizeLabel: Label Size
 movement-labelStandTypeLabel: Stand Type
 movement-labelCountLabel: Label Count
 
+#location
+location: Garden Location
+
 #propagation
 propagation: Propagation
 propagation-tab: Propagation
