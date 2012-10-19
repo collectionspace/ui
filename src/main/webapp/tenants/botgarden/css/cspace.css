@@ -37,6 +37,14 @@ CollectionSpace 1.8 default CSS selectors
 td .cs-autocomplete-input {
 	width: 99.5% !important;
 }
+
+.checkbox-group label {
+	margin-right: 1.5em;
+}
+
+.checkbox-group div {
+	padding-top: 3px;
+}
 /* ---------------------------------------*/
 
 /* core HTML elements*/

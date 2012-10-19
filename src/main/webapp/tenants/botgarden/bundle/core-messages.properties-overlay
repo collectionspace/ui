@@ -262,38 +262,28 @@ concept-associatedPersonLabel: Associated Person
 concept-associatedOrganizationLabel: Associated Organization
 
 #loanout
-loanout-collectionLabel: Collection
-loanout-majorGroupLabel: Major Group
-loanout-geographyLabel: Geography
-loanout-taxonomyLabel: Taxonomy
-loanout-objKindLabel: Object Kind
-loanout-shipDateLabel: Shipping Form Date
-loanout-transportMethodLabel: Transportation
-loanout-numPackagesLabel: # Packages
-loanout-acknowledgeDateLabel: Acknowledge Date
-loanout-manualCountsLabel: Manual Counts
-loanout-numLentLabel: Lent
-loanout-numReturnedLabel: Returned
-loanout-balanceLabel: Balance
-loanout-discrepancyLabel: Discrepancy
-loanout-objectInformationLabel: Loan Out Items
-loanout-objectNumbersLabel: Object number(s)
-loanout-objectQuantityLabel: Quantity
-loanout-objectConditionsLabel: Loan Conditions
-loanout-objectNotesLabel: Notes
-loanout-returnInformationLabel: Loan Return Items
-loanout-returnObjectNumbersLabel: Object number(s)
-loanout-returnQuantityLabel: Quantity
-loanout-returnDateLabel: Return Date
-loanout-returnDeterminationLabel: New Determination
-loanout-returnNotesLabel: Notes
-loanout-transferInformationLabel: Loan Transfers
-loanout-transferDateLabel: Transfer Date
-loanout-transferOrgLabel: To Institution
-loanout-transferPersonLabel: To Person
-loanout-transferDirectorLabel: Under Direction Of
-loanout-transferQuantityLabel: Quantity
-loanout-transferNotesLabel: Notes
+loanout: Voucher
+loanout-tab: Voucher
+loanout-number: Voucher Collection Number
+loanout-loanOutNumberLabel: Voucher Collection Number
+loanout-loanOutNoteLabel: Voucher Notes
+loanout-loanOutDateLabel: Voucher Date
+loanout-identificationNumberRequired: Please specify a Voucher Collection Number
+loanout-loanoutInformationLabel: Voucher Information
+loanout-borrowerLabel: Voucher Institution
+loanout-loanPurposeLabel: Voucher Purpose
+loanout-lendersAuthorizerLabel: Voucher Reviewed By
+loanout-collectorLabel: Voucher Collector
+loanout-phenologyGroupLabel: Phenology
+loanout-sterileLabel: Sterile
+loanout-fertileLabel: Fertile
+loanout-floweringLabel: Flowering
+loanout-fruitingLabel: Fruiting
+loanout-inSporeLabel: In Spore
+loanout-gardenLocationLabel: Garden Location
+loanout-numLentLabel: Number of Sheets
+loanout-sheetAccessionNumberLabel: Voucher Sheet Accession Number
+loanout-reviewCompleteLabel: Voucher Review Complete
 
 #loanin
 loanin-lenderLoanNumberLabel: Lender's No.
