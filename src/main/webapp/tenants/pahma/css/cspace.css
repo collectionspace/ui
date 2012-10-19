@@ -1986,16 +1986,16 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-sidebar-mediumImage {
     max-height: 165px;
 }
-.cs-reportProducer {
+.cs-reportProducer, .cs-batchRunner {
     padding-left: 10px;
     display: table;
 }
-.cs-reportProducer-header {
+.cs-reportProducer-header, .cs-batchRunner-header {
     color: #333;
     padding-bottom: 8px;
     font-weight: bold;
 }
-.cs-reportProducer .cs-reportProducer-button {
+.cs-reportProducer .cs-reportProducer-button, .cs-batchRunner .cs-batchRunner-button {
     margin-bottom: 10px;
     padding: 0 20px;
     -moz-border-radius:4px;
@@ -2003,12 +2003,12 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 	border-radius:4px;
     display: table-cell;
 }
-.cs-reportProducer .cs-reportProducer-reportType {
+.cs-reportProducer .cs-reportProducer-reportType, .cs-batchRunner .cs-batchRunner-batchType {
     display: table-cell;
     margin-bottom: 10px;
     margin-right: 10px;
 }
-.cs-reportProducer-loadingIndicator {
+.cs-reportProducer-loadingIndicator, .cs-batchRunner-loadingIndicator {
     position: fixed;
     top: 0px;
     z-index: 1000;
@@ -2016,20 +2016,21 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     height: 40px;
     width: 100%;
     border-top:1px solid #000;
+
     margin-left: -4px;
     padding: 4px 0;
     color: #FFFFFF;
     font-size: 13px;
     font-weight: bold;
 }
-.cs-reportProducer-loadingIndicator .cs-reportStatus-stop {
+.cs-reportProducer-loadingIndicator .cs-reportStatus-stop, .cs-batchRunner-loadingIndicator .cs-batchStatus-stop {
     float: right;
     margin: 8px 12px 0 0;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
 	border-radius:4px;
 }
-.cs-reportProducer-loadingIndicator .csc-reportStatus-message {
+.cs-reportProducer-loadingIndicator .csc-reportStatus-message, .cs-batchRunner-loadingIndicator .csc-batchStatus-message {
     padding-left: 44px;
     display: inline-block;
     margin-top: 10px;
