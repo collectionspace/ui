@@ -1357,7 +1357,7 @@ td.cs-externalURL-parent {
     min-width: 182px;
 }
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
-    width: 93%;
+    width: 95%;
 }
 input[type="text"].cs-externalURL, .cs-externalURL-parent input.cs-autocomplete-input, .info-pair .content tbody td.cs-externalURL-parent input.cs-autocomplete-input {
     width: 90%;
