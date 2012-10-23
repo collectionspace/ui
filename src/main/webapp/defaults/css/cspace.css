@@ -2326,6 +2326,7 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-mediaView-mediumImage {
     max-height: 165px;
+    max-width: 100%;
     display: block;
     margin: auto;
     padding: 12.5px 0;
