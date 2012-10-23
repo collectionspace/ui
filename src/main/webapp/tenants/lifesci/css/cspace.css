@@ -15,18 +15,6 @@ CollectionSpace 1.8 default CSS selectors
 
 /* It may be appropriate to move these changes to a separate stylesheet. */
 
-/* Added selectors specific to Determination History repeating group (table) in Cataloging */
-/* to adjust width of table cells - rickj, 24may2011 */
-.determinationHistory .taxon {
-    width: 17% !important;}
-.determinationHistory .date-container {
-    width: 93px !important;}
-.determinationHistory .input-date {
-    width: 67px !important; padding:0;}
-.determinationHistory .input-select-shorter {
-    width: 90px !important;}
-.determinationHistory .input-select-longer {
-    width: 145px !important;}
 .input-numeric-tiny   {
 	width: 35px  !important;}
 /* ---------------------------------------*/
