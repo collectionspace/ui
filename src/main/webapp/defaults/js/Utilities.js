@@ -363,16 +363,6 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
-    cspace.util.setZIndex = function () {
-        if ($.browser.msie) {
-            var zIndexNumber = 999;
-            $("div").each(function () {
-                $(this).css('zIndex', zIndexNumber);
-                zIndexNumber -= 1;
-            });
-        }
-    };
-
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
         fluid.initDependents(that);
@@ -1078,7 +1068,8 @@ fluid.registerNamespace("cspace.util");
         that.init = function (tag, options) {
             options = options || {};
             that.events.onFetch.fire();
-            fluid.fetchResources({
+
+            var spec = {
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
                     options: {
@@ -1087,8 +1078,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("Error fetching config file: " + textStatus);
                         }
                     }
-                },
-                loginstatus: {
+                }
+            };
+
+            if (!that.loginStatus) {
+                spec.loginstatus = {
                     href: fluid.invoke("cspace.util.getLoginURL"),
                     options: {
                         dataType: "json",
@@ -1116,8 +1110,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("PageBuilder was not able to retrieve login information and user permissions: " + textStatus);
                         }
                     }
-                }
-            }, function (resourceSpecs) {
+                };
+            }
+
+            fluid.fetchResources(spec, function (resourceSpecs) {
+                that.loginStatus = that.loginStatus || resourceSpecs.loginstatus.resourceText;
                 if (!that.globalBundle || !that.messageBar) {
                     that.events.afterFetch.fire();
                 }
@@ -1128,7 +1125,7 @@ fluid.registerNamespace("cspace.util");
                 }, {
                     pageBuilder: {
                         options: {
-                            userLogin: resourceSpecs.loginstatus.resourceText
+                            userLogin: that.loginStatus
                         }
                     },
                     pageBuilderIO: {

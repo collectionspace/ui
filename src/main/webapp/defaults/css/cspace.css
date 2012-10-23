@@ -770,8 +770,7 @@ table.cs-admin-table td.checkbox {
     padding:0 !important;}
 .list-table  table {
     font-size:12px; 
-    line-height:120%; 
-    background-color:#F0F5FB; 
+    line-height:120%;
     border:none; 
     width:100%;
 }
@@ -783,11 +782,16 @@ table.cs-admin-table td.checkbox {
     color:#333; 
     border-bottom:2px solid #C7CACE;}
 .list-table  table tbody tr td {
-    background-color:#F0F5FB; 
     padding: 5px 2px 4px 4px; 
     border-bottom:0px solid #ADADAD; 
     color:#000; 
     vertical-align:top;}
+.list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(240,245,251,.5);
+}
+.list-table table tbody tr:nth-child(even) {
+    background-color: #F0F5FB;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
@@ -1163,6 +1167,9 @@ td .field-cal img, td .csc-calendar-button img {
     position: relative; 
     bottom: 0px; 
     width: 100%; }
+#createnew #footer {
+    position: absolute;
+}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -2320,6 +2327,7 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-mediaView-mediumImage {
     max-height: 165px;
+    max-width: 100%;
     display: block;
     margin: auto;
     padding: 12.5px 0;
@@ -2366,4 +2374,10 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit li.cs-repeatable-repeat {
     padding-left: 4px;
     padding-top: 4px;
+/* This code is only for particular working for L\M\I repeatable Method select */
+.cs-fixedRepeatableSelect {
+    min-width: 230px;
+}
+.cs-fixedRepeatableSelect select.cs-repeatable-content {
+    width: 85%;
 }

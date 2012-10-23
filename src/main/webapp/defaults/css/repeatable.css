@@ -232,6 +232,9 @@ div.info-pair-select div.content,
 div.info-pair-date div.content {
     display: inherit;
 }
+div.info-pair-date {
+    min-width: 165px;
+}
 div.info-pair-select li.cs-repeatable-repeat,
 div.info-pair-date li.cs-repeatable-repeat {
     margin-bottom: 1px;
