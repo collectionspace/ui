@@ -2326,6 +2326,7 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-mediaView-mediumImage {
     max-height: 165px;
+    max-width: 100%;
     display: block;
     margin: auto;
     padding: 12.5px 0;
@@ -2367,4 +2368,12 @@ input[type="button"].cs-deleteRelationButton {
     padding: 15px 0 15px 20px;
     font-size: 13px;
     font-weight: bold;
+}
+
+/* This code is only for particular working for L\M\I repeatable Method select */
+.cs-fixedRepeatableSelect {
+    min-width: 230px;
+}
+.cs-fixedRepeatableSelect select.cs-repeatable-content {
+    width: 85%;
 }
