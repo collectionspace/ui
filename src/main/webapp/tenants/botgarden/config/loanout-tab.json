@@ -1,0 +1,57 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "loanout",
+            "schema": {
+                "loanout": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/LoanoutTemplate.html",
+                    "templateSelector": ".csc-loanout-template",
+                    "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "loanout-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-loanout"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Voucher Record",
+                            "recordList": "Related Voucher Records",
+                            "newRecordRow": "New Voucher Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-loanOut-loanOutNumber"
+                                                } 
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
