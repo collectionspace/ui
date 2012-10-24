@@ -2,32 +2,76 @@
     <div class="fl-container-flex fl-fix content main">
         <div class="info-column">
             <div class="info-column2-50 fl-force-left">
+
+                <div class="info-column" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-preferredPlace-placeTermGroup-label"></div>
+                        </div>
+                        <div class="content csc-preferredPlace-placeTermGroup cs-repeatable-stretched">
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-place-termDisplayName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-placeAuthority-termDisplayName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-place-termName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-placeAuthority-termName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-place-termLanguage-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-placeAuthority-termLanguage input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-place-termStatus-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-placeAuthority-termStatus input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-place-termDisplayName-label"></div>
+                        <div class="label csc-place-placeType-label"></div>
                     </div>
-                    <div class="content clearfix csc-preferredPlace-placeTermGroup">
-                        <input type="text" class="csc-placeAuthority-termDisplayName"/>
-                    </div>        
-                </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-place-termName-label"></div>
+                    <div class="content clearfix">
+                        <select class="csc-place-placeType input-select">
+                            <option value="">Options not loaded</option>
+                        </select>
                     </div>
-                    <div class="content clearfix csc-preferredPlace-placeTermGroup">
-                        <input type="text" class="csc-placeAuthority-termName"/>
-                    </div>        
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-place-termLanguage-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredPlace-placeTermGroup">
-                        <select class="csc-placeAuthority-termLanguage input-select"><option value="">Options not loaded</option></select>
-                    </div>        
-                </div>
+
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-place-placeNote-label"></div>
@@ -36,6 +80,7 @@
                         <input type="text" class="csc-place-placeNote"/>
                     </div>        
                 </div>
+
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-place-owner-label"></div>
@@ -44,23 +89,16 @@
                         <input type="text" class="csc-place-owner"/>
                     </div>        
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
+
+                <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-place-termStatus-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredPlace-placeTermGroup">
-                        <select class="csc-placeAuthority-termStatus input-select"><option value="">Options not loaded</option></select>
-                    </div>        
-                </div>
-                <div class="info-pair" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-place-editUsername-label"></div>
+                        <div class="label csc-place-updatedBy-label"></div>
                     </div>
                     <div class="content clearfix">
-                        <input type="text" class="csc-place-editUsername"/>
+                        <input type="text" class="csc-place-updatedBy"/>
                     </div>
                 </div>
+
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-place-updatedAt-label"></div>
@@ -81,7 +119,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>                                                     
+                </div>
+
             </div>
         </div>
     </div>
