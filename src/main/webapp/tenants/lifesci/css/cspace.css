@@ -2386,3 +2386,9 @@ input[type="button"].cs-deleteRelationButton {
 .cs-fixedRepeatableSelect select.cs-repeatable-content {
     width: 85%;
 }
+.cs-fixedExternalURL {
+    min-width: 350px;
+}
+.cs-fixedExternalURL div.cs-externalURL-parent input {
+    width: 93%;
+}
