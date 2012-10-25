@@ -1,0 +1,104 @@
+{
+    "csid": "1111-2222-8888-9999",
+    "fields": {
+        "conditionCheckRefNumber": "CC2012.001",
+        "objectAuditCategory": "Low",
+        "completenessGroup": [
+              {
+                  "_primary": true,
+                  "completeness": "Complete",
+                  "completenessDate": "2012-10-19T22:38:43Z",
+                  "completenessNote": "Object is complete."
+              }
+        ],
+        "conditionCheckGroup": [
+              {
+                  "_primary": true,
+                  "condition": "Needs no work",
+                  "conditionDate": "2012-10-19T22:38:43Z",
+                  "conditionNote": "Object is complete."
+              }
+        ],
+        "conservationTreatmentPriority": "Low",
+        "envConditionNoteGroup": [
+              {
+                  "_primary": true,
+                  "envConditionNote": "Environmental condition is supurb.",
+                  "envConditionNoteDate": "2012-10-19T22:38:43Z"
+              }
+        ],
+        "nextConditionCheckDate": "2012-14-19T22:38:43Z",
+        "techAssessmentGroup": [
+              {
+                  "_primary": true,
+                  "techAssessment": "Environmental condition is supurb.",
+                  "techAssessmentDate": "2012-10-19T22:38:43Z"
+              }
+        ],
+        "hazardGroup": [
+              {
+                  "_primary": true,
+                  "hazard": "Radioactive",
+                  "hazardDate": "2012-10-19T22:38:43Z",
+                  "hazardNote": "Object needs to be extinguished occasionally."
+              }
+        ],
+        "conditionCheckAssessmentDates": [
+              {
+                  "_primary": true,
+                  "conditionCheckAssessmentDate":"2010-08-19T22:38:43Z"
+              }
+        ],
+        "conditionCheckMethod": "Observed",
+        "conditionCheckNote": "It's ok",
+        "conditionCheckReason": "New acquisition",
+        "conditionCheckRefNumber": "CC2012.001",
+        "conditionChecker": "urn:cspace:org.collectionspace.demo:personauthorities:name(cc025527-efde-4a21-84fc):person(JimChecker)'Jim Checker'",
+        "displayRecommendations": "show every other tuesday",
+        "envRecommendations": "pure oxygen only",
+        "handlingRecommendations": "use angel hair",
+        "packingRecommendations": "use the finest cork",
+        "securityRecommendations": "can you get superman?",
+        "specialRecommendations": "none",
+        "storageRequirements": "place inside the fortress of solitude",
+        "salvagePriorityCodeGroup": [
+                {
+                    "_primary": true,
+                    "salvagePriorityCode": "Low",
+                    "salvagePriorityCodeDate": "2011-10-19T22:38:43Z"
+                }
+        ],
+        "legalReqsHeldGroup": [
+                {
+                    "_primary": true,
+                    "legalReqsHeld": "All of them.",
+                    "legalReqsHeldBeginDate": "2010-10-19T22:38:43Z",
+                    "legalReqsHeldEndDate": "2013-10-19T22:38:43Z",
+                    "legalReqsHeldNumber": "12345",
+                    "legalReqsHeldRenewDate": "2013-10-19T22:38:43Z"
+                }
+        ]
+    },
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "Jim Checker",
+            "sourceFieldName": "conditionChecker",
+            "recordtype": "person" 
+        }
+    ],
+    "relations": {
+        "cataloging": [
+            {
+                "summary": "Souvenir books. Molly O' Play Book.",
+                "csid": "2005.018.1383",
+                "number": "2005.018.1383",
+                "relid": "e8d20612-e1f5-4e90-bc36",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            }
+        ]
+    }
+}
+
+

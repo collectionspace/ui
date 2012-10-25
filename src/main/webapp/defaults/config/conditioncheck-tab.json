@@ -1,0 +1,42 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "conditioncheck",
+            "schema": {
+                "conditioncheck": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "conditioncheck-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-conditioncheck"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "conditioncheck-editRecord",
+                            "recordList": "conditioncheck-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "identificationNumber": ".csc-conditioncheck-conditionCheckRefNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
