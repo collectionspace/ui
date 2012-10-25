@@ -1002,7 +1002,7 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
-    overflow: hidden;
+    overflow: visible;
 }
 .info-pair.cs-listView {
     margin-bottom: 0;
