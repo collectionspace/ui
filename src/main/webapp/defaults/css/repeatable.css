@@ -40,7 +40,7 @@ input[type="button"].cs-repeatable-add {
 }
 li.cs-repeatable-repeat {
     list-style-type: none; 
-    margin-bottom:1px; 
+    margin-bottom: 4px;
 }
 input.cs-repeatable-primary {
     width: 11px; 
