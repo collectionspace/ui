@@ -366,7 +366,7 @@ propagation-woundedLabel: Wounded?
 propagation-propActivityGroupLabel: Propagation Activities
 propagation-orderLabel: Order
 propagation-propCountLabel: Propagule Count
-propagation-activityDateLabel: Activity Date
+propActivityGroup-activityDateLabel: Activity Date
 propagation-mediumLabel: Medium
 propagation-activityTypeLabel: Type
 propagation-potSizeLabel: Pot Size

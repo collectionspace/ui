@@ -22,8 +22,7 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.propNumber",
-                            "fields.propDate"
+                            "fields.propNumber"
                         ]
                     }
                 },
