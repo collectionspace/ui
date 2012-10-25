@@ -82,7 +82,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.autocomplete.bindListener = function (that) {
         that.container.keydown(function () {
             clearTimeout(that.outFirer);
-            that.outFirer = setTimeout(that.search, that.options.delay);
+            that.outFirer = setTimeout(function () {
+                var newValue = that.container.val();
+                if (newValue !== that.oldValue) {
+                    that.oldValue = newValue;
+                    that.events.onSearch.fire(newValue, newValue.length >= that.options.minChars);
+                }
+            }, that.options.delay);
         });
         that.container.change(function () {
             that.oldValue = that.container.val();
@@ -106,13 +112,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.events.onSearchDone.addListener(function () {
             container.removeClass(that.options.styles.loadingStyle);
         });
-
-        that.events.onSearchDone.addListener(function () {
-            delete that.searching;
-            if (that.newValue) {
-                that.search(that.newValue);
-            }
-        }, undefined, undefined, "last");
         
         fluid.each(["selectAuthority", "selectMatch"], function (event) {
             that.eventHolder.events[event].addListener(function () {
@@ -124,31 +123,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 container.removeClass(that.options.styles.loadingStyle);
             });
         });
-
-        that.search = function (newValue) {
-            var newValue = newValue || that.container.val(),
-                permitted = newValue.length >= that.options.minChars;
-
-            if (newValue !== that.oldValue) {
-                that.oldValue = newValue;
-            }
-
-            if (permitted) {
-                if (that.searching) {
-                    that.newValue = newValue;
-                    return;
-                }
-                that.searching = true;
-                if (that.newValue) {
-                    delete that.newValue;
-                }
-            } else {
-                delete that.newValue;
-                delete that.searching;
-            }
-
-            that.events.onSearch.fire(newValue, permitted);
-        };
         
         that.suppress = function () {
             clearTimeout(that.outFirer);
