@@ -65,7 +65,10 @@ cspace = cspace || {};
                         onSelect: "{admin}.events.onSelect"
                     },
                     listeners: {
-                        ready: "{loadingIndicator}.events.hideOn.fire",
+                        ready: [
+                            "{loadingIndicator}.events.hideOn.fire",
+                            "{admin}.events.ready.fire"
+                        ],
                         onModelChange: "{loadingIndicator}.events.showOn.fire",
                         afterUpdate: "{loadingIndicator}.events.hideOn.fire",
                         onError: "{loadingIndicator}.events.hideOn.fire"
@@ -97,7 +100,7 @@ cspace = cspace || {};
                     recordType: "{admin}.options.recordType",
                     globalRef: "adminModel",
                     listeners: {
-                        afterRecordRender: [
+                        afterInit: [
                             "{loadingIndicator}.events.hideOn.fire",
                             "{admin}.events.recordEditorReady.fire"
                         ],
@@ -113,6 +116,7 @@ cspace = cspace || {};
             }
         },
         events: {
+            ready: null,
             onSelect: null,
             onCreateNewRecord: null,
             recordEditorReady: null
@@ -280,6 +284,7 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function search () {
+            that.events.onSearch.fire();
             if (that[recordEditor]) {
                 instantiator.clearComponent(that, recordEditor);
             }
@@ -288,6 +293,7 @@ cspace = cspace || {};
             fluid.initDependent(that, banner, instantiator);
             fluid.initDependent(that, listView, instantiator);
             that.locate("unSearchButton").show();
+            that.events.afterSearch.fire();
         }
         if (!globalNavigator) {
             search();
@@ -303,6 +309,7 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function unSearch () {
+            that.events.onUnSearch.fire();
             that.locate("searchField").val("").change();
             that.locate("unSearchButton").hide();
             if (that[recordEditor]) {
@@ -312,6 +319,7 @@ cspace = cspace || {};
             instantiator.clearComponent(that, listView);
             fluid.initDependent(that, banner, instantiator);
             fluid.initDependent(that, listView, instantiator);
+            that.events.afterUnSearch.fire();
         }
         if (!globalNavigator) {
             unSearch();

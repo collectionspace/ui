@@ -103,7 +103,7 @@ cspace = cspace || {};
                     model: "{cspace.recordEditor}.model",
                     applier: "{cspace.recordEditor}.applier",
                     uispec: "{cspace.recordEditor}.options.uispec",
-                    resources: "{cspace.recordEditor.templateFetcher}.options.resources",
+                    resources: "{cspace.templateFetcher}.options.resources",
                     events: {
                         afterRender: "{cspace.recordEditor}.events.afterRecordRender"
                     }
@@ -111,7 +111,7 @@ cspace = cspace || {};
                 createOnEvent: "ready"
             },
             templateFetcher: {
-                type: "cspace.recordEditor.templateFetcher",
+                type: "cspace.templateFetcher",
                 priority: "first",
                 options: {
                     recordType: "{cspace.recordEditor}.options.recordType",
@@ -158,13 +158,15 @@ cspace = cspace || {};
         },
         events: {
             afterFetch: null,
+            afterFetchLocal: null,
             afterFetchTemplate: null,
             ready: {
                 events: {
-                    data: "{cspace.recordEditor}.events.afterFetch",
+                    data: "{cspace.recordEditor}.events.afterFetchLocal",
                     template: "{cspace.recordEditor}.events.afterFetchTemplate"
                 }
             },
+            afterInit: null,
             onSave: "preventable",
             afterCreate: null,
             afterSave: null,
@@ -180,7 +182,15 @@ cspace = cspace || {};
         },
         listeners: {
             afterSave: "{cspace.recordEditor}.afterSaveHandler",
-            ready: "{cspace.recordEditor}.onReady",
+            afterFetch: {
+                listener: "{cspace.recordEditor}.events.afterFetchLocal.fire",
+                priority: "last"
+            },
+            ready: [
+                "{cspace.recordEditor}.onReady", {
+                listener: "{cspace.recordEditor}.events.afterInit.fire",
+                priority: "last"
+            }],
             afterRecordRender: [
                 "{loadingIndicator}.events.hideOn.fire",
                 "{messageBar}.hide"
@@ -292,13 +302,16 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.cloner.preInit = function (that) {
+        that.copyAndStore = function () {
+            var modelToClone = fluid.copy(that.model);
+            fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
+                fluid.set(modelToClone, fieldPath);
+            });
+            that.localStorage.set(modelToClone);
+        };
         that.clone = function () {
             that.globalNavigator.events.onPerformNavigation.fire(function () {
-                var modelToClone = fluid.copy(that.model);
-                fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
-                    fluid.set(modelToClone, fieldPath);
-                });
-                that.localStorage.set(modelToClone);
+                that.copyAndStore();
                 var vocab = cspace.vocab.resolve({
                     model: that.model,
                     recordType: that.options.recordType,
@@ -333,7 +346,12 @@ cspace = cspace || {};
     cspace.recordEditor.changeTracker.preInit = function (that) {
         that.rollbackModel = fluid.copy(that.model);
         that.unsavedChanges = false;
-        that.applier.modelChanged.addListener("fields", function () {
+        that.applier.modelChanged.addListener("fields", function (model, newModel, changeRequest) {
+            // This case is specifically for Repeatable which populates Narrower/Broader contexts. We do not want to set that record was changed
+            // Important!!  ->  Implementation should use source tracking when it is available in a newer version of Infusion
+            if (changeRequest[0].silent) {
+                return;
+            }
             that.unsavedChanges = true;
             that.events.onChange.fire(that.unsavedChanges);
         });
@@ -468,12 +486,17 @@ cspace = cspace || {};
         args: ["{cspace.recordEditor.saver}", "{recordEditor}"]
     });
 
+    fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock", "cspace.relatedRecordsTab"], {
+        funcName: "cspace.recordEditor.saver.saveMovementTab",
+        args: ["{cspace.recordEditor.saver}", "{recordEditor}", "{relatedRecordsTab}.events.afterAddRelation"]
+    });
+
     fluid.demands("cspace.recordEditor.saver.afterValidate", "cspace.recordEditor.saver", {
         funcName: "cspace.recordEditor.saver.afterValidate",
         args: "{recordEditor}"
     });
 
-    cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
+    var openConfirmationMovement = function (that, recordEditor, proceedCallback) {
         recordEditor.confirmation.open("cspace.confirmation.saveDialog", undefined, {
             model: {
                 messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
@@ -486,17 +509,37 @@ cspace = cspace || {};
             },
             listeners: {
                 onClose: function (userAction) {
-                    if (userAction === "act") {
-                        cspace.recordEditor.saver.save(that, recordEditor);
-                    } else if (userAction === "proceed") {
-                        recordEditor.applier.requestChange("workflowTransition", "lock");
-                        cspace.recordEditor.saver.save(that, recordEditor);
-                    } else if (userAction === "cancel") {
+                    if (userAction === "cancel") {
                         recordEditor.events.onCancelSave.fire();
+                        return;
                     }
+                    if (userAction === "proceed") {
+                        proceedCallback();
+                    }
+                    cspace.recordEditor.saver.save(that, recordEditor);
                 }
             },
             parentBundle: recordEditor.options.parentBundle
+        });
+    };
+
+    cspace.recordEditor.saver.saveMovementTab = function (that, recordEditor, afterAddRelation) {
+        openConfirmationMovement(that, recordEditor, function () {
+            if (fluid.get(recordEditor.model, "csid")) {
+                recordEditor.applier.requestChange("workflowTransition", "lock");
+                return;
+            }
+            afterAddRelation.addListener(function () {
+                afterAddRelation.removeListener("saveMovementTab");
+                recordEditor.applier.requestChange("workflowTransition", "lock");
+                cspace.recordEditor.saver.save(that, recordEditor);
+            }, "saveMovementTab", undefined, "last");
+        });
+    };
+
+    cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
+        openConfirmationMovement(that, recordEditor, function () {
+            recordEditor.applier.requestChange("workflowTransition", "lock");
         });
     };
 
@@ -744,8 +787,8 @@ cspace = cspace || {};
         args: {
             targetTypeName: "cspace.recordEditor.remover.testRefobjsDataSource",
             termMap: {
-                recordType: "%recordType",
-                csid: "%csid"
+                csid: "%csid",
+                vocab: "%vocab"
             }
         }
     });
@@ -761,7 +804,7 @@ cspace = cspace || {};
         }
     });
     fluid.defaults("cspace.recordEditor.remover.testRefobjsDataSource", {
-        url: "%test/data/%recordType/refobjs/%csid.json"
+        url: "%test/data/%vocab/refobjs/%csid.json"
     });
     cspace.recordEditor.remover.testRefobjsDataSource = cspace.URLDataSource;
 
@@ -795,7 +838,34 @@ cspace = cspace || {};
         });
     };
 
-    cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle) {
+    cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle, removeMessage) {
+        if (fluid.find(model.fields.narrowerContexts, function (element) {
+            return element.narrowerContext || undefined;
+        })) {
+            removeMessage = removeMessage || "deleteDialog-hasNarrowerContextsMessage";
+        } else if (model.fields.broaderContext) {
+            removeMessage = removeMessage || "deleteDialog-hasBroaderContextMessage";
+        }
+        if (removeMessage) {
+            confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                enableButtons: ["act"],
+                model: {
+                    messages: [removeMessage],
+                    messagekeys: {
+                        actText: "alertDialog-actText"
+                    }
+                },
+                termMap: [
+                    parentBundle.resolve(that.options.recordType)
+                ],
+                parentBundle: parentBundle
+            });
+        } else {
+            cspace.recordEditor.remover.remove(that);
+        }
+    };
+
+    cspace.recordEditor.remover.removeWithCheckRefobjs = function (that, model, confirmation, parentBundle) {
         var removeMessage;
         that.refobjsDataSource.get({
             vocab: cspace.vocab.resolve({
@@ -808,30 +878,7 @@ cspace = cspace || {};
             if (fluid.makeArray(data.items.length) > 0) {
                 removeMessage = "deleteDialog-usedByMessage";
             }
-            if (fluid.find(model.fields.narrowerContexts, function (element) {
-                return element.narrowerContext || undefined;
-            })) {
-                removeMessage = "deleteDialog-hasNarrowerContextsMessage";
-            } else if (model.fields.broaderContext) {
-                removeMessage = "deleteDialog-hasBroaderContextMessage";
-            }
-            if (removeMessage) {
-                confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                    enableButtons: ["act"],
-                    model: {
-                        messages: [removeMessage],
-                        messagekeys: {
-                            actText: "alertDialog-actText"
-                        }
-                    },
-                    termMap: [
-                        parentBundle.resolve(that.options.recordType)
-                    ],
-                    parentBundle: parentBundle
-                });
-            } else {
-                cspace.recordEditor.remover.remove(that);
-            }
+            cspace.recordEditor.remover.removeWithCheck(that, model, confirmation, parentBundle, removeMessage);
         });
     };
 
@@ -965,6 +1012,19 @@ cspace = cspace || {};
                 onDeleteRelation: "{cspace.relatedRecordsTab}.events.onDeleteRelation"
             },
             recordType: "{cspace.recordEditor}.options.recordType"
+        }, "{arguments}.1"]
+    });
+    
+    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.recordEditor", "cspace.admin", "cspace.users"], {
+        mergeAllOptions: [{
+            recordModel: "{cspace.recordEditor}.model",
+            recordApplier: "{cspace.recordEditor}.applier",
+            model: {
+                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
+            },
+            recordType: "{cspace.recordEditor}.options.recordType",
+            userLogin: "{pageBuilder}.options.userLogin"
         }, "{arguments}.1"]
     });
 
@@ -1210,7 +1270,7 @@ cspace = cspace || {};
             return true;
         }
         //disable if: if we are looking at admin account
-        if (rModel.fields.email === "admin@collectionspace.org") {
+        if (rModel.fields.email === "admin@core.collectionspace.org") {
             return true;
         }
         return false;
@@ -1228,6 +1288,7 @@ cspace = cspace || {};
             that.locate("cancel").prop("disabled", !unsavedChanges);
             that.locate("createFromExistingButton").prop("disabled", notSaved);
             that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
+            that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
             that.locate("deleteRelationButton").prop("disabled", notSaved);
             that.renderGoTo();
         };
@@ -1252,11 +1313,17 @@ cspace = cspace || {};
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
         };
+        that.hideDeleteButtonForCurrentUser = function (userId) {
+            var userLogin = that.options.userLogin;
+            if (userLogin && userId && (userLogin.userId === userId)) {
+                that.applier.requestChange("showDeleteButton", false);
+            }
+        };
         // Function which sets the flag to be false whenever recordType matches one of the elements in the map for this flag
         that.hideButtonsByRecordType = function (recordType, hideButtonMap) {
             fluid.each(hideButtonMap, function(hideRecordTypes, flag) {
                  if(fluid.find(hideRecordTypes, function(hideRecordType) {
-                        return hideRecordType === recordType
+                        return hideRecordType === recordType;
                     })) {
                      that.applier.requestChange(flag, false);
                  }
@@ -1288,6 +1355,8 @@ cspace = cspace || {};
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
+        
+        that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
 
         that.refreshView();
         that.renderGoTo();
@@ -1295,7 +1364,7 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
 
-    fluid.defaults("cspace.recordEditor.templateFetcher", {
+    fluid.defaults("cspace.templateFetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         resources: {
             template: cspace.resourceSpecExpander({
@@ -1315,14 +1384,16 @@ cspace = cspace || {};
         events: {
             afterFetch: null
         },
-        finalInitFunction: "cspace.recordEditor.templateFetcher.finalInit"
+        finalInitFunction: "cspace.templateFetcher.finalInit"
     });
 
-    cspace.recordEditor.templateFetcher.finalInit = function (that) {
+    cspace.templateFetcher.finalInit = function (that) {
         var template = that.options.resources.template,
             recordType = that.options.recordType,
             templateName = that.options.template ? "-" + that.options.template : "";
-        recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        if (recordType) {
+            recordType = recordType.charAt(0).toUpperCase() + recordType.slice(1);
+        }
         template.url = fluid.stringTemplate(template.url, {
             recordType: recordType,
             template: templateName
@@ -1373,7 +1444,7 @@ cspace = cspace || {};
         }
     });
 
-    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.authority"], {
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cataloging.read"], {
         options: {
             selectors: {
                 hierarchy: ".csc-record-hierarchy"
@@ -1384,8 +1455,38 @@ cspace = cspace || {};
                     type: "cspace.hierarchy",
                     container: "{recordRenderer}.dom.hierarchy",
                     options: {
-                        uispec: "{pageBuilder}.options.uispec.hierarchy"
+                        produceTree: "cspace.hierarchy.produceTreeCataloging",
+                        components: {
+                            templateFetcher: {
+                                options: {
+                                    resources: {
+                                        template: cspace.resourceSpecExpander({
+                                            url: "%webapp/html/components/HierarchyObjectTemplate.html",
+                                            options: {
+                                                dataType: "html"
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        }
                     },
+                    createOnEvent: "afterRender"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.recordEditor.recordRenderer", ["cspace.recordEditor", "cspace.authority"], {
+        options: {
+            selectors: {
+                hierarchy: ".csc-record-hierarchy"
+            },
+            selectorsToIgnore: "hierarchy",
+            components: {
+                hierarchy: {
+                    type: "cspace.hierarchy",
+                    container: "{recordRenderer}.dom.hierarchy",
                     createOnEvent: "afterRender"
                 }
             }
@@ -1549,6 +1650,41 @@ cspace = cspace || {};
         tree.passwordInstructionsLabel = {
             messagekey: "users-passwordInstructionsLabel"
         };
+
+        // Do not render userId unless the user was already created.
+        if (!fluid.get(that.model, "fields.userId")) {
+            fluid.remove_if(tree, function (val, key) {
+                if (key.toLowerCase().indexOf("userid") > -1) {return true;}
+            });
+        }
+
+        function disable (tree, selector) {
+            var valuebinding = tree[selector],
+                value = {
+                    decorators: {
+                        type: "jQuery",
+                        func: "prop",
+                        args: ["disabled", "disabled"]
+                    }
+                };
+            if (typeof valuebinding === "string") {
+                value.value = valuebinding;
+            } else {
+                fluid.merge(null, value, valuebinding);
+            }
+            tree[selector] = value;
+        }
+
+        // CSPACE-5632: Adding extra protection for admin users.
+        if (fluid.get(that.model, "fields.metadataProtection") === "immutable") {
+            fluid.each(["email", "userName", "status"], function (field) {
+                disable(tree, ".csc-user-" + field);
+            });
+            disable(tree.expander.tree, ".csc-users-roleSelected");
+        } else if (fluid.get(that.model, "fields.rolesProtection") === "immutable") {
+            disable(tree.expander.tree, ".csc-users-roleSelected");
+        }
+
         return tree;
     };
 

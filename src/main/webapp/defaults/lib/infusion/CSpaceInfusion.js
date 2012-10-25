@@ -12160,7 +12160,7 @@ var fluid = fluid || fluid_1_5;
         return zeropad(date.getHours()) + ":" + zeropad(date.getMinutes()) + ":" + zeropad(date.getSeconds()) + "." + zeropad(date.getMilliseconds(), 3);
     };
 
-    fluid.isTracing = true;
+    fluid.isTracing = false;
 
     fluid.registerNamespace("fluid.tracing");
 
@@ -15983,7 +15983,7 @@ var fluid_1_5 = fluid_1_5 || {};
                  }
                  pendingClass[fetchClass][canon] = resourceSpec;
              }
-             options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+             // options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
              $.ajax(options);
          }
          else {

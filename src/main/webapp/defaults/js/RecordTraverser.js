@@ -140,7 +140,8 @@ cspace = cspace || {};
                     "{cspace.recordTraverser}.options.elPaths",
                     "{cspace.recordTraverser}.options.urls"
                 ]
-            }
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         urls: cspace.componentUrlBuilder({
             navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
@@ -291,6 +292,10 @@ cspace = cspace || {};
             index: get(model, searchReference, elPaths.index),
             source: get(model, searchReference, elPaths.source)
         }, function(data) {
+            if (data.isError === true) {
+                that.displayErrorMessage(that.options.parentBundle.resolve("recordTraverser-fail"));
+                return;
+            }
             applier.requestChange(elPaths.adjacentRecords, data);
             that.refreshView();
         });

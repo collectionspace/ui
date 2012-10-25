@@ -21,6 +21,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         preInitFunction: "cspace.sidebar.preInit",
+        finalInitFunction: "cspace.sidebar.finalInit",
         parentBundle: "{globalBundle}",
         strings: {},
         selectors: {
@@ -47,6 +48,9 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
+        },
+        events: {
+            ready: null
         },
         protoTree: {
             media: {
@@ -225,6 +229,10 @@ cspace = cspace || {};
                 return cspace.permissions.getPermissibleRelatedRecords(key, that.options.resolver, that.options.recordTypeManager, "list").length === 0;
             }
         });
+    };
+
+    cspace.sidebar.finalInit = function (that) {
+        that.events.ready.fire();
     };
 
     cspace.sidebar.buildModel = function (options, records) {

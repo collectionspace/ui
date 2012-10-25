@@ -101,6 +101,15 @@ TO:
         };
 {code}
 
+Changed:
+{code}
+        fluid.isTracing = true;
+{code}
+TO
+{code}
+        fluid.isTracing = false;
+{code}
+
 In Data Binding:
 {code}
     fluid.makeSuperApplier = function () {

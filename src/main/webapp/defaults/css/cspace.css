@@ -12,6 +12,7 @@ CollectionSpace 1.8 default CSS selectors
 
 /* core HTML elements*/
 html{
+    overflow-y: scroll;
     font-size: 100%;} 
 body {
     font-size: 12px; 
@@ -63,7 +64,7 @@ input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
     margin: 0;
-    width: 100%;
+    width: 95%;
 }
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
@@ -690,7 +691,8 @@ table tbody.highlight tr:focus td {
     color:#000; 
     cursor:default;}	
 .info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
-    padding-bottom:4px; 
+    padding-bottom:4px;
+    min-height: 12px;
     font-weight:bold; 
     color:#333333; 
     font-size:11px; 
@@ -705,10 +707,10 @@ table tbody.highlight tr:focus td {
 td.fl-date-group {
 	width:160px;}
 .info-pair .content > select {
-    width:100%; 
-    border-spacing:0; 
-    margin-top:0; 
-    border:1px solid #C7CFD4; 
+    width: 95%;
+    border-spacing:0;
+    margin-top:0;
+    border:1px solid #C7CFD4;
     padding:0;
 }
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
@@ -768,8 +770,7 @@ table.cs-admin-table td.checkbox {
     padding:0 !important;}
 .list-table  table {
     font-size:12px; 
-    line-height:120%; 
-    background-color:#F0F5FB; 
+    line-height:120%;
     border:none; 
     width:100%;
 }
@@ -781,11 +782,16 @@ table.cs-admin-table td.checkbox {
     color:#333; 
     border-bottom:2px solid #C7CACE;}
 .list-table  table tbody tr td {
-    background-color:#F0F5FB; 
     padding: 5px 2px 4px 4px; 
     border-bottom:0px solid #ADADAD; 
     color:#000; 
     vertical-align:top;}
+.list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(240,245,251,.5);
+}
+.list-table table tbody tr:nth-child(even) {
+    background-color: #F0F5FB;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
@@ -996,6 +1002,7 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
+    overflow: hidden;
 }
 .info-pair.cs-listView {
     margin-bottom: 0;
@@ -1160,6 +1167,9 @@ td .field-cal img, td .csc-calendar-button img {
     position: relative; 
     bottom: 0px; 
     width: 100%; }
+#createnew #footer {
+    position: absolute;
+}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1340,7 +1350,16 @@ input[disabled]:hover, input[disabled]:hover    {
     overflow:hidden;}
 
 /*   styling the externalURL  */
-input[type="text"].cs-externalURL {
+li.cs-repeatable-repeat div.cs-repeatable-content.cs-externalURL-parent {
+    min-width: 300px;
+}
+td.cs-externalURL-parent {
+    min-width: 182px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
+    width: 95%;
+}
+input[type="text"].cs-externalURL, .cs-externalURL-parent input.cs-autocomplete-input, .info-pair .content tbody td.cs-externalURL-parent input.cs-autocomplete-input {
     width: 90%;
 }
 input[type="text"].cs-externalURL.cs-externalURL-error{
@@ -1899,14 +1918,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     cursor:pointer;
     max-height: 50px;
 }
-.cs-hierarchy-equivalentContext {
-    background: #FFF;
-    display: block;
-    width: 100%;
-    border: 1px solid #C7CFD4;
-    height: 19px;
-    line-height: 15px;
-}
 .cs-sidebar-mediumImage {
     max-height: 165px;
 }
@@ -2166,7 +2177,6 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 .cs-search-highlight {
     display:inline-block;
     overflow:hidden;
-    width:99%;
     text-overflow:ellipsis;
     -o-text-overflow:ellipsis;
     white-space: nowrap;
@@ -2317,6 +2327,7 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-mediaView-mediumImage {
     max-height: 165px;
+    max-width: 100%;
     display: block;
     margin: auto;
     padding: 12.5px 0;
@@ -2347,4 +2358,26 @@ input[type="button"].cs-deleteRelationButton {
 .cs-mediaView-snapshot div a {
     color: #6F9ECD;
     font-weight: bold;
+}
+.cs-urnCSIDConverter {
+    display: block;
+    padding-bottom: 3px;
+}
+.cs-relatedRecordsTab-newRecordBannder-banner {
+    background-color: #EEF4D7;
+    color: #696565;
+    padding: 15px 0 15px 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.cs-multipleEdit li.cs-repeatable-repeat {
+    padding-left: 4px;
+    padding-top: 4px;
+/* This code is only for particular working for L\M\I repeatable Method select */
+.cs-fixedRepeatableSelect {
+    min-width: 230px;
+}
+.cs-fixedRepeatableSelect select.cs-repeatable-content {
+    width: 85%;
 }

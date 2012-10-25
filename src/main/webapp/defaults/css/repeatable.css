@@ -40,7 +40,7 @@ input[type="button"].cs-repeatable-add {
 }
 li.cs-repeatable-repeat {
     list-style-type: none; 
-    margin-bottom:1px; 
+    margin-bottom: 4px;
 }
 input.cs-repeatable-primary {
     width: 11px; 
@@ -231,6 +231,9 @@ div.infoGroup div.cs-repeatable-group {
 div.info-pair-select div.content,
 div.info-pair-date div.content {
     display: inherit;
+}
+div.info-pair-date {
+    min-width: 165px;
 }
 div.info-pair-select li.cs-repeatable-repeat,
 div.info-pair-date li.cs-repeatable-repeat {

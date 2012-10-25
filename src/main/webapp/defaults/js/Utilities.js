@@ -363,16 +363,6 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
-    cspace.util.setZIndex = function () {
-        if ($.browser.msie) {
-            var zIndexNumber = 999;
-            $("div").each(function () {
-                $(this).css('zIndex', zIndexNumber);
-                zIndexNumber -= 1;
-            });
-        }
-    };
-
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
         fluid.initDependents(that);
@@ -806,6 +796,33 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
 
+    fluid.defaults("cspace.util.urnCSIDConverter", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        strategy: "cspace.util.urnToString",
+        postInitFunction: "cspace.util.urnCSIDConverter.postInit",
+        components: {
+            externalURL: {
+                type: "cspace.externalURL",
+                container: "{cspace.util.urnCSIDConverter}.container"
+            }
+        },
+        styles: {
+            parent: "cs-urnCSIDConverter"
+        }
+    });
+
+    cspace.util.urnCSIDConverter.postInit = function (that) {
+        var strategy = fluid.getGlobalValue(that.options.strategy);
+        that.container.hide();
+        that.parent = $("<div/>");
+        that.parent.addClass(that.options.styles.parent);
+        that.container.wrap(that.parent);
+        that.input = $("<input/>");
+        that.input.prop("disabled", true);
+        that.input.val(strategy(that.container.val()));
+        that.container.after(that.input);
+    };
+
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -816,6 +833,23 @@ fluid.registerNamespace("cspace.util");
             return "";
         }
         return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");
+    };
+
+    cspace.util.urnToCSID = function (urn) {
+        if (!urn) {
+            return "";
+        }
+        return decodeURIComponent(urn.slice(urn.indexOf("id(") + 3, urn.indexOf(")")));
+    };
+
+    cspace.util.shortIdentifierToCSID = function (urn) {
+        var shortIdentifier;
+        if (!urn) {
+            return "";
+        }
+        urn = urn.slice(urn.indexOf("item:name(") + 10);
+        shortIdentifier = decodeURIComponent(urn.slice(0, urn.indexOf(")")));
+        return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
     };
 
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
@@ -1034,7 +1068,8 @@ fluid.registerNamespace("cspace.util");
         that.init = function (tag, options) {
             options = options || {};
             that.events.onFetch.fire();
-            fluid.fetchResources({
+
+            var spec = {
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
                     options: {
@@ -1043,8 +1078,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("Error fetching config file: " + textStatus);
                         }
                     }
-                },
-                loginstatus: {
+                }
+            };
+
+            if (!that.loginStatus) {
+                spec.loginstatus = {
                     href: fluid.invoke("cspace.util.getLoginURL"),
                     options: {
                         dataType: "json",
@@ -1072,8 +1110,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("PageBuilder was not able to retrieve login information and user permissions: " + textStatus);
                         }
                     }
-                }
-            }, function (resourceSpecs) {
+                };
+            }
+
+            fluid.fetchResources(spec, function (resourceSpecs) {
+                that.loginStatus = that.loginStatus || resourceSpecs.loginstatus.resourceText;
                 if (!that.globalBundle || !that.messageBar) {
                     that.events.afterFetch.fire();
                 }
@@ -1084,7 +1125,7 @@ fluid.registerNamespace("cspace.util");
                 }, {
                     pageBuilder: {
                         options: {
-                            userLogin: resourceSpecs.loginstatus.resourceText
+                            userLogin: that.loginStatus
                         }
                     },
                     pageBuilderIO: {
@@ -1149,7 +1190,7 @@ fluid.registerNamespace("cspace.util");
             eventMap: {
                 "primaryModel.csid": function () {
                     if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                        that.events.primaryRecordCreated.fire();
+                        that.events.primaryRecordCreated.fire(fluid.get(that.globalModel.model, "primaryModel"));
                     }
                 },
                 "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
@@ -1322,7 +1363,8 @@ fluid.registerNamespace("cspace.util");
         },
         mergePolicy: {
             schema: "nomerge",
-            model: "preserve"
+            model: "preserve",
+            sortRecords: "replace"
         },
         invokers: {
             getRecordTypes: {
@@ -1331,6 +1373,9 @@ fluid.registerNamespace("cspace.util");
             }
         },
         model: {},
+        sortRecords: [
+            "nonVocabularies"
+        ],
         strategy: cspace.util.schemaStrategy,
         finalInitFunction: "cspace.recordTypes.finalInit"
     });
@@ -1347,6 +1392,14 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
+        
+        fluid.each(that.options.sortRecords, function(elPath) {
+            if (!that[elPath]) {
+                return;
+            }
+            that[elPath] = that[elPath].sort();
+        });
+        
         that.events.ready.fire(that);
     };
 

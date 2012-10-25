@@ -29,9 +29,13 @@ cspace = cspace || {};
         },
         produceTree: "cspace.relationManager.produceTree",
         strings: {},
+        messageKeys: {
+            addRelationsFailedMessage: "recordEditor-addRelationsFailedMessage",
+            pleaseSaveFirst: "relationManager-pleaseSaveFirst",
+            afterAddRelation: "relationManager-afterAddRelation"
+        },
         parentBundle: "{globalBundle}",
         selectorsToIgnore: "searchDialog",
-        primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
             messageBar: "{messageBar}",
             // TODO: this should really not be a component but in fact it requires access to 
@@ -54,10 +58,7 @@ cspace = cspace || {};
             searchToRelateDialog: {
                 container: "{relationManager}.dom.searchDialog",
                 type: "cspace.searchToRelateDialog",
-                createOnEvent: "onSearchToRelateDialog",
-                options: {
-                    primaryCSID: "{relationManager}.options.primaryCSID"
-                }
+                createOnEvent: "onSearchToRelateDialog"
             },
             relationDataSource: {
                 type: "cspace.relationManager.relationDataSource"
@@ -106,21 +107,25 @@ cspace = cspace || {};
     cspace.relationManager.TestRelationDataSource = cspace.URLDataSource;
 
     cspace.relationManager.preInit = function (that) {
+        var options = that.options,
+            messageKeys = options.messageKeys,
+            resolve = options.parentBundle.resolve;
+
         that.onAddRelation = function (relations) {
             that.relationDataSource.set(relations, null, function (data) {
                 if (!data || data.isError) {
                     data.messages = data.messages || fluid.makeArray("");
                     fluid.each(data.messages, function (message) {
                         message = message.message || message;
-                        that.messageBar.show(that.options.parentBundle.resolve("recordEditor-addRelationsFailedMessage", [message]), null, true);
+                        that.messageBar.show(resolve(messageKeys.addRelationsFailedMessage, [message]), null, true);
                     });
                     return;
                 }
-                that.events.afterAddRelation.fire(that.options.related);
+                that.events.afterAddRelation.fire(options.related);
             });
         };
         that.afterAddRelation = function () {
-            that.messageBar.show(that.options.parentBundle.resolve("relationManager-afterAddRelation"), null, false);
+            that.messageBar.show(resolve(messageKeys.afterAddRelation), null, false);
         };
     };
 
@@ -134,23 +139,26 @@ cspace = cspace || {};
         that.events.onSearchToRelateDialog.fire();
     };
 
-    cspace.relationManager.addFromTab = function (that, recordEditor, globalBundle, messageBar, csid, event) {
+    cspace.relationManager.addFromTab = function (that, recordEditor, messageBar, csid, event) {
+        var callback = function () {
+            cspace.relationManager.add(that, messageBar, csid, event);
+        };
+
         if (!recordEditor) {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
+            callback();
             return;
         }
-        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
-            cspace.relationManager.add(that, globalBundle, messageBar, csid, event);
-        });
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(callback);
     };
 
-    cspace.relationManager.add = function (that, globalBundle, messageBar, csid, event) {
+    cspace.relationManager.add = function (that, messageBar, csid, event) {
+        var options = that.options;
         event.stopPropagation();
         if (csid) {
             messageBar.hide();
             that.searchToRelateDialog.open();
         } else {
-            messageBar.show(globalBundle.resolve("relationManager-pleaseSaveFirst"), null, true);
+            messageBar.show(options.parentBundle.resolve(options.messageKeys.pleaseSaveFirst), null, true);
         }
     };
 

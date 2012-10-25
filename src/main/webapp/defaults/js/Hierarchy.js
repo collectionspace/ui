@@ -9,18 +9,124 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
     
     fluid.registerNamespace("cspace.hierarchy");
+
+    cspace.hierarchy.treeUispecMerge = function (tree, uispec) {
+        return fluid.merge(null, tree, uispec);
+    };
+
+    cspace.hierarchy.filterUISpec = function (uispec) {
+        // NOTE: This is to fix an issue of not necessary things in uisoec
+        // for hierarchy. As soon as uispec is cleaned up - this needs to
+        // be removed.
+        return fluid.filterKeys(uispec, [
+            ".csc-hierarchy-broaderContext",
+            ".csc-hierarchy-broaderContextType",
+            ".csc-hierarchy-narrowerContexts"
+        ], false);
+    };
+
+    cspace.hierarchy.produceTreeCataloging = function (that) {
+        return cspace.hierarchy.treeUispecMerge({
+            header: {
+                messagekey: "hierarchy-headerCataloging"
+            },
+            narrowerContextLabel: {
+                messagekey: "hierarchy-narrowerContextCatalogingLabel"
+            },
+            broaderContextLabel: {
+                messagekey: "hierarchy-broaderContextCatalogingLabel"
+            },
+            narrowerContextTypeLabel: {
+                messagekey: "hierarchy-narrowerContextTypeLabel"
+            },
+            broaderContextTypeLabel: {
+                messagekey: "hierarchy-broaderContextTypeLabel"
+            },
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: {
+                    funcName: "cspace.hierarchy.assertEquivalentContexts",
+                    args: {
+                        equivalentContexts: "${fields.equivalentContexts}"
+                    }
+                },
+                trueTree: {
+                    equivalentContextsLabel: {
+                        messagekey: "hierarchy-equivalentContextsCatalogingLabel"
+                    },
+                    expander: {
+                        repeatID: "equivalentContext",
+                        tree: {
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
+                        },
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "fields.equivalentContexts"
+                    }
+                },
+                falseTree: {
+                    equivalentContextsLabel: {
+                        decorators: {addClass: "{styles}.hidden"}
+                    }
+                }
+            }
+        }, that.options.uispec);
+    };
     
     cspace.hierarchy.produceTree = function (that) {
-        return fluid.merge(null, {
+        return cspace.hierarchy.treeUispecMerge({
             header: {
                 messagekey: "hierarchy-header"
+            },
+            narrowerContextLabel: {
+                messagekey: "hierarchy-narrowerContextLabel"
+            },
+            broaderContextLabel: {
+                messagekey: "hierarchy-broaderContextLabel"
+            },
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: {
+                    funcName: "cspace.hierarchy.assertEquivalentContexts",
+                    args: {
+                        equivalentContexts: "${fields.equivalentContexts}"
+                    }
+                },
+                trueTree: {
+                    equivalentContextsLabel: {
+                        messagekey: "hierarchy-equivalentContextsLabel"
+                    },
+                    expander: {
+                        repeatID: "equivalentContext",
+                        tree: {
+                            value: "${{row}.equivalentContext}",
+                            decorators: {
+                                type: "fluid",
+                                func: "cspace.util.urnCSIDConverter"
+                            }
+                        },
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "fields.equivalentContexts"
+                    }
+                },
+                falseTree: {
+                    equivalentContextsLabel: {
+                        decorators: {addClass: "{styles}.hidden"}
+                    }
+                }
             }
         }, that.options.uispec);
     };
@@ -34,45 +140,83 @@ cspace = cspace || {};
         },
         selectors: {
             header: ".csc-hierarchy-header",
-            togglable: ".csc-hierarchy-togglable"
+            togglable: ".csc-hierarchy-togglable",
+            narrowerContextLabel: ".csc-hierarchy-narrowerContext-label",
+            narrowerContextTypeLabel: ".csc-hierarchy-narrowerContextType-label",
+            broaderContextLabel: ".csc-hierarchy-broaderContext-label",
+            broaderContextTypeLabel: ".csc-hierarchy-broaderContextType-label",
+            equivalentContextsLabel: ".csc-hierarchy-equivalentContexts-label",
+            equivalentContext: ".csc-hierarchy-equivalentContext"
         },
-        selectorsToIgnore: ["togglable"],
+        styles: {
+            hidden: "hidden"
+        },
+        selectorsToIgnore: "togglable",
+        repeatingSelectors: ["equivalentContext"],
         strings: {},
         parentBundle: "{globalBundle}",
         produceTree: cspace.hierarchy.produceTree,
         rendererFnOptions: {
             cutpointGenerator: "cspace.hierarchy.cutpointGenerator"
         },
+        events: {
+            afterFetchTemplate: null
+        },
+        listeners: {
+            afterFetchTemplate: "{that}.refreshView"
+        },
         components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "cspace.hierarchyAutocomplete"
+                }
+            },
             hierarchyTogglable: {
-                type: "cspace.util.togglable"
+                type: "cspace.util.togglable",
+                createOnEvent: "afterRender"
+            },
+            templateFetcher: {
+                type: "cspace.templateFetcher",
+                priority: "first",
+                options: {
+                    events: {
+                        afterFetch: {
+                            event: "{cspace.hierarchy}.events.afterFetchTemplate"
+                        }
+                    },
+                    template: "",
+                    resources: {
+                        template: cspace.resourceSpecExpander({
+                            url: "%webapp/html/components/HierarchyTemplate.html",
+                            options: {
+                                dataType: "html"
+                            }
+                        })
+                    }
+                }
             }
         },
-        resources: {
-            template: cspace.resourceSpecExpander({
-                fetchClass: "fastTemplate",
-                url: "%webapp/html/components/HierarchyTemplate.html",
-                options: {
-                    dataType: "html"
-                }
-            })
-        },
-        postInitFunction: "cspace.hierarchy.postInitFunction"
+        preInitFunction: "cspace.hierarchy.preInit"
     });
+
+    cspace.hierarchy.preInit = function (that) {
+        that.options.rendererFnOptions.templateSource = function () {
+            return that.template;
+        };
+        that.refreshView = function (resourceText) {
+            that.template = resourceText;
+            that.refreshView();
+        };
+    };
     
     cspace.hierarchy.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
     };
     
-    cspace.hierarchy.postInitFunction = function (that) {
-        that.renderer.refreshView();
-    };
-    
     cspace.hierarchy.assertEquivalentContexts = function (options) {
         return options.equivalentContexts && options.equivalentContexts.length > 0;
     };
-    
-    fluid.fetchResources.primeCacheFromResources("cspace.hierarchy");
     
 })(jQuery, fluid);

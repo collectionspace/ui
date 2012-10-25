@@ -389,42 +389,122 @@ var utilitiesTester = function ($) {
         jqUnit.assertEquals("Value should be converted to the following text", "TEST NAME", $(selector).text());
     });
     
-    utilitiesTest.test("cspace.recordTypes", function () {
-        var recTypes = cspace.recordTypes({
-            schema: cspace.tests.sampleSchema
+    var recordSortingTest = function(options) {
+        utilitiesTest.test("cspace.recordTypes", function () {
+            var recTypes = cspace.recordTypes({
+                schema: cspace.tests.sampleSchema,
+                sortRecords: options.sortRecords
+            });
+            
+            fluid.each(options.recordTypes, function(values, name) {
+                jqUnit.assertDeepEq(name + " should contain", values, recTypes[name]);
+            });
         });
-        jqUnit.assertDeepEq("all should contain", [
-            "person",
-            "intake",
-            "loanin",
-            "loanout",
-            "acquisition",
-            "organization",
-            "place",
-            "concept",
-            "cataloging",
-            "movement",
-            "objectexit",
-            "media"
-        ], recTypes.all);
-        jqUnit.assertDeepEq("cataloging should contain", [
-            "cataloging"
-        ], recTypes.cataloging);
-        jqUnit.assertDeepEq("procedures should contain", [
-            "intake",
-            "loanin",
-            "loanout",
-            "acquisition",
-            "movement",
-            "objectexit",
-            "media"
-        ], recTypes.procedures);
-        jqUnit.assertDeepEq("vocabularies should contain", [
-            "person",
-            "organization",
-            "place",
-            "concept"
-        ], recTypes.vocabularies);
+    };
+
+    fluid.each([{
+        sortRecords: null,
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "vocabularies": [
+                "person",
+                "organization",
+                "place",
+                "concept"
+            ]
+        }
+    }, {
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "vocabularies": [
+                "person",
+                "organization",
+                "place",
+                "concept"
+            ]
+        }
+    }, {
+        sortRecords: ["cataloging", "procedures", "vocabularies"],
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "acquisition",
+                "intake",
+                "loanin",
+                "loanout",
+                "media",
+                "movement",
+                "objectexit"
+            ],
+            "vocabularies": [
+                "concept",
+                "organization",
+                "person",
+                "place"
+            ]
+        }
+    }], function (test) {
+        recordSortingTest(test);
     });
     
     utilitiesTest.test("Loading Indicator basic", function () {
