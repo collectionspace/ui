@@ -23,10 +23,12 @@ collection-object-flowerColorLabel: Flower Color
 collection-object-fruitColorLabel: Fruit Color
 collection-object-provenanceTypeLabel: Provenance Type
 collection-object-propagationHistoryLabel: Propagation History
+collection-object-breedingSystemLabel: Breeding System
 collection-object-classUseLabel: Class Use
 collection-object-researchUseLabel: Research Use
 collection-object-distributionLabel: Distribution
 collection-object-ignoreRedDotLabel: Ignore Red Dot
+collection-object-fragranceLabel: Fragrance
 collection-object-securityRiskLabel: Security Risk
 collection-object-flowersJanLabel: Flowers Jan
 collection-object-flowersFebLabel: Flowers Feb
