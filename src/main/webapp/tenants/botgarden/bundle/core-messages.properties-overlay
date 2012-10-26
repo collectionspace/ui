@@ -384,6 +384,14 @@ propagation-updatedAtLabel: Updated At
 propagation-updatedAtStartLabel: Earliest
 propagation-updatedAtEndLabel: Latest
 propagation-updatedByLabel: Updated By
+propagation-numStartedLabel: Number Started
+propagation-scarStratGroupLabel: Scarification/Stratification
+propagation-durationLabel: Duration
+propagation-durationUnitLabel: Unit
+propagation-sporesLabel: Spores
+propagation-plantTypeLabel: Plant Type
+propagation-chemicalAppliedLabel: Chemical Applied
+propagation-activityConcentrationLabel: Concentration
 
 objectexit: Distribution
 objectexit-tab: Distribution

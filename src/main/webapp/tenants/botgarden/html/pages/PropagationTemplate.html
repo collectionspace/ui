@@ -55,14 +55,26 @@
 
 				<div class="info-column">
 					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair-select">
-							<div class="header">
-								<div class="label csc-propagation-propType-label"></div>
-							</div>
-							<div class="content">
-								<select class="csc-propagation-propType input-select"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
+					    <div class="info-column2-50 fl-force-left">
+    						<div class="info-pair-select">
+    							<div class="header">
+    								<div class="label csc-propagation-propType-label"></div>
+    							</div>
+    							<div class="content">
+    								<select class="csc-propagation-propType input-select"><option value="">Options not loaded</option></select>
+    							</div>
+    						</div>
+    					</div>
+    				    <div class="info-column2-50 fl-force-right">
+    				        <div class="info-pair">
+    				            <div class="header">
+    				                <div class="label csc-propagation-numStarted-label"></div>
+    				            </div>
+    				            <div class="content">
+    				                <input type="text" class="csc-propagation-numStarted"/>
+    				            </div>
+    				        </div>
+    				    </div>
                         <div class="info-pair">
                             <div class="header">
                                 <div class="label">Seeds</div>
@@ -70,24 +82,52 @@
                             <div class="content">
                                 <div class="info-column csc-callout-group">
                 					<div class="info-column2-70 fl-force-left">
-                						<div class="info-pair-select">
-                							<div class="header">
-                								<div class="label csc-propagation-scarStrat-label"></div>
-                							</div>
-                							<div class="content">
-                								<select class="csc-propagation-scarStrat input-select"><option value="">Options not loaded</option></select>
-                							</div>
-                						</div>
+                					    <div class="info-pair">
+                                            <div class="header">
+                                                <div class="label csc-propagation-scarStratGroup-label"></div>
+                                            </div>
+                                            <div class="content">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <td class="csc-propagation-scarStrat-label"></td>
+                                                            <td class="csc-propagation-duration-label"></td>
+                                                            <td class="csc-propagation-durationUnit-label"></td>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr class="csc-propagation-scarStratGroup">
+                                                            <td><select class="csc-propagation-scarStrat input-select"><option value="">Options not loaded</option></select></td>
+                                                            <td><input type="text" class="csc-propagation-duration" /></td>
+                                                            <td><select class="csc-propagation-durationUnit input-select"><option value="">Options not loaded</option></select></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                 					</div>
                 					<div class="info-column2-30 fl-force-right">
-                						<div class="info-pair">
-                							<div class="header">
-                								<div class="label csc-propagation-extraSeeds-label"></div>
-                							</div>
-                							<div class="content">
-                							    <input type="checkbox" class="csc-propagation-extraSeeds"/>
-                							</div>
-                						</div>
+                					    <div class="info-column2-50 fl-force-left">
+                    						<div class="info-pair">
+                    							<div class="header">
+                    								<div class="label csc-propagation-extraSeeds-label"></div>
+                    							</div>
+                    							<div class="content">
+                    							    <input type="checkbox" class="csc-propagation-extraSeeds"/>
+                    							</div>
+                    						</div>
+                                        </div>
+                                        <div class="info-column2-50 fl-force-right">
+                                            <div class="info-pair">
+                    							<div class="header">
+                    								<div class="label csc-propagation-spores-label"></div>
+                    							</div>
+                    							<div class="content">
+                    							    <input type="checkbox" class="csc-propagation-spores"/>
+                    							</div>
+                    						</div>
+                    					</div>
                 					</div>
                 				</div>
                 			</div>
@@ -156,6 +196,27 @@
     				    </div>
     				</div>
 				</div>
+
+				<div class="info-column2-30">
+    				<div class="info-pair">
+    				    <div class="header">
+    				        <div class="label">Living Plant Material</div>
+    				    </div>
+    				    <div class="content">
+            				<div class="info-column csc-callout-group">
+        						<div class="info-pair-select">
+        							<div class="header">
+        								<div class="label csc-propagation-plantType-label"></div>
+        							</div>
+        							<div class="content">
+        							    <select class="csc-propagation-plantType input-select"><option value="">Options not loaded</option></select>
+        							</div>
+        						</div>
+            				</div>
+    				    </div>
+    				</div>
+				</div>
+
 				
 				<div class="info-column">
 				    <div class="info-pair">
@@ -252,14 +313,26 @@
     							</div>
     							<div class="info-column">
     							    <div class="info-column2-50 fl-force-left">
-    									<div class="info-pair-select">
-    										<div class="header">
-    											<div class="csc-propagation-fungicide-label label"></div>
-    										</div>
-    										<div class="content">
-            							        <select class="csc-propagation-fungicide input-select"><option value="">Options not loaded</option></select>
-    										</div>
-    									</div>
+    							        <div class="info-column2-50 fl-force-left">
+        									<div class="info-pair-select">
+        										<div class="header">
+        											<div class="csc-propagation-chemicalApplied-label label"></div>
+        										</div>
+        										<div class="content">
+                							        <select class="csc-propagation-chemicalApplied input-select"><option value="">Options not loaded</option></select>
+        										</div>
+        									</div>
+                                        </div>
+                                        <div class="info-column2-50 fl-force-right">
+        									<div class="info-pair">
+        										<div class="header">
+        											<div class="csc-propagation-activityConcentration-label label"></div>
+        										</div>
+        										<div class="content">
+                							        <input type="text" class="csc-propagation-activityConcentration"/>
+        										</div>
+        									</div>
+                                        </div>
     							    </div>
     							    <div class="info-column2-50 fl-force-right">
     									<div class="info-pair">
