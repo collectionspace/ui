@@ -18,7 +18,9 @@ html{
     overflow-y: scroll;
     font-size: 100%;} 
 body {
-    font-size: 12px; 
+    font-family: Helvetica,arial,freesans,clean,sans-serif;
+    font-size: 12px;
+    color: #333;
     line-height:1.2; 
     padding:5px 4px 0 4px;
     margin:0;}
@@ -40,6 +42,7 @@ p {
 ul {
     margin:0; width:auto;}
 textarea {
+    font-family: inherit;
     overflow:auto; 
     resize:none;}
 
@@ -83,6 +86,7 @@ input[type="submit"].logout:focus {
     background-color:#333; 
     color:#FFF;}
 input[type="button"], input[type="submit"]  {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     background-color:#73AA4F; 
     height:21px; 
     padding-left:12px; 
@@ -206,6 +210,18 @@ input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
 input[type="button"].add {
     height:16px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    font-size: 0.8em;
+}
+input.secondaryButton {
+    font-size:1em;
+    background-color:#FFFFFF;
+    color:#48722D;
+    border: 1px solid #C7CFD4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+input.secondaryButton:focus, input.secondaryButton:hover {
+    background-color:#DAEDD1;
+    text-decoration: underline;
 }
 .gotoButton {
     display: inline;
@@ -228,7 +244,8 @@ input[type="button"].add {
     vertical-align: middle;
 }
 .button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
-    margin-left:10px; 
+    margin-left:10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
     margin-bottom:0px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {
@@ -409,6 +426,13 @@ li .flc-pager-pageLink {
     background-color:#fff; 
     margin-bottom:-2px;
 	line-height:1;}
+#mycollectionspace .header-menu-row .menu-item:nth-child(1), #mycollectionspace .header-menu-row .menu-item:nth-child(1) a,
+#createnew .header-menu-row .menu-item:nth-child(2), #createnew .header-menu-row .menu-item:nth-child(2) a,
+#search .header-menu-row .menu-item:nth-child(3), #search .header-menu-row .menu-item:nth-child(3) a,
+#administration .header-menu-row .menu-item:nth-child(4), #administration .header-menu-row .menu-item:nth-child(4) a {
+    color: #A6A6A6;
+    border-bottom-color: #A6A6A6;
+}
 .menu-item {
     margin-right:3px; 
     margin-bottom:7px; 
@@ -428,6 +452,7 @@ li .flc-pager-pageLink {
 
 /* header space for record ID etc. */
 #title-bar {
+    overflow: hidden;
     margin: 0 0 .5em 0;}
 #title-bar.nobg {
     background-color:#FFF;}
@@ -445,14 +470,18 @@ li .flc-pager-pageLink {
     float:left;}
 #title-bar .content {
     height:42px; 
-    color:#696565; 
+    color:#666666; 
     font-weight:bold; 
-    font-size:24px; 
+    font-size:2em; 
     line-height:110%;}
 #title-bar .content .overflow {
     padding-left:10px; 
     max-width:90%; 
     float:left;}
+#administration #title-bar, #administration #title-bar .content .overflow {
+    padding: 0;
+    margin: 0;
+}
 #title-bar .value{
     padding-right:30px; 
     float:left; 
@@ -464,8 +493,14 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
-    color: #696565;
+    color: #73AA4F;
     float: left;
+}
+.cs-authority #title-bar .cs-titleBar-recordType {
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-panel {
+    border: 2px solid #78449A;
 }
 .cs-titleBar-vocab {
     float: right;
@@ -612,6 +647,7 @@ table tbody.highlight tr:focus td {
 .fl-container-1000   {width: 1000px;}
 .fl-container-1050   {width: 1050px;}
 .fl-container-1024-inner {padding:0; background-color:#F0F5FB;}
+.cs-authority .fl-container-1024-inner {background-color:#F3EDF6;}
 .fl-container-left {min-width:693px; width:70%;}
 .fl-container-admin   {width:100%;}
 .fl-container-pivot  {width:30%; min-width: 297px; margin-top:26px;}
@@ -795,11 +831,20 @@ table.cs-admin-table td.checkbox {
 .list-table table tbody tr:nth-child(even) {
     background-color: #F0F5FB;
 }
+.cs-authority .list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(243,237,246,.5);
+}
+.cs-authority .list-table table tbody tr:nth-child(even) {
+    background-color: #F3EDF6;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
 .list-table  table tbody tr td a:focus, .cs-selecting, .list-table table tbody tr:hover td, .list-table table tbody tr.cs-selecting td {
     background-color:#C3D9E9;}
+.cs-authority .list-table table tbody tr td a:focus, .cs-authority .cs-selecting, .cs-authority .list-table table tbody tr:hover td, .cs-authority .list-table table tbody tr.cs-selecting td {
+    background-color:#C3A4D7;}
+}
 .list-table  table tbody tr.cs-search-disabled:hover td,
 .list-table  table tbody tr.cs-search-disabled:focus td {
     background-color:#F0F5FB;}
@@ -1310,12 +1355,27 @@ input[disabled]:hover, input[disabled]:hover    {
     float: left;
 }
 
+#secondary-nav .ui-tabs .ui-tabs-nav {
+    line-height: 17px;
+}
+.record .ui-tabs .ui-tabs-nav li:first-child {
+    font-size: 1.2em;
+}
 .ui-tabs .ui-tabs-hide {
     display: none;}
 .cs-tabs-tab-link {
-    -moz-border-radius:6px 6px 0 0;
-    -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+       border-radius:5px 5px 0 0;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
+    border-color: #78449A #78449A #FFFFFF;
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:hover, .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:focus {
+    color: #FFF;
+    background-color: #78449A;
+    border-color: #78449A;
 }
 .cs-add-related-records-dialog {
     background-color:#fff;}
@@ -1545,6 +1605,9 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
 }
+.cs-authority a.cs-listView-header-link {
+    color: #78449A;
+}
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {
     width:99% !important; 
     margin:8px 8px 8px 0; 
@@ -1656,6 +1719,9 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     font-weight: bold;
     line-height: 110%;
     padding: 10px 10px 10px 20px;
+}
+.cs-authority .cs-sidebar-banner-message {
+    background-color: #C3A4D7;
 }
 /*  Unifying and cleaning up the calendar date picker widget */
 .cs-calendar-button, .cs-externalURL-button {
@@ -2164,15 +2230,15 @@ tbody.csc-listView-rows tr.cs-listView-row td a {
 tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
     background: inherit;
 }
-.list-table .cs-disabled.cs-listView-row:hover > td,
-.list-table .cs-disabled.cs-listView-row:focus > td {
+.list-table .cs-disabled.cs-listView-row:hover > td a,
+.list-table .cs-disabled.cs-listView-row:focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td,
-.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td {
+.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td a,
+.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled, .cs-disabled > td {
+.list-table .cs-disabled, .cs-disabled > td a {
     color: gray !important;
     cursor: default !important;
 }
@@ -2309,6 +2375,7 @@ div.label.cs-preferred-label {
     margin-bottom: 10px;
 }
 input[type="button"].cs-deleteRelationButton {
+    box-shadow: none;
     position: absolute;
     right: 0;
     background-image: url(../images/icnDelete.png);
@@ -2367,7 +2434,7 @@ input[type="button"].cs-deleteRelationButton {
     padding-bottom: 3px;
 }
 .cs-relatedRecordsTab-newRecordBannder-banner {
-    background-color: #EEF4D7;
+    background-color: #FFFBCC;
     color: #696565;
     padding: 15px 0 15px 20px;
     font-size: 13px;

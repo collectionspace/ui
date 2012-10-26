@@ -9,12 +9,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
  */
 
 /*global cspace:true, jQuery, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    "use strict";
+
     fluid.defaults("cspace.header", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
@@ -204,6 +205,18 @@ cspace = cspace || {};
             }
         };
         return tree;
+    };
+
+    fluid.defaults("cspace.header.parentStyler", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        postInitFunction: "cspace.header.parentStyler.postInit",
+        styles: {
+            authority: "cs-authority"
+        }
+    });
+
+    cspace.header.parentStyler.postInit = function (that) {
+        that.container.parent().addClass(that.options.styles.authority);
     };
     
 })(jQuery, fluid);
