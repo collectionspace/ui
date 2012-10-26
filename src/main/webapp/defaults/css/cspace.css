@@ -2465,6 +2465,15 @@ input[type="button"].cs-deleteRelationButton {
 .cs-fixedRepeatableSelect select.cs-repeatable-content {
     width: 85%;
 }
+.cs-fixedExternalURL {
+    min-width: 350px;
+}
+.cs-fixedExternalURL input.cs-repeatable-add[type="button"] {
+    right: 18%;
+}
+.cs-fixedExternalURL div.cs-externalURL-parent input {
+    width: 93%;
+}
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
     width: 100%;

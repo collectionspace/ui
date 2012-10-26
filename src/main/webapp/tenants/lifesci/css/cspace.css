@@ -13,24 +13,6 @@ CollectionSpace 1.8 default CSS selectors
 /* ---------------------------------------*/
 /* Styling of HTML elements specific to the lifesci tenant */
 
-/* It may be appropriate to move these changes to a separate stylesheet. */
-
-/* Added selectors specific to Determination History repeating group (table) in Cataloging */
-/* to adjust width of table cells - rickj, 24may2011 */
-.determinationHistory .taxon {
-    width: 17% !important;}
-.determinationHistory .date-container {
-    width: 93px !important;}
-.determinationHistory .input-date {
-    width: 67px !important; padding:0;}
-.determinationHistory .input-select-shorter {
-    width: 90px !important;}
-.determinationHistory .input-select-longer {
-    width: 145px !important;}
-.input-numeric-tiny   {
-	width: 35px  !important;}
-/* ---------------------------------------*/
-
 /* core HTML elements*/
 html{
     overflow-y: scroll;
@@ -2485,6 +2467,12 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-fixedRepeatableSelect select.cs-repeatable-content {
     width: 85%;
+}
+.cs-fixedExternalURL {
+    min-width: 350px;
+}
+.cs-fixedExternalURL div.cs-externalURL-parent input {
+    width: 93%;
 }
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
