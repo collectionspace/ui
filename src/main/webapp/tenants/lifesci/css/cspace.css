@@ -13,12 +13,6 @@ CollectionSpace 1.8 default CSS selectors
 /* ---------------------------------------*/
 /* Styling of HTML elements specific to the lifesci tenant */
 
-/* It may be appropriate to move these changes to a separate stylesheet. */
-
-.input-numeric-tiny   {
-	width: 35px  !important;}
-/* ---------------------------------------*/
-
 /* core HTML elements*/
 html{
     overflow-y: scroll;
