@@ -357,8 +357,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             var newValue = newValue || that.container.val(),
                 permitted = newValue.length >= that.options.minChars;
 
-            if (newValue !== that.oldValue) {
-                that.oldValue = newValue;
+            if (newValue === that.oldValue) {
+                return;
             }
 
             if (permitted) {
@@ -367,6 +367,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     return;
                 }
                 that.searching = true;
+                that.oldValue = newValue;
                 if (that.newValue) {
                     delete that.newValue;
                 }
