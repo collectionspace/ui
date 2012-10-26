@@ -293,7 +293,7 @@ cspace = cspace || {};
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithDemandInParameters.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithDemandInParameters.pageBuilder.options);
         });
-        
+/*
         pageBuilderTest.test("cspace.composite.compose", function () {
             var resourceSpec = {
                 test1: {
@@ -352,6 +352,7 @@ cspace = cspace || {};
             jqUnit.assertEquals("Composite dataType is now", expected.composite.options.dataType, result.composite.options.dataType);
             jqUnit.assertEquals("Composite data is now", expected.composite.options.data, result.composite.options.data);
         });
+*/
     };
     
     $(document).ready(function () {

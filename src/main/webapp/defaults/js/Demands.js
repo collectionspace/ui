@@ -1631,6 +1631,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Composite demands
+/*
         fluid.demands("cspace.composite", "cspace.pageBuilderIO", {
             options: {
                 invokers: {
@@ -1667,7 +1668,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.composite.compose",
             args: ["{composite}", "{arguments}.0"]
         });
-        
+*/
         fluid.demands("cspace.advancedSearch.fetcher", "cspace.advancedSearch", "{options}");
 
         fluid.demands("cspace.advancedSearch.searchFields", "cspace.debug", {
