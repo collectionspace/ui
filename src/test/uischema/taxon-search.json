@@ -1,26 +1,59 @@
 {
-    "person": {
+    "taxon": {
         "properties": {
-            "birthDateGroupEnd": {
-                "type": "string"
-            },
-            "birthDateGroupStart": {
-                "type": "string"
-            },
-            "deathDateGroupEnd": {
-                "type": "string"
-            },
-            "deathDateGroupStart": {
-                "type": "string"
-            },
-            "genders": {
+            "commonNameGroup": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "default": true,
                             "type": "boolean"
                         },
-                        "gender": {
+                        "commonName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonAuthorGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonAuthor": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonCitationList": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonCitation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonCurrencys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonCurrency": {
                             "default": "",
                             "type": "string"
                         }
@@ -29,14 +62,30 @@
                 },
                 "type": "array"
             },
-            "groups": {
+            "taxonIsNamedHybrids": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "default": true,
                             "type": "boolean"
                         },
-                        "group": {
+                        "taxonIsNamedHybrid": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonRanks": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonRank": {
+                            "default": "",
                             "type": "string"
                         }
                     },
@@ -44,42 +93,16 @@
                 },
                 "type": "array"
             },
-            "nationalities": {
+            "taxonTermGroup": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "default": true,
                             "type": "boolean"
                         },
-                        "nationality": {
+                        "taxonomicStatus": {
+                            "default": "",
                             "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "occupations": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
-                        },
-                        "occupation": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "personTermGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
                         },
                         "termDisplayName": {
                             "type": "string"
@@ -93,14 +116,14 @@
                 },
                 "type": "array"
             },
-            "schoolsOrStyles": {
+            "taxonYears": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "default": true,
                             "type": "boolean"
                         },
-                        "schoolOrStyle": {
+                        "taxonYear": {
                             "type": "string"
                         }
                     },

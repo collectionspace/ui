@@ -1,26 +1,35 @@
 {
     "loanout": {
         "properties": {
-            "loanRenewalApplicationDateEnd": {
-                "type": "date"
-            },
-            "loanReturnDateStart": {
-                "type": "date"
+            "borrowers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "borrower": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
             },
             "loanOutDateEnd": {
                 "type": "date"
             },
-            "updatedAtEnd": {
+            "loanOutDateStart": {
                 "type": "date"
             },
-            "loanedObjectStatusGroup": {
+            "loanOutNumbers": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
-                        "loanedObjectStatus": {
-                            "default": "",
+                        "loanOutNumber": {
                             "type": "string"
                         }
                     },
@@ -32,6 +41,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "loanPurpose": {
@@ -43,50 +53,45 @@
                 },
                 "type": "array"
             },
-            "updatedAtStart": {
+            "loanRenewalApplicationDateEnd": {
                 "type": "date"
             },
             "loanRenewalApplicationDateStart": {
                 "type": "date"
             },
-            "borrowers": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "borrower": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "loanOutDateStart": {
-                "type": "date"
-            },
             "loanReturnDateEnd": {
                 "type": "date"
             },
-            "loanOutNumbers": {
+            "loanReturnDateStart": {
+                "type": "date"
+            },
+            "loanStatusGroup": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
-                        "loanOutNumber": {
+                        "loanStatus": {
+                            "default": "",
                             "type": "string"
                         }
                     },
                     "type": "object"
                 },
                 "type": "array"
+            },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "updatedAtStart": {
+                "type": "date"
             },
             "updatedBys": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "updatedBy": {

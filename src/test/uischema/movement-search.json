@@ -1,41 +1,109 @@
 {
     "movement": {
         "properties": {
-            "plannedRemovalDateStart": {
+            "currentLocations": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "currentLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "frequencyForInventorys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "frequencyForInventory": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryActionRequireds": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "inventoryActionRequired": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryContactList": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "inventoryContact": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inventoryDateEnd": {
+                "type": "date"
+            },
+            "inventoryDateStart": {
+                "type": "date"
+            },
+            "inventoryNotes": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "inventoryNote": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "locationDateEnd": {
+                "type": "date"
+            },
+            "locationDateStart": {
                 "type": "date"
             },
             "movementContacts": {
                 "items": {
                     "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
                         "movementContact": {
                             "type": "string"
-                        },
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
                         }
                     },
                     "type": "object"
                 },
                 "type": "array"
-            },
-            "normalLocations": {
-                "items": {
-                    "properties": {
-                        "normalLocation": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "updatedAtEnd": {
-                "type": "date"
             },
             "movementMethods": {
                 "items": {
@@ -53,12 +121,6 @@
                 },
                 "type": "array"
             },
-            "updatedAtStart": {
-                "type": "date"
-            },
-            "locationDateEnd": {
-                "type": "date"
-            },
             "movementReferenceNumbers": {
                 "items": {
                     "properties": {
@@ -74,7 +136,31 @@
                 },
                 "type": "array"
             },
-            "removalDateStart": {
+            "nextInventoryDateEnd": {
+                "type": "date"
+            },
+            "nextInventoryDateStart": {
+                "type": "date"
+            },
+            "normalLocations": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "normalLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "plannedRemovalDateEnd": {
+                "type": "date"
+            },
+            "plannedRemovalDateStart": {
                 "type": "date"
             },
             "reasonForMoves": {
@@ -96,26 +182,14 @@
             "removalDateEnd": {
                 "type": "date"
             },
-            "plannedRemovalDateEnd": {
+            "removalDateStart": {
                 "type": "date"
             },
-            "locationDateStart": {
+            "updatedAtEnd": {
                 "type": "date"
             },
-            "currentLocations": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "default": true,
-                            "type": "boolean"
-                        },
-                        "currentLocation": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+            "updatedAtStart": {
+                "type": "date"
             },
             "updatedBys": {
                 "items": {
@@ -131,76 +205,6 @@
                     "type": "object"
                 },
                 "type": "array"
-            },
-            "inventoryDateStart": {
-                "type": "date"
-            },
-            "inventoryDateEnd": {
-                "type": "date"
-            },
-            "inventoryContacts": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "inventoryContact": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "inventoryActionsRequired": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "inventoryActionRequired": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "inventoryNotes": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "inventoryNote": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "inventoryFrequencies": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "inventoryFrequency": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "nextInventoryDateStart": {
-                "type": "date"
-            },
-            "nextInventoryDateEnd": {
-                "type": "date"
             }
         },
         "type": "object"

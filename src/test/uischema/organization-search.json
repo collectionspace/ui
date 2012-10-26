@@ -1,6 +1,18 @@
 {
     "organization": {
         "properties": {
+            "dissolutionDateGroupEnd": {
+                "type": "string"
+            },
+            "dissolutionDateGroupStart": {
+                "type": "string"
+            },
+            "foundingDateGroupEnd": {
+                "type": "string"
+            },
+            "foundingDateGroupStart": {
+                "type": "string"
+            },
             "foundingPlaces": {
                 "items": {
                     "properties": {
@@ -54,6 +66,10 @@
                             "type": "boolean"
                         },
                         "termDisplayName": {
+                            "type": "string"
+                        },
+                        "termStatus": {
+                            "default": "",
                             "type": "string"
                         }
                     },
