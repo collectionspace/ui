@@ -2471,7 +2471,7 @@ input[type="button"].cs-deleteRelationButton {
 .cs-fixedExternalURL input.cs-repeatable-add[type="button"] {
     right: 18%;
 }
-.cs-fixedExternalURL div.cs-externalURL-parent input {
+.cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
     width: 93%;
 }
 /* These style is only for MediaHandling inputs */
