@@ -1186,6 +1186,9 @@ table.cs-admin-table td.checkbox {
 .content select {
     width: 88.5%;
 }
+.content .fl-pager-ui select {
+    width: auto;
+}
 .content table select {
     width: 100%; 
     height:19px; 
