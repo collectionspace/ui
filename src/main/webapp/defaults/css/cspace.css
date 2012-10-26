@@ -69,6 +69,9 @@ input[type="text"], input[type="password"], textarea {
     margin: 0;
     width: 95%;
 }
+div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
+    width: 88.5%;
+}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
 input[type="submit"].logout {
@@ -636,6 +639,7 @@ table tbody.highlight tr:focus td {
 .info-column2-70 {width:  69%;}
 .info-column2-75 {width:  74%;}
 .info-column2-80 {width:  79%;}
+.info-column2-100 {width:  99%;}
 .info-column3    {width:  33%;}
 .info-column4    {width:  25%;}
 
@@ -749,13 +753,19 @@ td.fl-date-group {
     border:1px solid #C7CFD4;
     padding:0;
 }
+div.info-column2-50 .info-pair .content > select {
+    width: 88.5%;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width: 90%;
+    width: 95%;
     border-spacing:0; 
     background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
     padding:0;
+}
+div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-date .content table, div.info-column2-50 .info-pair-select table {
+    width: 88.5%;
 }
 .cs-repeatable-content .info-pair .content table,
 .cs-repeatable-content .info-pair-date .content table,
@@ -1174,7 +1184,7 @@ table.cs-admin-table td.checkbox {
 .input-money-amount {
     width: 120px !important;}
 .content select {
-    width: auto;
+    width: 88.5%;
 }
 .content table select {
     width: 100%; 
@@ -1738,9 +1748,12 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     width:16px; 
     height:17px}
 .info-pair-date .content input {
-    border-right:none; 
-    /*width:142px !important; */
-    /*float:left;*/}
+    border-right: none;
+}
+.info-pair-date .content input[type="text"] {
+    border-right: none;
+    min-width: 83%;
+}
 .found-records-box { 
     margin-top: 20px}
 
@@ -2441,7 +2454,11 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit li.cs-repeatable-repeat {
     padding-left: 4px;
     padding-top: 4px;
-/* This code is only for particular working for L\M\I repeatable Method select */
+}
+.cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
+    margin-bottom: 10px;
+}
+/* These styles is only for particular working for L\M\I repeatable Method select */
 .cs-fixedRepeatableSelect {
     min-width: 230px;
 }
@@ -2456,4 +2473,8 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-fixedExternalURL div.cs-externalURL-parent input {
     width: 93%;
+}
+/* These style is only for MediaHandling inputs */
+.cs-mediaUploader-table-row input[type="text"] {
+    width: 100%;
 }
