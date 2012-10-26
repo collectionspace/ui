@@ -575,6 +575,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("header", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.header"
         });
+
+        fluid.demands("header", ["cspace.pageBuilder", "cspace.authority"], {
+            container: "{pageBuilder}.options.selectors.header",
+            options: {
+                components: {
+                    parentStyler: {
+                        type: "cspace.header.parentStyler",
+                        container: "{cspace.header}.container"
+                    }
+                }
+            }
+        });
         
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
