@@ -246,6 +246,9 @@ cspace = cspace || {};
                 type: "addClass",
                 classes: that.options.styles[key]
             };
+            if (fluid.isPrimitive(child)) {
+                return;
+            }
             child.decorators = child.decorators ? child.decorators.concat([decorator]) : [decorator];
         });
 
