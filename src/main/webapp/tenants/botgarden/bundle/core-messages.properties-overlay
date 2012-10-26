@@ -150,18 +150,16 @@ login-rologin: reader@botgarden.cspace.berkeley.edu
 
 #Vocabularies
 vocab-person: Default Persons
-vocab-organization: Collector Authority
-vocab-nomenclature: Nomenclature Organization Authority
-vocab-typeassertion: Type Assertion Organization Authority
-vocab-determination: Determination Organization Authority
-vocab-institution: Institution Authority
+vocab-organization: Organizations
 vocab-place: Default Places
 vocab-taxon: Default Scientific Taxonomy Authority
-vocab-concept: Medium
+vocab-concept: Propagation Medium
+vocab-conservation_ca: Conservation Category
 vocab-common: Common Taxonomy Authority
-vocab-unverified: Unverified Taxonomy Authority
-vocab-research_ca: Research
-vocab-class_ca: Class
+vocab-research_ca: Research Projects
+vocab-class_ca: Classes
+vocab-collector: Collectors
+vocab-group_org: Groups
 
 #Records:
 cataloging-number: Accession number
