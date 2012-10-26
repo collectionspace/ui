@@ -3,6 +3,9 @@
     background-color:#EEF4D7;}
 #administration #title-bar .record-type {
     color:#77AA44;}
+#administration .ui-tabs .ui-tabs-nav {
+    line-height: 17px;
+}
 #administration  .ui-tabs .ui-tabs-panel {padding: 20px 10px 10px 10px; display: block; border: 2px solid #438CC9; margin-bottom:30px; background-color:#FFF;   border:2px solid #77AA44;}
 #administration #pager-bottom {
     border-bottom: none;
