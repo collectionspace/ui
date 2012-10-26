@@ -1,4 +1,58 @@
 {
+    ".csc-person-birthDateGroup-label": {
+        "messagekey": "person-birthDateGroupLabel"
+    },
+    ".csc-person-birthDateGroupEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${birthDateGroupEnd}"
+    },
+    ".csc-person-birthDateGroupEnd-label": {
+        "messagekey": "person-birthDateGroupEndLabel"
+    },
+    ".csc-person-birthDateGroupStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${birthDateGroupStart}"
+    },
+    ".csc-person-birthDateGroupStart-label": {
+        "messagekey": "person-birthDateGroupStartLabel"
+    },
+    ".csc-person-deathDateGroup-label": {
+        "messagekey": "person-deathDateGroupLabel"
+    },
+    ".csc-person-deathDateGroupEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${deathDateGroupEnd}"
+    },
+    ".csc-person-deathDateGroupEnd-label": {
+        "messagekey": "person-deathDateGroupEndLabel"
+    },
+    ".csc-person-deathDateGroupStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${deathDateGroupStart}"
+    },
+    ".csc-person-deathDateGroupStart-label": {
+        "messagekey": "person-deathDateGroupStartLabel"
+    },
     ".csc-person-foreName-label": {
         "messagekey": "preferredPA-foreNameLabel"
     },
@@ -241,7 +295,25 @@
                     "repeatTree": {
                         "expander": {
                             "tree": {
-                                ".csc-personAuthority-termDisplayName": "${{row}.termDisplayName}"
+                                ".csc-personAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                ".csc-personAuthority-termStatus": {
+                                    "default": "",
+                                    "optionlist": [
+                                        "provisional",
+                                        "under review",
+                                        "accepted",
+                                        "rejected",
+                                        ""
+                                    ],
+                                    "optionnames": [
+                                        "Provisional",
+                                        "Under Review",
+                                        "Accepted",
+                                        "Rejected",
+                                        "Please select a value"
+                                    ],
+                                    "selection": "${{row}.termStatus}"
+                                }
                             },
                             "type": "fluid.noexpand"
                         }

@@ -2,17 +2,42 @@
     <div class="fl-container-flex fl-fix content main">
         <div class="info-column">
             <div class="info-column2-50 fl-force-left">
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-person-termDisplayName-label"></div>
+
+                <div class="info-column" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-preferredPA-personTermGroup-label"></div>
+                        </div>
+                        <div class="content csc-preferredPA-personTermGroup cs-repeatable-stretched">
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-person-termDisplayName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-personAuthority-termDisplayName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-person-termStatus-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-personAuthority-termStatus input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content clearfix csc-preferredPA-personTermGroup">
-                        <input type="text" class="csc-personAuthority-termDisplayName"/>
-                    </div>        
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when range search -->
-                <!-- on structured date start and end scalar values is working -->
-                <div class="info-pair" style="display:none">
+
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-birthDateGroup-label"></div>
                     </div>
@@ -20,22 +45,20 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td class="csc-person-birthDateStart-label"></td>
-                                    <td class="csc-person-birthDateEnd-label"></td>
+                                    <td class="csc-person-birthDateGroupStart-label"></td>
+                                    <td class="csc-person-birthDateGroupEnd-label"></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" class="csc-person-birthDateStart" /></td>
-                                    <td><input type="text" class="csc-person-birthDateEnd" /></td>
+                                    <td><input type="text" class="csc-person-birthDateGroupStart" /></td>
+                                    <td><input type="text" class="csc-person-birthDateGroupEnd" /></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when range search -->
-                <!-- on structured date start and end scalar values is working -->
-                <div class="info-pair" style="display:none">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-deathDateGroup-label"></div>
                     </div>
@@ -43,20 +66,21 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td class="csc-person-deathDateStart-label"></td>
-                                    <td class="csc-person-deathDateEnd-label"></td>
+                                    <td class="csc-person-deathDateGroupStart-label"></td>
+                                    <td class="csc-person-deathDateGroupEnd-label"></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" class="csc-person-deathDateStart" /></td>
-                                    <td><input type="text" class="csc-person-deathDateEnd" /></td>
+                                    <td><input type="text" class="csc-person-deathDateGroupStart" /></td>
+                                    <td><input type="text" class="csc-person-deathDateGroupEnd" /></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="info-pair" style="display:none">
+
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-group-label"></div>
                     </div>
@@ -64,7 +88,7 @@
                         <input type="text" class="csc-personAuthority-group"/>
                     </div>        
                 </div>
-                <div class="info-pair" style="display:none">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-nationality-label"></div>
                     </div>
@@ -80,7 +104,7 @@
                         <select class="csc-personAuthority-gender input-select"><option value="">Options not loaded</option></select>
                     </div>        
                 </div>              
-                <div class="info-pair" style="display:none">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-occupation-label"></div>
                     </div>
@@ -88,7 +112,7 @@
                         <input type="text" class="csc-personAuthority-occupation"/>
                     </div>        
                 </div>                                                 
-                <div class="info-pair" style="display:none">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-person-schoolOrStyle-label"></div>
                     </div>
@@ -96,21 +120,13 @@
                         <input type="text" class="csc-personAuthority-schoolOrStyle"/>
                     </div>        
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
+
+                <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-person-termStatus-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredPA-personTermGroup">
-                        <select class="csc-personAuthority-termStatus input-select"><option value="">Options not loaded</option></select>
-                    </div>        
-                </div>
-                <div class="info-pair" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-person-editUsername-label"></div>
+                        <div class="label csc-person-updatedBy-label"></div>
                     </div>
                     <div class="content clearfix">
-                        <input type="text" class="csc-person-editUsername"/>
+                        <input type="text" class="csc-person-updatedBy"/>
                     </div>
                 </div>
                 <div class="info-pair">
@@ -133,7 +149,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>                                                     
+                </div>
+
             </div>
         </div>
     </div>
