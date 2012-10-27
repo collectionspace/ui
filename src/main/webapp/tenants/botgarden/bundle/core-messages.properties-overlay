@@ -136,6 +136,7 @@ taxon-recordedByLabel: Recorded By
 taxon-habitatLabel: Habitat
 taxon-climateRatingLabel: Climate Rating
 taxon-conservationCategoryLabel: Conservation Category
+taxon-conservationOrganizationLabel: Conservation Organization
 taxon-frostSensitiveLabel: Frost Sensitive
 taxon-medicinalUseLabel: Medicinal Use
 taxon-economicUseLabel: Economic Use
