@@ -30,9 +30,9 @@
                         "model": "{pageBuilder}.model",
                         "uispec": "{pageBuilder}.options.uispec",
                         "strings": {
-                            "editRecord": "Edit Loan In Record",
-                            "recordList": "Related Loan In Records",
-                            "newRecordRow": "New Loan In Record"
+                            "editRecord": "Edit Propagation Record",
+                            "recordList": "Related Propagation Records",
+                            "newRecordRow": "New Propagation Record"
                         },
                         "components": {
                             "listEditor": {
