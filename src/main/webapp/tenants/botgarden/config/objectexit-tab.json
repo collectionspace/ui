@@ -1,0 +1,57 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "objectexit",
+            "schema": {
+                "objectexit": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/ObjectexitTemplate.html",
+                    "templateSelector": ".csc-objectexit-template",
+                    "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
+                }
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "objectexit-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-objectexit"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Distribution Record",
+                            "recordList": "Related Distribution Records",
+                            "newRecordRow": "New Distribution Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-objectexit-exitNumber"
+                                                } 
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
