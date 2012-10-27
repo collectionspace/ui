@@ -1,0 +1,22 @@
+{
+    "csid": "ba97ae73-1016-4c62-0000",
+    "fields": {
+        "currentLocation": "Back Porch",
+        "currentLocationFitness": "suitable",
+        "currentLocationNote": "covered",
+        "locationDate": "Jan 1, 2009",
+        "normalLocation": "Back Porch",
+        "movementContact": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person:name(Achmed Abdullah)'Achmed Abdullah'",
+        "movementMethods": [
+            {
+                "_primary": true,
+                "movementMethod": "handcarried" 
+            }
+        ],
+        "movementNote": "Sample movement note",
+        "movementReferenceNumber": "MOV.1.3",
+        "plannedRemovalDate": "Oct 10, 2010",
+        "reasonForMove": "exhibition",
+        "workflow": "locked"
+    }
+}

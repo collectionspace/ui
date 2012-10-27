@@ -13,9 +13,9 @@ collection-object-notesLabel: Notes
 collection-object-fieldLocVerbatimLabel: Field Location Verbatim
 collection-object-titleNoteLabel: Notes
 
-vocab-local_ta: Local
-vocab-common_ta: Common
-vocab-taxon: Default (v2.3)
+# Vocabularies
+vocab-common_ta: Common Taxa
+vocab-taxon: Local Taxa
 
 # Taxon record
 taxon: Taxon
@@ -47,6 +47,7 @@ taxon-commonNameLabel: Common Name
 taxon-commonNameLanguageLabel: Language
 taxon-commonNameSourceLabel: Source
 taxon-commonNameSourceDetailLabel: Source Detail
+taxon-updatedByLabel: Record last modified by
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
@@ -59,7 +60,7 @@ login-emailRequired: You must enter a valid email address
 login-passwordsMustMatch: Passwords must match
 login-invalid: Invalid email/password combination
 login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 2.4 Information
+login-current: Current Release 3.0 Information
 login-current-info: Welcome to the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
 login-current-details:
 login-login-info: To view the CollectionSpace Life Science tenant, use the login box on the right with the login:

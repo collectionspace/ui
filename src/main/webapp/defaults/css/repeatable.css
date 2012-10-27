@@ -33,11 +33,14 @@ input[type="button"].cs-repeatable-add {
     float: right;
     right: 17%;
     top: -16px;
-    padding:0
+    padding:0;
+    -moz-border-radius:4px 4px 0 0;
+    -webkit-border-radius:4px 4px 0 0;
+	border-radius:4px 4px 0 0;
 }
 li.cs-repeatable-repeat {
     list-style-type: none; 
-    margin-bottom:1px; 
+    margin-bottom: 4px;
 }
 input.cs-repeatable-primary {
     width: 11px; 
@@ -51,7 +54,8 @@ td input.cs-repeatable-primary {
     margin:0px 2px 0 2px;
     vertical-align:middle;}
 input.cs-repeatable-delete {
-    border:none; 
+    border:none;
+    box-shadow: none;
     vertical-align:top; 
     padding:0px;
 	width:16px;
@@ -64,7 +68,8 @@ input.cs-repeatable-delete:focus {
 input.cs-repeatable-delete[disabled], 
 input.cs-repeatable-delete[disabled]:hover, 
 input.cs-repeatable-delete[disabled]:focus {
-    background-color:transparent !important; 
+    background-color:transparent !important;
+    box-shadow: none;
     background: url('../images/icnDeleteDisabled.png') no-repeat 2px 3px; }
 table tr.csc-repeatable-repeat input.cs-repeatable-delete,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled],
@@ -228,6 +233,9 @@ div.infoGroup div.cs-repeatable-group {
 div.info-pair-select div.content,
 div.info-pair-date div.content {
     display: inherit;
+}
+div.info-pair-date {
+    min-width: 165px;
 }
 div.info-pair-select li.cs-repeatable-repeat,
 div.info-pair-date li.cs-repeatable-repeat {

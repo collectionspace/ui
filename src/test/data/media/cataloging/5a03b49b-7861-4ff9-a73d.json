@@ -1,0 +1,13 @@
+{
+    "items": [],
+    "pagination": {
+        "fieldsReturned": "subjectCsid|relationshipType|predicateDisplayName|objectCsid|uri|csid|subject|object",
+        "totalItems": "0",
+        "pageSize": "40",
+        "itemsInPage": "0",
+        "recordtypes": [
+            "cataloging"
+        ],
+        "pageNum": "0"
+    }
+}

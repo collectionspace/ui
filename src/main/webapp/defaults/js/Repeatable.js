@@ -155,7 +155,9 @@ cspace = cspace || {};
             primary: "cs-repeatable-primary",
             content: "cs-repeatable-content",
             withSubgroup: "cs-repeatable-withSubgroup",
-            repeatableGroup: "cs-repeatable-group"
+            repeatableGroup: "cs-repeatable-group",
+            show: "show",
+            hidden: "hidden"
         },
         preInitFunction: [{
             namespace: "preInitGenerateMethods",
@@ -282,7 +284,7 @@ cspace = cspace || {};
 
     var isGroup = function (tree) {
         var index = 0;
-        return fluid.find(tree, function (leaf) {
+        return fluid.find(tree, function () {
             if (index > 1) {
                 return true;
             }
@@ -340,7 +342,7 @@ cspace = cspace || {};
     cspace.repeatableImpl.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.repeatTree));
-    };;
+    };
     
     cspace.repeatableImpl.preInitMergeProtoTree = function (that) {
         fluid.merge(null, that.options.protoTree.expander[1].tree, that.options.repeatTree);
@@ -437,7 +439,15 @@ cspace = cspace || {};
                 _primary: true
             });
         }
-        that.applier.requestChange(that.options.fullPath, list);
+        // Here we do a silent model update. Since repeatable is asynchronous we do not want changeRequest trigger modelChanged simply because it is loading 
+        // of initial data into the repeatable for RecordEditor
+        // Important!!  ->  Implementation should use source tracking when it is available in a newer version of Infusion
+        that.applier.fireChangeRequest({
+            path: that.options.fullPath,
+            type: "ADD",
+            value: list,
+            silent: true
+        });
     };
     
     cspace.repeatableImpl.postInitGenerateMarkup = function (that) {
@@ -448,7 +458,8 @@ cspace = cspace || {};
             return that.options.styles[name];
         }
         
-        var node = that.locate("repeat");
+        var node = that.locate("repeat"),
+            primary, remove;
         if (!node.is("tr, li")) {
             node = node.removeClass(getClass("repeat"))
                        .addClass(getStyle("content"))
@@ -456,7 +467,7 @@ cspace = cspace || {};
                        .wrap($("<li/>").addClass(getClass("repeat"))
                                        .addClass(getStyle("clearfix"))
                                        .addClass(getStyle("repeat"))
-                                       .css("display", "block"))
+                                       .addClass(getStyle("show")))
                        .parent("li");
         }
     
@@ -464,14 +475,14 @@ cspace = cspace || {};
             that.container.prepend($(that.options.markup.addControl).addClass(getClass("add")));
         }
         if (that.locate("primary").length === 0) {
-            var primary = $(that.options.markup.primaryControl).addClass(getClass("primary"))
+            primary = $(that.options.markup.primaryControl).addClass(getClass("primary"))
                                                                .attr("name", "primary-" + that.options.fullPath)
                                                                .prop("disabled", that.options.disablePrimary)
-                                                               .css("display", that.options.hidePrimary ? "none" : "block");
+                                                               .addClass(getStyle(that.options.hidePrimary ? "hidden" : "show"));
             node.prepend(primary);
         }
         if (that.locate("delete").length === 0 && !that.options.disableDelete) {
-            var remove = $(that.options.markup.deleteControl).addClass(getClass("delete"));
+            remove = $(that.options.markup.deleteControl).addClass(getClass("delete"));
             node.append(remove);
         }
                 

@@ -1,8 +1,28 @@
-{ 
+{
     "results": [
-        { "number": "CompleteObjectExit001", "csid": "76feffe4-92e7-4da8-8a78", "summary": "Jim Nabors", "recordtype": "objectexit"}
+        {
+            "number": "CompleteObjectExit001",
+            "csid": "76feffe4-92e7-4da8-8a78",
+            "summary": "Jim Nabors",
+            "recordtype": "objectexit"
+        },
+        {
+            "summary": "Clara Young",
+            "summarylist": {
+                "updatedAt": "2012-03-16T14:21:40Z",
+                "exitNumber": "EX2012.1"
+            },
+            "csid": "aa643807-e1d1-4ca2-9f9b",
+            "number": "EX2012.1",
+            "recordtype": "objectexit"
+        }
     ],
     "pagination": {
-        "totalItems": 1
+        "fieldsReturned": "csid|uri|updatedAt|exitNumber|currentOwner",
+        "totalItems": "2",
+        "pageSize": "10",
+        "traverser": "86CA32289D0AF25F67396C177B71E531",
+        "itemsInPage": "2",
+        "pageNum": "0"
     }
 }

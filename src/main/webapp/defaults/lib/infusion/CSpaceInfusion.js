@@ -10215,10 +10215,25 @@ var fluid = fluid || fluid_1_5;
     
     fluid.version = "Infusion 1.5";
     
+    // Export this for use in environments like node.js, where it is useful for
+    // configuring stack trace behaviour
+    fluid.Error = Error;
+    
     fluid.environment = {
         fluid: fluid
     };
+    
     var globalObject = window || {};
+    
+    fluid.singleThreadLocal = function(initFunc) {
+        var value = initFunc();
+        return function() {
+            return value;
+        };
+    };
+    
+    // Return to the old strategy of monkey-patching this, since this is a most frequently used function within IoC    
+    fluid.threadLocal = fluid.singleThreadLocal;
     
     var softFailure = [false];
     
@@ -10557,14 +10572,21 @@ var fluid = fluid || fluid_1_5;
         return fluid.filterKeys(toCensor, keys, true);
     };
     
-    /** Return the keys in the supplied object as an array **/
-    fluid.keys = function (obj) {
-        var togo = [];
-        fluid.each(obj, function (value, key) {
-            togo.push(key);
-        });
-        return togo;
+    fluid.makeFlatten = function (index) {
+        return function (obj) {
+            var togo = [];
+            fluid.each(obj, function (value, key) {
+                togo.push(arguments[index]);
+            });
+            return togo;
+        }; 
     };
+    
+    /** Return the keys in the supplied object as an array **/
+    fluid.keys = fluid.makeFlatten(1); 
+    
+    /** Return the values in the supplied object as an array **/
+    fluid.values = fluid.makeFlatten(0);
     
     /** 
      * Searches through the supplied object, and returns <code>true</code> if the supplied value
@@ -11135,7 +11157,8 @@ var fluid = fluid || fluid_1_5;
     fluid.lifecycleFunctions = {
         preInitFunction: true,
         postInitFunction: true,
-        finalInitFunction: true
+        finalInitFunction: true,
+        clearFunction: false
     };
     
     fluid.rootMergePolicy = fluid.transform(fluid.lifecycleFunctions, function () {
@@ -11253,11 +11276,26 @@ var fluid = fluid || fluid_1_5;
             options: 0
         }
     });
+
+    fluid.clearEventedComponent = function (that) {
+        // Remove all declaratively attached event listeners that have a namespace.
+        fluid.each(that.options.listeners, function (listener, eventName) {
+            var namespace = listener.namespace;
+            if (!namespace) {
+                return;
+            }
+            that.events[eventName].removeListener(namespace);
+        });
+    };
     
     fluid.defaults("fluid.eventedComponent", {
         gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
             listeners: fluid.mergeListenersPolicy
+        },
+        clearFunction: {
+            namespace: "clearEventedComponent",
+            listener: "fluid.clearEventedComponent"
         }
     });
     
@@ -11534,6 +11572,9 @@ var fluid = fluid || fluid_1_5;
     
     fluid.clearLifecycleFunctions = function (options) {
         fluid.each(fluid.lifecycleFunctions, function (value, key) {
+            if (!value) {
+                return;
+            }
             delete options[key];
         });
         delete options.initFunction; 
@@ -12119,7 +12160,7 @@ var fluid = fluid || fluid_1_5;
         return zeropad(date.getHours()) + ":" + zeropad(date.getMinutes()) + ":" + zeropad(date.getSeconds()) + "." + zeropad(date.getMilliseconds(), 3);
     };
 
-    fluid.isTracing = true;
+    fluid.isTracing = false;
 
     fluid.registerNamespace("fluid.tracing");
 
@@ -12329,7 +12370,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global fluid_1_5:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, continue: true, elsecatch: true, operator: true, jslintok:true, undef: true, newcap: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_5 = fluid_1_5 || {};
 
@@ -12358,7 +12399,7 @@ var fluid_1_5 = fluid_1_5 || {};
         node = fluid.unwrap(node);
         var key = node.name || node.id;
         var record = fossils[key];
-        return record ? record.EL: null;
+        return record ? record.EL : null;
     };
   
     fluid.findForm = function (node) {
@@ -12378,9 +12419,9 @@ var fluid_1_5 = fluid_1_5 || {};
             node = node[0];
             multiple = true;
         }
-        if ("input" !== node.nodeName.toLowerCase() || ! /radio|checkbox/.test(node.type)) {
+        if ("input" !== node.nodeName.toLowerCase() || !/radio|checkbox/.test(node.type)) {
             // resist changes to contract of jQuery.val() in jQuery 1.5.1 (see FLUID-4113)
-            return newValue === undefined? $(node).val() : $(node).val(newValue);
+            return newValue === undefined ? $(node).val() : $(node).val(newValue);
         }
         var name = node.name;
         if (name === undefined) {
@@ -12389,12 +12430,10 @@ var fluid_1_5 = fluid_1_5 || {};
         var elements;
         if (multiple) {
             elements = nodeIn;
-        }
-        else {
+        } else {
             elements = node.ownerDocument.getElementsByName(name);
             var scope = fluid.findForm(node);
-            elements = $.grep(elements, 
-            function (element) {
+            elements = $.grep(elements, function (element) {
                 if (element.name !== name) {
                     return false;
                 }
@@ -12412,8 +12451,7 @@ var fluid_1_5 = fluid_1_5 || {};
                 this.checked = (newValue instanceof Array ? 
                     $.inArray(this.value, newValue) !== -1 : newValue === this.value);
             });
-        }
-        else { // this part jQuery will not do - extracting value from <input> array
+        } else { // this part jQuery will not do - extracting value from <input> array
             var checked = $.map(elements, function (element) {
                 return element.checked ? element.value : null;
             });
@@ -12441,13 +12479,12 @@ var fluid_1_5 = fluid_1_5 || {};
             fluid.fail("No fossil discovered for name " + name + " in fossil record above " + fluid.dumpEl(node));
         }
         if (typeof(fossil.oldvalue) === "boolean") { // deal with the case of an "isolated checkbox"
-            newValue = newValue[0] ? true: false;
+            newValue = newValue[0] ? true : false;
         }
         var EL = root.fossils[name].EL;
         if (applier) {
             applier.fireChangeRequest({path: EL, value: newValue, source: node.id});
-        }
-        else {
+        } else {
             fluid.set(root.data, EL, newValue);
         }    
     };
@@ -12691,11 +12728,11 @@ var fluid_1_5 = fluid_1_5 || {};
     fluid.pathUtil.matchPath = function (spec, path) {
         var togo = "";
         while (true) {
-            if (!spec || path === "") {
+            // FLUID-4625 - symmetry on spec and path is actually undesirable, but this
+            // quickly avoids at least missed notifications - improved (but slower) 
+            // implementation should explode composite changes
+            if (!spec || !path) {
                 break;
-            }
-            if (!path) {
-                return null;
             }
             var spechead = fluid.pathUtil.getHeadPath(spec);
             var pathhead = fluid.pathUtil.getHeadPath(path);
@@ -12730,7 +12767,7 @@ var fluid_1_5 = fluid_1_5 || {};
                 if (request.type === "ADD") {
                     fluid.clear(pen.root);
                 }
-                $.extend(true, request.path === "" ? pen.root: pen.root[pen.last], request.value);
+                $.extend(true, request.path === "" ? pen.root : pen.root[pen.last], request.value);
             }
             else {
                 pen.root[pen.last] = request.value;
@@ -12745,7 +12782,44 @@ var fluid_1_5 = fluid_1_5 || {};
             }
         }
     };
+          
+    /** Add a listener to a ChangeApplier event that only acts in the case the event
+     * has not come from the specified source (typically ourself)
+     * @param modelEvent An model event held by a changeApplier (typically applier.modelChanged)
+     * @param path The path specification to listen to
+     * @param source The source value to exclude (direct equality used)
+     * @param func The listener to be notified of a change
+     * @param [eventName] - optional - the event name to be listened to - defaults to "modelChanged" 
+     */
+    fluid.addSourceGuardedListener = function(applier, path, source, func, eventName) {
+        eventName = eventName || "modelChanged";
+        applier[eventName].addListener(path, 
+            function() {
+                if (!applier.hasChangeSource(source)) {
+                    func.apply(null, arguments);
+                }
+            });
+    };
+
+    /** Convenience method to fire a change event to a specified applier, including
+     * a supplied "source" identified (perhaps for use with addSourceGuardedListener)
+     */ 
+    fluid.fireSourcedChange = function (applier, path, value, source) {
+        applier.fireChangeRequest({
+            path: path,
+            value: value,
+            source: source
+        });         
+    };
     
+    /** Dispatches a list of changes to the supplied applier */
+    fluid.requestChanges = function (applier, changes) {
+        for (var i = 0; i < changes.length; ++i) {
+            applier.fireChangeRequest(changes[i]);
+        }  
+    };
+    
+  
     // Utility shared between changeApplier and superApplier
     
     function bindRequestChange(that) {
@@ -12759,6 +12833,24 @@ var fluid_1_5 = fluid_1_5 || {};
         };
     }
     
+    // Utility used for source tracking in changeApplier
+    
+    function sourceWrapModelChanged(modelChanged, threadLocal) {
+        return function(changeRequest) {
+            var sources = threadLocal().sources;
+            var args = arguments;
+            var source = changeRequest.source || "";
+            fluid.tryCatch(function() {
+                if (sources[source] === undefined) {
+                    sources[source] = 0;
+                }
+                ++sources[source];
+                modelChanged.apply(null, args);
+            }, null, function() {
+                --sources[source];
+            });
+        };
+    }
   
     fluid.makeChangeApplier = function (model, options) {
         options = options || {};
@@ -12767,7 +12859,11 @@ var fluid_1_5 = fluid_1_5 || {};
             postGuards: fluid.event.getEventFirer(false, true, "postGuard event"),
             modelChanged: fluid.event.getEventFirer(false, false, "modelChanged event")
         };
+        var threadLocal = fluid.threadLocal(function() { return {sources: {}};});
         var that = {
+        // For now, we don't use "id" to avoid confusing component detection which uses
+        // a simple algorithm looking for that field
+            changeid: fluid.allocateGuid(),
             model: model
         };
         
@@ -12826,7 +12922,7 @@ var fluid_1_5 = fluid_1_5 || {};
                             record.accumulate = [accum];
                         }
                         fireSpec.guids[guid] = record;
-                        var collection = transactional ? "transListeners": "listeners";
+                        var collection = transactional ? "transListeners" : "listeners";
                         fireSpec[collection].push(record);
                         fireSpec.all.push(record);
                     }
@@ -12923,14 +13019,15 @@ var fluid_1_5 = fluid_1_5 || {};
             }
         };
         
+        that.fireChangeRequest = sourceWrapModelChanged(that.fireChangeRequest, threadLocal);
         bindRequestChange(that);
 
         function fireAgglomerated(eventName, formName, changes, args, accpos) {
             var fireSpec = makeFireSpec();
-            for (var i = 0; i < changes.length; ++ i) {
+            for (var i = 0; i < changes.length; ++i) {
                 prepareFireEvent(eventName, changes[i].path, fireSpec, changes[i]);
             }
-            for (var j = 0; j < fireSpec[formName].length; ++ j) {
+            for (var j = 0; j < fireSpec[formName].length; ++j) {
                 var spec = fireSpec[formName][j];
                 if (accpos) {
                     args[accpos] = spec.accumulate;
@@ -12954,12 +13051,13 @@ var fluid_1_5 = fluid_1_5 || {};
             }
             // the guard in the inner world is given a private applier to "fast track"
             // and glob collateral changes it requires
-            var internalApplier = 
-              {fireChangeRequest: function (changeRequest) {
+            var internalApplier = {
+                fireChangeRequest: function (changeRequest) {
                     preFireChangeRequest(changeRequest);
                     fluid.model.applyChangeRequest(newModel, changeRequest, options.resolverSetConfig);
                     changes.push(changeRequest);
-                }};
+                }
+            };
             bindRequestChange(internalApplier);
             var ation = {
                 commit: function () {
@@ -13000,39 +13098,116 @@ var fluid_1_5 = fluid_1_5 || {};
                     }
                 }
             };
+            
+            ation.fireChangeRequest = sourceWrapModelChanged(ation.fireChangeRequest, threadLocal);
             bindRequestChange(ation);
 
             return ation;
+        };
+        
+        that.hasChangeSource = function (source) {
+            return threadLocal().sources[source] > 0;
         };
         
         return that;
     };
     
     fluid.makeSuperApplier = function () {
-        var subAppliers = [];
-        var that = {};
+        var subAppliers = {},
+            listeners = {};
+            var that = fluid.makeChangeApplier();
+
         that.addSubApplier = function (path, subApplier) {
-            subAppliers.push({path: path, subApplier: subApplier});
-        };
-        that.fireChangeRequest = function (request) {
-            for (var i = 0; i < subAppliers.length; ++ i) {
-                var path = subAppliers[i].path;
-                if (request.path.indexOf(path) === 0) {
-                    var subpath = request.path.substring(path.length + 1);
-                    var subRequest = fluid.copy(request);
-                    subRequest.path = subpath;
-                    // TODO: Deal with the as yet unsupported case of an EL rvalue DAR
-                    subAppliers[i].subApplier.fireChangeRequest(subRequest);
+            subAppliers[path] = subApplier;
+            fluid.remove_if(listeners, function (thisListeners, seg) {
+                var matchedPath = fluid.pathUtil.matchPath(path, seg);
+                if (!matchedPath) {
+                    return;
                 }
-            }
+                fluid.each(thisListeners, function (listener) {
+                    var subSpec = buildSubSpec(listener.spec, matchedPath);
+                    subApplier.modelChanged.addListener(subSpec, listener.listener, listener.namespace);
+                });
+                return true;
+            });
+        };
+
+        that.fireChangeRequest = function (request) {
+            fluid.find(subAppliers, function (subApplier, path) {
+                if (request.path.indexOf(path) !== 0) {
+                    return;
+                }
+                var subpath = request.path.substring(path.length + 1);
+                var subRequest = fluid.copy(request);
+                subRequest.path = subpath;
+                // TODO: Deal with the as yet unsupported case of an EL rvalue DAR
+                subApplier.fireChangeRequest(subRequest);
+                return true;
+            });
         };
         bindRequestChange(that);
+
+        function buildSubSpec (spec, matchedPath) {
+            var specPath = spec.path || spec,
+                subpath = specPath.substring(matchedPath.length + 1),
+                subSpec = fluid.copy(spec);
+            if (subSpec.path) {
+                subSpec.path = subpath;
+            } else {
+                subSpec = subpath;
+            }
+            return subSpec;
+        }
+
+        that.modelChanged.addListener = function (spec, listener, namespace) {
+            var specPath = spec.path || spec,
+                matchedPath, subSpec,
+                subApplier = fluid.find(subAppliers, function (subApplier, path) {
+                    matchedPath = fluid.pathUtil.matchPath(path, specPath);
+                    if (matchedPath) {
+                        return subApplier;
+                    }
+                });
+            if (subApplier) {
+                subSpec = buildSubSpec(spec, matchedPath);
+                subApplier.modelChanged.addListener(subSpec, listener, namespace);
+                return;
+            }
+            listeners[specPath] = fluid.makeArray(listeners[specPath]);
+            listeners[specPath].push({
+                spec: spec,
+                listener: listener,
+                namespace: namespace
+            });
+        };
+
+        that.modelChanged.removeListener = function (listener) {
+            fluid.each(subAppliers, function (subApplier) {
+                subApplier.modelChanged.removeListener(listener);
+            });
+            // Here we still don't know if the listener is removed so we need to check
+            // the ones that are registered but not attached.
+            if (typeof (listener) !== "string") {
+                return;
+            }
+            fluid.remove_if(listeners, function (thisListeners) {
+                fluid.remove_if(thisListeners, function (thisListener) {
+                    if (thisListener.namespace === listener) {
+                        return true;
+                    }
+                });
+                if (thisListeners.length < 1) {
+                    return true;
+                }
+            });
+        };
+
         return that;
     };
     
     fluid.attachModel = function (baseModel, path, model) {
         var segs = fluid.model.parseEL(path);
-        for (var i = 0; i < segs.length - 1; ++ i) {
+        for (var i = 0; i < segs.length - 1; ++i) {
             var seg = segs[i];
             var subModel = baseModel[seg];
             if (!subModel) {
@@ -14216,6 +14391,50 @@ var fluid_1_5 = fluid_1_5 || {};
         return that;
     };
     
+    /** "Global Dismissal Handler" for the entire page. Attaches a click handler to the 
+     * document root that will cause dismissal of any elements (typically dialogs) which 
+     * have registered themselves. Dismissal through this route will automatically clean up 
+     * the record - however, the dismisser themselves must take care to deregister in the case 
+     * dismissal is triggered through the dialog interface itself. This component can also be 
+     * automatically configured by fluid.deadMansBlur by means of the "cancelByDefault" option */ 
+     
+    var dismissList = {}; 
+     
+    $(document).click(function (event) { 
+        var target = event.target; 
+        while (target) { 
+            if (dismissList[target.id]) { 
+                return; 
+            } 
+            target = target.parentNode; 
+        } 
+        fluid.each(dismissList, function (dismissFunc, key) { 
+            dismissFunc(event); 
+            delete dismissList[key]; 
+        }); 
+    });
+    // TODO: extend a configurable equivalent of the above dealing with "focusin" events
+     
+    /** Accepts a free hash of nodes and an optional "dismissal function".
+     * If dismissFunc is set, this "arms" the dismissal system, such that when a click
+     * is received OUTSIDE any of the hierarchy covered by "nodes", the dismissal function
+     * will be executed.
+     */ 
+    fluid.globalDismissal = function (nodes, dismissFunc) { 
+        fluid.each(nodes, function (node) {
+          // Don't bother to use the real id if it is from a foreign document - we will never receive events
+          // from it directly in any case - and foreign documents may be under the control of malign fiends
+          // such as tinyMCE who allocate the same id to everything
+            var id = fluid.unwrap(node).ownerDocument === document? fluid.allocateSimpleId(node) : fluid.allocateGuid();
+            if (dismissFunc) { 
+                dismissList[id] = dismissFunc; 
+            } 
+            else { 
+                delete dismissList[id]; 
+            } 
+        }); 
+    }; 
+    
     /** Sets an interation on a target control, which morally manages a "blur" for
      * a possibly composite region.
      * A timed blur listener is set on the control, which waits for a short period of
@@ -14231,23 +14450,24 @@ var fluid_1_5 = fluid_1_5 || {};
         var that = fluid.initLittleComponent("fluid.deadMansBlur", options);
         that.blurPending = false;
         that.lastCancel = 0;
-        $(control).bind("focusout", function (event) {
-            fluid.log("Starting blur timer for element " + fluid.dumpEl(event.target));
-            var now = new Date().getTime();
-            fluid.log("back delay: " + (now - that.lastCancel));
-            if (now - that.lastCancel > that.options.backDelay) {
-                that.blurPending = true;
-            }
-            setTimeout(function () {
-                if (that.blurPending) {
-                    that.options.handler(control);
-                }
-            }, that.options.delay);
-        });
         that.canceller = function (event) {
             fluid.log("Cancellation through " + event.type + " on " + fluid.dumpEl(event.target)); 
-            that.lastCancel = new Date().getTime();
+            that.lastCancel = Date.now();
             that.blurPending = false;
+        };
+        that.noteProceeded = function () {
+            fluid.globalDismissal(that.options.exclusions);
+        };
+        that.reArm = function () {
+            fluid.globalDismissal(that.options.exclusions, that.proceed);
+        };
+        that.addExclusion = function (exclusions) {
+            fluid.globalDismissal(exclusions, that.proceed);
+        };
+        that.proceed = function (event) {
+            fluid.log("Direct proceed through " + event.type + " on " + fluid.dumpEl(event.target));
+            that.blurPending = false;
+            that.options.handler(control);
         };
         fluid.each(that.options.exclusions, function (exclusion) {
             exclusion = $(exclusion);
@@ -14258,6 +14478,24 @@ var fluid_1_5 = fluid_1_5 || {};
     // Mousedown is added for FLUID-4212, as a result of Chrome bug 6759, 14204
             });
         });
+        if (!that.options.cancelByDefault) {
+            $(control).bind("focusout", function (event) {
+                fluid.log("Starting blur timer for element " + fluid.dumpEl(event.target));
+                var now = Date.now();
+                fluid.log("back delay: " + (now - that.lastCancel));
+                if (now - that.lastCancel > that.options.backDelay) {
+                    that.blurPending = true;
+                }
+                setTimeout(function () {
+                    if (that.blurPending) {
+                        that.options.handler(control);
+                    }
+                }, that.options.delay);
+            });
+        }
+        else {
+            that.reArm();
+        }
         return that;
     };
 
@@ -14398,7 +14636,7 @@ var fluid_1_5 = fluid_1_5 || {};
     // Return an array of objects describing the current activity
     // unsupported, non-API function
     fluid.describeActivity = function() {
-        return fluid.threadLocal().activityStack || [];
+        return fluid.globalThreadLocal().activityStack || [];
     };
     
     // Execute the supplied function with the specified activity description pushed onto the stack
@@ -14407,7 +14645,7 @@ var fluid_1_5 = fluid_1_5 || {};
         if (!message || fluid.notrycatch) {
             return func();
         }
-        var root = fluid.threadLocal();
+        var root = fluid.globalThreadLocal();
         if (!root.activityStack) {
             root.activityStack = [];
         }
@@ -14448,32 +14686,38 @@ var fluid_1_5 = fluid_1_5 || {};
         var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(instantiator, parentThat, thatStack)]; 
         var fetcher = function(parsed) {
             var context = parsed.context;
-            if (localRecord && localRecordExpected.test(context)) {
+            var foundComponent;
+            if (context === "instantiator") {
+                // special treatment for the current instantiator which used to be discovered as unique in threadLocal
+                return instantiator;
+            }
+            else if (context === "that") {
+                foundComponent = parentThat; 
+            }
+            else if (localRecord && localRecordExpected.test(context)) {
                 var fetched = fluid.get(localRecord[context], parsed.path);
                 return (context === "arguments" || expandOptions.direct)? fetched : {
                     marker: context === "options"? fluid.EXPAND : fluid.EXPAND_NOW,
                     value: fetched
                 };
             }
-            var foundComponent;
-            visitComponents(instantiator, thatStack, function(component, name, options, up, down) {
-                if (context === name || context === component.typeName || context === component.nickName) {
-                    foundComponent = component;
-                    if (down > 1) {
-                        fluid.log("***WARNING: value resolution for context " + context + " found at depth " + down + ": this may not be supported in future");   
+            if (!foundComponent) {
+                visitComponents(instantiator, thatStack, function(component, name, options, up, down) {
+                    if (context === name || context === component.typeName || context === component.nickName) {
+                        foundComponent = component;
+                        return true; // YOUR VISIT IS AT AN END!!
                     }
-                    return true; // YOUR VISIT IS AT AN END!!
-                }
-                if (fluid.get(component, fluid.path("options", "components", context, "type")) && !component[context]) {
-                    foundComponent = fluid.get(component, context, {strategies: fetchStrategies});
-                    return true;
-                }
-            });
+                    if (fluid.get(component, fluid.path("options", "components", context, "type")) && !component[context]) {
+                        foundComponent = fluid.get(component, context, {strategies: fetchStrategies});
+                        return true;
+                    }
+                });
+            }
             if (!foundComponent && parsed.path !== "") {
                 var ref = fluid.renderContextReference(parsed);
                 fluid.log("Failed to resolve reference " + ref + ": thatStack contains\n" + fluid.dumpThatStack(thatStack, instantiator));
                 fluid.fail("Failed to resolve reference " + ref + " - could not match context with name " 
-                    + context + " from component leaf of type " + thatStack[thatStack.length - 1].typeName, "\ninstantiator contents: ", instantiator);
+                    + context + " from component leaf of type " + parentThat.typeName, "\ninstantiator contents: ", instantiator);
             }
             return fluid.get(foundComponent, parsed.path, fetchStrategies);
         };
@@ -14496,15 +14740,11 @@ var fluid_1_5 = fluid_1_5 || {};
             },
             idToPath: {},
             pathToComponent: {},
-            stackCount: 0,
             nickName: "instantiator"
         };
         var that = fluid.typeTag("fluid.instantiator");
         that = $.extend(that, preThat);
 
-        that.stack = function(count) {
-            return that.stackCount += count;
-        };
         that.getThatStack = function(component) {
             var path = that.idToPath[component.id] || "";
             var parsed = fluid.model.parseEL(path);
@@ -14521,7 +14761,7 @@ var fluid_1_5 = fluid_1_5 || {};
         that.getEnvironmentalStack = function() {
             var togo = [fluid.staticEnvironment];
             if (!freeInstantiator) {
-                togo.push(fluid.threadLocal());
+                togo.push(fluid.globalThreadLocal());
             }
             return togo;
         };
@@ -14560,6 +14800,7 @@ var fluid_1_5 = fluid_1_5 || {};
         that.clearComponent = function(component, name, child, options, noModTree) {
             options = options || {visited: {}, flat: true};
             child = child || component[name];
+            fluid.fireEvent(fluid.get(child, "options.clearFunction"), child);
             fluid.visitComponentChildren(child, function(gchild, gchildname) {
                 that.clearComponent(child, gchildname, null, options, noModTree);
             }, options);
@@ -14962,7 +15203,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 var listener = fluid.expandOptions(record.listener, that);
                 if (!listener) {
                     fluid.fail("Error in listener record - could not resolve reference " + record.listener + " to a listener or firer. "
-                    + "Did you miss out \"events.\" when referring to an event firer?");
+                        + "Did you miss out \"events.\" when referring to an event firer?");
                 }
                 if (listener.typeName === "fluid.event.firer") {
                     listener = listener.fire;
@@ -15029,9 +15270,10 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 firer = {typeName: "fluid.event.firer"}; // jslint:ok - already defined
                 firer.fire = function () {
                     var outerArgs = fluid.makeArray(arguments);
-                    return fluid.applyInstantiator(instantiator, that, function () {
+                    // TODO: this resolution should really be supplied for ALL events!
+                    return fluid.withInstantiator(that, function () {
                         return origin.fire.apply(null, outerArgs);
-                    });
+                    }, " firing synthetic event " + eventName, instantiator);
                 };
                 firer.addListener = function (listener, namespace, predicate, priority) {
                     var dispatcher = fluid.event.dispatchListener(instantiator, that, listener, eventName, eventSpec);
@@ -15185,21 +15427,59 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     
     fluid.expandComponentOptions = fluid.wrapActivity(fluid.expandComponentOptions, 
         ["    while expanding component options ", "arguments.1.value", " with record ", "arguments.1", " for component ", "arguments.2"]);
-    
-    fluid.applyInstantiator = function(userInstantiator, that, func, message) {
-        var root = fluid.threadLocal();
-        if (userInstantiator) {
-            var existing = root["fluid.instantiator"];
-            if (existing && existing !== userInstantiator) {
-                fluid.fail("Error in applyInstantiator: user instantiator supplied with id " + userInstantiator.id 
-                    + " which differs from that for currently active instantiation with id " + existing.id);
-            }
-            else {
-                root["fluid.instantiator"] = userInstantiator;
-                fluid.log("*** restored USER instantiator with id " + userInstantiator.id + " - STORED");
-            }
+
+   
+    // NON-API function 
+    fluid.getInstantiators = function() {
+        var root = fluid.globalThreadLocal();
+        var ins = root["fluid.instantiator"];
+        if (!ins) {
+            ins = root["fluid.instantiator"] = [];
         }
-        return fluid.withInstantiator(that, func, message);
+        return ins;    
+    };
+    
+    // These two are the only functions which touch the instantiator stack
+    // NON-API function
+    // This function is stateful and MUST NOT be called by client code
+    fluid.withInstantiator = function(that, func, message, userInstantiator) {
+        var ins = fluid.getInstantiators();
+        var oldLength;
+        var instantiator = userInstantiator;
+
+        return fluid.pushActivity(function() {
+            return fluid.tryCatch(function() {
+                if (!instantiator) {
+                    if (ins.length === 0) {
+                        instantiator = fluid.instantiator();
+                        fluid.log("Created new instantiator with id " + instantiator.id + " in order to operate on component " + (that? that.typeName : "[none]"));
+                        }
+                    else {
+                        instantiator = ins[ins.length - 1];
+                    }
+                }
+                ins.push(instantiator);
+                oldLength = ins.length;
+              
+                if (that) {
+                    instantiator.recordComponent(that);
+                }
+                //fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
+                return func(instantiator);
+            }, null, function() {
+                if (ins.length !== oldLength) {
+                    fluid.fail("Instantiator stack corrupted - old length " + oldLength + " new length " + ins.length);
+                }
+                if (ins[ins.length - 1] != instantiator) {
+                    fluid.fail("Instantiator stack corrupted at stack top - old id " + instantiator.id + " new id " + ins[ins.length-1].id); 
+                }
+                ins.length--;
+                //fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
+                if (ins.length === 0) {
+                    fluid.log("Cleared instantiators (last id " + instantiator.id + ") from threadLocal for end of " + (that? that.typeName : "[none]"));
+                }
+            });
+        }, message);
     };
     
     // The case without the instantiator is from the ginger strategy - this logic is still a little ragged
@@ -15210,7 +15490,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var component = that.options.components[name];
         var instance; // escape to here for debugging purposes
         
-        fluid.applyInstantiator(userInstantiator, that, function(instantiator) {
+        fluid.withInstantiator(that, function(instantiator) {
             if (typeof(component) === "string") {
                 that[name] = fluid.expandOptions([component], that)[0]; // TODO: expose more sensible semantic for expandOptions 
             }
@@ -15239,38 +15519,11 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             else { 
                 that[name] = component;
             }
-        }, ["    while instantiating dependent component with name \"" + name + "\" with record ", component, " as child of ", that]);
+        }, ["    while instantiating dependent component with name \"" + name + "\" with record ", component, " as child of ", that],
+        userInstantiator);
         if (instance) {
             fluid.log("Finished instantiation of component with name \"" + name + "\" and id " + instance.id + " as child of " + fluid.dumpThat(that));
         }
-    };
-    
-    // NON-API function
-    // This function is stateful and MUST NOT be called by client code
-    fluid.withInstantiator = function(that, func, message) {
-        var root = fluid.threadLocal();
-        var instantiator = root["fluid.instantiator"];
-        if (!instantiator) {
-            instantiator = root["fluid.instantiator"] = fluid.instantiator();
-            fluid.log("Created new instantiator with id " + instantiator.id + " in order to operate on component " + (that? that.typeName : "[none]"));
-        }
-        return fluid.pushActivity(function() {
-            return fluid.tryCatch(function() {
-                if (that) {
-                    instantiator.recordComponent(that);
-                }
-                instantiator.stack(1);
-                //fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
-                return func(instantiator);
-            }, null, function() {
-                var count = instantiator.stack(-1);
-                //fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
-                if (count === 0) {
-                    fluid.log("Clearing instantiator with id " + instantiator.id + " from threadLocal for end of " + (that? that.typeName : "[none]"));
-                    delete root["fluid.instantiator"];
-                }
-            });
-        }, message);
     };
     
     // unsupported, non-API function
@@ -15329,54 +15582,39 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     
     fluid.staticEnvironment.environmentClass = fluid.typeTag("fluid.browser");
     
-    // fluid.environmentalRoot.environmentClass = fluid.typeTag("fluid.rhino");
+    fluid.globalThreadLocal = fluid.threadLocal(function() {
+        return fluid.typeTag("fluid.dynamicEnvironment");
+    });
     
-    var singleThreadLocal = fluid.typeTag("fluid.dynamicEnvironment");
+    // Although the following two functions are unsupported and not part of the IoC
+    // implementation proper, they are still used in the renderer
+    // expander as well as in some old-style tests and various places in CSpace.
     
-    fluid.singleThreadLocal = function() {
-        return singleThreadLocal;
-    };
-
-    // Return to the old strategy of monkey-patching this, since this is a most frequently used function within IoC
-    fluid.threadLocal = fluid.singleThreadLocal;
-
-    function applyLocalChange(applier, type, path, value) {
-        var change = {
-            type: type,
-            path: path,
-            value: value
-        };
-        applier.fireChangeRequest(change);
-    }
-
     // unsupported, non-API function
-    fluid.withEnvironment = function(envAdd, func, prefix) {
-        prefix = prefix || "";
-        var root = fluid.threadLocal();
-        var applier = fluid.makeChangeApplier(root, {thin: true});
+    fluid.withEnvironment = function(envAdd, func, root) {
+        root = root || fluid.globalThreadLocal();
         return fluid.tryCatch(function() {
             for (var key in envAdd) {
-                applyLocalChange(applier, "ADD", fluid.model.composePath(prefix, key), envAdd[key]);
+                root[key] = envAdd[key];
             }
             $.extend(root, envAdd);
             return func();
         }, null, function() {
             for (var key in envAdd) { // jslint:ok duplicate "value"
-              // TODO: This could be much better through i) refactoring the ChangeApplier so we could naturally use "rollback" semantics 
-              // and/or implementing this material using some form of "prototype chain"
-                applyLocalChange(applier, "DELETE", fluid.model.composePath(prefix, key));
+                delete root[key]; // TODO: users may want a recursive "scoping" model
             }
         });
     };
     
     // unsupported, non-API function  
-    fluid.makeEnvironmentFetcher = function(prefix, directModel, elResolver) {
+    fluid.makeEnvironmentFetcher = function(directModel, elResolver, envGetter) {
+        envGetter = envGetter || fluid.globalThreadLocal;
         return function(parsed) {
-            var env = fluid.get(fluid.threadLocal(), prefix);
+            var env = envGetter();
             return fluid.fetchContextReference(parsed, directModel, env, elResolver);
         };
     };
-    
+
     // unsupported, non-API function  
     fluid.extractEL = function(string, options) {
         if (options.ELstyle === "ALL") {
@@ -15745,7 +15983,7 @@ var fluid_1_5 = fluid_1_5 || {};
                  }
                  pendingClass[fetchClass][canon] = resourceSpec;
              }
-             options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+             // options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
              $.ajax(options);
          }
          else {
@@ -18796,7 +19034,8 @@ fluid_1_5 = fluid_1_5 || {};
     
     fluid.renderer.repeat = function (options, container, key, config) {
         fluid.expect("Repetition expander", ["controlledBy", "tree"], options);
-        var path = fluid.extractContextualPath(options.controlledBy, {ELstyle: "ALL"}, fluid.threadLocal());
+        var env = config.threadLocal();
+        var path = fluid.extractContextualPath(options.controlledBy, {ELstyle: "ALL"}, env);
         var list = fluid.get(config.model, path, config.resolverGetConfig);
         
         var togo = {};
@@ -18805,15 +19044,17 @@ fluid_1_5 = fluid_1_5 || {};
         }
         var expanded = [];
         fluid.each(list, function (element, i) {
-            var EL = fluid.model.composePath(path, i); 
-            var envAdd = {};
+            var EL = fluid.model.composePath(path, i);
+            var envAdd = {}; 
             if (options.pathAs) {
                 envAdd[options.pathAs] = "${" + EL + "}";
             }
             if (options.valueAs) {
                 envAdd[options.valueAs] = fluid.get(config.model, EL, config.resolverGetConfig);
             }
-            var expandrow = fluid.withEnvironment(envAdd, function () {return config.expander(options.tree); }, "rendererEnvironment");
+            var expandrow = fluid.withEnvironment(envAdd, function() {
+                return config.expander(options.tree);
+            }, env);
             if (fluid.isArrayable(expandrow)) {
                 if (expandrow.length > 0) {
                     expanded.push({children: expandrow});
@@ -18882,7 +19123,7 @@ fluid_1_5 = fluid_1_5 || {};
                 return {
                     noDereference: parsed.path === "", 
                     path: fluid.model.composePath(EL, parsed.path) 
-                    }; 
+                }; 
             }
         }
         return parsed;
@@ -18913,11 +19154,10 @@ fluid_1_5 = fluid_1_5 || {};
         var options = $.extend({
             ELstyle: "${}"
         }, expandOptions); // shallow copy of options
-        
-        options.fetcher = fluid.makeEnvironmentFetcher("rendererEnvironment", options.model, fluid.transformContextPath);
+        var threadLocal; // rebound on every expansion at entry point
         
         function fetchEL(string) {
-            var env = fluid.threadLocal().rendererEnvironment;
+            var env = threadLocal();
             return fluid.extractContextualPath(string, options, env);
         }
          
@@ -18991,6 +19231,7 @@ fluid_1_5 = fluid_1_5 || {};
             resolverSetConfig: options.resolverSetConfig,
             expander: expandExternal,
             expandLight: expandLight
+            //threadLocal: threadLocal
         };
         
         var expandLeaf = function (leaf, componentType) {
@@ -19097,10 +19338,12 @@ fluid_1_5 = fluid_1_5 || {};
         };
         
         return function(entry) {
-            var initEnvironment = $.extend({}, options.envAdd);
-            return fluid.withEnvironment({rendererEnvironment: initEnvironment}, function() {
-                return expandEntry(entry);
+            threadLocal = fluid.threadLocal(function() {
+                return $.extend({}, options.envAdd);
             });
+            options.fetcher = fluid.makeEnvironmentFetcher(options.model, fluid.transformContextPath, threadLocal);
+            expandConfig.threadLocal = threadLocal;
+            return expandEntry(entry);
         };
     };
     
@@ -20577,13 +20820,6 @@ var fluid_1_5 = fluid_1_5 || {};
         function focusEditor(editor) {
             setTimeout(function () {
                 tinyMCE.execCommand('mceFocus', false, that.editField[0].id);
-                if ($.browser.mozilla && $.browser.version.substring(0, 3) === "1.8") {
-                    // Have not yet found any way to make this work on FF2.x - best to do nothing,
-                    // for FLUID-2206
-                    //var body = editor.getBody();
-                    //fluid.setCaretToEnd(body.firstChild, "");
-                    return;
-                }
                 editor.selection.select(editor.getBody(), 1);
                 editor.selection.collapse(0);
             }, 10);
@@ -20594,21 +20830,42 @@ var fluid_1_5 = fluid_1_5 || {};
             var editorBody = editor.getBody();
 
             // NB - this section has no effect - on most browsers no focus events
-            // are delivered to the actual body
-            fluid.deadMansBlur(that.editField, 
-                {
-                    exclusions: {body: $(editorBody)}, 
+            // are delivered to the actual body - however, on recent TinyMCE, the 
+            // "focusEditor" call DOES deliver a blur which causes FLUID-4681
+            that.deadMansBlur = fluid.deadMansBlur(that.editField, {
+                    cancelByDefault: true,
+                    exclusions: {body: $(editorBody), container: that.container}, 
                     handler: function () {
-                        that.cancel();
+                        that[that.options.onBlur]();
                     }
                 });
+            // Ridiculous drilling down functions on 3.4.9 to track dynamic creation of
+            // menu dropdowns which otherwise causes an undetectable focus transfer 
+            // away from editor (they are appended to the end of the document rather than
+            // nested within the editor).
+            editor.controlManager.onAdd.add(function(e) {
+                if (e.onShowMenu) {
+                    e.onShowMenu.add(function() {
+                        var el = fluid.byId(e.element.id);
+                        if (el) {
+                            that.deadMansBlur.addExclusion({id: el});
+                        }
+                    });
+                }
+            });
         });
             
         that.events.afterBeginEdit.addListener(function () {
             var editor = tinyMCE.get(that.editField[0].id);
             if (editor) {
                 focusEditor(editor);
-            } 
+            }
+            if (that.deadMansBlur) {
+                that.deadMansBlur.reArm();
+            }
+        });
+        that.events.afterFinishEdit.addListener(function () {
+            that.deadMansBlur.noteProceeded();
         });
     };
    
@@ -20623,8 +20880,14 @@ var fluid_1_5 = fluid_1_5 || {};
                 oldinit();
             }
         };
-        
-        tinyMCE.init(options);
+        // Ensure that instance creation is always asynchronous, to ensure that
+        // blurHandlerBinder always executes BEFORE instance is ready - so that
+        // its afterInitEdit listener is registered in time. All of this architecture
+        // is unsatisfactory, but can't be easily fixed until the whole component is
+        // migrated over to IoC with declarative listener registration.
+        setTimeout(function() {
+            tinyMCE.init(options);
+        }, 1);
     };
     
     fluid.defaults("fluid.inlineEdit.tinyMCE", {
@@ -20654,6 +20917,7 @@ var fluid_1_5 = fluid_1_5 || {};
         lazyEditView: true,
         defaultViewText: "Click Edit",
         modelComparator: fluid.inlineEdit.htmlComparator,
+        onBlur: "finish",
         blurHandlerBinder: fluid.inlineEdit.tinyMCE.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
         editModeRenderer: fluid.inlineEdit.tinyMCE.editModeRenderer
@@ -25648,7 +25912,7 @@ var fluid_1_5 = fluid_1_5 || {};
                 options: {
                     queueSettings: "{multiFileUploader}.options.queueSettings",
                     selectors: {
-                        browseButton: "{multiFileUploader}.selectors.browseButton"
+                        browseButton: "{multiFileUploader}.options.selectors.browseButton"
                     },
                     listeners: {
                         onFilesQueued: "{local}.addFiles"

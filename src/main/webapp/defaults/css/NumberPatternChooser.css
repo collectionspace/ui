@@ -25,13 +25,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 input.numberPatternChooserButton{
 	border:none;
-	background-color:#73AA4F; 
 	margin-left: 6px;
 	padding: 2px 8px;
-	color:#fff; 
 	float:right;
 	cursor:pointer;
-	font-size:11px;
 	font-weight:bold;
 }
 .cs-numberPatternChooser-list {
@@ -43,11 +40,15 @@ table.cs-numberPatternChooser-list thead {
 }
 table.cs-numberPatternChooser-list thead tr {
 	border-bottom:1 px solid ;
-	background-color: #6E9FCE;
-	color:#fff;
+	background-color: #F0F5FB;
+	color:#33669A;
+	font-weight: bold;
+	height: 19px;
 }
 table.cs-numberPatternChooser-list thead th {
 	border:none;
+	height: inherit;
+	font: inherit;
 	padding: 2px 0 2px 2px;
 }
 table.cs-numberPatternChooser-list tbody {

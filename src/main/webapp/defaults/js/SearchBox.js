@@ -57,7 +57,6 @@ cspace = cspace || {};
             autoBind: true
         },
         components: {
-            globalNavigator: "{globalNavigator}",
             vocab: "{vocab}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
@@ -126,6 +125,7 @@ cspace = cspace || {};
             // Bind a click event on search button to trigger searchBox's navigateToSearch
             that.locate("searchButton").click(that.navigateToSearch);
             that.locate("searchQuery").keypress(function (e) {
+                that.locate("searchQuery").change();
                 if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
                     that.navigateToSearch();
                 }
@@ -174,8 +174,8 @@ cspace = cspace || {};
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
     // the search results page.    
-    cspace.searchBox.navigateToSearch = function (that) {
-        that.globalNavigator.events.onPerformNavigation.fire(function () {
+    cspace.searchBox.navigateToSearch = function (that, recordEditor) {
+        function navigate () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
                 recordtype: that.model.recordType,
                 vocab: that.model.vocabs ? ("&" + $.param({
@@ -184,6 +184,13 @@ cspace = cspace || {};
                 keywords: that.model.keywords
             });
             window.location = url;
+        }
+        if (!recordEditor) {
+            navigate();
+            return;
+        }
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
+            navigate();
         });
     };
     
@@ -239,6 +246,9 @@ cspace = cspace || {};
                 type: "addClass",
                 classes: that.options.styles[key]
             };
+            if (fluid.isPrimitive(child)) {
+                return;
+            }
             child.decorators = child.decorators ? child.decorators.concat([decorator]) : [decorator];
         });
 

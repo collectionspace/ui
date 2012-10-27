@@ -27,19 +27,6 @@ cspace = cspace || {};
 
     cspace.testData = cspace.testData || {};
 
-    var testPageSpec = {
-        recordEditor: {
-            href: "test-data/template1.html",
-            templateSelector: "#template1mainNode",
-            targetSelector: "#insertTemplate1here"
-        },
-        sidebar: {
-            href: "test-data/template2.html",
-            templateSelector: "#template2mainNode",
-            targetSelector: "#insertTemplate2here"
-        }
-    };
-
     var pageBuilderTester = function () {
         
         var barePageBuilderTest = new jqUnit.TestCase("PageBuilder Tests", function () {
@@ -191,14 +178,6 @@ cspace = cspace || {};
             }
         };
         
-        cspace.testComponent1 = function (container, options) {
-            var body = $("body");
-            jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
-            jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
-            jqUnit.assertEquals("Rest of doc wasn't inserted", 0, $("#shouldntbehere", body).length);
-            start();
-        };
-        
         fluid.defaults("cspace.testComponent2", {
             gradeNames: ["fluid.viewComponent"]
         });
@@ -265,56 +244,7 @@ cspace = cspace || {};
             jqUnit.assertDeepEq("testComponent8 initiated with correct extra parameter demanded from PageBuilder", "Jacob", nameParam);
             jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", that.options.option1);
         };
-            
-        pageBuilderTest.asyncTest("Assembly of HTML only", function () {
-            var pageBuilderIOOpts = {
-                pageSpec: testPageSpec,
-                listeners: {
-                    pageReady: function () {
-                        var body = $("body");
-                        jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
-                        jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
-                        jqUnit.assertEquals("Rest of doc wasn't inserted", 0, $("#shouldntbehere", body).length);
-                        $("#testText1").remove();
-                        $("#testText2").remove();
-                        start();
-                    }
-                }
-            };
-            var pbIO = cspace.pageBuilderIO(pageBuilderIOOpts);
-            done = 0;
-            pbIO.initPageBuilder({
-                htmlOnly: true,
-                userLogin: cspace.tests.userLogin
-            });
-        });
 
-        pageBuilderTest.asyncTest("Assembly of HTML", function () {
-            expect(3);
-            
-            fluid.demands("recordEditor", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
-            
-            var pageBuilderIOOpts = {
-                pageSpec: testPageSpec
-            };
-            var pbIO = cspace.pageBuilderIO(pageBuilderIOOpts);
-            var pageBuilderOpts = {
-                selectors: {
-                    recordEditor: "#recordEditorContainer"
-                },
-                components: {
-                    recordEditor: {
-                        type: "cspace.testComponent1"
-                    }
-                },
-                userLogin: cspace.tests.userLogin
-            };
-            done = 0;
-            pbIO.initPageBuilder(pageBuilderOpts);
-        });
-
-    
         pageBuilderTest.asyncTest("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test"], {
@@ -363,7 +293,7 @@ cspace = cspace || {};
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithDemandInParameters.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithDemandInParameters.pageBuilder.options);
         });
-        
+/*
         pageBuilderTest.test("cspace.composite.compose", function () {
             var resourceSpec = {
                 test1: {
@@ -422,6 +352,7 @@ cspace = cspace || {};
             jqUnit.assertEquals("Composite dataType is now", expected.composite.options.dataType, result.composite.options.dataType);
             jqUnit.assertEquals("Composite data is now", expected.composite.options.data, result.composite.options.data);
         });
+*/
     };
     
     $(document).ready(function () {

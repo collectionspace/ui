@@ -13,117 +13,93 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("RelatedRecordsList.js loaded");
     
-    fluid.registerNamespace("cspace.relatedRecordsList");
-    
-    var addModelChangeListener = function (that, recordTypes, applier, recordList, recordType, related) {
-        applier.modelChanged.addListener(that.options.relationsElPath + "." + recordType, function (model) {
-            var instantiator = that.options.instantiator;
-            that.renderer.refreshView();
-            fluid.each(that.options.components, function (component, name) {
-                if (that[name]) {
-                    instantiator.clearComponent(that, name);
-                }
-                fluid.initDependent(that, name, instantiator);
-            });
-            setupRelatedRecordsList(that);
-        });
-    };
-
-    var bindEventHandlers = function (that) {
-        fluid.each(that.recordTypes[that.options.related], function (value) {
-            addModelChangeListener(that, that.recordTypes, that.options.applier, that.recordList, value, that.options.related);
-        });
-    };
-    
-    var setupRelatedRecordsList = function (that) {
-        that.locate("numOfRelated").text(fluid.stringTemplate(that.options.strings.numOfRelated, {
-            numOfRelated: that.recordList.calculateRecordListSize()
-        }));
-    };
-
-    cspace.relatedRecordsList = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relatedRecordsList", container, options);
-        that.renderer.refreshView();
-        fluid.initDependents(that);        
-        bindEventHandlers(that);
-        setupRelatedRecordsList(that);
-        that.events.afterSetup.fire(that);
-        return that;
-    };
-    
-    cspace.relatedRecordsList.buildRelationsList = function (recordTypes, relations, related) {
-        var relationList = [];
-        fluid.each(recordTypes[related], function (value) {
-            relationList = relationList.concat(relations[value] || []);
-        });   
-        return relationList;
-    };
-    
-    cspace.relatedRecordsList.buildRelationsListColumns = function (related) {
-        if (related !== "cataloging") {
-            return ["number", "recordtype", "summarylist.updatedAt"];
-        }
-        return ["number", "summary", "summarylist.updatedAt"];
-    };
-    
-    cspace.relatedRecordsList.buildRelationsListNames = function (related) {
-        if (related !== "cataloging") {
-            return ["number", "recordtype", "updatedAt"];
-        }
-        return ["number", "summary", "updatedAt"];
-    };
-    
-    cspace.relatedRecordsList.produceTree = function(that) {
-        return {
-            mainHeader: {
-                messagekey: that.options.related //holds key for stringBundle lookup
-            }
-        };
-    };
-
     fluid.defaults("cspace.relatedRecordsList", {
-        gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge",
-            instantiator: "nomerge"
-        },
-        instantiator: "{instantiator}",
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
-            recordTypes: "{recordTypes}",
-            recordList: {
-                type: "cspace.recordList",
-                options: {
-                    elPaths: {
-                        items: "items"
-                    },
-                    strings: {
-                        number: "Number",
-                        summary: "Summary",
-                        recordtype: "Type"
-                    },
-                    model: {
-                        messagekeys: {
-                            nothingYet: "relatedRecordsList-nothingYet"
-                        }
-                    },
-                    showNumberOfItems: false
-                }
-            },
             relationManager: {
                 type: "cspace.relationManager",
+                container: "{relatedRecordsList}.dom.relationManagerSelector",
                 options: {
                     primary: "{relatedRecordsList}.options.primary",
                     related: "{relatedRecordsList}.options.related",
-                    applier: "{relatedRecordsList}.options.applier",
-                    model: "{relatedRecordsList}.model",
-                    relationsElPath: "{relatedRecordsList}.options.relationsElPath"
+                    model: {
+                        addButton: "relationManager-addButton"
+                    },
+                    events: {
+                        afterAddRelation: "{cspace.relatedRecordsList}.events.afterAddRelation"
+                    }
+                }
+            },
+            rrlListView: {
+                type: "cspace.listView",
+                container: "{relatedRecordsList}.dom.listViewSelector",
+                createOnEvent: "primaryRecordCreated",
+                options: {
+                    recordType: "{relatedRecordsList}.options.related",
+                    urls: cspace.componentUrlBuilder({
+                        listUrl: "%tenant/%tname/%primary/%related/%csid?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
+                    }),
+                    produceTree: "cspace.listView.produceTreeSidebar",
+                    elPath: "items",
+                    model: {
+                        pageSizeList: ["5", "10", "20", "50"],
+                        columns: [{
+                            sortable: true,
+                            id: "number",
+                            name: "%recordType-number"
+                        }, {
+                            sortable: true,
+                            id: "summary",
+                            name: "title"
+                        }, {
+                            sortable: true,
+                            id: "summarylist.updatedAt",
+                            name: "updatedAt"
+                        }]
+                    },
+                    components: {
+                        pager: {
+                            options: {
+                                summary: {
+                                    options: {
+                                        message: {
+                                            expander: {
+                                                type: "fluid.deferredInvokeCall",
+                                                func: "cspace.util.resolveMessage",
+                                                args: ["{globalBundle}", "listView-total-short"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        afterUpdate: "{relatedRecordsList}.events.listUpdated.fire",
+                        ready: "{relatedRecordsList}.events.listUpdated.fire",
+                        onError: "{loadingIndicator}.events.hideOn.fire"
+                    },
+                    nonSortableColumns: {
+                        cataloging: ["summary"],
+                        procedures: ["number", "summary", "summarylist.updatedAt"]
+                    }
+                }
+            },
+            listBanner: {
+                type: "cspace.relatedRecordsList.banner",
+                container: "{relatedRecordsList}.dom.banner",
+                options: {
+                    list: "{relatedRecordsList}.dom.listViewSelector"
                 }
             },
             togglableRelated: {
                 type: "cspace.util.togglable",
+                container: "{relatedRecordsList}.container",
                 options: {
                     selectors: {
                         header: "{relatedRecordsList}.options.selectors.header",
@@ -133,23 +109,42 @@ cspace = cspace || {};
             }
         },
         events: {
-            afterSetup: null  
+            afterAddRelation: null,
+            relationsUpdated: {
+                event: "{globalEvents}.events.relationsUpdated"
+            },
+            primaryRecordCreated: {
+                event: "{globalEvents}.events.primaryRecordCreated"
+            },
+            listUpdated: null,
+            relatedRelationsUpdated: null
         },
-        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
+        listeners: {
+            listUpdated: "{relatedRecordsList}.listUpdatedHandler",
+            relationsUpdated: "{relatedRecordsList}.relationsUpdatedHandler",
+            relatedRelationsUpdated: "{relatedRecordsList}.relatedRelationsUpdatedHandler",
+            afterAddRelation: [
+                "{relatedRecordsList}.events.relationsUpdated.fire"
+            ]
+        },
+        category: [],
         parentBundle: "{globalBundle}",
-        produceTree: cspace.relatedRecordsList.produceTree,
+        protoTree: {
+            mainHeader: {
+                messagekey: "${related}"
+            }
+        },
         selectors: {
-            numOfRelated: ".csc-num-items",
             relationManagerSelector: ".csc-relatedRecordsList-relationManager",
-            recordListSelector: ".csc-relatedRecordsList-recordList",
+            listViewSelector: ".csc-listViewSelector",
             mainHeader: ".csc-related-mainheader",
             header: ".csc-related-header",
-            togglable: ".csc-related-togglable"
+            togglable: ".csc-related-togglable",
+            banner: ".csc-sidebar-bannerContainer"
         },
-        selectorsToIgnore: ["relationManagerSelector", "recordListSelector", "header", "togglable", "numOfRelated"],
-        strings: {
-            numOfRelated: "(%numOfRelated)"
-        },
+        selectorsToIgnore: ["relationManagerSelector", "listViewSelector", "header", "togglable", "banner"],
+        strings: {},
+        renderOnInit: true,
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -158,8 +153,254 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
+        },
+        preInitFunction: "cspace.relatedRecordsList.preInit"
+    });
+
+    cspace.relatedRecordsList.preInit = function (that) {
+        that.relatedListTag = fluid.typeTag("cspace.relatedRecordsList.related");
+        that.relatedListTypeTag = fluid.typeTag(fluid.model.composeSegments("cspace.relatedRecordsList", that.options.related));
+        that.relationsUpdatedHandler = function (related) {
+            if (related !== that.options.related && !fluid.find(that.options.category, function (recordType) {
+                if (recordType === related) {return true;}
+            })) {
+                return;
+            }
+            that.events.relatedRelationsUpdated.fire();
+        };
+        that.relatedRelationsUpdatedHandler = function () {
+            that.rrlListView.updateModel();
+        };
+        that.listUpdatedHandler = function () {
+            var showBanner = fluid.get(that.rrlListView.model, "list").length < 1;
+            that.listBanner.events[showBanner ? "showBanner": "hideBanner"].fire();
+        };
+    };
+
+    fluid.defaults("cspace.relatedRecordsList.banner", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        events: {
+            hideBanner: null,
+            showBanner: null
+        },
+        listeners: {
+            hideBanner: "{cspace.relatedRecordsList.banner}.hideHandler",
+            showBanner: "{cspace.relatedRecordsList.banner}.showBanner"
+        },
+        selectors: {
+            banner: ".csc-sidebar-banner",
+            bannerMessage: ".csc-sidebar-banner-message"
+        },
+        styles: {
+            banner: "cs-sidebar-banner",
+            bannerMessage: "cs-sidebar-banner-message"
+        },
+        strings: {},
+        parentBundle: "{globalBundle}",
+        protoTree: {
+            banner: {
+                decorators: {
+                    addClass: "{styles}.banner"
+                }
+            },
+            bannerMessage: {
+                messagekey: "sidebar-banner-message",
+                args: [],
+                decorators: {
+                    addClass: "{styles}.bannerMessage"
+                }
+            }
+        },
+        renderOnInit: true,
+        preInitFunction: "cspace.relatedRecordsList.banner.preInit",
+        postInitFunction: "cspace.relatedRecordsList.banner.postInit"
+    });
+
+    cspace.relatedRecordsList.banner.preInit = function (that) {
+        that.showBanner = function () {
+            that.options.list.hide();
+            that.locate("banner").show();
+        };
+        that.hideHandler = function () {
+            that.locate("banner").hide();
+            that.options.list.show();
+        };
+    };
+
+    cspace.relatedRecordsList.banner.postInit = function (that) {
+        that.locate("banner").show();
+        that.options.list.hide();
+    };
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            }
         }
     });
+    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource"
+        }
+    });
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsList",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+    fluid.demands("cspace.listView.dataSource", ["cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                primary: "{cspace.relatedRecordsList}.options.primary",
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource",
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+
+    fluid.defaults("cspace.relatedRecordsList.testDataSourceRelatedRecordsList", {
+        url: "%test/data/%primary/%related/%csid.json"
+    });
+    cspace.relatedRecordsList.testDataSourceRelatedRecordsList = cspace.URLDataSource;
+
+    cspace.relatedRecordsList.responseParserAuth = function (data) {
+        return data.termsUsed;
+    };
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            }
+        }
+    });
+    fluid.demands("cspace.listView.dataSource", ["cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource"
+        }
+    });
+
+    fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+        args: {
+            targetTypeName: "cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid"
+            },
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+    fluid.demands("cspace.listView.dataSource", ["cspace.authority", "cspace.listView", "cspace.sidebar", "cspace.relatedRecordsList.related", "cspace.relatedRecordsList.authorities"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.listView}.options.urls.listUrl",
+            termMap: {
+                vocab: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.vocab.resolve",
+                        args: {
+                            model: "{globalModel}.model.primaryModel",
+                            recordType: "{cspace.relatedRecordsList}.options.primary",
+                            vocab: "{vocab}"
+                        }
+                    }
+                },
+                related: "{cspace.relatedRecordsList}.options.related",
+                csid: "{globalModel}.model.primaryModel.csid",
+                pageNum: "%pageNum",
+                pageSize: "%pageSize",
+                sortDir: "%sortDir",
+                sortKey: "%sortKey"
+            },
+            targetTypeName: "cspace.listView.dataSource",
+            responseParser: "cspace.relatedRecordsList.responseParserAuth"
+        }
+    });
+
+    fluid.defaults("cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab", {
+        url: "%test/data/%vocab/%related/%csid.json"
+    });
+    cspace.relatedRecordsList.testDataSourceRelatedRecordsListVocab = cspace.URLDataSource;
 
     fluid.fetchResources.primeCacheFromResources("cspace.relatedRecordsList");
 })(jQuery, fluid);

@@ -1,52 +1,11 @@
 {
     "objectexit": {
         "properties": {
-            "exitNumbers": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "exitNumber": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "exitNotes": {
-                "items": {
-                    "properties": {
-                        "exitNote": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "depositors": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "depositor": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
             "currentOwners": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "currentOwner": {
@@ -57,10 +16,32 @@
                 },
                 "type": "array"
             },
+            "depositors": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "depositor": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "exitDateGroupEnd": {
+                "type": "string"
+            },
+            "exitDateGroupStart": {
+                "type": "string"
+            },
             "exitMethods": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "exitMethod": {
@@ -72,19 +53,41 @@
                 },
                 "type": "array"
             },
-            "exitDateStart": {
-                "type": "date"
+            "exitNotes": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "exitNote": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
             },
-            "exitDateEnd": {
-                "type": "date"
-            },
-            "updatedAtEnd": {
-                "type": "date"
+            "exitNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "exitNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
             },
             "exitReasons": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "exitReason": {
@@ -96,10 +99,17 @@
                 },
                 "type": "array"
             },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
             "updatedBys": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "updatedBy": {
@@ -109,9 +119,6 @@
                     "type": "object"
                 },
                 "type": "array"
-            },
-            "updatedAtStart": {
-                "type": "date"
             }
         },
         "type": "object"

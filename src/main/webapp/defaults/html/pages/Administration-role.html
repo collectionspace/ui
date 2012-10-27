@@ -1,65 +1,23 @@
 <div class="fl-fix fl-container-flex fl-col-mixed2">
-    <div class="fl-container-admin csc-admin-role">        
-		<div class="fl-container-flex fl-fix information-group info-column">				
-			<div class="info-column2-20 fl-force-left">
-				<div class="fl-container-flex info-column header">
-					<div class="csc-admin-listHeader fl-force-left"></div>
-					<input type="button" class="csc-admin-add csc-listEditor-createNew button fl-force-right" value="" />
-				</div>
-				<div class="overflow-list csc-listEditor-list"></div>
-			</div>
-			
-			<div class="info-column2-80 fl-force-right">
-				<div class="csc-admin-detailsHeader fl-container-flex header"></div>
-				<div class="csc-admin-details cs-admin-details fl-container-admin">
-					<div class="csc-listEditor-details-none">
-						<div class="csc-admin-detailsNoneSelected"></div>
-						<div class="csc-admin-detailsNone details-none"></div>
-					</div>
-					
-					<div class="fl-container-flex info-column fl-fix information-subgroup csc-listEditor-details">
-						<div class="button-row details">
-							<input type="button" class="csc-delete deleteButton" />
-							<input type="button" class="csc-cancel cancelButton" />
-							<input type="button" class="saveButton csc-save" />
-						</div>
-						
-						<div class="info-column2-45 fl-force-left">
-							<div class="info-pair">
-								<span class="label csc-role-roleName-label" /><span class="required">*</span>
-								<div class="user-input">
-									<input type="text" class="csc-role-name csc-required" />
-								</div>
-							</div>
-						
-							<div class="info-pair">
-								<div class="label csc-role-description-label"></div>
-								<div class="user-input">
-									<input type="text" class="csc-role-description" />
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column2-55 fl-force-right">
-							<div class="info-pair">
-								<div class="label csc-role-permissions-label"></div>
-								<div class="flc-cabinet-mainheader"><span class="label csc-role-none"></span><span class="label csc-role-read"></span><span class="label csc-role-write"></span><span class="label csc-role-delete"></span></div>
-								<div class="cs-permissions-table overflowdiv-admin">
-									<div class="cs-permissions-row csc-permissions-record-row clearfix">
-										<div class="radio-row csc-role-permission-row">
-											<span class="radio">
-												<input type="radio" class="radio csc-role-permission-input" />
-												<label class="csc-role-permission-label" style="display:none;"></label>
-											</span>
-										</div>
-										<div class="permission-name csc-role-resourceName"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>                                   
-		</div>
+    <div class="fl-container-admin csc-admin-role">
+        <div class="fl-container-flex fl-fix information-group info-column admin">
+            <div class="info-column2-30 fl-force-left">
+                <div class="fl-container-flex header">
+                    <div class="csc-admin-listViewHeader fl-force-left"></div>
+                    <input type="button" class="csc-admin-add cs-admin-add button fl-force-right" value="" />
+                </div>
+                <div class="content csc-admin-listView"></div>
+            </div>
+            <div class="info-column2-70 fl-force-right">
+                <div class="fl-container-flex header">
+                    <div class="csc-admin-recordEditorHeader fl-container-flex header"></div>
+                </div>
+                <div class="csc-admin-recordEditor cs-admin-recordEditor"></div>
+                <div class="csc-admin-banner cs-admin-banner">
+                    <div class="csc-admin-bannerTop"></div>
+                    <div class="csc-admin-bannerBottom"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

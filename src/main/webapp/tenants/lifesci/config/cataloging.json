@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "cataloging",
-            "selectors": {
-                "recordEditor": ".csc-cataloging-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,8 @@
                         "selectors": {
                             "identificationNumber": ".csc-object-identification-object-number" 
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model"
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber"]
                     }
                 },
                 "titleBar": {
@@ -51,17 +47,7 @@
             "recordType": "cataloging",
             "schema": {
                 "cataloging": null
-            },
-            "components": {
-                "templateLocator": {
-                    "type": "cspace.pageBuilderIO.templateLocator",
-                    "options": {
-                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
-                        "recordType": "{pageBuilderIO}.options.recordType"
-                    }
-                }
-            },
-            "pageSpec": {}
+            }
         }
     }
 }

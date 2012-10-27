@@ -44,6 +44,15 @@ var utilitiesTester = function ($) {
                                     "default": true
                                 }
                             }
+                        },
+                        "ulan_pa": {
+                            "properties": {
+                                "nptAllowed": {
+                                    "default": false,
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
                         }
                     },
                     "type": "object"
@@ -380,42 +389,122 @@ var utilitiesTester = function ($) {
         jqUnit.assertEquals("Value should be converted to the following text", "TEST NAME", $(selector).text());
     });
     
-    utilitiesTest.test("cspace.recordTypes", function () {
-        var recTypes = cspace.recordTypes({
-            schema: cspace.tests.sampleSchema
+    var recordSortingTest = function(options) {
+        utilitiesTest.test("cspace.recordTypes", function () {
+            var recTypes = cspace.recordTypes({
+                schema: cspace.tests.sampleSchema,
+                sortRecords: options.sortRecords
+            });
+            
+            fluid.each(options.recordTypes, function(values, name) {
+                jqUnit.assertDeepEq(name + " should contain", values, recTypes[name]);
+            });
         });
-        jqUnit.assertDeepEq("all should contain", [
-            "person",
-            "intake",
-            "loanin",
-            "loanout",
-            "acquisition",
-            "organization",
-            "place",
-            "concept",
-            "cataloging",
-            "movement",
-            "objectexit",
-            "media"
-        ], recTypes.all);
-        jqUnit.assertDeepEq("cataloging should contain", [
-            "cataloging"
-        ], recTypes.cataloging);
-        jqUnit.assertDeepEq("procedures should contain", [
-            "intake",
-            "loanin",
-            "loanout",
-            "acquisition",
-            "movement",
-            "objectexit",
-            "media"
-        ], recTypes.procedures);
-        jqUnit.assertDeepEq("vocabularies should contain", [
-            "person",
-            "organization",
-            "place",
-            "concept"
-        ], recTypes.vocabularies);
+    };
+
+    fluid.each([{
+        sortRecords: null,
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "vocabularies": [
+                "person",
+                "organization",
+                "place",
+                "concept"
+            ]
+        }
+    }, {
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "vocabularies": [
+                "person",
+                "organization",
+                "place",
+                "concept"
+            ]
+        }
+    }, {
+        sortRecords: ["cataloging", "procedures", "vocabularies"],
+        recordTypes: {
+            "all": [
+                "person",
+                "intake",
+                "loanin",
+                "loanout",
+                "acquisition",
+                "organization",
+                "place",
+                "concept",
+                "cataloging",
+                "movement",
+                "objectexit",
+                "media"
+            ],
+            "cataloging": ["cataloging"],
+            "procedures": [
+                "acquisition",
+                "intake",
+                "loanin",
+                "loanout",
+                "media",
+                "movement",
+                "objectexit"
+            ],
+            "vocabularies": [
+                "concept",
+                "organization",
+                "person",
+                "place"
+            ]
+        }
+    }], function (test) {
+        recordSortingTest(test);
     });
     
     utilitiesTest.test("Loading Indicator basic", function () {
@@ -448,13 +537,15 @@ var utilitiesTester = function ($) {
         jqUnit.assertDeepEq("Person vocabs", {
             person: "person",
             persontest1: "persontest1",
-            persontest2: "persontest2"
+            persontest2: "persontest2",
+            ulan_pa: "ulan_pa"
         }, vocab.authority.person.vocabs);
 
         jqUnit.assertDeepEq("Person nptAllowed vocabs", {
             person: true,
             persontest1: true,
-            persontest2: true
+            persontest2: true,
+            ulan_pa: false
         }, vocab.authority.person.nptAllowed.vocabs);
 
         jqUnit.assertTrue("Person is default", vocab.isDefault("person"));
@@ -474,6 +565,82 @@ var utilitiesTester = function ($) {
             recordType: "objectexit",
             vocab: vocab
         }));
+    });
+
+    utilitiesTest.test("New Super Applier", function () {
+        expect(7);
+        var one = {
+                field1: "field1",
+                field2: "field2"
+            },
+            oneApplier = fluid.makeChangeApplier(one),
+            two = {
+                field3: "field3",
+                field4: "field4"
+            },
+            twoApplier = fluid.makeChangeApplier(two);
+        var togo = fluid.assembleModel({
+            one: {
+                model: one,
+                applier: oneApplier
+            },
+            two: {
+                model: two,
+                applier: twoApplier
+            }
+        });
+        jqUnit.assertDeepEq("Combined model should be", {
+            one: {
+                field1: "field1",
+                field2: "field2"
+            },
+            two: {
+                field3: "field3",
+                field4: "field4"
+            }
+        }, togo.model);
+        togo.applier.requestChange("one.field2", "NEW");
+        togo.applier.requestChange("two.field3", "NEW");
+        jqUnit.assertEquals("Model should be updated", "NEW", togo.model.one.field2);
+        jqUnit.assertEquals("Model should be updated", "NEW", togo.model.two.field3);
+        togo.applier.modelChanged.addListener("one.field1", function () {
+            jqUnit.assertEquals("Model should be updated", "NEW", togo.model.one.field1);
+        });
+        togo.applier.modelChanged.addListener("two.field4", function () {
+            jqUnit.assertEquals("Model should be updated", "NEW", togo.model.two.field4);
+        });
+        togo.applier.requestChange("one.field1", "NEW");
+        togo.applier.requestChange("two.field4", "NEW");
+        jqUnit.assertDeepEq("Combined model should be", {
+            one: {
+                field1: "NEW",
+                field2: "NEW"
+            },
+            two: {
+                field3: "NEW",
+                field4: "NEW"
+            }
+        }, togo.model);
+        togo.applier.modelChanged.addListener("three.field5", function () {
+            jqUnit.assertEquals("Model should be updated", "NEW", togo.model.three.field5);
+        });
+        var three = {
+            field5: "field5"
+        }, threeApplier = fluid.makeChangeApplier(three);
+        fluid.attachModel(togo.model, "three", three);
+        togo.applier.addSubApplier("three", threeApplier);
+        togo.applier.requestChange("three.field5", "NEW");
+
+        togo.applier.modelChanged.addListener("four.field6", function () {
+            jqUnit.assertTrue("This test should never run", false);
+        }, "toRemove");
+        var four = {
+            field6: "field6"
+        }, fourApplier = fluid.makeChangeApplier(four);
+        togo.applier.modelChanged.removeListener("toRemove");
+        fluid.attachModel(togo.model, "four", four);
+        togo.applier.addSubApplier("four", fourApplier);
+        togo.applier.requestChange("four.field6", "NEW");
     });
 };
 
