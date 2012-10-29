@@ -1,0 +1,57 @@
+/*
+Copyright 2010
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+You may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
+.cs-structuredDate-popup {
+	width: auto;
+    border: 1px solid #C7CFD4;
+    position: absolute;
+    z-index: 9999 !important;
+    overflow: auto;
+    -moz-box-shadow: 3px 3px 4px  #C7CFD4;
+    -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
+    box-shadow: 3px 3px 4px  #C7CFD4;
+    background-color: #E6F4F5; /* Light blue per wireframe */
+    padding: 10px;
+    .info-pair .content tbody tr td:first-of-type{
+	   min-width: 110px;
+	   padding-left: 2px;
+	}
+	.content {
+    	input {
+        	border:1px solid #C7CFD4;
+        	&.cs-structuredDate-input {
+            	background: url('../images/icnStructuredDate.png') no-repeat scroll 98% center #fff;
+            	border: 1px solid #C7CFD4;
+            	&[disabled] {
+                	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #CCC;
+            	}
+            }
+        }
+        table {
+            input, select {
+                border: none;
+            }
+            select {
+                width: 75px;
+            }
+        }
+        td.label {
+        	padding-bottom:3px;
+        }
+    }
+}
+table .cs-structuredDate-popup {
+	width: 615px !important;
+}
+.cs-structuredDate-dateLabel {
+    background-color: #F8F8F7;
+    font-size: 11px;
+    color: #3B3B3C;
+}

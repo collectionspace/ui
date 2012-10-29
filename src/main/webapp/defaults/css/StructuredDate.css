@@ -7,77 +7,39 @@ You may not use this file except in compliance with this License.
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
-
 .cs-structuredDate-popup {
-	width:auto;
-    border:1px solid #C7CFD4;
-    position:absolute;
-    z-index:9999 !important;
-    overflow:auto;
-    -moz-box-shadow: 3px 3px 4px  #C7CFD4;
-    -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
-    box-shadow: 3px 3px 4px  #C7CFD4;
-    background-color: #E6F4F5; /* Light blue per wireframe */
-    padding: 10px;
-}
+  width: auto;
+  border: 1px solid #C7CFD4;
+  position: absolute;
+  z-index: 9999 !important;
+  overflow: auto;
+  -moz-box-shadow: 3px 3px 4px  #C7CFD4;
+  -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
+  box-shadow: 3px 3px 4px  #C7CFD4;
+  background-color: #E6F4F5;
+  /* Light blue per wireframe */
+  padding: 10px; }
+  .cs-structuredDate-popup .info-pair .content tbody tr td:first-of-type {
+    min-width: 110px;
+    padding-left: 2px; }
+  .cs-structuredDate-popup .content input {
+    border: 1px solid #C7CFD4; }
+    .cs-structuredDate-popup .content input.cs-structuredDate-input {
+      background: url("../images/icnStructuredDate.png") no-repeat scroll 98% center white;
+      border: 1px solid #C7CFD4; }
+      .cs-structuredDate-popup .content input.cs-structuredDate-input[disabled] {
+        background: url("../images/icnStructuredDate.png") no-repeat scroll 98% center #cccccc; }
+  .cs-structuredDate-popup .content table input, .cs-structuredDate-popup .content table select {
+    border: none; }
+  .cs-structuredDate-popup .content table select {
+    width: 75px; }
+  .cs-structuredDate-popup .content td.label {
+    padding-bottom: 3px; }
+
 table .cs-structuredDate-popup {
-	width: 615px !important;
-}
-.cs-structuredDate-popup .info-pair .content tbody tr td:first-of-type{
-	min-width:110px;
-	padding-left:2px;
-}
-.cs-structuredDate-popup .content input {
-	border:1px solid #C7CFD4;
-}
-.cs-structuredDate-popup .content table input {
-	border:none;
-}
-.cs-structuredDate-popup .content table select {
-	border:none;
-	width:75px;
-}
+  width: 615px !important; }
+
 .cs-structuredDate-dateLabel {
-    background-color: #F8F8F7;
-    font-size: 11px;
-    color: #3B3B3C;
-}
-.content input.cs-structuredDate-input {
-	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #fff;
-	border:1px solid #C7CFD4;
-}
-
-.content input.cs-structuredDate-input[disabled] {
-	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #CCC;
-}
-
-.info-pair .content td.label {
-	padding-bottom:3px;
-}
-/* Added by rjaffe, then commented out, 4 May 2010 */
-/* 
-.input-date-era {
-	width: 20px !important;
-}
-.input-date-qualifier {
-	width: 20px !important;
-}
-.input-date-qualifier-units {
-	width: 60px !important;
-}
-*/
-/* Added by rjaffe, then commented out, 6 May 2011 */
-/*
-.cs-structuredDate-popup .content table select .input-select-long {
-	border:none;
-	width:100px;
-}
-.cs-structuredDate-popup .content table select .input-select-medium {
-	border:none;
-	width:70px;
-}
-.cs-structuredDate-popup .content table select .input-select-short {
-	border:none;
-	width:40px;
-}
-*/
+  background-color: #F8F8F7;
+  font-size: 11px;
+  color: #3B3B3C; }
