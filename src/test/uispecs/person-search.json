@@ -313,6 +313,9 @@
                                         "Please select a value"
                                     ],
                                     "selection": "${{row}.termStatus}"
+                                },
+                                ".csc-preferredPA-personTermGroup-label": {
+                                    "messagekey": "preferredPA-personTermGroupLabel"
                                 }
                             },
                             "type": "fluid.noexpand"

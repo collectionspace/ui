@@ -239,6 +239,9 @@
                                         "Please select a value"
                                     ],
                                     "selection": "${{row}.termStatus}"
+                                },
+                                ".csc-preferredOA-orgTermGroup-label": {
+                                    "messagekey": "preferredOA-orgTermGroupLabel"
                                 }
                             },
                             "type": "fluid.noexpand"
