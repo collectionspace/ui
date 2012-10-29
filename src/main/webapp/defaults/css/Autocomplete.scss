@@ -1,0 +1,133 @@
+/*
+Copyright 2010
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+You may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
+@mixin backgroundImage($image, $horizontalAlignment: center, $verticalAlignment: center) {
+    background: url($image) no-repeat $horizontalAlignment $verticalAlignment;
+}
+.cs-autocomplete-closebutton {
+    @include backgroundImage('../images/icnDelete.png');
+    position: absolute;
+    width: 14px;
+    height: 14px;
+}
+.cs-autocomplete-input {
+    @include backgroundImage('../images/arrowPredictiveText.png', right);
+}
+.cs-autocomplete-loading {
+    @include backgroundImage('../images/indeterminate_progress_indicator_true_transparent_16x16.gif', right);
+}
+
+/* Menu
+----------------------------------*/
+.cs-autocomplete-Matches {
+    list-style: none;
+    padding: 2px;
+    margin-left: 0px;
+    display: block;
+    max-height: 250px;
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+
+.cs-autocomplete-MatchItem {
+    margin: 0px;
+    padding-left: 5px;
+    width: 100%;
+    list-style-type: none;
+    &:focus {
+        color: red;
+        background-color: red;
+    }
+}
+
+.cs-autocomplete-addToPanel {
+    padding: 2px;
+    list-style: none;
+}
+
+.cs-autocomplete-authorityItem {
+    @include backgroundImage('../images/icnAdd_.png', 5px);
+    list-style-type: none;
+    padding-left: 25px;
+    padding-right: 20px;
+    color: #679B41;
+}
+
+.cs-autocomplete-matchItem:hover, .cs-autocomplete-matchItem-select {
+    background-color: #CFE2F3;
+    cursor: pointer;
+}
+
+.cs-autocomplete-authorityItem:hover, .cs-autocomplete-authorityItem-select {
+    background-color: #D7E9C2;
+    cursor: pointer;
+}
+
+.cs-autocomplete-popup {
+    background-color: #FAFBF7;
+    width: auto;
+    float: left; 
+    border: 2px solid #C7CFD4;
+    position: absolute;
+    z-index: 1000 !important;
+    margin: 2px 0 0 -2px;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.4;
+    -moz-box-shadow: 3px 3px 4px  #C7CFD4;
+    -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
+    box-shadow: 3px 3px 4px  #C7CFD4;
+    font-size: 1.1em;
+    .cs-autocomplete-noMatches {
+        padding-left: 5px;
+        font-style: italic;
+        color: #6E6E6E;
+    }
+    .content {
+        color: #6E6E6E;
+        padding-bottom: 5px; 
+        display: inline-block;
+        width: 98%;
+    }
+    .pad-right {
+        padding-right:10px;
+    }
+    hr {
+        color: #AAA;
+        background-color: #AAA;
+        border: solid 1px #AAA;
+    }
+}
+.cs-autocomplete-matchItem-content {
+    display: block;
+    margin-left: 5px;
+    padding-right: 20px;
+    font-weight: normal;
+    white-space: nowrap;
+    &.cs-autocomplete-nonPreferred, &.cs-autocomplete-nonPreferredDisabled {
+        margin-left: 20px;
+    }
+    &.cs-autocomplete-nonPreferredDisabled {
+        color: #999999;
+    }
+}
+.cs-autocomplete-addTermTo {
+    margin-left: 5px;
+    .cs-autocomplete-newTermName {
+        float: left;
+        width: 75%;
+        margin-right: 4px;
+    }
+    .cs-autocomplete-addTermTo-content {
+        float: left;
+        margin-right: 4px;
+        margin-top: 2px;
+    }
+}
