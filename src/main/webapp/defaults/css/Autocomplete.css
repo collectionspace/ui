@@ -8,16 +8,16 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 .cs-autocomplete-closebutton {
-  background: url("../images/icnDelete.png") no-repeat center center;
+  background: white url("../images/icnDelete.png") no-repeat center center;
   position: absolute;
   width: 14px;
   height: 14px; }
 
 .cs-autocomplete-input {
-  background: url("../images/arrowPredictiveText.png") no-repeat right center; }
+  background: white url("../images/arrowPredictiveText.png") no-repeat right center; }
 
 .cs-autocomplete-loading {
-  background: url("../images/indeterminate_progress_indicator_true_transparent_16x16.gif") no-repeat right center; }
+  background: white url("../images/indeterminate_progress_indicator_true_transparent_16x16.gif") no-repeat right center; }
 
 /* Menu
 ----------------------------------*/
@@ -44,7 +44,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
   list-style: none; }
 
 .cs-autocomplete-authorityItem {
-  background: url("../images/icnAdd_.png") no-repeat 5px center;
+  background: white url("../images/icnAdd_.png") no-repeat 5px center;
   list-style-type: none;
   padding-left: 25px;
   padding-right: 20px;

@@ -9,7 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 @mixin backgroundImage($image, $horizontalAlignment: center, $verticalAlignment: center) {
-    background: url($image) no-repeat $horizontalAlignment $verticalAlignment;
+    background: #fff url($image) no-repeat $horizontalAlignment $verticalAlignment;
 }
 .cs-autocomplete-closebutton {
     @include backgroundImage('../images/icnDelete.png');
