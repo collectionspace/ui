@@ -1,31 +1,56 @@
 /* Person and Organization Authority specific stylings */
+person .fl-container-1024-inner {
+  background-color: #F3EDF6; }
+person #title-bar .record-type {
+  color: #58267F; }
+person .menu-record a {
+  color: #FFF;
+  border: 2px solid #551188;
+  background-color: #551188; }
+  person .menu-record a:hover, person .menu-record a:focus {
+    background: none repeat scroll 0 0 #330066;
+    border: 2px solid #330066; }
+  person .menu-record a.inactive {
+    border: 2px solid #CCC;
+    background-color: #CCC;
+    cursor: default;
+    border-bottom: none; }
+person .menu-record a.current, person .menu-record li.selected a {
+  color: #551188;
+  border: 2px solid #551188;
+  background-color: #FFF;
+  border-bottom: 2px solid #fff; }
+person #primaryTab {
+  border: 2px solid #58267F; }
+person .pivot-box .header, person .pivot-search-box-header, person .pivot-users-box-header {
+  background-color: #78449A; }
+  person .pivot-box .header:hover, person .pivot-search-box-header:hover, person .pivot-users-box-header:hover {
+    background-color: #58267F; }
 
-#person .fl-container-1024-inner, #organization .fl-container-1024-inner {
-	background-color:#F3EDF6;}
-#person #title-bar .record-type, #organization #title-bar .record-type {
-	color:#58267F;}
-#person .menu-record a:hover, #person .menu-record a:focus,
-#organization .menu-record a:hover, #organization .menu-record a:focus {
-	background:none repeat scroll 0 0 #330066; 
-	border:2px solid #330066;}
-#person .menu-record a, #organization .menu-record a  {
-	color:#FFF; 
-	border:2px solid #551188; 
-	background-color:#551188;}
-#person .menu-record a.current, #person.menu-record li.selected a, 
-#organization .menu-record a.current, #organization .menu-record li.selected a {
-	color:#551188; 
-	background-color:#FFF; 
-	border:2px solid #551188; 
-	border-bottom:2px solid #fff;}
-#organization #primaryTab, #person #primaryTab {
-	border:2px solid #58267F;}
-#organization .menu-record a.inactive, #person .menu-record a.inactive {
-	cursor:default; 
-	background-color:#CCC; 
-	border:2px solid #CCC; 
-	border-bottom:none;}
-#organization .pivot-box .header, #organization .pivot-search-box-header, #organization .pivot-users-box-header, #person .pivot-box .header, #person .pivot-search-box-header, #person .pivot-users-box-header {
-	background-color:#78449A;}
-#organization .pivot-box .header:hover, #organization .pivot-search-box-header:hover, #organization .pivot-users-box-header:hover, #person .pivot-box .header:hover, #person .pivot-search-box-header:hover, #person .pivot-users-box-header:hover {
-	background-color:#58267F;}
+organization .fl-container-1024-inner {
+  background-color: #F3EDF6; }
+organization #title-bar .record-type {
+  color: #58267F; }
+organization .menu-record a {
+  color: #FFF;
+  border: 2px solid #551188;
+  background-color: #551188; }
+  organization .menu-record a:hover, organization .menu-record a:focus {
+    background: none repeat scroll 0 0 #330066;
+    border: 2px solid #330066; }
+  organization .menu-record a.inactive {
+    border: 2px solid #CCC;
+    background-color: #CCC;
+    cursor: default;
+    border-bottom: none; }
+organization .menu-record a.current, organization .menu-record li.selected a {
+  color: #551188;
+  border: 2px solid #551188;
+  background-color: #FFF;
+  border-bottom: 2px solid #fff; }
+organization #primaryTab {
+  border: 2px solid #58267F; }
+organization .pivot-box .header, organization .pivot-search-box-header, organization .pivot-users-box-header {
+  background-color: #78449A; }
+  organization .pivot-box .header:hover, organization .pivot-search-box-header:hover, organization .pivot-users-box-header:hover {
+    background-color: #58267F; }

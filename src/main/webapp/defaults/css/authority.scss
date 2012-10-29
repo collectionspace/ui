@@ -1,0 +1,45 @@
+/* Person and Organization Authority specific stylings */
+@mixin authorityStyle($type) {
+    #{$type} {
+        .fl-container-1024-inner {
+            background-color: #F3EDF6;
+        }
+        #title-bar .record-type {
+            color: #58267F;
+        }
+        .menu-record {
+            a {
+                color: #FFF;
+                border: 2px solid #551188;
+                background-color: #551188;
+                &:hover, &:focus {
+                    background: none repeat scroll 0 0 #330066;
+                    border: 2px solid #330066;
+                }
+                &.inactive {
+                    border: 2px solid #CCC;
+                    background-color: #CCC;
+                    cursor: default;
+                    border-bottom: none;
+                }
+            }
+            a.current, li.selected a {
+                color: #551188;
+                border: 2px solid #551188;
+                background-color: #FFF;
+                border-bottom: 2px solid #fff;
+            }
+        }
+        #primaryTab {
+            border: 2px solid #58267F;
+        }
+        .pivot-box .header, .pivot-search-box-header, .pivot-users-box-header {
+            background-color: #78449A;
+            &:hover {
+                background-color: #58267F;
+            }
+        }
+    }
+}
+@include authorityStyle(person);
+@include authorityStyle(organization);
