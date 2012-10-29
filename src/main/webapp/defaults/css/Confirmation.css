@@ -7,127 +7,122 @@ You may not use this file except in compliance with this License.
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
-
 .ui-dialog {
-	padding: 0;
-	background-color:#fff;
-	-moz-border-radius:6px; 
-	-webkit-border-radius:6px;
-	border-radius:6px;
-}
-.ui-dialog:focus, .ui-dialog-content:focus {
-	outline:none;
-}
-.ui-dialog.cs-search-dialog {
-	min-width:800px !important;
-}
+  padding: 0;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; }
+  .ui-dialog:focus {
+    outline: none; }
+  .ui-dialog.cs-search-dialog {
+    min-width: 800px !important; }
+
+.ui-dialog-content:focus {
+  outline: none; }
+
 .cs-confirmationDialog {
-	color: #6E6E6E;
-	font-size:14px;
-	line-height:20px;
-	background-color: white;
-	width:100%;
-	*position:relative;
-	z-index:99999;
-	border:0px solid #CECECE;
-}
-.cs-confirmationDialog .label {
-	float:left; font-size:12px;
-}
-.cs-searchBox{
-}
-.cs-confirmationDialog .cs-searchBox .cs-searchBox-button, 
-.cs-confirmationDialog .cs-searchBox .cs-searchBox-query {
-	margin-top:10px;
-}	
-.add-more input{
-	height:17px;
-}
+  color: #6E6E6E;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: white;
+  width: 100%;
+  *position: relative;
+  z-index: 99999;
+  border: 0px solid #CECECE; }
+  .cs-confirmationDialog .label {
+    float: left;
+    font-size: 12px; }
+  .cs-confirmationDialog .cs-searchBox .cs-searchBox-button, .cs-confirmationDialog .cs-searchBox .cs-searchBox-query {
+    margin-top: 10px; }
+
+.add-more input {
+  height: 17px; }
+
 .csc-confirmationDialog-inner .search-box {
-	padding:10px 0; width:100%; float:left;
-}
+  padding: 10px 0;
+  width: 100%;
+  float: left; }
 .csc-confirmationDialog-inner .add-more .button.add, .csc-confirmationDialog-inner .add-more .button.add:hover {
-	color:#fff;
-	margin-bottom:2px;
-}
+  color: #fff;
+  margin-bottom: 2px; }
+
 .csc-recordTypeSelecter-procedures {
-	float:left;
-}
+  float: left; }
+
 .csc-search-results {
-	width:100%;
-}
+  width: 100%; }
+
 .ui-icon-closethick {
-	background-color:#fff;
-	color:#6B8DA7;
-}
+  background-color: #fff;
+  color: #6B8DA7; }
+
 a.ui-dialog-titlebar-close {
-	float:right;
-	width:30px;
-	height:15px;
-	margin:-6px -3px 0 0;
-}
+  float: right;
+  width: 30px;
+  height: 15px;
+  margin: -6px -3px 0 0; }
+
 .ui-dialog-titlebar {
-	background-color:#fff;
-	padding:10px;
-	cursor:move;
-	margin-top:20px;
-	-moz-border-radius:6px; 
-	-webkit-border-radius:6px;
-	border-radius:6px;
-}
+  background-color: #fff;
+  padding: 10px;
+  cursor: move;
+  margin-top: 20px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; }
+
 .ui-dialog-content {
-	padding:10px;
-}
-.csc-confirmationDialog-text{
-	padding-bottom:2px;
-}
+  padding: 10px; }
+
+.csc-confirmationDialog-text {
+  padding-bottom: 2px; }
+
 .csc-confirmationDialog-buttonrow {
-	padding:30px 0 0 0;
-}
+  padding: 30px 0 0 0; }
+
 .cs-confirmationDialogButton {
-	border:none !important;
-}
+  border: none !important; }
+
 .ui-dialog-title {
-	color:#6E6E6E;
-	font-size:18px;
-	font-weight:bold;
-}
+  color: #6E6E6E;
+  font-size: 18px;
+  font-weight: bold; }
+
 a, a:hover {
-	text-decoration:none;
-}
+  text-decoration: none; }
+
 .cs-dialog-closeBtn {
-    position:absolute;
-    right:-20px;
-    top:-20px;
-    width:auto;
-    cursor:pointer;
-}
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: auto;
+  cursor: pointer; }
+
 .add-related-steps {
-	background-color: #EBEBEB;
-	margin-bottom:10px;
-	padding-left:10px;
-}
+  background-color: #EBEBEB;
+  margin-bottom: 10px;
+  padding-left: 10px; }
+
 .cs-related-steps {
-	background: url('../images/linkRecords-or.png') center center no-repeat #EBEBEB;
-	-moz-border-radius:6px; 
-    -webkit-border-radius:6px;
-	border-radius:6px;
-}
+  background: url("../images/linkRecords-or.png") center center no-repeat #ebebeb;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px; }
+
 #search-box, #create-box {
-	padding:18px 0 0 0;
-	margin:0;
-}
+  padding: 18px 0 0 0;
+  margin: 0; }
+
 #relationship-box {
-	padding:17px 0 0 0;
-}
+  padding: 17px 0 0 0; }
+
 #search-box .header, #create-box .header, #relationship-box .header {
-	color:#5A5A5A;
-	font-size:12px;
-}
-#search-box .content, #create-box .content, #relationship-box .content {}
+  color: #5A5A5A;
+  font-size: 12px; }
+
 #search-box .select-recordtype {
-	padding-top:6px;
-}
+  padding-top: 6px; }
+
 #relationship-box {
-	padding:17px 0 0 0;
-}
+  padding: 17px 0 0 0; }

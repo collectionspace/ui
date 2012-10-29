@@ -1,0 +1,61 @@
+/*Administration Pages*/
+@mixin boxShadow($topOffset: 5px, $blurDistance: 15px) {
+    box-shadow: 0 $topOffset $blurDistance rgba(0, 0, 0, 0.3);
+}
+
+#administration {
+    .fl-container-1024-inner {
+        background-color: #EEF4D7;
+    }
+    #title-bar .record-type {
+        color: #77AA44;
+    }
+    .ui-tabs {
+        .ui-tabs-nav {
+            line-height: 17px;
+        }
+        .ui-tabs-panel {
+            padding: 20px 10px 10px 10px;
+            display: block;
+            border: 2px solid #438CC9;
+            margin-bottom: 30px;
+            background-color: #FFF;
+            border: 2px solid #77AA44;
+        }
+    }
+    #pager-bottom {
+        border-bottom: none;
+    }
+    .list-table {
+        background-color: inherit;
+        @include boxShadow();
+    }
+    .fl-pager .fl-pager-ui li {
+        &.flc-per-page {
+            width: 100px;
+        }
+        &.flc-pager-summary {
+            width: auto !important;
+            padding: 10px 0 5px 0;
+        }
+    }
+    .cs-admin-recordEditor {
+        background-color: #E6E6E6;
+        padding: 12px;
+    }
+    .cs-admin-add {
+        -moz-border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+    }
+    .information-subgroup {
+        @include boxShadow();
+    }
+    #search-box {
+        background-color: #E6E6E6;
+        padding: 12px;
+        input {
+            @include boxShadow(2px, 5px);
+        }
+    }
+}

@@ -1,0 +1,142 @@
+/*
+Copyright 2010
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+You may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+@mixin confirmationPadding($size) {
+    padding: $size 0 0 0;
+}
+@mixin borderRadius($size: 6px) {
+    -moz-border-radius: $size;
+	-webkit-border-radius: $size;
+	border-radius: $size;
+}
+.ui-dialog {
+	padding: 0;
+	background-color: #fff;
+	@include borderRadius();
+	&:focus {
+    	outline: none;
+	}
+	&.cs-search-dialog {
+    	min-width:800px !important;
+	}
+}
+.ui-dialog-content {
+    &:focus {
+        outline: none;
+    }
+}
+.cs-confirmationDialog {
+	color: #6E6E6E;
+	font-size: 14px;
+	line-height: 20px;
+	background-color: white;
+	width: 100%;
+	*position: relative;
+	z-index: 99999;
+	border: 0px solid #CECECE;
+	.label {
+    	float: left;
+    	font-size: 12px;
+	}
+	.cs-searchBox {
+    	.cs-searchBox-button, .cs-searchBox-query {
+        	margin-top: 10px;
+    	}
+	}
+}
+.add-more input{
+	height: 17px;
+}
+.csc-confirmationDialog-inner {
+    .search-box {
+        padding: 10px 0;
+        width: 100%;
+        float: left;
+    }
+    .add-more .button.add, .add-more .button.add:hover {
+	   color: #fff;
+	   margin-bottom: 2px;
+    }
+}
+.csc-recordTypeSelecter-procedures {
+	float: left;
+}
+.csc-search-results {
+	width: 100%;
+}
+.ui-icon-closethick {
+	background-color: #fff;
+	color: #6B8DA7;
+}
+a.ui-dialog-titlebar-close {
+	float: right;
+	width: 30px;
+	height: 15px;
+	margin: -6px -3px 0 0;
+}
+.ui-dialog-titlebar {
+	background-color: #fff;
+	padding: 10px;
+	cursor: move;
+	margin-top: 20px;
+	@include borderRadius();
+}
+.ui-dialog-content {
+	padding: 10px;
+}
+.csc-confirmationDialog-text{
+	padding-bottom:2px;
+}
+.csc-confirmationDialog-buttonrow {
+	@include confirmationPadding(30px);
+}
+.cs-confirmationDialogButton {
+	border: none !important;
+}
+.ui-dialog-title {
+	color: #6E6E6E;
+	font-size: 18px;
+	font-weight: bold;
+}
+a, a:hover {
+	text-decoration: none;
+}
+.cs-dialog-closeBtn {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: auto;
+    cursor: pointer;
+}
+.add-related-steps {
+	background-color: #EBEBEB;
+	margin-bottom: 10px;
+	padding-left: 10px;
+}
+.cs-related-steps {
+	background: url('../images/linkRecords-or.png') center center no-repeat #EBEBEB;
+	@include borderRadius();
+}
+#search-box, #create-box {
+	@include confirmationPadding(18px);
+	margin: 0;
+}
+#relationship-box {
+	@include confirmationPadding(17px);
+}
+#search-box .header, #create-box .header, #relationship-box .header {
+	color: #5A5A5A;
+	font-size: 12px;
+}
+#search-box .select-recordtype {
+	padding-top: 6px;
+}
+#relationship-box {
+	@include confirmationPadding(17px);
+}
