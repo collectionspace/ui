@@ -2372,6 +2372,9 @@ li.cs-repeatable-repeat .cs-termList {
     float: left;
     width: 88.5%;
 }
+li.cs-repeatable-repeat .cs-singleElementGroup .cs-termList {
+    width: 100%;
+}
 table li.cs-repeatable-repeat .cs-termList,
 li.cs-repeatable-repeat table .cs-termList {
     width: 100%;
