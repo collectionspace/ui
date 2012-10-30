@@ -190,7 +190,7 @@
     ".csc-loanout-loanStatusDate-label": {
         "messagekey": "loanout-loanStatusDateLabel"
     },
-    ".csc-loanout-loanStatusGroup": {
+    ".csc-loanOut-loanedObjectStatus": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
