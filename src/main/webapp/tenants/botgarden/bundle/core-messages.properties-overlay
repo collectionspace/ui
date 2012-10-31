@@ -118,11 +118,12 @@ taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
 taxon-taxonBasionymLabel: Basionym
-taxon-commonNameGroupLabel: Common Names
-taxon-commonNameLabel: Common Name
-taxon-commonNameLanguageLabel: Language
-taxon-commonNameSourceLabel: Source
-taxon-commonNameSourceDetailLabel: Source Detail
+taxon-naturalHistoryCommonNameGroupLabel: Common Names
+taxon-naturalHistoryCommonNameLabel: Common Name
+taxon-naturalHistoryCommonNameLanguageLabel: Language
+taxon-naturalHistoryCommonNameSourceLabel: Source
+taxon-naturalHistoryCommonNameSourceDetailLabel: Source Detail
+taxon-naturalHistoryCommonNameTypeLabel: Type
 taxon-relatedTermGroupLabel: Related Terms
 taxon-relatedTermLabel: Related Term
 taxon-relatedTermTypeLabel: Type
