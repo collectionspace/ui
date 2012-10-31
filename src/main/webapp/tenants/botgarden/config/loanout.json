@@ -1,0 +1,58 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "loanout",
+            "selectors": {
+                "recordEditor": ".csc-loanout-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.loanOutNumber"]
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.loanOutDate", 
+                            "fields.borrower"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "loanout",
+            "schema": {
+                "loanout": null
+            },
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "pages/LoanoutTemplate.html",
+                    "templateSelector": ".csc-loanout-template",
+                    "targetSelector": ".csc-record-edit-container"
+                }
+            }
+        }
+    }
+}
