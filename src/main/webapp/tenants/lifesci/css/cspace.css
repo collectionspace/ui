@@ -552,6 +552,9 @@ li .flc-pager-pageLink {
 #secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
+.secondary-nav-menu-sub {
+    display: table;
+}
 .secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
