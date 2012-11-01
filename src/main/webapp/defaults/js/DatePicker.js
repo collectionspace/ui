@@ -66,16 +66,12 @@ cspace = cspace || {};
         return Date.parse(fullDate).toString(format);
     };
     
-    cspace.datePicker.validateDate = function (messageBar, date, message, format) {
-        if (date === "") {
-            return date;
+    cspace.datePicker.validateDate = function (messageBar, dateInput, message, format) {
+        if (dateInput === "") {
+            return dateInput;
         }
         // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
-        // Add Jan 01 if only year was typed in
-        if (date.match(/^[0-9]{4}(?:,[0-9]{4})*,?$/)) {
-            date = date + "-01-01";
-        }
-        date = Date.parse(date);
+        date = Date.parse(dateInput);
         if (!date) {
             // If there is no date, we will display an invalid date message and emptying the date field.
             if (messageBar) {
@@ -83,6 +79,11 @@ cspace = cspace || {};
             }
             return "";
         }
+        // Handle the case when user entered only year so that month will be defaulted to January
+        if (dateInput === date.toString("yyyy")) {
+            date.setMonth(0);
+        }
+        
         // Format validated date into a string.
         return date.toString(format);
     };
