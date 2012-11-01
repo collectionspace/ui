@@ -87,6 +87,20 @@ var datePickerTester = function ($) {
         verifyGoogleDatePickerDate(date.year, date.month, date.day);
     });
     
+    datePickerTest.test("Test when only year is typed in", function () {
+        expect(4);
+        var datePicker = cspace.datePicker(".csc-datePicker-container", {
+            messageBar: cspace.messageBar("body")
+        }),
+            userInputDate = "2003",
+            date = buildDateStructure(userInputDate + "-01-01", "yyyy-MM-dd"),
+            inputField = datePicker.container;
+        inputField.val(userInputDate);
+        inputField.change();
+        jqUnit.assertEquals("Date should use Jan 01 as default month and a default day", date.formattedDate, inputField.val());
+        verifyGoogleDatePickerDate(date.year, date.month, date.day);
+    });
+    
     datePickerTest.test("Attempt to validate invalid dates", function () {
         expect(5);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
@@ -99,12 +113,12 @@ var datePickerTester = function ($) {
     });
     
     datePickerTest.test("Attempt to validate valid dates", function () {
-        expect(8);
+        expect(7);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
         inferAndValidateDates(datePicker.container, 
-                              ["today", "tomorrow", "Dec 12, 2000", "-10", "tomorrow + 10", "2000", "1000-01-01", "1800-11"], 
+                              ["today", "tomorrow", "Dec 12, 2000", "-10", "tomorrow + 10", "1000-01-01", "1800-11"], 
                               "yyyy-MM-dd",
                               "Text in the input field should be formatted correctly and equal to");
     });
