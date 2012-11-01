@@ -162,10 +162,8 @@ cspace = cspace || {};
             that.applier.requestChange("batchInProgress", false);
             that.batchStatus.hide();
 
-            if (data.batchNewFocus) {
-                if (data.response.primaryURICreated) {
-                    window.location = data.response.primaryURICreated;
-                }
+            if (data.batchNewFocus && data.response.primaryURICreated) {
+                window.location = data.response.primaryURICreated;
             }
             else {
                 that.messageBar.show(fluid.stringTemplate(that.lookupMessage("batch-batchComplete"), {
