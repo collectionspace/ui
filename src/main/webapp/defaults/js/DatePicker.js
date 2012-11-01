@@ -71,6 +71,10 @@ cspace = cspace || {};
             return date;
         }
         // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
+        // Add Jan 01 if only year was typed in
+        if (date.match(/^[0-9]{4}(?:,[0-9]{4})*,?$/)) {
+            date = date + "-01-01";
+        }
         date = Date.parse(date);
         if (!date) {
             // If there is no date, we will display an invalid date message and emptying the date field.
