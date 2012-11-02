@@ -131,6 +131,9 @@ cspace = cspace || {};
                         ],
                         afterCreate: "{relatedRecordsTab}.afterRelatedRecordCreate",
                         afterSave: "{relatedRecordsTab}.afterRecordSave"
+                    },
+                    events: {
+                        afterSave: "{relatedRecordsTab}.events.afterRecordSaved"
                     }
                 },
                 createOnEvent: "onSelect"
@@ -151,7 +154,8 @@ cspace = cspace || {};
             relationsUpdated: {
                 event: "{globalEvents}.events.relationsUpdated"
             },
-            recordEditorReady: null
+            recordEditorReady: null,
+            afterRecordSaved: null
         },
         listeners: {
             relationsUpdated: "{relatedRecordsTab}.relationsUpdatedHandler",
@@ -162,14 +166,25 @@ cspace = cspace || {};
                 "{loadingIndicator}.events.hideOn.fire",
                 "{relatedRecordsTab}.events.relationsUpdated.fire"
             ],
-            onCreateNewRecord: "{relatedRecordsTab}.onCreateNewRecord",
+            onCreateNewRecord: [
+                "{relatedRecordsTab}.onCreateNewRecord", {
+                    listener: "{relatedRecordsTab}.styleRecordEditor",
+                    args: "{relatedRecordsTab}.selectedRecordCsid"
+                }
+            ],
             onDeleteRelation: [
                 "{relatedRecordsTab}.onDeleteRelation"
             ],
             onSelect: [
                 "{loadingIndicator}.events.showOn.fire",
-                "{relatedRecordsTab}.onSelectHandler"
-            ]
+                "{relatedRecordsTab}.onSelectHandler", {
+                    listener: "{relatedRecordsTab}.styleRecordEditor",
+                    args: "{relatedRecordsTab}.selectedRecordCsid"
+                }
+            ],
+            afterRecordSaved: {
+                listener: "{relatedRecordsTab}.styleRecordEditor"
+            }
         },
         protoTree: {
             recordHeader: {
@@ -189,6 +204,9 @@ cspace = cspace || {};
             togglable: ".csc-relatedRecordsTab-togglable",
             listHeader: ".csc-relatedRecordsTab-listHeader",
             header: ".csc-relatedRecordsTab-header"
+        },
+        styles: {
+            created: "cs-relatedRecordsTab-Created"
         },
         selectorsToIgnore: ["togglable", "header", "relatedRecordsListView", "record", "newRecordBannder", "recordEditor", "relationManager"],
         parentBundle: "{globalBundle}",
@@ -306,6 +324,9 @@ cspace = cspace || {};
             that.events.onSelect.fire({
                 recordType: that.options.related
             });
+        };
+        that.styleRecordEditor = function (add) {
+            that.locate("recordEditor")[add ? "addClass" : "removeClass"](that.options.styles.created);
         };
         that.afterDeleteRelation = function (related, csid) {
             var resolve = that.options.parentBundle.resolve,
