@@ -1012,11 +1012,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 model: {
                     showCreate: true
+                },
+                listeners: {
+                    onClose: "{cspace.relationManager}.onDialogClose"
                 }
             }
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
-            options: {}
+            options: {
+                listeners: {
+                    onClose: "{cspace.relationManager}.onDialogClose"
+                }
+            }
         });
         
         // Repeatable demands
