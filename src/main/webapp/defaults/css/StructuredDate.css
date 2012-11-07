@@ -13,7 +13,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     border:1px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
-    overflow:auto;
     -moz-box-shadow: 3px 3px 4px  #C7CFD4;
     -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
     box-shadow: 3px 3px 4px  #C7CFD4;
@@ -54,30 +53,3 @@ table .cs-structuredDate-popup {
 .info-pair .content td.label {
 	padding-bottom:3px;
 }
-/* Added by rjaffe, then commented out, 4 May 2010 */
-/* 
-.input-date-era {
-	width: 20px !important;
-}
-.input-date-qualifier {
-	width: 20px !important;
-}
-.input-date-qualifier-units {
-	width: 60px !important;
-}
-*/
-/* Added by rjaffe, then commented out, 6 May 2011 */
-/*
-.cs-structuredDate-popup .content table select .input-select-long {
-	border:none;
-	width:100px;
-}
-.cs-structuredDate-popup .content table select .input-select-medium {
-	border:none;
-	width:70px;
-}
-.cs-structuredDate-popup .content table select .input-select-short {
-	border:none;
-	width:40px;
-}
-*/

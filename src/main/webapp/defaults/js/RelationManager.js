@@ -127,6 +127,9 @@ cspace = cspace || {};
         that.afterAddRelation = function () {
             that.messageBar.show(resolve(messageKeys.afterAddRelation), null, false);
         };
+        that.onDialogClose = function () {
+            that.locate("addButton").focus();
+        };
     };
 
     cspace.relationManager.finalInit = function (that) {

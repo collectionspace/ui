@@ -62,6 +62,60 @@
     ".csc-organization-additionsToName-label": {
         "messagekey": "preferredOA-additionsToNameLabel"
     },
+    ".csc-organization-dissolutionDateGroup-label": {
+        "messagekey": "organization-dissolutionDateGroupLabel"
+    },
+    ".csc-organization-dissolutionDateGroupEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dissolutionDateGroupEnd}"
+    },
+    ".csc-organization-dissolutionDateGroupEnd-label": {
+        "messagekey": "organization-dissolutionDateGroupEndLabel"
+    },
+    ".csc-organization-dissolutionDateGroupStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dissolutionDateGroupStart}"
+    },
+    ".csc-organization-dissolutionDateGroupStart-label": {
+        "messagekey": "organization-dissolutionDateGroupStartLabel"
+    },
+    ".csc-organization-foundingDateGroup-label": {
+        "messagekey": "organization-foundingDateGroupLabel"
+    },
+    ".csc-organization-foundingDateGroupEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${foundingDateGroupEnd}"
+    },
+    ".csc-organization-foundingDateGroupEnd-label": {
+        "messagekey": "organization-foundingDateGroupEndLabel"
+    },
+    ".csc-organization-foundingDateGroupStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${foundingDateGroupStart}"
+    },
+    ".csc-organization-foundingDateGroupStart-label": {
+        "messagekey": "organization-foundingDateGroupStartLabel"
+    },
     ".csc-organization-foundingPlace-label": {
         "messagekey": "organization-foundingPlaceLabel"
     },
@@ -167,7 +221,25 @@
                     "repeatTree": {
                         "expander": {
                             "tree": {
-                                ".csc-orgAuthority-termDisplayName": "${{row}.termDisplayName}"
+                                ".csc-orgAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                ".csc-orgAuthority-termStatus": {
+                                    "default": "",
+                                    "optionlist": [
+                                        "provisional",
+                                        "under review",
+                                        "accepted",
+                                        "rejected",
+                                        ""
+                                    ],
+                                    "optionnames": [
+                                        "Provisional",
+                                        "Under Review",
+                                        "Accepted",
+                                        "Rejected",
+                                        "Please select a value"
+                                    ],
+                                    "selection": "${{row}.termStatus}"
+                                }
                             },
                             "type": "fluid.noexpand"
                         }

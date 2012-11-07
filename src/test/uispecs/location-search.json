@@ -245,7 +245,39 @@
                     "repeatTree": {
                         "expander": {
                             "tree": {
-                                ".csc-locationAuthority-termDisplayName": "${{row}.termDisplayName}"
+                                ".csc-locationAuthority-termDisplayName": "${{row}.termDisplayName}",
+                                ".csc-locationAuthority-termLanguage": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.termList",
+                                            "options": {
+                                                "elPath": "termLanguage",
+                                                "root": "{row}",
+                                                "termListType": "termLanguage"
+                                            },
+                                            "type": "fluid"
+                                        }
+                                    ]
+                                },
+                                ".csc-locationAuthority-termName": "${{row}.termName}",
+                                ".csc-locationAuthority-termStatus": {
+                                    "default": "",
+                                    "optionlist": [
+                                        "provisional",
+                                        "under review",
+                                        "accepted",
+                                        "rejected",
+                                        ""
+                                    ],
+                                    "optionnames": [
+                                        "Provisional",
+                                        "Under Review",
+                                        "Accepted",
+                                        "Rejected",
+                                        "Please select a value"
+                                    ],
+                                    "selection": "${{row}.termStatus}"
+                                }
                             },
                             "type": "fluid.noexpand"
                         }

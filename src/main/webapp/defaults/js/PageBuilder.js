@@ -19,7 +19,7 @@ cspace = cspace || {};
     fluid.log("PageBuilder.js loaded");
     
     fluid.registerNamespace("cspace.pageBuilder");
-    
+/*
     // A composite component that has a compose method for modifying resourceSpecs ready to be fetched.
     fluid.defaults("cspace.composite", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
@@ -104,7 +104,7 @@ cspace = cspace || {};
         };
         return resourceSpecs;
     };
-
+*/
     var setTags = function (that, options) {
         var type = that.options.recordType;
         if (!type) {
@@ -129,9 +129,11 @@ cspace = cspace || {};
             lookupMessage: "cspace.util.lookupMessage"
         },
         components: {
+/*
             composite: {
                 type: "cspace.composite"
             },
+*/
             pageCategory: {
                 type: "cspace.pageCategory",
                 priority: "first",
@@ -246,7 +248,7 @@ cspace = cspace || {};
                 }
                 that.events.pageReady.fire();
             };
-            fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback);
+            fluid.fetchResources(resourceSpecs/* that.composite.compose(resourceSpecs) */, fetchCallback);
         };
     };
 

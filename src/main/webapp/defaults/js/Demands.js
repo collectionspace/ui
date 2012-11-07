@@ -575,6 +575,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("header", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.header"
         });
+
+        fluid.demands("header", ["cspace.pageBuilder", "cspace.authority"], {
+            container: "{pageBuilder}.options.selectors.header",
+            options: {
+                components: {
+                    parentStyler: {
+                        type: "cspace.header.parentStyler",
+                        container: "{cspace.header}.container"
+                    }
+                }
+            }
+        });
         
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
@@ -1000,11 +1012,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 model: {
                     showCreate: true
+                },
+                listeners: {
+                    onClose: "{cspace.relationManager}.onDialogClose"
                 }
             }
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
-            options: {}
+            options: {
+                listeners: {
+                    onClose: "{cspace.relationManager}.onDialogClose"
+                }
+            }
         });
         
         // Repeatable demands
@@ -1619,6 +1638,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Composite demands
+/*
         fluid.demands("cspace.composite", "cspace.pageBuilderIO", {
             options: {
                 invokers: {
@@ -1655,7 +1675,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.composite.compose",
             args: ["{composite}", "{arguments}.0"]
         });
-        
+*/
         fluid.demands("cspace.advancedSearch.fetcher", "cspace.advancedSearch", "{options}");
 
         fluid.demands("cspace.advancedSearch.searchFields", "cspace.debug", {

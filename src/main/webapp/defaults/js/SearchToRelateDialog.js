@@ -115,7 +115,9 @@ cspace = cspace || {};
             },
             onCreateNewRecord: {
                 event: "{cspace.relationManager}.events.onCreateNewRecord"
-            }
+            },
+            onOpen: null,
+            onClose: null
         },
         preInitFunction: "cspace.searchToRelateDialog.preInit",
         finalInitFunction: "cspace.searchToRelateDialog.finalInit"
@@ -126,9 +128,11 @@ cspace = cspace || {};
             that.search.hideResults();
             that.locate("addButton").hide();
             that.container.dialog("open");
+            that.events.onOpen.fire();
         };
         that.close = function () {
             that.container.dialog("close");
+            that.events.onClose.fire();
         };
         that.afterSearchHandler = function () {
             that.locate("addButton").show();
@@ -172,6 +176,12 @@ cspace = cspace || {};
             dialogClass: "cs-search-dialog " + that.setupDialogClass(),
             position: ["center", 100],
             title: title
+        });
+        fluid.deadMansBlur(that.container, {
+            exclusions: {union: that.container},
+            handler: function () {
+                that.close();
+            }
         });
     };
 

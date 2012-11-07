@@ -1,7 +1,7 @@
 <div class="fl-container-flex fl-fix information-group info-column">
     <div class="fl-container-flex fl-fix content main">
         <div class="info-column">
-            <div class="info-column2-50 fl-force-left">
+            <div class="info-column2-60 fl-force-left">
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-objectexit-exitNumber-label"></div>
@@ -26,9 +26,7 @@
                         <input type="text" class="csc-objectexit-depositor" />
                     </div>
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when range search -->
-                <!-- on structured date start and end scalar values is working -->
-                <div class="info-pair" style="display:none;">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-objectexit-exitDateGroup-label"></div>
                     </div>
@@ -73,13 +71,13 @@
                         <select class="csc-objectexit-exitReason input-select"><option value=""></option></select>
                     </div>
                 </div>
-                <div class="info-pair" style="display:none;">
+                <div class="info-pair">
                     <div class="header">
                         <div class="label csc-objectexit-updatedBy-label"></div>
                     </div>
                     <div class="content clearfix">
                         <input type="text" class="csc-objectexit-updatedBy"/>
-                    </div>        
+                    </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
@@ -88,37 +86,16 @@
                     <div class="content">
                         <table>
                             <thead>
-                                <tr>
-                                    <td class="csc-objectexit-updatedAtStart-label"></td>
-                                    <td class="csc-objectexit-updatedAtEnd-label"></td>
-                                </tr>
+                            <tr>
+                                <td class="csc-objectexit-updatedAtStart-label"></td>
+                                <td class="csc-objectexit-updatedAtEnd-label"></td>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="text" class="csc-objectexit-updatedAtStart" /></td>
-                                    <td><input type="text" class="csc-objectexit-updatedAtEnd" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-objectexit-exitDateGroup-label"></div>
-                    </div>
-                    <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td class="csc-objectexit-exitDateGroupStart-label"></td>
-                                    <td class="csc-objectexit-exitDateGroupEnd-label"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="csc-objectexit-exitDateGroupStart" /></td>
-                                    <td><input type="text" class="csc-objectexit-exitDateGroupEnd" /></td>
-                                </tr>
+                            <tr>
+                                <td><input type="text" class="csc-objectexit-updatedAtStart" /></td>
+                                <td><input type="text" class="csc-objectexit-updatedAtEnd" /></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

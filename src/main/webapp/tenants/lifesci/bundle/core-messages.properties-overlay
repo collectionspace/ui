@@ -47,6 +47,7 @@ taxon-commonNameLabel: Common Name
 taxon-commonNameLanguageLabel: Language
 taxon-commonNameSourceLabel: Source
 taxon-commonNameSourceDetailLabel: Source Detail
+taxon-updatedByLabel: Record last modified by
 taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest

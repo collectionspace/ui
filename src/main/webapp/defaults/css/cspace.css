@@ -15,7 +15,9 @@ html{
     overflow-y: scroll;
     font-size: 100%;} 
 body {
+    font-family: Helvetica,arial,freesans,clean,sans-serif;
     font-size: 12px; 
+    color: #333;
     line-height:1.2; 
     padding:5px 4px 0 4px;
     margin:0;}
@@ -37,6 +39,7 @@ p {
 ul {
     margin:0; width:auto;}
 textarea {
+    font-family: inherit;
     overflow:auto; 
     resize:none;}
 
@@ -66,6 +69,9 @@ input[type="text"], input[type="password"], textarea {
     margin: 0;
     width: 95%;
 }
+div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
+    width: 88.5%;
+}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
 input[type="submit"].logout {
@@ -80,6 +86,7 @@ input[type="submit"].logout:focus {
     background-color:#333; 
     color:#FFF;}
 input[type="button"], input[type="submit"]  {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     background-color:#73AA4F; 
     height:21px; 
     padding-left:12px; 
@@ -203,6 +210,18 @@ input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
 input[type="button"].add {
     height:16px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    font-size: 0.8em;
+}
+input.secondaryButton {
+    font-size:1em;
+    background-color:#FFFFFF;
+    color:#48722D;
+    border: 1px solid #C7CFD4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+input.secondaryButton:focus, input.secondaryButton:hover {
+    background-color:#DAEDD1;
+    text-decoration: underline;
 }
 .gotoButton {
     display: inline;
@@ -226,6 +245,7 @@ input[type="button"].add {
 }
 .button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
     margin-left:10px; 
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
     margin-bottom:0px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {
@@ -406,6 +426,13 @@ li .flc-pager-pageLink {
     background-color:#fff; 
     margin-bottom:-2px;
 	line-height:1;}
+#mycollectionspace .header-menu-row .menu-item:nth-child(1), #mycollectionspace .header-menu-row .menu-item:nth-child(1) a,
+#createnew .header-menu-row .menu-item:nth-child(2), #createnew .header-menu-row .menu-item:nth-child(2) a,
+#search .header-menu-row .menu-item:nth-child(3), #search .header-menu-row .menu-item:nth-child(3) a,
+#administration .header-menu-row .menu-item:nth-child(4), #administration .header-menu-row .menu-item:nth-child(4) a {
+    color: #A6A6A6;
+    border-bottom-color: #A6A6A6;
+}
 .menu-item {
     margin-right:3px; 
     margin-bottom:7px; 
@@ -425,13 +452,14 @@ li .flc-pager-pageLink {
 
 /* header space for record ID etc. */
 #title-bar {
+    overflow: hidden;
     margin: 0 0 .5em 0;}
 #title-bar.nobg {
     background-color:#FFF;}
 #title-bar .title-bar-value {
     padding:0 10px; 
     height:42px; 
-    color:#696565; 
+    color:#696565;
     font-weight:bold;}
 #title-bar .title-bar-value .overflow{
     padding-top:9px; 
@@ -442,14 +470,18 @@ li .flc-pager-pageLink {
     float:left;}
 #title-bar .content {
     height:42px; 
-    color:#696565; 
+    color:#666666;
     font-weight:bold; 
-    font-size:24px; 
+    font-size: 2em;
     line-height:110%;}
 #title-bar .content .overflow {
     padding-left:10px; 
     max-width:90%; 
     float:left;}
+#administration #title-bar, #administration #title-bar .content .overflow {
+    padding: 0;
+    margin: 0;
+}
 #title-bar .value{
     padding-right:30px; 
     float:left; 
@@ -461,8 +493,14 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
-    color: #696565;
+    color: #73AA4F;
     float: left;
+}
+.cs-authority #title-bar .cs-titleBar-recordType {
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-panel {
+    border: 2px solid #78449A;
 }
 .cs-titleBar-vocab {
     float: right;
@@ -511,6 +549,9 @@ li .flc-pager-pageLink {
 #secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
+.secondary-nav-menu-sub {
+    display: table;
+}
 .secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
@@ -601,6 +642,7 @@ table tbody.highlight tr:focus td {
 .info-column2-70 {width:  69%;}
 .info-column2-75 {width:  74%;}
 .info-column2-80 {width:  79%;}
+.info-column2-100 {width:  99%;}
 .info-column3    {width:  33%;}
 .info-column4    {width:  25%;}
 
@@ -609,6 +651,7 @@ table tbody.highlight tr:focus td {
 .fl-container-1000   {width: 1000px;}
 .fl-container-1050   {width: 1050px;}
 .fl-container-1024-inner {padding:0; background-color:#F0F5FB;}
+.cs-authority .fl-container-1024-inner {background-color:#F3EDF6;}
 .fl-container-left {min-width:693px; width:70%;}
 .fl-container-admin   {width:100%;}
 .fl-container-pivot  {width:30%; min-width: 297px; margin-top:26px;}
@@ -713,13 +756,19 @@ td.fl-date-group {
     border:1px solid #C7CFD4;
     padding:0;
 }
+div.info-column2-50 .info-pair .content > select {
+    width: 88.5%;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width: 90%;
+    width: 95%;
     border-spacing:0; 
     background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
     padding:0;
+}
+div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-date .content table, div.info-column2-50 .info-pair-select table {
+    width: 88.5%;
 }
 .cs-repeatable-content .info-pair .content table,
 .cs-repeatable-content .info-pair-date .content table,
@@ -792,11 +841,20 @@ table.cs-admin-table td.checkbox {
 .list-table table tbody tr:nth-child(even) {
     background-color: #F0F5FB;
 }
+.cs-authority .list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(243,237,246,.5);
+}
+.cs-authority .list-table table tbody tr:nth-child(even) {
+    background-color: #F3EDF6;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
 .list-table  table tbody tr td a:focus, .cs-selecting, .list-table table tbody tr:hover td, .list-table table tbody tr.cs-selecting td {
     background-color:#C3D9E9;}
+.cs-authority .list-table table tbody tr td a:focus, .cs-authority .cs-selecting, .cs-authority .list-table table tbody tr:hover td, .cs-authority .list-table table tbody tr.cs-selecting td {
+    background-color:#C3A4D7;}
+}
 .list-table  table tbody tr.cs-search-disabled:hover td,
 .list-table  table tbody tr.cs-search-disabled:focus td {
     background-color:#F0F5FB;}
@@ -1002,7 +1060,7 @@ table.cs-admin-table td.checkbox {
     line-height:12px;
     clear: both;
     min-height: 31px;
-    overflow: hidden;
+    overflow: visible;
 }
 .info-pair.cs-listView {
     margin-bottom: 0;
@@ -1129,6 +1187,9 @@ table.cs-admin-table td.checkbox {
 .input-money-amount {
     width: 120px !important;}
 .content select {
+    width: 88.5%;
+}
+.content .fl-pager-ui select {
     width: auto;
 }
 .content table select {
@@ -1306,13 +1367,28 @@ input[disabled]:hover, input[disabled]:hover    {
 .info-column .cs-repeatable-content {
     float: left;
 }
-	
+
+#secondary-nav .ui-tabs .ui-tabs-nav {
+    line-height: 17px;
+}
+.record .ui-tabs .ui-tabs-nav li:first-child {
+    font-size: 1.2em;
+}
 .ui-tabs .ui-tabs-hide {
     display: none;}
 .cs-tabs-tab-link {
-    -moz-border-radius:6px 6px 0 0;
-    -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
+    border-color: #78449A #78449A #FFFFFF;
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:hover, .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:focus {
+    color: #FFF;
+    background-color: #78449A;
+    border-color: #78449A;
 }
 .cs-add-related-records-dialog {
     background-color:#fff;}
@@ -1463,7 +1539,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
     -webkit-border-radius:0;
 	border-radius:0;}
 
-.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton {
+.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
@@ -1541,6 +1617,9 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
+}
+.cs-authority a.cs-listView-header-link {
+    color: #78449A;
 }
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {
     width:99% !important; 
@@ -1654,6 +1733,9 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     line-height: 110%;
     padding: 10px 10px 10px 20px;
 }
+.cs-authority .cs-sidebar-banner-message {
+    background-color: #C3A4D7;
+}
 /*  Unifying and cleaning up the calendar date picker widget */
 .cs-calendar-button, .cs-externalURL-button {
     border:1px solid #C7CFD4;
@@ -1672,9 +1754,12 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     width:16px; 
     height:17px}
 .info-pair-date .content input {
-    border-right:none; 
-    /*width:142px !important; */
-    /*float:left;*/}
+    border-right: none;
+}
+.info-pair-date .content input[type="text"] {
+    border-right: none;
+    min-width: 83%;
+}
 .found-records-box { 
     margin-top: 20px}
 
@@ -2035,15 +2120,10 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     padding-left: 20px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-toggle {
-    background-color: #FFF;
-    color: #6E9FCE;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
+    border-radius:4px;
     display: none;
-}
-.cs-advancedSearch-template .cs-advancedSearch-toggle:hover, .cs-advancedSearch-template .cs-advancedSearch-toggle:focus {
-    background-color: #6E9FCE;
-    color: #FFF;
 }
 
 .cs-searchTips-template {
@@ -2292,6 +2372,9 @@ li.cs-repeatable-repeat .cs-termList {
     float: left;
     width: 88.5%;
 }
+li.cs-repeatable-repeat .cs-singleElementGroup .cs-termList {
+    width: 100%;
+}
 table li.cs-repeatable-repeat .cs-termList,
 li.cs-repeatable-repeat table .cs-termList {
     width: 100%;
@@ -2306,6 +2389,7 @@ div.label.cs-preferred-label {
     margin-bottom: 10px;
 }
 input[type="button"].cs-deleteRelationButton {
+    box-shadow: none;
     position: absolute;
     right: 0;
     background-image: url(../images/icnDelete.png);
@@ -2364,7 +2448,7 @@ input[type="button"].cs-deleteRelationButton {
     padding-bottom: 3px;
 }
 .cs-relatedRecordsTab-newRecordBannder-banner {
-    background-color: #EEF4D7;
+    background-color: #FFFBCC;
     color: #696565;
     padding: 15px 0 15px 20px;
     font-size: 13px;
@@ -2374,10 +2458,27 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit li.cs-repeatable-repeat {
     padding-left: 4px;
     padding-top: 4px;
-/* This code is only for particular working for L\M\I repeatable Method select */
+}
+.cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
+    margin-bottom: 10px;
+}
+/* These styles is only for particular working for L\M\I repeatable Method select */
 .cs-fixedRepeatableSelect {
     min-width: 230px;
 }
 .cs-fixedRepeatableSelect select.cs-repeatable-content {
     width: 85%;
+}
+.cs-fixedExternalURL {
+    min-width: 350px;
+}
+.cs-fixedExternalURL input.cs-repeatable-add[type="button"] {
+    right: 18%;
+}
+.cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
+    width: 93%;
+}
+/* These style is only for MediaHandling inputs */
+.cs-mediaUploader-table-row input[type="text"] {
+    width: 100%;
 }
