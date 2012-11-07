@@ -671,8 +671,11 @@ table tbody.highlight tr:focus td {
     padding: 12px;
     width:auto; }
 .information-group .cs-relatedRecordsTab-record.content.main {
-    background-color: white;
+    background-color: #FFFBCC;
     border: 2px solid #F5F5F5;
+}
+.information-group .cs-relatedRecordsTab-record.content.main.cs-relatedRecordsTab-Created {
+    background-color: white;
 }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 

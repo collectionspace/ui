@@ -233,6 +233,35 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     once: true
                 }
             }
+        },
+        "RecordEditor stylings": {
+            testType: "asyncTest",
+            testEnv: rrtTest,
+            setup: setupRRT,
+            listeners: {
+                "ready.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        relatedRecordsTab.events.onCreateNewRecord.fire();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        var created = relatedRecordsTab.options.styles.created,
+                            recordEditorContainer = relatedRecordsTab.locate("recordEditor");
+                        jqUnit.assertFalse("Record editor does not have a created class", recordEditorContainer.hasClass(created));
+                        relatedRecordsTab.events.recordEditorReady.addListener(function (relatedRecordsTab) {
+                            jqUnit.assertTrue("Record editor has a created class since we selected a record", recordEditorContainer.hasClass(created));
+                            start();
+                        });
+                        relatedRecordsTab.relatedRecordsListView.locate("row").eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
         }
     };
 
