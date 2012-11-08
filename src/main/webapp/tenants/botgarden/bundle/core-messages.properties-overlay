@@ -273,7 +273,10 @@ loanout-loanOutDateLabel: Voucher Date
 loanout-identificationNumberRequired: Please specify a Voucher Collection Number
 loanout-loanoutInformationLabel: Voucher Information
 loanout-borrowerLabel: Voucher Institution
+loanout-fieldCollectionNoteLabel: Collection Notes
 loanout-loanPurposeLabel: Voucher Purpose
+loanout-fieldCollectionPlaceNoteLabel: Location
+loanout-annotationLabel: Annotation
 loanout-lendersAuthorizerLabel: Voucher Reviewed By
 loanout-collectorLabel: Voucher Collector
 loanout-phenologyGroupLabel: Phenology
@@ -282,10 +285,12 @@ loanout-fertileLabel: Fertile
 loanout-floweringLabel: Flowering
 loanout-fruitingLabel: Fruiting
 loanout-inSporeLabel: In Spore
+loanout-hortWildLabel: Horticultural/Wild
 loanout-gardenLocationLabel: Garden Location
 loanout-numLentLabel: Number of Sheets
 loanout-sheetAccessionNumberLabel: Voucher Sheet Accession Number
 loanout-reviewCompleteLabel: Voucher Review Complete
+loanout-labelRequestedLabel: Label Requested
 
 #loanin
 loanin-lenderLoanNumberLabel: Lender's No.
