@@ -54,7 +54,7 @@ input, textarea, select {
     font-size:12px; 
     font-weight:inherit; 
     line-height:15px; 
-    padding:00 1px 1px; 
+    padding:0 0 1px 1px; 
     margin:0; 
     border:1px solid #C7CFD4; 
     overflow:visible; 

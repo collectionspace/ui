@@ -19,7 +19,7 @@
 	float:none;
 }
 .content li.cs-repeatable-repeat .content input.cs-repeatable-add {
-    float: right;
+    float:right;
 }
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
@@ -216,9 +216,9 @@ li.cs-repeatable-repeat div.cs-termList.cs-repeatable-stretched {
     width: 95%;
 }
 
-/*ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
     width: 14px;
-}*/
+}
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-delete {
     width: 21px;
 }
