@@ -133,7 +133,7 @@ cspace = cspace || {};
                         afterSave: "{relatedRecordsTab}.afterRecordSave"
                     },
                     events: {
-                        afterSave: "{relatedRecordsTab}.events.afterRecordSaved"
+                        afterSave: "{relatedRecordsTab}.events.afterRecordSave"
                     }
                 },
                 createOnEvent: "onSelect"
@@ -155,7 +155,7 @@ cspace = cspace || {};
                 event: "{globalEvents}.events.relationsUpdated"
             },
             recordEditorReady: null,
-            afterRecordSaved: null
+            afterRecordSave: null
         },
         listeners: {
             relationsUpdated: "{relatedRecordsTab}.relationsUpdatedHandler",
@@ -182,7 +182,7 @@ cspace = cspace || {};
                     args: "{relatedRecordsTab}.selectedRecordCsid"
                 }
             ],
-            afterRecordSaved: {
+            afterRecordSave: {
                 listener: "{relatedRecordsTab}.styleRecordEditor"
             }
         },
