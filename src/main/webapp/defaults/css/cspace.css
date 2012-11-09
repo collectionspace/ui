@@ -748,7 +748,7 @@ table tbody.highlight tr:focus td {
 .info-pair .content.fl-date-group {
 	width: 162px;}
 td.fl-date-group {
-	width:160px;}
+	min-width:160px;}
 .info-pair .content > select {
     width: 95%;
     border-spacing:0;
@@ -1182,7 +1182,8 @@ table.cs-admin-table td.checkbox {
 .input-numeric-medium {
     width: 120px !important;}
 .input-date {
-    width: 142px !important;
+    width: 88.5% !important;
+    min-width: 83%;
 	border-right:none;}
 .input-money-amount {
     width: 120px !important;}
