@@ -776,7 +776,7 @@ div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-da
 .cs-repeatable-content .info-pair .content table,
 .cs-repeatable-content .info-pair-date .content table,
 .cs-repeatable-content .info-pair-select table {
-    width: 100%;
+    width: 94%;
 }
 
 table.cs-admin-table td {
@@ -2482,4 +2482,15 @@ input[type="button"].cs-deleteRelationButton {
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
     width: 100%;
+}
+
+/* stretched stylings */
+div.info-column2-50 .info-pair .content.stretched table, div.info-column2-50 .info-pair-date .content.stretched table, div.info-column2-50 .stretched .info-pair-select table {
+    width: 97%;
+}
+li.cs-repeatable-repeat .stretched .cs-termList {
+    width: 100%;
+}
+.stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+    width: 94%
 }
