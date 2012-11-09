@@ -1427,6 +1427,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /*   styling the externalURL  */
 li.cs-repeatable-repeat div.cs-repeatable-content.cs-externalURL-parent {
+    width: 90%;
     min-width: 300px;
 }
 td.cs-externalURL-parent {
