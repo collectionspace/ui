@@ -1746,6 +1746,9 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     width: 18px;
 	cursor:pointer;
     /*float:left;*/}
+td.fl-date-group .cs-calendar-button {
+    float: right;
+}
 table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
 table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button,
