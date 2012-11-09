@@ -153,6 +153,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, {amalgamateClasses: ["testResource"]});
     };
 
+    var checkCreatedStyling = function (relatedRecordsTab) {
+        var created = relatedRecordsTab.options.styles.created,
+            recordEditorContainer = relatedRecordsTab.locate("recordEditor");
+        jqUnit[relatedRecordsTab.selectedRecordCsid ? "assertTrue" : "assertFalse"]("Record editor does not have a created class",
+            recordEditorContainer.hasClass(created));
+    };
+
     var testConfig = {
         "Creation": {
             testType: "asyncTest",
@@ -185,6 +192,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordEditorReady: {
                     path: "listeners",
                     listener: function (relatedRecordsTab) {
+                        checkCreatedStyling(relatedRecordsTab);
                         var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
                         fluid.each(controlPanels, function (controlPanel) {
                             var goTo = controlPanel.locate("goTo");
@@ -212,6 +220,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 "recordEditorReady.test": {
                     path: "listeners",
                     listener: function (relatedRecordsTab) {
+                        checkCreatedStyling(relatedRecordsTab);
                         var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
                         fluid.each(controlPanels, function (controlPanel) {
                             var goTo = controlPanel.locate("goTo");
@@ -219,6 +228,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/objectexit.html?csid=ba97ae73-1016-4c62-b4eb", goTo.attr("href"));
                         });
                         relatedRecordsTab.events.recordEditorReady.addListener(function (relatedRecordsTab) {
+                            checkCreatedStyling(relatedRecordsTab);
                             var controlPanels = fluid.renderer.getDecoratorComponents(relatedRecordsTab.relatedRecordsRecordEditor);
                             fluid.each(controlPanels, function (controlPanel) {
                                 var goTo = controlPanel.locate("goTo");
@@ -228,6 +238,29 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             start();
                         });
                         relatedRecordsTab.relatedRecordsListView.locate("row").eq(0).click();
+                    },
+                    priority: "last",
+                    once: true
+                }
+            }
+        },
+        "RecordEditor stylings": {
+            testType: "asyncTest",
+            testEnv: rrtTest,
+            setup: setupRRT,
+            listeners: {
+                "ready.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        relatedRecordsTab.events.onCreateNewRecord.fire();
+                    },
+                    once: true
+                },
+                "recordEditorReady.test": {
+                    path: "listeners",
+                    listener: function (relatedRecordsTab) {
+                        checkCreatedStyling(relatedRecordsTab);
+                        start();
                     },
                     priority: "last",
                     once: true

@@ -128,7 +128,7 @@ input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; 
+    background:white url('../images/icnCancel.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -140,7 +140,7 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnCancelDisabled.png') no-repeat 8px 4px; 
+    background:white url('../images/icnCancelDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
@@ -155,7 +155,7 @@ input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton
     color:#606060
 }
 input[type="button"].editButton, input[type="submit"].editButton {
-    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; 
+    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -163,7 +163,7 @@ input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
 input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
-    background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; 
+    background:white url('../images/icnDelete.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;
@@ -177,7 +177,7 @@ input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[d
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
+    background:white url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px;
     color:#CCC;}
@@ -675,8 +675,11 @@ table tbody.highlight tr:focus td {
     padding: 12px;
     width:auto; }
 .information-group .cs-relatedRecordsTab-record.content.main {
-    background-color: white;
+    background-color: #FFFBCC;
     border: 2px solid #F5F5F5;
+}
+.information-group .cs-relatedRecordsTab-record.content.main.cs-relatedRecordsTab-Created {
+    background-color: white;
 }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
