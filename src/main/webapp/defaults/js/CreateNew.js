@@ -149,7 +149,7 @@ cspace = cspace || {};
             }
             var vocabs = {};
             fluid.each(permittedAuth, function (auth) {
-                vocabs[auth] = that.vocab.authority[auth].vocabs;
+                vocabs[auth] = that.vocab.authority[auth].order.vocabs;
             });
             that.applier.requestChange("vocabs", vocabs);
         };
@@ -486,12 +486,8 @@ cspace = cspace || {};
         if (!vocabsExist) {
             return applier.requestChange("vocabs", undefined);
         }
-        var vocabs = [];
-        fluid.each(vocabsExist, function (vocab) {
-            vocabs.push(vocab);
-        });
-        applier.requestChange("vocabs", vocabs);
-        applier.requestChange("vocabSelection", vocabs[0]);
+        applier.requestChange("vocabs", vocabsExist);
+        applier.requestChange("vocabSelection", vocabsExist[0]);
         lookupNames(applier, messageBase, model.vocabs, "vocabNames", "vocab");
     };
     

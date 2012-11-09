@@ -131,7 +131,7 @@ input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
     border-radius:4px;
-    background:white url('../images/icnCancel.png') no-repeat 8px 4px;
+    background:white url('../images/icnCancel.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -158,7 +158,7 @@ input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton
     color:#606060
 }
 input[type="button"].editButton, input[type="submit"].editButton {
-    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; 
+    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -166,7 +166,7 @@ input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
 input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
-    background:white url('../images/icnDelete.png') no-repeat 8px 4px;
+    background:white url('../images/icnDelete.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;
@@ -678,8 +678,11 @@ table tbody.highlight tr:focus td {
     padding: 12px;
     width:auto; }
 .information-group .cs-relatedRecordsTab-record.content.main {
-    background-color: white;
+    background-color: #FFFBCC;
     border: 2px solid #F5F5F5;
+}
+.information-group .cs-relatedRecordsTab-record.content.main.cs-relatedRecordsTab-Created {
+    background-color: white;
 }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
@@ -755,7 +758,7 @@ table tbody.highlight tr:focus td {
 .info-pair .content.fl-date-group {
     width: 162px;}
 td.fl-date-group {
-    width:160px;}
+    min-width:160px;}
 .info-pair .content > select {
     width: 95%;
     border-spacing:0;
@@ -778,7 +781,7 @@ div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-da
 .cs-repeatable-content .info-pair .content table,
 .cs-repeatable-content .info-pair-date .content table,
 .cs-repeatable-content .info-pair-select table {
-    width: 100%;
+    width: 94%;
 }
 
 table.cs-admin-table td {
@@ -1187,7 +1190,8 @@ table.cs-admin-table td.checkbox {
 .input-numeric-medium {
     width: 120px !important;}
 .input-date {
-    width: 141px !important;
+    width: 88.5% !important;
+    min-width: 83%;
     border-right:none;}
 .input-money-amount {
     width: 120px !important;}
@@ -1233,7 +1237,7 @@ td .field-cal img, td .csc-calendar-button img {
     position: relative; 
     bottom: 0px; 
     width: 100%; }
-#createnew #footer {
+#createnew #footer, #search #footer, #administration #footer {
     position: absolute;
 }
 #footer .footer-text {
@@ -1431,6 +1435,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /*   styling the externalURL  */
 li.cs-repeatable-repeat div.cs-repeatable-content.cs-externalURL-parent {
+    width: 90%;
     min-width: 300px;
 }
 td.cs-externalURL-parent {
@@ -1750,6 +1755,8 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     display: inline-block;
     float: none;
     vertical-align: top;}
+td.fl-date-group .cs-calendar-button {
+}
 table .cs-calendar-button, table .cs-externalURL-button,
 ul .cs-externalURL-button {
     border:none;}
@@ -2503,4 +2510,15 @@ input[type="button"].cs-deleteRelationButton {
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
     width: 100%;
+}
+
+/* stretched stylings */
+div.info-column2-50 .info-pair .content.stretched table, div.info-column2-50 .info-pair-date .content.stretched table, div.info-column2-50 .stretched .info-pair-select table {
+    width: 97%;
+}
+li.cs-repeatable-repeat .stretched .cs-termList {
+    width: 100%;
+}
+.stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+    width: 94%
 }

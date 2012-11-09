@@ -1,12 +1,12 @@
 [
     {
         "url": "vocabularies/person",
-        "type": "person",
+        "type": "person-ulan_pa",
         "fullName": "Default person authority"
     },
     {
         "url": "vocabularies/personpamha",
-        "type": "person",
+        "type": "person-person",
         "fullName": "Pamha person authority"
     }
 ]

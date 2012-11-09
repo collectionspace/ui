@@ -285,10 +285,10 @@ cspace = cspace || {};
     var isGroup = function (tree) {
         var index = 0;
         return fluid.find(tree, function () {
-            ++index;
             if (index > 1) {
                 return true;
             }
+            ++index;
         });
     };
 

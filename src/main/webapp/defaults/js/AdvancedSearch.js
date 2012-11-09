@@ -421,10 +421,9 @@ cspace = cspace || {};
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
-            var vocabs = [],
+            var vocabs = vocab.authority[model.recordType].order.vocabs,
                 vocabNames = [];
-            fluid.each(vocabsExist, function (vocab) {
-                vocabs.push(vocab);
+            fluid.each(vocabs, function (vocab) {
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });
             if (vocabs.length > 1) {

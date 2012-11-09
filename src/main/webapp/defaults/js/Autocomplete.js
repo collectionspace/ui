@@ -44,6 +44,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         components: {
+            vocab: "{vocab}",
             autocomplete: {
                 type: "fluid.autocomplete.autocompleteView",
                 options: {
@@ -231,12 +232,30 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             if (that.handlePermissions) {
                 that.handlePermissions();
             }
+            that.model.authorities.sort(function (auth1, auth2) {
+                return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
+            });
         }, cspace.util.provideErrorCallback(that, authUrl, "errorFetching"));
 
         that.closeButton.button.click(function () {
             that.eventHolder.events.revertState.fire();
             return false;
         });
+    };
+
+    cspace.autocomplete.compareAuthorities = function (vocab, auth1, auth2) {
+        var vocabType1 = auth1.type.split("-"),
+            vocabType2 = auth2.type.split("-"),
+            type1 = vocabType1[0],
+            type2 = vocabType2[0],
+            vocab1 = vocabType1[1],
+            vocab2 = vocabType2[1],
+            order;
+        if (type1 !== type2) {
+            return 0;
+        }
+        order = vocab.authority[type1].order.vocabs;
+        return order.indexOf(vocab1) - order.indexOf(vocab2);
     };
     
     fluid.defaults("fluid.autocomplete.eventHolder", {

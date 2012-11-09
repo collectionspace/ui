@@ -225,11 +225,13 @@ ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-primary {
     width: 11px;
 }
-
+.cs-advancedSearch-searchFields .content li.cs-repeatable-repeat input.cs-repeatable-primary {
+    display:none;
+}
 
 div.cs-repeatable-group div.cs-repeatable-content,
 li.cs-repeatable-repeat {
-    width: 93.5%;
+    width: 95%;
 }
 
 div.infoGroup div.cs-repeatable-group {
