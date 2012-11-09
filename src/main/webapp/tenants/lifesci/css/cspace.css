@@ -1231,7 +1231,7 @@ td .field-cal img, td .csc-calendar-button img {
     position: relative; 
     bottom: 0px; 
     width: 100%; }
-#createnew #footer {
+#createnew #footer, #search #footer, #administration #footer {
     position: absolute;
 }
 #footer .footer-text {
