@@ -24,6 +24,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
                                 }
                             }
                         },
@@ -33,6 +37,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 1
                                 }
                             }
                         },
@@ -42,6 +50,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 2
                                 }
                             }
                         },
@@ -50,6 +62,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "default": false,
                                     "type": "boolean"
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 3
                                 }
                             },
                             "type": "object"
@@ -65,6 +81,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 2
                                 }
                             }
                         },
@@ -74,6 +94,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 1
                                 }
                             }
                         },
@@ -83,6 +107,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
                                 }
                             }
                         }
@@ -97,6 +125,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
                                 }
                             }
                         },
@@ -106,6 +138,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 1
                                 }
                             }
                         },
@@ -115,6 +151,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 2
                                 }
                             }
                         }
@@ -129,6 +169,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
                                 }
                             }
                         },
@@ -138,6 +182,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 1
                                 }
                             }
                         }
@@ -152,6 +200,10 @@ var utilitiesTester = function ($) {
                                 "nptAllowed": {
                                     "type": "boolean",
                                     "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
                                 }
                             }
                         }
@@ -547,6 +599,14 @@ var utilitiesTester = function ($) {
             persontest2: true,
             ulan_pa: false
         }, vocab.authority.person.nptAllowed.vocabs);
+
+        jqUnit.assertDeepEq("Person order vocabs", [
+            "person", "persontest1", "persontest2", "ulan_pa"
+        ], vocab.authority.person.order.vocabs);
+
+        jqUnit.assertDeepEq("Person order vocabs", [
+            "material", "activity", "concept"
+        ], vocab.authority.concept.order.vocabs);
 
         jqUnit.assertTrue("Person is default", vocab.isDefault("person"));
         jqUnit.assertFalse("Persontest1 is not default", vocab.isDefault("persontest1"));

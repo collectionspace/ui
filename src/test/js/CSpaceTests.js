@@ -73,39 +73,29 @@ cspace.tests.sampleSchema = {
     },
     "namespaces": {
         "properties": {
-            "person": {
+            "organization": {
                 "properties": {
-                    "person": {
-                        "type": "object",
+                    "ulan_oa": {
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
                     },
-                    "persontest1": {
-                        "type": "object",
+                    "organization": {
                         "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    },
-                    "persontest2": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    },
-                    "ulan_pa": {
-                        "properties": {
-                            "nptAllowed": {
-                                "default": false,
+                                "default": true,
                                 "type": "boolean"
                             }
                         },
@@ -117,86 +107,74 @@ cspace.tests.sampleSchema = {
             "concept": {
                 "properties": {
                     "concept": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
+                    },
+                    "material_ca": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     },
                     "activity": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 2,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
-                    },
-                    "material": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
             },
-            "place": {
+            "person": {
                 "properties": {
-                    "place": {
-                        "type": "object",
+                    "person": {
                         "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
                     },
-                    "placetest1": {
-                        "type": "object",
+                    "ulan_pa": {
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
-                    },
-                    "placetest2": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "organization": {
-                "properties": {
-                    "organization": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    },
-                    "organizationtest": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -204,13 +182,61 @@ cspace.tests.sampleSchema = {
             "location": {
                 "properties": {
                     "location": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
+                    },
+                    "offsite_sla": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "tgn_place": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"

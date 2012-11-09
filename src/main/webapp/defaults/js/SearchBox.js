@@ -135,7 +135,7 @@ cspace = cspace || {};
             var vocab = that.vocab,
                 applier = that.applier,
                 model = that.model,
-                vocabsExist;
+                vocabs;
             if (!model.recordType) {
                 return;
             }
@@ -143,15 +143,13 @@ cspace = cspace || {};
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
-            vocabsExist = vocab.authority[model.recordType].vocabs;
-            if (!vocabsExist) {
+            vocabs = vocab.authority[model.recordType].order.vocabs;
+            if (!vocabs) {
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
-            var vocabs = [],
-                vocabNames = [];
-            fluid.each(vocabsExist, function (vocab) {
-                vocabs.push(vocab);
+            var vocabNames = [];
+            fluid.each(vocabs, function (vocab) {
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });
             if (vocabs.length > 1) {
