@@ -254,6 +254,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         if (type1 !== type2) {
             return 0;
         }
+        if (!vocab.hasVocabs(type1)) {
+            return 0;
+        }
         order = vocab.authority[type1].order.vocabs;
         return order.indexOf(vocab1) - order.indexOf(vocab2);
     };
