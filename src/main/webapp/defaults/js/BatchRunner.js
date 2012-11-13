@@ -59,6 +59,7 @@ cspace = cspace || {};
         events: {
             onError: null,
             onStop: null,
+            onSynchronousFetch: null,
             batchStarted: null,
             batchFinished: null,
             ready: null
@@ -129,34 +130,6 @@ cspace = cspace || {};
     };
     
     cspace.batchRunner.preInit = function (that) {
-        that.options.listeners = {
-            batchStarted: function () {
-                that.applier.requestChange("batchInProgress", true);
-                that.applier.requestChange("batchTypeSelection", that.model.batchTypeSelection || that.model.batchlist[0]);
-                that.batchStatus.show({
-                    batchType: that.model.batchTypeSelection,
-                    batchName: that.model.batchnames[$.inArray(that.model.batchTypeSelection, that.model.batchlist)]
-                });
-            },
-            batchFinished: function (data) {
-                that.applier.requestChange("batchInProgress", false);
-                that.batchStatus.hide();
-                that.messageBar.show(fluid.stringTemplate(that.lookupMessage("batch-batchComplete"), {
-                    batchName: data.batchName,
-                    userNote: data.response.userNote
-                }), null, false);
-            },
-            onError: function (message) {
-                that.applier.requestChange("batchInProgress", false);
-                that.batchStatus.hide();
-                that.messageBar.show(that.lookupMessage("batch-batchError") + message, null, true)
-            },
-            onStop: function (batchType) {
-                that.applier.requestChange("batchInProgress", false);
-                that.applier.requestChange("batchTypeSelection", batchType);
-                that.requestBatch(true);
-            }
-        };
         that.options.recordApplier.modelChanged.addListener("csid", function () {
             that.refreshView();
         });
@@ -168,6 +141,49 @@ cspace = cspace || {};
             .addClass(that.options.styles.batchLoadingIndicatorContainer)
             .hide();
         $("body").append(that.batchLoadingIndicatorContainer);
+
+
+        that.events.batchStarted.addListener(function () {
+            that.applier.requestChange("batchInProgress", true);
+            that.applier.requestChange("batchTypeSelection", that.model.batchTypeSelection || that.model.batchlist[0]);
+
+            var selectionIndex = $.inArray(that.model.batchTypeSelection, that.model.batchlist);
+            var batchNewFocus = that.model.batchnewfocuses[selectionIndex];
+
+            if (!batchNewFocus) {
+               that.batchStatus.show({
+                    batchType: that.model.batchTypeSelection,
+                    batchName: that.model.batchnames[selectionIndex]
+                })
+            };
+        });
+
+        that.events.batchFinished.addListener(function (data) {
+            that.applier.requestChange("batchInProgress", false);
+            that.batchStatus.hide();
+
+            if (data.batchNewFocus && data.response.primaryURICreated) {
+                window.location = data.response.primaryURICreated;
+            }
+            else {
+                that.messageBar.show(fluid.stringTemplate(that.lookupMessage("batch-batchComplete"), {
+                    batchName: data.batchName,
+                    userNote: data.response.userNote
+                }), null, false);
+            }
+        });
+
+        that.events.onError.addListener(function (message) {
+            that.applier.requestChange("batchInProgress", false);
+            that.batchStatus.hide();
+            that.messageBar.show(that.lookupMessage("batch-batchError") + message, null, true)
+        });
+
+        that.events.onStop.addListener(function (batchType) {
+            that.applier.requestChange("batchInProgress", false);
+            that.applier.requestChange("batchTypeSelection", batchType);
+            that.requestBatch(true);
+        });
     };
     
     cspace.batchRunner.finalInit = function (that) {
@@ -189,6 +205,7 @@ cspace = cspace || {};
             if (data.batchlist.length > 0) {
                 that.applier.requestChange("batchnames", data.batchnames);
                 that.applier.requestChange("batchlist", data.batchlist);
+                that.applier.requestChange("batchnewfocuses", data.batchnewfocuses);
             }
             that.refreshView();
             that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
@@ -223,6 +240,7 @@ cspace = cspace || {};
         if (!stop) {
             events.batchStarted.fire();
         }
+
         var href = fluid.stringTemplate(options.urls.batchUrl, {
             batchcsid: model.batchTypeSelection,
             recordType: options.recordType,
@@ -230,8 +248,14 @@ cspace = cspace || {};
         });
 
         var batchType = model.batchTypeSelection;
-        var batchName = model.batchnames[$.inArray(batchType, model.batchlist)]
-
+        var selectionIndex = $.inArray(batchType, model.batchlist);
+        var batchName = model.batchnames[selectionIndex];
+        var batchNewFocus = model.batchnewfocuses[selectionIndex];
+        
+        if (batchNewFocus) {
+            events.onSynchronousFetch.fire();
+        }
+        
         var invocationSource = cspace.URLDataSource({
             value: {
                 targetTypeName: "cspace.batchRunner.invocationSource"
@@ -244,20 +268,19 @@ cspace = cspace || {};
             {},
             function (data) {
                 if (!data) {
-                    that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    events.onError.fire(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
                         url: that.batchTypesSource.options.url
                     }));
                     return;
                 }
                 if (data.isError === true) {
-                    fluid.each(data.messages, function (message) {
-                        that.displayErrorMessage(message);
-                    });
+                    events.onError.fire(data.messages.join(". "));
                     return;
                 }
                 
                 events.batchFinished.fire({
                     batchName: batchName,
+                    batchNewFocus: batchNewFocus,
                     response: data
                 });
                 
