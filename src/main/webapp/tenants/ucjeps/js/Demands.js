@@ -966,7 +966,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 recordType: "{sidebar}.options.primaryRecordType",
                 recordModel: "{pageBuilder}.model",
-                recordApplier: "{pageBuilder}.applier"
+                recordApplier: "{pageBuilder}.applier",
+                listeners: {
+                    onSynchronousFetch: "{loadingIndicator}.events.showOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onStop: "{loadingIndicator}.events.hideOn.fire",
+                    batchFinished: "{loadingIndicator}.events.hideOn.fire"
+                }
             }
         });
 
