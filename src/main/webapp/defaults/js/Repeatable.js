@@ -401,7 +401,28 @@ cspace = cspace || {};
         };
         that.addRow = function (fields) {
             fields = fluid.makeArray(fields);
+
+			//in the future, repeatable groups should be either 'ordered', 'preferred' or both 'ordered' and 'preferred'
+			//ideally defined in app config? and if a group is 'ordered' it should define an 'order' field in that group
+			//this has some implications on radio buttons & introduction of up/down arrows in rendering
+			if (that.options.recordType === "propagation" && that.options.fullPath === "fields.propActivityGroup") {
+				//if this is the first row, make sure order has been user-defined, if not, set equal to 1
+				if (fields.length === 1 && !fields[0].order) {
+					fields[0].order = 1;
+				}
+				//sort based on order value
+				fields.sort(function(a, b) {
+					return parseInt(a.order) - parseInt(b.order);
+				});
+			}
+
             fields.push(that.getBaseRow());
+
+			//auto-increment from the previous item in the array, which after sort should be the largest item
+			if (that.options.recordType === "propagation" && that.options.fullPath === "fields.propActivityGroup") {
+				fields[fields.length - 1].order = parseInt(fields[fields.length - 2].order) + 1;
+			}
+
             return fields;
         };
         that.updatePrimary = function (fields, index) {
