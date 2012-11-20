@@ -26,7 +26,11 @@ cspace = cspace || {};
             },
             validateDate: {
                 funcName: "cspace.datePicker.validateDate",
-                args: ["{messageBar}", "{arguments}.0", "{datePicker}.options.strings.invalidDateMessage", "{datePicker}.options.defaultFormat"]
+                args: ["{messageBar}", "{arguments}.0", "{datePicker}.options.strings.invalidDateMessage", "{datePicker}.options.defaultFormat", "{datePicker}.options.era"]
+            },
+            validateEra: {
+                funcName: "cspace.datePicker.validateEra",
+                args: ["{messageBar}", "{arguments}.0", "{datePicker}.options.validEras"]
             }
         },
         strings: {
@@ -57,8 +61,34 @@ cspace = cspace || {};
         defaultFormat: "yyyy-MM-dd",
         components: {
             messageBar: "{messageBar}"
-        }
+        },
+        validEras: ["BC", "B.C.", "AD", "A.D.", "BCE", "CE"],
+        era: null
     });
+    
+    cspace.datePicker.validateEra = function (messageBar, dateInput, validEras) {
+        var era, date = dateInput;
+        
+        if (dateInput === "") {
+            return {
+                date: date
+            };
+        }
+        
+        fluid.each(validEras, function (validEra) {
+            if (dateInput.indexOf(validEra) !== -1) {
+                era = validEra;
+                date = date.replace(era, "");
+                return false;
+            }
+        });
+        
+        // trim whitespaces
+        return {
+            date: date.replace(/^\s+|\s+$/g, ""),
+            era: era  
+        };
+    }
     
     cspace.datePicker.formatDate = function (date, format) {
         // Pulling a full date from google datePicker into one of the formats that can be parsed by datejs. 
@@ -66,7 +96,7 @@ cspace = cspace || {};
         return Date.parse(fullDate).toString(format);
     };
     
-    cspace.datePicker.validateDate = function (messageBar, dateInput, message, format) {
+    cspace.datePicker.validateDate = function (messageBar, dateInput, message, format, era) {
         if (dateInput === "") {
             return dateInput;
         }
@@ -84,8 +114,10 @@ cspace = cspace || {};
             date.setMonth(0);
         }
         
+        era = (era) ? " " + era : "";
+        
         // Format validated date into a string.
-        return date.toString(format);
+        return date.toString(format) + era;
     };
 
     var bindEvents = function (that) {
@@ -111,6 +143,10 @@ cspace = cspace || {};
             }
             // Get a string value for a field.
             var dateFieldValue = that.container.val();
+            // Validate Era of the value if present
+            var result = that.validateEra(dateFieldValue);
+            that.options.era = result.era;
+            dateFieldValue = result.date;
             // Get a validated string value for the same field.
             var date = that.validateDate(dateFieldValue);
             // If validated date is different from the original, put validated value into 
