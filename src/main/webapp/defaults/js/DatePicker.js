@@ -62,7 +62,10 @@ cspace = cspace || {};
         components: {
             messageBar: "{messageBar}"
         },
-        validEras: ["BC", "B.C.", "AD", "A.D.", "BCE", "CE"],
+        mergePolicy: {
+            validEras: "replace"
+        },
+        validEras: ["BCE", "B.C.", "B.C.E.", "C.E.", "BC", "CE", "AD", "A.D."],
         era: null
     });
     
@@ -75,11 +78,11 @@ cspace = cspace || {};
             };
         }
         
-        fluid.each(validEras, function (validEra) {
+        fluid.find(validEras, function (validEra) {
             if (dateInput.indexOf(validEra) !== -1) {
                 era = validEra;
                 date = date.replace(era, "");
-                return false;
+                return true;
             }
         });
         
@@ -255,6 +258,17 @@ cspace = cspace || {};
     };
     
     cspace.datePicker.finalInit = function (that) {
+        var validEras = that.options.validEras;
+        // pre-sort valid Eras by era length in desc order for cases e.g. BCE matches before BC or CE
+        if (Array.isArray(validEras)) {
+            that.options.validEras.sort(function (a,b) {
+                if ( a.length > b.length )
+                    return -1;
+                if ( a.length < b.length )
+                    return 1;
+                return 0;
+            });   
+        }
         if (that.options.readOnly) {
             return;
         }
