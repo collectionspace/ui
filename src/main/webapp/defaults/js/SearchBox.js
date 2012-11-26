@@ -57,6 +57,7 @@ cspace = cspace || {};
             autoBind: true
         },
         components: {
+            messageBar: "{messageBar}",
             vocab: "{vocab}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
@@ -181,6 +182,7 @@ cspace = cspace || {};
                 })) : "",
                 keywords: that.model.keywords
             });
+            that.messageBar.disable();
             window.location = url;
         }
         if (!recordEditor) {

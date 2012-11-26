@@ -287,7 +287,8 @@ cspace = cspace || {};
         components: {
             localStorage: "{localStorage}",
             globalNavigator: "{globalNavigator}",
-            vocab: "{vocab}"
+            vocab: "{vocab}",
+            messageBar: "{messageBar}"
         },
         events: {
             onCreateFromExisting: {
@@ -317,6 +318,7 @@ cspace = cspace || {};
                     recordType: that.options.recordType,
                     vocab: that.vocab
                 });
+                that.messageBar.disable();
                 window.location = fluid.stringTemplate(that.options.cloneURL, {
                     recordType: that.options.recordType,
                     vocab: vocab ? ("?" + $.param({

@@ -39,6 +39,9 @@ var mbTester = function ($) {
         jqUnit.assertTrue("Message should have error style", $.inArray(mb.options.styles.error, mb.locate("messageBlock")[0].classList) > 0);
         mb.locate("cancel").click();
         jqUnit.notVisible("Message box should be invisible", mb.container);
+        mb.disable();
+        mb.show("TEST");
+        jqUnit.notVisible("Message box should be invisible since mb was disabled", mb.container);
     });
 };
 

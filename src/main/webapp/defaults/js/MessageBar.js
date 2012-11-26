@@ -28,6 +28,10 @@ cspace = cspace || {};
             that.renderer.refreshView();
             bindEvents(that);
         };
+        that.disable = function () {
+            // Emptying the show function.
+            that.show = function () {};
+        };
         return that;
     };
     
