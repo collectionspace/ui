@@ -998,6 +998,9 @@ fluid.registerNamespace("cspace.util");
                 namespace: "onPerformNavigationFinal"
             }
         },
+        components: {
+            messageBar: "{messageBar}"
+        },
         preInitFunction: "cspace.util.globalNavigator.preInit",
         postInitFunction: "cspace.util.globalNavigator.postInit",
         clearFunction: "cspace.util.globalNavigator.clear"
@@ -1037,7 +1040,8 @@ fluid.registerNamespace("cspace.util");
             }
             that.events.onPerformNavigation.fire(function () {
                 // NOTE: dispatchEvent has proven to be extremely unreliable in cross
-                // browser testing. Thus we resolve to more straitforward redirect. 
+                // browser testing. Thus we resolve to more straitforward redirect.
+                that.messageBar.disable();
                 window.location.href = target.attr("href");
             }, evt);
             return false;
@@ -1045,6 +1049,7 @@ fluid.registerNamespace("cspace.util");
         that.container.delegate(that.options.selectors.forms, "submit", function () {
             var target = $(this);
             that.events.onPerformNavigation.fire(function () {
+                that.messageBar.disable();
                 target[0].submit();
             });
             return false;
