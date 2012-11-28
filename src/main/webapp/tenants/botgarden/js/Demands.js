@@ -693,6 +693,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                minChars: 2,
                 delay: 2000,
                 model: {
                     vocab: {
