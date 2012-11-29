@@ -1337,6 +1337,11 @@ input[disabled]:hover, input[disabled]:hover    {
 
 .required {color:red;}
 
+.field-info {
+	font-style: italic; 
+	font-weight:normal;
+}
+
 /* id/class selector combinations to activate proper header tabs*/
 .record .header-menu-row .findedit a,
 #search .header-menu-row .findedit a,
