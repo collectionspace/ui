@@ -410,3 +410,4 @@ objectexit-exitMethodLabel: Distribution Method
 objectexit-exitReasonLabel: Distribution Reason
 objectexit-exitNoteLabel: Distribution Note
 objectexit-identificationNumberRequired: Please specify a Distribution Number
+objectexit-currentOwnerLabel: Authorized By
