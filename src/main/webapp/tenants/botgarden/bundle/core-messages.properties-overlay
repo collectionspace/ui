@@ -67,6 +67,9 @@ collection-object-hybridFlagLabel: Hybrid Flag
 taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
 collection-object-taxonomicRangeLabel: Taxonomic range
+collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
+collection-object-objectNumberRangeSearchStartLabel: From
+collection-object-objectNumberRangeSearchEndLabel: To
 
 # Inadvertently shares field name and label
 # with another entry below
