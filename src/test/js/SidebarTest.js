@@ -77,7 +77,7 @@ var sidebarTester = function ($) {
     //test not rendering procedures
     var noProceduresSidebarTest = cspace.tests.testEnvironment({
         testCase: bareSidebarTest,
-        permissions: getLimitedPermissions(["intake", "loanin", "loanout", "acquisition", "movement", "objectexit", "media"])
+        permissions: getLimitedPermissions(["intake", "loanin", "loanout", "conditioncheck", "acquisition", "movement", "objectexit", "media"])
     });
 
     noProceduresSidebarTest.test("RelatedRecordsList: procedures not rendering", function () {
