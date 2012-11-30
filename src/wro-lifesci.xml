@@ -69,7 +69,6 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
     <css>/tenants/lifesci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
@@ -88,7 +87,6 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
     <css>/tenants/lifesci/css/cspace.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
