@@ -1,7 +1,7 @@
 This is a custom build of Fluid Infusion 1.3 including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from commit 4115f5b35da7ff339a6f66f7034e92e9b5036cc9 of Infusion project master, at
-    http://github.com/fluid-project/infusion
+It was built from commit 7f02261cec5fc1335e1a43bbbaa22268b7c49f00 of Infusion project fork, at
+    https://github.com/yzen/infusion.git
     
 Line 26013 (the body of fluid.pager.selfRender): was replaced FROM:
 {code}
@@ -15,6 +15,15 @@ TO:
     } else {
         template = fluid.selfRender(root, {}, options.renderOptions);
     }
+{code}
+
+In Requests:
+{code}
+options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+{code}
+TO:
+{code}
+// options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
 {code}
 
 In framework
@@ -66,6 +75,25 @@ TO:
             listener: "fluid.clearEventedComponent"
         }
     });
+{code}
+AND
+{code}
+    fluid.clearLifecycleFunctions = function (options) {
+        fluid.each(fluid.lifecycleFunctions, function (value, key) {
+            delete options[key];
+        });
+        delete options.initFunction; 
+{code}
+TO:
+{code}
+    fluid.clearLifecycleFunctions = function (options) {
+        fluid.each(fluid.lifecycleFunctions, function (value, key) {
+  	        if (!value) {
+  	            return;
+  	        }
+            delete options[key];
+        });
+        delete options.initFunction; 
 {code}
 AND
 {code}
@@ -231,4 +259,4 @@ TO:
 {code}
 
 using the following command:
-   ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, uploader, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"
+   ant customBuild -Dinclude="json, fss, framework, renderer, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"
