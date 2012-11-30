@@ -193,16 +193,15 @@ cspace = cspace || {};
             var sourceUrl = that.locate("linkInput").val();
             that.applier.requestChange(that.options.elPaths.sourceUrl, sourceUrl);
             that.applier.requestChange(that.options.elPaths.externalUrl, sourceUrl);
-            that.applier.removeListener("allowButtons");
+            that.applier.modelChanged.removeListener("allowButtons");
             that.events.onLink.fire();
         };
-        that.onSuccess = function (file, responseText, xhr) {
-            var response = JSON.parse(responseText);
+        that.onSuccess = function (response, xhr) {
             that.applier.requestChange(that.options.elPaths.sourceUrl, response.file);
             delete response.file;
             that.applier.requestChange(that.options.elPaths.blobs, [response]);
             that.applier.requestChange(that.options.elPaths.blobCsid, response.csid);
-            that.applier.removeListener("allowButtons");
+            that.applier.modelChanged.removeListener("allowButtons");
             // TODO: When the onLink event listener triggers rerender and reinstantiation of media uploader this uploader dies :(.
             setTimeout(function () {
                 that.events.onLink.fire();
@@ -238,7 +237,7 @@ cspace = cspace || {};
             that.events.onFileSelected.fire();
             $.ajax({
                 url: that.options.urls.upload,
-                type: "PUT",
+                type: "POST",
                 cache: false,
                 contentType: false,
                 processData: false,
