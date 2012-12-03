@@ -1771,6 +1771,11 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
 .found-records-box { 
     margin-top: 20px}
 
+.cs-mediaUploader .cs-mediaUploader-note {
+    padding-left: 19%;
+    font-style: italic;
+    color: #4D4D4D;
+}
 .cs-mediaUploader .cs-mediaUploader-uploadButton {
     cursor: pointer;
     display: inline-block;
