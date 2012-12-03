@@ -1,9 +1,9 @@
 {
     "namespaces": {
         "properties": {
-            "person": {
+            "work": {
                 "properties": {
-                    "person": {
+                    "work": {
                         "properties": {
                             "nptAllowed": {
                                 "default": true,
@@ -12,7 +12,30 @@
                         },
                         "type": "object"
                     },
-                    "ulan_pa": {
+                    "cona_work": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "organization": {
+                "properties": {
+                    "organization": {
+                        "properties": {
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "ulan_oa": {
                         "properties": {
                             "nptAllowed": {
                                 "default": false,
@@ -56,9 +79,9 @@
                 },
                 "type": "object"
             },
-            "organization": {
+            "person": {
                 "properties": {
-                    "ulan_oa": {
+                    "person": {
                         "properties": {
                             "nptAllowed": {
                                 "default": true,
@@ -67,7 +90,7 @@
                         },
                         "type": "object"
                     },
-                    "organization": {
+                    "ulan_pa": {
                         "properties": {
                             "nptAllowed": {
                                 "default": true,

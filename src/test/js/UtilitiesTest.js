@@ -121,6 +121,38 @@ var utilitiesTester = function ($) {
                     },
                     "type": "object"
                 },
+                "work": {
+                    "properties": {
+                        "work": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "worktest1": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "worktest2": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
                 "organization": {
                     "properties": {
                         "organization": {
@@ -222,6 +254,7 @@ var utilitiesTester = function ($) {
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
+        "work": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
         "objects": ["create", "read", "update", "delete", "list"]
@@ -402,6 +435,7 @@ var utilitiesTester = function ($) {
             "organization",
             "place",
             "concept",
+            "work",
             "cataloging",
             "movement",
             "objectexit",
@@ -423,7 +457,8 @@ var utilitiesTester = function ($) {
             "person",
             "organization",
             "place",
-            "concept"
+            "concept",
+            "work"
         ], recTypes.vocabularies);
     });
     
@@ -450,6 +485,7 @@ var utilitiesTester = function ($) {
             "person": "person",
             "concept": "concept",
             "place": "place",
+            "work": "work",
             "organization": "organization",
             "location": "location"
         }, vocab.authorities);
@@ -479,6 +515,10 @@ var utilitiesTester = function ($) {
         }));
         jqUnit.assertEquals("Resolve namespace", "place", cspace.vocab.resolve({
             recordType: "place",
+            vocab: vocab
+        }));
+        jqUnit.assertEquals("Resolve namespace", "work", cspace.vocab.resolve({
+            recordType: "work",
             vocab: vocab
         }));
         jqUnit.assertUndefined("Resolve namespace", cspace.vocab.resolve({
