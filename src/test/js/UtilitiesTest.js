@@ -249,6 +249,7 @@ var utilitiesTester = function ($) {
     var perms = {
         "person": ["create", "read", "update", "delete", "list"],
         "loanout": ["create", "read", "update", "delete", "list"],
+        "conditioncheck": ["create", "read", "update", "delete", "list"],
         "loanin": ["read", "list"],
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
@@ -431,6 +432,7 @@ var utilitiesTester = function ($) {
             "intake",
             "loanin",
             "loanout",
+            "conditioncheck",
             "acquisition",
             "organization",
             "place",
@@ -448,6 +450,7 @@ var utilitiesTester = function ($) {
             "intake",
             "loanin",
             "loanout",
+            "conditioncheck",
             "acquisition",
             "movement",
             "objectexit",
