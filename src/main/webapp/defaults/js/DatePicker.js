@@ -80,13 +80,24 @@ cspace = cspace || {};
             return "";
         }
         // Handle the case when user entered only year so that month will be defaulted to January
-        // Convert to integer in order to support formats of type 0yyy or 00yy or 000y
-        if (dateInput * 1 === date.toString("yyyy") * 1) {
+        if (dateInput === cspace.datePicker.getYear(date)) {
             date.setMonth(0);
         }
         
         // Format validated date into a string.
         return date.toString(format);
+    };
+
+    // Trim all leading 0's from year.
+    cspace.datePicker.getYear = function (date) {
+        var year = date.toString("yyyy"),
+            i = 0;
+        for (i; i < year.length; ++i) {
+            if (year[i] !== "0") {
+                return year.substring(i);
+            }
+        }
+        return 0;
     };
 
     var bindEvents = function (that) {
