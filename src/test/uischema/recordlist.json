@@ -30,7 +30,8 @@
       "work", 
       "intake", 
       "group", 
-      "media"
+      "media",
+      "conditioncheck"
     ], 
     "type": "array"
   }

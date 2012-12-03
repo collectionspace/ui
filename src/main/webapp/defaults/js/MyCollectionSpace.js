@@ -30,6 +30,7 @@ cspace = cspace || {};
             loanout: ".csc-myCollectionSpace-loanout-group",
             movement: ".csc-myCollectionSpace-movement-group",
             objectexit: ".csc-myCollectionSpace-objectexit-group",
+            conditioncheck: ".csc-myCollectionSpace-conditioncheck-group",
             media: ".csc-myCollectionSpace-media-group",
             group: ".csc-myCollectionSpace-group-group",
             togglable: ".csc-toggle-selector"

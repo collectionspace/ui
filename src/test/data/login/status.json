@@ -40,6 +40,13 @@
             "delete",
             "list"
         ],
+        "conditioncheck": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "place": [
             "create",
             "read",
