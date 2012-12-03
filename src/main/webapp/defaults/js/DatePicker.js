@@ -65,7 +65,7 @@ cspace = cspace || {};
         mergePolicy: {
             validEras: "replace"
         },
-        validEras: ["BCE", "B.C.", "B.C.E.", "C.E.", "BC", "CE", "AD", "A.D."],
+        validEras: [],
         era: null
     });
     
@@ -88,7 +88,7 @@ cspace = cspace || {};
         
         // trim whitespaces
         return {
-            date: date.replace(/^\s+|\s+$/g, ""),
+            date: cspace.util.trim(date),
             era: era  
         };
     }
@@ -97,6 +97,13 @@ cspace = cspace || {};
         // Pulling a full date from google datePicker into one of the formats that can be parsed by datejs. 
         var fullDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         return Date.parse(fullDate).toString(format);
+    };
+    
+    cspace.datePicker.printDate = function (date, format, era) {
+        era = (era) ? " " + era : "";
+        
+        // Format validated date into a string.
+        return date.toString(format) + era;
     };
     
     cspace.datePicker.validateDate = function (messageBar, dateInput, message, format, era) {
@@ -117,10 +124,7 @@ cspace = cspace || {};
             date.setMonth(0);
         }
         
-        era = (era) ? " " + era : "";
-        
-        // Format validated date into a string.
-        return date.toString(format) + era;
+        return cspace.datePicker.printDate(date, format, era);
     };
 
     var bindEvents = function (that) {
@@ -260,7 +264,7 @@ cspace = cspace || {};
     cspace.datePicker.finalInit = function (that) {
         var validEras = that.options.validEras;
         // pre-sort valid Eras by era length in desc order for cases e.g. BCE matches before BC or CE
-        if (Array.isArray(validEras)) {
+        if (fluid.isArrayable(validEras)) {
             that.options.validEras.sort(function (a,b) {
                 if ( a.length > b.length )
                     return -1;

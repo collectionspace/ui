@@ -702,6 +702,24 @@ var utilitiesTester = function ($) {
         togo.applier.addSubApplier("four", fourApplier);
         togo.applier.requestChange("four.field6", "NEW");
     });
+    
+    utilitiesTest.test("Testing string trim function", function () {
+        var testCases = [
+            { input: "", expected: "" },
+            { input: " aa", expected: "aa" },
+            { input: "aa ", expected: "aa" },
+            { input: " aa ", expected: "aa" },
+            { input: "   aa aa    a ", expected: "aa aa    a" },
+            { input: null, expected: null },
+            { input: 44, expected: 44 }
+        ];
+        
+        expect(testCases.length);
+        
+        fluid.each(testCases, function (testCase) {
+            jqUnit.assertEquals("String properly trimmed", testCase.expected, cspace.util.trim(testCase.input));
+        });
+    });
 };
 
 (function () {
