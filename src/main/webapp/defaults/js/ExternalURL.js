@@ -128,7 +128,7 @@ cspace = cspace || {};
             var messageBar = that.messageBar,
                 externalURLButton = that.externalURLButton,
                 // Get a string value for a field.
-                urlValue = that.container.val(),
+                urlValue = $.trim(that.container.val()),
                 error;
 
             if (that.processUrl) {
