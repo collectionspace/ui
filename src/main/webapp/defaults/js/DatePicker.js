@@ -80,7 +80,8 @@ cspace = cspace || {};
             return "";
         }
         // Handle the case when user entered only year so that month will be defaulted to January
-        if (dateInput === date.toString("yyyy")) {
+        // Convert to integer in order to support formats of type 0yyy or 00yy or 000y
+        if (dateInput * 1 === date.toString("yyyy") * 1) {
             date.setMonth(0);
         }
         

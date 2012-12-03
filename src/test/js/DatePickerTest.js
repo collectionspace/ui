@@ -101,13 +101,25 @@ var datePickerTester = function ($) {
         verifyGoogleDatePickerDate(date.year, date.month, date.day);
     });
     
+    datePickerTest.test("Test when year is < 1900 typed in", function () {
+        expect(1);
+        var datePicker = cspace.datePicker(".csc-datePicker-container", {
+            messageBar: cspace.messageBar("body")
+        }),
+            userInputDate = "400",
+            inputField = datePicker.container;
+        inputField.val(userInputDate);
+        inputField.change();
+        jqUnit.assertEquals("Date's year should be 0400", "0400-01-01", inputField.val());
+    });
+    
     datePickerTest.test("Attempt to validate invalid dates", function () {
         expect(5);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
         inferAndValidateDates(datePicker.container, 
-                              ["999", "fail", "monday", "-A", "{year: '2000'}"], 
+                              ["99a", "fail", "monday", "-A", "{year: '2000'}"], 
                               "yyyy-MM-dd",
                               "Text in the input field should be empty since the validation failed", "");     
     });
