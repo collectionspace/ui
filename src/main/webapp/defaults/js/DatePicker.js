@@ -70,6 +70,10 @@ cspace = cspace || {};
         if (dateInput === "") {
             return dateInput;
         }
+        // Check if there's a 3 digit year, if so, add leading 0
+        dateInput = dateInput.replace(/(^|\D)(\d{3})(\D|$)/g, function (match, p1, p2, p3) {
+            return [p1, "0" + p2, p3].join("")
+        });
         // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
         date = Date.parse(dateInput);
         if (!date) {
@@ -80,24 +84,12 @@ cspace = cspace || {};
             return "";
         }
         // Handle the case when user entered only year so that month will be defaulted to January
-        if (dateInput === cspace.datePicker.getYear(date)) {
+        if (dateInput === date.toString("yyyy")) {
             date.setMonth(0);
         }
         
         // Format validated date into a string.
         return date.toString(format);
-    };
-
-    // Trim all leading 0's from year.
-    cspace.datePicker.getYear = function (date) {
-        var year = date.toString("yyyy"),
-            i = 0;
-        for (i; i < year.length; ++i) {
-            if (year[i] !== "0") {
-                return year.substring(i);
-            }
-        }
-        return 0;
     };
 
     var bindEvents = function (that) {
