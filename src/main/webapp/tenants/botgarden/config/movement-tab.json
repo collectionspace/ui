@@ -41,7 +41,6 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-movement-currentLocation",
                                                     "recordLockContainer": ".csc-recordLock"
                                                 },
                                                 "selectorsToIgnore": [
