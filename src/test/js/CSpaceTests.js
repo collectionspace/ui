@@ -170,7 +170,7 @@ cspace.tests.sampleSchema = {
                                 "type": "integer"
                             },
                             "nptAllowed": {
-                                "default": true,
+                                "default": false,
                                 "type": "boolean"
                             }
                         },
