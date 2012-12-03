@@ -68,7 +68,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         recordEditor: {
                             options: {
                                 listeners: {
-                                    "afterRender.workTest": function (recordEditor) {
+                                    "afterRecordRender.workTest": function (recordEditor) {
                                         var repeatableField = [
                                             "creatorGroup",
                                             "publisherGroup"
