@@ -54,7 +54,7 @@ cspace = cspace || {};
         var options = that.options;
         var tree = {
             expander: {
-                repeatID: "message:",
+                repeatID: "message",
                 tree: {
                     messagekey: "${{message}}",
                     args: that.options.termMap
@@ -198,7 +198,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.confirmation.saveDialog", {
         enableButtons: ["act", "cancel", "proceed"],
         model: {
-            messages: ["saveDialog-primaryMessage", "saveDialog-secondaryMessage"],
+            messages: ["saveDialog-primaryMessage", "saveDialog-secondaryMessage", "saveDialog-hardSaveMessage"],
             messagekeys: {
                 actText: "saveDialog-actText",
                 actAlt: "saveDialog-actAlt",
