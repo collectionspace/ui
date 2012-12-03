@@ -43,7 +43,8 @@ cspace = cspace || {};
             linkInput: ".csc-mediaUploader-linkInput",
             linkButton: ".csc-mediaUploader-linkButton",
             linkMediaLabel: ".csc-mediaUploader-linkMedia-label",
-            removeButton: ".csc-mediaUploader-removeMedia"
+            removeButton: ".csc-mediaUploader-removeMedia",
+            note: ".csc-mediaUploader-note"
         },
         strings: {},
         styles: {
@@ -54,7 +55,8 @@ cspace = cspace || {};
             button: "cs-mediaUploader-button",
             hidden: "hidden",
             removeButton: "cs-mediaUploader-removeMedia",
-            disabled: "cs-disabled"
+            disabled: "cs-disabled",
+            note: "cs-mediaUploader-note"
         },
         events: {
             onLink: null,
@@ -170,6 +172,10 @@ cspace = cspace || {};
                     func: "click",
                     args: that.linkMedia
                 }]
+            },
+            note: {
+                messagekey: "mediaUploader-note",
+                decorators: {addClass: "{styles}.note"}
             }
         };
     };
