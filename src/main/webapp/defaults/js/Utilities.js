@@ -16,14 +16,6 @@ fluid.registerNamespace("cspace.util");
     "use strict";
 
     fluid.log("Utilities.js loaded");
-
-    // Trim sting from leading and ending spaces
-    cspace.util.trim = function (text) {
-        if (typeof text === "string") {
-            text = text.replace(/^\s+|\s+$/g, "");
-        }
-        return text;
-    };
     
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {

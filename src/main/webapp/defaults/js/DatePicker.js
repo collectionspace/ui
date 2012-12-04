@@ -88,7 +88,7 @@ cspace = cspace || {};
         
         // trim whitespaces
         return {
-            date: cspace.util.trim(date),
+            date: $.trim(date),
             era: era  
         };
     }
