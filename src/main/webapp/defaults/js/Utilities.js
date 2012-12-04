@@ -17,6 +17,12 @@ fluid.registerNamespace("cspace.util");
 
     fluid.log("Utilities.js loaded");
 
+    cspace.util.redirectToLoginPage = function () {
+        var currentUrl = document.location.href,
+            loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+        window.location = loginUrl;
+    };
+    
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
@@ -1105,9 +1111,7 @@ fluid.registerNamespace("cspace.util");
                                 }
                                 
                                 if (!check) {
-                                    var currentUrl = document.location.href;
-                                    var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                                    window.location = loginUrl;
+                                    cspace.util.redirectToLoginPage();
                                 }
                             });
                         },
@@ -1144,6 +1148,7 @@ fluid.registerNamespace("cspace.util");
                     type: "cspace.pageBuilderIO",
                     options: options.pageBuilderIO.options
                 };
+                that.events.loginStatusRequired.fire(that.loginStatus);
                 fluid.initDependent(that, newPageBuilderIOName, that.instantiator);
                 that[newPageBuilderIOName].initPageBuilder(options.pageBuilder.options);
             }, {amalgamateClasses: that.options.amalgamateClasses});
@@ -1215,7 +1220,8 @@ fluid.registerNamespace("cspace.util");
             onFetch: null,
             pageReady: null,
             onError: null,
-            afterFetch: null
+            afterFetch: null,
+            loginStatusRequired: null
         },
         amalgamateClasses: [
             "fastTemplate",
@@ -1258,6 +1264,15 @@ fluid.registerNamespace("cspace.util");
                         "{globalSetup}.events.onFetch"
                     ]
                 }
+            },
+            autoLogout: {
+                type: "cspace.autoLogout",
+                createOnEvent: "afterFetch",
+                options: {
+                    events: {
+                        loginStatusRequired: "{globalSetup}.events.loginStatusRequired"
+                    }
+                }
             }
         }
     });
@@ -1267,6 +1282,85 @@ fluid.registerNamespace("cspace.util");
             loadingIndicator.hide();
         }
         messageBar.show(message, Date(), true);
+    };
+    
+    fluid.defaults("cspace.autoLogout", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            loginStatusSet: "cspace.autoLogout.loginStatusSet",
+            userWarning: {
+                funcName: "cspace.autoLogout.userWarning",
+                args: ["{messageBar}", "{autoLogout}.options.strings", "{globalBundle}", "{autoLogout}.options.logoutNotificationTime"]
+            },
+            userAutologout: "cspace.util.redirectToLoginPage"
+        },
+        events: {
+            loginStatusRequired: null
+        },
+        listeners: {
+            loginStatusRequired: "{cspace.autoLogout}.loginStatusRequired"
+        },
+        components: {
+            globalBundle: "{globalBundle}",
+            messageBar: {
+                type: "cspace.messageBar"
+            }
+        },
+        elPaths: {
+            loginExpiry: "loginExpiry"
+        },
+        strings: {
+            autoLogoutWarning: "login-autoLogoutMessage"
+        },
+        loginExpiryTime: null,
+        logoutNotificationTime: 10,
+        timerLoginExpiry: null,
+        timerLogoutNotification: null,
+        preInitFunction: "cspace.autoLogout.preInit"
+    });
+    
+    fluid.demands("cspace.autoLogout.loginStatusSet", "cspace.autoLogout", {
+        funcName: "cspace.autoLogout.loginStatusSet",
+        args: ["{cspace.autoLogout}", "{arguments}.0"]
+    });
+    
+    cspace.autoLogout.preInit = function (that) {
+        that.loginStatusRequired = function (loginStatus) {
+            that.loginStatusSet(loginStatus);
+        };
+    };
+    
+    cspace.autoLogout.loginStatusSet = function (that, loginStatus) {
+        //var loginExpiry = fluid.get(that.options.elPaths.loginExpiry, loginStatus);
+        if (!loginStatus.login) {
+            return;
+        }
+        
+        var loginExpiryTime = /* loginStatus.loginExpiry */ 11 * 1000,
+            logoutNotificationTime = that.options.logoutNotificationTime * 1000;
+        
+        // If we have a valid login expiry time then set a timer on for auto logout
+        if (!loginExpiryTime) {
+            return;
+        }
+        
+        that.options.loginExpiryTime = loginExpiryTime;
+        that.options.timerLoginExpiry = setTimeout(that.userAutologout, loginExpiryTime);
+        
+        // If we have a valid notification time about auto logout and it is before actual log out then set the timer
+        if (!logoutNotificationTime || (loginExpiryTime - logoutNotificationTime) <= 0) {
+            return;
+        }
+        
+        logoutNotificationTime = loginExpiryTime - logoutNotificationTime;
+        that.options.timerLogoutNotification = setTimeout(that.userWarning, logoutNotificationTime);
+    };
+    
+    cspace.autoLogout.userWarning = function (messageBar, strings, parentBundle, logoutNotificationTime) {
+        logoutNotificationTime = Math.floor(logoutNotificationTime / 60);
+        
+        messageBar.show(parentBundle.resolve(strings.autoLogoutWarning, [logoutNotificationTime]), null, false);
     };
     
     fluid.defaults("cspace.vocab", {

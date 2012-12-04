@@ -1,6 +1,7 @@
 {
     "userId": "admin@collectionspace.org",
     "screenName": "admin@collectionspace.org",
+    "loginExpiry": 1800,
     "permissions": {
         "all": [
             "create",
