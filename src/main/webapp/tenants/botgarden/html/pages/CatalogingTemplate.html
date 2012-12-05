@@ -101,7 +101,7 @@
 						</div>
 						<div class="content csc-collection-object-taxonomicIdentGroup determinationHistory oocss">
 							<div class="info-column">
-								<table style="margin-bottom: 12px">
+							    <table style="margin-bottom: 12px; float: left">
 									<thead>
 										<tr>
 											<td class="csc-collection-object-taxon-label"/>
@@ -110,7 +110,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td class="flc-inlineEdit-text taxon size2of3">
+											<td class="flc-inlineEdit-text taxon info-column2-60">
 												<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
 											</td>
 											<td class="flc-inlineEdit-text">
@@ -121,9 +121,19 @@
 										</tr>
 									</tbody>
 								</table>
+								<div class="info-column2-10 fl-force-right">
+								    <div class="info-pair">
+    									<div class="header">
+    										<div class="label csc-collection-object-hybridFlag-label"></div>
+    									</div>
+    									<div class="content">
+    										<input type="checkbox" class="csc-collection-object-hybridFlag">
+    									</div>
+    								</div>
+                                </div>
 							</div>							
 							<div class="info-column indent">
-								<table style="margin-bottom: 12px">
+								<table style="margin-bottom: 24px">
 									<thead>
 										<tr>
 											<td class="csc-collection-object-identBy-label"/>
@@ -147,6 +157,28 @@
 									</tbody>
 								</table>
 							</div>
+                            <div class="info-column indent">
+                                <table style="margin-bottom: 12px">
+                                    <thead>
+                                        <tr>
+                                            <td class="csc-collection-object-hybridParent-label"/>
+                                            <td class="csc-collection-object-hybridParentQualifier-label"/>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="csc-taxonomicIdentGroup-taxonomicIdentHybridParentGroup">
+                                            <td class="flc-inlineEdit-text info-column2-80">
+                                                <input type="text" class="csc-collection-object-taxonomicIdentHybridParent editableText"/>
+                                            </td>
+                                            <td class="flc-inlineEdit-text">
+                                                <select class="csc-collection-object-taxonomicIdentHybridParentQualifier input-select-shorter">
+                                                    <option value="">Options not loaded</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+		                    </div>
 							<div class="info-column indent">
 								<div class="info-column2-40 fl-force-left">
 									<div class="info-pair">
@@ -199,35 +231,6 @@
 								</div>
 							</div>
 							<div class="info-column indent">
-								<div class="info-column2-40 fl-force-left">
-			                        <div class="info-pair">
-			                            <div class="header">
-			                                <div class="label csc-taxonomicIdentGroup-taxonomicIdentHybridParentGroup-label"></div>
-			                            </div>
-			                            <div class="content">
-			                                <table>
-			                                    <thead>
-			                                        <tr>
-			                                            <td class="csc-collection-object-hybridParent-label"/>
-			                                            <td class="csc-collection-object-hybridParentQualifier-label"/>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                        <tr class="csc-taxonomicIdentGroup-taxonomicIdentHybridParentGroup">
-			                                            <td class="flc-inlineEdit-text">
-			                                                <input type="text" class="csc-collection-object-taxonomicIdentHybridParent editableText"/>
-			                                            </td>
-			                                            <td class="flc-inlineEdit-text">
-			                                                <select class="csc-collection-object-taxonomicIdentHybridParentQualifier input-select-shorter">
-			                                                    <option value="">Options not loaded</option>
-			                                                </select>
-			                                            </td>
-			                                        </tr>
-			                                    </tbody>
-			                                </table>
-			                            </div>
-			                        </div>
-			                    </div>
 			                    <div class="info-column2-60 fl-force-right">
 									<div class="info-pair">
 										<div class="header">
@@ -235,14 +238,6 @@
 										</div>
 										<div class="content">
 											<input type="text" class="csc-collection-object-affinityTaxon"/>
-										</div>
-									</div>
-									<div class="info-pair">
-										<div class="header">
-											<div class="label csc-collection-object-hybridFlag-label"></div>
-										</div>
-										<div class="content">
-											<input type="checkbox" class="csc-collection-object-hybridFlag">
 										</div>
 									</div>
 								</div>
