@@ -106,6 +106,10 @@ cspace = cspace || {};
         if (dateInput === "") {
             return dateInput;
         }
+        // Check if there's a 3 digit year, if so, add leading 0
+        dateInput = dateInput.replace(/(^|\D)(\d{3})(\D|$)/g, function (match, p1, p2, p3) {
+            return [p1, "0" + p2, p3].join("")
+        });
         // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
         date = Date.parse(dateInput);
         if (!date) {
