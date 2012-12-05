@@ -63,21 +63,6 @@ var datePickerTester = function ($) {
         jqUnit.assertNotUndefined("datePickers google date picker should not be undefined", datePicker.datePickerWidget);
         jqUnit.assertDeepEq("datePickers valid eras should be sorted by length in desc order", sortedEras, datePicker.options.validEras);
     });
-    
-    datePickerTest.test("Testing string trim function", function () {
-        var date = new Date("Dec 12, 1912"),
-            testCases = [
-                { args: [date, "yyyy-MM-dd", null], expected: "1912-12-12" },
-                { args: [date, "yyyy-MM-dd", "BC"], expected: "1912-12-12 BC" },
-                { args: [date, "yyyy-MM-dd", "AD"], expected: "1912-12-12 AD" }
-            ];
-        
-        expect(testCases.length);
-        
-        fluid.each(testCases, function (testCase) {
-            jqUnit.assertEquals("String properly trimmed", testCase.expected, cspace.datePicker.printDate.apply(null, testCase.args));
-        });
-    });
  
     datePickerTest.test("Use google DatePicker to select a date", function () {
         expect(5);

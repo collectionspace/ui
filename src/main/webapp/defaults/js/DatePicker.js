@@ -66,27 +66,30 @@ cspace = cspace || {};
             validEras: "replace"
         },
         validEras: [],
-        era: null
+        model: {
+            era: undefined,
+            date: undefined
+        }
     });
     
-    cspace.datePicker.validateEra = function (messageBar, dateInput, validEras) {
-        var era, date = dateInput;
+    cspace.datePicker.validateEra = function (messageBar, userInput, validEras) {
+        var era, date = userInput;
         
-        if (dateInput === "") {
+        if (userInput === "") {
             return {
                 date: date
             };
         }
         
         fluid.find(validEras, function (validEra) {
-            if (dateInput.indexOf(validEra) !== -1) {
+            if (userInput.indexOf(validEra) !== -1) {
                 era = validEra;
                 date = date.replace(era, "");
                 return true;
             }
         });
         
-        // trim whitespaces
+        // trim whitespaces and return a new model
         return {
             date: $.trim(date),
             era: era  
@@ -97,13 +100,6 @@ cspace = cspace || {};
         // Pulling a full date from google datePicker into one of the formats that can be parsed by datejs. 
         var fullDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         return Date.parse(fullDate).toString(format);
-    };
-    
-    cspace.datePicker.printDate = function (date, format, era) {
-        era = (era) ? " " + era : "";
-        
-        // Format validated date into a string.
-        return date.toString(format) + era;
     };
     
     cspace.datePicker.validateDate = function (messageBar, dateInput, message, format, era) {
@@ -124,11 +120,31 @@ cspace = cspace || {};
             date.setMonth(0);
         }
         
-        return cspace.datePicker.printDate(date, format, era);
+        return date.toString(format);
     };
 
     var bindEvents = function (that) {
         var table = $(that.datePickerWidget.tableBody_);
+        
+        that.applier.modelChanged.addListener("", function () {
+            
+            var model = that.model,
+                era = model.era ? " " + model.era : "",
+                date = model.date,
+                oldDate = that.container.val(),
+                newDate;
+                
+            date = that.validateDate(date);
+            
+            that.model.date = date;
+            
+            newDate = date + era;
+            
+            if (oldDate !== newDate) {
+                that.container.val(newDate);
+            }
+            that.datePickerWidget.setDate(Date.parse(newDate));
+        });
         
         fluid.deadMansBlur(that.datePicker, {
             exclusions: {picker: that.datePicker}, 
@@ -148,20 +164,11 @@ cspace = cspace || {};
             if (that.messageBar) {
                 that.messageBar.hide();
             }
-            // Get a string value for a field.
-            var dateFieldValue = that.container.val();
-            // Validate Era of the value if present
-            var result = that.validateEra(dateFieldValue);
-            that.options.era = result.era;
-            dateFieldValue = result.date;
-            // Get a validated string value for the same field.
-            var date = that.validateDate(dateFieldValue);
-            // If validated date is different from the original, put validated value into 
-            // the date field and update the datePicker's selected date.
-            if (dateFieldValue !== date) {
-                that.container.val(date);
-            }
-            that.datePickerWidget.setDate(Date.parse(date));
+            
+            // Get user input for the container
+            var userInput = that.container.val();
+            // Set model according to the input
+            that.applier.requestChange("", that.validateEra(userInput));
         });
     
         var setDate = function () {
