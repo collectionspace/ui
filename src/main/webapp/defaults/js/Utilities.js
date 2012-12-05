@@ -1148,7 +1148,7 @@ fluid.registerNamespace("cspace.util");
                     type: "cspace.pageBuilderIO",
                     options: options.pageBuilderIO.options
                 };
-                that.events.loginStatusRequired.fire(that.loginStatus);
+                that.events.onLoginStatus.fire(that.loginStatus);
                 fluid.initDependent(that, newPageBuilderIOName, that.instantiator);
                 that[newPageBuilderIOName].initPageBuilder(options.pageBuilder.options);
             }, {amalgamateClasses: that.options.amalgamateClasses});
@@ -1221,7 +1221,7 @@ fluid.registerNamespace("cspace.util");
             pageReady: null,
             onError: null,
             afterFetch: null,
-            loginStatusRequired: null
+            onLoginStatus: null
         },
         amalgamateClasses: [
             "fastTemplate",
@@ -1270,7 +1270,7 @@ fluid.registerNamespace("cspace.util");
                 createOnEvent: "afterFetch",
                 options: {
                     events: {
-                        loginStatusRequired: "{globalSetup}.events.loginStatusRequired"
+                        onLoginStatus: "{globalSetup}.events.onLoginStatus"
                     }
                 }
             }
@@ -1289,29 +1289,20 @@ fluid.registerNamespace("cspace.util");
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
             loginStatusSet: "cspace.autoLogout.loginStatusSet",
-            userWarning: {
-                funcName: "cspace.autoLogout.userWarning",
+            warnUser: {
+                funcName: "cspace.autoLogout.warnUser",
                 args: ["{messageBar}", "{autoLogout}.options.strings", "{globalBundle}", "{autoLogout}.options.logoutNotificationTime"]
-            },
-            userAutologout: "cspace.util.redirectToLoginPage"
+            }
         },
         events: {
-            loginStatusRequired: null
+            onLoginStatus: null
         },
         listeners: {
-            loginStatusRequired: "{cspace.autoLogout}.loginStatusRequired"
+            onLoginStatus: "{cspace.autoLogout}.onLoginStatus"
         },
         components: {
             globalBundle: "{globalBundle}",
-            messageBar: {
-                type: "cspace.messageBar"
-            }
-        },
-        elPaths: {
-            loginExpiry: "loginExpiry"
-        },
-        strings: {
-            autoLogoutWarning: "login-autoLogoutMessage"
+            messageBar: "{messageBar}"
         },
         loginExpiryTime: null,
         logoutNotificationTime: 10,
@@ -1326,13 +1317,12 @@ fluid.registerNamespace("cspace.util");
     });
     
     cspace.autoLogout.preInit = function (that) {
-        that.loginStatusRequired = function (loginStatus) {
+        that.onLoginStatus = function (loginStatus) {
             that.loginStatusSet(loginStatus);
         };
     };
     
     cspace.autoLogout.loginStatusSet = function (that, loginStatus) {
-        //var loginExpiry = fluid.get(that.options.elPaths.loginExpiry, loginStatus);
         if (!loginStatus.login) {
             return;
         }
@@ -1346,7 +1336,7 @@ fluid.registerNamespace("cspace.util");
         }
         
         that.options.loginExpiryTime = loginExpiryTime;
-        that.options.timerLoginExpiry = setTimeout(that.userAutologout, loginExpiryTime);
+        that.options.timerLoginExpiry = setTimeout(cspace.util.redirectToLoginPage, loginExpiryTime);
         
         // If we have a valid notification time about auto logout and it is before actual log out then set the timer
         if (!logoutNotificationTime || (loginExpiryTime - logoutNotificationTime) <= 0) {
@@ -1354,13 +1344,13 @@ fluid.registerNamespace("cspace.util");
         }
         
         logoutNotificationTime = loginExpiryTime - logoutNotificationTime;
-        that.options.timerLogoutNotification = setTimeout(that.userWarning, logoutNotificationTime);
+        that.options.timerLogoutNotification = setTimeout(that.warnUser, logoutNotificationTime);
     };
     
-    cspace.autoLogout.userWarning = function (messageBar, strings, parentBundle, logoutNotificationTime) {
+    cspace.autoLogout.warnUser = function (messageBar, strings, parentBundle, logoutNotificationTime) {
         logoutNotificationTime = Math.floor(logoutNotificationTime / 60);
         
-        messageBar.show(parentBundle.resolve(strings.autoLogoutWarning, [logoutNotificationTime]), null, false);
+        messageBar.show(parentBundle.resolve("login-autoLogoutMessage", [logoutNotificationTime]), null, false);
     };
     
     fluid.defaults("cspace.vocab", {
