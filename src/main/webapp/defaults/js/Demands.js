@@ -565,6 +565,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 readOnly: "{recordEditor}.options.readOnly"
             }
         });
+        fluid.demands("cspace.datePicker", "cspace.search.searchView", {
+            options: {
+                validEras: ["BCE", "B.C.", "B.C.E.", "C.E.", "BC", "CE", "AD", "A.D."]
+            }
+        });
         
         // Footer demands
         fluid.demands("footer", "cspace.pageBuilder", {
