@@ -58,10 +58,10 @@ var datePickerTester = function ($) {
             sortedEras = ["BCE", "BC", "AD"],
             datePicker = cspace.datePicker(".csc-datePicker-container", {
                 messageBar: cspace.messageBar("body"),
-                validEras: nonSortedEras
+                eras: nonSortedEras
             });
         jqUnit.assertNotUndefined("datePickers google date picker should not be undefined", datePicker.datePickerWidget);
-        jqUnit.assertDeepEq("datePickers valid eras should be sorted by length in desc order", sortedEras, datePicker.options.validEras);
+        jqUnit.assertDeepEq("datePickers valid eras should be sorted by length in desc order", sortedEras, datePicker.options.eras);
     });
  
     datePickerTest.test("Use google DatePicker to select a date", function () {
@@ -131,7 +131,7 @@ var datePickerTester = function ($) {
         ];
         
         // Add every possible validEra to the test case
-        fluid.each(datePicker.options.validEras, function (validEra) {
+        fluid.each(datePicker.options.eras, function (validEra) {
             tests.push({
                 era: validEra,
                 error: false
