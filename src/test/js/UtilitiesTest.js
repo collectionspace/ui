@@ -718,7 +718,7 @@ var utilitiesTester = function ($) {
         start();
     };
     
-    utilitiesTest.asyncTest("Autologout component with default settings. Should not do anything and should be running without errors. PLEASE WAIT.", function () {
+    utilitiesTest.asyncTest("Autologout component with default settings. Should not do anything and should be running without errors.", function () {
         expect(0);
         var options = {
                 invokers: {
@@ -733,9 +733,9 @@ var utilitiesTester = function ($) {
         start();
     });
     
-    utilitiesTest.asyncTest("Autologout component which does not have warning function but has warning time set. PLEASE WAIT.", function () {
+    utilitiesTest.asyncTest("Autologout component which does not have warning function but has warning time set.", function () {
         expect(1);
-        var waitTime = 2000,
+        var waitTime = 0.002,
             options = {
                 invokers: {
                     logoutUser: {
@@ -743,7 +743,7 @@ var utilitiesTester = function ($) {
                     }
                 },
                 loginExpiryTime: waitTime,
-                loginExpiryNotificationTime: waitTime - 1000
+                loginExpiryNotificationTime: waitTime - 0.001
             },
             autoLogout = cspace.autoLogout(options);
             
@@ -752,9 +752,9 @@ var utilitiesTester = function ($) {
         });
     });
     
-    utilitiesTest.asyncTest("Autologout component which does not have warning time but has warning function set. PLEASE WAIT.", function () {
+    utilitiesTest.asyncTest("Autologout component which does not have warning time but has warning function set.", function () {
         expect(1);
-        var waitTime = 2000,
+        var waitTime = 0.002,
             options = {
                 invokers: {
                     logoutUser: {
@@ -774,9 +774,9 @@ var utilitiesTester = function ($) {
         });
     });
     
-    utilitiesTest.asyncTest("Autologout component test without processModel. PLEASE WAIT.", function () {
+    utilitiesTest.asyncTest("Autologout component test without processModel.", function () {
         expect(2);
-        var waitTime = 2000,
+        var waitTime = 0.002,
             options = {
                 invokers: {
                     logoutUser: {
@@ -787,7 +787,7 @@ var utilitiesTester = function ($) {
                     }
                 },
                 loginExpiryTime: waitTime,
-                loginExpiryNotificationTime: waitTime - 1000
+                loginExpiryNotificationTime: waitTime - 0.001
             },
             autoLogout = cspace.autoLogout(options);
             
@@ -796,9 +796,9 @@ var utilitiesTester = function ($) {
         });
     });
     
-    utilitiesTest.asyncTest("Autologout component test with all invokers set. PLEASE WAIT.", function () {
+    utilitiesTest.asyncTest("Autologout component test with all invokers set.", function () {
         expect(4);
-        var waitTime = 2000,
+        var waitTime = 0.002,
             options = {
                 invokers: {
                     logoutUser: {
@@ -812,7 +812,7 @@ var utilitiesTester = function ($) {
                         args: ["{autoLogout}"]
                     }
                 },
-                loginExpiryNotificationTime: waitTime - 1000
+                loginExpiryNotificationTime: waitTime - 0.001
             },
             autoLogout = cspace.autoLogout(options);
             
