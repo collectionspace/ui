@@ -16,6 +16,12 @@ fluid.registerNamespace("cspace.util");
     "use strict";
 
     fluid.log("Utilities.js loaded");
+
+    cspace.util.redirectToLoginPage = function () {
+        var currentUrl = document.location.href,
+            loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+        window.location = loginUrl;
+    };
     
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
@@ -1105,9 +1111,7 @@ fluid.registerNamespace("cspace.util");
                                 }
                                 
                                 if (!check) {
-                                    var currentUrl = document.location.href;
-                                    var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                                    window.location = loginUrl;
+                                    cspace.util.redirectToLoginPage();
                                 }
                             });
                         },
@@ -1258,6 +1262,23 @@ fluid.registerNamespace("cspace.util");
                         "{globalSetup}.events.onFetch"
                     ]
                 }
+            },
+            autoLogout: {
+                type: "cspace.autoLogout",
+                createOnEvent: "afterFetch",
+                options: {
+                    invokers: {
+                        warnUser: {
+                            funcName: "cspace.autoLogout.warnUser",
+                            args: ["{messageBar}", "{autoLogout}.options.strings", "{globalBundle}", "{autoLogout}.options.loginExpiryNotificationTime"]
+                        },
+                        processModel: {
+                            funcName: "cspace.autoLogout.processLoginStatus",
+                            args: ["{autoLogout}"]
+                        }
+                    },
+                    model: "{cspace.globalSetup}.loginStatus"
+                }
             }
         }
     });
@@ -1268,6 +1289,82 @@ fluid.registerNamespace("cspace.util");
         }
         messageBar.show(message, Date(), true);
     };
+    
+    /* autoLogout component */
+    fluid.defaults("cspace.autoLogout", {
+        gradeNames: ["fluid.eventedComponent", "autoInit", "fluid.modelComponent"],
+        preInitFunction: "cspace.autoLogout.preInit",
+        finalInitFunction: "cspace.autoLogout.finalInit",
+        invokers: {
+            logoutUser: "cspace.util.redirectToLoginPage",
+            warnUser: null,
+            processModel: null
+        },
+        events: {
+            onModel: null
+        },
+        listeners: {
+            onModel: "{that}.applyModel"
+        },
+        timerLoginExpiry: undefined,
+        timerLoginExpiryNotification: undefined,
+        loginExpiryTime: undefined,
+        loginExpiryNotificationTime: 180, // Going to set default 3 minutes of notifications before the logout
+        model: {}
+    });
+    
+    cspace.autoLogout.preInit = function (that) {
+        that.applyModel = function (newModel) {
+            that.applier.requestChange("", newModel);
+        };
+    };
+    
+    cspace.autoLogout.finalInit = function (that) {
+        var invokers = that.options.invokers;
+        var setTimers = function () {
+            var loginExpiryTime = that.options.loginExpiryTime,
+                loginExpiryNotificationTime = that.options.loginExpiryNotificationTime,
+                logoutUser = (invokers.logoutUser) ? that.logoutUser : null,
+                warnUser = (invokers.warnUser) ? that.warnUser : null;
+
+            if (!loginExpiryTime || !logoutUser) {
+                return;
+            }
+
+            clearTimeout(that.options.timerLoginExpiry);
+            that.options.timerLoginExpiry = setTimeout(logoutUser, loginExpiryTime * 1000);
+
+            if (loginExpiryNotificationTime && loginExpiryTime && (loginExpiryTime - loginExpiryNotificationTime) > 0 && warnUser) {
+                clearTimeout(that.options.timerLoginExpiryNotification);
+                that.options.timerLoginExpiryNotification = setTimeout(warnUser, (loginExpiryTime - loginExpiryNotificationTime) * 1000);
+            }
+        };
+        if (invokers.processModel) {
+            that.applier.modelChanged.addListener("", function () {
+                that.processModel();
+                setTimers();
+            });
+            that.processModel();
+        }
+        setTimers();
+    };
+    
+    cspace.autoLogout.warnUser = function (messageBar, strings, parentBundle, loginExpiryNotificationTime) {
+        loginExpiryNotificationTime = Math.floor(loginExpiryNotificationTime / 60);
+        messageBar.show(parentBundle.resolve("login-autoLogoutMessage", [loginExpiryNotificationTime]), null, false);
+    };
+    
+    cspace.autoLogout.processLoginStatus = function (that) {
+        var loginStatus = that.model;
+        
+        // If we are not logged-in or have a valid login expiry time then set a timer on for auto logout
+        if (!loginStatus.login || !loginStatus.maxInterval) {
+            return;
+        }
+        
+        that.options.loginExpiryTime = loginStatus.maxInterval;
+    };
+    /* autoLogout component */
     
     fluid.defaults("cspace.vocab", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
