@@ -279,7 +279,6 @@ var utilitiesTester = function ($) {
         "objects": ["create", "read", "update", "delete", "list"]
     };
     
-/*
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
         setExpectedSchemaBasedModel();
         var model = cspace.util.getBeanValue({}, "new", {
@@ -703,23 +702,103 @@ var utilitiesTester = function ($) {
         togo.applier.addSubApplier("four", fourApplier);
         togo.applier.requestChange("four.field6", "NEW");
     });
-*/
+    
+    /* autoLogout testing sets */
     cspace.autoLogout.testWarnUser = function () {
         jqUnit.assertTrue("We are going to show some warning here", true);
     };
     
     cspace.autoLogout.testProcessLoginStatus = function (that) {
         jqUnit.assertTrue("We are going to do some model processing here", true);
-        that.options.loginExpiryTime = that.model.loginExpiryTime;
+        that.options.loginExpiryTime = that.model.maxInterval;
     };
     
     cspace.autoLogout.testLogoutUser = function (that) {
         jqUnit.assertTrue("We are going to logout user here", true);
+        start();
     };
     
-    utilitiesTest.test("Autologout component tests", function () {
+    utilitiesTest.asyncTest("Autologout component with default settings. Should not do anything and should be running without errors. PLEASE WAIT.", function () {
+        expect(0);
+        var options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    }
+                },
+                loginExpiryTime: null,
+                loginExpiryNotificationTime: null
+            },
+            autoLogout = cspace.autoLogout(options);
+        start();
+    });
+    
+    utilitiesTest.asyncTest("Autologout component which does not have warning function but has warning time set. PLEASE WAIT.", function () {
+        expect(1);
+        var waitTime = 2000,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: waitTime - 1000
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component which does not have warning time but has warning function set. PLEASE WAIT.", function () {
+        expect(1);
+        var waitTime = 2000,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: null
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component test without processModel. PLEASE WAIT.", function () {
         expect(2);
-        var waitTime = 5,
+        var waitTime = 2000,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: waitTime - 1000
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component test with all invokers set. PLEASE WAIT.", function () {
+        expect(4);
+        var waitTime = 2000,
             options = {
                 invokers: {
                     logoutUser: {
@@ -733,7 +812,7 @@ var utilitiesTester = function ($) {
                         args: ["{autoLogout}"]
                     }
                 },
-                loginExpiryNotificationTime: waitTime - 1
+                loginExpiryNotificationTime: waitTime - 1000
             },
             autoLogout = cspace.autoLogout(options);
             
@@ -741,6 +820,7 @@ var utilitiesTester = function ($) {
             maxInterval: waitTime
         });
     });
+    /* autoLogout testing sets */
 };
 
 (function () {

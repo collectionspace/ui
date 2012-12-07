@@ -1324,10 +1324,11 @@ fluid.registerNamespace("cspace.util");
     
     cspace.autoLogout.finalInit = function (that) {
         var setTimers = function () {
-            var loginExpiryTime = that.options.loginExpiryTime,
+            var invokers = that.options.invokers,
+                loginExpiryTime = that.options.loginExpiryTime,
                 loginExpiryNotificationTime = that.options.loginExpiryNotificationTime,
-                logoutUser = that.logoutUser,
-                warnUser = that.warnUser;
+                logoutUser = (invokers.logoutUser) ? that.logoutUser : null,
+                warnUser = (invokers.warnUser) ? that.warnUser : null;
             
             if (!loginExpiryTime || !logoutUser) {
                 return;
@@ -1342,7 +1343,7 @@ fluid.registerNamespace("cspace.util");
             }
         };
         
-        if (that.processModel) {
+        if (that.options.invokers.processModel) {
             that.applier.modelChanged.addListener("", function () {
                 that.processModel();
                 setTimers();
