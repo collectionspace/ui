@@ -51,14 +51,19 @@ var datePickerTester = function ($) {
         }
     };
     
+
     datePickerTest.test("Initialization", function () {
-        expect(1);
-        var datePicker = cspace.datePicker(".csc-datePicker-container", {
-            messageBar: cspace.messageBar("body")
-        });
+        expect(2);
+        var nonSortedEras = ["BC", "BCE", "AD"],
+            sortedEras = ["BCE", "BC", "AD"],
+            datePicker = cspace.datePicker(".csc-datePicker-container", {
+                messageBar: cspace.messageBar("body"),
+                eras: nonSortedEras
+            });
         jqUnit.assertNotUndefined("datePickers google date picker should not be undefined", datePicker.datePickerWidget);
+        jqUnit.assertDeepEq("datePickers valid eras should be sorted by length in desc order", sortedEras, datePicker.options.eras);
     });
-    
+ 
     datePickerTest.test("Use google DatePicker to select a date", function () {
         expect(5);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
@@ -101,6 +106,60 @@ var datePickerTester = function ($) {
         verifyGoogleDatePickerDate(date.year, date.month, date.day);
     });
     
+    datePickerTest.test("Test eras typed in", function () {
+        var datePicker = cspace.datePicker(".csc-datePicker-container", {
+            messageBar: cspace.messageBar("body")
+        });
+        
+        var tests = [
+            {
+                era: "A.d.",
+                error: true
+            },
+            {
+                era: "JUNK",
+                error: true
+            },
+            {
+                era: "bcd",
+                error: true
+            },
+            {
+                era: "b.c.",
+                error: true
+            }
+        ];
+        
+        // Add every possible validEra to the test case
+        fluid.each(datePicker.options.eras, function (validEra) {
+            tests.push({
+                era: validEra,
+                error: false
+            });
+        });
+        
+        expect(tests.length);
+        
+        var testEraFunction = function (era, error) {
+            var dateWithoutEra = "2003-01-01",
+                userInputDate = dateWithoutEra + " " + era,
+                date = buildDateStructure(dateWithoutEra, "yyyy-MM-dd"),
+                inputField = datePicker.container;
+            inputField.val(userInputDate);
+            inputField.change();
+            if (!error) {
+                jqUnit.assertEquals("Date should use Jan 01 as default month and a default day", date.formattedDate + " " + era, inputField.val());
+            } else {
+                jqUnit.assertEquals("Date should be empty since era " + era + " format was incorrect", "", inputField.val());
+            }
+        };
+        
+        // Run our era tests
+        fluid.each(tests, function (test) {
+            testEraFunction(test.era, test.error);
+        });
+    });
+
     datePickerTest.test("Test when year is < 1900 typed in", function () {
         expect(1);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
