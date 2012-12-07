@@ -1,5 +1,9 @@
 {
     "details": {
+        ".csc-collection-object-computedCurrentLocation-label": {
+            "messagekey": "collection-object-computedCurrentLocationLabel"
+        },
+        ".csc-collection-object-computedCurrentLocation": "${fields.computedCurrentLocation}",
         ".csc-collection-object-assocPeopleGroup-label": {
             "messagekey": "collection-object-assocPeopleGroupLabel"
         },
