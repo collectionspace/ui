@@ -279,6 +279,7 @@ var utilitiesTester = function ($) {
         "objects": ["create", "read", "update", "delete", "list"]
     };
     
+/*
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
         setExpectedSchemaBasedModel();
         var model = cspace.util.getBeanValue({}, "new", {
@@ -701,6 +702,44 @@ var utilitiesTester = function ($) {
         fluid.attachModel(togo.model, "four", four);
         togo.applier.addSubApplier("four", fourApplier);
         togo.applier.requestChange("four.field6", "NEW");
+    });
+*/
+    cspace.autoLogout.testWarnUser = function () {
+        jqUnit.assertTrue("We are going to show some warning here", true);
+    };
+    
+    cspace.autoLogout.testProcessLoginStatus = function (that) {
+        jqUnit.assertTrue("We are going to do some model processing here", true);
+        that.options.loginExpiryTime = that.model.loginExpiryTime;
+    };
+    
+    cspace.autoLogout.testLogoutUser = function (that) {
+        jqUnit.assertTrue("We are going to logout user here", true);
+    };
+    
+    utilitiesTest.test("Autologout component tests", function () {
+        expect(2);
+        var waitTime = 5,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    },
+                    processModel: {
+                        funcName: "cspace.autoLogout.testProcessLoginStatus",
+                        args: ["{autoLogout}"]
+                    }
+                },
+                loginExpiryNotificationTime: waitTime - 1
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
     });
 };
 
