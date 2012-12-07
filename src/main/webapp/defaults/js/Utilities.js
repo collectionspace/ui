@@ -1312,7 +1312,7 @@ fluid.registerNamespace("cspace.util");
         timerLoginExpiry: undefined,
         timerLoginExpiryNotification: undefined,
         loginExpiryTime: undefined,
-        loginExpiryNotificationTime: undefined,
+        loginExpiryNotificationTime: 180, // Going to set default 3 minutes of notifications before the logout
         model: {}
     });
     
