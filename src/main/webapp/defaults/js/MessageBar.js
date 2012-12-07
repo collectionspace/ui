@@ -42,6 +42,13 @@ cspace = cspace || {};
     cspace.messageBarImpl.show = function (that, message, time, isError) {
         // Check if message is an object of type {isError, message} and if not then it is just a plain string message
         message = message.message || message;
+
+        message = fluid.find(message.split(":"), function (mSeg) {
+            mSeg = $.trim(mSeg).toUpperCase().replace(/\s/gi, "");
+            var resolved = that.options.parentBundle.resolve(mSeg);
+            if (resolved !== "[Message string for key " + mSeg + " not found]") {return resolved;}
+        }) || message;
+
         that.applier.requestChange("", {
             message: message,
             time: time
