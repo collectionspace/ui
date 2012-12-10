@@ -529,7 +529,13 @@
             return function () {
                 var n = Number(s);
                 this.year = ((s.length > 2) ? n : 
-                    (n + (((n + 2000) < $C.twoDigitYearMax) ? 2000 : 1900))); 
+                    (n + (((n + 2000) < $C.twoDigitYearMax) ? 2000 : 1900)));
+            };
+        },
+        tinyYear: function (s) {
+            // Rule for supporting tiny years which are <1900
+            return function () {
+                this.year = Number(s);
             };
         },
         rday: function (s) { 
@@ -603,6 +609,10 @@
             }
 
             var r = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
+            // Since the default date does not support <1900 years we have to overwrite year if it provided in a tiny format
+            if (this.year <= 1900) {
+                r.setUTCFullYear(this.year);
+            }
 
             if (this.timezone) { 
                 r.set({ timezone: this.timezone }); 
@@ -805,6 +815,8 @@
     g.yy = _.cache(_.process(_.rtoken(/^(\d\d)/), t.year));
     g.yyy = _.cache(_.process(_.rtoken(/^(\d\d?\d?\d?)/), t.year));
     g.yyyy = _.cache(_.process(_.rtoken(/^(\d\d\d\d)/), t.year));
+    // New rule for <1900 year support
+    g.qqqq = _.cache(_.process(_.rtoken(/^(\d\d?\d?\d?)/), t.tinyYear));
 	
 	// rolling these up into general purpose rules
     _fn = function () { 
@@ -864,8 +876,9 @@
     g.format = _.process(_.many(
         _.any(
         // translate format specifiers into grammar rules
+        // Adding our new "qqqq" rule in order to support <1900 year to the default set of the rules
         _.process(
-        _.rtoken(/^(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?)/), 
+        _.rtoken(/^(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|qqqq|ss?|tt?|zz?z?)/), 
         function (fmt) { 
         if (g[fmt]) { 
             return g[fmt]; 
@@ -918,6 +931,7 @@
     };
 
 	// check for these formats first
+	// Adding our new "qqqq" rule in order to support <1900 year
     g._formats = g.formats([
         "\"yyyy-MM-ddTHH:mm:ssZ\"",
         "yyyy-MM-ddTHH:mm:ssZ",
@@ -934,7 +948,7 @@
         "ddMyyyy",
         "Mdyyyy",
         "dMyyyy",
-        "yyyy",
+        "qqqq",
         "Mdyy",
         "dMyy",
         "d"

@@ -1776,6 +1776,58 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
 .found-records-box { 
     margin-top: 20px}
 
+.cs-mediaUploader .cs-mediaUploader-note {
+    padding-left: 19%;
+    font-style: italic;
+    color: #4D4D4D;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    height: 21px;
+    margin: 0;
+    background-color: #73AA4F;
+    border: medium none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: bold;
+    width: 6.5em;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton[disabled], .cs-mediaUploader .cs-mediaUploader-uploadButton:hover[disabled], .cs-mediaUploader .cs-mediaUploader-uploadButton:focus[disabled] {
+    background-color: #CCCCCC;
+    background-image: none;
+    color: #606060;
+    cursor: default;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton:hover, .cs-mediaUploader .cs-mediaUploader-uploadButton:focus {
+    background-color: #48722D;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton[disabled] .cs-mediaUploader .cs-mediaUploader-uploadButton[disabled]:hover, .cs-mediaUploader .cs-mediaUploader-uploadButton[disabled]:focus {
+    background-color: #CCCCCC;
+    background-image: none;
+    color: #606060;
+    cursor: default;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButtonLabel {
+    cursor: pointer;
+    float: left;
+    left: 1em;
+    top: 4px;
+    position: absolute;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButtonInput {
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 .cs-mediaUploader .info-column {
     margin: 15px 0 0 20px;
 }

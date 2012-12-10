@@ -92,7 +92,7 @@ cspace = cspace || {};
         return makeRequiredFieldsValidator(messageBar, domBinder, "email", message)();      
     };
 
-    var passwordFormValid = function (messageBar, domBinder, allRequiredMessage, mustMatchMessage) {
+    var passwordFormValid = function (messageBar, domBinder, passwordValidator, allRequiredMessage, mustMatchMessage) {
         if (!makeRequiredFieldsValidator(messageBar, domBinder, "password", allRequiredMessage)()) {
             return false;
         }
@@ -101,7 +101,7 @@ cspace = cspace || {};
             domBinder.locate("newPassword").focus();
             return false;
         }
-        return true;
+        return passwordValidator.validateLength(domBinder.locate("newPassword").val());
     };
     
     var wrapSuccess = function (that, event, url) {
@@ -113,7 +113,9 @@ cspace = cspace || {};
                 return;
             }
             if (data.isError === true) {
-                fluid.each(data.messages, function (message) {
+                var messages = data.messages || data.message;
+                messages = fluid.makeArray(messages);
+                fluid.each(messages, function (message) {
                     that.displayErrorMessage(message);
                 });
                 return;
@@ -175,6 +177,10 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
+        that.locate("password").change(function () {
+            var pwd = that.locate("password");
+            pwd.val($.trim(pwd.val()));
+        });
         that.locate("requestReset").click(function (e) {
             that.messageBar.hide();
             showResetRequestForm(that.dom);
@@ -406,7 +412,7 @@ cspace = cspace || {};
             }
         };
         that.submitNewPassword = function () {
-            if (passwordFormValid(that.messageBar, that.dom, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
+            if (passwordFormValid(that.messageBar, that.dom, that.passwordValidator, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
                 submitNewPassword(that.locate("newPassword").val(), that.options.urls.resetpassword, that);
             }
         };

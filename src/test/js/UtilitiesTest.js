@@ -702,6 +702,125 @@ var utilitiesTester = function ($) {
         togo.applier.addSubApplier("four", fourApplier);
         togo.applier.requestChange("four.field6", "NEW");
     });
+    
+    /* autoLogout testing sets */
+    cspace.autoLogout.testWarnUser = function () {
+        jqUnit.assertTrue("We are going to show some warning here", true);
+    };
+    
+    cspace.autoLogout.testProcessLoginStatus = function (that) {
+        jqUnit.assertTrue("We are going to do some model processing here", true);
+        that.options.loginExpiryTime = that.model.maxInterval;
+    };
+    
+    cspace.autoLogout.testLogoutUser = function (that) {
+        jqUnit.assertTrue("We are going to logout user here", true);
+        start();
+    };
+    
+    utilitiesTest.asyncTest("Autologout component with default settings. Should not do anything and should be running without errors.", function () {
+        expect(0);
+        var options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    }
+                },
+                loginExpiryTime: null,
+                loginExpiryNotificationTime: null
+            },
+            autoLogout = cspace.autoLogout(options);
+        start();
+    });
+    
+    utilitiesTest.asyncTest("Autologout component which does not have warning function but has warning time set.", function () {
+        expect(1);
+        var waitTime = 0.002,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: waitTime - 0.001
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component which does not have warning time but has warning function set.", function () {
+        expect(1);
+        var waitTime = 0.002,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: null
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component test without processModel.", function () {
+        expect(2);
+        var waitTime = 0.002,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    }
+                },
+                loginExpiryTime: waitTime,
+                loginExpiryNotificationTime: waitTime - 0.001
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    
+    utilitiesTest.asyncTest("Autologout component test with all invokers set.", function () {
+        expect(4);
+        var waitTime = 0.002,
+            options = {
+                invokers: {
+                    logoutUser: {
+                        funcName: "cspace.autoLogout.testLogoutUser"
+                    },
+                    warnUser: {
+                        funcName: "cspace.autoLogout.testWarnUser"
+                    },
+                    processModel: {
+                        funcName: "cspace.autoLogout.testProcessLoginStatus",
+                        args: ["{autoLogout}"]
+                    }
+                },
+                loginExpiryNotificationTime: waitTime - 0.001
+            },
+            autoLogout = cspace.autoLogout(options);
+            
+        autoLogout.applier.requestChange("", {
+            maxInterval: waitTime
+        });
+    });
+    /* autoLogout testing sets */
 };
 
 (function () {

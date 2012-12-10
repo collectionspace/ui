@@ -565,6 +565,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 readOnly: "{recordEditor}.options.readOnly"
             }
         });
+        fluid.demands("cspace.datePicker", "cspace.advancedSearch", {
+            options: {
+                eras: ["BCE", "B.C.", "B.C.E.", "C.E.", "BC", "CE", "AD", "A.D."]
+            }
+        });
         
         // Footer demands
         fluid.demands("footer", "cspace.pageBuilder", {
@@ -856,60 +861,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire"
                 }
-            }
-        });
-        
-        // Media upload demands
-
-        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.singleFile"], {
-            options: fluid.COMPONENT_OPTIONS
-        });
-        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.html5"], {
-            options: {
-                listeners: {
-                    onUploadStart: "{loadingIndicator}.events.showOn.fire",
-                    afterFileQueued: "{mediaUploader}.afterFileQueuedListener",
-                    onFileSuccess: [{
-                        listener: "{mediaUploader}.onFileSuccess"
-                    }, {
-                        listener: "{loadingIndicator}.events.hideOn.fire"
-                    }],
-                    onFileError: [{
-                        listener: "{loadingIndicator}.events.hideOn.fire"
-                    }, {
-                        listener: "{mediaUploader}.onFileError"
-                    }]
-                }
-            }
-        });
-        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.swfUpload"], {
-            options: {
-                listeners: {
-                    onUploadStart: "{loadingIndicator}.events.showOn.fire",
-                    afterFileQueued: "{mediaUploader}.afterFileQueuedListener",
-                    onFileSuccess: [{
-                        listener: "{mediaUploader}.onFileSuccess"
-                    }, {
-                        listener: "{loadingIndicator}.events.hideOn.fire"
-                    }],
-                    onFileError: [{
-                        listener: "{loadingIndicator}.events.hideOn.fire"
-                    }, {
-                        listener: "{mediaUploader}.onFileError"
-                    }]
-                }
-            }
-        });
-        fluid.demands("fluid.uploader.html5Strategy.browseButtonView", ["fluid.uploader.html5Strategy.local", "cspace.mediaUploader"], {
-            container: "{multiFileUploader}.container",
-            options: {
-                mergePaths: ["{options}", {
-                    events: {
-                        onBrowse: "{local}.events.onFileDialog"
-                    }
-                }, {
-                    multiFileInputMarkup: "<input type='file' name='file' multiple='' class='flc-uploader-html5-input fl-hidden' />"
-                }]
             }
         });
         

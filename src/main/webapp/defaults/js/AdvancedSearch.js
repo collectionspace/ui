@@ -464,11 +464,23 @@ cspace = cspace || {};
         },
         rendererOptions: {
             instantiator: "{instantiator}",
-            parentComponent: "{searchFields}"
+            parentComponent: "{searchFields}",
+            autoBind: true
         },
         strings: {},
-        parentBundle: "{globalBundle}"
+        preInitFunction: "cspace.advancedSearch.searchFields.preInit",
+        parentBundle: "{globalBundle}",
+        latestDate: "updatedAtEnd"
     });
+
+    cspace.advancedSearch.searchFields.preInit = function (that) {
+        // CSPACE-5476: Fixing the issue with the server not being able to handle inslusivity with dates
+        // on advanced search. Doing it on the client for the latest date.
+        that.applier.guards.addListener(that.options.latestDate, function (model, changeRequest) {
+            changeRequest.value =
+                Date.parse(changeRequest.value).addDays(1).toString("yyyy-MM-dd");
+        });
+    };
 
     cspace.advancedSearch.searchFields.produceTree = function (that) {
         return that.options.uispec;

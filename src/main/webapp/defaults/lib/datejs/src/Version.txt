@@ -1,3 +1,0 @@
-This is a svn trunk copy of datejs revision r194.
-
-SVN repo: http://datejs.googlecode.com/svn/trunk/

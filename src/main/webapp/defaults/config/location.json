@@ -9,7 +9,7 @@
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
-                            "identificationNumber": ".csc-location-displayName"
+                            "identificationNumber": ".csc-locationAuthority-termDisplayName"
                         }
                     }
                 },

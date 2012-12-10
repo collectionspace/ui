@@ -39,6 +39,22 @@ var mbTester = function ($) {
         jqUnit.assertTrue("Message should have error style", $.inArray(mb.options.styles.error, mb.locate("messageBlock")[0].classList) > 0);
         mb.locate("cancel").click();
         jqUnit.notVisible("Message box should be invisible", mb.container);
+        mb.disable();
+        mb.show("TEST");
+        jqUnit.notVisible("Message box should be invisible since mb was disabled", mb.container);
+    });
+    
+    mbTest.test("MessageBar with an error object passed into it", function () {
+        var mb = setupMessageBar(),
+            error = {
+                isError: true,
+                message: "You are looking at the message in the error object"  
+            };
+        mb.show(error);
+        jqUnit.assertEquals("Message should say", error.message, mb.locate("message").text());
+        jqUnit.assertEquals("Button should say", "OK", mb.locate("cancel").val());
+        mb.locate("cancel").click();
+        jqUnit.notVisible("Message box should be invisible", mb.container);
     });
 };
 

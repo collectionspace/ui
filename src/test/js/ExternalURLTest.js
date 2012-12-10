@@ -25,7 +25,7 @@ var externalURLTester = function ($) {
             errorClass = externalURL.options.styles.error;
         
         fluid.each(urls, function (testPair) {
-            url = testPair[0];
+            url = $.trim(testPair[0]);
             validURL = testPair[1];
             
             input.val(url);
@@ -58,9 +58,11 @@ var externalURLTester = function ($) {
             [ "http://www1.cbc.ca/", true ],
             [ "http://upload.wikimedia.org/wikipedia/en/7/78/Trollface.svg", true],
             [ "http://upload.wikimedia.org/wikipedia/en/thumb/7/78/Trollface.svg/200px-Trollface.svg.png", true],
-            [ "http://www.nasa.gov/images/content/674789main_pia16021-full_full.jpg", true]
+            [ "http://www.nasa.gov/images/content/674789main_pia16021-full_full.jpg", true],
+            [ "http://www.nasa.gov/images/content/674789main_pia16021-full_full.jpg            ", true]
         ];
         
+        expect(4 + urls.length * 3);
         checkURLValidity(urls, input, button, externalURL);
     };
     
@@ -94,7 +96,6 @@ var externalURLTester = function ($) {
     externalURLTest.test("Initialization", function () {
         // IMPROVE REGEX to parse such fail urls like
         // http://jsonlint..com or http://www1.cbc.ca/
-        expect(43);
         setupAndTest({}, initAndURLCheck);
     });
     
