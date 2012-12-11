@@ -19,14 +19,16 @@ html{
     font-size: 100%;} 
 body {
     font-family: Helvetica,arial,freesans,clean,sans-serif;
-    font-size: 12px;
+    font-size: 12px; 
     color: #333;
     line-height:1.2; 
     padding:5px 4px 0 4px;
     margin:0;}
 input:focus, a:focus, button:focus, form:focus, select:focus, textarea:focus, div:focus {
     outline:1px solid #000 !important;
-}
+    outline-offset:-1px;}
+td input:focus, td a:focus, td button:focus, td form:focus, td select:focus, td textarea:focus, td div:focus {
+    outline-offset:-1px;}
 table {
     border-collapse:collapse;}
 table tr, table tr td, table tr th  {
@@ -55,28 +57,30 @@ input, textarea, select {
     font-size:12px; 
     font-weight:inherit; 
     line-height:15px; 
-    padding:0; 
+    padding:0 0 1px 1px; 
     margin:0; 
     border:1px solid #C7CFD4; 
     overflow:visible; 
-    height:19px;
+    height:21px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
     vertical-align: middle;}
-select {height:21px;}
+select {
+    height:21px;
+    padding:0;}
 table select, table ~ select, table input {
     border:none;}
 input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
     height:auto;}
 input[type="checkbox"] {
-	padding:0 2px;}
+    padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
     margin: 0;
-    width: 95%;
-}
-div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
-    width: 88.5%;
-}
+    width: 95%;}
 table input[type="text"], table input[type="password"], table textarea {
     width:100%;}
+table input {
+    height:19px;}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -126,8 +130,8 @@ input[type="button"].createFromExistingButton:focus, input[type="submit"].create
 input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
-    background:white url('../images/icnCancel.png') no-repeat 8px 4px;
+    border-radius:4px;
+    background:white url('../images/icnCancel.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -138,7 +142,7 @@ input[type="button"].cancelButton:focus, input[type="submit"].cancelButton:focus
 input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[disabled] {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background:white url('../images/icnCancelDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
@@ -154,7 +158,7 @@ input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton
     color:#606060
 }
 input[type="button"].editButton, input[type="submit"].editButton {
-    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; 
+    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -162,20 +166,20 @@ input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
 input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
-    background:white url('../images/icnDelete.png') no-repeat 8px 4px;
+    background:white url('../images/icnDelete.png') no-repeat 8px 4px; 
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;}
+    border-radius:4px;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover,
 input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[disabled] {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background:white url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px;
@@ -238,7 +242,7 @@ input.secondaryButton:focus, input.secondaryButton:hover {
     vertical-align: middle;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     }
 .gotoButton:hover {
     background-color:#DAEDD1;}
@@ -247,7 +251,7 @@ input.secondaryButton:focus, input.secondaryButton:hover {
     vertical-align: middle;
 }
 .button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
-    margin-left:10px;
+    margin-left:10px; 
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
     margin-bottom:0px;}
@@ -423,12 +427,12 @@ li .flc-pager-pageLink {
     width:auto; 
     margin-bottom:2px; 
     border-bottom: 0px solid #4D4D4D;
-	background: #fff url("../images/header-menu-row-buffer.png") repeat-x right bottom;}
+    background: #fff url("../images/header-menu-row-buffer.png") repeat-x right bottom;}
 .header-menu-row .inner {
     float:left; 
     background-color:#fff; 
     margin-bottom:-2px;
-	line-height:1;}
+    line-height:1;}
 #mycollectionspace .header-menu-row .menu-item:nth-child(1), #mycollectionspace .header-menu-row .menu-item:nth-child(1) a,
 #createnew .header-menu-row .menu-item:nth-child(2), #createnew .header-menu-row .menu-item:nth-child(2) a,
 #search .header-menu-row .menu-item:nth-child(3), #search .header-menu-row .menu-item:nth-child(3) a,
@@ -462,7 +466,7 @@ li .flc-pager-pageLink {
 #title-bar .title-bar-value {
     padding:0 10px; 
     height:42px; 
-    color:#696565; 
+    color:#696565;
     font-weight:bold;}
 #title-bar .title-bar-value .overflow{
     padding-top:9px; 
@@ -473,9 +477,9 @@ li .flc-pager-pageLink {
     float:left;}
 #title-bar .content {
     height:42px; 
-    color:#666666; 
+    color:#666666;
     font-weight:bold; 
-    font-size:2em; 
+    font-size: 2em;
     line-height:110%;}
 #title-bar .content .overflow {
     padding-left:10px; 
@@ -550,8 +554,8 @@ li .flc-pager-pageLink {
     /*display:inline;*/}
 #secondary-nav-menu-sub  .button-row,
 #secondary-nav-footer-menu-sub .button-row {
-	/*float:right;*/
-	text-align:right;}
+    /*float:right;*/
+    text-align:right;}
 .secondary-nav-menu-sub {
     display: table;
 }
@@ -674,8 +678,11 @@ table tbody.highlight tr:focus td {
     padding: 12px;
     width:auto; }
 .information-group .cs-relatedRecordsTab-record.content.main {
-    background-color: white;
+    background-color: #FFFBCC;
     border: 2px solid #F5F5F5;
+}
+.information-group .cs-relatedRecordsTab-record.content.main.cs-relatedRecordsTab-Created {
+    background-color: white;
 }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
@@ -735,7 +742,7 @@ table tbody.highlight tr:focus td {
     padding:0; 
     margin:0; 
     color:#000; 
-    cursor:default;}	
+    cursor:default;}    
 .info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
     padding-bottom:4px;
     min-height: 12px;
@@ -744,27 +751,25 @@ table tbody.highlight tr:focus td {
     font-size:11px; 
     line-height:11px;}
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
-	display:inline-block;}
+    display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
     border:none;
 }
 .info-pair .content.fl-date-group {
-	width: 162px;}
+    width: 166px;}
 td.fl-date-group {
-	min-width:160px;}
+    min-width:160px;}
 .info-pair .content > select {
     width: 95%;
     border-spacing:0;
     margin-top:0;
     border:1px solid #C7CFD4;
-    padding:0;
 }
 div.info-column2-50 .info-pair .content > select {
     width: 88.5%;
 }
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
     width: 95%;
-    border-spacing:0; 
     background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
@@ -780,10 +785,10 @@ div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-da
 }
 
 table.cs-admin-table td {
-	padding:0 2px;}
+    padding:0 2px;}
 table.cs-admin-table td.checkbox {
-	width:13px; 
-	/*padding-top:2px;*/}
+    width:13px; 
+    /*padding-top:2px;*/}
 .info-pair .content table table, /* FIX */ /* info-pair-date doesn't use tables anymore*/
 .info-pair-date .content table  table,
 .info-pair-select table table {
@@ -796,10 +801,10 @@ table.cs-admin-table td.checkbox {
     border-bottom:1px solid #C7CFD4; 
     background-color:#E8E8E8;    
     padding:4px 2px 4px 3px;
-	font-weight:bold; 
+    font-weight:bold; 
     font-size:11px; 
     line-height:1;
-	color:#3B3B3C;}
+    color:#3B3B3C;}
 .info-pair .content tbody tr {}
 .info-pair .content tbody td {
     border: 1px solid #C7CFD4;
@@ -988,14 +993,14 @@ table.cs-admin-table td.checkbox {
     position:absolute;
     right:0;
     top:-25px;
-	float:none;}
+    float:none;}
 .cs-admin-details .info-pair {
     padding-bottom:16px;}
 .cs-admin-details .info-pair .label { 
     /*width:120px; */
     font-weight:bold; 
     padding-bottom:6px;
-	display:inline-block;}
+    display:inline-block;}
 /*.cs-admin-details .info-pair  {
     width:320px;}*/
 /*.cs-admin-details .info-pair  textarea {
@@ -1057,7 +1062,7 @@ table.cs-admin-table td.checkbox {
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
     position:relative;
     margin-bottom:18px;
-	padding-bottom:0px;
+    padding-bottom:0px;
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;
@@ -1187,7 +1192,7 @@ table.cs-admin-table td.checkbox {
 .input-date {
     width: 88.5% !important;
     min-width: 83%;
-	border-right:none;}
+    border-right:none;}
 .input-money-amount {
     width: 120px !important;}
 .content select {
@@ -1334,7 +1339,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .overflowdiv-admin {
     overflow-y:auto; 
     overflow-x:hidden; 
-    max-height:440px;} /*  min-height */
+    max-height:520px;} /*  min-height */
 
 .hidden {
     display: none;}
@@ -1369,7 +1374,6 @@ input[disabled]:hover, input[disabled]:hover    {
 
 .clearfix .cs-repeatable-content,
 .info-column .cs-repeatable-content {
-    float: left;
 }
 
 #secondary-nav .ui-tabs .ui-tabs-nav {
@@ -1383,7 +1387,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .cs-tabs-tab-link {
     -moz-border-radius:5px 5px 0 0;
     -webkit-border-radius:5px 5px 0 0;
-       border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
 }
 .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
     border-color: #78449A #78449A #FFFFFF;
@@ -1457,7 +1461,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 }
 /*   styling the date pickers   */
 .cs-date-picker {
-    margin-top: 21px;}
+    margin-top: 1px;}
 .cs-calendar-image {
     background: url('../images/cal.png') no-repeat center center;
 }
@@ -1513,17 +1517,17 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .cs-relatedRecords-tab .header:nth-child(2) {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-	border-radius: 0;
-	padding: 15px 0 15px 20px;
+    border-radius: 0;
+    padding: 15px 0 15px 20px;
 }
 .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2) {
     background:#6E9FCE url('../images/toggle-less.png') no-repeat 4px 15px;}
 .cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2) {
-    background:#6E9FCE url('../images/toggle-more.png') no-repeat 4px 15px;	}
+    background:#6E9FCE url('../images/toggle-more.png') no-repeat 4px 15px; }
 .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):focus {
     background: #5B92C8 url('../images/toggle-less.png') no-repeat 4px 15px;
 }
@@ -1533,27 +1537,27 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .cs-togglable-collapsed.header {
     -moz-border-radius:6px 6px 6px 6px; 
     -webkit-border-radius:6px 6px 0 0;
-	border-radius:6px 6px 0 0;}
+    border-radius:6px 6px 0 0;}
 .pivot-box .cs-togglable-expanded.header, 
 .pivot-box .cs-togglable-collapsed.header {
-	-moz-border-radius:0; 
+    -moz-border-radius:0; 
     -webkit-border-radius:0;
-	border-radius:0;}
+    border-radius:0;}
 
 .saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     line-height: 1.5;}
 .infopair .header { /* FIX */
-	-moz-border-radius:0; 
+    -moz-border-radius:0; 
     -webkit-border-radius:0;
-	border-radius:0;}
-	
+    border-radius:0;}
+    
 .cs-search-disabled {
     cursor: default !important;}
 .cs-search-disabled td {
@@ -1682,7 +1686,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
 .cs-togglable-expanded {
     background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {
-    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;	}
+    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;  }
 .csc-related-mainheader {
     display:inline;}
 
@@ -1747,10 +1751,11 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     border-left:none;
     height:19px;
     width: 18px;
-	cursor:pointer;
-    /*float:left;*/}
+    cursor:pointer;
+    display: inline-block;
+    float: none;
+    vertical-align: top;}
 td.fl-date-group .cs-calendar-button {
-    float: right;
 }
 table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
@@ -1761,11 +1766,12 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
-.info-pair-date .content input {
+.content input.input-date {
     border-right: none;
+    float:none;
+    display: inline-block;
 }
 .info-pair-date .content input[type="text"] {
-    border-right: none;
     min-width: 83%;
 }
 .found-records-box { 
@@ -1853,14 +1859,14 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     margin-left: 5px;
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     display:table-cell;
     opacity: 1.0;
 }
 input[type=button].cs-mediaUploader-removeMedia {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
     background: url("../images/icnCancel.png") no-repeat scroll 8px 4px transparent;
     color: #669922;
     padding-left: 24px;
@@ -1947,7 +1953,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordList .cs-recordList-title-row {
     -moz-border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
-	border-radius: 4px 0 0 0;
+    border-radius: 4px 0 0 0;
     min-height: 13px;
     width: 100%;
     background-color: #EFEFEF;
@@ -1961,7 +1967,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .right-sidebar .cs-recordList .cs-recordList-title-row {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-	border-radius: 0;
+    border-radius: 0;
 }
 .cs-recordList-new {
     min-height: 13px;
@@ -2017,29 +2023,29 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
-	border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
 }
 .right-sidebar .cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-	border-radius: 0;
+    border-radius: 0;
 }
 .cs-recordList .cs-recordList-deleteRelation {
     background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;
     height: 14px;
-	vertical-align:top;
+    vertical-align:top;
 }
 .cs-recordList .cs-recordList-deleteRelation:hover,
 .cs-recordList .cs-recordList-deleteRelation:focus {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
-	height: 14px;
+    height: 14px;
 }
 .cs-recordList .cs-disabled {
     color: gray;
     cursor: default;
 }
 .cs-mediaUploader .cs-disabled {
-	background-color: #CCC;
+    background-color: #CCC;
 }
 
 .cs-recordList-thumbnail {
@@ -2079,8 +2085,8 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin-bottom: 10px;
     padding: 0 20px;
     -moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
     display: table-cell;
 }
 .cs-reportProducer .cs-reportProducer-reportType {
@@ -2107,7 +2113,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin: 8px 12px 0 0;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-	border-radius:4px;
+    border-radius:4px;
 }
 .cs-reportProducer-loadingIndicator .csc-reportStatus-message {
     padding-left: 44px;
@@ -2120,7 +2126,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 .cs-advancedSearch-template {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1 .cs-advancedSearch-selectRecordType {
     margin-left: 15px;
@@ -2129,14 +2135,14 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     margin-right: 10px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1, .cs-advancedSearch-template .cs-advancedSearch-step2 {
-	border: 1px solid #6E9FCE;
-	margin-bottom: 20px;
-	-moz-border-radius:4px;
+    border: 1px solid #6E9FCE;
+    margin-bottom: 20px;
+    -moz-border-radius:4px;
     -webkit-border-radius:4px;
     background-color: #F5F5F5;
 }
 .cs-advancedSearch-template .cs-advancedSearch-step1-header, .cs-advancedSearch-template .cs-advancedSearch-step2-header {
-	background-color: #6E9FCE;
+    background-color: #6E9FCE;
     display: inline-block;
     padding: 15px;
     font-size: 14px;
@@ -2185,7 +2191,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     border-radius:4px;
     display: none;
 }
+.cs-advancedSearch-searchFields ul.cs-repeatable .content {
 
+}
 .cs-searchTips-template {
     margin: 0 20px;
     color: #316285;
@@ -2279,6 +2287,13 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     display: table-row;
     text-decoration: none;
 }
+.cs-hierarchy .cs-hierarchy-narrowerContext-content {
+    padding-top:18px;
+}
+.cs-hierarchy .content, .cs-hierarchy ul.cs-repeatable {
+    overflow-y:auto;
+    max-height:250px;
+}
 
 /* CSPACE-4676 */
 .csc-blobs-dimension *{ display:none;}
@@ -2331,13 +2346,13 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 /* oocss styles, line is composed of a unit, which can be of varying sizes. lines can contain lines. */
 /* example: 
    <div class="line">
-		<div class="unit size1of4"></div>
-		<div class="unit size1of2"></div>
-		<div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
-			<div class="unit size1of3"></div>
-			<div class="lastUnit size2of3"</div>
-		</div>
-	</div>
+        <div class="unit size1of4"></div>
+        <div class="unit size1of2"></div>
+        <div class="lastUnit line"> TAKES THE REMAINING FOURTH AND DIVIDES IT IN THIRDS
+            <div class="unit size1of3"></div>
+            <div class="lastUnit size2of3"</div>
+        </div>
+    </div>
 */
 .line, .lastUnit { overflow: hidden; _overflow: visible; _zoom:1; }
 .unit { float: left; _zoom: 1; }
@@ -2366,27 +2381,27 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 .oocss .info-pair-select,
 .oocss .info-pair-termList
 {
-	width: auto;
-	padding-right: 1.5em;
+    width: auto;
+    padding-right: 1.5em;
 }
 
 .oocss .cs-repeatable-group li {
-	background-color: #E2E2E2 !important;
-	border: 1px solid #CCC !important;
-	padding: 4px 4px 0 4px !important;
-	margin-bottom: 4px !important;
+    background-color: #E2E2E2 !important;
+    border: 1px solid #CCC !important;
+    padding: 4px 4px 0 4px !important;
+    margin-bottom: 4px !important;
 }
 
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
-	top: -12px !important;
+    top: -12px !important;
 }
 
 .infoDiv .fieldgroup {
-	background: none !important;
+    background: none !important;
 }
 
 /*.csc-place .cs-repeatable-repeat input, .csc-place .cs-repeatable-repeat textarea {
-	width: 100% !important;
+    width: 100% !important;
 }
 */
 .remarks, .georefplacename {
@@ -2429,8 +2444,11 @@ li.cs-locked {
     float: none;
 }
 li.cs-repeatable-repeat .cs-termList {
-    float: left;
+    display: inline-block;
     width: 88.5%;
+}
+.information-subgroup li.cs-repeatable-repeat .cs-termList {
+    width: 87.5%;
 }
 li.cs-repeatable-repeat .cs-singleElementGroup .cs-termList {
     width: 100%;
@@ -2522,7 +2540,7 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
     margin-bottom: 10px;
 }
-/* This code is only for particular working for L\M\I repeatable Method select */
+/* These styles is only for particular working for L\M\I repeatable Method select */
 .cs-fixedRepeatableSelect {
     min-width: 230px;
 }
@@ -2532,8 +2550,13 @@ input[type="button"].cs-deleteRelationButton {
 .cs-fixedExternalURL {
     min-width: 350px;
 }
+.cs-fixedExternalURL input.cs-repeatable-add[type="button"] {
+    right: 18%;
+}
 .cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
     width: 93%;
+    border-left: none;
+    height: 21px;
 }
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
@@ -2542,7 +2565,7 @@ input[type="button"].cs-deleteRelationButton {
 
 /* stretched stylings */
 div.info-column2-50 .info-pair .content.stretched table, div.info-column2-50 .info-pair-date .content.stretched table, div.info-column2-50 .stretched .info-pair-select table {
-    width: 97%;
+    width: 95%;
 }
 li.cs-repeatable-repeat .stretched .cs-termList {
     width: 100%;

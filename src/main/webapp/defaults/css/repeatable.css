@@ -1,6 +1,5 @@
 /*  styling repeatable fields  */
 .cs-repeatable {
-    display: inline;
 }
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
 .content .cs-repeatable-repeat {}
@@ -8,7 +7,11 @@
 .content li.cs-repeatable-repeat select,
 .content li.cs-repeatable-repeat button,
 .content li.cs-repeatable-repeat textarea {
-	float:left;}
+    display:inline-block;
+}
+.content li.cs-repeatable-repeat input.cs-repeatable-add {
+    display:block;
+}
 .content li.cs-repeatable-repeat .content input,
 .content li.cs-repeatable-repeat .content select,
 .content li.cs-repeatable-repeat .content button,
@@ -16,7 +19,7 @@
 	float:none;
 }
 .content li.cs-repeatable-repeat .content input.cs-repeatable-add {
-    float: right;
+    float:right;
 }
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
@@ -40,18 +43,18 @@ input[type="button"].cs-repeatable-add {
 }
 li.cs-repeatable-repeat {
     list-style-type: none; 
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }
 input.cs-repeatable-primary {
     width: 11px; 
     position: relative; 
-    vertical-align:middle; 
-    border:none; 
-    margin-right:3px;
-    margin-top:2px;
+    vertical-align:top; 
+    border:none;
+    margin:0 3px;
+    height: 19px;
 }
 td input.cs-repeatable-primary {
-    margin:0px 2px 0 2px;
+    margin:0 3px;
     vertical-align:middle;}
 input.cs-repeatable-delete {
     border:none;
@@ -59,6 +62,7 @@ input.cs-repeatable-delete {
     vertical-align:top; 
     padding:0px;
 	width:16px;
+    height:19px;
     background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
 	}
 input.cs-repeatable-delete:hover, 
@@ -84,13 +88,14 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .cs-repeatable-withSubgroup .cs-repeatable-repeat  {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
-	float: left;
+    display: inline-block;
 }
 
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
-	float:left;
+    display: inline-block;
+    float: none;
 }
 
 .infoGroup { 
@@ -126,7 +131,8 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
     float: left;
 }
 .infoDiv input.cs-repeatable-delete {
-    float:right;
+    float:none;
+    display:inline-block;
     border:none;
     vertical-align:top;
     padding:0px;
@@ -136,7 +142,6 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 }
 .infoDiv input.cs-repeatable-delete:hover,
 .infoDiv input.cs-repeatable-delete:focus {
-/*    float:right;*/
     color:white;
     background-color:transparent !important;
     background:url('../images/icnDelete.png') no-repeat 2px 3px;
@@ -144,7 +149,7 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .infoDiv input.cs-repeatable-delete[disabled],
 .infoDiv input.cs-repeatable-delete[disabled]:hover,
 .infoDiv input.cs-repeatable-delete[disabled]:focus {
-    float:right;
+    float:none;
     background-color:transparent !important;
     background:url('../images/icnDeleteDisabled.png') no-repeat 2px 3px;
 }
@@ -179,14 +184,19 @@ ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList select {
 input.cs-autocomplete-input,
 ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
 ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
-ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content,
+textarea.cs-repeatable-content,
+select.cs-repeatable-content {
     width: 88.5%;
 }
 
-
-textarea.cs-repeatable-content,
-select.cs-repeatable-content {
-    width: 90%;
+.information-subgroup input.cs-autocomplete-input,
+.information-subgroup ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
+.information-subgroup ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
+.information-subgroup ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content,
+.information-subgroup textarea.cs-repeatable-content,
+.information-subgroup select.cs-repeatable-content {
+    width: 87.5%;
 }
 
 div.infoGroup li.cs-repeatable-repeat {
@@ -198,6 +208,9 @@ div.info-pair-select li.cs-repeatable-repeat {
 
 li.cs-repeatable-repeat div.cs-repeatable-content {
     width: 88.5%;
+    float:none;
+    display:inline-block;
+    vertical-align: top;
 }
 td div.cs-termList,
 td select {
@@ -206,7 +219,7 @@ td select {
 
 li.cs-repeatable-repeat div.cs-repeatable-content.cs-repeatable-stretched,
 li.cs-repeatable-repeat div.cs-termList.cs-repeatable-stretched {
-    width: 95%;
+    width: 94%;
 }
 
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
@@ -216,13 +229,20 @@ ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input
     width: 21px;
 }
 ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-primary {
-    width: 12px;
+    width: 11px;
 }
-
+.cs-advancedSearch-searchFields .content li.cs-repeatable-repeat input.cs-repeatable-primary {
+    display:none;
+}
 
 div.cs-repeatable-group div.cs-repeatable-content,
 li.cs-repeatable-repeat {
-    width: 95%;
+    width: 93%;
+}
+
+.cs-fixedExternalURL .cs-repeatable-group div.cs-repeatable-content,
+.cs-fixedExternalURL li.cs-repeatable-repeat {
+    width: 100%;
 }
 
 div.infoGroup div.cs-repeatable-group {
@@ -232,7 +252,7 @@ div.infoGroup div.cs-repeatable-group {
 
 div.info-pair-select div.content,
 div.info-pair-date div.content {
-    display: inherit;
+    /*display: inherit;*/
 }
 div.info-pair-date {
     min-width: 165px;

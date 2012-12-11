@@ -150,7 +150,6 @@ cspace = cspace || {};
             add: "cs-repeatable-add",
             repeatable: "cs-repeatable",
             repeat: "cs-repeatable-repeat",
-            clearfix: "clearfix",
             "delete": "cs-repeatable-delete",
             primary: "cs-repeatable-primary",
             content: "cs-repeatable-content",
@@ -285,10 +284,10 @@ cspace = cspace || {};
     var isGroup = function (tree) {
         var index = 0;
         return fluid.find(tree, function () {
-            ++index;
             if (index > 1) {
                 return true;
             }
+            ++index;
         });
     };
 
@@ -465,7 +464,6 @@ cspace = cspace || {};
                        .addClass(getStyle("content"))
                        .wrap($("<ul></ul>").addClass(getStyle("repeatable")))
                        .wrap($("<li/>").addClass(getClass("repeat"))
-                                       .addClass(getStyle("clearfix"))
                                        .addClass(getStyle("repeat"))
                                        .addClass(getStyle("show")))
                        .parent("li");
