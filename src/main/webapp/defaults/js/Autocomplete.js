@@ -92,7 +92,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matches: "matches",
             type: "type",
             csid: "csid",
-            rowDisabled: "disabled"
+            rowDisabled: "disabled",
+            namespace: "namespace"
         },
         preInitFunction: "cspace.autocomplete.preInit",
         postInitFunction: "cspace.autocomplete.postInit",
@@ -669,7 +670,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     csid = that.options.elPaths.csid,
                     type = that.options.elPaths.type,
                     rowDisabled = that.options.elPaths.rowDisabled,
-                    matchesPath = that.options.elPaths.matches;
+                    matchesPath = that.options.elPaths.matches,
+                    namespace = that.options.elPaths.namespace;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
                     var recordCSID = fluid.get(that.options, "recordModel.csid");
                     if (recordCSID && recordCSID === match[csid]) {
@@ -693,6 +695,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[type] = match.type;
                         elem[csid] = match.csid;
                         elem[rowDisabled] = (!elem[preferred] && (disabled === true));
+                        elem[namespace] = match.namespace;
                         return elem;
                     }));
                 });
@@ -720,6 +723,120 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return tree;
     };
     
+    /* miniView component */
+    fluid.defaults("cspace.autocomplete.popup.miniView", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        resources: {
+            template: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.specBuilder",
+                    args: {
+                        forceCache: true,
+                        fetchClass: "slowTemplate",
+                        url: "%webapp/html/components/MiniView.html"
+                    }
+                }
+            }
+        },
+        events: {
+            onModel: null,
+            onHide: null,
+            onShow: null,
+        },
+        listeners: {
+            onModel: "{that}.onModel",
+            onHide: "{that}.hide",
+            onShow: "{that}.show"
+        },
+        selectors: {
+            header: ".cs-autocomplete-popup-miniView-header",
+            body: ".cs-autocomplete-popup-miniView-body",
+            footer: ".cs-autocomplete-popup-miniView-footer"
+        },
+        components: {
+            dataSource: {
+                type: "cspace.autocomplete.popup.miniView.dataSource"
+            }
+        },
+        delay: 1000,
+        model: null,
+        preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
+    });
+    
+    fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "%tenant/%tname/basic/%recordType/%csid",
+            termMap: {
+                csid: "%csid",
+                recordType: "%recordType",
+                vocab: "%vocab"
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.authority"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "%tenant/%tname/vocabularies/basic/%vocab/%csid",
+            termMap: {
+                csid: "%csid",
+                recordType: "%recordType",
+                vocab: "%vocab"
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "%test/data/basic/%recordType/%csid.json",
+            termMap: {
+                csid: "%csid",
+                recordType: "%recordType",
+                vocab: "%vocab"
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.authority", "cspace.localData"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "%test/data/basic/%recordType/%csid.json",
+            termMap: {
+                csid: "%csid",
+                recordType: "%recordType",
+                vocab: "%vocab"
+            }
+        }
+    });
+    
+    cspace.autocomplete.popup.miniView.preInit = function (that) {
+        that.onModel = function (attributes) {
+            that.applier.requestChange("attributes", attributes);
+        };
+        that.applier.modelChanged.addListener("attributes", function () {
+            that.dataSource.get({
+                csid: that.model.attributes.csid,
+                recordType: that.model.attributes.type,
+                vocab: that.model.attributes.namespace
+            }, function (basic) {
+                that.applier.requestChange("basic", basic);
+            });
+        });
+        that.applier.modelChanged.addListener("basic", function () {
+            that.refreshView();
+            that.events.onShow.fire();
+        });
+        fluid.each(["hide", "show"], function (operation) {
+            that[operation] = function () {
+                that.container[operation]();
+            };
+        });
+    };
+    /* miniView component */
+    
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
         selectors: {
@@ -732,7 +849,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             addTermTo: ".csc-autocomplete-addTermTo"
         },
         invokers: {
-            open: "cspace.autocomplete.popup.open"
+            open: "cspace.autocomplete.popup.open",
+            addRowHover: "cspace.autocomplete.popup.addRowHover"
         },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
@@ -758,7 +876,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         components: {
             eventHolder: "{eventHolder}",
-            vocab: "{vocab}"
+            vocab: "{vocab}",
+            miniView: {
+                type: "cspace.autocomplete.popup.miniView",
+                container: ".cs-autocomplete-popup-miniView",
+                createOnEvent: "afterRender"
+            }
         },
         strings: {},
         parentBundle: "{globalBundle}"
@@ -775,11 +898,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     cspace.autocomplete.popup.open = function (that, extraSelectables) {
+        that.renderer.refreshView();
+        
         var input = fluid.unwrap(that.options.inputField),
             container = that.container,
-            activatables, selectables;
-        that.renderer.refreshView();
-        activatables = that.locate("authorityItem").add(that.locate("matchItemContent"));
+            activatables, selectables,
+            matchItemContent = that.locate("matchItemContent");
+        activatables = that.locate("authorityItem").add(matchItemContent);
         fluid.activatable(activatables, that.activateFunction);
         selectables = $(activatables).add(input);
         if (extraSelectables) {
@@ -796,6 +921,39 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             at: "left bottom",
             of: that.options.inputField,
             collision: "none"
+        });
+        
+        // Add hover for all the elements
+        that.addRowHover(that.miniView, matchItemContent, that.model.matches);
+    };
+    
+    cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches) {
+        var timeout,
+            openMiniView = function (el) {
+                var currentTarget = $(el.currentTarget);
+                
+                var index = currentTarget.attr("id").split(":")[1];
+                
+                index = (index === "") ? 0 : index * 1;
+                timeout = setTimeout(function () {
+                    miniView.container.css({
+                        top: currentTarget.position().top
+                    });
+                    miniView.events.onModel.fire(matches[index]);
+                }, miniView.options.delay);
+            },
+            closeMiniView = function (el) {
+                clearTimeout(timeout);
+                miniView.events.onHide.fire();
+            };
+        elements.focusin(function (el) {
+            openMiniView(el);
+        }).focusout(function (el) {
+            closeMiniView(el);
+        }).hover(function (el) {
+            openMiniView(el);
+        }, function (el) {
+            closeMiniView(el);
         });
     };
 

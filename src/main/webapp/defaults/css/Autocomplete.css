@@ -121,3 +121,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     margin-right: 4px;
     margin-top: 2px;
 }
+
+.csc-autocomplete-popup-miniView {
+    display: block;
+    min-width: 350px;
+    min-height: 150px;
+    z-index: 6000;
+    background-color: yellow;
+    position: absolute;
+    top: 0px;
+    left: 255px;
+    color: black;
+}
