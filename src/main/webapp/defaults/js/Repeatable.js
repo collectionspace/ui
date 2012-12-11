@@ -150,7 +150,6 @@ cspace = cspace || {};
             add: "cs-repeatable-add",
             repeatable: "cs-repeatable",
             repeat: "cs-repeatable-repeat",
-            clearfix: "clearfix",
             "delete": "cs-repeatable-delete",
             primary: "cs-repeatable-primary",
             content: "cs-repeatable-content",
@@ -465,7 +464,6 @@ cspace = cspace || {};
                        .addClass(getStyle("content"))
                        .wrap($("<ul></ul>").addClass(getStyle("repeatable")))
                        .wrap($("<li/>").addClass(getClass("repeat"))
-                                       .addClass(getStyle("clearfix"))
                                        .addClass(getStyle("repeat"))
                                        .addClass(getStyle("show")))
                        .parent("li");

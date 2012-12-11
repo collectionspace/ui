@@ -756,7 +756,7 @@ table tbody.highlight tr:focus td {
     border:none;
 }
 .info-pair .content.fl-date-group {
-    width: 162px;}
+    width: 166px;}
 td.fl-date-group {
     min-width:160px;}
 .info-pair .content > select {
@@ -1339,7 +1339,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .overflowdiv-admin {
     overflow-y:auto; 
     overflow-x:hidden; 
-    max-height:440px;} /*  min-height */
+    max-height:520px;} /*  min-height */
 
 .hidden {
     display: none;}
@@ -1757,8 +1757,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     vertical-align: top;}
 td.fl-date-group .cs-calendar-button {
 }
-table .cs-calendar-button, table .cs-externalURL-button,
-ul .cs-externalURL-button {
+table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
 table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button,
 table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-button { background-color:#fff;}
@@ -1773,7 +1772,6 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     display: inline-block;
 }
 .info-pair-date .content input[type="text"] {
-    border-right: none;
     min-width: 83%;
 }
 .found-records-box { 
@@ -2449,6 +2447,9 @@ li.cs-repeatable-repeat .cs-termList {
     display: inline-block;
     width: 88.5%;
 }
+.information-subgroup li.cs-repeatable-repeat .cs-termList {
+    width: 87.5%;
+}
 li.cs-repeatable-repeat .cs-singleElementGroup .cs-termList {
     width: 100%;
 }
@@ -2554,10 +2555,8 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
     width: 93%;
-    border-top: none;
-    border-bottom: none;
     border-left: none;
-    height: 19px;
+    height: 21px;
 }
 /* These style is only for MediaHandling inputs */
 .cs-mediaUploader-table-row input[type="text"] {
@@ -2566,7 +2565,7 @@ input[type="button"].cs-deleteRelationButton {
 
 /* stretched stylings */
 div.info-column2-50 .info-pair .content.stretched table, div.info-column2-50 .info-pair-date .content.stretched table, div.info-column2-50 .stretched .info-pair-select table {
-    width: 97%;
+    width: 95%;
 }
 li.cs-repeatable-repeat .stretched .cs-termList {
     width: 100%;
