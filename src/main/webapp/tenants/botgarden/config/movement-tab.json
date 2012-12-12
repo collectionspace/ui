@@ -52,10 +52,6 @@
                                                     "togglable"
                                                 ],
                                                 "components": {
-                                                    "recordLock": {
-                                                        "type": "cspace.util.recordLock",
-                                                        "createOnEvent": "afterRender"
-                                                    }
                                                 }
                                             }
                                         }

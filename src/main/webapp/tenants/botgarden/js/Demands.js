@@ -1305,11 +1305,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: "{recordEditor}"
         });
 
-        fluid.demands("cspace.recordEditor.requestSave", ["cspace.recordEditor", "movement.lock"], {
-            funcName: "cspace.recordEditor.requestSaveMovement",
-            args: "{recordEditor}"
-        });
-
         fluid.demands("cspace.recordEditor.finishSave", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.finishSave",
             args: ["{recordEditor}", "{arguments}.0", "{arguments}.1"]

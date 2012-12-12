@@ -14,10 +14,6 @@
                         },
                         "selectorsToIgnore": ["recordLockContainer", "recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
                         "components": {
-                            "recordLock": {
-                                "type": "cspace.util.recordLock",
-                                "createOnEvent": "afterRender"
-                            }
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
