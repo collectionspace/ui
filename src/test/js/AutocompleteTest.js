@@ -67,7 +67,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.assertTrue("Close button initially hidden", autocomplete.closeButton.button.is(":hidden"));
             input.keydown();
             input.val("top");
-            stop();
         },
 
         clickMatch = function (autocomplete) {
@@ -95,10 +94,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 assertMatchCount("Dialog now empty", 0, autocomplete);
                 start();
             });
-    
+
             input.keydown();
             input.val("Utopia");
-            stop();
         },
     
         clickDisabledMatch = function (autocomplete) {
@@ -130,7 +128,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
             input.keydown();
             input.val("Plummer");
-            stop();
         },
     
         focusBlurable = function (autocomplete) {
@@ -154,10 +151,41 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             autocomplete.popup.dom.locate("authorityItem").eq(0).click();
         },
     
-        gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
-            expect(6);
-            var autocomplete = cspace.autocomplete(container),
+        gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue, hasMiniView) {
+            var expectNum = 6;
+            if (hasMiniView) {
+                ++expectNum;
+            }
+            
+            expect(expectNum);
+            
+            var miniViewContainer = $(".miniViewTest"),
+                onShow = function () {
+                    setTimeout(function () {
+                        jqUnit.assertTrue("miniView is visible", $(".cs-autocomplete-popup-miniView").is(":visible"));
+                    }, 100);
+                },
+                autocompleteOptions = (hasMiniView) ? {
+                    components: {
+                        popup: {
+                            options: {
+                                components: {
+                                    miniView: {
+                                        options: {
+                                            delay: null,
+                                            listeners: {
+                                                onShow: onShow
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } : null,
+                autocomplete = cspace.autocomplete(container, autocompleteOptions),
                 input = autocomplete.autocompleteInput;
+            miniViewContainer.hide();
             autocomplete.autocomplete.events.onSearchDone.addListener(function() {
                 assertPopupOpen(autocomplete, true);
                 assertInputFocused(autocomplete, true);
@@ -172,6 +200,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         assertInputFocused(autocomplete, inputFocus);
                         assertInput(autocomplete, originalValue);
                         jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
+                        $("#blurable").focus();
                         start();
                     }, 200);
                 }, 150);
@@ -179,7 +208,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             input.keydown();
             input.val("Utopia");
             input.focus();
-            stop();
         },
     
         gdInteractionClick = function (container, focusFunc) {
@@ -191,7 +219,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
     
         gdInteractionExclude = function (container, focusFunc) {
-            gdInteraction(container, focusFunc, true, false, "Utopia");
+            gdInteraction(container, focusFunc, true, false, "Utopia", true);
         },
         
         newTermNameNotPresent = function(container, closeFunc) {
@@ -207,7 +235,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
             input.keydown();
             input.val("top");
-            stop();
         },
         
         newTermNamePresent = function(container, closeFunc) {
@@ -227,7 +254,120 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
             input.keydown();
             input.val("top");
-            stop();
+        },
+        
+        miniViewTestBasic = function () {
+            expect(2);
+            
+            var delay = null,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                    miniView.events.onHide.fire();
+                },
+                onHide = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
+                    start();
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow,
+                        onHide: onHide
+                    }
+                });
+
+            miniView.events.onShow.fire();
+        },
+        
+        miniViewTestDelay = function () {
+            expect(2);
+            
+            var delay = 100,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
+                    setTimeout(function () {
+                        jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                        start();
+                    }, delay + 100);
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow
+                    }
+                });
+
+            container.hide();
+            miniView.events.onShow.fire();
+        },
+        
+        miniViewTestModelChange = function () {
+            expect(2);
+            
+            var delay = null,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                    miniView.events.onHide.fire();
+                },
+                onHide = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
+                    start();
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow,
+                        onHide: onHide
+                    }
+                });
+
+            miniView.events.onModel.fire({
+                csid: "3c238b1b-1163-471c-98e4",
+                type: "person",
+                namespace: "person"
+            });
         },
     
         makeArgumentedTest = function (testFunc, argFunc) {
@@ -241,13 +381,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 "#autocomplete1": " new markup",
                 "#autocomplete2": " old markup"
             }, function (autocompleteID, message) {
-                autocompleteTests.test(name + message, function () {
+                autocompleteTests.asyncTest(name + message, function () {
                     func(autocompleteID);
                 });
             });
         },
         
         testScenario = {
+            "Testing basic miniView component functionality": {
+                testFunc: miniViewTestBasic
+            },
+            "Testing basic miniView component functionality with a Delay. PLEASE WAIT.": {
+                testFunc: miniViewTestDelay
+            },
+            "Testing model change for miniView component": {
+                testFunc: miniViewTestModelChange
+            },
             "Input newTerm is NOT present in autocomplete by default": {
                 testFunc: newTermNameNotPresent,
                 argFunc: clickCloseButton

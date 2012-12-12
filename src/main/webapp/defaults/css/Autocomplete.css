@@ -123,13 +123,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 }
 
 .csc-autocomplete-popup-miniView {
-    display: block;
+    display: none;
     min-width: 350px;
     min-height: 150px;
     z-index: 6000;
-    background-color: yellow;
+    background-color: #CFE2F3;
     position: absolute;
     top: 0px;
     left: 255px;
     color: black;
+    border: 2px solid #C7CFD4;
+    box-shadow: 3px 3px 4px #C7CFD4;
 }

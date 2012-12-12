@@ -760,6 +760,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         delay: 1000,
+        showTimer: undefined,
         model: null,
         preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
     });
@@ -826,14 +827,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
         });
         that.applier.modelChanged.addListener("basic", function () {
-            that.refreshView();
+            //that.refreshView();
             that.events.onShow.fire();
         });
-        fluid.each(["hide", "show"], function (operation) {
-            that[operation] = function () {
-                that.container[operation]();
-            };
-        });
+        that.hide = function () {
+            clearTimeout(that.options.showTimer);
+            that.container.hide();
+        };
+        that.show = function () {
+            var options = that.options,
+                showTimer = that.options.showTimer;
+            if (showTimer) {
+                clearTimeout(showTimer);
+            }
+            that.options.showTimer = setTimeout(function () {
+                that.container.show();
+            }, options.delay || 1);
+        };
     };
     /* miniView component */
     
@@ -930,17 +940,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches) {
         var timeout,
             openMiniView = function (el) {
-                var currentTarget = $(el.currentTarget);
-                
-                var index = currentTarget.attr("id").split(":")[1];
+                var currentTarget = $(el.currentTarget),
+                    index = currentTarget.attr("id").split(":")[1];
                 
                 index = (index === "") ? 0 : index * 1;
-                timeout = setTimeout(function () {
-                    miniView.container.css({
-                        top: currentTarget.position().top
-                    });
-                    miniView.events.onModel.fire(matches[index]);
-                }, miniView.options.delay);
+                miniView.container.css({
+                    top: currentTarget.position().top
+                });
+                miniView.events.onModel.fire(matches[index]);
             },
             closeMiniView = function (el) {
                 clearTimeout(timeout);
