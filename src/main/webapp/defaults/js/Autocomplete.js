@@ -742,7 +742,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         events: {
             onModel: null,
             onHide: null,
-            onShow: null,
+            onShow: null
         },
         listeners: {
             onModel: "{that}.onModel",
@@ -950,18 +950,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 miniView.events.onModel.fire(matches[index]);
             },
             closeMiniView = function (el) {
-                clearTimeout(timeout);
                 miniView.events.onHide.fire();
             };
-        elements.focusin(function (el) {
-            openMiniView(el);
-        }).focusout(function (el) {
-            closeMiniView(el);
-        }).hover(function (el) {
-            openMiniView(el);
-        }, function (el) {
-            closeMiniView(el);
-        });
+
+        miniView.container
+            .mouseenter(function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+            }).mouseleave(function (el) {
+                closeMiniView(el);
+            });
+
+        elements
+            .focusin(function (el) {
+                openMiniView(el);
+            }).focusout(function (el) {
+                closeMiniView(el);
+            }).hover(function (el) {
+                clearTimeout(timeout);
+                closeMiniView(el);
+                openMiniView(el);
+            }, function (el) {
+                timeout = setTimeout(function () {
+                    closeMiniView(el);
+                }, 500);
+            });
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");

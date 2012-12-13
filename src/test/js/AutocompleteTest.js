@@ -391,7 +391,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             "Testing basic miniView component functionality": {
                 testFunc: miniViewTestBasic
             },
-            "Testing basic miniView component functionality with a Delay. PLEASE WAIT.": {
+            "Testing basic miniView component functionality with a Delay.": {
                 testFunc: miniViewTestDelay
             },
             "Testing model change for miniView component": {
