@@ -246,7 +246,7 @@ cspace = cspace || {};
         // The arguments to a javascript function are stored in the variable named arguments, which is
         // Array-like, but not an Array. Convert it to an Array using Array.prototype.slice.
         var args = Array.prototype.slice.call(arguments);
-        return ("[" + args.join(", ") + "]");
+        return (args.join(", "));
     };
 
     /*
