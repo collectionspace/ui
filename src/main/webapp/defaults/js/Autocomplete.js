@@ -979,7 +979,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 
                 index = (index === "") ? 0 : index * 1;
                 miniView.container.css({
-                    top: currentTarget.position().top
+                    top: currentTarget.position().top,
+                    left: currentTarget.parent().width() + 25
                 });
                 miniView.events.onModel.fire(matches[index]);
             },
