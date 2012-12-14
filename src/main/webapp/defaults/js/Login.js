@@ -177,6 +177,10 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
+        that.locate("password").change(function () {
+            var pwd = that.locate("password");
+            pwd.val($.trim(pwd.val()));
+        });
         that.locate("requestReset").click(function (e) {
             that.messageBar.hide();
             showResetRequestForm(that.dom);
