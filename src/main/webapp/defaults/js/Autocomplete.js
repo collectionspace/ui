@@ -734,7 +734,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     args: {
                         forceCache: true,
                         fetchClass: "slowTemplate",
-                        url: "%webapp/html/components/MiniView.html"
+                        url: "%webapp/html/components/MiniViewTemplate.html"
                     }
                 }
             }
@@ -750,20 +750,109 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             onShow: "{that}.show"
         },
         selectors: {
-            header: ".cs-autocomplete-popup-miniView-header",
-            body: ".cs-autocomplete-popup-miniView-body",
-            footer: ".cs-autocomplete-popup-miniView-footer"
+            displayName: ".csc-autocomplete-popup-miniView-displayName",
+            field1: ".csc-autocomplete-popup-miniView-field1",
+            field2: ".csc-autocomplete-popup-miniView-field2",
+            field3: ".csc-autocomplete-popup-miniView-field3",
+            field4: ".csc-autocomplete-popup-miniView-field4",
+            
+            field1Label: ".csc-autocomplete-popup-miniView-field1Label",
+            field2Label: ".csc-autocomplete-popup-miniView-field2Label",
+            field3Label: ".csc-autocomplete-popup-miniView-field3Label",
+            field4Label: ".csc-autocomplete-popup-miniView-field4Label"
         },
         components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "{cspace.autocomplete.popup.miniView}.model.attributes.type"
+                },
+                createOnEvent: "onShow"
+            },
             dataSource: {
                 type: "cspace.autocomplete.popup.miniView.dataSource"
-            }
+            },
+            renderer: {}
         },
+        parentBundle: "{globalBundle}",
+        strings: {},
         delay: 1000,
         showTimer: undefined,
         model: null,
         preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
     });
+
+    fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView");
+    
+/*     Demands block for the content in miniView popup */
+    
+/*     display name; birth date; death date; biographical note */
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup"], {
+        options: {
+            protoTree: {
+                displayName: "${basic.fields.termDisplayName}",
+                field1: "${basic.fields.birthDateGroup.dateDisplayDate}",
+                field2: "${basic.fields.deathDateGroup.dateDisplayDate}",
+                field3: "${basic.fields.bioNote}",
+                
+                field1Label: {
+                    messagekey: "person-miniView-field1Label"
+                },
+                field2Label: {
+                    messagekey: "person-miniView-field2Label"
+                }
+            }
+        }
+    });
+    
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "concept"], {
+        options: {
+            protoTree: {
+                header: {
+                    
+                },
+                body: {
+                    
+                },
+                footer: {
+                    
+                }
+            }
+        }
+    });
+    
+
+    
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "location"], {
+        options: {
+
+        }
+    });
+    
+
+/*     display name; founding date; dissolution date; history */
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "organization"], {
+        options: {
+
+        }
+    });
+    
+
+    
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "place"], {
+        options: {
+
+        }
+    });
+    
+
+    
+    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "taxon"], {
+        options: {
+
+        }
+    });
+/*     Demands block for the content in miniView popup */
     
     fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView"], {
         funcName: "cspace.URLDataSource",
@@ -827,7 +916,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
         });
         that.applier.modelChanged.addListener("basic", function () {
-            //that.refreshView();
+            that.refreshView();
             that.events.onShow.fire();
         });
         that.hide = function () {
