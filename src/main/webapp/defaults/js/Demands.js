@@ -414,7 +414,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
                             resolver: "{permissionsResolver}",
                             permission: "update"
-                        }, "create", "{autocomplete}.autocompleteInput"]
+                        }, "create"]
                     }
                 }
             }, "{arguments}.1"]
@@ -441,7 +441,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
                             resolver: "{permissionsResolver}",
                             permission: "update"
-                        }, "create", "{autocomplete}.autocompleteInput"]
+                        }, "create"]
                     }
                 },
                 components: {

@@ -377,8 +377,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         that.search = function (newValue) {
-            var newValue = newValue || that.container.val(),
-                permitted = newValue.length >= that.options.minChars;
+            var permitted;
+            newValue = newValue || that.container.val();
+            permitted = newValue.length >= that.options.minChars;
 
             if (newValue === that.oldValue) {
                 return;
@@ -443,13 +444,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
     
-    cspace.autocomplete.testNewTermDataSource = function (options) {
+    cspace.autocomplete.testNewTermDataSource = function () {
         var url = "%tenant/%tname/%termUrl";
         return {
             options: {
                 url: url
             },
-            resolveUrl: function (directModel) {
+            resolveUrl: function () {
                 var expander = fluid.invoke("cspace.urlExpander");
                 var replaced = url;
                 replaced = expander(replaced);
@@ -725,6 +726,47 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     /* miniView component */
     fluid.defaults("cspace.autocomplete.popup.miniView", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        events: {
+            onModel: null,
+            onHide: null,
+            onShow: null,
+            onContext: null,
+            onRender: null
+        },
+        listeners: {
+            onContext: "{that}.onContext",
+            onModel: "{that}.onModel",
+            onHide: "{that}.hide",
+            onShow: "{that}.show"
+        },
+        components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "{cspace.autocomplete.popup.miniView}.options.context"
+                },
+                createOnEvent: "onContext"
+            },
+            dataSource: {
+                type: "cspace.autocomplete.popup.miniView.dataSource"
+            },
+            renderer: {
+                container: "{cspace.autocomplete.popup.miniView}.container",
+                type: "cspace.autocomplete.popup.miniView.renderer",
+                createOnEvent: "onRender",
+                options: {
+                    model: "{cspace.autocomplete.popup.miniView}.model.basic.fields"
+                }
+            }
+        },
+        delay: 1000,
+        showTimer: undefined,
+        model: null,
+        preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
+    });
+
+    fluid.defaults("cspace.autocomplete.popup.miniView.renderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         resources: {
             template: {
@@ -739,62 +781,67 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         },
-        events: {
-            onModel: null,
-            onHide: null,
-            onShow: null
-        },
-        listeners: {
-            onModel: "{that}.onModel",
-            onHide: "{that}.hide",
-            onShow: "{that}.show"
-        },
+        renderOnInit: true,
+        parentBundle: "{globalBundle}",
+        strings: {},
         selectors: {
             displayName: ".csc-autocomplete-popup-miniView-displayName",
             field1: ".csc-autocomplete-popup-miniView-field1",
             field2: ".csc-autocomplete-popup-miniView-field2",
             field3: ".csc-autocomplete-popup-miniView-field3",
             field4: ".csc-autocomplete-popup-miniView-field4",
-            
             field1Label: ".csc-autocomplete-popup-miniView-field1Label",
             field2Label: ".csc-autocomplete-popup-miniView-field2Label",
             field3Label: ".csc-autocomplete-popup-miniView-field3Label",
             field4Label: ".csc-autocomplete-popup-miniView-field4Label"
-        },
-        components: {
-            context: {
-                type: "fluid.typeFount",
-                options: {
-                    targetTypeName: "{cspace.autocomplete.popup.miniView}.model.attributes.type"
-                },
-                createOnEvent: "onShow"
-            },
-            dataSource: {
-                type: "cspace.autocomplete.popup.miniView.dataSource"
-            },
-            renderer: {}
-        },
-        parentBundle: "{globalBundle}",
-        strings: {},
-        delay: 1000,
-        showTimer: undefined,
-        model: null,
-        preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
+        }
     });
+    fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView.renderer");
 
-    fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView");
-    
-/*     Demands block for the content in miniView popup */
-    
-/*     display name; birth date; death date; biographical note */
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup"], {
+    cspace.autocomplete.popup.miniView.preInit = function (that) {
+        that.onContext = function () {
+            that.options.context = that.model.attributes.type + "-miniView";
+        };
+        that.onModel = function (attributes) {
+            that.applier.requestChange("attributes", attributes);
+            that.events.onContext.fire();
+        };
+        that.applier.modelChanged.addListener("attributes", function () {
+            that.dataSource.get({
+                csid: that.model.attributes.csid,
+                recordType: that.model.attributes.type,
+                vocab: that.model.attributes.namespace
+            }, function (basic) {
+                that.applier.requestChange("basic", basic);
+            });
+        });
+        that.applier.modelChanged.addListener("basic", function () {
+            that.events.onRender.fire();
+            that.events.onShow.fire();
+        });
+        that.hide = function () {
+            clearTimeout(that.options.showTimer);
+            that.container.hide();
+        };
+        that.show = function () {
+            var options = that.options,
+                showTimer = that.options.showTimer;
+            if (showTimer) {
+                clearTimeout(showTimer);
+            }
+            that.options.showTimer = setTimeout(function () {
+                that.container.show();
+            }, options.delay || 1);
+        };
+    };
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "person-miniView"], {
         options: {
             protoTree: {
-                displayName: "${basic.fields.termDisplayName}",
-                field1: "${basic.fields.birthDateGroup.dateDisplayDate}",
-                field2: "${basic.fields.deathDateGroup.dateDisplayDate}",
-                field3: "${basic.fields.bioNote}",
-                
+                displayName: "${termDisplayName}",
+                field1: "${birthDateGroup.dateDisplayDate}",
+                field2: "${deathDateGroup.dateDisplayDate}",
+                field3: "${bioNote}",
                 field1Label: {
                     messagekey: "person-miniView-field1Label"
                 },
@@ -804,56 +851,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }
     });
-    
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "concept"], {
-        options: {
-            protoTree: {
-                header: {
-                    
-                },
-                body: {
-                    
-                },
-                footer: {
-                    
-                }
-            }
-        }
-    });
-    
 
-    
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "location"], {
-        options: {
-
-        }
-    });
-    
-
-/*     display name; founding date; dissolution date; history */
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "organization"], {
-        options: {
-
-        }
-    });
-    
-
-    
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "place"], {
-        options: {
-
-        }
-    });
-    
-
-    
-    fluid.demands("cspace.autocomplete.popup.miniView", ["cspace.autocomplete.popup", "taxon"], {
-        options: {
-
-        }
-    });
-/*     Demands block for the content in miniView popup */
-    
     fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView"], {
         funcName: "cspace.URLDataSource",
         args: {
@@ -901,39 +899,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }
     });
-    
-    cspace.autocomplete.popup.miniView.preInit = function (that) {
-        that.onModel = function (attributes) {
-            that.applier.requestChange("attributes", attributes);
-        };
-        that.applier.modelChanged.addListener("attributes", function () {
-            that.dataSource.get({
-                csid: that.model.attributes.csid,
-                recordType: that.model.attributes.type,
-                vocab: that.model.attributes.namespace
-            }, function (basic) {
-                that.applier.requestChange("basic", basic);
-            });
-        });
-        that.applier.modelChanged.addListener("basic", function () {
-            that.refreshView();
-            that.events.onShow.fire();
-        });
-        that.hide = function () {
-            clearTimeout(that.options.showTimer);
-            that.container.hide();
-        };
-        that.show = function () {
-            var options = that.options,
-                showTimer = that.options.showTimer;
-            if (showTimer) {
-                clearTimeout(showTimer);
-            }
-            that.options.showTimer = setTimeout(function () {
-                that.container.show();
-            }, options.delay || 1);
-        };
-    };
+
     /* miniView component */
     
     fluid.defaults("cspace.autocomplete.popup", {
@@ -1038,7 +1004,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 });
                 miniView.events.onModel.fire(matches[index]);
             },
-            closeMiniView = function (el) {
+            closeMiniView = function () {
                 miniView.events.onHide.fire();
             };
 
@@ -1104,7 +1070,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     }
     
-    cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission, selector) {
+    cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission) {
         var types = fluid.transform(model.authorities, function (auth) {
             // We only need an authority not the vocabulary.
             return auth.type.split("-")[0];
