@@ -124,8 +124,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .csc-autocomplete-popup-miniView {
     display: none;
-    min-width: 350px;
-    min-height: 150px;
+    min-width: 250px;
+    min-height: 50px;
     z-index: 6000;
     background-color: #CFE2F3;
     position: absolute;
@@ -134,4 +134,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     color: black;
     border: 2px solid #C7CFD4;
     box-shadow: 3px 3px 4px #C7CFD4;
+}
+.cs-miniView {
+    font-weight: normal;
+    padding: 5px;
+}
+.cs-autocomplete-popup-miniView-displayName {
+    color: #1176BC;
+    font-weight: bold;
+    text-decoration: underline;
 }

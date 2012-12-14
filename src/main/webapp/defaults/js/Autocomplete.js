@@ -756,7 +756,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 type: "cspace.autocomplete.popup.miniView.renderer",
                 createOnEvent: "onRender",
                 options: {
-                    model: "{cspace.autocomplete.popup.miniView}.model.basic.fields"
+                    model: "{cspace.autocomplete.popup.miniView}.model.basic"
                 }
             }
         },
@@ -796,6 +796,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             field4Label: ".csc-autocomplete-popup-miniView-field4Label"
         }
     });
+
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView.renderer");
 
     cspace.autocomplete.popup.miniView.preInit = function (that) {
@@ -838,15 +839,82 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "person-miniView"], {
         options: {
             protoTree: {
-                displayName: "${termDisplayName}",
-                field1: "${birthDateGroup.dateDisplayDate}",
-                field2: "${deathDateGroup.dateDisplayDate}",
-                field3: "${bioNote}",
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.termDisplayName}"
+                },
+                field1: "${fields.birthDateGroup.dateDisplayDate}",
+                field2: "${fields.deathDateGroup.dateDisplayDate}",
+                field3: "${fields.bioNote}",
                 field1Label: {
                     messagekey: "person-miniView-field1Label"
                 },
                 field2Label: {
                     messagekey: "person-miniView-field2Label"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "organization-miniView"], {
+        options: {
+            protoTree: {
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.termDisplayName}"
+                },
+                field1: "${fields.foundingDateGroup.dateDisplayDate}",
+                field2: "${fields.dissolutionDateGroup.dateDisplayDate}",
+                field3: "${fields.historyNotes.0.historyNote}",
+                field1Label: {
+                    messagekey: "organization-miniView-field1Label"
+                },
+                field2Label: {
+                    messagekey: "organization-miniView-field2Label"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "location-miniView"], {
+        options: {
+            protoTree: {
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.termDisplayName}"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "concept-miniView"], {
+        options: {
+            protoTree: {
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.termDisplayName}"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "place-miniView"], {
+        options: {
+            protoTree: {
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.termDisplayName}"
+                }
+            }
+        }
+    });
+
+    fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], {
+        options: {
+            protoTree: {
+                displayName: {
+                    target: "#",
+                    linktext: "${fields.objectNumber}"
                 }
             }
         }
@@ -975,6 +1043,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         if (extraSelectables) {
             selectables = selectables.add(that.locate(extraSelectables));
         }
+
         that.selectable.selectables = selectables;
         that.selectable.selectablesUpdated();
         container.show();
