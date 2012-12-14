@@ -968,10 +968,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Add hover for all the elements
-        that.addRowHover(that.miniView, matchItemContent, that.model.matches);
+        that.addRowHover(that.miniView, matchItemContent, that.model.matches, that.container.find(".inner").width());
     };
     
-    cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches) {
+    cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches, left) {
         var timeout,
             openMiniView = function (el) {
                 var currentTarget = $(el.currentTarget),
@@ -980,7 +980,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 index = (index === "") ? 0 : index * 1;
                 miniView.container.css({
                     top: currentTarget.position().top,
-                    left: currentTarget.parent().width() + 25
+                    left: left + 10
                 });
                 miniView.events.onModel.fire(matches[index]);
             },
