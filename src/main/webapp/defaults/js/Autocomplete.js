@@ -756,7 +756,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 type: "cspace.autocomplete.popup.miniView.renderer",
                 createOnEvent: "onRender",
                 options: {
-                    model: "{cspace.autocomplete.popup.miniView}.model.basic"
+                    model: "{cspace.autocomplete.popup.miniView}.model.basic",
+                    recordType: "{cspace.autocomplete.popup.miniView}.model.attributes.type",
+                    vocab: "{cspace.autocomplete.popup.miniView}.model.attributes.namespace",
+                    urn: "{cspace.autocomplete.popup.miniView}.model.attributes.urn"
                 }
             }
         },
@@ -784,6 +787,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         renderOnInit: true,
         parentBundle: "{globalBundle}",
         strings: {},
+        listeners: {
+            prepareModelForRender: "{that}.prepareModelForRender"
+        },
         selectors: {
             displayName: ".csc-autocomplete-popup-miniView-displayName",
             field1: ".csc-autocomplete-popup-miniView-field1",
@@ -794,8 +800,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             field2Label: ".csc-autocomplete-popup-miniView-field2Label",
             field3Label: ".csc-autocomplete-popup-miniView-field3Label",
             field4Label: ".csc-autocomplete-popup-miniView-field4Label"
-        }
+        },
+        url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid&vocab=%vocab"),
+        toCSID: "cspace.util.shortIdentifierToCSID",
+        preInitFunction: "cspace.autocomplete.popup.miniView.renderer.preInit"
     });
+
+    cspace.autocomplete.popup.miniView.renderer.preInit = function (that) {
+        that.prepareModelForRender = function () {
+            var link = fluid.stringTemplate(that.options.url, {
+                recordType: that.options.recordType,
+                vocab: that.options.vocab,
+                csid: fluid.invokeGlobalFunction(that.options.toCSID, [
+                    that.options.urn
+                ])
+            });
+            that.applier.requestChange("miniView-link", link);
+        };
+    };
 
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView.renderer");
 
@@ -840,7 +862,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options: {
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.termDisplayName}"
                 },
                 field1: "${fields.birthDateGroup.dateDisplayDate}",
@@ -860,7 +882,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options: {
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.termDisplayName}"
                 },
                 field1: "${fields.foundingDateGroup.dateDisplayDate}",
@@ -880,7 +902,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options: {
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.termDisplayName}"
                 }
             }
@@ -891,7 +913,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options: {
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.termDisplayName}"
                 }
             }
@@ -902,7 +924,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         options: {
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.termDisplayName}"
                 }
             }
@@ -911,9 +933,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], {
         options: {
+            toCSID: "cspace.util.urnToCSID",
+            url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid"),
             protoTree: {
                 displayName: {
-                    target: "#",
+                    target: "${miniView-link}",
                     linktext: "${fields.objectNumber}"
                 }
             }
