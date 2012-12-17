@@ -43,7 +43,6 @@ table .cs-structuredDate-popup {
 }
 .content input.cs-structuredDate-input {
 	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #fff;
-	border:1px solid #C7CFD4;
 }
 
 .content input.cs-structuredDate-input[disabled] {
