@@ -23,7 +23,9 @@ body {
     margin:0;}
 input:focus, a:focus, button:focus, form:focus, select:focus, textarea:focus, div:focus {
     outline:1px solid #000 !important;
-}
+    outline-offset:-1px;}
+td input:focus, td a:focus, td button:focus, td form:focus, td select:focus, td textarea:focus, td div:focus {
+    outline-offset:-1px;}
 table {
     border-collapse:collapse;}
 table tr, table tr td, table tr th  {
@@ -52,15 +54,20 @@ input, textarea, select {
     font-size:12px; 
     font-weight:inherit; 
     line-height:15px; 
-    padding:0; 
+    padding:1px 0 0 1px; 
     margin:0; 
     border:1px solid #C7CFD4; 
     overflow:visible; 
-    height:19px;
+    height:21px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
     vertical-align: middle;}
-select {height:21px;}
+select {
+    padding:0;}
 table select, table ~ select, table input {
-    border:none;}
+    border:none;
+    height:19px;
+    padding-left:2px;}
 input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
     height:auto;}
 input[type="checkbox"] {
@@ -72,8 +79,12 @@ input[type="text"], input[type="password"], textarea {
 div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
     width: 88.5%;
 }
+div.info-column2-50 table input[type="text"], div.info-column2-50 table input[type="password"], div.info-column2-50 table textarea {
+    width: 100%;
+}
 table input[type="text"], table input[type="password"], table textarea {
-    width:100%;}
+    width:100%;
+    padding-left:2px;}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -1198,7 +1209,6 @@ table.cs-admin-table td.checkbox {
 }
 .content table select {
     width: 100%; 
-    height:19px; 
     padding-top:0; 
     border:none;}
 .content textarea {
@@ -1459,7 +1469,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .cs-date-picker {
     margin-top: 21px;}
 .cs-calendar-image {
-    background: url('../images/cal.png') no-repeat center center;
+    background: #FFF url('../images/cal.png') no-repeat center center;
 }
 /*   styling the loading progress indicator */
 .cs-loading-indicator {
@@ -1751,6 +1761,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     /*float:left;*/}
 td.fl-date-group .cs-calendar-button {
     float: right;
+    height:21px;
 }
 table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
