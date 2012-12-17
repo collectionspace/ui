@@ -15,6 +15,7 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("DatePicker.js loaded");
 
+    // Datepicker widget component used in Collection Space.
     fluid.defaults("cspace.datePicker", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         postInitFunction: "cspace.datePicker.postInit",
@@ -36,6 +37,7 @@ cspace = cspace || {};
         strings: {
             invalidDateMessage: "Provided date has invalid format."
         },
+        // Default locale for Date.js library.
         i18n: "en_US",
         parentBundle: "{globalBundle}",
         selectors: {
@@ -71,7 +73,9 @@ cspace = cspace || {};
             date: undefined
         }
     });
-    
+
+    // Parse the date string into a date object, splitting
+    // up the date part and the era part if available.
     cspace.datePicker.parseDate = function (userInput, eras) {
         var era, date = userInput;
         
@@ -95,13 +99,15 @@ cspace = cspace || {};
             era: era  
         };
     }
-    
+
+    // Format date based on the default format.
     cspace.datePicker.formatDate = function (date, format) {
         // Pulling a full date from google datePicker into one of the formats that can be parsed by datejs. 
         var fullDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         return Date.parse(fullDate).toString(format);
     };
-    
+
+    // Validate user input date string using date.js.
     cspace.datePicker.validateDate = function (messageBar, dateInput, options) {
         if (dateInput === "") {
             return dateInput;
@@ -127,6 +133,8 @@ cspace = cspace || {};
         return date.toString(options.defaultFormat);
     };
 
+    // Bind events related to date picker's model. Also related to focusing and
+    // bluding in context of keyboard navigation.
     var bindEvents = function (that) {
         var table = $(that.datePickerWidget.tableBody_);
 
@@ -209,7 +217,8 @@ cspace = cspace || {};
                 }
             }
         });
-        
+
+        // Handler keyboard interaction.
         that.datePicker.keypress(function (event) {
             switch (cspace.util.keyCode(event)) {
             case $.ui.keyCode.RIGHT:
@@ -234,14 +243,17 @@ cspace = cspace || {};
             }
         });
     };
-    
+
+    // Build the markup for the widget, since we decorate just a basic
+    // input field.
     cspace.datePicker.buildMarkup = function (that, control) {
         that[control] = $(that.options.markup[control])
             .addClass(that.options.selectors[control].slice(1))
             .addClass(that.options.styles[control]);
         that.container.after(that[control]);
     };
-    
+
+    // Use the correct i18n option.
     var internationalize = function (that) {
         var messages = fluid.copy(that.options.strings);
         if (that.options.parentBundle) {
@@ -263,7 +275,8 @@ cspace = cspace || {};
         internationalize(that);
         return datePickerWidget;
     };
-    
+
+    // Apply Google Closure datepicker to our datepicker.
     var setupDatePicker = function (that) {
         var datePickerClass = that.datePicker[0].className;
         var datePickerWidget = setupDatePickerWithI18n(that);
@@ -292,6 +305,7 @@ cspace = cspace || {};
     };
     
     cspace.datePicker.postInit = function (that) {
+        // Add some styling for datepicker.
         that.parent = that.container.parent();
         that.parent.addClass(that.options.styles.parent);
         that.container.addClass(that.options.styles.calendarDate).addClass(that.options.selectors.calendarDate.slice(1));
