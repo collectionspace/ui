@@ -38,9 +38,13 @@ cspace = cspace || {};
             mediaSnapshot: "cs-mediaView-snapshot"
         },
         components: {
+            // Global CSpace model
             globalModel: "{globalModel}",
+            // Global CSpace Events
             globalEvents: "{globalEvents}",
+            // Possible record types
             recordTypes: "{recordTypes}",
+            // DataSource to get the media image
             relatedMedia: {
                 type: "cspace.mediaView.dataSource"
             }
@@ -68,6 +72,7 @@ cspace = cspace || {};
             prepareModelForRender: "{cspace.mediaView}.prepareModelForRender",
             mediaUpdated: "{cspace.mediaView}.render"
         },
+        // Template for mediaView
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -80,6 +85,7 @@ cspace = cspace || {};
         relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=0")
     });
 
+    // Render tree for the MediaView
     cspace.mediaView.produceTree = function (that) {
         var model = that.model;
         return {
@@ -208,6 +214,7 @@ cspace = cspace || {};
             updateIndex(-1);
         };
 
+        // Get URL for getting a media thumbnail
         that.formatMedia = function (url, format) {
             var bool = !!url;
             if (format === "bool") {
@@ -219,15 +226,18 @@ cspace = cspace || {};
             return url.replace(/Thumbnail/, format || "Original");
         };
 
+        // Function to return if record has the primary media
         that.hasPrimaryMedia = function () {
             return !!fluid.get(that.globalModel.model, "primaryModel.fields.blobCsid");
         };
 
+        // Function to return primary media for the record
         that.getPrimaryMedia = function (callback) {
             that.applier.requestChange("primaryMedia", that.hasPrimaryMedia() ? fluid.get(that.globalModel.model, "primaryModel.fields.blobs.0") : undefined);
             callback();
         };
 
+        // Function to return related media for the record
         that.getRelatedMedia = function (callback) {
             that.relatedMedia.get({
                 csid: fluid.get(that.globalModel.model, "baseModel.primaryCsid")
@@ -252,6 +262,7 @@ cspace = cspace || {};
             });
         };
 
+        // Get the image address in the given record's model
         that.getMedia = function (model, format) {
             var imgThumb = fluid.get(model, "imgThumb");
             if (imgThumb) {
@@ -260,6 +271,7 @@ cspace = cspace || {};
             return that.formatMedia("", format);
         };
 
+        // Function to open an associated image with the record in the separate window
 		that.getOriginalImage = function () {
             var src = that.getMedia(that.model.currentMedia);
 			window.open(src, "_blank", that.options.parentBundle.resolve("media-originalMediaOptions", ["600", "800", "yes"]));
@@ -268,22 +280,26 @@ cspace = cspace || {};
 
     cspace.mediaView.finalInit = function (that) {
 
+        // function to return if there is any media in the mediaView
         function hasMedia (related) {
             var category = that.recordTypes[related] || [];
             return $.inArray("media", category) > -1;
         }
 
+        // Event which fires when relations are updated for the current record
         that.globalEvents.events.relationsUpdated.addListener(function (related) {
             if (related === "media" || hasMedia(related)) {
                 that.getRelatedMedia(that.render);
             }
         });
+        // Event which fires when the main record image is updated
         that.globalEvents.events.primaryMediaUpdated.addListener(function () {
             that.getPrimaryMedia(that.render);
         });
         that.getAllMedia();
     };
 
+    // Demands to overwrite dataSource for local testing.
     fluid.demands("cspace.mediaView.dataSource",  ["cspace.localData", "cspace.mediaView"], {
         funcName: "cspace.mediaView.testDataSource",
         args: {
@@ -294,6 +310,7 @@ cspace = cspace || {};
         }
     });
 
+    // Datasource to get related images to the record
     fluid.demands("cspace.mediaView.dataSource", "cspace.mediaView", {
         funcName: "cspace.URLDataSource",
         args: {
@@ -306,6 +323,7 @@ cspace = cspace || {};
         }
     });
 
+    // Datasource for tests
     fluid.defaults("cspace.mediaView.testDataSource", {
         url: "%test/data/relationships.json"
     });
