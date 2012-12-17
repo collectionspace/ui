@@ -18,11 +18,14 @@ cspace = cspace || {};
     
     fluid.log("Admin.js loaded");
 
+    // cspace.admin component used for every administration tab.
     fluid.defaults("cspace.admin", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         produceTree: "cspace.admin.produceTree",
         components: {
             instantiator: "{instantiator}",
+            // A subcomponent responsible for showing/hiding the add button
+            // that lets the user create a new admin record.
             showAddButton: {
                 type: "cspace.admin.showAddButton",
                 options: {
@@ -30,6 +33,8 @@ cspace = cspace || {};
                     applier: "{admin}.applier"
                 }
             },
+            // A subcomponent that is initially displayed when the admin page
+            // loads.
             banner: {
                 type: "cspace.admin.banner",
                 container: "{admin}.dom.banner",
@@ -42,17 +47,22 @@ cspace = cspace || {};
                     }
                 }
             },
+            // A paginated list portion of any admin page. It is used to display
+            // the list of admin records.
             adminListView: {
                 type: "cspace.listView",
                 container: "{admin}.dom.listView",
                 createOnEvent: "afterRender",
                 options: {
                     recordType: "{admin}.options.recordType",
+                    // URL to fetch the list of admin records from.
                     urls: cspace.componentUrlBuilder({
                         listUrl: "%tenant/%tname/%recordType?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey"
                     }),
+                    // Path to the list data in the list payload.
                     elPath: "items",
                     produceTree: "cspace.listView.produceTreeSidebar",
+                    // Model for the pager.
                     model: {
                         pageSizeList: ["5", "10", "20", "50"],
                         columns: [{
@@ -92,6 +102,8 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Subcomponent responsible for rendering and editing the admin
+            // records.
             adminRecordEditor: {
                 type: "cspace.recordEditor",
                 container: "{admin}.dom.recordEditor",
@@ -161,22 +173,31 @@ cspace = cspace || {};
         strings: {}
     });
 
+    // Initial admin component setup.
     cspace.admin.preInit = function (that) {
+        // Expand all strings in the model and resolve recordType.
         that.model.strings = cspace.util.stringBuilder(that.model.strings, {
             vars: {
                 recordType: that.options.recordType
             }
         });
-        // Clearing password fields once Admin page is loaded. NOTE: We might want to get rid of this once server is changed NOT to return password back.
+        // Clearing password fields once Admin page is loaded.
+        // NOTE: We might want to get rid of this once server is changed NOT
+        // to return password back.
         that.clearPassword = function () {
             that.locate("password").val("");
             that.locate("passwordConfirm").val("");
         };
+        // Listener for the record editor's after save event.
         that.afterRecordSave = function (model) {
+            // Trigger list's update.
             that.adminListView.updateModel();
             that.selectedRecordCsid = fluid.get(that.adminRecordEditor.model, that.options.elPaths.adminRecordEditorCsid);
         };
+        // Listener for the record editor's after remove event.
         that.afterRecordRemove = function () {
+            // Recreate the banner, remove the record editor component.
+            // Trigger list's update.
             var instantiator = that.instantiator,
                 banner = "banner";
             that.adminListView.updateModel();
@@ -184,14 +205,19 @@ cspace = cspace || {};
             instantiator.clearComponent(that, banner);
             fluid.initDependent(that, banner, instantiator);
         };
+        // Listener for the event that fires when admin record is selected.
         that.onSelectHandler = function (record) {
             that.selectedRecordCsid = record.csid;
         };
+        // Listener for the event that is fired when the user wants to
+        // create a new admin record.
         that.onCreateNewRecord = function () {
             that.events.onSelect.fire({
                 recordType: that.options.recordType
             });
         };
+        // A wrapper that is taking care of unsaved data before the
+        // onCreateNewRecord event is fired.
         that.add = function () {
             var globalNavigator = fluid.get(that, "adminRecordEditor.globalNavigator");
             if (!globalNavigator) {
@@ -204,11 +230,14 @@ cspace = cspace || {};
         };
     };
 
+    // Additional admin component setup for user administration page.
     cspace.admin.preInitUserAdmin = function (that) {
         cspace.admin.preInit(that);
+        // Validate before save.
         that.onSave = function () {
             return that.validate();
         };
+        // Status can only be changed for other users.
         that.processStatus = function () {
             if (that.options.userId !== fluid.get(that.adminRecordEditor.model, "fields.userId")) {
                 return;
@@ -217,10 +246,12 @@ cspace = cspace || {};
         };
     };
 
+    // Render the admin component at the end of initialization.
     cspace.admin.finalInit = function (that) {
         that.refreshView();
     };
 
+    // A generic protoTree for the admin component.
     cspace.admin.produceTree = function (that) {
         return {
             listViewHeader: {
@@ -246,6 +277,7 @@ cspace = cspace || {};
         };
     };
 
+    // User admin specific protoTree.
     cspace.admin.produceAdminUserTree = function (that) {
         return fluid.merge(null, cspace.admin.produceTree(that), {
             searchField: "${query}",
@@ -273,10 +305,12 @@ cspace = cspace || {};
         });
     };
 
+    // Only display roles that have display setting not set to "none."
     cspace.admin.assertRoleDisplay = function (displayString) {
         return displayString !== "none";
     };
 
+    // User admin related search functionality.
     cspace.admin.search = function (that) {
         var globalNavigator = fluid.get(that, "adminRecordEditor.globalNavigator"),
             instantiator = that.instantiator,
@@ -284,6 +318,8 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function search () {
+            // Recreate the list view component with search results.
+            // Recreate the banner since the old list is ivalid.
             that.events.onSearch.fire();
             if (that[recordEditor]) {
                 instantiator.clearComponent(that, recordEditor);
@@ -299,9 +335,11 @@ cspace = cspace || {};
             search();
             return;
         }
+        // Make sure data is saved, if aplicable.
         globalNavigator.events.onPerformNavigation.fire(search);
     };
 
+    // User admin related unsearch functionality.
     cspace.admin.unSearch = function (that) {
         var globalNavigator = fluid.get(that, "adminRecordEditor.globalNavigator"),
             instantiator = that.instantiator,
@@ -309,6 +347,8 @@ cspace = cspace || {};
             recordEditor = "adminRecordEditor",
             banner = "banner";
         function unSearch () {
+            // Recreate the list view component with search results.
+            // Recreate the banner since the old list is ivalid.
             that.events.onUnSearch.fire();
             that.locate("searchField").val("").change();
             that.locate("unSearchButton").hide();
@@ -325,9 +365,11 @@ cspace = cspace || {};
             unSearch();
             return;
         }
+        // Make sure data is saved, if aplicable.
         globalNavigator.events.onPerformNavigation.fire(unSearch);
     };
 
+    // Validate passowords.
     cspace.admin.validate = function (that, messageBar, passwordValidator) {
         var password = that.locate("password");
         if (password.is(":visible")) {
@@ -350,10 +392,13 @@ cspace = cspace || {};
         return true;
     };
 
+    // Verify is user is editing its own record.
     cspace.admin.isCurrentUser = function (sessionUser, currentUser) {
         return sessionUser !== currentUser;
     };
 
+    // Component that is responsible for add new admin record button
+    // visibility.
     fluid.defaults("cspace.admin.showAddButton", {
         gradeNames: ["autoInit", "fluid.modelComponent"],
         components: {
@@ -365,10 +410,12 @@ cspace = cspace || {};
     });
 
     cspace.admin.showAddButton.finalInit = function (that) {
+        // Dissallow adding new term list records.
         if (that.options.recordType === "termlist") {
             that.applier.requestChange("showAddButton", false);
             return;
         }
+        // Display add button if user has appropriate permissions.
         that.applier.requestChange("showAddButton", cspace.permissions.resolve({
             permission: that.options.addButtonPermission,
             target: that.options.recordType,
@@ -376,6 +423,7 @@ cspace = cspace || {};
         }));
     };
 
+    // Message banner that is displayed by default on admin page load.
     fluid.defaults("cspace.admin.banner", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         events: {
@@ -417,6 +465,7 @@ cspace = cspace || {};
     });
 
     cspace.admin.banner.preInit = function (that) {
+        // Hide itself if user selects an admin record.
         that.onSelectHandler = function () {
             that.options.recordEditor.show();
             that.container.hide();
@@ -448,6 +497,7 @@ cspace = cspace || {};
         args: ["{admin}", "{messageBar}", "{passwordValidator}"]
     });
 
+    // Data source used to fetch lists of admin records.
     fluid.demands("cspace.listView.dataSource",  ["cspace.localData", "cspace.listView", "cspace.admin"], {
         funcName: "cspace.listView.testDataSourceAdmin",
         args: {
