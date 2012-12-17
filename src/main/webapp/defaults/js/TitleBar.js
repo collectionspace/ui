@@ -23,6 +23,7 @@ cspace = cspace || {};
         });
     };
     
+    // TitleBar constructor
     cspace.titleBar = function (container, options) {
         var that = fluid.initRendererComponent("cspace.titleBar", container, options);
         fluid.initDependents(that);
@@ -43,6 +44,7 @@ cspace = cspace || {};
         });
     };
     
+    // Bind events for html elements after component finished rendering
     cspace.titleBar.bindEvents = function (that) {
         fluid.each(that.options.fields, function (field) {
             if (!field) {
@@ -52,12 +54,14 @@ cspace = cspace || {};
             if (typeof path !== "string") {
                 return;
             }
+            // Refresh component if its model changed
             that.options.recordApplier.modelChanged.addListener(path, function () {
                 that.renderer.refreshView();
             });
         });
     };
     
+    // Set the titleBar value
     cspace.titleBar.fixFieldValue = function (fieldValue) {
         if (!fieldValue) {
             return "";
@@ -81,6 +85,7 @@ cspace = cspace || {};
         return title;
     }; 
     
+    // Render tree for the component
     cspace.titleBar.produceTree = function (that) {
         var vocab = cspace.vocab.resolve({
             model: that.options.recordModel,
@@ -149,6 +154,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         produceTree: cspace.titleBar.produceTree,
         separator: " - ",
+        // HTML template for the component
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",

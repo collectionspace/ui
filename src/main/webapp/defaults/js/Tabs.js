@@ -72,6 +72,7 @@ cspace = cspace || {};
             current: "current", // TODO: This needs to be moved to "cs-tabs-current" style,
             inactive: "inactive" // TODO: This needs to be moved to "cs-tabs-inactive" style
         },
+        // HTML template for the TabList component
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -227,6 +228,7 @@ cspace = cspace || {};
         setupTab(tabModel.type || tabModel["name"]);
     };
     
+    // Create a tab with provided options
     cspace.tabs.setupTab = function (tabName, that) {
         var options = that.options;
         var urlExpander = fluid.invoke("cspace.urlExpander");
@@ -295,6 +297,7 @@ cspace = cspace || {};
         }
     };
     
+    // Make tabs clickable and apply extra CSS formatting to be scrollable
     cspace.tabs.tabify = function (that) {
         that.locate("tabs").tabs({
             tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
