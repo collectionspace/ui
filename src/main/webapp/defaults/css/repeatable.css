@@ -40,7 +40,7 @@ input[type="button"].cs-repeatable-add {
 }
 li.cs-repeatable-repeat {
     list-style-type: none; 
-    margin-bottom: 4px;
+    margin-bottom: 0;
 }
 input.cs-repeatable-primary {
     width: 11px; 
@@ -244,4 +244,39 @@ div.info-pair-date li.cs-repeatable-repeat {
 
 .infoDiv .info-column {
     margin-bottom: 18px;
+}
+
+/* hierarchical stylings */
+.cs-fixedExternalURL .cs-repeatable-group ul.cs-repeatable {
+    overflow-y:auto;
+    max-height: 210px; /* 10 li elements tall */
+    line-height: 0;
+    display:block;
+}
+.cs-hierarchy-equivalentContexts {
+    overflow-y:auto;
+    max-height: 240px; /* 10 div elements tall */
+}
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat {
+    float:none;
+    border:none;
+    background:inherit;
+}
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat .cs-repeatable-content {
+    float:none;
+    display:inline-block;
+    height:21px;
+}
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-primary {
+    float:none;
+    display:inline-block;
+    vertical-align: top;
+    height:19px;
+    margin:0 3px;
+}
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-delete,
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-delete[disabled] {
+    float:none;
+    display:inline-block;
+    height:19px;
 }
