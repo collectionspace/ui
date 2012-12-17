@@ -92,7 +92,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matches: "matches",
             type: "type",
             csid: "csid",
-            rowDisabled: "disabled"
+            rowDisabled: "disabled",
+            namespace: "namespace"
         },
         preInitFunction: "cspace.autocomplete.preInit",
         postInitFunction: "cspace.autocomplete.postInit",
@@ -376,8 +377,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         that.search = function (newValue) {
-            var newValue = newValue || that.container.val(),
-                permitted = newValue.length >= that.options.minChars;
+            var permitted;
+            newValue = newValue || that.container.val();
+            permitted = newValue.length >= that.options.minChars;
 
             if (newValue === that.oldValue) {
                 return;
@@ -442,13 +444,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
     
-    cspace.autocomplete.testNewTermDataSource = function (options) {
+    cspace.autocomplete.testNewTermDataSource = function () {
         var url = "%tenant/%tname/%termUrl";
         return {
             options: {
                 url: url
             },
-            resolveUrl: function (directModel) {
+            resolveUrl: function () {
                 var expander = fluid.invoke("cspace.urlExpander");
                 var replaced = url;
                 replaced = expander(replaced);
@@ -669,7 +671,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     csid = that.options.elPaths.csid,
                     type = that.options.elPaths.type,
                     rowDisabled = that.options.elPaths.rowDisabled,
-                    matchesPath = that.options.elPaths.matches;
+                    matchesPath = that.options.elPaths.matches,
+                    namespace = that.options.elPaths.namespace;
                 fluid.each(fluid.get(model, matchesPath), function (match) {
                     var recordCSID = fluid.get(that.options, "recordModel.csid");
                     if (recordCSID && recordCSID === match[csid]) {
@@ -693,6 +696,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[type] = match.type;
                         elem[csid] = match.csid;
                         elem[rowDisabled] = (!elem[preferred] && (disabled === true));
+                        elem[namespace] = match.namespace;
                         return elem;
                     }));
                 });
@@ -720,6 +724,162 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return tree;
     };
     
+    /* miniView component */
+    fluid.defaults("cspace.autocomplete.popup.miniView", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        events: {
+            onModel: null,
+            onHide: null,
+            onShow: null,
+            onContext: null,
+            onRender: null,
+            onReady: null
+        },
+        listeners: {
+            onContext: "{that}.onContext",
+            onModel: "{that}.onModel",
+            onHide: "{that}.hide",
+            onShow: "{that}.show",
+            onReady: "{that}.onReady"
+        },
+        components: {
+            context: {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: "{cspace.autocomplete.popup.miniView}.options.context"
+                },
+                createOnEvent: "onContext"
+            },
+            dataSource: {
+                type: "cspace.autocomplete.popup.miniView.dataSource",
+                createOnEvent: "onContext"
+            },
+            urnToCSID: {
+                type: "cspace.autocomplete.popup.miniView.urnToCSID",
+                createOnEvent: "onContext"
+            },
+            renderer: {
+                container: "{cspace.autocomplete.popup.miniView}.container",
+                type: "cspace.autocomplete.popup.miniView.renderer",
+                createOnEvent: "onRender",
+                options: {
+                    model: "{cspace.autocomplete.popup.miniView}.model.basic",
+                    recordType: "{cspace.autocomplete.popup.miniView}.model.attributes.type",
+                    vocab: "{cspace.autocomplete.popup.miniView}.model.attributes.namespace",
+                    urn: "{cspace.autocomplete.popup.miniView}.model.attributes.urn"
+                }
+            }
+        },
+        delay: 1000,
+        showTimer: undefined,
+        model: null,
+        preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
+    });
+
+    fluid.defaults("cspace.autocomplete.popup.miniView.urnToCSID", {
+        gradeNames: ["autoInit", "fluid.littleComponent"],
+        preInitFunction: "cspace.autocomplete.popup.miniView.urnToCSID.preInit"
+    });
+
+    cspace.autocomplete.popup.miniView.urnToCSID.preInit = function (that) {
+        that.convert = function (urn) {
+            fluid.invokeGlobalFunction(that.options.toCSID, [urn]);
+        };
+    };
+
+    fluid.defaults("cspace.autocomplete.popup.miniView.renderer", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        resources: {
+            template: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.specBuilder",
+                    args: {
+                        forceCache: true,
+                        fetchClass: "slowTemplate",
+                        url: "%webapp/html/components/MiniViewTemplate.html"
+                    }
+                }
+            }
+        },
+        renderOnInit: true,
+        parentBundle: "{globalBundle}",
+        strings: {},
+        listeners: {
+            prepareModelForRender: "{that}.prepareModelForRender"
+        },
+        selectors: {
+            displayName: ".csc-autocomplete-popup-miniView-displayName",
+            field1: ".csc-autocomplete-popup-miniView-field1",
+            field2: ".csc-autocomplete-popup-miniView-field2",
+            field3: ".csc-autocomplete-popup-miniView-field3",
+            field4: ".csc-autocomplete-popup-miniView-field4",
+            field1Label: ".csc-autocomplete-popup-miniView-field1Label",
+            field2Label: ".csc-autocomplete-popup-miniView-field2Label",
+            field3Label: ".csc-autocomplete-popup-miniView-field3Label",
+            field4Label: ".csc-autocomplete-popup-miniView-field4Label"
+        },
+        url: cspace.componentUrlBuilder("%webapp/html/%recordType.html?csid=%csid&vocab=%vocab"),
+        toCSID: "cspace.util.shortIdentifierToCSID",
+        preInitFunction: "cspace.autocomplete.popup.miniView.renderer.preInit"
+    });
+
+    cspace.autocomplete.popup.miniView.renderer.preInit = function (that) {
+        that.prepareModelForRender = function () {
+            var link = fluid.stringTemplate(that.options.url, {
+                recordType: that.options.recordType,
+                vocab: that.options.vocab,
+                csid: fluid.invokeGlobalFunction(that.options.toCSID, [
+                    that.options.urn
+                ])
+            });
+            that.applier.requestChange("miniView-link", link);
+        };
+    };
+
+    fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup.miniView.renderer");
+
+    cspace.autocomplete.popup.miniView.preInit = function (that) {
+        that.onContext = function () {
+            that.options.context = that.model.attributes.type + "-miniView";
+        };
+        that.onModel = function (attributes) {
+            that.applier.requestChange("attributes", attributes);
+            that.events.onContext.fire();
+            that.events.onReady.fire();
+        };
+        that.onReady = function () {
+            that.dataSource.get({
+                csid: that.options.toCSID ?
+                    that.urnToCSID.convert(that.model.attributes.urn) :
+                    that.model.attributes.csid,
+                recordType: that.model.attributes.type,
+                vocab: that.model.attributes.namespace
+            }, function (basic) {
+                that.applier.requestChange("basic", basic);
+            });
+        };
+        that.applier.modelChanged.addListener("basic", function () {
+            that.events.onRender.fire();
+            that.events.onShow.fire();
+        });
+        that.hide = function () {
+            clearTimeout(that.options.showTimer);
+            that.container.hide();
+        };
+        that.show = function () {
+            var options = that.options,
+                showTimer = that.options.showTimer;
+            if (showTimer) {
+                clearTimeout(showTimer);
+            }
+            that.options.showTimer = setTimeout(function () {
+                that.container.show();
+            }, options.delay || 1);
+        };
+    };
+    /* miniView component */
+    
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
         selectors: {
@@ -732,7 +892,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             addTermTo: ".csc-autocomplete-addTermTo"
         },
         invokers: {
-            open: "cspace.autocomplete.popup.open"
+            open: "cspace.autocomplete.popup.open",
+            addRowHover: "cspace.autocomplete.popup.addRowHover"
         },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
@@ -758,7 +919,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         components: {
             eventHolder: "{eventHolder}",
-            vocab: "{vocab}"
+            vocab: "{vocab}",
+            miniView: {
+                type: "cspace.autocomplete.popup.miniView",
+                container: ".cs-autocomplete-popup-miniView",
+                createOnEvent: "afterRender"
+            }
         },
         strings: {},
         parentBundle: "{globalBundle}"
@@ -775,16 +941,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     cspace.autocomplete.popup.open = function (that, extraSelectables) {
+        that.renderer.refreshView();
+        
         var input = fluid.unwrap(that.options.inputField),
             container = that.container,
-            activatables, selectables;
-        that.renderer.refreshView();
-        activatables = that.locate("authorityItem").add(that.locate("matchItemContent"));
+            activatables, selectables,
+            matchItemContent = that.locate("matchItemContent");
+        activatables = that.locate("authorityItem").add(matchItemContent);
         fluid.activatable(activatables, that.activateFunction);
         selectables = $(activatables).add(input);
         if (extraSelectables) {
             selectables = selectables.add(that.locate(extraSelectables));
         }
+
         that.selectable.selectables = selectables;
         that.selectable.selectablesUpdated();
         container.show();
@@ -797,6 +966,51 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             of: that.options.inputField,
             collision: "none"
         });
+        
+        // Add hover for all the elements
+        that.addRowHover(that.miniView, matchItemContent, that.model.matches, that.container.find(".inner").width());
+    };
+    
+    cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches, left) {
+        var timeout,
+            openMiniView = function (el) {
+                var currentTarget = $(el.currentTarget),
+                    index = currentTarget.attr("id").split(":")[1];
+                
+                index = (index === "") ? 0 : index * 1;
+                miniView.container.css({
+                    top: currentTarget.position().top,
+                    left: left + 10
+                });
+                miniView.events.onModel.fire(matches[index]);
+            },
+            closeMiniView = function () {
+                miniView.events.onHide.fire();
+            };
+
+        miniView.container
+            .mouseenter(function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+            }).mouseleave(function (el) {
+                closeMiniView(el);
+            });
+
+        elements
+            .focusin(function (el) {
+                openMiniView(el);
+            }).focusout(function (el) {
+                closeMiniView(el);
+            }).hover(function (el) {
+                clearTimeout(timeout);
+                closeMiniView(el);
+                openMiniView(el);
+            }, function (el) {
+                timeout = setTimeout(function () {
+                    closeMiniView(el);
+                }, 500);
+            });
     };
 
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");
@@ -836,7 +1050,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     }
     
-    cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission, selector) {
+    cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission) {
         var types = fluid.transform(model.authorities, function (auth) {
             // We only need an authority not the vocabulary.
             return auth.type.split("-")[0];
