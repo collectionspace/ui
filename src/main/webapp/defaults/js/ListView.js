@@ -17,16 +17,20 @@ cspace = cspace || {};
     "use strict";
     
     fluid.registerNamespace("cspace.listView");
-    
+
+    // Default sorter for the pager used by the list view.
     cspace.listView.sorter = function (overallThat, model) {
         return null;
     };
-    
+
+    // List view component used everywhere we have list data
+    // that supports pagination.
     fluid.defaults("cspace.listView", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         disablePageSize: false,
         stubbPagination: false,
         model: {
+            // Default model options. Most of them are used by the pager.
             columns: [{
                 sortable: true,
                 id: "",
@@ -62,11 +66,15 @@ cspace = cspace || {};
         },
         produceTree: "cspace.listView.produceTree",
         components: {
+            // Common message bar.
             messageBar: "{messageBar}",
+            // Data source to fetch list data.
             dataSource: {
                 type: "cspace.listView.dataSource"
             },
             permissionsResolver: "{permissionsResolver}",
+            // Component, responsible for navigation after interacting
+            // with list view pager's cells.
             listNavigator: {
                 type: "cspace.listView.listNavigator",
                 createOnEvent: "pagerAfterRender",
@@ -79,6 +87,8 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            // Component responsible for list view pager styling based
+            // on permissions.
             listPermissionStyler: {
                 type: "cspace.listView.listPermissionStyler",
                 createOnEvent: "pagerAfterRender",
@@ -88,6 +98,8 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            // Component responsible for styling based on record's workflow
+            // state (e.g. locked for location/movement/inventory records).
             workflowStyler: {
                 type: "cspace.util.workflowStyler",
                 createOnEvent: "pagerAfterRender",
@@ -97,6 +109,7 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            // fluid.pager component used to render list data.
             pager: {
                 type: "fluid.pager",
                 createOnEvent: "afterRender",
@@ -186,6 +199,8 @@ cspace = cspace || {};
         nonSortableColumns: {}
     });
 
+    // List view's produce tree that prepares the template for starting up the
+    // pager.
     cspace.listView.produceTree = function (that) {
         return {
             headers: {
@@ -249,6 +264,7 @@ cspace = cspace || {};
         };
     };
 
+    // Sidebar specific list view produce tree.
     cspace.listView.produceTreeSidebar = function (that) {
         var tree = cspace.listView.produceTree(that);
         tree.show.messagekey = "listView-show-short";
@@ -262,7 +278,8 @@ cspace = cspace || {};
     cspace.listView.preInit = function (that) {
         // get a non sortable array of column names by recordType
         var nonSortable = fluid.get(that.options.nonSortableColumns, that.options.recordType) || [];
-        
+
+        // Sort data based on the sort order.
         fluid.each(that.model.columns, function (column) {
             fluid.each(["id", "name"], function (key) {
                 column[key] = fluid.stringTemplate(column[key], {
@@ -274,7 +291,9 @@ cspace = cspace || {};
                 }
             });
         });
+
         that.bindEvents = function () {
+            // Add styling related to user interactions: hovering and focusing.
             $("a", that.locate("rows")).focus(function () {
                 $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
                 $(this).parents("tr").addClass(that.options.styles.selecting);
@@ -285,6 +304,8 @@ cspace = cspace || {};
                 that.styleAndActivate($(this), that.locate("row"));
             });
         };
+
+        // Update list model.
         that.updateList = function (list) {
             var pagerModel = that.pager.model;
             var offset = pagerModel.pageIndex * pagerModel.pageSize;
@@ -299,6 +320,9 @@ cspace = cspace || {};
                 that.applier.requestChange(fluid.model.composeSegments("list", fullIndex), row);
             });
         };
+
+        // Public method used to trigger the update of the data and its
+        // subsequent rendering.
         that.updateModel = function (model) {
             var initialUpdate;
             if (!model) {
@@ -345,8 +369,10 @@ cspace = cspace || {};
     };
 
     cspace.listView.finalInit = function (that) {
+        // Remder the template.
         that.refreshView();
 
+        // Validate if change is a genuine change (e.g. values actually changed).
         function validChange (oldModel, newModel) {
             var valid = oldModel["sortKey"] !== newModel["sortKey"];
             valid = valid || fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "totalRange"], function (field) {
@@ -374,6 +400,7 @@ cspace = cspace || {};
         that.updateModel();
     };
 
+    // Style and activate a row.
     cspace.listView.styleAndActivate = function (that, row, rows) {
         $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
         var index = that.model.offset + rows.index(row),
@@ -469,6 +496,8 @@ cspace = cspace || {};
         }
     });
 
+    // Component, responsible for navigation after interacting
+    // with list view pager's cells.
     fluid.defaults("cspace.listView.listNavigator", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         typePath: "recordtype",
@@ -485,6 +514,7 @@ cspace = cspace || {};
     });
 
     cspace.listView.listNavigator.navigate = function (that, recordEditor, row, rows, evt) {
+        // Navigation aware navigation.
         if (!recordEditor) {
             that.styleAndActivate(row, rows);
             return;
@@ -497,6 +527,7 @@ cspace = cspace || {};
     cspace.listView.listNavigator.finalInitEdit = function (that) {
         cspace.listView.listNavigator.finalInit(that);
         var rows = that.locate("row");
+        // Add user interaction handling to the rows.
         fluid.each(rows, function (row, index) {
             var link = $("a", that.locate("column", rows.eq(index)));
             link.click(function (evt) {
@@ -531,7 +562,9 @@ cspace = cspace || {};
         });
     };
 
-   fluid.defaults("cspace.listView.listPermissionStyler", {
+    // Component responsible for list view pager styling based
+    // on permissions.
+    fluid.defaults("cspace.listView.listPermissionStyler", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         finalInitFunction: "cspace.listView.listPermissionStyler.finalInit",
         components: {
@@ -561,6 +594,7 @@ cspace = cspace || {};
         });
     };
 
+    // Specify the mapping between the data and things in the pager rows.
     cspace.listView.colDefsGenerator = function (columns, globalBundle) {
         return fluid.transform(columns, function (column) {
             var key = column.id;
@@ -681,7 +715,8 @@ cspace = cspace || {};
         },
         renderOnInit: true
     });
-    
+
+    // Enable sorting by rows within the list view.
     fluid.defaults("cspace.listView.headers.sortable", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         styles: {
@@ -695,7 +730,8 @@ cspace = cspace || {};
         }
         that.container.addClass(that.options.styles.sortable);
     };
-    
+
+    // Render list view's header.
     fluid.demands("cspace.listView.headers.header", "cspace.listView.headers", {
         container: "{arguments}.0",
         mergeAllOptions: [{}, "{arguments}.1"]
