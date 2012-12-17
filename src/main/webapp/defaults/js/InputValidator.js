@@ -15,7 +15,11 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("InputValidator.js loaded");
-    
+
+    // Input validator component used to trigger input
+    // field validation (based on the uischema field type,
+    // e.g. integer, float). If invalid - show error message
+    // using messageBar.
     fluid.defaults("cspace.inputValidator", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         postInitFunction: "cspace.inputValidator.postInit",
@@ -34,7 +38,8 @@ cspace = cspace || {};
         type: "",
         delay: 500
     });
-    
+
+    // Hide message bar when validation happens.
     cspace.inputValidator.clear = function (messageBar) {
         messageBar.hide();
     };
@@ -50,6 +55,7 @@ cspace = cspace || {};
     };
 
     cspace.inputValidator.postInit = function (that) {
+        // Validate on keyup after specified timeout.
         that.container.keyup(function () {
             clearTimeout(that.outFirer);
             that.outFirer = setTimeout(function () {
