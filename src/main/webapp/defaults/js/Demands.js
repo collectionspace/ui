@@ -72,6 +72,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Autocomplete demands
+        var localDataSourceDemands = {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "%tenant/%tname/data/basic/%recordType/%csid.json",
+                termMap: {
+                    csid: "%csid",
+                    recordType: "%recordType",
+                    vocab: "%vocab"
+                }
+            }
+        };
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "person-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "organization-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "location-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "concept-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "place-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"], {
             funcName: "cspace.autocomplete.testAuthoritiesDataSource",
             args: {
@@ -325,6 +342,135 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Autocomplete demands
+        var authUrnToCSID = {
+            options: {
+                toCSID: "cspace.util.shortIdentifierToCSID"
+            }
+        };
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], {
+            options: {
+                toCSID: "cspace.util.urnToCSID"
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "person-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "location-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "place-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "person-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    },
+                    field1: "${fields.birthDateGroup.dateDisplayDate}",
+                    field2: "${fields.deathDateGroup.dateDisplayDate}",
+                    field3: "${fields.bioNote}",
+                    field1Label: {
+                        messagekey: "person-miniView-field1Label"
+                    },
+                    field2Label: {
+                        messagekey: "person-miniView-field2Label"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "organization-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    },
+                    field1: "${fields.foundingDateGroup.dateDisplayDate}",
+                    field2: "${fields.dissolutionDateGroup.dateDisplayDate}",
+                    field3: "${fields.historyNotes.0.historyNote}",
+                    field1Label: {
+                        messagekey: "organization-miniView-field1Label"
+                    },
+                    field2Label: {
+                        messagekey: "organization-miniView-field2Label"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "location-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "concept-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "place-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], {
+            options: {
+                toCSID: "cspace.util.urnToCSID",
+                url: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: "%webapp/html/%recordType.html?csid=%csid"
+                    }
+                },
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.objectNumber}"
+                    }
+                }
+            }
+        });
+        var authDataSourceDemands = {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "%tenant/%tname/vocabularies/basic/%vocab/%csid",
+                termMap: {
+                    csid: "%csid",
+                    recordType: "%recordType",
+                    vocab: "%vocab"
+                }
+            }
+        };
+        var nonAuthDataSourceDemands = {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "%tenant/%tname/basic/%recordType/%csid",
+                termMap: {
+                    csid: "%csid",
+                    recordType: "%recordType",
+                    vocab: "%vocab"
+                }
+            }
+        };
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], nonAuthDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "person-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "location-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "place-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
@@ -414,7 +560,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
                             resolver: "{permissionsResolver}",
                             permission: "update"
-                        }, "create", "{autocomplete}.autocompleteInput"]
+                        }, "create"]
                     }
                 }
             }, "{arguments}.1"]
@@ -441,7 +587,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
                             resolver: "{permissionsResolver}",
                             permission: "update"
-                        }, "create", "{autocomplete}.autocompleteInput"]
+                        }, "create"]
                     }
                 },
                 components: {
