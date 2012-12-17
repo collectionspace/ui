@@ -14,7 +14,10 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     "use strict";
-    
+
+    // Media uploader component used by media records.
+    // Displays upload UI when no media uploaded OR
+    // info about the media if it was already uploaded.
     fluid.defaults("cspace.mediaUploader", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         parentBundle: "{globalBundle}",
@@ -75,6 +78,7 @@ cspace = cspace || {};
         components: {
             confirmation: "{confirmation}"
         },
+        // Media uploader template.
         resources: {
             template: {
                 expander: {
@@ -92,9 +96,12 @@ cspace = cspace || {};
             }
         }
     });
-    
+
+    // Media uploader's produce tree.
     cspace.mediaUploader.produceTree = function (that) {
         return {
+            // If no media uploaded render uploader part.
+            // Otherwise the info part.
             expander: [{
                 type: "fluid.renderer.condition",
                 condition: "${" + that.options.elPaths.blobCsid + "}",
@@ -181,20 +188,26 @@ cspace = cspace || {};
     };
 
     cspace.mediaUploader.preInit = function (that) {
+        // Handler focus on the upload button.
         that.uploadFocus = function () {
             that.locate("uploadButton").addClass(that.options.styles.fileInputFocused);
+            // Clear if file was selected.
             if (that.file) {
                 delete that.file;
             }
         };
+        // Handler blur on the upload button.
         that.uploadBlur = function () {
             that.locate("uploadButton").removeClass(that.options.styles.fileInputFocused);
         };
+        // Process link that was typed into the link text field.
         that.processLink = function () {
             var linkButton = that.locate("linkButton"),
                 allow = fluid.get(that.model, that.options.elPaths.required);
             linkButton.prop("disabled", that.locate("linkInput").val() && allow ? false : true);
         };
+        // Link media in the model and fire onLink that will trigger record
+        // save.
         that.linkMedia = function () {
             var sourceUrl = that.locate("linkInput").val();
             that.applier.requestChange(that.options.elPaths.sourceUrl, sourceUrl);
@@ -202,6 +215,8 @@ cspace = cspace || {};
             that.applier.modelChanged.removeListener("allowButtons");
             that.events.onLink.fire();
         };
+        // OnSuccess upload event handler, will trigger onLink consequent
+        // record save.
         that.onSuccess = function (response, xhr) {
             that.applier.requestChange(that.options.elPaths.sourceUrl, response.file);
             delete response.file;
@@ -213,9 +228,11 @@ cspace = cspace || {};
                 that.events.onLink.fire();
             }, 1);
         };
+        // If upload resulted in error, update message bar.
         that.onError = function (error, responseText, xhr) {
             cspace.util.provideErrorCallback(that, that.options.urls.upload, "errorWriting")(error, responseText, xhr);
         };
+        // Remove media link from the model.
         that.removeMedia = function () {
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 model: {
@@ -236,6 +253,7 @@ cspace = cspace || {};
                 parentBundle: that.options.parentBundle
             });
         };
+        // A method that does the actual upload through input file.
         that.upload = function () {
             that.file = this.files[0];
             var data = new FormData();
@@ -269,7 +287,8 @@ cspace = cspace || {};
         );
         allowButtons();
     };
-    
+
+    // Assert if media was already uploaded to the record.
     cspace.mediaUploader.assertBlob = function (blobCsid) {
         return !!blobCsid;
     };
