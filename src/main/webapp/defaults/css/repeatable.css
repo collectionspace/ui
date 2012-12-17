@@ -280,3 +280,6 @@ div.info-pair-date li.cs-repeatable-repeat {
     display:inline-block;
     height:19px;
 }
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat.clearfix:after {
+   content: "";
+}
