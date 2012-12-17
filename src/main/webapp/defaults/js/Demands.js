@@ -12,6 +12,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function ($, fluid) {
+
+    // This file contains most of the demand blocks across Collection
+    // Space application.
+    // The file is split into 2 sections: one for local
+    // (inside cspace.includeLocalDemands) that's only loaded when
+    // application is run locally in the browser from filesystem,
+    // the other ones is (within cspace.includeDemands) that is loaded
+    // in all contexts - a set of demands used in production.
     
     fluid.setLogging(false);
 
