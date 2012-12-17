@@ -150,6 +150,11 @@ cspace = cspace || {};
                             vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
                         }
                     });
+                    var pivotLocation = expander(that.options.urls.pivot);
+                    if (event.shiftKey || event.ctrlKey || event.metaKey) {
+                        window.open(pivotLocation, "_blank");
+                        return;
+                    }
                     if (that.searchReferenceStorage) {
                         that.searchReferenceStorage.set({
                             token: that.model.pagination.traverser,
@@ -157,7 +162,7 @@ cspace = cspace || {};
                             source: that.options.source
                         });
                     }
-                    window.location = expander(that.options.urls.pivot);
+                    window.location = pivotLocation;
                     return false;
                 });
             });
