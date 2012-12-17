@@ -1,0 +1,172 @@
+{
+    "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(TestOrganization1355502638016)'Test Organization'",
+    "csid": "539a1987-c985-46cb-9234",
+    "namespace": "organization",
+    "fields": {
+        "relatedTerms": [
+            {
+                "_primary": true
+            }
+        ],
+        "contactNames": [
+            {
+                "_primary": true,
+                "contactName": ""
+            }
+        ],
+        "contact": {
+            "updatedAt": "2012-12-14T16:30:38Z",
+            "faxNumberGroup": [
+                {
+                    "_primary": true,
+                    "faxNumber": "",
+                    "faxNumberType": ""
+                }
+            ],
+            "_subrecordcsid": "8dad1d82-cac2-4d5e-9522",
+            "createdBy": "admin@core.collectionspace.org",
+            "addressGroup": [
+                {
+                    "_primary": true,
+                    "addressStateOrProvince": "",
+                    "addressPostCode": "",
+                    "addressType": "",
+                    "addressCountry": "",
+                    "addressPlace1": "",
+                    "addressPlace2": "",
+                    "addressMunicipality": ""
+                }
+            ],
+            "createdAt": "2012-12-14T16:30:38Z",
+            "webAddressGroup": [
+                {
+                    "_primary": true,
+                    "webAddress": "",
+                    "webAddressType": ""
+                }
+            ],
+            "emailGroup": [
+                {
+                    "_primary": true,
+                    "emailType": "",
+                    "email": ""
+                }
+            ],
+            "telephoneNumberGroup": [
+                {
+                    "_primary": true,
+                    "telephoneNumberType": "",
+                    "telephoneNumber": ""
+                }
+            ],
+            "updatedBy": "admin@core.collectionspace.org"
+        },
+        "updatedBy": "admin@core.collectionspace.org",
+        "namespace": "organization",
+        "shortIdentifier": "TestOrganization1355502638016",
+        "dissolutionDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "true",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "2012-12-12",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "termDisplayName": "Test Organization",
+        "createdAt": "2012-12-14T16:30:38Z",
+        "orgTermGroup": [
+            {
+                "additionsToName": "",
+                "termName": "",
+                "termSource": "",
+                "termSourceID": "",
+                "termSourceNote": "",
+                "termLanguage": "",
+                "termPrefForLang": false,
+                "_primary": true,
+                "termDisplayName": "Test Organization",
+                "termType": "",
+                "mainBodyName": "",
+                "termStatus": "provisional",
+                "termQualifier": "",
+                "termSourceDetail": ""
+            }
+        ],
+        "termStatus": "",
+        "historyNotes": [
+            {
+                "_primary": true,
+                "historyNote": " This is history of the organization."
+            }
+        ],
+        "narrowerContexts": [
+            {
+                "_primary": true
+            }
+        ],
+        "groups": [
+            {
+                "_primary": true,
+                "group": ""
+            }
+        ],
+        "recordtype": "organization",
+        "functions": [
+            {
+                "_primary": true,
+                "function": ""
+            }
+        ],
+        "csid": "539a1987-c985-46cb-9234",
+        "updatedAt": "2012-12-14T16:30:38Z",
+        "urn": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(TestOrganization1355502638016)'Test Organization'",
+        "foundingDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "true",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "2012-12-12",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "createdBy": "admin@core.collectionspace.org",
+        "broaderContext": "",
+        "refName": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(TestOrganization1355502638016)'Test Organization'",
+        "authorityid": "61752280-57bc-4c85-9acd",
+        "equivalentContexts": [],
+        "refid": "urn:cspace:core.collectionspace.org:orgauthorities:name(organization):item:name(TestOrganization1355502638016)'Test Organization'"
+    }
+}
