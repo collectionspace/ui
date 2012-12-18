@@ -18,12 +18,15 @@ cspace = cspace || {};
 
     fluid.log("Sidebar.js loaded");
     
+    // Default options of the component 
     fluid.defaults("cspace.sidebar", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         preInitFunction: "cspace.sidebar.preInit",
         finalInitFunction: "cspace.sidebar.finalInit",
+        // Message Bundle
         parentBundle: "{globalBundle}",
         strings: {},
+        // Selectors being used for rendering
         selectors: {
             media: ".csc-sidebar-media",
             termsUsed: ".csc-integrated-authorities",
@@ -37,9 +40,12 @@ cspace = cspace || {};
             togglable: ".csc-sidebar-togglable",
             report: ".csc-sidebar-report"
         },
+        // Render immediately
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
+        // Elements which should be ignored in our render tree. These ones will be used for other functions.
         selectorsToIgnore: ["report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
+        // HTML markup for the component
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -52,6 +58,7 @@ cspace = cspace || {};
         events: {
             ready: null
         },
+        // Render tree for some of the selectors.
         protoTree: {
             media: {
                 decorators: {
@@ -80,7 +87,9 @@ cspace = cspace || {};
             recordTypeManager: "nomerge",
             resolver: "nomerge"
         },
+        // Model part of our component
         model: {
+            // pre-process 3 models for out 3 listviews. in the side bar
             categories: [{
                 expander: {
                     type: "fluid.deferredInvokeCall",
@@ -119,10 +128,12 @@ cspace = cspace || {};
                 }
             }]
         },
+        // Possible recordTypes
         recordTypeManager: "{recordTypeManager}",
         resolver: "{permissionsResolver}",
         components: {
             instantiator: "{instantiator}",
+            // Sub-component for report generation
             report: {
                 type: "cspace.reportProducer",
                 container: "{sidebar}.dom.report",
@@ -130,6 +141,7 @@ cspace = cspace || {};
                     recordType: "{sidebar}.options.primary"
                 }
             },
+            // Sub-component wrap for rendering a list of vocabs
             vocabularies: {
                 type: "cspace.relatedRecordsList",
                 options: {
@@ -162,6 +174,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Sub-component wrap for rendering a list of cataloging records
             cataloging: {
                 type: "cspace.relatedRecordsList",
                 options: {
@@ -179,6 +192,7 @@ cspace = cspace || {};
                     related: "cataloging"
                 }
             },
+            // Sub-component wrap for rendering a list of procedure records
             procedures: {
                 type: "cspace.relatedRecordsList",
                 options: {
@@ -196,6 +210,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Togglable headers
             togglable: {
                 type: "cspace.util.togglable",
                 container: "{sidebar}.container",
@@ -232,10 +247,12 @@ cspace = cspace || {};
     };
 
     cspace.sidebar.finalInit = function (that) {
+        // Fire an event so that other components know we are done here
         that.events.ready.fire();
     };
 
     cspace.sidebar.buildModel = function (options, records) {
+        // Pre-process data for future use
         if (!records || records.length < 1) {
             return;
         }
@@ -246,21 +263,32 @@ cspace = cspace || {};
         };
     };
 
+    // Fetching / Caching
+    // ----------------------------------------------------
+    
+    // Call to primeCacheFromResources will start fetching/caching
+    // of the template on this file load before the actual component's
+    // creator function is called
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
 
+    // Wrapper component for the image part in sidebar
     fluid.defaults("cspace.sidebar.media", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
+        // Render tree.
         protoTree: {
             mediaHeader: {
                 messagekey: "sidebar-mediaHeader"
             }
         },
+        // Render immediately
         renderOnInit: true,
         components: {
+            // Sub-component which will handle the image and its interactions
             mediaView: {
                 type: "cspace.mediaView",
                 container: "{cspace.sidebar.media}.dom.mediaViewContainer"
             },
+            // Togglable header
             togglable: {
                 type: "cspace.util.togglable",
                 container: "{media}.container",
@@ -272,13 +300,16 @@ cspace = cspace || {};
                 }
             }
         },
+        // Selectors will be used for rendering and sub-components
         selectors: {
             mediaViewContainer: ".csc-mediaView-container",
             mediaHeader: ".csc-sidebar-mediaHeader",
             header: ".csc-media-header",
             togglable: ".csc-media-togglable"
         },
+        // Message Bundle
         parentBundle: "{globalBundle}",
+        // Selectors we do not want to render in render tree. We need an access them for sub-components
         selectorsToIgnore: ["header", "togglable", "mediaViewContainer"],
         strings: {}
     });
