@@ -1146,7 +1146,12 @@ cspace = cspace || {};
                         }, {
                             type: "jQuery",
                             func: "click",
-                            args: that.events.onDeleteRelation.fire
+                            args: function () {
+                                that.events.onDeleteRelation.fire({
+                                    csid: that.options.recordModel.csid,
+                                    recordtype: that.options.recordType
+                                })
+                            }
                         }]
                     }
                 }
