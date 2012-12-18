@@ -18,12 +18,17 @@ cspace = cspace || {};
 
     fluid.log("RecordEditor.js loaded");
 
+    // Record editor component is one of the high level components used for
+    // pages that do record/data editing/manipulation.
     fluid.defaults("cspace.recordEditor", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
+            // Replace fieldsToIgnore options if passed.
             fieldsToIgnore: "replace",
             "uispec": "nomerge"
         },
+        // Fields that are not going to be copied when the user creates a
+        // record from existing.
         fieldsToIgnore: ["csid", "fields.csid", "fields.workflow"],
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
@@ -33,6 +38,8 @@ cspace = cspace || {};
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
         },
+        // Render control panel (a collection of control buttons above and
+        // below the record editing area.
         protoTree: {
             controlPanel: {
                 decorators: {
@@ -42,6 +49,8 @@ cspace = cspace || {};
             }
         },
         selectorsToIgnore: ["recordRendererContainer", "header", "togglable", "identificationNumber"],
+        // Record editor template resource. (not the record type specific
+        // template).
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -52,12 +61,16 @@ cspace = cspace || {};
             })
         },
         components: {
+            // Component that does handles message bar manipulations.
             messanger: {
                 type: "cspace.recordEditor.messanger"
             },
+            // Component that handles confirmation dialogs when saving, deleting
+            // a record.
             confirmation: {
                 type: "cspace.confirmation"
             },
+            // Component that tracks all changes to a record model.
             changeTracker: {
                 type: "cspace.recordEditor.changeTracker",
                 options: {
@@ -66,10 +79,12 @@ cspace = cspace || {};
                 },
                 createOnEvent: "afterFetch"
             },
+            // Component that handles all saving related functionality,
             saver: {
                 type: "cspace.recordEditor.saver",
                 createOnEvent: "afterFetch"
             },
+            // Component that handles all delete related functionality.
             remover: {
                 type: "cspace.recordEditor.remover",
                 createOnEvent: "afterFetch",
@@ -78,16 +93,20 @@ cspace = cspace || {};
                     strings: "{cspace.recordEditor}.options.strings"
                 }
             },
+            // Component that handles cancelling of all changes.
             canceller: {
                 type: "cspace.recordEditor.canceller",
                 createOnEvent: "afterFetch"
             },
+            // Local storage component that saves current record model
+            // before create a new one from existing.
             localStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
                     elPath: "modelToClone"
                 }
             },
+            // Component that handles creation from existing.
             cloner: {
                 type: "cspace.recordEditor.cloner",
                 options: {
@@ -96,6 +115,8 @@ cspace = cspace || {};
                     recordType: "{cspace.recordEditor}.options.recordType"
                 }
             },
+            // Component that does the rendering of the main record editing
+            // area.
             recordRenderer: {
                 type: "cspace.recordEditor.recordRenderer",
                 container: "{cspace.recordEditor}.dom.recordRendererContainer",
@@ -110,6 +131,8 @@ cspace = cspace || {};
                 },
                 createOnEvent: "ready"
             },
+            // Component that does the async fetching of record type specific
+            // template, representing the record editing area.
             templateFetcher: {
                 type: "cspace.templateFetcher",
                 priority: "first",
@@ -120,12 +143,14 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Component that handles all saving/retreiving data operations.
             recordDataSource: {
                 type: "cspace.recordEditor.dataSource",
                 options: {
                     recordType: "{cspace.recordEditor}.options.recordType"
                 }
             },
+            // Renders and styles toggle bars for record editor's sections.
             recordEditorTogglable: {
                 type: "cspace.util.togglable",
                 options: {
@@ -136,14 +161,21 @@ cspace = cspace || {};
                 },
                 createOnEvent: "afterRecordRender"
             },
+            // Component that applies read only styling for all of record
+            // editor.
             readOnly: {
                 type: "cspace.recordEditor.readOnly",
                 container: "{recordEditor}.container",
                 createOnEvent: "afterRecordRender"
             },
+            // Component handler of vocab related utils.
             vocab: "{vocab}",
+            // Global model contains all data for current and related records.
             globalModel: "{globalModel}",
+            // Global events contains events visible to all components.
             globalEvents: "{globalEvents}",
+            // Component that will trigger confirmation is user navigates
+            // with data not saved.
             globalNavigator: {
                 type: "cspace.util.globalNavigator",
                 options: {
@@ -157,27 +189,45 @@ cspace = cspace || {};
             }
         },
         events: {
+            // Fires when data for the record is fetched.
             afterFetch: null,
+            // Local only afterFetch event.
             afterFetchLocal: null,
+            // Fires when template is fetched.
             afterFetchTemplate: null,
+            // Fires when both template and data are fetched.
             ready: {
                 events: {
                     data: "{cspace.recordEditor}.events.afterFetchLocal",
                     template: "{cspace.recordEditor}.events.afterFetchTemplate"
                 }
             },
+            // Fires as the final afterInit event (last listener to ready).
             afterInit: null,
+            // Fires when record is abot to be saved.
             onSave: "preventable",
+            // Fires on the firs save of a new record.
             afterCreate: null,
+            // Fires when record is saved.
             afterSave: null,
+            // Fires when the record is about to be removed.
             onRemove: "preventable",
+            // Fires afer the record is removed.
             afterRemove: null,
+            // Fires when changes are about to be reverted.
             onCancel: null,
+            // Fires if save is cancelled.
             onCancelSave: null,
+            // Fires after changes to record are cancelled.
             afterCancel: null,
+            // Fires when the user is about to create a new record from
+            // existing.
             onCreateFromExisting: null,
+            // Fires after the record editor section is rendered.
             afterRecordRender: null,
+            // Fires whenever there's an error.
             onError: null,
+            // Fires whenever the user changes a record field.
             onChange: null
         },
         listeners: {
@@ -199,11 +249,19 @@ cspace = cspace || {};
             onCancel: "{loadingIndicator}.events.showOn.fire",
             afterRemove: "{loadingIndicator}.events.hideOn.fire"
         },
+        // Component that contains all messages.
         parentBundle: "{globalBundle}",
+        // A flag to show create from existing button.
         showCreateFromExistingButton: false,
+        // A flag to show delete button.
         showDeleteButton: false,
+        // A flag to indicate that record editor section needs
+        // to be rendererd explicitely and not automatically.
         deferRendering: false,
+        // A default path into a global modal for current record editor's
+        // model.
         globalRef: "primaryModel",
+        // Elements on the page that should never be treated as read only.
         neverReadOnlySelectors: {
             createFromExistingButton: ".csc-createFromExisting"
         }
@@ -212,15 +270,20 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
 
     cspace.recordEditor.preInit = function (that) {
+        // After save fire a corresponding global event.
         that.afterSaveHandler = function () {
             if (that.options.globalRef !== "primaryModel") {
                 return;
             }
             that.globalEvents.events.primaryRecordSaved.fire();
         };
+        // Rebder when ready to.
         that.onReady = function () {
             that.refreshView();
         };
+        // This is a listener attached to globalNavigator that is activated when
+        // the user tries to navigate away with unsaved data.
+        // It will trigger a confirmation dialog.
         that.onPerformNavigation = function (callback) {
             // TODO: This is a hack, the listener is not cleared in some cases.
             if (fluid.get(that, "changeTracker.unsavedChanges")) {
@@ -246,6 +309,7 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.finalInit = function (that) {
+        // Attach this record editor's model and appler to a global model.
         var modelSpec = {},
             modelToClone = that.localStorage.get();
 
@@ -255,6 +319,8 @@ cspace = cspace || {};
         };
         that.globalModel.attachModel(modelSpec);
 
+        // If the record is not in local storage, fetch it using the data
+        // source.
         if (modelToClone) {
             that.localStorage.set();
             that.applier.requestChange("", modelToClone);
@@ -271,6 +337,7 @@ cspace = cspace || {};
         }
     };
 
+    // Updates the UI to read only if applicable.
     fluid.defaults("cspace.recordEditor.readOnly", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         readOnly: "{cspace.recordEditor}.options.readOnly",
@@ -282,6 +349,7 @@ cspace = cspace || {};
         cspace.util.processReadOnly(that.container, that.options.readOnly, that.options.neverReadOnlySelectors);
     };
 
+    // Component that does cloning from existing.
     fluid.defaults("cspace.recordEditor.cloner", {
         gradeNames: ["fluid.modelComponent", "fluid.eventedComponent", "autoInit"],
         components: {
@@ -329,6 +397,7 @@ cspace = cspace || {};
         };
     };
 
+    // Component that tracks all the changes to the model.
     fluid.defaults("cspace.recordEditor.changeTracker", {
         gradeNames: ["autoInit", "fluid.modelComponent", "fluid.eventedComponent"],
         preInitFunction: "cspace.recordEditor.changeTracker.preInit",
@@ -357,11 +426,13 @@ cspace = cspace || {};
             that.unsavedChanges = true;
             that.events.onChange.fire(that.unsavedChanges);
         });
+        // Clear the changes.
         that.revert = function () {
             that.applier.requestChange("", that.rollbackModel);
             that.unsavedChanges = false;
             that.events.onChange.fire(that.unsavedChanges);
         };
+        // Regresh the component since the record was saved.
         that.afterSave = function (newModel) {
             that.rollbackModel = newModel;
             that.unsavedChanges = false;
@@ -369,6 +440,7 @@ cspace = cspace || {};
         };
     };
 
+    // Validate the record based on the schema.
     fluid.defaults("cspace.recordEditor.validator", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         selectors: {
@@ -427,9 +499,13 @@ cspace = cspace || {};
             };
         }
 
+        // Validate required fields.
         that.validateRequired = validate("requiredFields", "recordEditor-missingRequiredFields");
+
+        // Validate ID Number.
         that.validateIdentificationNumber = validate("identificationNumber", that.options.recordType + "-identificationNumberRequired");
 
+        // Validate both required fields and ID number.
         that.validate = function (model, applier) {
             var valFunctions = ["validateRequired", "validateIdentificationNumber"],
                 i;
@@ -450,6 +526,7 @@ cspace = cspace || {};
         };
     };
 
+    // Component that does the saving work.
     fluid.defaults("cspace.recordEditor.saver", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
@@ -499,6 +576,7 @@ cspace = cspace || {};
     });
 
     var openConfirmationMovement = function (that, recordEditor, proceedCallback) {
+        // Confirm save.
         recordEditor.confirmation.open("cspace.confirmation.saveDialog", undefined, {
             model: {
                 messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
@@ -525,6 +603,9 @@ cspace = cspace || {};
         });
     };
 
+    // Location/Movement/Inventory tab specific save function. It takes into
+    // consideration locking workflow for that record type.
+    // The user has two options: save and hard save.
     cspace.recordEditor.saver.saveMovementTab = function (that, recordEditor, afterAddRelation) {
         openConfirmationMovement(that, recordEditor, function () {
             if (fluid.get(recordEditor.model, "csid")) {
@@ -539,17 +620,22 @@ cspace = cspace || {};
         });
     };
 
+    // Location/Movement/Inventory specific save function. It takes into
+    // consideration locking workflow for that record type.
+    // The user has two options: save and hard save.
     cspace.recordEditor.saver.saveMovement = function (that, recordEditor) {
         openConfirmationMovement(that, recordEditor, function () {
             recordEditor.applier.requestChange("workflowTransition", "lock");
         });
     };
 
+    // Default save function.
     cspace.recordEditor.saver.save = function (that, recordEditor) {
         that.events.beforeSave.fire();
         that.events.onValidate.fire(recordEditor.model, recordEditor.applier);
     };
 
+    // If validation succeeded save the record.
     cspace.recordEditor.saver.afterValidate = function (recordEditor) {
         var vocab = cspace.vocab.resolve({
             model: recordEditor.model,
@@ -581,6 +667,7 @@ cspace = cspace || {};
         };
     };
 
+    // Component that does all removing work.
     fluid.defaults("cspace.recordEditor.remover", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
@@ -610,12 +697,18 @@ cspace = cspace || {};
         },
         components: {
             vocab: "{vocab}",
+            // Data source that will be used to check if there are related
+            // procedural records.
             proceduresDataSource: {
                 type: "cspace.recordEditor.remover.proceduresDataSource"
             },
+            // Data source that will be used to check if there are related
+            // cataloging records.
             catalogingDataSource: {
                 type: "cspace.recordEditor.remover.catalogingDataSource"
             },
+            // Data source that will be used to check if there are related
+            // terms records.
             refobjsDataSource: {
                 type: "cspace.recordEditor.remover.refobjsDataSource"
             },
@@ -824,6 +917,8 @@ cspace = cspace || {};
         args: "{cspace.recordEditor.remover}"
     });
 
+    // When the user removes the record, first check for related cataloging
+    // and procedures.
     cspace.recordEditor.remover.remove = function (that) {
         var csid = fluid.get(that.globalModel.model, "primaryModel.csid");
         that.proceduresDataSource.get({
@@ -840,6 +935,7 @@ cspace = cspace || {};
         });
     };
 
+    // Remove method that also checks hierarchy related relations.
     cspace.recordEditor.remover.removeWithCheck = function (that, model, confirmation, parentBundle, removeMessage) {
         if (fluid.find(model.fields.narrowerContexts, function (element) {
             return element.narrowerContext || undefined;
@@ -867,6 +963,7 @@ cspace = cspace || {};
         }
     };
 
+    // Remove method that checks wether the auth record is used by other records.
     cspace.recordEditor.remover.removeWithCheckRefobjs = function (that, model, confirmation, parentBundle) {
         var removeMessage;
         that.refobjsDataSource.get({
@@ -884,6 +981,7 @@ cspace = cspace || {};
         });
     };
 
+    // Component that cancels changes done by the user.
     fluid.defaults("cspace.recordEditor.canceller", {
         gradeNames: ["autoInit", "fluid.eventedComponent", "fluid.modelComponent"],
         events: {
@@ -922,6 +1020,7 @@ cspace = cspace || {};
         };
     };
 
+    // Component that abstracts message bar messaging.
     fluid.defaults("cspace.recordEditor.messanger", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         events: {
@@ -948,10 +1047,12 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.messanger.preInit = function (that) {
+        // Notify message bar on save.
         that.afterSaveHandler = function () {
             var resolve = that.globalBundle.resolve;
             that.messageBar.show(resolve("recordEditor-saveSuccessfulMessage", [resolve(that.options.recordType)]), Date.today(), false);
         };
+        // Notify message bar on error.
         that.onErrorHandler = function (data, operation) {
             if (!data) {
                 return;
@@ -971,6 +1072,8 @@ cspace = cspace || {};
         };
     };
 
+    // Control panel component that renders the contol buttons above and below
+    // record editor's edit panel.
     fluid.demands("cspace.recordEditor.controlPanel", "cspace.recordEditor", {
         mergeAllOptions: [{
             recordModel: "{cspace.recordEditor}.model",
@@ -1116,6 +1219,7 @@ cspace = cspace || {};
         }
     });
 
+    // Render spec for control panel for tabs.
     cspace.recordEditor.controlPanel.produceTreeTabs = function (that) {
         return {
             goTo: {
@@ -1186,6 +1290,7 @@ cspace = cspace || {};
         };
     };
 
+    // Render spec for control panel.
     cspace.recordEditor.controlPanel.produceTree = function (that) {
         return {
             recordLock: {
@@ -1271,6 +1376,7 @@ cspace = cspace || {};
         };
     };
 
+    // Check if delete button needs to be disabled.
     cspace.recordEditor.controlPanel.disableDeleteButton = function (rModel) {
         //disable if: model.csid is not set (new record)
         if (!rModel || !rModel.csid) {
@@ -1290,6 +1396,7 @@ cspace = cspace || {};
 
     cspace.recordEditor.controlPanel.preInit = function (that) {
         var rModel = that.options.recordModel;
+        // Adjust buttons on changes to the field.
         that.onChangeHandler = function (unsavedChanges) {
             var notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
             that.locate("cancel").prop("disabled", !unsavedChanges);
@@ -1299,6 +1406,7 @@ cspace = cspace || {};
             that.locate("deleteRelationButton").prop("disabled", notSaved);
             that.renderGoTo();
         };
+        // Check if goto needs to be enabled.
         that.renderGoTo = function () {
             var rModel = that.options.recordModel,
                 goTo = that.locate("goTo"),
@@ -1371,6 +1479,7 @@ cspace = cspace || {};
 
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor.controlPanel");
 
+    // Component that fetches record specific templates.
     fluid.defaults("cspace.templateFetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         resources: {
@@ -1522,6 +1631,7 @@ cspace = cspace || {};
         }
     });
 
+    // Component that does the rendering and data binding for the record.
     fluid.defaults("cspace.recordEditor.recordRenderer", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -1634,10 +1744,12 @@ cspace = cspace || {};
         ]));
     };
 
+    // Default produce tree.
     cspace.recordEditor.recordRenderer.produceTree = function (that) {
         return fluid.copy(that.options.uispec);
     };
 
+    // Produce tree for non-default template.
     cspace.recordEditor.recordRenderer.produceTreeTemplate = function (that) {
         var tree = cspace.recordEditor.recordRenderer.produceTree(that);
         tree.templateEditor = {
@@ -1649,6 +1761,7 @@ cspace = cspace || {};
         return tree;
     };
 
+    // Produce tree for user admin record.
     cspace.recordEditor.recordRenderer.produceTreeUsersAdmin = function (that) {
         var tree = cspace.recordEditor.recordRenderer.produceTree(that);
         tree.passwordConfirmLabel = {
@@ -1695,6 +1808,7 @@ cspace = cspace || {};
         return tree;
     };
 
+    // Produce tree for role admin record.
     cspace.recordEditor.recordRenderer.produceTreeRoleAdmin = function (that) {
         var tree = cspace.recordEditor.recordRenderer.produceTree(that);
         tree.noneLabel = {
@@ -1717,6 +1831,8 @@ cspace = cspace || {};
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
     };
 
+    // Component that does all the IO related to saving, craeting,
+    // updating and deleting the record.
     fluid.defaults("cspace.recordEditor.dataSource", {
         gradeNames: ["fluid.eventedComponent", "autoInit"],
         mergePolicy: {
@@ -1923,6 +2039,7 @@ cspace = cspace || {};
         return modelCsid || optionsCsid || cspace.util.getUrlParameter("csid");
     };
 
+    // Merge role admin record from role and permissions payloads.
     cspace.recordEditor.dataSource.preInitRoleAdmin = function (that) {
         that.afterGetSourcePermissions = function (data) {
             that.permissions = data;
@@ -1991,6 +2108,7 @@ cspace = cspace || {};
         };
     };
 
+    // Merge user admin record by merging user and roles payloads.
     cspace.recordEditor.dataSource.preInitUserAdmin = function (that) {
         that.afterGet = function (callback, user, roles) {
             roles = fluid.transform(roles, function (role) {
@@ -2027,6 +2145,8 @@ cspace = cspace || {};
     cspace.recordEditor.dataSource.finalInit = function (that) {
         //TODO: Think about error callbacks.
         that.get = function (callback) {
+            // If it is a new empty record, recreate the
+            // skeleton from the schema.
             if (!that.options.csid) {
                 callback(cspace.util.getBeanValue({}, that.options.recordType, that.options.schema));
                 return;
