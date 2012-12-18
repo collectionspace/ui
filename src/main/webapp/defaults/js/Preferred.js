@@ -16,6 +16,7 @@ cspace = cspace || {};
 
     "use strict";
     
+    // Default options for the component
     fluid.defaults("cspace.preferred", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         mergePolicy: {
@@ -24,6 +25,7 @@ cspace = cspace || {};
         readOnly: false,
         selectors: {},
         strings: {},
+        // HTML markup for the component
         resourceSpec: {
             template: {
                 href: cspace.componentUrlBuilder("%webapp/html/components/PreferredTemplate-%recordType.html"),
@@ -34,6 +36,7 @@ cspace = cspace || {};
             }
         },
         components: {
+            // Renderer subcomponent. Render part delegation while parent takes care of the model
             renderer: {
                 type: "cspace.preferred.renderer",
                 createOnEvent: "afterFetch",
@@ -58,19 +61,19 @@ cspace = cspace || {};
     });
     
     cspace.preferred.preInit = function (that) {
+        // Set the proper options prior requesting them based on the recrodType
         that.options.resourceSpec.template.href = fluid.stringTemplate(that.options.resourceSpec.template.href, {recordType: that.options.recordType});
         that.options.components.renderer.options.protoTree = that.options.protoTree;
     };
     
     cspace.preferred.finalInit = function (that) {
+        // Requesting template
         fluid.fetchResources(that.options.resourceSpec, function () {
             that.events.afterFetch.fire();
         });
     };
     
-    
-/*     Rendered part */
-
+    // Render part for the Preferred component
     fluid.defaults("cspace.preferred.renderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
@@ -96,6 +99,7 @@ cspace = cspace || {};
     });
 
     cspace.preferred.renderer.preInit = function (that) {
+        // setting a render tree for the label
         that.options.protoTree.preferredLabel = {
             messagekey: "preferred",
             decorators: {"addClass": "{styles}.preferredLabel"}
@@ -103,6 +107,7 @@ cspace = cspace || {};
     };
     
     cspace.preferred.renderer.finalInit = function (that) {
+        // Read-only styling fixes
         cspace.util.processReadOnly(that.container, that.options.readOnly);
         if (that.options.readOnly) {
             $("a", that.container).hide();
@@ -110,6 +115,7 @@ cspace = cspace || {};
     };
 
     cspace.preferred.renderer.cutpointGenerator = function (selectors, options) {
+        // Since we are getting back a big UIspec we are only interested in a specific part of it
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.protoTree));
     };
