@@ -579,7 +579,7 @@ cspace = cspace || {};
         // Confirm save.
         recordEditor.confirmation.open("cspace.confirmation.saveDialog", undefined, {
             model: {
-                messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage"],
+                messages: ["lockDialog-primaryMessage", "lockDialog-secondaryMessage", "saveDialog-hardSaveMessage"],
                 messagekeys: {
                     actText: "lockDialog-actText",
                     actAlt: "lockDialog-actAlt",
