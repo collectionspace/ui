@@ -18,6 +18,7 @@ cspace = cspace || {};
 
     fluid.log("RelationManager.js loaded");
 
+    // Component that handles the actual relation creation.
     fluid.defaults("cspace.relationManager", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         selectors: {
@@ -55,11 +56,14 @@ cspace = cspace || {};
                     applier: "{relationManager}.applier"
                 }
             },
+            // Dialog that lets the user to create a new related record or
+            // create a relation with the existing record.
             searchToRelateDialog: {
                 container: "{relationManager}.dom.searchDialog",
                 type: "cspace.searchToRelateDialog",
                 createOnEvent: "onSearchToRelateDialog"
             },
+            // The actual data source used to create relations.
             relationDataSource: {
                 type: "cspace.relationManager.relationDataSource"
             }
@@ -112,6 +116,8 @@ cspace = cspace || {};
             resolve = options.parentBundle.resolve;
 
         that.onAddRelation = function (relations) {
+            // When the user wants to create a relation send the data
+            // via the data source.
             that.relationDataSource.set(relations, null, function (data) {
                 if (!data || data.isError) {
                     data.messages = data.messages || fluid.makeArray("");
@@ -142,6 +148,7 @@ cspace = cspace || {};
         that.events.onSearchToRelateDialog.fire();
     };
 
+    // Add relation function specific to the related records tab,
     cspace.relationManager.addFromTab = function (that, recordEditor, messageBar, csid, event) {
         var callback = function () {
             cspace.relationManager.add(that, messageBar, csid, event);
@@ -154,6 +161,7 @@ cspace = cspace || {};
         recordEditor.globalNavigator.events.onPerformNavigation.fire(callback);
     };
 
+    // Add relation function.
     cspace.relationManager.add = function (that, messageBar, csid, event) {
         var options = that.options;
         event.stopPropagation();
@@ -165,6 +173,7 @@ cspace = cspace || {};
         }
     };
 
+    // Render config used to render the add relation button.
     cspace.relationManager.produceTree = function (that) {
         return {
             expander: {
@@ -202,6 +211,7 @@ cspace = cspace || {};
     });
 
     cspace.relationManager.permissionResolver.finalInit = function (that) {
+        // Detect if the add button needs to be displayed or not.
         if (that.options.locked) {
             that.applier.requestChange("showAddButton", false);
             return;
