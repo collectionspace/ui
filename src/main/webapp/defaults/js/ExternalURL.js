@@ -18,6 +18,8 @@ cspace = cspace || {};
     
     fluid.log("ExternalURL.js loaded"); 
 
+    // External url widget component. It lets users navigate to urls
+    // that are inserted into the input field decorated with this widget.
     fluid.defaults("cspace.externalURL", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         preInitFunction: "cspace.externalURL.preInit",
@@ -78,6 +80,7 @@ cspace = cspace || {};
         }
     });
 
+    // Process url specific to the authority records (inferred from the short id).
     cspace.externalURL.processUrlAuth = function (url, recordType, vocab, original) {
         if (!original) {
             return "";
@@ -93,6 +96,7 @@ cspace = cspace || {};
         });
     };
 
+    // Process url for non-auth records (inferred from urn).
     cspace.externalURL.processUrl = function (url, recordType, original) {
         if (!original) {
             return "";
@@ -124,6 +128,8 @@ cspace = cspace || {};
             return url.match(regex) || url.length < 1;
         };
 
+        // External url's method that validates the url based on the
+        // above regex and renders it (the anchor that is).
         that.validateAndRender = function () {
             var messageBar = that.messageBar,
                 externalURLButton = that.externalURLButton,
@@ -155,6 +161,7 @@ cspace = cspace || {};
     };
 
     cspace.externalURL.finalInit = function (that) {
+        // Disable external url link if in read only mode.
         if (that.options.readOnly) {
             that.container.prop("disabled", true);
             return;

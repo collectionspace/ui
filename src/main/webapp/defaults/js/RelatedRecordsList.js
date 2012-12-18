@@ -17,10 +17,13 @@ cspace = cspace || {};
     "use strict";
 
     fluid.log("RelatedRecordsList.js loaded");
-    
+
+    // Related record list component used by the sidebar to display all
+    // related procedural, catalogign and auth records.
     fluid.defaults("cspace.relatedRecordsList", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
+            // Handles actual addition of related redords.
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsList}.dom.relationManagerSelector",
@@ -35,6 +38,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Represents the pagination view of related records.
             rrlListView: {
                 type: "cspace.listView",
                 container: "{relatedRecordsList}.dom.listViewSelector",
@@ -90,6 +94,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Inital message when there are still no records related.
             listBanner: {
                 type: "cspace.relatedRecordsList.banner",
                 container: "{relatedRecordsList}.dom.banner",
@@ -97,6 +102,7 @@ cspace = cspace || {};
                     list: "{relatedRecordsList}.dom.listViewSelector"
                 }
             },
+            // Togglable component for the related records list.
             togglableRelated: {
                 type: "cspace.util.togglable",
                 container: "{relatedRecordsList}.container",
@@ -109,14 +115,19 @@ cspace = cspace || {};
             }
         },
         events: {
+            // Fired after relation is added.
             afterAddRelation: null,
+            // Global relations updated event.
             relationsUpdated: {
                 event: "{globalEvents}.events.relationsUpdated"
             },
+            // Global primary record created event.
             primaryRecordCreated: {
                 event: "{globalEvents}.events.primaryRecordCreated"
             },
+            // Related records list updated.
             listUpdated: null,
+            // Fired when related records for the list are updated.
             relatedRelationsUpdated: null
         },
         listeners: {
@@ -127,6 +138,7 @@ cspace = cspace || {};
                 "{relatedRecordsList}.events.relationsUpdated.fire"
             ]
         },
+        // Used to handle categories of records, e.g. procedures.
         category: [],
         parentBundle: "{globalBundle}",
         protoTree: {
@@ -158,9 +170,12 @@ cspace = cspace || {};
     });
 
     cspace.relatedRecordsList.preInit = function (that) {
+        // Add extra context based on the record type of the related records.
         that.relatedListTag = fluid.typeTag("cspace.relatedRecordsList.related");
         that.relatedListTypeTag = fluid.typeTag(fluid.model.composeSegments("cspace.relatedRecordsList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
+            // Only fire relatedRelationsUpdated if it's the records that
+            // this rrList handles are updated.
             if (related !== that.options.related && !fluid.find(that.options.category, function (recordType) {
                 if (recordType === related) {return true;}
             })) {
@@ -172,6 +187,7 @@ cspace = cspace || {};
             that.rrlListView.updateModel();
         };
         that.listUpdatedHandler = function () {
+            // Show or hide banner based on whether there are any records.
             var showBanner = fluid.get(that.rrlListView.model, "list").length < 1;
             that.listBanner.events[showBanner ? "showBanner": "hideBanner"].fire();
         };

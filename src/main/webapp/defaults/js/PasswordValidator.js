@@ -16,6 +16,8 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("PasswordValidator.js loaded");
 
+    // Password validator component that validates password strings and
+    // their lengths.
     fluid.defaults("cspace.passwordValidator", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         preInitFunction: "cspace.passwordValidator.preInit",
@@ -23,6 +25,7 @@ cspace = cspace || {};
         selectors: {
             passwordField: ".csc-passwordValidator-password"
         },
+        // Parent bundle component that contains all message strings.
         parentBundle: "{globalBundle}",
         invokers: {
             lookupMessage: {
@@ -39,6 +42,7 @@ cspace = cspace || {};
     });
 
     cspace.passwordValidator.preInit = function (that) {
+        // Validate based on min and max length.
         that.validateLength = function (password) {
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {

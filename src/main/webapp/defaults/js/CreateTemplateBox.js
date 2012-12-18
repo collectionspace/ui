@@ -14,7 +14,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    // Craete template component (currently only supported in UI)
+    // can be used to create custom templates based on default,
+    // record template.
     fluid.defaults("cspace.createTemplateBox", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         finalInitFunction: "cspace.createTemplateBox.finalInit",
@@ -94,7 +97,8 @@ cspace = cspace || {};
         }),
         permission: "create"
     });
-    
+
+    // Generic produceTree for createTemplateBox.
     cspace.createTemplateBox.produceTree = function (that) {
         var tree = {
             recordType: {
@@ -145,13 +149,16 @@ cspace = cspace || {};
         tree.recordType.decorators = {"addClass": "{styles}.recordType"};
         return tree;        
     };
-    
+
+    // If there are no templates return false (will render empty).
     cspace.createTemplateBox.assertTemplateTypes = function () {
         return arguments.length > 0;
     };
     
     cspace.createTemplateBox.preInit = function (that) {
         that.options.listeners = {
+            // When record type is changed, update the component and render
+            // it based on whether there are already templates available or not.
             recordTypeChanged: function (recordType) {
                 that.listSource.get({
                     recordType: recordType
@@ -180,6 +187,8 @@ cspace = cspace || {};
     };
     
     cspace.createTemplateBox.finalInit = function (that) {
+        // Navigate to template creation page if the user chooses to create
+        // a new template.
         that.createNewRecordFromTemplate = function () { 
             that.templateSource.get({
                 recordType: that.model.recordType,

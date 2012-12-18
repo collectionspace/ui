@@ -17,6 +17,8 @@ cspace = cspace || {};
     
     fluid.log("Confirmation.js loaded");
 
+    // A sub-routine used to build button related part of confirmation's
+    // protoTree.
     var addButtonToTree = function (id, resolve, messagekeys, styles) {
         return {
             messagekey: "${messagekeys." + id + "Text}",
@@ -31,7 +33,8 @@ cspace = cspace || {};
             }]
         };
     };
-    
+
+    // Bind confirmation events such as close, act, etc.
     var bindEventHandlers = function (that) {
         that.locate("close").click(function () {
             that.events.onClose.fire("cancel");
@@ -43,13 +46,16 @@ cspace = cspace || {};
         });
     };
 
+    // Confirmation dialog used for various confirmations of user actions
+    // such as record deletion, relation deletion, navigation away and etc.
     cspace.confirmationDialog = function (container, options) {
         var that = fluid.initRendererComponent("cspace.confirmationDialog", container, options);
         that.refreshView();
         bindEventHandlers(that);
         return that;
     };
-    
+
+    // Basic confirmation produceTree function.
     cspace.confirmationDialog.produceTree = function (that) {
         var options = that.options;
         var tree = {
@@ -77,12 +83,14 @@ cspace = cspace || {};
         });
         return tree;
     };
-    
+
+    // Confirmation dialog.
     fluid.defaults("cspace.confirmationDialog", {
         produceTree: cspace.confirmationDialog.produceTree,
         events: {
             onClose: null
         },
+        // Default actions/buttons available.
         model: {
             messagekeys: {
                 cancelText: "saveDialog-cancelText",
@@ -103,6 +111,7 @@ cspace = cspace || {};
             proceed: "cs-confirmationDialogButton-proceed",
             act: "cs-confirmationDialogButton-act"
         },
+        // Confirmation dialog template.
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
@@ -122,7 +131,9 @@ cspace = cspace || {};
             that.popup.empty();
         }, undefined, undefined, "first");
     };
-    
+
+    // Setup jQuery UI Dialog widget as a backbone for Collection Space
+    // confirmation.
     var setupConfirmation = function (that) {
         that.popup = $("<div></div>");
         that.popup.dialog({
@@ -138,6 +149,7 @@ cspace = cspace || {};
         });
     };
 
+    // Confirmation creator function.
     cspace.confirmation = function (options) {
         var that = fluid.initLittleComponent("cspace.confirmation", options);
         setupConfirmation(that);
@@ -168,7 +180,9 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}"
     });
-    
+
+    // An older implementation of something that resembles
+    // grade. This type is used for delete confirmation.
     cspace.confirmation.deleteDialog = function (container, options) {
         var that = fluid.initLittleComponent("cspace.confirmation.deleteDialog", options);
         return cspace.confirmationDialog(container, that.options);
@@ -189,7 +203,9 @@ cspace = cspace || {};
         },
         strings: { }
     });
-    
+
+    // An older implementation of something that resembles
+    // grade. This type is used for save confirmation.
     cspace.confirmation.saveDialog = function (container, options) {
         var that = fluid.initLittleComponent("cspace.confirmation.saveDialog", options);
         return cspace.confirmationDialog(container, that.options);
@@ -209,6 +225,8 @@ cspace = cspace || {};
         strings: { }
     });
 
+    // An older implementation of something that resembles
+    // grade. This type is used for alert confirmation.
     cspace.confirmation.alertDialog = function (container, options) {
         var that = fluid.initLittleComponent("cspace.confirmation.alertDialog", options);
         return cspace.confirmationDialog(container, that.options);

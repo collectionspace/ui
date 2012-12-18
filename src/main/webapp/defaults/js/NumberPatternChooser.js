@@ -15,6 +15,7 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("NumberPatternChooser.js loaded");
 
+    // Build a renderer tree for the number pattern chooser.
     var buildTree = function (model) {
         // If no model return empty component tree.
         if (!model) {
@@ -51,6 +52,7 @@ cspace = cspace || {};
         }));
     };
 
+    // Build renderer components.
     var buildCutpoints = function (selectors) {
         return [
             {id: "pattern-row:", selector: selectors.row},
@@ -61,6 +63,8 @@ cspace = cspace || {};
         ];
     };
 
+    // Query the app layer for the next available number based on
+    // selected pattern.
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
         var url = cspace.util.addTrailingSlash(that.options.baseUrl) + "id/" + sequenceName;
         jQuery.ajax({
@@ -76,6 +80,7 @@ cspace = cspace || {};
 
     };
 
+    // Update the decorated field. If there's error display it with messageBar.
     var populateInputField = function (that) {
         return function (data, status) {
             if (!data) {
@@ -116,7 +121,8 @@ cspace = cspace || {};
                 list.focus();
             }
         });
-        
+
+        // Add keyboard a11y.
         fluid.deadMansBlur(rows, {
             exclusions: {rows: rows}, 
             handler: function () {
@@ -170,6 +176,8 @@ cspace = cspace || {};
         that.locate("list").hide();
     };
 
+    // Numbder chooser component used for selecting patterned record
+    // numbers.
     fluid.defaults("cspace.numberPatternChooser", {
         gradeNames: ["fluid.viewComponent", "fluid.modelComponent", "autoInit"],
         finalInitFunction: "cspace.numberPatternChooser.finalInit",

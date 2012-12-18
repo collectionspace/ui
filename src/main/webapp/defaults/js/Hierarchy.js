@@ -18,10 +18,13 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.hierarchy");
 
+    // Sub-routine used to merge app layer's uispece with default proto
+    // tree.
     cspace.hierarchy.treeUispecMerge = function (tree, uispec) {
         return fluid.merge(null, tree, uispec);
     };
 
+    // Filter unnessesary things from the uispec.
     cspace.hierarchy.filterUISpec = function (uispec) {
         // NOTE: This is to fix an issue of not necessary things in uisoec
         // for hierarchy. As soon as uispec is cleaned up - this needs to
@@ -33,6 +36,7 @@ cspace = cspace || {};
         ], false);
     };
 
+    // Produce tree function specific to cataloging records.
     cspace.hierarchy.produceTreeCataloging = function (that) {
         return cspace.hierarchy.treeUispecMerge({
             header: {
@@ -84,7 +88,8 @@ cspace = cspace || {};
             }
         }, that.options.uispec);
     };
-    
+
+    // Generic hierarchy produce tree.
     cspace.hierarchy.produceTree = function (that) {
         return cspace.hierarchy.treeUispecMerge({
             header: {
@@ -166,6 +171,8 @@ cspace = cspace || {};
             afterFetchTemplate: "{that}.refreshView"
         },
         components: {
+            // Additional context that hierarchy creates used by its
+            // child autocomplete decorators.
             context: {
                 type: "fluid.typeFount",
                 options: {
@@ -176,6 +183,7 @@ cspace = cspace || {};
                 type: "cspace.util.togglable",
                 createOnEvent: "afterRender"
             },
+            // Fetch hierarchy template.
             templateFetcher: {
                 type: "cspace.templateFetcher",
                 priority: "first",
@@ -204,6 +212,7 @@ cspace = cspace || {};
         that.options.rendererFnOptions.templateSource = function () {
             return that.template;
         };
+        // Render hierarchy once the template is fetched.
         that.refreshView = function (resourceText) {
             that.template = resourceText;
             that.refreshView();
@@ -214,7 +223,8 @@ cspace = cspace || {};
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
     };
-    
+
+    // Evaluate whether the current record contains equivalent context records.
     cspace.hierarchy.assertEquivalentContexts = function (options) {
         return options.equivalentContexts && options.equivalentContexts.length > 0;
     };
