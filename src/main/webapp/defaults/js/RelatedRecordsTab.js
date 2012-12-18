@@ -18,15 +18,20 @@ cspace = cspace || {};
 
     fluid.log("RelatedRecordsTab.js loaded");
 
+    // Component that renders and handles all related records tabs.
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         components: {
             instantiator: "{instantiator}",
+            // Tab specific confirmation dialog.
             confirmation: {
                 type: "cspace.confirmation"
             },
+            // Globla message bar.
             messageBar: "{messageBar}",
+            // Record types container with all record type schema info.
             recordTypes: "{recordTypes}",
+            // Component that handles the actual record relation IO.
             relationManager: {
                 type: "cspace.relationManager",
                 container: "{relatedRecordsTab}.dom.relationManager",
@@ -52,6 +57,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // List of related records in the tab.
             relatedRecordsListView: {
                 type: "cspace.listView",
                 container: "{relatedRecordsTab}.dom.relatedRecordsListView",
@@ -96,6 +102,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // UI representation of the record.
             record: {
                 type: "cspace.relatedRecordsTab.record",
                 container: "{relatedRecordsTab}.dom.record",
@@ -105,6 +112,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Message banner for an empty tab.
             newRecordBannder: {
                 type: "cspace.relatedRecordsTab.newRecordBannder",
                 container: "{relatedRecordsTab}.dom.newRecordBannder",
@@ -117,6 +125,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Record editor within the tab.
             relatedRecordsRecordEditor: {
                 type: "cspace.recordEditor",
                 container: "{relatedRecordsTab}.dom.recordEditor",
@@ -138,23 +147,35 @@ cspace = cspace || {};
                 },
                 createOnEvent: "onSelect"
             },
+            // Data source used to delete relations.
             deleteRelationDataSource: {
                 type: "cspace.relatedRecordsTab.deleteRelationDataSource"
             }
         },
         events: {
+            // Fired when component is ready.
             ready: null,
+            // Fired when related record is selected from the list.
             onSelect: null,
+            // Fired before relation is added.
             onAddRelation: null,
+            // Fired before relation is deleted.
             onDeleteRelation: null,
+            // Fired on relation deletion.
             deleteRelation: null,
+            // Fired after relation is added.
             afterAddRelation: null,
+            // Fired after relation is deleted.
             afterDeleteRelation: null,
+            // Fired when new record is created by the record editor.
             onCreateNewRecord: null,
+            // Global event when relations are updated.
             relationsUpdated: {
                 event: "{globalEvents}.events.relationsUpdated"
             },
+            // Fired when record editor is ready.
             recordEditorReady: null,
+            // Fired when the record editor saves the record.
             afterRecordSave: null
         },
         listeners: {
@@ -248,14 +269,17 @@ cspace = cspace || {};
     cspace.relatedRecordsTab.testDeleteRelationDataSource = cspace.URLDataSource;
 
     cspace.relatedRecordsTab.preInit = function (that) {
-        
+
+        // Check if related record from event payload matters to this tab.
         function hasRelated (related) {
             var category = that.recordTypes[related] || [];
             return $.inArray(that.options.related, category) > -1;
         }
 
+        // Add additional context to the tab.
         that.listTag = fluid.typeTag(fluid.model.composeSegments("cspace", "relatedTabList", that.options.related));
         that.relationsUpdatedHandler = function (related) {
+            // Only update the list in the tab if updated relation is for this tab.
             if (related === that.options.related || hasRelated(related)) {
                 that.relatedRecordsListView.updateModel();
             }
@@ -269,6 +293,7 @@ cspace = cspace || {};
             if (!target.csid || !target.recordtype) {
                 target = undefined;
             }
+            // Confirm with user if the relation needs to be deleted.
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 listeners: {
                     onClose: function (userAction) {
@@ -305,6 +330,7 @@ cspace = cspace || {};
             });
         };
         that.afterRelatedRecordCreate = function (model) {
+            // When new record is created automatically add a relation.
             that.events.onAddRelation.fire({
                 items: [{
                     source: {
@@ -329,6 +355,7 @@ cspace = cspace || {};
             that.locate("recordEditor")[add ? "addClass" : "removeClass"](that.options.styles.created);
         };
         that.afterDeleteRelation = function (related, csid) {
+            // Update all UI after relation is deleted.
             var resolve = that.options.parentBundle.resolve,
                 recordEditor = "relatedRecordsRecordEditor",
                 recordEditorComponent = that[recordEditor],
@@ -385,6 +412,7 @@ cspace = cspace || {};
     });
     cspace.listView.testDataSourceTab = cspace.URLDataSource;
 
+    // Banner used when no records are related.
     fluid.defaults("cspace.relatedRecordsTab.newRecordBannder", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         parentBundle: "{globalBundle}",

@@ -16,35 +16,46 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.log("Autocomplete.js loaded");
 
+    // An autocomplete component that is used for term completion
+    // in Collection Space.
     fluid.defaults("cspace.autocomplete", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
+        // Minimum number of character to activate the term completion.
         minChars: 3,
         model: {
             authorities: [],
             matches: []
         },
+        // Delay before making a request to complete the term.
         delay: 500,
         invokers: {
+            // Invoker that positions buttons etc.
             buttonAdjustor: {
                 funcName: "cspace.autocomplete.buttonAdjustor",
                 args: ["{autocomplete}.closeButton", "{autocomplete}.model", "{arguments}.0"]
             },
+            // Invoker that is used when authority is selected.
             selectAuthority: {
                 funcName: "cspace.autocomplete.selectAuthority",
                 args: ["{autocomplete}", "{arguments}.0"]
             },
+            // Invoker that reverts the current state of the autocomplete
+            // widget to its original.
             revertState: {
                 funcName: "cspace.autocomplete.revertState",
                 args: ["{autocomplete}"]
             },
+            // Invoker, used when matched term is selected.
             selectMatch: {
                 funcName: "cspace.autocomplete.selectMatch",
                 args: ["{autocomplete}", "{arguments}.0"]
             },
+            // Invoker used to display error message via messageBar.
             displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         components: {
             vocab: "{vocab}",
+            // Autocomplete view subcomponents - autocomplete's actual UI.
             autocomplete: {
                 type: "fluid.autocomplete.autocompleteView",
                 options: {
@@ -52,10 +63,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     delay: "{cspace.autocomplete}.options.delay"
                 }
             },
+            // Common even container.
             eventHolder: {
                 type: "fluid.autocomplete.eventHolder",
                 priority: "first"
             },
+            // A popup widget subcomponent.
             popup: {
                 type: "cspace.autocomplete.popup",
                 options: {
@@ -65,15 +78,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     elPaths: "{autocomplete}.options.elPaths"
                 }
             },
+            // Data source to get all available authorities for the
+            // autocomplete.
             authoritiesSource: {
                 type: "cspace.autocomplete.authoritiesDataSource"
             },
+            // Data source to query for matches.
             matchesSource: {
                 type: "cspace.autocomplete.matchesDataSource"
             },
+            // Data source to create a new term.
             newTermSource: {
                 type: "cspace.autocomplete.newTermDataSource"
             },
+            // Close button subcomponent.
             closeButton: {
                 type: "cspace.autocomplete.closeButton"
             }
@@ -107,6 +125,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
 
+    // Data source used when autocomplete is used within the context of
+    // structured objects (cataloging at the memomet but can be used anywhere).
     fluid.defaults("cspace.autocomplete.structuredObjectsAuthoritiesSource", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         finalInitFunction: "cspace.autocomplete.structuredObjectsAuthoritiesSource.finalInit",
@@ -138,6 +158,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
     };
 
+    // Expand urls based on vocab info.
     cspace.autocomplete.preInit = function (that) {
         fluid.each(["vocab", "vocabSingle"], function (url) {
             var urls = that.options.urls;
@@ -152,13 +173,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     cspace.autocomplete.postInit = function (that) {
+        // Hide actual input field bound to a model.
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
+
+        // Create an input that will be used by autocomplete.
         var autocompleteInput = $("<input/>");
         autocompleteInput.insertAfter(that.hiddenInput);
         that.autocompleteInput = autocompleteInput;
-        
+
+        // Create a coantiner for a popup.
         var popup = $("<div></div>");
         var topRelative = findTopRelative(autocompleteInput[0]);
         topRelative.append(popup);
@@ -176,11 +201,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var authUrl;
         that.resolveMessage = that.options.parentBundle.resolve;
         that.closeButton.button.attr("title", that.resolveMessage("autocomplete-closeButton"));
+        // Add a listener to the onSearch event.
         that.autocomplete.events.onSearch.addListener(function (newValue, permitted) {
             that.applier.requestChange("term", newValue);
             if (permitted) {
                 that.buttonAdjustor(true); // hide the button to show the "loading indicator"
                 var matchesUrl = that.matchesSource.resolveUrl(that.model);
+                // Fetch matches if available.
                 that.matchesSource.get(that.model, function (matches) {
                     if (!matches) {
                         that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
@@ -195,12 +222,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         return;
                     }
                     that.applier.requestChange("matches", matches);
+                    // Adjust buttons and show popup.
                     that.buttonAdjustor();
                     that.popup.open();
                     that.autocomplete.events.onSearchDone.fire(newValue);
                 }, cspace.util.provideErrorCallback(that, matchesUrl, "errorFetching"));
             }
             else {
+                // If invalid term, revert.
                 if (newValue === "") { // CSPACE-1651
                     var blankRec = cspace.autocomplete.urnToRecord("");
                     updateAuthoritatively(that, blankRec);
@@ -209,7 +238,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 that.popup.closeWithFocus();
             }
         });
-        
+
+        // Bind several events to appropriate autocomplete's invokers.
         that.eventHolder.events.selectMatch.addListener(that.selectMatch);
         that.eventHolder.events.selectAuthority.addListener(that.selectAuthority);
         that.eventHolder.events.revertState.addListener(that.revertState);
@@ -217,6 +247,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // TODO: risk of asynchrony
         authUrl = that.authoritiesSource.resolveUrl();
         that.authoritiesSource.get(null, function (authorities) {
+            // After autocomplete authorities (configuration) is fetched,
+            // do the rest of the setup. Handler permissions, sort authorities
+            // based on vocab.
             if (!authorities) {
                 that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
                     url: authUrl
@@ -238,12 +271,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
         }, cspace.util.provideErrorCallback(that, authUrl, "errorFetching"));
 
+        // If closed revert state.
         that.closeButton.button.click(function () {
             that.eventHolder.events.revertState.fire();
             return false;
         });
     };
 
+    // Sorting algo for authorities and their vocabularies.
     cspace.autocomplete.compareAuthorities = function (vocab, auth1, auth2) {
         var vocabType1 = auth1.type.split("-"),
             vocabType2 = auth2.type.split("-"),
@@ -261,7 +296,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         order = vocab.authority[type1].order.vocabs;
         return order.indexOf(vocab1) - order.indexOf(vocab2);
     };
-    
+
+    // Basic event holder component.
     fluid.defaults("fluid.autocomplete.eventHolder", {
         gradeNames: ["fluid.eventedComponent", "autoInit"],
         events: {
@@ -347,7 +383,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.container.addClass(that.options.styles.baseStyle);
         
         fluid.autocomplete.bindListener(that);
-        
+
+        // ====== Bind some of the autocomplete events and their listeners.
         that.events.onSearch.addListener(function (term, permitted) {
             if (permitted) {
                 container.addClass(that.options.styles.loadingStyle);
@@ -375,7 +412,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 container.removeClass(that.options.styles.loadingStyle);
             });
         });
+        // ================================================================
 
+        // Handler search, taking care of timeouts based on delay and user
+        // input.
         that.search = function (newValue) {
             var permitted;
             newValue = newValue || that.container.val();
@@ -464,7 +504,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     /**** End testing definitions ****/
     
-    
+    // Basic close button component that takes care of its positioning
+    // and appropriate events.
     fluid.defaults("cspace.autocomplete.closeButton", {
         gradeNames: ["fluid.viewComponent"],
         styles: {
@@ -498,7 +539,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var buildValueBinding = function (fieldName) {
         return "${" + fluid.model.composeSegments("{row}", fieldName) + "}";
     };
-    
+
+    // Build part of the autocomplete's popup tree that represents,
+    // authoity selection for a new term.
     cspace.autocomplete.makeAuthoritySelectionTree = function (tree, repeatID, listPath, fieldName) {
         tree.expander = fluid.makeArray(tree.expander);
         tree.expander.push({
@@ -509,7 +552,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             tree: buildValueBinding(fieldName)
         });
     };
-    
+
+    // Build part of the tree responsible for rendering Preferred -
+    // Non-Preferred authority names.
     cspace.autocomplete.makePNPSelectionTree = function (elPaths, styles, tree, repeatID) {
         var preferred = elPaths.preferred,
             displayName = elPaths.displayName,
@@ -560,7 +605,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     };
-    
+
+    // Generic authocomplete popup produceTree function.
     cspace.autocomplete.produceTree = function (that) {
         var tree = {},
             model = that.model;
@@ -583,7 +629,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
         return tree;
     };
-    
+
+    // Creator function for popup subcomponent.
     cspace.autocomplete.popup = function (container, options) {
         var that = fluid.initRendererComponent("cspace.autocomplete.popup", container, options);
         fluid.initDependents(that);
@@ -600,7 +647,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
             return togo;
         };
-        
+
         that.activateFunction = function (item) {
             var decoded = decodeItem(item.target);
             if (decoded.type) {
@@ -626,6 +673,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
+        // Handle keyboard selection and activation.
         function makeHighlighter(funcName) {
             return function (item) {
                 var decoded = decodeItem(item); 
@@ -660,6 +708,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.popup.preInit = function (that) {
+        // Process the popup model before rendering.
         cspace.util.preInitMergeListeners(that.options, {
             prepareModelForRender: function (model, applier, that) {
                 var matches = [],
@@ -688,6 +737,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         disabled = true;
                     }
 
+                    // Builde "matches" structure with all data, necessary for rendering.
                     matches = matches.concat(fluid.transform(displayNameList, function (thisDisplayName, index) {
                         var elem = {};
                         elem[urn] = match[baseUrn].concat("'", thisDisplayName, "'");
@@ -705,6 +755,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
 
+    // Produce tree function specific to structured objects.
     cspace.autocomplete.produceTreeStructuredObjects = function (that) {
         var tree = cspace.autocomplete.produceTree(that);
         fluid.merge({
@@ -743,6 +794,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             onReady: "{that}.onReady"
         },
         components: {
+            // Holds context of which recordType is hilighted.
             context: {
                 type: "fluid.typeFount",
                 options: {
@@ -750,14 +802,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 createOnEvent: "onContext"
             },
+            // Data source to fetch the data to be rendered in miniview.
             dataSource: {
                 type: "cspace.autocomplete.popup.miniView.dataSource",
                 createOnEvent: "onContext"
             },
+            // OVerridable component that extracts correct CSID based on record
+            // type, vocab.
             urnToCSID: {
                 type: "cspace.autocomplete.popup.miniView.urnToCSID",
                 createOnEvent: "onContext"
             },
+            // Actual component that does the rendering.
             renderer: {
                 container: "{cspace.autocomplete.popup.miniView}.container",
                 type: "cspace.autocomplete.popup.miniView.renderer",
@@ -770,12 +826,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         },
+        // Delay to display the miniView.
         delay: 1000,
         showTimer: undefined,
         model: null,
         preInitFunction: "cspace.autocomplete.popup.miniView.preInit"
     });
 
+    // Component that handles correct CSID extraction from the urn.
     fluid.defaults("cspace.autocomplete.popup.miniView.urnToCSID", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
         preInitFunction: "cspace.autocomplete.popup.miniView.urnToCSID.preInit"
@@ -787,6 +845,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
     };
 
+    // Mini view renderer comopnent.
     fluid.defaults("cspace.autocomplete.popup.miniView.renderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         resources: {
@@ -825,6 +884,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     cspace.autocomplete.popup.miniView.renderer.preInit = function (that) {
+        // Process mini view model for quick render.
         that.prepareModelForRender = function () {
             var link = fluid.stringTemplate(that.options.url, {
                 recordType: that.options.recordType,
@@ -879,7 +939,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
     };
     /* miniView component */
-    
+
+    // Autocomple popup component.
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
         selectors: {
@@ -904,6 +965,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         repeatingSelectors: ["matchItem", "authorityItem"],
         preInitFunction: "cspace.autocomplete.popup.preInit",
         produceTree: "cspace.autocomplete.produceTree",
+        // Template for popup component.
         resources: {
             template: {
                 expander: {
@@ -918,6 +980,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         components: {
+            // Same old event holder.
             eventHolder: "{eventHolder}",
             vocab: "{vocab}",
             miniView: {
@@ -941,6 +1004,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     cspace.autocomplete.popup.open = function (that, extraSelectables) {
+        // Render the popup view.
+        // Attach all keyboard related abilities.
         that.renderer.refreshView();
         
         var input = fluid.unwrap(that.options.inputField),
@@ -972,6 +1037,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.popup.addRowHover = function (miniView, elements, matches, left) {
+        // Add hoever, focus functionality related to the mini view.
         var timeout,
             openMiniView = function (el) {
                 var currentTarget = $(el.currentTarget),
@@ -1016,6 +1082,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");
 
     function updateAuthoritatively(that, termRecord) {
+        // Handle update of the actual hidden model-bound field when
+        // the autocomplete value is set.
         if (that.hiddenInput.val() && 
             termRecord.urn === that.hiddenInput.val() && 
             that.autocompleteInput.val() === termRecord.displayName) {
@@ -1051,6 +1119,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     }
     
     cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission) {
+        // Filter authorities from configuration based on permissions.
         var types = fluid.transform(model.authorities, function (auth) {
             // We only need an authority not the vocabulary.
             return auth.type.split("-")[0];
@@ -1073,6 +1142,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var selectAuthority = function (that, model, directModel, newTermUrl) {
+        // Common select authority functionality used by all autocompletes.
         fluid.merge(null, model, {
             fields: {
                 displayName: that.model.term
@@ -1098,6 +1168,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, cspace.util.provideErrorCallback(that, newTermUrl, "errorWriting"));
     };
 
+    // Generic select authority invoker implementation.
     cspace.autocomplete.selectAuthority = function (that, key) {
         var authority = that.model.authorities[key],
             directModel = {termUrl: authority.url},
@@ -1106,6 +1177,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         selectAuthority(that, model, directModel, newTermUrl);
     };
 
+    // Select authority specific to structured objects.
     cspace.autocomplete.selectAuthorityStructuredObjects = function (that, recordModel, changeTracker, messageBar, fieldsToIgnore, schema, key) {
         var authority = that.model.authorities[key],
             directModel = {termUrl: authority.type},
@@ -1133,13 +1205,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
         selectAuthority(that, model, directModel, newTermUrl);
     };
-    
+
+    // Revert autocomplete value to its original.
     cspace.autocomplete.revertState = function (that) {
         updateAuthoritatively(that, that.model.baseRecord);
         that.buttonAdjustor();
         that.popup.close();
     };
-    
+
+    // Select a match from the list of queried matches.
     cspace.autocomplete.selectMatch = function (that, key) {
         var match = that.model.matches[key],
             rowDisabled = that.options.elPaths.rowDisabled;
@@ -1150,7 +1224,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.buttonAdjustor();
         that.eventHolder.events.afterSelectMatch.fire();
     };
-    
+
+    // Select a match from the list of queried matches, specific to te case
+    // where confirmation is needed (e.g. picking narrower that has different
+    // broader).
     cspace.autocomplete.selectMatchConfirm = function (that, key) {
         var match = that.model.matches[key];
         that.broaderDataSource.get({recordType: match.type, csid: match.csid}, function (response) {

@@ -105,6 +105,9 @@ cspace = cspace || {};
         return resourceSpecs;
     };
 */
+    // A function that attaches little subcomponents to page builder,
+    // with component tag name that can later be used as a context,
+    // in demands resolution.
     var setTags = function (that, options) {
         var type = that.options.recordType;
         if (!type) {
@@ -115,6 +118,8 @@ cspace = cspace || {};
         });
     };
 
+    // Component responsible for all asynchronous IO (fetching uispec,
+    // uischemae etc).
     fluid.defaults("cspace.pageBuilderIO", {
         gradeNames: ["fluid.eventedComponent", "autoInit"],
         preInitFunction: "cspace.pageBuilderIO.preInit",
@@ -150,6 +155,7 @@ cspace = cspace || {};
     });
 
     cspace.pageBuilderIO.preInit = function (that) {
+        // Add a record type name context.
         that.recordTypeTag = fluid.typeTag(that.options.namespace || that.options.recordType);
     };
 
@@ -161,10 +167,16 @@ cspace = cspace || {};
             }
         };
 
+        // Pubcli method (used only by globalSetup) that will do the IO and
+        // consequently create its page builder subcomponent.
         that.initPageBuilder = function (options) {
+            // A container for all resources to be fetched that's passed to
+            // fluid.fetchResources.
             var resourceSpecs = {};
             setTags(that, options);
 
+            // Figure out if the page is read only. This property will be read
+            // by other components where readOnly flag matters (for rendering).
             that.options.readOnly = cspace.util.resolveReadOnly({
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
@@ -267,6 +279,7 @@ cspace = cspace || {};
         },
         components: {
             instantiator: "{instantiator}",
+            // Abstraction around permission resolution utilities.
             permissionsResolver: {
                 type: "cspace.permissions.resolver",
                 options: {
@@ -276,6 +289,7 @@ cspace = cspace || {};
             recordTypeManager: {
                 type: "cspace.recordTypeManager"
             },
+            // Component that stores all user login information.
             userLogin: {
                 type: "cspace.util.login",
                 options: {
@@ -284,12 +298,15 @@ cspace = cspace || {};
                     csid: "{pageBuilder}.options.userLogin.csid"
                 }
             },
+            // Abstraction around vocab related utilities.
             vocab: {
                 type: "cspace.vocab",
                 options: {
                     schema: "{pageBuilder}.schema"
                 }
             },
+            // A holder of schemae configuration describing all available
+            // record types, groups etc.
             recordTypes: {
                 type: "cspace.recordTypes",
                 options: {
@@ -301,6 +318,7 @@ cspace = cspace || {};
                     }
                 }
             },
+            // Common footer component present on all pages.
             footer: {
                 type: "cspace.footer"
             }
@@ -317,6 +335,8 @@ cspace = cspace || {};
     
     cspace.pageBuilder.preInit = function (that) {
         that.recordTypesReady = function (recordTypes) {
+            // Set authority or nonAuthority flag used as context in
+            // demands resolution.
             if (fluid.find(recordTypes.vocabularies, function (vocab) {
                 if (that.options.recordType === vocab) {return true;}
             })) {
@@ -330,7 +350,9 @@ cspace = cspace || {};
         fluid.instantiateFirers(that, that.options);
         that.events.onDependencySetup.fire(that.options.uispec);
     };
-    
+
+    // Common renderer component that does some header specific rendering based
+    // on the page you are in.
     fluid.defaults("cspace.pageBuilder.renderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: "cspace.pageBuilder.renderer.preInit",

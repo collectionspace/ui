@@ -19,6 +19,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.termList", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         components: {
+            // Main implementation of the Term List
             termListImpl: {
                 type: "cspace.termList.impl",
                 container: "{termList}.termListImplContainer",
@@ -47,6 +48,7 @@ cspace = cspace || {};
             displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         parentBundle: "{globalBundle}",
+        // URL to grab terms
         urls: {
             termList: "%tenant/%tname/%recordType/termList/%termListType"
         },
@@ -66,13 +68,16 @@ cspace = cspace || {};
             recordType: that.options.recordType,
             termListType: that.options.termListType
         }, termListUrl = that.termListSource.resolveUrl(directModel);
+        // Get the list of elements for the termList
         that.termListSource.get(directModel, function (data) {
+            // If there is no data
             if (!data) {
                 that.displayErrorMessage(fluid.stringTemplate(that.options.parentBundle.resolve("emptyResponse"), {
                     url: termListUrl
                 }));
                 return;
             }
+            // If there is an error during fetching
             if (data.isError === true) {
                 fluid.each(data.messages, function (message) {
                     that.displayErrorMessage(message);
@@ -87,11 +92,13 @@ cspace = cspace || {};
     };
 
     cspace.termList.postInit = function (that) {
+        // Apply all the appropriate classes for the elements
         that.container.wrap($("<div />").addClass(that.options.styles.termList));
         that.termListImplContainer = that.container.parent();
         that.termListSelector = "." + that.container.attr("class").split(" ").join(".");
     };
 
+    // Main core options of the termList component
     fluid.defaults("cspace.termList.impl", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         selectors: {
@@ -110,6 +117,7 @@ cspace = cspace || {};
     });
     
     cspace.termList.impl.finalInit = function (that) {
+        // Disabe the rows if they are not active
         if (that.options.activestatus) {
             fluid.each($("option", that.locate("termList")), function (option, index) {
                 var stat = that.options.activestatus[index];
@@ -121,6 +129,7 @@ cspace = cspace || {};
         that.events.ready.fire(that);
     };
 
+    // HTML markup generation based on the retreived data
     cspace.termList.impl.produceTree = function (that) {
         return {
             termList: {

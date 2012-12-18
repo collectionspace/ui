@@ -14,7 +14,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    // Basic component used to display dimention specific
+    // block within the record rendering/editing section.
     fluid.defaults("cspace.dimension", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
@@ -43,6 +45,7 @@ cspace = cspace || {};
     });
     
     cspace.dimension.finalInit = function (that) {
+        // If record is read only, make sure everything is disabled.
         cspace.util.processReadOnly(that.container, that.options.readOnly);
         if (that.options.readOnly) {
             $("a", that.container).hide();
