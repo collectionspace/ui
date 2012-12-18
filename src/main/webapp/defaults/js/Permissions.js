@@ -14,12 +14,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 fluid.registerNamespace("cspace.permissions");
 
 (function ($, fluid) {
+
+    // This file contains all permission filtering and manipulation
+    // utilities used to vero resources (primarely record types).
+
     fluid.log("Permissions.js loaded");
-    
+
+    // Check if permissions array has a given permission.
     cspace.permissions.hasPermission = function (permissions, target, permission) {
         return $.inArray(permission, fluid.makeArray(permissions[target])) > -1;
     };
-    
+
+    // Combine multiple permission rules (e.g. AND or OR) together to figure out
+    // whether to veto or not.
     cspace.permissions.logicalCombine = function (values, applyAnd) {
         if (values.length === 0) {
             return false;
@@ -31,9 +38,12 @@ fluid.registerNamespace("cspace.permissions");
         });
         return found === undefined ? applyAnd: found;
     };
-    
+
+    // Permission resolver component that does the permission resolution.
     cspace.permissions.resolver = function (options) {
         var that = fluid.initLittleComponent("cspace.permissions.resolver", options);
+        // Takes an options block that contains permissions, target permission,
+        // etc.
         that.resolve = function (resOpts) {
             var target = fluid.makeArray(resOpts.target);
             var values = fluid.transform(target, function (thisTarget) {
@@ -49,13 +59,16 @@ fluid.registerNamespace("cspace.permissions");
             permissions: "nomerge"
         }
     });
-    
+
+    // If no resolver in options, create a new one based on permissions
+    // from the same options block.
     cspace.permissions.ensureResolver = function (options) {
         if (!options.resolver) {
             options.resolver = cspace.permissions.resolver({permissions: options.permissions});
         }
     };
-    
+
+    // A wrapper that resolves permissions for a toFilter list.
     cspace.permissions.filterList = function (options) {
         options = fluid.copy(options);
         cspace.permissions.ensureResolver(options);
@@ -64,7 +77,8 @@ fluid.registerNamespace("cspace.permissions");
             return !options.resolver.resolve(options);     
         });
     };
-    
+
+    // Apply permission resolution for a whole category of records from recordTypeManager.
     cspace.permissions.getPermissibleRelatedRecords = function (related, resolver, recordTypeManager, permission) {
         var toFilter = recordTypeManager.recordTypesForCategory(related);
         return cspace.permissions.filterList({
@@ -73,7 +87,8 @@ fluid.registerNamespace("cspace.permissions");
             resolver: resolver
         });
     };
-    
+
+    // Fix up the options block that will be resolved against.
     var buildResOpts = function (options) {
         var resOpts = {};
         if (options.oneOf) {
@@ -90,14 +105,17 @@ fluid.registerNamespace("cspace.permissions");
         }
         return resOpts;
     };
-    
+
+    // Main permission resolution function.
     cspace.permissions.resolve = function (options) {
         var resOpts = buildResOpts(options);
         resOpts.permission = options.permission;
         cspace.permissions.ensureResolver(options);
         return options.resolver.resolve(resOpts);
     };
-    
+
+    // Same as resolve but also lets the user apply permissions on logical
+    // groups of resources.
     cspace.permissions.resolveMultiple = function (options) {
         if (options.permission) {
             return cspace.permissions.resolve(options);
