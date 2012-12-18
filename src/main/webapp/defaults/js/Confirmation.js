@@ -212,9 +212,12 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.confirmation.saveDialog", {
+        mergePolicy: {
+            "model.messages": "replace"
+        },
         enableButtons: ["act", "cancel", "proceed"],
         model: {
-            messages: ["saveDialog-primaryMessage", "saveDialog-secondaryMessage", "saveDialog-hardSaveMessage"],
+            messages: ["saveDialog-primaryMessage", "saveDialog-secondaryMessage"],
             messagekeys: {
                 actText: "saveDialog-actText",
                 actAlt: "saveDialog-actAlt",
