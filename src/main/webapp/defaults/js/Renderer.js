@@ -118,9 +118,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     };
-    
+
+    // Container for all the renderer utils used by CSPACE.
     cspace.renderUtils = {
-        
+
+        // Utility used to generate cutpoints block from the UISPEC.
         cutpointsFromUISpec: function (uispec) {
             var selectors = {};
             cspace.renderUtils.buildSelectorsFromUISpec(uispec, selectors);
@@ -140,6 +142,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return tree;
         },
 
+        // Utility used to get the selectors from the UISPEC.
         buildSelectorsFromUISpec: function (uispec, selectors) {
             for (var key in uispec) {
                 if (!uispec.hasOwnProperty(key)) {
