@@ -1191,10 +1191,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
         if (authority.createFromExisting) {
             if (changeTracker.unsavedChanges) {
-                that.revertState();
-                messageBar.show(that.options.parentBundle.resolve("autocomplete-structuredObjects-save"), null, true);
-                that.eventHolder.events.afterSelectAuthority.fire();
-                return;
+                messageBar.show(that.options.parentBundle.resolve("autocomplete-structuredObjects-pleaseSave"), null, false);
             }
             model = fluid.copy(recordModel);
             fluid.each(fieldsToIgnore, function (fieldPath) {
