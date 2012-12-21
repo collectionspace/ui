@@ -1035,7 +1035,8 @@ cspace = cspace || {};
             onError: "{cspace.recordEditor.messanger}.onErrorHandler",
             afterSave: {
                 listener: "{cspace.recordEditor.messanger}.afterSaveHandler",
-                priority: "last"
+                priority: "last",
+                namespace: "afterSaveMessanger"
             }
         },
         preInitFunction: "cspace.recordEditor.messanger.preInit",
@@ -1673,8 +1674,14 @@ cspace = cspace || {};
             }
         },
         listeners: {
-            afterSave: "{recordRenderer}.refreshViewHandler",
-            afterCancel: "{recordRenderer}.refreshViewHandler",
+            afterSave: {
+                listener: "{recordRenderer}.refreshViewHandler",
+                namespace: "afterSaveRecordRenderer"
+            },
+            afterCancel: {
+                listener: "{recordRenderer}.refreshViewHandler",
+                namespace: "afterCancelRecordRenderer"
+            },
             onRenderTreePublic: "{recordRenderer}.onRenderTreeHandler"
         },
         preInitFunction: "cspace.recordEditor.recordRenderer.preInit",
