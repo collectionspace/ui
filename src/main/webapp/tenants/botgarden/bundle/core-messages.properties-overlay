@@ -14,6 +14,8 @@ collection-object-commentsLabel: Accession Notes
 collection-object-accessionDateLabel: Accession Date
 collection-object-deadFlagLabel: Dead Flag
 collection-object-deadDateLabel: Dead Date
+collection-object-deadDateEndLabel: Latest
+collection-object-deadDateStartLabel: Earliest
 collection-object-requestedByLabel: Requested By
 collection-object-vegetationTypeLabel: Vegetation Type
 collection-object-cbdRestrictionLabel: CBD Restriction
