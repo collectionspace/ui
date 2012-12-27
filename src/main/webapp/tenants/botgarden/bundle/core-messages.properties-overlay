@@ -336,7 +336,7 @@ loanin-transferOutReturnNotesLabel: Notes
 organization-termSourceLabel: Term Source
 organization-contactNamesLabel: Contact/Chair
 organization-associatedPersonGroupLabel: Associated People
-organization-associatedPersonLabel: Person
+organization-associatedPersonLabel: Associated Person
 organization-associatedPersonRoleLabel: Role
 organization-historyNotesLabel: Organization Notes
 
