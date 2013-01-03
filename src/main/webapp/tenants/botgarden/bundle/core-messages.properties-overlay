@@ -387,6 +387,8 @@ propagation-nurseryLocationLabel: Location in Nursery
 propagation-fungicideLabel: Fungicide
 propagation-activityCommentsLabel: Comments
 propagation-germinationDateLabel: Germination/Rooting Date
+propagation-germinationDateStartLabel: Earliest
+propagation-germinationDateEndLabel: Latest
 propagation-successRateLabel: Success Rate
 propagation-propDateStartLabel: Earliest
 propagation-propDateEndLabel: Latest
