@@ -109,7 +109,7 @@ taxon-taxonFullNameLabel: Short name (without authors)
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Current?
 taxon-taxonAuthorGroupLabel: Authors
-taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorLabel: Author Name
 taxon-taxonAuthorTypeLabel: Author type
 taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is named hybrid
