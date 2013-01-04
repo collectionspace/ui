@@ -20,7 +20,7 @@
 			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-identificationInformation-label"></div>
 			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
 				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
+					<div class="info-column2-40 fl-force-left">
 						<div class="info-pair">
 							<div class="header">
 								<span class="label csc-collection-object-objectNumber-label"></span>
@@ -30,9 +30,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="info-column2-50 fl-force-left">
+					<div class="info-column2-60 fl-force-left">
 					    <div class="info-column">
-					        <div class="info-column2-50 fl-force-left">
+					        <div class="info-column2-40 fl-force-left">
 					            <div class="info-pair">
 					                <div class="header">
 					                    <div class="label csc-collection-object-accessionDate-label"></div>
@@ -42,18 +42,20 @@
 					                </div>
 					            </div>
 					        </div>
-					        <div class="info-column2-50 fl-force-right">
-					            <div class="info-column2-25 fl-force-left">
-					                <div class="info-pair">
+					        <div class="info-column2-60 fl-force-right">
+					            <div class="info-column2-50 fl-force-left">
+					                <div class="info-pair-select">
 					                    <div class="header">
 					                        <div class="label csc-collection-object-deadFlag-label"></div>
 					                    </div>
 					                    <div class="content">
-					                        <input type="checkbox" class="csc-collection-object-deadFlag" />
+											<select class="csc-collection-object-deadFlag input-select">
+												<option value="">Options not loaded</option>
+											</select>
 					                    </div>
 					                </div>
 					            </div>
-					            <div class="info-column2-75 fl-force-left">
+					            <div class="info-column2-50 fl-force-left">
 					                <div class="info-pair">
 					                    <div class="header">
 					                        <div class="label csc-collection-object-deadDate-label"></div>
@@ -1157,19 +1159,24 @@
 	            								<div class="label csc-collection-object-cultivated-label"></div>
 	            							</div>
 	            							<div class="content">
-	            								<input class="csc-collection-object-cultivated" type="checkbox" />
+	            								<!-- <input class="csc-collection-object-cultivated" type="checkbox" /> -->
+												<select class="csc-collection-object-cultivated input-select">
+													<option value="">Options not loaded</option>
+												</select>
 	            							</div>
 	            						</div>
 	            					</div>
 	            				</div>
 	            			</div>
 	            			<div class="info-column2-30 fl-force-right">
-	    					    <div class="info-pair">
+	    					    <div class="info-pair-select">
 	    					        <div class="header">
 	    					            <div class="label csc-collection-object-rare-label"></div>
 	    					        </div>
 	    					        <div class="content">
-	    					            <input class="csc-collection-object-rare" type="checkbox" />
+										<select class="csc-collection-object-rare input-select">
+											<option value="">Options not loaded</option>
+										</select>		
 	    					        </div>
 	    					    </div>
 	    					</div>
