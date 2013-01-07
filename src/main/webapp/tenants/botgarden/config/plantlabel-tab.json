@@ -1,0 +1,57 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "plantlabel",
+            "schema": {
+                "plantlabel": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/PlantlabelTemplate.html",
+                    "templateSelector": ".csc-plantlabel-template",
+                    "targetSelector": ".csc-relatedRecordsTab-plantlabel .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "plantlabel-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-plantlabel"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Plant Label Record",
+                            "recordList": "Related Plant Label Records",
+                            "newRecordRow": "New Plant Label Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-plantlabel-propNumber"
+                                                } 
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
