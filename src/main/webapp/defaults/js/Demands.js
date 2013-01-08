@@ -964,7 +964,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 listeners: {
                     onSynchronousFetch: "{loadingIndicator}.events.showOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
-                    onStop: "{loadingIndicator}.events.hideOn.fire"
+                    onStop: "{loadingIndicator}.events.hideOn.fire",
+                    batchFinished: "{loadingIndicator}.events.hideOn.fire"
                 }
             }
         });
