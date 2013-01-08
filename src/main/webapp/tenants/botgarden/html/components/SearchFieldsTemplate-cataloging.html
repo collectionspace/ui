@@ -47,14 +47,14 @@
                         <select class="csc-object-identification-responsible-department"><option value="">Options not loaded</option></select>
                     </div>        
                 </div> -->
-                <div class="info-pair-select">
+                <!-- <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-collection-label"></div>
                     </div>
                     <div class="content clearfix">
                         <select class="csc-object-identification-collection"><option value="">Options not loaded</option></select>
                     </div>        
-                </div>
+                </div> -->
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-collection-object-taxon-label"></div>
@@ -95,14 +95,14 @@
                         <input type="text" class="csc-object-description-edition-number"/>
                     </div>
                 </div> -->
-                <div class="info-pair-select">
+                <!-- <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-typeSpecimenKind-label"></div>
                     </div>
                     <div class="content clearfix csc-collection-object-typeSpecimenGroup">
                         <select class="csc-object-identification-object-typeSpecimenKind input-select"><option value="">Options not loaded</option></select>
                     </div>
-                </div>
+                </div> -->
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-collection-object-fieldCollector-label"></div>
@@ -119,7 +119,7 @@
                         <input type="text" class="csc-collection-object-fieldLocVerbatim"/>
                     </div>
                 </div>
-                <div class="info-pair-select">
+                <!-- <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-fieldLocCounty-label"></div>
                     </div>
@@ -142,15 +142,15 @@
                     <div class="content clearfix csc-collection-object-localityGroup">
                         <select class="csc-collection-object-fieldLocCountry input-select"><option value="">Options not loaded</option></select>
                     </div>
-                </div>
-                <div class="info-pair-select">
+                </div> -->
+                <!-- <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-form-label"></div>
                     </div>
                     <div class="content clearfix">
                         <select class="csc-object-description-form input-select"><option value="">Options not loaded</option></select>
                     </div>
-                </div>
+                </div> -->
                 <!-- Commenting these out for now, to avoid CSPACE-4903. -->
                 <!--
                 <div class="info-pair">
@@ -194,14 +194,14 @@
                         <select class="csc-object-description-phase input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
-                <div class="info-pair-select">
+                <!-- <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-collection-object-sex-label"></div>
                     </div>
                     <div class="content clearfix">
                         <select class="csc-object-description-sex input-select"><option value="">Options not loaded</option></select>
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="info-pair">
                     <div class="header">
                         <div class="label csc-collection-object-style-label"></div>
@@ -290,6 +290,84 @@
                     </div>
                     <div class="content clearfix">
                         <input type="text" class="csc-collection-object-editUsername"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-deadDate-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-collection-object-deadDateStart-label"></td>
+                                    <td class="csc-collection-object-deadDateEnd-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-collection-object-deadDateStart" /></td>
+                                    <td><input type="text" class="csc-collection-object-deadDateEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-deadFlag-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <!-- <input type="checkbox" class="csc-collection-object-deadFlag"/> -->
+						<select class="csc-collection-object-deadFlag input-select">
+							<option value="">Options not loaded</option>
+						</select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-rare-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <!-- <input type="checkbox" class="csc-collection-object-rare"/> -->
+						<select class="csc-collection-object-rare input-select">
+							<option value="">Options not loaded</option>
+						</select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-cultivated-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <!-- <input type="checkbox" class="csc-collection-object-rare"/> -->
+						<select class="csc-collection-object-cultivated input-select">
+							<option value="">Options not loaded</option>
+						</select>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldLocPlace-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-localityGroup">
+                        <input type="text" class="csc-collection-object-fieldLocPlace"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldLocPlace-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-localityGroup">
+                        <input type="text" class="csc-collection-object-fieldLocPlace"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-taxonomicRange-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-localityGroup">
+                        <input type="text" class="csc-collection-object-taxonomicRange"/>
                     </div>
                 </div>
                 <div class="info-pair">

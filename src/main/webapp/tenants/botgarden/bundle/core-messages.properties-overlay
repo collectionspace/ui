@@ -14,6 +14,8 @@ collection-object-commentsLabel: Accession Notes
 collection-object-accessionDateLabel: Accession Date
 collection-object-deadFlagLabel: Dead Flag
 collection-object-deadDateLabel: Dead Date
+collection-object-deadDateEndLabel: Latest
+collection-object-deadDateStartLabel: Earliest
 collection-object-requestedByLabel: Requested By
 collection-object-vegetationTypeLabel: Vegetation Type
 collection-object-cbdRestrictionLabel: CBD Restriction
@@ -107,7 +109,7 @@ taxon-taxonFullNameLabel: Short name (without authors)
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Current?
 taxon-taxonAuthorGroupLabel: Authors
-taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorLabel: Author Name
 taxon-taxonAuthorTypeLabel: Author type
 taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is named hybrid
@@ -334,7 +336,7 @@ loanin-transferOutReturnNotesLabel: Notes
 organization-termSourceLabel: Term Source
 organization-contactNamesLabel: Contact/Chair
 organization-associatedPersonGroupLabel: Associated People
-organization-associatedPersonLabel: Person
+organization-associatedPersonLabel: Associated Person
 organization-associatedPersonRoleLabel: Role
 organization-historyNotesLabel: Organization Notes
 
@@ -385,6 +387,8 @@ propagation-nurseryLocationLabel: Location in Nursery
 propagation-fungicideLabel: Fungicide
 propagation-activityCommentsLabel: Comments
 propagation-germinationDateLabel: Germination/Rooting Date
+propagation-germinationDateStartLabel: Earliest
+propagation-germinationDateEndLabel: Latest
 propagation-successRateLabel: Success Rate
 propagation-propDateStartLabel: Earliest
 propagation-propDateEndLabel: Latest
