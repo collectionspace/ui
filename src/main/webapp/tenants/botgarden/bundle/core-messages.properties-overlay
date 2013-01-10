@@ -408,47 +408,18 @@ propagation-activityConcentrationLabel: Concentration
 #plantlabel
 plantlabel: Plant Label
 plantlabel-tab: Plant Label
-plantlabel-plantlabelInformationLabel: Propagation Information
-plantlabel-propNumberLabel: Propagation ID
-plantlabel-propDateLabel: Propagation Date
-plantlabel-propReasonLabel: Reason for Propagation
-plantlabel-propTypeLabel: Propagation Type
-plantlabel-propCommentsLabel: Comments
-plantlabel-scarStratLabel: Scar/Stratification
-plantlabel-extraSeedsLabel: Extra Seeds?
-plantlabel-cuttingTypeLabel: Cutting Type
-plantlabel-hormoneLabel: Hormone
-plantlabel-concentrationLabel: Concentration
-plantlabel-woundedLabel: Wounded?
-plantlabel-propActivityGroupLabel: Propagation Activities
-plantlabel-orderLabel: Order
-plantlabel-propCountLabel: Propagule Count
-propActivityGroup-activityDateLabel: Activity Date
-plantlabel-mediumLabel: Medium
-plantlabel-activityTypeLabel: Type
-plantlabel-potSizeLabel: Pot Size
-plantlabel-conditionsLabel: Conditions
-plantlabel-nurseryLocationLabel: Location in Nursery
-plantlabel-fungicideLabel: Fungicide
-plantlabel-activityCommentsLabel: Comments
-plantlabel-germinationDateLabel: Germination/Rooting Date
-plantlabel-germinationDateStartLabel: Earliest
-plantlabel-germinationDateEndLabel: Latest
-plantlabel-successRateLabel: Success Rate
-plantlabel-propDateStartLabel: Earliest
-plantlabel-propDateEndLabel: Latest
-plantlabel-updatedAtLabel: Updated At
-plantlabel-updatedAtStartLabel: Earliest
-plantlabel-updatedAtEndLabel: Latest
-plantlabel-updatedByLabel: Updated By
-plantlabel-numStartedLabel: Number Started
-plantlabel-scarStratGroupLabel: Scarification/Stratification
-plantlabel-durationLabel: Duration
-plantlabel-durationUnitLabel: Unit
-plantlabel-sporesLabel: Spore
-plantlabel-plantTypeLabel: Plant Type
-plantlabel-chemicalAppliedLabel: Chemical Applied
-plantlabel-activityConcentrationLabel: Concentration
+plantlabel-volunteerLabelsLabel: Volunteer Propagator Labels
+plantlabel-familyLabel: Family
+plantlabel-commonNameLabel: Common Name
+plantlabel-localeLabel: Locale
+plantlabel-taxonNameLabel: Taxon Name
+plantlabel-labelDataLabel: Label Data
+plantlabel-numberOfLabelsLabel: Number of Labels
+plantlabel-printLabelsLabel: Print Labels
+plantlabel-propagatorLabelsLabel: Propagation Labels
+plantlabel-gardenLocationAbreviationLabel: Garden Location Abreviation
+plantlabel-collectorLabel: Collector
+plantlabel-ecologyDataLabel: Ecology Data
 
 objectexit: Distribution
 objectexit-tab: Distribution
