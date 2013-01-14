@@ -405,21 +405,21 @@ propagation-plantTypeLabel: Plant Type
 propagation-chemicalAppliedLabel: Chemical Applied
 propagation-activityConcentrationLabel: Concentration
 
-#plantlabel
-plantlabel: Plant Label
-plantlabel-tab: Plant Label
-plantlabel-volunteerLabelsLabel: Volunteer Propagator Labels
-plantlabel-familyLabel: Family
-plantlabel-commonNameLabel: Common Name
-plantlabel-localeLabel: Locale
-plantlabel-taxonNameLabel: Taxon Name
-plantlabel-labelDataLabel: Label Data
-plantlabel-numberOfLabelsLabel: Number of Labels
-plantlabel-printLabelsLabel: Print Labels
-plantlabel-propagatorLabelsLabel: Propagation Labels
-plantlabel-gardenLocationAbreviationLabel: Garden Location Abreviation
-plantlabel-collectorLabel: Collector
-plantlabel-ecologyDataLabel: Ecology Data
+#pottag
+pottag: Pot Tag
+pottag-tab: Pot Tag
+pottag-volunteerLabelsLabel: Volunteer Propagator Labels
+pottag-familyLabel: Family
+pottag-commonNameLabel: Common Name
+pottag-localeLabel: Locale
+pottag-taxonNameLabel: Taxon Name
+pottag-labelDataLabel: Label Data
+pottag-numberOfLabelsLabel: Number of Labels
+pottag-printLabelsLabel: Print Labels
+pottag-propagatorLabelsLabel: Propagation Labels
+pottag-gardenLocationAbreviationLabel: Garden Location Abreviation
+pottag-collectorLabel: Collector
+pottag-ecologyDataLabel: Ecology Data
 
 objectexit: Distribution
 objectexit-tab: Distribution

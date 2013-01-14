@@ -1,16 +1,16 @@
 {
     "pageBuilder": {
         "options": {
-            "pageType": "plantlabel",
+            "pageType": "pottag",
             "selectors": {
-                "recordEditor": ".csc-plantlabel-template"
+                "recordEditor": ".csc-pottag-template"
             },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-plantlabel-propNumber"
+                            "identificationNumber": ".csc-pottag-propNumber"
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
@@ -44,14 +44,14 @@
     },
     "pageBuilderIO": {
         "options": {
-            "recordType": "plantlabel",
+            "recordType": "pottag",
             "schema": {
-                "plantlabel": null
+                "pottag": null
             },
             "pageSpec": {
                 "recordEditor": {
-                    "href": "pages/PlantlabelTemplate.html",
-                    "templateSelector": ".csc-plantlabel-template",
+                    "href": "pages/PottagTemplate.html",
+                    "templateSelector": ".csc-pottag-template",
                     "targetSelector": ".csc-record-edit-container"
                 }
             }
