@@ -277,6 +277,14 @@
 								</table>
 							</div>
 						</div>
+					    <div class="info-pair">
+					        <div class="header">
+					            <div class="label csc-collection-object-requestedBy-label"></div>
+					        </div>
+					        <div class="content">
+					            <input type="text" class="csc-collection-object-requestedBy" />
+					        </div>
+					    </div>
 					</div>
 					<div class="info-column2-50 fl-force-right">
 						<div class="info-pair">
@@ -361,14 +369,14 @@
 
 				<div class="info-column">
 					<div class="info-column2-50 fl-force-left">
-					    <div class="info-pair">
-					        <div class="header">
-					            <div class="label csc-collection-object-requestedBy-label"></div>
-					        </div>
-					        <div class="content">
-					            <input type="text" class="csc-collection-object-requestedBy" />
-					        </div>
-					    </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-briefDescriptions-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-object-identification-brief-description"></textarea>
+							</div>
+						</div>
 					</div>
 					<div class="info-column2-50 fl-force-right">
 						<div class="info-pair-select">
@@ -439,24 +447,12 @@
 				</div>
 
 				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-briefDescriptions-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-object-identification-brief-description"></textarea>
-							</div>
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-collection-object-comments-label"></div>
 						</div>
-					</div>
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-comments-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-object-identification-comments"></textarea>
-							</div>
+						<div class="content">
+							<textarea rows="4" cols="30" class="input-textarea csc-object-identification-comments"></textarea>
 						</div>
 					</div>
 				</div>
@@ -538,110 +534,6 @@
                         </div>
                     </div>
                 </div> -->
-			</div>
-		</div> <!-- information-group -->
-
-		<div class="fl-container-flex fl-fix information-group">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-objectCollectionInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionDate-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-collection-object-fieldCollectionDate" />
-							</div>
-						</div>
-
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectors-label"></div>
-							</div>							  
-							<div class="content">
-								<input type="text" class="input-alpha csc-collection-object-fieldCollector" />
-							</div>
-						</div>
-
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionNumber-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="input-alpha csc-collection-object-fieldCollectionNumber" />
-							</div>
-						</div>
-
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionNumberAssignor-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="input-alpha csc-collection-object-fieldCollectionNumberAssignor" />
-							</div>
-						</div>
-						
-						<div class="info-pair-select">
-						    <div class="header">
-						        <div class="label csc-collection-object-vegetationType-label"></div>
-						    </div>
-						    <div class="content">
-						        <select class="input-select csc-collection-object-vegetationType"><option value="">Options not loaded</option></select>
-						    </div>
-						</div>
-					</div>
-
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionMethods-label"></div>
-							</div>
-							<div class="content">
-								<select class="input-select csc-collection-object-fieldCollectionMethod"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-fieldCollectionNote-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-collection-object-fieldCollectionNote"></textarea>
-							</div>
-						</div>
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-associatedTaxaGroup-label"></div>
-							</div>
-							<div class="content">
-								<table>
-									<thead>
-										<tr>
-											<td class="csc-collection-object-taxon-label"/>
-											<td class="csc-collection-object-commonName-label"/>
-											<td class="csc-collection-object-interaction-label"/>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="csc-collection-object-associatedTaxaGroup">
-											<td class="flc-inlineEdit-text">
-												<input type="text" class="csc-collection-object-associatedTaxaTaxon editableText"/>
-											</td>
-											<td class="flc-inlineEdit-text">
-												<input type="text" class="csc-collection-object-associatedTaxaCommonName editableText"/>
-											</td>
-											<td class="flc-inlineEdit-text">
-												<select class="csc-collection-object-associatedTaxaInteraction input-select-shorter">
-													<option value="">Options not loaded</option>
-												</select>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div> <!-- information-group -->
 
@@ -1073,6 +965,110 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-objectCollectionInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionDate-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-collection-object-fieldCollectionDate" />
+							</div>
+						</div>
+
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectors-label"></div>
+							</div>							  
+							<div class="content">
+								<input type="text" class="input-alpha csc-collection-object-fieldCollector" />
+							</div>
+						</div>
+
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionNumber-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="input-alpha csc-collection-object-fieldCollectionNumber" />
+							</div>
+						</div>
+
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionNumberAssignor-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="input-alpha csc-collection-object-fieldCollectionNumberAssignor" />
+							</div>
+						</div>
+						
+						<div class="info-pair-select">
+						    <div class="header">
+						        <div class="label csc-collection-object-vegetationType-label"></div>
+						    </div>
+						    <div class="content">
+						        <select class="input-select csc-collection-object-vegetationType"><option value="">Options not loaded</option></select>
+						    </div>
+						</div>
+					</div>
+
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionMethods-label"></div>
+							</div>
+							<div class="content">
+								<select class="input-select csc-collection-object-fieldCollectionMethod"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-fieldCollectionNote-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-collection-object-fieldCollectionNote"></textarea>
+							</div>
+						</div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-collection-object-associatedTaxaGroup-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<thead>
+										<tr>
+											<td class="csc-collection-object-taxon-label"/>
+											<td class="csc-collection-object-commonName-label"/>
+											<td class="csc-collection-object-interaction-label"/>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="csc-collection-object-associatedTaxaGroup">
+											<td class="flc-inlineEdit-text">
+												<input type="text" class="csc-collection-object-associatedTaxaTaxon editableText"/>
+											</td>
+											<td class="flc-inlineEdit-text">
+												<input type="text" class="csc-collection-object-associatedTaxaCommonName editableText"/>
+											</td>
+											<td class="flc-inlineEdit-text">
+												<select class="csc-collection-object-associatedTaxaInteraction input-select-shorter">
+													<option value="">Options not loaded</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- information-group -->
 
 		<div class="fl-container-flex fl-fix information-group">
 			<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-descriptionInformation-label"></div>

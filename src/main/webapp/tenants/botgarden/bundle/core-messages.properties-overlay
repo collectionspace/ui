@@ -68,7 +68,7 @@ collection-object-affinityTaxonLabel: Affinity Taxon
 collection-object-hybridFlagLabel: Hybrid Flag
 taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
-collection-object-taxonomicRangeLabel: Taxonomic range
+collection-object-taxonomicRangeLabel: Geographic Range of Taxon
 collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
@@ -188,8 +188,8 @@ collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
 collection-object-taxonomicIdentGroupLabel: Determination History
-collection-object-localNameGroupLabel: Local Name
-collection-object-localNameLabel: Local Name
+collection-object-localNameGroupLabel: Common Name
+collection-object-localNameLabel: Common Name
 collection-object-localNameLanguageLabel: Language
 collection-object-hybridParentGroupLabel: Hybrid Parent
 collection-object-hybridParentLabel: Hybrid Parent
