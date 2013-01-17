@@ -65,7 +65,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     float:left; 
     border:2px solid #C7CFD4;
     position:absolute;
-    z-index:9999 !important;
+    z-index:1000 !important;
     margin:2px 0 0 -2px;
     font-size: 1.2em;
     font-weight:bold;
@@ -73,13 +73,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     -moz-box-shadow: 3px 3px 4px  #C7CFD4;
     -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
     box-shadow: 3px 3px 4px  #C7CFD4;
+    font-size: 1.1em;
 }
 .cs-autocomplete-popup .cs-autocomplete-noMatches {
      padding-left: 5px;
     font-style:italic;
     color:#6E6E6E;
 }
-.cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
+.cs-autocomplete-popup .content {
+    color:#6E6E6E;
+    padding-bottom:5px; 
+    display: inline-block;
+    width: 98%;
+}
 .cs-autocomplete-popup .pad-right {padding-right:10px;}
 .cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: solid 1px #AAA}
 
@@ -95,9 +101,46 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     background-color: red;
 }
 .cs-autocomplete-matchItem-content.cs-autocomplete-nonPreferred {
+    margin-left: 20px;
+}
+.cs-autocomplete-matchItem-content.cs-autocomplete-nonPreferredDisabled {
     color: #999999;
     margin-left: 20px;
 }
 .cs-autocomplete-addTermTo {
     margin-left: 5px;
+}
+
+.cs-autocomplete-addTermTo .cs-autocomplete-newTermName {
+    float: left;
+    width: 75%;
+    margin-right: 4px;
+}
+.cs-autocomplete-addTermTo .cs-autocomplete-addTermTo-content {
+    float: left;
+    margin-right: 4px;
+    margin-top: 2px;
+}
+
+.csc-autocomplete-popup-miniView {
+    display: none;
+    min-width: 250px;
+    min-height: 50px;
+    z-index: 6000;
+    background-color: #CFE2F3;
+    position: absolute;
+    top: 0px;
+    left: 250px;
+    color: black;
+    border: 2px solid #C7CFD4;
+    box-shadow: 3px 3px 4px #C7CFD4;
+}
+.cs-miniView {
+    font-weight: normal;
+    padding: 5px;
+}
+.cs-autocomplete-popup-miniView-displayName {
+    color: #1176BC;
+    font-weight: bold;
+    text-decoration: underline;
 }

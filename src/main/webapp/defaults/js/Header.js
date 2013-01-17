@@ -9,12 +9,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
  */
 
 /*global cspace:true, jQuery, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    "use strict";
+
+    // Header component used on every page of Collecion Space
+    // application.
     fluid.defaults("cspace.header", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
@@ -23,6 +26,7 @@ cspace = cspace || {};
             permissions: "nomerge"
         },
         components: {
+            // Subcomponent for a quick search access.
             searchBox: {
                 type: "cspace.searchBox",
                 options: {
@@ -34,6 +38,8 @@ cspace = cspace || {};
         selectorsToIgnore: ["searchBox" ],
         parentBundle: "{globalBundle}",
         model: {
+            // List of items in the top level tab menu (resolved with
+            // permissions).
             menuitems: [
             {
                 messagekey: "menuItems-myCollectionSpace",
@@ -98,6 +104,7 @@ cspace = cspace || {};
                 args: "{header}"
             }
         },
+        // Header template.
         resources: {
             template: {
                 expander: {
@@ -114,6 +121,7 @@ cspace = cspace || {};
                 }
             }
         },
+        // Logout url
         urls: cspace.componentUrlBuilder({
             logoutUrl: "%tenant/%tname/logout"
         }),
@@ -126,10 +134,12 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.header");
     
     cspace.header.postInit = function (that) {
+        // Render header's own template.
         that.refreshView();
     };
     
     cspace.header.finalInit = function (that) {
+        // Render all subcomponents.
         that.refreshComponents();
     };
 
@@ -204,6 +214,20 @@ cspace = cspace || {};
             }
         };
         return tree;
+    };
+
+    // Add record specific or rather (auth | non-auth) flag at the very
+    // top of the page to be able to namespace the styling.
+    fluid.defaults("cspace.header.parentStyler", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        postInitFunction: "cspace.header.parentStyler.postInit",
+        styles: {
+            authority: "cs-authority"
+        }
+    });
+
+    cspace.header.parentStyler.postInit = function (that) {
+        that.container.parent().addClass(that.options.styles.authority);
     };
     
 })(jQuery, fluid);

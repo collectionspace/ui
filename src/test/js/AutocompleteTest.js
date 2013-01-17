@@ -12,177 +12,435 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function ($) {
-    var bareAutocompleteTests = new jqUnit.TestCase("Autocomplete Tests");
+    var bareAutocompleteTests = new jqUnit.TestCase("Autocomplete Tests"),
     
-    var autocompleteTests = cspace.tests.testEnvironment({testCase: bareAutocompleteTests});
+        autocompleteTests = cspace.tests.testEnvironment({
+            testCase: bareAutocompleteTests
+        }),
     
-    var popDefs = fluid.defaults("cspace.autocomplete.popup");
+        popDefs = fluid.defaults("cspace.autocomplete.popup"),
     
-    function assertMatchCount(message, count, autocomplete) {
-        var matches = $(popDefs.selectors.matchItem, autocomplete.popupElement);
-        jqUnit.assertEquals(message, count, matches.length);
-    }
+        assertMatchCount = function (message, count, autocomplete) {
+            var matchCount = $(popDefs.selectors.matchItem, autocomplete.popupElement).length;
+            jqUnit.assertEquals(message, count, matchCount);
+        },
     
-    function assertCloseVisible(autocomplete, state) {
-        jqUnit.assertEquals("Close button visibility: " + state, state, autocomplete.closeButton.button.is(":visible"));
-    }
+        assertCloseVisible = function (autocomplete, state) {
+            jqUnit.assertEquals("Close button visibility: " + state, state, autocomplete.closeButton.button.is(":visible"));
+        },
     
-    function clickCloseButton(autocomplete) {
-        autocomplete.closeButton.button.click();
-    }
+        clickCloseButton = function (autocomplete) {
+            autocomplete.closeButton.button.click();
+        },
     
-    function pressEscKey(autocomplete) {
-        autocomplete.popup.container.trigger({type: "keydown", keyCode: $.ui.keyCode.ESCAPE});
-        autocomplete.popup.container.trigger({type: "keyup", keyCode: $.ui.keyCode.ESCAPE});
-    }
+        pressEscKey = function (autocomplete) {
+            var container = autocomplete.popup.container,
+                escapeKey = $.ui.keyCode.ESCAPE;
+            $.each(["keydown", "keyup"], function (index, value) {
+                container.trigger({
+                    type: value,
+                    keyCode: escapeKey
+                });
+            });
+        },
     
-    var openAndCloseInteraction = function (container, closeFunc) {
-        expect(10);
-        var autocomplete = cspace.autocomplete(container);
-        jqUnit.assertValue("Constructed", autocomplete);
-        var input = autocomplete.autocompleteInput;
-        jqUnit.assertValue("Found input", input);
-        autocomplete.autocomplete.events.onSearch.addListener(function(newValue, permitted) {
-            jqUnit.assertEquals("Search performed", "top", newValue);
-            jqUnit.assertTrue("Results loading indicator", input.hasClass(autocomplete.autocomplete.options.styles.loadingStyle));
-        });
-        autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertMatchCount("\"top\" results count in markup", 14, autocomplete);
-            assertCloseVisible(autocomplete, true);
-            closeFunc(autocomplete);
-            assertCloseVisible(autocomplete, false);
-            assertMatchCount("Dialog now empty", 0, autocomplete);
-            jqUnit.assertEquals("Field emptied", "", input.val());
-            start();
-        });
-        jqUnit.assertTrue("Close button initially hidden", autocomplete.closeButton.button.is(":hidden"));
-        input.keydown();
-        input.val("top");
-        stop();
-    };
+        openAndCloseInteraction = function(container, closeFunc) {
+            expect(10);
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
+                events = autocomplete.autocomplete.events;
+            jqUnit.assertValue("Constructed", autocomplete);
+            jqUnit.assertValue("Found input", input);
+            events.onSearch.addListener(function(newValue, permitted) {
+                jqUnit.assertEquals("Search performed", "top", newValue);
+                jqUnit.assertTrue("Results loading indicator", input.hasClass(autocomplete.autocomplete.options.styles.loadingStyle));
+            });
+            events.onSearchDone.addListener(function() {
+                assertMatchCount("\"top\" results count in markup", 14, autocomplete);
+                assertCloseVisible(autocomplete, true);
+                closeFunc(autocomplete);
+                assertCloseVisible(autocomplete, false);
+                assertMatchCount("Dialog now empty", 0, autocomplete);
+                jqUnit.assertEquals("Field emptied", "", input.val());
+                start();
+            });
+            jqUnit.assertTrue("Close button initially hidden", autocomplete.closeButton.button.is(":hidden"));
+            input.keydown();
+            input.val("top");
+        },
 
-    function submitTest(name, func) {
-        autocompleteTests.test(name + " new markup", function () {            
-            func("#autocomplete1");
-        });
-        autocompleteTests.test(name + " old markup", function () {            
-            func("#autocomplete2");
-        });
-    }
+        clickMatch = function (autocomplete) {
+            autocomplete.popup.dom.locate("matchItemContent").click();
+        },
+    
+        enterMatch = function (autocomplete) {
+            autocomplete.popup.dom.locate("matchItemContent").trigger({type: "keydown", keyCode: $.ui.keyCode.ENTER});
+        },
 
-    function makeArgumentedTest(testFunc, argFunc) {
-        return function(container) {
-            testFunc(container, argFunc);
-        };
-    }
+        chooseMatchInteraction = function (container, chooseFunc) {
+            expect(6);
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput;
+            autocomplete.autocomplete.events.onSearchDone.addListener(function() {
+                assertMatchCount("\"Utopia\" results count in markup", 1, autocomplete);
+                assertCloseVisible(autocomplete, true);
+                chooseFunc(autocomplete);
+                assertCloseVisible(autocomplete, false);
+                var match = autocomplete.model.matches[0],
+                    matchDisplayName = match.displayName,
+                    matchUrn = match.urn;
+                jqUnit.assertEquals("Visible field value", matchDisplayName, input.val());
+                jqUnit.assertEquals("Hidden field value", matchUrn, autocomplete.hiddenInput.val());
+                assertMatchCount("Dialog now empty", 0, autocomplete);
+                start();
+            });
 
-    submitTest("Open and close interaction with close button", makeArgumentedTest(openAndCloseInteraction, clickCloseButton));
-    submitTest("Open and close interaction with Escape key", makeArgumentedTest(openAndCloseInteraction, pressEscKey));
+            input.keydown();
+            input.val("Utopia");
+        },
+    
+        clickDisabledMatch = function (autocomplete) {
+            autocomplete.popup.dom.locate("matchItemContent")[1].click();
+        },
+    
+        focusMatch = function (autocomplete) {
+            autocomplete.popup.dom.locate("matchItemContent").focus();
+        },
 
-    function clickMatch(autocomplete) {
-        var popup = autocomplete.popup;
-        popup.dom.locate("matchItemContent").click();
-    }
+        chooseMatchInteractionDisabled = function (container, chooseFunc) {
+            expect(6);
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput;
+            autocomplete.autocomplete.events.onSearchDone.addListener(function() {
+                assertMatchCount("\"Plummer\" results count in markup", 5, autocomplete);
+                assertCloseVisible(autocomplete, true);
+                chooseFunc(autocomplete);
+                assertCloseVisible(autocomplete, true);
+                var match = autocomplete.model.matches[1],
+                    matchDisplayName = match.displayName,
+                    matchUrn = match.urn;
+                jqUnit.assertNotEquals("Visible field value not equal to the one which was clicked", matchDisplayName, input.val());
+                jqUnit.assertEquals("Hidden field value is empty", "", autocomplete.hiddenInput.val());
+                assertMatchCount("Dialog is still open with its options", 5, autocomplete);
+                autocomplete.closeButton.button.click();
+                start();
+            });
     
-    function enterMatch(autocomplete) {
-        autocomplete.popup.dom.locate("matchItemContent").trigger({type: "keydown", keyCode: $.ui.keyCode.ENTER});
-    }
-
-    var chooseMatchInteraction = function (container, chooseFunc) {
-        expect(6);
-        var autocomplete = cspace.autocomplete(container);
-        var input = autocomplete.autocompleteInput;
-        autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertMatchCount("\"Utopia\" results count in markup", 1, autocomplete);
-            assertCloseVisible(autocomplete, true);
-            chooseFunc(autocomplete);
-            assertCloseVisible(autocomplete, false);
-            var match = autocomplete.model.matches[0],
-                matchDisplayName = match.displayName,
-                matchUrn = match.urn;
-            jqUnit.assertEquals("Visible field value", matchDisplayName, input.val());
-            jqUnit.assertEquals("Hidden field value", matchUrn, autocomplete.hiddenInput.val());
-            assertMatchCount("Dialog now empty", 0, autocomplete);
-            start();
-        });
-
-        input.keydown();
-        input.val("Utopia");
-        stop();
-    };
+            input.keydown();
+            input.val("Plummer");
+        },
     
-    submitTest("Choose match interaction with mouse item click", makeArgumentedTest(chooseMatchInteraction, clickMatch));
-    submitTest("Choose match interaction with ENTER key", makeArgumentedTest(chooseMatchInteraction, enterMatch));
+        focusBlurable = function (autocomplete) {
+            autocomplete.autocompleteInput.blur();
+            $("#blurable").focus();
+        },
     
-    var focusBlurable = function (autocomplete) {
-        autocomplete.autocompleteInput.blur();
-        $("#blurable").focus();
-    };
+        assertPopupOpen = function (autocomplete, state) {
+            jqUnit.assertEquals("Popup open: " + state, state, autocomplete.popup.container.html() !== "");
+        },
     
-    var focusMatch = function (autocomplete) {
-        var popup = autocomplete.popup;
-        popup.dom.locate("matchItemContent").focus();        
-    };
+        assertInputFocused = function (autocomplete, state) {
+            jqUnit.assertEquals("Input focus: " + state, state, document.activeElement === autocomplete.autocompleteInput[0]);
+        },
     
-    var assertPopupOpen = function (autocomplete, state) {
-        jqUnit.assertEquals("Popup open: " + state, state, autocomplete.popup.container.html() !== "");
-    };
+        assertInput = function (autocomplete, value) {
+            jqUnit.assertEquals("Input", value, autocomplete.autocompleteInput.val());
+        },
     
-    var assertInputFocused = function (autocomplete, state) {
-        jqUnit.assertEquals("Input focus: " + state, state, document.activeElement === autocomplete.autocompleteInput[0]);
-    };
+        clickAuthority = function (autocomplete) {
+            autocomplete.popup.dom.locate("authorityItem").eq(0).click();
+        },
     
-    var assertInput = function (autocomplete, value) {
-        jqUnit.assertEquals("Input", value, autocomplete.autocompleteInput.val());
-    };
+        gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue, hasMiniView) {
+            var expectNum = 6;
+            if (hasMiniView) {
+                ++expectNum;
+            }
+            
+            expect(expectNum);
+            
+            var miniViewContainer = $(".miniViewTest"),
+                onShow = function () {
+                    setTimeout(function () {
+                        jqUnit.assertTrue("miniView is visible", $(".cs-autocomplete-popup-miniView").is(":visible"));
+                    }, 100);
+                },
+                autocompleteOptions = (hasMiniView) ? {
+                    components: {
+                        popup: {
+                            options: {
+                                components: {
+                                    miniView: {
+                                        options: {
+                                            delay: null,
+                                            listeners: {
+                                                onShow: onShow
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } : null,
+                autocomplete = cspace.autocomplete(container, autocompleteOptions),
+                input = autocomplete.autocompleteInput;
+            miniViewContainer.hide();
+            autocomplete.autocomplete.events.onSearchDone.addListener(function() {
+                assertPopupOpen(autocomplete, true);
+                assertInputFocused(autocomplete, true);
+                // this OUTER wait is necessary between operation of the input field and applying a blur in order
+                // to evade the "proleptic blur" functionality required to evade out-of-order event sequencing on IE 
+                setTimeout(function() {
+                    focusFunc(autocomplete);
+                    // NOTE: Waiting for 200ms that are equivalent to the timeout insidet the dead man's blur, 
+                    // in order to verify that the handler fired or was prevented with exclusion. 
+                    setTimeout(function () {
+                        assertPopupOpen(autocomplete, popupOpen);
+                        assertInputFocused(autocomplete, inputFocus);
+                        assertInput(autocomplete, originalValue);
+                        jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
+                        $("#blurable").focus();
+                        start();
+                    }, 200);
+                }, 150);
+            });
+            input.keydown();
+            input.val("Utopia");
+            input.focus();
+        },
     
-    function clickAuthority(autocomplete) {
-        var popup = autocomplete.popup;
-        popup.dom.locate("authorityItem").eq(0).click();        
-    }
+        gdInteractionClick = function (container, focusFunc) {
+            gdInteraction(container, focusFunc, false, true, "Utopia");
+        },
     
-    var gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
-        expect(6);
-        var autocomplete = cspace.autocomplete(container);
-        var input = autocomplete.autocompleteInput;
-        autocomplete.autocomplete.events.onSearchDone.addListener(function() {
-            assertPopupOpen(autocomplete, true);
-            assertInputFocused(autocomplete, true);
-            // this OUTER wait is necessary between operation of the input field and applying a blur in order
-            // to evade the "proleptic blur" functionality required to evade out-of-order event sequencing on IE 
-            setTimeout(function() {
-                focusFunc(autocomplete);
-                // NOTE: Waiting for 200ms that are equivalent to the timeout insidet the dead man's blur, 
-                // in order to verify that the handler fired or was prevented with exclusion. 
-                setTimeout(function () {
-                    assertPopupOpen(autocomplete, popupOpen);
-                    assertInputFocused(autocomplete, inputFocus);
-                    assertInput(autocomplete, originalValue);
-                    jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
+        gdInteractionBlur = function (container, focusFunc) {
+            gdInteraction(container, focusFunc, false, false, "");
+        },
+    
+        gdInteractionExclude = function (container, focusFunc) {
+            gdInteraction(container, focusFunc, true, false, "Utopia", true);
+        },
+        
+        newTermNameNotPresent = function(container, closeFunc) {
+            expect(1);
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
+                events = autocomplete.autocomplete.events;
+            events.onSearchDone.addListener(function() {
+                var addTermTo = autocomplete.popup.dom.locate("addTermTo");
+                jqUnit.assertEquals("addTerm line has text only", "Add \"top\" to:", addTermTo.html());
+                closeFunc(autocomplete);
+                start();
+            });
+            input.keydown();
+            input.val("top");
+        },
+        
+        newTermNamePresent = function(container, closeFunc) {
+            expect(2);
+            fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.autocompleteTests");
+            
+            var autocomplete = cspace.autocomplete(container),
+                input = autocomplete.autocompleteInput,
+                events = autocomplete.autocomplete.events;
+            events.onSearchDone.addListener(function() {
+                var newTermName = autocomplete.popup.dom.locate("newTermName");
+                jqUnit.assertEquals("newTermName is present", 1, newTermName.length);
+                jqUnit.assertEquals("newTermName has a proper name set", "top", newTermName[0].value);
+                closeFunc(autocomplete);
+                delete fluid.staticEnvironment.cspaceTestEnv;
+                start();
+            });
+            input.keydown();
+            input.val("top");
+        },
+        
+        miniViewTestBasic = function () {
+            expect(2);
+            
+            var delay = null,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                    miniView.events.onHide.fire();
+                },
+                onHide = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
                     start();
-                }, 200);
-            }, 150);
-        });
-        input.keydown();
-        input.val("Utopia");
-        input.focus();
-        stop();
-    };
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow,
+                        onHide: onHide
+                    }
+                });
+
+            miniView.events.onShow.fire();
+        },
+        
+        miniViewTestDelay = function () {
+            expect(2);
+            
+            var delay = 100,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
+                    setTimeout(function () {
+                        jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                        start();
+                    }, delay + 100);
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow
+                    }
+                });
+
+            container.hide();
+            miniView.events.onShow.fire();
+        },
+        
+        miniViewTestModelChange = function () {
+            expect(2);
+            
+            var delay = null,
+                container = $(".miniViewTest"),
+                onShow = function () {
+                    jqUnit.assertTrue("miniView is visible", container.is(":visible"));
+                    miniView.events.onHide.fire();
+                },
+                onHide = function () {
+                    jqUnit.assertFalse("miniView is hidden", container.is(":visible"));
+                    start();
+                },
+                miniView = cspace.autocomplete.popup.miniView(container, {
+                    delay: delay,
+                    resources: {
+                        template: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.specBuilder",
+                                args: {
+                                    forceCache: true,
+                                    fetchClass: "slowTemplate",
+                                    url: "%webapp/html/components/MiniView.html"
+                                }
+                            }
+                        }
+                    },
+                    listeners: {
+                        onShow: onShow,
+                        onHide: onHide
+                    }
+                });
+
+            miniView.events.onModel.fire({
+                csid: "3c238b1b-1163-471c-98e4",
+                type: "person",
+                namespace: "person"
+            });
+        },
     
-    var gdInteractionClick = function (container, focusFunc) {
-        gdInteraction(container, focusFunc, false, true, "Utopia");
-    };
+        makeArgumentedTest = function (testFunc, argFunc) {
+            return function(container) {
+                testFunc(container, argFunc);
+            };
+        },
+        
+        submitTest = function (name, func) {
+            $.each({
+                "#autocomplete1": " new markup",
+                "#autocomplete2": " old markup"
+            }, function (autocompleteID, message) {
+                autocompleteTests.asyncTest(name + message, function () {
+                    func(autocompleteID);
+                });
+            });
+        },
+        
+        testScenario = {
+            "Testing basic miniView component functionality": {
+                testFunc: miniViewTestBasic
+            },
+            "Testing basic miniView component functionality with a Delay.": {
+                testFunc: miniViewTestDelay
+            },
+            "Testing model change for miniView component": {
+                testFunc: miniViewTestModelChange
+            },
+            "Input newTerm is NOT present in autocomplete by default": {
+                testFunc: newTermNameNotPresent,
+                argFunc: clickCloseButton
+            },
+            "Input newTerm is present in autocomplete by default": {
+                testFunc: newTermNamePresent,
+                argFunc: clickCloseButton
+            },
+            "Open and close interaction with close button": {
+                testFunc: openAndCloseInteraction,
+                argFunc: clickCloseButton
+            },
+            "Open and close interaction with Escape key": {
+                testFunc: openAndCloseInteraction,
+                argFunc: pressEscKey
+            },
+            "Choose match interaction with mouse item click": {
+                testFunc: chooseMatchInteraction,
+                argFunc: clickMatch
+            },
+            "Choose match interaction with ENTER key": {
+                testFunc: chooseMatchInteraction,
+                argFunc: enterMatch
+            },
+            "Choose match interaction with mouse item click for disabled NP item": {
+                testFunc: chooseMatchInteractionDisabled,
+                argFunc: clickDisabledMatch
+            },
+            "Test Global Dismissal interaction when click": {
+                testFunc: gdInteractionClick,
+                argFunc: clickAuthority
+            },
+            "Test Global Dismissal interaction when blur should fire": {
+                testFunc: gdInteractionBlur,
+                argFunc: focusBlurable
+            },
+            "Test Global Dismissal interaction with exclusion": {
+                testFunc: gdInteractionExclude,
+                argFunc: focusMatch
+            }
+        };
     
-    var gdInteractionBlur = function (container, focusFunc) {
-        gdInteraction(container, focusFunc, false, false, "");
-    };
-    
-    var gdInteractionExclude = function (container, focusFunc) {
-        gdInteraction(container, focusFunc, true, false, "Utopia");
-    };
-    
-    submitTest("Test Global Dismissal interaction when click", makeArgumentedTest(gdInteractionClick, clickAuthority));
-    submitTest("Test Global Dismissal interaction when blur should fire", makeArgumentedTest(gdInteractionBlur, focusBlurable));
-    submitTest("Test Global Dismissal interaction with exclusion", makeArgumentedTest(gdInteractionExclude, focusMatch));
+    $.each(testScenario, function(message, args){
+        submitTest(message, makeArgumentedTest(args.testFunc, args.argFunc));
+    });
     
 })(jQuery);

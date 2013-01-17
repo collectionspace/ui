@@ -1,0 +1,17 @@
+{
+    "csid": "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
+    "fields": {
+        "email": "admin@core.collectionspace.org",
+        "status": "active",
+        "createdAt": "2012-05-30T00:41:01.794",
+        "userId": "admin@core.collectionspace.org",
+        "screenName": "Administrator",
+        "csid": "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
+        "password": "reader",
+        "role": [{
+            "roleId": "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+            "roleName": "ROLE_TENANT_ADMINISTRATOR",
+            "roleSelected": true
+        }]
+    }
+}

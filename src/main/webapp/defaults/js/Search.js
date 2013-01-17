@@ -9,11 +9,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid, window*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+    "use strict";
+
     fluid.log("Search.js loaded");
     
     var displayLookingMessage = function (domBinder, keywords, strings) {
@@ -37,7 +39,7 @@ cspace = cspace || {};
             if (vocab && vocab !== "all") {
                 vocabParam = "&" + $.param({
                     vocab: vocab
-                })
+                });
             }
             if (key === "number") {
                 comp = {
@@ -148,6 +150,11 @@ cspace = cspace || {};
                             vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
                         }
                     });
+                    var pivotLocation = expander(that.options.urls.pivot);
+                    if (event.shiftKey || event.ctrlKey || event.metaKey) {
+                        window.open(pivotLocation, "_blank");
+                        return;
+                    }
                     if (that.searchReferenceStorage) {
                         that.searchReferenceStorage.set({
                             token: that.model.pagination.traverser,
@@ -155,7 +162,7 @@ cspace = cspace || {};
                             source: that.options.source
                         });
                     }
-                    window.location = expander(that.options.urls.pivot);
+                    window.location = pivotLocation;
                     return false;
                 });
             });
@@ -207,6 +214,9 @@ cspace = cspace || {};
         },
         strings: {},
         events: {
+            primaryRecordCreated: {
+                event: "{globalEvents}.events.primaryRecordCreated"
+            },
             modelChanged: null,
             onSearch: null,
             onInitialSearch: null,
@@ -218,7 +228,11 @@ cspace = cspace || {};
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
         listeners: {
-            onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler"
+            primaryRecordCreated: "{that}.primaryRecordCreated",
+            onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler",
+            afterSearch: "{loadingIndicator}.events.hideOn.fire",
+            onError: "{loadingIndicator}.events.hideOn.fire",
+            onSearch: "{loadingIndicator}.events.showOn.fire"
         },
         invokers: {
             buildUrl: "cspace.search.searchView.buildUrl",
@@ -241,6 +255,7 @@ cspace = cspace || {};
             },
             onInitialSearch: "cspace.search.searchView.onInitialSearch"
         },
+        primaryCSID: "{globalModel}.model.primaryModel.csid",
         components: {
             messageBar: "{messageBar}",
             vocab: "{vocab}",
@@ -313,11 +328,12 @@ cspace = cspace || {};
             pivot: "%recordType.html?csid=%csid%vocab",
             pageNum: "&pageNum=%pageNum",
             pageSize: "&pageSize=%pageSize",
+            mkRtSbj: "&mkRtSbj=%mkRtSbj",
             vocab: "&vocab=%vocab",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
-            defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
+            defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort%mkRtSbj",
             defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
-            localUrl: "%tenant/%tname/data/%recordType/search.json",
+            localUrl: "%tenant/%tname/data/%recordType/search.json"
         }),
        preInitFunction: "cspace.search.searchView.preInit"
     });
@@ -373,6 +389,28 @@ cspace = cspace || {};
         that.onInitialSearchHandler = function () {
             that.onInitialSearch();
         };
+
+        that.primaryRecordCreated = function (primaryRecordModel) {
+            that.options.primaryCSID = fluid.get(primaryRecordModel, "csid");
+        };
+        
+        // Function which won't allow a user to select already related records
+        that.disableRelated = function (model) {
+            if (!model.results || model.results.length < 1) {
+                return;
+            }
+            var offset = model.pagination.pageSize * model.pagination.pageNum;
+            var index;
+            for (index = offset; index < fluid.pager.computePageLimit(that.resultsPager.model); ++ index) {
+                var result = model.results[index],
+                    row = that.locate("resultsRow").eq(index - offset),
+                    disable = result.related === "true" ||
+                              result.csid === that.options.primaryCSID ||
+                              fluid.get(result, "summarylist.workflow") === "locked";
+                row.prop("disabled", disable);
+                row.toggleClass(that.options.styles.disabled, disable);
+            }
+        };
     };
     
     cspace.search.searchView.updateSearch = function (currentSearch, search) {
@@ -381,7 +419,7 @@ cspace = cspace || {};
             search.options.defaultFieldsModel = fields;
         }
         fluid.each(currentSearch, function (value, path) {
-            search.applier.requestChange(path, value)
+            search.applier.requestChange(path, value);
         });
         search.refreshView();
         search.toggleControls(true);
@@ -412,9 +450,10 @@ cspace = cspace || {};
         that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
             
         displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
-        if (that.searchResultsResolver) {
-            that.searchResultsResolver.resolve(that.model);
-        }
+        
+        // Disable all related records.
+        that.disableRelated(that.model);
+        
         that.locate("resultsContainer").show();
         that.events.afterSearch.fire(that.model.searchModel);
     };
@@ -520,7 +559,8 @@ cspace = cspace || {};
             pageSize: pagerModel.pageSize,
             pageIndex: pagerModel.pageIndex,
             sortKey: pagerModel.sortKey,
-            sortDir: pagerModel.sortDir
+            sortDir: pagerModel.sortDir,
+            mkRtSbj: that.options.primaryCSID
         });
         var url = that.buildUrl();
         that.events.onSearch.fire();
@@ -562,36 +602,13 @@ cspace = cspace || {};
             vocab: options.vocab || "",
             pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
             pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
-            sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
+            sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : "",
+            mkRtSbj: options.mkRtSbj ? fluid.stringTemplate(urls.mkRtSbj, {mkRtSbj: options.mkRtSbj}) : ""
         });
         return url;
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {
         return fluid.stringTemplate(urls.localUrl, {recordType: options.recordType});
-    };
-    
-    fluid.defaults("cspace.search.searchResultsResolver", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
-        invokers: {
-            resolve: {
-                funcName: "cspace.search.searchResultsResolver.resolve",
-                args: ["{searchView}", "{relationResolver}", "{arguments}.0"]
-            }
-        }
-    });
-    cspace.search.searchResultsResolver.resolve = function (search, relationResolver, model) {
-        if (!model.results || model.results.length < 1) {
-            return;
-        }
-        var offset = model.pagination.pageSize * model.pagination.pageNum;
-        var index;
-        for (index = offset; index < fluid.pager.computePageLimit(search.resultsPager.model); ++ index) {
-            var result = model.results[index];
-            var row = search.locate("resultsRow").eq(index - offset);
-            var disable = relationResolver.isPrimary(result.csid) || relationResolver.isRelated(result.recordtype, result.csid);
-            row.prop("disabled", disable);
-            row.toggleClass(search.options.styles.disabled, disable);
-        }
     };
 
 })(jQuery, fluid);

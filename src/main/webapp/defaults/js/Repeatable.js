@@ -18,6 +18,7 @@ cspace = cspace || {};
 
     fluid.log("Repeatable.js loaded");
 
+    // Get names of the subcomponents
     var getDefaultsNames = function (componentName) {
         var names = [];
         fluid.each(fluid.defaults(componentName), function (def, name) {
@@ -26,6 +27,7 @@ cspace = cspace || {};
         return names;
     };
 
+    // Function to find if element we are repeating is list or table
     var isListOrTable = function (elem) {
         return $(elem).is("ul, ol, table");
     };
@@ -62,9 +64,11 @@ cspace = cspace || {};
         });
     };
 
+    // Extra layer of abstraction around repeatable. Depreceated
     fluid.defaults("cspace.repeatable", {
         gradeNames: "fluid.viewComponent",
         components: {
+            // Render component of the Repeatable
             repeatableImpl: {
                 type: "cspace.repeatableImpl",
                 container: "{repeatable}.container",
@@ -79,6 +83,7 @@ cspace = cspace || {};
         }
     });
 
+    // Main default options for the repeatable
     fluid.defaults("cspace.makeRepeatable", {
         gradeNames: "fluid.viewComponent",
         mergePolicy: {
@@ -95,6 +100,7 @@ cspace = cspace || {};
             }
         },
         components: {
+            // Render component of the Repeatable
             repeatableImpl: {
                 type: "cspace.repeatableImpl",
                 container: "{makeRepeatable}.repeatableImplContainer",
@@ -115,17 +121,20 @@ cspace = cspace || {};
         return that;
     }
 
+    // Repeatable constructor. Depreceated
     cspace.repeatable = function (container, options) {
         var that = fluid.initView("cspace.repeatable", container, options);
         return returnRepeatable(that);
     };
 
+    // Repeatable constructor.
     cspace.makeRepeatable = function (container, options) {
         var that = fluid.initView("cspace.makeRepeatable", container, options);
         that.repeatableImplContainer = getRepeatbleImplContainer(that.container, that.options);
         return returnRepeatable(that);
     };
 
+    // Default options of the renderer part of the repeatable
     fluid.defaults("cspace.repeatableImpl", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -137,6 +146,7 @@ cspace = cspace || {};
             "rendererOptions.applier": "applier"
         },
         root: "",
+        // Markup elements used for rendering
         selectors: {
             add: ".csc-repeatable-add",
             "delete": ".csc-repeatable-delete",
@@ -155,7 +165,9 @@ cspace = cspace || {};
             primary: "cs-repeatable-primary",
             content: "cs-repeatable-content",
             withSubgroup: "cs-repeatable-withSubgroup",
-            repeatableGroup: "cs-repeatable-group"
+            repeatableGroup: "cs-repeatable-group",
+            show: "show",
+            hidden: "hidden"
         },
         preInitFunction: [{
             namespace: "preInitGenerateMethods",
@@ -178,11 +190,13 @@ cspace = cspace || {};
             namespace: "finalInitStyle",
             listener: "cspace.repeatableImpl.finalInitStyle"
         }],
+        // Markup elements which will be added dynamically
         markup: {
             addControl:     "<input type='button' />",
             deleteControl:  "<input type='button' value='' />",
             primaryControl: "<input type='radio' />"
         },
+        // render tree of the component
         protoTree: {
             expander: [{
                 type: "fluid.renderer.condition",
@@ -219,10 +233,12 @@ cspace = cspace || {};
         disablePrimary: false,
         disableAdd: false,
         disableDelete: false,
+        // Message Bundle
         parentBundle: "{globalBundle}",
         strings: {},
         recordType: "",
         invokers: {
+            // function to rerender repeatable
             refreshView: {
                 funcName: "cspace.repeatableImpl.refreshView",
                 args: "{repeatableImpl}"
@@ -280,16 +296,18 @@ cspace = cspace || {};
         });
     };
 
+    // Return true if there is more than 1 element in the repeatable
     var isGroup = function (tree) {
         var index = 0;
-        return fluid.find(tree, function (leaf) {
+        return fluid.find(tree, function () {
+            ++index;
             if (index > 1) {
                 return true;
             }
-            ++index;
         });
     };
 
+    // Adding extra styles for the repeatable right after all dynamic content was generated
     cspace.repeatableImpl.finalInitStyle = function (that) {
         if (hasRepeatableSubgroup(that.options.components)) {
             that.container.addClass(that.options.styles.withSubgroup);
@@ -299,12 +317,14 @@ cspace = cspace || {};
         }
     };
 
+    // Adding ID to the selectors.
     cspace.repeatableImpl.expandSelectors = function (selectors, id) {
         return fluid.transform(selectors, function (selector) {
             return selector.concat("-", id);
         });
     };
 
+    // Dynamically bind some of the events to dynamically added html elements
     cspace.repeatableImpl.finalInitBindEvents = function (that) {
         fluid.each(["add", "delete", "primary"], function (selector) {
             that.container.delegate(that.options.selectors[selector], "click", that[selector + "Handler"]);
@@ -316,6 +336,7 @@ cspace = cspace || {};
         });
     };
     
+    // Delete a repeatable group if there > 1 of them
     cspace.repeatableImpl.deleteHandler = function (that, target, event) {
         if (that.fetchModel().length < 2) {
             return false;
@@ -323,11 +344,13 @@ cspace = cspace || {};
         cspace.repeatableImpl.updateAndRefreshIndex(that, that.deleteRow, target, event, true, "delete");
     };
     
+    // Update on index change
     cspace.repeatableImpl.updateAndRefreshIndex = function (that, callback, target, event, render, selector) {
         var index = that.locate(selector).index(target);
         cspace.repeatableImpl.updateAndRefresh(that, callback, event, render, index);
     };
     
+    // Rerendering repeatable and set the new primary
     cspace.repeatableImpl.updateAndRefresh = function (that, callback, event, render, index) {
         that.requestChange(callback, index);
         if (render) {
@@ -337,43 +360,50 @@ cspace = cspace || {};
         event.fire();
     };
     
+    // Function to get only part of the UIspec
     cspace.repeatableImpl.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.repeatTree));
-    };;
+    };
     
     cspace.repeatableImpl.preInitMergeProtoTree = function (that) {
         fluid.merge(null, that.options.protoTree.expander[1].tree, that.options.repeatTree);
         that.options.protoTree.expander[1].controlledBy = that.options.fullPath;
     };
     
+    // Getting schema for the recordType from the set of existing schemas
     cspace.repeatableImpl.getSchema = function (globalSchema, recordType) {
         var schema = {};
         schema[recordType] = globalSchema[recordType];
         return schema;
     };
     
+    // Even on model change
     cspace.repeatableImpl.requestChange = function (options, applier, fetchModel, callback, index) {
         applier.requestChange(options.fullPath, 
             callback(fetchModel(), index, options.fullPath, options.schema, options.recordType));
     };
 
+    // Function to set radio button checked by reading the model
     cspace.repeatableImpl.setupPrimary = function (radioButtons, fetchModel) {
         fluid.each(fetchModel(), function (field, index) {
             radioButtons[index].checked = field._primary || false;
         });
     };
     
+    // Style delete depending on how many elements we have in the repeatable
     cspace.repeatableImpl.processDeleteInput = function (inputs, fetchModel) {
         inputs.eq(0).prop("disabled", fetchModel().length <= 1);
     };
     
+    // Rerender function
     cspace.repeatableImpl.refreshView = function (that) {
         that.events.onRefreshView.fire();
         that.renderer.refreshView();
         that.setupPrimary();
     };
     
+    // Final stylings after all the dynamic html markup is generated
     cspace.repeatableImpl.finalInitRender = function (that) {
         that.events.onRefreshView.fire();
         that.renderer.refreshView();
@@ -381,6 +411,7 @@ cspace = cspace || {};
         that.processDeleteInput();
     };
         
+    // Function to set main function as "delete", "add" and "set primary" for the repeatable groups
     cspace.repeatableImpl.preInitGenerateMethods = function (that) {
         // This is a full path to repeatable sub-model.
         that.options.fullPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
@@ -423,6 +454,7 @@ cspace = cspace || {};
         };
     };
 
+    // Preinit function to build the model and set the primary if it was not set
     cspace.repeatableImpl.preInitPrepareModel = function (that) {
         var list = fluid.copy(fluid.get(that.model, that.options.fullPath));
         if (list && list.length > 1) {
@@ -437,9 +469,18 @@ cspace = cspace || {};
                 _primary: true
             });
         }
-        that.applier.requestChange(that.options.fullPath, list);
+        // Here we do a silent model update. Since repeatable is asynchronous we do not want changeRequest trigger modelChanged simply because it is loading 
+        // of initial data into the repeatable for RecordEditor
+        // Important!!  ->  Implementation should use source tracking when it is available in a newer version of Infusion
+        that.applier.fireChangeRequest({
+            path: that.options.fullPath,
+            type: "ADD",
+            value: list,
+            silent: true
+        });
     };
     
+    // PostInit function which adds and styles the extra dynamically added markup for the fetched and rendered schema
     cspace.repeatableImpl.postInitGenerateMarkup = function (that) {
         function getClass(name) {
             return that.options.selectors[name].substr(1);
@@ -448,7 +489,9 @@ cspace = cspace || {};
             return that.options.styles[name];
         }
         
-        var node = that.locate("repeat");
+        var node = that.locate("repeat"),
+            primary, remove;
+        // Style the rows
         if (!node.is("tr, li")) {
             node = node.removeClass(getClass("repeat"))
                        .addClass(getStyle("content"))
@@ -456,28 +499,33 @@ cspace = cspace || {};
                        .wrap($("<li/>").addClass(getClass("repeat"))
                                        .addClass(getStyle("clearfix"))
                                        .addClass(getStyle("repeat"))
-                                       .css("display", "block"))
+                                       .addClass(getStyle("show")))
                        .parent("li");
         }
     
+        // Add "add" button and style it
         if (that.locate("add").length === 0 && !that.options.disableAdd) {
             that.container.prepend($(that.options.markup.addControl).addClass(getClass("add")));
         }
+        // Style "primary" record
         if (that.locate("primary").length === 0) {
-            var primary = $(that.options.markup.primaryControl).addClass(getClass("primary"))
+            primary = $(that.options.markup.primaryControl).addClass(getClass("primary"))
                                                                .attr("name", "primary-" + that.options.fullPath)
                                                                .prop("disabled", that.options.disablePrimary)
-                                                               .css("display", that.options.hidePrimary ? "none" : "block");
+                                                               .addClass(getStyle(that.options.hidePrimary ? "hidden" : "show"));
             node.prepend(primary);
         }
+        // Add "delete" button dynamically and style it
         if (that.locate("delete").length === 0 && !that.options.disableDelete) {
-            var remove = $(that.options.markup.deleteControl).addClass(getClass("delete"));
+            remove = $(that.options.markup.deleteControl).addClass(getClass("delete"));
             node.append(remove);
         }
-                
+        
+        // If the repeatable is not the row then stop right there
         if (!node.is("tr")) {
             return;
         }
+        // Adding extra styles for the rows
         primary.wrap("<td/>");
         remove.wrap("<td/>");
         var headerRow = that.locate("headerRow");

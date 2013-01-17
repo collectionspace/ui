@@ -1,5 +1,17 @@
 {
     "recordEditor": {
+        ".csc-media-externalUrl-label": {
+            "messagekey": "media-externalUrlLabel"
+        },
+        ".csc-media-externalUrl": {
+            "decorators": [
+                {
+                    "func": "cspace.externalURL",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.externalUrl}"
+        },
         ".csc-media-date": {
             "decorators": [
                 {

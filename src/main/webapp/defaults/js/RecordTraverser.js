@@ -16,6 +16,7 @@ cspace = cspace || {};
 
     "use strict";
     
+    // Record Traverser default options
     fluid.defaults("cspace.recordTraverser", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         model: { },
@@ -25,6 +26,7 @@ cspace = cspace || {};
             linkNext: ".csc-recordTraverser-next",
             linkPrevious: ".csc-recordTraverser-previous"
         },
+        // HTML template for the component
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -42,7 +44,9 @@ cspace = cspace || {};
             disabled: "cs-recordTraverser-disabled"
         },
         strings: {},
+        // Message Bundle
         parentBundle: "{globalBundle}",
+        // Rendering tree used for rendering body of the component
         protoTree: {
             indexTotal: {
                 messagekey: "recordTraverser-indexTotal",
@@ -104,12 +108,14 @@ cspace = cspace || {};
         },
         finalInitFunction: "cspace.recordTraverser.finalInitFunction",
         components: {
+            // Cached data for the search reference
             searchReferenceStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
                     elPath: "searchReference"
                 }
             },
+            // Cached data for search history
             searchHistoryStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
@@ -117,6 +123,7 @@ cspace = cspace || {};
                     source: "advancedsearch"
                }
             },
+            // Cached data for find edit history
             findeditHistoryStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
@@ -124,9 +131,11 @@ cspace = cspace || {};
                     source: "findedit"
                 }
             },
+            // Data for the component
             dataSource: {
                 type: "cspace.recordTraverser.dataSource"
             },
+            // Component to capture user navigating away from the page
             globalNavigator: "{globalNavigator}"
         },
         invokers: {
@@ -140,8 +149,10 @@ cspace = cspace || {};
                     "{cspace.recordTraverser}.options.elPaths",
                     "{cspace.recordTraverser}.options.urls"
                 ]
-            }
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
+        // URL used by the navigation links
         urls: cspace.componentUrlBuilder({
             navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             adjacentRecords: "%tenant/%tname/adjacentRecords/%token/%index",
@@ -168,6 +179,7 @@ cspace = cspace || {};
         }
     });
 
+    // Data for the component grabbed from App layer
     fluid.demands("cspace.recordTraverser.dataSource", ["cspace.recordTraverser"], {
         funcName: "cspace.URLDataSource",
         args: {
@@ -180,6 +192,7 @@ cspace = cspace || {};
         }
     });
 
+    // Overwriting data when testing locally
     fluid.demands("cspace.recordTraverser.dataSource",  ["cspace.localData", "cspace.recordTraverser"], {
         funcName: "cspace.recordTraverser.testDataSource",
         args: {
@@ -190,15 +203,18 @@ cspace = cspace || {};
             }
         }
     });
+    // Overwriting data when testing locally
     fluid.defaults("cspace.recordTraverser.testDataSource", {
         url: "%test/data/person/%token.json"
     });
     cspace.recordTraverser.testDataSource = cspace.URLDataSource;
     
+    // Function to get a sub-model from the model of the component
     var get = function (model) {
         return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
     
+    // Preprocessing model for rendering - making sure all neccessary fields are present in the model so that we can reference them in a prototree
     cspace.recordTraverser.prepareModel = function (storages, vocabComponent, model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
             if (!get(model, rec, elPaths.csid)) {
@@ -244,17 +260,24 @@ cspace = cspace || {};
     };
 
     cspace.recordTraverser.preInitFunction = function (that) {
+        // Function to cache the data we retreive
         that.save = function (increment) {
+            if (!increment) {
+                return;
+            }
             var model = that.model,
                 elPaths = that.options.elPaths,
-                searchReference = elPaths.searchReference;
+                searchReference = elPaths.searchReference,
+                index = get(model, searchReference, elPaths.index);
 
-            if (typeof increment !== "number") {
-                increment = 0;
+            if (typeof index !== "number") {
+                index = undefined;
+            } else {
+                index += increment;
             }
             that.searchReferenceStorage.set({
                 token: get(model, searchReference, elPaths.token),
-                index: get(model, searchReference, elPaths.index) + increment,
+                index: index,
                 source: get(model, searchReference, elPaths.source)
             });
         };
@@ -270,8 +293,14 @@ cspace = cspace || {};
             searchReference = elPaths.searchReference,
             searchReferenceStorage = that.searchReferenceStorage;
 
+        // Get the data and put it as a model for the Record Traverser
         applier.requestChange(searchReference, searchReferenceStorage.get());
-        if (!fluid.get(model, searchReference)) {
+        var searchRef = fluid.get(model, searchReference);
+        if (!searchRef) {
+            return;
+        }
+        if ($.isEmptyObject(searchRef)) {
+            searchReferenceStorage.set();
             return;
         }
         searchReferenceStorage.set();
@@ -280,11 +309,17 @@ cspace = cspace || {};
             index: get(model, searchReference, elPaths.index),
             source: get(model, searchReference, elPaths.source)
         }, function(data) {
+            // If data cannot be retreived then show a user-friendly error
+            if (data.isError === true) {
+                that.displayErrorMessage(that.options.parentBundle.resolve("recordTraverser-fail"));
+                return;
+            }
             applier.requestChange(elPaths.adjacentRecords, data);
             that.refreshView();
         });
 
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback, evt) {
+        // Capture navigation away events when user clicks navigation links
+        that.globalNavigator.addListener(function (callback, evt) {
             if (!evt) {
                 return;
             }
@@ -300,9 +335,15 @@ cspace = cspace || {};
                     return increment;
                 }
             }));
-        }, "recordTraverser");
+        }, "recordTraverser", "first");
     };
     
+    // Fetching / Caching
+    // ----------------------------------------------------
+    
+    // Call to primeCacheFromResources will start fetching/caching
+    // of the template on this file load before the actual component's
+    // creator function is called
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");
     
 })(jQuery, fluid);

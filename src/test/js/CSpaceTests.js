@@ -73,34 +73,33 @@ cspace.tests.sampleSchema = {
     },
     "namespaces": {
         "properties": {
-            "person": {
+            "organization": {
                 "properties": {
-                    "person": {
-                        "type": "object",
+                    "ulan_oa": {
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
                     },
-                    "persontest1": {
-                        "type": "object",
+                    "organization": {
                         "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
-                    },
-                    "persontest2": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -108,86 +107,74 @@ cspace.tests.sampleSchema = {
             "concept": {
                 "properties": {
                     "concept": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
+                    },
+                    "material_ca": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     },
                     "activity": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 2,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
-                    },
-                    "material": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
             },
-            "place": {
+            "person": {
                 "properties": {
-                    "place": {
-                        "type": "object",
+                    "person": {
                         "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
                     },
-                    "placetest1": {
-                        "type": "object",
+                    "ulan_pa": {
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": false,
+                                "type": "boolean"
                             }
-                        }
-                    },
-                    "placetest2": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "organization": {
-                "properties": {
-                    "organization": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
-                    },
-                    "organizationtest": {
-                        "type": "object",
-                        "properties": {
-                            "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
-                            }
-                        }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -195,13 +182,61 @@ cspace.tests.sampleSchema = {
             "location": {
                 "properties": {
                     "location": {
-                        "type": "object",
                         "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
                             "nptAllowed": {
-                                "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "type": "boolean"
                             }
-                        }
+                        },
+                        "type": "object"
+                    },
+                    "offsite_sla": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "place": {
+                "properties": {
+                    "place": {
+                        "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "tgn_place": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -313,14 +348,15 @@ fluid.defaults("cspace.tests.testEnvironment", {
     permissions: cspace.tests.sampleUserPerms,
     schema: cspace.tests.sampleSchema,
     components: {
+        instantiator: "{instantiator}",
         permissionsResolver: {
             type: "cspace.permissions.resolver",
             options: {
                 permissions: "{testEnvironment}.options.permissions"
             }
         },
-        relationResolver: {
-            type: "cspace.util.relationResolver"
+        navigationEventHolder: {
+            type: "cspace.navigationEventHolder"
         },
         vocab: {
             type: "cspace.vocab",
@@ -335,16 +371,22 @@ fluid.defaults("cspace.tests.testEnvironment", {
             type: "cspace.globalBundle"
         },
         globalNavigator: {
-            type: "cspace.util.globalNavigator",
+            type: "cspace.util.globalNavigator"
         },
         userLogin: {
-            type: "cspace.util.login",
+            type: "cspace.util.login"
         },
         recordTypes: {
             type: "cspace.recordTypes",
             options: {
                 schema: "{testEnvironment}.options.schema"
             }
+        },
+        globalModel: {
+            type: "cspace.model"
+        },
+        globalEvents: {
+            type: "cspace.globalEvents"
         },
         loadingIndicator: {
             type: "cspace.util.loadingIndicator"
@@ -360,3 +402,45 @@ fluid.defaults("cspace.tests.modelHolder", {
     model: "{testEnvironment}.options.model",
     applier: "{testEnvironment}.options.applier"
 });
+
+cspace.tests.testRunner = function (testsConfig) {
+    fluid.each(testsConfig, function (config, testName) {
+        var options = config.componentOptions || {},
+            testEnv = config.testEnv;
+        fluid.each(config.listeners, function (listenerGroup, eventName) {
+            listenerGroup = fluid.makeArray(listenerGroup);
+            fluid.each(listenerGroup, function (listener) {
+                var listeners = fluid.get(options, listener.path),
+                    originalListener = listener.listener;
+                if (!listeners) {
+                    fluid.set(options, listener.path, {});
+                    listeners = fluid.get(options, listener.path);
+                }
+                if (listener.once) {
+                    listener.listener = function (component) {
+                        component.events[fluid.pathUtil.getHeadPath(eventName)].removeListener(fluid.pathUtil.getTailPath(eventName));
+                        originalListener.apply(null, fluid.makeArray(arguments));
+                    };
+                }
+                listeners[eventName] = {
+                    listener: listener.listener,
+                    priority: listener.priority
+                };
+            });
+        });
+        testEnv[config.testType](testName, function () {
+            var instantiator = testEnv.instantiator;
+            if (testEnv.testContext) {
+                instantiator.clearComponent(testEnv, "testContext");
+            }
+            testEnv.options.components.testContext = {
+                type: "fluid.typeFount",
+                options: {
+                    targetTypeName: testName
+                }
+            };
+            fluid.initDependent(testEnv, "testContext", instantiator);
+            config.setup(options, testEnv);
+        });
+    });
+};

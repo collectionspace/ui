@@ -14,13 +14,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    // Footer component used on all pages within Collection
+    // Space application.
     cspace.footer = function (container, options) {
         var that = fluid.initRendererComponent("cspace.footer", container, options);
         that.renderer.refreshView();        
         return that;
     };
-    
+
+    // Build a renderer tree for the footer.
     cspace.footer.produceTree = function () {
         return {
             text1: {
@@ -66,9 +69,10 @@ cspace = cspace || {};
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
-            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+2.4+Feedback",
-            version: "2.4"
+            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+3.2+Feedback",
+            version: "3.2"
         },
+        // Footer template resource.
         resources: {
             template: {
                 expander: {

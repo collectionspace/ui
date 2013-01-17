@@ -16,43 +16,16 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("PasswordValidator.js loaded");
 
-    var bindEvents = function (that) {
-        var pwField = that.locate("passwordField");
-        pwField.change(function (event) {
-            that.validateLength(pwField.val());
-        });
-    };
-
-    cspace.passwordValidator = function (container, options) {
-        var that = fluid.initView("cspace.passwordValidator", container, options);
-        fluid.initDependents(that);
-        
-        that.validateLength = function (password) {
-            var passwordLength = password.length;
-            if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
-                var msg = fluid.stringTemplate(that.lookupMessage("passwordLengthError"), {min: that.options.minLength, max: that.options.maxLength});
-                that.messageBar.show(msg, null, true);
-                return false;
-            }
-            that.messageBar.hide();
-            return true;
-        };
-
-        // TODO: In general, we shouldn't make a component's event binding public.
-        // Password validation should probably be more of a decorator-type function.
-        // This is captured in CSPACE-1829
-        that.bindEvents = function () {
-            bindEvents(that);
-        };
-        that.messageBar.hide();
-        return that;
-    };
-
+    // Password validator component that validates password strings and
+    // their lengths.
     fluid.defaults("cspace.passwordValidator", {
-        gradeNames: ["fluid.viewComponent"],
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        preInitFunction: "cspace.passwordValidator.preInit",
+        finalInitFunction: "cspace.passwordValidator.finalInit",
         selectors: {
             passwordField: ".csc-passwordValidator-password"
         },
+        // Parent bundle component that contains all message strings.
         parentBundle: "{globalBundle}",
         invokers: {
             lookupMessage: {
@@ -67,4 +40,31 @@ cspace = cspace || {};
             messageBar: "{messageBar}"
         }
     });
+
+    cspace.passwordValidator.preInit = function (that) {
+        // Validate based on min and max length.
+        that.validateLength = function (password) {
+            var passwordLength = password.length;
+            if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
+                var msg = fluid.stringTemplate(that.lookupMessage("passwordLengthError"), {min: that.options.minLength, max: that.options.maxLength});
+                that.messageBar.show(msg, null, true);
+                return false;
+            }
+            that.messageBar.hide();
+            return true;
+        };
+        // TODO: In general, we shouldn't make a component's event binding public.
+        // Password validation should probably be more of a decorator-type function.
+        // This is captured in CSPACE-1829
+        that.bindEvents = function () {
+            var pwField = that.locate("passwordField");
+            pwField.change(function (event) {
+                that.validateLength(pwField.val());
+            });
+        };
+    };
+
+    cspace.passwordValidator.finalInit = function (that) {
+        that.messageBar.hide();
+    };
 })(jQuery, fluid);

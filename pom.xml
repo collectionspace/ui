@@ -5,7 +5,7 @@
   <groupId>org.collectionspace</groupId>
   <artifactId>cspace-ui</artifactId>
   <packaging>war</packaging>
-  <version>2.4</version>
+  <version>3.2</version>
   <name>collectionspace Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>

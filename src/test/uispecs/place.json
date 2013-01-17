@@ -1,9 +1,6 @@
 {
     "hierarchy": {
-        ".csc-hierarchy-narrowerContext-label": {
-            "messagekey": "hierarchy-narrowerContextLabel"
-        },
-        ".csc-hierarchy-narrowerContext": {
+        ".csc-hierarchy-narrowerContexts": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -42,12 +39,6 @@
                 }
             ]
         },
-        ".csc-hierarchy-equivalentContext-label": {
-            "messagekey": "hierarchy-equivalentContextLabel"
-        },
-        ".csc-hierarchy-equivalentInformation-label": {
-            "messagekey": "hierarchy-equivalentInformationLabel"
-        },
         ".csc-hierarchy-broaderContext": {
             "decorators": [
                 {
@@ -60,95 +51,6 @@
                 }
             ],
             "value": "${fields.broaderContext}"
-        },
-        ".csc-hierarchy-broaderContext-label": {
-            "messagekey": "hierarchy-broaderContextLabel"
-        },
-        "expander": [
-            {
-                "trueTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextLabel"
-                    }
-                },
-                "condition": {
-                    "funcName": "cspace.hierarchy.assertEquivalentContexts",
-                    "args": {
-                        "equivalentContexts": "${fields.equivalentContexts}"
-                    }
-                },
-                "type": "fluid.renderer.condition",
-                "falseTree": {
-                    ".csc-hierarchy-equivalentContext-label": {
-                        "decorators": {
-                            "classes": "hidden",
-                            "type": "addClass"
-                        }
-                    }
-                }
-            },
-            {
-                "repeatID": ".csc-hierarchy-equivalentContext:",
-                "tree": {
-                    "decorators": {
-                        "classes": "cs-hierarchy-equivalentContext",
-                        "type": "addClass"
-                    },
-                    "value": "${{row}.equivalentContext}"
-                },
-                "type": "fluid.renderer.repeat",
-                "pathAs": "row",
-                "controlledBy": "fields.equivalentContexts"
-            }
-        ],
-        ".csc-hierarchy-relatedTerms-label": {
-            "messagekey": "hierarchy-relatedTermsLabel"
-        },
-        ".csc-hierarchy-domaindata-label": {
-            "messagekey": "hierarchy-domaindataLabel"
-        },
-        ".csc-hierarchy-narrowerContexts-label": {
-            "messagekey": "hierarchy-narrowerContextsLabel"
-        },
-        ".csc-hierarchy-hierarchyInformation-label": {
-            "messagekey": "hierarchy-hierarchyInformationLabel"
-        },
-        ".csc-hierarchy-relatedTerm": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-hierarchy-relatedTerm": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.autocomplete",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "queryUrl": "../../../tenant/core/vocabularies/place/autocomplete/relatedTerm",
-                                                    "vocabUrl": "../../../tenant/core/vocabularies/place/source-vocab/relatedTerm"
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.relatedTerm}"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.relatedTerms"
-                    }
-                }
-            ]
-        },
-        ".csc-hierarchy-equivalentContexts-label": {
-            "messagekey": "hierarchy-equivalentContextsLabel"
-        },
-        ".csc-hierarchy-relatedTerm-label": {
-            "messagekey": "hierarchy-relatedTermLabel"
         }
     },
     "recordEditor": {

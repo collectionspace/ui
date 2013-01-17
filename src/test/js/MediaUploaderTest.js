@@ -48,30 +48,10 @@ var mediaUploaderTester = function ($) {
         
         jqUnit.isVisible("Main uploader widget is visible", mediaUploader.locate("uploader"));
         jqUnit.notVisible("Remove media is invisible", mediaUploader.locate("removeButton"));
-        jqUnit.assertTrue("+ Upload button is disabled", mediaUploader.locate("uploadButton").attr("disabled"));
+        jqUnit.assertTrue("+ Upload button is disabled", mediaUploader.locate("uploadButton")[0].getAttribute("disabled"));
         jqUnit.assertTrue("Link button is disabled", mediaUploader.locate("linkButton").attr("disabled"));
     });
-    
-//    mediaUploaderTest.test("Init and render. Check that upload field is disabled depending on CSID presence, no CSID", function () {
-//        expect(2);
-//        var mediaUploader = setupMediaUploader();
-//        var mediaUploaderInput = mediaUploader.fileUploader.strategy.local.browseButtonView.locate("fileInputs");
-//        jqUnit.assertTrue("HTML input is disabled", mediaUploaderInput.is(":disabled"));
-//        jqUnit.assertTrue("Media uploader styled as disabled", mediaUploader.locate("uploadInputContainer").hasClass(mediaUploader.options.styles.disabled));
-//    });
-//
-//    mediaUploaderTest.test("Init and render. Check that upload field is disabled depending on CSID presence, with CSID", function () {
-//        expect(2);
-//        var model = fluid.copy(baseCSIDModel);
-//        var mediaUploader = setupMediaUploader({
-//            model: model,
-//            applier: fluid.makeChangeApplier(model)
-//        });
-//        var mediaUploaderInput = mediaUploader.fileUploader.strategy.local.browseButtonView.locate("fileInputs");
-//        jqUnit.assertFalse("HTML input is not disabled since it has CSID", mediaUploaderInput.is(":disabled"));
-//        jqUnit.assertFalse("Media uploader not styled as disabled since it has CSID", mediaUploader.locate("uploadInputContainer").hasClass(mediaUploader.options.styles.disabled));
-//    });
-    
+
     mediaUploaderTest.asyncTest("Linking", function () {
         expect(5);
         var url = "http://testlink.com/media";
@@ -84,7 +64,7 @@ var mediaUploaderTester = function ($) {
             applier: fluid.makeChangeApplier(model),
             listeners: {
                 onLink: function () {
-                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.srcUri));
+                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.sourceUrl));
                     jqUnit.assertTrue("Linking performed successfully", true);
                     start();
                 }
@@ -96,8 +76,8 @@ var mediaUploaderTester = function ($) {
         jqUnit.assertTrue("Link button is disabled", linkButton.attr("disabled"));
         linkInput.val(url);
         linkInput.keyup();
-        jqUnit.assertFalse("Link button is enabled", linkButton.attr("disabled"));
-        jqUnit.assertUndefined("Model has no srcUri", fluid.get(model, mediaUploader.options.elPaths.srcUri));
+        jqUnit.assertFalse("Link button is enabled", linkButton[0].getAttribute("disabled"));
+        jqUnit.assertUndefined("Model has no sourceUrl", fluid.get(model, mediaUploader.options.elPaths.sourceUrl));
         linkButton.click();
     });
     

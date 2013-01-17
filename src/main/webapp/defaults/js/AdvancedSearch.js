@@ -14,11 +14,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    // Component that is responsible for advanced search functionality,
     fluid.defaults("cspace.advancedSearch", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         produceTree: "cspace.advancedSearch.produceTree",
         components: {
+            // Subcomponent that lets users select an appopriate record
+            // based on their permissions.
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
                 options: {
@@ -29,6 +32,8 @@ cspace = cspace || {};
                     permission: "{advancedSearch}.options.permission"
                 }
             },
+            // Subcomponent that lets users select different vocabs for
+            // authority records.
             vocabSelector: {
                 type: "cspace.advancedSearch.vocabSelector",
                 container: "{cspace.advancedSearch}.dom.vocab",
@@ -41,7 +46,9 @@ cspace = cspace || {};
                     applier: "{cspace.advancedSearch}.applier"
                 }
             },
-           fetcher: {
+            // Component that does all configuration fetching for advanced
+            // search renderable components.
+            fetcher: {
                 type: "cspace.advancedSearch.fetcher",
                 options: {
                     events: {
@@ -51,6 +58,7 @@ cspace = cspace || {};
                 },
                 priority: "first"
             },
+            // Local storage that is used to maintain recent search results.
             searchHistoryStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
@@ -130,6 +138,7 @@ cspace = cspace || {};
             searchFields : "cs-advancedSearch-searchFields"
         },
         resources: {
+            // Advanced search template resource location.
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/components/AdvancedSearchTemplate.html",
@@ -164,11 +173,13 @@ cspace = cspace || {};
         toggleControls(false);
         event.fire();
     };
-    
+
+    // Transform search model into the one consistent with the app layer.
     var transformSearchModel = function (keywordModel, rules) {
         return fluid.model.transformWithRules(fluid.copy(keywordModel), rules);
     };
-    
+
+    // Build search model and fire search event.
     cspace.advancedSearch.search = function (searchEvent, keywordModel, fieldsModel) {
         var searchModel = {};
         var rules = {
@@ -183,7 +194,9 @@ cspace = cspace || {};
         fluid.merge(null, searchModel, transformSearchModel(keywordModel, rules));
         searchEvent.fire(searchModel)
     };
-    
+
+    // Initialize (clear if already exists) a search fields subcomponent based on
+    // configuration from : app layer, previously saved searches.
     cspace.advancedSearch.initSearchFields = function (that, instantiator, options) {
         if (that.searchFields) {
             instantiator.clearComponent(that, ["searchFields"]);
@@ -217,18 +230,24 @@ cspace = cspace || {};
     
     cspace.advancedSearch.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
+            // Initialize default search fields once all configuration
+            // is fetched.
             afterFetch: function (options) {
                 that.initSearchFields(options);
             },
+            // Listener that is fired when the record type is changed.
             recordTypeChanged: function () {
                 that.locate("searchFields").hide();
             },
+            // Show search fields once they are rendered.
             afterSearchFieldsInit: function () {
                 that.locate("searchFields").show();
             },
+            // Hide search attributes to display search results.
             onSearch: function (searchModel) {
                 that.toggleControls(true);
             },
+            // Save search to local storage.
             afterSearch: function (searchModel) {
                 that.updateSearchHistory(searchModel);
             }
@@ -236,19 +255,23 @@ cspace = cspace || {};
     };
     
     cspace.advancedSearch.postInit = function (that) {
+        // Fire record type changed event once the dropdown is updated.
         that.applier.modelChanged.addListener("recordType", function () {
             that.events.recordTypeChanged.fire(that.model.recordType);
         });
     };
     
     cspace.advancedSearch.finalInit = function (that) {
+        // Toggle various advanced search steps.
         that.toggleControls = function (hideSteps) {
             that.locate("step1").add(that.locate("step2"))[hideSteps ? "hide" : "show"]();
             that.locate("toggle")[hideSteps ? "show" : "hide"]();
         };
+        // Render advanced search.
         that.refreshView();
     };
-    
+
+    // Advanced search default protoTree.
     cspace.advancedSearch.produceTree = function (that) {
         var tree = {
             advancedSearch: {decorators: {"addClass": "{styles}.advancedSearch"}},
@@ -353,6 +376,7 @@ cspace = cspace || {};
         });
     };
 
+    // Component responsible for render vocab selection tool in advanced search.
     fluid.defaults("cspace.advancedSearch.vocabSelector", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         selectors: {
@@ -404,9 +428,12 @@ cspace = cspace || {};
     });
 
     cspace.advancedSearch.vocabSelector.preInit = function (that) {
+        // Update vocab selector when record type is changed.
         that.recordTypeChangedHandler = function () {
             that.refreshView();
         };
+
+        // Fixup vocab selector's model.
         that.prepareModelForRenderHandler = function () {
             var vocab = that.options.vocab,
                 applier = that.applier,
@@ -421,10 +448,9 @@ cspace = cspace || {};
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
-            var vocabs = [],
+            var vocabs = vocab.authority[model.recordType].order.vocabs,
                 vocabNames = [];
-            fluid.each(vocabsExist, function (vocab) {
-                vocabs.push(vocab);
+            fluid.each(vocabs, function (vocab) {
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });
             if (vocabs.length > 1) {
@@ -437,6 +463,7 @@ cspace = cspace || {};
                 applier.requestChange("vocab", vocabs[0]);
             }
         };
+        // Animate vocab selector.
         that.afterRenderHandler = function () {
             if (that.model.vocabs) {
                 that.locate("selectVocab")
@@ -445,7 +472,8 @@ cspace = cspace || {};
             }
         };
     };
-    
+
+    // A component that renders search fields.
     fluid.defaults("cspace.advancedSearch.searchFields", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         produceTree: "cspace.advancedSearch.searchFields.produceTree",
@@ -465,11 +493,23 @@ cspace = cspace || {};
         },
         rendererOptions: {
             instantiator: "{instantiator}",
-            parentComponent: "{searchFields}"
+            parentComponent: "{searchFields}",
+            autoBind: true
         },
         strings: {},
-        parentBundle: "{globalBundle}"
+        preInitFunction: "cspace.advancedSearch.searchFields.preInit",
+        parentBundle: "{globalBundle}",
+        latestDate: "updatedAtEnd"
     });
+
+    cspace.advancedSearch.searchFields.preInit = function (that) {
+        // CSPACE-5476: Fixing the issue with the server not being able to handle inslusivity with dates
+        // on advanced search. Doing it on the client for the latest date.
+        that.applier.guards.addListener(that.options.latestDate, function (model, changeRequest) {
+            changeRequest.value =
+                Date.parse(changeRequest.value).addDays(1).toString("yyyy-MM-dd");
+        });
+    };
 
     cspace.advancedSearch.searchFields.produceTree = function (that) {
         return that.options.uispec;
@@ -478,7 +518,9 @@ cspace = cspace || {};
     cspace.advancedSearch.searchFields.cutPointGenerator = function (selectors, options) {
         return cspace.renderUtils.cutpointsFromUISpec(options.uispec);
     };
-    
+
+    // A component that is responsible for fetching all configuration:
+    // uispec, uischema, template.
     fluid.defaults("cspace.advancedSearch.fetcher", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
         preInitFunction: "cspace.advancedSearch.fetcher.preInit",
@@ -515,6 +557,7 @@ cspace = cspace || {};
     });
     
     cspace.advancedSearch.fetcher.preInit = function (that) {
+        // Fetch all configuration, fire afterFetch event when done.
         that.fetch = function (recordType) {
             var resourceSpec = fluid.copy(that.options.resourceSpec);
             fluid.each(resourceSpec, function (spec) {

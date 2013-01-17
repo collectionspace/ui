@@ -1,0 +1,158 @@
+{
+    "taxon": {
+        "properties": {
+            "commonNameGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "commonName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonAuthorGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonAuthor": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonCitationList": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonCitation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonCurrencys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonCurrency": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonIsNamedHybrids": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonIsNamedHybrid": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonRanks": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonRank": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonTermGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonomicStatus": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "termDisplayName": {
+                            "type": "string"
+                        },
+                        "termStatus": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "taxonYears": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "taxonYear": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "updatedBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "default": true,
+                            "type": "boolean"
+                        },
+                        "updatedBy": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    }
+}

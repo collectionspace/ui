@@ -18,6 +18,9 @@
 .right-sidebar {
 	width:100%; 
 	border-bottom:3px solid #CDE2F2;}
+.cs-authority .right-sidebar {
+    border-bottom: none;
+}
 .cs-sidebar-mediaImage {
 	background-image: url(../images/sample.png);
 	background-repeat: no-repeat; 
@@ -45,6 +48,12 @@
 	cursor:pointer; 
 	height:13px; 
 	width:auto;}
+.cs-authority .pivot-box .header, .cs-authority .pivot-search-box-header, .cs-authority .pivot-users-box-header, .cs-authority .create-report .header {
+    background-color:#78449A;
+}
+.cs-authority .pivot-box .header:hover, .cs-authority .pivot-box .header:focus {
+    background-color:#6a3c88;
+}
 .pivot-box .header:hover, .pivot-box .header:focus {
 	background-color:#438CC9;}
 .pivot-box .header.toggle {

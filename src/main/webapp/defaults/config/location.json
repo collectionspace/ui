@@ -2,30 +2,14 @@
     "pageBuilder": {
         "options": {
             "pageType": "location",
-            "selectors": {
-                "recordEditor": ".csc-location-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
-                            "hierarchy": ".csc-location-hierarchy",
-                            "identificationNumber": ".csc-location-displayName"
-                        },
-                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
-                        "components": {
-                            "hierarchy": {
-                                "type": "cspace.hierarchy",
-                                "options": {
-                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                },
-                                "createOnEvent": "afterRender"
-                            }
+                            "identificationNumber": ".csc-locationAuthority-termDisplayName"
                         }
                     }
                 },
@@ -62,26 +46,6 @@
             "recordType": "location",
             "schema": {
                 "location": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/LocationTemplate.html",
-                    "templateSelector": ".csc-location-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                }
-            },
-            "components": {
-                "dataContext": {
-                    "options": {
-                        "baseUrl": {
-                            "expander": {
-                                "type": "fluid.deferredInvokeCall",
-                                "func": "cspace.util.urlBuilder",
-                                "args": "%tenant/%tname/vocabularies"
-                            }
-                        }
-                    }
-                }
             }
         }
     }

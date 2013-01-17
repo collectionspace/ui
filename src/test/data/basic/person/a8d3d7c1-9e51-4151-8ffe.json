@@ -1,0 +1,179 @@
+{
+    "csid": "a8d3d7c1-9e51-4151-8ffe",
+    "namespace": "person",
+    "fields": {
+        "relatedTerms": [
+            {
+                "_primary": true
+            }
+        ],
+        "personTermGroup": [
+            {
+                "middleName": "",
+                "termName": "",
+                "termSource": "",
+                "surName": "",
+                "termSourceID": "",
+                "termSourceNote": "",
+                "termLanguage": "",
+                "termPrefForLang": false,
+                "_primary": true,
+                "title": "",
+                "termDisplayName": "Some owner",
+                "termType": "",
+                "initials": "",
+                "termStatus": "",
+                "termQualifier": "",
+                "termSourceDetail": "",
+                "salutation": "",
+                "foreName": "",
+                "nameAdditions": ""
+            }
+        ],
+        "deathDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "contact": {
+            "updatedAt": "2012-09-04T15:59:53Z",
+            "faxNumberGroup": [
+                {
+                    "_primary": true,
+                    "faxNumber": "",
+                    "faxNumberType": ""
+                }
+            ],
+            "_subrecordcsid": "c49c0aec-55b6-46eb-b805",
+            "createdBy": "admin@core.collectionspace.org",
+            "addressGroup": [
+                {
+                    "_primary": true,
+                    "addressStateOrProvince": "",
+                    "addressPostCode": "",
+                    "addressType": "",
+                    "addressCountry": "",
+                    "addressPlace1": "",
+                    "addressPlace2": "",
+                    "addressMunicipality": ""
+                }
+            ],
+            "createdAt": "2012-09-04T15:59:53Z",
+            "webAddressGroup": [
+                {
+                    "_primary": true,
+                    "webAddress": "",
+                    "webAddressType": ""
+                }
+            ],
+            "emailGroup": [
+                {
+                    "_primary": true,
+                    "emailType": "",
+                    "email": ""
+                }
+            ],
+            "telephoneNumberGroup": [
+                {
+                    "_primary": true,
+                    "telephoneNumberType": "",
+                    "telephoneNumber": ""
+                }
+            ],
+            "updatedBy": "admin@core.collectionspace.org"
+        },
+        "updatedBy": "admin@core.collectionspace.org",
+        "namespace": "person",
+        "shortIdentifier": "Someowner1346774360758",
+        "nationalities": [
+            {
+                "_primary": true,
+                "nationality": "Some nationality"
+            }
+        ],
+        "schoolsOrStyles": [
+            {
+                "_primary": true,
+                "schoolOrStyle": "Some school"
+            }
+        ],
+        "termDisplayName": "Some owner",
+        "createdAt": "2012-09-04T15:59:20Z",
+        "termStatus": "",
+        "narrowerContexts": [
+            {
+                "_primary": true
+            }
+        ],
+        "groups": [
+            {
+                "_primary": true,
+                "group": "Some group"
+            }
+        ],
+        "recordtype": "person",
+        "occupations": [
+            {
+                "occupation": "Some occupation",
+                "_primary": true
+            }
+        ],
+        "csid": "a8d3d7c1-9e51-4151-8ffe",
+        "birthDateGroup": {
+            "dateEarliestSingleQualifier": "",
+            "scalarValuesComputed": "",
+            "dateLatestDay": "",
+            "dateLatestYear": "",
+            "dateAssociation": "",
+            "dateEarliestSingleEra": "",
+            "dateDisplayDate": "",
+            "dateEarliestSingleCertainty": "",
+            "dateLatestEra": "",
+            "dateEarliestSingleQualifierValue": "",
+            "dateLatestCertainty": "",
+            "dateEarliestSingleYear": "",
+            "dateLatestQualifier": "",
+            "dateLatestQualifierValue": "",
+            "dateEarliestSingleQualifierUnit": "",
+            "datePeriod": "",
+            "dateEarliestScalarValue": "",
+            "dateLatestMonth": "",
+            "dateNote": "",
+            "dateLatestScalarValue": "",
+            "dateLatestQualifierUnit": "",
+            "dateEarliestSingleDay": "",
+            "dateEarliestSingleMonth": ""
+        },
+        "updatedAt": "2012-09-04T15:59:53Z",
+        "createdBy": "admin@core.collectionspace.org",
+        "broaderContext": "",
+        "refName": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Someowner1346774360758)'Some owner'",
+        "authorityid": "831e1486-82a2-414b-b903",
+        "equivalentContexts": [
+            {
+                "_primary": true
+            }
+        ],
+        "refid": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(Someowner1346774360758)'Some owner'"
+    }
+}

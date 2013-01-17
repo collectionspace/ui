@@ -1,126 +1,64 @@
 {
-    ".csc-group-updatedAtStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${updatedAtStart}"
-    },
-    ".csc-group-title-label": {
-        "messagekey": "group-titleLabel"
-    },
-    ".csc-group-updatedBy": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-group-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
     ".csc-group-owner": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
-                "type": "fluid",
                 "options": {
                     "elPath": "owners",
-                    "protoTree": {
+                    "hidePrimary": true,
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-group-owner": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/group/autocomplete/owner",
-                                                        "vocabUrl": "../../../tenant/core/group/source-vocab/owner"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.owner}"
+                                ".csc-group-owner": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/group/autocomplete/owner",
+                                                "vocabUrl": "../../../tenant/core/group/source-vocab/owner"
+                                            },
+                                            "type": "fluid"
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "owners"
+                                    ],
+                                    "value": "${{row}.owner}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
-                    },
-                    "hidePrimary": true
-                }
+                    }
+                },
+                "type": "fluid"
             }
         ]
+    },
+    ".csc-group-owner-label": {
+        "messagekey": "group-ownerLabel"
     },
     ".csc-group-title": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
-                "type": "fluid",
                 "options": {
                     "elPath": "titles",
-                    "protoTree": {
+                    "hidePrimary": true,
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-group-title": "${{row}.title}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "titles"
-                                }
+                                ".csc-group-title": "${{row}.title}"
                             },
                             "type": "fluid.noexpand"
                         }
-                    },
-                    "hidePrimary": true
-                }
+                    }
+                },
+                "type": "fluid"
             }
         ]
     },
-    ".csc-group-updatedBy-label": {
-        "messagekey": "group-updatedByLabel"
-    },
-    ".csc-group-updatedAtEnd-label": {
-        "messagekey": "group-updatedAtEndLabel"
+    ".csc-group-title-label": {
+        "messagekey": "group-titleLabel"
     },
     ".csc-group-updatedAt-label": {
         "messagekey": "group-updatedAtLabel"
-    },
-    ".csc-group-updatedAtStart-label": {
-        "messagekey": "group-updatedAtStartLabel"
-    },
-    ".csc-group-owner-label": {
-        "messagekey": "group-ownerLabel"
     },
     ".csc-group-updatedAtEnd": {
         "decorators": [
@@ -130,5 +68,43 @@
             }
         ],
         "value": "${updatedAtEnd}"
+    },
+    ".csc-group-updatedAtEnd-label": {
+        "messagekey": "group-updatedAtEndLabel"
+    },
+    ".csc-group-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
+    },
+    ".csc-group-updatedAtStart-label": {
+        "messagekey": "group-updatedAtStartLabel"
+    },
+    ".csc-group-updatedBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "elPath": "updatedBys",
+                    "hidePrimary": true,
+                    "repeatTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-group-updatedBy": "${{row}.updatedBy}"
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                },
+                "type": "fluid"
+            }
+        ]
+    },
+    ".csc-group-updatedBy-label": {
+        "messagekey": "group-updatedByLabel"
     }
 }

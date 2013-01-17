@@ -16,6 +16,7 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Login.js loaded");
 
+    // Show sign in UI and make sure everything else is hidden.
     var showSignIn = function (domBinder) {
         domBinder.locate("signIn").show();
         domBinder.locate("userID").focus();
@@ -23,13 +24,15 @@ cspace = cspace || {};
         domBinder.locate("resetRequest").hide();
     };
 
+    // Show Reset request UI and make sure everything else is hidden.
     var showResetRequestForm = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").show();
         domBinder.locate("email").focus();
         domBinder.locate("resetRequest").hide();
     };
-    
+
+    // Sub-routine to display error message.
     var displayMessage = function (messageBar, data) {
         if (data.messages) {
             // TODO: expand this branch as sophistication increases for CSPACE-3142
@@ -49,6 +52,7 @@ cspace = cspace || {};
         displayMessage(messageBar, data)
     };
 
+    // Show Reset password UI and make sure everything else is hidden.
     var showReset = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").hide();
@@ -65,6 +69,7 @@ cspace = cspace || {};
         displayMessage(messageBar, data)
     };
 
+    // Validate if any of the fields are missing.
     var makeRequiredFieldsValidator = function (messageBar, domBinder, formType, message) {
         return function (e) {
             var requiredFields = domBinder.locate(formType + "Required");
@@ -88,11 +93,12 @@ cspace = cspace || {};
         };
     };
 
+    // Email and password validation handlers.
     var emailFormValid = function (messageBar, domBinder, message) {
         return makeRequiredFieldsValidator(messageBar, domBinder, "email", message)();      
     };
 
-    var passwordFormValid = function (messageBar, domBinder, allRequiredMessage, mustMatchMessage) {
+    var passwordFormValid = function (messageBar, domBinder, passwordValidator, allRequiredMessage, mustMatchMessage) {
         if (!makeRequiredFieldsValidator(messageBar, domBinder, "password", allRequiredMessage)()) {
             return false;
         }
@@ -101,9 +107,10 @@ cspace = cspace || {};
             domBinder.locate("newPassword").focus();
             return false;
         }
-        return true;
+        return passwordValidator.validateLength(domBinder.locate("newPassword").val());
     };
-    
+
+    // Success and error response handler wrappers.
     var wrapSuccess = function (that, event, url) {
         return function (data) {
             if (!data) {
@@ -113,7 +120,9 @@ cspace = cspace || {};
                 return;
             }
             if (data.isError === true) {
-                fluid.each(data.messages, function (message) {
+                var messages = data.messages || data.message;
+                messages = fluid.makeArray(messages);
+                fluid.each(messages, function (message) {
                     that.displayErrorMessage(message);
                 });
                 return;
@@ -129,6 +138,7 @@ cspace = cspace || {};
         };
     };
 
+    // Submit email and new password payloads.
     var submitEmail = function (email, url, that) {
         if (cspace.util.useLocalData()) {
             var mockResponse = {message: "Success", ok: true};
@@ -175,6 +185,11 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
+        // Add user event handlers to UI controls.
+        that.locate("password").change(function () {
+            var pwd = that.locate("password");
+            pwd.val($.trim(pwd.val()));
+        });
         that.locate("requestReset").click(function (e) {
             that.messageBar.hide();
             showResetRequestForm(that.dom);
@@ -193,6 +208,7 @@ cspace = cspace || {};
             that.messageBar.show(that.lookupMessage("login-generalError"), null, true);            
         });
 
+        // On form submit , validate data.
         that.locate("loginForm").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "login", that.lookupMessage("login-allFieldsRequired")));
         that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "password", that.lookupMessage("login-allFieldsRequired")));
     };
@@ -382,6 +398,8 @@ cspace = cspace || {};
             that.locate("loginForm").attr("action", that.options.urls.login);
         }
 
+        // Infer if there was an error already and display it on login page
+        // load.
         var result = cspace.util.getUrlParameter("result");
         if (result === "fail") {
             that.messageBar.show(that.lookupMessage("login-invalid"), null, true);
@@ -400,13 +418,14 @@ cspace = cspace || {};
     };
     
     cspace.login.postInit = function (that) {
+        // Public methods for email and password submission.
         that.submitEmail = function () {
             if (emailFormValid(that.messageBar, that.dom, that.lookupMessage("login-emailRequired"))) {
                 submitEmail(that.locate("email").val(), that.options.urls.passwordreset, that);
             }
         };
         that.submitNewPassword = function () {
-            if (passwordFormValid(that.messageBar, that.dom, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
+            if (passwordFormValid(that.messageBar, that.dom, that.passwordValidator, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
                 submitNewPassword(that.locate("newPassword").val(), that.options.urls.resetpassword, that);
             }
         };

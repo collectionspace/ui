@@ -1,197 +1,163 @@
-<div class="csc-loanin-template csc-listEditor-details">
-    <div class="csc-loanin">
-        <div id="secondary-nav">		
-			<div id="secondary-nav-menu-sub">
-                <span class="csc-recordTraverser"></span>
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
+<div class="csc-recordEditor-header fl-container-flex header toggle csc-loanin-loaninInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<span class="label required csc-loanin-loanInNumber-label"></span><span class="required">*</span>
+					<div class="content csc-loanIn-loanInNumber-patternChooserContainer clearfix">
+						<input type="text" class="csc-loanIn-loanInNumber pattern-chooser-input" />
+					</div>
 				</div>
-				<div class="time-stamp"> </div>
+			</div>
+			
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair-select">
+					<div class="header">
+						<div class="label csc-loanin-loanPurpose-label"></div>
+					</div>
+					<div class="content">
+						<select class="csc-loanIn-loanPurpose input-select"><option value="">Options not loaded</option></select>
+					</div>
+				</div>
 			</div>
 		</div>
 		
-		<div class="csc-templateEditor"></div>
-        
-		<div class="fl-container-flex fl-fix information-group">			
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-loanin-loaninInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<span class="label required csc-loanin-loanInNumber-label"></span><span class="required">*</span>
-							<div class="content csc-loanIn-loanInNumber-patternChooserContainer clearfix">
-								<input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair-select">
-							<div class="header">
-								<div class="label csc-loanin-loanPurpose-label"></div>
-							</div>
-							<div class="content">
-								<select class="csc-loanIn-loanPurpose input-select"><option value="">Options not loaded</option></select>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="info-column">                   
-                    <div class="info-pair">
-                        <div class="header">
-                            <div class="label csc-loanin-loanStatusGroup-label"></div>
-                        </div>
-                        <div class="content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td class="label csc-loanin-loanStatus-label"></td>
-                                        <td class="label csc-loanin-loanStatusNote-label"></td>
-                                        <td class="label csc-loanin-loanStatusDate-label"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="csc-loanin-loanStatusGroup">
-                                        <td><select class="csc-loanin-loanStatus input-select"><option value="">Options not loaded</option></select></td>
-                                        <td><input type="text" class="csc-loanin-loanStatusNote" /></td>
-                                        <td><input type="text" class="csc-loanin-loanStatusDate" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+		<div class="info-column">                   
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-loanin-loanStatusGroup-label"></div>
                 </div>
-					
-				<div class="info-column">					
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-loanin-lenderGroup-label"></div>
-						</div>
-						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td class="label csc-loanin-lender-label"></td>
-										<td class="label csc-loanin-lendersContact-label"></td>
-										<td class="label csc-loanin-lendersAuthorizer-label"></td>
-										<td class="label csc-loanin-lendersAuthorizationDate-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="csc-loanin-lenderGroup">
-										<td><input type="text" class="csc-loanIn-lender" /></td>
-										<td><input type="text" class="csc-loanIn-lendersContact" /></td>
-										<td><input type="text" class="csc-loanIn-lendersAuthorizer" /></td>
-										<td><input type="text" class="csc-loanIn-lendersAuthorizerDate" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="label csc-loanin-loanStatus-label"></td>
+                                <td class="label csc-loanin-loanStatusNote-label"></td>
+                                <td class="label csc-loanin-loanStatusDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-loanin-loanStatusGroup">
+                                <td><select class="csc-loanin-loanStatus input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-loanin-loanStatusNote" /></td>
+                                <td><input type="text" class="csc-loanin-loanStatusDate" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+			
+		<div class="info-column">					
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-loanin-lenderGroup-label"></div>
 				</div>
-					
-				<div class="info-column">
-					<div class="info-pair">
-                        <div class="header">
-                            <div class="label"></div>
-                        </div>
-                        <div class="content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td class="label csc-loanin-borrowersContact-label"></td>
-                                        <td class="label csc-loanin-borrowersAuthorizer-label"></td>
-                                        <td class="label csc-loanin-borrowersAuthorizationDate-label"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="text" class="csc-loanin-borrowersContact" /></td>
-                                        <td><input type="text" class="csc-loanin-borrowersAuthorizer" /></td>
-                                        <td><input type="text" class="csc-loanin-borrowersAuthorizationDate" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-				 </div>
-					
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-loanin-loanInConditions-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-loanIn-loanInConditions" />
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column2-50 fl-force-right">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-loanin-loanInNote-label"></div>
-							</div>
-							<div class="content">
-								<textarea rows="4" cols="30" class="input-textarea csc-loanIn-loanInNote" />
-							</div>
-						</div>
-					</div>
-				</div>
-					
-				<div class="info-column">
-					<div class="info-column3 fl-force-left">
-						<div class="info-pair-date">
-							<div class="header">
-								<div class="label csc-loanin-loanInDate-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-loanIn-loanInDate" />
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column3 fl-force-left">
-						<div class="info-pair-date">
-							<div class="header">
-								<div class="label csc-loanin-loanReturnDate-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-loanIn-loanReturnDate" />
-							</div>
-						</div>
-					</div>
-					
-					<div class="info-column3 fl-force-left">
-						<div class="info-pair-date">
-							<div class="header">
-								<div class="label csc-loanin-loanRenewalApplicationDate-label"></div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-loanIn-loanRenewalApplicationDate" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>        
-
-        <div id="secondary-nav-footer">
-			<div id="secondary-nav-menu-sub">
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="label csc-loanin-lender-label"></td>
+								<td class="label csc-loanin-lendersContact-label"></td>
+								<td class="label csc-loanin-lendersAuthorizer-label"></td>
+								<td class="label csc-loanin-lendersAuthorizationDate-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="csc-loanin-lenderGroup">
+								<td><input type="text" class="csc-loanIn-lender" /></td>
+								<td><input type="text" class="csc-loanIn-lendersContact" /></td>
+								<td><input type="text" class="csc-loanIn-lendersAuthorizer" /></td>
+								<td><input type="text" class="csc-loanIn-lendersAuthorizerDate" /></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-    </div>
-</div>
+			
+		<div class="info-column">
+			<div class="info-pair">
+                <div class="header">
+                    <div class="label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="label csc-loanin-borrowersContact-label"></td>
+                                <td class="label csc-loanin-borrowersAuthorizer-label"></td>
+                                <td class="label csc-loanin-borrowersAuthorizationDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="csc-loanin-borrowersContact" /></td>
+                                <td><input type="text" class="csc-loanin-borrowersAuthorizer" /></td>
+                                <td><input type="text" class="csc-loanin-borrowersAuthorizationDate" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+		 </div>
+			
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-loanin-loanInConditions-label"></div>
+					</div>
+					<div class="content">
+						<textarea rows="4" cols="30" class="input-textarea csc-loanIn-loanInConditions" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-loanin-loanInNote-label"></div>
+					</div>
+					<div class="content">
+						<textarea rows="4" cols="30" class="input-textarea csc-loanIn-loanInNote" />
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div class="info-column">
+			<div class="info-column3 fl-force-left">
+				<div class="info-pair-date">
+					<div class="header">
+						<div class="label csc-loanin-loanInDate-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-loanIn-loanInDate" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="info-column3 fl-force-left">
+				<div class="info-pair-date">
+					<div class="header">
+						<div class="label csc-loanin-loanReturnDate-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-loanIn-loanReturnDate" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="info-column3 fl-force-left">
+				<div class="info-pair-date">
+					<div class="header">
+						<div class="label csc-loanin-loanRenewalApplicationDate-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-loanIn-loanRenewalApplicationDate" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

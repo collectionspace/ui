@@ -1,0 +1,193 @@
+{
+    "csid": "2771b1f7-4998-4dee-a2b7-5d3c6da8d999",
+    "fields": {
+        "description": "Generated tenant admin role.",
+        "permissions": [
+            {
+                "permission": "delete",
+                "resourceName": "cataloging"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "acquisition"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "group"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "intake"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "loanin"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "loanout"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "media"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "movement"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "objectexit"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "concept"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "location"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "organization"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "person"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "place"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "role"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "termlist"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "users"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "concept"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "location"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "organization"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "person"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "place"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "/dimensions/workflow/"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "idgenerators"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "taxonomyauthority"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "locations"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "dimensions"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "taxon"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "vocabularyitems"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "organizations"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "places"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "concepts"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "workflow"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "persons"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "imports"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "relations"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "batch"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "authorization/permissions/permroles"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "notes"
+            }
+        ],
+        "csid": "2771b1f7-4998-4dee-a2b7-5d3c6da8d999",
+        "roleName": "ROLE_1_TENANT_ADMINISTRATOR",
+        "displayName": "TENANT_ADMINISTRATOR",
+        "usedBy": [
+            {
+                "accountId": "faf89dbe-9635-4803-bbce-128b71d3b8e5",
+                "userId": "chris.hoffman@berkeley.edu",
+                "screenName": "Chris Hoffman"
+            },
+            {
+                "accountId": "2cb3c626-eb57-4ef1-9fbe-f3447497342d",
+                "userId": "aronroberts@gmail.com",
+                "screenName": "Aron"
+            },
+            {
+                "accountId": "c63bb7b4-8d61-4c2c-8fd5-32137f9350cd",
+                "userId": "pschmitz@berkeley.edu",
+                "screenName": "Patrick"
+            },
+            {
+                "accountId": "fa33db90-08fe-4679-8b85-12d49d20c7ca",
+                "userId": "jmartinez@movingimage.us",
+                "screenName": "Jesse"
+            },
+            {
+                "accountId": "bae639bb-28e2-43c4-8b0c-35e2f26f60ae",
+                "userId": "admin@core.collectionspace.org"
+            }
+        ]
+    }
+}

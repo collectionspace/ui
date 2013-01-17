@@ -17,14 +17,20 @@ cspace = cspace || {};
     "use strict";
     
     fluid.registerNamespace("cspace.listView");
-    
+
+    // Default sorter for the pager used by the list view.
     cspace.listView.sorter = function (overallThat, model) {
         return null;
     };
-    
+
+    // List view component used everywhere we have list data
+    // that supports pagination.
     fluid.defaults("cspace.listView", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
+        disablePageSize: false,
+        stubbPagination: false,
         model: {
+            // Default model options. Most of them are used by the pager.
             columns: [{
                 sortable: true,
                 id: "",
@@ -55,66 +61,34 @@ cspace = cspace || {};
         selectorsToIgnore: ["pager", "rows"],
         styles: {
             row: "cs-listView-row",
-            selected: "cs-selected"
+            selected: "cs-selected",
+            selecting: "cs-selecting"
         },
-        protoTree: {
-            headers: {
-                decorators: [{
-                    type: "fluid",
-                    func: "cspace.listView.headers",
-                    options: {
-                        model: {
-                            columns: "${columns}"
-                        }
-                    }
-                }, {
-                    type: "attrs",
-                    attributes: {
-                        "rsf:id": "header:"                        
-                    }
-                }]
-            },
-            row: {
-                decorators: [{
-                    "addClass": "{styles}.row"
-                }, {
-                    type: "attrs",
-                    attributes: {
-                        "rsf:id": "row:"                        
-                    }
-                }, {
-                    type: "fluid",
-                    func: "cspace.listView.columns",
-                    options: {
-                        model: {
-                            columns: "${columns}"
-                        }
-                    }
-                }]
-            },
-            show: {
-                messagekey: "listView-show"
-            },
-            perPage: {
-                messagekey: "listView-perPage"
-            },
-            pageSize: {
-                optionlist: "${pageSizeList}",
-                optionnames: "${pageSizeList}",
-                selection: "${pagerModel}.pageSize"
-            },
-            next: {
-                messagekey: "listView-next"
-            },
-            previous: {
-                messagekey: "listView-previous"
-            }
-        },
+        produceTree: "cspace.listView.produceTree",
         components: {
+            // Common message bar.
+            messageBar: "{messageBar}",
+            // Data source to fetch list data.
             dataSource: {
                 type: "cspace.listView.dataSource"
             },
             permissionsResolver: "{permissionsResolver}",
+            // Component, responsible for navigation after interacting
+            // with list view pager's cells.
+            listNavigator: {
+                type: "cspace.listView.listNavigator",
+                createOnEvent: "pagerAfterRender",
+                container: "{cspace.listView}.dom.rows",
+                options: {
+                    offset: "{cspace.listView}.model.offset",
+                    selectors: {
+                        row: "{cspace.listView}.options.selectors.row"
+                    },
+                    list: "{cspace.listView}.model.list"
+                }
+            },
+            // Component responsible for list view pager styling based
+            // on permissions.
             listPermissionStyler: {
                 type: "cspace.listView.listPermissionStyler",
                 createOnEvent: "pagerAfterRender",
@@ -124,6 +98,8 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            // Component responsible for styling based on record's workflow
+            // state (e.g. locked for location/movement/inventory records).
             workflowStyler: {
                 type: "cspace.util.workflowStyler",
                 createOnEvent: "pagerAfterRender",
@@ -133,6 +109,7 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            // fluid.pager component used to render list data.
             pager: {
                 type: "fluid.pager",
                 createOnEvent: "afterRender",
@@ -176,20 +153,17 @@ cspace = cspace || {};
                     },
                     listeners: {
                         afterRender: [{
-                            listener: "{cspace.listView}.bindEvents"
-                        }, {
                             listener: "{cspace.listView}.events.pagerAfterRender.fire"
+                        }, {
+                            listener: "{cspace.listView}.bindEvents"
                         }]
                     }
                 }
             }
         },
         invokers: {
-            bindEvents: {
-                funcName: "cspace.listView.bindEvents",
-                args: ["{cspace.listView}"]
-            },
-            select: "cspace.listView.select"
+            select: "cspace.listView.select",
+            styleAndActivate: "cspace.listView.styleAndActivate"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -204,11 +178,9 @@ cspace = cspace || {};
             onModelChange: null,
             afterUpdate: null,
             ready: null,
+            onError: null,
             onSelect: null,
             pagerAfterRender: null
-        },
-        listeners: {
-            onSelect: "{cspace.listView}.handleOnSelect"
         },
         strings: {},
         parentBundle: "{globalBundle}",
@@ -216,25 +188,141 @@ cspace = cspace || {};
         finalInitFunction: "cspace.listView.finalInit",
         urls: cspace.componentUrlBuilder({
             listUrl: "%tenant/%tname/%recordType?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey",
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid%vocab",
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         }),
         elPath: "items",
-        recordType: ""
+        recordType: "",
+        // Object with pair of recordType name : Array of column names which won't be sorted
+        // CSPACE-5366. Not sure if it is a proper place for this structure. Since ListView utilizes a generic way of renedering by making all columns sortable for ANY type of record
+        // we want to disable filter functionality for some of the record types.
+        nonSortableColumns: {}
     });
-    
+
+    // List view's produce tree that prepares the template for starting up the
+    // pager.
+    cspace.listView.produceTree = function (that) {
+        return {
+            headers: {
+                decorators: [{
+                    type: "fluid",
+                    func: "cspace.listView.headers",
+                    options: {
+                        model: {
+                            columns: "${columns}"
+                        }
+                    }
+                }, {
+                    type: "attrs",
+                    attributes: {
+                        "rsf:id": "header:"
+                    }
+                }]
+            },
+            row: {
+                decorators: [{
+                    "addClass": "{styles}.row"
+                }, {
+                    type: "attrs",
+                    attributes: {
+                        "rsf:id": "row:"
+                    }
+                }, {
+                    type: "fluid",
+                    func: "cspace.listView.columns",
+                    options: {
+                        model: {
+                            columns: "${columns}"
+                        }
+                    }
+                }]
+            },
+            show: {
+                messagekey: "listView-show"
+            },
+            perPage: {
+                messagekey: "listView-perPage"
+            },
+            pageSize: {
+                optionlist: "${pageSizeList}",
+                optionnames: "${pageSizeList}",
+                selection: "${pagerModel}.pageSize",
+                decorators: {
+                    type: "jQuery",
+                    func: "prop",
+                    args: {
+                        disabled: that.options.disablePageSize
+                    }
+                }
+            },
+            next: {
+                messagekey: "listView-next"
+            },
+            previous: {
+                messagekey: "listView-previous"
+            }
+        };
+    };
+
+    // Sidebar specific list view produce tree.
+    cspace.listView.produceTreeSidebar = function (that) {
+        var tree = cspace.listView.produceTree(that);
+        tree.show.messagekey = "listView-show-short";
+        tree.next.messagekey = "listView-next-short";
+        tree.previous.messagekey = "listView-previous-short";
+        return tree;
+    };
+
     fluid.demands("fluid.pager", "cspace.listView", ["{cspace.listView}.dom.pager", fluid.COMPONENT_OPTIONS]);
 
     cspace.listView.preInit = function (that) {
+        // get a non sortable array of column names by recordType
+        var nonSortable = fluid.get(that.options.nonSortableColumns, that.options.recordType) || [];
+
+        // Sort data based on the sort order.
+        fluid.each(that.model.columns, function (column) {
+            fluid.each(["id", "name"], function (key) {
+                column[key] = fluid.stringTemplate(column[key], {
+                    recordType: that.options.recordType
+                });
+                // If column id in the nonSortable array then make the column non sortable
+                if ($.inArray(column["id"], nonSortable) !== -1) {
+                    column["sortable"] = false;
+                }
+            });
+        });
+
+        that.bindEvents = function () {
+            // Add styling related to user interactions: hovering and focusing.
+            $("a", that.locate("rows")).focus(function () {
+                $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
+                $(this).parents("tr").addClass(that.options.styles.selecting);
+            }).hover(function () {
+                $(that.options.selectors["row"]).removeClass(that.options.styles.selecting);
+            });
+            that.locate("row").click(function () {
+                that.styleAndActivate($(this), that.locate("row"));
+            });
+        };
+
+        // Update list model.
         that.updateList = function (list) {
             var pagerModel = that.pager.model;
             var offset = pagerModel.pageIndex * pagerModel.pageSize;
             that.applier.requestChange("offset", offset);
+
+            // TODO: THIS IS A HACK UNTIL THE SERVER SUPPORTS PAGINATION EVERYWHERE.
+            if (list.length === 0 || that.options.stubbPagination) {
+                that.applier.requestChange(fluid.model.composeSegments("list"), list);
+            }
             fluid.each(list, function (row, index) {
                 var fullIndex = offset + index;
                 that.applier.requestChange(fluid.model.composeSegments("list", fullIndex), row);
             });
         };
+
+        // Public method used to trigger the update of the data and its
+        // subsequent rendering.
         that.updateModel = function (model) {
             var initialUpdate;
             if (!model) {
@@ -249,91 +337,233 @@ cspace = cspace || {};
                 sortKey: model.sortKey || cspace.listView.getColumnRange(that.model.columns)
             };
             that.dataSource.get(directModel, function (data) {
+                if (!data || data.isError) {
+                    data = data || {};
+                    if (!data.messages) {
+                        var resolve = that.options.parentBundle.resolve;
+                        data.messages = fluid.makeArray({
+                            message: resolve("listView-error", [
+                                resolve("listView-unknownError")
+                            ])
+                        });
+                    }
+                    var messages = data.messages || fluid.makeArray(data.message);
+                    fluid.each(messages, function (message) {
+                        that.messageBar.show(message.message, Date.today(), true);
+                    });
+                    that.events.onError.fire();
+                    return;
+                }
                 that.updateList(fluid.get(data, that.options.elPath));
+
+                // TODO: THIS IS A HACK UNTIL THE SERVER SUPPORTS PAGINATION EVERYWHERE.
+                if (that.options.stubbPagination) {
+                    fluid.set(data, "pagination.totalItems", that.model.list.length.toString())
+                }
+
                 that.pager.applier.requestChange("totalRange", parseInt(fluid.get(data, "pagination.totalItems"), 10));
                 that.pager.events.initiatePageChange.fire({pageIndex: model.pageIndex, forceUpdate: true});
                 that.events[initialUpdate ? "ready" : "afterUpdate"].fire(that);
             }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
         };
-        that.styleAndActivate = function (row, rows) {
-            var index = that.model.offset + rows.index(row),
-                record = that.model.list[index];
-            if (!cspace.permissions.resolve({
-                permission: "read",
-                target: record.recordtype || record.sourceFieldType,
-                resolver: that.permissionsResolver
-            })) {
-                return;
-            }
-            row.addClass(that.options.styles.selected);
-            that.applier.requestChange("selectonIndex", index);
-            that.events.onSelect.fire();
-        };
-        that.handleOnSelect = function () {
-            that.select();
-        };
     };
 
-    fluid.demands("cspace.listView.select", ["cspace.listView", "cspace.localData"], {
-        funcName: "cspace.listView.selectNavigate",
-        args: ["{listView}.model", "{listView}.options.urls.navigateLocal", "{globalNavigator}"]
-    });
+    cspace.listView.finalInit = function (that) {
+        // Remder the template.
+        that.refreshView();
 
-    fluid.demands("cspace.listView.select", "cspace.listView", {
-        funcName: "cspace.listView.selectNavigate",
-        args: ["{listView}.model", "{listView}.options.urls.navigate", "{globalNavigator}"]
-    });
+        // Validate if change is a genuine change (e.g. values actually changed).
+        function validChange (oldModel, newModel) {
+            var valid = oldModel["sortKey"] !== newModel["sortKey"];
+            valid = valid || fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "totalRange"], function (field) {
+                var oldVal = oldModel[field],
+                    newVal = newModel[field];
+                if (isNaN(oldVal)) {
+                    return false;
+                }
+                if (isNaN(newVal)) {
+                    return false;
+                }
+                if (oldVal !== newVal) {
+                    return true;
+                }
+            });
+            return !!valid;
+        }
 
-    var selectNavigate = function (model, url, globalNavigator, typePath) {
-        var record = fluid.get(model, "list")[model.selectonIndex];
-        if (!record) {
+        that.pager.events.onModelChange.addListener(function (model, oldModel) {
+            if (validChange(model, oldModel)) {
+                that.updateModel(model);
+            }
+        });
+        
+        that.updateModel();
+    };
+
+    // Style and activate a row.
+    cspace.listView.styleAndActivate = function (that, row, rows) {
+        $(that.options.selectors["row"]).removeClass(that.options.styles.selected + " " + that.options.styles.selecting);
+        var index = that.model.offset + rows.index(row),
+            record = that.model.list[index],
+            recordtype = record.recordtype || record.sourceFieldType;
+        if (!cspace.permissions.resolve({
+            permission: "read",
+            target: recordtype,
+            resolver: that.permissionsResolver
+        })) {
             return;
         }
-        globalNavigator.events.onPerformNavigation.fire(function () {
-            window.location = fluid.stringTemplate(url, {
-                recordType: record[typePath].toLowerCase(),
-                csid: record.csid
+        row.addClass(that.options.styles.selected);
+        that.applier.requestChange("selectonIndex", index);
+        that.events.onSelect.fire({
+            recordType: recordtype,
+            csid: record.csid
+        });
+    };
+
+    fluid.demands("cspace.listView.styleAndActivate", "cspace.listView", {
+        funcName: "cspace.listView.styleAndActivate",
+        args: ["{cspace.listView}", "{arguments}.0", "{arguments}.1"]
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInit",
+            url: "{cspace.listView}.options.urls.navigateLocal"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", "cspace.listView", {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInit",
+            url: "{cspace.listView}.options.urls.navigate"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.relatedRecordsTab", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.admin"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    fluid.demands("cspace.listView.listNavigator", ["cspace.listView", "cspace.admin", "cspace.localData"], {
+        options: {
+            finalInitFunction: "cspace.listView.listNavigator.finalInitEdit",
+            invokers: {
+                styleAndActivate: "cspace.listView.styleAndActivate",
+                navigate: {
+                    funcName: "cspace.listView.listNavigator.navigate",
+                    args: ["{cspace.listView.listNavigator}", "{recordEditor}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                }
+            },
+            url: "#"
+        }
+    });
+
+    // Component, responsible for navigation after interacting
+    // with list view pager's cells.
+    fluid.defaults("cspace.listView.listNavigator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        typePath: "recordtype",
+        selectors: {
+            column: ".csc-listView-column"
+        },
+        components: {
+            vocab: "{vocab}"
+        },
+        urls: {
+            vocab: "&vocab=%vocab"
+        },
+        offset: 0
+    });
+
+    cspace.listView.listNavigator.navigate = function (that, recordEditor, row, rows, evt) {
+        // Navigation aware navigation.
+        if (!recordEditor) {
+            that.styleAndActivate(row, rows);
+            return;
+        }
+        recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.styleAndActivate(row, rows);
+        }, evt);
+    };
+
+    cspace.listView.listNavigator.finalInitEdit = function (that) {
+        cspace.listView.listNavigator.finalInit(that);
+        var rows = that.locate("row");
+        // Add user interaction handling to the rows.
+        fluid.each(rows, function (row, index) {
+            var link = $("a", that.locate("column", rows.eq(index)));
+            link.click(function (evt) {
+                var row = $(this).parents(that.options.selectors.row);
+                if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
+                    return;
+                }
+                that.navigate(row, rows, evt);
+                return false;
             });
         });
     };
 
-    cspace.listView.selectNavigate = function (model, url, globalNavigator) {
-        selectNavigate(model, url, globalNavigator, "recordtype");
-    };
-
-    cspace.listView.finalInit = function (that) {
-        that.refreshView();
-        that.updateModel();
-        that.pager.events.onModelChange.addListener(function (model, oldModel) {
-            if (model.pageCount !== oldModel.pageCount || model.pageIndex !== oldModel.pageIndex || model.pageSize !== oldModel.pageSize ||
-                model.sortDir !== oldModel.sortDir || model.sortKey !== oldModel.sortKey || model.totalRange !== oldModel.totalRange) {
-                that.updateModel(model);
+    cspace.listView.listNavigator.finalInit = function (that) {
+        var rows = that.locate("row");
+        fluid.each(rows, function (row, index) {
+            var record = that.options.list[that.options.offset + index];
+            if (!record) {
+                $(row).hide();
+                return;
             }
+            var vocab = cspace.vocab.resolve({
+                model: record,
+                recordType: record[that.options.typePath].toLowerCase(),
+                vocab: that.vocab
+            });
+            that.locate("column", rows.eq(index)).wrapInner($("<a/>").attr("href", fluid.stringTemplate(that.options.url, {
+                recordType: record[that.options.typePath].toLowerCase(),
+                csid: record.csid,
+                vocab: vocab ? fluid.stringTemplate(that.options.urls.vocab, {vocab: vocab}) : ""
+            })));
         });
     };
 
-    cspace.listView.bindEvents = function (that) {
-        fluid.activatable(that.locate("row"), function (event) {
-            var rows = that.locate("row");
-            rows.removeClass(that.options.styles.selected);
-            that.styleAndActivate($(event.target), rows);
-            return false;
-        });
-
-        fluid.selectable(that.locate("rows"), {
-            selectableElements: that.locate("row"),
-            onLeaveContainer: function () {
-                that.locate("row").removeClass(that.options.styles.selected);
-            }
-        });
-        that.locate("rows").fluid("tabbable");
-
-        that.locate("row").click(function () {
-            $(that.options.selectors["row"]).removeClass(that.options.styles.selected);
-            that.styleAndActivate($(this), that.locate("row"));
-        });
-    };
-
+    // Component responsible for list view pager styling based
+    // on permissions.
     fluid.defaults("cspace.listView.listPermissionStyler", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         finalInitFunction: "cspace.listView.listPermissionStyler.finalInit",
@@ -349,16 +579,22 @@ cspace = cspace || {};
     cspace.listView.listPermissionStyler.finalInit = function (that) {
         fluid.each(that.options.rows, function (row, index) {
             var record = that.options.list[that.options.offset + index];
+            if (!record) {
+                return;
+            }
             if (!cspace.permissions.resolve({
                 permission: "read",
                 target: record.recordtype || record.sourceFieldType,
                 resolver: that.permissionsResolver
             })) {
+                // Make links unclickable and also style them as read-only
                 that.options.rows.eq(index).addClass(that.options.styles.disabled);
+                that.options.rows.eq(index).find("a").attr("href", "#");
             }
         });
     };
 
+    // Specify the mapping between the data and things in the pager rows.
     cspace.listView.colDefsGenerator = function (columns, globalBundle) {
         return fluid.transform(columns, function (column) {
             var key = column.id;
@@ -479,7 +715,8 @@ cspace = cspace || {};
         },
         renderOnInit: true
     });
-    
+
+    // Enable sorting by rows within the list view.
     fluid.defaults("cspace.listView.headers.sortable", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         styles: {
@@ -493,7 +730,8 @@ cspace = cspace || {};
         }
         that.container.addClass(that.options.styles.sortable);
     };
-    
+
+    // Render list view's header.
     fluid.demands("cspace.listView.headers.header", "cspace.listView.headers", {
         container: "{arguments}.0",
         mergeAllOptions: [{}, "{arguments}.1"]

@@ -1,6 +1,18 @@
 {
     "person": {
         "properties": {
+            "birthDateGroupEnd": {
+                "type": "string"
+            },
+            "birthDateGroupStart": {
+                "type": "string"
+            },
+            "deathDateGroupEnd": {
+                "type": "string"
+            },
+            "deathDateGroupStart": {
+                "type": "string"
+            },
             "genders": {
                 "items": {
                     "properties": {
@@ -70,6 +82,10 @@
                             "type": "boolean"
                         },
                         "termDisplayName": {
+                            "type": "string"
+                        },
+                        "termStatus": {
+                            "default": "",
                             "type": "string"
                         }
                     },

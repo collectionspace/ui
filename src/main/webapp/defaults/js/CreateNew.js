@@ -14,13 +14,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
+    // Create new component used to render Collection Space create new page.
     fluid.defaults("cspace.createNew", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         finalInitFunction: "cspace.createNew.finalInit",
         preInitFunction: "cspace.createNew.preInit",
         parentBundle: "{globalBundle}",
         model: {
+            // Model contains categories that represent:
+            // * Cataloging
+            // * Authorities
+            // * Procedures
             categories: [{
                 expander: {
                     type: "fluid.deferredInvokeCall",
@@ -138,6 +143,7 @@ cspace = cspace || {};
     });
 
     cspace.createNew.preInit = function (that) {
+        // Process create new model before rednering.
         that.prepareModelForRender = function () {
             var permittedAuth = fluid.find(that.model.categories, function (category) {
                 if (category.name === "vocabulariesCategory") {
@@ -149,7 +155,7 @@ cspace = cspace || {};
             }
             var vocabs = {};
             fluid.each(permittedAuth, function (auth) {
-                vocabs[auth] = that.vocab.authority[auth].vocabs;
+                vocabs[auth] = that.vocab.authority[auth].order.vocabs;
             });
             that.applier.requestChange("vocabs", vocabs);
         };
@@ -186,6 +192,7 @@ cspace = cspace || {};
         window.location = url;
     };
 
+    // Add additional styles after rendering is done.
     cspace.createNew.stylefy = function (that) {
         //apply styles:
         var styles = that.options.styles;
@@ -270,7 +277,9 @@ cspace = cspace || {};
             }
         };
     };
-    
+
+    // Function, used to assist in building create new's model,
+    // based on permitted record types and categories by extention.
     cspace.createNew.buildModel = function (options, records) {
         if (!records || records.length < 1) {
             return;
@@ -283,6 +292,8 @@ cspace = cspace || {};
     
     cspace.createNew.finalInit = function (that) {
         cspace.util.modelBuilder.fixupModel(that.model);
+        // Fetch configuration for templates available for specific
+        // record types.
         that.templateSource.get(null, function (templateViews) {
             if (!templateViews) {
                 that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
@@ -296,6 +307,7 @@ cspace = cspace || {};
                 });
                 return;
             }
+            // Populate the model with template configuration.
             that.applier.requestChange("templateViews", templateViews);
             that.refreshView();
             $("input[type|='radio']").filter(":first").prop('checked', true).change();
@@ -305,7 +317,9 @@ cspace = cspace || {};
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");
-    
+
+    // Create new's subcomponent used to render each record specific entry in
+    // radio list (including templates).
     fluid.defaults("cspace.createNew.recordBox", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -338,6 +352,7 @@ cspace = cspace || {};
             templateSelection: "cs-createNew-templateSelection",
             vocabs: "cs-createNew-vocabs"
         },
+        // recor box's template
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -372,6 +387,7 @@ cspace = cspace || {};
     });
     
     var updateModel = function (that) {
+        // Update create new's model.
         that.events.updateModel.fire({
             currentSelection: that.locate("radio").val(),
             createFromSelection: that.model.createFromSelection,
@@ -392,7 +408,8 @@ cspace = cspace || {};
         }
         updateModel(that);
     };
-    
+
+    // Generic record box's produceTree.
     cspace.createNew.recordBox.produceTree = function (that) {
         return {
             "label": {
@@ -461,14 +478,17 @@ cspace = cspace || {};
             }]
         };
     };
-    
+
+    // Sub-routine that looks up names from message bundle based on the
+    // record type prefix.
     var lookupNames = function (applier, messageBase, list, key, prefix) {
         fluid.each(list, function (value, index) {
             applier.requestChange(fluid.model.composeSegments(key, index), 
                 cspace.util.lookupMessage(messageBase, prefix + "-" + value));
         });
     };
-    
+
+    // Process the model before rendering record box.
     var fixupModel = function (model, applier, messageBase) {
         var exists = fluid.get(model, "templates")[model.recordType];
         applier.requestChange("templates", exists ? exists.templates : undefined);
@@ -486,12 +506,8 @@ cspace = cspace || {};
         if (!vocabsExist) {
             return applier.requestChange("vocabs", undefined);
         }
-        var vocabs = [];
-        fluid.each(vocabsExist, function (vocab) {
-            vocabs.push(vocab);
-        });
-        applier.requestChange("vocabs", vocabs);
-        applier.requestChange("vocabSelection", vocabs[0]);
+        applier.requestChange("vocabs", vocabsExist);
+        applier.requestChange("vocabSelection", vocabsExist[0]);
         lookupNames(applier, messageBase, model.vocabs, "vocabNames", "vocab");
     };
     

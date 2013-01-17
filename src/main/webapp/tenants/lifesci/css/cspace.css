@@ -13,35 +13,22 @@ CollectionSpace 1.8 default CSS selectors
 /* ---------------------------------------*/
 /* Styling of HTML elements specific to the lifesci tenant */
 
-/* It may be appropriate to move these changes to a separate stylesheet. */
-
-/* Added selectors specific to Determination History repeating group (table) in Cataloging */
-/* to adjust width of table cells - rickj, 24may2011 */
-.determinationHistory .taxon {
-    width: 17% !important;}
-.determinationHistory .date-container {
-    width: 93px !important;}
-.determinationHistory .input-date {
-    width: 67px !important; padding:0;}
-.determinationHistory .input-select-shorter {
-    width: 90px !important;}
-.determinationHistory .input-select-longer {
-    width: 145px !important;}
-.input-numeric-tiny   {
-	width: 35px  !important;}
-/* ---------------------------------------*/
-
 /* core HTML elements*/
 html{
+    overflow-y: scroll;
     font-size: 100%;} 
 body {
-    font-size: 12px; 
+    font-family: Helvetica,arial,freesans,clean,sans-serif;
+    font-size: 12px;
+    color: #333;
     line-height:1.2; 
     padding:5px 4px 0 4px;
     margin:0;}
 input:focus, a:focus, button:focus, form:focus, select:focus, textarea:focus, div:focus {
     outline:1px solid #000 !important;
-}
+    outline-offset:-1px;}
+td input:focus, td a:focus, td button:focus, td form:focus, td select:focus, td textarea:focus, td div:focus {
+    outline-offset:-1px;}
 table {
     border-collapse:collapse;}
 table tr, table tr td, table tr th  {
@@ -57,6 +44,7 @@ p {
 ul {
     margin:0; width:auto;}
 textarea {
+    font-family: inherit;
     overflow:auto; 
     resize:none;}
 
@@ -69,25 +57,36 @@ input, textarea, select {
     font-size:12px; 
     font-weight:inherit; 
     line-height:15px; 
-    padding:0; 
+    padding:1px 0 0 1px; 
     margin:0; 
     border:1px solid #C7CFD4; 
     overflow:visible; 
-    height:19px;
+    height:21px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
     vertical-align: middle;}
-select {height:21px;}
+select {
+    padding:0;}
 table select, table ~ select, table input {
-    border:none;}
+    border:none;
+    height:19px;
+    padding-left:2px;}
 input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
     height:auto;}
 input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    width:99.5%; 
-    margin:0;}
-table input[type="text"], table input[type="password"], table textarea {
-    width:100%;
+    margin: 0;
+    width: 95%;
 }
+div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
+    width: 88.5%;
+}
+div.info-column2-50 table input[type="text"], div.info-column2-50 table input[type="password"], div.info-column2-50 table textarea {
+    width: 100%;
+}
+table input[type="text"], table input[type="password"], table textarea {
+    width:100%;}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -100,6 +99,7 @@ input[type="submit"].logout:focus {
     background-color:#333; 
     color:#FFF;}
 input[type="button"], input[type="submit"]  {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     background-color:#73AA4F; 
     height:21px; 
     padding-left:12px; 
@@ -137,7 +137,7 @@ input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; 
+    background:white url('../images/icnCancel.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -149,7 +149,7 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnCancelDisabled.png') no-repeat 8px 4px; 
+    background:white url('../images/icnCancelDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#CCC;}
@@ -172,10 +172,13 @@ input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
 input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
-    background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; 
+    background:white url('../images/icnDelete.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
-    color:#669922;}
+    color:#669922;
+    -moz-border-radius:4px; 
+    -webkit-border-radius:4px;
+	border-radius:4px;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover,
 input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus {
     background-color:#DAEDD1;}
@@ -183,7 +186,7 @@ input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[d
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:transparent url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
+    background:white url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px;
     color:#CCC;}
@@ -219,21 +222,43 @@ input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
     background-color:#48722D;}
 input[type="button"].add {
     height:16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    font-size: 0.8em;
+}
+input.secondaryButton {
+    font-size:1em;
+    background-color:#FFFFFF;
+    color:#48722D;
+    border: 1px solid #C7CFD4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+input.secondaryButton:focus, input.secondaryButton:hover {
+    background-color:#DAEDD1;
+    text-decoration: underline;
 }
 .gotoButton {
-    background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
-    padding-left:28px; 
-    padding-right:8px;
-    margin-top:1px;
-    /*float:right;*/
+    display: inline;
+    background:transparent url('../images/icnGoTo.png') no-repeat 8px 3px;
+    padding: 3px 8px 3px 28px;
     font-weight:bold;
-    line-height:1.65;
     font-size:13px;
-    color:#669922;}
+    color:#669922;
+    height: 21px;
+    line-height: 13px;
+    vertical-align: middle;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	border-radius:4px;
+    }
 .gotoButton:hover {
     background-color:#DAEDD1;}
-.button-row input[type="button"], .button-row-right input[type="button"] {
-    margin-left:10px; 
+.button-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+.button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
+    margin-left:10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
     margin-bottom:0px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {
@@ -414,6 +439,13 @@ li .flc-pager-pageLink {
     background-color:#fff; 
     margin-bottom:-2px;
 	line-height:1;}
+#mycollectionspace .header-menu-row .menu-item:nth-child(1), #mycollectionspace .header-menu-row .menu-item:nth-child(1) a,
+#createnew .header-menu-row .menu-item:nth-child(2), #createnew .header-menu-row .menu-item:nth-child(2) a,
+#search .header-menu-row .menu-item:nth-child(3), #search .header-menu-row .menu-item:nth-child(3) a,
+#administration .header-menu-row .menu-item:nth-child(4), #administration .header-menu-row .menu-item:nth-child(4) a {
+    color: #A6A6A6;
+    border-bottom-color: #A6A6A6;
+}
 .menu-item {
     margin-right:3px; 
     margin-bottom:7px; 
@@ -433,6 +465,7 @@ li .flc-pager-pageLink {
 
 /* header space for record ID etc. */
 #title-bar {
+    overflow: hidden;
     margin: 0 0 .5em 0;}
 #title-bar.nobg {
     background-color:#FFF;}
@@ -450,14 +483,18 @@ li .flc-pager-pageLink {
     float:left;}
 #title-bar .content {
     height:42px; 
-    color:#696565; 
+    color:#666666; 
     font-weight:bold; 
-    font-size:24px; 
+    font-size:2em; 
     line-height:110%;}
 #title-bar .content .overflow {
     padding-left:10px; 
     max-width:90%; 
     float:left;}
+#administration #title-bar, #administration #title-bar .content .overflow {
+    padding: 0;
+    margin: 0;
+}
 #title-bar .value{
     padding-right:30px; 
     float:left; 
@@ -469,8 +506,14 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
-    color: #696565;
+    color: #73AA4F;
     float: left;
+}
+.cs-authority #title-bar .cs-titleBar-recordType {
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-panel {
+    border: 2px solid #78449A;
 }
 .cs-titleBar-vocab {
     float: right;
@@ -488,38 +531,45 @@ li .flc-pager-pageLink {
 
 
 /* secondary navigation menu */
-#secondary-nav {
+.secondary-nav {
     padding-bottom:10px;}
-#secondary-nav-footer {
+.secondary-nav-footer {
     padding-bottom:0;}
-#secondary-nav-menu {
+.cs-relatedRecordsTab-record .secondary-nav-footer {
+    padding-top: 10px;
+}
+.secondary-nav-menu {
     /*padding-top:6px;*/ 
     width:100%;     
     margin-bottom:0px;}
-#secondary-nav.pivot {
+.secondary-nav.pivot {
     padding-bottom:0;}
-#secondary-nav.pivot .menu-record {}
-#secondary-nav.pivot ul.menu-record { 
+.secondary-nav.pivot .menu-record {}
+.secondary-nav.pivot ul.menu-record { 
     white-space:nowrap;}
-#secondary-nav.pivot ul.menu-record li {
+.secondary-nav.pivot ul.menu-record li {
     display:inline; 
     list-style-type:none; 
     margin-right:3px;}
-#secondary-nav.pivot ul.menu-record li a {
+.secondary-nav.pivot ul.menu-record li a {
     width:100%;}
-#secondary-nav-menu .menu-record ul {
+.secondary-nav-menu .menu-record ul {
     margin:0; 
     padding:0;}
-#secondary-nav-menu .menu-record li {
+.secondary-nav-menu .menu-record li {
     /*display:inline;*/}
-#secondary-nav-menu-sub  .button-row{
+#secondary-nav-menu-sub  .button-row,
+#secondary-nav-footer-menu-sub .button-row {
 	/*float:right;*/
 	text-align:right;}
-#secondary-nav-menu-sub .upper-save {
+.secondary-nav-menu-sub {
+    display: table;
+}
+.secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
     margin-left:15px;}
-#secondary-nav-menu-sub .time-stamp {
+.secondary-nav-menu-sub .time-stamp {
     float:right; 
     /*padding-top:6px; */
     font-size:10px; 
@@ -605,6 +655,7 @@ table tbody.highlight tr:focus td {
 .info-column2-70 {width:  69%;}
 .info-column2-75 {width:  74%;}
 .info-column2-80 {width:  79%;}
+.info-column2-100 {width:  99%;}
 .info-column3    {width:  33%;}
 .info-column4    {width:  25%;}
 
@@ -613,6 +664,7 @@ table tbody.highlight tr:focus td {
 .fl-container-1000   {width: 1000px;}
 .fl-container-1050   {width: 1050px;}
 .fl-container-1024-inner {padding:0; background-color:#F0F5FB;}
+.cs-authority .fl-container-1024-inner {background-color:#F3EDF6;}
 .fl-container-left {min-width:693px; width:70%;}
 .fl-container-admin   {width:100%;}
 .fl-container-pivot  {width:30%; min-width: 297px; margin-top:26px;}
@@ -625,11 +677,16 @@ table tbody.highlight tr:focus td {
 .find-edit .fl-container-left-inner  {margin-right:15px;}
 
 /*.fl-container-left*/  .information-group       {padding:0 0 20px 0;}
+.cs-relatedRecords-tab .information-group {padding: 0;}
 /*.fl-container-left*/  .information-subgroup {padding:10px 0;}
 /*.fl-container-left*/  .information-group .content.main, .information-group .content.main  {
     background-color: #F5F5F5; 
     padding: 12px;
     width:auto; }
+.information-group .cs-relatedRecordsTab-record.content.main {
+    background-color: white;
+    border: 2px solid #F5F5F5;
+}
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
     background-color: #e2e2e2; 
@@ -689,8 +746,9 @@ table tbody.highlight tr:focus td {
     margin:0; 
     color:#000; 
     cursor:default;}	
-.info-pair .label, .info-pair-date .label, .info-pair-select .label {
-    padding-bottom:4px; 
+.info-pair .label, .info-pair-date .label, .info-pair-select .label, .info-pair-termList .label  {
+    padding-bottom:4px;
+    min-height: 12px;
     font-weight:bold; 
     color:#333333; 
     font-size:11px; 
@@ -698,28 +756,39 @@ table tbody.highlight tr:focus td {
 .info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
 	display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
-    width:100%; 
-    /*float:left; */
-    border:none;}
+    border:none;
+}
 .info-pair .content.fl-date-group {
 	width: 162px;}
 td.fl-date-group {
-	width:160px;}
-.info-pair-date .content {
-    width:auto;}
+	min-width:160px;}
 .info-pair .content > select {
-    width:100%; 
-    border-spacing:0; 
-    margin-top:0; 
-    border:1px solid #C7CFD4; 
-    padding:0;}
+    width: 95%;
+    border-spacing:0;
+    margin-top:0;
+    border:1px solid #C7CFD4;
+    padding:0;
+}
+div.info-column2-50 .info-pair .content > select {
+    width: 88.5%;
+}
 .info-pair .content table, .info-pair-date .content table, .info-pair-select table {
-    width:100%; 
+    width: 95%;
     border-spacing:0; 
-    background-color:#FFF; 
+    background-color:#FFFFFF;
     margin-top:0; 
     border:1px solid #C7CFD4; 
-    padding:0;}
+    padding:0;
+}
+div.info-column2-50 .info-pair .content table, div.info-column2-50 .info-pair-date .content table, div.info-column2-50 .info-pair-select table {
+    width: 88.5%;
+}
+.cs-repeatable-content .info-pair .content table,
+.cs-repeatable-content .info-pair-date .content table,
+.cs-repeatable-content .info-pair-select table {
+    width: 94%;
+}
+
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
@@ -747,8 +816,6 @@ table.cs-admin-table td.checkbox {
     /*padding-left: 2px;*/
     height: 19px;
 }
-.info-pair .content tbody td input {
-    /*margin:0 -2px 0 2px;*/}
 .info-pair .content tbody td .content {
     width:159px;}
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {
@@ -765,10 +832,10 @@ table.cs-admin-table td.checkbox {
     padding:0 !important;}
 .list-table  table {
     font-size:12px; 
-    line-height:120%; 
-    background-color:#F0F5FB; 
+    line-height:120%;
     border:none; 
-    width:100%;}
+    width:100%;
+}
 .list-table  table thead tr td, .list-table  table thead tr th {
     font-size:11px; 
     background-color:#EFEFEF; 
@@ -777,18 +844,30 @@ table.cs-admin-table td.checkbox {
     color:#333; 
     border-bottom:2px solid #C7CACE;}
 .list-table  table tbody tr td {
-    background-color:#F0F5FB; 
     padding: 5px 2px 4px 4px; 
     border-bottom:0px solid #ADADAD; 
     color:#000; 
     vertical-align:top;}
+.list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(240,245,251,.5);
+}
+.list-table table tbody tr:nth-child(even) {
+    background-color: #F0F5FB;
+}
+.cs-authority .list-table table tbody tr:nth-child(odd) {
+    background-color: rgba(243,237,246,.5);
+}
+.cs-authority .list-table table tbody tr:nth-child(even) {
+    background-color: #F3EDF6;
+}
 .list-table table tbody tr.add-new-record td{
     background-color:#FFFBBC;}
 .list-table  table tbody tr td a {}
-.list-table  table tbody tr td a:focus {
+.list-table  table tbody tr td a:focus, .cs-selecting, .list-table table tbody tr:hover td, .list-table table tbody tr.cs-selecting td {
     background-color:#C3D9E9;}
-.list-table  table tbody tr:hover td {
-    background-color:#C3D9E9;}
+.cs-authority .list-table table tbody tr td a:focus, .cs-authority .cs-selecting, .cs-authority .list-table table tbody tr:hover td, .cs-authority .list-table table tbody tr.cs-selecting td {
+    background-color:#C3A4D7;}
+}
 .list-table  table tbody tr.cs-search-disabled:hover td,
 .list-table  table tbody tr.cs-search-disabled:focus td {
     background-color:#F0F5FB;}
@@ -940,20 +1019,24 @@ table.cs-admin-table td.checkbox {
     background-color:#FFE7E3;}
 .csc-role-list {
     /*padding-top:12px;*/}
-.csc-listEditor-details-none {
+.csc-listEditor-details-none, .cs-relatedRecordsTab-record-banner, .cs-admin-banner {
     background-color:#C2D7EC; 
     padding:30px; 
     color:white; 
     font-size:40px; 
     font-weight:bold; 
     line-height:110%;}
-.details-none {
+.details-none, .cs-relatedRecordsTab-record-banner-messageBottom, .cs-admin-bannerBottom {
     background:transparent url("../images/whiteArrow.png") no-repeat 0 center; 
     padding: 5px 0 0 45px; 
     margin-top:15px; 
     height: 35px; 
     font-size:26px; 
     line-height:110%;}
+.cs-relatedRecordsTab-record-banner-messageBottom {
+    background: transparent;
+    padding: 5px 0 15px 5px;
+}
 .create-new .fl-container-left  .information-group {
     padding:0;}
 .create-new .fl-container-left  .information-group .info-column  {
@@ -981,31 +1064,32 @@ table.cs-admin-table td.checkbox {
     margin-right:auto;}
 .cataloging .fl-container-pivot {
     padding-top:0px;}
-.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
-    width:100%; 
-    position:relative; 
+.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termList {
+    position:relative;
     margin-bottom:18px;
 	padding-bottom:0px;
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;
-    /*float:left;*/}
-/*.info-pair:hover {
-    -moz-border-radius:5px 5px 5px;
-    border:1px solid #C2D7EF;
-    background-color:#DEEFFF;
-    margin:-1px;}*/     
+    clear: both;
+    min-height: 31px;
+    overflow: visible;
+}
+.info-pair.cs-listView {
+    margin-bottom: 0;
+}
 .info-pair-table.list-table {
     padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
     padding-bottom:14px;}
-.info-pair-termlist  table, .info-pair-termlist tbody td{
+.info-pair-termList  table, .info-pair-termList tbody td{
     width:auto;  
     background-color:#E6E6E6;}
-/*.fl-container-left*/  .information-group .info-pair-termlist .info-pair .content {
+/*.fl-container-left*/  .information-group .info-pair-termList .info-pair .content {
     padding-bottom:4px;}
-.info-pair-termlist table select {
-    border:0;}
+.info-pair-termList table select {
+    border:0;
+}
 /*.fl-container-left*/ .information-group .info-pair-date .info-pair .content  table {
     width:auto;}
 /*.fl-container-left*/  .information-group .info-pair-select .info-pair .content  table {
@@ -1098,7 +1182,7 @@ table.cs-admin-table td.checkbox {
 .addrow {
     float:right; 
     margin:0; 
-    position:relative; 
+    position:relative;
     right:0px; 
     bottom:-3px;}
 .info-pair-table .info-value table.components, .info-pair-table .info-pair .content table.components {
@@ -1111,23 +1195,25 @@ table.cs-admin-table td.checkbox {
 .input-numeric-medium {
     width: 120px !important;}
 .input-date {
-    width: 142px !important;
+    width: 88.5% !important;
+    min-width: 83%;
 	border-right:none;}
 .input-money-amount {
     width: 120px !important;}
 .content select {
-    width: auto; 
-    /*height:21px; */
-    /*border:1px solid #C7CFD4;*/}
+    width: 88.5%;
+}
+.content .fl-pager-ui select {
+    width: auto;
+}
 .content table select {
     width: 100%; 
-    height:19px; 
     padding-top:0; 
     border:none;}
-.content textarea { 
-    width:100%; 
-    height:75px; 
-    overflow:auto;}
+.content textarea {
+    height:75px;
+    overflow:auto;
+}
 .input-alpha-login {
     width: 120px; 
     height:18px;}
@@ -1155,6 +1241,9 @@ td .field-cal img, td .csc-calendar-button img {
     position: relative; 
     bottom: 0px; 
     width: 100%; }
+#createnew #footer, #search #footer, #administration #footer {
+    position: absolute;
+}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1277,10 +1366,43 @@ input[disabled]:hover, input[disabled]:hover    {
    height: 0;
    clear: both;
 }
-	
+
+.clearfix:after, 
+.info-group:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.clearfix .cs-repeatable-content,
+.info-column .cs-repeatable-content {
+    float: left;
+}
+
+#secondary-nav .ui-tabs .ui-tabs-nav {
+    line-height: 17px;
+}
+.record .ui-tabs .ui-tabs-nav li:first-child {
+    font-size: 1.2em;
+}
 .ui-tabs .ui-tabs-hide {
     display: none;}
-
+.cs-tabs-tab-link {
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+       border-radius:5px 5px 0 0;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
+    border-color: #78449A #78449A #FFFFFF;
+    color: #78449A;
+}
+.cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:hover, .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link:focus {
+    color: #FFF;
+    background-color: #78449A;
+    border-color: #78449A;
+}
 .cs-add-related-records-dialog {
     background-color:#fff;}
 
@@ -1316,11 +1438,37 @@ input[disabled]:hover, input[disabled]:hover    {
 .csc-related-field {
     overflow:hidden;}
 
+/*   styling the externalURL  */
+li.cs-repeatable-repeat div.cs-repeatable-content.cs-externalURL-parent {
+    width: 90%;
+    min-width: 300px;
+}
+td.cs-externalURL-parent {
+    min-width: 182px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
+    width: 95%;
+}
+input[type="text"].cs-externalURL, .cs-externalURL-parent input.cs-autocomplete-input, .info-pair .content tbody td.cs-externalURL-parent input.cs-autocomplete-input {
+    width: 90%;
+}
+input[type="text"].cs-externalURL.cs-externalURL-error{
+    border-color: red;
+    border-width: 2px;
+    background-color: #fbf7f7;
+}
+.cs-externalURL-button.cs-externalURL-error{
+    border-width: 2px 2px 2px medium;
+    border-color: red red red -moz-use-text-color;
+}
+.cs-externalURL-image {
+    background: url('../images/eURL.png') no-repeat center center;
+}
 /*   styling the date pickers   */
 .cs-date-picker {
     margin-top: 21px;}
 .cs-calendar-image {
-    background: url('../images/cal.png') no-repeat center center;
+    background: #FFF url('../images/cal.png') no-repeat center center;
 }
 /*   styling the loading progress indicator */
 .cs-loading-indicator {
@@ -1375,6 +1523,22 @@ input[disabled]:hover, input[disabled]:hover    {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
 	border-radius:6px 6px 0 0;}
+.cs-relatedRecords-tab .header:nth-child(2) {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+	border-radius: 0;
+	padding: 15px 0 15px 20px;
+}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2) {
+    background:#6E9FCE url('../images/toggle-less.png') no-repeat 4px 15px;}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2) {
+    background:#6E9FCE url('../images/toggle-more.png') no-repeat 4px 15px;	}
+.cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-expanded:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-less.png') no-repeat 4px 15px;
+}
+.cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):hover, .cs-relatedRecords-tab .cs-togglable-collapsed:nth-child(2):focus {
+    background: #5B92C8 url('../images/toggle-more.png') no-repeat 4px 15px;
+}
 .cs-togglable-expanded.header {
     -moz-border-radius:6px 6px 0 0; 
     -webkit-border-radius:6px 6px 0 0;
@@ -1389,7 +1553,7 @@ input[disabled]:hover, input[disabled]:hover    {
     -webkit-border-radius:0;
 	border-radius:0;}
 
-.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton {
+.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
@@ -1467,6 +1631,9 @@ input[disabled]:hover, input[disabled]:hover    {
 a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
+}
+.cs-authority a.cs-listView-header-link {
+    color: #78449A;
 }
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {
     width:99% !important; 
@@ -1572,31 +1739,99 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     background-color:#9E0022;}
 .cs-sidebar-header {
     padding-right: 5px;}
-
+.cs-sidebar-banner-message {
+    background-color: #C2D7EC;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 110%;
+    padding: 10px 10px 10px 20px;
+}
+.cs-authority .cs-sidebar-banner-message {
+    background-color: #C3A4D7;
+}
 /*  Unifying and cleaning up the calendar date picker widget */
-.cs-calendar-button { 
+.cs-calendar-button, .cs-externalURL-button {
     border:1px solid #C7CFD4;
     border-left:none;
     height:19px;
     width: 18px;
-	cursor:pointer;
+    cursor:pointer;
     /*float:left;*/}
-table .cs-calendar-button { 
+td.fl-date-group .cs-calendar-button {
+    float: right;
+    height:21px;
+}
+table .cs-calendar-button, table .cs-externalURL-button {
     border:none;}
-table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button { background-color:#fff;}
-.cs-calendar-button img {
+table td.fl-table .cs-calendar-button, .information-subgroup .cs-calendar-button,
+table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-button { background-color:#fff;}
+.cs-calendar-button img, .cs-externalURL-button img {
     margin:0 0 -1px 2px; 
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
-.info-pair-date .content {
-    background-color:#fff;}
 .info-pair-date .content input {
-    border-right:none; 
-    /*width:142px !important; */
-    /*float:left;*/}
+    border-right: none;
+}
+.info-pair-date .content input[type="text"] {
+    border-right: none;
+    min-width: 83%;
+}
 .found-records-box { 
     margin-top: 20px}
+
+.cs-mediaUploader .cs-mediaUploader-note {
+    padding-left: 19%;
+    font-style: italic;
+    color: #4D4D4D;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    height: 21px;
+    margin: 0;
+    background-color: #73AA4F;
+    border: medium none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: bold;
+    width: 6.5em;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton[disabled], .cs-mediaUploader .cs-mediaUploader-uploadButton:hover[disabled], .cs-mediaUploader .cs-mediaUploader-uploadButton:focus[disabled] {
+    background-color: #CCCCCC;
+    background-image: none;
+    color: #606060;
+    cursor: default;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton:hover, .cs-mediaUploader .cs-mediaUploader-uploadButton:focus {
+    background-color: #48722D;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButton[disabled] .cs-mediaUploader .cs-mediaUploader-uploadButton[disabled]:hover, .cs-mediaUploader .cs-mediaUploader-uploadButton[disabled]:focus {
+    background-color: #CCCCCC;
+    background-image: none;
+    color: #606060;
+    cursor: default;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButtonLabel {
+    cursor: pointer;
+    float: left;
+    left: 1em;
+    top: 4px;
+    position: absolute;
+}
+.cs-mediaUploader .cs-mediaUploader-uploadButtonInput {
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
 
 .cs-mediaUploader .info-column {
     margin: 15px 0 0 20px;
@@ -1836,14 +2071,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 } 
 .cs-media-image {
     cursor:pointer;
-}
-.cs-hierarchy-equivalentContext {
-    background: #FFF;
-    display: block;
-    width: 100%;
-    border: 1px solid #C7CFD4;
-    height: 19px;
-    line-height: 15px;
+    max-height: 50px;
 }
 .cs-sidebar-mediumImage {
     max-height: 165px;
@@ -1962,15 +2190,10 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     padding-left: 20px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-toggle {
-    background-color: #FFF;
-    color: #6E9FCE;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
+    border-radius:4px;
     display: none;
-}
-.cs-advancedSearch-template .cs-advancedSearch-toggle:hover, .cs-advancedSearch-template .cs-advancedSearch-toggle:focus {
-    background-color: #6E9FCE;
-    color: #FFF;
 }
 
 .cs-searchTips-template {
@@ -2030,6 +2253,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 /* recordTraverser styling */
+.cs-recordTraverser {
+    display: table-cell;
+}
 .cs-recordTraverser-template {
     display: table;
 }
@@ -2070,15 +2296,30 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-listView-row:hover {
     cursor:pointer;
 }
-.list-table .cs-disabled.cs-listView-row:hover > td,
-.list-table .cs-disabled.cs-listView-row:focus > td {
+tbody.csc-listView-rows tr.cs-listView-row td {
+    padding: 0;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a {
+    cursor:pointer;
+    padding: 5px 2px 4px 4px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    min-height: 14.4px;
+    background: inherit;
+}
+tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows tr.cs-listView-row td a:focus {
+    background: inherit;
+}
+.list-table .cs-disabled.cs-listView-row:hover > td a,
+.list-table .cs-disabled.cs-listView-row:focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td,
-.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td {
+.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td a,
+.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td a{
     background-color: #F0F5FB;
 }
-.list-table .cs-disabled, .cs-disabled > td {
+.list-table .cs-disabled, .cs-disabled > td a {
     color: gray !important;
     cursor: default !important;
 }
@@ -2086,7 +2327,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-search-highlight {
     display:inline-block;
     overflow:hidden;
-    width:99%;
     text-overflow:ellipsis;
     -o-text-overflow:ellipsis;
     white-space: nowrap;
@@ -2134,13 +2374,13 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .oocss .info-pair-table, 
 .oocss .info-pair-date,
 .oocss .info-pair-select,
-.oocss .info-pair-termlist
+.oocss .info-pair-termList
 {
 	width: auto;
 	padding-right: 1.5em;
 }
 
-.oocss li {
+.oocss .cs-repeatable-group li {
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
@@ -2195,3 +2435,128 @@ li.cs-locked {
     height: inherit;
 }
 
+.cs-termList {
+    float: none;
+}
+li.cs-repeatable-repeat .cs-termList {
+    float: left;
+    width: 88.5%;
+}
+li.cs-repeatable-repeat .cs-singleElementGroup .cs-termList {
+    width: 100%;
+}
+table li.cs-repeatable-repeat .cs-termList,
+li.cs-repeatable-repeat table .cs-termList {
+    width: 100%;
+}
+div.label.cs-preferred-label {
+    vertical-align: middle;
+    display: inline-block;
+    padding-top: 6px;
+}
+
+.cs-relatedRecords-tab .cs-add-related-record-button {
+    margin-bottom: 10px;
+}
+input[type="button"].cs-deleteRelationButton {
+    box-shadow: none;
+    position: absolute;
+    right: 0;
+    background-image: url(../images/icnDelete.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: transparent;
+    line-height: inherit;
+    height: inherit;
+    font: inherit;
+    cursor: inherit;
+    color: inherit;
+    padding: 0 0 0 14px;
+    margin: 0 5px 0 0;
+    border: none;
+}
+.cs-mediaView {
+    height: 190px;
+    background: url("../images/sample.png") no-repeat scroll center center transparent;
+}
+.cs-mediaView-mediumImage {
+    max-height: 165px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    padding: 12.5px 0;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.cs-mediaView-snapshot {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+.cs-mediaView-snapshot .cs-mediaView-panelTop {
+    background: rgba(216,216,216, 0.9);
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    font-size: 11px;
+}
+.cs-mediaView-snapshot .cs-mediaView-panel {
+    width: 297px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.cs-mediaView-snapshot div .cs-mediaView-oneOf {
+    margin: 0 20px;
+    display: inline-block;
+}
+.cs-mediaView-snapshot div a {
+    color: #6F9ECD;
+    font-weight: bold;
+}
+.cs-urnCSIDConverter {
+    display: block;
+    padding-bottom: 3px;
+}
+.cs-relatedRecordsTab-newRecordBannder-banner {
+    background-color: #FFFBCC;
+    color: #696565;
+    padding: 15px 0 15px 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.cs-multipleEdit li.cs-repeatable-repeat {
+    padding-left: 4px;
+    padding-top: 4px;
+}
+.cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
+    margin-bottom: 10px;
+}
+/* This code is only for particular working for L\M\I repeatable Method select */
+.cs-fixedRepeatableSelect {
+    min-width: 230px;
+}
+.cs-fixedRepeatableSelect select.cs-repeatable-content {
+    width: 85%;
+}
+.cs-fixedExternalURL {
+    min-width: 350px;
+}
+.cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
+    width: 93%;
+}
+/* These style is only for MediaHandling inputs */
+.cs-mediaUploader-table-row input[type="text"] {
+    width: 100%;
+}
+
+/* stretched stylings */
+div.info-column2-50 .info-pair .content.stretched table, div.info-column2-50 .info-pair-date .content.stretched table, div.info-column2-50 .stretched .info-pair-select table {
+    width: 97%;
+}
+li.cs-repeatable-repeat .stretched .cs-termList {
+    width: 100%;
+}
+.stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+    width: 94%
+}

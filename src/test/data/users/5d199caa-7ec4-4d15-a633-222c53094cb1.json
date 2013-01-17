@@ -1,0 +1,17 @@
+{
+    "csid": "5d199caa-7ec4-4d15-a633-222c53094cb1",
+    "fields": {
+        "email": "reader@core.collectionspace.org",
+        "status": "active",
+        "createdAt": "2012-05-30T00:41:01.794",
+        "userId": "reader@core.collectionspace.org",
+        "screenName": "Reader",
+        "csid": "5d199caa-7ec4-4d15-a633-222c53094cb1",
+        "password": "reader",
+        "role": [{
+            "roleId": "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+            "roleName": "ROLE_TENANT_READER",
+            "roleSelected": true
+        }]
+    }
+}
