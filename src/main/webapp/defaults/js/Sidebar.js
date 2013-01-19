@@ -38,13 +38,14 @@ cspace = cspace || {};
             termsHeader: ".csc-sidebar-termsHeader",
             header: ".csc-sidebar-header",
             togglable: ".csc-sidebar-togglable",
-            report: ".csc-sidebar-report"
+            report: ".csc-sidebar-report",
+            batch: ".csc-sidebar-batch"
         },
         // Render immediately
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
         // Elements which should be ignored in our render tree. These ones will be used for other functions.
-        selectorsToIgnore: ["report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
+        selectorsToIgnore: ["batch", "report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
         // HTML markup for the component
         resources: {
             template: cspace.resourceSpecExpander({
@@ -141,6 +142,14 @@ cspace = cspace || {};
                     recordType: "{sidebar}.options.primary"
                 }
             },
+            // Sub-component for batch invocation
+            batch: {
+                type: "cspace.batchRunner",
+                container: "{sidebar}.dom.batch",
+                options: {
+                    recordType: "{sidebar}.options.primary"
+                }
+            },
             // Sub-component wrap for rendering a list of vocabs
             vocabularies: {
                 type: "cspace.relatedRecordsList",
@@ -161,8 +170,8 @@ cspace = cspace || {};
                                         name: "%recordType-number"
                                     }, {
                                         sortable: true,
-                                        id: "recordtype",
-                                        name: "recordType"
+                                        id: "namespace",
+                                        name: "namespace"
                                     }, {
                                         sortable: true,
                                         id: "sourceFieldName",

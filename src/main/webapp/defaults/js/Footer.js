@@ -50,6 +50,12 @@ cspace = cspace || {};
                 linktext: {
                     messagekey: "footer-feedback"
                 }
+            },
+            support: {
+                target: "${support}",
+                linktext: {
+                    messagekey: "footer-support"
+                }
             }
         };
     };
@@ -64,13 +70,15 @@ cspace = cspace || {};
             text2: ".csc-footer-text2",
             currentRelease: ".csc-footer-currentRelease",
             about: ".csc-footer-about",
-            feedback: ".csc-footer-feedback"
+            feedback: ".csc-footer-feedback",
+            support: ".csc-footer-support"
         },
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+3.2+Feedback",
-            version: "3.2"
+            version: "3.2",
+            support: "mailto:cspace-support@lists.berkeley.edu"
         },
         // Footer template resource.
         resources: {

@@ -225,7 +225,8 @@ cspace = cspace || {};
             ready: null,
             pagerAfterRender: null
         },
-        columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
+        //columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
+        columnList: ["number", "summary", "recordtype", "namespace", "summarylist.updatedAt"],
         resultsSelectable: false,
         listeners: {
             primaryRecordCreated: "{that}.primaryRecordCreated",
@@ -470,6 +471,9 @@ cspace = cspace || {};
             // Only present on findedit and advanced search pages.
             var searchData;
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
+                if (!storage) {
+                    return;
+                }
                 if (storage.options.source !== that.options.source) {
                     return;
                 }
