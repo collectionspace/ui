@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "claim",
-            "selectors": {
-                "recordEditor": ".csc-claim-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                         	"identificationNumber": ".csc-claim-claimNumber"
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.claimNumber"]
                     }
                 },
@@ -46,15 +41,8 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "claim",
-             "schema": {
+            "schema": {
                 "claim": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/ClaimTemplate.html",
-                    "templateSelector": ".csc-claim-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }
