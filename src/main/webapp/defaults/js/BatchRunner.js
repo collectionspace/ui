@@ -17,26 +17,23 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.batchRunner", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        mergePolicy: {
-            recordModel: "preserve",
-            recordApplier: "nomerge"
-        },
         produceTree: "cspace.batchRunner.produceTree",
         invokers: {
             runBatch: "cspace.batchRunner.runBatch",
             requestBatch: {
                 funcName: "cspace.batchRunner.requestBatch",
-                args: ["{batchRunner}.model", "{batchRunner}.options", "{batchRunner}.events", "{arguments}.0", "{arguments}.1"]
+                args: ["{batchRunner}.model", "{globalModel}", "{batchRunner}.options", "{batchRunner}.events", "{arguments}.0", "{arguments}.1"]
             },
             checkBatchButtonDisabling: {
                 funcName: "cspace.batchRunner.checkBatchButtonDisabling",
-                args: ["{batchRunner}.model", "{batchRunner}.options.recordModel"]
+                args: ["{batchRunner}.model", "{globalModel}"]
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
         },
         parentBundle: "{globalBundle}",
         components: {
+            globalModel: "{globalModel}",
             confirmation: {
                 type: "cspace.confirmation"
             },
@@ -51,7 +48,7 @@ cspace = cspace || {};
                 }
             },
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
+            globalNavigator: "{recordEditor}.globalNavigator",
             batchTypesSource: {
                 type: "cspace.batchRunner.batchTypesSource"
             }
@@ -123,16 +120,13 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.batchRunner");
     
     cspace.batchRunner.checkBatchButtonDisabling = function (model, recordModel) {
-        if (!recordModel.csid) {
+        if (!fluid.get(globalModel.model, "primaryModel.csid")) {
             return true;
         }
         return model.batchlist.length < 2 && !model.batchlist[0];
     };
     
     cspace.batchRunner.preInit = function (that) {
-        that.options.recordApplier.modelChanged.addListener("csid", function () {
-            that.refreshView();
-        });
     };
     
     cspace.batchRunner.postInit = function (that) {
@@ -187,6 +181,9 @@ cspace = cspace || {};
     };
     
     cspace.batchRunner.finalInit = function (that) {
+        that.globalModel.applier.modelChanged.addListener("primaryModel.csid", function () {
+            that.refreshView();
+        });
         that.batchTypesSource.get({
             recordType: that.options.recordType
         }, function (data) {
@@ -208,7 +205,7 @@ cspace = cspace || {};
                 that.applier.requestChange("batchnewfocuses", data.batchnewfocuses);
             }
             that.refreshView();
-            that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            that.globalNavigator.addListener(function (callback) {
                 if (that.model.batchInProgress) {
                     that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                         model: {
@@ -236,7 +233,7 @@ cspace = cspace || {};
         }, cspace.util.provideErrorCallback(that, that.batchTypesSource.options.url, "errorFetching"));
     };
     
-    cspace.batchRunner.requestBatch = function (model, options, events, stop, callback) {
+    cspace.batchRunner.requestBatch = function (model, globalModel, options, events, stop, callback) {
         if (!stop) {
             events.batchStarted.fire();
         }
@@ -244,7 +241,7 @@ cspace = cspace || {};
         var href = fluid.stringTemplate(options.urls.batchUrl, {
             batchcsid: model.batchTypeSelection,
             recordType: options.recordType,
-            csid: options.recordModel.csid
+            csid: globalModel.model.primaryModel.csid
         });
 
         var batchType = model.batchTypeSelection;
@@ -305,7 +302,7 @@ cspace = cspace || {};
     };
     
     cspace.batchRunner.runBatch = function (confirmation, parentBundle, requestBatch, recordEditor) {
-        if (recordEditor && recordEditor.unsavedChanges) {
+        if (fluid.get(recordEditor, "changeTracker.unsavedChanges")) {
             openConfirmation(confirmation, "saveDialog", {
                 messages: [ "batch-dialog-primaryMessageSave" ],
                 messagekeys: {
@@ -318,10 +315,10 @@ cspace = cspace || {};
             parentBundle,
             function (userAction) {
                 if (userAction === "act") {
-                    recordEditor.options.dataContext.events.afterSave.addListener(function () {
+                    recordEditor.events.afterSave.addListener(function () {
                         requestBatch(false);
                     }, undefined, undefined, "last");
-                    recordEditor.requestSave();
+                    recordEditor.events.onSave.fire();
                 } else if (userAction === "proceed") {
                     requestBatch(false);
                 }
