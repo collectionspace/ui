@@ -1,96 +1,62 @@
-<div class="csc-claim-template csc-listEditor-details">
-	<div class="csc-claim">
-		<div id="secondary-nav">
-			<div id="secondary-nav-menu-sub">
-				<span class="csc-recordTraverser"></span>
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
-				</div>
-				<div class="time-stamp"> </div>
-			</div>
-		</div>
-
-		<div class="csc-templateEditor"></div>
-		
-		<div class="fl-container-flex fl-fix information-group">
-			<div class="csc-recordEditor-header fl-container-flex header toggle csc-claim-claimInformation-label"></div>
-			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left"> <!-- Claim number -->
-						<div class="info-pair">
-							<span class="label csc-claim-claimNumber-label"></span><span class="required">*</span>
-							<div class="content csc-claim-claimNumber-container"> 
-								<input type="text" class="input-numeric-long csc-claim-claimNumber pattern-chooser-input" />
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="info-column">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-claim-claimClaimantGroup-label"></div>
-						</div>
-						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td class="csc-claim-filedBy-label"></td>
-										<td class="csc-claim-filedOnBehalfOf-label"></td>
-										<td class="csc-claim-claimantNote-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="csc-claim-claimClaimantGroup">
-										<td><input type="text" class="csc-claim-filedBy" /></td>
-										<td><input type="text" class="csc-claim-filedOnBehalfOf" /></td>
-										<td><input type="text" class="csc-claim-claimantNote" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<div class="info-column">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-claim-claimReceivedGroup-label"></div>
-						</div>
-						<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<td class="csc-claim-claimReceivedDate-label"></td>
-										<td class="csc-claim-claimReceivedNote-label"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="csc-claim-claimReceivedGroup">
-										<td><input type="text" class="csc-claim-claimReceivedDate" /></td>
-										<td><input type="text" class="csc-claim-claimReceivedNote" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+<div class="csc-claim-claimInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
+<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+	<div class="info-column">
+		<div class="info-column2-50 fl-force-left"> <!-- Claim number -->
+			<div class="info-pair">
+				<span class="label csc-claim-claimNumber-label"></span><span class="required">*</span>
+				<div class="content csc-claim-claimNumber-container"> 
+					<input type="text" class="input-numeric-long csc-claim-claimNumber pattern-chooser-input" />
 				</div>
 			</div>
 		</div>
-		
-		<div id="secondary-nav-footer">
-			<div id="secondary-nav-menu-sub">
-				<div class="button-row">
-					<a style="display:none;" class="csc-goto gotoButton"></a>
-					<input type="button" class="csc-createFromExisting createFromExistingButton" />
-					<input type="button" class="csc-cancel cancelButton" />
-					<input type="button" class="csc-delete deleteButton" />
-					<input type="button" class="csc-save saveButton" />                                           
-				</div>
+	</div>
+
+	<div class="info-column">
+		<div class="info-pair">
+			<div class="header">
+				<div class="label csc-claim-claimClaimantGroup-label"></div>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<td class="csc-claim-filedBy-label"></td>
+							<td class="csc-claim-filedOnBehalfOf-label"></td>
+							<td class="csc-claim-claimantNote-label"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="csc-claim-claimClaimantGroup">
+							<td><input type="text" class="csc-claim-filedBy" /></td>
+							<td><input type="text" class="csc-claim-filedOnBehalfOf" /></td>
+							<td><input type="text" class="csc-claim-claimantNote" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="info-column">
+		<div class="info-pair">
+			<div class="header">
+				<div class="label csc-claim-claimReceivedGroup-label"></div>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<td class="csc-claim-claimReceivedDate-label"></td>
+							<td class="csc-claim-claimReceivedNote-label"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="csc-claim-claimReceivedGroup">
+							<td><input type="text" class="csc-claim-claimReceivedDate" /></td>
+							<td><input type="text" class="csc-claim-claimReceivedNote" /></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
