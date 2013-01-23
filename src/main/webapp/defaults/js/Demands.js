@@ -80,14 +80,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Batch Runner
-        // TODO: 3.2 - Need this?
-        // fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.localData"], {
-        //     container: "{sidebar}.dom.batch",
-        //     options: {
-        //         recordType: "{sidebar}.options.primaryRecordType"
-        //     }
-        // });
-
         fluid.demands("cspace.batchRunner.batchTypesSource", ["cspace.batchRunner", "cspace.localData"], {
             funcName: "cspace.batchRunner.testBatchTypesSource",
             args: {
@@ -679,21 +671,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         // Batch runner
-        // TODO: 3.2 - Need this?  
-        // fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.pageBuilder"], {
-        //     container: "{sidebar}.dom.batch",
-        //     options: {
-        //         recordType: "{sidebar}.options.primaryRecordType",
-        //         recordModel: "{pageBuilder}.model",
-        //         recordApplier: "{pageBuilder}.applier",
-        //         listeners: {
-        //             onSynchronousFetch: "{loadingIndicator}.events.showOn.fire",
-        //             onError: "{loadingIndicator}.events.hideOn.fire",
-        //             onStop: "{loadingIndicator}.events.hideOn.fire",
-        //             batchFinished: "{loadingIndicator}.events.hideOn.fire"
-        //         }
-        //     }
-        // });
+
+        fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.pageBuilder"], {
+            options: {
+                listeners: {
+                    onSynchronousFetch: "{loadingIndicator}.events.showOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onStop: "{loadingIndicator}.events.hideOn.fire",
+                    batchFinished: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
+        });
 
         fluid.demands("cspace.batchRunner.batchTypesSource", "cspace.batchRunner", {
             funcName: "cspace.URLDataSource",
