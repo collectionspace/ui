@@ -119,7 +119,7 @@ cspace = cspace || {};
     
     fluid.fetchResources.primeCacheFromResources("cspace.batchRunner");
     
-    cspace.batchRunner.checkBatchButtonDisabling = function (model, recordModel) {
+    cspace.batchRunner.checkBatchButtonDisabling = function (model, globalModel) {
         if (!fluid.get(globalModel.model, "primaryModel.csid")) {
             return true;
         }
