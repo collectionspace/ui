@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html manifest="../cspace.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>CollectionSpace - Advanced Search</title>
+        
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Confirmation.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Autocomplete.css" />
+        <link rel="stylesheet" type="text/css" href="../css/pivot.css" />
+        <link rel="stylesheet" type="text/css" href="../css/repeatable.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/goog/demos/css/datepicker.css" />
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+
+        <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
+        <script type="text/javascript" src="../js/Demands.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/Autocomplete.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/Footer.js"></script>
+        <script type="text/javascript" src="../js/InputValidator.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
+        <script type="text/javascript" src="../js/TermList.js"></script>
+        <script type="text/javascript" src="../js/Repeatable.js"></script>
+        <script type="text/javascript" src="../js/AdvancedSearch.js"></script>
+        <script type="text/javascript" src="../js/RelateSearchResults.js"></script>
+        <script type="text/javascript" src="../js/SearchResultsRelationManager.js"></script>
+        <script type="text/javascript" src="../js/SearchToRelateDialog.js"></script>
+        <script type="text/javascript" src="../js/SearchTips.js"></script>
+        <script type="text/javascript" src="../js/SearchTools.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/StructuredDate.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        <script type="text/javascript" src="../js/ComputedField.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/globalization/en-US.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/core.js"></script>
+        <script type="text/javascript" src="../lib/datejs/src/parser.js"></script>
+        <script type="text/javascript" src="../lib/goog/js/goog.ui.DatePicker.js"></script>
+        <script type="text/javascript" src="../js/DatePicker.js"></script>
+        <script type="text/javascript" src="../tools/uispecVerifier/js/uispecVerifier.js"></script>
+        <script type="text/javascript" src="../js/pahma.js"></script>
+    </head>
+    <body id="advancedsearch">
+        <div class="fl-container-1024 fl-centered">
+            <div id="name-header" class="csc-header-container"></div>
+            <div class="fl-container-1024">
+                <div id="title-bar" class="nobg csc-advancedsearch">
+                    <div class="content">
+                        <div class="header-name csc-pageBuilder-header"></div>
+                    </div>
+                </div>
+                <div id="all-content" class="fl-fix info-column">
+                    <div class="fl-fix fl-container-flex fl-col-mixed2">
+                        <div class="fl-container-content fl-container-left info-column fl-force-left">
+                            <div class="main-search-page fl-container-left-inner">
+                                <div class="csc-advancedsearch-container"></div>
+
+                                <div class="csc-search-loadingIndicator">
+	                                <div class="fl-container-flex header static found-records-box csc-search-lookingContainer">
+	                                    <span class="found-records-content-looking">
+	                                        <span class="csc-search-lookingString cs-search-highlight"></span>
+	                                    </span>
+	                                </div>
+	
+	                                <div class="csc-search-results">
+	                                    <div class="fl-container-flex header static button found-records-box">
+	                                        <span class="found-records-content csc-search-resultsCountContainer csc-relateSearchResults">
+	                                            <span class="csc-search-results-count cs-search-highlight"></span>
+		                                        <input type="button" class="csc-relateSearchResults-relateButton button add fl-force-right" />
+	                                        </span>
+	                                    </div>
+	
+	                                    <!-- search results -->
+	                                    <div class="fl-pager list-table" id="toggle-records">
+	                                        <table summary="search results" id="search-results" class="flc-pager-body-template fl-pager-data" xmlns:rsf="http://ponder.org.uk">
+	                                            <thead>
+	                                                <tr rsf:id="header:">
+	                                                    <th class="flc-pager-sort-header"><a rsf:id="number" href="#"></a></th>
+	                                                    <th class="flc-pager-sort-header"><a rsf:id="summary" href="#"></a></th>
+	                                                    <th><span rsf:id="recordtype"></span></th>
+	                                                    <th><span rsf:id="namespace"></span></th>
+	                                                    <th class="flc-pager-sort-header"><a rsf:id="summarylist.updatedAt" href="#"></a></th>
+	                                                </tr>
+	                                            </thead>
+	                                            <tbody>
+	                                                <tr class="csc-row" rsf:id="row:">
+	                                                    <td><a rsf:id="number" href="#" class="link"></a></td>
+	                                                    <td rsf:id="summary"></td>
+	                                                    <td rsf:id="recordtype"></td>
+	                                                    <td rsf:id="namespace"></td>
+	                                                    <td rsf:id="summarylist.updatedAt"></td>
+	                                                </tr>
+	                                            </tbody>
+	                                        </table>
+	                                        <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom clearfix">
+	                                            <li class="flc-per-page">
+	                                                Show <span>
+	                                                    <select class="flc-pager-page-size">
+	                                                        <option value="1">1</option>
+	                                                        <option value="10">10</option>
+	                                                        <option value="20">20</option>
+	                                                        <option value="50">50</option>
+	                                                        <option value="100">100</option>
+	                                                        <option value="500">500</option>
+	                                                    </select>
+	                                                </span>
+	                                                per page
+	                                            </li>
+	                                            <li class="flc-pager-previous">
+	                                                <a href="#">&lt; previous</a>
+	                                            </li>
+	                                            <li>
+	                                                <ul class="pager-links fl-pager-links flc-pager-links">
+	                                                    <li class="flc-pager-pageLink"><a href="#">1</a></li>
+	                                                    <li class="flc-pager-pageLink"><a href="#">3</a></li>
+	                                                </ul>
+	                                            </li>
+	                                            <li class="flc-pager-next">
+	                                                <a href="#">next &gt;</a>
+	                                            </li>
+	                                            <li class="flc-pager-summary" style="width:100px; text-align:right;">
+	                                                1-10 of 500 items
+	                                            </li>
+	                                        </ul>
+	                                    </div>
+	                                </div>
+	                                <!-- end search results -->
+	                            </div>
+                            </div>
+                            <div class="hidden csc-searchResultsRelationManager">
+								<div class="csc-search-related-dialog"></div>
+							</div>
+                        </div>
+                        <div class="fl-container-pivot fl-force-left">
+                            <div class="csc-search-tips"></div>
+                            <div class="csc-search-tools"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="csc-footer-container" id="footer">
+            <!-- this div will be filled in with the contents of the Template -->
+        </div>
+
+        <script type="text/javascript">
+            cspace.globalSetup("cspace.advancedSearch");
+        </script>
+    </body>
+</html>

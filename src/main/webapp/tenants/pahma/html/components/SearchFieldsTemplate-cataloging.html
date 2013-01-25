@@ -1,0 +1,420 @@
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectNumber-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-object-identification-object-number"/>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectNumberRangeSearch-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-collection-object-objectNumberRangeSearchStart-label"></td>
+                                    <td class="csc-collection-object-objectNumberRangeSearchEnd-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-collection-object-objectNumberRangeSearchStart" /></td>
+                                    <td><input type="text" class="csc-collection-object-objectNumberRangeSearchEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="hidden pahma-note">
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-collection-object-sortableObjectNumberStart" /></td>
+                                    <td><input type="text" class="csc-collection-object-sortableObjectNumberEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaAltNum-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-pahmaAltNumGroup">
+                        <input type="text" class="csc-collection-object-pahmaAltNum"/>
+                    </div>        
+                </div>
+                <!-- <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-homeLocation-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-collection-object-homeLocation"/>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-homeCrate-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-collection-object-homeCrate"/>
+                    </div>        
+                </div> -->
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-isComponent-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-isComponent"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaObjectStatus-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-pahmaObjectStatus"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectName-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectNameGroup">
+                        <input type="text" class="csc-object-identification-object-name"/>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-responsibleDepartment-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-identification-responsible-department"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-collection-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-identification-collection"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaEthnographicFileCode-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-collection-object-pahmaEthnographicFileCode"/>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-recordStatus-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-identification-record-status input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated cultural group / <span class="csc-collection-object-assocPeople-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPeopleGroup">
+                        <input type="text" class="csc-collection-object-assocPeople"/>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-material-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-materialGroup">
+                        <input type="text" class="csc-object-description-material"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-title-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-titleGroup">
+                        <input type="text" class="csc-object-identification-object-title"/>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-portfolioSeries-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-portfolioSeries input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaTmsLegacyDepartment-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-pahmaTmsLegacyDepartment input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaFieldCollectionPlace-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-pahmaFieldCollectionPlace" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldCollectionSource-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldCollectionSource" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldCollector-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldCollector" />
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-fieldColEventName-label"></div>
+                    </div>                            
+                    <div class="content clearfix">
+                        <input type="text" class="input-alpha csc-collection-object-fieldColEventName" />
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-nagpraInventoryName-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-nagpraInventoryName input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-nagpraApplicability-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-nagpraApplicability input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-pahmaNagpraCodeLegacy-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-collection-object-pahmaNagpraCodeLegacy input-select"><option value="">Options not loaded</option></select>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-form-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-description-form input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectComponentName-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectComponentGroup">
+                        <input type="text" class="csc-object-description-object-component-name input-select"/>
+                    </div>
+                </div>
+                <!-- FIXME: Can unhide by removing style after CSPACE-5185 (and hence CSPACE-4903 / CSPACE-5184) is fixed -->
+                <div class="info-pair" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-collection-object-inscriptionDescriptionInscriber-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-nonTextualInscriptionGroup">
+                        <input type="text" class="csc-object-description-inscription-description-inscriber"/>
+                    </div>
+                </div>
+                <!-- FIXME: Can unhide by removing style after CSPACE-5185 (and hence CSPACE-4903 / CSPACE-5184) is fixed -->
+                <div class="info-pair" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-collection-object-inscriptionDescriptionMethod-label"></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-nonTextualInscriptionGroup">
+                        <input type="text" class="csc-object-description-inscription-description-method"/>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-sex-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-description-sex input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-collection-object-phase-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-object-description-phase input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Taxonomic determination history / <span class="label csc-collection-object-taxon-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-taxonomicIdentGroup">
+                        <input type="text" class="csc-taxonomic-identification-taxon"/>
+                    </div>
+                </div>
+                <!-- FIXME: Can unhide by removing style after CSPACE-5185 (and hence CSPACE-4903 / CSPACE-5184) is fixed -->
+                <div class="info-pair" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-collection-object-objectProductionDate-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-object-production-date"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Production cultural group / <span class="csc-collection-object-objectProductionPeople-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectProductionPeopleGroup">
+                        <input type="text" class="csc-object-production-people"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label">Production technique / <span class="csc-collection-object-technique-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-techniqueGroup">
+                        <input type="text" class="csc-object-production-technique"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Production person / <span class="csc-collection-object-objectProductionPerson-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectProductionPersonGroup">
+                        <input type="text" class="csc-object-production-person"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Production place / <span class="csc-collection-object-objectProductionPlace-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectProductionPlaceGroup">
+                        <input type="text" class="csc-object-production-place"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Production organization / <span class="csc-collection-object-objectProductionOrganization-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-objectProductionOrganizationGroup">
+                        <input type="text" class="csc-object-production-organization"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated cultural affinity / <span class="csc-collection-object-assocCulturalContext-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocCulturalContextGroup">
+                        <input type="text" class="csc-collection-object-assocCulturalContext"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated organization / <span class="csc-collection-object-assocOrganization-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocOrganizationGroup">
+                        <input type="text" class="csc-collection-object-assocOrganization"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated person / <span class="csc-collection-object-assocPerson-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPersonGroup">
+                        <input type="text" class="csc-collection-object-assocPerson"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <!-- FIXME: App layer isn't providing labels of the groups in the uispec, so hardcode them for now -->
+                        <div class="label">Associated place / <span class="csc-collection-object-assocPlace-label"/></div>
+                    </div>
+                    <div class="content clearfix csc-collection-object-assocPlaceGroup">
+                        <input type="text" class="csc-collection-object-assocPlace"/>
+                    </div>
+                </div>
+                <div class="info-pair" style="display:none;">
+                    <div class="header">
+                        <div class="label csc-collection-object-editUsername-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-collection-object-editUsername"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-createdAt-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-collection-object-createdAtStart-label"></td>
+                                    <td class="csc-collection-object-createdAtEnd-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-collection-object-createdAtStart" /></td>
+                                    <td><input type="text" class="csc-collection-object-createdAtEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-collection-object-updatedAt-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-collection-object-updatedAtStart-label"></td>
+                                    <td class="csc-collection-object-updatedAtEnd-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-collection-object-updatedAtStart" /></td>
+                                    <td><input type="text" class="csc-collection-object-updatedAtEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                                                     
+            </div>
+        </div>
+    </div>
+</div>    
