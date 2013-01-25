@@ -210,12 +210,12 @@ group-number: Title of group
 loanin-number: Loan number
 loanout-number: Loan number
 claim-number: Claim number
-movement-number: Current location
+movement-number: Reference number
 media-number: Media rendition number (or Museum number)
 
 hierarchy-broaderContextLabel: Broader context
 hierarchy-equivalentContextsLabel: Equivalent context
-hierarchy-narrowerContextsLabel: Narrower context
+hierarchy-narrowerContextLabel: Narrower context
 hierarchy-relatedTermsLabel: Related term
 
 # ---------------------------------- Object Exit Information (Cataloging) -------------------------- #
@@ -239,7 +239,6 @@ group-scopeNoteLabel: Scope note
 group-ownerLabel: Group owner
 group-responsibleDepartmentLabel: Purpose
 group-updatedAtLabel: Modified date
-group-editUsername: Record modified by
 group-identificationNumberRequired: Please specify a title
 persontest1: Person test 1
 persontest2: Person test 2
@@ -279,7 +278,6 @@ person-birthDateLabel: Birth date
 person-deathDateLabel: Death date
 person-bioNoteLabel: Biographical note
 person-updatedAtLabel: Modified date
-person-editUsername: Record modified by
 person-birthPlaceLabel: Place of birth
 person-deathPlaceLabel: Place of death
 person-identificationNumberRequired: Please specify a display name
@@ -310,7 +308,6 @@ acquisition-ownersLabel: Previous owner (donor)
 acquisition-ownerLabel: Previous owner (donor)
 acquisition-acquisitionInformationLabel: Accession Information
 acquisition-acquisitionFundingLabel: Acquisition funding
-acquisition-acquisitionSourcesLabel: Acquisition source
 acquisition-acquisitionSourceLabel: Acquisition source
 acquisition-createdAtLabel: Created date
 acquisition-createdAtStartLabel: Earliest
@@ -340,7 +337,6 @@ acquisition-objectOfferPriceCurrencyLabel: Purchase price
 acquisition-objectPurchaseOfferPriceValueLabel: Object purch. offer price
 acquisition-objectPurchaseOfferPriceCurrencyLabel: Purchase price(s), if applicable
 acquisition-updatedAtLabel: Modified date
-acquisition-editNameLabel: Record modified by
 acquisition-identificationNumberRequired: Please specify an acquisition reference number
 
 #Loan in
@@ -366,7 +362,6 @@ loanin-loanInDateGroupLabel: Loan receipt date
 loanin-loanInConditionsLabel: Loan conditions
 loanin-loanInContactLabel: PAHMA contact
 loanin-updatedAtLabel: Modified date
-loanin-updatedByLabel: Record modified by
 loanin-identificationNumberRequired: Please specify a loan number
 loanin-createdAtLabel: 
 loanin-tenantIDLabel: 
@@ -397,7 +392,6 @@ loanout-loanedObjectStatusGroupLabel: Loaned object status
 loanout-loanOutDateLabel: Loan date
 loanout-loanOutDateGroupLabel: Loan date
 loanout-updatedAtLabel: Modified date
-loanout-editNameLabel: Record modified by
 loanout-identificationNumberRequired: Please specify a loan number
 loanout-createdAtLabel: 
 loanout-tenantIDLabel:
@@ -413,7 +407,6 @@ organization-foundingPlaceLabel: Founding place
 organization-displayNameLabel: Display name
 organization-longNameLabel: Main body name
 organization-displayName-label: Display name
-organization-editUsername: Record modified my
 organization-updatedAtLabel: Modified date
 organization-identificationNumberRequired: Please specify a display name
 organization-shortIdentifierLabel: 
@@ -444,7 +437,6 @@ movement-removalDateLabel: Move date
 movement-reasonForMoveLabel: Reason
 movement-currentLocationHeaderLabel: Storage location
 movement-updatedAtLabel: Modified date
-movement-editNameLabel: Record modified by
 movement-identificationNumberRequired: Please specify a storage Location
 movement-locationHandlersLabel: Location handler
 movement-locationHandlerLabel: Handler
@@ -582,7 +574,6 @@ media-dateLabel: Dates
 media-identificationNumberRequired: Please specify an identification number
 media-dimensionGroupLabel: Dimensions
 media-updatedAtLabel: Modified date
-media-editUsername: Record modified by
 mediaUploader-uploadMediaLabel: Upload media
 mediaUploader-linkMediaLabel: Link to external media
 media-approvedForWebLabel: Approved for public?
@@ -632,7 +623,6 @@ intake-currentLocationNoteLabel: Location note
 intake-entryMethodsLabel: Entry method
 intake-entryMethodLabel: Entry method
 intake-updatedAtLabel: Modified date
-intake-editUsernameLabel: Record modified by
 intake-identificationNumberRequired: Please specify an object entry number
 
 # ******************* Cataloging ******************* #
@@ -1007,7 +997,6 @@ claim-documentsArchivedLabel: Claim documents archived
 
 # ---------------------------------- Record Metadata (Cataloging) -------------------------- #
 collection-object-updatedAtLabel: Modified date
-collection-object-editUsername: Record modified by
 
 # ******************* Record groups ******************* #
 
