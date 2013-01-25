@@ -1,27 +1,27 @@
 /**
- *  This document is a part of the source code and related artifacts
- *  for CollectionSpace, an open source collections management system
- *  for museums and related institutions:
+ *	This document is a part of the source code and related artifacts
+ *	for CollectionSpace, an open source collections management system
+ *	for museums and related institutions:
 
- *  http://www.collectionspace.org
- *  http://wiki.collectionspace.org
+ *	http://www.collectionspace.org
+ *	http://wiki.collectionspace.org
 
- *  Copyright 2009 University of California at Berkeley
+ *	Copyright 2009 University of California at Berkeley
 
- *  Licensed under the Educational Community License (ECL), Version 2.0.
- *  You may not use this file except in compliance with this License.
+ *	Licensed under the Educational Community License (ECL), Version 2.0.
+ *	You may not use this file except in compliance with this License.
 
- *  You may obtain a copy of the ECL 2.0 License at
+ *	You may obtain a copy of the ECL 2.0 License at
 
- *  https://source.collectionspace.org/collection-space/LICENSE.txt
+ *	https://source.collectionspace.org/collection-space/LICENSE.txt
 
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *  
- *  $LastChangedRevision$
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ *	
+ *	$LastChangedRevision$
  */
 
 /*global jQuery, cspace:true, fluid*/
@@ -29,50 +29,45 @@
 cspace = cspace || {};
 
 (function ($, fluid) {
+
+	"use strict";
+
+	fluid.log("SearchResultsRelationManager.js loaded");
+
+	// Component that handles the actual relation creation.
 	fluid.defaults("cspace.searchResultsRelationManager", {
-		gradeNames: "fluid.rendererComponent",
+		gradeNames: ["fluid.rendererComponent", "autoInit"],
 		selectors: {
-			searchDialog: ".csc-search-related-dialog",
+			searchDialog: ".csc-search-related-dialog"
 		},
+		strings: {},
+		messageKeys: {
+			addRelationsFailedMessage: "searchResultsRelationManager-addRelationsFailedMessage"
+		},
+		parentBundle: "{globalBundle}",
 		selectorsToIgnore: "searchDialog",
 		components: {
-			dataContext: {
-				type: "cspace.dataContext",
-				options: {
-					recordType: "relationships"
-				}
-			},
+			messageBar: "{messageBar}",
 			searchToRelateDialog: {
-				type: "cspace.searchToRelateDialog",
-				createOnEvent: "afterInitDependents",
 				container: "{searchResultsRelationManager}.dom.searchDialog",
+				type: "cspace.searchToRelateDialog",
+				createOnEvent: "onSearchToRelateDialog",
 				options: {
 					related: "nonVocabularies",
-					model: "{pageBuilder}.model",
-					applier: "{pageBuilder}.applier",
-					relationsElPath: "relations",
-					listeners: {
-						addRelations: "{searchResultsRelationManager}.addRelations"
-					},
 					strings: {
 						title: "searchResultsRelationManager-dialogTitle",
 						addButton: "searchResultsRelationManager-addButton"
 					}
 				}
+			},
+			// The data source used to create relations.
+			relationDataSource: {
+				type: "cspace.searchResultsRelationManager.relationDataSource"
+			},
+			// The data source used to list existing relations for a record.
+			listDataSource: {
+				type: "cspace.searchResultsRelationManager.listDataSource"
 			}
-		},
-		events: {
-			afterInitDependents: null,
-			onRelateButtonClick: null,
-			onFetchExistingRelations: null,
-			onSave: null,
-			onError: null,
-			afterSave: null
-		},
-		listeners: {
-			onFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
-			onError: "{loadingIndicator}.events.hideOn.fire",
-			afterSave: "{loadingIndicator}.events.hideOn.fire"
 		},
 		invokers: {
 			add: {
@@ -83,55 +78,116 @@ cspace = cspace || {};
 				funcName: "cspace.searchResultsRelationManager.addRelations",
 				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"]  
 			},
-			showMessage: {
-				funcName: "cspace.searchResultsRelationManager.showMessage",
-				args: ["{messageBar}", "{arguments}.0"]
-			},
-			showError: {
-				funcName: "cspace.searchResultsRelationManager.showError",
-				args: ["{messageBar}", "{arguments}.0"]
-			},
-			clearMessage: {
-				funcName: "cspace.searchResultsRelationManager.clearMessage",
-				args: "{messageBar}"
-			}
 		},
-		parentBundle: "{globalBundle}",
+		events: {
+			onRelateButtonClick: null,
+			onSearchToRelateDialog: null,
+			onAddRelation: null,
+			beforeFetchExistingRelations: null,
+			afterAddRelations: null,
+			onError: null
+		},
+		listeners: {
+			onRelateButtonClick: "{cspace.searchResultsRelationManager}.onRelateButtonClick",
+			onAddRelation: "{cspace.searchResultsRelationManager}.onAddRelation",
+			afterAddRelations: "{cspace.searchResultsRelationManager}.afterAddRelations",
+			onError: "{cspace.searchResultsRelationManager}.onError"
+		},
+		relationURL: cspace.componentUrlBuilder("%tenant/%tname/relationships"),
+		listURL: cspace.componentUrlBuilder("%tenant/%tname/%primary/%related/%csid"),
+		preInitFunction: "cspace.searchResultsRelationManager.preInit",
 		finalInitFunction: "cspace.searchResultsRelationManager.finalInit"
 	});
+
+	// TODO: Make a local datasource file, and restore the test configuration
+	// fluid.demands("cspace.searchResultsRelationManager.relationDataSource",	["cspace.localData", "cspace.searchResultsRelationManager"], {
+	// 	funcName: "cspace.searchResultsRelationManager.TestRelationDataSource",
+	// 	args: {
+	// 		writeable: true,
+	// 		targetTypeName: "cspace.searchResultsRelationManager.TestRelationDataSource"
+	// 	}
+	// });
 	
-	var bindEventHandlers = function(that) {
-		that.events.onRelateButtonClick.addListener(function() {
+	fluid.demands("cspace.searchResultsRelationManager.relationDataSource", "cspace.searchResultsRelationManager", {
+		funcName: "cspace.URLDataSource",
+		args: {
+			writeable: true,
+			url: "{cspace.searchResultsRelationManager}.options.relationURL",
+			targetTypeName: "cspace.searchResultsRelationManager.relationDataSource"
+		}
+	});
+
+	// TODO: Make a local datasource file, and restore the test configuration
+	// fluid.defaults("cspace.searchResultsRelationManager.TestRelationDataSource", {
+	// 	url: "%test/data/relationships.json"
+	// });
+	// cspace.searchResultsRelationManager.TestRelationDataSource = cspace.URLDataSource;
+
+	fluid.demands("cspace.searchResultsRelationManager.listDataSource", "cspace.searchResultsRelationManager", {
+		funcName: "cspace.URLDataSource",
+		args: {
+			url: "{cspace.searchResultsRelationManager}.options.listURL",
+			termMap: {
+				primary: "%primary",
+				related: "%related",
+				csid: "%csid"
+			},
+			targetTypeName: "cspace.searchResultsRelationManager.listDataSource"
+		}
+	});
+	
+	cspace.searchResultsRelationManager.preInit = function (that) {
+		var options = that.options,
+			messageKeys = options.messageKeys,
+			resolve = options.parentBundle.resolve;
+
+		that.onRelateButtonClick = function () {
 			that.add();
-		});
-		
-		that.dataContext.events.afterAddRelations.addListener(function(relations) {
-			afterAddRelations(that, relations);
-		});
-		
-		that.dataContext.events.onError.addListener(function(operation, message, data) {
-			onError(that, operation, message, data);
-		});
-    };
-	
-	cspace.searchResultsRelationManager = function(container, options) {
-		var that = fluid.initRendererComponent("cspace.searchResultsRelationManager", container, options);
-		that.renderer.refreshView();
-		
-		that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
-		fluid.initDependents(that);
-		that.events.afterInitDependents.fire();
-		
-		bindEventHandlers(that);
-		return that;
-	};
-	
-	cspace.searchResultsRelationManager.finalInit = function(that) {
-		that.refreshView();
-	};
-	
-	cspace.searchResultsRelationManager.add = function(that) {
-		that.searchToRelateDialog.open();
+		}
+		that.onAddRelation = function (relations) {
+			that.addRelations(relations);
+		};
+		that.afterAddRelations = function (relations, selectedRecords, alreadyRelatedRecords) {
+			var counts = {};
+			
+			fluid.each(relations.items, function(item) {
+				var source= item.source;
+				var csid = source.csid;
+			
+				counts[csid] = ((csid in counts) ? counts[csid] : 0) + 1;
+			});
+			
+			var sources = selectedRecords.sort(function(a, b) {
+				return a.number.localeCompare(b.number);
+			});
+			
+			var messages = [];
+			
+			// FIXME: Move message text to the message bundle.
+			
+			fluid.each(sources, function(source) {
+				var csid = source.csid;
+				var count = (csid in counts) ? counts[csid] : 0;
+				var alreadyRelatedCount = alreadyRelatedRecords[csid].length;
+			
+				var message = "Added " + count + " " + (count == 1 ? "record" : "records") + " to " + source.number;
+			
+				if (alreadyRelatedCount > 0) {
+					message = message + " (" + alreadyRelatedCount + " " + (alreadyRelatedCount == 1 ? "was" : "were") + " already related)";
+				}
+			
+				messages.push(message + ".");
+			});
+
+			that.messageBar.show(messages.join(" "), null, false);
+		};
+		that.onError = function(data) {
+			data.messages = data.messages || fluid.makeArray("");
+			fluid.each(data.messages, function (message) {
+				message = message.message || message;
+				that.messageBar.show(resolve(messageKeys.addRelationsFailedMessage, [message]), null, true);
+			});
+		};
 	};
 
 	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
@@ -142,78 +198,84 @@ cspace = cspace || {};
 		 * the record selected in the dialog, and the target is the search result. We also need to
 		 * filter out existing relations.
 		 */
-		that.events.onFetchExistingRelations.fire();
+		
+		that.events.beforeFetchExistingRelations.fire();
 		
 		var results = searchModel.results;
-
+		var searchType = searchModel.searchModel.recordType;
+		
 		if (dialogRelations.items.length > 0 && results.length > 0) {
-			var relationResolvers = {};
-
+			var relatedRecords = {};
+			
+			fluid.each(dialogRelations.items, function(dialogRelation) {
+				relatedRecords[dialogRelation.target.csid] = null;
+			});
+			
 			fluid.each(dialogRelations.items, function(dialogRelation) {
 				/*
-				 * Create a relationResolver for each record selected in the dialog, so we
-				 * can filter out records that are already related. Load the data via
-				 * dataContext components, and proceed when all of the dataContexts have
-				 * completed loading the necessary data.
+				 * Find the related records for each record selected in the dialog, so we
+				 * can filter out ones that are already related.
 				 */
 				
 				var target = dialogRelation.target;
+
+				var model = {
+					primary: target.recordtype,
+					related: (searchType == "cataloging") ? "cataloging" : "procedures",
+					csid: target.csid
+				};
 				
-				relationResolvers[target.csid] = null;
+				that.listDataSource.get(model, function(data) {
+					if (!data || data.isError) {
+						if (!data.messages) {
+							data.messages = ["error retrieving existing relations for " + target.number];
+						}
+						
+						that.events.onError.fire(data);
+					}
+					else {
+						var relatedCsids = [];
+						
+						fluid.each(data.items, function(item) {
+							relatedCsids.push(item.csid);
+						});
+						
+						relatedRecords[target.csid] = relatedCsids;
 
-				var dataContext = cspace.dataContext({
-					model: {},
-					recordType: target.recordtype,
-					listeners: {
-						afterFetch: function(data) {
-							relationResolvers[target.csid] = cspace.util.relationResolver({
-								model: data
-							});
-							
-							var allRelationsLoaded = true;
-
-							for (var csid in relationResolvers) {
-								if (relationResolvers[csid] == null) {
-									allRelationsLoaded = false;
-									break;
-								}
+						var complete = true;
+						
+						for (var csid in relatedRecords) {
+							if (relatedRecords[csid] == null) {
+								complete = false;
 							}
-							
-							if (allRelationsLoaded) {
-								filterAndAddRelations(that, dialogRelations, searchModel, relationResolvers);
-							}
-						},
-						onError: function(operation, message, data) {
-							onError(that, operation, message, data);
-							that.events.onError.fire();
+						}
+						
+						if (complete) {
+							filterAndAddRelations(that, dialogRelations, searchModel, relatedRecords);
 						}
 					}
 				});
-				
-				dataContext.fetch(target.csid);
 			});
 		}
 	};
-	
-	var filterAndAddRelations = function(that, dialogRelations, searchModel, relationResolvers) {
+
+	var filterAndAddRelations = function(that, dialogRelations, searchModel, relatedRecords) {
 		var results = searchModel.results;
 		var transformedItems = [];
 		var selectedRecords = [];
 		var alreadyRelatedRecords = {};
 		var start = searchModel.offset;
 		var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
-	
-		that.events.onSave.fire();
 		
 		fluid.each(dialogRelations.items, function(dialogRelation) {
 			var source = dialogRelation.target;
-			var relationResolver = relationResolvers[source.csid];
+			var relatedRecordsList = relatedRecords[source.csid];
 
 			selectedRecords.push(source);
 			alreadyRelatedRecords[source.csid] = [];
 			
 			fluid.each(results, function(target) {
-				if (relationResolver.isRelated(target.recordtype, target.csid)) {
+				if (relatedRecordsList && $.inArray(target.csid, relatedRecordsList) > -1) {
 					alreadyRelatedRecords[source.csid].push(target);
 				}
 				else {
@@ -227,64 +289,27 @@ cspace = cspace || {};
 			});
 		});
 		
-		that.selectedRecords = selectedRecords;
-		that.alreadyRelatedRecords = alreadyRelatedRecords;
-		
-		that.dataContext.addRelations({
-			items: transformedItems
-		});
-	};
-	
-	var afterAddRelations = function(that, relations) {
-		var alreadyRelatedRecords = that.alreadyRelatedRecords;
-		var counts = {};
+		that.relationDataSource.set({items: transformedItems}, null, function (data) {
+			if (!data || data.isError) {
+				if (!data.messages) {
+					data.messages = ["error creating relations"];
+				}
 				
-		fluid.each(relations.items, function(item) {
-			var source= item.source;
-			var csid = source.csid;
-
-			counts[csid] = ((csid in counts) ? counts[csid] : 0) + 1;
-		});
-
-		var sources = that.selectedRecords.sort(function(a, b) {
-			return a.number.localeCompare(b.number);
-		});
-		
-		var messages = [];
-		
-		// FIXME: Move message text to the message bundle.
-
-		fluid.each(sources, function(source) {
-			var csid = source.csid;
-			var count = (csid in counts) ? counts[csid] : 0;
-			var alreadyRelatedCount = alreadyRelatedRecords[csid].length;
-			
-			var message = "Added " + count + " " + (count == 1 ? "record" : "records") + " to " + source.number;
-			
-			if (alreadyRelatedCount > 0) {
-				message = message + " (" + alreadyRelatedCount + " " + (alreadyRelatedCount == 1 ? "was" : "were") + " already related)";
+				that.events.onError.fire(data);
 			}
-			
-			messages.push(message + ".");
+			else {
+				that.events.afterAddRelations.fire(data, selectedRecords, alreadyRelatedRecords);
+			}
 		});
-		
-		that.showMessage(messages.join(" "));
-		that.events.afterSave.fire();
 	};
 	
-	var onError = function(that, operation, message, data) {
-		that.showError("Error on " + operation + ": " + message + ((typeof(data) != "undefined") ? (": " + data) : ""));
-	};
-	
-	cspace.searchResultsRelationManager.showMessage = function (messageBar, message) {
-		messageBar.show(message, null, false);
-	};
-	
-	cspace.searchResultsRelationManager.showError = function (messageBar, message) {
-		messageBar.show(message, null, true);
+	cspace.searchResultsRelationManager.finalInit = function (that) {
+		that.refreshView();
+		that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
+		that.events.onSearchToRelateDialog.fire();
 	};
 
-	cspace.searchResultsRelationManager.clearMessage = function (messageBar) {
-		messageBar.hide();
+	cspace.searchResultsRelationManager.add = function (that) {
+		that.searchToRelateDialog.open();
 	};
 })(jQuery, fluid);

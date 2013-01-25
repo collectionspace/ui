@@ -1159,6 +1159,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: {
                     showCreate: true
                 },
+                related: "{cspace.relationManager}.options.related",
+                primary: "{cspace.relationManager}.options.primary",
+                events: {
+                    onAddRelation: "{cspace.relationManager}.events.onAddRelation",
+                    onCreateNewRecord: "{cspace.relationManager}.events.onCreateNewRecord"
+                },
                 listeners: {
                     onClose: "{cspace.relationManager}.onDialogClose"
                 }
@@ -1166,12 +1172,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
             options: {
+                related: "{cspace.relationManager}.options.related",
+                primary: "{cspace.relationManager}.options.primary",
+                events: {
+                    onAddRelation: "{cspace.relationManager}.events.onAddRelation",
+                    onCreateNewRecord: "{cspace.relationManager}.events.onCreateNewRecord"
+                },
                 listeners: {
                     onClose: "{cspace.relationManager}.onDialogClose"
                 }
             }
         });
-        
+        fluid.demands("cspace.searchToRelateDialog", "cspace.searchResultsRelationManager", {
+            options: {
+                events: {
+                    onAddRelation: "{cspace.searchResultsRelationManager}.events.onAddRelation"
+                }
+            }
+        });
+
         // Repeatable demands
         fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", {
             container: "{arguments}.0",
@@ -1270,7 +1289,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        // TODO: 3.2 - Still needed? Still need the listeners section?
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.advancedSearch"], {
             container: "{searchToRelateDialog}.container",
             options: {
@@ -1284,11 +1302,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
                     namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
-                },
-                listeners: {
-                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire",
-                    onSearch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -1357,10 +1370,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-        fluid.demands("cspace.searchResultsRelationManager", ["cspace.relateSearchResults"], {
+        fluid.demands("cspace.searchResultsRelationManager", "cspace.relateSearchResults", {
             options: {
                 events: {
                     onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
+                },
+                listeners: {
+                    beforeFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
+                    afterAddRelations: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire"
                 }
             }
         });

@@ -51,8 +51,8 @@ cspace = cspace || {};
         model: {
             showCreate: false
         },
-        related: "{relationManager}.options.related",
-        primary: "{relationManager}.options.primary",
+        related: null,
+        primary: null,
         components: {
             globalModel: "{globalModel}",
             search: {
@@ -110,12 +110,8 @@ cspace = cspace || {};
             rendererTargetSelector: "dialog"
         },
         events: {
-            onAddRelation: {
-                event: "{cspace.relationManager}.events.onAddRelation"
-            },
-            onCreateNewRecord: {
-                event: "{cspace.relationManager}.events.onCreateNewRecord"
-            },
+            onAddRelation: null,
+            onCreateNewRecord: null,
             onOpen: null,
             onClose: null
         },
