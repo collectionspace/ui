@@ -2,15 +2,65 @@
     <div class="fl-container-flex fl-fix content main">
         <div class="info-column">
             <div class="info-column2-50 fl-force-left">
-                
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-location-termDisplayName-label"></div>
+
+                <div class="info-column cs-multipleEdit" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-preferredSLA-locTermGroup-label"></div>
+                        </div>
+                        <div class="content csc-preferredSLA-locTermGroup cs-repeatable-stretched">
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-location-termDisplayName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-locationAuthority-termDisplayName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-location-termName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-locationAuthority-termName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-location-termLanguage-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-locationAuthority-termLanguage input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-location-termStatus-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-locationAuthority-termStatus input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content clearfix csc-preferredSLA-locTermGroup">
-                        <input type="text" class="csc-locationAuthority-termDisplayName"/>
-                    </div>        
                 </div>
+
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-location-conditionNote-label"></div>
@@ -27,21 +77,12 @@
                         <select class="csc-location-type input-select"><option value="">Options not loaded</option></select>
                     </div>        
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
+                <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-location-termStatus-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredSLA-locTermGroup">
-                        <select class="csc-locationAuthority-termStatus input-select"><option value="">Options not loaded</option></select>
-                    </div>
-                </div>
-                <div class="info-pair" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-location-editUsername-label"></div>
+                        <div class="label csc-location-updatedBy-label"></div>
                     </div>
                     <div class="content clearfix">
-                        <input type="text" class="csc-location-editUsername"/>
+                        <input type="text" class="csc-location-updatedBy"/>
                     </div>
                 </div>
                 <div class="info-pair">
