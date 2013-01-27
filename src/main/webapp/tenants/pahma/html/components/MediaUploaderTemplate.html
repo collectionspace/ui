@@ -1,6 +1,9 @@
 <input type="button" class="csc-mediaUploader-removeMedia fl-force-right" />
 <div class="csc-mediaUploader cs-mediaUploader">
     <div class="info-column fl-force-left">
+        <span class="csc-mediaUploader-note"></span>
+    </div>
+    <div class="info-column fl-force-left">
         <div class="info-column2-20 fl-force-left" >
             <div class="info-pair">
                 <div class="header">
@@ -11,17 +14,33 @@
         <div class="info-column2-40 fl-force-left">
             <div class="info-pair">
                 <div class="content">
-                    <form class="csc-mediaUploader-fileUploaderContainer cs-mediaUploader-fileUploaderContainer" method="get" enctype="multipart/form-data" action="#">
-                        <div class="flc-uploader-queue-footer fl-uploader-queue-footer">
-                            <span class="flc-uploader-button-browse fl-uploader-browse">
-                                <span class="csc-mediaUploader-uploadInput"></span>
-                            </span>
+                    <div class="cs-mediaUploader-table-row">
+                        <span class="csc-mediaUploader-uploadButton">
+                            <span class="csc-mediaUploader-uploadButtonLabel"></span>
+                            <input class="csc-mediaUploader-uploadButtonInput" type="file">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-column fl-force-left">
+        <div class="info-column2-20 fl-force-left" >
+            <div class="info-pair">
+                <div class="header">
+                    <div class="csc-mediaUploader-linkMedia-label label"></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-column2-40 fl-force-left">
+            <div class="info-pair">
+                <div class="content">
+                    <div class="cs-mediaUploader-table-row">
+                        <div class="cs-mediaUploader-contextInput">
+                            <input type="text" class="input-alpha csc-mediaUploader-linkInput" />
                         </div>
-                        <div>
-                            <input type="button" class="csc-mediaUploader-uploadButton" />
-                        </div>
-                        <div class="flc-uploader-status-region fl-offScreen-hidden"></div>
-                    </form>
+                        <input disabled="disabled" type="button" class="csc-mediaUploader-linkButton" />
+                    </div>
                 </div>
             </div>
         </div>
