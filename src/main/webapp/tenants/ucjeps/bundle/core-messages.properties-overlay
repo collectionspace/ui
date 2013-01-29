@@ -148,7 +148,7 @@ collection-object-decimalLongitudeLabel: Decimal longitude
 collection-object-geodeticDatumLabel: Datum
 collection-object-coordUncertaintyLabel: Uncertainty
 collection-object-coordUncertaintyUnitLabel: Uncertainty units
-collection-object-vCoordinatesLabel: Verbatim coords
+collection-object-vCoordinatesLabel: Verbatim - other coords
 collection-object-vLatitudeLabel: Verbatim latitude
 collection-object-vLongitudeLabel: Verbatim longitude
 collection-object-vCoordSysLabel: Coordinate system
