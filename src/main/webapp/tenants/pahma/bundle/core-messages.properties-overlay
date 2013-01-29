@@ -155,6 +155,7 @@ collection-object-accessRestrictionOnBehalfOfLabel: On behalf of (organization)
 collection-object-accessRestrictionDateLabel: Date
               
 collection-object-culturalCareNoteLabel: Cultural care notes
+collection-object-computedCrateLabel: Computed crate
 
 # ------------------------------------------------------------
 # Added to support the collectionobjects_pahma local schema extensions
