@@ -155,6 +155,7 @@ collection-object-accessRestrictionOnBehalfOfLabel: On behalf of (organization)
 collection-object-accessRestrictionDateLabel: Date
               
 collection-object-culturalCareNoteLabel: Cultural care notes
+collection-object-computedCurrentLocationLabel: Computed current location
 collection-object-computedCrateLabel: Computed crate
 
 # ------------------------------------------------------------
