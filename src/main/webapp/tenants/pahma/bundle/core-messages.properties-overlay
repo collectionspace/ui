@@ -24,6 +24,23 @@ proceduresCategory: Action Records
 vocabulariesCategory: Authority Terms
 cataloging: Catalog Object
 
+loanin-editRecord: Edit In Loan Record
+loanout-editRecord: Edit Out Loan Record
+acquisition-editRecord: Edit Accession Record
+movement-editRecord: Edit Inventory/Movement Record
+intake-editRecord: Edit Object Entry Record
+media-editRecord: Edit Media Record
+claim-editRecord: Edit NAGPRA Claim Record
+ 
+loanin-recordList: Related In Loan Records
+loanout-recordList: Related Out Loan Records
+acquisition-recordList: Related Accession Records
+movement-recordList: Related Inventory/Movement Records
+intake-recordList: Related Object Entry Records
+media-recordList: Related Media Records
+claim-recordList: Related NAGPRA Claim Records
+
+
 # ------------------------------------------------------------
 # Added to support the collectionobjects_naturalhistory domain schema extensions
 # Taxon record
@@ -194,7 +211,7 @@ claim-tab: NAGPRA Claim
 loanin-tab: In Loan
 loanout-tab: Out Loan
 acquisition-tab: Accession
-movement-tab: Mov/Inv...
+movement-tab: Inv/Mov...
 intake-tab: Object Entry
 media-tab: Media
 
