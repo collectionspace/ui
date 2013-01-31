@@ -1902,7 +1902,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model",
                 events: {
                     removeApplierListeners: "{recordEditor}.events.onRenderTree",
-                    onSubmit: "{recordEditor}.events.onSave"
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
                 }
             }, "{arguments}.1"]
         });
@@ -1914,7 +1914,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 events: {
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
                     recordEditorOnRenderTree: "{recordEditor}.events.onRenderTree",
-                    onSubmit: "{recordEditor}.events.onSave"
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{computedField}.events.removeApplierListeners.fire",
