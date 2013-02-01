@@ -24,6 +24,9 @@ proceduresCategory: Action Records
 vocabulariesCategory: Authority Terms
 cataloging: Catalog Object
 
+procedures: Action Records
+
+
 loanin-editRecord: Edit In Loan Record
 loanout-editRecord: Edit Out Loan Record
 acquisition-editRecord: Edit Accession Record
