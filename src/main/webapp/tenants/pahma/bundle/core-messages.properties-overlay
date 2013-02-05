@@ -176,7 +176,9 @@ collection-object-accessRestrictionDateLabel: Date
               
 collection-object-culturalCareNoteLabel: Cultural care notes
 collection-object-computedCurrentLocationLabel: Computed current location
+collection-object-computedCurrentLocationSearchLabel: Computed current location
 collection-object-computedCrateLabel: Computed crate
+collection-object-computedCrateSearchLabel: Computed crate
 
 # ------------------------------------------------------------
 # Added to support the collectionobjects_pahma local schema extensions
