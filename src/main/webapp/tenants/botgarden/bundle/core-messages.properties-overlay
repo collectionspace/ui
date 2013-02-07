@@ -205,7 +205,7 @@ collection-object-numberOfObjectsLabel: Number of Sheets
 collection-object-handwrittenLabel: Handwritten label
 collection-object-postToPublicLabel: Post to public
 collection-object-cultivatedLabel: Cultivated
-collection-object-recordStatusLabel: Data Quality
+collection-object-recordStatusLabel: Provenance Data Quality
 
 collection-object-associatedTaxaGroupLabel: Associated Taxa
 collection-object-commonNameLabel: Common Name
