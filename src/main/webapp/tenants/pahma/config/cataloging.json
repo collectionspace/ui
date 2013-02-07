@@ -10,7 +10,7 @@
                             "identificationNumber": ".csc-object-identification-object-number" 
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber"]
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup"]
                     }
                 },
                 "titleBar": {
