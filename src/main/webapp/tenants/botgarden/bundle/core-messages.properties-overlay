@@ -134,7 +134,7 @@ taxon-relatedTermLabel: Related Term
 taxon-relatedTermTypeLabel: Type
 taxon-relatedTermSourceLabel: Source
 taxon-relatedTermSourceDetailLabel: Source Detail
-taxon-accessRestrictionsLabel: Access Restrictions
+taxon-accessRestrictionsLabel: Access Code
 taxon-familyLabel: Family
 taxon-plantAttributesGroupLabel: Plant Attributes
 taxon-attributeDateLabel: Attribute Date
