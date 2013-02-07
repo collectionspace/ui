@@ -412,15 +412,11 @@ pottag-tab: Pot Tag
 pottag-volunteerLabelsLabel: Volunteer Propagator Labels
 pottag-familyLabel: Family
 pottag-commonNameLabel: Common Name
-pottag-localeLabel: Locale
+pottag-localeLabel: Country Name/Locale
 pottag-taxonNameLabel: Taxon Name
 pottag-labelDataLabel: Label Data
 pottag-numberOfLabelsLabel: Number of Labels
 pottag-printLabelsLabel: Print Labels
-pottag-propagatorLabelsLabel: Propagation Labels
-pottag-gardenLocationAbreviationLabel: Garden Location Abreviation
-pottag-collectorLabel: Collector
-pottag-ecologyDataLabel: Ecology Data
 
 objectexit: Distribution
 objectexit-tab: Distribution
