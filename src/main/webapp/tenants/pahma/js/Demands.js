@@ -1906,7 +1906,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model",
                 events: {
                     removeApplierListeners: "{recordEditor}.events.onRenderTree",
-                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                    onSubmit: "{recordEditor}.saver.events.beforeSave",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{computedField}.events.removeAllListeners.fire",
+                        priority: "first"
+                    }
                 }
             }, "{arguments}.1"]
         });
@@ -1918,11 +1925,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 events: {
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
                     recordEditorOnRenderTree: "{recordEditor}.events.onRenderTree",
-                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                    onSubmit: "{recordEditor}.saver.events.beforeSave",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{computedField}.events.removeApplierListeners.fire",
-                    recordEditorOnRenderTree: "{computedField}.events.removeApplierListeners.fire"
+                    recordEditorOnRenderTree: "{computedField}.events.removeApplierListeners.fire",
+                    recordEditorAfterSave: {
+                        listener: "{computedField}.events.removeAllListeners.fire",
+                        priority: "first"
+                    }
                 }
             }, "{arguments}.1"]
         });
