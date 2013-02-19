@@ -148,10 +148,11 @@ collection-object-decimalLongitudeLabel: Decimal longitude
 collection-object-geodeticDatumLabel: Datum
 collection-object-coordUncertaintyLabel: Uncertainty
 collection-object-coordUncertaintyUnitLabel: Uncertainty units
-collection-object-vCoordinatesLabel: Verbatim coords
+collection-object-vCoordinatesLabel: TRS
+collection-object-vOtherCoordsLabel: Other coords
 collection-object-vLatitudeLabel: Verbatim latitude
 collection-object-vLongitudeLabel: Verbatim longitude
-collection-object-vCoordSysLabel: Coordinate system
+collection-object-vCoordSysLabel: Other coords system
 collection-object-vSpatialReferenceSystemLabel: Verbatim SRS
 collection-object-vDepthLabel: Depth
 collection-object-minDepthLabel: Min
