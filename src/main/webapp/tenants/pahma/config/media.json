@@ -13,7 +13,22 @@
                             "width": "800",
                             "height": "600"
                         },
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor"
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "components": { 
+                            "recordRenderer": {
+                                "options": {
+                                    "components": {
+                                        "uploader": {
+                                            "options": {
+                                                "elPaths": {
+                                                    "required": ""
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "titleBar": {
