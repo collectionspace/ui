@@ -1907,12 +1907,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 events: {
                     removeApplierListeners: "{recordEditor}.events.onRenderTree",
                     onSubmit: "{recordEditor}.saver.events.beforeSave",
-                    recordEditorAfterSave: "{recordEditor}.events.afterSave"
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel"
                 },
                 listeners: {
                     recordEditorAfterSave: {
                         listener: "{computedField}.events.removeAllListeners.fire",
                         priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{computedField}.events.removeAllListeners.fire"
                     }
                 }
             }, "{arguments}.1"]
@@ -1926,7 +1930,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
                     recordEditorOnRenderTree: "{recordEditor}.events.onRenderTree",
                     onSubmit: "{recordEditor}.saver.events.beforeSave",
-                    recordEditorAfterSave: "{recordEditor}.events.afterSave"
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel"
                 },
                 listeners: {
                     repeatableOnRefreshView: "{computedField}.events.removeApplierListeners.fire",
@@ -1934,6 +1939,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     recordEditorAfterSave: {
                         listener: "{computedField}.events.removeAllListeners.fire",
                         priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{computedField}.events.removeAllListeners.fire"
                     }
                 }
             }, "{arguments}.1"]
