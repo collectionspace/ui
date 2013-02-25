@@ -7,7 +7,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier", "fields.narrowerContexts"],
                         "selectors": {
                             "identificationNumber": ".csc-placeAuthority-termDisplayName"
                         }
