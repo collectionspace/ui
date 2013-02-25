@@ -10,7 +10,8 @@
                         "fieldsToIgnore": [
                             "csid",
                             "fields.csid",
-                            "fields.shortIdentifier"
+                            "fields.shortIdentifier",
+                            "fields.narrowerContexts"
                         ],
                         "selectors": {
                             "identificationNumber": ".csc-conceptAuthority-termDisplayName"
