@@ -135,7 +135,92 @@
                                 </div>
 							</div>							
 							<div class="info-column indent">
-								<table style="margin-bottom: 24px">
+								<div class="info-pair" style="margin: 0">
+									<div class="header">
+										<div class="label csc-collection-object-affinityTaxon-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-collection-object-affinityTaxon"/>
+									</div>
+								</div>
+							</div>
+							<div class="info-column indent">
+                                <table style="margin-bottom: 10px; margin-top: 20px">
+                                    <thead>
+                                        <tr>
+                                            <td class="csc-collection-object-hybridParent-label"/>
+                                            <td class="csc-collection-object-hybridParentQualifier-label"/>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="csc-taxonomicIdentGroup-taxonomicIdentHybridParentGroup">
+                                            <td class="flc-inlineEdit-text info-column2-80">
+                                                <input type="text" class="csc-collection-object-taxonomicIdentHybridParent editableText"/>
+                                            </td>
+                                            <td class="flc-inlineEdit-text">
+                                                <select class="csc-collection-object-taxonomicIdentHybridParentQualifier input-select-shorter">
+                                                    <option value="">Options not loaded</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+		                    </div>
+                            <div class="info-column indent">
+                                <table>
+									<thead>
+										<tr>
+											<!-- <td class="csc-collection-object-identKind-label"/> -->
+											<!-- Inadvertently shares label with object reference field -->
+											<td class="csc-collection-object-reference-label"/>
+											<td class="csc-collection-object-refPage-label"/>
+											<!-- <td class="csc-collection-object-notes-label"/> -->
+										</tr>
+									</thead>
+									<tbody>
+										<!-- <td class="flc-inlineEdit-text">
+												<select class="csc-taxonomic-identification-ident-kind input-select-longer">
+														<option value="">Options not loaded</option>
+												</select>
+										</td> -->
+									<td class="flc-inlineEdit-text">
+										<input type="text" class="csc-taxonomic-identification-reference editableText"/>
+									</td>
+									<td class="flc-inlineEdit-text">
+										<input type="text" class="csc-taxonomic-identification-reference-page editableText input-numeric-tiny"/>
+									</td>
+									<!-- <td class="flc-inlineEdit-text">
+											<input type="text" class="csc-taxonomic-identification-notes editableText"/>
+									</td> -->
+									</tbody>
+								</table>
+                            </div>
+							<div class="info-column indent">
+							    <div class="info-column2-40 fl-force-left">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-identKind-label"></div>
+										</div>
+										<div class="content">
+											<select class="csc-taxonomic-identification-ident-kind input-select-longer">
+												<option value="">Options not loaded</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="info-column2-60 fl-force-right">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label csc-collection-object-notes-label"></div>
+										</div>
+										<div class="content">
+											<textarea rows="4" class="input-textarea csc-taxonomic-identification-notes"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="info-column indent">
+								<table style="margin-bottom: 10px">
 									<thead>
 										<tr>
 											<td class="csc-collection-object-identBy-label"/>
@@ -158,91 +243,6 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
-                            <div class="info-column indent">
-                                <table style="margin-bottom: 12px">
-                                    <thead>
-                                        <tr>
-                                            <td class="csc-collection-object-hybridParent-label"/>
-                                            <td class="csc-collection-object-hybridParentQualifier-label"/>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="csc-taxonomicIdentGroup-taxonomicIdentHybridParentGroup">
-                                            <td class="flc-inlineEdit-text info-column2-80">
-                                                <input type="text" class="csc-collection-object-taxonomicIdentHybridParent editableText"/>
-                                            </td>
-                                            <td class="flc-inlineEdit-text">
-                                                <select class="csc-collection-object-taxonomicIdentHybridParentQualifier input-select-shorter">
-                                                    <option value="">Options not loaded</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-		                    </div>
-							<div class="info-column indent">
-								<div class="info-column2-40 fl-force-left">
-									<div class="info-pair">
-										<div class="header">
-											<div class="label csc-collection-object-identKind-label"></div>
-										</div>
-										<div class="content">
-											<select class="csc-taxonomic-identification-ident-kind input-select-longer">
-												<option value="">Options not loaded</option>
-											</select>
-										</div>
-									</div>
-									<table>
-										<thead>
-											<tr>
-												<!-- <td class="csc-collection-object-identKind-label"/> -->
-												<!-- Inadvertently shares label with object reference field -->
-												<td class="csc-collection-object-reference-label"/>
-												<td class="csc-collection-object-refPage-label"/>
-												<!-- <td class="csc-collection-object-notes-label"/> -->
-											</tr>
-										</thead>
-										<tbody>
-											<!-- <td class="flc-inlineEdit-text">
-													<select class="csc-taxonomic-identification-ident-kind input-select-longer">
-															<option value="">Options not loaded</option>
-													</select>
-											</td> -->
-										<td class="flc-inlineEdit-text">
-											<input type="text" class="csc-taxonomic-identification-reference editableText"/>
-										</td>
-										<td class="flc-inlineEdit-text">
-											<input type="text" class="csc-taxonomic-identification-reference-page editableText input-numeric-tiny"/>
-										</td>
-										<!-- <td class="flc-inlineEdit-text">
-												<input type="text" class="csc-taxonomic-identification-notes editableText"/>
-										</td> -->
-										</tbody>
-									</table>
-								</div>
-								<div class="info-column2-60 fl-force-right">
-									<div class="info-pair">
-										<div class="header">
-											<div class="label csc-collection-object-notes-label"></div>
-										</div>
-										<div class="content">
-											<textarea rows="4" class="input-textarea csc-taxonomic-identification-notes"></textarea>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="info-column indent">
-			                    <div class="info-column2-60 fl-force-right">
-									<div class="info-pair">
-										<div class="header">
-											<div class="label csc-collection-object-affinityTaxon-label"></div>
-										</div>
-										<div class="content">
-											<input type="text" class="csc-collection-object-affinityTaxon"/>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
