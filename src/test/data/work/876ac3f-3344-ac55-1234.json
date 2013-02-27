@@ -8,7 +8,7 @@
         "csid": "876ac3f-3344-ac55-1234",
         "updatedBy": "admin@core.collectionspace.org",
         "shortIdentifier": "WorkDisplayName8673509000000",
-        "updatedAt": "2013-02-08T02:01:11Z",
+        "updatedAt": "2013-02-26T02:01:11Z",
         "createdBy": "admin@core.collectionspace.org",
         "broaderContext": "",
         "createdAt": "2012-05-02T02:01:11Z",
@@ -26,7 +26,7 @@
         "publisherGroup": [
             {
                 "_primary": true,
-                "publisherType": "distributioncompany",
+                "publisherType": "distributor",
                 "publisher": "TriStar Pictures"
             }
         ],
