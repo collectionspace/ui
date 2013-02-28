@@ -1908,7 +1908,7 @@ cspace = cspace || {};
             },
             urls: cspace.componentUrlBuilder({
                 recordURL: "%tenant/%tname/%recordType/%csid",
-                roleUrl: "%tenant/%tname/role/"
+                roleUrl: "%tenant/%tname/role?pageSize=60"
             }),
             components: {
                 sourceRole: {
