@@ -259,13 +259,14 @@ cspace = cspace || {};
     
     cspace.reportProducer.generateReport = function (confirmation, parentBundle, requestReport, recordEditor) {
         if (fluid.get(recordEditor, "changeTracker.unsavedChanges")) {
-            openConfirmation(confirmation, "saveDialog", {
+            // CSPACE-5891: Calling deleteDialog instead of saveDialog 
+            // because it has only two buttons, instead of three...
+            // in order to remove the ability to run report with unsaved changes        
+            openConfirmation(confirmation, "deleteDialog", {
                 messages: [ "reporting-dialog-primaryMessageSave" ],
                 messagekeys: {
                     actText: "reporting-dialog-actTextSave",
-                    actAlt: "reporting-dialog-actAltSave",
-                    proceedText: "reporting-dialog-proceedTextSave",
-                    proceedAlt: "reporting-dialog-proceedAltSave"
+                    actAlt: "reporting-dialog-actAltSave"
                 }
             }, 
             parentBundle,
