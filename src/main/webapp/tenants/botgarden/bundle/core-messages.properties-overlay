@@ -417,6 +417,9 @@ pottag-taxonNameLabel: Taxon Name
 pottag-labelDataLabel: Label Data
 pottag-numberOfLabelsLabel: Number of Labels
 pottag-printLabelsLabel: Print Labels
+pottag-updatedAtLabel: Modified Date
+pottag-updatedAtStartLabel: Earliest
+pottag-updatedAtEndLabel: Latest
 
 objectexit: Distribution
 objectexit-tab: Distribution
