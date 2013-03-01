@@ -409,7 +409,7 @@ propagation-activityConcentrationLabel: Concentration
 #pottag
 pottag: Pot Tag
 pottag-tab: Pot Tag
-pottag-volunteerLabelsLabel: Volunteer Propagator Labels
+pottag-volunteerLabelsLabel: Pot Tag
 pottag-familyLabel: Family
 pottag-commonNameLabel: Common Name
 pottag-localeLabel: Country Name/Locale
