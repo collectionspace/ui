@@ -44,6 +44,7 @@ taxon-displayNameLabel: Display name (with authors)
 taxon-termStatusLabel: Term status (admin)
 taxon-taxonFullNameLabel: Short name (without authors)
 taxon-taxonRankLabel: Rank
+taxon-taxonMajorGroupLabel: Major group
 taxon-taxonCurrencyLabel: Current?
 taxon-taxonAuthorGroupLabel: Authors
 taxon-taxonAuthorLabel: Name
