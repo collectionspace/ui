@@ -72,6 +72,9 @@ collection-object-taxonomicRangeLabel: Geographic Range of Taxon
 collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
+collection-object-deadDateSearchLabel: Dead Date
+collection-object-deadDateSearchStartLabel: Earliest
+collection-object-deadDateSearchEndLabel: Latest
 
 # Inadvertently shares field name and label
 # with another entry below
