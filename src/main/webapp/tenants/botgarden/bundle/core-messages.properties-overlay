@@ -408,6 +408,7 @@ propagation-sporesLabel: Spore
 propagation-plantTypeLabel: Plant Type
 propagation-chemicalAppliedLabel: Chemical Applied
 propagation-activityConcentrationLabel: Concentration
+propagation-number: Propagation Number
 
 #pottag
 pottag: Pot Tag
