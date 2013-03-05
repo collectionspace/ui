@@ -423,6 +423,7 @@ pottag-printLabelsLabel: Print Labels
 pottag-updatedAtLabel: Modified Date
 pottag-updatedAtStartLabel: Earliest
 pottag-updatedAtEndLabel: Latest
+pottag-number: Pot Tag Number
 
 objectexit: Distribution
 objectexit-tab: Distribution
