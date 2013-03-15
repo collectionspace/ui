@@ -1,5 +1,3 @@
-# Added for botgarden tenant
-media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
 
 # Schema extensions to Cataloging record
 collection-object-taxonLabel: Name
@@ -157,6 +155,7 @@ taxon-diameterBreastHeightLabel: DBH
 login-current-info: 
 login-login: admin@botgarden.cspace.berkeley.edu
 login-rologin: reader@botgarden.cspace.berkeley.edu
+login-rologin-pwd: and password:
 
 #Vocabularies
 vocab-person: Default Persons
