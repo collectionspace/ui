@@ -2,22 +2,13 @@
     "pageBuilder": {
         "options": {
             "pageType": "movement",
-            "selectors": {
-                "recordEditor": ".csc-movement-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "recordLockContainer": ".csc-recordLock"
                         },
-                        "selectorsToIgnore": ["recordLockContainer", "recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
-                        "components": {
-                        },
-                        "applier": "{pageBuilder}.applier",
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model"
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor"
                     }
                 },
                 "titleBar": {
@@ -49,13 +40,6 @@
             "recordType": "movement",
             "schema": {
                 "movement": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/MovementTemplate.html",
-                    "templateSelector": ".csc-movement-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                }
             }
         }
     }
