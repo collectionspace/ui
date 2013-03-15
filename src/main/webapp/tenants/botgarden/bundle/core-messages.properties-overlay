@@ -299,6 +299,8 @@ loanout-numLentLabel: Number of Sheets
 loanout-sheetAccessionNumberLabel: Voucher Sheet Accession Number
 loanout-reviewCompleteLabel: Voucher Review Complete
 loanout-labelRequestedLabel: Label Requested
+loanout-editRecordLabel: Edit Voucher Record
+loanout-recordList: Related Voucher Records
 
 #loanin
 loanin-lenderLoanNumberLabel: Lender's No.
