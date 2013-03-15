@@ -27,33 +27,10 @@
                         "components": {
                             "relatedRecordsRecordEditor": {
                                 "options": {
-<<<<<<< HEAD
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "recordLockContainer": ".csc-recordLock"
-                                                },
-                                                "selectorsToIgnore": [
-                                                    "recordLockContainer",
-                                                    "recordTraverser",
-                                                    "requiredFields",
-                                                    "identificationNumber",
-                                                    "header",
-                                                    "togglable"
-                                                ],
-                                                "components": {
-                                                }
-                                            }
-                                        }
-                                    }
-=======
                                     "selectors": {
-                                        "identificationNumber": ".csc-movement-currentLocation",
                                         "recordLockContainer": ".csc-recordLock"
                                     },
                                     "uispec": "{pageBuilder}.options.uispec.details"
->>>>>>> local_v3.2
                                 }
                             }
                         }
