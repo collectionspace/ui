@@ -360,6 +360,8 @@ movement-labelRequestedLabel: Label Requested
 movement-labelSizeLabel: Label Size
 movement-labelStandTypeLabel: Stand Type
 movement-labelCountLabel: Label Count
+movement-editRecordLabel: Edit Current Location Record
+movement-recordListLabel: Related Current Location Records
 
 #location
 location: Garden Location
