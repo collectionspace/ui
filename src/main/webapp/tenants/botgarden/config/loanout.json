@@ -2,16 +2,14 @@
     "pageBuilder": {
         "options": {
             "pageType": "loanout",
-            "selectors": {
-                "recordEditor": ".csc-loanout-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-                        "applier": "{pageBuilder}.applier",
+                        "selectors": {
+                            "identificationNumber": ".csc-loanOut-loanOutNumber"
+                        },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.loanOutNumber"]
                     }
                 },
@@ -45,13 +43,6 @@
             "recordType": "loanout",
             "schema": {
                 "loanout": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/LoanoutTemplate.html",
-                    "templateSelector": ".csc-loanout-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }
