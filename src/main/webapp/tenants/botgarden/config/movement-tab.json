@@ -1,0 +1,67 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "movement",
+            "schema": {
+                "movement": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/MovementTemplate.html",
+                    "templateSelector": ".csc-movement-template",
+                    "targetSelector": ".csc-relatedRecordsTab-movement .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "movement-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-movement"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Current Location Record",
+                            "recordList": "Related Current Location Records",
+                            "newRecordRow": "New Current Location Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "recordLockContainer": ".csc-recordLock"
+                                                },
+                                                "selectorsToIgnore": [
+                                                    "recordLockContainer",
+                                                    "recordTraverser",
+                                                    "requiredFields",
+                                                    "identificationNumber",
+                                                    "header",
+                                                    "togglable"
+                                                ],
+                                                "components": {
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

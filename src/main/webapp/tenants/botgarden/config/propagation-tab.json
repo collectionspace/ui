@@ -1,0 +1,57 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "propagation",
+            "schema": {
+                "propagation": null
+            },
+            "pageSpec": {
+                "details": {
+                    "href": "pages/PropagationTemplate.html",
+                    "templateSelector": ".csc-propagation-template",
+                    "targetSelector": ".csc-relatedRecordsTab-propagation .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "propagation-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-propagation"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Propagation Record",
+                            "recordList": "Related Propagation Records",
+                            "newRecordRow": "New Propagation Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-propagation-propNumber"
+                                                } 
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
