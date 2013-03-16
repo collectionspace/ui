@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "pottag",
-            "selectors": {
-                "recordEditor": ".csc-pottag-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-pottag-propNumber"
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.propNumber"]
                     }
                 },
@@ -47,13 +42,6 @@
             "recordType": "pottag",
             "schema": {
                 "pottag": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/PottagTemplate.html",
-                    "templateSelector": ".csc-pottag-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }
