@@ -1817,8 +1817,10 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
-.info-pair-date .content {
+/* This has been around forever, in 3.2 upgrade, have a hunch we don't need it*/
+/*.info-pair-date .content {
     background-color:#fff;}
+*/
 .info-pair-date .content input {
     border-right: none;
 }
