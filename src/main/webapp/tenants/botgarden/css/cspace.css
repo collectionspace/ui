@@ -2125,7 +2125,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 .cs-sidebar-mediumImage {
     max-height: 165px;
-	cursor:pointer;
 }
 .cs-reportProducer, .cs-batchRunner {
     padding-left: 10px;
