@@ -4,13 +4,6 @@
             "recordType": "objectexit",
             "schema": {
                 "objectexit": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/ObjectexitTemplate.html",
-                    "templateSelector": ".csc-objectexit-template",
-                    "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
-                }
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Distribution Record",
-                            "recordList": "Related Distribution Records",
-                            "newRecordRow": "New Distribution Record"
+                            "editRecord": "objectexit-editRecord",
+                            "recordList": "objectexit-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-objectexit-exitNumber"
-                                                } 
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-objectexit-exitNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

@@ -442,3 +442,5 @@ objectexit-exitReasonLabel: Distribution Reason
 objectexit-exitNoteLabel: Distribution Note
 objectexit-identificationNumberRequired: Please specify a Distribution Number
 objectexit-currentOwnerLabel: Authorized By
+objectexit-editRecordLabel: Edit Distribution Record
+objectexit-recordListLabel: Related Distribution Records
