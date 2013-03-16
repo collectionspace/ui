@@ -2,9 +2,6 @@
     "pageBuilder": {
         "options": {
             "pageType": "propagation",
-            "selectors": {
-                "recordEditor": ".csc-propagation-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
@@ -12,9 +9,7 @@
                         "selectors": {
                             "identificationNumber": ".csc-propagation-propNumber"
                         },
-                        "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.propNumber"]
                     }
                 },
@@ -47,13 +42,6 @@
             "recordType": "propagation",
             "schema": {
                 "propagation": null
-            },
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "pages/PropagationTemplate.html",
-                    "templateSelector": ".csc-propagation-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
             }
         }
     }
