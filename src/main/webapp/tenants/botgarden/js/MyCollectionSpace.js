@@ -15,6 +15,8 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
+    // Component responsible for the collection space page
+    // rendering.
     fluid.defaults("cspace.myCollectionSpace", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         selectors: {
@@ -86,6 +88,10 @@ cspace = cspace || {};
             }
         },
         model: {
+            // Model is separated into categories:
+            // * Cataloging
+            // * Procedures
+            // All of the record types are resolved with permission resolver.
             categories: [{
                 expander: {
                     type: "fluid.deferredInvokeCall",
@@ -114,7 +120,6 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}",
             togglable: {
                 type: "cspace.util.togglable",
                 createOnEvent: "afterRender"
@@ -122,6 +127,7 @@ cspace = cspace || {};
         },
         preInitFunction: "cspace.myCollectionSpace.preInit",
         finalInitFunction: "cspace.myCollectionSpace.finalInit",
+        // My Collection Space template.
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -132,7 +138,8 @@ cspace = cspace || {};
             })
         }
     });
-    
+
+    // Build model based on permissible records.
     cspace.myCollectionSpace.buildModel = function (options, records) {
         if (!records || records.length < 1) {
             return;
@@ -153,7 +160,10 @@ cspace = cspace || {};
     };
 
     cspace.myCollectionSpace.preInit = function (that) {
+        // Pre-process the model.
         cspace.util.modelBuilder.fixupModel(that.model);
+        // Specify all list view subcomponents depending on what
+        // record types are permitted.
         var options = that.options;
         fluid.each(options.records, function (record) {
             options.components[record] = {
@@ -182,6 +192,7 @@ cspace = cspace || {};
         });
     };
 
+    // Render the page at the end of initialization.
     cspace.myCollectionSpace.finalInit = function (that) {
         that.refreshView();
     };
