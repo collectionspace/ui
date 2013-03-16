@@ -428,6 +428,8 @@ pottag-updatedAtLabel: Modified Date
 pottag-updatedAtStartLabel: Earliest
 pottag-updatedAtEndLabel: Latest
 pottag-number: Pot Tag Number
+pottag-editRecordLabel: Edit Plant Label Record
+pottag-recordListLabel: Related Plant Label Records
 
 objectexit: Distribution
 objectexit-tab: Distribution
