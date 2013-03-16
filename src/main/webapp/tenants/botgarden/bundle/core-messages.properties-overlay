@@ -299,7 +299,7 @@ loanout-numLentLabel: Number of Sheets
 loanout-sheetAccessionNumberLabel: Voucher Sheet Accession Number
 loanout-reviewCompleteLabel: Voucher Review Complete
 loanout-labelRequestedLabel: Label Requested
-loanout-editRecordLabel: Edit Voucher Record
+loanout-editRecord: Edit Voucher Record
 loanout-recordList: Related Voucher Records
 
 #loanin
@@ -360,8 +360,8 @@ movement-labelRequestedLabel: Label Requested
 movement-labelSizeLabel: Label Size
 movement-labelStandTypeLabel: Stand Type
 movement-labelCountLabel: Label Count
-movement-editRecordLabel: Edit Current Location Record
-movement-recordListLabel: Related Current Location Records
+movement-editRecord: Edit Current Location Record
+movement-recordList: Related Current Location Records
 
 #location
 location: Garden Location
@@ -412,8 +412,8 @@ propagation-plantTypeLabel: Plant Type
 propagation-chemicalAppliedLabel: Chemical Applied
 propagation-activityConcentrationLabel: Concentration
 propagation-number: Propagation Number
-propagation-editRecordLabel: Edit Propagation Record
-propagation-recordListLabel: Related Propagation Records
+propagation-editRecord: Edit Propagation Record
+propagation-recordList: Related Propagation Records
 
 #pottag
 pottag: Pot Tag
@@ -430,8 +430,8 @@ pottag-updatedAtLabel: Modified Date
 pottag-updatedAtStartLabel: Earliest
 pottag-updatedAtEndLabel: Latest
 pottag-number: Pot Tag Number
-pottag-editRecordLabel: Edit Plant Label Record
-pottag-recordListLabel: Related Plant Label Records
+pottag-editRecord: Edit Plant Label Record
+pottag-recordList: Related Plant Label Records
 
 objectexit: Distribution
 objectexit-tab: Distribution
@@ -446,5 +446,5 @@ objectexit-exitReasonLabel: Distribution Reason
 objectexit-exitNoteLabel: Distribution Note
 objectexit-identificationNumberRequired: Please specify a Distribution Number
 objectexit-currentOwnerLabel: Authorized By
-objectexit-editRecordLabel: Edit Distribution Record
-objectexit-recordListLabel: Related Distribution Records
+objectexit-editRecord: Edit Distribution Record
+objectexit-recordList: Related Distribution Records
