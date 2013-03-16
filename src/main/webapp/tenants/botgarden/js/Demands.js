@@ -859,16 +859,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        fluid.demands("cspace.recordEditor.finishSave", "cspace.recordEditor", {
-            funcName: "cspace.recordEditor.finishSave",
-            args: ["{recordEditor}", "{arguments}.0", "{arguments}.1"]
-        });
-        
-        fluid.demands("cspace.recordEditor.finishSave", ["cspace.recordEditor", "movement.lock"], {
-            funcName: "cspace.recordEditor.finishSaveMovement",
-            args: ["{recordEditor}", "{arguments}.0", "{arguments}.1"]
-        });
-        
         fluid.demands("cancel", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.cancel",
             args: "{recordEditor}"
