@@ -4,13 +4,6 @@
             "recordType": "propagation",
             "schema": {
                 "propagation": null
-            },
-            "pageSpec": {
-                "details": {
-                    "href": "pages/PropagationTemplate.html",
-                    "templateSelector": ".csc-propagation-template",
-                    "targetSelector": ".csc-relatedRecordsTab-propagation .csc-relatedRecordsTab-recordEditor"
-                } 
             }
         }
     },
@@ -26,26 +19,18 @@
                     "options": {
                         "primary": "{pageBuilder}.options.primary",
                         "related": "{pageBuilder}.options.related",
-                        "applier": "{pageBuilder}.applier",
-                        "model": "{pageBuilder}.model",
-                        "uispec": "{pageBuilder}.options.uispec",
+                        "csid": "{globalModel}.model.primaryModel.csid",
                         "strings": {
-                            "editRecord": "Edit Propagation Record",
-                            "recordList": "Related Propagation Records",
-                            "newRecordRow": "New Propagation Record"
+                            "editRecord": "propagation-editRecord",
+                            "recordList": "propagation-recordList"
                         },
                         "components": {
-                            "listEditor": {
+                            "relatedRecordsRecordEditor": {
                                 "options": {
-                                    "components": {
-                                        "details": {
-                                            "options": {
-                                                "selectors": {
-                                                    "identificationNumber": ".csc-propagation-propNumber"
-                                                } 
-                                            } 
-                                        }
-                                    }
+                                    "selectors": {
+                                        "identificationNumber": ".csc-propagation-propNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
                                 }
                             }
                         }

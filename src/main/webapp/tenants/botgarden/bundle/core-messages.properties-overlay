@@ -412,6 +412,8 @@ propagation-plantTypeLabel: Plant Type
 propagation-chemicalAppliedLabel: Chemical Applied
 propagation-activityConcentrationLabel: Concentration
 propagation-number: Propagation Number
+propagation-editRecordLabel: Edit Propagation Record
+propagation-recordListLabel: Related Propagation Records
 
 #pottag
 pottag: Pot Tag
