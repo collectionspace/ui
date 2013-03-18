@@ -23,8 +23,6 @@
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
@@ -45,8 +43,6 @@
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/MyCollectionSpace.js</js>
@@ -110,8 +106,6 @@
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
@@ -128,8 +122,6 @@
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/PasswordValidator.js</js>
     <js>/defaults/js/Login.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/PageBuilder.js</js>
@@ -140,6 +132,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/tenants/ucjeps/css/cspace.css</css>
+    <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/cabinet.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/search.css</css>
@@ -159,18 +152,19 @@
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/tenants/ucjeps/js/RecordEditor.js</js>
-    <js>/defaults/js/RecordList.js</js>
     <js>/defaults/js/PasswordValidator.js</js>
     <js>/defaults/js/Repeatable.js</js>
-    <js>/defaults/js/ListEditor.js</js>
     <js>/defaults/js/TitleBar.js</js>
+    <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Tabs.js</js>
     <js>/defaults/js/Admin.js</js>
     <js>/defaults/js/Search.js</js>
+    <js>/defaults/js/RecordTraverser.js</js>
+    <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
+    <js>/defaults/lib/datejs/src/core.js</js>
+    <js>/defaults/lib/datejs/src/parser.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   
@@ -178,7 +172,6 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
     <css>/tenants/ucjeps/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
@@ -204,8 +197,6 @@
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/js/MessageBar.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
@@ -215,18 +206,19 @@
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/RelationManager.js</js>
-    <js>/defaults/js/RecordList.js</js>
     <js>/defaults/js/RelatedRecordsList.js</js>
     <js>/defaults/js/NumberPatternChooser.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/Sidebar.js</js>
     <js>/defaults/js/TitleBar.js</js>
     <js>/defaults/js/Tabs.js</js>
+    <js>/defaults/js/ExternalURL.js</js>
+    <js>/defaults/js/MediaView.js</js>
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/ReportProducer.js</js>
     <js>/defaults/js/BatchRunner.js</js>
-    <js>/defaults/js/ListEditor.js</js>
+    <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/RelatedRecordsTab.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/js/Georef.js</js>
@@ -244,7 +236,6 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
     <css>/tenants/ucjeps/css/cspace.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -264,8 +255,6 @@
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
-    <js>/defaults/js/DataSource.js</js>
-    <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
@@ -277,6 +266,8 @@
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/TitleBar.js</js>
     <js>/defaults/js/MediaUploader.js</js>
+    <js>/defaults/js/ExternalURL.js</js>
+    <js>/defaults/js/MediaView.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
