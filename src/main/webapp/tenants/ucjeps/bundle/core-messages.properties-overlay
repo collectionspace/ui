@@ -1,6 +1,3 @@
-# Added for ucjeps tenant
-media-originalMediaOptions: height=%height,width=%width,scrollbars=%scrollbars
-
 # Schema extensions to Cataloging record
 collection-object-taxonLabel: Name
 collection-object-qualifierLabel: Qualifier
@@ -76,6 +73,7 @@ taxon-relatedTermSourceDetailLabel: Source Detail
 login-current-info: 
 login-login: admin@ucjeps.cspace.berkeley.edu
 login-rologin: reader@ucjeps.cspace.berkeley.edu
+login-rologin-pwd:  and password: 
 
 #Vocabularies
 vocab-person: Default Persons
