@@ -1,0 +1,472 @@
+<div class="csc-loanout-template csc-listEditor-details">
+    <div class="csc-loanout">
+        <div id="secondary-nav">		
+			<div id="secondary-nav-menu-sub">
+                <span class="csc-recordTraverser"></span>
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="time-stamp"> </div>
+			</div>
+		</div>
+		
+		<div class="csc-templateEditor"></div>
+        
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle label csc-loanout-loanoutInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-40 fl-force-left">
+						<div class="info-pair">
+							<span class="label required csc-loanout-loanOutNumber-label"></span><span class="required">*</span>
+							<div class="content csc-loanOut-loanOutNumber-patternChooserContainer clearfix">
+								<input type="text" class="input-numeric-long csc-loanOut-loanOutNumber pattern-chooser-input" />
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-60 fl-force-right">
+						<div class="info-column2-60 fl-force-left">
+							<div class="info-pair-select">
+								<div class="header">
+									<div class="label csc-loanout-loanPurpose-label"></div>
+								</div>
+								<div class="content">
+									<select class="csc-loanOut-loanPurpose input-select"><option value="">Options not loaded</option></select>
+								</div>
+							</div>
+						</div>
+						<div class="info-column2-40 fl-force-right">
+							<div class="info-pair-select">
+								<div class="header">
+									<div class="label csc-loanout-collection-label"></div>
+								</div>
+								<div class="content">
+									<select class="csc-loanout-collection input-select"><option value="">Options not loaded</option></select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="info-column">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-loanout-lenderGroup-label"></div>
+                        </div>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="label csc-loanout-lendersAuthorizer-label"></td>
+                                        <td class="label csc-loanout-lendersContact-label"></td>
+                                        <td class="label csc-loanout-lendersAuthorizationDate-label"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="csc-loanOut-lendersAuthorizer" /></td>
+                                        <td><input type="text" class="csc-loanOut-lendersContact" /></td>
+                                        <td><input type="text" class="csc-loanOut-lendersAuthorizationDate" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+				
+				<div class="info-column">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-loanout-borrower-label"></div>
+                        </div>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="label csc-loanout-borrower-label"></td>
+                                        <td class="label csc-loanout-borrowersContact-label"></td>
+                                        <td class="label csc-loanout-borrowersAuthorizer-label"></td>
+                                        <td class="label csc-loanout-borrowersAuthorizationDate-label"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="csc-loanOut-borrower" /></td>
+                                        <td><input type="text" class="csc-loanOut-borrowersContact" /></td>
+                                        <td><input type="text" class="csc-loanout-borrowersAuthorizer" /></td>
+                                        <td><input type="text" class="csc-loanout-borrowersAuthorizationDate" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-column">
+                    <div class="info-column2-50 fl-force-left">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-loanout-specialConditionsOfLoan-label"></div>
+                            </div>
+                            <div class="content">
+                                <textarea rows="4" cols="30" class="input-textarea csc-loanOut-loanOutConditions" />
+                            </div>
+                        </div>                      
+                    </div>
+                    
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-loanout-loanOutNote-label"></div>
+                            </div>
+                            <div class="content">
+                                <textarea rows="4" cols="30" class="input-textarea csc-loanOut-loanOutNote"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label csc-loanout-majorGroup-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-loanout-majorGroup input-select"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="info-column">
+					<div class="info-column3 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-loanout-geography-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-loanout-geography" />
+							</div>
+						</div>
+					</div>
+					<div class="info-column3 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-loanout-taxonomy-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-loanout-taxonomy" />
+							</div>
+						</div>
+					</div>
+					<div class="info-column3 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-loanout-objKind-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-loanout-objKind input-select"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-loanout-loanStatusGroup-label"></div>
+						</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td class="label csc-loanout-loanStatus-label"></td>
+										<td class="label csc-loanout-loanStatusDate-label"></td>
+										<td class="label csc-loanout-loanStatusNote-label"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="csc-loanout-loanStatusGroup">
+										<td><select class="input-select csc-loanOut-loanedObjectStatus"><option value="">Options not loaded</option></select></td>
+										<td><input type="text" class="csc-loanOut-loanedObjectStatusDate" /></td>
+										<td><input type="text" class="csc-loanOut-loanedObjectStatusNote" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="info-column">
+					<div class="info-column2-60 fl-force-left">
+						<div class="info-column">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label csc-loanout-loanOutDate-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanOut-loanOutDate" />
+									</div>
+								</div>
+							</div>
+							<div class="info-column2-50 fl-force-right">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label csc-loanout-shipDate-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-shipDate" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="info-column">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair-select">
+									<div class="header">
+										<div class="label csc-loanout-transportMethod-label"></div>
+									</div>
+									<div class="content">
+										<select class="csc-loanout-transportMethod input-select"><option value="">Options not loaded</option></select>
+									</div>
+								</div>
+							</div>
+							<div class="info-column2-50 fl-force-right">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label csc-loanout-numPackages-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-numPackages input-numeric-medium" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="info-column">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label csc-loanout-acknowledgeDate-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-acknowledgeDate" />
+									</div>
+								</div>
+							</div>
+							<div class="info-column2-50 fl-force-right">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label csc-loanout-loanReturnDate-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanOut-loanReturnDate" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="info-column">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label csc-loanout-loanRenewalApplicationDate-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanOut-loanRenewalApplicationDate" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-40 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-loanout-manualCounts-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<tbody>
+										<tr>
+											<td class="label csc-loanout-numLent-label"></td>
+											<td><input type="text" class="csc-loanout-numLent " /></td>
+										</tr>
+										<tr>
+											<td class="label csc-loanout-numReturned-label"></td>
+											<td><input type="text" class="csc-loanout-numReturned" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-loanout-balance-label"></td>
+											<td><input type="text" class="csc-loanout-balance" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-loanout-discrepancy-label"></td>
+											<td><input type="text" class="csc-loanout-discrepancy" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle label csc-loanout-objectInformation-label cs-togglable-collapsed"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display: none">
+				<div class="info-column2-50">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-loanout-loanoutItems-label"></div>
+						</div>
+						<div class="content">
+							<textarea rows="4" cols="30" class="input-textarea csc-loanout-loanoutItems" />
+						</div>
+					</div>
+				</div>
+				<div class="info-column" id="multipleEdit">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label"><br/></div>
+						</div>
+						<div class="content csc-loanout-objectGroup">
+							<table>
+								<thead>
+									<tr>
+										<td class="label csc-loanout-objectNumbers-label"></td>
+										<td class="label csc-loanout-objectQuantity-label"></td>
+										<td class="label csc-loanout-objectConditions-label"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="text" class="csc-loanout-objectNumbers" /></td>
+										<td class="input-numeric-small"><input type="text" class="csc-loanout-objectQuantity" /></td>
+										<td><input type="text" class="csc-loanout-objectConditions" /></td>
+									</tr>
+								</tbody>
+							</table>
+							<br/>
+							<div class="info-column indent">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label csc-loanout-objectNotes-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-objectNotes" />
+									</div>
+								</div>	                    
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle label csc-loanout-returnInformation-label cs-togglable-collapsed"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display: none">
+				<div class="info-column" id="multipleEdit">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label"><br/></div>
+						</div>
+						<div class="content csc-loanout-returnGroup">
+							<table>
+								<thead>
+									<tr>
+										<td class="label csc-loanout-returnObjectNumbers-label"></td>
+										<td class="label csc-loanout-returnQuantity-label"></td>
+										<td class="label csc-loanout-returnDate-label"></td>
+										<td class="label csc-loanout-returnDetermination-label"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="text" class="csc-loanout-returnObjectNumbers" /></td>
+										<td class="input-numeric-small"><input type="text" class="csc-loanout-returnQuantity" /></td>
+										<td><input type="text" class="csc-loanout-returnDate" style="float: left" /></td>
+										<td><input type="text" class="csc-loanout-returnDetermination" /></td>
+									</tr>
+								</tbody>
+							</table>
+							<br/>
+							<div class="info-column indent">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label csc-loanout-returnNotes-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-returnNotes" />
+									</div>
+								</div>	                    
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle label csc-loanout-transferInformation-label cs-togglable-collapsed"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display: none">
+				<div class="info-column" id="multipleEdit">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label"><br/></div>
+						</div>
+						<div class="content csc-loanout-transferGroup">
+							<table>
+								<thead>
+									<tr>
+										<td class="label csc-loanout-transferDate-label"></td>
+										<td class="label csc-loanout-transferOrg-label"></td>
+										<td class="label csc-loanout-transferPerson-label"></td>
+										<td class="label csc-loanout-transferDirector-label"></td>
+										<td class="label csc-loanout-transferQuantity-label"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="text" class="csc-loanout-transferDate" style="float: left" /></td>
+										<td><input type="text" class="csc-loanout-transferOrg" /></td>
+										<td><input type="text" class="csc-loanout-transferPerson" /></td>
+										<td><input type="text" class="csc-loanout-transferDirector" /></td>
+										<td class="input-numeric-small"><input type="text" class="csc-loanout-transferQuantity" /></td>
+									</tr>
+								</tbody>
+							</table>
+							<br/>
+							<div class="info-column indent">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label csc-loanout-transferNotes-label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-loanout-transferNotes" />
+									</div>
+								</div>	                    
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="secondary-nav-footer">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-createFromExisting createFromExistingButton" />
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
