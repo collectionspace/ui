@@ -6,13 +6,8 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-<<<<<<< HEAD
-                        "applier": "{pageBuilder}.applier",
-=======
                         "selectors": {
-                            "identificationNumber": ".csc-object-identification-object-number" 
-                        },
->>>>>>> ucjeps_3.2
+                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts"]
                     }
