@@ -2,17 +2,19 @@
     "pageBuilder": {
         "options": {
             "pageType": "cataloging",
-            "selectors": {
-                "recordEditor": ".csc-cataloging-template"
-            },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
+<<<<<<< HEAD
                         "applier": "{pageBuilder}.applier",
+=======
+                        "selectors": {
+                            "identificationNumber": ".csc-object-identification-object-number" 
+                        },
+>>>>>>> ucjeps_3.2
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber"]
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts"]
                     }
                 },
                 "titleBar": {
@@ -49,17 +51,7 @@
             "recordType": "cataloging",
             "schema": {
                 "cataloging": null
-            },
-            "components": {
-                "templateLocator": {
-                    "type": "cspace.pageBuilderIO.templateLocator",
-                    "options": {
-                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
-                        "recordType": "{pageBuilderIO}.options.recordType"
-                    }
-                }
-            },
-            "pageSpec": {}
+            }
         }
     }
 }
