@@ -1,235 +1,18 @@
-<div id="taxon" class="csc-taxon-template">
-    <div class="csc-authority-container">
-        <div id="secondary-nav">
-            <div id="secondary-nav-menu-sub">
-                <span class="csc-recordTraverser"></span>
-                <div class="button-row">
-                    <a style="display:none;" class="csc-goto gotoButton"></a>
-                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
-                    <input type="button" class="csc-cancel cancelButton" />
-                    <input type="button" class="csc-delete deleteButton" />
-                    <input type="button" class="csc-save saveButton" />
-                </div>
-                <div class="time-stamp"> </div>
+<div class="csc-taxon-taxonNameAuthorityInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
+<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+    
+    <div class="info-column">
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-taxon-preferredTaxon-label"></div>
             </div>
-        </div>
-
-        <div class="csc-templateEditor"></div>
-
-        <div class="fl-container-flex fl-fix information-group">
-            <div class="csc-taxon-taxonNameAuthorityInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
-            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                
-                <div class="info-column">
-                    <div class="info-pair">
-                        <div class="header">
-                            <div class="label csc-taxon-preferredTaxon-label"></div>
-                        </div>
-                        <div class="content">
-                            <div class="csc-preferred-taxonAuthority"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-column">
-                    <div class="info-column2-50 fl-force-left">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonRank-label label"></div>
-                            </div>
-                            <div class="content">
-                                <select class="csc-taxon-taxonRank input-select"><option value="">Options not loaded</option></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-column2-50 fl-force-right">
-                        <!-- <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonCurrency-label label"></div>
-                            </div>
-                            <div class="content">
-                                <select class="csc-taxon-taxonCurrency input-select"><option value="">Options not loaded</option></select>
-                            </div>
-                        </div> -->
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonMajorGroup-label label"></div>
-                            </div>
-                            <div class="content">
-                                <select class="csc-taxon-taxonMajorGroup input-select"><option value="">Options not loaded</option></select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-column">
-                    <div class="info-pair">
-                        <div class="header">
-                            <div class="csc-taxon-taxonAuthorGroup-label label"></div>
-                        </div>
-                        <div class="content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td class="csc-taxon-taxonAuthor-label label"></td>
-                                        <td class="csc-taxon-taxonAuthorType-label label"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="csc-taxon-taxonAuthorGroup">
-                                        <td><input type="text" class="csc-taxon-taxonAuthor" /></td>
-                                        <td><select class="csc-taxon-taxonAuthorType input-select"><option value="">Options not loaded</option></select></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-column">
-                    <div class="info-column2-50 fl-force-left" >
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonYear-label label"></div>
-                            </div>
-                            <div class="content">
-                                <input type="text" class="csc-taxon-taxonYear" />
-                            </div>
-                        </div>
-                        <div class="info-pair-select">
-                            <div class="header">
-                                <div class="csc-taxon-taxonIsNamedHybrid-label label"></div>
-                            </div>
-                            <div class="content">
-                                <input type="checkbox" class="csc-taxon-taxonIsNamedHybrid"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-column2-50 fl-force-right">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonCitation-label label"></div>
-                            </div>
-                            <div class="content repeatable">
-                                <input type="text" class="csc-taxon-taxonCitation" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-column">
-                    <div class="info-column2-50 fl-force-left">
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonBasionym-label label"></div>
-                            </div>
-                            <div class="content">
-                                <input type="text" class="csc-taxon-taxonBasionym" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-column2-50 fl-force-right" >
-                        <div class="info-pair">
-                            <div class="header">
-                                <div class="csc-taxon-taxonNote-label label"></div>
-                            </div>
-                            <div class="content">
-                                <textarea rows="2" cols="60" class="input-textarea csc-taxon-taxonNote" ></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-column">
-                    <div class="info-pair">
-                        <div class="header">
-                            <div class="csc-taxon-commonNameGroup-label label"></div>
-                        </div>
-                        <div class="content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td class="csc-taxon-commonName-label label"></td>
-                                        <td class="csc-taxon-commonNameLanguage-label label"></td>
-                                        <td class="csc-taxon-commonNameSource-label label"></td>
-                                        <td class="csc-taxon-commonNameSourceDetail-label label"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="csc-taxon-commonNameGroup">
-                                        <td><input type="text" class="csc-taxon-commonName" /></td>
-                                        <td><select class="csc-taxon-commonNameLanguage input-select"><option value="">Options not loaded</option></select></td>
-                                        <td><input type="text" class="csc-taxon-commonNameSource" /></td>
-                                        <td><input type="text" class="csc-taxon-commonNameSourceDetail" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-column">
-                    <div class="info-pair">
-                        <div class="header">
-                            <div class="csc-taxon-relatedTermGroup-label label"></div>
-                        </div>
-                        <div class="content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td class="csc-taxon-relatedTerm-label label"></td>
-                                        <td class="csc-taxon-relatedTermType-label label"></td>
-                                        <td class="csc-taxon-relatedTermSource-label label"></td>
-                                        <td class="csc-taxon-relatedTermSourceDetail-label label"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="csc-taxon-relatedTermGroup">
-                                        <td><input type="text" class="csc-taxon-relatedTerm" /></td>
-                                        <td><select class="csc-taxon-relatedTermType input-select"><option value="">Options not loaded</option></select></td>
-                                        <td><input type="text" class="csc-taxon-relatedTermSource" /></td>
-                                        <td><input type="text" class="csc-taxon-relatedTermSourceDetail" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="csc-hierarchy"></div>
-
-        <div id="secondary-nav-footer">
-            <div id="secondary-nav-footer-menu-sub">
-                <div class="button-row">
-                    <a style="display:none;" class="csc-goto gotoButton"></a>
-                    <input type="button" class="csc-createFromExisting createFromExistingButton" />
-                    <input type="button" class="csc-cancel cancelButton" />
-                    <input type="button" class="csc-delete deleteButton" />
-                    <input type="button" class="csc-save saveButton" />
-                </div>
+            <div class="content">
+                <div class="csc-preferred-taxonAuthority cs-multipleEdit"></div>
             </div>
         </div>
     </div>
-</div>
-
-<!--
-
-<div class="info-column">
-    <div class="info-pair">
-        <div class="header">
-            <div class="csc-taxon-displayName-label label"><span class="required">*</span></div>
-        </div>
-        <div class="content">
-            <input type="text" class="csc-taxon-displayName" />
-        </div>
-    </div>
-</div>
-
--->
-<!--
-
-<div class="info-column">
-    <div class="info-column2-50 fl-force-left">
-        <div class="info-column2-50 fl-force-left" >
+    <div class="info-column">
+        <div class="info-column2-50 fl-force-left">
             <div class="info-pair">
                 <div class="header">
                     <div class="csc-taxon-taxonRank-label label"></div>
@@ -240,42 +23,26 @@
             </div>
         </div>
         <div class="info-column2-50 fl-force-right">
-            <div class="info-pair">
+            <!-- <div class="info-pair">
                 <div class="header">
-                    <div class="csc-taxon-taxonomicStatus-label label"></div>
+                    <div class="csc-taxon-taxonCurrency-label label"></div>
                 </div>
                 <div class="content">
-                    <select class="csc-taxon-taxonomicStatus input-select"><option value="">Options not loaded</option></select>
+                    <select class="csc-taxon-taxonCurrency input-select"><option value="">Options not loaded</option></select>
+                </div>
+            </div> -->
+            <div class="info-pair">
+                <div class="header">
+                    <div class="csc-taxon-taxonMajorGroup-label label"></div>
+                </div>
+                <div class="content">
+                    <select class="csc-taxon-taxonMajorGroup input-select"><option value="">Options not loaded</option></select>
                 </div>
             </div>
         </div>
     </div>
-    <div class="info-column2-50 fl-force-right">
-        <div class="info-pair">
-            <div class="header">
-                <div class="csc-taxon-taxonFullName-label label"></div>
-            </div>
-            <div class="content">
-                <input type="text" class="csc-taxon-taxonFullName" />
-            </div>
-        </div>
-//      <div class="info-pair">
-            <div class="header">
-                <div class="csc-taxon-taxonCurrency-label label"></div>
-            </div>
-            <div class="content">
-                <select class="csc-taxon-taxonCurrency input-select"><option value="">Options not loaded</option></select>
-            </div>
-        </div> //
-    </div>
-</div>
-
-
--->
-
-<!--
-<div class="info-column">
-    <div class="info-column2-70 fl-force-left">
+    
+    <div class="info-column">
         <div class="info-pair">
             <div class="header">
                 <div class="csc-taxon-taxonAuthorGroup-label label"></div>
@@ -298,75 +65,113 @@
             </div>
         </div>
     </div>
-    <div class="info-column2-30 fl-force-right">
-        <div class="info-pair">
-            <div class="header">
-                <div class="csc-taxon-termStatus-label label"></div>
-            </div>
-            <div class="content">
-                <select class="csc-taxon-termStatus input-select"><option value="">Options not loaded</option></select>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-<!--
-<div class="info-column2-50 fl-force-left" >
-    <div class="info-column2-20 fl-force-left" >
-        <div class="info-pair">
-            <div class="header">
-                <div class="csc-taxon-taxonYear-label label"></div>
-            </div>
-            <div class="content">
-                <input type="text" class="csc-taxon-taxonYear" />
-            </div>
-        </div>
-    </div>
-    <div class="info-column2-80 fl-force-right">
-        <div class="info-pair">
-            <div class="header">
-                <div class="csc-taxon-taxonNameSource-label label"></div>
-            </div>
-            <div class="content">
-                <select class="csc-taxon-taxonNameSource input-select"><option value="">Options not loaded</option></select>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="info-column2-50 fl-force-right">
-    <div class="info-column2-70 fl-force-left">
-       <div class="info-column2-50 fl-force-left" >
+    
+    <div class="info-column">
+        <div class="info-column2-50 fl-force-left" >
             <div class="info-pair">
                 <div class="header">
-                    <div class="csc-taxon-taxonNameSourceCode-label label"></div>
+                    <div class="csc-taxon-taxonYear-label label"></div>
                 </div>
                 <div class="content">
-                    <input type="text" class="csc-taxon-taxonNameSourceCode" />
+                    <input type="text" class="csc-taxon-taxonYear" />
+                </div>
+            </div>
+            <div class="info-pair-select">
+                <div class="header">
+                    <div class="csc-taxon-taxonIsNamedHybrid-label label"></div>
+                </div>
+                <div class="content">
+                    <input type="checkbox" class="csc-taxon-taxonIsNamedHybrid"/>
                 </div>
             </div>
         </div>
         <div class="info-column2-50 fl-force-right">
             <div class="info-pair">
                 <div class="header">
-                    <div class="csc-taxon-taxonGUID-label label"></div>
+                    <div class="csc-taxon-taxonCitation-label label"></div>
                 </div>
-                <div class="content">
-                    <input type="text" class="csc-taxon-taxonGUID" />
+                <div class="content repeatable">
+                    <input type="text" class="csc-taxon-taxonCitation" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="info-column2-30 fl-force-right">
-        <div class="info-pair-select">
+    <div class="info-column">
+        <div class="info-column2-50 fl-force-left">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="csc-taxon-taxonBasionym-label label"></div>
+                </div>
+                <div class="content">
+                    <input type="text" class="csc-taxon-taxonBasionym" />
+                </div>
+            </div>
+        </div>
+        <div class="info-column2-50 fl-force-right" >
+            <div class="info-pair">
+                <div class="header">
+                    <div class="csc-taxon-taxonNote-label label"></div>
+                </div>
+                <div class="content">
+                    <textarea rows="2" cols="60" class="input-textarea csc-taxon-taxonNote" ></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-column">
+        <div class="info-pair">
             <div class="header">
-                <div class="csc-taxon-taxonIsNamedHybrid-label label"></div>
+                <div class="csc-taxon-commonNameGroup-label label"></div>
             </div>
             <div class="content">
-                <select class="csc-taxon-taxonIsNamedHybrid input-select" style="max-width: 100%"><option value="">Options not loaded</option></select>
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="csc-taxon-commonName-label label"></td>
+                            <td class="csc-taxon-commonNameLanguage-label label"></td>
+                            <td class="csc-taxon-commonNameSource-label label"></td>
+                            <td class="csc-taxon-commonNameSourceDetail-label label"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-taxon-commonNameGroup">
+                            <td><input type="text" class="csc-taxon-commonName" /></td>
+                            <td><select class="csc-taxon-commonNameLanguage input-select"><option value="">Options not loaded</option></select></td>
+                            <td><input type="text" class="csc-taxon-commonNameSource" /></td>
+                            <td><input type="text" class="csc-taxon-commonNameSourceDetail" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="info-column">
+        <div class="info-pair">
+            <div class="header">
+                <div class="csc-taxon-relatedTermGroup-label label"></div>
+            </div>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="csc-taxon-relatedTerm-label label"></td>
+                            <td class="csc-taxon-relatedTermType-label label"></td>
+                            <td class="csc-taxon-relatedTermSource-label label"></td>
+                            <td class="csc-taxon-relatedTermSourceDetail-label label"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-taxon-relatedTermGroup">
+                            <td><input type="text" class="csc-taxon-relatedTerm" /></td>
+                            <td><select class="csc-taxon-relatedTermType input-select"><option value="">Options not loaded</option></select></td>
+                            <td><input type="text" class="csc-taxon-relatedTermSource" /></td>
+                            <td><input type="text" class="csc-taxon-relatedTermSourceDetail" /></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
--->
+<div class="csc-record-hierarchy"></div>
