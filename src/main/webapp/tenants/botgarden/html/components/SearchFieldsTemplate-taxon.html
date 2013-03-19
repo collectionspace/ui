@@ -2,25 +2,56 @@
     <div class="fl-container-flex fl-fix content main">
         <div class="info-column">
             <div class="info-column2-50 fl-force-left">
+
+                <div class="info-column cs-multipleEdit" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-preferredTA-taxonTermGroup-label"></div>
+                        </div>
+                        <div class="content csc-preferredTA-taxonTermGroup cs-repeatable-stretched">
+                            <div class="info-column">
+                                <div class="info-column1 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-taxon-termDisplayName-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <input type="text" class="csc-taxonAuthority-termDisplayName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-taxon-termStatus-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-taxonAuthority-termStatus input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-taxon-taxonomicStatus-label"></div>
+                                        </div>
+                                        <div class="content clearfix">
+                                            <select class="csc-taxonAuthority-taxonomicStatus input-select">
+                                                <option value="">Options not loaded</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-taxon-termDisplayName-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredTA-taxonTermGroup">
-                        <input type="text" class="csc-taxonAuthority-termDisplayName">
-                    </div>
-                </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair" style="display:none;">
-                    <div class="header">
-                        <div class="label csc-taxon-termName-label"></div>
-                    </div>
-                    <div class="content clearfix csc-preferredTA-taxonTermGroup">
-                        <input type="text" class="csc-taxonAuthority-termName">
-                    </div>
-                </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair" style="display:none;">
                     <div class="header">
                         <div class="label csc-taxon-taxonRank-label"></div>
                     </div>
@@ -86,7 +117,7 @@
                         <input type="text" class="csc-taxon-family" />
                     </div>
                 </div>
-				<div class="info-pair-select">
+                <div class="info-pair-select">
                     <div class="header">
                         <div class="csc-taxon-accessRestrictions-label label"></div>
                     </div>
@@ -94,40 +125,29 @@
                         <select class="csc-taxon-accessRestrictions input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-taxon-conservationOrganization-label"></div>
-					</div>
-					<div class="content clearfix csc-taxon-plantAttributesGroup">
-						<input type="text" class="csc-taxon-conservationOrganization"/>
-					</div>
-				</div>
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-taxon-conservationCategory-label"></div>
-					</div>
-					<div class="content clearfix csc-taxon-plantAttributesGroup">
-						<input type="text" class="csc-taxon-conservationCategory"/>
-					</div>
-				</div>
-
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
+                <div class="info-pair">
                     <div class="header">
-                        <div class="csc-taxon-taxonomicStatus-label label"></div>
+                        <div class="label csc-taxon-conservationOrganization-label"></div>
                     </div>
-                    <div class="content clearfix csc-preferredTA-taxonTermGroup">
-                        <select class="csc-taxonAuthority-taxonomicStatus input-select"><option value="">Options not loaded</option></select>
+                    <div class="content clearfix csc-taxon-plantAttributesGroup">
+                        <input type="text" class="csc-taxon-conservationOrganization"/>
                     </div>
                 </div>
-                <!-- FIXME: Un-hide by removing 'style' attribute when CSPACE-5184/CSPACE-5185 is fixed -->
-                <div class="info-pair-select" style="display:none;">
+                <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-taxon-termStatus-label"></div>
+                        <div class="label csc-taxon-conservationCategory-label"></div>
                     </div>
-                    <div class="content clearfix csc-preferredTA-taxonTermGroup">
-                        <select class="csc-taxonAuthority-termStatus input-select"><option value="">Options not loaded</option></select>
-                    </div>        
+                    <div class="content clearfix csc-taxon-plantAttributesGroup">
+                        <input type="text" class="csc-taxon-conservationCategory"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="csc-taxon-updatedBy-label label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <input type="text" class="csc-taxon-updatedBy" />
+                    </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
