@@ -560,15 +560,15 @@ cspace = cspace || {};
         args: ["{cspace.recordEditor.saver}", "{recordEditor}"]
     });
 
-    fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock"], {
-        funcName: "cspace.recordEditor.saver.saveMovement",
-        args: ["{cspace.recordEditor.saver}", "{recordEditor}"]
-    });
+    // fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock"], {
+    //     funcName: "cspace.recordEditor.saver.saveMovement",
+    //     args: ["{cspace.recordEditor.saver}", "{recordEditor}"]
+    // });
 
-    fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock", "cspace.relatedRecordsTab"], {
-        funcName: "cspace.recordEditor.saver.saveMovementTab",
-        args: ["{cspace.recordEditor.saver}", "{recordEditor}", "{relatedRecordsTab}.events.afterAddRelation"]
-    });
+    // fluid.demands("cspace.recordEditor.saver.save", ["cspace.recordEditor.saver", "movement.lock", "cspace.relatedRecordsTab"], {
+    //     funcName: "cspace.recordEditor.saver.saveMovementTab",
+    //     args: ["{cspace.recordEditor.saver}", "{recordEditor}", "{relatedRecordsTab}.events.afterAddRelation"]
+    // });
 
     fluid.demands("cspace.recordEditor.saver.afterValidate", "cspace.recordEditor.saver", {
         funcName: "cspace.recordEditor.saver.afterValidate",

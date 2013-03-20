@@ -173,11 +173,11 @@ cspace = cspace || {};
         });
 
         var namespace = that.getFieldListenerNamespace();
-
+        
         that.applier.modelChanged.addListener(that.fullElPath, function(model) {
             that.container.val(fluid.get(model, that.fullElPath));
         }, namespace);
-
+        
         that.applierListenerNamespaces.push(namespace);      
     };
 
@@ -187,26 +187,47 @@ cspace = cspace || {};
     cspace.computedField.refresh = function (that) {
         that.clearMessage();
 
-        var newValue;
+        /*
+         * If all arguments are undefined, and the target field is undefined, don't do anything.
+         * This is a (probably overly simple) way to handle the case where a computed field exists
+         * inside a repeatable, and an instance of the repeatable is deleted. In that case, the
+         * model is updated with a shorter array, and we might be running in response to that
+         * update. We don't want to re-lengthen the array, thereby undermining the deletion.
+         * See UCJEPS-362. 
+         */
+        var hasDefinedArg = false;
+        
+        for (var i=0; i<that.fullArgElPaths.length; i++) {
+            if (typeof(fluid.get(that.model, that.fullArgElPaths[i])) !== 'undefined') {
+                hasDefinedArg = true;
+                break;
+            }
+        }
 
-        try {
-            newValue = that.calculateFieldValue();
-        }
-        catch (error) {
-            var message = fluid.stringTemplate(that.lookupMessage("errorCalculating"), {
-                label: that.labelText,
-                status: error.message
-            });
+        var hasDefinedTarget = typeof(fluid.get(that.model, that.fullElPath)) !== 'undefined';
+
+        if (hasDefinedArg || hasDefinedTarget) {
+            var newValue;
+
+            try {
+                newValue = that.calculateFieldValue();
+            }
+            catch (error) {
+                var message = fluid.stringTemplate(that.lookupMessage("errorCalculating"), {
+                    label: that.labelText,
+                    status: error.message
+                });
             
-            that.showMessage(message);
-            return;
-        }
+                that.showMessage(message);
+                return;
+            }
         
-        if (!that.validate(newValue, that.invalidCalculationMessage)) {
-            return;
-        }
+            if (!that.validate(newValue, that.invalidCalculationMessage)) {
+                return;
+            }
         
-        that.applier.requestChange(that.fullElPath, newValue);      
+            that.applier.requestChange(that.fullElPath, newValue);
+        }
     }
 
     /*
