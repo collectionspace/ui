@@ -338,6 +338,10 @@ cspace = cspace || {};
 
     // After save fire a corresponding global event.
     cspace.recordEditor.afterSave = function (that) {
+        // On a secondary tab, this function will be called with that being undefined if the user switches
+        // between recordEditors by selecting different related records.
+        if (!that) return;
+
         if (that.options.globalRef !== "primaryModel") {
             return;
         }
@@ -346,6 +350,10 @@ cspace = cspace || {};
 
     // If the action code is Dead, delete this record. Otherwise, do the same as above.
     cspace.recordEditor.afterSaveMovement = function (that) {
+        // On a secondary tab, this function will be called with that being undefined if the user switches
+        // between recordEditors by selecting different related records.
+        if (!that) return;
+
         if (that.model.fields.reasonForMove == "Dead") {
             that.remover.remove();
             return;
