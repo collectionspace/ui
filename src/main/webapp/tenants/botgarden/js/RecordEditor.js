@@ -249,6 +249,9 @@ cspace = cspace || {};
             onCancel: "{loadingIndicator}.events.showOn.fire",
             afterRemove: "{loadingIndicator}.events.hideOn.fire"
         },
+        invokers: {
+            afterSave: "cspace.recordEditor.afterSave"
+        },
         // Component that contains all messages.
         parentBundle: "{globalBundle}",
         // A flag to show create from existing button.
@@ -270,12 +273,8 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.recordEditor");
 
     cspace.recordEditor.preInit = function (that) {
-        // After save fire a corresponding global event.
-        that.afterSaveHandler = function () {
-            if (that.options.globalRef !== "primaryModel") {
-                return;
-            }
-            that.globalEvents.events.primaryRecordSaved.fire();
+        that.afterSaveHandler = function() {
+            that.afterSave();
         };
         // Rebder when ready to.
         that.onReady = function () {
@@ -336,6 +335,37 @@ cspace = cspace || {};
             });
         }
     };
+
+    // After save fire a corresponding global event.
+    cspace.recordEditor.afterSave = function (that) {
+        if (that.options.globalRef !== "primaryModel") {
+            return;
+        }
+        that.globalEvents.events.primaryRecordSaved.fire();
+    };
+
+    // If the action code is Dead, delete this record. Otherwise, do the same as above.
+    cspace.recordEditor.afterSaveMovement = function (that) {
+        if (that.model.fields.reasonForMove == "Dead") {
+            that.remover.remove();
+            return;
+        }
+        
+        if (that.options.globalRef !== "primaryModel") {
+            return;
+        }
+        that.globalEvents.events.primaryRecordSaved.fire();
+    };
+
+    fluid.demands("cspace.recordEditor.afterSave", "cspace.recordEditor", {
+        funcName: "cspace.recordEditor.afterSave",
+        args: ["{recordEditor}"]
+    });
+
+    fluid.demands("cspace.recordEditor.afterSave", ["cspace.recordEditor", "movement.lock"], {
+        funcName: "cspace.recordEditor.afterSaveMovement",
+        args: ["{recordEditor}"]
+    });
 
     // Updates the UI to read only if applicable.
     fluid.defaults("cspace.recordEditor.readOnly", {
@@ -739,9 +769,9 @@ cspace = cspace || {};
         args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
     });
 
-    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.recordEditor.remover", "cspace.tab"], {
-        funcName: "cspace.recordEditor.remover.statusAfterDelete",
-        args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType"]
+    fluid.demands("cspace.recordEditor.remover.afterRemove", ["cspace.recordEditor.remover", "cspace.tab", "cspace.relatedRecordsTab"], {
+        funcName: "cspace.recordEditor.remover.updateTabAfterDelete",
+        args: ["{messageBar}", "{recordEditor}.options.strings", "{globalBundle}", "{recordEditor}.options.recordType", "{recordEditor}.model.csid", "{relatedRecordsTab}"]
     });
 
     /*
@@ -778,6 +808,15 @@ cspace = cspace || {};
         messageBar.show(parentBundle.resolve(strings.removeSuccessfulMessage, [
             parentBundle.resolve(recordType)
         ]), null, false);
+    };
+
+    cspace.recordEditor.remover.updateTabAfterDelete = function (messageBar, strings, parentBundle, recordType, csid, relatedRecordsTab) {
+        //show messagebar
+        messageBar.show(parentBundle.resolve("recordEditor-removeSuccessfulMessage", [
+            parentBundle.resolve(recordType)
+        ]), null, false);
+
+        relatedRecordsTab.events.afterDeleteRelation.fire(recordType, csid);
     };
 
     fluid.demands("cspace.recordEditor.remover.openConfirmation", "cspace.recordEditor.remover", {

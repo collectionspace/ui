@@ -30,7 +30,12 @@
                                     "selectors": {
                                         "recordLockContainer": ".csc-recordLock"
                                     },
-                                    "uispec": "{pageBuilder}.options.uispec.details"
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "strings": {
+                                        "deleteMessageWithRelated": "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                                        "removeSuccessfulMessage": "{globalBundle}.messageBase.recordEditor-removeSuccessfulMessage",
+                                        "deleteFailedMessage": "{globalBundle}.messageBase.recordEditor-deleteFailedMessage"
+                                    }
                                 }
                             }
                         }
