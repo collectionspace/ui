@@ -30,14 +30,6 @@ CollectionSpace 1.8 default CSS selectors
 	float: right;
 }
 
-.determinationHistory .cs-autocomplete-input {
-	width: 99.5%;
-}
-
-td .cs-autocomplete-input {
-	width: 99.5% !important;
-}
-
 .checkbox-group label {
 	margin-right: 1.5em;
 }
