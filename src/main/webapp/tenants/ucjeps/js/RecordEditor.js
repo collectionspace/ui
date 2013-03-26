@@ -279,6 +279,10 @@ cspace = cspace || {};
         };
         // Rebder when ready to.
         that.onReady = function () {
+            //Get cookie for sticky scientificTaxonomy field 
+            if (!that.model.csid && !that.model.fields.scientificTaxonomy) {
+                if (that.options.recordType == "media") that.model.fields.scientificTaxonomy = getCookie('scientificTaxonomy');
+            }
             that.refreshView();
         };
         // This is a listener attached to globalNavigator that is activated when
@@ -525,7 +529,31 @@ cspace = cspace || {};
             that.events.afterValidate.fire();
         };
     };
-
+    
+    var setCookie = function (name, value, days) {
+        var ex;
+        if (days) {
+            var d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            ex = "; expires=" + d.toUTCString();
+        }
+        else {
+            ex = ""; 
+        }
+        document.cookie = name+"="+value+ex+"; path=/";
+    };
+    
+    var getCookie = function (name) {
+        name = name+"=";
+        var ca = document.cookie.split(';');
+        for (var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return null;
+    };
+    
     // Component that does the saving work.
     fluid.defaults("cspace.recordEditor.saver", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
@@ -632,6 +660,10 @@ cspace = cspace || {};
     // Default save function.
     cspace.recordEditor.saver.save = function (that, recordEditor) {
         that.events.beforeSave.fire();
+        //Set Cookie for sticky scientificTaxonomy field
+        if (recordEditor.options.recordType == "media") {
+            setCookie("scientificTaxonomy", recordEditor.model.fields.scientificTaxonomy, 7);
+        }
         that.events.onValidate.fire(recordEditor.model, recordEditor.applier);
     };
 
