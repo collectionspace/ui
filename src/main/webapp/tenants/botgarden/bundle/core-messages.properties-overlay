@@ -432,6 +432,7 @@ pottag-updatedAtEndLabel: Latest
 pottag-number: Pot Tag Number
 pottag-editRecord: Edit Plant Label Record
 pottag-recordList: Related Plant Label Records
+pottag-updatedByLabel: Record last modified by
 
 objectexit: Distribution
 objectexit-tab: Distribution
