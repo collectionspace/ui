@@ -85,26 +85,28 @@
 				</div>
 				<div class="content csc-collection-object-taxonomicIdentGroup determinationHistory oocss">
 					<div class="info-column">
-					    <table style="margin-bottom: 12px; float: left">
-							<thead>
-								<tr>
-									<td class="csc-collection-object-taxon-label"/>
-									<td class="csc-collection-object-qualifier-label"/>																			 
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="flc-inlineEdit-text taxon info-column2-60">
-										<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
-									</td>
-									<td class="flc-inlineEdit-text">
-										<select class="csc-taxonomic-identification-qualifier">
-											<option value="">Options not loaded</option>
-										</select>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+					    <div class="info-column2-90 fl-force-left">
+    					    <table style="margin-bottom: 12px; float: left">
+    							<thead>
+    								<tr>
+    									<td class="csc-collection-object-taxon-label"/>
+    									<td class="csc-collection-object-qualifier-label"/>																			 
+    								</tr>
+    							</thead>
+    							<tbody>
+    								<tr>
+    									<td class="flc-inlineEdit-text taxon info-column2-60">
+    										<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
+    									</td>
+    									<td class="flc-inlineEdit-text">
+    										<select class="csc-taxonomic-identification-qualifier">
+    											<option value="">Options not loaded</option>
+    										</select>
+    									</td>
+    								</tr>
+    							</tbody>
+    						</table>
+						</div>
 						<div class="info-column2-10 fl-force-right">
 						    <div class="info-pair">
 								<div class="header">
@@ -1247,9 +1249,7 @@
 							</div>
 						</div>
 						<div class="info-column2-50 fl-force-right">
-						    <div class="info-column2-50 fl-force-left">
-							</div>
-							<div class="info-column2-50 fl-force-right">
+							<div class="info-column2-50 fl-force-left">
 								<div class="info-pair">
 									<div class="header">
 										<div class="label csc-collection-object-propagationHistory-label"></div>
@@ -1261,74 +1261,72 @@
 									</div>
 								</div>
 							</div>
+							<div class="info-column2-50 fl-force-right">
+						        <div class="info-pair">
+    					            <div class="header">
+    					                <div class="label csc-collection-object-breedingSystem-label"></div>
+    					            </div>
+    					            <div class="content">
+    					                <select class="csc-collection-object-breedingSystem input-select">
+    					                    <option value="">Options not loaded</option>
+    					                </select>
+    					            </div>
+    					        </div>
+							</div>
 						</div>
 					</div>
 
 					<div class="info-column fl-force-left">
-					    <div class="info-column2-25 fl-force-left">
-					        <div class="info-pair">
-					            <div class="header">
-					                <div class="label csc-collection-object-breedingSystem-label"></div>
-					            </div>
-					            <div class="content">
-					                <select class="csc-collection-object-breedingSystem input-select">
-					                    <option value="">Options not loaded</option>
-					                </select>
-					            </div>
-					        </div>
-					    </div>
-                        <div class="info-column2-75 fl-force-right">
-                            <div class="info-column2-20 fl-force-left">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-classUse-label"></div>
-									</div>
-									<div class="content">
-				                        <input type="checkbox" class="csc-collection-object-classUse" />
-									</div>
-								</div>                                        
-                            </div>
-                            <div class="info-column2-20 fl-force-left">
-                                <div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-researchUse-label"></div>
-									</div>
-									<div class="content">
-				                        <input type="checkbox" class="csc-collection-object-researchUse" />
-									</div>
+                        <div class="info-column2-20 fl-force-left">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-collection-object-classUse-label"></div>
+								</div>
+								<div class="content">
+			                        <input type="checkbox" class="csc-collection-object-classUse" />
+								</div>
+							</div>                                        
+                        </div>
+                        <div class="info-column2-20 fl-force-left">
+                            <div class="info-pair">
+								<div class="header">
+									<div class="label csc-collection-object-researchUse-label"></div>
+								</div>
+								<div class="content">
+			                        <input type="checkbox" class="csc-collection-object-researchUse" />
 								</div>
 							</div>
-							<div class="info-column2-20 fl-force-left">
-							    <div class="info-pair">
-    								<div class="header">
-    									<div class="label csc-collection-object-distribution-label"></div>
-    								</div>
-    								<div class="content">
-    									<input type="checkbox" class="csc-collection-object-distribution" />
-    								</div>
-    							</div>
+						</div>
+						<div class="info-column2-20 fl-force-left">
+						    <div class="info-pair">
+								<div class="header">
+									<div class="label csc-collection-object-distribution-label"></div>
+								</div>
+								<div class="content">
+									<input type="checkbox" class="csc-collection-object-distribution" />
+								</div>
 							</div>
-							<div class="info-column2-20 fl-force-left">
-							    <div class="info-pair ">
-    								<div class="header">
-    									<div class="label csc-collection-object-ignoreRedDot-label"></div>
-    								</div>
-    								<div class="content">
-    									<input type="checkbox" class="csc-collection-object-ignoreRedDot" />
-    								</div>
-    							</div>
-    						</div>
-    						<div class="info-column2-20 fl-force-left">
-    						    <div class="info-pair">
-    						        <div class="header">
-    						            <div class="label csc-collection-object-fragrance-label"></div>
-    						        </div>
-    						        <div class="content">
-    						            <input type="checkbox" class="csc-collection-object-fragrance"/>
-    						        </div>
-    						    </div>
-    						</div>
-                        </div>
+						</div>
+						<div class="info-column2-20 fl-force-left">
+						    <div class="info-pair ">
+								<div class="header">
+									<div class="label csc-collection-object-ignoreRedDot-label"></div>
+								</div>
+								<div class="content">
+									<input type="checkbox" class="csc-collection-object-ignoreRedDot" />
+								</div>
+							</div>
+						</div>
+						<div class="info-column2-20 fl-force-left">
+						    <div class="info-pair">
+						        <div class="header">
+						            <div class="label csc-collection-object-fragrance-label"></div>
+						        </div>
+						        <div class="content">
+						            <input type="checkbox" class="csc-collection-object-fragrance"/>
+						        </div>
+						    </div>
+						</div>
 					</div>
 
 					<!--flowers-->
