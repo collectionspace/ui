@@ -68,7 +68,10 @@ taxon-relatedTermLabel: Related Term
 taxon-relatedTermTypeLabel: Type
 taxon-relatedTermSourceLabel: Source
 taxon-relatedTermSourceDetailLabel: Source Detail
-
+taxon-miniView-field1Label: Term Type: 
+taxon-miniView-field2Label: Term Status: 
+taxon-miniView-field3Label: Rank:  
+taxon-miniView-field4Label: Major Group:  
 #Login
 login-current-info: 
 login-login: admin@ucjeps.cspace.berkeley.edu
