@@ -214,6 +214,7 @@
     <js>/defaults/js/Tabs.js</js>
     <js>/defaults/js/ExternalURL.js</js>
     <js>/defaults/js/MediaView.js</js>
+    <js>/tenants/ucjeps/js/MediaView.js</js>
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/ReportProducer.js</js>
@@ -268,6 +269,7 @@
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/ExternalURL.js</js>
     <js>/defaults/js/MediaView.js</js>
+    <js>/tenants/ucjeps/js/MediaView.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
