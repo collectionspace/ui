@@ -42,10 +42,6 @@ cspace = cspace || {};
             // permissions).
             menuitems: [
             {
-                messagekey: "menuItems-myCollectionSpace",
-                href: "myCollectionSpace.html"
-            },
-            {
                 messagekey: "menuItems-createNew",
                 href: "createnew.html",
                 hide: {
