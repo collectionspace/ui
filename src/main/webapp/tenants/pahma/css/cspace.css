@@ -576,9 +576,9 @@ li .flc-pager-pageLink {
     margin-bottom:-2px;
 	line-height:1;}
 #mycollectionspace .header-menu-row .menu-item:nth-child(1), #mycollectionspace .header-menu-row .menu-item:nth-child(1) a,
-#createnew .header-menu-row .menu-item:nth-child(2), #createnew .header-menu-row .menu-item:nth-child(2) a,
-#search .header-menu-row .menu-item:nth-child(3), #search .header-menu-row .menu-item:nth-child(3) a,
-#administration .header-menu-row .menu-item:nth-child(4), #administration .header-menu-row .menu-item:nth-child(4) a {
+#createnew .header-menu-row .menu-item:nth-child(1), #createnew .header-menu-row .menu-item:nth-child(1) a,
+#search .header-menu-row .menu-item:nth-child(2), #search .header-menu-row .menu-item:nth-child(2) a,
+#administration .header-menu-row .menu-item:nth-child(3), #administration .header-menu-row .menu-item:nth-child(3) a {
     color: #A6A6A6;
     border-bottom-color: #A6A6A6;
 }
