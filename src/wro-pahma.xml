@@ -20,7 +20,7 @@
     <js>/defaults/js/CreateTemplateBox.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
@@ -40,7 +40,7 @@
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/ListView.js</js>
@@ -67,7 +67,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -104,7 +104,7 @@
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
@@ -149,7 +149,7 @@
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
@@ -193,7 +193,7 @@
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
@@ -251,7 +251,7 @@
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
-    <js>/defaults/js/Header.js</js>
+    <js>/tenants/pahma/js/Header.js</js>
     <js>/tenants/pahma/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
