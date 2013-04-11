@@ -233,7 +233,7 @@ cspace = cspace || {};
                             });
                             return;
                         }
-                        window.location = href;
+                        window.open(href, "_blank");
                         events.reportFinished.fire();
                         if (callback) {
                             callback();
