@@ -138,13 +138,30 @@ cspace = cspace || {};
                 "{relatedRecordsList}.events.relationsUpdated.fire"
             ]
         },
+        model: {
+            showShowButton: false
+        },
         // Used to handle categories of records, e.g. procedures.
         category: [],
         parentBundle: "{globalBundle}",
         protoTree: {
             mainHeader: {
                 messagekey: "${related}"
-            }
+            },
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${showShowButton}",
+                trueTree: {
+                    showButton: {
+                        messagekey: "sidebar-show"
+                    }
+                },
+                falseTree: {
+                    showButton: {
+                        decorators: {addClass: "{styles}.hidden"}
+                    }
+                }
+            }]
         },
         selectors: {
             relationManagerSelector: ".csc-relatedRecordsList-relationManager",
@@ -152,10 +169,15 @@ cspace = cspace || {};
             mainHeader: ".csc-related-mainheader",
             header: ".csc-related-header",
             togglable: ".csc-related-togglable",
-            banner: ".csc-sidebar-bannerContainer"
+            banner: ".csc-sidebar-bannerContainer",
+            showButton: ".csc-show-related-records-button"
         },
         selectorsToIgnore: ["relationManagerSelector", "listViewSelector", "header", "togglable", "banner"],
         strings: {},
+        styles: {
+            hidden: "hidden",
+            disabled: "cs-disabled"
+        },
         renderOnInit: true,
         resources: {
             template: cspace.resourceSpecExpander({
