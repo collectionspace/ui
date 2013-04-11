@@ -1934,8 +1934,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     recordEditorAfterCancel: "{recordEditor}.events.afterCancel"
                 },
                 listeners: {
-                    repeatableOnRefreshView: "{computedField}.events.removeApplierListeners.fire",
-                    recordEditorOnRenderTree: "{computedField}.events.removeApplierListeners.fire",
+                    repeatableOnRefreshView: "{computedField}.events.removeAllListeners.fire",
+                    recordEditorOnRenderTree: "{computedField}.events.removeAllListeners.fire",
                     recordEditorAfterSave: {
                         listener: "{computedField}.events.removeAllListeners.fire",
                         priority: "first"
