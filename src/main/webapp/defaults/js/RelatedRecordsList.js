@@ -112,7 +112,10 @@ cspace = cspace || {};
                         togglable: "{relatedRecordsList}.options.selectors.togglable"
                     }
                 }
-            }
+            },
+            globalNavigator: "{recordEditor}.globalNavigator",
+            messageBar: "{messageBar}",
+            titleBar: "{titleBar}"
         },
         events: {
             // Fired after relation is added.
@@ -137,6 +140,12 @@ cspace = cspace || {};
             afterAddRelation: [
                 "{relatedRecordsList}.events.relationsUpdated.fire"
             ]
+        },
+        invokers: {
+            navigateToAdvancedSearch: {
+                funcName: "cspace.relatedRecordsList.navigateToAdvancedSearch",
+                args: ["{relatedRecordsList}", "{globalModel}.model.primaryModel"]
+            }
         },
         model: {
             showShowButton: false
@@ -188,7 +197,9 @@ cspace = cspace || {};
                 }
             })
         },
-        preInitFunction: "cspace.relatedRecordsList.preInit"
+        advancedSearchUrl: cspace.componentUrlBuilder("%webapp/html/advancedsearch.html?recordtype=%recordType&relatedRecordType=%relatedRecordType&relatedCsid=%relatedCsid&relatedTitle=%relatedTitle"),
+        preInitFunction: "cspace.relatedRecordsList.preInit",
+        finalInitFunction: "cspace.relatedRecordsList.finalInit"
     });
 
     cspace.relatedRecordsList.preInit = function (that) {
@@ -213,6 +224,30 @@ cspace = cspace || {};
             var showBanner = fluid.get(that.rrlListView.model, "list").length < 1;
             that.listBanner.events[showBanner ? "showBanner": "hideBanner"].fire();
         };
+    };
+
+    cspace.relatedRecordsList.finalInit = function (that) {
+        bindEventHandlers(that);   
+    };
+
+    var bindEventHandlers = function (that) {
+        // Add user event handlers to UI controls.
+        that.locate("showButton").click(function() {
+            that.navigateToAdvancedSearch();
+            event.stopPropagation();
+        });
+    };
+
+    cspace.relatedRecordsList.navigateToAdvancedSearch = function (that, primaryModel) {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.messageBar.disable();
+            window.location = fluid.stringTemplate(that.options.advancedSearchUrl, {
+                recordType: that.options.related,
+                relatedRecordType: that.options.primary,
+                relatedCsid: primaryModel.csid,
+                relatedTitle: that.titleBar.buildTitle()
+            })
+        });
     };
 
     fluid.defaults("cspace.relatedRecordsList.banner", {
