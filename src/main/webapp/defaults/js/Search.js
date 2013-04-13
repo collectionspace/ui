@@ -506,7 +506,7 @@ cspace = cspace || {};
                 vocab: cspace.util.getUrlParameter("vocab"),
                 relatedRecordType: cspace.util.getUrlParameter("relatedRecordType"),
                 relatedCsid: cspace.util.getUrlParameter("relatedCsid"),
-                relatedTitle: cspace.util.getUrlParameter("relatedTitle")
+                relatedTitle: decodeURIComponent(cspace.util.getUrlParameter("relatedTitle"))
             });
         }
         that.hideResults();
