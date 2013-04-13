@@ -162,12 +162,21 @@ cspace = cspace || {};
                 condition: "${showShowButton}",
                 trueTree: {
                     showButton: {
-                        messagekey: "sidebar-show"
+                        messagekey: "sidebar-show",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: true
+                            }
+                        }]
                     }
                 },
                 falseTree: {
                     showButton: {
-                        decorators: {addClass: "{styles}.hidden"}
+                        decorators: {
+                            addClass: "{styles}.hidden"
+                        }
                     }
                 }
             }]
@@ -221,8 +230,11 @@ cspace = cspace || {};
         };
         that.listUpdatedHandler = function () {
             // Show or hide banner based on whether there are any records.
-            var showBanner = fluid.get(that.rrlListView.model, "list").length < 1;
-            that.listBanner.events[showBanner ? "showBanner": "hideBanner"].fire();
+            var hasNoRecords = fluid.get(that.rrlListView.model, "list").length < 1;
+            that.listBanner.events[hasNoRecords ? "showBanner": "hideBanner"].fire();
+
+            // Enable or disable the Show button.
+            that.locate("showButton").prop("disabled", hasNoRecords);
         };
     };
 
