@@ -1423,10 +1423,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.searchBox.navigateToSearch",
             args: ["{searchBox}", "{recordEditor}"]
         });
-        fluid.demands("cspace.searchBox.navigateToSearch", ["cspace.searchBox", "cspace.search.searchView"], {
-            funcName: "cspace.search.handleSubmitSearch",
-            args: ["{searchBox}", "{searchView}"]
-        });
         
         fluid.demands("cspace.termList.termListSource", ["cspace.termList"], {
             funcName: "cspace.URLDataSource",
