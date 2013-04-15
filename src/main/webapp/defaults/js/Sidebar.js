@@ -189,7 +189,8 @@ cspace = cspace || {};
                 options: {
                     primary: "{sidebar}.options.primary",
                     model: {
-                        related: "cataloging"
+                        related: "cataloging",
+                        showShowButton: true
                     },
                     category: {
                         expander: {
