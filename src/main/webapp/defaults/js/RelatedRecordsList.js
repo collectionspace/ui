@@ -112,7 +112,10 @@ cspace = cspace || {};
                         togglable: "{relatedRecordsList}.options.selectors.togglable"
                     }
                 }
-            }
+            },
+            globalNavigator: "{recordEditor}.globalNavigator",
+            messageBar: "{messageBar}",
+            titleBar: "{titleBar}"
         },
         events: {
             // Fired after relation is added.
@@ -138,13 +141,45 @@ cspace = cspace || {};
                 "{relatedRecordsList}.events.relationsUpdated.fire"
             ]
         },
+        invokers: {
+            navigateToAdvancedSearch: {
+                funcName: "cspace.relatedRecordsList.navigateToAdvancedSearch",
+                args: ["{relatedRecordsList}", "{globalModel}.model.primaryModel"]
+            }
+        },
+        model: {
+            showShowButton: false
+        },
         // Used to handle categories of records, e.g. procedures.
         category: [],
         parentBundle: "{globalBundle}",
         protoTree: {
             mainHeader: {
                 messagekey: "${related}"
-            }
+            },
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${showShowButton}",
+                trueTree: {
+                    showButton: {
+                        messagekey: "sidebar-show",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: true
+                            }
+                        }]
+                    }
+                },
+                falseTree: {
+                    showButton: {
+                        decorators: {
+                            addClass: "{styles}.hidden"
+                        }
+                    }
+                }
+            }]
         },
         selectors: {
             relationManagerSelector: ".csc-relatedRecordsList-relationManager",
@@ -152,10 +187,15 @@ cspace = cspace || {};
             mainHeader: ".csc-related-mainheader",
             header: ".csc-related-header",
             togglable: ".csc-related-togglable",
-            banner: ".csc-sidebar-bannerContainer"
+            banner: ".csc-sidebar-bannerContainer",
+            showButton: ".csc-show-related-records-button"
         },
         selectorsToIgnore: ["relationManagerSelector", "listViewSelector", "header", "togglable", "banner"],
         strings: {},
+        styles: {
+            hidden: "hidden",
+            disabled: "cs-disabled"
+        },
         renderOnInit: true,
         resources: {
             template: cspace.resourceSpecExpander({
@@ -166,7 +206,9 @@ cspace = cspace || {};
                 }
             })
         },
-        preInitFunction: "cspace.relatedRecordsList.preInit"
+        advancedSearchUrl: cspace.componentUrlBuilder("%webapp/html/advancedsearch.html?recordtype=%recordType&relatedRecordType=%relatedRecordType&relatedCsid=%relatedCsid&relatedTitle=%relatedTitle"),
+        preInitFunction: "cspace.relatedRecordsList.preInit",
+        finalInitFunction: "cspace.relatedRecordsList.finalInit"
     });
 
     cspace.relatedRecordsList.preInit = function (that) {
@@ -188,9 +230,36 @@ cspace = cspace || {};
         };
         that.listUpdatedHandler = function () {
             // Show or hide banner based on whether there are any records.
-            var showBanner = fluid.get(that.rrlListView.model, "list").length < 1;
-            that.listBanner.events[showBanner ? "showBanner": "hideBanner"].fire();
+            var hasNoRecords = fluid.get(that.rrlListView.model, "list").length < 1;
+            that.listBanner.events[hasNoRecords ? "showBanner": "hideBanner"].fire();
+
+            // Enable or disable the Show button.
+            that.locate("showButton").prop("disabled", hasNoRecords);
         };
+    };
+
+    cspace.relatedRecordsList.finalInit = function (that) {
+        bindEventHandlers(that);   
+    };
+
+    var bindEventHandlers = function (that) {
+        // Add user event handlers to UI controls.
+        that.locate("showButton").click(function() {
+            that.navigateToAdvancedSearch();
+            event.stopPropagation();
+        });
+    };
+
+    cspace.relatedRecordsList.navigateToAdvancedSearch = function (that, primaryModel) {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.messageBar.disable();
+            window.location = fluid.stringTemplate(that.options.advancedSearchUrl, {
+                recordType: that.options.related,
+                relatedRecordType: that.options.primary,
+                relatedCsid: primaryModel.csid,
+                relatedTitle: that.titleBar.buildTitle()
+            })
+        });
     };
 
     fluid.defaults("cspace.relatedRecordsList.banner", {
