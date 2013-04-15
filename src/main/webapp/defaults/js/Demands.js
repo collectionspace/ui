@@ -1415,7 +1415,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 strings: {
                     errorMessage: "{globalBundle}.messageBase.search-errorMessage",
                     resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    relatedResultsCount: "{globalBundle}.messageBase.search-relatedResultsCount",
                     looking: "{globalBundle}.messageBase.search-looking",
+                    relatedLooking: "{globalBundle}.messageBase.search-relatedLooking",
                     selected: "{globalBundle}.messageBase.search-selected",
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
