@@ -333,6 +333,7 @@ cspace = cspace || {};
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort%mkRtSbj",
             defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
+            defaultRelatedUrl: "%tenant/%tname/%relatedRecordType/%recordType/%relatedCsid?%pageNum%pageSize%sort",
             localUrl: "%tenant/%tname/data/%recordType/search.json"
         }),
        preInitFunction: "cspace.search.searchView.preInit"
@@ -430,7 +431,11 @@ cspace = cspace || {};
         var offset = searchModel.pageIndex * searchModel.pageSize;
         that.applier.requestChange("offset", offset);
         that.applier.requestChange("pagination", data.pagination);
-        fluid.each(data.results, function (row, index) {
+
+        // The related records query returns "items" instead of "results", so check for both.
+        var results = data.results || data.items;
+        
+        fluid.each(results, function (row, index) {
             var fullIndex = offset + index;
             if (!that.model.results[fullIndex]) {
                 row.selected = false;
@@ -486,7 +491,9 @@ cspace = cspace || {};
             that.updateModel({
                 keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
                 recordType: cspace.util.getUrlParameter("recordtype"),
-                vocab: cspace.util.getUrlParameter("vocab")
+                vocab: cspace.util.getUrlParameter("vocab"),
+                relatedRecordType: cspace.util.getUrlParameter("relatedRecordType"),
+                relatedCsid: cspace.util.getUrlParameter("relatedCsid")
             });
         }
         that.hideResults();
@@ -596,15 +603,29 @@ cspace = cspace || {};
     };
     
     cspace.search.searchView.buildUrlDefault = function (options, urls) {
-        var url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
-            recordType: options.recordType,
-            keywords: options.keywords,
-            vocab: options.vocab || "",
-            pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
-            pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
-            sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : "",
-            mkRtSbj: options.mkRtSbj ? fluid.stringTemplate(urls.mkRtSbj, {mkRtSbj: options.mkRtSbj}) : ""
-        });
+        var url;
+
+        if (options.relatedRecordType && options.relatedCsid) {
+            url = fluid.stringTemplate(urls.defaultRelatedUrl, {
+                relatedRecordType: options.relatedRecordType,
+                recordType: options.recordType,
+                relatedCsid: options.relatedCsid,
+                pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
+                pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
+                sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
+            });
+        } else {
+            url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
+                recordType: options.recordType,
+                keywords: options.keywords,
+                vocab: options.vocab || "",
+                pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
+                pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
+                sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : "",
+                mkRtSbj: options.mkRtSbj ? fluid.stringTemplate(urls.mkRtSbj, {mkRtSbj: options.mkRtSbj}) : ""
+            });
+        }
+        
         return url;
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {
