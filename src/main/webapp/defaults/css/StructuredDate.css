@@ -52,6 +52,6 @@ table .cs-structuredDate-popup {
 .info-pair .content td.label {
 	padding-bottom:3px;
 }
-.cs-structuredDate-popup table {
+.cs-structuredDate-popup table, .cs-structuredDate-popup .content {
     width: 100% !important;
 }
