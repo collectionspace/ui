@@ -190,6 +190,9 @@ cspace = cspace || {};
             keywords: searchBox.model.keywords,
             recordType: searchBox.model.recordType,
             vocab: searchBox.model.vocabs ? searchBox.model.vocabSelection : undefined,
+            relatedRecordType: undefined,
+            relatedCsid: undefined,
+            relatedTitle: undefined,
             sortKey: ""
         });
         that.resultsPager.applier.requestChange("pageCount", 1);
