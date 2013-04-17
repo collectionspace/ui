@@ -60,7 +60,7 @@ login-emailRequired: You must enter a valid email address
 login-passwordsMustMatch: Passwords must match
 login-invalid: Invalid email/password combination
 login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 3.2.2 Information
+login-current: Current Release 3.2.3 Information
 login-current-info: Welcome to the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
 login-current-details:
 login-login-info: To view the CollectionSpace Life Science tenant, use the login box on the right with the login:
