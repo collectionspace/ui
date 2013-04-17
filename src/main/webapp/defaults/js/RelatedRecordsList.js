@@ -289,7 +289,7 @@ cspace = cspace || {};
                 }
             },
             bannerMessage: {
-                messagekey: "sidebar-banner-message",
+                messagekey: "sidebar-banner-loading-message",
                 args: [],
                 decorators: {
                     addClass: "{styles}.bannerMessage"
@@ -304,6 +304,7 @@ cspace = cspace || {};
     cspace.relatedRecordsList.banner.preInit = function (that) {
         that.showBanner = function () {
             that.options.list.hide();
+            that.locate("bannerMessage").text(that.options.parentBundle.resolve("sidebar-banner-empty-message"));
             that.locate("banner").show();
         };
         that.hideHandler = function () {
