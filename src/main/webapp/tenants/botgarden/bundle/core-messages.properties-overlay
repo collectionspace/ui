@@ -183,6 +183,7 @@ media-scientificTaxonomyLabel: Scientific name
 media-handwrittenLabel: Handwritten label
 media-postToPublicLabel: Post to public
 media-identificationNumberLabel: Accession number
+media-identificationNumberRequired: Please specify an Accession number
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
@@ -414,6 +415,7 @@ propagation-activityConcentrationLabel: Concentration
 propagation-number: Propagation Number
 propagation-editRecord: Edit Propagation Record
 propagation-recordList: Related Propagation Records
+propagation-identificationNumberRequired: Please specify a Propagation ID
 
 #pottag
 pottag: Pot Tag
