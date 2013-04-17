@@ -202,9 +202,12 @@ cspace = cspace || {};
 		that.events.beforeFetchExistingRelations.fire();
 		
 		var results = searchModel.results;
+		var pageStart = searchModel.offset;
+		var pageEnd = Math.min(pageStart + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
+		var resultsPage = results.slice(pageStart, pageEnd);
 		var searchType = searchModel.searchModel.recordType;
 		
-		if (dialogRelations.items.length > 0 && results.length > 0) {
+		if (dialogRelations.items.length > 0 && resultsPage.length > 0) {
 			var relatedRecords = {};
 			
 			fluid.each(dialogRelations.items, function(dialogRelation) {
@@ -251,7 +254,7 @@ cspace = cspace || {};
 						}
 						
 						if (complete) {
-							filterAndAddRelations(that, dialogRelations, searchModel, relatedRecords);
+							filterAndAddRelations(that, dialogRelations, resultsPage, relatedRecords);
 						}
 					}
 				});
@@ -259,13 +262,10 @@ cspace = cspace || {};
 		}
 	};
 
-	var filterAndAddRelations = function(that, dialogRelations, searchModel, relatedRecords) {
-		var results = searchModel.results;
+	var filterAndAddRelations = function(that, dialogRelations, resultsPage, relatedRecords) {
 		var transformedItems = [];
 		var selectedRecords = [];
 		var alreadyRelatedRecords = {};
-		var start = searchModel.offset;
-		var end = Math.min(start + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
 		
 		fluid.each(dialogRelations.items, function(dialogRelation) {
 			var source = dialogRelation.target;
@@ -274,7 +274,7 @@ cspace = cspace || {};
 			selectedRecords.push(source);
 			alreadyRelatedRecords[source.csid] = [];
 			
-			fluid.each(results, function(target) {
+			fluid.each(resultsPage, function(target) {
 				if (relatedRecordsList && $.inArray(target.csid, relatedRecordsList) > -1) {
 					alreadyRelatedRecords[source.csid].push(target);
 				}
