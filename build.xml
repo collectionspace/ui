@@ -1,0 +1,55 @@
+<project name="ui" default="quick-deploy" basedir=".">
+    <!-- This file based on https://github.com/collectionspace/Tools/blob/master/mini-build/tenant-customizations-v2.2/ui/build.xml -->
+
+    <description>CollectionSpace UI</description>
+
+    <!-- 'environment' must be declared to bring values of system -->
+    <!-- environment variables into Ant, prior to reading any -->
+    <!-- properties files that may reference those values. -->
+    <property environment="env" />
+    
+    <!-- Set properties for this build -->
+    <property file="build.properties" />
+
+    <property name="ui.war.dir.filepath"
+        value="${jee.deploy.cspace}/${cspace.ui.war.dir}" />
+
+    <fileset id="ui.webapp.with.standard.excludes" dir="${cspace.ui.webapp.filepath}"
+        defaultexcludes="false">
+        <include name="${cspace.ui.tenants}/**" />
+        <include name="${cspace.ui.defaults}/**" />
+        <exclude name="**/.project" />
+        <exclude name="**/.classpath" />
+        <exclude name="**/.idea/**" />
+        <exclude name="**/.settings/**" />
+        <exclude name="**/.svn/**" />
+        <exclude name="**/nbproject/**" />
+        <exclude name="**/.git/**" />
+        <exclude name="**/.gitignore" />
+    </fileset>
+	
+    <!-- One-way sync the contents of the webapp directory to an exploded UI .war directory, -->
+    <!-- if present, without first doing an undeploy. -->
+    <target name="quick-deploy"
+        description="Sync UI customizations to the deployed CollectionSpace UI .war directory." 
+        depends="sync-to-war-dir">
+    </target>
+    
+    <!-- Syncs a potentially customized UI to the deployed UI .war directory -->
+    <target name="sync-to-war-dir"
+        depends="check-ui-war-dir-exists"
+        if="${ui.war.dir.exists}">
+        <!-- Does not overwrite files in the target with same or newer timestamp and provides -->
+        <!-- verbose output, both helping make the set of files being updated readily apparent. -->
+        <sync todir="${ui.war.dir.filepath}"
+            verbose="true">
+            <fileset refid="ui.webapp.with.standard.excludes" />
+        </sync>
+    </target>
+        
+    <!-- Identify whether a UI .war directory exists -->
+    <target name="check-ui-war-dir-exists">
+        <available type="dir" file="${ui.war.dir.filepath}"
+            property="ui.war.dir.exists" />
+    </target>
+</project>
