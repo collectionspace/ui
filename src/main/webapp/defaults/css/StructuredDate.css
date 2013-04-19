@@ -9,7 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 .cs-structuredDate-popup {
-	width:auto;
+	width: 615px !important;
     border:1px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
@@ -51,4 +51,7 @@ table .cs-structuredDate-popup {
 
 .info-pair .content td.label {
 	padding-bottom:3px;
+}
+.cs-structuredDate-popup table, .cs-structuredDate-popup .content {
+    width: 100% !important;
 }
