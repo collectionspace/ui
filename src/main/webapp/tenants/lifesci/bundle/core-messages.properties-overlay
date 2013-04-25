@@ -1,6 +1,7 @@
 # Added for lifesci tenant
 
 # Schema extensions to Cataloging record
+collection-object-determinationHistoryGroupLabel: Determination History
 collection-object-taxonLabel: Name
 collection-object-qualifierLabel: Qualifier
 collection-object-identByLabel: By
