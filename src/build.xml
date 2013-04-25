@@ -11,6 +11,9 @@
             <fileset dir="./src/main/webapp">
             	<exclude name="defaults/js/*" />
             	<exclude name="defaults/css/*" />
+
+            	<exclude name="tenants/botgarden/js/*" />
+            	<exclude name="tenants/botgarden/css/*" />
             </fileset>
         </copy>
     </target>
