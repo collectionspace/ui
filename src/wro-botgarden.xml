@@ -224,6 +224,7 @@
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
+    <js>/defaults/lib/georef-js/georef.js</js>
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
     <js>/defaults/js/RecordTraverser.js</js>
