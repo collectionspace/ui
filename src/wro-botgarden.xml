@@ -220,6 +220,7 @@
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/RelatedRecordsTab.js</js>
     <js>/defaults/js/PageBuilder.js</js>
+    <js>/defaults/js/Georef.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
