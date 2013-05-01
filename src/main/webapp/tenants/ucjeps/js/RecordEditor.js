@@ -2181,6 +2181,46 @@ cspace = cspace || {};
         };
     };
 
+    var initializeUndefinedBooleans = function (data, schema) {
+        // Initialize missing/undefined boolean values in the given data model,
+        // using the given schema. Missing or undefined boolean fields are set
+        // to false. The traversal algorithm is based on validateImpl in 
+        // Utilities.js.
+        
+        // Recursively drill down into complex values.
+        fluid.each(data, function (fieldValue, fieldName) {
+            if (typeof(fieldValue) === "object") {
+                var fieldSpec = schema[fieldName];
+
+                if (fieldSpec) {
+                    var fieldType = fieldSpec.type;
+                    var subSchema = null;
+            
+                    if (fieldType === "array") {
+                        subSchema = fieldSpec.items ? fluid.transform(fieldValue, function () {
+                            return fieldSpec.items;
+                        }) : [];
+                    }
+                    else if (fieldType === "object") {
+                        subSchema = fieldSpec.properties;
+                    }
+
+                    if (subSchema) {
+                        initializeUndefinedBooleans(fieldValue, subSchema);
+                    }
+                }
+            }
+        });
+
+        // At the current level, find boolean fields in the schema that are not defined
+        // in the data model, and set them to false.
+        fluid.each(schema, function(fieldSpec, fieldName) {
+            if (fieldSpec.type === "boolean" && typeof(data[fieldName]) === "undefined") {
+                data[fieldName] = false;
+            }
+        });
+    };
+
     cspace.recordEditor.dataSource.finalInit = function (that) {
         //TODO: Think about error callbacks.
         that.get = function (callback) {
@@ -2197,7 +2237,14 @@ cspace = cspace || {};
                     recordType: that.options.recordType,
                     vocab: that.vocab
                 })
-            }, callback);
+            }, function(data) {
+                // Process the data model retrieved from the datasource before returning it.
+                
+                // CSPACE-5982: Undefined boolean fields cause problems saving, so initialize them to false.
+                initializeUndefinedBooleans(data.fields, that.options.schema[that.options.recordType].properties.fields.properties);
+                
+                callback(data);
+            });
         };
         that.set = function (model, callback) {
             that.options.csid = model.csid = model.csid || that.options.csid || "";
