@@ -2529,13 +2529,6 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 	padding-right: 1.5em;
 }
 
-.oocss .cs-repeatable-group li {
-	background-color: #E2E2E2 !important;
-	border: 1px solid #CCC !important;
-	padding: 4px 4px 0 4px !important;
-	margin-bottom: 4px !important;
-}
-
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
 	top: -12px !important;
 }
@@ -2677,6 +2670,7 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit li.cs-repeatable-repeat {
     padding-left: 4px;
     padding-top: 4px;
+    margin-bottom: 4px;
 }
 .cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
     margin-bottom: 10px;
