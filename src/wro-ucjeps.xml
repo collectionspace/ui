@@ -58,7 +58,7 @@
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
     <css>/defaults/css/pivot.css</css>
-    <css>/defaults/css/repeatable.css</css>
+    <css>/tenants/ucjeps/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
@@ -138,7 +138,7 @@
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/admin.css</css>
-    <css>/defaults/css/repeatable.css</css>
+    <css>/tenants/ucjeps/css/repeatable.css</css>
     <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
@@ -181,7 +181,7 @@
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/authority.css</css>
-    <css>/defaults/css/repeatable.css</css>
+    <css>/tenants/ucjeps/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
@@ -243,7 +243,7 @@
     <css>/defaults/css/StructuredDate.css</css>
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/authority.css</css>
-    <css>/defaults/css/repeatable.css</css>
+    <css>/tenants/ucjeps/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/tenants/ucjeps/js/Demands.js</js>
