@@ -12,6 +12,7 @@
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/createNew.css</css>
     <css>/defaults/css/pivot.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='myCollectionSpace'>
@@ -21,6 +22,7 @@
     <css>/tenants/lifesci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='findedit'>
@@ -29,6 +31,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/tenants/lifesci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='index'>
@@ -36,6 +39,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/tenants/lifesci/css/cspace.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='administration'>
@@ -51,6 +55,7 @@
     <css>/defaults/css/admin.css</css>
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='advancedsearch'>
@@ -63,6 +68,7 @@
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='record'>
@@ -81,6 +87,7 @@
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
   
   <group name='template'>
@@ -96,5 +103,6 @@
     <css>/defaults/css/authority.css</css>
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
+    <js>/tenants/ucjeps/js/Demands.js</js>
   </group>
 </groups>

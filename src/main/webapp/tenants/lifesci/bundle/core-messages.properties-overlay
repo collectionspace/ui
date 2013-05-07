@@ -53,6 +53,9 @@ taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
 taxon-preferredTaxonLabel: Taxon Term Group(s)
+# NOTE: Must include space after colon for colon to appear in UI (CSPACE-5954)
+taxon-miniView-field1Label: Term Type:  
+taxon-miniView-field2Label: Term Status: 
 
 # -------------------------------------
 #Login
