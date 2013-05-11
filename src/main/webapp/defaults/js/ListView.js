@@ -372,10 +372,12 @@ cspace = cspace || {};
         // Remder the template.
         that.refreshView();
 
-        // Validate if change is a genuine change (e.g. values actually changed).
-        function validChange (oldModel, newModel) {
-            var valid = oldModel["sortKey"] !== newModel["sortKey"];
-            valid = valid || fluid.find(["pageCount", "pageIndex", "pageSize", "sortDir", "totalRange"], function (field) {
+        // Determine if a change to the model requires an update of the list (e.g. pageSize, sortDir, etc. actually changed).
+        function isUpdateRequired (oldModel, newModel) {
+            var updateRequired = oldModel["sortKey"] !== newModel["sortKey"];
+            // CSPACE-5998: Leave out pageCount and totalRange. These fields can't be changed by the end user, so if they do change,
+            // it's because of a list update. There's no point in updating the list again.
+            updateRequired = updateRequired || fluid.find(["pageIndex", "pageSize", "sortDir"], function (field) { 
                 var oldVal = oldModel[field],
                     newVal = newModel[field];
                 if (isNaN(oldVal)) {
@@ -388,11 +390,11 @@ cspace = cspace || {};
                     return true;
                 }
             });
-            return !!valid;
+            return !!updateRequired;
         }
 
         that.pager.events.onModelChange.addListener(function (model, oldModel) {
-            if (validChange(model, oldModel)) {
+            if (isUpdateRequired(model, oldModel)) {
                 that.updateModel(model);
             }
         });
