@@ -113,6 +113,9 @@ var listViewTester = function ($) {
                 jqUnit.assertTrue("List should not be empty", listView.model.list.length > 0);
                 jqUnit.assertEquals("Number of rows should be equal to the limit per page", listView.model.pagerModel.pageSize, listView.locate("row").length);
                 start();
+            }, "afterUpdate.last": function (listView) {
+                // CSPACE-5998: Shouldn't get here. If afterUpdate fires, it means the list was loaded more than once.
+                jqUnit.assertTrue("The list should only load once", false);
             }
         }, undefined);
     });
