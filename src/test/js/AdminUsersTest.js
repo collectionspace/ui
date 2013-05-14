@@ -771,26 +771,36 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         var confirmation = admin.adminRecordEditor.confirmation;
 
+                        admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                            jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
+                            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User  ?", confirmation.confirmationDialog.locate("message:").text());
+                            jqUnit.isVisible("Delete button should be visible", confirmation.confirmationDialog.locate("act"));
+                            jqUnit.isVisible("Cancel button should be visible", confirmation.confirmationDialog.locate("cancel"));
+                            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
+                            confirmation.confirmationDialog.events.onClose.fire();
+
+                            jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
+                            jqUnit.notVisible("Confiration dialog is invisible initially", confirmation.popup);
+                            locateSelector(recordRenderer, "screenName").val("New Name").change();
+
+                            admin.adminRecordEditor.confirmation.popup.unbind("dialogopen");
+
+                            admin.adminRecordEditor.confirmation.popup.bind("dialogopen", function () {
+                                jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", confirmation.confirmationDialog.locate("message:").eq(0).text());
+                                jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", confirmation.confirmationDialog.locate("message:").eq(1).text());
+                                confirmation.confirmationDialog.events.onClose.fire();
+
+                                start();
+                            });
+            
+                            $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
+                        });
+                        
                         var controlPanel = fluid.find(fluid.renderer.getDecoratorComponents(admin.adminRecordEditor), function (decorator) {
                             return decorator;
                         });
+                        
                         controlPanel.locate("deleteButton").eq(0).click();
-                        jqUnit.isVisible("Confirmation dialog should now be visible", confirmation.popup);
-                        jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User  ?", confirmation.confirmationDialog.locate("message:").text());
-                        jqUnit.isVisible("Delete button should be visible", confirmation.confirmationDialog.locate("act"));
-                        jqUnit.isVisible("Cancel button should be visible", confirmation.confirmationDialog.locate("cancel"));
-                        jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
-                        confirmation.confirmationDialog.locate("close").click();
-
-                        jqUnit.assertEquals("Selected username is", "Reader", locateSelector(recordRenderer, "screenName").val());
-                        jqUnit.notVisible("Confiration dialog is invisible initially", confirmation.popup);
-                        locateSelector(recordRenderer, "screenName").val("New Name").change();
-
-                        $("a", admin.adminListView.locate("row").eq(2)).eq(0).click();
-                        jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", confirmation.confirmationDialog.locate("message:").eq(0).text());
-                        jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", confirmation.confirmationDialog.locate("message:").eq(1).text());
-                        confirmation.confirmationDialog.locate("close").click();
-                        start();
                     },
                     priority: "last",
                     once: true
