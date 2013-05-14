@@ -350,7 +350,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     listener: function (admin) {
                         var recordRenderer = admin.adminRecordEditor.recordRenderer;
                         changeDetails(admin, recordRenderer, "validPassword");
-                        locateSelector(recordRenderer, "email").val(testDataCreateUser.email).change();
+                        locateSelector(recordRenderer, "email").val("").change();
                         admin.adminRecordEditor.events.onSave.fire();
                     },
                     priority: "last"
