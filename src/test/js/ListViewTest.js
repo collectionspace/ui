@@ -109,7 +109,7 @@ var listViewTester = function ($) {
                 });
             }, "afterRender.last": function (listView) {
                 jqUnit.assertValue("Page should be initialized", listView.pager);
-            }, "afterUpdate.last": function (listView) {
+            }, "ready.last": function (listView) {
                 jqUnit.assertTrue("List should not be empty", listView.model.list.length > 0);
                 jqUnit.assertEquals("Number of rows should be equal to the limit per page", listView.model.pagerModel.pageSize, listView.locate("row").length);
                 start();
