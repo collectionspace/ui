@@ -2255,8 +2255,10 @@ cspace = cspace || {};
             }, function(data) {
                 // Process the data model retrieved from the datasource before returning it.
                 
-                // CSPACE-5982: Undefined boolean fields cause problems saving, so initialize them to false.
-                initializeUndefinedBooleans(data.fields, that.options.schema[that.options.recordType].properties.fields.properties);
+                if (data.fields) {
+                    // CSPACE-5982: Undefined boolean fields cause problems saving, so initialize them to false.
+                    initializeUndefinedBooleans(data.fields, that.options.schema[that.options.recordType].properties.fields.properties);
+                }
                 
                 callback(data);
             });
