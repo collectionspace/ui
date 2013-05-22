@@ -15,7 +15,7 @@
                     "options": {
                         "fields": [
                             "fields.exitNumber",
-                            "fields.currentOwner"
+                            "fields.depositor"
                         ]
                     }
                 },
