@@ -152,10 +152,16 @@ taxon-widthLabel: Width
 taxon-diameterBreastHeightLabel: DBH
 
 #Login
-login-current-info: 
-login-login: admin@botgarden.cspace.berkeley.edu
-login-rologin: reader@botgarden.cspace.berkeley.edu
-login-rologin-pwd: and password:
+login-current-info: Welcome to the UC Botanical Garden's collection management system, CollectionSpace. UCBG-CSpace has been configured to support the needs of botanical gardens in general, as well as the specific needs of the UC Botanical Garden.
+login-current-details: 
+login-login-info: 
+login-login: 
+login-login-pwd: 
+login-login-pwdValue:
+login-rologin-info:  
+login-rologin:  
+login-rologin-pwd: 
+login-rologin-pwdValue: 
 
 #Vocabularies
 vocab-person: Default Persons
