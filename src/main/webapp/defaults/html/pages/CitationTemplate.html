@@ -17,26 +17,26 @@
 			<div class="info-column">
 				<div class="info-pair">
 					<div class="header">
-						<div class="csc-citation-labelPublicationInformation-group-label label"></div>
+						<div class="csc-citation-citationPublicationInfoGroup-label label"></div>
 					</div>
 					<div class="content">
 						<table>
 							<thead>
 								<tr>									
-									<td class="csc-citation-labelPublicationInformation-publisher-label label"></td>
-									<td class="csc-citation-labelPublicationInformation-place-label label"></td>
-									<td class="csc-citation-labelPublicationInformation-date-label label"></td>
-									<td class="csc-citation-labelPublicationInformation-edition-label label"></td>
-									<td class="csc-citation-labelPublicationInformation-pages-label label"></td>										
+									<td class="csc-citation-publisher-label label"></td>
+									<td class="csc-citation-place-label label"></td>
+									<td class="csc-citationPublicationInfoGroup-publicationDate-label label"></td>
+									<td class="csc-citation-edition-label label"></td>
+									<td class="csc-citation-pages-label label"></td>										
 								</tr>
 							</thead>                                                        
 							<tbody>
 								<tr class="csc-citation-citationPublicationInfoGroup">
-									<td><input type="text" class="csc-citationAuthority-publication-publisher"/></td>
-									<td><input type="text" class="csc-citationAuthority-publication-place"/></td>
-									<td><input type="text" class="csc-citationAuthority-publication-publicationDate"/></td>
-									<td><input type="text" class="csc-citationAuthority-publication-edition"/></td>
-									<td><input type="text" class="csc-citationAuthority-publication-pages"/></td>
+									<td><input type="text" class="csc-citation-publisher"/></td>
+									<td><input type="text" class="csc-citation-place"/></td>
+									<td><input type="text" class="csc-citationPublicationInfoGroup-publicationDate"/></td>
+									<td><input type="text" class="csc-citation-edition"/></td>
+									<td><input type="text" class="csc-citation-pages"/></td>
 								</tr>									
 							</tbody>
 						</table>
@@ -47,22 +47,22 @@
 			<div class="info-column">
 				<div class="info-pair">
 					<div class="header">
-						<div class="csc-citation-labelAgentInformation-group-label label"></div>
+						<div class="csc-citation-citationAgentInfoGroup-label label"></div>
 					</div>
 					<div class="content">
 						<table>
 							<thead>
 								<tr>
-									<td class="csc-citation-labelAgentInformation-agent-label label"></td>
-									<td class="csc-citation-labelAgentInformation-role-label label"></td>
-									<td class="csc-citation-labelAgentInformation-note-label label"></td>
+									<td class="csc-citation-agent-label label"></td>
+									<td class="csc-citation-role-label label"></td>
+									<td class="csc-citation-note-label label"></td>
 								</tr>
 							</thead>                                                          
 							<tbody>
 								<tr class="csc-citation-citationAgentInfoGroup">
-									<td><input type="text" class="csc-citationAuthority-agentInfo-agent"/></td>
-									<td><select class="csc-citationAuthority-agentInfo-role input-select"><option value="">Options not loaded</option></select></td>
-									<td><input type="text" class="csc-citationAuthority-agentInfo-note"/></td>																		
+									<td><input type="text" class="csc-citation-agent"/></td>
+									<td><select class="csc-citation-role input-select"><option value="">Options not loaded</option></select></td>
+									<td><input type="text" class="csc-citation-note"/></td>																		
 								</tr>									
 							</tbody>
 						</table>
@@ -74,10 +74,10 @@
 				<div class="info-column2-60 fl-force-left">
 					 <div class="info-pair">
 						<div class="header">
-							<div class="csc-citation-labelCitationNote-label label"></div>
+							<div class="csc-citation-citationNote-label label"></div>
 						</div>
 						<div class="content">
-							<input type="text" class="csc-citationAuthority-citation-note"/>
+							<input type="text" class="csc-citation-citationNote"/>
 						</div>
 					</div>	
 				</div>	
@@ -86,22 +86,22 @@
 			<div class="info-column">
 				<div class="info-pair">
 					<div class="header">
-						<div class="csc-citation-labelResourceIdentifiers-group-label label"></div>
+						<div class="csc-citation-citationResourceIdentGroup-label label"></div>
 					</div>
 					<div class="content">
 						<table>
 							<thead>
 								<tr>
-									<td class="csc-citation-labelResourceIdentifiers-id-label label"></td>								
-									<td class="csc-citation-labelResourceIdentifiers-type-label label"></td>
-									<td class="csc-citation-labelResourceIdentifiers-capture-date-label label"></td> 									
+									<td class="csc-citation-resourceIdent-label label"></td>								
+									<td class="csc-citation-type-label label"></td>
+									<td class="csc-citationResourceIdentGroup-captureDate-label label"></td> 									
 								</tr>
 							</thead>                                                         
 							<tbody>
 								<tr class="csc-citation-citationResourceIdentGroup">
-									<td><input type="text" class="csc-citationAuthority-resourceId-id"/></td>
-									<td><select class="csc-citationAuthority-resourceId-type input-select"><option value="">Options not loaded</option></select></td>
-									<td><input type="text" class="csc-citationAuthority-resourceId-captureDate"/></td>																		
+									<td><input type="text" class="csc-citation-resourceIdent"/></td>
+									<td><select class="csc-citation-type input-select"><option value="">Options not loaded</option></select></td>
+									<td><input type="text" class="csc-citationResourceIdentGroup-captureDate"/></td>																		
 								</tr>									
 							</tbody>
 						</table>
@@ -112,20 +112,20 @@
 			<div class="info-column">
 				<div class="info-pair">
 					<div class="header">
-						<div class="csc-citation-labelRelatedTerms-group-label label"></div>
+						<div class="csc-citation-citationRelatedTermsGroup-label label"></div>
 					</div>
 					<div class="content">
 						<table>
 							<thead>
 								<tr>
-									<td class="csc-citation-labelRelatedTerms-related-label label"></td>	
-									<td class="csc-citation-labelRelatedTerms-type-label label"></td>
+									<td class="csc-citation-relatedTerm-label label"></td>	
+									<td class="csc-citation-relationType-label label"></td>
 								</tr>
 							</thead>                                                          
 							<tbody>
 								<tr class="csc-citation-citationRelatedTermsGroup">
-									<td><input type="text" class="csc-citationAuthority-relatedTerms-relatedTerm"/></td>
-									<td><select class="csc-citationAuthority-relatedTerms-relationType input-select"><option value="">Options not loaded</option></select></td>																	
+									<td><input type="text" class="csc-citation-relatedTerm"/></td>
+									<td><select class="csc-citation-relationType input-select"><option value="">Options not loaded</option></select></td>																	
 								</tr>									
 							</tbody>
 						</table>
