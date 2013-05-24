@@ -1611,6 +1611,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+       fluid.demands("tabsList", ["cspace.tabs", "citation"], {
+            container: "{tabs}.dom.tabsList",
+            options: {
+                model: {
+                    tabs: {
+                        primary: {
+                            "name": "tablist-primary",
+                            href: "#primaryTab",
+                            title: "tablist-primary"
+                        }
+                    }
+                }
+            }
+        });
+
         fluid.demands("tabsList", ["cspace.tabs", "organization"], {
             container: "{tabs}.dom.tabsList",
             options: {
