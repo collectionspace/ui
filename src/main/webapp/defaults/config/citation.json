@@ -1,0 +1,53 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "citation",
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-citationAuthority-termDisplayName"
+                        },
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier", "fields.narrowerContexts"]
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [{
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.citationTermGroup",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "termDisplayName"
+                        }]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "citation",
+            "schema": {
+                "citation": null
+            }
+        }
+    }
+}
+
