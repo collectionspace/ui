@@ -46,7 +46,7 @@ table .cs-structuredDate-popup {
 }
 
 .content input.cs-structuredDate-input[disabled] {
-	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #CCC;
+	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #eee;
 }
 
 .info-pair .content td.label {
