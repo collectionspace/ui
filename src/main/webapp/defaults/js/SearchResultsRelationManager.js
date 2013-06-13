@@ -199,8 +199,6 @@ cspace = cspace || {};
 		 * filter out existing relations.
 		 */
 		
-		that.events.beforeFetchExistingRelations.fire();
-		
 		var results = searchModel.results;
 		var pageStart = searchModel.offset;
 		var pageEnd = Math.min(pageStart + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
@@ -208,6 +206,8 @@ cspace = cspace || {};
 		var searchType = searchModel.searchModel.recordType;
 		
 		if (dialogRelations.items.length > 0 && resultsPage.length > 0) {
+			that.events.beforeFetchExistingRelations.fire();
+
 			var relatedRecords = {};
 			
 			fluid.each(dialogRelations.items, function(dialogRelation) {
