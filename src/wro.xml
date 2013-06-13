@@ -55,6 +55,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/defaults/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
+    <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
     <css>/defaults/css/pivot.css</css>
     <css>/defaults/css/repeatable.css</css>
@@ -73,6 +74,9 @@
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
+    <js>/defaults/js/RelateSearchResults.js</js>
+    <js>/defaults/js/SearchResultsRelationManager.js</js>
+    <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/SearchTips.js</js>
     <js>/defaults/js/SearchTools.js</js>
     <js>/defaults/js/Search.js</js>
