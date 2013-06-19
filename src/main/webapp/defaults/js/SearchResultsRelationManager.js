@@ -38,8 +38,13 @@ cspace = cspace || {};
 	fluid.defaults("cspace.searchResultsRelationManager", {
 		gradeNames: ["fluid.rendererComponent", "autoInit"],
 		selectors: {
-			searchDialog: ".csc-search-related-dialog"
+			searchDialog: ".csc-search-related-dialog",
+			addButton: ".csc-add-search-results-button"
 		},
+		styles: {
+			addButton: "cs-add-search-results-button"
+		},
+		produceTree: "cspace.searchResultsRelationManager.produceTree",
 		strings: {},
 		messageKeys: {
 			addRelationsFailedMessage: "searchResultsRelationManager-addRelationsFailedMessage"
@@ -78,6 +83,14 @@ cspace = cspace || {};
 				funcName: "cspace.searchResultsRelationManager.addRelations",
 				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"]  
 			},
+			showAddButton: {
+				funcName: "cspace.searchResultsRelationManager.showAddButton",
+				args: ["{searchResultsRelationManager}", "{arguments}.0"]
+			},
+			recordTypeChanged: {
+				funcName: "cspace.searchResultsRelationManager.recordTypeChanged",
+				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.mainSearch.recordTypeSelector.model"]
+			}
 		},
 		events: {
 			onRelateButtonClick: null,
@@ -85,13 +98,15 @@ cspace = cspace || {};
 			onAddRelation: null,
 			beforeFetchExistingRelations: null,
 			afterAddRelations: null,
-			onError: null
+			onError: null,
+			recordTypeChanged: "{search}.mainSearch.events.recordTypeChanged"
 		},
 		listeners: {
 			onRelateButtonClick: "{cspace.searchResultsRelationManager}.onRelateButtonClick",
 			onAddRelation: "{cspace.searchResultsRelationManager}.onAddRelation",
 			afterAddRelations: "{cspace.searchResultsRelationManager}.afterAddRelations",
-			onError: "{cspace.searchResultsRelationManager}.onError"
+			onError: "{cspace.searchResultsRelationManager}.onError",
+			recordTypeChanged: "{cspace.searchResultsRelationManager}.handleRecordTypeChanged"
 		},
 		relationURL: cspace.componentUrlBuilder("%tenant/%tname/relationships"),
 		listURL: cspace.componentUrlBuilder("%tenant/%tname/%primary/%related/%csid"),
@@ -188,6 +203,9 @@ cspace = cspace || {};
 				that.messageBar.show(resolve(messageKeys.addRelationsFailedMessage, [message]), null, true);
 			});
 		};
+		that.handleRecordTypeChanged = function(recordType) {
+			that.recordTypeChanged(recordType);
+		}
 	};
 
 	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
@@ -312,4 +330,35 @@ cspace = cspace || {};
 	cspace.searchResultsRelationManager.add = function (that) {
 		that.searchToRelateDialog.open();
 	};
+	
+	// Render config used to render the add to record button.
+	cspace.searchResultsRelationManager.produceTree = function (that) {
+		return {
+			 addButton: {
+				 messagekey: "searchResultsRelationManager-addToRecordButton",
+				 decorators: [{
+					 addClass: "{styles}.addButton"
+				 }, {
+					 type: "jQuery",
+					 func: "click",
+					 args: that.add
+				 }]
+			 }
+		};
+	};
+	
+	cspace.searchResultsRelationManager.recordTypeChanged = function(that, recordType, recordTypes) {
+		var isVocab = $.inArray(recordType, recordTypes.vocabularies) >= 0;
+		
+		if (isVocab) {
+			that.showAddButton(false);
+		}
+		else {
+			that.showAddButton(true);
+		}
+	};
+	
+	cspace.searchResultsRelationManager.showAddButton = function(that, show) {
+		that.locate("addButton").toggleClass("hidden", !show);
+	}
 })(jQuery, fluid);

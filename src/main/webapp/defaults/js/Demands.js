@@ -1328,11 +1328,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-        fluid.demands("cspace.searchResultsRelationManager", "cspace.relateSearchResults", {
+        fluid.demands("cspace.searchResultsRelationManager", "cspace.advancedSearch", {
             options: {
-                events: {
-                    onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
-                },
                 listeners: {
                     beforeFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
                     afterAddRelations: "{loadingIndicator}.events.hideOn.fire",
