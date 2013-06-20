@@ -208,8 +208,11 @@ cspace = cspace || {};
 		}
 	};
 
+	/*
+	 * Adds relations between records in the current page of the search results in searchModel,
+	 * and the records that were selected in the dialog.
+	 */
 	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
-		/*
 		 * The searchToRelateDialog returns a list of relations in which the targets are the records
 		 * that were checked in the dialog. For each record checked in the dialog, we want to create
 		 * a relation with each record in the current page of search results, in which the source is 
@@ -280,6 +283,11 @@ cspace = cspace || {};
 		}
 	};
 
+	/*
+	 * Adds relations between records in the current page of the search results in searchModel,
+	 * and the records that were selected in the dialog, using a map of already related records
+	 * to prevent duplicating existing relations.
+	 */
 	var filterAndAddRelations = function(that, dialogRelations, resultsPage, relatedRecords) {
 		var transformedItems = [];
 		var selectedRecords = [];
@@ -346,7 +354,12 @@ cspace = cspace || {};
 			 }
 		};
 	};
-	
+
+	/*
+	 * Updates the UI when there has been a change in the record type being searched. The
+	 * new record type is specified, along with an object that contains a list of
+	 * record types that are vocabularies.
+	 */
 	cspace.searchResultsRelationManager.updateRecordType = function(that, recordType, recordTypes) {
 		var isVocab = $.inArray(recordType, recordTypes.vocabularies) >= 0;
 		
@@ -358,6 +371,9 @@ cspace = cspace || {};
 		}
 	};
 	
+	/*
+	 * Shows or hides the add to record button.
+	 */
 	cspace.searchResultsRelationManager.showAddButton = function(that, show) {
 		that.locate("addButton").toggleClass("hidden", !show);
 	}
