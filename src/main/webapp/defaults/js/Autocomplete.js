@@ -613,7 +613,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         var stopCharPattern = /[\^,\*]$/,
             startCharPattern = /^[\^,\*]/,
-            interstitialWildcard = /[^\^,\*]+\*[^\^,\*]+/;
+            interstitialWildcard = /\*/;
         
         if (stopCharPattern.test(model.term) || startCharPattern.test(model.term)) {
             model.term = model.term.replace(stopCharPattern, "").replace(startCharPattern, "");
