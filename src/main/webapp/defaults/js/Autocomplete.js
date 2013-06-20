@@ -612,13 +612,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             model = that.model;
         
         var stopCharPattern = /[\^,\*]$/,
-            startCharPattern = /^[\^,\*]/;
+            startCharPattern = /^[\^,\*]/,
+            interstitialWildcard = /[^\^,\*]+\*[^\^,\*]+/;
         
         if (stopCharPattern.test(model.term) || startCharPattern.test(model.term)) {
             model.term = model.term.replace(stopCharPattern, "").replace(startCharPattern, "");
         }
         
-        if (model.authorities.length > 0) {
+        if (model.authorities.length > 0 && !(interstitialWildcard.test(model.term))) {
             tree.addToPanel = {};
             tree.addTermTo = {
                 messagekey: "autocomplete-addTermTo",
