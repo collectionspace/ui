@@ -1476,7 +1476,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.searchBox.navigateToSearch",
             args: ["{searchBox}", "{recordEditor}"]
         });
-        fluid.demands("cspace.searchBox.navigateToSearch", ["cspace.searchBox", "cspace.search.searchView"], {
+        fluid.demands("cspace.searchBox.navigateToSearch", ["cspace.searchBox", "cspace.search.searchView", "cspace.searchToRelateDialog"], {
             funcName: "cspace.search.handleSubmitSearch",
             args: ["{searchBox}", "{searchView}"]
         });
