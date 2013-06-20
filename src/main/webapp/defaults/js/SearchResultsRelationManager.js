@@ -47,6 +47,8 @@ cspace = cspace || {};
 		produceTree: "cspace.searchResultsRelationManager.produceTree",
 		strings: {},
 		messageKeys: {
+			addRelationsMessage: "searchResultsRelationManager-addRelationsMessage",
+			alreadyRelatedMessage: "searchResultsRelationManager-alreadyRelatedMessage",
 			addRelationsFailedMessage: "searchResultsRelationManager-addRelationsFailedMessage"
 		},
 		parentBundle: "{globalBundle}",
@@ -87,8 +89,8 @@ cspace = cspace || {};
 				funcName: "cspace.searchResultsRelationManager.showAddButton",
 				args: ["{searchResultsRelationManager}", "{arguments}.0"]
 			},
-			recordTypeChanged: {
-				funcName: "cspace.searchResultsRelationManager.recordTypeChanged",
+			updateRecordType: {
+				funcName: "cspace.searchResultsRelationManager.updateRecordType",
 				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.mainSearch.recordTypeSelector.model"]
 			}
 		},
@@ -178,23 +180,21 @@ cspace = cspace || {};
 			
 			var messages = [];
 			
-			// FIXME: Move message text to the message bundle.
-			
 			fluid.each(sources, function(source) {
 				var csid = source.csid;
 				var count = (csid in counts) ? counts[csid] : 0;
 				var alreadyRelatedCount = alreadyRelatedRecords[csid].length;
 			
-				var message = "Added " + count + " " + (count == 1 ? "record" : "records") + " to " + source.number;
+				var message = resolve(messageKeys.addRelationsMessage, [count, source.number]);
 			
 				if (alreadyRelatedCount > 0) {
-					message = message + " (" + alreadyRelatedCount + " " + (alreadyRelatedCount == 1 ? "was" : "were") + " already related)";
+					message = message + ' ' + resolve(messageKeys.alreadyRelatedMessage, [alreadyRelatedCount]);
 				}
-			
-				messages.push(message + ".");
+				
+				messages.push(message);
 			});
 
-			that.messageBar.show(messages.join(" "), null, false);
+			that.messageBar.show(messages.join(". "), null, false);
 		};
 		that.onError = function(data) {
 			data.messages = data.messages || fluid.makeArray("");
@@ -204,7 +204,7 @@ cspace = cspace || {};
 			});
 		};
 		that.handleRecordTypeChanged = function(recordType) {
-			that.recordTypeChanged(recordType);
+			that.updateRecordType(recordType);
 		}
 	};
 
@@ -347,7 +347,7 @@ cspace = cspace || {};
 		};
 	};
 	
-	cspace.searchResultsRelationManager.recordTypeChanged = function(that, recordType, recordTypes) {
+	cspace.searchResultsRelationManager.updateRecordType = function(that, recordType, recordTypes) {
 		var isVocab = $.inArray(recordType, recordTypes.vocabularies) >= 0;
 		
 		if (isVocab) {
