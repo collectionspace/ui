@@ -139,8 +139,7 @@ cspace = cspace || {};
             relatedRelationsUpdated: "{relatedRecordsList}.relatedRelationsUpdatedHandler",
             afterAddRelation: [
                 "{relatedRecordsList}.events.relationsUpdated.fire"
-            ],
-            primaryRecordCreated: "{relatedRecordsList}.primaryRecordCreatedHandler"
+            ]
         },
         invokers: {
             navigateToAdvancedSearch: {
@@ -163,7 +162,7 @@ cspace = cspace || {};
                 condition: "${showShowButton}",
                 trueTree: {
                     showButton: {
-                        messagekey: "sidebar-show",
+                        messagekey: "sidebar-showButton",
                         decorators: [{
                             type: "jQuery",
                             func: "prop",
@@ -236,9 +235,6 @@ cspace = cspace || {};
 
             // Enable or disable the Show button.
             that.locate("showButton").prop("disabled", hasNoRecords);
-        };
-        that.primaryRecordCreatedHandler = function () {
-            that.listBanner.events.showBanner.fire(true);
         };
     };
 
