@@ -51,8 +51,8 @@ cspace = cspace || {};
         model: {
             showCreate: false
         },
-        related: "{relationManager}.options.related",
-        primary: "{relationManager}.options.primary",
+        related: null,
+        primary: null,
         components: {
             globalModel: "{globalModel}",
             search: {
@@ -110,12 +110,8 @@ cspace = cspace || {};
             rendererTargetSelector: "dialog"
         },
         events: {
-            onAddRelation: {
-                event: "{cspace.relationManager}.events.onAddRelation"
-            },
-            onCreateNewRecord: {
-                event: "{cspace.relationManager}.events.onCreateNewRecord"
-            },
+            onAddRelation: null,
+            onCreateNewRecord: null,
             onOpen: null,
             onClose: null
         },
@@ -167,7 +163,7 @@ cspace = cspace || {};
 
     cspace.searchToRelateDialog.finalInit = function (that) {
         var resolve = that.options.parentBundle.resolve,
-            title = resolve("searchToRelateDialog-title", [resolve(that.options.related === "procedures" ? "searchToRelateDialog-procedures" : that.options.related)]);
+            title = resolve(that.options.strings.title || "searchToRelateDialog-title", [resolve(that.options.related === "procedures" ? "searchToRelateDialog-procedures" : that.options.related)]);
         that.container.dialog({
             autoOpen: false,
             modal: true,
@@ -226,7 +222,7 @@ cspace = cspace || {};
                 }
             },
             addButton: {
-                messagekey: "searchToRelateDialog-addButton",
+                messagekey: that.options.strings.addButton || "searchToRelateDialog-addButton",
                 decorators: [{
                     addClass: "hidden"
                 }, {
