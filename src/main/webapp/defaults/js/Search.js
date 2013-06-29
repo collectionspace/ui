@@ -18,15 +18,25 @@ cspace = cspace || {};
 
     fluid.log("Search.js loaded");
     
-    var displayLookingMessage = function (domBinder, keywords, strings) {
+    var displayLookingMessage = function (domBinder, searchModel, strings) {
         domBinder.locate("resultsCountContainer").hide();
-        domBinder.locate("lookingString").text(fluid.stringTemplate(strings.looking, {query: keywords || ""}));
+
+        var message = isRelatedSearch(searchModel) ?
+                fluid.stringTemplate(strings.relatedLooking, {query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
+                fluid.stringTemplate(strings.looking, {query: searchModel.keywords || ""});
+
+        domBinder.locate("lookingString").text(message);
         domBinder.locate("lookingContainer").show();
     };
     
-    var displayResultsCount = function (domBinder, count, keywords, strings) {
+    var displayResultsCount = function (domBinder, count, searchModel, strings) {
         domBinder.locate("lookingContainer").hide();
-        domBinder.locate("resultsCount").text(fluid.stringTemplate(strings.resultsCount, {count: count, query: keywords || ""}));
+
+        var message = isRelatedSearch(searchModel) ?
+                fluid.stringTemplate(strings.relatedResultsCount, {count: count, query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
+                fluid.stringTemplate(strings.resultsCount, {count: count, query: searchModel.keywords || ""});                  
+               
+        domBinder.locate("resultsCount").text(message);                 
         domBinder.locate("resultsCountContainer").show();
     };
 
@@ -180,6 +190,9 @@ cspace = cspace || {};
             keywords: searchBox.model.keywords,
             recordType: searchBox.model.recordType,
             vocab: searchBox.model.vocabs ? searchBox.model.vocabSelection : undefined,
+            relatedRecordType: undefined,
+            relatedCsid: undefined,
+            relatedTitle: undefined,
             sortKey: ""
         });
         that.resultsPager.applier.requestChange("pageCount", 1);
@@ -333,6 +346,7 @@ cspace = cspace || {};
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort%mkRtSbj",
             defaultVocabUrl: "%tenant/%tname/vocabularies/%vocab/search?query=%keywords%pageNum%pageSize%sort",
+            defaultRelatedUrl: "%tenant/%tname/%relatedRecordType/%recordType/%relatedCsid?%pageNum%pageSize%sort",
             localUrl: "%tenant/%tname/data/%recordType/search.json"
         }),
        preInitFunction: "cspace.search.searchView.preInit"
@@ -422,7 +436,9 @@ cspace = cspace || {};
             search.applier.requestChange(path, value);
         });
         search.refreshView();
-        search.toggleControls(true);
+
+        var hideToggle = isRelatedSearch(currentSearch);
+        search.toggleControls(true, hideToggle);
     };
     
     cspace.search.searchView.applyResults = function (that, data) {
@@ -430,7 +446,11 @@ cspace = cspace || {};
         var offset = searchModel.pageIndex * searchModel.pageSize;
         that.applier.requestChange("offset", offset);
         that.applier.requestChange("pagination", data.pagination);
-        fluid.each(data.results, function (row, index) {
+
+        // The related records query returns "items" instead of "results", so check for both.
+        var results = data.results || data.items;
+        
+        fluid.each(results, function (row, index) {
             var fullIndex = offset + index;
             if (!that.model.results[fullIndex]) {
                 row.selected = false;
@@ -449,7 +469,7 @@ cspace = cspace || {};
         that.resultsPager.applier.requestChange("totalRange", range);
         that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
             
-        displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
+        displayResultsCount(that.dom, range, that.model.searchModel, that.options.strings);
         
         // Disable all related records.
         that.disableRelated(that.model);
@@ -491,7 +511,10 @@ cspace = cspace || {};
             that.updateModel({
                 keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
                 recordType: cspace.util.getUrlParameter("recordtype"),
-                vocab: cspace.util.getUrlParameter("vocab")
+                vocab: cspace.util.getUrlParameter("vocab"),
+                relatedRecordType: cspace.util.getUrlParameter("relatedRecordType"),
+                relatedCsid: cspace.util.getUrlParameter("relatedCsid"),
+                relatedTitle: decodeURIComponent(cspace.util.getUrlParameter("relatedTitle"))
             });
         }
         that.hideResults();
@@ -558,7 +581,7 @@ cspace = cspace || {};
         that.mainSearch.locate("searchQuery").val(searchModel.keywords).change();
         that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType).change();
         that.mainSearch.locate("selectVocab").val(searchModel.vocab).change();
-        displayLookingMessage(that.dom, searchModel.keywords, that.options.strings);
+        displayLookingMessage(that.dom, searchModel, that.options.strings);
         var pagerModel = newPagerModel || that.resultsPager.model;
         that.updateModel({
             pageSize: pagerModel.pageSize,
@@ -601,19 +624,36 @@ cspace = cspace || {};
     };
     
     cspace.search.searchView.buildUrlDefault = function (options, urls) {
-        var url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
-            recordType: options.recordType,
-            keywords: options.keywords,
-            vocab: options.vocab || "",
-            pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
-            pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
-            sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : "",
-            mkRtSbj: options.mkRtSbj ? fluid.stringTemplate(urls.mkRtSbj, {mkRtSbj: options.mkRtSbj}) : ""
-        });
+        var url;
+
+        if (isRelatedSearch(options)) {
+            url = fluid.stringTemplate(urls.defaultRelatedUrl, {
+                relatedRecordType: options.relatedRecordType,
+                recordType: options.recordType,
+                relatedCsid: options.relatedCsid,
+                pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
+                pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
+                sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
+            });
+        } else {
+            url = fluid.stringTemplate(options.vocab && options.vocab !== "all" ? urls.defaultVocabUrl : urls.defaultUrl, {
+                recordType: options.recordType,
+                keywords: options.keywords,
+                vocab: options.vocab || "",
+                pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
+                pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
+                sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : "",
+                mkRtSbj: options.mkRtSbj ? fluid.stringTemplate(urls.mkRtSbj, {mkRtSbj: options.mkRtSbj}) : ""
+            });
+        }
+        
         return url;
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {
         return fluid.stringTemplate(urls.localUrl, {recordType: options.recordType});
     };
 
+    var isRelatedSearch = function (searchModel) {
+        return (searchModel.relatedRecordType && searchModel.relatedCsid);
+    };
 })(jQuery, fluid);
