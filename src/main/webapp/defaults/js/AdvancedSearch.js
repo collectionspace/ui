@@ -263,9 +263,13 @@ cspace = cspace || {};
     
     cspace.advancedSearch.finalInit = function (that) {
         // Toggle various advanced search steps.
-        that.toggleControls = function (hideSteps) {
+        that.toggleControls = function (hideSteps, hideToggle) {
+            if (typeof(hideToggle) === "undefined") {
+                hideToggle = !hideSteps;
+            }
+
             that.locate("step1").add(that.locate("step2"))[hideSteps ? "hide" : "show"]();
-            that.locate("toggle")[hideSteps ? "show" : "hide"]();
+            that.locate("toggle")[hideToggle ? "hide" : "show"]();
         };
         // Render advanced search.
         that.refreshView();
