@@ -470,6 +470,11 @@ cspace = cspace || {};
             // Only present on findedit and advanced search pages.
             var searchData;
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
+                if (!storage) {
+                    // PAHMA-462: The searchView inside the searchToRelateDialog on the advanced search page doesn't
+                    // have history storage, so need to check that storage is defined.
+                    return;
+                }
                 if (storage.options.source !== that.options.source) {
                     return;
                 }

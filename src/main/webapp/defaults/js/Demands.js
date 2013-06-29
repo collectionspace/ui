@@ -1106,6 +1106,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+        fluid.demands("cspace.searchResultsRelationManager", "cspace.advancedSearch", {
+            options: {
+                listeners: {
+                    beforeFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
+                    afterAddRelations: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
+        });
         
         // Related records tab demands
         fluid.demands("relatedRecordsTab", "cspace.pageBuilder", {
@@ -1118,6 +1128,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: {
                     showCreate: true
                 },
+                related: "{cspace.relationManager}.options.related",
+                primary: "{cspace.relationManager}.options.primary",
+                events: {
+                    onAddRelation: "{cspace.relationManager}.events.onAddRelation",
+                    onCreateNewRecord: "{cspace.relationManager}.events.onCreateNewRecord"
+                },
                 listeners: {
                     onClose: "{cspace.relationManager}.onDialogClose"
                 }
@@ -1125,11 +1141,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
             options: {
+                related: "{cspace.relationManager}.options.related",
+                primary: "{cspace.relationManager}.options.primary",
+                events: {
+                    onAddRelation: "{cspace.relationManager}.events.onAddRelation",
+                    onCreateNewRecord: "{cspace.relationManager}.events.onCreateNewRecord"
+                },
                 listeners: {
                     onClose: "{cspace.relationManager}.onDialogClose"
                 }
             }
         });
+
+       fluid.demands("cspace.searchToRelateDialog", "cspace.searchResultsRelationManager", {
+           options: {
+               events: {
+                   onAddRelation: "{cspace.searchResultsRelationManager}.events.onAddRelation"
+               }
+           }
+       });
         
         // Repeatable demands
         fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", {
@@ -1229,6 +1259,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.searchResultsRelationManager"], {
+            container: "{searchToRelateDialog}.container",
+            options: {
+                strings: {
+                    errorMessage: "{globalBundle}.messageBase.search-errorMessage",
+                    resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    looking: "{globalBundle}.messageBase.search-looking",
+                    selected: "{globalBundle}.messageBase.search-selected",
+                    number: "{globalBundle}.messageBase.search-number",
+                    summary: "{globalBundle}.messageBase.search-summary",
+                    recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
+                }
+            }
+        });
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search",
             options: {
@@ -1301,6 +1346,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.searchBox.updateSearchHistory", ["cspace.searchBox", "cspace.search.searchView"], {
             funcName: "cspace.search.updateSearchHistory",
             args: ["{searchBox}.findeditHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
+        });
+
+        fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.searchToRelateDialog", "cspace.search.searchView"], {
+            // The search component in the Add to Record dialog should not perform any search when the page initially loads.
+            funcName: "jQuery.noop"
         });
 
         fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.search.searchView"], {
@@ -1390,6 +1440,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
+        });
+
+        fluid.demands("cspace.search.searchView.search", ["cspace.search.searchView", "cspace.searchToRelateDialog", "cspace.advancedSearch"], {
+            funcName: "cspace.search.searchView.search",
+            args: ["{arguments}.0", "{searchView}"]
         });
         
         fluid.demands("cspace.search.searchView.search", "cspace.search.searchView", {
