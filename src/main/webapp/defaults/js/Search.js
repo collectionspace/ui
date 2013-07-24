@@ -21,22 +21,22 @@ cspace = cspace || {};
     var displayLookingMessage = function (domBinder, searchModel, strings) {
         domBinder.locate("resultsCountContainer").hide();
 
-		var message = isRelatedSearch(searchModel) ?
-        	fluid.stringTemplate(strings.relatedLooking, {query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
-			fluid.stringTemplate(strings.looking, {query: searchModel.keywords || ""});
+        var message = isRelatedSearch(searchModel) ?
+                fluid.stringTemplate(strings.relatedLooking, {query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
+                fluid.stringTemplate(strings.looking, {query: searchModel.keywords || ""});
 
-    	domBinder.locate("lookingString").text(message);
+        domBinder.locate("lookingString").text(message);
         domBinder.locate("lookingContainer").show();
     };
     
     var displayResultsCount = function (domBinder, count, searchModel, strings) {
         domBinder.locate("lookingContainer").hide();
 
-		var message = isRelatedSearch(searchModel) ?
-        	fluid.stringTemplate(strings.relatedResultsCount, {count: count, query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
-        	fluid.stringTemplate(strings.resultsCount, {count: count, query: searchModel.keywords || ""});			
-		
-    	domBinder.locate("resultsCount").text(message);			
+        var message = isRelatedSearch(searchModel) ?
+                fluid.stringTemplate(strings.relatedResultsCount, {count: count, query: searchModel.relatedTitle || searchModel.relatedCsid || ""}) :
+                fluid.stringTemplate(strings.resultsCount, {count: count, query: searchModel.keywords || ""});                  
+               
+        domBinder.locate("resultsCount").text(message);                 
         domBinder.locate("resultsCountContainer").show();
     };
 
@@ -492,6 +492,8 @@ cspace = cspace || {};
             var searchData;
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
                 if (!storage) {
+                    // PAHMA-462: The searchView inside the searchToRelateDialog on the advanced search page doesn't
+                    // have history storage, so need to check that storage is defined.
                     return;
                 }
                 if (storage.options.source !== that.options.source) {

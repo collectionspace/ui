@@ -267,7 +267,7 @@ cspace = cspace || {};
             if (typeof(hideToggle) === "undefined") {
                 hideToggle = !hideSteps;
             }
-            
+
             that.locate("step1").add(that.locate("step2"))[hideSteps ? "hide" : "show"]();
             that.locate("toggle")[hideToggle ? "hide" : "show"]();
         };

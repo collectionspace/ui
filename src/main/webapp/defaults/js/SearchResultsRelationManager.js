@@ -38,10 +38,17 @@ cspace = cspace || {};
 	fluid.defaults("cspace.searchResultsRelationManager", {
 		gradeNames: ["fluid.rendererComponent", "autoInit"],
 		selectors: {
-			searchDialog: ".csc-search-related-dialog"
+			searchDialog: ".csc-search-related-dialog",
+			addButton: ".csc-add-search-results-button"
 		},
+		styles: {
+			addButton: "cs-add-search-results-button"
+		},
+		produceTree: "cspace.searchResultsRelationManager.produceTree",
 		strings: {},
 		messageKeys: {
+			addRelationsMessage: "searchResultsRelationManager-addRelationsMessage",
+			alreadyRelatedMessage: "searchResultsRelationManager-alreadyRelatedMessage",
 			addRelationsFailedMessage: "searchResultsRelationManager-addRelationsFailedMessage"
 		},
 		parentBundle: "{globalBundle}",
@@ -78,6 +85,14 @@ cspace = cspace || {};
 				funcName: "cspace.searchResultsRelationManager.addRelations",
 				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.model"]  
 			},
+			showAddButton: {
+				funcName: "cspace.searchResultsRelationManager.showAddButton",
+				args: ["{searchResultsRelationManager}", "{arguments}.0"]
+			},
+			updateRecordType: {
+				funcName: "cspace.searchResultsRelationManager.updateRecordType",
+				args: ["{searchResultsRelationManager}", "{arguments}.0", "{search}.mainSearch.recordTypeSelector.model"]
+			}
 		},
 		events: {
 			onRelateButtonClick: null,
@@ -85,13 +100,15 @@ cspace = cspace || {};
 			onAddRelation: null,
 			beforeFetchExistingRelations: null,
 			afterAddRelations: null,
-			onError: null
+			onError: null,
+			recordTypeChanged: "{search}.mainSearch.events.recordTypeChanged"
 		},
 		listeners: {
 			onRelateButtonClick: "{cspace.searchResultsRelationManager}.onRelateButtonClick",
 			onAddRelation: "{cspace.searchResultsRelationManager}.onAddRelation",
 			afterAddRelations: "{cspace.searchResultsRelationManager}.afterAddRelations",
-			onError: "{cspace.searchResultsRelationManager}.onError"
+			onError: "{cspace.searchResultsRelationManager}.onError",
+			recordTypeChanged: "{cspace.searchResultsRelationManager}.handleRecordTypeChanged"
 		},
 		relationURL: cspace.componentUrlBuilder("%tenant/%tname/relationships"),
 		listURL: cspace.componentUrlBuilder("%tenant/%tname/%primary/%related/%csid"),
@@ -163,23 +180,21 @@ cspace = cspace || {};
 			
 			var messages = [];
 			
-			// FIXME: Move message text to the message bundle.
-			
 			fluid.each(sources, function(source) {
 				var csid = source.csid;
 				var count = (csid in counts) ? counts[csid] : 0;
 				var alreadyRelatedCount = alreadyRelatedRecords[csid].length;
 			
-				var message = "Added " + count + " " + (count == 1 ? "record" : "records") + " to " + source.number;
+				var message = resolve(messageKeys.addRelationsMessage, [count, source.number]);
 			
 				if (alreadyRelatedCount > 0) {
-					message = message + " (" + alreadyRelatedCount + " " + (alreadyRelatedCount == 1 ? "was" : "were") + " already related)";
+					message = message + ' ' + resolve(messageKeys.alreadyRelatedMessage, [alreadyRelatedCount]);
 				}
-			
-				messages.push(message + ".");
+				
+				messages.push(message);
 			});
 
-			that.messageBar.show(messages.join(" "), null, false);
+			that.messageBar.show(messages.join(". "), null, false);
 		};
 		that.onError = function(data) {
 			data.messages = data.messages || fluid.makeArray("");
@@ -188,8 +203,15 @@ cspace = cspace || {};
 				that.messageBar.show(resolve(messageKeys.addRelationsFailedMessage, [message]), null, true);
 			});
 		};
+		that.handleRecordTypeChanged = function(recordType) {
+			that.updateRecordType(recordType);
+		}
 	};
 
+	/*
+	 * Adds relations between records in the current page of the search results in searchModel,
+	 * and the records that were selected in the dialog.
+	 */
 	cspace.searchResultsRelationManager.addRelations = function(that, dialogRelations, searchModel) {
 		/*
 		 * The searchToRelateDialog returns a list of relations in which the targets are the records
@@ -199,8 +221,6 @@ cspace = cspace || {};
 		 * filter out existing relations.
 		 */
 		
-		that.events.beforeFetchExistingRelations.fire();
-		
 		var results = searchModel.results;
 		var pageStart = searchModel.offset;
 		var pageEnd = Math.min(pageStart + parseInt(searchModel.pagination.pageSize), parseInt(searchModel.pagination.totalItems));
@@ -208,6 +228,8 @@ cspace = cspace || {};
 		var searchType = searchModel.searchModel.recordType;
 		
 		if (dialogRelations.items.length > 0 && resultsPage.length > 0) {
+			that.events.beforeFetchExistingRelations.fire();
+
 			var relatedRecords = {};
 			
 			fluid.each(dialogRelations.items, function(dialogRelation) {
@@ -262,6 +284,11 @@ cspace = cspace || {};
 		}
 	};
 
+	/*
+	 * Adds relations between records in the current page of the search results in searchModel,
+	 * and the records that were selected in the dialog, using a map of already related records
+	 * to prevent duplicating existing relations.
+	 */
 	var filterAndAddRelations = function(that, dialogRelations, resultsPage, relatedRecords) {
 		var transformedItems = [];
 		var selectedRecords = [];
@@ -312,4 +339,43 @@ cspace = cspace || {};
 	cspace.searchResultsRelationManager.add = function (that) {
 		that.searchToRelateDialog.open();
 	};
+	
+	// Render config used to render the add to record button.
+	cspace.searchResultsRelationManager.produceTree = function (that) {
+		return {
+			 addButton: {
+				 messagekey: "searchResultsRelationManager-addToRecordButton",
+				 decorators: [{
+					 addClass: "{styles}.addButton"
+				 }, {
+					 type: "jQuery",
+					 func: "click",
+					 args: that.add
+				 }]
+			 }
+		};
+	};
+
+	/*
+	 * Updates the UI when there has been a change in the record type being searched. The
+	 * new record type is specified, along with an object that contains a list of
+	 * record types that are vocabularies.
+	 */
+	cspace.searchResultsRelationManager.updateRecordType = function(that, recordType, recordTypes) {
+		var isVocab = $.inArray(recordType, recordTypes.vocabularies) >= 0;
+		
+		if (isVocab) {
+			that.showAddButton(false);
+		}
+		else {
+			that.showAddButton(true);
+		}
+	};
+	
+	/*
+	 * Shows or hides the add to record button.
+	 */
+	cspace.searchResultsRelationManager.showAddButton = function(that, show) {
+		that.locate("addButton").toggleClass("hidden", !show);
+	}
 })(jQuery, fluid);

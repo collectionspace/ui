@@ -33,10 +33,6 @@
                         "permissions": "{pageBuilder}.permissions" 
                     } 
                 },
-                "relateSearchResults": {
-                    "type": "cspace.relateSearchResults",
-                    "container": ".csc-relateSearchResults"
-                },
                 "searchResultsRelationManager": {
                     "type": "cspace.searchResultsRelationManager",
                     "container": ".csc-searchResultsRelationManager"
