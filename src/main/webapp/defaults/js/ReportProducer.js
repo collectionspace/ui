@@ -130,10 +130,11 @@ cspace = cspace || {};
             reportStarted: function () {
                 that.applier.requestChange("reportInProgress", true);
                 that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportlist[0]);
-                that.reportStatus.show({
-                    reportType: that.model.reportTypeSelection,
-                    reportName: that.model.reportnames[$.inArray(that.model.reportTypeSelection, that.model.reportlist)]
-                });
+                // UCJEPS-438: Don't show the status bar, so that it doesn't blip onscreen when the Run button is clicked.
+                // that.reportStatus.show({
+                //     reportType: that.model.reportTypeSelection,
+                //     reportName: that.model.reportnames[$.inArray(that.model.reportTypeSelection, that.model.reportlist)]
+                // });
             },
             reportFinished: function () {
                 that.applier.requestChange("reportInProgress", false);
@@ -223,7 +224,17 @@ cspace = cspace || {};
         });
         fluid.fetchResources({
             report: {
-                href: href,
+                // UCJEPS-438: Disable the initial error-checking request. Instead of loading the report URL here,
+                // load a different arbitrary (but known to be small, and appcache resident) URL instead. Why not
+                // just remove the fetchResources call completely and make the window.open(href, "_blank") call
+                // synchronous? Because that would potentially change the browser's perception of whether or not
+                // the window.open call is user-initiated, which would potentially change how it displays the
+                // report (as a tab vs. a pop-up, with or without pop-up blocking). Doing it this way allows us
+                // just to omit the error checking request, without changing any other behavior that might be
+                // surprising to users, or require additional training. For more information, see
+                // http://issues.collectionspace.org/browse/UCJEPS-438.
+                href: "cataloging.html",
+                // href: href,
                 options: {
                     type: "GET",
                     success: function (data) {
