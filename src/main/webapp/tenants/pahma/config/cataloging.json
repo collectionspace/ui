@@ -1,0 +1,49 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "cataloging",
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-object-identification-object-number" 
+                        },
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts", "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup"]
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.objectNumber", 
+                            "fields.nametitle"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar"
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "cataloging",
+            "schema": {
+                "cataloging": null
+            }
+        }
+    }
+}

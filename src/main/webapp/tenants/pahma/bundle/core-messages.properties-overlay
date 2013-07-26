@@ -1,0 +1,1056 @@
+#Login
+#login-current: CollectionSpace 3.2.2: PAHMA prototype
+#login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
+#login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
+login-current: PAHMA-CollectionSpace 3.2.2
+login-current-info: Welcome to PAHMA's new collection management system, CollectionSpace.  PAHMA-CSpace has been configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
+login-login-info: To sign in, enter your email and passphrase in the Sign In box on the right.
+#login-login: admin@pahma.cspace.berkeley.edu
+#login-login-pwd: and the password 
+#login-rologin-info: To view CollectionSpace PAHMA tenant as a read-only user, enter the login 
+#login-rologin: reader@pahma.cspace.berkeley.edu 
+#login-rologin-pwd: and the password 
+login-login: 
+login-login-pwd: 
+login-login-pwdValue: 
+login-rologin-info: If you do not yet have access to PAHMA-CollectionSpace, have your supervisor send a request on your behalf to
+login-rologin: pahma-cspace@berkeley.edu
+login-rologin-pwd: with your specifics as well as the levels of access that you'll be needing.
+login-rologin-pwdValue: 
+login-forgot: Forgot password?\t
+login-reset-label: Click here to reset your password.
+
+proceduresCategory: Action Records
+vocabulariesCategory: Authority Terms
+cataloging: Catalog Object
+
+procedures: Action Records
+
+
+loanin-editRecord: Edit In Loan Record
+loanout-editRecord: Edit Out Loan Record
+acquisition-editRecord: Edit Accession Record
+movement-editRecord: Edit Inventory/Movement Record
+intake-editRecord: Edit Object Entry Record
+media-editRecord: Edit Media Record
+claim-editRecord: Edit NAGPRA Claim Record
+ 
+loanin-recordList: Related In Loan Records
+loanout-recordList: Related Out Loan Records
+acquisition-recordList: Related Accession Records
+movement-recordList: Related Inventory/Movement Records
+intake-recordList: Related Object Entry Records
+media-recordList: Related Media Records
+claim-recordList: Related NAGPRA Claim Records
+
+
+# ------------------------------------------------------------
+# Added to support the collectionobjects_naturalhistory domain schema extensions
+# Taxon record
+taxon-taxonomicDeterminationHistoryGroupLabel: FIX-Taxonomic determination history
+taxon-taxonLabel: Name
+taxon-qualifierLabel: Qualifier
+taxon-identByLabel: By
+taxonomicIdentGroup-identDateGroupLabel: Date
+taxon-institutionLabel: Institution
+taxon-identKindLabel: Kind
+taxon-referenceLabel: FIX-Taxonomic reference
+taxon-refPageLabel: Page
+taxon-notesLabel: Notes
+
+# Vocabularies
+vocab-material_ca: Materials
+vocab-activity: Activities
+vocab-concept: Ethnographic Cultures
+vocab-ethusecode: Ethnographic File Codes
+vocab-archculture: Archaeological Cultures
+vocab-organization: PAHMA Organization Authority
+vocab-person: PAHMA Person Authority
+vocab-place: PAHMA Place Authority
+vocab-location: PAHMA Storage Locations
+vocab-taxon: PAHMA Taxon Authority
+vocab-crate: Crates
+
+# Cataloging record
+collection-object-homeLocationLabel: Home location
+collection-object-homeCrateLabel: Home crate
+collection-object-commentsLabel: Object comments
+collection-object-taxonomicDeterminationHistoryGroupLabel: FIX1-Taxonomic determination history
+collection-object-taxonomicDeterminationHistoryGroupLabel: FIX2-Taxonomic determination history
+collection-object-taxonLabel: Name
+collection-object-qualifierLabel: Qualifier
+collection-object-identByLabel: By
+collection-object-identDateLabel: Date
+collection-object-institutionLabel: Institution
+collection-object-identKindLabel: Kind
+collection-object-referenceLabel: FIX-Taxonomic reference
+collection-object-refPageLabel: Page
+collection-object-notesLabel: Notes
+
+collection-object-annotationGroupLabel: Annotations
+collection-object-annotationTypeLabel: Type
+collection-object-annotationNoteLabel: Note
+collection-object-annotationDateLabel: Date
+collection-object-annotationAuthorLabel: Author
+
+collection-object-objectProductionDateGroupLabel: Production date
+collection-object-dateEarliestSingleYearLabel: Year, Earliest date
+collection-object-dateLatestYearLabel: Year, Latest date
+collection-object-dateEarliestSingleMonthLabel: Month, Earliest date
+collection-object-dateLatestMonthLabel: Month, Latest date
+collection-object-dateEarliestSingleDayLabel: Day, Earliest date
+collection-object-dateLatestDayLabel: Day, Latest date
+
+# ******************* Taxonomy ******************* #
+# ======== Are these now obsolete? {begin} ========
+taxon-displayNameLabel: Display name
+taxon-termStatusLabel: Term status
+taxon-taxonFullNameLabel: Full name
+taxon-taxonCurrencyLabel: Current?
+taxon-taxonCitationLabel: Citation
+taxon-taxonomicStatusLabel: Taxonomic status
+taxon-taxonNameSourceLabel: Name source
+taxon-taxonNameSourceCodeLabel: Name source code
+# ======== Are these now obsolete? {end} ========
+
+# Taxon record
+taxon: Taxon
+taxon-identificationNumberRequired: Please specify a Display Name
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
+preferredTA-termDisplayNameLabel: Display name
+preferredTA-termNameLabel: Term
+preferredTA-termQualifierLabel: Qualifier
+preferredTA-termStatusLabel: Term status
+preferredTA-termTypeLabel: Term type
+preferredTA-termLanguageLabel: Language
+preferredTA-termPrefForLangLabel: Pref for lang
+preferredTA-termSourceLabel: Source
+preferredTA-termSourceDetailLabel: Source detail
+preferredTA-termSourceIDLabel: Source ID
+preferredTA-termSourceNoteLabel: Source note
+preferredTA-taxonomicStatusLabel: Taxonomic status
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Currency
+taxon-taxonAuthorGroupLabel: Author
+taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorTypeLabel: Author type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is named hybrid?
+taxon-taxonCitationLabel: Citations
+taxon-taxonNoteLabel: Note
+taxon-commonNameGroupLabel: Common name
+taxon-commonNameLabel: Name
+taxon-commonNameLanguageLabel: Language
+taxon-commonNameSourceLabel: Source
+taxon-commonNameSourceDetailLabel: Source detail
+taxon-updatedAtLabel: Modified date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
+taxon-preferredTaxonLabel: Taxononomic Term(s)
+# ------------------------------------------------------------
+
+# ------------------------------------------------------------
+# Added to support the collectionobjects_anthropology domain schema extensions
+# ******************* Cataloging ******************* #
+collection-object-repatriationNagpraComplianceInformationLabel: Repatriation and NAGPRA Compliance Information
+collection-object-nagpraInventoryNameLabel: NAGPRA inventory
+collection-object-nagpraApplicabilityLabel: Museum's NAGPRA category det.
+collection-object-nagpraCulturalDeterminationLabel: NAGPRA cultural determination
+collection-object-repatriationNoteLabel: Repatriation note
+
+collection-object-repatriationClaimGroupLabel: Claims made for object
+collection-object-repatriationClaimNameLabel: Name of claim
+collection-object-repatriationClaimStatusLabel: Status
+collection-object-repatriationClaimClaimantLabel: Claimant
+collection-object-repatriationClaimNoteLabel: Note
+collection-object-repatriationClaimDateLabel: Date
+
+collection-object-culturalCareInformationLabel: Cultural Care Information
+collection-object-accessRestrictionGroupLabel: Access limitations
+collection-object-accessRestrictionTypeLabel: Type
+collection-object-accessRestrictionLevelLabel: Level
+collection-object-accessRestrictionDetailsLabel: Details
+collection-object-accessRestrictionRequestorLabel: Requestor (person)
+collection-object-accessRestrictionOnBehalfOfLabel: On behalf of (organization)
+collection-object-accessRestrictionDateLabel: Date
+              
+collection-object-culturalCareNoteLabel: Cultural care notes
+collection-object-computedCurrentLocationLabel: Current storage location
+collection-object-computedCurrentLocationSearchLabel: Current storage location
+collection-object-computedCrateLabel: Current box or container
+collection-object-computedCrateSearchLabel: Current box or container
+
+# ------------------------------------------------------------
+# Added to support the collectionobjects_pahma local schema extensions
+# ******************* Cataloging ******************* #
+collection-object-pahmaNagpraCodeLegacyLabel : Grave association code
+collection-object-pahmaEthnographicFileCodeLabel: Ethnographic file code
+collection-object-pahmaTms2003DataSourceLabel: TMS primary data source
+collection-object-pahmaTmsLegacyDepartmentLabel: TMS legacy department
+collection-object-pahmaCollectionLabel: Collection
+collection-object-pahmaObjectStatusLabel: Object status
+collection-object-inventoryCountLabel: Inventory count
+collection-object-portfolioSeriesLabel: R. Keeling audio series
+collection-object-pahmaFieldLocVerbatimLabel: Field collection place (verbatim)
+collection-object-isComponentLabel: Is component?
+collection-object-pahmaFieldCollectionDateGroupLabel: Field collection date
+
+# ------------------------------------------------------------
+
+pageBuilder-header-myCollectionSpace: Recently Modified or Created Records
+
+# ---------------------------------- Procedure Names -------------------------- #
+loanin: In Loan
+loanout: Out Loan
+acquisition: Accession
+movement: Inventory/Movement
+#movement: Storage and Movement
+objectexit: Object Exit
+intake: Object Entry
+group: Group
+media: Media
+claim: NAGPRA Claim
+
+# ---------------------------------- Top Tabs -------------------------- #
+claim-tab: NAGPRA Claim
+loanin-tab: In Loan
+loanout-tab: Out Loan
+acquisition-tab: Accession
+movement-tab: Inv/Mov...
+intake-tab: Object Entry
+media-tab: Media
+
+# ---------- What are these ? ----------- #
+person: Person
+contact: Contact
+
+
+# ******************* List captions ******************* #
+cataloging-number: Museum number
+intake-number: Entry number
+objectexit-number: Exit number
+acquisition-number: Accession number
+group-number: Title of group
+loanin-number: Loan number
+loanout-number: Loan number
+claim-number: Claim number
+movement-number: Reference number
+media-number: Media rendition number (or Museum number)
+
+hierarchy-broaderContextLabel: Broader context
+hierarchy-equivalentContextsLabel: Equivalent context
+hierarchy-narrowerContextLabel: Narrower context
+hierarchy-relatedTermsLabel: Related term
+
+# ---------------------------------- Object Exit Information (Cataloging) -------------------------- #
+objectexit-exitNumberLabel: Object exit number
+objectexit-exitDateGroupLabel: Exit date
+objectexit-exitDateLabel: Exit date
+objectexit-newOwnerLabel: Current or new owner
+objectexit-exitMethodsLabel: Exit method
+objectexit-exitMethodLabel: Exit method
+objectexit-exitReasonLabel: Exit reason
+objectexit-exitNoteLabel: Exit note
+objectexit-packingNoteLabel: Packing note
+objectexit-updatedAtLabel: Modified date
+objectexit-editUsername: Record modified by
+objectexit-identificationNumberRequired: Please specify an exit number
+objectexit-depositorLabel: Recipient
+
+# ---------------------------------- Groups -------------------------- #
+group-groupInformationLabel: Group information
+group-scopeNoteLabel: Scope note
+group-ownerLabel: Group owner
+group-responsibleDepartmentLabel: Purpose
+group-updatedAtLabel: Modified date
+group-identificationNumberRequired: Please specify a title
+persontest1: Person test 1
+persontest2: Person test 2
+
+# ---------------------------------- Person Name Authority -------------------------- #
+person-contactInformationLabel: Contact Information
+# ======== Are these obsolete? {begin} ========
+person-displayNameLabel: Display name
+person-foreNameLabel: First name
+person-middleNameLabel: Middle name(s)
+person-surNameLabel: Last name
+# ======== Are these obsolete? {end} ========
+
+preferredPA-termDisplayNameLabel: Display name
+preferredPA-termQualifierLabel: Qualifier
+preferredPA-termTypeLabel: Term type
+preferredPA-termNameLabel: Term
+preferredPA-termLanguageLabel: Language
+preferredPA-termPrefForLangLabel: Pref for lang
+preferredPA-termSourceLabel: Source
+preferredPA-termSourceDetailLabel: Source detail
+preferredPA-termSourceIDLabel: Source ID
+preferredPA-termSourceNoteLabel: Source note
+preferredPA-termStatusLabel: Status
+preferredPA-salutationLabel: Salutation
+preferredPA-titleLabel: Title
+preferredPA-foreNameLabel: Forename
+preferredPA-middleNameLabel: Middle name
+preferredPA-surNameLabel: Surname
+preferredPA-nameAdditionsLabel: Additions to name
+preferredPA-initialsLabel: Initials
+person-preferredPersonLabel: Person Term(s)
+person-schoolsOrStylesLabel: School/style
+person-schoolOrStyleLabel: School/style
+person-nameNoteLabel: Name notes
+person-birthDateLabel: Birth date
+person-deathDateLabel: Death date
+person-bioNoteLabel: Biographical note
+person-updatedAtLabel: Modified date
+person-birthPlaceLabel: Place of birth
+person-deathPlaceLabel: Place of death
+person-identificationNumberRequired: Please specify a display name
+person-altNameNotesLabel: Alternate name notes
+person-groupsLabel: Cultural group
+person-createdAtLabel: Created date
+person-createdAtStartLabel: Earliest
+person-createdAtEndLabel: Latest
+
+
+# ---------------------------------- Contact -------------------------- #
+contact-telephoneNumberGroupLabel: Telephone number
+contact-addressPostCodeLabel: Postal code
+contact-updatedByLabel: Updated by
+contact-addressStateOrProvinceLabel: State/province
+contact-createdByLabel: Created by
+contact-faxNumberGroupLabel: Fax number
+contact-updatedAtLabel: Updated at
+contact-createdAtLabel: Created at
+contact-webAddressGroupLabel: Web address
+contact-webAddressLabel: Web address
+contact-addressNoteLabel: Address note
+contact-emailGroupLabel: Email address
+contact-addressGroupLabel: Postal address
+
+#Acquisition:
+acquisition-ownersLabel: Previous owner (donor)
+acquisition-ownerLabel: Previous owner (donor)
+acquisition-acquisitionInformationLabel: Accession Information
+acquisition-acquisitionFundingLabel: Acquisition funding
+acquisition-acquisitionSourceLabel: Acquisition source
+acquisition-createdAtLabel: Created date
+acquisition-createdAtStartLabel: Earliest
+acquisition-createdAtEndLabel: Latest
+
+# ---------------------------------- Object Collection Information (Acquisition) -------------------------- #
+acquisition-acquisitionProvisosLabel: Accession provisos
+acquisition-acquisitionAuthorizerHeaderLabel: Accession authorizer
+acquisition-acquisitionAuthorizerLabel: Person's name
+acquisition-acquisitionAuthorizerDateLabel: Authorization date
+acquisitionDateGroup-acquisitionDateGroupLabel: Acquisition date
+acquisition-transferOfTitleNumberLabel: Transfer of title number
+acquisition-creditLineLabel: Credit line
+acquisition-acquisitionMethodLabel: Acquisition method
+acquisition-acquisitionReasonLabel: Accession reason
+acquisition-accessionDateGroupLabel: Accession date
+acquisition-acquisitionReferenceNumberLabel: Accession number
+acquisition-acquisitionNoteLabel: Accession note
+acquisition-acquisitionDescriptionLabel: Accession description
+
+acquisition-originalObjectPurchasePriceValueLabel: Original object purch. price 
+acquisition-originalObjectPurchasePriceCurrencyLabel: Original object purch. price
+acquisition-groupPurchasePriceCurrencyLabel: Price (currency)
+acquisition-groupPurchasePriceValueLabel: Price (amount)
+acquisition-objectOfferPriceValueLabel: Object offer price
+acquisition-objectOfferPriceCurrencyLabel: Purchase price
+acquisition-objectPurchaseOfferPriceValueLabel: Object purch. offer price
+acquisition-objectPurchaseOfferPriceCurrencyLabel: Purchase price(s), if applicable
+acquisition-updatedAtLabel: Modified date
+acquisition-identificationNumberRequired: Please specify an acquisition reference number
+
+#Loan in
+loanin-loaninInformationLabel: Incoming Loans Information
+loanin-loanInNumberLabel: Loan number
+loanin-lendersContactLabel: Lender's contact
+loanin-loanStatusGroupLabel: Loan status
+loanin-loanStatusNoteLabel: Status note
+loanin-loanStatusDateLabel: Status date
+loanin-loanStatusLabel: Status
+loanin-lendersAuthorizerLabel: Lender's authorizer
+loanin-lendersAuthorizationDateLabel: Authorization date
+loanin-loanReturnDateLabel: Loan return date
+loanin-loanReturnDateGroupLabel: Loan return date
+loanin-borrowersContactLabel: PAHMA contact
+loanin-borrowersAuthorizerLabel: PAHMA authorizer
+loanin-borrowersAuthorizationDateLabel: Authorization date
+loanin-loanInNoteLabel: Loan note
+loanin-loanPurposeLabel: Loan purpose
+loanin-loanRenewalApplicationDateLabel: Loan renewal application date
+loanin-loanInDateLabel: Loan receipt date
+loanin-loanInDateGroupLabel: Loan receipt date
+loanin-loanInConditionsLabel: Loan conditions
+loanin-loanInContactLabel: PAHMA contact
+loanin-updatedAtLabel: Modified date
+loanin-identificationNumberRequired: Please specify a loan number
+loanin-createdAtLabel: 
+loanin-tenantIDLabel: 
+
+# Out Loans
+loanout-loanoutInformationLabel: Outgoing Loans Information
+loanout-loanOutNumberLabel: Loan number
+loanout-borrowersContactLabel: Borrower's contact 
+loanout-borrowersAuthorizerLabel: Borrower's authorizer
+loanout-borrowersAuthorizationDateLabel: Authorization date
+loanout-specialConditionsOfLoanLabel: Loan conditions
+loanout-lendersAuthorizerLabel: PAHMA authorizer
+loanout-lendersContactLabel: PAHMA contact
+loanout-lendersAuthorizationDateLabel: Authorization date
+loanout-loanStatusLabel: Status
+loanout-loanStatusGroupLabel: Loan status
+loanout-loanStatusDateLabel: Status date
+loanout-loanStatusNoteLabel: Status note
+loanout-loanedObjectStatusLabel: Status
+loanout-loanedObjectStatusDateLabel: Status date
+loanout-loanedObjectStatusNoteLabel: Status note
+loanout-loanRenewalApplicationDateLabel: Loan renewal application date
+loanout-loanPurposeLabel: Loan purpose
+loanout-loanReturnDateLabel: Loan return date 
+loanout-loanReturnDateGroupLabel: Loan return date 
+loanout-loanOutNoteLabel: Loan note
+loanout-loanedObjectStatusGroupLabel: Loaned object status
+loanout-loanOutDateLabel: Loan date
+loanout-loanOutDateGroupLabel: Loan date
+loanout-updatedAtLabel: Modified date
+loanout-identificationNumberRequired: Please specify a loan number
+loanout-createdAtLabel: 
+loanout-tenantIDLabel:
+
+# Organization
+organization-foundingDateGroupLabel: Founding date
+organization-dissolutionDateGroupLabel:  Dissolution date
+organization-contactInformationLabel: Contact information
+organization-contactNamesLabel: Related persons
+organization-orgTypeLabel: Organization type
+organization-orgNoteLabel: Notes
+organization-foundingPlaceLabel: Founding place
+organization-displayNameLabel: Display name
+organization-longNameLabel: Main body name
+organization-displayName-label: Display name
+organization-updatedAtLabel: Modified date
+organization-identificationNumberRequired: Please specify a display name
+organization-shortIdentifierLabel: 
+organization-createdAtLabel:
+organization-tenantIDLabel:
+organization-groupsLabel: Cultural group
+organization-groupLabel: Cultural group
+preferredOA-termDisplayNameLabel: Display name
+preferredOA-termTypeLabel: Term type
+preferredOA-termPrefForLangLabel: Pref for lang
+preferredOA-termSourceNoteLabel: Source note
+preferredOA-termSourceDetailLabel: Source detail
+preferredOA-mainBodyNameLabel: Main body name
+preferredOA-additionsToNameLabel: Additions to name
+
+#Movement
+#movement-movementControlInformationLabel: Movement Control Information*/
+movement-movementReferenceNumberLabel: Reference number
+movement-locationMovementInformationLabel: Inventory/Movement Information
+movement-currentLocationLabel: Storage location
+movement-crateLabel: Crate
+movement-currentLocationMISSINGLabel: Storage location
+movement-currentLocationNoteLabel: Storage note
+movement-locationDateLabel: Inventory/Move date
+movement-normalLocationLabel: Home location
+movement-plannedRemovalDateLabel: Planned move date
+movement-removalDateLabel: Move date
+movement-reasonForMoveLabel: Reason
+movement-currentLocationHeaderLabel: Storage location
+movement-updatedAtLabel: Modified date
+movement-identificationNumberRequired: Please specify a storage Location
+movement-locationHandlersLabel: Location handler
+movement-locationHandlerLabel: Handler
+
+#Location
+location-accessNoteLabel: Access note
+location-conditionGroupLabel: Condition note
+location-displayNameLabel: Display name
+location-termStatusLabel: Term status
+location-securityNoteLabel: Security note
+location-locNoteLabel: Location note
+location-conditionNoteLabel: Condition note
+location-updatedAtLabel: Modified date
+location-editUsername: Record modified by
+location-identificationNumberRequired: Please specify a display name
+location-moveableContainerLabel: Moveable/container
+preferredSLA-termDisplayNameLabel: Display name
+preferredSLA-termStatusLabel: Term status
+preferredSLA-termTypeLabel: Term type
+preferredSLA-termLanguageLabel: Language
+preferredSLA-termPrefForLangLabel: Pref for lang
+preferredSLA-termSourceDetailLabel: Source detail
+preferredSLA-termSourceNoteLabel: Source note
+location-preferredLocationLabel: Storage location term(s)
+location-createdAtLabel: Created date
+location-createdAtStartLabel: Earliest
+location-createdAtEndLabel: Latest
+
+#concept
+concept-scopeNoteLabel: Scope note
+concept-scopeNoteSourceLabel: Scope note source
+concept-scopeNoteSourceDetailLabel: Scope note source detail
+preferredCA-termDisplayNameLabel: Display name
+preferredCA-termTypeLabel: Term type
+preferredCA-termPrefForLangLabel: Pref for lang
+preferredCA-historicalStatusLabel: Current?
+preferredCA-termSourceDetailLabel: Source detail
+preferredCA-termSourceNoteLabel: Source note
+concept-citationSourceDetailLabel: Citation source detail
+concept-additionalSourceGroupLabel: Additional sources
+concept-additionalSourceDetailLabel: Additional source
+concept-additionalSourceIDLabel: Additional source detail
+concept-additionalSourceLabel: Additional source unique ID
+concept-additionalSourceNoteLabel: Additional source note
+concept-preferredConceptLabel: Concept Term(s)
+
+# Place
+place-placeAuthorityInformationLabel: Place Authority Term Information
+place-placeTypeLabel: Place type
+place-placeIdentifierLabel: Identifier
+place-placeNameGroupLabel: Place names
+preferredPlace-termDisplayNameLabel: Display name
+preferredPlace-termNameLabel: Name
+preferredPlace-termQualifierLabel: Qualifier
+preferredPlace-termTypeLabel: Type
+preferredPlace-termStatusLabel: Status
+preferredPlace-termLanguageLabel: Language
+preferredPlace-termPrefForLangLabel: Pref for lang
+preferredPlace-termSourceLabel: Source
+preferredPlace-termSourceDetailLabel: Source detail
+preferredPlace-termSourceIDLabel: Source ID
+preferredPlace-termSourceNoteLabel: Source note
+preferredPlace-nameAbbrevLabel: Abbreviation
+preferredPlace-historicalStatusLabel: Current?
+preferredPlace-nameNoteLabel: Note
+placeTermGroup-nameDateGroupLabel: Date
+place-placeOwnerGroupLabel: Place owners
+place-ownerLabel: Owner
+placeOwnerGroup-ownershipDateGroupLabel: Date
+place-ownershipNoteLabel: Note
+place-placeSourceLabel: Place source
+place-placeNoteLabel: Place note
+place-localityInformationLabel: Locality Information
+place-vCoordinatesLabel: Verbatim coordinates
+place-vLatitudeLabel: Verbatim latitude
+place-vLongitudeLabel: Verbatim longitude
+place-vCoordSysLabel: Coordinate system
+place-vSpatialReferenceSystemLabel: Spatial reference system
+place-vCoordSourceLabel: Source
+place-vCoordSourceRefIdLabel: Source detail
+place-vUnitofMeasureLabel:Unit of measure
+place-vElevationLabel: Elevation
+place-minElevationInMetersLabel: Min. elevation (m)
+place-maxElevationInMetersLabel: Max. elevation (m)
+place-vDepthLabel: Depth
+place-minDepthInMetersLabel: Min. depth (m)
+place-maxDepthInMetersLabel: Max. depth (m)
+place-vDistanceAboveSurfaceLabel: Distance above surface
+place-minDistanceAboveSurfaceInMetersLabel: Min. distance above surface (m)
+place-maxDistanceAboveSurfaceInMetersLabel: Max. distance above surface (m)
+place-geoReferenceInformationLabel: Georeference Information
+place-decimalLatitudeLabel: Decimal latitude
+place-decimalLongitudeLabel: Decimal longitude
+place-geodeticDatumLabel: Datum
+place-coordUncertaintyInMetersLabel: Uncertainty
+place-coordPrecisionLabel: Precision
+place-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+place-footprintWKTLabel: Footprint WKT
+place-footprintSRSLabel: Footprint SRS
+place-footprintSpatialFitLabel: Footprint sp. fit
+place-geoReferencedByLabel: Georeferenced by
+placeGeoRefGroup-geoRefDateGroupLabel: Date
+place-geoRefProtocolLabel: Protocol
+place-geoRefSourceLabel: Source
+place-geoRefVerificationStatusLabel: Verification
+place-geoRefRemarksLabel: Remarks
+place-geoRefPlaceNameLabel: Georeference place name
+place-updatedAtLabel: Modified date
+place-updatedAtStartLabel: Earliest
+place-updatedAtEndLabel: Latest
+place-editUsername: Record Modified By
+place-identificationNumberRequired: Please specify a Display Name
+place-termQualifierLabel: Qualifier
+place-termTypeLabel: Term type
+place-termLabel: Term
+place-termLanguageLabel: Lang
+place-termPrefForLangLabel: Pref for lang
+place-termSourceLabel: Source
+place-termSourceDetailLabel: Source detail
+place-termSourceIDLabel: Source ID
+place-termSourceNoteLabel: Source note
+place-historicalStatusLabel: Historical status
+place-preferredPlaceLabel: Place Term(s)
+place-createdAtLabel: Created date
+place-createdAtStartLabel: Earliest
+place-createdAtEndLabel: Latest
+
+# ******************* Media ******************* #
+media-fileInformationHeaderLabel: Media file information
+media-mediaInformationLabel: Media handling information
+media-fileInformationLabel: File information
+media-identificationNumberLabel: Media rendition number (or Museum number)
+media-dimensionSummaryLabel: Dimension summary
+media-dateLabel: Dates
+media-identificationNumberRequired: Please specify an identification number
+media-dimensionGroupLabel: Dimensions
+media-updatedAtLabel: Modified date
+mediaUploader-uploadMediaLabel: Upload media
+mediaUploader-linkMediaLabel: Link to external media
+media-approvedForWebLabel: Approved for public?
+media-primaryDisplayLabel: Primary display?
+media-descriptionLabel: Notes
+media-createdAtLabel: Created Date
+media-createdAtStartLabel: Earliest
+media-createdAtEndLabel: Latest
+media-subjectLabel: Subject(s)
+
+# ******************* Intake (=Object Entry) ******************* #
+intake-objectEntryInformationLabel: Object Entry Information
+intake-insuranceRenewalDateLabel: Renewal date
+intake-entryReasonLabel: Entry reason
+intake-currentLocationGroupLabel: Storage location
+intake-valuationInformationLabel: Valuation Information
+intake-conditionCheckReasonsLabel: Condition check reason
+intake-normalLocationLabel: Home location
+intake-entryNoteLabel: Entry note
+intake-returnDateLabel: Return date
+intake-conditionInformationLabel: Condition Information
+intake-locationInformationLabel: Location Information
+intake-depositorsRequirementsLabel: Depositor requirements
+intake-fieldCollectionDateLabel: Field collection date
+intake-currentOwnerLabel: Current owner
+intake-conditionCheckMethodsLabel: Condition check method
+intake-locationDateLabel: Location date
+intake-valuationReferenceNumberLabel: Reference number
+intake-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
+intake-entryNumberLabel: Object entry number
+intake-conditionCheckDateLabel: Condition check date
+intake-insuranceInformationLabel: Insurance Information
+intake-insurersLabel: Insurer
+intake-insuranceReferenceNumberLabel: Reference number
+intake-insuranceNoteLabel: Insurance note
+intake-conditionCheckNoteLabel: Condition check note
+intake-entryDateLabel: Entry date
+intake-conditionCheckReferenceNumberLabel: Condition check reference number
+intake-insurancePolicyNumberLabel: Policy number
+
+# ---------------------------------- Object Collection Information (Intake/Object Entry) -------------------------- #
+intake-conditionCheckersOrAssessorsLabel: Condition check assessor
+intake-packingNoteLabel: Packing note
+intake-currentLocationLabel: Storage location
+intake-currentLocationFitnessLabel: Location fitness
+intake-currentLocationNoteLabel: Location note
+intake-entryMethodsLabel: Entry method
+intake-entryMethodLabel: Entry method
+intake-updatedAtLabel: Modified date
+intake-identificationNumberRequired: Please specify an object entry number
+
+# ******************* Cataloging ******************* #
+collection-object-objectNumberLabel: Museum number
+collection-object-sortableObjectNumberLabel: Sort as
+collection-object-objectNumberRangeSearchLabel: Museum number (range)
+collection-object-objectNumberRangeSearchStartLabel: From
+collection-object-objectNumberRangeSearchEndLabel: To
+
+cataloging-identificationNumberRequired: Please specify a museum number
+
+# ---------------- Alternate Numbers ---------------- #
+collection-object-pahmaAltNumGroupListLabel: FIX1-Alternate numbers
+collection-object-pahmaAltNumGroupLabel: FIX2-Alternate numbers
+collection-object-pahmaAltNumLabel: Alternate number
+collection-object-pahmaAltNumTypeLabel: Type
+collection-object-pahmaAltNumNoteLabel: Note				
+
+# ---------------- Dimensions ---------------- #
+dimension-measuredPartGroupLabel: Dimensions
+dimension-dimensionLabel: Dimension
+dimension-dimensionNoteLabel: Measurement notes
+dimension-dimensionSummaryLabel: Dimension summary
+dimension-measuredPartLabel: Part measured
+dimension-valueLabel: Value
+dimension-valueQualifierLabel: Value qualifier
+dimension-measuredByLabel: Measured by
+dimension-measurementUnitLabel: Measurement unit
+dimension-valueDateLabel: Value date
+
+
+# ---------------------------------- Object Viewer's Contribution Information (Cataloging) -------------------------- #
+collection-object-ageEstimateGroupLabel: Age estimate
+collection-object-ageEstimateLabel: Estimate
+collection-object-ageEstimateQualifierLabel: Qualifier
+collection-object-ageEstimateUnitLabel: Unit
+collection-object-ageEstimateNoteLabel: Notes
+collection-object-phaseLabel: Phase or biological age group
+collection-object-numberOfObjectsLabel: Number of pieces
+collection-object-sexLabel: Sex determination
+
+collection-object-objectProductionPlaceGroupLabel: Production place
+
+# ---------------------------------- Object Production Information (Cataloging) -------------------------- #
+collection-object-objectHistoryNoteLabel: Object history note
+collection-object-ownersContributionNoteLabel: Owner's contribution note
+collection-object-materialGroupLabel: Materials
+collection-object-collectionLabel: Object type
+collection-object-responsibleDepartmentsLabel: Responsible collection manager
+collection-object-responsibleDepartmentLabel: Responsible collection manager
+collection-object-ownersReferencesLabel: Owner's reference
+
+
+collection-object-textualInscriptionInformationLabel: Textual inscription
+collection-object-inscriptionContentMethodLabel: Inscription method
+collection-object-inscriptionContentScriptLabel: Script
+collection-object-inscriptionContentTransliterationLabel: Transliteration
+collection-object-inscriptionContentTypeLabel: Type
+collection-object-inscriptionContentInscriberLabel: Inscriber
+collection-object-inscriptionContentLabel: Inscription content
+collection-object-inscriptionContentPositionLabel: Inscription position
+
+collection-object-nonTextualInscriptionInformationLabel: Nontextual Inscription
+collection-object-inscriptionDescriptionLabel: Inscription description
+collection-object-inscriptionDescriptionInscriberLabel: Inscriber
+collection-object-inscriptionDescriptionPositionLabel: Inscription position
+collection-object-inscriptionDescriptionMethodLabel: Inscription method
+collection-object-inscriptionDescriptionTypeLabel: Type
+collection-object-inscriptionDescriptionInterpretationLabel: Interpretation
+collection-object-inscriptionContentInterpretationLabel: Interpretation
+
+collection-object-physicalDescriptionLabel: Physical description
+collection-object-briefDescriptionsLabel: Brief description
+collection-object-viewersPersonalResponseLabel: Viewer's personal response
+collection-object-copyNumberLabel: Copy number
+
+# ---------------------------------- Object History and Association Information (Cataloging) -------------------------- #
+collection-object-objectHistoryAssociationInformationLabel: Object History and Association Information
+collection-object-associationInformationLabel: Associations
+
+# ---------------- Associated Activity ---------------- #
+collection-object-assocActivityGroupLabel: Associated activity
+collection-object-assocActivityLabel: Activity
+collection-object-assocActivityTypeLabel: Type of association
+collection-object-assocActivityNoteLabel: Note
+
+# ---------------- Associated Concept ---------------- #		
+collection-object-assocConceptLabel: Concept
+collection-object-assocConceptTypeLabel: Type of association
+collection-object-assocConceptNoteLabel: Note 
+
+# ---------------- Associated Cultural Context ---------------- #
+collection-object-assocCulturalContextGroupLabel: Associated cultural affinity
+collection-object-assocCulturalContextLabel: Cultural affinity 
+collection-object-assocCulturalContextTypeLabel: Type of association
+collection-object-assocCulturalContextNoteLabel: Note 
+
+# ---------------- Associated Date ---------------- #
+collection-object-assocDateGroupLabel: Associated date
+assocDateGroup-assocStructuredDateGroupLabel: Date
+collection-object-assocDateTypeLabel: Type of association
+collection-object-assocDateNoteLabel: Note 
+
+# ---------------- Associated Event ---------------- #
+collection-object-assocEventNoteLabel: Associated event note
+collection-object-assocEventNameGroupLabel: Associated event 
+collection-object-assocEventNameLabel: Name of event 
+collection-object-assocEventOrganizationsLabel: Associated event organization
+collection-object-assocEventPeoplesLabel: Associated event cultural group
+collection-object-assocEventPersonsLabel: Associated event person
+collection-object-assocEventPlacesLabel: Associated event place
+
+# ---------------- Associated Object ---------------- #
+collection-object-assocObjectGroupLabel: Associated object
+collection-object-assocObjectLabel: Object name
+collection-object-assocObjectTypeLabel: Type of association
+collection-object-assocObjectNoteLabel: Note
+
+# ---------------- Associated Organization ---------------- #
+collection-object-assocOrganizationGroupLabel: Associated organization
+collection-object-assocOrganizationLabel: Name of organization 
+collection-object-assocOrganizationTypeLabel: Type of association
+collection-object-assocOrganizationNoteLabel: Note 
+
+# ---------------- Associated People ---------------- #
+collection-object-assocPeopleGroupLabel: Associated cultural group
+collection-object-assocPeopleLabel: Cultural group
+collection-object-assocPeopleTypeLabel: Type of association
+collection-object-assocPeopleNoteLabel: Note
+
+# ---------------- Associated Person ---------------- #
+collection-object-assocPersonGroupLabel: Associated person
+collection-object-assocPersonLabel: Person's name
+collection-object-assocPersonTypeLabel: Type of association
+collection-object-assocPersonNoteLabel: Note
+
+# ---------------- Associated Place ---------------- #
+collection-object-assocPlaceGroupLabel: Associated place
+collection-object-assocPlaceLabel: Place 
+collection-object-assocPlaceTypeLabel: Type of association
+collection-object-assocPlaceNoteLabel: Note
+
+# ---------------- Biological Information ---------------- #
+collection-object-biologicalInformationLabel: Biological Information
+
+# ---------------- Content Depicted ---------------- #
+collection-object-contentInformationLabel: Content Depicted
+collection-object-contentDescriptionLabel: Description
+collection-object-contentOrganizationsLabel: Organization depicted
+collection-object-contentPositionsLabel: Position
+collection-object-contentActivitiesLabel: Activity depicted
+collection-object-contentLanguagesLabel: Language
+collection-object-contentEventNameGroupLabel: Event depicted
+collection-object-contentEventNameLabel: Event name
+collection-object-contentEventNameTypeLabel: Event type
+collection-object-contentDateLabel: Date depicted
+collection-object-contentNoteLabel: Note
+collection-object-contentPlacesLabel: Place depicted
+collection-object-contentPersonsLabel: Person depicted 
+collection-object-contentScriptsLabel: Script 
+collection-object-contentPeoplesLabel: Cultural group depicted 
+collection-object-contentConceptsLabel: Concept depicted
+collection-object-contentObjectGroupLabel: Object depicted
+collection-object-contentObjectLabel: Object name
+collection-object-contentObjectTypeLabel: Object type
+collection-object-contentOtherGroupLabel: Other depicted
+collection-object-contentOtherLabel: Name
+collection-object-contentOtherTypeLabel: Other type
+
+collection-object-distinguishingFeaturesLabel: Distinguishing features
+collection-object-objectComponentGroupLabel: Object components
+
+# ---------------------------------- Object Description Information (Cataloging) -------------------------- #
+collection-object-objectProductionNoteLabel: Production note
+collection-object-assocEventNameTypeLabel: Type of association
+collection-object-editionNumberLabel: Edition number
+collection-object-formsLabel: Form (as stored)
+collection-object-formLabel: Form (as stored)
+
+# ---------------- Object Name ---------------- #
+collection-object-objectNameGroupLabel: Object name
+collection-object-objectNameLabel: Object name
+collection-object-objectNameCurrencyLabel: Current?
+collection-object-objectNameLevelLabel: Level
+collection-object-objectNameSystemLabel: System
+collection-object-objectNameTypeLabel: Type 
+collection-object-objectNameLanguageLabel: Language
+collection-object-objectNameNoteLabel: Note
+
+
+# ---------------------------------- Object Collection Information (Cataloging) -------------------------- #
+collection-object-fieldCollectionSourcesLabel: Field collection source (person or cultural group)
+collection-object-fieldCollectionSourceLabel: Field collection source (person or cultural group)
+collection-object-pahmaFieldCollectionPlaceLabel: Field collection place
+collection-object-fieldCollectionMethodsLabel: Field collection method
+collection-object-fieldCollectionNoteLabel: Field collection note
+collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-fieldCollectorsLabel: Field collector
+collection-object-fieldCollectorLabel: Field collector
+collection-object-fieldCollectionDateLabel: Field collection date
+collection-object-objectStatusLabel: Object status
+
+# ---------------- Ownership ---------------- #
+collection-object-ownershipHistoryInformationLabel: FIX-Object History and Ownership Details
+collection-object-ownershipHistoryGroupLabel: Previous owners
+collection-object-previousOwnerLabel: Name
+ownershipHistoryGroup-ownershipDateGroupLabel: Date(s)
+collection-object-ownershipCategoryLabel: Category
+collection-object-ownershipPlaceLabel: Place
+collection-object-ownershipMethodLabel: Exchg. meth.
+collection-object-ownershipPriceCurrencyLabel: Price (currency)
+collection-object-ownershipPriceAmountLabel: Price (amount)	
+collection-object-ownershipNoteLabel: Note
+                            											
+collection-object-recordStatusLabel: Cataloging status
+
+
+# ---------------------------------- Object Reference Information (Cataloging) -------------------------- #
+collection-object-referenceInformationLabel: Bibliographic Reference Information
+collection-object-referenceGroupLabel: Bibliographic reference(s)
+collection-object-referenceLabel: Reference
+
+# ---------------- Object Title ---------------- #
+titleGroup-titleTranslationSubGroupLabel: Title translation
+collection-object-titleLanguageLabel: Title language
+collection-object-titleTranslationLabel: Title translation
+collection-object-titleTranslationLanguageLabel: Transl. language
+collection-object-titleTypeLabel: Title type
+collection-object-identificationNameLabel: Object name
+
+collection-object-materialComponentLabel: Material component
+collection-object-materialComponentNoteLabel: Note
+collection-object-materialSourceLabel: Material source
+collection-object-materialNameLabel: Material name
+
+# ---------------- Technical Attributes ---------------- #
+collection-object-technicalAttributeGroupLabel: Technical attributes
+collection-object-technicalAttributeLabel: Technical attribute
+
+# ---------------- Production Techniques ---------------- #
+collection-object-techniqueGroupLabel: Production technique
+collection-object-techniqueLabel: Technique
+collection-object-techniqueTypeLabel: Technique type
+
+collection-object-objectProductionReasonsLabel: Production reason
+collection-object-objectProductionPeopleGroupLabel: Production cultural group
+collection-object-objectProductionPeopleLabel: Cultural group
+
+collection-object-objectProductionPersonGroupLabel: Production person
+collection-object-objectProductionPersonLabel: Person's name
+
+collection-object-objectProductionPlaceLabel: Place
+
+collection-object-objectProductionDateGroupLabel: Production date
+collection-object-objectProductionDateStartLabel: Earliest
+collection-object-objectProductionDateEndLabel: Latest
+
+collection-object-objectProductionOrganizationGroupLabel: Production organization
+collection-object-objectProductionOrganizationLabel: Name of organization
+
+collection-object-usageGroupLabel: Context of use
+collection-object-usageNoteLabel: Note
+
+collection-object-referenceNoteLabel: Reference note
+
+collection-object-ownersPersonalExperienceLabel: Owner's personal experience
+collection-object-ownersLabel: Owner
+collection-object-ownersPersonalResponseLabel: Owner's personal response
+
+collection-object-viewersRoleLabel: Viewer's role
+collection-object-viewersReferencesLabel: Viewer's reference
+collection-object-viewersPersonalExperienceLabel: Viewer's personal experience
+collection-object-viewersContributionNoteLabel: Viewer's contribution note
+
+collection-object-createdAtLabel: Created date
+collection-object-createdAtStartLabel: Earliest
+collection-object-createdAtEndLabel: Latest
+
+# ---------------- NAGPRA Claim ---------------- #
+claim-claimInformationLabel: NAGPRA Claim Information
+claim-claimNameLabel: Claim name
+claim-claimTypeLabel: Claim type
+
+claim-claimReceivedDateStartLabel: Earliest
+claim-claimReceivedDateEndLabel: Latest
+
+claim-claimAltNameGroupLabel: Alternate claim names or numbers
+claim-claimAltNameLabel: Name
+claim-claimAltNoteLabel: Note
+
+claim-claimNoteLabel: Notes on claim
+claim-claimAssociationInformationLabel: Claim Context
+
+claim-claimInventoryInvolvedGroupLabel: Inventory Involved
+claim-inventoryInvolvedNameLabel: Inventory
+claim-inventoryInvolvedNoteLabel: Note
+
+claim-claimSiteInvolvedGroupLabel: Sites involved
+claim-claimSiteInvolvedNameLabel: Site or place name
+claim-claimSiteInvolvedNoteLabel: Note
+
+claim-claimGroupInvolvedGroupLabel: Cultural groups involved
+claim-groupInvolvedNameLabel: Name
+claim-groupInvolvedNoteLabel: Note
+
+claim-claimPeriodInvolvedGroupLabel: Time period(s) represented
+claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroupLabel: Period or date
+claim-claimPeriodInvolvedNoteLabel: Note
+
+claim-claimProcessingInformationLabel: Claim Processing Information
+
+claim-dateOfInitialResponseGroupLabel: Date of initial response
+claim-initialResponseDateLabel: Date
+claim-initialResponseNoteLabel: Note
+
+claim-sentToLocalCommitteeGroupLabel: Date sent to UCB-NAGPRA committee
+claim-sentToLocalCommitteeDateLabel: Date
+claim-sentToLocalCommitteeNoteLabel: Note
+
+claim-sentToOversightCommitteeGroupLabel: Date sent to UC systemwide committee
+claim-sentToOversightCommitteeDateLabel: Date
+claim-sentToOversightCommitteeNoteLabel: Note
+
+claim-sentToNationalNagpraGroupLabel: Date sent to National NAGPRA
+claim-sentToNationalNagpraDateLabel: Date
+claim-sentToNationalNagpraNoteLabel: Note
+
+#claim-dateOfNationalNagpraApprovalGroupLabel: National NAGPRA's final approval
+claim-dateOfNationalNagpraApprovalGroupLabel: Publication by National NAGPRA
+claim-dateOfNationalNagpraApprovalDateLabel: Date
+claim-dateOfNationalNagpraApprovalNoteLabel: Note
+
+claim-dateOfThirtyDayNoticeGroupLabel: Start and end dates for National NAGPRA's 30-day notice
+claim-dateOfThirtyDayNoticeDateLabel: Date
+claim-dateOfThirtyDayNoticeTypeLabel: Type
+claim-dateOfThirtyDayNoticeNoteLabel: Note
+
+claim-transferGroupLabel: Date of transfer
+claim-transferDateLabel: Date
+claim-transferNoteLabel: Note
+
+claim-recommendationOfLocalCommitteeGroupLabel: Recommendation of UCB-NAGPRA committee
+claim-recommendationOfLocalCommitteeDateLabel: Date
+claim-recommendationOfLocalCommitteeNoteLabel: Committee's recommendations
+
+claim-recommendationOfOversightCommitteeGroupLabel: Recommendation of UC systemwide committee
+claim-recommendationOfOversightCommitteeDateLabel: Date
+claim-recommendationOfOversightCommitteeNoteLabel: Committee's recommendations
+
+claim-responseFromNationalNagpraGroupLabel: Response from National NAGPRA
+claim-responseFromNationalNagpraDateLabel: Date
+claim-responseFromNationalNagpraNoteLabel: Response
+
+claim-identificationNumberRequired: Please specify a Claim Number
+
+claim-claimTaskInformationLabel: Tasks to be completed
+claim-claimTaskHeaderLabel: Task
+claim-claimTaskNotesHeaderLabel: Notes
+claim-dispositionPossibilitiesDiscussedLabel: Disposition possibilities discussed
+claim-surroundingTribesContactedLabel: Surrounding tribes contacted
+claim-workingTeamNotifiedLabel: PAHMA-NAGPRA team notified
+claim-siteFileResearchCompletedLabel: Site file research completed
+claim-accessionFileResearchCompletedLabel: Accession file research completed
+claim-objectsLocatedAndCountedLabel: Objects located and counted
+claim-objectsConsolidatedLabel: Objects consolidated
+claim-objectsPhotographedLabel: Objects photographed
+claim-registrationDocumentsDraftedLabel: Registration documents drawn up
+claim-tribeContactedForPackingPreferencesLabel: Tribe contacted for packing/storage instr
+claim-dateArrangedForTransferLabel: Date arranged for pickup/transfer
+claim-objectsMarkedAsDeaccessionedLabel: Objects marked as deaccessioned
+claim-documentsArchivedLabel: Claim documents archived
+
+# ---------------------------------- Record Metadata (Cataloging) -------------------------- #
+collection-object-updatedAtLabel: Modified date
+
+# ******************* Record groups ******************* #
+
+collection-object-dateEarliestSingleCertaintyLabel: 
+collection-object-dateLatestCertaintyLabel:
+
+
+#searchTips
+searchTips-instructionsSecond: To perform a keyword search, enter terms into the keyword search field and select the search button to its right
+searchTips-instructionsThird: To perform a field-based search, enter terms into the form and select the bottom search button
+
+#Reporting
+reporting-message: Creating %reportName report...
+
+#Structured Date
+structuredDate-close: Close
+structuredDate-dateDisplayDateLabel: Display date
+structuredDate-datePeriodLabel: Date period
+structuredDate-dateAssociationLabel: Association
+structuredDate-dateNoteLabel: Note
+structuredDate-dateHeaderLabel: Date
+structuredDate-dateYearLabel: Year
+structuredDate-dateMonthLabel: Month
+structuredDate-dateDayLabel: Day
+structuredDate-dateEraLabel: Era
+structuredDate-dateCertaintyHeaderLabel: Certainty term OR Qualifier, Value and Unit
+structuredDate-dateCertaintyLabel: Certainty
+structuredDate-dateQualifierLabel: Qualifier
+structuredDate-dateQualifierValueLabel: Value
+structuredDate-dateQualifierUnitLabel: Unit
+structuredDate-dateEarliestSingleRowLabel: Earliest date
+structuredDate-dateLatestRowLabel: Latest date
+structuredDate-scalarValueLabel: Scalar value

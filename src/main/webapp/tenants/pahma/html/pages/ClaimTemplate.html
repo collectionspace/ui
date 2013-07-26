@@ -1,0 +1,535 @@
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-claim-claimInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main pahmaCustomColumnWidth" >
+		<div class="info-column"> <!-- Claim number, Claim name -->
+			<div class="info-column2-50 fl-force-left"> <!-- Claim number -->
+				<div class="info-pair">
+					<span class="label csc-claim-claimNumber-label"></span><span class="required">*</span>
+					<div class="content csc-claim-claimNumber-container"> 
+						<input type="text" class="input-numeric-long csc-claim-claimNumber pattern-chooser-input" />
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right"> <!-- Claim name -->
+				<div class="info-pair"> 
+					<div class="header">
+						<div class="label csc-claim-claimName-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="input-alpha csc-claim-claimName" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column"> <!-- Alternate claim names/numbers, Claimants -->
+			<div class="info-column2-50 fl-force-left"> <!-- Alternate claim names and numbers -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimAltNameGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-claimAltName-label"></td>
+									<td class="csc-claim-claimAltNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimAltNameGroup">
+									<td><input type="text" class="csc-claim-claimAltName" /></td>
+									<td><input type="text" class="csc-claim-claimAltNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right"> <!-- Claimants	 (Filed by, Filed on behalf of, claimant note) -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimClaimantGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-filedBy-label"></td>
+									<td class="csc-claim-filedOnBehalfOf-label"></td>
+									<td class="csc-claim-claimantNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimClaimantGroup">
+									<td><input type="text" class="csc-claim-filedBy" /></td>
+									<td><input type="text" class="csc-claim-filedOnBehalfOf" /></td>
+									<td><input type="text" class="csc-claim-claimantNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column"> <!-- Claim type, Claim filed date, Notes on claim -->
+					<div class="info-column2-50 fl-force-left"> <!-- Claim type -->
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label csc-claim-claimType-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-claim-claimType input-select"><option value="">Options not loaded</option></select>
+							</div>												
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="info-column2-50 fl-force-left"> <!-- Claim filed date -->
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-claim-claimReceivedGroup-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<thead>
+										<tr>
+											<td class="csc-claim-claimReceivedDate-label"></td>
+											<td class="csc-claim-claimReceivedNote-label"></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="csc-claim-claimReceivedGroup pahmaCustomColumnWidth">
+											<td class="caldatefield"><input type="text" class="csc-claim-claimReceivedDate caldatefield" /></td>
+											<td><input type="text" class="csc-claim-claimReceivedNote" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-50 fl-force-right"> <!-- Notes on claim -->
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-claim-claimNote-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-claim-claimNote"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
+</div>
+		
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-claim-claimAssociationInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main pahmaCustomColumnWidth" >
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left"> <!-- Inventory involved -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimInventoryInvolvedGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-inventoryInvolvedName-label"></td>
+									<td class="csc-claim-inventoryInvolvedNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimInventoryInvolvedGroup">
+									<td><select class="csc-claim-inventoryInvolvedName input-select"><option value="">Options not loaded</option></select></td>
+									<td><input type="text" class="csc-claim-inventoryInvolvedNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right"> <!-- Sites involved -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimSiteInvolvedGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-claimSiteInvolvedName-label"></td>
+									<td class="csc-claim-claimSiteInvolvedNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimSiteInvolvedGroup">
+									<td><input type="text" class="csc-claim-claimSiteInvolvedName" /></td>
+									<td><input type="text" class="csc-claim-claimSiteInvolvedNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left"> <!-- Other cultural groups involved -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimGroupInvolvedGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-groupInvolvedName-label"></td>
+									<td class="csc-claim-groupInvolvedNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimGroupInvolvedGroup">
+									<td><input type="text" class="csc-claim-groupInvolvedName" /></td>
+									<td><input type="text" class="csc-claim-groupInvolvedNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right"> <!-- Time periods involved -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimPeriodInvolvedGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroup-label"></td>
+									<td class="csc-claim-claimPeriodInvolvedNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-claimPeriodInvolvedGroup">
+									<td><input type="text" class="csc-claimPeriodInvolvedGroup-claimPeriodInvolvedDateGroup" /></td>
+									<td><input type="text" class="csc-claim-claimPeriodInvolvedNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group">
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-claim-claimProcessingInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main pahmaCustomColumnWidth" >
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-dateOfInitialResponseGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-initialResponseDate-label"></td>
+									<td class="csc-claim-initialResponseNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-dateOfInitialResponseGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-initialResponseDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-initialResponseNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-sentToLocalCommitteeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-sentToLocalCommitteeDate-label"></td>
+									<td class="csc-claim-sentToLocalCommitteeNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-sentToLocalCommitteeGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-sentToLocalCommitteeDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-sentToLocalCommitteeNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-recommendationOfLocalCommitteeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-recommendationOfLocalCommitteeDate-label"></td>
+									<td class="csc-claim-recommendationOfLocalCommitteeNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-recommendationOfLocalCommitteeGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-recommendationOfLocalCommitteeDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-recommendationOfLocalCommitteeNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-sentToOversightCommitteeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-sentToOversightCommitteeDate-label"></td>
+									<td class="csc-claim-sentToOversightCommitteeNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-sentToOversightCommitteeGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-sentToOversightCommitteeDate caldatefield" /></td> <!-- NOT SHOWING UP IN MERGED SCHEMA? -->
+									<td><input type="text" class="csc-claim-sentToOversightCommitteeNote" /></td> <!-- NOT SHOWING UP IN MERGED SCHEMA? -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-recommendationOfOversightCommitteeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-recommendationOfOversightCommitteeDate-label"></td>
+									<td class="csc-claim-recommendationOfOversightCommitteeNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-recommendationOfOversightCommitteeGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-recommendationOfOversightCommitteeDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-recommendationOfOversightCommitteeNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-sentToNationalNagpraGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-sentToNationalNagpraDate-label"></td>
+									<td class="csc-claim-sentToNationalNagpraNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-sentToNationalNagpraGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-sentToNationalNagpraDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-sentToNationalNagpraNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-responseFromNationalNagpraGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-responseFromNationalNagpraDate-label"></td>
+									<td class="csc-claim-responseFromNationalNagpraNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-responseFromNationalNagpraGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-responseFromNationalNagpraDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-responseFromNationalNagpraNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-dateOfNationalNagpraApprovalGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-dateOfNationalNagpraApprovalDate-label"></td>
+									<td class="csc-claim-dateOfNationalNagpraApprovalNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-dateOfNationalNagpraApprovalGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-dateOfNationalNagpraApprovalDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-dateOfNationalNagpraApprovalNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-dateOfThirtyDayNoticeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-dateOfThirtyDayNoticeDate-label"></td>
+									<td class="csc-claim-dateOfThirtyDayNoticeType-label"></td>
+									<td class="csc-claim-dateOfThirtyDayNoticeNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-dateOfThirtyDayNoticeGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-dateOfThirtyDayNoticeDate caldatefield" /></td>
+									<td><select class="csc-claim-dateOfThirtyDayNoticeType input-select"><option value="">Options not loaded</option></select></td>
+									<td><input type="text" class="csc-claim-dateOfThirtyDayNoticeNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-transferGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-claim-transferDate-label"></td>
+									<td class="csc-claim-transferNote-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-claim-transferGroup pahmaCustomColumnWidth">
+									<td class="caldatefield"><input type="text" class="csc-claim-transferDate caldatefield" /></td>
+									<td><input type="text" class="csc-claim-transferNote" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-claim-claimTaskInformation-label"></div>
+					</div>
+					<div class="content">
+						<table class="checklist">
+							<thead>
+								<tr>
+									<td class="csc-claim-claimTaskHeader-label"></td>
+									<td></td>
+									<td class="csc-claim-claimTaskNotesHeader-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-dispositionPossibilitiesDiscussed"><span class="label csc-claim-dispositionPossibilitiesDiscussed-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-dispositionPossibilitiesDiscussed" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-dispositionPossibilitiesDiscussedNote"/></td>
+								</tr>
+								<tr>
+
+									<td class="claimLabel"><label for=".csc-claim-surroundingTribesContacted"><span class="label csc-claim-surroundingTribesContacted-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-surroundingTribesContacted" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-surroundingTribesContactedNote"/></td>
+								</tr>
+								<tr>
+
+									<td class="claimLabel"><label for=".csc-claim-workingTeamNotified"><span class="label csc-claim-workingTeamNotified-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-workingTeamNotified" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-workingTeamNotifiedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-siteFileResearchCompleted"><span class="label csc-claim-siteFileResearchCompleted-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-siteFileResearchCompleted" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-siteFileResearchCompletedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-accessionFileResearchCompleted"><span class="label csc-claim-accessionFileResearchCompleted-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-accessionFileResearchCompleted" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-accessionFileResearchCompletedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-objectsLocatedAndCounted"><span class="label csc-claim-objectsLocatedAndCounted-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-objectsLocatedAndCounted" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-objectsLocatedAndCountedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-objectsConsolidated"><span class="label csc-claim-objectsConsolidated-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-objectsConsolidated" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-objectsConsolidatedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-objectsPhotographed"><span class="label csc-claim-objectsPhotographed-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-objectsPhotographed" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-objectsPhotographedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-registrationDocumentsDrafted"><span class="label csc-claim-registrationDocumentsDrafted-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-registrationDocumentsDrafted" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-registrationDocumentsDraftedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-tribeContactedForPackingPreferences"><span class="label csc-claim-tribeContactedForPackingPreferences-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-tribeContactedForPackingPreferences" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-tribeContactedForPackingPreferencesNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-dateArrangedForTransfer"><span class="label csc-claim-dateArrangedForTransfer-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-dateArrangedForTransfer" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-dateArrangedForTransferNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-objectsMarkedAsDeaccessioned"><span class="label csc-claim-objectsMarkedAsDeaccessioned-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-objectsMarkedAsDeaccessioned" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-objectsMarkedAsDeaccessionedNote"/></td>
+								</tr>
+								<tr>
+									<td class="claimLabel"><label for=".csc-claim-documentsArchived"><span class="label csc-claim-documentsArchived-label"/>:</label></td>
+									<td class="claimCheck"><input class="csc-claim-documentsArchived" type="checkbox"/></td>
+									<td><textarea class="input-textarea csc-claim-documentsArchivedNote"/></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
