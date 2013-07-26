@@ -151,15 +151,6 @@ cspace = cspace || {};
         model: {
             showShowButton: false
         },
-        invokers: {
-            navigateToAdvancedSearch: {
-                funcName: "cspace.relatedRecordsList.navigateToAdvancedSearch",
-                args: ["{relatedRecordsList}", "{globalModel}.model.primaryModel"]
-            }
-        },
-        model: {
-            showShowButton: false
-        },
         // Used to handle categories of records, e.g. procedures.
         category: [],
         parentBundle: "{globalBundle}",
