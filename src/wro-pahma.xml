@@ -74,7 +74,6 @@
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
-    <js>/defaults/js/RelateSearchResults.js</js>
     <js>/defaults/js/SearchResultsRelationManager.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/SearchTips.js</js>
