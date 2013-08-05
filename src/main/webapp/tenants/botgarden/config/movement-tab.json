@@ -1,0 +1,47 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "movement",
+            "schema": {
+                "movement": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "movement-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-movement"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "movement-editRecord",
+                            "recordList": "movement-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "recordLockContainer": ".csc-recordLock"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "strings": {
+                                        "deleteMessageWithRelated": "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                                        "removeSuccessfulMessage": "{globalBundle}.messageBase.recordEditor-removeSuccessfulMessage",
+                                        "deleteFailedMessage": "{globalBundle}.messageBase.recordEditor-deleteFailedMessage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

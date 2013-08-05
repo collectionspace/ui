@@ -1,0 +1,460 @@
+
+# Schema extensions to Cataloging record
+collection-object-taxonLabel: Name
+collection-object-qualifierLabel: Qualifier
+collection-object-identByLabel: By
+taxonomicIdentGroup-identDateGroupLabel: Date
+collection-object-institutionLabel: Institution
+collection-object-identKindLabel: Kind
+collection-object-objectCountNumberLabel: Sheet
+collection-object-briefDescriptionsLabel: Material Type
+collection-object-commentsLabel: Accession Notes
+collection-object-accessionDateLabel: Accession Date
+collection-object-deadFlagLabel: Dead Flag
+collection-object-deadDateLabel: Dead Date
+collection-object-deadDateEndLabel: Latest
+collection-object-deadDateStartLabel: Earliest
+collection-object-requestedByLabel: Requested By
+collection-object-vegetationTypeLabel: Vegetation Type
+collection-object-cbdRestrictionLabel: CBD Restriction
+collection-object-rareLabel: Rare
+collection-object-accessionAttributesGroupLabel: Accession Attributes
+collection-object-flowerColorLabel: Flower Color
+collection-object-fruitColorLabel: Fruit Color
+collection-object-provenanceTypeLabel: Provenance Type
+collection-object-propagationHistoryLabel: Propagation History
+collection-object-breedingSystemLabel: Breeding System
+collection-object-classUseLabel: Class Use
+collection-object-researchUseLabel: Research Use
+collection-object-distributionLabel: Distribution
+collection-object-ignoreRedDotLabel: Ignore Red Dot
+collection-object-fragranceLabel: Fragrance
+collection-object-securityRiskLabel: Security Risk
+collection-object-flowersJanLabel: Flowers Jan
+collection-object-flowersFebLabel: Flowers Feb
+collection-object-flowersMarLabel: Flowers Mar
+collection-object-flowersAprLabel: Flowers Apr
+collection-object-flowersMayLabel: Flowers May
+collection-object-flowersJunLabel: Flowers Jun
+collection-object-flowersJulLabel: Flowers Jul
+collection-object-flowersAugLabel: Flowers Aug
+collection-object-flowersSepLabel: Flowers Sep
+collection-object-flowersOctLabel: Flowers Oct
+collection-object-flowersNovLabel: Flowers Nov
+collection-object-flowersDecLabel: Flowers Dec
+collection-object-fruitsJanLabel: Fruits Jan
+collection-object-fruitsFebLabel: Fruits Feb
+collection-object-fruitsMarLabel: Fruits Mar
+collection-object-fruitsAprLabel: Fruits Apr
+collection-object-fruitsMayLabel: Fruits May
+collection-object-fruitsJunLabel: Fruits Jun
+collection-object-fruitsJulLabel: Fruits Jul
+collection-object-fruitsAugLabel: Fruits Aug
+collection-object-fruitsSepLabel: Fruits Sep
+collection-object-fruitsOctLabel: Fruits Oct
+collection-object-fruitsNovLabel: Fruits Nov
+collection-object-fruitsDecLabel: Fruits Dec
+collection-object-accessionUseInformationLabel: Accession Use Information
+collection-object-accessionUseGroupLabel: Accession Use
+collection-object-useTypeLabel: Use Type
+collection-object-usedInLabel: Used In
+collection-object-materialTypeLabel: Material Type
+collection-object-requestDateLabel: Request Date
+collection-object-filledDateLabel: Filled Date
+collection-object-useNotesLabel: Use Notes
+collection-object-affinityTaxonLabel: Affinity Taxon
+collection-object-hybridFlagLabel: Hybrid Flag
+taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
+collection-object-sourceLabel: Source
+collection-object-taxonomicRangeLabel: Geographic Range of Taxon
+collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
+collection-object-objectNumberRangeSearchStartLabel: From
+collection-object-objectNumberRangeSearchEndLabel: To
+collection-object-deadDateSearchLabel: Dead Date
+collection-object-deadDateSearchStartLabel: Earliest
+collection-object-deadDateSearchEndLabel: Latest
+
+# Inadvertently shares field name and label
+# with another entry below
+collection-object-referenceLabel: Reference
+collection-object-refPageLabel: Page
+collection-object-notesLabel: Notes
+
+collection-object-objectCollectionInformationLabel: Field Collection Information
+collection-object-fieldCollectionDateLabel: Field collection date
+collection-object-fieldCollectorLabel: Field collection collector
+collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-fieldCollectionNumberAssignorLabel: Field collection number assignor
+collection-object-fieldCollectionMethodLabel: Field collection method
+collection-object-fieldCollectionNoteLabel: Habitat information
+collection-object-fieldCollectionSourceLabel: Field collection source
+collection-object-fieldColEventNameLabel: Field collection event name
+ccollection-object-fieldAssociatedTaxaLabel: Associated taxa
+
+
+# From Type Specimen fieldgroup
+collection-object-typeSpecimenGroupLabel: Type Specimen
+collection-object-typeSpecimenKindLabel: Kind of Type
+collection-object-typeSpecimenAssertionByLabel: Asserted By
+collection-object-typeSpecimenReferenceLabel: Reference
+collection-object-typeSpecimenRefPageLabel: Page
+collection-object-typeSpecimenBasionymLabel: Verified Basionym
+collection-object-typeSpecimenNotesLabel: Notes
+
+# Taxon record
+taxon: Taxon
+taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
+taxon-displayNameLabel: Display name (with authors)
+taxon-termStatusLabel: Term status (admin)
+taxon-taxonFullNameLabel: Short name (without authors)
+taxon-taxonRankLabel: Rank
+taxon-taxonCurrencyLabel: Current?
+taxon-taxonAuthorGroupLabel: Authors
+taxon-taxonAuthorLabel: Author Name
+taxon-taxonAuthorTypeLabel: Author type
+taxon-taxonYearLabel: Year
+taxon-taxonIsNamedHybridLabel: Is named hybrid
+taxon-taxonCitationLabel: Citations
+taxon-taxonomicStatusLabel: Taxonomic status
+taxon-taxonNameSourceLabel: Name source
+taxon-taxonNameSourceCodeLabel: Name source code
+taxon-taxonGUIDLabel: Name GUID
+taxon-taxonNoteLabel: Notes
+taxon-updatedAtLabel: Modified Date
+taxon-updatedAtStartLabel: Earliest
+taxon-updatedAtEndLabel: Latest
+taxon-taxonBasionymLabel: Basionym
+taxon-naturalHistoryCommonNameGroupLabel: Common Names
+taxon-naturalHistoryCommonNameLabel: Common Name
+taxon-naturalHistoryCommonNameLanguageLabel: Language
+taxon-naturalHistoryCommonNameSourceLabel: Source
+taxon-naturalHistoryCommonNameSourceDetailLabel: Source Detail
+taxon-naturalHistoryCommonNameTypeLabel: Type
+taxon-relatedTermGroupLabel: Related Terms
+taxon-relatedTermLabel: Related Term
+taxon-relatedTermTypeLabel: Type
+taxon-relatedTermSourceLabel: Source
+taxon-relatedTermSourceDetailLabel: Source Detail
+taxon-accessRestrictionsLabel: Access Code
+taxon-familyLabel: Family
+taxon-plantAttributesGroupLabel: Plant Attributes
+taxon-attributeDateLabel: Attribute Date
+taxon-recordedByLabel: Recorded By
+taxon-habitatLabel: Habitat
+taxon-climateRatingLabel: Climate Rating
+taxon-conservationCategoryLabel: Conservation Category
+taxon-conservationOrganizationLabel: Conservation Organization
+taxon-frostSensitiveLabel: Frost Sensitive
+taxon-medicinalUseLabel: Medicinal Use
+taxon-economicUseLabel: Economic Use
+taxon-heightLabel: Height
+taxon-widthLabel: Width
+taxon-diameterBreastHeightLabel: DBH
+
+#Login
+login-current-info: Welcome to the UC Botanical Garden's collection management system, CollectionSpace. UCBG-CSpace has been configured to support the needs of botanical gardens in general, as well as the specific needs of the UC Botanical Garden.
+login-current-details: 
+login-login-info: 
+login-login: 
+login-login-pwd: 
+login-login-pwdValue:
+login-rologin-info:  
+login-rologin:  
+login-rologin-pwd: 
+login-rologin-pwdValue: 
+
+#Vocabularies
+vocab-person: Default Persons
+vocab-organization: Organizations
+vocab-place: Default Places
+vocab-taxon: Default Scientific Taxonomy Authority
+vocab-concept: Propagation Medium
+vocab-conservation_ca: Conservation Category
+vocab-common: Common Taxonomy Authority
+vocab-research_ca: Research Projects
+vocab-class_ca: Classes
+vocab-collector: Collectors
+vocab-group_org: Authors
+vocab-plantsales: Plant Sales Taxonomy Authority
+
+#Records:
+cataloging-number: Accession number
+cataloging-identificationNumberRequired: Please specify an Accession Number
+
+#place
+preferredPlace-termStatusLabel: Admin Status
+
+#media
+media-scientificTaxonomyLabel: Scientific name
+media-handwrittenLabel: Handwritten label
+media-postToPublicLabel: Post to public
+media-identificationNumberLabel: Accession number
+media-identificationNumberRequired: Please specify an Accession number
+
+#cataloging
+collection-object-objectNumberLabel: Accession Number
+collection-object-basicStorageLocationLabel: Filed in Cabinet
+collection-object-otherNumberLabel: Other Number
+collection-object-otherNumberGroupLabel: Other Number
+collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-localNameGroupLabel: Common Name
+collection-object-localNameLabel: Common Name
+collection-object-localNameLanguageLabel: Language
+collection-object-hybridParentGroupLabel: Hybrid Parent
+collection-object-hybridParentLabel: Hybrid Parent
+collection-object-hybridParentQualifierLabel: Parent Qualifier
+collection-object-hybridNameLabel: Hybrid Name
+collection-object-donorGroupLabel: Donor
+collection-object-donorLabel: Donor
+collection-object-donorDateLabel: Date
+collection-object-donorNoteLabel: Note
+collection-object-labelHeaderLabel: Label Header
+collection-object-labelFooterLabel: Label Footer
+collection-object-numberOfObjectsLabel: Number of Sheets
+collection-object-handwrittenLabel: Handwritten label
+collection-object-postToPublicLabel: Post to public
+collection-object-cultivatedLabel: Cultivated
+collection-object-recordStatusLabel: Provenance Data Quality
+
+collection-object-associatedTaxaGroupLabel: Associated Taxa
+collection-object-commonNameLabel: Common Name
+collection-object-interactionLabel: Interaction
+
+collection-object-annotationGroupLabel: Annotations
+collection-object-annotationTypeLabel: Type
+collection-object-annotationNoteLabel: Note
+collection-object-annotationDateLabel: Date
+collection-object-annotationAuthorLabel: Author
+
+collection-object-localityInformationLabel: Locality Information
+collection-object-fieldLocVerbatimLabel: Field collection location verbatim
+collection-object-fieldLocPlaceLabel: Field collection place
+collection-object-fieldLocCountyLabel: Field location county
+collection-object-fieldLocCountryLabel: Field location country
+collection-object-fieldLocStateLabel: Field location state
+collection-object-fieldLocHigherGeographyLabel: Field location higher geography
+collection-object-decimalLatitudeLabel: Decimal latitude
+collection-object-decimalLongitudeLabel: Decimal longitude
+collection-object-geodeticDatumLabel: Datum
+collection-object-coordUncertaintyLabel: Uncertainty
+collection-object-coordUncertaintyUnitLabel: Uncertainty units
+collection-object-vCoordinatesLabel: TRS
+collection-object-vOtherCoordsLabel: Other coords
+collection-object-vLatitudeLabel: Verbatim latitude
+collection-object-vLongitudeLabel: Verbatim longitude
+collection-object-vCoordSysLabel: Other coords system
+collection-object-vSpatialReferenceSystemLabel: Verbatim SRS
+collection-object-vDepthLabel: Depth
+collection-object-minDepthLabel: Min
+collection-object-maxDepthLabel: Max
+collection-object-depthUnitLabel: Unit
+collection-object-vElevationLabel: Elevation
+collection-object-minElevationLabel: Min
+collection-object-maxElevationLabel: Max
+collection-object-elevationUnitLabel: Unit
+collection-object-vDistanceAboveSurfaceLabel: Above surface
+collection-object-minDistanceAboveSurfaceLabel: Min
+collection-object-maxDistanceAboveSurfaceLabel: Max
+collection-object-distanceAboveSurfaceUnitLabel: Unit
+collection-object-localityNoteLabel: Locality note
+collection-object-localitySourceLabel: Source
+collection-object-localitySourceDetailLabel: Source detail
+collection-object-geoRefDetailLabel: Georeference Detail
+collection-object-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+collection-object-footprintWKTLabel: Footprint WKT
+collection-object-footprintSRSLabel: Footprint SRS
+collection-object-footprintSpatialFitLabel: Footprint sp. fit
+collection-object-coordPrecisionLabel: Precision
+collection-object-geoRefencedByLabel: Georeference by
+localityGroup-geoRefDateGroupLabel: Date
+collection-object-geoRefProtocolLabel: Protocol
+collection-object-geoRefSourceLabel: Source
+collection-object-geoRefVerificationStatusLabel: Verification
+collection-object-geoRefRemarksLabel: Remarks
+collection-object-geoRefPlaceNameLabel: Georeference place name
+
+#concept
+concept: Concept
+concept-concept: Concept
+concept-associatedPersonLabel: Associated Person
+concept-associatedOrganizationLabel: Associated Organization
+
+#loanout
+loanout: Voucher
+loanout-tab: Voucher
+loanout-number: Voucher Collection Number
+loanout-loanOutNumberLabel: Voucher Collection Number
+loanout-loanOutNoteLabel: Voucher Notes
+loanout-loanOutDateLabel: Voucher Date
+loanout-identificationNumberRequired: Please specify a Voucher Collection Number
+loanout-loanoutInformationLabel: Voucher Information
+loanout-borrowerLabel: Voucher Institution
+loanout-fieldCollectionNoteLabel: Collection Notes
+loanout-loanPurposeLabel: Voucher Purpose
+loanout-fieldCollectionPlaceNoteLabel: Location
+loanout-annotationLabel: Annotation
+loanout-lendersAuthorizerLabel: Voucher Reviewed By
+loanout-collectorLabel: Voucher Collector
+loanout-phenologyGroupLabel: Phenology
+loanout-sterileLabel: Sterile
+loanout-fertileLabel: Fertile
+loanout-floweringLabel: Flowering
+loanout-fruitingLabel: Fruiting
+loanout-inSporeLabel: In Spore
+loanout-hortWildLabel: Horticultural/Wild
+loanout-gardenLocationLabel: Garden Location
+loanout-numLentLabel: Number of Sheets
+loanout-sheetAccessionNumberLabel: Voucher Sheet Accession Number
+loanout-reviewCompleteLabel: Voucher Review Complete
+loanout-labelRequestedLabel: Label Requested
+loanout-editRecord: Edit Voucher Record
+loanout-recordList: Related Voucher Records
+
+#loanin
+loanin-lenderLoanNumberLabel: Lender's No.
+loanin-majorGroupLabel: Major Group
+loanin-geographyLabel: Geography
+loanin-taxonomyLabel: Taxonomy
+loanin-objKindLabel: Object Kind
+loanin-dueDateLabel: Due Date
+loanin-shipDateLabel: Loan Shipped Date
+loanin-manualCountsLabel: Manual Counts
+loanin-numReceivedLabel: Received
+loanin-numReturnedLabel: Returned
+loanin-numTransferredOutLabel: Transferred Out
+loanin-balanceLabel: Balance
+loanin-discrepancyLabel: Discrepancy
+loanin-transferInLabel: Transfer In
+loanin-transferInDateLabel: Date
+loanin-transferInOrgLabel: From
+loanin-transferInPersonLabel: Previous Borrower
+loanin-returnInformationLabel: Items Returned
+loanin-returnGroupLabel: Items Returned
+loanin-returnDateLabel: Date
+loanin-returnQuantityLabel: Quantity
+loanin-returnNotesLabel: Notes
+loanin-transferOutInformationLabel: Items Transferred Out
+loanin-transferOutDateLabel: Date
+loanin-transferOutQuantityLabel: Quantity
+loanin-transferOutOrgLabel: Institution
+loanin-transferOutPersonLabel: For Study By
+loanin-transferOutDirectorLabel: Under Direction Of
+loanin-transferOutNotesLabel: Notes
+loanin-transferOutReturnLabel: Transferred Items Returned
+loanin-transferOutReturnDateLabel: Date
+loanin-transferOutReturnQuantityLabel: Quantity
+loanin-transferOutReturnNotesLabel: Notes
+
+#organization
+organization-termSourceLabel: Term Source
+organization-contactNamesLabel: Contact/Chair
+organization-associatedPersonGroupLabel: Associated People
+organization-associatedPersonLabel: Associated Person
+organization-associatedPersonRoleLabel: Role
+organization-historyNotesLabel: Organization Notes
+
+#movement
+movement-tab: Current Location
+movement: Current Location
+movement-number: Garden Location
+movement-locationMovementInformationLabel: Current Location Information
+movement-locationDateLabel: Action Date
+movement-reasonForMoveLabel: Action Code
+movement-currentLocationLabel: Garden Location
+movement-currentLocationMISSINGLabel: Garden Location
+movement-identificationNumberRequired: Please specify a Garden Location
+movement-labelInformationLabel: Label Information
+movement-labelRequestedLabel: Label Requested
+movement-labelSizeLabel: Label Size
+movement-labelStandTypeLabel: Stand Type
+movement-labelCountLabel: Label Count
+movement-editRecord: Edit Current Location Record
+movement-recordList: Related Current Location Records
+
+#location
+location: Garden Location
+vocab-location: Garden Locations
+
+#propagation
+propagation: Propagation
+propagation-tab: Propagation
+propagation-propagationInformationLabel: Propagation Information
+propagation-propNumberLabel: Propagation ID
+propagation-propDateLabel: Propagation Date
+propagation-propReasonLabel: Reason for Propagation
+propagation-propTypeLabel: Propagation Type
+propagation-propCommentsLabel: Comments
+propagation-scarStratLabel: Scar/Stratification
+propagation-extraSeedsLabel: Extra Seeds?
+propagation-cuttingTypeLabel: Cutting Type
+propagation-hormoneLabel: Hormone
+propagation-concentrationLabel: Concentration
+propagation-woundedLabel: Wounded?
+propagation-propActivityGroupLabel: Propagation Activities
+propagation-orderLabel: Order
+propagation-propCountLabel: Propagule Count
+propActivityGroup-activityDateLabel: Activity Date
+propagation-mediumLabel: Medium
+propagation-activityTypeLabel: Type
+propagation-potSizeLabel: Pot Size
+propagation-conditionsLabel: Conditions
+propagation-nurseryLocationLabel: Location in Nursery
+propagation-fungicideLabel: Fungicide
+propagation-activityCommentsLabel: Comments
+propagation-germinationDateLabel: Germination/Rooting Date
+propagation-germinationDateStartLabel: Earliest
+propagation-germinationDateEndLabel: Latest
+propagation-successRateLabel: Success Rate
+propagation-propDateStartLabel: Earliest
+propagation-propDateEndLabel: Latest
+propagation-updatedAtLabel: Updated At
+propagation-updatedAtStartLabel: Earliest
+propagation-updatedAtEndLabel: Latest
+propagation-updatedByLabel: Updated By
+propagation-numStartedLabel: Number Started
+propagation-scarStratGroupLabel: Scarification/Stratification
+propagation-durationLabel: Duration
+propagation-durationUnitLabel: Unit
+propagation-sporesLabel: Spore
+propagation-plantTypeLabel: Plant Type
+propagation-chemicalAppliedLabel: Chemical Applied
+propagation-activityConcentrationLabel: Concentration
+propagation-number: Propagation Number
+propagation-editRecord: Edit Propagation Record
+propagation-recordList: Related Propagation Records
+propagation-identificationNumberRequired: Please specify a Propagation ID
+
+#pottag
+pottag: Pot Tag
+pottag-tab: Pot Tag
+pottag-volunteerLabelsLabel: Pot Tag
+pottag-familyLabel: Family
+pottag-commonNameLabel: Common Name
+pottag-localeLabel: Country Name/Locale
+pottag-taxonNameLabel: Taxon Name
+pottag-labelDataLabel: Label Data
+pottag-numberOfLabelsLabel: Number of Labels
+pottag-printLabelsLabel: Print Labels
+pottag-updatedAtLabel: Modified Date
+pottag-updatedAtStartLabel: Earliest
+pottag-updatedAtEndLabel: Latest
+pottag-number: Pot Tag Number
+pottag-editRecord: Edit Plant Label Record
+pottag-recordList: Related Plant Label Records
+pottag-updatedByLabel: Record last modified by
+
+objectexit: Distribution
+objectexit-tab: Distribution
+objectexit-depositorLabel: Organization
+objectexit-exitDateGroupLabel: Date
+objectexit-countLabel: Count
+objectexit-exitNumberLabel: Distribution Number
+objectexit-objectexitInformationLabel: Distribution Information
+objectexit-exitMethodsLabel: Distribution Method
+objectexit-exitMethodLabel: Distribution Method
+objectexit-exitReasonLabel: Distribution Reason
+objectexit-exitNoteLabel: Distribution Note
+objectexit-identificationNumberRequired: Please specify a Distribution Number
+objectexit-currentOwnerLabel: Authorized By
+objectexit-editRecord: Edit Distribution Record
+objectexit-recordList: Related Distribution Records

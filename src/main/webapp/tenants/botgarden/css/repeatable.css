@@ -1,0 +1,302 @@
+/*  styling repeatable fields  */
+.cs-repeatable {
+    display: inline;
+}
+.cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
+.content .cs-repeatable-repeat {}
+.content li.cs-repeatable-repeat input,
+.content li.cs-repeatable-repeat select,
+.content li.cs-repeatable-repeat button,
+.content li.cs-repeatable-repeat textarea {
+	float:left;}
+.content li.cs-repeatable-repeat .content input,
+.content li.cs-repeatable-repeat .content select,
+.content li.cs-repeatable-repeat .content button,
+.content li.cs-repeatable-repeat .content textarea {
+	float:none;
+}
+.content li.cs-repeatable-repeat .content input.cs-repeatable-add {
+    float: right;
+}
+tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
+    width:13px;}
+.cs-repeatable-add {}
+#read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {
+    display:none;}
+#read-only .cs-repeatable-primary {}
+input[type="button"].cs-repeatable-add {
+    font-size:14px; 
+    height:16px; 
+    width:14px; 
+    font-weight:bold;
+    position: relative; 
+    float: right;
+    right: 17%;
+    top: -16px;
+    padding:0;
+    -moz-border-radius:4px 4px 0 0;
+    -webkit-border-radius:4px 4px 0 0;
+	border-radius:4px 4px 0 0;
+}
+li.cs-repeatable-repeat {
+    list-style-type: none; 
+    margin-bottom: 0;
+}
+input.cs-repeatable-primary {
+    width: 11px; 
+    position: relative; 
+    vertical-align:middle; 
+    border:none; 
+    margin-right:3px;
+}
+td input.cs-repeatable-primary {
+    margin:0 auto;
+    vertical-align:middle;}
+input.cs-repeatable-delete {
+    border:none;
+    box-shadow: none;
+    vertical-align:top; 
+    padding:0px;
+	width:16px;
+    height:19px;
+    background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
+	}
+input.cs-repeatable-delete:hover, 
+input.cs-repeatable-delete:focus {
+    color: white; 
+    background: transparent url('../images/icnDelete.png') no-repeat 2px 3px;}
+input.cs-repeatable-delete[disabled], 
+input.cs-repeatable-delete[disabled]:hover, 
+input.cs-repeatable-delete[disabled]:focus {
+    background-color:transparent !important;
+    box-shadow: none;
+    background: url('../images/icnDeleteDisabled.png') no-repeat 2px 3px; }
+table tr.csc-repeatable-repeat input.cs-repeatable-delete,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled],
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, 
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
+	background-position:2px 1px; height:15px;}
+	
+.cs-repeatable-group .cs-repeatable-repeat ,
+.cs-repeatable-group .cs-repeatable-repeat ,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat,
+.csc-callout-group  {
+	border:1px solid #CCC;
+	background-color:#E2E2E2;
+	float: left;
+	margin: 0 0 20px 0;
+}
+
+.cs-repeatable-group .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-select,
+.cs-repeatable-group .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-group .cs-repeatable-repeat .info-pair-select,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair, 
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair-date, 
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .info-pair-select,
+.csc-callout-group .info-pair, 
+.csc-callout-group .info-pair-date, 
+.csc-callout-group .info-pair-select {
+    margin: 5px 10px 10px 10px;
+}
+
+.cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
+.cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
+	float:left;
+}
+
+.infoGroup { 
+    padding: 20px 4px 0;
+    background-color:#E2E2E2;
+}
+
+.infoGroup .cs-repeatable-group { position:relative;}
+
+.infoGroup .cs-repeatable-group .cs-repeatable-repeat {
+    border:none; 
+    background-color:inherit;
+}
+
+/***************************************************************************************************************
+ * Repeatable group in a div, rather than in a table (e.g., see block in Place/Georeference Information group) *
+ * Based on Jesse's css from 21Nov011. Added by rjaffe, Dec2011-Jan2012                                        *
+ ***************************************************************************************************************/
+
+.infoDiv { padding:4px 0 0 0; position: relative; margin-top:12px; background-color: #F5F5F5;}
+
+/*.infoDiv .cs-repeatable-group { position:relative; background-color: #E2E2E2;}*/
+
+/*.infoDiv ul, .infoDiv ol, .infoDiv dl {margin-left: 1em;}*/
+
+.infoDiv li.cs-repeatable-repeat { padding:4px; border:none; background-color:#F5F5F5;}
+
+.infoDiv .repeatable-bkgnd {background-color: #CBCBCB;}
+
+.infoDiv .cs-repeatable-content {
+    width:94%;
+    padding:4px;
+    float: left;
+}
+.infoDiv input.cs-repeatable-delete {
+    float:right;
+    border:none;
+    vertical-align:top;
+    padding:0px;
+	width:16px;
+    background-color:transparent !important;
+    background:url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
+}
+.infoDiv input.cs-repeatable-delete:hover,
+.infoDiv input.cs-repeatable-delete:focus {
+/*    float:right;*/
+    color:white;
+    background-color:transparent !important;
+    background:url('../images/icnDelete.png') no-repeat 2px 3px;
+}
+.infoDiv input.cs-repeatable-delete[disabled],
+.infoDiv input.cs-repeatable-delete[disabled]:hover,
+.infoDiv input.cs-repeatable-delete[disabled]:focus {
+    float:right;
+    background-color:transparent !important;
+    background:url('../images/icnDeleteDisabled.png') no-repeat 2px 3px;
+}
+.infoDiv .fieldgroup {
+    background: #F5F5F5;
+    float: left;
+    margin: 6px;
+    padding: 8px;
+    width: 97%;
+}
+
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content textarea,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content select,
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content td select {
+    width: 100%;
+}
+
+.info-pair .content tbody td input.cs-autocomplete-input {
+    width: 100%;
+}
+
+
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList input,
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList textarea {
+    width: 100%;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.cs-termList select {
+    width: 100%;
+}
+
+input.cs-autocomplete-input,
+ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input,
+ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
+ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+    width: 88.5%;
+}
+
+
+textarea.cs-repeatable-content,
+select.cs-repeatable-content {
+    width: 90%;
+}
+
+div.infoGroup li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
+div.info-pair-select li.cs-repeatable-repeat {
+    padding: 0px 0px 0px;
+}
+
+li.cs-repeatable-repeat div.cs-repeatable-content {
+    width: 88.5%;
+}
+td div.cs-termList,
+td select {
+    width: 100%;
+}
+
+li.cs-repeatable-repeat div.cs-repeatable-content.cs-repeatable-stretched,
+li.cs-repeatable-repeat div.cs-termList.cs-repeatable-stretched {
+    width: 95%;
+}
+
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-add {
+    width: 14px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-delete {
+    width: 21px;
+}
+ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content input.cs-repeatable-primary {
+    width: 11px;
+}
+
+
+div.cs-repeatable-group div.cs-repeatable-content,
+li.cs-repeatable-repeat {
+    width: 95%;
+}
+
+div.infoGroup div.cs-repeatable-group {
+    display: table-cell;
+    width: 20%;
+}
+
+div.info-pair-select div.content,
+div.info-pair-date div.content {
+    display: inherit;
+}
+div.info-pair-date {
+    min-width: 165px;
+}
+div.info-pair-select li.cs-repeatable-repeat,
+div.info-pair-date li.cs-repeatable-repeat {
+    margin-bottom: 1px;
+}
+
+.infoDiv .info-column {
+    margin-bottom: 18px;
+}
+
+/* hierarchical stylings */
+.cs-fixedExternalURL .cs-repeatable-group ul.cs-repeatable {
+    overflow-y:auto;
+    max-height: 210px; /* 10 li elements tall */
+    line-height: 0;
+    display:block;
+}
+.cs-hierarchy-equivalentContexts {
+    overflow-y:auto;
+    max-height: 240px; /* 10 div elements tall */
+}
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat {
+    float:none;
+    border:none;
+    background:inherit;
+}
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat .cs-repeatable-content {
+    float:none;
+    display:inline-block;
+    height:21px;
+}
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-primary {
+    float:none;
+    display:inline-block;
+    vertical-align: top;
+    height:19px;
+    margin:0 3px;
+}
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-delete,
+.cs-fixedExternalURL li.cs-repeatable-repeat input.cs-repeatable-delete[disabled] {
+    float:none;
+    display:inline-block;
+    height:19px;
+}
+.cs-fixedExternalURL .cs-repeatable-group li.cs-repeatable-repeat.clearfix:after {
+   content: "";
+}
