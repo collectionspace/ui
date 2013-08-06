@@ -61,6 +61,10 @@
             },
             {
                 "permission": "read",
+                "resourceName": "work"
+            },
+            {
+                "permission": "read",
                 "resourceName": "role"
             },
             {
@@ -90,6 +94,10 @@
             {
                 "permission": "read",
                 "resourceName": "place"
+            },
+            {
+                "permission": "read",
+                "resourceName": "work"
             },
             {
                 "permission": "read",
@@ -126,6 +134,10 @@
             {
                 "permission": "read",
                 "resourceName": "places"
+            },
+            {
+                "permission": "read",
+                "resourceName": "works"
             },
             {
                 "permission": "read",

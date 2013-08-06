@@ -61,6 +61,10 @@
             },
             {
                 "permission": "delete",
+                "resourceName": "work"
+            },
+            {
+                "permission": "delete",
                 "resourceName": "role"
             },
             {
@@ -90,6 +94,10 @@
             {
                 "permission": "delete",
                 "resourceName": "place"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "work"
             },
             {
                 "permission": "delete",
@@ -126,6 +134,10 @@
             {
                 "permission": "delete",
                 "resourceName": "places"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "works"
             },
             {
                 "permission": "delete",
