@@ -1149,6 +1149,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+        fluid.demands("cspace.searchResultsRelationManager", "cspace.advancedSearch", {
+            options: {
+                listeners: {
+                    beforeFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
+                    afterAddRelations: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
+        });
         
         // Related records tab demands
         fluid.demands("relatedRecordsTab", "cspace.pageBuilder", {
@@ -1185,14 +1195,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        fluid.demands("cspace.searchToRelateDialog", "cspace.searchResultsRelationManager", {
-            options: {
-                events: {
-                    onAddRelation: "{cspace.searchResultsRelationManager}.events.onAddRelation"
-                }
-            }
-        });
 
+       fluid.demands("cspace.searchToRelateDialog", "cspace.searchResultsRelationManager", {
+           options: {
+               events: {
+                   onAddRelation: "{cspace.searchResultsRelationManager}.events.onAddRelation"
+               }
+           }
+       });
+        
         // Repeatable demands
         fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", {
             container: "{arguments}.0",
@@ -1291,7 +1302,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.advancedSearch"], {
+        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.searchResultsRelationManager"], {
             container: "{searchToRelateDialog}.container",
             options: {
                 strings: {
@@ -1302,7 +1313,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
-                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 }
             }
@@ -1368,19 +1378,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }
                         }
                     }
-                }
-            }
-        });
-
-        fluid.demands("cspace.searchResultsRelationManager", "cspace.relateSearchResults", {
-            options: {
-                events: {
-                    onRelateButtonClick: "{relateSearchResults}.events.onRelateButtonClick"
-                },
-                listeners: {
-                    beforeFetchExistingRelations: "{loadingIndicator}.events.showOn.fire",
-                    afterAddRelations: "{loadingIndicator}.events.hideOn.fire",
-                    onError: "{loadingIndicator}.events.hideOn.fire"
                 }
             }
         });
@@ -1491,17 +1488,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        
-        fluid.demands("cspace.search.searchView.search", "cspace.search.searchView", {
-            funcName: "cspace.search.searchView.search",
-            args: ["{arguments}.0", "{searchView}"]
-        });
 
         fluid.demands("cspace.search.searchView.search", ["cspace.search.searchView", "cspace.searchToRelateDialog", "cspace.advancedSearch"], {
             funcName: "cspace.search.searchView.search",
             args: ["{arguments}.0", "{searchView}"]
         });
         
+        fluid.demands("cspace.search.searchView.search", "cspace.search.searchView", {
+            funcName: "cspace.search.searchView.search",
+            args: ["{arguments}.0", "{searchView}"]
+        });
+
         fluid.demands("cspace.search.searchView.search", ["cspace.search.searchView", "cspace.advancedSearch"], {
             funcName: "cspace.search.searchView.advancedSearch",
             args: ["{arguments}.0", "{searchView}"]
@@ -1716,6 +1713,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+       fluid.demands("tabsList", ["cspace.tabs", "citation"], {
+            container: "{tabs}.dom.tabsList",
+            options: {
+                model: {
+                    tabs: {
+                        primary: {
+                            "name": "tablist-primary",
+                            href: "#primaryTab",
+                            title: "tablist-primary"
+                        }
+                    }
+                }
+            }
+        });
+
         fluid.demands("tabsList", ["cspace.tabs", "organization"], {
             container: "{tabs}.dom.tabsList",
             options: {
