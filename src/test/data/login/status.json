@@ -48,6 +48,13 @@
             "delete",
             "list"
         ],
+        "work": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "group": [
             "create",
             "read",
