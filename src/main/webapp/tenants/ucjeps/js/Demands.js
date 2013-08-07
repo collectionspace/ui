@@ -1986,7 +1986,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                }
             }, "{arguments}.1"]
         });
-
         fluid.demands("cspace.computedField", "cspace.advancedSearch.searchFields", {
             container: "{arguments}.0",
             mergeAllOptions: [{
