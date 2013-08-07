@@ -161,6 +161,37 @@ var utilitiesTester = function ($) {
                     },
                     "type": "object"
                 },
+                "work": {
+                    "properties": {
+                        "work": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 0
+                                }
+                            }
+                        },
+                        "cona_work": {
+                            "type": "object",
+                            "properties": {
+                                "nptAllowed": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "default": 1
+                                }
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
                 "organization": {
                     "properties": {
                         "organization": {
@@ -273,6 +304,7 @@ var utilitiesTester = function ($) {
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
+        "work": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
@@ -465,6 +497,7 @@ var utilitiesTester = function ($) {
                 "acquisition",
                 "organization",
                 "place",
+                "work",
                 "concept",
                 "cataloging",
                 "movement",
@@ -485,6 +518,7 @@ var utilitiesTester = function ($) {
                 "person",
                 "organization",
                 "place",
+                "work",
                 "concept"
             ]
         }
@@ -498,6 +532,7 @@ var utilitiesTester = function ($) {
                 "acquisition",
                 "organization",
                 "place",
+                "work",
                 "concept",
                 "cataloging",
                 "movement",
@@ -518,6 +553,7 @@ var utilitiesTester = function ($) {
                 "person",
                 "organization",
                 "place",
+                "work",
                 "concept"
             ]
         }
@@ -532,6 +568,7 @@ var utilitiesTester = function ($) {
                 "acquisition",
                 "organization",
                 "place",
+                "work",
                 "concept",
                 "cataloging",
                 "movement",
@@ -552,7 +589,8 @@ var utilitiesTester = function ($) {
                 "concept",
                 "organization",
                 "person",
-                "place"
+                "place",
+                "work"
             ]
         }
     }], function (test) {
@@ -582,6 +620,7 @@ var utilitiesTester = function ($) {
             "person": "person",
             "concept": "concept",
             "place": "place",
+            "work": "work",
             "organization": "organization",
             "location": "location"
         }, vocab.authorities);
@@ -619,6 +658,10 @@ var utilitiesTester = function ($) {
         }));
         jqUnit.assertEquals("Resolve namespace", "place", cspace.vocab.resolve({
             recordType: "place",
+            vocab: vocab
+        }));
+        jqUnit.assertEquals("Resolve namespace", "work", cspace.vocab.resolve({
+            recordType: "work",
             vocab: vocab
         }));
         jqUnit.assertUndefined("Resolve namespace", cspace.vocab.resolve({
