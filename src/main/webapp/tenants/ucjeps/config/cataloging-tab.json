@@ -28,7 +28,6 @@
                             "relatedRecordsRecordEditor": {
                                 "options": {
                                     "selectors": {
-                                        "identificationNumber": ".csc-object-identification-object-number"
                                     },
                                     "uispec": "{pageBuilder}.options.uispec.details"
                                 }
