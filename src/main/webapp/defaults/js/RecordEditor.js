@@ -358,6 +358,13 @@ cspace = cspace || {};
             vocab: "{vocab}",
             messageBar: "{messageBar}"
         },
+        template: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "template"
+            }
+        },
         events: {
             onCreateFromExisting: {
                 event: "{cspace.recordEditor}.events.onCreateFromExisting"
@@ -367,7 +374,7 @@ cspace = cspace || {};
             onCreateFromExisting: "{cspace.recordEditor.cloner}.clone"
         },
         preInitFunction: "cspace.recordEditor.cloner.preInit",
-        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%vocab")
+        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%params")
     });
 
     cspace.recordEditor.cloner.preInit = function (that) {
@@ -387,11 +394,22 @@ cspace = cspace || {};
                     vocab: that.vocab
                 });
                 that.messageBar.disable();
+
+                var params = {};
+                
+                if (that.options.template) {
+                    params.template = that.options.template;
+                }
+
+                if (vocab) {
+                    params.vocab = vocab;
+                }
+
+                params = $.param(params);
+
                 window.location = fluid.stringTemplate(that.options.cloneURL, {
                     recordType: that.options.recordType,
-                    vocab: vocab ? ("?" + $.param({
-                        vocab: vocab
-                    })) : ""
+                    params: params ? ("?" + params) : ""
                 });
             });
         };
