@@ -1,3 +1,6 @@
+# Templates
+template-collectorLabel: Collector Label
+
 # Schema extensions to Cataloging record
 collection-object-taxonLabel: Name
 collection-object-qualifierLabel: Qualifier

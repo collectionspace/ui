@@ -1,4 +1,7 @@
 {
+    "cataloging": {
+        "templates": ["collectorLabel"]
+    },
     "intake": {
         "templates": ["doorstopDonation"]
     }
