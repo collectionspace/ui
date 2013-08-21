@@ -20,6 +20,8 @@ collection-object-objectCollectionInformationLabel: Field Collection Information
 collection-object-fieldCollectionDateLabel: Field collection date
 collection-object-fieldCollectorLabel: Field collection collector
 collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-fieldCollectionNumberStartLabel: From
+collection-object-fieldCollectionNumberEndLabel: To
 collection-object-fieldCollectionNumberAssignorLabel: Field collection number assignor
 collection-object-fieldCollectionMethodLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Habitat information
