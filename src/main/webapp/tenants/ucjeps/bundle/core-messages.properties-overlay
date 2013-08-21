@@ -25,8 +25,8 @@ collection-object-fieldCollectionMethodLabel: Field collection method
 collection-object-fieldCollectionNoteLabel: Habitat information
 collection-object-fieldCollectionSourceLabel: Field collection source
 collection-object-fieldColEventNameLabel: Field collection event name
-ccollection-object-fieldAssociatedTaxaLabel: Associated taxa
-
+collection-object-fieldAssociatedTaxaLabel: Associated taxa
+collection-object-collectorLabelInformationLabel: Collector Label Information
 
 # From Type Specimen fieldgroup
 collection-object-typeSpecimenGroupLabel: Type Specimen
