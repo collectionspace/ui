@@ -9,7 +9,8 @@
                         "selectors": {
                             "identificationNumber": ".csc-group-title"
                         },
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor"
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "fieldsToIgnore": ["fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
                     }
                 },
                 "titleBar": {
