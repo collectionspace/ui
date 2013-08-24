@@ -280,7 +280,7 @@ input.secondaryButton:focus, input.secondaryButton:hover {
     margin-left:10px; 
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
-    margin-bottom:0px;}
+    margin-bottom:4px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {
     margin-right:10px; 
     margin-top:10px;}
@@ -2319,6 +2319,14 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
     display: table-row;
     text-decoration: none;
+}
+
+/* recordHistory styling */
+.cs-recordHistory {
+    display: table-cell;
+    font-size: 11px;
+    padding-left: 14px;
+    vertical-align: middle;
 }
 
 /* CSPACE-4676 */
