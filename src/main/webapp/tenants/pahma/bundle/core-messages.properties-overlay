@@ -189,7 +189,7 @@ collection-object-pahmaTms2003DataSourceLabel: TMS primary data source
 collection-object-pahmaTmsLegacyDepartmentLabel: TMS legacy department
 collection-object-pahmaCollectionLabel: Collection
 collection-object-pahmaObjectStatusLabel: Object status
-collection-object-inventoryCountLabel: Inventory count
+collection-object-inventoryCountLabel: Count note
 collection-object-portfolioSeriesLabel: R. Keeling audio series
 collection-object-pahmaFieldLocVerbatimLabel: Field collection place (verbatim)
 collection-object-isComponentLabel: Is component?
