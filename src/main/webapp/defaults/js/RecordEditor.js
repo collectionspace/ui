@@ -33,7 +33,8 @@ cspace = cspace || {};
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
         selectors: {
-            controlPanel: ".csc-recordEditor-controlPanel-container",
+            headerControlPanel: ".secondary-nav.csc-recordEditor-controlPanel-container",
+            footerControlPanel: ".secondary-nav-footer.csc-recordEditor-controlPanel-container",
             recordRendererContainer: ".csc-recordEditor-renderer-container",
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
@@ -41,10 +42,20 @@ cspace = cspace || {};
         // Render control panel (a collection of control buttons above and
         // below the record editing area.
         protoTree: {
-            controlPanel: {
+            headerControlPanel: {
                 decorators: {
                     type: "fluid",
                     func: "cspace.recordEditor.controlPanel"
+                }
+            },
+            footerControlPanel: {
+                decorators: {
+                    type: "fluid",
+                    func: "cspace.recordEditor.controlPanel",
+                    options: {
+                        showRecordTraverser: false,
+                        showRecordHistory: false
+                    }
                 }
             }
         },
@@ -358,6 +369,13 @@ cspace = cspace || {};
             vocab: "{vocab}",
             messageBar: "{messageBar}"
         },
+        template: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "template"
+            }
+        },
         events: {
             onCreateFromExisting: {
                 event: "{cspace.recordEditor}.events.onCreateFromExisting"
@@ -367,7 +385,7 @@ cspace = cspace || {};
             onCreateFromExisting: "{cspace.recordEditor.cloner}.clone"
         },
         preInitFunction: "cspace.recordEditor.cloner.preInit",
-        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%vocab")
+        cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%params")
     });
 
     cspace.recordEditor.cloner.preInit = function (that) {
@@ -387,11 +405,22 @@ cspace = cspace || {};
                     vocab: that.vocab
                 });
                 that.messageBar.disable();
+
+                var params = {};
+                
+                if (that.options.template) {
+                    params.template = that.options.template;
+                }
+
+                if (vocab) {
+                    params.vocab = vocab;
+                }
+
+                params = $.param(params);
+
                 window.location = fluid.stringTemplate(that.options.cloneURL, {
                     recordType: that.options.recordType,
-                    vocab: vocab ? ("?" + $.param({
-                        vocab: vocab
-                    })) : ""
+                    params: params ? ("?" + params) : ""
                 });
             });
         };
@@ -1163,10 +1192,12 @@ cspace = cspace || {};
             cancel: ".csc-cancel",
             deleteRelationButton: ".csc-deleteRelation",
             goTo: ".csc-goto",
-            recordLock: ".csc-recordLock"
+            recordLock: ".csc-recordLock",
+            recordHistory: ".csc-recordHistory"
         },
         styles: {
-            recordTraverser: "cs-recordTraverser"
+            recordTraverser: "cs-recordTraverser",
+            recordHistory: "cs-recordHistory"
         },
         events: {
             onSave: {
@@ -1217,7 +1248,9 @@ cspace = cspace || {};
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
-        }
+        }	,
+        showRecordTraverser: true,
+        showRecordHistory: true
     });
 
     // Render spec for control panel for tabs.
@@ -1300,15 +1333,20 @@ cspace = cspace || {};
                     func: "cspace.util.recordLock"
                 }
             },
-            recordTraverser: {
-                decorators: [{
-                    addClass: "{styles}.recordTraverser"
-                }, {
-                    type: "fluid",
-                    func: "cspace.recordTraverser"
-                }]
-            },
             expander: [{
+                type: "fluid.renderer.condition",
+                condition: that.options.showRecordTraverser,
+                trueTree: {
+                    recordTraverser: {
+                        decorators: [{
+                            addClass: "{styles}.recordTraverser"
+                        }, {
+                            type: "fluid",
+                            func: "cspace.recordTraverser"
+                        }]
+                    }
+                }
+            },{
                 type: "fluid.renderer.condition",
                 condition: "${showCreateFromExistingButton}",
                 trueTree: {
@@ -1369,6 +1407,22 @@ cspace = cspace || {};
                             func: "prop",
                             args: {
                                 disabled: "${disableCancelButton}"
+                            }
+                        }]
+                    }
+                }
+            },{
+                type: "fluid.renderer.condition",
+                condition: that.options.showRecordHistory,
+                trueTree: {
+                    recordHistory: {
+                        decorators: [{
+                            addClass: "{styles}.recordHistory"
+                        },{
+                            type: "fluid",
+                            func: "cspace.recordHistory",
+                            options: {
+                                recordApplier: that.options.recordApplier
                             }
                         }]
                     }
