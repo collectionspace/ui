@@ -12,7 +12,7 @@
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": [
                             "csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts", "fields.computedCurrentLocation", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy",
-                            "fields.computedCrate", "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup", "fields.briefDescriptions"]
+                            "fields.computedCrate", "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup", "fields.briefDescriptions", "fields.titleGroup"]
                     }
                 },
                 "titleBar": {
