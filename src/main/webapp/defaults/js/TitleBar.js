@@ -66,7 +66,7 @@ cspace = cspace || {};
         if (!fieldValue) {
             return "";
         }
-        return fieldValue.indexOf("urn") < 0 ? fieldValue : cspace.util.urnToString(fieldValue);
+        return fieldValue.indexOf("urn:") == 0 ? cspace.util.urnToString(fieldValue) : fieldValue;
     };
     
     cspace.titleBar.buildTitle = function (that) {
