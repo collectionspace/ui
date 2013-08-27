@@ -10,7 +10,11 @@
                             "identificationNumber": ".csc-object-identification-object-number" 
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup"]
+                        "fieldsToIgnore": [
+                            "csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts",
+                            "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy",
+                            "fields.computedCurrentLocation", "fields.computedCrate",
+                            "fields.objectNameGroup", "fields.measuredPartGroup", "fields.inventoryCount", "fields.sex", "fields.ageEstimateGroup", "fields.briefDescriptions"]
                     }
                 },
                 "titleBar": {
