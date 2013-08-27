@@ -38,7 +38,9 @@ var titlebarTester = function ($) {
                 value: "rep4",
                 _primary: false
             }],
-            test6: [{}]
+            test6: [{}],
+            test7: "Montgomery Burns",
+            test8: "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(KenBurns1377635804213)'Ken Burns'"
         };
         var opts = {
             model: {
@@ -142,6 +144,15 @@ var titlebarTester = function ($) {
             }, "test1"]
         });
         jqUnit.assertEquals("Record Type should be rendered correctly", "rep2 - 123", titleBar.locate("title").text());
+    });
+    // CSPACE-6164
+    titlebarTest.test("Strings containing 'urn'", function () {
+        expect(1);
+        var titleBar = setupTitlebar({
+            fields: ["test7", "test8"],
+            separator: " - "
+        });
+        jqUnit.assertEquals("Record Type should be rendered correctly", "Montgomery Burns - Ken Burns", titleBar.locate("title").text());
     });
 };
 
