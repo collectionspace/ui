@@ -33,6 +33,7 @@ preferredTA-termSourceLabel: Source
 preferredTA-termSourceDetailLabel: Source Detail
 preferredTA-termSourceIDLabel: Source ID
 preferredTA-termSourceNoteLabel: Source Note
+preferredTA-termFormattedDisplayNameLabel: Formatted Display Name
 preferredTA-taxonomicStatusLabel: Taxonomic Status
 taxon-taxonRankLabel: Rank
 taxon-taxonCurrencyLabel: Currency
