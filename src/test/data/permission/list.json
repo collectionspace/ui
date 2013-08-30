@@ -161,6 +161,19 @@
             "number": "CRUDL",
             "recordtype": "permission"
         },
+         {
+            "summary": "work",
+            "display": "show",
+            "csid": "67f72b20-76eb-11e2-bcfd-0800200c9a66"
+            "recordtype": "permission"
+        },
+        {
+            "summary": "works",
+            "display": "none",
+            "csid": "73871180-76eb-11e2-bcfd-0800200c9a66",
+            "number": "CRUDL",
+            "recordtype": "permission"
+        },
         {
             "summary": "taxonomyauthority",
             "display": "none",

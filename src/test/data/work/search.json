@@ -1,0 +1,30 @@
+{
+    "results": [{
+        "shortIdentifier": "WorkDisplayName8673509000000",
+        "summary": "Muppets Take Manhattan (1984)",
+        "summarylist": {
+            "updatedAt": "2013-02-26T02:01:11Z",
+            "shortIdentifier": "WorkDisplayName8673509000000",
+            "termStatus": "complete",
+            "refName": "urn:cspace:core.collectionspace.org:workauthorities:name(work):item:name(WorkDisplayName8673509000000)'Work (Display Name)'",
+            "csid": "876ac3f-3344-ac55-1234",
+            "displayName": "Muppets Take Manhattan (1984)",
+            "uri": "/workauthorities/6ca3db57-7c96-47b6-b17d/items/876ac3f-3344-ac55-1234"
+        },
+        "termStatus": "complete",
+        "csid": "876ac3f-3344-ac55-1234",
+        "number": "Muppets Take Manhattan (1984)",
+        "displayName": "Muppets Take Manhattan (1984)",
+        "refid": "urn:cspace:core.collectionspace.org:workauthorities:name(work):item:name(WorkDisplayName8673509000000)'Work (Display Name)'"
+    }],
+    "pagination": {
+        "fieldsReturned": "csid|uri|updatedAt|termType|displayName|shortIdentifier|refName|termStatus",
+        "separatelists": [[]],
+        "totalItems": "1",
+        "pageSize": "30",
+        "traverser": "E41EBA34EC3D3BE59D97843ED7EC63CC",
+        "itemsInPage": "1",
+        "numInstances": "1",
+        "pageNum": "0"
+    }
+}
