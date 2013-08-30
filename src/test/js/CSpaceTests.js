@@ -30,6 +30,7 @@ cspace.tests.sampleSchema = {
                     "person",
                     "organization",
                     "place",
+                    "work",
                     "concept"
                 ],
                 "type": "array"
@@ -63,6 +64,7 @@ cspace.tests.sampleSchema = {
             "acquisition",
             "organization",
             "place",
+            "work",
             "concept",
             "cataloging",
             "movement",
@@ -240,6 +242,37 @@ cspace.tests.sampleSchema = {
                     }
                 },
                 "type": "object"
+            },
+            "work": {
+                "properties": {
+                    "work": {
+                        "properties": {
+                            "order": {
+                                "default": 1,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "cona_work": {
+                        "properties": {
+                            "order": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "nptAllowed": {
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
             }
         },
         "type": "object"
@@ -253,6 +286,7 @@ cspace.tests.sampleUserPerms = {
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
+        "work": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "cataloging": ["create", "read", "update", "delete", "list"],
@@ -271,6 +305,7 @@ cspace.tests.fullPerms = {
         "person": ["create", "read", "update", "delete", "list"],
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
+        "work": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
         "users": ["create", "read", "update", "delete", "list"]

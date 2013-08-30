@@ -54,7 +54,9 @@
           "local_place", 
           "placetest2", 
           "place", 
-          "tgn_place"
+          "tgn_place",
+          "work",
+          "cona_work"
         ], 
         "type": "array"
       }
