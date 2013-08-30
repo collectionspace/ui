@@ -1,8 +1,8 @@
 #Login
-#login-current: CollectionSpace 3.3: PAHMA prototype
+#login-current: CollectionSpace 4.0: PAHMA prototype
 #login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
 #login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
-login-current: PAHMA-CollectionSpace 3.3
+login-current: PAHMA-CollectionSpace 4.0
 login-current-info: Welcome to PAHMA's new collection management system, CollectionSpace.  PAHMA-CSpace has been configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
 login-login-info: To sign in, enter your email and passphrase in the Sign In box on the right.
 #login-login: admin@pahma.cspace.berkeley.edu
