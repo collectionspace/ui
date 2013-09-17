@@ -120,7 +120,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     // This test is obsolete, because of the fix for CSPACE-5265. Doing a search through the form now navigates to a findEdit URL
-	// (which is tested above), instead of doing an AJAX call.
+    // (which is tested above), instead of doing an AJAX call.
     // findEditTests.test("FindEdit URL through form inputs", function () {
     //     findEditUrlTest(opts, ".././data/loanin/search.json", null, function (findEdit) {
     //         jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle").change();
