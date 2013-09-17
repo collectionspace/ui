@@ -118,14 +118,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var options = fluid.copy(opts) || {};
         findEditUrlTest(options, ".././data/intake/search.json");
     });
-    
-    findEditTests.test("FindEdit URL through form inputs", function () {
-        findEditUrlTest(opts, ".././data/loanin/search.json", null, function (findEdit) {
-            jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle").change();
-            jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin").change();
-            jQuery(findEdit.mainSearch.options.selectors.searchButton).click();
-        });
-    });
+
+    // This test is obsolete, because of the fix for CSPACE-5265. Doing a search through the form now navigates to a findEdit URL
+	// (which is tested above), instead of doing an AJAX call.
+    // findEditTests.test("FindEdit URL through form inputs", function () {
+    //     findEditUrlTest(opts, ".././data/loanin/search.json", null, function (findEdit) {
+    //         jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle").change();
+    //         jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin").change();
+    //         jQuery(findEdit.mainSearch.options.selectors.searchButton).click();
+    //     });
+    // });
 
     findEditTests.asyncTest("FindEdit initialization", function () {
         expect(10);
