@@ -1,0 +1,8 @@
+login-login-info: To view the CollectionSpace CineFiles tenant, use the login box on the right with the login:
+login-login: admin@cinefiles.cspace.berkeley.edu
+login-login-pwd: 
+login-login-pwdValue: 
+login-rologin-info: There is also a read-only account:
+login-rologin: reader@cinefiles.cspace.berkeley.edu
+login-rologin-pwd: 
+login-rologin-pwdValue: 
