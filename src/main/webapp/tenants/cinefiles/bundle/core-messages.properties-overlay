@@ -1,3 +1,4 @@
+# Login page
 login-login-info: To view the CollectionSpace CineFiles tenant, use the login box on the right with the login:
 login-login: admin@cinefiles.cspace.berkeley.edu
 login-login-pwd: 
@@ -6,3 +7,14 @@ login-rologin-info: There is also a read-only account:
 login-rologin: reader@cinefiles.cspace.berkeley.edu
 login-rologin-pwd: 
 login-rologin-pwdValue: 
+
+# Vocabularies
+vocab-person: Persons
+vocab-location: Storage Locations
+vocab-place: Places
+vocab-work: Moving Images
+vocab-concept: Subjects
+vocab-genre: Genres
+vocab-organization: Corporate Names
+vocab-committee: Committees
+vocab-citation: Citations
