@@ -2,7 +2,7 @@
 template-collectorLabel: Collector Label
 
 # Schema extensions to Cataloging record
-collection-object-taxonLabel: Name
+collection-object-taxonLabel: Scientific Name
 collection-object-qualifierLabel: Qualifier
 collection-object-identByLabel: By
 taxonomicIdentGroup-identDateGroupLabel: Date
