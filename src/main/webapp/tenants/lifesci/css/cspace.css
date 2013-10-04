@@ -2560,3 +2560,12 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 .stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
     width: 94%
 }
+
+/* CSPACE-6174: Determination History multi-line repeatable block */
+.determinationHistory .cs-autocomplete-input {
+  width: 99.5%;
+}
+.info-column.indent {
+width: 90%;
+float: right;
+}
