@@ -82,7 +82,7 @@ cspace = cspace || {};
                 }
             })
         },
-        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=40")
+        relatedMediaUrl: cspace.componentUrlBuilder("%tenant/%tname/%primary/media/%csid?pageNum=0&pageSize=40&sortKey=page")
     });
 
     // Render tree for the MediaView
