@@ -109,48 +109,102 @@
 			</div>
 		</div>
 		
-		<div class="info-column">
-            <div class="info-pair">
-                <div class="header">
-                    <div class="label csc-collection-object-taxonomicIdentGroup-label"></div>
-                </div>
-                <div class="content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td class="csc-collection-object-taxon-label"></td>
-                                <td class="csc-collection-object-qualifier-label"></td>
-                                <td class="csc-collection-object-identBy-label"></td>
-                                <td class="csc-collection-object-identDate-label"></td>
-                                <td class="csc-collection-object-institution-label"></td>
-                                <td class="csc-collection-object-identKind-label"></td>
-                                <!-- Inadvertently shares label with object reference field -->
-                                <td class="csc-collection-object-reference-label"></td>
-                                <td class="csc-collection-object-refPage-label"></td>
-                                <td class="csc-collection-object-notes-label"></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="csc-collection-object-taxonomicIdentGroup determinationHistory">
-                                <td class="flc-inlineEdit-text taxon"><input type="text" class="csc-taxonomic-identification-taxon editableText" /></td>
-                                <td class="flc-inlineEdit-text"><select class="csc-taxonomic-identification-qualifier"><option value="">Options not loaded</option></select></td>
-                                <!-- add options -->
-                                <td class="flc-inlineEdit-text"><input type="text" class="csc-taxonomic-identification-ident-by editableText" /></td>
-                                <td class="flc-inlineEdit-text csc-taxonomic-identification-ident-date-container fl-date-group">
-                                    <input type="text" class="input-date csc-taxonomic-identification-ident-date csc-calendar-date" />
-                                    <div class="csc-date-picker cs-date-picker" />
-                                </td>
-                                <td class="flc-inlineEdit-text"><input type="text" class="csc-taxonomic-identification-institution" /></td>
-                                <td class="flc-inlineEdit-text"><select class="csc-taxonomic-identification-ident-kind"><option value="">Options not loaded</option></select></td>
-                                <td class="flc-inlineEdit-text"><input type="text" class="csc-taxonomic-identification-reference editableText" /></td>
-                                <td class="flc-inlineEdit-text"><input type="text" class="csc-taxonomic-identification-reference-page editableText" /></td>
-                                <td class="flc-inlineEdit-text"><input type="text" class="csc-taxonomic-identification-notes editableText" /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+		<div class="info-column cs-multipleEdit" id="multipleEdit">
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-collection-object-taxonomicIdentGroup-label"></div>
+				</div>
+				<div class="content csc-collection-object-taxonomicIdentGroup determinationHistory oocss">
+					<div class="info-column">
+						<table style="margin-bottom: 12px">
+							<thead>
+								<tr>
+									<td class="csc-collection-object-taxon-label"/>
+									<td class="csc-collection-object-qualifier-label"/>																			 
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="flc-inlineEdit-text taxon size2of3">
+										<input type="text" class="csc-taxonomic-identification-taxon editableText"/>
+									</td>
+									<td class="flc-inlineEdit-text">
+										<select class="csc-taxonomic-identification-qualifier">
+											<option value="">Options not loaded</option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>							
+					<div class="info-column indent">
+						<table style="margin-bottom: 12px">
+							<thead>
+								<tr>
+									<td class="csc-collection-object-identBy-label"/>
+									<td class="csc-collection-object-identDate-label"/>
+									<td class="csc-collection-object-institution-label"/>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="flc-inlineEdit-text">
+										<input type="text" class="csc-taxonomic-identification-ident-by editableText"/>
+									</td>
+									<td class="flc-inlineEdit-text">
+										<input type="text" class="csc-taxonomic-identification-ident-date" />
+									</td>
+									<td class="flc-inlineEdit-text">
+										<input type="text" class="csc-taxonomic-identification-institution"/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="info-column indent">
+						<div class="info-column2-40 fl-force-left">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-collection-object-identKind-label"></div>
+								</div>
+								<div class="content">
+									<select class="csc-taxonomic-identification-ident-kind input-select-longer">
+										<option value="">Options not loaded</option>
+									</select>
+								</div>
+							</div>
+							<table>
+								<thead>
+									<tr>
+										<!-- Inadvertently shares label with object reference field -->
+										<td class="csc-collection-object-reference-label"/>
+										<td class="csc-collection-object-refPage-label"/>
+									</tr>
+								</thead>
+								<tbody>
+                                    <td class="flc-inlineEdit-text">
+                                        <input type="text" class="csc-taxonomic-identification-reference editableText"/>
+                                    </td>
+                                    <td class="flc-inlineEdit-text">
+                                        <input type="text" class="csc-taxonomic-identification-reference-page editableText input-numeric-tiny"/>
+                                    </td>
+								</tbody>
+							</table>
+						</div>
+						<div class="info-column2-60 fl-force-right">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-collection-object-notes-label"></div>
+								</div>
+								<div class="content">
+									<textarea rows="4" class="input-textarea csc-taxonomic-identification-notes"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<div class="info-column cs-multipleEdit" id="multipleEdit">
 			<div class="info-pair">
