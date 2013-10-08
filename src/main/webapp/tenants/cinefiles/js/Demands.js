@@ -1159,7 +1159,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cataloging", "cspace.sidebar", {
             container: "{sidebar}.options.selectors.relatedCataloging"
         });
-        
+        fluid.demands("media", "cspace.sidebar", {
+            container: "{sidebar}.options.selectors.relatedMedia"
+        });
+
         // Relation manager demands
         fluid.demands("relationManager", "cspace.relatedRecordsList", {
             options: fluid.COMPONENT_OPTIONS
@@ -1603,6 +1606,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 primary: "{pageBuilder}.options.pageType",
                 components: {
                     cataloging: {
+                        type: "fluid.emptySubcomponent"
+                    },
+                    media: {
                         type: "fluid.emptySubcomponent"
                     },
                     procedures: {

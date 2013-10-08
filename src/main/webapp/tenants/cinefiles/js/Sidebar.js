@@ -34,6 +34,7 @@ cspace = cspace || {};
             categoryContainer: ".csc-related-record",
             relatedVocabularies: ".csc-related-vocabularies",
             relatedCataloging: ".csc-related-cataloging",
+            relatedMedia: ".csc-related-media",
             relatedProcedures: ".csc-related-procedures",
             termsHeader: ".csc-sidebar-termsHeader",
             header: ".csc-sidebar-header",
@@ -45,7 +46,7 @@ cspace = cspace || {};
         renderOnInit: true,
         repeatingSelectors: ["categoryContainer"],
         // Elements which should be ignored in our render tree. These ones will be used for other functions.
-        selectorsToIgnore: ["batch", "report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
+        selectorsToIgnore: ["batch", "report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedMedia", "relatedProcedures", "header", "togglable", "termsUsedBanner"],
         // HTML markup for the component
         resources: {
             template: cspace.resourceSpecExpander({
@@ -90,7 +91,7 @@ cspace = cspace || {};
         },
         // Model part of our component
         model: {
-            // pre-process 3 models for out 3 listviews. in the side bar
+            // pre-process 4 models for our 4 listviews in the side bar
             categories: [{
                 expander: {
                     type: "fluid.deferredInvokeCall",
@@ -110,6 +111,18 @@ cspace = cspace || {};
                     args: {
                         callback: "cspace.sidebar.buildModel",
                         related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "media",
                         resolver: "{permissionsResolver}",
                         recordTypeManager: "{recordTypeManager}",
                         permission: "list"
@@ -200,6 +213,25 @@ cspace = cspace || {};
                         }
                     },
                     related: "cataloging"
+                }
+            },
+            // Sub-component wrap for rendering a list of media records
+            media: {
+                type: "cspace.relatedRecordsList",
+                options: {
+                    primary: "{sidebar}.options.primary",
+                    model: {
+                        related: "media",
+                        showShowButton: true
+                    },
+                    category: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.permissions.getPermissibleRelatedRecords",
+                            args: ["media", "{permissionsResolver}", "{recordTypeManager}", "list"]
+                        }
+                    },
+                    related: "media"
                 }
             },
             // Sub-component wrap for rendering a list of procedure records

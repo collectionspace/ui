@@ -90,6 +90,7 @@ cspace = cspace || {};
                     },
                     nonSortableColumns: {
                         cataloging: ["summary"],
+                        media: ["summary"],
                         procedures: ["number", "summary", "summarylist.updatedAt"]
                     }
                 }
