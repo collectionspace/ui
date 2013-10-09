@@ -15,6 +15,33 @@
 
 		<div class="info-column">
 			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-organization-foundingCity-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-organization-foundingCity" />
+					</div>
+				</div>
+
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-organization-foundingState-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-organization-foundingState" />
+					</div>
+				</div>
+				
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-organization-foundingPlace-label"></div>
+					</div>
+					<div class="content">
+						<select class="csc-orgAuthority-foundingPlace input-select"><option value="">Options not loaded</option></select>
+					</div>
+				</div>
+				
 				<div class="info-pair-date">
 					<div class="header">
 						<div class="label csc-organization-foundingDateGroup-label"> </div>
@@ -24,56 +51,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="info-column">
-			<div class="info-column2-50 fl-force-left">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-organization-foundingPlace-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-orgAuthority-foundingPlace" />
-					</div>
-				</div>
-
-				<div class="info-pair-date">
-					<div class="header">
-						<div class="label csc-organization-dissolutionDateGroup-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-organizationAuthority-dissolutionDate" />
-					</div>
-				</div>
-
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-organization-contactNames-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-orgAuthority-contactName" />
-					</div>
-				</div>
-			</div>
+			
 			<div class="info-column2-50 fl-force-right">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-organization-groups-label"> </div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-orgAuthority-group" />
-					</div>
-				</div>
-
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-organization-functions-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-orgAuthority-function" />
-					</div>
-				</div>
-
 				<div class="info-pair">
 					<div class="header">
 						<div class="label csc-organization-historyNotes-label"></div>
@@ -81,6 +60,41 @@
 					<div class="content">
 						<textarea rows="4" cols="30" class="input-textarea csc-orgAuthority-history"> </textarea>
 					</div>
+				</div>
+				
+				<div class="info-pair">
+					<div class="header">
+						<div class="csc-organization-accessCode-label label"></div>
+					</div>
+					<div class="content">
+						<select class="csc-organization-accessCode input-select"><option value="">Options not loaded</option></select>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="info-column">
+			<div class="info-pair">
+				<div class="header">
+					<div class="csc-organization-memberGroup-label label"></div>
+				</div>
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="csc-organization-member-label"></td>
+								<td class="csc-organization-memberNote-label"></td>
+								<td class="csc-organization-memberAuthority-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="csc-organization-memberGroup">
+								<td><input type="text" class="csc-organization-member"/></td>
+								<td><input type="text" class="csc-organization-memberNote"/></td>
+								<td><input type="text" class="csc-organization-memberAuthority"/></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

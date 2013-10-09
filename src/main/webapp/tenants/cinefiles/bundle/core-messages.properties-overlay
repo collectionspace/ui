@@ -28,3 +28,16 @@ person-birthPlaceLabel: Country of Birth
 person-birthStateLabel: State of Birth
 person-birthCityLabel: City of Birth
 person-accessCodeLabel: Publication Access Code
+
+# Organization
+organization-foundingPlaceLabel: Foundation Country
+organization-foundingStateLabel: Foundation State
+organization-foundingCityLabel: Foundation City
+organization-historyNotesLabel: Name Note
+organization-accessCodeLabel: Publication Access Code
+organization-memberGroupLabel: Members
+organization-memberLabel: Member
+organization-memberNoteLabel: Note
+organization-memberAuthorityLabel: Authority
+
+
