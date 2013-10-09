@@ -22,3 +22,9 @@ vocab-citation: Citations
 
 # Media
 media-number: Page
+
+# Person
+person-birthPlaceLabel: Country of Birth
+person-birthStateLabel: State of Birth
+person-birthCityLabel: City of Birth
+person-accessCodeLabel: Publication Access Code
