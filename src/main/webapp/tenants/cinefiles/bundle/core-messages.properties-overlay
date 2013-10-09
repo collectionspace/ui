@@ -40,4 +40,12 @@ organization-memberLabel: Member
 organization-memberNoteLabel: Note
 organization-memberAuthorityLabel: Authority
 
-
+# Work
+work-identificationNumberRequired: Please specify a Title
+preferredWork-termNameLabel: Title
+preferredWork-termQualifierLabel: Article
+work-languagesLabel: Language
+work-countriesLabel: Country
+work-genresLabel: Genre
+work-subjectsLabel: Subject
+work-themesLabel: Theme
