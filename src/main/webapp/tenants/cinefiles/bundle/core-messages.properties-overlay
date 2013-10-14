@@ -21,6 +21,8 @@ vocab-committee: Committees
 vocab-citation: Citations
 
 # Media
+media-pageLabel: Page Number
+media-resolutionLabel: Resolution
 media-number: Page
 
 # Person
