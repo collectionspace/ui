@@ -89,8 +89,6 @@ cspace = cspace || {};
                         onError: "{loadingIndicator}.events.hideOn.fire"
                     },
                     nonSortableColumns: {
-                        cataloging: ["summary"],
-                        media: ["summary"],
                         procedures: ["number", "summary", "summarylist.updatedAt"]
                     }
                 }

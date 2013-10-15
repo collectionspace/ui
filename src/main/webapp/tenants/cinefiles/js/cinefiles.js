@@ -13,6 +13,14 @@ var cinefiles = {};
 (function ($, fluid) {
 	
 	cinefiles.computeWorkDisplayName = function(article, title) {
+		return computeTitle(article, title);
+	}
+	
+	cinefiles.computeDocDisplayName = function(article, title) {
+		return computeTitle(article, title);
+	}
+	
+	var computeTitle = function(article, title) {
 		if (typeof(article) == "undefined") {
 			article = "";
 		}
@@ -23,5 +31,4 @@ var cinefiles = {};
 		
 		return article + title;
 	}
-	
 })(jQuery, fluid);
