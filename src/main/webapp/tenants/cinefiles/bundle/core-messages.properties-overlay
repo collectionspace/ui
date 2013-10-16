@@ -52,6 +52,10 @@ work-genresLabel: Genre
 work-subjectsLabel: Subject
 work-themesLabel: Theme
 preferredWork-termDisplayNameSearchLabel: Display Name
+work-miniView-field1Label: Alt. Display Name: 
+work-miniView-field2Label: Creator: 
+work-miniView-field3Label: Country: 
+work-miniView-field4Label: Work date: 
 
 # CollectionObject
 collection-object-numberOfObjectsLabel: Number of Pages

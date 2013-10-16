@@ -464,6 +464,34 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 					displayName: {
 						target: "${miniView-link}",
 						linktext: "${fields.termDisplayName}"
+					},
+					field1: "${fields.workTermGroup.1.termDisplayName}",
+					field2: {
+						value: "${fields.creatorGroup.0.creator}",
+						decorators: {
+							type: "fluid",
+							func: "cspace.util.urnToStringFieldConverter"
+						}
+					},
+					field3: {
+						value: "${fields.countries.0.country}",
+						decorators: {
+							type: "fluid",
+							func: "cspace.util.urnToStringFieldConverter"
+						}
+					},
+					field4: "${fields.workDateGroup.0.dateDisplayDate}",
+					field1Label: {
+						messagekey: "work-miniView-field1Label"
+					},
+					field2Label: {
+						messagekey: "work-miniView-field2Label"
+					},
+					field3Label: {
+						messagekey: "work-miniView-field3Label"
+					},
+					field4Label: {
+						messagekey: "work-miniView-field4Label"
 					}
 				}
 			}
