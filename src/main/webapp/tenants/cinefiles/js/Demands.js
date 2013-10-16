@@ -480,7 +480,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 							func: "cspace.util.urnToStringFieldConverter"
 						}
 					},
-					field4: "${fields.workDateGroup.0.dateDisplayDate}"
+					field4: "${fields.workDateGroup.0.dateDisplayDate}",
+					field1Label: {
+						messagekey: "work-miniView-field1Label"
+					},
+					field2Label: {
+						messagekey: "work-miniView-field2Label"
+					},
+					field3Label: {
+						messagekey: "work-miniView-field3Label"
+					},
+					field4Label: {
+						messagekey: "work-miniView-field4Label"
+					}
 				}
 			}
 		});
