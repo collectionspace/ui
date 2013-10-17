@@ -406,14 +406,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 						target: "${miniView-link}",
 						linktext: "${fields.termDisplayName}"
 					},
-					field1: "${fields.foundingDateGroup.dateDisplayDate}",
-					field2: "${fields.dissolutionDateGroup.dateDisplayDate}",
-					field3: "${fields.historyNotes.0.historyNote}",
+					field1: {
+						value: "${fields.foundingPlace}",
+						decorators: {
+							type: "fluid",
+							func: "cspace.util.urnToStringFieldConverter"
+						}
+					},
+					field2: "${fields.foundingDateGroup.dateDisplayDate}",
+					field3: "${fields.accessCode}",
 					field1Label: {
 						messagekey: "organization-miniView-field1Label"
 					},
 					field2Label: {
 						messagekey: "organization-miniView-field2Label"
+					},
+					field3Label: {
+						messagekey: "organization-miniView-field3Label"
 					}
 				}
 			}
