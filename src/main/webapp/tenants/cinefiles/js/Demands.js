@@ -387,14 +387,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 						target: "${miniView-link}",
 						linktext: "${fields.termDisplayName}"
 					},
-					field1: "${fields.birthDateGroup.dateDisplayDate}",
-					field2: "${fields.deathDateGroup.dateDisplayDate}",
-					field3: "${fields.bioNote}",
+					field1: {
+						value: "${fields.birthPlace}",
+						decorators: {
+							type: "fluid",
+							func: "cspace.util.urnToStringFieldConverter"
+						}
+					},
+					field2: "${fields.birthDateGroup.dateDisplayDate}",
+					field3: "${fields.accessCode}",
 					field1Label: {
 						messagekey: "person-miniView-field1Label"
 					},
 					field2Label: {
 						messagekey: "person-miniView-field2Label"
+					},
+					field3Label: {
+						messagekey: "person-miniView-field3Label"
 					}
 				}
 			}

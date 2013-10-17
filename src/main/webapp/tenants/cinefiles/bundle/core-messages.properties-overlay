@@ -30,6 +30,9 @@ person-birthPlaceLabel: Country of Birth
 person-birthStateLabel: State of Birth
 person-birthCityLabel: City of Birth
 person-accessCodeLabel: Publication Access Code
+person-miniView-field1Label: Country of Birth:
+person-miniView-field2Label: Birth Date:
+person-miniView-field3Label: Access Code:
 
 # Organization
 organization-foundingPlaceLabel: Foundation Country
