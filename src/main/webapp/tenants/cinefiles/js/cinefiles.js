@@ -13,22 +13,45 @@ var cinefiles = {};
 (function ($, fluid) {
 	
 	cinefiles.computeWorkDisplayName = function(article, title) {
-		return computeTitle(article, title);
+		return computeFullTitle(article, title);
 	}
 	
 	cinefiles.computeDocDisplayName = function(article, title) {
-		return computeTitle(article, title);
+		return computeFullTitle(article, title);
 	}
-	
-	var computeTitle = function(article, title) {
-		if (typeof(article) == "undefined") {
-			article = "";
-		}
 		
+	var computeFullTitle = function(article, title) {
 		if (typeof(title) == "undefined") {
 			title = "";
 		}
 		
-		return article + title;
+		if (isBlank(article)) {
+			return title;
+		}
+		else if (requiresFollowingSpace(article)) {
+			return article + " " + title;
+		}
+		else {
+			return article + title;
+		}
+	}
+	
+	var nonWhitespacePattern = /\S/;
+	
+	/*
+	 * Returns true if a string is undefined, empty, or contains only whitespace.
+	 * Otherwise, returns false.
+	 */
+	var isBlank = function(string) {
+		return (typeof(string) == "undefined" || !nonWhitespacePattern.test(string));
+	}
+	
+	/*
+	 * An article requires a following space unless it ends with an apostrophe or dash.
+	 */
+	var requiresFollowingSpace = function(article) {
+		var lastChar = article.substring(article.length - 1);
+		
+		return (lastChar != "'" && lastChar != "-");
 	}
 })(jQuery, fluid);
