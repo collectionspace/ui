@@ -27,6 +27,8 @@ vocab-citation: Citations
 media-pageLabel: Page Number
 media-resolutionLabel: Resolution
 media-number: Page Number
+media-pageStartLabel: From
+media-pageEndLabel: To
 
 # Person
 person-birthPlaceLabel: Country of Birth
