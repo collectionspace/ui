@@ -56,10 +56,15 @@ work-identificationNumberRequired: Please specify a Title
 preferredWork-termNameLabel: Title
 preferredWork-termQualifierLabel: Article
 work-languagesLabel: Language
+work-languageLabel: Language
 work-countriesLabel: Country
+work-countryLabel: Country
 work-genresLabel: Genre
+work-genreLabel: Genre
 work-subjectsLabel: Subject
+work-subjectLabel: Subject
 work-themesLabel: Theme
+work-themeLabel: Theme
 preferredWork-termDisplayNameSearchLabel: Display Name
 work-miniView-field1Label: Alt. Display Name:
 work-miniView-field2Label: Creator:
