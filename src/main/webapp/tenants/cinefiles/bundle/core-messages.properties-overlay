@@ -78,21 +78,36 @@ collection-object-numberOfObjectsLabel: Number of Pages
 collection-object-docTitleArticleLabel: Article
 collection-object-docTitleLabel: Title
 collection-object-docDisplayNameLabel: Display Name
+collection-object-docDisplayNameSearchLabel: Display Name
 collection-object-pageInfoLabel: Original Pagination
 collection-object-accessCodeLabel: Publication Access Code
 collection-object-clearedLabel: Cleared for Publication
 collection-object-hasCastCrLabel: Cast Cr.
+collection-object-hasCastCrSearchLabel: Cast Cr.
 collection-object-hasTechCrLabel: Tech Cr.
+collection-object-hasTechCrSearchLabel: Tech Cr.
 collection-object-hasBoxInfoLabel: Box Office
+collection-object-hasBoxInfoSearchLabel: Box Office
 collection-object-hasFilmogLabel: Filmography
+collection-object-hasFilmogSearchLabel: Filmography
 collection-object-hasDistCoLabel: Dist. Co.
+collection-object-hasDistCoSearchLabel: Dist. Co.
 collection-object-hasProdCoLabel: Prod. Co.
+collection-object-hasProdCoSearchLabel: Prod. Co.
 collection-object-hasCostInfoLabel: Cost Info.
+collection-object-hasCostInfoSearchLabel: Cost Info.
 collection-object-hasIllustLabel: With Illus.
+collection-object-hasIllustSearchLabel: With Illus.
 collection-object-hasBiblioLabel: Bibliography
+collection-object-hasBiblioSearchLabel: Bibliography
 collection-object-docTypeLabel: Document Type
 collection-object-docSubjectsLabel: Document Subject
+collection-object-docSubjectLabel: Document Subject
 collection-object-nameSubjectsLabel: Name Subject
+collection-object-nameSubjectLabel: Name Subject
 collection-object-filmSubjectsLabel: Film Subject
+collection-object-filmSubjectLabel: Film Subject
 collection-object-docLanguagesLabel: Document Language
+collection-object-docLanguageLabel: Document Language
 collection-object-sourcesLabel: Source
+collection-object-sourceLabel: Source
