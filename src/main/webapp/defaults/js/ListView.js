@@ -44,7 +44,7 @@ cspace = cspace || {};
                 sortKey: "",
                 totalRange: 0
             },
-            pageSizeList: ["1", "5", "10", "20", "50"],
+            pageSizeList: ["5", "10", "20", "50"],
             list: []
         },
         selectors: {
