@@ -1242,14 +1242,9 @@ td .field-cal img, td .csc-calendar-button img {
 
 #footer {
     border-top: 2px solid #D8D9DA; 
-    padding-top:7px; 
-    bottom: 0px; 
-    position: relative; 
-    bottom: 0px; 
-    width: 100%; }
-#createnew #footer, #search #footer, #administration #footer {
-    position: absolute;
-}
+    padding-top:7px;
+    width: 100%;
+    clear: both; }
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1576,8 +1571,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .cs-search-disabled input[type="checkbox"] {
     display: none;}
 .cs-createNew-createButton, .cs-createNew-createTemplateButton {
-    margin-left: 10px;
-    float:right;}
+    margin-left: 10px;}
 .cs-searchBox {
     -moz-border-radius:8px; 
     -webkit-border-radius:8px;}
