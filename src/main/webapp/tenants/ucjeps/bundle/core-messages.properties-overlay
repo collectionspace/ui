@@ -47,6 +47,7 @@ taxon-termStatusLabel: Term status (admin)
 taxon-taxonFullNameLabel: Short name (without authors)
 taxon-taxonRankLabel: Rank
 taxon-taxonMajorGroupLabel: Major group
+taxon-familyLabel: Family
 taxon-taxonCurrencyLabel: Current?
 taxon-taxonAuthorGroupLabel: Authors
 taxon-taxonAuthorLabel: Name
