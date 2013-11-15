@@ -29,6 +29,7 @@ media-resolutionLabel: Resolution
 media-number: Page Number
 media-pageStartLabel: From
 media-pageEndLabel: To
+media-identificationNumberRequired: Please specify a Page Number
 
 # Person
 person-birthPlaceLabel: Country of Birth

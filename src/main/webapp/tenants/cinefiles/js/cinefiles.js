@@ -12,6 +12,18 @@ var cinefiles = {};
 
 (function ($, fluid) {
 	
+	cinefiles.computeMediaTitle = function(blobs) {
+		var filename = "";
+		
+		if (blobs.length > 0) {
+			var blob = blobs[0];
+			
+			filename = blob.name;
+		}
+		
+		return filename;
+	}
+	
 	cinefiles.computeWorkDisplayName = function(article, title) {
 		return computeFullTitle(article, title);
 	}

@@ -6,22 +6,37 @@
 				"recordEditor": {
 					"type": "cspace.recordEditor",
 					"options": {
-						"fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"],
+						"fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber", "fields.page", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"],
 						"selectors": {
-							"identificationNumber": ".csc-media-identificationNumber"
+							"identificationNumber": ".csc-media-page"
 						},
 						"originalMediaDimensions": {
 							"width": "800",
 							"height": "600"
 						},
-						"uispec": "{pageBuilder}.options.uispec.recordEditor"
+						"uispec": "{pageBuilder}.options.uispec.recordEditor",
+						"components": {
+							"recordRenderer": {
+								"options": {
+									"components": {
+										"uploader": {
+											"options": {
+												"elPaths": {
+													"required": "fields.page"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				},
 				"titleBar": {
 					"type": "cspace.titleBar",
 					"options": {
 						"fields": [
-							"fields.identificationNumber",
+							"fields.page",
 							"fields.title"
 						]
 					}

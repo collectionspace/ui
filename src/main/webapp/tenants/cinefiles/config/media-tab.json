@@ -28,13 +28,28 @@
 							"relatedRecordsRecordEditor": {
 								"options": {
 									"selectors": {
-										"identificationNumber": ".csc-media-identificationNumber"
+										"identificationNumber": ".csc-media-page"
 									},
 									"originalMediaDimensions": {
 										"width": "800",
 										"height": "600"
 									},
-									"uispec": "{pageBuilder}.options.uispec.details"
+									"uispec": "{pageBuilder}.options.uispec.details",
+									"components": {
+										"recordRenderer": {
+											"options": {
+												"components": {
+													"uploader": {
+														"options": {
+															"elPaths": {
+																"required": "fields.page"
+															}
+														}
+													}
+												}
+											}
+										}
+									}
 								}
 							}
 						}
