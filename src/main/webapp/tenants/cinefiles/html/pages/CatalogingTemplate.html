@@ -39,14 +39,14 @@
 							<thead>
 								<tr>
 									<td class="csc-collection-object-docTitleArticle-label"></td>
-									<td class="csc-collection-object-docTitle-label"></td>
+									<td><span class="csc-collection-object-docTitle-label"></span><span class="required">*</span></td>
 									<td class="csc-collection-object-docDisplayName-label"></td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td><select class="csc-collection-object-docTitleArticle input-select"><option value="">Options not loaded</option></select></td>
-									<td><input type="text" class="csc-collection-object-docTitle"/></td>
+									<td><input type="text" class="csc-collection-object-docTitle csc-required"/></td>
 									<td><input type="text" class="csc-collection-object-docDisplayName"/></td>
 								</tr>
 							</tbody>
@@ -54,12 +54,12 @@
 					</div>
 				</div>
 				
-				<div class="info-pair-select">
+				<div class="info-pair"> <!-- BAMPFA-98: This needs to be info-pair, not info-pair-select, so that the right label will be found for the required error message. -->
 					<div class="header">
-						<div class="label csc-collection-object-docType-label"></div>
+						<span class="label required csc-collection-object-docType-label"></span><span class="required">*</span>
 					</div>
 					<div class="content">
-						<select class="csc-collection-object-docType input-select"><option value="">Options not loaded</option></select>
+						<select class="csc-collection-object-docType input-select csc-required"><option value="">Options not loaded</option></select>
 					</div>
 				</div>
 				
@@ -109,10 +109,10 @@
 					<div class="info-column2-50 fl-force-left">
 						<div class="info-pair">
 							<div class="header">
-								<div class="label csc-collection-object-numberOfObjects-label"></div>
+								<span class="label required csc-collection-object-numberOfObjects-label"></span><span class="required">*</span>
 							</div>
 							<div class="content">
-								<input type="text" class="csc-object-identification-number-objects"/>
+								<input type="text" class="csc-object-identification-number-objects csc-required"/>
 							</div>
 						</div>
 					</div>
