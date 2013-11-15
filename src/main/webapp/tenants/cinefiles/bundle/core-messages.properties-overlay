@@ -30,6 +30,7 @@ media-number: Page Number
 media-pageStartLabel: From
 media-pageEndLabel: To
 media-identificationNumberRequired: Please specify a Page Number
+media-titleSearchLabel: File name
 
 # Person
 person-birthPlaceLabel: Country of Birth
