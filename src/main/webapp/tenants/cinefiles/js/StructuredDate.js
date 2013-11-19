@@ -56,7 +56,6 @@ cspace = cspace || {};
 						removeListeners: "{structuredDate}.events.removeListeners"
 					}
 				}
-				
 			}
 		},
 		events: {
@@ -95,9 +94,9 @@ cspace = cspace || {};
 			}
 		});
 
-	   // Hide the popup when focus leaves the union of the
-	   // container field and the structured date popup container
-	   fluid.deadMansBlur(that.union, {
+		// Hide the popup when focus leaves the union of the
+		// container field and the structured date popup container
+		fluid.deadMansBlur(that.union, {
 			exclusions: {union: that.union},
 			handler: that.hidePopup
 		});
@@ -117,7 +116,7 @@ cspace = cspace || {};
 	};
 	
 	cspace.structuredDate.hidePopup = function (that) {
-		that.popupContainer.hide();
+		that.popup.hide();
 	};
 	
 	var positionPopup = function (popup, container) {
@@ -161,9 +160,7 @@ cspace = cspace || {};
 	};
 
 	cspace.structuredDate.showPopup = function (that) {
-		that.popup.refreshView();
-		that.popupContainer.show();
-		positionPopup(that.popup.locate("popup"), that.container);
+		that.popup.show();
 	};
 	
 	cspace.structuredDate.postInitFunction = function (that) {
@@ -294,6 +291,18 @@ cspace = cspace || {};
 			updateScalarValues: {
 				funcName: "cspace.structuredDate.popup.updateScalarValues",
 				args: ["{arguments}.0", "{arguments}.2", "{popup}"]
+			},
+			updateStructuredFields: {
+				funcName: "cspace.structuredDate.popup.updateStructuredFields",
+				args: "{popup}"
+			},
+			show: {
+				funcName: "cspace.structuredDate.popup.show",
+				args: ["{popup}", "{cspace.structuredDate}.container"]
+			},
+			hide: {
+				funcName: "cspace.structuredDate.popup.hide",
+				args: "{popup}"
 			}
 		},
 		defaultFormat: "yyyy-MM-dd",
@@ -305,6 +314,24 @@ cspace = cspace || {};
 			removeListeners: {
 				listener: "{popup}.removeApplierListeners"
 			}
+		},
+		components: {
+			// The data source used to parse display dates.
+			dateParserDataSource: {
+				type: "cspace.structuredDate.dateParserDataSource"
+			}
+		},
+		dateParserURL: cspace.componentUrlBuilder("%tenant/%tname/parseDate?displayDate=%displayDate")
+	});
+	
+	fluid.demands("cspace.structuredDate.dateParserDataSource", "cspace.structuredDate.popup", {
+		funcName: "cspace.URLDataSource",
+		args: {
+			url: "{popup}.options.dateParserURL",
+			termMap: {
+				displayDate: "%displayDate"
+			},
+			targetTypeName: "cspace.structuredDate.dateParserDataSource"
 		}
 	});
 	
@@ -371,6 +398,16 @@ cspace = cspace || {};
 		                   setDate(secondYear, firstMonth || secondMonth, firstDay || secondDay, earliest);
 	};
 
+	cspace.structuredDate.popup.show = function (that, container) {
+		that.refreshView();
+		that.container.show();
+		positionPopup(that.locate("popup"), container);
+	};
+
+	cspace.structuredDate.popup.hide = function (that) {
+		that.container.hide();
+	};
+	
 	cspace.structuredDate.popup.updateScalarValues = function (model, changeRequest, popup) {
 		if (!popup) {
 			return;
@@ -413,7 +450,29 @@ cspace = cspace || {};
 		if (displayScalars) {
 			refreshView();
 		}
-   };
+	};
+
+	cspace.structuredDate.popup.updateStructuredFields = function (that) {
+		var displayDateFullElPath = that.composeElPath("dateDisplayDate");
+
+		var directModel = {
+			displayDate: fluid.get(that.model, displayDateFullElPath)
+		};
+		
+		that.dateParserDataSource.get(directModel, function(data) {
+			if (data.isError) {
+				console.log(data.messages.join(": "));
+			}
+
+			that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
+			
+			// Refresh the view. If the popup has focus, just calling
+			// that.refreshView() causes the popup to move and
+			// cover the container input, so call show() instead,
+			// which will also calculate the correct position.
+			that.show();
+		});
+	};
 	
 	cspace.structuredDate.popup.composeRootElPath = function (elPaths, root) {
 		var path = fluid.find(elPaths, function(elPath) {
@@ -603,13 +662,37 @@ cspace = cspace || {};
 		that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
 		var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed");
 		if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
-			that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, "scalar-" + that.id);
+			that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, "updateScalarValues-" + that.composeRootElPath());
 		}
+		
+		var displayDatePath = that.composeElPath("dateDisplayDate");
+		that.applier.modelChanged.addListener(displayDatePath, function (model, oldModel) {
+			var oldValue = fluid.get(oldModel, displayDatePath);
+			
+			if (typeof(oldValue) == "undefined" || oldValue == null) {
+				// Normalize blank values to empty string
+				oldValue = "";
+			}
+			
+			var currentValue = fluid.get(model, displayDatePath);
+		
+			if (typeof(currentValue) == "undefined" || currentValue == null) {
+				// Normalize blank values to empty string
+				currentValue = "";
+			}
+			
+			if (currentValue != oldValue) {
+				that.updateStructuredFields();
+			}
+		}, "updateStructuredFields-" + displayDatePath);
 	};
 	
 	cspace.structuredDate.popup.preInit = function (that) {
 		that.removeApplierListeners = function () {
-			that.applier.modelChanged.removeListener("scalar-" + that.id);
+			that.applier.modelChanged.removeListener("updateScalarValues-" + that.composeRootElPath());
+			
+			var displayDatePath = that.composeElPath("dateDisplayDate");
+			that.applier.modelChanged.removeListener("updateStructuredFields-" + displayDatePath);
 		};
 	};
 
