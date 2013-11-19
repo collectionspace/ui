@@ -390,11 +390,11 @@ li .flc-pager-pageLink {
 #name-header-login {
     margin-top:30px;
     background-color: #fff;
-    background-image: url("../images/small-header-logo.png"), url("../images/header-logo-cspace.png");
+    background-image: url("../images/header-logo.png"), url("../images/header-logo-cspace.png");
     background-repeat: no-repeat;
     background-position: left top, right top;
     width:100%;
-    height:45px;
+    height:48px;
 }
 
 
