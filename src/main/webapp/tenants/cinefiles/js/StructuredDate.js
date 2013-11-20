@@ -659,22 +659,24 @@ cspace = cspace || {};
 	};
 	
 	cspace.structuredDate.popup.finalInitFunction = function (that) {
+		that.rootElPath = that.composeRootElPath();
+		that.displayDateElPath = that.composeElPath("dateDisplayDate");
+		
 		that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
 		var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed");
 		if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
-			that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, "updateScalarValues-" + that.composeRootElPath());
+			that.applier.modelChanged.addListener(that.rootElPath, that.updateScalarValues, "updateScalarValues-" + that.rootElPath);
 		}
 		
-		var displayDatePath = that.composeElPath("dateDisplayDate");
-		that.applier.modelChanged.addListener(displayDatePath, function (model, oldModel) {
-			var oldValue = fluid.get(oldModel, displayDatePath);
+		that.applier.modelChanged.addListener(that.displayDateElPath, function (model, oldModel) {
+			var oldValue = fluid.get(oldModel, that.displayDateElPath);
 			
 			if (typeof(oldValue) == "undefined" || oldValue == null) {
 				// Normalize blank values to empty string
 				oldValue = "";
 			}
 			
-			var currentValue = fluid.get(model, displayDatePath);
+			var currentValue = fluid.get(model, that.displayDateElPath);
 		
 			if (typeof(currentValue) == "undefined" || currentValue == null) {
 				// Normalize blank values to empty string
@@ -684,15 +686,13 @@ cspace = cspace || {};
 			if (currentValue != oldValue) {
 				that.updateStructuredFields();
 			}
-		}, "updateStructuredFields-" + displayDatePath);
+		}, "updateStructuredFields-" + that.displayDateElPath);
 	};
 	
 	cspace.structuredDate.popup.preInit = function (that) {
 		that.removeApplierListeners = function () {
-			that.applier.modelChanged.removeListener("updateScalarValues-" + that.composeRootElPath());
-			
-			var displayDatePath = that.composeElPath("dateDisplayDate");
-			that.applier.modelChanged.removeListener("updateStructuredFields-" + displayDatePath);
+			that.applier.modelChanged.removeListener("updateScalarValues-" + that.rootElPath);
+			that.applier.modelChanged.removeListener("updateStructuredFields-" + that.displayDateElPath);
 		};
 	};
 
