@@ -112,3 +112,5 @@ collection-object-filmSubjectLabel: Film Subject
 collection-object-docLanguagesLabel: Document Language
 collection-object-docLanguageLabel: Document Language
 collection-object-sourceLabel: Source
+
+structuredDate-parseErrorMessage: Unrecognized display date format. Try a different format, or enter values in the fields below.

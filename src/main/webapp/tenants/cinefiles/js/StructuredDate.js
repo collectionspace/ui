@@ -237,7 +237,8 @@ cspace = cspace || {};
 			dateLatestQualifier: ".csc-structuredDate-dateLatestQualifier",
 			dateLatestQualifierValue: ".csc-structuredDate-dateLatestQualifierValue",
 			dateLatestQualifierUnit: ".csc-structuredDate-dateLatestQualifierUnit",
-			dateLatestScalarValue: ".csc-structuredDate-dateLatestScalarValue"
+			dateLatestScalarValue: ".csc-structuredDate-dateLatestScalarValue",
+			parseStatus: ".csc-structuredDate-parseStatus"
 		},
 		strings: {},
 		stringPaths: {
@@ -462,6 +463,15 @@ cspace = cspace || {};
 		that.dateParserDataSource.get(directModel, function(data) {
 			if (data.isError) {
 				console.log(data.messages.join(": "));
+				
+				that.parseStatus.isError = true;
+				that.parseStatus.message = data.messages[0];
+				that.parseStatus.messageDetail = data.messages[1];
+			}
+			else {
+				that.parseStatus.isError = false;
+				that.parseStatus.message = "";
+				that.parseStatus.messageDetail = "";
 			}
 
 			that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
@@ -654,6 +664,17 @@ cspace = cspace || {};
 			},
 			dateLatestRowLabel: {
 				messagekey: that.options.stringPaths.dateLatestRowLabel
+			},
+			parseStatus: {
+				decorators: {
+					type: "fluid",
+					func: "cspace.structuredDate.popup.parseStatus",
+					container: "{popup}.options.selectors.parseStatus",
+					options: {
+						model: that.parseStatus,
+						messageResolver: that.messageResolver
+					}
+				}
 			}
 		};
 	};
@@ -690,11 +711,38 @@ cspace = cspace || {};
 	};
 	
 	cspace.structuredDate.popup.preInit = function (that) {
+		that.parseStatus = {
+			isError: false,
+			message: "",
+			messageDetail: ""
+		};
+		
 		that.removeApplierListeners = function () {
 			that.applier.modelChanged.removeListener("updateScalarValues-" + that.rootElPath);
 			that.applier.modelChanged.removeListener("updateStructuredFields-" + that.displayDateElPath);
 		};
 	};
+	
+	fluid.defaults("cspace.structuredDate.popup.parseStatus", {
+		gradeNames: ["fluid.viewComponent"]
+	});
+	
+	cspace.structuredDate.popup.parseStatus = function (container, options) {
+		var that = fluid.initView("cspace.structuredDate.popup.parseStatus", container, options);
+		
+		if (that.model.isError) {
+			that.container.addClass("error");
+			that.container.text(that.options.messageResolver.resolve("structuredDate-parseErrorMessage", [that.model.message, that.model.messageDetail]));
+			that.container.show();
+		}
+		else {
+			that.container.removeClass("error");
+			that.container.text("");
+			that.container.hide();
+		}
+		
+		return that;
+	}
 
 	// Fetching / Caching
 	// ----------------------------------------------------
