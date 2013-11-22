@@ -459,45 +459,56 @@ cspace = cspace || {};
 		var displayDateFullElPath = that.composeElPath("dateDisplayDate");
 		var displayDate = fluid.get(that.model, displayDateFullElPath);
 
-		var directModel = {
-			displayDate: displayDate
-		};
+		if ($.trim(displayDate) == "") {
+			// If the display date was cleared, reset the structured fields.
+			
+			that.applier.requestChange(that.composeRootElPath(), {
+				dateDisplayDate: displayDate
+			});
+		}
+		else {
+			// Make a call to the app layer to parse the display date.
+			
+			var directModel = {
+				displayDate: displayDate
+			};
 		
-		that.dateParserDataSource.get(directModel, function(data) {
-			if (data.isError) {
-				that.parseStatus.isError = true;
+			that.dateParserDataSource.get(directModel, function(data) {
+				if (data.isError) {
+					that.parseStatus.isError = true;
 
-				if (data.messages) {
-					console.log(data.messages.join(": "));
+					if (data.messages) {
+						console.log(data.messages.join(": "));
 
-					that.parseStatus.message = data.messages[0];
-					that.parseStatus.messageDetail = data.messages[1];
+						that.parseStatus.message = data.messages[0];
+						that.parseStatus.messageDetail = data.messages[1];
+					}
+					else {
+						console.log("Unknown parse error");
+					}
 				}
 				else {
-					console.log("Unknown parse error");
+					that.parseStatus.isError = false;
+					that.parseStatus.message = "";
+					that.parseStatus.messageDetail = "";
 				}
-			}
-			else {
-				that.parseStatus.isError = false;
-				that.parseStatus.message = "";
-				that.parseStatus.messageDetail = "";
-			}
 
-			if (data.structuredDate) {
-				that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
-			}
-			else {
-				that.applier.requestChange(that.composeRootElPath(), {
-					dateDisplayDate: displayDate
-				});
-			}
+				if (data.structuredDate) {
+					that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
+				}
+				else {
+					that.applier.requestChange(that.composeRootElPath(), {
+						dateDisplayDate: displayDate
+					});
+				}
 			
-			// Refresh the view. If the popup has focus, just calling
-			// that.refreshView() causes the popup to move and
-			// cover the container input, so call show() instead,
-			// which will also calculate the correct position.
-			that.show();
-		});
+				// Refresh the view. If the popup has focus, just calling
+				// that.refreshView() causes the popup to move and
+				// cover the container input, so call show() instead,
+				// which will also calculate the correct position.
+				that.show();
+			});
+		}
 	};
 	
 	cspace.structuredDate.popup.composeRootElPath = function (elPaths, root) {
