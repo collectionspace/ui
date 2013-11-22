@@ -455,18 +455,25 @@ cspace = cspace || {};
 
 	cspace.structuredDate.popup.updateStructuredFields = function (that) {
 		var displayDateFullElPath = that.composeElPath("dateDisplayDate");
+		var displayDate = fluid.get(that.model, displayDateFullElPath);
 
 		var directModel = {
-			displayDate: fluid.get(that.model, displayDateFullElPath)
+			displayDate: displayDate
 		};
 		
 		that.dateParserDataSource.get(directModel, function(data) {
 			if (data.isError) {
-				console.log(data.messages.join(": "));
-				
 				that.parseStatus.isError = true;
-				that.parseStatus.message = data.messages[0];
-				that.parseStatus.messageDetail = data.messages[1];
+
+				if (data.messages) {
+					console.log(data.messages.join(": "));
+
+					that.parseStatus.message = data.messages[0];
+					that.parseStatus.messageDetail = data.messages[1];
+				}
+				else {
+					console.log("Unknown parse error");
+				}
 			}
 			else {
 				that.parseStatus.isError = false;
@@ -474,7 +481,14 @@ cspace = cspace || {};
 				that.parseStatus.messageDetail = "";
 			}
 
-			that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
+			if (data.structuredDate) {
+				that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
+			}
+			else {
+				that.applier.requestChange(that.composeRootElPath(), {
+					dateDisplayDate: displayDate
+				});
+			}
 			
 			// Refresh the view. If the popup has focus, just calling
 			// that.refreshView() causes the popup to move and
