@@ -465,6 +465,16 @@ cspace = cspace || {};
 			that.applier.requestChange(that.composeRootElPath(), {
 				dateDisplayDate: displayDate
 			});
+			
+			that.parseStatus.isError = false;
+			that.parseStatus.message = "";
+			that.parseStatus.messageDetail = "";
+			
+			// Refresh the view. If the popup has focus, just calling
+			// that.refreshView() causes the popup to move and
+			// cover the container input, so call show() instead,
+			// which will also calculate the correct position.
+			that.show();
 		}
 		else {
 			// Make a call to the app layer to parse the display date.
