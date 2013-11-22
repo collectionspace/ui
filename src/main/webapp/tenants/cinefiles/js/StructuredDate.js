@@ -116,7 +116,9 @@ cspace = cspace || {};
 	};
 	
 	cspace.structuredDate.hidePopup = function (that) {
-		that.popup.hide();
+		if (that) { // A hack to fix CSPACE-5688
+			that.popup.hide();
+		}
 	};
 	
 	var positionPopup = function (popup, container) {
