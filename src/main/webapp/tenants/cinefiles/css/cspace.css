@@ -2572,3 +2572,17 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 .stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
     width: 94%
 }
+
+/* Structured date parser */
+.cs-structuredDate-parseStatus {
+       position: relative;
+       top: -9px;
+       height: 14px;
+       padding-top: 4px;
+       font-size: 11px;
+}
+
+.cs-structuredDate-parseStatus.error {
+       background: url(../images/warning.png) no-repeat top left;
+       padding-left: 18px;
+}

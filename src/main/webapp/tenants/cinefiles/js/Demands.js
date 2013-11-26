@@ -1605,6 +1605,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 			funcName: "cspace.URLDataSource",
 			args: {
 				url: "{termList}.options.urls.termList",
+				caching: true,
 				targetTypeName: "cspace.termList.termListSource",
 				termMap: {
 					recordType: "%recordType",
