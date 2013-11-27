@@ -1,5 +1,5 @@
 /*
-Copyright 2010 - 2011
+Copyright 2010-2013
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 You may not use this file except in compliance with this License.
@@ -10,8 +10,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 CollectionSpace 1.8 default CSS selectors 
 */
 
-/* ---------------------------------------*/
-/* Styling of HTML elements specific to the lifesci tenant */
+/* --------------------------------------------------------- */
+/* CSS styles copied from the default styles */
+/* --------------------------------------------------------- */
 
 /* core HTML elements*/
 html{
@@ -86,7 +87,8 @@ div.info-column2-50 table input[type="text"], div.info-column2-50 table input[ty
     width: 100%;
 }
 table input[type="text"], table input[type="password"], table textarea {
-    width:100%;}
+    width:100%;
+    padding-left:2px;}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -164,7 +166,7 @@ input[type="button"].saveButton[disabled]:focus, input[type="submit"].saveButton
     color:#606060
 }
 input[type="button"].editButton, input[type="submit"].editButton {
-    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; 
+    background:transparent url('../images/icnEdit.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -224,6 +226,7 @@ input[type="button"].add {
     height:16px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     font-size: 0.8em;
+    margin-left: 3px;
 }
 input.secondaryButton {
     font-size:1em;
@@ -472,7 +475,7 @@ li .flc-pager-pageLink {
 #title-bar .title-bar-value {
     padding:0 10px; 
     height:42px; 
-    color:#696565; 
+    color:#696565;
     font-weight:bold;}
 #title-bar .title-bar-value .overflow{
     padding-top:9px; 
@@ -483,7 +486,7 @@ li .flc-pager-pageLink {
     float:left;}
 #title-bar .content {
     height:42px; 
-    color:#666666; 
+    color:#666666;
     font-weight:bold; 
     font-size:2em; 
     line-height:110%;}
@@ -684,8 +687,11 @@ table tbody.highlight tr:focus td {
     padding: 12px;
     width:auto; }
 .information-group .cs-relatedRecordsTab-record.content.main {
-    background-color: white;
+    background-color: #FFFBCC;
     border: 2px solid #F5F5F5;
+}
+.information-group .cs-relatedRecordsTab-record.content.main.cs-relatedRecordsTab-Created {
+    background-color: white;
 }
 /*.fl-container-left*/   .information-subgroup .content.main {
     border:none; 
@@ -1236,14 +1242,9 @@ td .field-cal img, td .csc-calendar-button img {
 
 #footer {
     border-top: 2px solid #D8D9DA; 
-    padding-top:7px; 
-    bottom: 0px; 
-    position: relative; 
-    bottom: 0px; 
-    width: 100%; }
-#createnew #footer, #search #footer, #administration #footer {
-    position: absolute;
-}
+    padding-top:7px;
+    width: 100%;
+    clear: both;}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1392,7 +1393,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .cs-tabs-tab-link {
     -moz-border-radius:5px 5px 0 0;
     -webkit-border-radius:5px 5px 0 0;
-       border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
 }
 .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
     border-color: #78449A #78449A #FFFFFF;
@@ -1553,7 +1554,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
     -webkit-border-radius:0;
 	border-radius:0;}
 
-.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton {
+.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-show-related-records-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton, .cs-add-search-results-button {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
@@ -1570,8 +1571,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .cs-search-disabled input[type="checkbox"] {
     display: none;}
 .cs-createNew-createButton, .cs-createNew-createTemplateButton {
-    margin-left: 10px;
-    float:right;}
+    margin-left: 10px;}
 .cs-searchBox {
     -moz-border-radius:8px; 
     -webkit-border-radius:8px;}
@@ -2384,7 +2384,7 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
-	margin-bottom: 4px !important;
+	/*margin-bottom: 4px !important;*/
 }
 
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
@@ -2532,7 +2532,7 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
     margin-bottom: 10px;
 }
-/* This code is only for particular working for L\M\I repeatable Method select */
+/* These styles are only for L/M/I repeatable Method select */
 .cs-fixedRepeatableSelect {
     min-width: 230px;
 }
@@ -2541,6 +2541,9 @@ input[type="button"].cs-deleteRelationButton {
 }
 .cs-fixedExternalURL {
     min-width: 350px;
+}
+.cs-fixedExternalURL input.cs-repeatable-add[type="button"] {
+    right: 18%;
 }
 .cs-fixedExternalURL ul.cs-repeatable li.cs-repeatable-repeat div.content.cs-repeatable-content.cs-externalURL-parent input {
     width: 93%;
@@ -2560,6 +2563,10 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 .stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
     width: 94%
 }
+
+/* --------------------------------------------------------- */
+/* CSS styles specific to the Lifesci tenant */
+/* --------------------------------------------------------- */
 
 /* CSPACE-6174: Determination History multi-line repeatable block */
 .determinationHistory .cs-autocomplete-input {
