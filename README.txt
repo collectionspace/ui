@@ -1,4 +1,4 @@
-To build a war file for deployment, run:
+To build a WAR file for deployment, run:
 
     mvn clean install
 
