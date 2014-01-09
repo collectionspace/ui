@@ -223,7 +223,7 @@ cspace = cspace || {};
             if (!url) {
                 return url;
             }
-            return url.replace(/Thumbnail/, format || "Original");
+            return url.replace(/Thumbnail/, format || "OriginalJpeg");
         };
 
         // Function to return if record has the primary media
