@@ -8,7 +8,8 @@
                     "options": {
                         "selectors": {
                         },
-                        "uispec": "{pageBuilder}.options.uispec.recordEditor"
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.workflow", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
                     }
                 },
                 "titleBar": {
