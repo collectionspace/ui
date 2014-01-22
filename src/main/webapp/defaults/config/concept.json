@@ -11,7 +11,8 @@
                             "csid",
                             "fields.csid",
                             "fields.shortIdentifier",
-                            "fields.narrowerContexts"
+                            "fields.narrowerContexts",
+                            "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"
                         ],
                         "selectors": {
                             "identificationNumber": ".csc-conceptAuthority-termDisplayName"
