@@ -1810,7 +1810,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.findLabel = function (required) {
-        return $(required).parents(".info-pair").find(".label").text();
+        return $(required).parents(".info-pair,.info-pair-date,.info-pair-select").find(".label").text();
     };
     
     cspace.util.processReadOnly = function (container, readOnly, neverReadOnly) {
