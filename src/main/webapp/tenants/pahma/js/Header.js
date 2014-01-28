@@ -60,7 +60,7 @@ cspace = cspace || {};
             },
             {
                 messagekey: "menuItems-findEdit",
-                href: "findedit.html"
+                href: "advancedsearch.html"
             },
             {
                 messagekey: "menuItems-administration",
