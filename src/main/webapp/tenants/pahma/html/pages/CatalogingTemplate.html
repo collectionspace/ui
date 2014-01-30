@@ -639,6 +639,178 @@
 	</div>
 </div> <!-- information-group -->
 
+<div class="fl-container-flex fl-fix information-group"> <!-- Object Production Information -->
+	<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-objectProductionInformation-label"></div>
+	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+		<div class="info-column"> <!-- Object production date, Object production cultural group -->
+			<div class="info-column2-50 fl-force-left"> <!-- Object production date -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionDateGroup-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-objectProductionDateGroup-objectProductionDate" />
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right"> <!-- Object production cultural group -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionPeopleGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr class="pahmaCustomColumnWidth">
+									<td class="csc-collection-object-objectProductionPeople-label"></td>
+									<td class="csc-collection-object-objectProductionPeopleRole-label fixedwidth40"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-objectProductionPeopleGroup">
+									<td><input type="text" class="csc-object-production-people"/></td>
+                                          <td><select class="csc-object-production-people-role input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column"> <!-- Production technique, Object production person -->
+			<div class="info-column2-50 fl-force-left"> <!-- Production technique -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-techniqueGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr class="pahmaCustomColumnWidth">
+									<td class="csc-collection-object-technique-label"></td>
+									<td class="csc-collection-object-techniqueType-label fixedwidth40"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-techniqueGroup">
+									<td><input type="text" class="csc-object-production-technique"/></td>
+									<td><select class="csc-object-production-technique-type input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="info-column2-50 fl-force-right"> <!-- Object production person -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionPersonGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr class="pahmaCustomColumnWidth">
+									<td class="csc-collection-object-objectProductionPerson-label"></td>
+									<td class="csc-collection-object-objectProductionPersonRole-label fixedwidth40"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-objectProductionPersonGroup">
+									<td><input type="text" class="csc-object-production-person"/></td>
+									<td><select class="csc-collection-object-objectProductionPersonRole input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column"> <!-- Object production place, Production organization -->
+			<div class="info-column2-50 fl-force-left"> <!-- Object production place -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionPlaceGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr class="pahmaCustomColumnWidth">
+									<td class="csc-collection-object-objectProductionPlace-label"></td>
+									<td class="csc-collection-object-objectProductionPlaceRole-label fixedwidth40"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-objectProductionPlaceGroup">
+									<td><input type="text" class="csc-object-production-place"/></td>
+									<!--################# MTB CHANGED THIS FIELD TO A CONTROLLED LIST ################## -->
+									<!-- ############## NB: SELECTOR NAMED IN 1.12 DISTRIBUTION IS WRONG: ############## -->
+									<!--IT IS NOT:     csc-collection-object-objectProductionPlaceRole-->
+									<!--IT SHOULD BE:  csc-object-production-place-role-->
+									<td><select class="csc-object-production-place-role input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="info-column2-50 fl-force-right"> <!-- Production organization -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionOrganizationGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr class="pahmaCustomColumnWidth">
+									<td class="csc-collection-object-objectProductionOrganization-label"></td>
+									<td class="csc-collection-object-objectProductionOrganizationRole-label fixedwidth40"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-objectProductionOrganizationGroup">
+									<td><input type="text" class="csc-object-production-organization"/></td>
+									<!--################# MTB CHANGED THIS FIELD TO A CONTROLLED LIST ################## -->
+									<td><select class="csc-collection-object-objectProductionOrganizationRole input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-column"> <!-- Object production reason, Object production note -->
+			<div class="info-column2-50 fl-force-left"> <!-- Object production reason -->
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-objectProductionReasons-label"></div>
+					</div>
+					<div class="content">
+						<textarea rows="4" cols="30" class="input-textarea csc-object-production-reason"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="info-column2-50 fl-force-right"> <!-- Object production note -->
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-collection-object-objectProductionNote-label"></div>
+						</div>
+						<div class="content">
+							<textarea rows="4" cols="30" class="input-textarea csc-object-production-note"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> <!-- information-group -->
+
 <div class="fl-container-flex fl-fix information-group"> <!-- Repatriation and NAGPRA Compliance Information -->
 	<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-repatriationNagpraComplianceInformation-label cs-togglable-collapsed"></div>
 	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display:none;">
@@ -1394,178 +1566,6 @@
 				</div>
 			</div>
 		</div> <!-- information-subgroup -->
-	</div>
-</div> <!-- information-group -->
-
-<div class="fl-container-flex fl-fix information-group"> <!-- Object Production Information -->
-	<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-objectProductionInformation-label"></div>
-	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-		<div class="info-column"> <!-- Object production date, Object production cultural group -->
-			<div class="info-column2-50 fl-force-left"> <!-- Object production date -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionDateGroup-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-objectProductionDateGroup-objectProductionDate" />
-					</div>
-				</div>
-			</div>
-			<div class="info-column2-50 fl-force-right"> <!-- Object production cultural group -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionPeopleGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr class="pahmaCustomColumnWidth">
-									<td class="csc-collection-object-objectProductionPeople-label"></td>
-									<td class="csc-collection-object-objectProductionPeopleRole-label fixedwidth40"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-objectProductionPeopleGroup">
-									<td><input type="text" class="csc-object-production-people"/></td>
-                                          <td><select class="csc-object-production-people-role input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="info-column"> <!-- Production technique, Object production person -->
-			<div class="info-column2-50 fl-force-left"> <!-- Production technique -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-techniqueGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr class="pahmaCustomColumnWidth">
-									<td class="csc-collection-object-technique-label"></td>
-									<td class="csc-collection-object-techniqueType-label fixedwidth40"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-techniqueGroup">
-									<td><input type="text" class="csc-object-production-technique"/></td>
-									<td><select class="csc-object-production-technique-type input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="info-column2-50 fl-force-right"> <!-- Object production person -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionPersonGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr class="pahmaCustomColumnWidth">
-									<td class="csc-collection-object-objectProductionPerson-label"></td>
-									<td class="csc-collection-object-objectProductionPersonRole-label fixedwidth40"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-objectProductionPersonGroup">
-									<td><input type="text" class="csc-object-production-person"/></td>
-									<td><select class="csc-collection-object-objectProductionPersonRole input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="info-column"> <!-- Object production place, Production organization -->
-			<div class="info-column2-50 fl-force-left"> <!-- Object production place -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionPlaceGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr class="pahmaCustomColumnWidth">
-									<td class="csc-collection-object-objectProductionPlace-label"></td>
-									<td class="csc-collection-object-objectProductionPlaceRole-label fixedwidth40"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-objectProductionPlaceGroup">
-									<td><input type="text" class="csc-object-production-place"/></td>
-									<!--################# MTB CHANGED THIS FIELD TO A CONTROLLED LIST ################## -->
-									<!-- ############## NB: SELECTOR NAMED IN 1.12 DISTRIBUTION IS WRONG: ############## -->
-									<!--IT IS NOT:     csc-collection-object-objectProductionPlaceRole-->
-									<!--IT SHOULD BE:  csc-object-production-place-role-->
-									<td><select class="csc-object-production-place-role input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="info-column2-50 fl-force-right"> <!-- Production organization -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionOrganizationGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr class="pahmaCustomColumnWidth">
-									<td class="csc-collection-object-objectProductionOrganization-label"></td>
-									<td class="csc-collection-object-objectProductionOrganizationRole-label fixedwidth40"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-objectProductionOrganizationGroup">
-									<td><input type="text" class="csc-object-production-organization"/></td>
-									<!--################# MTB CHANGED THIS FIELD TO A CONTROLLED LIST ################## -->
-									<td><select class="csc-collection-object-objectProductionOrganizationRole input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="info-column"> <!-- Object production reason, Object production note -->
-			<div class="info-column2-50 fl-force-left"> <!-- Object production reason -->
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-objectProductionReasons-label"></div>
-					</div>
-					<div class="content">
-						<textarea rows="4" cols="30" class="input-textarea csc-object-production-reason"></textarea>
-					</div>
-				</div>
-			</div>
-
-			<div class="info-column2-50 fl-force-right"> <!-- Object production note -->
-				<div class="info-column">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-collection-object-objectProductionNote-label"></div>
-						</div>
-						<div class="content">
-							<textarea rows="4" cols="30" class="input-textarea csc-object-production-note"></textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </div> <!-- information-group -->
 
