@@ -7,7 +7,7 @@
 	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
 
 
-		<div class="info-column"> <!-- Museum number, Number of pieces, Alternate numbers, Brief description, Object name, Department, Collection, File code, Cataloging status, Associated cultural group, Associated place, Dimension summary, Comments -->
+		<div class="info-column"> <!-- Museum number, Number of pieces, Alternate numbers, Brief description, Object name, Department, Collection, File code, Associated cultural group, Associated place, Dimension summary, Comments -->
 
 
 			<div class="info-column2-50 fl-force-left"> <!-- Museum number, Number of pieces, Alternate numbers -->
@@ -218,29 +218,31 @@
 				</div>
 			</div>
 
-			<div class="info-column fl-force-left pahmaCustomColumnWidth"> <!-- Department, Collection, File code, Cataloging status -->
-				<div class="info-column2-25 fl-force-left fixedfield25"> <!-- Department -->
-					<div class="info-pair-select">
-						<div class="header">
-							<div class="label csc-collection-object-responsibleDepartments-label"></div>
+			<div class="info-column"> <!-- Department, Collection, File code -->
+				<div class="info-column2-50 fl-force-left">
+					<div class="info-column2-60 fl-force-left"> <!-- Department -->
+						<div class="narrow info-pair-select">
+							<div class="header">
+								<div class="label csc-collection-object-responsibleDepartments-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-object-identification-responsible-department input-select"><option value="">Options not loaded</option></select>
+							</div>
 						</div>
-						<div class="content">
-							<select class="csc-object-identification-responsible-department input-select fixedwidth80"><option value="">Options not loaded</option></select>
+					</div>
+					<div class="info-column2-40 fl-force-right"> <!-- Collection -->
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label csc-collection-object-collection-label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-object-identification-collection input-select"><option value="">Options not loaded</option></select>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="info-column2-25 fl-force-left fixedfield25"> <!-- Collection -->
-					<div class="info-pair-select">
-						<div class="header">
-							<div class="label csc-collection-object-collection-label"></div>
-						</div>
-						<div class="content">
-							<select class="csc-object-identification-collection input-select fixedwidth80"><option value="">Options not loaded</option></select>
-						</div>
-					</div>
-				</div>
-				<div class="info-column2-25 fl-force-left fixedfield25"> <!-- Ethnographic file code -->
-					<div class="narrow info-pair">
+				<div class="info-column2-50 fl-force-right"> <!-- Ethnographic file code -->
+					<div class="info-pair">
 						<div class="header">
 							<div class="label csc-collection-object-pahmaEthnographicFileCode-label"></div>
 						</div>
@@ -249,17 +251,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="info-column2-25 fl-force-left fixedfield25"> <!-- Cataloging status -->
-					<div class="info-pair-select">
-						<div class="header">
-							<div class="label csc-collection-object-recordStatus-label"></div>
-						</div>
-						<div class="content">
-							<select class="csc-object-identification-record-status input-select fixedwidth80"><option value="">Options not loaded</option></select>
-						</div>
-					</div>
-				</div>
-				<div class="clear"></div>
 			</div>
 
 			<div class="info-column fl-force-left"> <!-- Associated cultural group, Comments -->
