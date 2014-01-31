@@ -186,7 +186,7 @@ collection-object-computedCrateSearchLabel: Current box or container
 collection-object-pahmaNagpraCodeLegacyLabel : Grave association code
 collection-object-pahmaEthnographicFileCodeLabel: Ethnographic file code
 collection-object-pahmaTms2003DataSourceLabel: TMS primary data source
-collection-object-pahmaTmsLegacyDepartmentLabel: TMS legacy department
+collection-object-pahmaTmsLegacyDepartmentLabel: Legacy department
 collection-object-pahmaCollectionLabel: Collection
 collection-object-pahmaObjectStatusLabel: Object status
 collection-object-inventoryCountLabel: Count note
