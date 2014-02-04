@@ -972,9 +972,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 disablePageSize: true,
                 model: {
                     // TODO: Disabling pagintaion related things, since it does not work yet for users.
-                    pageSizeList: ["100"],
+                    pageSizeList: ["150"],
                     pagerModel: {
-                        pageSize: 100
+                        pageSize: 150
                     },
                     columns: [{
                         sortable: false,
@@ -994,9 +994,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 disablePageSize: true,
                 stubbPagination: true,
                 model: {
-                    pageSizeList: ["100"],
+                    pageSizeList: ["150"],
                     pagerModel: {
-                        pageSize: 100
+                        pageSize: 150
                     },
                     columns: [{
                         sortable: false,
