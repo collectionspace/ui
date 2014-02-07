@@ -4,9 +4,9 @@ login-emailRequired: You must enter a valid email address
 login-passwordsMustMatch: Passwords must match
 login-invalid: Invalid email/password combination
 login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 3.3 Information
-login-current-info: The CollectionSpace project team is pleased to announce the release of CollectionSpace 3.3. For release notes, please visit the project's wiki.
-login-current-details: Version 3.3 incorporates various feature enhancements and bugfixes, building on the previous release of version 3.2.3. 
+login-current: Current Release 4.0 Information
+login-current-info: The CollectionSpace project team is pleased to announce the release of CollectionSpace 4.0. For release notes, please visit the project's wiki.
+login-current-details: Version 4.0 streamlines and simplifies the process of configuring existing fields and adding new fields to CollectionSpace's main record types. It also adds a Work Authority and includes various bugfixes. 
 login-login-info: To view the CollectionSpace Core tenant, use the login box on the right with the login:
 login-login: admin@core.collectionspace.org
 login-login-pwd:  and password: 

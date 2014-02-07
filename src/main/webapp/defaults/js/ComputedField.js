@@ -274,7 +274,7 @@ cspace = cspace || {};
      * Returns a unique namespace name for a given argument EL path.
      */
     cspace.computedField.getArgListenerNamespace = function (that, elPath) {
-        return  ("argElPath-" + elPath + "-" + that.id);
+        return  (elPath + ":" + that.fullElPath);
     };
 
     /*

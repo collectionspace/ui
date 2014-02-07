@@ -1,0 +1,60 @@
+{
+    "termsUsed": [],
+    "relations": [],
+    "csid": "876ac3f-3344-ac55-1234",
+    "refobjs": [],
+    "namespace": "work",
+    "fields": {
+        "csid": "876ac3f-3344-ac55-1234",
+        "updatedBy": "admin@core.collectionspace.org",
+        "shortIdentifier": "WorkDisplayName8673509000000",
+        "updatedAt": "2013-02-26T02:01:11Z",
+        "createdBy": "admin@core.collectionspace.org",
+        "broaderContext": "",
+        "createdAt": "2012-05-02T02:01:11Z",
+        "refName": "urn:cspace:core.collectionspace.org:workauthorities:name(work):item:name(WorkDisplayName8673509000000)'Work (Display Name)'",
+        "narrowerContexts": [{
+            "_primary": true
+        }],
+        "equivalentContexts": [{
+            "_primary": true
+        }],
+        "authorityid": "6ca3db57-7c96-47b6-b17d",
+        "refid": "urn:cspace:core.collectionspace.org:workauthorities:name(work):item:name(WorkDisplayName8673509000000)'Work (Display Name)'",
+        "shortIdentifier": "worktest1",
+        "termStatus": "complete",
+        "publisherGroup": [
+            {
+                "_primary": true,
+                "publisherType": "distributor",
+                "publisher": "TriStar Pictures"
+            }
+        ],
+        "workHistoryNote": "history note goes here",
+        "workType": "work type goes here",
+        "displayName": "Muppets Take Manhattan (1984)",
+        "workTermGroup": [
+            {
+                "_primary": true,
+                "termDisplayName": "Muppets Take Manhattan (1984)",
+                "termName": "Work",
+                "termLanguage": "english",
+                "termPrefForLang": true,
+                "termType": "",
+                "termQualifier": "term qualifier",
+                "termSource": "other",
+                "termSourceID": "12345",
+                "termSourceDetail": "term source detail",
+                "termSourceNote": "source note goes here",
+                "termStatus": "complete"
+            }
+        ],
+        "creatorGroup": [
+            {
+                "_primary": true,
+                "creatorType": "director",
+                "creator": "Frank Oz"
+            }
+        ]   
+    }
+}
