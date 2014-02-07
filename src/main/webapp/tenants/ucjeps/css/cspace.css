@@ -1265,9 +1265,6 @@ td .field-cal img, td .csc-calendar-button img {
     padding-top:7px;
     width: 100%;
     clear: both; }
-#createnew #footer, #search #footer, #administration #footer {
-    position: absolute;
-}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
