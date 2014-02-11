@@ -4,10 +4,18 @@
             <div class="info-column2-50 fl-force-left">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-loanin-loanInNumber-label"></div>
+                        <div class="label csc-loanin-lenderLoanNumber-label"></div>
                     </div>
                     <div class="content clearfix">
-                        <input type="text" class="csc-loanIn-loanInNumber"/>
+                        <input type="text" class="csc-loanin-lenderLoanNumber"/>
+                    </div>        
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-loanin-loanPurpose-label"></div>
+                    </div>
+                    <div class="content clearfix">
+                        <select class="csc-loanIn-loanPurpose input-select"><option value="">Options not loaded</option></select>
                     </div>        
                 </div>
                 <div class="info-pair">
@@ -16,14 +24,6 @@
                     </div>
                     <div class="content clearfix csc-loanin-lenderGroup">
                         <input type="text" class="csc-loanIn-lender"/>
-                    </div>        
-                </div>
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-loanin-lenderLoanNumber-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <input type="text" class="csc-loanin-lenderLoanNumber"/>
                     </div>        
                 </div>
                 <div class="info-pair">
@@ -46,7 +46,28 @@
                             </tbody>
                         </table>
                     </div>
-                </div>     
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-loanin-loanRenewalApplicationDate-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-loanin-loanRenewalApplicationDateStart-label"></td>
+                                    <td class="csc-loanin-loanRenewalApplicationDateEnd-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-loanin-loanRenewalApplicationDateStart" /></td>
+                                    <td><input type="text" class="csc-loanin-loanRenewalApplicationDateEnd" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-loanin-loanReturnDate-label"></div>
@@ -68,35 +89,6 @@
                         </table>
                     </div>        
                 </div>                                                              
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label csc-loanin-loanRenewalApplicationDate-label"></div>
-                    </div>
-                    <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td class="csc-loanin-loanRenewalApplicationDateStart-label"></td>
-                                    <td class="csc-loanin-loanRenewalApplicationDateEnd-label"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="csc-loanin-loanRenewalApplicationDateStart" /></td>
-                                    <td><input type="text" class="csc-loanin-loanRenewalApplicationDateEnd" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>     
-                <div class="info-pair-select">
-                    <div class="header">
-                        <div class="label csc-loanin-loanPurpose-label"></div>
-                    </div>
-                    <div class="content clearfix">
-                        <select class="csc-loanIn-loanPurpose input-select"><option value="">Options not loaded</option></select>
-                    </div>        
-                </div>
                 <div class="info-pair">
                     <div class="header">
                         <div class="label csc-loanin-updatedBy-label"></div>
