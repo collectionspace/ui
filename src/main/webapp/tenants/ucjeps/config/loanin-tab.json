@@ -28,7 +28,7 @@
                             "relatedRecordsRecordEditor": {
                                 "options": {
                                     "selectors": {
-                                        "identificationNumber": ".csc-loanIn-loanInNumber"
+                                        "identificationNumber": ".csc-loanin-lenderLoanNumber"
                                     },
                                     "uispec": "{pageBuilder}.options.uispec.details"
                                 }

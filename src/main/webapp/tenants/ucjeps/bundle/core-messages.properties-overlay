@@ -231,6 +231,7 @@ loanout-transferQuantityLabel: Quantity
 loanout-transferNotesLabel: Notes
 
 #loanin
+loanin-identificationNumberRequired: Please specify a Lender's No.
 loanin-lenderLoanNumberLabel: Lender's No.
 loanin-majorGroupLabel: Major Group
 loanin-geographyLabel: Geography

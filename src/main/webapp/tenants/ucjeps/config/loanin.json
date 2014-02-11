@@ -7,7 +7,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-loanIn-loanInNumber"
+                            "identificationNumber": ".csc-loanin-lenderLoanNumber"
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.loanInNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
@@ -17,7 +17,7 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.loanInNumber", {
+                            "fields.lenderLoanNumber", {
                             "type": "repeatableMatch",
                             "queryPath": "fields.lenderGroup",
                             "childPath": "_primary",
