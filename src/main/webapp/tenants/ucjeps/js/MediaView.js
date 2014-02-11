@@ -215,7 +215,7 @@ cspace = cspace || {};
         };
 
         // Get URL for getting a media thumbnail
-        that.formatMedia = function (url, format) {
+        that.formatMedia = function (url, format, mimeType) {
             var bool = !!url;
             if (format === "bool") {
                 return bool;
@@ -223,7 +223,8 @@ cspace = cspace || {};
             if (!url) {
                 return url;
             }
-            return url.replace(/Thumbnail/, format || "OriginalJpeg");
+            var defaultFormat = (mimeType.indexOf("image/") == 0) ? "OriginalJpeg" : "Original";
+            return url.replace(/Thumbnail/, format || defaultFormat);
         };
 
         // Function to return if record has the primary media
@@ -265,10 +266,11 @@ cspace = cspace || {};
         // Get the image address in the given record's model
         that.getMedia = function (model, format) {
             var imgThumb = fluid.get(model, "imgThumb");
+            var mimeType = fluid.get(model, "mimeType");
             if (imgThumb) {
-                return that.formatMedia(imgThumb, format);
+                return that.formatMedia(imgThumb, format, mimeType);
             }
-            return that.formatMedia("", format);
+            return that.formatMedia("", format, mimeType);
         };
 
         // Function to open an associated image with the record in the separate window
