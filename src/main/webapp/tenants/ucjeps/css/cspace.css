@@ -29,6 +29,18 @@ CollectionSpace 1.8 default CSS selectors
 	float: right;
 }
 
+/* 
+	This is a fix for repeatable delete buttons wrapping to the next line on narrow fields.
+	Apply the narrow class to the containing info-pair.
+*/
+.narrow .cs-repeatable-content,
+.narrow li.cs-repeatable-repeat .cs-termList,
+.narrow ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, 
+.narrow ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content,
+.narrow ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
+	width: 75%;
+}
+
 /* ---------------------------------------*/
 
 /* core HTML elements*/
