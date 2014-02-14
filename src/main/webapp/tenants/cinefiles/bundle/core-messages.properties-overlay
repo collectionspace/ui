@@ -82,7 +82,7 @@ collection-object-docTitleLabel: Title
 collection-object-docDisplayNameLabel: Display Name
 collection-object-docDisplayNameSearchLabel: Display Name
 collection-object-pageInfoLabel: Original Pagination
-collection-object-accessCodeLabel: Publication Access Code
+collection-object-accessCodeLabel: Access Code Override
 collection-object-clearedLabel: Cleared for Publication
 collection-object-hasCastCrLabel: Cast Cr.
 collection-object-hasCastCrSearchLabel: Cast Cr.
