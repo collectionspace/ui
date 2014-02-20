@@ -1270,14 +1270,9 @@ td .field-cal img, td .csc-calendar-button img {
 
 #footer {
     border-top: 2px solid #D8D9DA; 
-    padding-top:7px; 
-    bottom: 0px; 
-    position: relative; 
-    bottom: 0px; 
-    width: 100%; }
-#createnew #footer, #search #footer, #administration #footer {
-    position: absolute;
-}
+    padding-top:7px;
+    width: 100%;
+    clear: both; }
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1609,8 +1604,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 .cs-search-disabled input[type="checkbox"] {
     display: none;}
 .cs-createNew-createButton, .cs-createNew-createTemplateButton {
-    margin-left: 10px;
-    float:right;}
+    margin-left: 10px;}
 .cs-searchBox {
     -moz-border-radius:8px; 
     -webkit-border-radius:8px;}
@@ -2427,6 +2421,13 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 	padding-right: 1.5em;
 }
 
+.oocss .cs-repeatable-group li {
+       background-color: #E2E2E2 !important;
+       border: 1px solid #CCC !important;
+       padding: 4px 4px 0 4px !important;
+       /*margin-bottom: 4px !important;*/
+}
+
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
 	top: -12px !important;
 }
@@ -2603,4 +2604,18 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 }
 .stretched input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-autocomplete-input, .stretched ul.cs-repeatable li.cs-repeatable-repeat input.cs-repeatable-content, .stretched ul.cs-repeatable li.cs-repeatable-repeat textarea.cs-repeatable-content {
     width: 94%
+}
+
+/* Structured date parser */
+.cs-structuredDate-parseStatus {
+       position: relative;
+       top: -9px;
+       height: 14px;
+       padding-top: 4px;
+       font-size: 11px;
+}
+
+.cs-structuredDate-parseStatus.error {
+       background: url(../images/warning.png) no-repeat top left;
+       padding-left: 18px;
 }

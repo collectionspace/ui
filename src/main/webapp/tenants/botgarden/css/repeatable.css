@@ -104,6 +104,15 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
     margin: 5px 10px 10px 10px;
 }
 
+.oocss .cs-repeatable-group ul.cs-repeatable li.cs-repeatable-repeat,
+.cs-repeatable-group ul.cs-repeatable li.cs-repeatable-repeat {
+    padding:4px 0 4px 4px;
+}
+
+.cs-repeatable-group ul.cs-repeatable li.cs-repeatable-repeat:last-child {
+    margin-bottom: 18px;
+}
+
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
