@@ -268,6 +268,8 @@ fluid.registerNamespace("cspace.util");
 
     var eUC = "encodeURIComponent:";
 
+    var URLDataSourceCache = {};
+
     /** A "Data Source" attached to a URL. Reduces HTTP transport to the simple 
      * "Data Source" API. This should become the only form of AJAX throughout CollectionSpace,
      * with the exception of calls routed through fluid.fetchResources (the two methods may
@@ -316,6 +318,9 @@ fluid.registerNamespace("cspace.util");
                                 fluid.invokeGlobalFunction(responseParser, [data, directModel]) :
                                 responseParser(data, directModel);
                     }
+                    if (that.options.caching) {
+                        URLDataSourceCache[togo.url] = data;
+                    }
                     callback(data);
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -334,9 +339,15 @@ fluid.registerNamespace("cspace.util");
 
         that.get = function (directModel, callback) {
             var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
-            wrapper(function () {
-                $.ajax(ajaxOpts);
-            });
+
+            if (that.options.caching && (ajaxOpts.url in URLDataSourceCache)) {
+                callback(URLDataSourceCache[ajaxOpts.url]);
+            }
+            else {
+                wrapper(function () {
+                    $.ajax(ajaxOpts);
+                });
+            }
         };
         if (that.options.writeable) {
             that.set = function (model, directModel, callback) {
@@ -1810,7 +1821,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.findLabel = function (required) {
-        return $(required).parents(".info-pair").find(".label").text();
+        return $(required).parents(".info-pair,.info-pair-date,.info-pair-select").find(".label").text();
     };
     
     cspace.util.processReadOnly = function (container, readOnly, neverReadOnly) {

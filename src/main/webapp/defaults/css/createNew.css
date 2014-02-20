@@ -69,3 +69,8 @@
 }
 .cs-createNew-vocabs {
 }
+
+.cs-createNew-buttonHolder {
+	text-align: right;
+	margin-bottom: 30px;
+}

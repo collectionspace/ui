@@ -113,7 +113,6 @@ cspace = cspace || {};
                     }
                 }
             },
-            globalNavigator: "{recordEditor}.globalNavigator",
             messageBar: "{messageBar}",
             titleBar: "{titleBar}"
         },
@@ -145,7 +144,7 @@ cspace = cspace || {};
         invokers: {
             navigateToAdvancedSearch: {
                 funcName: "cspace.relatedRecordsList.navigateToAdvancedSearch",
-                args: ["{relatedRecordsList}", "{globalModel}.model.primaryModel"]
+                args: ["{relatedRecordsList}", "{globalModel}.model.primaryModel", "{recordEditor}"]
             }
         },
         model: {
@@ -254,16 +253,21 @@ cspace = cspace || {};
         });
     };
 
-    cspace.relatedRecordsList.navigateToAdvancedSearch = function (that, primaryModel) {
-        that.globalNavigator.events.onPerformNavigation.fire(function () {
-            that.messageBar.disable();
-            window.location = fluid.stringTemplate(that.options.advancedSearchUrl, {
-                recordType: that.options.related,
-                relatedRecordType: that.options.primary,
-                relatedCsid: primaryModel.csid,
-                relatedTitle: that.titleBar.buildTitle()
-            })
-        });
+    cspace.relatedRecordsList.navigateToAdvancedSearch = function (that, primaryModel, recordEditor) {
+        // This function currently depends on a recordEditor being present in the relatedRecordList's
+        // context. If it ever needs to be used outside of a recordEditor, do something similar to
+        // cspace.searchBox.navigateToSearch.
+        if (recordEditor) {
+            recordEditor.globalNavigator.events.onPerformNavigation.fire(function () {
+                that.messageBar.disable();
+                window.location = fluid.stringTemplate(that.options.advancedSearchUrl, {
+                    recordType: that.options.related,
+                    relatedRecordType: that.options.primary,
+                    relatedCsid: primaryModel.csid,
+                    relatedTitle: that.titleBar.buildTitle()
+                })
+            });
+        }
     };
 
     fluid.defaults("cspace.relatedRecordsList.banner", {
