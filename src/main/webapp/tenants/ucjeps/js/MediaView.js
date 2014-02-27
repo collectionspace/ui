@@ -223,6 +223,9 @@ cspace = cspace || {};
             if (!url) {
                 return url;
             }
+            if (typeof(mimeType) == "undefined") {
+                mimeType = "";
+            }
             var defaultFormat = (mimeType.indexOf("image/") == 0) ? "OriginalJpeg" : "Original";
             return url.replace(/Thumbnail/, format || defaultFormat);
         };
