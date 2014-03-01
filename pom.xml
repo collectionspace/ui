@@ -240,6 +240,25 @@
           </execution>
           -->
           <execution>
+            <id>integration-test-botgarden</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <excludes>
+                <exclude>**/CatalogingIT.java</exclude> <!-- Use BotGardenCatalogingIT instead -->
+                <exclude>**/MovementIT.java</exclude> <!-- Use BotGardenMovementIT instead -->
+                <exclude>**/TaxonIT.java</exclude> <!-- Use BotGardenTaxonIT instead -->
+              </excludes>
+              <systemPropertyVariables>
+                <tenantName>botgarden</tenantName>
+                <user>admin@botgarden.cspace.berkeley.edu</user>
+              </systemPropertyVariables>
+              <reportsDirectory>target/failsafe-reports/botgarden</reportsDirectory>
+              <summaryFile>target/failsafe-reports/botgarden/failsafe-summary.xml</summaryFile>
+            </configuration>
+          </execution>
+          <execution>
             <id>verify</id>
             <goals>
               <goal>verify</goal>
@@ -250,6 +269,7 @@
                 <summaryFile>target/failsafe-reports/core/failsafe-summary.xml</summaryFile>
                 <summaryFile>target/failsafe-reports/lifesci/failsafe-summary.xml</summaryFile>
                 -->
+                <summaryFile>target/failsafe-reports/botgarden/failsafe-summary.xml</summaryFile>
               </summaryFiles>
             </configuration>
           </execution>
