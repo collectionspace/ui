@@ -112,3 +112,7 @@ collection-object-filmSubjectLabel: Film Subject
 collection-object-docLanguagesLabel: Document Language
 collection-object-docLanguageLabel: Document Language
 collection-object-sourceLabel: Source
+collection-object-referenceInformationLabel: External Document URL Information
+collection-object-referenceGroupLabel: External Document URL Details
+collection-object-referenceLabel: External Document URL Source
+collection-object-referenceNoteLabel: External Document URL
