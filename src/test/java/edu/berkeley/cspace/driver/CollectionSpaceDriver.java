@@ -908,6 +908,32 @@ public class CollectionSpaceDriver {
 		return value;
 	}
 	
+	public List<String> getAutocompleteVocabularyNames(String className) {
+		WebElement element = findField(className);
+		
+		return getAutocompleteVocabularyNames(element);
+	}
+	
+	public List<String> getAutocompleteVocabularyNames(WebElement element) {
+		List<String> vocabularyNames = new ArrayList<String>();
+		WebElement autocompleteInputElement = findFollowingSiblingAutocompleteInputElement(element);
+		
+		if (autocompleteInputElement != null) {
+			autocompleteInputElement.click();
+			autocompleteInputElement.sendKeys("test value");
+			
+			WebElement popupElement = driver.findElement(By.className("cs-autocomplete-popup"));
+			WebElement addToPanelElement = popupElement.findElement(By.className("csc-autocomplete-addToPanel"));
+
+			for (WebElement vocabularyItem : addToPanelElement.findElements(By.tagName("li"))) {
+				String vocabularyName = vocabularyItem.getText();
+				vocabularyNames.add(vocabularyName);
+			}
+		}
+		
+		return vocabularyNames;
+	}
+	
 	public Map<String, String> fillStructuredDateField(WebElement element, Map<String, String> values) {
 		element.click();
 

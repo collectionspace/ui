@@ -17,7 +17,7 @@ public class LoginIT extends CollectionSpaceIT {
 	 * </ul>
 	 */
 	@Test
-	public void testLogin() {		
+	public void testLogin() {
 		super.testLogin();
 
 		Assert.assertEquals(driver.getCurrentUrl(), driver.getLandingPageUrl(), "incorrect landing page:");
