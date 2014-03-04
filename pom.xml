@@ -226,6 +226,23 @@
           </execution>
           -->
           <execution>
+            <id>integration-test-cinefiles</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <excludes>
+                <exclude>**/CatalogingIT.java</exclude> <!-- Use CineFilesCatalogingIT instead -->
+              </excludes>
+              <systemPropertyVariables>
+                <tenantName>cinefiles</tenantName>
+                <user>admin@cinefiles.cspace.berkeley.edu</user>
+              </systemPropertyVariables>
+              <reportsDirectory>target/failsafe-reports/cinefiles</reportsDirectory>
+              <summaryFile>target/failsafe-reports/cinefiles/failsafe-summary.xml</summaryFile>
+            </configuration>
+          </execution>
+          <execution>
             <id>verify</id>
             <goals>
               <goal>verify</goal>
@@ -236,6 +253,7 @@
                 <summaryFile>target/failsafe-reports/core/failsafe-summary.xml</summaryFile>
                 <summaryFile>target/failsafe-reports/lifesci/failsafe-summary.xml</summaryFile>
                 -->
+                <summaryFile>target/failsafe-reports/cinefiles/failsafe-summary.xml</summaryFile>
               </summaryFiles>
             </configuration>
           </execution>
