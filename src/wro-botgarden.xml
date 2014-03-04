@@ -79,7 +79,7 @@
     <js>/defaults/js/SearchTips.js</js>
     <js>/defaults/js/SearchTools.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/botgarden/js/StructuredDate.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
@@ -197,7 +197,7 @@
     <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/botgarden/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/tenants/botgarden/js/TermList.js</js>
@@ -256,7 +256,7 @@
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
-    <js>/defaults/js/StructuredDate.js</js>
+    <js>/tenants/botgarden/js/StructuredDate.js</js>
     <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/tenants/botgarden/js/TermList.js</js>
