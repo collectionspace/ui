@@ -587,7 +587,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 minChars: 2,
-                delay: 2000,
+                delay: 1000,
                 model: {
                     vocab: {
                         expander: {
@@ -1558,8 +1558,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.URLDataSource",
             args: {
                 url: "{termList}.options.urls.termList",
-                targetTypeName: "cspace.termList.termListSource",
                 caching: true,
+                targetTypeName: "cspace.termList.termListSource",
                 termMap: {
                     recordType: "%recordType",
                     termListType: "%termListType"
