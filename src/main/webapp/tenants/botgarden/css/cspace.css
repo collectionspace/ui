@@ -1804,10 +1804,14 @@ table td.fl-table .cs-externalURL-button, .information-subgroup .cs-externalURL-
     padding: 1px 1px 0 0; 
     width:16px; 
     height:17px}
+.info-pair-date .content.fl-date-group {
+    width: auto;
+}
 .info-pair-date .content input {
     border-right: none;
 }
 .info-pair-date .content input[type="text"] {
+    float: left !important;
     border-right: none;
     min-width: 83%;
 }
