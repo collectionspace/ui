@@ -65,7 +65,7 @@ public abstract class CollectionSpaceIT {
 	 * </ul>
 	 */
 	@Test
-	public void testLogin() {		
+	public void testLogin() {
 		try {
 			driver.login();
 		}

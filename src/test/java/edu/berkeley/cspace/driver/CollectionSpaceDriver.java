@@ -908,6 +908,32 @@ public class CollectionSpaceDriver {
 		return value;
 	}
 	
+	public List<String> getAutocompleteVocabularyNames(String className) {
+		WebElement element = findField(className);
+		
+		return getAutocompleteVocabularyNames(element);
+	}
+	
+	public List<String> getAutocompleteVocabularyNames(WebElement element) {
+		List<String> vocabularyNames = new ArrayList<String>();
+		WebElement autocompleteInputElement = findFollowingSiblingAutocompleteInputElement(element);
+		
+		if (autocompleteInputElement != null) {
+			autocompleteInputElement.click();
+			autocompleteInputElement.sendKeys("test value");
+			
+			WebElement popupElement = driver.findElement(By.className("cs-autocomplete-popup"));
+			WebElement addToPanelElement = popupElement.findElement(By.className("csc-autocomplete-addToPanel"));
+
+			for (WebElement vocabularyItem : addToPanelElement.findElements(By.tagName("li"))) {
+				String vocabularyName = vocabularyItem.getText();
+				vocabularyNames.add(vocabularyName);
+			}
+		}
+		
+		return vocabularyNames;
+	}
+	
 	public Map<String, String> fillStructuredDateField(WebElement element, Map<String, String> values) {
 		element.click();
 
@@ -1104,6 +1130,24 @@ public class CollectionSpaceDriver {
 		int index = random.nextInt(displayValues.size());
 		
 		return displayValues.get(index);
+	}
+	
+	public List<String> getOptionDataValues(String className) {
+		WebElement selectElement = findField(className);
+		
+		return getOptionDataValues(selectElement);
+	}
+	
+	public List<String> getOptionDataValues(WebElement element) {
+		List<String> dataValues = new ArrayList<String>();
+		
+		for (WebElement optionElement : findElementsImmediately(element, By.tagName("option"))) {
+			String dataValue = optionElement.getAttribute("value");
+			
+			dataValues.add(dataValue);
+		}
+		
+		return dataValues;
 	}
 	
 	/**
@@ -1442,59 +1486,72 @@ public class CollectionSpaceDriver {
 	
 	protected String chooseNextNumber(WebElement numberPatternChooserElement, String patternName) {
 		String newNumber = null;
-		WebElement buttonElement = null;
+		WebElement buttonElement = driver.findElement(By.className("csc-numberPatternChooser-button"));
 
-		try {
-			buttonElement = driver.findElement(By.className("csc-numberPatternChooser-button"));
-		}
-		catch(NoSuchElementException e) {
-			logger.warn("button not found for number pattern chooser");
-		}
-
-		if (buttonElement != null) {
-			buttonElement.click();
-			
-			List<WebElement> candidatePatternElements = buttonElement.findElements(By.xpath("//td[@class=\"csc-numberPatternChooser-name\"]"));
-			WebElement patternElement = null;
-			
-			if (candidatePatternElements.size() > 0) {
-				if (patternName != null) {
-					for (WebElement candidatePatternElement : candidatePatternElements) {
-						if (candidatePatternElement.getText().equals(patternName)) {
-							patternElement = candidatePatternElement;
-							break;
-						}
+		buttonElement.click();
+		
+		List<WebElement> candidatePatternElements = buttonElement.findElements(By.xpath("//td[@class=\"csc-numberPatternChooser-name\"]"));
+		WebElement patternElement = null;
+		
+		if (candidatePatternElements.size() > 0) {
+			if (patternName != null) {
+				for (WebElement candidatePatternElement : candidatePatternElements) {
+					if (candidatePatternElement.getText().equals(patternName)) {
+						patternElement = candidatePatternElement;
+						break;
 					}
-				}
-				else {
-					patternElement = candidatePatternElements.get(0);
-				}
-				
-				if (patternElement != null) {
-					// Clear the field first, so it will be possible to tell when
-					// the new number has been filled in.
-					
-					numberPatternChooserElement.clear();
-					patternElement.click();
-					
-					String value = "";
-					
-					while(StringUtils.isEmpty(value)) {
-						value = numberPatternChooserElement.getAttribute("value");
-					}
-					
-					newNumber = value;
-				}
-				else {
-					logger.warn("no pattern found for name " + patternName);
 				}
 			}
 			else {
-				logger.warn("no patterns found for number pattern chooser");
+				patternElement = candidatePatternElements.get(0);
 			}
+			
+			if (patternElement != null) {
+				// Clear the field first, so it will be possible to tell when
+				// the new number has been filled in.
+				
+				numberPatternChooserElement.clear();
+				patternElement.click();
+				
+				String value = "";
+				
+				while(StringUtils.isEmpty(value)) {
+					value = numberPatternChooserElement.getAttribute("value");
+				}
+				
+				newNumber = value;
+			}
+			else {
+				logger.warn("no pattern found for name " + patternName);
+			}
+		}
+		else {
+			logger.warn("no patterns found for number pattern chooser");
 		}
 		
 		return newNumber;
+	}
+
+	public List<String> getNumberPatternNames(String className) {
+		WebElement numberPatternChooserElement = findField(className);
+		
+		return getNumberPatternNames(numberPatternChooserElement);
+	}
+	
+	public List<String> getNumberPatternNames(WebElement numberPatternChooserElement) {
+		List<String> patternNames = new ArrayList<String>();
+		WebElement buttonElement = driver.findElement(By.className("csc-numberPatternChooser-button"));
+
+		buttonElement.click();
+		
+		List<WebElement> patternElements = buttonElement.findElements(By.xpath("//td[@class=\"csc-numberPatternChooser-name\"]"));
+		
+		for (WebElement patternElement : patternElements) {
+			String patternName = patternElement.getText();
+			patternNames.add(patternName);
+		}
+
+		return patternNames;
 	}
 	
 	/*
