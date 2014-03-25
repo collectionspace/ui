@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class CollectionSpaceDriver {
 	private WebDriver driver;
 	private Random random;
 	SimpleDateFormat calendarDateFormatter;
+	SimpleDateFormat timestampFormatter;
 	
 	private String baseUrl = DEFAULT_BASE_URL;
 	private String tenantName = DEFAULT_TENANT_NAME;
@@ -60,6 +62,7 @@ public class CollectionSpaceDriver {
 	public CollectionSpaceDriver() {
 		random = new Random();
 		calendarDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		timestampFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		createWebDriver();
 		configureWebDriver();
@@ -1552,6 +1555,10 @@ public class CollectionSpaceDriver {
 		}
 
 		return patternNames;
+	}
+	
+	public String getTimestamp() {
+		return timestampFormatter.format(new Date());
 	}
 	
 	/*
