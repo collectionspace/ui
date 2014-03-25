@@ -1830,7 +1830,10 @@ cspace = cspace || {};
     });
 
     cspace.recordEditor.recordRenderer.navigateToFullImage = function (model, originalMediaDimensions, parentBundle) {
-        window.open(model.fields.blobs[0].imgOrig, "_blank", parentBundle.resolve("media-originalMediaOptions", [
+        var mimeType = model.fields.blobs[0].mimeType;
+        var format = (typeof(mimeType) == "undefined" || mimeType.indexOf("image/") == 0) ? "imgOrigJpeg" : "imgOrig";
+
+        window.open(model.fields.blobs[0][format], "_blank", parentBundle.resolve("media-originalMediaOptions", [
             originalMediaDimensions.height,
             originalMediaDimensions.width,
             "yes"
