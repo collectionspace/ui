@@ -151,7 +151,7 @@
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/TermList.js</js>
-    <js>/defaults/js/RecordEditor.js</js>
+    <js>/tenants/cinefiles/js/RecordEditor.js</js>
     <js>/defaults/js/PasswordValidator.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/TitleBar.js</js>
@@ -201,7 +201,7 @@
     <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
-    <js>/defaults/js/RecordEditor.js</js>
+    <js>/tenants/cinefiles/js/RecordEditor.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
     <js>/defaults/js/RelationManager.js</js>
@@ -259,7 +259,7 @@
     <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
-    <js>/defaults/js/RecordEditor.js</js>
+    <js>/tenants/cinefiles/js/RecordEditor.js</js>
     <js>/defaults/js/TemplateEditor.js</js>
     <js>/defaults/js/NumberPatternChooser.js</js>
     <js>/defaults/js/Repeatable.js</js>
