@@ -29,6 +29,7 @@
 		<replaceregexp file="${base-dir}/defaults/html/template.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/template.css&quot; />" flags="g"></replaceregexp>
 
         <!-- Tenant specific replacements -->
+        <replaceregexp file="${base-dir}/tenants/botgarden/html/advancedsearch.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/advancedsearch.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/tenants/botgarden/html/findedit.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/findedit.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/tenants/botgarden/html/record.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/record.css&quot; />" flags="g"></replaceregexp>
 		
@@ -51,6 +52,7 @@
 		<replaceregexp file="${base-dir}/defaults/html/template.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/template.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 
 		<!-- Tenant specific replacements -->
+		<replaceregexp file="${base-dir}/tenants/botgarden/html/advancedsearch.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/advancedsearch.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/tenants/botgarden/html/findedit.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/findedit.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/tenants/botgarden/html/record.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/record.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 
