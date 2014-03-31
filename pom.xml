@@ -246,7 +246,18 @@
             </goals>
             <configuration>
               <excludes>
+                <!-- Exclude tests that are overridden. -->
                 <exclude>**/CatalogingIT.java</exclude> <!-- Use CineFilesCatalogingIT instead -->
+                <exclude>**/OrganizationIT.java</exclude> <!-- Use CineFilesOrganizationIT instead -->
+                <exclude>**/PersonIT.java</exclude> <!-- Use CineFilesPersonIT instead -->
+                <exclude>**/WorkIT.java</exclude> <!-- Use CineFilesWorkIT instead -->
+                
+                <!-- Exclude tests for unused record types. -->
+                <exclude>**/IntakeIT.java</exclude>
+                <exclude>**/LoanOutIT.java</exclude>
+                <exclude>**/MovementIT.java</exclude>
+                <exclude>**/ObjectExitIT.java</exclude>
+                <exclude>**/TaxonIT.java</exclude>
               </excludes>
               <systemPropertyVariables>
                 <tenantName>cinefiles</tenantName>

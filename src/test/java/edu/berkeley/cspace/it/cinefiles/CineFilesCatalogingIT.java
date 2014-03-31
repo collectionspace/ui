@@ -1,7 +1,11 @@
 package edu.berkeley.cspace.it.cinefiles;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,6 +14,10 @@ import edu.berkeley.cspace.driver.SaveFailedException;
 import edu.berkeley.cspace.it.CatalogingIT;
 
 public class CineFilesCatalogingIT extends CatalogingIT {
+	public static final Logger logger = Logger.getLogger(CineFilesCatalogingIT.class);
+
+	public static final List<String> CHECKBOX_FIELDS = Arrays.asList(
+			"hasCastCr", "hasTechCr", "hasBoxInfo", "hasFilmog", "hasBiblio", "hasDistCo", "hasProdCo", "hasCostInfo", "hasIllust");
 
 	/**
 	 * Tests CineFiles customizations to the Cataloging form.
@@ -46,5 +54,40 @@ public class CineFilesCatalogingIT extends CatalogingIT {
 		List<String> vocabularyNames = driver.getAutocompleteVocabularyNames("csc-collection-object-reference");
 		Assert.assertEquals(vocabularyNames.size(), 1, "Incorrect number of reference vocabularies:");
 		Assert.assertEquals(vocabularyNames.get(0), "Corporate Names", "Incorrect first vocabulary for reference autocomplete:");
+	}
+	
+	/**
+	 * Tests creating cataloging records, each with a single checkbox checked.
+	 * This ensures that each checkbox is wired correctly.
+	 * 
+	 * @throws SaveFailedException 
+	 */
+	@Test(dependsOnMethods = { "testLogin" })
+	public void testCheckboxes() throws SaveFailedException {
+		for (String checkedField : CHECKBOX_FIELDS) {
+			driver.navigateTo(CollectionSpacePage.CATALOGING);
+
+			Map<String, Object> fieldValues = new HashMap<String, Object>();
+			fieldValues.put("csc-object-identification-object-number", "Test Checkboxes " + driver.getTimestamp());
+			fieldValues.put("csc-collection-object-docTitle", "Test Checkboxes");
+			fieldValues.put("csc-object-identification-number-objects", "1");
+
+			for (String field : CHECKBOX_FIELDS) {
+				String className = "csc-collection-object-" + field;
+				
+				fieldValues.put(className, field.equals(checkedField) ? "true" : "false");
+			}
+
+			driver.fillFields(fieldValues);
+			driver.save();
+			
+			for (String field : CHECKBOX_FIELDS) {
+				String className = "csc-collection-object-" + field;
+				String expectedSavedValue = (String) fieldValues.get(className);
+				String actualSavedValue = (String) driver.getFieldValue(className);
+				
+				Assert.assertEquals(actualSavedValue, expectedSavedValue, "incorrect value for " + className);
+			}
+		}
 	}
 }
