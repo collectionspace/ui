@@ -400,6 +400,36 @@ public class CollectionSpaceDriver {
 		return filledValues;
 	}
 	
+	/**
+	 * Fill editable fields in a record editor with provided values.
+	 * 
+	 * @param  fieldValues A map of field names and values to fill in
+	 * @return             A map of field names and values that were filled in
+	 */
+	public Map<String, Object> fillFields(Map<String, Object> fieldValues) {
+		return fillFields(findRecordEditor(), fieldValues);
+	}
+	
+	/**
+	 * Fill editable fields in a record editor with provided values.
+	 * 
+	 * @param  context     The element in which to look for editable fields
+	 * @param  fieldValues A map of field names and values to fill in
+	 * @return             A map of field names and values that were filled in
+	 */
+	public Map<String, Object> fillFields(WebElement context, Map<String, Object> fieldValues) {
+		Map<String, Object> filledValues = new LinkedHashMap<String, Object>();
+		
+		for (String className : fieldValues.keySet()) {
+			Object specifiedValue = fieldValues.get(className);
+			Object filledValue = fillField(context, className, specifiedValue);
+
+			filledValues.put(className, filledValue);
+		}
+		
+		return filledValues;
+	}
+	
 	public WebElement findRecordEditor() {
 		return driver.findElement(By.className(RECORD_EDITOR_CLASSNAME));
 	}
@@ -1421,23 +1451,11 @@ public class CollectionSpaceDriver {
 		return currentValue;
 	}
 
-	/*
-	protected void clearField(String className) {
-		WebElement element = null;
-		
-		try {
-			element = driver.findElement(By.className(className));
-		}
-		catch(NoSuchElementException e) {
-			logger.warn("no field found for class " + className);
-		}
-		
-		if (element != null) {
-			element.clear();
-		}
-	}
+	public void clearField(String className) {
+		WebElement element = driver.findElement(By.className(className));
 
- */
+		element.clear();
+	}
 	
 	public WebElement findPreviousSiblingElementByTag(WebElement element, String tagName) {
 		WebElement foundElement = null;
@@ -1451,43 +1469,14 @@ public class CollectionSpaceDriver {
 			foundElement = precedingSiblings.get(precedingSiblings.size() - 1);
 		}
 		
-		return foundElement;			
+		return foundElement;
 	}
 	
-//	protected String chooseNextNumber(String className) {
-//		return chooseNextNumber(className, null);
-//	}
-	
-//	protected String chooseNextNumber(String className, String patternName) {
-//		WebElement element = null;
-//		String nextNumber = "";
-//		
-//		try {
-//			element = driver.findElement(By.className(className));
-//		}
-//		catch(NoSuchElementException e) {
-//			logger.warn("no field found for class " + className);
-//		}
-//		
-//		if (element != null) {
-//			if (isNumberPattern(element)) {
-//				chooseNextNumber(findSiblingNumberPatternChooserElement(element), patternName);
-//				pause(NUMBER_GENERATOR_PAUSE);
-//				nextNumber = element.getAttribute("value");
-//			}
-//			else {
-//				logger.warn(className + " is not a number pattern field");
-//			}
-//		}
-//		
-//		return nextNumber;
-//	}
-	
-	protected String chooseNextNumber(WebElement numberPatternChooserElement) {
+	public String chooseNextNumber(WebElement numberPatternChooserElement) {
 		return chooseNextNumber(numberPatternChooserElement, null);
 	}
 	
-	protected String chooseNextNumber(WebElement numberPatternChooserElement, String patternName) {
+	public String chooseNextNumber(WebElement numberPatternChooserElement, String patternName) {
 		String newNumber = null;
 		WebElement buttonElement = driver.findElement(By.className("csc-numberPatternChooser-button"));
 
