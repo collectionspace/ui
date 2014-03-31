@@ -118,7 +118,7 @@ public abstract class CollectionSpaceIT {
 			else if (value instanceof String) {
 				String valueString = (String) value;
 				
-				Assert.assertNotEquals(valueString, "", "value of " + className + " should not be empty:");
+				Assert.assertNotEquals(valueString, "", "value of " + className + " should not be empty");
 			}
 		}
 	}
