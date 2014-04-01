@@ -111,7 +111,7 @@ cspace = cspace || {};
 			recordTypeChanged: "{cspace.searchResultsRelationManager}.handleRecordTypeChanged"
 		},
 		relationURL: cspace.componentUrlBuilder("%tenant/%tname/relationships"),
-		listURL: cspace.componentUrlBuilder("%tenant/%tname/%primary/%related/%csid"),
+		listURL: cspace.componentUrlBuilder("%tenant/%tname/%primary/%related/%csid?pgSz=0"),
 		preInitFunction: "cspace.searchResultsRelationManager.preInit",
 		finalInitFunction: "cspace.searchResultsRelationManager.finalInit"
 	});
