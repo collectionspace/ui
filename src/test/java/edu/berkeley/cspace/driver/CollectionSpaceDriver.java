@@ -967,6 +967,17 @@ public class CollectionSpaceDriver {
 		return vocabularyNames;
 	}
 	
+	/**
+	 * Fills a structured date field with the supplied value. If the value is a String,
+	 * the parent display date field is filled. Otherwise, the value must be a map, containing
+	 * class names of fields in the structured date popup and their desired values. Any null
+	 * or non-existent values in the map will be filled with a generated value.
+	 * 
+	 * @param element The element representing the parent display date input
+	 * @param value   The desired value
+	 * @return        The value that was filled. This will be a String, if a String value
+	 *                was supplied, or a Map<String, String> if a map was supplied.
+	 */
 	public Object fillStructuredDateField(WebElement element, Object value) {
 		element.click();
 
