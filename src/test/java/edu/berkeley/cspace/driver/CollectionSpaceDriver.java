@@ -617,7 +617,7 @@ public class CollectionSpaceDriver {
 				value = fillAutocompleteField(element, (String) value);
 			}
 			else if (isStructuredDate(element)) {
-				value = fillStructuredDateField(element, (Map<String, String>) value);
+				value = fillStructuredDateField(element, value);
 			}
 			else if (isText(element)) {
 				value = fillTextField(element, (String) value);
@@ -967,27 +967,47 @@ public class CollectionSpaceDriver {
 		return vocabularyNames;
 	}
 	
-	public Map<String, String> fillStructuredDateField(WebElement element, Map<String, String> values) {
+	public Object fillStructuredDateField(WebElement element, Object value) {
 		element.click();
 
 		// Wait for term lists in the structured date popup to load
 		waitForTermLists();
 
-		WebElement popupContainer = findFollowingSiblingElementByClass(element, "csc-structuredDate-popup-container");
-		Map<String, String> filledValues = new LinkedHashMap<String, String>();
-		
-		for (String className : findAllFields(popupContainer)) {
-			String value = null;
-			
-			if (values != null) {
-				value = values.containsKey(className) ? values.get(className) : "";
-			}
-			
-			String filledValue = (String) fillField(popupContainer, className, value);			
-			filledValues.put(className, filledValue);
+		if (value instanceof String) {
+			return fillTextField(element, (String) value);
 		}
+		else {
+			Map<String, String> values = (Map<String, String>) value;
+			
+			WebElement popupContainer = findFollowingSiblingElementByClass(element, "csc-structuredDate-popup-container");
+			Map<String, String> filledValues = new LinkedHashMap<String, String>();
+			
+			for (String className : findAllFields(popupContainer)) {
+				String valueString = null;
+				
+				if (values != null) {
+					valueString = values.containsKey(className) ? values.get(className) : "";
+				}
+				
+				String filledValue = (String) fillField(popupContainer, className, valueString);
+				filledValues.put(className, filledValue);
+			}
+
+			return (values == null ? filledValues : values);
+		}
+	}
+
+	public boolean isStructuredDateParseWarningVisible(String className) {
+		WebElement structuredDateElement = driver.findElement(By.className(className));
 		
-		return (values == null ? filledValues : values);
+		return isStructuredDateParseWarningVisible(structuredDateElement);
+	}
+	
+	public boolean isStructuredDateParseWarningVisible(WebElement element) {
+		WebElement popupContainer = findFollowingSiblingElementByClass(element, "csc-structuredDate-popup-container");		
+		List<WebElement> warningElements = findElementsImmediately(popupContainer, By.cssSelector(".cs-structuredDate-parseStatus.error"));
+		
+		return (warningElements.size() > 0);
 	}
 	
 	/**
