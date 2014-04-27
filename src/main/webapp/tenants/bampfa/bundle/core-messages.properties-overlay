@@ -7,3 +7,12 @@ login-rologin-info: There is also a read-only account:
 login-rologin: reader@bampfa.cspace.berkeley.edu
 login-rologin-pwd: 
 login-rologin-pwdValue: 
+
+# Cataloging
+collection-object-accNumberInformationLabel: Accession Number Information
+collection-object-accNumberPrefixLabel: Prefix
+collection-object-accNumberPart1Label: Year
+collection-object-accNumberPart2Label: Gift
+collection-object-accNumberPart3Label: Gift
+collection-object-accNumberPart4Label: Gift
+collection-object-accNumberPart5Label: Alpha
