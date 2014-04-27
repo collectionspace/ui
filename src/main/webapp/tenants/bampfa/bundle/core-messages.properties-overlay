@@ -9,6 +9,9 @@ login-rologin-pwd:
 login-rologin-pwdValue: 
 
 # Cataloging
+collection-object-objectNumberLabel: Accession Number
+cataloging-identificationNumberRequired: At least one Accession Number Information field must be filled in
+cataloging-number: Accession Number
 collection-object-accNumberInformationLabel: Accession Number Information
 collection-object-accNumberPrefixLabel: Prefix
 collection-object-accNumberPart1Label: Year
@@ -16,3 +19,4 @@ collection-object-accNumberPart2Label: Gift
 collection-object-accNumberPart3Label: Gift
 collection-object-accNumberPart4Label: Gift
 collection-object-accNumberPart5Label: Alpha
+collection-object-objectNumberSearchLabel: Accession Number
