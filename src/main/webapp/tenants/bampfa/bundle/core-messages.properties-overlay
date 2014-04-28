@@ -10,7 +10,7 @@ login-rologin-pwdValue:
 
 # Cataloging
 collection-object-objectNumberLabel: Accession Number
-cataloging-identificationNumberRequired: At least one Accession Number Information field must be filled in
+cataloging-identificationNumberRequired: Please specify at least one Accession Number Information field.
 cataloging-number: Accession Number
 collection-object-accNumberInformationLabel: Accession Number Information
 collection-object-accNumberPrefixLabel: Prefix
