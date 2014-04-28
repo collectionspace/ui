@@ -17,7 +17,8 @@ public enum CollectionSpacePage implements Page {
 	OBJECTEXIT		("objectexit.html"),
 	INTAKE			("intake.html"),
 	GROUP			("group.html"),
-	MEDIA			("media.html");
+	MEDIA			("media.html"),
+	ADVANCED_SEARCH ("advancedsearch.html");
 	
 	private final String path;
 	
