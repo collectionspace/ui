@@ -80,6 +80,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 *     and should be tied to the collection vocabulary (BAMPFA-167)</li>
 	 * <li>The cataloger name and catalog date fields should appear (BAMPFA-169)</li>
 	 * <li>The condition/conservation fields should appear (BAMPFA-170)</li>
+	 * <li>The style field should be tied to the periodorstyle vocabulary (BAMPFA-176)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -140,6 +141,27 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-conditionCheckDate"));
 		Assert.assertEquals(elements.size(), 1, "the condition check date field should be found:");
+
+		// The style field should be tied to the periodorstyle vocabulary (BAMPFA-176)
+
+		WebElement styleElement = driver.findElementImmediately(By.className("csc-object-description-style"));
+
+		elements = driver.findElementsImmediately(styleElement, By.cssSelector("option"));
+		Assert.assertTrue(elements.size() > 0, "the style field should contain options:");
+		
+		value = "";
+		
+		for (int i=0; i<elements.size(); i++) {
+			String candidateValue = elements.get(i).getAttribute("value");
+			
+			if (StringUtils.isNotEmpty(candidateValue)) {
+				value = candidateValue;
+				break;
+			}
+		}
+		
+		Assert.assertTrue(value.startsWith("urn:cspace:bampfa.cspace.berkeley.edu:vocabularies:name(periodorstyle):item:name"), "the style field should be tied to the periodorstyle vocabulary:");
+		
 	}
 	
 	/**
@@ -147,20 +169,29 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <ul>
 	 * <li>The collectionobjects_common collection field should not appear (BAMPFA-167)</li>
 	 * <li>The collectionobjects_bampfa collection field should appear (BAMPFA-167)</li>
+	 * <li>The style field should be a dropdown (BAMPFA-176)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
 	public void testAdvancedSearchFormCustomizations() {
 		driver.navigateTo(CollectionSpacePage.ADVANCED_SEARCH);
-	
 		List<WebElement> elements;
 		
-		elements = driver.findElementsImmediately(By.className("csc-object-identification-collection"));
+		// The collectionobjects_common collection field should not appear (BAMPFA-167)
 		
+		elements = driver.findElementsImmediately(By.className("csc-object-identification-collection"));
 		Assert.assertEquals(elements.size(), 0, "the collectionobjects_common collection should not be found:");
 		
+		// The collectionobjects_bampfa collection field should appear (BAMPFA-167)
+		
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaCollection"));
-
 		Assert.assertEquals(elements.size(), 1, "the collectionobjects_bampfa collection field should be found:");
+		
+		// The style field should be a dropdown (BAMPFA-176)
+		
+		WebElement styleElement = driver.findElementImmediately(By.className("csc-object-description-style"));
+
+		elements = driver.findElementsImmediately(styleElement, By.cssSelector("option"));
+		Assert.assertTrue(elements.size() > 0, "the style field should contain options:");
 	}
 }
