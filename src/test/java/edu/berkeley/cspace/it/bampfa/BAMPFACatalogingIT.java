@@ -79,27 +79,31 @@ public class BAMPFACatalogingIT extends CatalogingIT {
 	 * <li>The collectionobjects_common collection field should not appear (BAMPFA-167)</li>
 	 * <li>The collectionobjects_bampfa collection field should appear, should be repeatable,
 	 *     and should be tied to the collection vocabulary (BAMPFA-167)</li>
+	 * <li>The cataloger name and catalog date fields should appear (BAMPFA-169)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
 	public void testFormCustomizations() {
 		driver.navigateTo(CollectionSpacePage.CATALOGING);
+		driver.expandAllSections();
+		
 		List<WebElement> elements;
 		
-		elements = driver.findElementsImmediately(By.className("csc-object-identification-collection"));
+		// The collectionobjects_common collection field should not appear (BAMPFA-167)
 		
+		elements = driver.findElementsImmediately(By.className("csc-object-identification-collection"));
 		Assert.assertEquals(elements.size(), 0, "the collectionobjects_common collection should not be found:");
 		
+		// The collectionobjects_bampfa collection field should appear, should be repeatable,
+		// and should be tied to the collection vocabulary (BAMPFA-167)
+		
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaCollection"));
-
 		Assert.assertEquals(elements.size(), 1, "the collectionobjects_bampfa collection field should be found:");
 		
 		WebElement collectionElement = elements.get(0);
-		
 		Assert.assertEquals(driver.isRepeatable(collectionElement), true, "the collection field should be repeatable:");
 		
 		elements = driver.findElementsImmediately(collectionElement, By.cssSelector("option"));
-		
 		Assert.assertTrue(elements.size() > 0, "the collectionobjects_bampfa collection field should contain options:");
 		
 		String value = "";
@@ -114,6 +118,14 @@ public class BAMPFACatalogingIT extends CatalogingIT {
 		}
 		
 		Assert.assertTrue(value.startsWith("urn:cspace:bampfa.cspace.berkeley.edu:vocabularies:name(collection):item:name"), "the collectionobjects_bampfa collection field should be tied to the collection vocabulary:");
+
+		// The cataloger name and catalog date fields should appear (BAMPFA-169)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-catalogerName"));
+		Assert.assertEquals(elements.size(), 1, "the cataloger name field should be found:");
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-catalogDate"));
+		Assert.assertEquals(elements.size(), 1, "the catalog date field should be found:");
 	}
 	
 	/**
