@@ -24,3 +24,6 @@ collection-object-bampfaCollectionLabel: Collection
 collection-object-distinguishingFeaturesLabel: Curatorial Comments
 collection-object-briefDescriptionsLabel: Description of Work
 collection-object-commentsLabel: Notes
+collection-object-catalogerInformationLabel: Cataloger Information
+collection-object-catalogerNameLabel: Cataloger Name
+collection-object-catalogDateLabel: Date
