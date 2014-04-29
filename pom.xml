@@ -233,7 +233,6 @@
             <configuration>
               <excludes>
                 <exclude>**/TaxonIT.java</exclude>
-                <exclude>**/CatalogingIT.java</exclude> <!-- Use BAMPFACatalogingIT instead -->
               </excludes>
               <systemPropertyVariables>
                 <tenantName>bampfa</tenantName>

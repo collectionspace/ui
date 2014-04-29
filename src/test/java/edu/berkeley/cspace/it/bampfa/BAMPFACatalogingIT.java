@@ -10,10 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import edu.berkeley.cspace.driver.CollectionSpacePage;
-import edu.berkeley.cspace.it.CatalogingIT;
 import edu.berkeley.cspace.it.CollectionSpaceIT;
 
-public class BAMPFACatalogingIT extends CatalogingIT {
+public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	public static final Logger logger = Logger.getLogger(BAMPFACatalogingIT.class);
 
 	/**
