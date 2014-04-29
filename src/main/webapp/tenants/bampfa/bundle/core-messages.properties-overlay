@@ -27,3 +27,10 @@ collection-object-commentsLabel: Notes
 collection-object-catalogerInformationLabel: Cataloger Information
 collection-object-catalogerNameLabel: Cataloger Name
 collection-object-catalogDateLabel: Date
+collection-object-conditionCheckInformationLabel: Condition/Conservation Information
+collection-object-conditionCheckGroupLabel: Condition Check
+collection-object-conditionNoteLabel: Condition Note
+collection-object-conservationNoteLabel: Conservation Note
+collection-object-conditionCheckByLabel: Checked By
+collection-object-conditionCheckDateLabel: Date
+

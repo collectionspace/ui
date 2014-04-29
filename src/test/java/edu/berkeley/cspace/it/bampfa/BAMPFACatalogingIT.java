@@ -80,6 +80,7 @@ public class BAMPFACatalogingIT extends CatalogingIT {
 	 * <li>The collectionobjects_bampfa collection field should appear, should be repeatable,
 	 *     and should be tied to the collection vocabulary (BAMPFA-167)</li>
 	 * <li>The cataloger name and catalog date fields should appear (BAMPFA-169)</li>
+	 * <li>The condition/conservation fields should appear (BAMPFA-170)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -126,6 +127,20 @@ public class BAMPFACatalogingIT extends CatalogingIT {
 		
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-catalogDate"));
 		Assert.assertEquals(elements.size(), 1, "the catalog date field should be found:");
+		
+		// The condition/conservation fields should appear (BAMPFA-170)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-conditionNote"));
+		Assert.assertEquals(elements.size(), 1, "the condition note field should be found:");
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-conservationNote"));
+		Assert.assertEquals(elements.size(), 1, "the conservation note field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-conditionCheckBy"));
+		Assert.assertEquals(elements.size(), 1, "the condition checker field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-conditionCheckDate"));
+		Assert.assertEquals(elements.size(), 1, "the condition check date field should be found:");
 	}
 	
 	/**
