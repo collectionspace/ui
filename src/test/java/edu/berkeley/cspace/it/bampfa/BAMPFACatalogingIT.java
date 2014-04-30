@@ -82,6 +82,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The condition/conservation fields should appear (BAMPFA-170)</li>
 	 * <li>The style field should be tied to the periodorstyle vocabulary (BAMPFA-176)</li>
 	 * <li>The item class field should appear, and should be tied to the itemclass vocabulary (BAMPFA-175)</li>
+	 * <li>Copyright fields should appear (BAMPFA-171)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -183,6 +184,22 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		Assert.assertTrue(value.startsWith("urn:cspace:bampfa.cspace.berkeley.edu:vocabularies:name(itemclass):item:name"), "the item class field should be tied to the itemclass vocabulary:");
 
+		// Copyright fields should appear (BAMPFA-171)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-copyrightCredit"));
+		Assert.assertEquals(elements.size(), 1, "the copyright credit field should be found:");
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-copyrightNote"));
+		Assert.assertEquals(elements.size(), 1, "the copyright note field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-photoCredit"));
+		Assert.assertEquals(elements.size(), 1, "the photo credit field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-copyrightHolder"));
+		Assert.assertEquals(elements.size(), 1, "the copyright holder field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduce"));
+		Assert.assertEquals(elements.size(), 1, "the permission to reproduce field should be found:");
 	}
 	
 	/**
@@ -192,6 +209,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The collectionobjects_bampfa collection field should appear (BAMPFA-167)</li>
 	 * <li>The style field should be a dropdown (BAMPFA-176)</li>
 	 * <li>The item class field should appear, and should be a dropdown (BAMPFA-175)</li>
+	 * <li>The permission to reproduce field should appear (BAMPFA-171)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -222,5 +240,10 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(itemClassElement, By.cssSelector("option"));
 		Assert.assertTrue(elements.size() > 0, "the item class field should contain options:");
+		
+		// The permission to reproduce field should appear (BAMPFA-171)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduceSearch"));
+		Assert.assertEquals(elements.size(), 1, "the permission to reproduce field should be found:");
 	}
 }
