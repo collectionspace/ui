@@ -81,6 +81,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The cataloger name and catalog date fields should appear (BAMPFA-169)</li>
 	 * <li>The condition/conservation fields should appear (BAMPFA-170)</li>
 	 * <li>The style field should be tied to the periodorstyle vocabulary (BAMPFA-176)</li>
+	 * <li>The item class field should appear, and should be tied to the itemclass vocabulary (BAMPFA-175)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -162,6 +163,26 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		Assert.assertTrue(value.startsWith("urn:cspace:bampfa.cspace.berkeley.edu:vocabularies:name(periodorstyle):item:name"), "the style field should be tied to the periodorstyle vocabulary:");
 		
+		// The item class field should appear, and should be tied to the itemclass vocabulary (BAMPFA-175)
+		
+		WebElement itemClassElement = driver.findElementImmediately(By.className("csc-collection-object-itemClass"));
+
+		elements = driver.findElementsImmediately(itemClassElement, By.cssSelector("option"));
+		Assert.assertTrue(elements.size() > 0, "the item class field should contain options:");
+		
+		value = "";
+		
+		for (int i=0; i<elements.size(); i++) {
+			String candidateValue = elements.get(i).getAttribute("value");
+			
+			if (StringUtils.isNotEmpty(candidateValue)) {
+				value = candidateValue;
+				break;
+			}
+		}
+		
+		Assert.assertTrue(value.startsWith("urn:cspace:bampfa.cspace.berkeley.edu:vocabularies:name(itemclass):item:name"), "the item class field should be tied to the itemclass vocabulary:");
+
 	}
 	
 	/**
@@ -170,6 +191,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The collectionobjects_common collection field should not appear (BAMPFA-167)</li>
 	 * <li>The collectionobjects_bampfa collection field should appear (BAMPFA-167)</li>
 	 * <li>The style field should be a dropdown (BAMPFA-176)</li>
+	 * <li>The item class field should appear, and should be a dropdown (BAMPFA-175)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -193,5 +215,12 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(styleElement, By.cssSelector("option"));
 		Assert.assertTrue(elements.size() > 0, "the style field should contain options:");
+
+		// The item class field should appear, and should be a dropdown (BAMPFA-175)
+		
+		WebElement itemClassElement = driver.findElementImmediately(By.className("csc-collection-object-itemClass"));
+
+		elements = driver.findElementsImmediately(itemClassElement, By.cssSelector("option"));
+		Assert.assertTrue(elements.size() > 0, "the item class field should contain options:");
 	}
 }
