@@ -83,6 +83,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The style field should be tied to the periodorstyle vocabulary (BAMPFA-176)</li>
 	 * <li>The item class field should appear, and should be tied to the itemclass vocabulary (BAMPFA-175)</li>
 	 * <li>Copyright fields should appear (BAMPFA-171)</li>
+	 * <li>Production people should be an autocomplete (BAMPFA-168)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -200,6 +201,11 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduce"));
 		Assert.assertEquals(elements.size(), 1, "the permission to reproduce field should be found:");
+		
+		// Production people should be an autocomplete (BAMPFA-168)
+		
+		WebElement productionPeopleElement = driver.findElementImmediately(By.className("csc-object-production-people"));
+		Assert.assertTrue(driver.isAutocomplete(productionPeopleElement), "the production people field should be an autocomplete field:");
 	}
 	
 	/**

@@ -8,6 +8,9 @@ login-rologin: reader@bampfa.cspace.berkeley.edu
 login-rologin-pwd: 
 login-rologin-pwdValue: 
 
+# Vocabularies
+vocab-collective: Artists Collectives
+
 # Cataloging
 collection-object-objectNumberLabel: Accession Number
 cataloging-identificationNumberRequired: Please specify at least one Accession Number Information field.
