@@ -84,6 +84,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The item class field should appear, and should be tied to the itemclass vocabulary (BAMPFA-175)</li>
 	 * <li>Copyright fields should appear (BAMPFA-171)</li>
 	 * <li>Production people should be an autocomplete (BAMPFA-168)</li>
+	 * <li>Black & white or color field should appear (BAMPFA-180)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -206,6 +207,11 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		WebElement productionPeopleElement = driver.findElementImmediately(By.className("csc-object-production-people"));
 		Assert.assertTrue(driver.isAutocomplete(productionPeopleElement), "the production people field should be an autocomplete field:");
+
+		// Black & white or color field should appear (BAMPFA-180)
+		
+		WebElement bwOrColorElement = driver.findElementImmediately(By.className("csc-collection-object-bwOrColor"));
+		Assert.assertEquals(elements.size(), 1, "the black & white or color field should be found:");
 	}
 	
 	/**
@@ -216,6 +222,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The style field should be a dropdown (BAMPFA-176)</li>
 	 * <li>The item class field should appear, and should be a dropdown (BAMPFA-175)</li>
 	 * <li>The permission to reproduce field should appear (BAMPFA-171)</li>
+	 * <li>Black & white or color field should appear (BAMPFA-180)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -251,5 +258,10 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduceSearch"));
 		Assert.assertEquals(elements.size(), 1, "the permission to reproduce field should be found:");
+		
+		// Black & white or color field should appear (BAMPFA-180)
+		
+		WebElement bwOrColorElement = driver.findElementImmediately(By.className("csc-collection-object-bwOrColor"));
+		Assert.assertEquals(elements.size(), 1, "the black & white or color field should be found:");
 	}
 }
