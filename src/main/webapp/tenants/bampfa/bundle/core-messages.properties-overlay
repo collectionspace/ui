@@ -45,3 +45,6 @@ collection-object-photoCreditLabel: Photo Credit
 collection-object-permissionToReproduceLabel: Permission to reproduce granted for noncommercial uses
 collection-object-permissionToReproduceSearchLabel: Permission to reproduce granted for noncommercial uses
 collection-object-bwOrColorLabel: Black & White or Color
+
+# Person
+person-datesActiveLabel: Dates Active
