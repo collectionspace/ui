@@ -85,6 +85,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>Copyright fields should appear (BAMPFA-171)</li>
 	 * <li>Production people should be an autocomplete (BAMPFA-168)</li>
 	 * <li>Black & white or color field should appear (BAMPFA-180)</li>
+	 * <li>The additional object production date fields should appear (BAMPFA-178)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -210,8 +211,22 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		// Black & white or color field should appear (BAMPFA-180)
 		
-		WebElement bwOrColorElement = driver.findElementImmediately(By.className("csc-collection-object-bwOrColor"));
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-bwOrColor"));
 		Assert.assertEquals(elements.size(), 1, "the black & white or color field should be found:");
+		
+		// The additional object production date fields should appear (BAMPFA-178)
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-objectProductionDateCirca"));
+		Assert.assertEquals(elements.size(), 1, "the circa field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-objectProductionDateCentury"));
+		Assert.assertEquals(elements.size(), 1, "the century field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-objectProductionDateEra"));
+		Assert.assertEquals(elements.size(), 1, "the era field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-objectProductionDynasty"));
+		Assert.assertEquals(elements.size(), 1, "the dynasty field should be found:");
 	}
 	
 	/**

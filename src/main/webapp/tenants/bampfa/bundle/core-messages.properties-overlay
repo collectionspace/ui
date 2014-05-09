@@ -45,6 +45,11 @@ collection-object-photoCreditLabel: Photo Credit
 collection-object-permissionToReproduceLabel: Permission to reproduce granted for noncommercial uses
 collection-object-permissionToReproduceSearchLabel: Permission to reproduce granted for noncommercial uses
 collection-object-bwOrColorLabel: Black & White or Color
+collection-object-objectProductionDateCircaLabel: Circa
+collection-object-objectProductionDateCenturyLabel: Century
+collection-object-objectProductionDateEraLabel: Era
+collection-object-objectProductionDynastyLabel: Dynasty
+
 
 # Person
 person-datesActiveLabel: Dates Active
