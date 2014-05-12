@@ -49,7 +49,7 @@ collection-object-objectProductionDateCircaLabel: Circa
 collection-object-objectProductionDateCenturyLabel: Century
 collection-object-objectProductionDateEraLabel: Era
 collection-object-objectProductionDynastyLabel: Dynasty
-
+collection-object-editionNumberLabel: Edition
 
 # Person
 person-datesActiveLabel: Dates Active
