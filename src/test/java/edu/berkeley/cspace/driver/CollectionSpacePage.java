@@ -13,6 +13,7 @@ public enum CollectionSpacePage implements Page {
 	WORK			("work.html"),
 	CITATION		("citation.html"),
 	LOANOUT			("loanout.html"),
+	ACQUISITION		("acquisition.html"),
 	MOVEMENT		("movement.html"),
 	OBJECTEXIT		("objectexit.html"),
 	INTAKE			("intake.html"),
