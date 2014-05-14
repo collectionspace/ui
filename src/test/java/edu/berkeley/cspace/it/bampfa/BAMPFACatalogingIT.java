@@ -86,6 +86,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>Production people should be an autocomplete (BAMPFA-168)</li>
 	 * <li>Black & white or color field should appear (BAMPFA-180)</li>
 	 * <li>The additional object production date fields should appear (BAMPFA-178)</li>
+	 * <li>The object production person fields should appear (BAMPFA-188)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -227,6 +228,17 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-objectProductionDynasty"));
 		Assert.assertEquals(elements.size(), 1, "the dynasty field should be found:");
+		
+		// The object production person fields should appear (BAMPFA-188)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaObjectProductionPerson"));
+		Assert.assertEquals(elements.size(), 1, "the bampfa object production person field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaObjectProductionPersonRole"));
+		Assert.assertEquals(elements.size(), 1, "the bampfa object production person role field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaObjectProductionPersonQualifier"));
+		Assert.assertEquals(elements.size(), 1, "the bampfa object production person qualifier field should be found:");
 	}
 	
 	/**

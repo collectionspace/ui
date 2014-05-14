@@ -50,6 +50,10 @@ collection-object-objectProductionDateCenturyLabel: Century
 collection-object-objectProductionDateEraLabel: Era
 collection-object-objectProductionDynastyLabel: Dynasty
 collection-object-editionNumberLabel: Edition
+collection-object-bampfaObjectProductionPersonGroupLabel: Production Person
+collection-object-bampfaObjectProductionPersonLabel: Production person
+collection-object-bampfaObjectProductionPersonRoleLabel: Role
+collection-object-bampfaObjectProductionPersonQualifierLabel: Qualifier
 
 # Person
 person-datesActiveLabel: Dates Active
