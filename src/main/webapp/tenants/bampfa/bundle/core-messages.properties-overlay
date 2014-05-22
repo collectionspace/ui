@@ -55,5 +55,21 @@ collection-object-bampfaObjectProductionPersonLabel: Production person
 collection-object-bampfaObjectProductionPersonRoleLabel: Role
 collection-object-bampfaObjectProductionPersonQualifierLabel: Qualifier
 
+# Acquisition
+acquisition-accessionDateGroupLabel: Date In
+acquisition-acquisitionProvisosLabel: Acquisition Terms
+acquisition-legalStatusLabel: Legal Status
+acquisition-legalStatusDateGroupLabel: Status Date
+acquisition-bampfaAcquisitionReasonLabel: For
+acquisition-appraisalInfoLabel: Appraisal Info
+acquisition-currentValueGroupLabel: Current Value
+acquisition-currentValueLabel: Value
+acquisition-currentValueSourceLabel: Source
+currentValueGroup-currentValueDateGroupLabel: Date
+acquisition-initialValueGroupLabel: Initial Value
+acquisition-initialValueLabel: Value
+acquisition-initialValueSourceLabel: Source
+initialValueGroup-initialValueDateGroupLabel: Date
+
 # Person
 person-datesActiveLabel: Dates Active
