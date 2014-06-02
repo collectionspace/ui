@@ -460,6 +460,19 @@ public class CollectionSpaceDriver {
 		return fields;
 	}
 	
+	
+	/**
+	 * Determines if an element represents a repeatable field.
+	 * 
+	 * @param element	The element to test
+	 * @return			True if the element is a repeatable field, false otherwise
+	 */
+	public boolean isRepeatable(WebElement element) {
+		List<WebElement> elements = findElementsImmediately(element, By.xpath("ancestor::ul[@class=\"cs-repeatable\"]"));
+		
+		return (elements.size() > 0);
+	}
+	
 	/**
 	 * Determines if an element represents an editable field. To be
 	 * editable, the element must be a text input, a checkbox, a
