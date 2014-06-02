@@ -73,7 +73,7 @@ currentValueGroup-currentValueDateGroupLabel: Date
 acquisition-initialValueGroupLabel: Initial Value
 acquisition-initialValueLabel: Value
 acquisition-initialValueSourceLabel: Source
-initialValueGroup-initialValueDateGroupLabel: Date
+acquisition-initialValueDateGroupLabel: Date
 
 # Person
 person-datesActiveLabel: Dates Active

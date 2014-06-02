@@ -97,7 +97,7 @@ public class BAMPFAAcquisitionIT extends CollectionSpaceIT {
 		elements = driver.findElementsImmediately(By.className("csc-acquisition-initialValueSource"));
 		Assert.assertEquals(elements.size(), 1, "the initial value source field should be found:");
 
-		elements = driver.findElementsImmediately(By.className("csc-initialValueGroup-initialValueDateGroup"));
+		elements = driver.findElementsImmediately(By.className("csc-acquisition-initialValueDateGroup"));
 		Assert.assertEquals(elements.size(), 1, "the initial value date field should be found:");
 
 		// The acquisition source field should not be an autocomplete field (BAMPFA-190)
