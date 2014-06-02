@@ -87,6 +87,8 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>Black & white or color field should appear (BAMPFA-180)</li>
 	 * <li>The additional object production date fields should appear (BAMPFA-178)</li>
 	 * <li>The object production person fields should appear (BAMPFA-188)</li>
+	 * <li>The state/generation field should appear (BAMPFA-193)</li>
+	 * <li>The sound or silent field should appear (BAMPFA-194)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -239,6 +241,16 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaObjectProductionPersonQualifier"));
 		Assert.assertEquals(elements.size(), 1, "the bampfa object production person qualifier field should be found:");
+		
+		// The state/generation field should appear (BAMPFA-193)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-stateGeneration"));
+		Assert.assertEquals(elements.size(), 1, "the state/generation field should be found:");
+		
+		// The sound or silent field should appear (BAMPFA-194)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-soundOrSilent"));
+		Assert.assertEquals(elements.size(), 1, "the sound or silent field should be found:");
 	}
 	
 	/**

@@ -54,6 +54,10 @@ collection-object-bampfaObjectProductionPersonGroupLabel: Production Person
 collection-object-bampfaObjectProductionPersonLabel: Production person
 collection-object-bampfaObjectProductionPersonRoleLabel: Role
 collection-object-bampfaObjectProductionPersonQualifierLabel: Qualifier
+collection-object-stylesLabel: Period/Style
+collection-object-styleLabel: Period/Style
+collection-object-soundOrSilentLabel: Sound or Silent
+collection-object-stateGenerationLabel: State/Generation
 
 # Acquisition
 acquisition-accessionDateGroupLabel: Date In
