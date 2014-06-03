@@ -89,6 +89,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The object production person fields should appear (BAMPFA-188)</li>
 	 * <li>The state/generation field should appear (BAMPFA-193)</li>
 	 * <li>The sound or silent field should appear (BAMPFA-194)</li>
+	 * <li>The acquisition override fields shoud appear (BAMPFA-195)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -251,6 +252,62 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-soundOrSilent"));
 		Assert.assertEquals(elements.size(), 1, "the sound or silent field should be found:");
+
+		// The acquisition override fields should appear (BAMPFA-195)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-accessionDateGroup"));
+		Assert.assertEquals(elements.size(), 1, "the date in field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-legalStatus"));
+		Assert.assertEquals(elements.size(), 1, "the legal status field should be found:");
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-legalStatusDateGroup"));
+		Assert.assertEquals(elements.size(), 1, "the status date field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-acquisitionDateGroup-acquisitionDateGroup"));
+		Assert.assertEquals(elements.size(), 1, "the acquisition date field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-acquisitionMethod"));
+		Assert.assertEquals(elements.size(), 1, "the acquisition method field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-creditLine"));
+		Assert.assertEquals(elements.size(), 1, "the credit line field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-acquisitionSource"));
+		Assert.assertEquals(elements.size(), 1, "the source field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-bampfaAcquisitionReason"));
+		Assert.assertEquals(elements.size(), 1, "the for field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-acquisitionProvisos"));
+		Assert.assertEquals(elements.size(), 1, "the acquisition terms field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-appraisalInfo"));
+		Assert.assertEquals(elements.size(), 1, "the appraisal info field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-acquisitionNote"));
+		Assert.assertEquals(elements.size(), 1, "the appraisal info field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-provenance"));
+		Assert.assertEquals(elements.size(), 1, "the provenance field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-currentValue"));
+		Assert.assertEquals(elements.size(), 1, "the acquisition note field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-currentValueSource"));
+		Assert.assertEquals(elements.size(), 1, "the current value source field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-currentValueGroup-currentValueDateGroup"));
+		Assert.assertEquals(elements.size(), 1, "the current value date field should be found:");
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-initialValue"));
+		Assert.assertEquals(elements.size(), 1, "the initial value field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-initialValueSource"));
+		Assert.assertEquals(elements.size(), 1, "the initial value source field should be found:");
+
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-initialValueDateGroup"));
+		Assert.assertEquals(elements.size(), 1, "the initial value date field should be found:");
 	}
 	
 	/**

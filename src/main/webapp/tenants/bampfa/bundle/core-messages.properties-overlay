@@ -58,6 +58,25 @@ collection-object-stylesLabel: Period/Style
 collection-object-styleLabel: Period/Style
 collection-object-soundOrSilentLabel: Sound or Silent
 collection-object-stateGenerationLabel: State/Generation
+collection-object-acquisitionInformationLabel: Item-Specific Acquisition Information
+collection-object-accessionDateGroupLabel: Date In
+collection-object-legalStatusLabel: Legal Status
+collection-object-legalStatusDateGroupLabel: Status Date
+collection-object-acquisitionMethodLabel: Acquisition Method
+collection-object-acquisitionSourceLabel: Source
+collection-object-creditLineLabel: Credit Line
+collection-object-bampfaAcquisitionReasonLabel: For
+collection-object-acquisitionNoteLabel: Acquistion Note
+collection-object-acquisitionProvisosLabel: Acquisition Terms
+collection-object-appraisalInfoLabel: Appraisal Info
+collection-object-provenanceLabel: Provenance
+collection-object-currentValueGroupLabel: Current Value
+collection-object-currentValueLabel: Value
+collection-object-currentValueSourceLabel: Source
+collection-object-initialValueGroupLabel: Initial Value
+collection-object-initialValueLabel: Value
+collection-object-initialValueSourceLabel: Source
+collection-object-initialValueDateGroupLabel: Date
 
 # Acquisition
 acquisition-accessionDateGroupLabel: Date In
