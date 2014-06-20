@@ -78,6 +78,9 @@ collection-object-initialValueLabel: Value
 collection-object-initialValueSourceLabel: Source
 collection-object-initialValueDateGroupLabel: Date
 
+# Dimension
+dimension-dimensionNoteLabel: Measurement Note
+
 # Acquisition
 acquisition-accessionDateGroupLabel: Date In
 acquisition-acquisitionProvisosLabel: Acquisition Terms
