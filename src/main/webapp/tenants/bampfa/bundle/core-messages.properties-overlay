@@ -76,6 +76,8 @@ collection-object-initialValueGroupLabel: Initial Value
 collection-object-initialValueLabel: Value
 collection-object-initialValueSourceLabel: Source
 collection-object-initialValueDateGroupLabel: Date
+collection-object-physicalDescriptionLabel: Materials
+
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
