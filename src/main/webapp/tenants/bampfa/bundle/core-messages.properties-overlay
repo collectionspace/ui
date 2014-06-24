@@ -76,7 +76,7 @@ collection-object-initialValueLabel: Value
 collection-object-initialValueSourceLabel: Source
 collection-object-initialValueDateGroupLabel: Date
 collection-object-physicalDescriptionLabel: Materials
-
+collection-object-numberOfScansLabel: Number of Scans
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note

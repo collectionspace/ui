@@ -90,6 +90,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 	 * <li>The state/generation field should appear (BAMPFA-193)</li>
 	 * <li>The sound or silent field should appear (BAMPFA-194)</li>
 	 * <li>The acquisition override fields shoud appear (BAMPFA-195)</li>
+	 * <li>The number of scans field shoud appear (BAMPFA-215)</li>	
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -308,6 +309,11 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 
 		elements = driver.findElementsImmediately(By.className("csc-collection-object-initialValueDateGroup"));
 		Assert.assertEquals(elements.size(), 1, "the initial value date field should be found:");
+		
+		// The number of scans field shoud appear (BAMPFA-215)
+		
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-numberOfScans"));
+		Assert.assertEquals(elements.size(), 1, "the number of scans field should be found:");		
 	}
 	
 	/**
