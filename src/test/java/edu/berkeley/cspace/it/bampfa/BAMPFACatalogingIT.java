@@ -352,7 +352,7 @@ public class BAMPFACatalogingIT extends CollectionSpaceIT {
 		
 		// The permission to reproduce field should appear (BAMPFA-171)
 		
-		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduceSearch"));
+		elements = driver.findElementsImmediately(By.className("csc-collection-object-permissionToReproduce"));
 		Assert.assertEquals(elements.size(), 1, "the permission to reproduce field should be found:");
 		
 		// Black & white or color field should appear (BAMPFA-180)
