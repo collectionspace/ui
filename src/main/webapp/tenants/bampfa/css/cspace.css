@@ -661,6 +661,11 @@ table tbody.highlight tr:focus td {
 .info-column3    {width:  33%;}
 .info-column4    {width:  25%;}
 
+.info-column.offset {
+    border-bottom: 1px solid #C7CFD4;
+    margin-bottom: 18px;
+}
+
 .fl-container-1024   {min-width: 990px; /* a little smaller to account for vertical scrolling */}
 .fl-container-900     {width:  900px;}
 .fl-container-1000   {width: 1000px;}
