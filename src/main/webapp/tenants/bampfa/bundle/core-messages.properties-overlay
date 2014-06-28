@@ -86,9 +86,11 @@ collection-object-objectProductionInformationLabel: Detail
 collection-object-classificationInformationLabel: Classification
 collection-object-numberOfObjectsLabel: Item Count
 collection-object-noteInformationLabel: Notes
+collection-object-subjectThemeLabel: Subject/Theme
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
+dimension-measuredPartNoteLabel: Note
 
 # Acquisition
 acquisition-accessionDateGroupLabel: Date In
