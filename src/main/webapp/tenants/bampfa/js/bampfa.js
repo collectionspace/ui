@@ -35,5 +35,48 @@ var bampfa = {};
 		}
 		
 		return normalizedPart;
-	} 
+	}
+	
+	bampfa.computeDimensionSummary = function(measuredPart, dimensionSubGroup, measuredPartNote) {
+		var valueMap = {};
+		
+		for (var i=0; i<dimensionSubGroup.length; i++) {
+			var measurement = dimensionSubGroup[i];
+			var dimension = measurement.dimension;
+			var value = measurement.value;
+			
+			if (value != null && value != "" && !(dimension in valueMap)) {
+				valueMap[dimension] = value;
+			}
+		}
+		
+		var orderedDimensions = ["height", "width", "depth", "diameter"];
+		var orderedValues = [];
+		
+		for (var i=0; i<orderedDimensions.length; i++) {
+			var dimension = orderedDimensions[i];
+			
+			if (dimension in valueMap) {
+				orderedValues.push(valueMap[dimension]);
+			}
+		}
+		
+		var dimensionSummary = orderedValues.join(" x ");
+		var summaryParts = [];
+		
+		if (measuredPart != null && measuredPart != "") {
+			summaryParts.push(measuredPart + ":");
+		}
+
+		if (dimensionSummary != "") {
+			summaryParts.push(dimensionSummary);
+		}
+		
+		if (measuredPartNote != null && measuredPartNote != "") {
+			summaryParts.push("(" + measuredPartNote + ")");
+		}
+		
+		return summaryParts.join(" ");
+	}
+	
 })(jQuery, fluid);
