@@ -82,6 +82,10 @@ collection-object-titleLanguageLabel: Language
 collection-object-objectProductionPersonLabel: Artist or Maker
 collection-object-objectProductionPeopleGroupLabel: Artists Collective
 collection-object-objectProductionPeopleLabel: Collective
+collection-object-objectProductionInformationLabel: Detail
+collection-object-classificationInformationLabel: Classification
+collection-object-numberOfObjectsLabel: Item Count
+collection-object-noteInformationLabel: Notes
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note

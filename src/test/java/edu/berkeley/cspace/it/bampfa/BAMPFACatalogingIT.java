@@ -1,5 +1,6 @@
 package edu.berkeley.cspace.it.bampfa;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,11 +11,19 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import edu.berkeley.cspace.driver.CollectionSpacePage;
+import edu.berkeley.cspace.it.CatalogingIT;
 import edu.berkeley.cspace.it.CollectionSpaceIT;
 
-public class BAMPFACatalogingIT extends CollectionSpaceIT {
+public class BAMPFACatalogingIT extends CatalogingIT {
 	public static final Logger logger = Logger.getLogger(BAMPFACatalogingIT.class);
 
+	public BAMPFACatalogingIT() {
+		setCalendarDateFieldNames(Arrays.asList(
+			"csc-dimension-valueDate",
+			"csc-collection-object-conditionCheckDate"
+		));
+	}
+	
 	/**
 	 * Tests object number computation (BAMPFA-166).
 	 */
