@@ -23,6 +23,12 @@
                             "childPath": "_primary",
                             "value": true,
                             "path": "title"
+                        }, {
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.bampfaObjectProductionPersonGroup",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "bampfaObjectProductionPerson"
                         }]
                     }
                 },
