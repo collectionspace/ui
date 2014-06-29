@@ -59,6 +59,29 @@ cspace = cspace || {};
                 that.renderer.refreshView();
             });
         });
+        
+        $(window).bind("scroll.titleBar", function() {
+            var scrollTop = $(window).scrollTop();
+
+            if (!that.docked) {
+                var titleBar = that.container.find(that.options.selectors["title-bar"]);
+
+                if (scrollTop >= titleBar.position().top) {
+                    that.container.css("height", titleBar.css("height"));
+                    titleBar.addClass("docked");
+                    that.docked = true;
+                }
+            }
+            else {
+                if (scrollTop <= that.container.position().top) {
+                    var titleBar = that.container.find(that.options.selectors["title-bar"]);
+
+                    that.container.css("height", "auto");
+                    titleBar.removeClass("docked");
+                    that.docked = false;
+                }
+            }
+        })
     };
     
     // Set the titleBar value
@@ -92,12 +115,14 @@ cspace = cspace || {};
             recordType: that.model.recordType,
             vocab: that.vocab
         });
+        var docked = that.docked || false;
+
         return {
             recordType: {
                 messagekey: "${recordType}",
                 decorators: {"addClass": "{styles}.recordType"}
             },
-            expander: {
+            expander: [{
                 type: "fluid.renderer.condition",
                 condition: vocab || false,
                 trueTree: {
@@ -107,7 +132,20 @@ cspace = cspace || {};
                         decorators: {"addClass": "{styles}.vocab"}
                     }
                 }
-            },
+            }, {
+                type: "fluid.renderer.condition",
+                condition: docked,
+                trueTree: {
+                    "title-bar": {
+                        decorators: {"addClass": "docked"}
+                    }
+                },
+                falseTree: {
+                    "title-bar": {
+                        
+                    }
+                }
+            }],
             title: {
                 value: that.buildTitle()
             }
@@ -117,6 +155,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.titleBar", {
         gradeNames: "fluid.rendererComponent",
         selectors: {
+            "title-bar": "#title-bar",
             title: ".csc-titleBar-value",
             recordType: ".csc-titleBar-recordType",
             vocab: ".csc-titleBar-vocab"
