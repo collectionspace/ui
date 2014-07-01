@@ -226,7 +226,16 @@ cspace = cspace || {};
                 return;
             }
         
-            that.applier.requestChange(that.fullElPath, newValue);
+            /*
+             * If the new value is empty, and the target field is undefined, don't do anything.
+             * By setting the value, the change detector would think that the page is modified,
+             * because the field went from undefined to empty string; but to the user, they're the
+             * same thing. This prevents an apparently spurious confirmation dialog, if the user
+             * attempts to navigate away without saving.
+             */
+            if (newValue != "" || hasDefinedTarget) {
+                that.applier.requestChange(that.fullElPath, newValue);
+            }
         }
     }
 
