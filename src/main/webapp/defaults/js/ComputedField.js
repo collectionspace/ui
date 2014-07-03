@@ -254,19 +254,34 @@ cspace = cspace || {};
     };
 
     /*
-     * Resolve the given EL path.
-     * The argument elPath is simply appended to the root, so argument fields must be under the same root as this field.
+     * Resolve the given EL path. If the EL path starts with the document root, it is simply returned.
+     * Otherwise, the argument EL path is composed with this field's root EL path.
      * TODO: Make this function smarter about finding argument elPaths that are outside of this field's root.
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-        var root = that.options.root;
+        var documentRoot = "fields";
+        var resolvedPath;
         
-        if (that.fullElPath.match(/^fields\./) && !root) {
-            root = "fields";
+        if (elPath.substr(0, documentRoot.length + 1) == (documentRoot + ".")) {
+            // The argument El path starts with the document root.
+            
+            resolvedPath = elPath;
         }
-
-        return cspace.util.composeSegments(root, elPath);
+        else {
+            var root = that.options.root;
+            
+            if (!root) {
+                // This field has an undefined/null/empty root EL path.
+                // Use the document root.
+                
+                root = documentRoot;
+            }
+            
+            resolvedPath = cspace.util.composeSegments(root, elPath);
+        }
+        
+        return resolvedPath;
     };
     
     /*
