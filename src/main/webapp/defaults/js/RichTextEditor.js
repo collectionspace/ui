@@ -21,14 +21,27 @@ cspace = cspace || {};
 		preInitFunction: "cspace.richTextEditor.preInit",
 		finalInitFunction: "cspace.richTextEditor.finalInit",
 		events: {
+			repeatableOnRefreshView: null,
+			recordEditorAfterSave: null,
+			recordEditorAfterCancel: null,
+			removeAllListeners: null,
 			onSubmit: null
+		},
+		listeners: {
+			removeAllListeners: {
+				listener: "{richTextEditor}.removeAllListeners"
+			}
 		}
 	});
 
 	cspace.richTextEditor.preInit = function(that) {
 		that.transferData = function() {
 			cspace.computedField.transferData(that);
-		}
+		};
+		
+		that.removeAllListeners = function() {
+			that.events.onSubmit.removeListener(that.id);
+		};
 	};
 		
 	cspace.richTextEditor.finalInit = function(that) {
@@ -43,6 +56,12 @@ cspace = cspace || {};
 		
 		if (isMultiline) {
 			editableDiv.addClass("multiline");
+
+			// UC Berkeley customization: textarea elements may have class "short". Transfer this to the editable div.
+			
+			if (that.container.hasClass("short")) {
+				editableDiv.addClass("short");
+			}
 		}
 		
 		// Instantiate an inline editor, using the div just created.
@@ -59,8 +78,8 @@ cspace = cspace || {};
 				element: 'i',
 				overrides: 'em'
 			},
-			removeButtons: "",
-			toolbar: [[
+			removeButtons: "",				// Prevent the underline button from being removed.
+			toolbar: [[						// Configure the toolbar. TODO: Make this able to be specified for each field (via app layer config/uispec).
 				'Bold',
 				'Italic',
 				'Underline',
@@ -68,14 +87,25 @@ cspace = cspace || {};
 			]]
 		});
 
+		// When the field loses focus, transfer the data from the editable div into the 
+		// original textarea/input. This is necessary because the field might be used
+		// in the title bar or as an input to a computed field, so it needs to be 
+		// updated in real time.
+		
 		that.editor.on("blur", function(event) {
 			that.transferData();
 		});
+		
+		// When the form is submitted, transfer the data from the editable div into the 
+		// original textarea/input. This is necessary in addition to the blur handler, because
+		// if the editable div has focus when the form is submitted, the blur event fires
+		// too late to transfer the value before the form is saved.
 		
 		that.events.onSubmit.addListener(that.transferData, that.id);
 		
 		if (!isMultiline) {
 			// This isn't a multiline field, so disable the enter key.
+			
 			that.editor.on('key', function(event) {
 				if (event.data.keyCode == 13 || event.data.keyCode == CKEDITOR.SHIFT + 13) {
 					event.cancel();
@@ -89,13 +119,19 @@ cspace = cspace || {};
 		
 		// Hide the original textarea/input.
 		
-		that.container.css("display", "none");		
+		that.container.css("display", "none");
 	}
-	
+		
 	cspace.computedField.transferData = function(that) {
 		var data = that.editor.getData();
+		
+		// Chrome uses &nbsp; entities for spaces occurring immediately before tags.
+		// This doesn't actually seem to be necessary, so replace them with regular
+		// spaces for readability.
+		
+		data = data.replace(/&nbsp;/g, " ");
 
 		that.container.val(data);
-		that.container.change();		
+		that.container.change();
 	}
 })(jQuery, fluid);

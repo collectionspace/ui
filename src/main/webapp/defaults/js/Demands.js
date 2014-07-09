@@ -2019,9 +2019,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         // richTextEditor demands
         fluid.demands("cspace.richTextEditor", "cspace.recordEditor", {
+            container: "{arguments}.0",
             mergeAllOptions: [{
                 events: {
-                    onSubmit: "{recordEditor}.saver.events.beforeSave",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.richTextEditor", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    repeatableOnRefreshView: "{richTextEditor}.events.removeAllListeners.fire",
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire"
+                    }
                 }
             }, "{arguments}.1"]
         });
