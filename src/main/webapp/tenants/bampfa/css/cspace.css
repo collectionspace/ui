@@ -44,9 +44,11 @@ textarea {
     font-family: inherit;
     overflow:auto; 
     resize:none;}
+sup {
+    vertical-align: super;}
 
 /* input form selectors */
-input, textarea, select {
+input, textarea, select, div.richtext {
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box;
@@ -62,9 +64,17 @@ input, textarea, select {
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     vertical-align: middle;}
+div.richtext {
+    background: white;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+div.richtext.multiline {
+    white-space: normal;
+}
 select {
     padding:0;}
-table select, table ~ select, table input {
+table select, table ~ select, table input, table div.richtext {
     border:none;
     height:19px;
     padding-left:2px;}
@@ -76,13 +86,13 @@ input[type="text"], input[type="password"], textarea {
     margin: 0;
     width: 95%;
 }
-div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea {
+div.info-column2-50 input[type="text"], div.info-column2-50 input[type="password"], div.info-column2-50 textarea, div.info-column2-50 div.richtext {
     width: 88.5%;
 }
-div.info-column2-50 table input[type="text"], div.info-column2-50 table input[type="password"], div.info-column2-50 table textarea {
+div.info-column2-50 table input[type="text"], div.info-column2-50 table input[type="password"], div.info-column2-50 table textarea, div.info-column2-50 table div.richtext {
     width: 100%;
 }
-table input[type="text"], table input[type="password"], table textarea {
+table input[type="text"], table input[type="password"], table textarea, table div.richtext {
     width:100%;
     padding-left:2px;}
 input[type="submit"].logout {
@@ -1220,7 +1230,7 @@ table.cs-admin-table td.checkbox {
     width: 100%; 
     padding-top:0; 
     border:none;}
-.content textarea {
+.content textarea, .content div.richtext.multiline {
     height:75px;
     overflow:auto;
 }
