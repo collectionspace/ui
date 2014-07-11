@@ -24,13 +24,8 @@ cspace = cspace || {};
 			repeatableOnRefreshView: null,
 			recordEditorAfterSave: null,
 			recordEditorAfterCancel: null,
-			removeAllListeners: null,
+			destroyEditor: null,
 			onSubmit: null
-		},
-		listeners: {
-			removeAllListeners: {
-				listener: "{richTextEditor}.removeAllListeners"
-			}
 		}
 	});
 
@@ -39,9 +34,52 @@ cspace = cspace || {};
 			cspace.computedField.transferData(that);
 		};
 		
+		that.bindEvents = function() {
+			// When the field loses focus, transfer the data from the editable div into the 
+			// original textarea/input. This is necessary because the field might be used
+			// in the title bar or as an input to a computed field, so it needs to be 
+			// updated in real time.
+		
+			that.editor.on("blur", function(event) {
+				that.transferData();
+			});
+			
+			// When the form is submitted, transfer the data from the editable div into the 
+			// original textarea/input. This is necessary in addition to the blur handler, because
+			// if the editable div has focus when the form is submitted, the blur event fires
+			// too late to transfer the value before the form is saved.
+		
+			that.events.onSubmit.addListener(that.transferData, that.id);
+			
+			// If this is a repeatable field, transfer the data from the editable div into the 
+			// original textarea/input before each time the model is updated. This handles
+			// the case where the plus button is clicked while the editable div has focus.
+			// In that situation, the blur handler fires too late to update the model before
+			// the repeating fields are redrawn, so the current value would be lost.
+			
+			that.events.repeatableOnUpdateModel.addListener(that.transferData, that.id);
+			
+			// If this is a repeatable field, destroy the editor and all event handlers
+			// when the repeatable fields are redrawn.
+			
+			that.events.repeatableOnRefreshView.addListener(that.destroyEditor, that.id);
+			
+			// Destroy the editor and all event handlers when told.
+			
+			that.events.destroyEditor.addListener(that.destroyEditor, that.id);
+		}
+		
 		that.removeAllListeners = function() {
 			that.events.onSubmit.removeListener(that.id);
+			that.events.repeatableOnUpdateModel.removeListener(that.id);
+			that.events.repeatableOnRefreshView.removeListener(that.id);
+			that.events.destroyEditor.removeListener(that.id);
 		};
+		
+		that.destroyEditor = function(arg) {
+			that.removeAllListeners();
+			that.editor.destroy();
+		}
 	};
 		
 	cspace.richTextEditor.finalInit = function(that) {
@@ -86,22 +124,6 @@ cspace = cspace || {};
 				'Superscript'
 			]]
 		});
-
-		// When the field loses focus, transfer the data from the editable div into the 
-		// original textarea/input. This is necessary because the field might be used
-		// in the title bar or as an input to a computed field, so it needs to be 
-		// updated in real time.
-		
-		that.editor.on("blur", function(event) {
-			that.transferData();
-		});
-		
-		// When the form is submitted, transfer the data from the editable div into the 
-		// original textarea/input. This is necessary in addition to the blur handler, because
-		// if the editable div has focus when the form is submitted, the blur event fires
-		// too late to transfer the value before the form is saved.
-		
-		that.events.onSubmit.addListener(that.transferData, that.id);
 		
 		if (!isMultiline) {
 			// This isn't a multiline field, so disable the enter key.
@@ -120,17 +142,13 @@ cspace = cspace || {};
 		// Hide the original textarea/input.
 		
 		that.container.css("display", "none");
+		
+		that.bindEvents();
 	}
 		
 	cspace.computedField.transferData = function(that) {
 		var data = that.editor.getData();
 		
-		// Chrome uses &nbsp; entities for spaces occurring immediately before tags.
-		// This doesn't actually seem to be necessary, so replace them with regular
-		// spaces for readability.
-		
-		data = data.replace(/&nbsp;/g, " ");
-
 		that.container.val(data);
 		that.container.change();
 	}
