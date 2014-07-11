@@ -82,7 +82,7 @@ input[type="button"], input[type="submit"], input[type="checkbox"], input[type="
     height:auto;}
 input[type="checkbox"] {
 	padding:0 2px;}
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], textarea, div.richtext {
     margin: 0;
     width: 95%;
 }
