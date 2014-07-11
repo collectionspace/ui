@@ -87,6 +87,8 @@ collection-object-classificationInformationLabel: Classification
 collection-object-numberOfObjectsLabel: Item Count
 collection-object-noteInformationLabel: Notes
 collection-object-subjectThemeLabel: Subject/Theme
+collection-object-bampfaTitleGroupLabel: Title
+collection-object-bampfaTitleSearchLabel: Title
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note

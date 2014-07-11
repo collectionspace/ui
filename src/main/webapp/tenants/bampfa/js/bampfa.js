@@ -80,4 +80,21 @@ var bampfa = {};
 		return summaryParts.join(" ");
 	}
 	
+	/* 
+	 * Convert html from the richTextEditor component into plain text.
+	 */
+	bampfa.convertHtmlToPlainText = function(html) {
+		var lines = html.split("<br />");
+		var plainTextLines = [];
+		
+		for (var i=0; i<lines.length; i++) {
+			var line = lines[i].replace(/&nbsp;/g, " ");
+			var element = $("<div>" + line + "</div>");
+			
+			plainTextLines.push(element.text());
+		}
+		
+		return plainTextLines.join("\n");
+	}
+	
 })(jQuery, fluid);
