@@ -1126,6 +1126,10 @@ table.cs-admin-table td.checkbox {
     line-height:20px; 
     font-weight:bold; 
     color:#9D9D9D;}
+.login-text .subheader {
+    font-size: 14px; 
+    line-height:18px; 
+    color:#9D9D9D;}
 .login-text .content, .login-forms .content, .login-text /*.fl-container-left*/  .information-group .info-pair .content, 
 /*.fl-container-left*/  .information-group .login-forms .info-pair .content {
     padding-top: 20px; 
