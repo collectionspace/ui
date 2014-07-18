@@ -39,6 +39,13 @@ cspace = cspace || {};
                     args: ["${version}"]
                 }
             },
+            deploymentRelease: {
+                target: "",
+                linktext: {
+                    messagekey: "footer-deploymentRelease",
+                    args: ["${deploymentVersion}"]
+                }
+            },
             about: {
                 target: "${about}",
                 linktext: {
@@ -69,6 +76,7 @@ cspace = cspace || {};
             text1: ".csc-footer-text1",
             text2: ".csc-footer-text2",
             currentRelease: ".csc-footer-currentRelease",
+            deploymentRelease: ".csc-footer-deploymentRelease",
             about: ".csc-footer-about",
             feedback: ".csc-footer-feedback",
             support: ".csc-footer-support"
@@ -78,6 +86,7 @@ cspace = cspace || {};
             currentRelease: "http://www.collectionspace.org/current_release",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback",
             version: "4.0",
+            deploymentVersion: "UC Berkeley",
             support: "mailto:cspace-support@lists.berkeley.edu"
         },
         // Footer template resource.
