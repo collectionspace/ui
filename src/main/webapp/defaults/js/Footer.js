@@ -40,7 +40,7 @@ cspace = cspace || {};
                 }
             },
             deploymentRelease: {
-                target: "",
+                target: "${deploymentRelease}",
                 linktext: {
                     messagekey: "footer-deploymentRelease",
                     args: ["${deploymentVersion}"]
@@ -84,6 +84,7 @@ cspace = cspace || {};
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
+            deploymentRelease: "releaseNotes.html",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback",
             version: "4.0",
             deploymentVersion: "UC Berkeley",
