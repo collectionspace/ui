@@ -15,6 +15,7 @@ public class BAMPFAPersonIT extends CollectionSpaceIT {
 	 * Tests BAM/PFA customizations to the Person form.
 	 * <ul>
 	 * <li>The dates active field should appear (BAMPFA-183)</li>
+	 * <li>The birth city field should appear (BAMPFA-237)</li>
 	 * </ul>
 	 */
 	@Test(dependsOnMethods = { "testLogin" })
@@ -28,5 +29,10 @@ public class BAMPFAPersonIT extends CollectionSpaceIT {
 		
 		elements = driver.findElementsImmediately(By.className("csc-person-datesActive"));
 		Assert.assertEquals(elements.size(), 1, "the dates active field should be found:");
+
+		// The birth city field should appear (BAMPFA-237)
+		
+		elements = driver.findElementsImmediately(By.className("csc-person-birthCity"));
+		Assert.assertEquals(elements.size(), 1, "the birth city field should be found:");
 	}
 }
