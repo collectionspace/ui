@@ -30,7 +30,7 @@ var bampfa = {};
 	var normalizeAccessionNumberPart = function(part) {
 		var normalizedPart = "";
 		
-		if (typeof(part) != "undefined" || part != null) {
+		if (typeof(part) != "undefined" && part != null) {
 			normalizedPart = $.trim(part);
 		}
 		
