@@ -6,6 +6,56 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(bampfa_4.0-23) -->
+<div id="bampfa_4.0-23">
+<h2>Version bampfa_4.0-23 <span class="releasedate">(July 28, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Cataloging: Implement accession number calculation <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-166">BAMPFA-166</a>)</span>
+<ul class="commits">
+<li id="commit_3234f8d" class="ui commit">Fix a minor bug in accession number calculation, which could have caused an error if a part was null.</li>
+</ul>
+</li>
+<li class="issue">
+Person: Calculate display name(s) from name parts <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-205">BAMPFA-205</a>)</span>
+<ul class="commits">
+<li id="commit_c5c900c" class="application commit">Configure person termDisplayName and termName to be computed.</li>
+<li id="commit_7dc1932" class="ui commit">Add LFM and FML name computation functions.</li>
+</ul>
+</li>
+<li class="issue">
+Cataloging: Add subjectTheme field <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-219">BAMPFA-219</a>)</span>
+<ul class="commits">
+<li id="commit_97e5778" class="application commit">Add new values from FileMaker to the subjects and themes vocabulary.</li>
+</ul>
+</li>
+<li class="issue">
+Person: Relabel "Place of Birth" to "Birth Country" <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-236">BAMPFA-236</a>)</span>
+<ul class="commits">
+<li id="commit_5fca7e0" class="ui commit">Relabel person 'Place of Birth' to 'Birth Country'.</li>
+</ul>
+</li>
+<li class="issue">
+Person: Add "Birth City" field <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-237">BAMPFA-237</a>)</span>
+<ul class="commits">
+<li id="commit_d8385f9" class="application commit">Add birth city field to persons_bampfa schema.</li>
+<li id="commit_55add1a" class="ui commit">Add birth city field to person record.</li>
+</ul>
+</li>
+<li class="issue">
+Uncategorized issues
+<ul class="commits">
+<li id="commit_41cb192" class="ui commit">Add release notes page.</li>
+<li id="commit_68c25ed" class="ui commit">Copy changes from defaults into tenant files.</li>
+<li id="commit_3dff54f" class="ui commit">Make tenant copy of releaseNotes.html.</li>
+<li id="commit_c09ff04" class="ui commit">Update version number in release notes.</li>
+<li id="commit_428b893" class="ui commit">Update version number in release notes.</li>
+</ul>
+</li>
+</ul>
+</div>
 		<!-- generated_release_notes(bampfa_4.0-22) -->
 	</body>
 </html>
