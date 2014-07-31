@@ -250,25 +250,44 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             // After autocomplete authorities (configuration) is fetched,
             // do the rest of the setup. Handler permissions, sort authorities
             // based on vocab.
-            if (!authorities) {
-                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
-                    url: authUrl
-                }));
-                return;
-            }
-            if (authorities.isError === true) {
-                fluid.each(authorities.messages, function (message) {
-                    that.displayErrorMessage(message);
+
+            // It's possible the autocomplete field will have been removed from
+            // the page by the time this callback happens. For example, when
+            // Create New from Existing is used on a secondary tab, and the
+            // record has been modified, the user may choose to save the record
+            // first, before the new one is created. In that case, the record is
+            // saved, which causes new autocomplete components to be created, but
+            // then that form and its autocompletes are immediately discarded to
+            // make way for the form for the new-from-existing record. So we need
+            // to test if this autocomplete is still "alive" before doing anything.
+            // To do this, use jquery to test if the field is still in the DOM.
+
+            if (jQuery.contains(document, that.container[0])) {
+                if (!authorities) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                        url: authUrl
+                    }));
+                    return;
+                }
+                if (authorities.isError === true) {
+                    fluid.each(authorities.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
+                that.applier.requestChange("authorities", authorities);
+
+                if (that.handlePermissions) {
+                    that.handlePermissions();
+                }
+
+                that.model.authorities.sort(function (auth1, auth2) {
+                    return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
                 });
-                return;
             }
-            that.applier.requestChange("authorities", authorities);
-            if (that.handlePermissions) {
-                that.handlePermissions();
+            else {
+                that.applier.requestChange("authorities", []);
             }
-            that.model.authorities.sort(function (auth1, auth2) {
-                return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
-            });
         }, cspace.util.provideErrorCallback(that, authUrl, "errorFetching"));
 
         // If closed revert state.
