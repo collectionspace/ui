@@ -246,6 +246,7 @@ cspace = cspace || {};
             passwordRequired: ".csc-login-passwordRequired",
             
             currentReleaseHeader: ".csc-login-current",
+            deploymentReleaseHeader: ".csc-login-deployment",
             currentReleaseInfo: ".csc-login-current-info",
             currentReleaseDetails: ".csc-login-current-details",
             loginInfo: ".csc-login-login-info",
@@ -286,6 +287,9 @@ cspace = cspace || {};
             },
             currentReleaseHeader: {
                 messagekey: "login-current"
+            },
+            deploymentReleaseHeader: {
+                messagekey: "login-deployment"
             },
             currentReleaseInfo: {
                 messagekey: "login-current-info"

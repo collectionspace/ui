@@ -1,0 +1,2 @@
+# Don't convert line endings in ckeditor files, since modifying those files could impose additional license (MPL) obligations.  
+src/main/webapp/defaults/lib/ckeditor/ -crlf
