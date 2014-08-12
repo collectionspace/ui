@@ -21,7 +21,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
@@ -41,7 +41,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Search.js</js>
@@ -68,7 +68,7 @@
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/tenants/botgarden/js/TermList.js</js>
@@ -102,7 +102,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
@@ -121,7 +121,7 @@
     <js>/defaults/js/PasswordValidator.js</js>
     <js>/defaults/js/Login.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   
@@ -147,7 +147,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/tenants/botgarden/js/TermList.js</js>
@@ -192,7 +192,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/js/MessageBar.js</js>
@@ -252,7 +252,7 @@
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/botgarden/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
