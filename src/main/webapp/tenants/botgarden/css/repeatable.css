@@ -7,7 +7,8 @@
 .content li.cs-repeatable-repeat input,
 .content li.cs-repeatable-repeat select,
 .content li.cs-repeatable-repeat button,
-.content li.cs-repeatable-repeat textarea {
+.content li.cs-repeatable-repeat textarea,
+.content li.cs-repeatable-repeat div.richtext {
 	float:left;}
 .content li.cs-repeatable-repeat .content input,
 .content li.cs-repeatable-repeat .content select,

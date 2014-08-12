@@ -111,6 +111,7 @@ cspace = cspace || {};
             afterDelete: null,
             afterAdd: null,
             afterUpdatePrimary: null,
+            onUpdateModel: null,
             onRefreshView: null
         }
     });
@@ -352,6 +353,7 @@ cspace = cspace || {};
     
     // Rerendering repeatable and set the new primary
     cspace.repeatableImpl.updateAndRefresh = function (that, callback, event, render, index) {
+        that.events.onUpdateModel.fire();
         that.requestChange(callback, index);
         if (render) {
             that.events.onRefreshView.fire();

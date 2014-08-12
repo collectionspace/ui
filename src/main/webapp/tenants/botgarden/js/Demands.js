@@ -213,7 +213,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.includeDemands = function () {
 
         fluid.demands("cspace.util.globalNavigator", null, {
-            container: "body"
+            container: "body",
+            options: {
+                selectors: {
+                    include: "a",
+                    exclude: ".cke_button, [href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+                    forms: ".csc-header-logout-form"
+                }
+            }
         });
 
         fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
@@ -2009,6 +2016,48 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     removeAllListeners: "{advancedSearch}.events.recordTypeChanged",
                     onSubmit: "{searchView}.events.onAdvancedSearch"
                 },
+            }, "{arguments}.1"]
+        });
+
+        // richTextEditor demands
+        fluid.demands("cspace.richTextEditor", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.richTextEditor", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    repeatableOnUpdateModel: "{repeatableImpl}.events.onUpdateModel",
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire"
+                    }
+                }
             }, "{arguments}.1"]
         });
     };
