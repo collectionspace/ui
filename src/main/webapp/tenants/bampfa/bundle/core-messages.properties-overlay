@@ -84,7 +84,9 @@ collection-object-objectProductionPersonLabel: Artist or Maker
 collection-object-objectProductionPeopleGroupLabel: Artists Collective
 collection-object-objectProductionPeopleLabel: Collective
 collection-object-objectProductionInformationLabel: Detail
-collection-object-classificationInformationLabel: Classification
+colperson-miniView-field1Label:
+person-miniView-field1Label:
+person-miniView-field1Label:lection-object-classificationInformationLabel: Classification
 collection-object-numberOfObjectsLabel: Item Count
 collection-object-noteInformationLabel: Notes
 collection-object-subjectThemeLabel: Subject/Theme
@@ -117,3 +119,6 @@ preferredPA-termQualifierLabel: Term Qualifier
 preferredPA-termNameLabel: FML Name
 person-birthPlaceLabel: Birth Country
 person-birthCityLabel: Birth City
+person-miniView-field1Label: Birth Date:
+person-miniView-field2Label: Death Date:
+person-miniView-field3Label: Birth Country:

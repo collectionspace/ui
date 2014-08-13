@@ -396,12 +396,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     field1: "${fields.birthDateGroup.dateDisplayDate}",
                     field2: "${fields.deathDateGroup.dateDisplayDate}",
-                    field3: "${fields.bioNote}",
+                    field3: "${fields.birthPlace}",
                     field1Label: {
                         messagekey: "person-miniView-field1Label"
                     },
                     field2Label: {
                         messagekey: "person-miniView-field2Label"
+                    },
+                    field3Label: {
+                        messagekey: "person-miniView-field3Label"
                     }
                 }
             }
