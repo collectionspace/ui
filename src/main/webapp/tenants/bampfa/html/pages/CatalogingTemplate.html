@@ -1,53 +1,6 @@
 <div class="fl-container-flex fl-fix information-group">
 	<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-identificationInformation-label"></div>
 	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-		<div class="info-column offset">
-			<div class="info-column2-50 fl-force-left">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-otherNumberGroup-label"></div>
-					</div>
-					<div class="content">
-						<table>
-							<thead>
-								<tr>
-									<td class="csc-collection-object-otherNumber-label"></td>
-									<td class="csc-collection-object-numberType-label"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-object-identification-otherNumbers">
-									<td><input type="text" class="csc-object-identification-other-number"/></td>
-									<td><select class="csc-object-identification-other-number-type input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="info-column2-50 fl-force-right">
-				<div class="info-column2-50 fl-force-left">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-collection-object-accessionDateGroup-label"></div>
-						</div>
-						<div class="content">
-							<input type="text" class="csc-collection-object-accessionDateGroup"/>
-						</div>
-					</div>
-				</div>
-				<div class="info-column2-50 fl-force-right">
-					<div class="info-pair">
-						<div class="header">
-							<div class="label csc-collection-object-numberOfScans-label"></div>
-						</div>
-						<div class="content">
-							<input type="text" class="input-numeric-medium csc-collection-object-numberOfScans"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
 		<div class="info-column">		
 			<div class="info-column2-50 fl-force-left">
 				<div class="info-pair">
@@ -87,14 +40,6 @@
 						<input type="text" class="csc-object-identification-object-number" />
 					</div>
 				</div>
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-itemClass-label"></div>
-					</div>
-					<div class="content">
-						<select class="csc-collection-object-itemClass input-select"><option value="">Options not loaded</option></select>
-					</div>
-				</div>
 				<!-- <div class="info-pair-select">
 					<div class="header">
 						<div class="label csc-collection-object-responsibleDepartments-label"></div>
@@ -107,46 +52,18 @@
 			<div class="info-column2-50 fl-force-right">
 				<div class="info-pair">
 					<div class="header">
-						<div class="label csc-collection-object-bampfaObjectProductionPersonGroup-label"></div>
+						<div class="label csc-collection-object-accessionDateGroup-label"></div>
 					</div>
 					<div class="content">
-						<table>
-							<thead>
-								<tr>
-									<td class="csc-collection-object-bampfaObjectProductionPerson-label"></td>
-									<td class="csc-collection-object-bampfaObjectProductionPersonRole-label"></td>
-									<td class="csc-collection-object-bampfaObjectProductionPersonQualifier-label"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-bampfaObjectProductionPersonGroup">
-									<td><input type="text" class="csc-collection-object-bampfaObjectProductionPerson"/></td>
-									<td><select class="csc-collection-object-bampfaObjectProductionPersonRole input-select"><option value="">Options not loaded</option></select></td>
-									<td><select class="csc-collection-object-bampfaObjectProductionPersonQualifier input-select"><option value="">Options not loaded</option></select></td>
-								</tr>
-							</tbody>
-						</table>
+						<input type="text" class="csc-collection-object-accessionDateGroup"/>
 					</div>
 				</div>
 				<div class="info-pair">
 					<div class="header">
-						<div class="label csc-collection-object-objectProductionPeopleGroup-label"></div>
+						<div class="label csc-collection-object-itemClass-label"></div>
 					</div>
 					<div class="content">
-						<table>
-							<thead>
-								<tr>
-									<td class="csc-collection-object-objectProductionPeople-label"></td>
-									<td class="csc-collection-object-objectProductionPeopleRole-label"></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="csc-collection-object-objectProductionPeopleGroup">
-									<td><input type="text" class="csc-object-production-people"/></td>
-									<td><input type="text" class="csc-collection-object-objectProductionPeopleRole"/></td>
-								</tr>
-							</tbody>
-						</table>
+						<select class="csc-collection-object-itemClass input-select"><option value="">Options not loaded</option></select>
 					</div>
 				</div>
 				<!-- <div class="info-pair-select">
@@ -162,6 +79,50 @@
 		<div class="info-column">
 			<div class="info-pair">
 				<div class="header">
+					<div class="label csc-collection-object-bampfaObjectProductionPersonGroup-label"></div>
+				</div>
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="csc-collection-object-bampfaObjectProductionPerson-label"></td>
+								<td class="csc-collection-object-bampfaObjectProductionPersonRole-label"></td>
+								<td class="csc-collection-object-bampfaObjectProductionPersonQualifier-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="csc-collection-object-bampfaObjectProductionPersonGroup">
+								<td><input type="text" class="csc-collection-object-bampfaObjectProductionPerson"/></td>
+								<td><select class="csc-collection-object-bampfaObjectProductionPersonRole input-select"><option value="">Options not loaded</option></select></td>
+								<td><select class="csc-collection-object-bampfaObjectProductionPersonQualifier input-select"><option value="">Options not loaded</option></select></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-collection-object-objectProductionPeopleGroup-label"></div>
+				</div>
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="csc-collection-object-objectProductionPeople-label"></td>
+								<td class="csc-collection-object-objectProductionPeopleRole-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="csc-collection-object-objectProductionPeopleGroup">
+								<td><input type="text" class="csc-object-production-people"/></td>
+								<td><input type="text" class="csc-collection-object-objectProductionPeopleRole"/></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="info-pair">
+				<div class="header">
 					<div class="label csc-collection-object-bampfaTitleGroup-label"></div>
 				</div>
 				<div class="content">
@@ -169,6 +130,41 @@
 						<textarea rows="2" cols="30" class="input-textarea short csc-collection-object-bampfaFormattedTitle"></textarea>
 						<!-- The following field should be hidden, but must not be commented out. -->
 						<textarea rows="2" cols="30" class="input-textarea short csc-collection-object-bampfaTitle" style="display: none"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="info-column">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-otherNumberGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-collection-object-otherNumber-label"></td>
+									<td class="csc-collection-object-numberType-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-object-identification-otherNumbers">
+									<td><input type="text" class="csc-object-identification-other-number"/></td>
+									<td><select class="csc-object-identification-other-number-type input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-numberOfScans-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="input-numeric-medium csc-collection-object-numberOfScans"/>
 					</div>
 				</div>
 			</div>
