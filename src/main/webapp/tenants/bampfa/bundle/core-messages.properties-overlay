@@ -118,6 +118,12 @@ intake-intakeObjectLabel: Object (Artist/Title/Medium)
 intake-sourceAddressLabel: Source Address
 intake-receiptLabel: Receipt
 intake-dispositionLabel: Disposition
+intake-entryNumberLabel: TR Number
+intake-identificationNumberRequired: Please specify a TR Number
+intake-entryDateLabel: Date In
+intake-entryReasonLabel: Purpose
+intake-entryNoteLabel: Intake Note
+intake-currentOwnerLabel: Source
 
 # Person
 person-datesActiveLabel: Dates Active
