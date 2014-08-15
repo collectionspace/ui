@@ -46,7 +46,7 @@ var bampfa = {};
 			var value = measurement.value;
 			var unit = measurement.measurementUnit;
 			
-			if (unit == "inches" && value != null && value != "" && !(dimension in valueMap)) {
+			if ((unit == "inches" || unit == "centimeters") && value != null && value != "" && !(dimension in valueMap)) {
 				valueMap[dimension] = value;
 			}
 		}
