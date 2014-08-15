@@ -113,6 +113,12 @@ acquisition-initialValueLabel: Value
 acquisition-initialValueSourceLabel: Source
 acquisition-initialValueDateGroupLabel: Date
 
+# Intake
+intake-intakeObjectLabel: Object (Artist/Title/Medium)
+intake-sourceAddressLabel: Source Address
+intake-receiptLabel: Receipt
+intake-dispositionLabel: Disposition
+
 # Person
 person-datesActiveLabel: Dates Active
 preferredPA-termQualifierLabel: Term Qualifier
