@@ -131,6 +131,7 @@ preferredPA-termQualifierLabel: Term Qualifier
 preferredPA-termNameLabel: FML Name
 person-birthPlaceLabel: Birth Country
 person-birthCityLabel: Birth City
-person-miniView-field1Label: Birth Date:
-person-miniView-field2Label: Death Date:
-person-miniView-field3Label: Birth Country:
+person-miniView-field1Label: Birth Country:
+person-miniView-field2Label: Birth Date:
+person-miniView-field3Label: Death Date:
+person-miniView-field4Label: Dates Active:

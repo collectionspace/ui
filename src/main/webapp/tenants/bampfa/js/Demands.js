@@ -394,9 +394,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
                     },
-                    field1: "${fields.birthDateGroup.dateDisplayDate}",
-                    field2: "${fields.deathDateGroup.dateDisplayDate}",
-                    field3: "${fields.birthPlace}",
+                    field1: "${fields.birthPlace}",
+                    field2: "${fields.birthDateGroup.dateDisplayDate}",
+                    field3: "${fields.deathDateGroup.dateDisplayDate}",
+                    field4: "${fields.datesActive}",
                     field1Label: {
                         messagekey: "person-miniView-field1Label"
                     },
@@ -405,6 +406,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     field3Label: {
                         messagekey: "person-miniView-field3Label"
+                    },
+                    field4Label: {
+                        messagekey: "person-miniView-field4Label"
                     }
                 }
             }
