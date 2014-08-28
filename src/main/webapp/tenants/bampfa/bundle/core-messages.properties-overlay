@@ -113,7 +113,7 @@ acquisition-initialValueDateGroupLabel: Date
 
 # Intake
 intake-intakeObjectLabel: Object (Artist/Title/Medium)
-intake-sourceAddressLabel: Source Address
+intake-sourceAddressLabel: Address for Agenda
 intake-receiptLabel: Receipt
 intake-dispositionLabel: Disposition
 intake-entryNumberLabel: TR Number
