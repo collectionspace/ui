@@ -133,3 +133,6 @@ person-miniView-field1Label: Nationality:
 person-miniView-field2Label: Birth Country:
 person-miniView-field3Label: Birth Date:
 person-miniView-field4Label: Death Date:
+
+# Movement
+movement-movementContactLabel: Handler
