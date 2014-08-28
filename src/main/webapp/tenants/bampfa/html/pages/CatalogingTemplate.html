@@ -698,24 +698,27 @@
 	<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-catalogerInformation-label"></div>
 	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
 		<div class="info-column">
-			<div class="info-column2-50 fl-force-left">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-catalogerName-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-collection-object-catalogerName" />
-					</div>
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-collection-object-catalogerGroup-label"></div>
 				</div>
-			</div>
-			<div class="info-column2-50 fl-force-right">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-catalogDate-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="input-alpha csc-collection-object-catalogDate" />
-					</div>
+				<div class="content">
+					<table>
+						<thead>
+							<tr>
+								<td class="csc-collection-object-catalogerName-label"></td>
+								<td class="csc-collection-object-catalogDate-label"></td>
+								<td class="csc-collection-object-catalogNote-label"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="csc-collection-object-catalogerGroup">
+								<td><input type="text" class="csc-collection-object-catalogerName"/></td>
+								<td><input type="text" class="csc-collection-object-catalogDate"/></td>
+								<td><input type="text" class="csc-collection-object-catalogNote"/></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

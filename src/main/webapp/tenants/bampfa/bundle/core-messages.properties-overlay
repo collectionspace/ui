@@ -28,8 +28,10 @@ collection-object-bampfaCollectionLabel: Collection
 collection-object-briefDescriptionsLabel: Description of Work
 collection-object-commentsLabel: Notes
 collection-object-catalogerInformationLabel: Cataloger Information
+collection-object-catalogerGroupLabel: Cataloger Information
 collection-object-catalogerNameLabel: Cataloger Name
 collection-object-catalogDateLabel: Date
+collection-object-catalogNoteLabel: Note
 collection-object-conditionCheckInformationLabel: Condition/Conservation Information
 collection-object-conditionCheckGroupLabel: Condition Check
 collection-object-conditionNoteLabel: Condition Note
