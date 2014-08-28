@@ -395,10 +395,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
                     },
-                    field1: "${fields.birthPlace}",
-                    field2: "${fields.birthDateGroup.dateDisplayDate}",
-                    field3: "${fields.deathDateGroup.dateDisplayDate}",
-                    field4: "${fields.datesActive}",
+                    field1: "${fields.nationalities.0.nationality}",
+                    field2: "${fields.birthPlace}",
+                    field3: "${fields.birthDateGroup.dateDisplayDate}",
+                    field4: "${fields.deathDateGroup.dateDisplayDate}",
                     field1Label: {
                         messagekey: "person-miniView-field1Label"
                     },
