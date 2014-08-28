@@ -94,6 +94,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             // Close button subcomponent.
             closeButton: {
                 type: "cspace.autocomplete.closeButton"
+            },
+            // A miniView subcomonent to show information about the current value.
+            miniView: {
+                type: "cspace.autocomplete.popup.miniView",
+                container: "{autocomplete}.miniViewContainer"
             }
         },
         urls: {
@@ -170,6 +175,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 vocab: that.model.vocab
             });
         });
+
+        that.initializeMiniView = function () {
+            cspace.autocomplete.initializeMiniView(that);
+        };
+
+        that.refreshMiniView = function () {
+            cspace.autocomplete.refreshMiniView(that);
+        };
     };
 
     cspace.autocomplete.postInit = function (that) {
@@ -178,9 +191,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
 
+        // Create a container for a miniView that shows information about the current value.
+        var miniViewContainer = $('<div class="csc-autocomplete-popup-miniView currentValue"/>');
+        miniViewContainer.insertAfter(that.hiddenInput);
+        that.miniViewContainer = miniViewContainer;
+
         // Create an input that will be used by autocomplete.
         var autocompleteInput = $("<input/>");
-        autocompleteInput.insertAfter(that.hiddenInput);
+        autocompleteInput.insertAfter(that.miniViewContainer);
         that.autocompleteInput = autocompleteInput;
 
         // Create a coantiner for a popup.
@@ -225,6 +243,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     // Adjust buttons and show popup.
                     that.buttonAdjustor();
                     that.popup.open();
+                    that.miniView.events.onHide.fire();
                     that.autocomplete.events.onSearchDone.fire(newValue);
                 }, cspace.util.provideErrorCallback(that, matchesUrl, "errorFetching"));
             }
@@ -243,6 +262,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.eventHolder.events.selectMatch.addListener(that.selectMatch);
         that.eventHolder.events.selectAuthority.addListener(that.selectAuthority);
         that.eventHolder.events.revertState.addListener(that.revertState);
+
+        that.initializeMiniView();
 
         // TODO: risk of asynchrony
         authUrl = that.authoritiesSource.resolveUrl();
@@ -284,6 +305,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 that.model.authorities.sort(function (auth1, auth2) {
                     return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
                 });
+
+                that.refreshMiniView();
             }
             else {
                 that.applier.requestChange("authorities", []);
@@ -295,6 +318,139 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.eventHolder.events.revertState.fire();
             return false;
         });
+    };
+
+    cspace.autocomplete.initializeMiniView = function (that) {
+        var timeout;
+        var miniView = that.miniView;
+        var elements = that.autocompleteInput;
+
+        var openMiniView = function (el) {
+            var currentValueRefName = fluid.get(miniView.model, "attributes.urn");
+
+            if (currentValueRefName) {
+                var currentTarget = $(el.currentTarget);
+            
+                miniView.container.css({
+                    left: currentTarget.position().left - 2,
+                    top: currentTarget.position().top + currentTarget.outerHeight() + 2
+                });
+                
+                var miniViewValueRefName = fluid.get(miniView.model, "basic.fields.refName");
+                
+                if (miniViewValueRefName && (miniViewValueRefName == currentValueRefName)) {
+                    // The miniView already contains information for the current value. Just show it.
+                    miniView.events.onShow.fire();
+                }
+                else {
+                    // The miniView does not contain information for the current value. Fetch it, then show.
+                    miniView.events.onReady.fire();
+                }
+            }
+        };
+        
+        var closeMiniView = function () {
+            miniView.events.onHide.fire();
+        };
+
+        miniView.container
+            .mouseenter(function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+            })
+            .mouseleave(function (el) {
+                closeMiniView(el);
+            });
+
+        elements
+            .focusin(function (el) {
+                openMiniView(el);
+            })
+            .focusout(function (el) {
+                closeMiniView(el);
+            })
+            .hover(
+                function (el) {
+                    clearTimeout(timeout);
+                    closeMiniView(el);
+                    openMiniView(el);
+                },
+                function (el) {
+                    clearTimeout(miniView.options.showTimer);
+                
+                    timeout = setTimeout(function () {
+                        closeMiniView(el);
+                    }, 500);
+                }
+            );
+    };
+
+    cspace.autocomplete.refreshMiniView = function (that) {
+        var authorities = that.model.authorities;
+        var miniViewType;
+        
+        // Get the type of record that may be referenced by this autocomplete.
+        // This could either be the name of a cataloging or procedural record
+        // (in the case of hierarchy fields), or the meta-descriptor "vocab"
+        // for vocabulary records. The meta-descriptor is used because an
+        // autocomplete field can be tied to more than one kind of vocabulary
+        // record. Even if there is a value in the field, the record type can
+        // not be inferred from the refname, since only the app layer has this
+        // knowledge. Luckily, At this point, it's not necessary to know
+        // exactly which kind of record it is -- knowing that it's some kind
+        // of vocabulary record is enough to generate the right call to the
+        // app layer to get the full record.
+        
+        if (authorities.length > 0) {
+            var authority = authorities[0];
+            var type = (authority.type.split("-"))[0];
+            
+            if (that.vocab.isVocab(type)) {
+                miniViewType = "vocab";
+            }
+            else {
+                miniViewType = type;
+            }
+        }
+        
+        // Get the current value of the autocomplete (a refname).
+        
+        var refName = that.model.baseRecord.urn;
+        
+        if (refName) {
+            // If there is a value, calculate a "csid" and namespace
+            // from the refname. The "csid" isn't actually a csid,
+            // but the urn-formatted shortid that can be substituted
+            // for the csid in services layer calls. This information
+            // is used to fetch the full record for the refname.
+            
+            var csid = cspace.util.shortIdentifierToCSID(refName);
+            var namespace = cspace.util.namespaceFromRefName(refName);
+
+            that.miniView.applier.requestChange("attributes", {
+                csid: csid,
+                urn: refName,
+                type: miniViewType,
+                namespace: namespace
+            });
+            
+            that.miniView.events.onContext.fire();
+        }
+        else {
+            // If there is no value, clear out the model of the
+            // miniView, and hide it if it's showing.
+            
+            if (that.miniView.model.attributes) {
+                that.miniView.applier.requestChange("attributes", {});
+            }
+            
+            if (that.miniView.model.basic) {
+                that.miniView.applier.requestChange("basic", {});
+            }
+            
+            that.miniView.hide();
+        }
     };
 
     // Sorting algo for authorities and their vocabularies.
@@ -948,8 +1104,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
         };
         that.applier.modelChanged.addListener("basic", function () {
-            that.events.onRender.fire();
-            that.events.onShow.fire();
+            if (fluid.get(that.model, "basic.fields")) {
+                // If this is a vocabulary record, the type is currently set to the meta-descriptor "vocab".
+                // This was enough to be able to get the full record. Now that we have the full record, we
+                // know exactly which type of record this is, so the type can be set to a specific record
+                // type. This is necessary to show the proper disambiguation fields for the record type.
+                
+                that.applier.requestChange("attributes.type", fluid.get(that.model, "basic.fields.recordtype"));
+                that.events.onContext.fire();
+
+                // Render and show.
+
+                that.events.onRender.fire();
+                that.events.onShow.fire();
+            }
         });
         that.hide = function () {
             clearTimeout(that.options.showTimer);
@@ -1127,6 +1295,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.applier.requestChange("term", termRecord.displayName);
         if (that.autocomplete) {
             that.autocomplete.suppress();
+        }
+        
+        if (that.miniView) {
+            that.refreshMiniView();
         }
     }
     
