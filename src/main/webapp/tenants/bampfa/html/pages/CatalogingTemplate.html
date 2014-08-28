@@ -42,12 +42,22 @@
 			<div class="info-column2-50 fl-force-right">
 				<div class="info-pair">
 					<div class="header">
-						<div class="label csc-collection-object-accessionDateGroup-label"></div>
+						<div class="label csc-collection-object-legalStatus-label"></div>
 					</div>
 					<div class="content">
-						<input type="text" class="csc-collection-object-accessionDateGroup"/>
+						<select class="csc-collection-object-legalStatus input-select"><option value="">Options not loaded</option></select>
 					</div>
 				</div>
+
+				<div class="info-pair-select">
+					<div class="header">
+						<div class="label csc-collection-object-legalStatusDateGroup-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-collection-object-legalStatusDateGroup"/>
+					</div>
+				</div>
+
 				<div class="info-pair">
 					<div class="header">
 						<div class="label csc-collection-object-itemClass-label"></div>
@@ -336,24 +346,6 @@
 	<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" style="display:none;">
 		<div class="info-column">
 			<div class="info-column2-50 fl-force-left">
-				<div class="info-pair">
-					<div class="header">
-						<div class="label csc-collection-object-legalStatus-label"></div>
-					</div>
-					<div class="content">
-						<select class="csc-collection-object-legalStatus input-select"><option value="">Options not loaded</option></select>
-					</div>
-				</div>
-
-				<div class="info-pair-select">
-					<div class="header">
-						<div class="label csc-collection-object-legalStatusDateGroup-label"></div>
-					</div>
-					<div class="content">
-						<input type="text" class="csc-collection-object-legalStatusDateGroup"/>
-					</div>
-				</div>
-				
 				<div class="info-pair-select">
 					<div class="header">
 						<div class="label csc-collection-object-acquisitionMethod-label"></div>
@@ -389,9 +381,7 @@
 						<select class="csc-collection-object-bampfaAcquisitionReason input-select"><option value="">Options not loaded</option></select>
 					</div>
 				</div>
-			</div>
-			
-			<div class="info-column2-50 fl-force-right">
+				
 				<div class="info-pair">
 					<div class="header">
 						<div class="label csc-collection-object-acquisitionProvisos-label"></div>
@@ -400,7 +390,9 @@
 						<textarea rows="4" cols="30" class="input-textarea csc-collection-object-acquisitionProvisos" />
 					</div>
 				</div>
-				
+			</div>
+			
+			<div class="info-column2-50 fl-force-right">
 				<div class="info-pair">
 					<div class="header">
 						<div class="label csc-collection-object-provenance-label"></div>
