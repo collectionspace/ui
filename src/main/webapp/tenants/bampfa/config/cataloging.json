@@ -16,19 +16,27 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.objectNumber", {
-                            "type": "repeatableMatch",
-                            "queryPath": "fields.bampfaTitleGroup",
-                            "childPath": "_primary",
-                            "value": true,
-                            "path": "bampfaTitle"
-                        }, {
-                            "type": "repeatableMatch",
-                            "queryPath": "fields.bampfaObjectProductionPersonGroup",
-                            "childPath": "_primary",
-                            "value": true,
-                            "path": "bampfaObjectProductionPerson"
-                        }]
+                            "fields.objectNumber",
+                            {
+                                "type": "repeatableMatch",
+                                "queryPath": "fields.bampfaTitleGroup",
+                                "childPath": "_primary",
+                                "value": true,
+                                "path": "bampfaTitle"
+                            }, {
+                                "type": "repeatableMatch",
+                                "queryPath": "fields.objectProductionDateGroup",
+                                "childPath": "_primary",
+                                "value": true,
+                                "path": "dateDisplayDate"
+                            }, {
+                                "type": "repeatableMatch",
+                                "queryPath": "fields.bampfaObjectProductionPersonGroup",
+                                "childPath": "_primary",
+                                "value": true,
+                                "path": "bampfaObjectProductionPerson"
+                            }
+                        ]
                     }
                 },
                 "header": {
