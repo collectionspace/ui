@@ -2621,3 +2621,7 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 .cs-authority #title-bar.docked {
 	background-color: #F3EDF6;
 }
+
+#administration #title-bar.docked {
+	background-color: #EEF4D7;
+}
