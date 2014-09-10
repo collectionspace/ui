@@ -6,6 +6,76 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(ucjeps_4.0-15) -->
+<div id="ucjeps_4.0-15">
+<h2>Version ucjeps_4.0-15 <span class="releasedate">(September  9, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Investigate incorporating a javascript rich text editor into the UI <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-210">BAMPFA-210</a>)</span>
+<ul class="commits">
+<li id="commit_73bfd27" class="ui commit">Rename a misnamed function.</li>
+<li id="commit_15f2c94" class="ui commit">Add /defaults/js/RichTextEditor.js to minification config.</li>
+</ul>
+</li>
+<li class="issue">
+Make title bar dock at the top of the window when scrolling <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-220">BAMPFA-220</a>)</span>
+<ul class="commits">
+<li id="commit_a546305" class="ui commit">Implement title bar docking in defaults.</li>
+</ul>
+</li>
+<li class="issue">
+Make create new from existing copy relations <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-240">BAMPFA-240</a>)</span>
+<ul class="commits">
+<li id="commit_6f91db0" class="ui commit">Enable create new from existing on secondary tabs.</li>
+<li id="commit_d06a021" class="ui commit">Fix errors when autocomplete fields are loaded during create new from existing on secondary tabs.</li>
+</ul>
+</li>
+<li class="issue">
+Show disambiguation pop-up when hovering over autocomplete fields <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-247">BAMPFA-247</a>)</span>
+<ul class="commits">
+<li id="commit_639bbd9" class="ui commit">Show disambiguation pop-up when hovering over an autocomplete field with a value.</li>
+</ul>
+</li>
+<li class="issue">
+Derive structured date values from what is entered in display date <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-79">BAMPFA-79</a>)</span>
+<ul class="commits">
+<li id="commit_9dc9bbd" class="ui commit">Preserve primary setting in structured dates after parsing.</li>
+</ul>
+</li>
+<li class="issue">
+Update pom.xml files to reference our Artifactory instance before any other maven repos <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6291">CSPACE-6291</a>)</span>
+<ul class="commits">
+<li id="commit_e285102" class="services commit">Consolidate remaining <repository> references in POMs to the project's top level POM. Move the repository reference to the project Maven repo's 'nuxeo-public' repo earlier, above two references to remote maven.nuxeo.org repos, to help ensure that cached copies of artifacts in the project repo are preferentially downloaded. Replace a non-existent pluginRepository reference."</li>
+</ul>
+</li>
+<li class="issue">
+Update build scripts to support JDBC options in all db urls <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6404">CSPACE-6404</a>)</span>
+<ul class="commits">
+<li id="commit_77b7e69" class="services commit">Added support for JDBC options throughout the build and configuration files.</li>
+</ul>
+</li>
+<li class="issue">
+Refobjs call with page size 0 hangs <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6406">CSPACE-6406</a>)</span>
+<ul class="commits">
+<li id="commit_eb15a16" class="services commit">Fix infinite loop in LazyAuthorityRefDocList.java when page size is 0.</li>
+</ul>
+</li>
+<li class="issue">
+Clear Voucher Label Requests batch job only clears 40 vouchers at a time <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/UCBG-383">UCBG-383</a>)</span>
+<ul class="commits">
+<li id="commit_6c1fc85" class="services commit">Retrieve all records in batch job searches, instead of the default 40.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_87989b1" class="ui commit">Transfer changes from defaults into tenant overrides.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(ucjeps_4.0-14) -->
 <div id="ucjeps_4.0-14">
 <h2>Version ucjeps_4.0-14 <span class="releasedate">(July 29, 2014)</span></h2>
