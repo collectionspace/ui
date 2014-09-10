@@ -503,15 +503,20 @@ cspace = cspace || {};
                     that.parseStatus.messageDetail = "";
                 }
 
-                if (data.structuredDate) {
-                    that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
-                }
-                else {
-                    that.applier.requestChange(that.composeRootElPath(), {
+                if (!data.structuredDate) {
+                    data.structuredDate = {
                         dateDisplayDate: displayDate
-                    });
+                    };
                 }
-            
+
+                var primary = fluid.get(that.model, cspace.util.composeSegments(that.composeRootElPath(), "_primary"));
+                
+                if (typeof(primary) != "undefined") {
+                    data.structuredDate["_primary"] = primary;
+                }
+                
+                that.applier.requestChange(that.composeRootElPath(), data.structuredDate);
+                
                 // Refresh the view. If the popup has focus, just calling
                 // that.refreshView() causes the popup to move and
                 // cover the container input, so call show() instead,

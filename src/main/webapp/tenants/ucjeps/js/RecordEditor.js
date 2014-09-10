@@ -386,7 +386,10 @@ cspace = cspace || {};
             }
         },
         listeners: {
-            onCreateFromExisting: "{cspace.recordEditor.cloner}.clone"
+            onCreateFromExisting: "{cspace.recordEditor.cloner}.createFromExisting"
+        },
+        invokers: {
+            clone: "cspace.recordEditor.cloner.clone",
         },
         preInitFunction: "cspace.recordEditor.cloner.preInit",
         cloneURL: cspace.componentUrlBuilder("%webapp/html/%recordType.html%params")
@@ -400,35 +403,57 @@ cspace = cspace || {};
             });
             that.localStorage.set(modelToClone);
         };
-        that.clone = function () {
-            that.globalNavigator.events.onPerformNavigation.fire(function () {
-                that.copyAndStore();
-                var vocab = cspace.vocab.resolve({
-                    model: that.model,
-                    recordType: that.options.recordType,
-                    vocab: that.vocab
-                });
-                that.messageBar.disable();
-
-                var params = {};
-                
-                if (that.options.template) {
-                    params.template = that.options.template;
-                }
-
-                if (vocab) {
-                    params.vocab = vocab;
-                }
-
-                params = $.param(params);
-
-                window.location = fluid.stringTemplate(that.options.cloneURL, {
-                    recordType: that.options.recordType,
-                    params: params ? ("?" + params) : ""
-                });
-            });
+        that.createFromExisting = function () {
+            that.clone();
         };
     };
+
+    cspace.recordEditor.cloner.clone = function (that) {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.copyAndStore();
+            var vocab = cspace.vocab.resolve({
+                model: that.model,
+                recordType: that.options.recordType,
+                vocab: that.vocab
+            });
+            that.messageBar.disable();
+
+            var params = {};
+            
+            if (that.options.template) {
+                params.template = that.options.template;
+            }
+
+            if (vocab) {
+                params.vocab = vocab;
+            }
+
+            params = $.param(params);
+
+            window.location = fluid.stringTemplate(that.options.cloneURL, {
+                recordType: that.options.recordType,
+                params: params ? ("?" + params) : ""
+            });
+        });
+    };
+
+    cspace.recordEditor.cloner.cloneTab = function (that, relatedRecordsTab) {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.copyAndStore();
+
+            relatedRecordsTab.events.onCreateNewRecord.fire();
+        });
+    };
+
+    fluid.demands("cspace.recordEditor.cloner.clone", "cspace.recordEditor.cloner", {
+        funcName: "cspace.recordEditor.cloner.clone",
+        args: ["{cspace.recordEditor.cloner}"]
+    });
+
+    fluid.demands("cspace.recordEditor.cloner.clone", ["cspace.recordEditor.cloner", "cspace.relatedRecordsTab"], {
+        funcName: "cspace.recordEditor.cloner.cloneTab",
+        args: ["{cspace.recordEditor.cloner}", "{cspace.relatedRecordsTab}"]
+    });
 
     // Component that tracks all the changes to the model.
     fluid.defaults("cspace.recordEditor.changeTracker", {
@@ -1153,7 +1178,17 @@ cspace = cspace || {};
             recordModel: "{cspace.recordEditor}.model",
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
-                showCreateFromExistingButton: false,
+                showCreateFromExistingButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "create",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
                 showDeleteButton: false,
                 showDeleteRelationButton: {
                     expander: {
@@ -1302,6 +1337,25 @@ cspace = cspace || {};
                 }
             },
             expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${showCreateFromExistingButton}",
+                trueTree: {
+                    createFromExistingButton: {
+                        messagekey: "recordEditor-createFromExistingButton",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableCreateFromExistingButton}"
+                            }
+                        }, {
+                            type: "jQuery",
+                            func: "click",
+                            args: that.events.onCreateFromExisting.fire
+                        }]
+                    }
+                }
+            }, {
                 type: "fluid.renderer.condition",
                 condition: "${showDeleteRelationButton}",
                 trueTree: {

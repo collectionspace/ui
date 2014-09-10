@@ -196,6 +196,7 @@
     <js>/tenants/ucjeps/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
+    <js>/defaults/js/RichTextEditor.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/tenants/ucjeps/js/StructuredDate.js</js>
