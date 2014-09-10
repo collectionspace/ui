@@ -869,6 +869,13 @@ fluid.registerNamespace("cspace.util");
         return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
     };
 
+    cspace.util.namespaceFromRefName = function (refName) {
+        if (!refName) {
+            return "";
+        }
+        return decodeURIComponent(refName.slice(refName.indexOf("name(") + 5, refName.indexOf(")")));
+    }
+
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
         gradeNames: ["fluid.viewComponent"],
         convert: cspace.util.urnToString

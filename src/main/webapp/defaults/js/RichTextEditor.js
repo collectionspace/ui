@@ -31,7 +31,7 @@ cspace = cspace || {};
 
 	cspace.richTextEditor.preInit = function(that) {
 		that.transferData = function() {
-			cspace.computedField.transferData(that);
+			cspace.richTextEditor.transferData(that);
 		};
 		
 		that.bindEvents = function() {
@@ -146,7 +146,7 @@ cspace = cspace || {};
 		that.bindEvents();
 	}
 		
-	cspace.computedField.transferData = function(that) {
+	cspace.richTextEditor.transferData = function(that) {
 		var data = that.editor.getData();
 		
 		that.container.val(data);
