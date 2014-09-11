@@ -217,4 +217,34 @@ var bampfa = {};
 		return plainTextLines.join("\n");
 	}
 	
+	
+	var zeroPad = function(str, len){
+		if (str.length >= len) {
+			return (str);
+		}
+		
+		return (new Array(len + 1).join('0') + str).slice(-len);
+	};
+	
+	var isNumericRegExp = /^\d+$/;
+	
+	bampfa.computeSortableObjectNumber = function(objectNumber) {
+		var parts = objectNumber.split('.');
+		var sortableParts = [];
+		
+		for (var i=0; i<parts.length; i++) {
+			var part = parts[i];
+			
+			if (isNumericRegExp.test(part)) {
+				part = zeroPad(part, 5);
+			}
+			else {
+				part = part.toLowerCase();
+			}
+			
+			sortableParts.push(part);
+		}
+		
+		return sortableParts.join(' ');
+	}
 })(jQuery, fluid);
