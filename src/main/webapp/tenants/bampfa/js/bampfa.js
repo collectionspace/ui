@@ -91,8 +91,15 @@ var bampfa = {};
 		var nationality = "";
 		
 		if (nationalities.length > 0) {
-			nationality = jQuery.trim(nationalities[0].nationality);
-		} 
+			for (var i=0; i<nationalities.length; i++) {
+				var candidateNationality = nationalities[i];
+				
+				if (candidateNationality["_primary"]) {
+					nationality = jQuery.trim(candidateNationality.nationality);
+					break;
+				}
+			}
+		}
 	
 		if (surName.toLowerCase() == "unknown") {
 			nameParts.push(surName);
@@ -165,8 +172,15 @@ var bampfa = {};
 		var nationality = "";
 		
 		if (nationalities.length > 0) {
-			nationality = jQuery.trim(nationalities[0].nationality);
-		} 
+			for (var i=0; i<nationalities.length; i++) {
+				var candidateNationality = nationalities[i];
+				
+				if (candidateNationality["_primary"]) {
+					nationality = jQuery.trim(candidateNationality.nationality);
+					break;
+				}
+			}
+		}
 		
 		if (surName.toLowerCase() == "unknown") {
 			nameParts.push(surName);
