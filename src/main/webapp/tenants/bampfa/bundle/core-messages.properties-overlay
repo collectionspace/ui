@@ -92,6 +92,9 @@ collection-object-noteInformationLabel: Notes
 collection-object-subjectThemeLabel: Subject/Theme
 collection-object-bampfaTitleGroupLabel: Title
 collection-object-bampfaTitleSearchLabel: Title
+collection-object-objectNumberRangeSearchLabel: ID Number (Range)
+collection-object-objectNumberRangeSearchStartLabel: From
+collection-object-objectNumberRangeSearchEndLabel: To
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
