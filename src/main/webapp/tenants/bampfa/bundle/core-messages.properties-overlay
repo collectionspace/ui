@@ -11,6 +11,7 @@ login-rologin-pwdValue:
 
 # Vocabularies
 vocab-collective: Artists Collectives
+vocab-crate: Crates
 
 # Cataloging
 collection-object-objectNumberLabel: ID Number
@@ -95,6 +96,7 @@ collection-object-bampfaTitleSearchLabel: Title
 collection-object-objectNumberRangeSearchLabel: ID Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
+collection-object-computedCrateLabel: Computed Crate
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
@@ -143,3 +145,4 @@ person-copyrightHolderLabel: Copyright Holder
 
 # Movement
 movement-movementContactLabel: Handler
+movement-crateLabel: Crate
