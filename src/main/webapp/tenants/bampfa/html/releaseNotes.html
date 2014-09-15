@@ -6,6 +6,55 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(bampfa_4.0-31) -->
+<div id="bampfa_4.0-31">
+<h2>Version bampfa_4.0-31 <span class="releasedate">(September 15, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Add LMI:Crate and Cataloging:Current Crate Location fields <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-258">BAMPFA-258</a>)</span>
+<ul class="commits">
+<li id="commit_b74a0fe" class="services commit">Copy UpdateObjectLocationAndCrateOnMove listener into UCB shared branch, so it can be used by deployments other than pahma.</li>
+<li id="commit_c9c76af" class="services commit">Enable UpdateObjectLocationAndCrateOnMove listener for bampfa tenant.</li>
+<li id="commit_19e7093" class="application commit">Configure crate vocabulary, add computed crate field to collectionobject, and add crate field to movement.</li>
+<li id="commit_ac5b5b3" class="ui commit">Add computed crate field to cataloging records, and add crate field to movements.</li>
+<li id="commit_e9c8395" class="application commit">Add computed current location and comptuted crate to advanced search.</li>
+<li id="commit_acf96a2" class="ui commit">Add computed current location and comptuted crate to advanced search.</li>
+</ul>
+</li>
+<li class="issue">
+Make handler on LMI records are free text field <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-262">BAMPFA-262</a>)</span>
+<ul class="commits">
+<li id="commit_905c33b" class="application commit">Remove autocomplete from movement handler.</li>
+</ul>
+</li>
+<li class="issue">
+Update pom.xml files to reference our Artifactory instance before any other maven repos <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6291">CSPACE-6291</a>)</span>
+<ul class="commits">
+<li id="commit_e285102" class="services commit">Consolidate remaining <repository> references in POMs to the project's top level POM. Move the repository reference to the project Maven repo's 'nuxeo-public' repo earlier, above two references to remote maven.nuxeo.org repos, to help ensure that cached copies of artifacts in the project repo are preferentially downloaded. Replace a non-existent pluginRepository reference."</li>
+</ul>
+</li>
+<li class="issue">
+Update build scripts to support JDBC options in all db urls <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6404">CSPACE-6404</a>)</span>
+<ul class="commits">
+<li id="commit_77b7e69" class="services commit">Added support for JDBC options throughout the build and configuration files.</li>
+</ul>
+</li>
+<li class="issue">
+Refobjs call with page size 0 hangs <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6406">CSPACE-6406</a>)</span>
+<ul class="commits">
+<li id="commit_eb15a16" class="services commit">Fix infinite loop in LazyAuthorityRefDocList.java when page size is 0.</li>
+</ul>
+</li>
+<li class="issue">
+Clear Voucher Label Requests batch job only clears 40 vouchers at a time <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/UCBG-383">UCBG-383</a>)</span>
+<ul class="commits">
+<li id="commit_6c1fc85" class="services commit">Retrieve all records in batch job searches, instead of the default 40.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(bampfa_4.0-30) -->
 <div id="bampfa_4.0-30">
 <h2>Version bampfa_4.0-30 <span class="releasedate">(September 11, 2014)</span></h2>
