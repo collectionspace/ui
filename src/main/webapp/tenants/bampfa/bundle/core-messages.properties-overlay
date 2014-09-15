@@ -97,6 +97,8 @@ collection-object-objectNumberRangeSearchLabel: ID Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
 collection-object-computedCrateLabel: Computed Crate
+collection-object-computedCurrentLocationSearchLabel: Computed Current Location
+collection-object-computedCrateSearchLabel: Computed Crate
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
