@@ -286,6 +286,10 @@ var bampfa = {};
 		
 		date = removeTimestamp(date);
 		
+		if (reason) {
+			reason = cspace.util.urnToString(reason);
+		}
+		
 		if (date && reason) {
 			summary = date + " (" + reason + ")";
 		}
