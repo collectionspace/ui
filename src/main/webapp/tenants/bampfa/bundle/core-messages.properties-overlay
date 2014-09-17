@@ -96,9 +96,10 @@ collection-object-bampfaTitleSearchLabel: Title
 collection-object-objectNumberRangeSearchLabel: ID Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
-collection-object-computedCrateLabel: Computed Crate
-collection-object-computedCurrentLocationSearchLabel: Computed Current Location
-collection-object-computedCrateSearchLabel: Computed Crate
+collection-object-computedCrateLabel: Current Box or Container
+collection-object-computedCrateSearchLabel: Current Box or Container
+collection-object-computedCurrentLocationLabel: Current Storage Location
+collection-object-computedCurrentLocationSearchLabel: Current Storage Location
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
@@ -146,5 +147,16 @@ person-copyrightCreditLabel: Copyright Credit
 person-copyrightHolderLabel: Copyright Holder
 
 # Movement
+movement-tab: Inv/Mov...
+movement-editRecord: Edit Inventory/Movement Record
+movement-recordList: Related Inventory/Movement Records
+movement: Inventory/Movement
+movement-locationMovementInformationLabel: Inventory/Movement Information
+movement-currentLocationLabel: Storage Location
+movement-currentLocationMISSINGLabel: Storage Location
+movement-currentLocationHeaderLabel: Storage Location
+movement-identificationNumberRequired: Please specify a Storage Location
+movement-locationDateLabel: Inventory/Move Date
+movement-reasonForMoveLabel: Reason
 movement-movementContactLabel: Handler
 movement-crateLabel: Crate

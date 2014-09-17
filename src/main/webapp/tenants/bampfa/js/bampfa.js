@@ -261,4 +261,41 @@ var bampfa = {};
 		
 		return sortableParts.join(' ');
 	}
+	
+	var removeTimestamp = function(datetime) {
+		var date = datetime;
+		var index = datetime.indexOf("T");
+	
+		if (index > -1) {
+			date = datetime.substring(0, index);
+		}
+		
+		return date;
+	}
+	
+	bampfa.computeMovementSummary = function(date, reason) {
+		var summary = "";
+		
+		if (typeof(date) == "undefined") {
+			date = "";
+		}
+
+		if (typeof(reason) == "undefined") {
+			reason = "";
+		}
+		
+		date = removeTimestamp(date);
+		
+		if (date && reason) {
+			summary = date + " (" + reason + ")";
+		}
+		else if (date) {
+			summary = date;
+		}
+		else if (reason) {
+			summary = reason;
+		}
+		
+		return summary;
+	}
 })(jQuery, fluid);
