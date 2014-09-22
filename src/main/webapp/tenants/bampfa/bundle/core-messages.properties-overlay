@@ -143,8 +143,13 @@ person-miniView-field1Label: Nationality:
 person-miniView-field2Label: Birth Country:
 person-miniView-field3Label: Birth Date:
 person-miniView-field4Label: Death Date:
+person-copyrightInformationLabel: Copyright Information
 person-copyrightCreditLabel: Copyright Credit
 person-copyrightHolderLabel: Copyright Holder
+person-copyrightNoteLabel: Copyright Note
+person-permissionToReproduceLabel: Permission to reproduce granted for noncommercial uses
+person-otherRegionalInfoLabel: Other Regional Info
+person-dynastyPeriodLabel: Dynasty/Period
 
 # Movement
 movement-tab: Inv/Mov...
