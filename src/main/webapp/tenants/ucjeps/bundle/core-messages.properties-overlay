@@ -2,13 +2,13 @@
 template-collectorLabel: Collector Label
 
 # Schema extensions to Cataloging record
-collection-object-taxonLabel: Scientific Name
+collection-object-taxonLabel: Determinación
 collection-object-qualifierLabel: Qualifier
-collection-object-identByLabel: By
-taxonomicIdentGroup-identDateGroupLabel: Date
-collection-object-institutionLabel: Institution
-collection-object-identKindLabel: Kind
-collection-object-objectCountNumberLabel: Sheet
+collection-object-identByLabel: Determinador
+taxonomicIdentGroup-identDateGroupLabel: Fecha
+collection-object-institutionLabel: Institución
+collection-object-identKindLabel: Tipo
+collection-object-objectCountNumberLabel: Hoja
 
 # Inadvertently shares field name and label
 # with another entry below
@@ -16,15 +16,15 @@ collection-object-referenceLabel: Reference
 collection-object-refPageLabel: Page
 collection-object-notesLabel: Notes
 
-collection-object-objectCollectionInformationLabel: Field Collection Information
-collection-object-fieldCollectionDateLabel: Field collection date
-collection-object-fieldCollectorLabel: Field collection collector
-collection-object-fieldCollectionNumberLabel: Field collection number
+collection-object-objectCollectionInformationLabel: Colección de Campo
+collection-object-fieldCollectionDateLabel: Fecha
+collection-object-fieldCollectorLabel: Colector
+collection-object-fieldCollectionNumberLabel: Número de Campo
 collection-object-fieldCollectionNumberStartLabel: From
 collection-object-fieldCollectionNumberEndLabel: To
 collection-object-fieldCollectionNumberAssignorLabel: Field collection number assignor
-collection-object-fieldCollectionMethodLabel: Field collection method
-collection-object-fieldCollectionNoteLabel: Habitat information
+collection-object-fieldCollectionMethodLabel: Método
+collection-object-fieldCollectionNoteLabel: Hábitat
 collection-object-fieldCollectionSourceLabel: Field collection source
 collection-object-fieldColEventNameLabel: Field collection event name
 collection-object-fieldAssociatedTaxaLabel: Associated taxa
@@ -40,17 +40,17 @@ collection-object-typeSpecimenBasionymLabel: Verified Basionym
 collection-object-typeSpecimenNotesLabel: Notes
 
 # Taxon record
-taxon: Taxon
+taxon: Taxonomía
 taxon-taxonNameAuthorityInformationLabel: Taxonomic Name Authority Information
 taxon-displayNameLabel: Display name (with authors)
 taxon-termStatusLabel: Term status (admin)
 taxon-taxonFullNameLabel: Short name (without authors)
 taxon-taxonRankLabel: Rank
-taxon-taxonMajorGroupLabel: Major group
-taxon-familyLabel: Family
+taxon-taxonMajorGroupLabel: Grupo
+taxon-familyLabel: Familia
 taxon-taxonCurrencyLabel: Current?
-taxon-taxonAuthorGroupLabel: Authors
-taxon-taxonAuthorLabel: Name
+taxon-taxonAuthorGroupLabel: Autor
+taxon-taxonAuthorLabel: Nombre
 taxon-taxonAuthorTypeLabel: Author type
 taxon-taxonYearLabel: Year
 taxon-taxonIsNamedHybridLabel: Is named hybrid
@@ -79,7 +79,7 @@ taxon-miniView-field2Label: Term Status:
 taxon-miniView-field3Label: Rank:  
 taxon-miniView-field4Label: Major Group:  
 #Login
-login-deployment: Version ucjeps_4.0-medellin-1
+login-deployment: Version ucjeps_4.0-15
 login-current-info: 
 login-login: admin@ucjeps.cspace.berkeley.edu
 login-rologin: reader@ucjeps.cspace.berkeley.edu
@@ -146,11 +146,11 @@ collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
 
 collection-object-localityInformationLabel: Locality Information
-collection-object-fieldLocVerbatimLabel: Field collection location verbatim
+collection-object-fieldLocVerbatimLabel: Localidad
 collection-object-fieldLocPlaceLabel: Field collection place
-collection-object-fieldLocCountyLabel: Field location county
-collection-object-fieldLocCountryLabel: Field location country
-collection-object-fieldLocStateLabel: Field location state
+collection-object-fieldLocCountyLabel: Municipio
+collection-object-fieldLocCountryLabel: País
+collection-object-fieldLocStateLabel: Departamento
 collection-object-fieldLocHigherGeographyLabel: Field location higher geography
 collection-object-decimalLatitudeLabel: Decimal latitude
 collection-object-decimalLongitudeLabel: Decimal longitude
@@ -167,7 +167,7 @@ collection-object-vDepthLabel: Depth
 collection-object-minDepthLabel: Min
 collection-object-maxDepthLabel: Max
 collection-object-depthUnitLabel: Unit
-collection-object-vElevationLabel: Elevation
+collection-object-vElevationLabel: Altura
 collection-object-minElevationLabel: Min
 collection-object-maxElevationLabel: Max
 collection-object-elevationUnitLabel: Unit
