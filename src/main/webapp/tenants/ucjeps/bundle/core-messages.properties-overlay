@@ -18,12 +18,12 @@ collection-object-notesLabel: Notes
 
 collection-object-objectCollectionInformationLabel: Colección de Campo
 collection-object-fieldCollectionDateLabel: Fecha
-collection-object-fieldCollectorLabel: Colector
+collection-object-fieldCollectorsLabel: Colector
 collection-object-fieldCollectionNumberLabel: Número de Campo
 collection-object-fieldCollectionNumberStartLabel: From
 collection-object-fieldCollectionNumberEndLabel: To
 collection-object-fieldCollectionNumberAssignorLabel: Field collection number assignor
-collection-object-fieldCollectionMethodLabel: Método
+collection-object-fieldCollectionMethodsLabel: Método
 collection-object-fieldCollectionNoteLabel: Hábitat
 collection-object-fieldCollectionSourceLabel: Field collection source
 collection-object-fieldColEventNameLabel: Field collection event name
