@@ -165,4 +165,4 @@ movement-identificationNumberRequired: Please specify a Storage Location
 movement-locationDateLabel: Inventory/Move Date
 movement-reasonForMoveLabel: Reason
 movement-movementContactLabel: Handler
-movement-crateLabel: Crate
+movement-crateLabel: Box or Container
