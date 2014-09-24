@@ -53,7 +53,7 @@ collection-object-objectProductionDateEraLabel: Era
 collection-object-objectProductionDynastyLabel: Dynasty
 collection-object-editionNumberLabel: Edition
 collection-object-bampfaObjectProductionPersonGroupLabel: Artist or Maker
-collection-object-bampfaObjectProductionPersonLabel: Person
+collection-object-bampfaObjectProductionPersonLabel: Artist or Maker
 collection-object-bampfaObjectProductionPersonRoleLabel: Role
 collection-object-bampfaObjectProductionPersonQualifierLabel: Qualifier
 collection-object-stylesLabel: Period/Style
@@ -85,7 +85,7 @@ collection-object-otherNumberGroupLabel: T.R. / Other Numbers
 collection-object-titleLanguageLabel: Language
 collection-object-objectProductionPersonLabel: Artist or Maker
 collection-object-objectProductionPeopleGroupLabel: Artists Collective
-collection-object-objectProductionPeopleLabel: Collective
+collection-object-objectProductionPeopleLabel: Artists Collective
 collection-object-objectProductionInformationLabel: Detail
 collection-object-classificationInformationLabel: Classification
 collection-object-numberOfObjectsLabel: Item Count
@@ -100,6 +100,7 @@ collection-object-computedCrateLabel: Current Box or Container
 collection-object-computedCrateSearchLabel: Current Box or Container
 collection-object-computedCurrentLocationLabel: Current Storage Location
 collection-object-computedCurrentLocationSearchLabel: Current Storage Location
+collection-object-objectProductionPlaceLabel: Production Place
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
