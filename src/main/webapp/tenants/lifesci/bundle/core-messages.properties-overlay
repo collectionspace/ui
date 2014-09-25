@@ -54,6 +54,9 @@ taxon-updatedAtLabel: Modified Date
 taxon-updatedAtStartLabel: Earliest
 taxon-updatedAtEndLabel: Latest
 taxon-preferredTaxonLabel: Taxon Term Group(s)
+taxon-miniView-field1Label: Term Type:
+taxon-miniView-field2Label: Term Status:
+taxon-miniView-field3Label: Rank:
 
 # -------------------------------------
 #Login
