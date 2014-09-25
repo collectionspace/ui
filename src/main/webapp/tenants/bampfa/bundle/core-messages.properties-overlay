@@ -16,7 +16,7 @@ vocab-crate: Crates
 # Cataloging
 collection-object-objectNumberLabel: ID Number
 cataloging-identificationNumberRequired: Please specify at least one ID Number Information field.
-cataloging-number: ID Number
+cataloging-number: Number
 collection-object-accNumberInformationLabel: ID Number Information
 collection-object-accNumberPrefixLabel: Prefix
 collection-object-accNumberPart1Label: Year
@@ -167,3 +167,8 @@ movement-locationDateLabel: Inventory/Move Date
 movement-reasonForMoveLabel: Reason
 movement-movementContactLabel: Handler
 movement-crateLabel: Box or Container
+
+# Search
+# For cataloging records, "ID Number" refers to specifically to objectNumber, but in search results, the number column could contain
+# otherNumber if there is no objectNumber. To prevent confusion, don't label the column "ID Number".
+search-number: Number

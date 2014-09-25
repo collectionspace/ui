@@ -302,4 +302,30 @@ var bampfa = {};
 		
 		return summary;
 	}
+	
+	bampfa.computeEffectiveObjectNumber = function(objectNumber, otherNumber) {
+		// The effective object number is the objectNumber, if it exists. Otherwise,
+		// fall back to the primary otherNumber.
+		
+		var effectiveObjectNumber = objectNumber;
+		
+		if (!effectiveObjectNumber) {
+			var fallbackNumber = null;
+			
+			if (otherNumber.length > 0) {
+				for (var i=0; i<otherNumber.length; i++) {
+					var candidateNumber = otherNumber[i];
+			
+					if (candidateNumber["_primary"]) {
+						fallbackNumber = candidateNumber.numberValue;
+						break;
+					}
+				}
+			}
+			
+			effectiveObjectNumber = fallbackNumber;
+		}
+		
+		return effectiveObjectNumber;
+	}
 })(jQuery, fluid);
