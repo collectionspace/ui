@@ -6,6 +6,51 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(bampfa_4.0-35) -->
+<div id="bampfa_4.0-35">
+<h2>Version bampfa_4.0-35 <span class="releasedate">(September 24, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Person: Calculate display name(s) from name parts <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-205">BAMPFA-205</a>)</span>
+<ul class="commits">
+<li id="commit_d04a95f" class="application commit">Configure an app-layer only field for searching on person termDisplayName.</li>
+<li id="commit_8cf1766" class="ui commit">Change person advanced search to use the non-computed termDisplayNameSearch field.</li>
+</ul>
+</li>
+<li class="issue">
+Cataloging: In title bar, fall back to other number if there is no object number <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-255">BAMPFA-255</a>)</span>
+<ul class="commits">
+<li id="commit_428823a" class="application commit">Configure effectiveObjectNumber and sortableEffectiveObjectNumber fields in collectionobjects_bampfa.</li>
+<li id="commit_b37ba5b" class="ui commit">Add computed, hidden effectiveObjectNumber and sortableEffectiveObjectNumber fields to cataloging record editor.</li>
+</ul>
+</li>
+<li class="issue">
+Add fields to Person <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-265">BAMPFA-265</a>)</span>
+<ul class="commits">
+<li id="commit_12a5b2b" class="application commit">Configure four additional fields in persons_bampfa.</li>
+<li id="commit_dfcfb68" class="ui commit">Add four new fields to person record.</li>
+</ul>
+</li>
+<li class="issue">
+Remove unused fields from advanced search <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-269">BAMPFA-269</a>)</span>
+<ul class="commits">
+<li id="commit_0482593" class="ui commit">Remove unused cataloging fields from advanced search.</li>
+<li id="commit_6412e1e" class="ui commit">Reorder cataloging advanced search fields, and correct some labels.</li>
+<li id="commit_9a51d3f" class="ui commit">Add tenant copy of SearchFieldsTemplate-intake.html.</li>
+<li id="commit_de478f2" class="ui commit">Clean up whitespace.</li>
+<li id="commit_a3f0002" class="ui commit">Remove unused intake fields from advanced search.</li>
+<li id="commit_66a6025" class="ui commit">Reorder intake advanced search fields.</li>
+<li id="commit_20a14a2" class="ui commit">Add tenant copy of SearchFieldsTemplate-movement.html.</li>
+<li id="commit_f0b2153" class="ui commit">Clean up whitespace.</li>
+<li id="commit_48bc4a5" class="ui commit">Reorder movement advanced search fields, and remove unused fields.</li>
+<li id="commit_280458a" class="ui commit">Add tenant copy of SearchFieldsTemplate-person.html.</li>
+<li id="commit_577cfc7" class="ui commit">Reorder person advanced search fields, and remove unused fields.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(bampfa_4.0-34) -->
 <div id="bampfa_4.0-34">
 <h2>Version bampfa_4.0-34 <span class="releasedate">(September 16, 2014)</span></h2>
