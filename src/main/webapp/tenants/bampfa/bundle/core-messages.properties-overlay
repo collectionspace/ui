@@ -151,6 +151,7 @@ person-copyrightNoteLabel: Copyright Note
 person-permissionToReproduceLabel: Permission to reproduce granted for noncommercial uses
 person-otherRegionalInfoLabel: Other Regional Info
 person-dynastyPeriodLabel: Dynasty/Period
+preferredPA-termDisplayNameSearchLabel: Display Name
 
 # Movement
 movement-tab: Inv/Mov...
