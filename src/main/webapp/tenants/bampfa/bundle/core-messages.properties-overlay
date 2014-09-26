@@ -82,6 +82,8 @@ collection-object-initialValueDateGroupLabel: Date
 collection-object-physicalDescriptionLabel: Medium
 collection-object-numberOfScansLabel: Number of Scans
 collection-object-otherNumberGroupLabel: T.R. / Other Numbers
+collection-object-otherNumberLabel: T.R. / Other Number
+collection-object-numberValueLabel: T.R. / Other Number
 collection-object-titleLanguageLabel: Language
 collection-object-objectProductionPersonLabel: Artist or Maker
 collection-object-objectProductionPeopleGroupLabel: Artists Collective
@@ -101,6 +103,9 @@ collection-object-computedCrateSearchLabel: Current Box or Container
 collection-object-computedCurrentLocationLabel: Current Storage Location
 collection-object-computedCurrentLocationSearchLabel: Current Storage Location
 collection-object-objectProductionPlaceLabel: Production Place
+collection-object-acquisitionDateGroupLabel: Acquisition Date
+collection-object-acquisitionDateGroupStartLabel: Earliest
+collection-object-acquisitionDateGroupEndLabel: Latest
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
