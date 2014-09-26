@@ -70,24 +70,35 @@ cspace = cspace || {};
         }, termListUrl = that.termListSource.resolveUrl(directModel);
         // Get the list of elements for the termList
         that.termListSource.get(directModel, function (data) {
-            // If there is no data
-            if (!data) {
-                that.displayErrorMessage(fluid.stringTemplate(that.options.parentBundle.resolve("emptyResponse"), {
-                    url: termListUrl
-                }));
-                return;
+            // BAMPFA-271: It's possible the termList will have been removed from
+            // the page by the time this callback happens. This happens when a 
+            // termList appears on advanced search, and the Return to search link
+            // is used to return to a search. In that case, the form is initially
+            // loaded with a termList, which is immediately removed to be replaced
+            // with a form corresponding to the saved search. So we need
+            // to test if this termList is still "alive" before doing anything.
+            // To do this, use jquery to test if the field is still in the DOM.
+
+            if (jQuery.contains(document, that.container[0])) {
+                // If there is no data
+                if (!data) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.options.parentBundle.resolve("emptyResponse"), {
+                        url: termListUrl
+                    }));
+                    return;
+                }
+                // If there is an error during fetching
+                if (data.isError === true) {
+                    fluid.each(data.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
+                that.optionnames = data.optionnames;
+                that.optionlist = data.optionlist;
+                that.activestatus = data.activestatus;
+                that.events.afterFetch.fire();
             }
-            // If there is an error during fetching
-            if (data.isError === true) {
-                fluid.each(data.messages, function (message) {
-                    that.displayErrorMessage(message);
-                });
-                return;
-            }
-            that.optionnames = data.optionnames;
-            that.optionlist = data.optionlist;
-            that.activestatus = data.activestatus;
-            that.events.afterFetch.fire();
         }, cspace.util.provideErrorCallback(that, termListUrl, "errorFetching"));
     };
 
