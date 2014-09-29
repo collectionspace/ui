@@ -108,6 +108,14 @@ collection-object-acquisitionDateGroupStartLabel: Earliest
 collection-object-acquisitionDateGroupEndLabel: Latest
 collection-object-seriesTitleLabel: Series Title
 collection-object-partOfLabel: Part Of
+collection-object-collectionTextInformationLabel: Collection Text Information
+collection-object-collectionTextGroupLabel: Text / Label
+collection-object-collectionTextTypeLabel: Type
+collection-object-collectionTextDoNotPublishLabel: Do Not Publish
+collection-object-collectionTextLabel: Text
+collection-object-collectionTextAuthorLabel: Author
+collectionTextGroup-collectionTextDateGroupLabel: Date
+collection-object-collectionTextNoteLabel: Notes
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
