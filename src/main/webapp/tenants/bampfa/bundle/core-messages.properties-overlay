@@ -106,6 +106,8 @@ collection-object-objectProductionPlaceLabel: Production Place
 collection-object-acquisitionDateGroupLabel: Acquisition Date
 collection-object-acquisitionDateGroupStartLabel: Earliest
 collection-object-acquisitionDateGroupEndLabel: Latest
+collection-object-seriesTitleLabel: Series Title
+collection-object-partOfLabel: Part Of
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
