@@ -10,7 +10,7 @@
                             "identificationNumber": ".csc-object-identification-object-number" 
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.objectNumber", "fields.narrowerContexts", "fields.computedCurrentLocation"]
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.objectNumber", "fields.narrowerContexts", "fields.computedCurrentLocation"]
                     }
                 },
                 "titleBar": {
