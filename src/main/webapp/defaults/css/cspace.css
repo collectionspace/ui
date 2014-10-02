@@ -466,6 +466,14 @@ li .flc-pager-pageLink {
 #title-bar {
     overflow: hidden;
     margin: 0 0 .5em 0;}
+#title-bar.docked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 31;
+    background-color: #F0F5FB;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);}
 #title-bar.nobg {
     background-color:#FFF;}
 #title-bar .title-bar-value {
@@ -478,7 +486,8 @@ li .flc-pager-pageLink {
     max-width:90%; 
     float:left;}
 #title-bar .header-name, #title-bar .content .overflow, #title-bar .record-type {
-    padding-top:9px; 
+    padding-top:9px;
+    padding-bottom:7px;
     float:left;}
 #title-bar .content {
     height:42px; 
@@ -494,6 +503,9 @@ li .flc-pager-pageLink {
     padding: 0;
     margin: 0;
 }
+#administration #title-bar.docked {
+    background-color: #EEF4D7;
+}
 #title-bar .value{
     padding-right:30px; 
     float:left; 
@@ -505,11 +517,15 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
+    padding-left: 10px;
     color: #73AA4F;
     float: left;
 }
 .cs-authority #title-bar .cs-titleBar-recordType {
     color: #78449A;
+}
+.cs-authority #title-bar.docked {
+    background-color: #F3EDF6;
 }
 .cs-authority .ui-tabs .ui-tabs-panel {
     border: 2px solid #78449A;
