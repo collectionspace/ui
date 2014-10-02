@@ -486,7 +486,8 @@ li .flc-pager-pageLink {
     max-width:90%; 
     float:left;}
 #title-bar .header-name, #title-bar .content .overflow, #title-bar .record-type {
-    padding-top:9px; 
+    padding-top:9px;
+    padding-bottom:7px;
     float:left;}
 #title-bar .content {
     height:42px; 
@@ -516,6 +517,7 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
+    padding-left: 10px;
     color: #73AA4F;
     float: left;
 }
