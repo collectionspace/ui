@@ -1,0 +1,28 @@
+{
+    "csid": "222-333-4444-5555",
+    "fields": {
+        "valuationcontrolRefNumber": "VC2013.001",
+        "valueAmounts": [{
+            "_primary": true,
+            "valueAmount": "1234.56",
+            "valueCurrency": "usd"
+        }],
+        "valueDate": "2011-01-01",
+        "valueRenewalDate": "2012-01-01",
+        "valueSource": "urn:cspace:core.collectionspace.org:personauthorities:name(person):item:name(TEST4)'TEST4'",
+        "valueType": "Current Value",
+        "valueNote": "value note goes here"
+    },
+    "relations": {
+        "cataloging": [
+            {
+                "summary": "Souvenir books. Molly O' Play Book.",
+                "csid": "2005.018.1383",
+                "number": "2005.018.1383",
+                "relid": "e8d20612-e1f5-4e90-bc36",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            }
+        ]
+    }
+}

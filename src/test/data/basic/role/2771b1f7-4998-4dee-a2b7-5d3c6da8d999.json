@@ -37,6 +37,10 @@
             },
             {
                 "permission": "delete",
+                "resourceName": "valuationcontrol"
+            },
+            {
+                "permission": "delete",
                 "resourceName": "movement"
             },
             {

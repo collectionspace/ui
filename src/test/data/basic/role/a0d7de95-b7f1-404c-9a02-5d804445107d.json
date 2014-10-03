@@ -37,6 +37,10 @@
             },
             {
                 "permission": "read",
+                "resourceName": "valuationcontrol"
+            },
+            {
+                "permission": "read",
                 "resourceName": "movement"
             },
             {

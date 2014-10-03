@@ -47,7 +47,8 @@ var searchBoxTester = function ($) {
         "relations": ["create", "read", "update", "delete", "list"],
         "authorization/permissions/permroles": ["create", "read", "update", "delete", "list"],
         "vocab": ["create", "read", "update", "delete", "list"],
-        "notes": ["create", "read", "update", "delete", "list"]
+        "notes": ["create", "read", "update", "delete", "list"],
+        "valuationcontrol": ["create", "read", "update", "delete", "list"]
     };
     
     var bareSearchBoxTest = new jqUnit.TestCase("SearchBox Tests");
