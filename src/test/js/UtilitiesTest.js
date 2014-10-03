@@ -308,7 +308,8 @@ var utilitiesTester = function ($) {
         "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
-        "objects": ["create", "read", "update", "delete", "list"]
+        "objects": ["create", "read", "update", "delete", "list"],
+        "valuationcontrol": ["create", "read", "update", "delete", "list"]
     };
     
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
@@ -502,7 +503,8 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
@@ -512,7 +514,8 @@ var utilitiesTester = function ($) {
                 "acquisition",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "person",
@@ -537,7 +540,8 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
@@ -547,7 +551,8 @@ var utilitiesTester = function ($) {
                 "acquisition",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "person",
@@ -573,7 +578,8 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
@@ -583,7 +589,8 @@ var utilitiesTester = function ($) {
                 "loanout",
                 "media",
                 "movement",
-                "objectexit"
+                "objectexit",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "concept",

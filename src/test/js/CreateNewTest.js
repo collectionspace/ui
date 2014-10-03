@@ -57,6 +57,7 @@ var createNewTester = function ($) {
     lessPermissions.loanin = [];
     lessPermissions.movement = [];
     lessPermissions.intake = ["create", "read", "update", "delete", "list"];
+    lessPermissions.valuationcontrol = [];
     
     var createNewTestLessPerms = cspace.tests.testEnvironment({
         testCase: bareCreateNewTest,
@@ -78,6 +79,8 @@ var createNewTester = function ($) {
             jqUnit.assertTrue("Intake ("+str+") shown", $('label:contains("'+str+'")').length == 1);
             str = createNewPage.options.parentBundle.messageBase.loanout;
             jqUnit.assertTrue("Loan out ("+str+") shown", $('label:contains("'+str+'")').length == 1);
+            str = createNewPage.options.parentBundle.messageBase.valuationcontrol;
+            jqUnit.assertTrue("Valuation Control ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
             //styling:
             assertStyling(createNewPage, createNewPage.options.styles.totalOf3);
             start();
@@ -93,6 +96,7 @@ var createNewTester = function ($) {
     lessCategories.place = [];
     lessCategories.work = [];
     lessCategories.concept = [];
+    lessCategories.valuationcontrol = [];
     
     var createNewTestOneCategories = cspace.tests.testEnvironment({
         testCase: bareCreateNewTest,

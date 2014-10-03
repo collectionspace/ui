@@ -278,6 +278,13 @@
             "update",
             "delete",
             "list"
+        ],
+        "valuationcontrol": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
         ]
     },
     "login": true,

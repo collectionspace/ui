@@ -1,0 +1,8 @@
+{
+    "items": [
+        {"number": "VC2013.001", "csid": "222-333-4444-5555", "summary": "2011-01-01", "recordtype": "valuationcontrol"}
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
+}

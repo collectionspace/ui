@@ -34,6 +34,7 @@ cspace = cspace || {};
             objectexit: ".csc-myCollectionSpace-objectexit-group",
             media: ".csc-myCollectionSpace-media-group",
             group: ".csc-myCollectionSpace-group-group",
+            valuationcontrol: ".csc-myCollectionSpace-valuationcontrol-group",
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",
