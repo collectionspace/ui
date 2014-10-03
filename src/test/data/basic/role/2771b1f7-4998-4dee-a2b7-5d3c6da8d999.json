@@ -33,6 +33,10 @@
             },
             {
                 "permission": "delete",
+                "resourceName": "conditioncheck"
+            },
+            {
+                "permission": "delete",
                 "resourceName": "movement"
             },
             {

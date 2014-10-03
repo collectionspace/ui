@@ -182,6 +182,13 @@
             "delete",
             "list"
         ],
+        "conditioncheck": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "vocabularyitems": [
             "create",
             "read",
