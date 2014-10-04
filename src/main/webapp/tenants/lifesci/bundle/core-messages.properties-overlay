@@ -84,7 +84,7 @@ login-email-label: Email
 login-password-label: Password
 login-loginButton: Sign In
 login-forgot: Forgot Password?\t
-login-reset-label: Click here to reset password,
+login-reset-label: Click here to reset password.
 login-reset-header: Reset password
 login-enterEmailMessage: Please enter the email address associated with your account.
 login-submitEmail: Reset My Password
