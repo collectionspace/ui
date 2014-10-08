@@ -2731,14 +2731,32 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 
 /* Structured date parser */
 .cs-structuredDate-parseStatus {
-       position: relative;
-       top: -9px;
-       height: 14px;
-       padding-top: 4px;
-       font-size: 11px;
+    position: relative;
+    top: -9px;
+    height: 14px;
+    padding-top: 4px;
+    font-size: 11px;
 }
 
 .cs-structuredDate-parseStatus.error {
-       background: url(../images/warning.png) no-repeat top left;
-       padding-left: 18px;
+    background: url(../images/warning.png) no-repeat top left;
+    padding-left: 18px;
+}
+
+#title-bar.docked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #F0F5FB;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cs-authority #title-bar.docked {
+    background-color: #F3EDF6;
+}
+
+#administration #title-bar.docked {
+    background-color: #EEF4D7;
 }
