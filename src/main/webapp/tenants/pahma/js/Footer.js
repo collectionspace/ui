@@ -87,7 +87,7 @@ cspace = cspace || {};
             deploymentRelease: "releaseNotes.html",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback",
             version: "4.0",
-            deploymentVersion: "pahma_4.0-85",
+            deploymentVersion: "pahma_4.0-86",
             support: "mailto:cspace-support@lists.berkeley.edu?subject=%5BPAHMA-CSpace%5D%20"
         },
         // Footer template resource.
