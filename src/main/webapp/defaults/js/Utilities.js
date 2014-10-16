@@ -1838,6 +1838,9 @@ fluid.registerNamespace("cspace.util");
                 return oldPropertyValue || readOnly;
             });
         });
+
+        container.find("div.richtext").prop("contenteditable", !readOnly);
+
         // Now lets enable back selectors which should not be disabled
         fluid.each(neverReadOnly, function (selector) {
             container.find(selector).removeAttr('disabled');
