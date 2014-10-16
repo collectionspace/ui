@@ -1334,7 +1334,7 @@ td .field-cal img, td .csc-calendar-button img {
 /* disabling/enabling selectors */ /*needs to be consolidated*/
 .disabled {
     color:#606060;}
-td.disabled, td.disabled input, input[disabled], select:disabled, textarea:disabled, textarea[readonly]  {
+td.disabled, td.disabled input, input[disabled], select:disabled, textarea:disabled, textarea[readonly], div.richtext[contenteditable="false"] {
     color:#000; 
     background-color:#eee; 
     cursor:not-allowed; 
