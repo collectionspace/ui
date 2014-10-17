@@ -6,6 +6,66 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(bampfa_4.0-42) -->
+<div id="bampfa_4.0-42">
+<h2>Version bampfa_4.0-42 <span class="releasedate">(October 16, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Cataloging: Implement accession number calculation <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-166">BAMPFA-166</a>)</span>
+<ul class="commits">
+<li id="commit_bf97d4d" class="ui commit">Remove objectNumber from cataloging fieldsToIgnore.</li>
+</ul>
+</li>
+<li class="issue">
+Reorder dimension fields and add dimension note to UI <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-206">BAMPFA-206</a>)</span>
+<ul class="commits">
+<li id="commit_25b998e" class="application commit">Move modified base-other-dimension.xml back into defaults.</li>
+</ul>
+</li>
+<li class="issue">
+Make create new from existing copy relations <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-240">BAMPFA-240</a>)</span>
+<ul class="commits">
+<li id="commit_d1ce0df" class="ui commit">Copy fieldsToIgnore into tab config files.</li>
+</ul>
+</li>
+<li class="issue">
+Add LMI:Crate and Cataloging:Current Crate Location fields <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-258">BAMPFA-258</a>)</span>
+<ul class="commits">
+<li id="commit_7f354fb" class="ui commit">Make tenant copy of cataloging-tab.json.</li>
+<li id="commit_e1c015e" class="ui commit">Add computedCrate to fieldsToIgnore for cataloging records.</li>
+</ul>
+</li>
+<li class="issue">
+Rich text fields are not disabled on read-only records <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-279">BAMPFA-279</a>)</span>
+<ul class="commits">
+<li id="commit_c5e11d4" class="ui commit">Add styling for disabled rich text fields.</li>
+<li id="commit_ee3e74e" class="ui commit">Disable rich text fields on read-only records.</li>
+</ul>
+</li>
+<li class="issue">
+Add terms to permission to reproduce <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-281">BAMPFA-281</a>)</span>
+<ul class="commits">
+<li id="commit_24bedbd" class="application commit">Add terms to permissionToReproduce on collectionobject and person.</li>
+</ul>
+</li>
+<li class="issue">
+Media: Add image number field  <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-287">BAMPFA-287</a>)</span>
+<ul class="commits">
+<li id="commit_96d185d" class="ui commit">Make tenant copy of MediaTemplate.html.</li>
+<li id="commit_bfea302" class="application commit">Add imageNumber to media_bampfa.</li>
+<li id="commit_19c6104" class="ui commit">Add image number field to media record editor.</li>
+<li id="commit_647fc45" class="ui commit">Make tenant copy of SearchFieldsTemplate-media.html.</li>
+<li id="commit_e23f039" class="ui commit">Clean up whitespace.</li>
+<li id="commit_2ff952c" class="ui commit">Add image number to media advanced search.</li>
+<li id="commit_baf2fa3" class="ui commit">Make tenant copy of MediaView.js.</li>
+<li id="commit_0303170" class="ui commit">Sort media snapshots by image number.</li>
+<li id="commit_5609925" class="ui commit">Change media number label to 'Image Number'.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(bampfa_4.0-41) -->
 <div id="bampfa_4.0-41">
 <h2>Version bampfa_4.0-41 <span class="releasedate">(October  2, 2014)</span></h2>
