@@ -183,6 +183,9 @@ movement-reasonForMoveLabel: Reason
 movement-movementContactLabel: Handler
 movement-crateLabel: Box or Container
 
+# Media
+media-imageNumberLabel: Image Number
+
 # Search
 # For cataloging records, "ID Number" refers to specifically to objectNumber, but in search results, the number column could contain
 # otherNumber if there is no objectNumber. To prevent confusion, don't label the column "ID Number".
