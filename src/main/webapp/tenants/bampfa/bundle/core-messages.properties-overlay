@@ -187,6 +187,7 @@ movement-crateLabel: Box or Container
 media-imageNumberLabel: Image Number
 media-imageNumberStartLabel: From
 media-imageNumberEndLabel: To
+media-number: Image Number
 
 # Search
 # For cataloging records, "ID Number" refers to specifically to objectNumber, but in search results, the number column could contain
