@@ -6,6 +6,101 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(botgarden_4.0-64) -->
+<div id="botgarden_4.0-64">
+<h2>Version botgarden_4.0-64 <span class="releasedate">(October 19, 2014)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Investigate incorporating a javascript rich text editor into the UI <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-210">BAMPFA-210</a>)</span>
+<ul class="commits">
+<li id="commit_15f2c94" class="ui commit">Add /defaults/js/RichTextEditor.js to minification config.</li>
+</ul>
+</li>
+<li class="issue">
+Make title bar dock at the top of the window when scrolling <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-220">BAMPFA-220</a>)</span>
+<ul class="commits">
+<li id="commit_a546305" class="ui commit">Implement title bar docking in defaults.</li>
+</ul>
+</li>
+<li class="issue">
+Make create new from existing copy relations <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-240">BAMPFA-240</a>)</span>
+<ul class="commits">
+<li id="commit_6f91db0" class="ui commit">Enable create new from existing on secondary tabs.</li>
+<li id="commit_d06a021" class="ui commit">Fix errors when autocomplete fields are loaded during create new from existing on secondary tabs.</li>
+<li id="commit_d1ce0df" class="ui commit">Copy fieldsToIgnore into tab config files.</li>
+</ul>
+</li>
+<li class="issue">
+Cataloging advanced search: Add range search for object number <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-245">BAMPFA-245</a>)</span>
+<ul class="commits">
+<li id="commit_f5cb135" class="ui commit">Fix computed fields not being refreshed on advanced search page.</li>
+</ul>
+</li>
+<li class="issue">
+Show disambiguation pop-up when hovering over autocomplete fields <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-247">BAMPFA-247</a>)</span>
+<ul class="commits">
+<li id="commit_639bbd9" class="ui commit">Show disambiguation pop-up when hovering over an autocomplete field with a value.</li>
+</ul>
+</li>
+<li class="issue">
+Add LMI:Crate and Cataloging:Current Crate Location fields <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-258">BAMPFA-258</a>)</span>
+<ul class="commits">
+<li id="commit_b74a0fe" class="services commit">Copy UpdateObjectLocationAndCrateOnMove listener into UCB shared branch, so it can be used by deployments other than pahma.</li>
+</ul>
+</li>
+<li class="issue">
+Return to search from advanced search causes javascript errors <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-271">BAMPFA-271</a>)</span>
+<ul class="commits">
+<li id="commit_7859a8a" class="ui commit">Fix js errors when returning to advanced search with dynamic term lists.</li>
+</ul>
+</li>
+<li class="issue">
+Add S3 components to the services  code repo. <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-276">BAMPFA-276</a>)</span>
+<ul class="commits">
+<li id="commit_7af6596" class="services commit">Add Amazon S3 binary manager files, and examples of configuration.</li>
+</ul>
+</li>
+<li class="issue">
+Rich text fields are not disabled on read-only records <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-279">BAMPFA-279</a>)</span>
+<ul class="commits">
+<li id="commit_ee3e74e" class="ui commit">Disable rich text fields on read-only records.</li>
+</ul>
+</li>
+<li class="issue">
+Derive structured date values from what is entered in display date <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-79">BAMPFA-79</a>)</span>
+<ul class="commits">
+<li id="commit_9dc9bbd" class="ui commit">Preserve primary setting in structured dates after parsing.</li>
+</ul>
+</li>
+<li class="issue">
+Update pom.xml files to reference our Artifactory instance before any other maven repos <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6291">CSPACE-6291</a>)</span>
+<ul class="commits">
+<li id="commit_e285102" class="services commit">Consolidate remaining <repository> references in POMs to the project's top level POM. Move the repository reference to the project Maven repo's 'nuxeo-public' repo earlier, above two references to remote maven.nuxeo.org repos, to help ensure that cached copies of artifacts in the project repo are preferentially downloaded. Replace a non-existent pluginRepository reference."</li>
+</ul>
+</li>
+<li class="issue">
+Update build scripts to support JDBC options in all db urls <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6404">CSPACE-6404</a>)</span>
+<ul class="commits">
+<li id="commit_77b7e69" class="services commit">Added support for JDBC options throughout the build and configuration files.</li>
+</ul>
+</li>
+<li class="issue">
+Refobjs call with page size 0 hangs <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/CSPACE-6406">CSPACE-6406</a>)</span>
+<ul class="commits">
+<li id="commit_eb15a16" class="services commit">Fix infinite loop in LazyAuthorityRefDocList.java when page size is 0.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_2c90b50" class="services commit">Update some comments.</li>
+<li id="commit_c6d793c" class="ui commit">Transfer changes from defaults into tenant overrides.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(botgarden_4.0-63) -->
 <div id="botgarden_4.0-63">
 <h2>Version botgarden_4.0-63 <span class="releasedate">(October  1, 2014)</span></h2>

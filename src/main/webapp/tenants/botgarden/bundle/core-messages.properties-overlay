@@ -152,7 +152,7 @@ taxon-widthLabel: Width
 taxon-diameterBreastHeightLabel: DBH
 
 #Login
-login-deployment: Version botgarden_4.0-63
+login-deployment: Version botgarden_4.0-64
 login-current-info: Welcome to the UC Botanical Garden's collection management system, CollectionSpace. UCBG-CSpace has been configured to support the needs of botanical gardens in general, as well as the specific needs of the UC Botanical Garden.
 login-current-details: 
 login-login-info: 
