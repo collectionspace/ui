@@ -135,6 +135,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     border: 2px solid #C7CFD4;
     box-shadow: 3px 3px 4px #C7CFD4;
 }
+.csc-autocomplete-popup-miniView.currentValue {
+    line-height: 1.4;
+    font-size: 1.1em;
+    position: absolute;
+}
 .cs-miniView {
     font-weight: normal;
     padding: 5px;
