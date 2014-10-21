@@ -328,4 +328,16 @@ var bampfa = {};
 		
 		return effectiveObjectNumber;
 	}
+	
+	bampfa.computeMediaTitle = function(blobs) {
+		var filename = "";
+		
+		if (blobs.length > 0) {
+			var blob = blobs[0];
+			
+			filename = blob.name;
+		}
+		
+		return filename;
+	}
 })(jQuery, fluid);

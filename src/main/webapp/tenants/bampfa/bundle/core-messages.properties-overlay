@@ -189,6 +189,7 @@ media-imageNumberStartLabel: From
 media-imageNumberEndLabel: To
 media-number: Image Number
 media-identificationNumberRequired: Please specify an Image Number
+media-titleSearchLabel: File name
 
 # Search
 # For cataloging records, "ID Number" refers to specifically to objectNumber, but in search results, the number column could contain

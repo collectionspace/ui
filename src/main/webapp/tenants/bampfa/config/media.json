@@ -36,7 +36,7 @@
 					"type": "cspace.titleBar",
 					"options": {
 						"fields": [
-							"fields.identificationNumber",
+							"fields.imageNumber",
 							"fields.title"
 						]
 					}
