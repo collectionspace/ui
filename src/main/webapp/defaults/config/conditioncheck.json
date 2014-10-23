@@ -7,7 +7,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-conditioncheck-conditioncheckRefNumber"
+                            "identificationNumber": ".csc-conditioncheck-numberPatternChooser-reference-number"
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.conditionCheckRefNumber", "fields.narrowerContexts"]
