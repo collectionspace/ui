@@ -116,6 +116,8 @@ collection-object-collectionTextLabel: Text
 collection-object-collectionTextAuthorLabel: Author
 collectionTextGroup-collectionTextDateGroupLabel: Date
 collection-object-collectionTextNoteLabel: Notes
+collection-object-assocPlaceGroupLabel: Site
+collection-object-assocPlaceLabel: Site
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
