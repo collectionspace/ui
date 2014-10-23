@@ -8,12 +8,12 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/createNew.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
@@ -21,7 +21,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
@@ -31,17 +31,17 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Search.js</js>
@@ -53,7 +53,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
@@ -61,14 +61,14 @@
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/TermList.js</js>
@@ -81,28 +81,30 @@
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/PageBuilder.js</js>
+    <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
+    <js>/tenants/bampfa/js/bampfa.js</js>
   </group>
   
   <group name='findedit'>
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/PageBuilder.js</js>
@@ -112,16 +114,16 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/PasswordValidator.js</js>
     <js>/defaults/js/Login.js</js>
     <js>/defaults/js/Search.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/PageBuilder.js</js>
   </group>
   
@@ -129,7 +131,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/cabinet.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -141,13 +143,13 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/TermList.js</js>
@@ -171,7 +173,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -186,13 +188,13 @@
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/lib/jquery/ui/js/jquery.ui.tabs.js</js>
     <js>/defaults/lib/jquery/plugins/scrollabletabs/js/jquery.scrollabletabs.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/ComputedField.js</js>
     <js>/defaults/js/RichTextEditor.js</js>
@@ -214,13 +216,14 @@
     <js>/defaults/js/Tabs.js</js>
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/ExternalURL.js</js>
-    <js>/defaults/js/MediaView.js</js>
+    <js>/tenants/bampfa/js/MediaView.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/ReportProducer.js</js>
     <js>/defaults/js/BatchRunner.js</js>
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/RelatedRecordsTab.js</js>
     <js>/defaults/js/PageBuilder.js</js>
+    <js>/defaults/lib/ckeditor/ckeditor.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
@@ -229,13 +232,14 @@
     <js>/defaults/js/RecordTraverser.js</js>
     <js>/defaults/js/RecordHistory.js</js>
     <js>/defaults/js/Preferred.js</js>
+    <js>/tenants/bampfa/js/bampfa.js</js>
   </group>
   
   <group name='template'>
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/defaults/css/cspace.css</css>
+    <css>/tenants/bampfa/css/cspace.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>
@@ -245,13 +249,13 @@
     <css>/defaults/css/repeatable.css</css>
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
-    <js>/defaults/js/Demands.js</js>
+    <js>/tenants/bampfa/js/Demands.js</js>
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
-    <js>/defaults/js/Footer.js</js>
+    <js>/tenants/bampfa/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
@@ -266,7 +270,7 @@
     <js>/defaults/js/TitleBar.js</js>
     <js>/defaults/js/MediaUploader.js</js>
     <js>/defaults/js/ExternalURL.js</js>
-    <js>/defaults/js/MediaView.js</js>
+    <js>/tenants/bampfa/js/MediaView.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
