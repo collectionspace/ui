@@ -169,6 +169,7 @@ person-permissionToReproduceLabel: Permission to reproduce granted for noncommer
 person-otherRegionalInfoLabel: Other Regional Info
 person-dynastyPeriodLabel: Dynasty/Period
 preferredPA-termDisplayNameSearchLabel: Display Name
+person-identificationNumberRequired: Display Name is empty. Please enter a Forename, Middle Name, or Surname to generate a Display Name.
 
 # Movement
 movement-tab: Inv/Mov...
