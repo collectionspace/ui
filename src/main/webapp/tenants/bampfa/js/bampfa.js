@@ -38,7 +38,16 @@ var bampfa = {};
 	}
 	
 	bampfa.computeDimensionSummary = function(measuredPart, dimensionSubGroup, measuredPartNote) {
-		var valueMap = {};
+		var measurements = {};
+		
+		// Collect the necessary measurements for the summary.
+		
+		// Measurements with units other than inches and centimeters are excluded.
+		
+		// Measurements with empty values are excluded.
+		
+		// A dimension could be measured more than once. If this happens, the first (top-most) measurement
+		// of that dimension is used. All others are excluded.
 		
 		for (var i=0; i<dimensionSubGroup.length; i++) {
 			var measurement = dimensionSubGroup[i];
@@ -46,31 +55,72 @@ var bampfa = {};
 			var value = measurement.value;
 			var unit = measurement.measurementUnit;
 			
-			if ((unit == "inches" || unit == "centimeters") && value != null && value != "" && !(dimension in valueMap)) {
-				valueMap[dimension] = value;
+			if ((unit == "inches" || unit == "centimeters") && value != null && value != "" && !(dimension in measurements)) {
+				measurements[dimension] = {
+					value: value,
+					unit: unit
+				}
 			}
 		}
 		
+		// Order the collected measurements by dimension, and drop measurements of
+		// dimensions that are not used in the summary.
+		
 		var orderedDimensions = ["height", "width", "depth", "diameter"];
-		var orderedValues = [];
+		var orderedMeasurements = [];
+		var usedUnits = {};
 		
 		for (var i=0; i<orderedDimensions.length; i++) {
 			var dimension = orderedDimensions[i];
 			
-			if (dimension in valueMap) {
-				orderedValues.push(valueMap[dimension]);
+			if (dimension in measurements) {
+				var measurement = measurements[dimension];
+				
+				orderedMeasurements.push(measurement);
+				usedUnits[measurement.unit] = true;
 			}
 		}
 		
-		var dimensionSummary = orderedValues.join(" x ");
+		// Create descriptions of each measurement. If all measurements share
+		// a common unit, this is just the value of the measurement. Otherwise,
+		// it's the value and the unit.
+		
+		var orderedMeasurementDescriptions = [];
+		var hasCommonUnit = (Object.keys(usedUnits).length == 1);
+
+		for (var i=0; i<orderedMeasurements.length; i++) {
+			var measurement = orderedMeasurements[i];
+			var measurementDescription = measurement.value;
+			
+			if (!hasCommonUnit) {
+				measurementDescription += " " + measurement.unit;
+			}
+			
+			orderedMeasurementDescriptions.push(measurementDescription);
+		}
+		
+		// Join all measurement descriptions with x.
+		
+		var measurementSummary = orderedMeasurementDescriptions.join(" x ");
+
+		// If there is a common unit, append it.
+		
+		if (hasCommonUnit) {
+			var commonUnit = (Object.keys(usedUnits))[0];
+			
+			measurementSummary += " " + commonUnit;
+		}
+		
+		// Compose this with the measured part and the measured part note.
+		
 		var summaryParts = [];
 		
 		if (measuredPart != null && measuredPart != "") {
 			summaryParts.push(measuredPart + ":");
 		}
 
-		if (dimensionSummary != "") {
-			summaryParts.push(dimensionSummary);
+		if (measurementSummary != "") {
+			summaryParts.push(measurementSummary);
 		}
 		
 		if (measuredPartNote != null && measuredPartNote != "") {
