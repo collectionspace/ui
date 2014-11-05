@@ -1522,6 +1522,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     listener: "{searchTools}.events.renderOn.fire",
                                     priority: "last"
                                 }
+                            },
+                            model: {
+                                operation: "and"
                             }
                         }
                     }
