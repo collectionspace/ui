@@ -92,6 +92,7 @@ cspace = cspace || {};
             advancedSearchURL: "%webapp/html/advancedsearch.html"
         }),
         enableAdvancedSearch: true,
+        defaultRecordType: "cataloging",
         animationOpts: {
             time: 300,
             easing: "linear"
@@ -102,7 +103,7 @@ cspace = cspace || {};
         that.subTree = that.recordTypeSelector.produceComponent();
         if (that.subTree.recordTypeSelect) {
             if (!that.model.recordType) {
-                that.applier.requestChange("recordType", that.subTree.recordTypeSelect.selection);
+                that.applier.requestChange("recordType", that.options.defaultRecordType);
             }
             that.subTree.recordTypeSelect.selection = "${recordType}";
         }
