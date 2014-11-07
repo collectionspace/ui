@@ -28,7 +28,7 @@
                             "relatedRecordsRecordEditor": {
                                 "options": {
                                     "selectors": {
-                                        "identificationNumber": ".csc-conditioncheck-conditionCheckRefNumber"
+                                        "identificationNumber": ".csc-conditioncheck-numberPatternChooser-reference-number"
                                     },
                                     "uispec": "{pageBuilder}.options.uispec.details"
                                 }
