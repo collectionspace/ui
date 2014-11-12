@@ -182,6 +182,13 @@
             "delete",
             "list"
         ],
+        "conditioncheck": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "vocabularyitems": [
             "create",
             "read",
@@ -273,6 +280,13 @@
             "list"
         ],
         "media": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
+        "valuationcontrol": [
             "create",
             "read",
             "update",

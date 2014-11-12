@@ -31,9 +31,11 @@ cspace = cspace || {};
             loanin: ".csc-myCollectionSpace-loanin-group",
             loanout: ".csc-myCollectionSpace-loanout-group",
             movement: ".csc-myCollectionSpace-movement-group",
+            conditioncheck: ".csc-myCollectionSpace-conditioncheck-group",
             objectexit: ".csc-myCollectionSpace-objectexit-group",
             media: ".csc-myCollectionSpace-media-group",
             group: ".csc-myCollectionSpace-group-group",
+            valuationcontrol: ".csc-myCollectionSpace-valuationcontrol-group",
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",

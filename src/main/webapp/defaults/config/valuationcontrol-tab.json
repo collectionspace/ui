@@ -1,0 +1,42 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "valuationcontrol",
+            "schema": {
+                "valuationcontrol": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "valuationcontrol-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-valuationcontrol"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "valuationcontrol-editRecord",
+                            "recordList": "valuationcontrol-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "identificationNumber": ".csc-valuationcontrol-valuationcontrolRefNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

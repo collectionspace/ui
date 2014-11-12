@@ -160,6 +160,7 @@
     <js>/defaults/js/Admin.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/RecordTraverser.js</js>
+    <js>/defaults/js/RecordHistory.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
     <js>/defaults/lib/datejs/src/parser.js</js>
@@ -223,6 +224,7 @@
     <js>/defaults/lib/goog/js/goog.ui.DatePicker.js</js>
     <js>/defaults/js/DatePicker.js</js>
     <js>/defaults/js/RecordTraverser.js</js>
+    <js>/defaults/js/RecordHistory.js</js>
     <js>/defaults/js/Preferred.js</js>
   </group>
   

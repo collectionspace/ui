@@ -98,6 +98,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "concept-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "place-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "citation-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "taxon-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "work-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"], {
             funcName: "cspace.autocomplete.testAuthoritiesDataSource",
@@ -368,6 +369,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "place-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "citation-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "work-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "person-miniView"], {
             options: {
@@ -447,6 +449,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    },
+                    field1: "${fields.taxonTermGroup.0.termType}",
+                    field2: "${fields.taxonTermGroup.0.termStatus}",
+                    field3: "${fields.taxonRank}",
+                    field1Label: {
+                        messagekey: "taxon-miniView-field1Label"
+                    },
+                    field2Label: {
+                        messagekey: "taxon-miniView-field2Label"
+                    },
+                    field3Label: {
+                        messagekey: "taxon-miniView-field3Label"
+                    }
+                }
+            }
+        });
         fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "work-miniView"], {
             options: {
                 protoTree: {
@@ -504,6 +528,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "place-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "citation-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "work-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",

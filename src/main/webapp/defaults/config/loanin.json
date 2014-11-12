@@ -10,7 +10,7 @@
                             "identificationNumber": ".csc-loanIn-loanInNumber"
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.loanInNumber"]
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.loanInNumber"]
                     }
                 },
                 "titleBar": {

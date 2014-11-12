@@ -302,13 +302,15 @@ var utilitiesTester = function ($) {
         "loanout": ["create", "read", "update", "delete", "list"],
         "loanin": ["read", "list"],
         "acquisition": [],
+        "conditioncheck": ["create", "read", "update", "delete", "list"],
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
         "work": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
-        "objects": ["create", "read", "update", "delete", "list"]
+        "objects": ["create", "read", "update", "delete", "list"],
+        "valuationcontrol": ["create", "read", "update", "delete", "list"]
     };
     
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
@@ -494,6 +496,7 @@ var utilitiesTester = function ($) {
                 "intake",
                 "loanin",
                 "loanout",
+                "conditioncheck",
                 "acquisition",
                 "organization",
                 "place",
@@ -502,17 +505,20 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
                 "intake",
                 "loanin",
                 "loanout",
+                "conditioncheck",
                 "acquisition",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "person",
@@ -529,6 +535,7 @@ var utilitiesTester = function ($) {
                 "intake",
                 "loanin",
                 "loanout",
+                "conditioncheck",
                 "acquisition",
                 "organization",
                 "place",
@@ -537,17 +544,20 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
                 "intake",
                 "loanin",
                 "loanout",
+                "conditioncheck",
                 "acquisition",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "person",
@@ -565,6 +575,7 @@ var utilitiesTester = function ($) {
                 "intake",
                 "loanin",
                 "loanout",
+                "conditioncheck",
                 "acquisition",
                 "organization",
                 "place",
@@ -573,17 +584,20 @@ var utilitiesTester = function ($) {
                 "cataloging",
                 "movement",
                 "objectexit",
-                "media"
+                "media",
+                "valuationcontrol"
             ],
             "cataloging": ["cataloging"],
             "procedures": [
                 "acquisition",
+                "conditioncheck",
                 "intake",
                 "loanin",
                 "loanout",
                 "media",
                 "movement",
-                "objectexit"
+                "objectexit",
+                "valuationcontrol"
             ],
             "vocabularies": [
                 "concept",

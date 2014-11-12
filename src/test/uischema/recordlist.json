@@ -14,6 +14,7 @@
       "location", 
       "loanin", 
       "loanout", 
+      "conditioncheck", 
       "acquisition", 
       "ulan_oa", 
       "organization", 

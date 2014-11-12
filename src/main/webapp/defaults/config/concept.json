@@ -10,6 +10,7 @@
                         "fieldsToIgnore": [
                             "csid",
                             "fields.csid",
+                            "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy",
                             "fields.shortIdentifier",
                             "fields.narrowerContexts"
                         ],
