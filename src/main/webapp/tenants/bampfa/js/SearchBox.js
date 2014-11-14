@@ -103,7 +103,17 @@ cspace = cspace || {};
         that.subTree = that.recordTypeSelector.produceComponent();
         if (that.subTree.recordTypeSelect) {
             if (!that.model.recordType) {
-                that.applier.requestChange("recordType", that.options.defaultRecordType);
+                var initialRecordType;
+                var defaultRecordType = that.options.defaultRecordType;
+
+                if (defaultRecordType && that.subTree.recordTypeSelect.optionlist.indexOf(defaultRecordType) >= 0) {
+                    initialRecordType = defaultRecordType;
+                }
+                else {
+                    initialRecordType = that.subTree.recordTypeSelect.selection;
+                }
+                
+                that.applier.requestChange("recordType", initialRecordType);
             }
             that.subTree.recordTypeSelect.selection = "${recordType}";
         }
