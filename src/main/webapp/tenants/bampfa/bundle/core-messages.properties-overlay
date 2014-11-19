@@ -118,6 +118,7 @@ collectionTextGroup-collectionTextDateGroupLabel: Date
 collection-object-collectionTextNoteLabel: Notes
 collection-object-assocPlaceGroupLabel: Site
 collection-object-assocPlaceLabel: Site
+collection-object-artistDisplayOverrideLabel: Artist Display Override
 
 # Dimension
 dimension-dimensionNoteLabel: Measurement Note
