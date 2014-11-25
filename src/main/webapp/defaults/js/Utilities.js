@@ -882,7 +882,7 @@ fluid.registerNamespace("cspace.util");
 
         return namespace;
     }
-	
+
     cspace.util.csidFromRefName = function (refName) {
         var csid = "";
         
@@ -1426,6 +1426,21 @@ fluid.registerNamespace("cspace.util");
                     return true;
                 }
             }) || false;
+        };
+
+        that.getAuthority = function (vocab) {
+            var authority = null;
+            
+            for (var candidateAuthority in that.list) {
+                var vocabList = that.list[candidateAuthority];
+                
+                if (vocabList[vocab]) {
+                    authority = candidateAuthority;
+                    break;
+                }
+            }
+
+            return authority;
         };
 
         that.isDefault = function (vocab) {
