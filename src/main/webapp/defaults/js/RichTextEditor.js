@@ -35,6 +35,15 @@ cspace = cspace || {};
 		};
 		
 		that.bindEvents = function() {
+			// When the field is focused, check if it has been disabled, which will
+			// happen when the record is read-only. If it has, destroy the editor.
+			
+			that.editor.on("focus", function(event) {
+				if (event.editor.container.getAttribute("contenteditable") == "false") {
+					that.destroyEditor();
+				}
+			});
+			
 			// When the field loses focus, transfer the data from the editable div into the 
 			// original textarea/input. This is necessary because the field might be used
 			// in the title bar or as an input to a computed field, so it needs to be 

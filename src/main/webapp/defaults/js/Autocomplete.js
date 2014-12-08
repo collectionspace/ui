@@ -387,47 +387,93 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     cspace.autocomplete.refreshMiniView = function (that) {
-        var authorities = that.model.authorities;
-        var miniViewType;
-        
-        // Get the type of record that may be referenced by this autocomplete.
-        // This could either be the name of a cataloging or procedural record
-        // (in the case of hierarchy fields), or the meta-descriptor "vocab"
-        // for vocabulary records. The meta-descriptor is used because an
-        // autocomplete field can be tied to more than one kind of vocabulary
-        // record. Even if there is a value in the field, the record type can
-        // not be inferred from the refname, since only the app layer has this
-        // knowledge. Luckily, At this point, it's not necessary to know
-        // exactly which kind of record it is -- knowing that it's some kind
-        // of vocabulary record is enough to generate the right call to the
-        // app layer to get the full record.
-        
-        if (authorities.length > 0) {
-            var authority = authorities[0];
-            var type = (authority.type.split("-"))[0];
-            
-            if (that.vocab.isVocab(type)) {
-                miniViewType = "vocab";
-            }
-            else {
-                miniViewType = type;
-            }
-        }
-        
         // Get the current value of the autocomplete (a refname).
         
         var refName = that.model.baseRecord.urn;
         
         if (refName) {
-            // If there is a value, calculate a "csid" and namespace
-            // from the refname. The "csid" isn't actually a csid,
-            // but the urn-formatted shortid that can be substituted
-            // for the csid in services layer calls. This information
-            // is used to fetch the full record for the refname.
+            // If there is a value, retrieve the data for the item,
+            // and show the miniView. In order to do this, we need
+            // the record type of the referenced record, the csid,
+            // and the vocabulary (aka namespace) if it's an
+            // authority item.
             
-            var csid = cspace.util.shortIdentifierToCSID(refName);
+            var miniViewType;
+            var csid;
+            
+            // If the refname is that of an authority item, it will
+            // contain the vocabulary id (known in the app/ui as the
+            // namespace).
             var namespace = cspace.util.namespaceFromRefName(refName);
+            
+            if (that.model.baseRecord.type) {
+                // If the current value was entered after the page was
+                // initially loaded, its record type was retrieved when
+                // populating autocomplete pop-up, and is now stored in
+                // the model. Just get it from there.
+                
+                miniViewType = that.model.baseRecord.type;
+            }
+            else {
+                // If the current value came from the initial page load,
+                // we don't know the record type of the refname. It must
+                // be inferred from the refname, or from the configuration
+                // of the autocomplete.
+                
+                if (namespace) {
+                    // The refname looks like it's that of an authority item,
+                    // which contains a vocabulary name (it has a ":name(...):" part).
+                    // From the that.vocab structure, we can find the parent authority
+                    // of the vocabulary, which is our record type.
+                    
+                    miniViewType = that.vocab.getAuthority(namespace);
+                }
+                else {
+                    // The refname doesn't look like that of an authority item, so
+                    // it refers to a cataloging or procedural record. The services
+                    // record type (e.g. collectionobject) can be parsed from the refname,
+                    // but the app layer record type (e.g. cataloging) can't. So it takes
+                    // some work to infer the record type. We can see which record types
+                    // are bound to the field by looking at the that.model.authorities
+                    // structure. It should be safe just take the first of these. We know
+                    // the refname is for a cataloging/procedural record, which means we're
+                    // in a record hierarchy field, and those fields are only ever bound to
+                    // a single record type.
+                    
+                    // FIXME: This doesn't work when the user doesn't have write permission
+                    // on the referenced record type, because that.model.authorities only
+                    // contains record types that the user can create.
+                    
+                    var authorities = that.model.authorities;
+        
+                    if (authorities.length > 0) {
+                        var authorities = authorities[0];
+                        miniViewType = (authorities.type.split("-"))[0];
+                    }
+                }
+            }
 
+            if (that.model.baseRecord.csid) {
+                // If the current value was entered after the page was
+                // initially loaded, its csid was retrieved when
+                // populating autocomplete pop-up, and is now stored in
+                // the model. Just get it from there.
+                
+                csid = that.model.baseRecord.csid;
+            }
+            else {
+                // If the current value came from the initial page load,
+                // we don't know the csid of the referenced record. It must
+                // be parsed from the refname.
+
+                if (that.vocab.isVocab(miniViewType)) {
+                    csid = cspace.util.shortIdentifierToCSID(refName);
+                }
+                else {
+                    csid = cspace.util.csidFromRefName(refName);
+                }
+            }
+            
             that.miniView.applier.requestChange("attributes", {
                 csid: csid,
                 urn: refName,
@@ -1104,20 +1150,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
         };
         that.applier.modelChanged.addListener("basic", function () {
-            if (fluid.get(that.model, "basic.fields")) {
-                // If this is a vocabulary record, the type is currently set to the meta-descriptor "vocab".
-                // This was enough to be able to get the full record. Now that we have the full record, we
-                // know exactly which type of record this is, so the type can be set to a specific record
-                // type. This is necessary to show the proper disambiguation fields for the record type.
-                
-                that.applier.requestChange("attributes.type", fluid.get(that.model, "basic.fields.recordtype"));
-                that.events.onContext.fire();
-
-                // Render and show.
-
-                that.events.onRender.fire();
-                that.events.onShow.fire();
-            }
+            that.events.onRender.fire();
+            that.events.onShow.fire();
         });
         that.hide = function () {
             clearTimeout(that.options.showTimer);
