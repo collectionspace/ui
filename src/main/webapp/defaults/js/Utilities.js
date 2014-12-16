@@ -1982,7 +1982,7 @@ fluid.registerNamespace("cspace.util");
             instantiator: "{instantiator}"
         },
         offset: 0,
-        removeRelationPermission: "update"
+        removeRelationPermission: "read"
     });
 
     cspace.util.relationRemover.getRemoverWidgetConatiner = function (rows, index) {

@@ -211,10 +211,10 @@ cspace = cspace || {};
             resolver: "{permissionsResolver}"
         },
         recordType: "{relationManager}.options.related",
-        recordTypePermission: "update",
+        recordTypePermission: "read",
         allOf: [{
             target: "{relationManager}.options.primary",
-            permission: "update"
+            permission: "read"
         }],
         finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
     });
