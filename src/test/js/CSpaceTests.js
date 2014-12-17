@@ -46,10 +46,12 @@ cspace.tests.sampleSchema = {
                     "intake",
                     "loanin",
                     "loanout",
+                    "conditioncheck",
                     "acquisition",
                     "movement",
                     "objectexit",
-                    "media"
+                    "media",
+                    "valuationcontrol"
                 ],
                 "type": "array"
             }
@@ -61,6 +63,7 @@ cspace.tests.sampleSchema = {
             "intake",
             "loanin",
             "loanout",
+            "conditioncheck",
             "acquisition",
             "organization",
             "place",
@@ -69,7 +72,8 @@ cspace.tests.sampleSchema = {
             "cataloging",
             "movement",
             "objectexit",
-            "media"
+            "media",
+            "valuationcontrol"
         ],
         "type": "array"
     },
@@ -284,6 +288,7 @@ cspace.tests.sampleUserPerms = {
         "loanout": ["create", "read", "update", "delete", "list"],
         "loanin": ["read", "list"],
         "acquisition": [],
+        "conditioncheck": [],
         "organization": ["create", "read", "update", "delete", "list"],
         "place": ["create", "read", "update", "delete", "list"],
         "work": ["create", "read", "update", "delete", "list"],
@@ -291,7 +296,8 @@ cspace.tests.sampleUserPerms = {
         "movement": ["create", "read", "update", "delete", "list"],
         "cataloging": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
-        "users": ["create", "read", "update", "delete", "list"]
+        "users": ["create", "read", "update", "delete", "list"],
+        "valuationcontrol": []
 };
 
 cspace.tests.fullPerms = {
@@ -300,6 +306,7 @@ cspace.tests.fullPerms = {
         "acquisition": ["create", "read", "update", "delete", "list"],
         "loanout": ["create", "read", "update", "delete", "list"],
         "loanin": ["create", "read", "update", "delete", "list"],
+        "conditioncheck": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
         "person": ["create", "read", "update", "delete", "list"],
@@ -308,7 +315,8 @@ cspace.tests.fullPerms = {
         "work": ["create", "read", "update", "delete", "list"],
         "concept": ["create", "read", "update", "delete", "list"],
         "media": ["create", "read", "update", "delete", "list"],
-        "users": ["create", "read", "update", "delete", "list"]
+        "users": ["create", "read", "update", "delete", "list"],
+        "valuationcontrol": ["create", "read", "update", "delete", "list"]
 };
 
 cspace.tests.userLogin = {
