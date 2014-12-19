@@ -1,0 +1,12 @@
+Welcome to the CollectionSpace Life Science demo tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
+
+Log in to the demo using the email admin@lifesci.collectionspace.org and password 'Adminstrator' for full access to the system; to view in read-only mode, use the email reader@lifesci.collectionspace.org with password 'reader'.
+
+Not sure where to get started? Follow along with one of our quickstart guides:
+Create a new object [http://bit.ly/newobjpdf] [https://vimeo.com/112212895]
+Link to an image [http://bit.ly/linkimgpdf] [https://vimeo.com/112214418]
+Add a storage location [http://bit.ly/storlocpdf] [https://vimeo.com/112818120]
+
+We re-build this demo site weekly so don’t worry, you can’t break it!
+
+To return to the CollectionSpace Core tenant, follow this link.
