@@ -246,8 +246,12 @@ cspace = cspace || {};
             passwordRequired: ".csc-login-passwordRequired",
             
             currentReleaseHeader: ".csc-login-current",
-            currentReleaseInfo: ".csc-login-current-info",
+            currentReleaseInfo1: ".csc-login-current-info-1",
+            currentReleaseInfo2: ".csc-login-current-info-2",
+            currentReleaseInfo3: ".csc-login-current-info-3",
+            currentReleaseInfo4: ".csc-login-current-info-4",
             currentReleaseDetails: ".csc-login-current-details",
+			
             loginInfo: ".csc-login-login-info",
             loginLogin: ".csc-login-login",
             loginPwd: ".csc-login-login-pwd",
@@ -256,6 +260,14 @@ cspace = cspace || {};
             rologinLogin: ".csc-login-rologin",
             rologinPwd: ".csc-login-rologin-pwd",
             rologinPwdValue: ".csc-login-rologin-pwdValue",
+			
+			loginRebuild: ".csc-login-rebuild",
+			
+			loginWebcastInfo: ".csc-login-webcast-info",
+			loginWebcastLinkObject :".csc-login-webcast-link-object",
+			loginWebcastLinkImage :".csc-login-webcast-link-image",
+			loginWebcastLinkLocation :".csc-login-webcast-link-location",
+			
             footerFirst: ".csc-login-details-footer-first",
             footerLink: ".csc-login-details-footer-link",
             footerLast: ".csc-login-details-footer-last",
@@ -287,8 +299,17 @@ cspace = cspace || {};
             currentReleaseHeader: {
                 messagekey: "login-current"
             },
-            currentReleaseInfo: {
-                messagekey: "login-current-info"
+            currentReleaseInfo1: {
+                messagekey: "login-current-info-1"
+            },
+            currentReleaseInfo2: {
+                messagekey: "login-current-info-2"
+            },
+            currentReleaseInfo3: {
+                messagekey: "login-current-info-3"
+            },
+            currentReleaseInfo4: {
+                messagekey: "login-current-info-4"
             },
             currentReleaseDetails: {
                 messagekey: "login-current-details"
@@ -316,8 +337,23 @@ cspace = cspace || {};
             },
             rologinPwdValue: {
                 messagekey: "login-rologin-pwdValue"
+            },			
+            loginRebuild: {
+                messagekey: "login-rebuild"
+            },			
+            loginWebcastInfo: {
+                messagekey: "login-webcast-info"
             },
-            loginHeader: {
+            loginWebcastLinkObject: {
+                messagekey: "login-webcast-link-object"
+            },
+            loginWebcastLinkImage: {
+                messagekey: "login-webcast-link-image"
+            },
+            loginWebcastLinkLocation: {
+                messagekey: "login-webcast-link-location"
+            },
+			loginHeader: {
                 messagekey: "login-header"
             },
             loginEmailHeader: {

@@ -60,37 +60,11 @@ taxon-miniView-field3Label: Rank:
 
 # -------------------------------------
 #Login
-login-allFieldsRequired: All fields must be filled in
-login-emailRequired: You must enter a valid email address
-login-passwordsMustMatch: Passwords must match
-login-invalid: Invalid email/password combination
-login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
-login-current: Current Release 4.1 Information
-login-current-info: Welcome to the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
-login-current-details:
-login-login-info: To view the CollectionSpace Life Science tenant, use the login box on the right with the login:
+
+login-current-info-4: This is the landing page for the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
 login-login: admin@lifesci.collectionspace.org
-login-login-pwd:  and the password\t 
-login-login-pwdValue: Administrator
-login-rologin-info: Or use the read-only account:
-login-rologin: reader@core.collectionspace.org
-login-rologin-pwd:  and password: 
-login-rologin-pwdValue: reader
+login-rologin: reader@lifesci.collectionspace.org
+
 login-footerFirst: To return to the CollectionSpace Core tenant, follow\t
 login-footerLink: this link
 login-footerLast: .
-login-header: Sign In
-login-email-label: Email
-login-password-label: Password
-login-loginButton: Sign In
-login-forgot: Forgot Password?\t
-login-reset-label: Click here to reset password.
-login-reset-header: Reset password
-login-enterEmailMessage: Please enter the email address associated with your account.
-login-submitEmail: Reset My Password
-login-loginBack: Back to Sign In page
-login-loginNewPasswordNote: Enter the new password for\t
-login-loginPasswordInstructions: Password must be between 8 and 24 characters.
-login-loginNewPasswordLabel: New Password
-login-loginConfirmPasswordLabel: Confirm Password
-login-submitNewPassword: Reset
