@@ -260,7 +260,7 @@ cspace = cspace || {};
      * Returns the full EL path.
      */
     cspace.computedField.resolveElPath = function (that, elPath) {
-        var documentRoot = "fields";
+        var documentRoot = that.model.fields ? "fields" : "";
         var resolvedPath;
         
         if (elPath.substr(0, documentRoot.length + 1) == (documentRoot + ".")) {

@@ -57,6 +57,13 @@
             "recordtype": "permission"
         },
         {
+            "summary": "conditioncheck",
+            "display": "show",
+            "csid": "aaaabbbb-d8e5-1111-aaaa-92a744ae807b",
+            "number": "CRUDL",
+            "recordtype": "permission"
+        },
+        {
             "summary": "batch",
             "display": "none",
             "csid": "06f1a87c-fcc1-4a3a-87f5-76ebd6c4b1dd",
@@ -81,6 +88,13 @@
             "summary": "media",
             "display": "show",
             "csid": "85047404-c7c6-4e49-af57-a30fbebad26c",
+            "number": "CRUDL",
+            "recordtype": "permission"
+        },
+        {
+            "summary": "valuationcontrol",
+            "display": "show",
+            "csid": "6ce4c946-6dc0-428f-b782-e190b5378957",
             "number": "CRUDL",
             "recordtype": "permission"
         },
