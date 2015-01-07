@@ -88,13 +88,14 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	float: left;
 }
 
+/* Alternate light and dark backgrounds for repeatable groups */
 .cs-repeatable-group .cs-repeatable-repeat:nth-child(even) ,
 .cs-repeatable-group .cs-repeatable-repeat:nth-child(even) ,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat:nth-child(even) ,
 .cs-repeatable-group .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main,
 .cs-repeatable-group .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main {
-	background-color: #C2C2C2;
+  background-color: #C2C2C2;
 }
 
 .oocss .cs-repeatable-group ul.cs-repeatable li.cs-repeatable-repeat,
