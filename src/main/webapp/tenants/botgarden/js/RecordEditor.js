@@ -29,7 +29,7 @@ cspace = cspace || {};
         },
         // Fields that are not going to be copied when the user creates a
         // record from existing.
-        fieldsToIgnore: ["csid", "fields.csid", "fields.workflow"],
+        fieldsToIgnore: ["csid", "fields.csid", "fields.workflow", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"],
         preInitFunction: "cspace.recordEditor.preInit",
         finalInitFunction: "cspace.recordEditor.finalInit",
         selectors: {
@@ -1330,7 +1330,7 @@ cspace = cspace || {};
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
-        }	,
+        },
         showRecordTraverser: true,
         showRecordHistory: true
     });
