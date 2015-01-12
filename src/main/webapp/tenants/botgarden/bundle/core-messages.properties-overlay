@@ -150,6 +150,9 @@ taxon-economicUseLabel: Economic Use
 taxon-heightLabel: Height
 taxon-widthLabel: Width
 taxon-diameterBreastHeightLabel: DBH
+taxon-miniView-field1Label: Term Type:
+taxon-miniView-field2Label: Term Status:
+taxon-miniView-field3Label: Rank:
 
 #Login
 login-deployment: Version botgarden_4.1
