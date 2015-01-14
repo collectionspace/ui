@@ -6,7 +6,7 @@
                 "recordEditor": {
                     "type": "cspace.recordEditor",
                     "options": {
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber", "fields.page", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"],
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.identificationNumber", "fields.page"],
                         "selectors": {
                             "identificationNumber": ".csc-media-page"
                         },

@@ -49,7 +49,8 @@
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
                                 }
                             }
                         }
