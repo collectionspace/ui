@@ -7,7 +7,8 @@
 .content li.cs-repeatable-repeat input,
 .content li.cs-repeatable-repeat select,
 .content li.cs-repeatable-repeat button,
-.content li.cs-repeatable-repeat textarea {
+.content li.cs-repeatable-repeat textarea,
+.content li.cs-repeatable-repeat div.richtext {
 	float:left;}
 .content li.cs-repeatable-repeat .content input,
 .content li.cs-repeatable-repeat .content select,
@@ -85,6 +86,16 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
 	float: left;
+}
+
+/* Alternate light and dark backgrounds for repeatable groups */
+.cs-repeatable-group .cs-repeatable-repeat:nth-child(even) ,
+.cs-repeatable-group .cs-repeatable-repeat:nth-child(even) ,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat:nth-child(even) ,
+.cs-repeatable-group .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main,
+.cs-repeatable-group .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main,
+.cs-repeatable-withSubgroup .cs-repeatable-repeat:nth-child(even) .information-subgroup .content.main {
+  background-color: #C2C2C2;
 }
 
 .oocss .cs-repeatable-group ul.cs-repeatable li.cs-repeatable-repeat,

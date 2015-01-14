@@ -33,6 +33,14 @@
             },
             {
                 "permission": "read",
+                "resourceName": "conditioncheck"
+            },
+            {
+                "permission": "read",
+                "resourceName": "valuationcontrol"
+            },
+            {
+                "permission": "read",
                 "resourceName": "movement"
             },
             {

@@ -109,6 +109,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "concept-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "place-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "citation-miniView"], localDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "taxon-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cspace.localData", "work-miniView"], localDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"], {
             funcName: "cspace.autocomplete.testAuthoritiesDataSource",
@@ -213,7 +214,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.includeDemands = function () {
 
         fluid.demands("cspace.util.globalNavigator", null, {
-            container: "body"
+            container: "body",
+            options: {
+                selectors: {
+                    include: "a",
+                    exclude: ".cke_button, [href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+                    forms: ".csc-header-logout-form"
+                }
+            }
         });
 
         fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
@@ -373,12 +381,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 toCSID: "cspace.util.urnToCSID"
             }
         });
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "vocab-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "person-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "location-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "place-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "citation-miniView"], authUrnToCSID);
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "work-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "person-miniView"], {
             options: {
@@ -458,6 +468,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], {
+            options: {
+                protoTree: {
+                    displayName: {
+                        target: "${miniView-link}",
+                        linktext: "${fields.termDisplayName}"
+                    },
+                    field1: "${fields.taxonTermGroup.0.termType}",
+                    field2: "${fields.taxonTermGroup.0.termStatus}",
+                    field3: "${fields.taxonRank}",
+                    field1Label: {
+                        messagekey: "taxon-miniView-field1Label"
+                    },
+                    field2Label: {
+                        messagekey: "taxon-miniView-field2Label"
+                    },
+                    field3Label: {
+                        messagekey: "taxon-miniView-field3Label"
+                    }
+                }
+            }
+        });
         fluid.demands("cspace.autocomplete.popup.miniView.renderer", ["cspace.autocomplete.popup.miniView", "work-miniView"], {
             options: {
                 protoTree: {
@@ -509,12 +541,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         };
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], nonAuthDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "vocab-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "person-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "location-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "concept-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "place-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "citation-miniView"], authDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "taxon-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "work-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.authoritiesDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
@@ -2007,6 +2041,48 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     removeAllListeners: "{advancedSearch}.events.recordTypeChanged",
                     onSubmit: "{searchView}.events.onAdvancedSearch"
                 },
+            }, "{arguments}.1"]
+        });
+
+        // richTextEditor demands
+        fluid.demands("cspace.richTextEditor", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.richTextEditor", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    repeatableOnUpdateModel: "{repeatableImpl}.events.onUpdateModel",
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire"
+                    }
+                }
             }, "{arguments}.1"]
         });
     };

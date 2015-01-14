@@ -869,6 +869,34 @@ fluid.registerNamespace("cspace.util");
         return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
     };
 
+    cspace.util.namespaceFromRefName = function (refName) {
+        var namespace = "";
+        
+        if (refName) {
+            var index = refName.indexOf("name(");
+        
+            if (index > -1) {
+                namespace = decodeURIComponent(refName.slice(index + 5, refName.indexOf(")")));
+            }
+        }
+
+        return namespace;
+    }
+
+    cspace.util.csidFromRefName = function (refName) {
+        var csid = "";
+        
+        if (refName) {
+            var index = refName.indexOf("id(");
+        
+            if (index > -1) {
+                csid = decodeURIComponent(refName.slice(index + 3, refName.indexOf(")")));
+            }
+        }
+
+        return csid;
+    }
+
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
         gradeNames: ["fluid.viewComponent"],
         convert: cspace.util.urnToString
@@ -1400,6 +1428,21 @@ fluid.registerNamespace("cspace.util");
             }) || false;
         };
 
+        that.getAuthority = function (vocab) {
+            var authority = null;
+            
+            for (var candidateAuthority in that.list) {
+                var vocabList = that.list[candidateAuthority];
+                
+                if (vocabList[vocab]) {
+                    authority = candidateAuthority;
+                    break;
+                }
+            }
+
+            return authority;
+        };
+
         that.isDefault = function (vocab) {
             return !!fluid.get(that.list, vocab);
         };
@@ -1831,6 +1874,9 @@ fluid.registerNamespace("cspace.util");
                 return oldPropertyValue || readOnly;
             });
         });
+
+        container.find("div.richtext").prop("contenteditable", !readOnly);
+
         // Now lets enable back selectors which should not be disabled
         fluid.each(neverReadOnly, function (selector) {
             container.find(selector).removeAttr('disabled');
@@ -1936,7 +1982,7 @@ fluid.registerNamespace("cspace.util");
             instantiator: "{instantiator}"
         },
         offset: 0,
-        removeRelationPermission: "update"
+        removeRelationPermission: "read"
     });
 
     cspace.util.relationRemover.getRemoverWidgetConatiner = function (rows, index) {

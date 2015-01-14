@@ -30,7 +30,8 @@
                                     "selectors": {
                                         "identificationNumber": ".csc-loanIn-loanInNumber"
                                     },
-                                    "uispec": "{pageBuilder}.options.uispec.details"
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.loanInNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
                                 }
                             }
                         }

@@ -33,6 +33,14 @@
             },
             {
                 "permission": "delete",
+                "resourceName": "conditioncheck"
+            },
+            {
+                "permission": "delete",
+                "resourceName": "valuationcontrol"
+            },
+            {
+                "permission": "delete",
                 "resourceName": "movement"
             },
             {

@@ -94,6 +94,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             // Close button subcomponent.
             closeButton: {
                 type: "cspace.autocomplete.closeButton"
+            },
+            // A miniView subcomonent to show information about the current value.
+            miniView: {
+                type: "cspace.autocomplete.popup.miniView",
+                container: "{autocomplete}.miniViewContainer"
             }
         },
         urls: {
@@ -170,6 +175,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 vocab: that.model.vocab
             });
         });
+
+        that.initializeMiniView = function () {
+            cspace.autocomplete.initializeMiniView(that);
+        };
+
+        that.refreshMiniView = function () {
+            cspace.autocomplete.refreshMiniView(that);
+        };
     };
 
     cspace.autocomplete.postInit = function (that) {
@@ -178,9 +191,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.hiddenInput.hide();
         that.parent = that.hiddenInput.parent();
 
+        // Create a container for a miniView that shows information about the current value.
+        var miniViewContainer = $('<div class="csc-autocomplete-popup-miniView currentValue"/>');
+        miniViewContainer.insertAfter(that.hiddenInput);
+        that.miniViewContainer = miniViewContainer;
+
         // Create an input that will be used by autocomplete.
         var autocompleteInput = $("<input/>");
-        autocompleteInput.insertAfter(that.hiddenInput);
+        autocompleteInput.insertAfter(that.miniViewContainer);
         that.autocompleteInput = autocompleteInput;
 
         // Create a coantiner for a popup.
@@ -225,6 +243,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     // Adjust buttons and show popup.
                     that.buttonAdjustor();
                     that.popup.open();
+                    that.miniView.events.onHide.fire();
                     that.autocomplete.events.onSearchDone.fire(newValue);
                 }, cspace.util.provideErrorCallback(that, matchesUrl, "errorFetching"));
             }
@@ -244,31 +263,54 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.eventHolder.events.selectAuthority.addListener(that.selectAuthority);
         that.eventHolder.events.revertState.addListener(that.revertState);
 
+        that.initializeMiniView();
+
         // TODO: risk of asynchrony
         authUrl = that.authoritiesSource.resolveUrl();
         that.authoritiesSource.get(null, function (authorities) {
             // After autocomplete authorities (configuration) is fetched,
             // do the rest of the setup. Handler permissions, sort authorities
             // based on vocab.
-            if (!authorities) {
-                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
-                    url: authUrl
-                }));
-                return;
-            }
-            if (authorities.isError === true) {
-                fluid.each(authorities.messages, function (message) {
-                    that.displayErrorMessage(message);
+
+            // It's possible the autocomplete field will have been removed from
+            // the page by the time this callback happens. For example, when
+            // Create New from Existing is used on a secondary tab, and the
+            // record has been modified, the user may choose to save the record
+            // first, before the new one is created. In that case, the record is
+            // saved, which causes new autocomplete components to be created, but
+            // then that form and its autocompletes are immediately discarded to
+            // make way for the form for the new-from-existing record. So we need
+            // to test if this autocomplete is still "alive" before doing anything.
+            // To do this, use jquery to test if the field is still in the DOM.
+
+            if (jQuery.contains(document, that.container[0])) {
+                if (!authorities) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                        url: authUrl
+                    }));
+                    return;
+                }
+                if (authorities.isError === true) {
+                    fluid.each(authorities.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
+                that.applier.requestChange("authorities", authorities);
+
+                if (that.handlePermissions) {
+                    that.handlePermissions();
+                }
+
+                that.model.authorities.sort(function (auth1, auth2) {
+                    return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
                 });
-                return;
+
+                that.refreshMiniView();
             }
-            that.applier.requestChange("authorities", authorities);
-            if (that.handlePermissions) {
-                that.handlePermissions();
+            else {
+                that.applier.requestChange("authorities", []);
             }
-            that.model.authorities.sort(function (auth1, auth2) {
-                return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
-            });
         }, cspace.util.provideErrorCallback(that, authUrl, "errorFetching"));
 
         // If closed revert state.
@@ -276,6 +318,185 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.eventHolder.events.revertState.fire();
             return false;
         });
+    };
+
+    cspace.autocomplete.initializeMiniView = function (that) {
+        var timeout;
+        var miniView = that.miniView;
+        var elements = that.autocompleteInput;
+
+        var openMiniView = function (el) {
+            var currentValueRefName = fluid.get(miniView.model, "attributes.urn");
+
+            if (currentValueRefName) {
+                var currentTarget = $(el.currentTarget);
+            
+                miniView.container.css({
+                    left: currentTarget.position().left - 2,
+                    top: currentTarget.position().top + currentTarget.outerHeight() + 2
+                });
+                
+                var miniViewValueRefName = fluid.get(miniView.model, "basic.fields.refName");
+                
+                if (miniViewValueRefName && (miniViewValueRefName == currentValueRefName)) {
+                    // The miniView already contains information for the current value. Just show it.
+                    miniView.events.onShow.fire();
+                }
+                else {
+                    // The miniView does not contain information for the current value. Fetch it, then show.
+                    miniView.events.onReady.fire();
+                }
+            }
+        };
+        
+        var closeMiniView = function () {
+            miniView.events.onHide.fire();
+        };
+
+        miniView.container
+            .mouseenter(function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+            })
+            .mouseleave(function (el) {
+                closeMiniView(el);
+            });
+
+        elements
+            .focusin(function (el) {
+                openMiniView(el);
+            })
+            .focusout(function (el) {
+                closeMiniView(el);
+            })
+            .hover(
+                function (el) {
+                    clearTimeout(timeout);
+                    closeMiniView(el);
+                    openMiniView(el);
+                },
+                function (el) {
+                    clearTimeout(miniView.options.showTimer);
+                
+                    timeout = setTimeout(function () {
+                        closeMiniView(el);
+                    }, 500);
+                }
+            );
+    };
+
+    cspace.autocomplete.refreshMiniView = function (that) {
+        // Get the current value of the autocomplete (a refname).
+        
+        var refName = that.model.baseRecord.urn;
+        
+        if (refName) {
+            // If there is a value, retrieve the data for the item,
+            // and show the miniView. In order to do this, we need
+            // the record type of the referenced record, the csid,
+            // and the vocabulary (aka namespace) if it's an
+            // authority item.
+            
+            var miniViewType;
+            var csid;
+            
+            // If the refname is that of an authority item, it will
+            // contain the vocabulary id (known in the app/ui as the
+            // namespace).
+            var namespace = cspace.util.namespaceFromRefName(refName);
+            
+            if (that.model.baseRecord.type) {
+                // If the current value was entered after the page was
+                // initially loaded, its record type was retrieved when
+                // populating autocomplete pop-up, and is now stored in
+                // the model. Just get it from there.
+                
+                miniViewType = that.model.baseRecord.type;
+            }
+            else {
+                // If the current value came from the initial page load,
+                // we don't know the record type of the refname. It must
+                // be inferred from the refname, or from the configuration
+                // of the autocomplete.
+                
+                if (namespace) {
+                    // The refname looks like it's that of an authority item,
+                    // which contains a vocabulary name (it has a ":name(...):" part).
+                    // From the that.vocab structure, we can find the parent authority
+                    // of the vocabulary, which is our record type.
+                    
+                    miniViewType = that.vocab.getAuthority(namespace);
+                }
+                else {
+                    // The refname doesn't look like that of an authority item, so
+                    // it refers to a cataloging or procedural record. The services
+                    // record type (e.g. collectionobject) can be parsed from the refname,
+                    // but the app layer record type (e.g. cataloging) can't. So it takes
+                    // some work to infer the record type. We can see which record types
+                    // are bound to the field by looking at the that.model.authorities
+                    // structure. It should be safe just take the first of these. We know
+                    // the refname is for a cataloging/procedural record, which means we're
+                    // in a record hierarchy field, and those fields are only ever bound to
+                    // a single record type.
+                    
+                    // FIXME: This doesn't work when the user doesn't have write permission
+                    // on the referenced record type, because that.model.authorities only
+                    // contains record types that the user can create.
+                    
+                    var authorities = that.model.authorities;
+        
+                    if (authorities.length > 0) {
+                        var authorities = authorities[0];
+                        miniViewType = (authorities.type.split("-"))[0];
+                    }
+                }
+            }
+
+            if (that.model.baseRecord.csid) {
+                // If the current value was entered after the page was
+                // initially loaded, its csid was retrieved when
+                // populating autocomplete pop-up, and is now stored in
+                // the model. Just get it from there.
+                
+                csid = that.model.baseRecord.csid;
+            }
+            else {
+                // If the current value came from the initial page load,
+                // we don't know the csid of the referenced record. It must
+                // be parsed from the refname.
+
+                if (that.vocab.isVocab(miniViewType)) {
+                    csid = cspace.util.shortIdentifierToCSID(refName);
+                }
+                else {
+                    csid = cspace.util.csidFromRefName(refName);
+                }
+            }
+            
+            that.miniView.applier.requestChange("attributes", {
+                csid: csid,
+                urn: refName,
+                type: miniViewType,
+                namespace: namespace
+            });
+            
+            that.miniView.events.onContext.fire();
+        }
+        else {
+            // If there is no value, clear out the model of the
+            // miniView, and hide it if it's showing.
+            
+            if (that.miniView.model.attributes) {
+                that.miniView.applier.requestChange("attributes", {});
+            }
+            
+            if (that.miniView.model.basic) {
+                that.miniView.applier.requestChange("basic", {});
+            }
+            
+            that.miniView.hide();
+        }
     };
 
     // Sorting algo for authorities and their vocabularies.
@@ -1108,6 +1329,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.applier.requestChange("term", termRecord.displayName);
         if (that.autocomplete) {
             that.autocomplete.suppress();
+        }
+        
+        if (that.miniView) {
+            that.refreshMiniView();
         }
     }
     
