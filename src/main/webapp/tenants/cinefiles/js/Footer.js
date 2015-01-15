@@ -87,7 +87,7 @@ cspace = cspace || {};
             deploymentRelease: "releaseNotes.html",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.1+Feedback",
             version: "4.1",
-            deploymentVersion: "cinefiles_4.1-1",
+            deploymentVersion: "cinefiles_4.1-2",
             support: "mailto:cspace-support@lists.berkeley.edu"
         },
         // Footer template resource.

@@ -1,5 +1,5 @@
 # Login page
-login-deployment: Version cinefiles_4.1-1
+login-deployment: Version cinefiles_4.1-2
 login-login-info: To view the CollectionSpace CineFiles tenant, use the login box on the right with the login: 
 login-login: admin@cinefiles.cspace.berkeley.edu
 login-login-pwd: 
