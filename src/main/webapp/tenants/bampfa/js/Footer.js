@@ -85,9 +85,9 @@ cspace = cspace || {};
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
             deploymentRelease: "releaseNotes.html",
-            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback",
-            version: "4.0",
-            deploymentVersion: "bampfa_4.0-54",
+            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.1+Feedback",
+            version: "4.1",
+            deploymentVersion: "bampfa_4.1",
             support: "mailto:cspace-support@lists.berkeley.edu"
         },
         // Footer template resource.

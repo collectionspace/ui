@@ -6,7 +6,7 @@
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.identificationNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"],
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.identificationNumber"],
                         "selectors": {
                             "identificationNumber": ".csc-media-imageNumber"
                         },
