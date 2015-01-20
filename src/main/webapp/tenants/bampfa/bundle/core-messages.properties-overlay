@@ -1,5 +1,5 @@
 # Login page
-login-deployment: Version bampfa_4.0-54
+login-deployment: Version bampfa_4.1
 login-login-info: To view the CollectionSpace BAM/PFA tenant, use the login box on the right with the login: 
 login-login: admin@bampfa.cspace.berkeley.edu
 login-login-pwd: 
