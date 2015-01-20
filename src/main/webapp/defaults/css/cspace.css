@@ -1,5 +1,5 @@
 /*
-Copyright 2010 - 2011
+Copyright 2010-2013
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 You may not use this file except in compliance with this License.
@@ -16,7 +16,7 @@ html{
     font-size: 100%;} 
 body {
     font-family: Helvetica,arial,freesans,clean,sans-serif;
-    font-size: 12px; 
+    font-size: 12px;
     color: #333;
     line-height:1.2; 
     padding:5px 4px 0 4px;
@@ -145,7 +145,7 @@ input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
-    background:white url('../images/icnCancel.png') no-repeat 8px 4px; 
+    background:white url('../images/icnCancel.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;}
@@ -180,7 +180,7 @@ input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
 input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
     background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
-    background:white url('../images/icnDelete.png') no-repeat 8px 4px; 
+    background:white url('../images/icnDelete.png') no-repeat 8px 4px;
     padding-left:24px; 
     padding-right:8px; 
     color:#669922;
@@ -266,7 +266,7 @@ input.secondaryButton:focus, input.secondaryButton:hover {
     vertical-align: middle;
 }
 .button-row input[type="button"], .button-row-right input[type="button"], .button-row a, .button-row-right a {
-    margin-left:10px; 
+    margin-left:10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     /*float:right; */
     margin-bottom:4px;}
@@ -476,6 +476,14 @@ li .flc-pager-pageLink {
 #title-bar {
     overflow: hidden;
     margin: 0 0 .5em 0;}
+#title-bar.docked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 31;
+    background-color: #F0F5FB;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);}
 #title-bar.nobg {
     background-color:#FFF;}
 #title-bar .title-bar-value {
@@ -488,13 +496,14 @@ li .flc-pager-pageLink {
     max-width:90%; 
     float:left;}
 #title-bar .header-name, #title-bar .content .overflow, #title-bar .record-type {
-    padding-top:9px; 
+    padding-top:9px;
+    padding-bottom:7px;
     float:left;}
 #title-bar .content {
     height:42px; 
     color:#666666;
     font-weight:bold; 
-    font-size: 2em;
+    font-size:2em; 
     line-height:110%;}
 #title-bar .content .overflow {
     padding-left:10px; 
@@ -503,6 +512,9 @@ li .flc-pager-pageLink {
 #administration #title-bar, #administration #title-bar .content .overflow {
     padding: 0;
     margin: 0;
+}
+#administration #title-bar.docked {
+    background-color: #EEF4D7;
 }
 #title-bar .value{
     padding-right:30px; 
@@ -515,11 +527,15 @@ li .flc-pager-pageLink {
     font-weight:bolder; 
     padding-right:10px;}
 #administration #title-bar .record-type.cs-titleBar-recordType {
+    padding-left: 10px;
     color: #73AA4F;
     float: left;
 }
 .cs-authority #title-bar .cs-titleBar-recordType {
     color: #78449A;
+}
+.cs-authority #title-bar.docked {
+    background-color: #F3EDF6;
 }
 .cs-authority .ui-tabs .ui-tabs-panel {
     border: 2px solid #78449A;
@@ -1254,7 +1270,7 @@ td .field-cal img, td .csc-calendar-button img {
     border-top: 2px solid #D8D9DA; 
     padding-top:7px;
     width: 100%;
-    clear: both; }
+    clear: both;}
 #footer .footer-text {
     text-align: center; 
     color: #656565; 
@@ -1403,7 +1419,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .cs-tabs-tab-link {
     -moz-border-radius:5px 5px 0 0;
     -webkit-border-radius:5px 5px 0 0;
-	border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
 }
 .cs-authority .ui-tabs .ui-tabs-nav .cs-tabs-tab-link {
     border-color: #78449A #78449A #FFFFFF;
@@ -1596,7 +1612,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
 .cs-searchBox-container {
-	display: table-cell;}
+    display: table-cell;}
 .cs-searchBox {
     padding:12px 14px 12px 0; 
     background-color:#F5F5F5; }
@@ -1766,7 +1782,7 @@ a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     border-left:none;
     height:19px;
     width: 18px;
-	cursor:pointer;
+    cursor:pointer;
     /*float:left;*/}
 td.fl-date-group .cs-calendar-button {
     float: right;
@@ -2398,12 +2414,15 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 	padding-right: 1.5em;
 }
 
+/*
+// Commented out per CSPACE-6136
 .oocss .cs-repeatable-group li {
 	background-color: #E2E2E2 !important;
 	border: 1px solid #CCC !important;
 	padding: 4px 4px 0 4px !important;
-	/*margin-bottom: 4px !important;*/
+	// margin-bottom: 4px !important;
 }
+*/
 
 .oocss .infoDiv input[type="button"].cs-repeatable-add {
 	top: -12px !important;
@@ -2551,7 +2570,7 @@ input[type="button"].cs-deleteRelationButton {
 .cs-multipleEdit ul.cs-repeatable li.cs-repeatable-repeat:last-child {
     margin-bottom: 10px;
 }
-/* These styles is only for particular working for L\M\I repeatable Method select */
+/* These styles are only for L/M/I repeatable Method select */
 .cs-fixedRepeatableSelect {
     min-width: 230px;
 }
