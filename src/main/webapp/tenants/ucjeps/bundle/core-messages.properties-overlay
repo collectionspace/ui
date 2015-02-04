@@ -79,7 +79,7 @@ taxon-miniView-field2Label: Term Status:
 taxon-miniView-field3Label: Rank:  
 taxon-miniView-field4Label: Major Group:  
 #Login
-login-deployment: Version ucjeps_4.1-8
+login-deployment: Version ucjeps_4.1-9
 login-current-info: 
 login-login: admin@ucjeps.cspace.berkeley.edu
 login-rologin: reader@ucjeps.cspace.berkeley.edu
