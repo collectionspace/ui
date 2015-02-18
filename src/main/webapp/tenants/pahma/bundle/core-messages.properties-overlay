@@ -1055,3 +1055,50 @@ structuredDate-dateQualifierUnitLabel: Unit
 structuredDate-dateEarliestSingleRowLabel: Earliest date
 structuredDate-dateLatestRowLabel: Latest date
 structuredDate-scalarValueLabel: Scalar value
+
+# Exhibition
+exhibition-exhibitionNumberLabel: Exhibition number
+exhibition-identificationNumberRequired: Please specify an Exhibition number
+exhibition-titleLabel: Exhibition title
+exhibition-typeLabel: Exhibition type
+exhibition-venueOpeningDateLabel: Opening date
+exhibition-venueClosingDateLabel: Closing date
+exhibition-venueUrlLabel: Web address
+exhibition-planningNoteLabel: Planning notes
+exhibition-curatorialNoteLabel: Curatorial notes
+exhibition-generalNoteLabel: General notes
+exhibition-exhibitionPersonGroupLabel: Curator and other associated persons
+exhibition-boilerplateTextLabel: Boilerplate rext
+exhibition-exhibitionReferenceGroupLabel: Bibliographic references
+exhibition-exhibitionReferenceLabel: Reference
+exhibition-exhibitionReferenceNoteLabel: Reference note
+exhibition-updatedAtLabel: Modified date
+exhibition-updatedByLabel: Record last modified by
+
+exhibition-galleryRotationGroupLabel: Gallery Rotations
+exhibition-galleryRotationNameLabel: Rotation name
+galleryRotationGroup-galleryRotationStartDateGroupLabel: Start date
+galleryRotationGroup-galleryRotationEndDateGroupLabel: End date
+exhibition-galleryRotationNoteLabel: Notes
+exhibition-exhibitionPlanningInformationLabel: Exhibition Planning Information
+exhibition-exhibitionSectionGroupLabel: Exhibition sections
+exhibition-exhibitionSectionNameLabel: Section
+exhibition-exhibitionSectionLocationLabel: Location
+exhibition-exhibitionSectionObjectsLabel: Objects
+exhibition-exhibitionSectionNoteLabel: Remarks
+exhibition-exhibitionStatusGroupLabel: Exhibition status
+exhibition-exhibitionStatusLabel: Status
+exhibition-exhibitionStatusDateLabel: Status date
+exhibition-exhibitionStatusNoteLabel: Remarks
+exhibition-exhibitionObjectInformationLabel: Exhibited Object Information
+exhibition-exhibitionObjectGroupLabel: Object checklist
+exhibition-exhibitionObjectNumberLabel: Object
+exhibition-exhibitionObjectNameLabel: Name
+exhibition-exhibitionObjectConsCheckDateLabel: Cons. check
+exhibition-exhibitionObjectConsTreatmentDateLabel: Cons. treatment
+exhibition-exhibitionObjectMountLabel: Mount?
+exhibition-exhibitionObjectSectionLabel: Section
+exhibition-exhibitionObjectCaseLabel: Case
+exhibition-exhibitionObjectSeqNumLabel: Seq. #
+exhibition-exhibitionObjectRotationLabel: Rotation
+exhibition-exhibitionObjectNoteLabel: Note
