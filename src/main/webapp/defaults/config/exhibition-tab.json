@@ -1,0 +1,43 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "exhibition",
+            "schema": {
+                "exhibition": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "exhibition-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-exhibition"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "exhibition-editRecord",
+                            "recordList": "exhibition-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "identificationNumber": ".csc-exhibition-exhibitionNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.exhibitionNumber"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
