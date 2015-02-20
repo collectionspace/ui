@@ -6,6 +6,56 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(pahma_4.1-8) -->
+<div id="pahma_4.1-8">
+<h2>Version pahma_4.1-8 <span class="releasedate">(February 19, 2015)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Add <tenant:properties> directives to set the max number of autocomplete matches to 100 <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/BAMPFA-388">BAMPFA-388</a>)</span>
+<ul class="commits">
+<li id="commit_78aa77c" class="services commit">Change default maxListItemsReturnedLimitOnJdbcQueries to 100, and default jdbcQueriesAreTenantIdRestricted to false.</li>
+</ul>
+</li>
+<li class="issue">
+New procedure: Exhibitions <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/PAHMA-1215">PAHMA-1215</a>)</span>
+<ul class="commits">
+<li id="commit_c8430ad" class="services commit">Add exhibition procedure.</li>
+<li id="commit_44c0318" class="application commit">Add exhibition procedure.</li>
+<li id="commit_64b2dd3" class="application commit">Configure exhibition for pahma.</li>
+<li id="commit_b75dfcc" class="ui commit">Add exhibition procedure.</li>
+<li id="commit_8909559" class="application commit">Add services-schema-qualify='true' to title.</li>
+<li id="commit_47e708b" class="application commit">Remove vocabularies that don't exist in pahma from autocompletes.</li>
+<li id="commit_184c1a9" class="ui commit">Add exhibition adv search form.</li>
+<li id="commit_75e947f" class="ui commit">Make tenant copy of ExhibitionTemplate.html.</li>
+<li id="commit_3c53730" class="application commit">Add pahma exhibition extension.</li>
+<li id="commit_ce019d7" class="ui commit">Correct some field labels.</li>
+<li id="commit_1a01108" class="ui commit">Add pahma exhibition extension fields.</li>
+<li id="commit_71fd1e7" class="ui commit">Add styling for large textareas.</li>
+<li id="commit_1894d34" class="ui commit">Copy changes from defaults into tenant overrides.</li>
+</ul>
+</li>
+<li class="issue">
+Add counties to controlled list <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/UCJEPS-556">UCJEPS-556</a>)</span>
+<ul class="commits">
+<li id="commit_46ffdb4" class="application commit">Add Boone, Nicholson, and Pulaski to fieldLocCounty.</li>
+</ul>
+</li>
+<li class="issue">
+UCJEPS Cataloging Taxonomic Determination Qualifier drop down: add value 'cv.' <span class="issuenumber">(<a href="http://issues.collectionspace.org/browse/UCJEPS-561">UCJEPS-561</a>)</span>
+<ul class="commits">
+<li id="commit_37059f8" class="application commit">Add cv. to qualifier options.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_662c917" class="services commit">Remove now-obsolete configuration override in pahma-tenant-bindings.delta.xml.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(pahma_4.1-7) -->
 <div id="pahma_4.1-7">
 <h2>Version pahma_4.1-7 <span class="releasedate">(January 26, 2015)</span></h2>
