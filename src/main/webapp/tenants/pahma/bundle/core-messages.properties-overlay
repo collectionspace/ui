@@ -213,13 +213,14 @@ media: Media
 claim: NAGPRA Claim
 
 # ---------------------------------- Top Tabs -------------------------- #
-claim-tab: NAGPRA Claim
+claim-tab: NAGPRA
 loanin-tab: In Loan
 loanout-tab: Out Loan
 acquisition-tab: Accession
-movement-tab: Inv/Mov...
-intake-tab: Object Entry
+movement-tab: Inv/Mov
+intake-tab: Entry
 media-tab: Media
+objectexit-tab: Exit
 
 # ---------- What are these ? ----------- #
 person: Person
@@ -1068,7 +1069,7 @@ exhibition-planningNoteLabel: Planning notes
 exhibition-curatorialNoteLabel: Curatorial notes
 exhibition-generalNoteLabel: General notes
 exhibition-exhibitionPersonGroupLabel: Curator and other associated persons
-exhibition-boilerplateTextLabel: Boilerplate rext
+exhibition-boilerplateTextLabel: Boilerplate text
 exhibition-exhibitionReferenceGroupLabel: Bibliographic references
 exhibition-exhibitionReferenceLabel: Reference
 exhibition-exhibitionReferenceNoteLabel: Reference note
