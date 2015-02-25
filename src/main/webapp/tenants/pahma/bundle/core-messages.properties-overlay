@@ -1,6 +1,6 @@
 #Login
 #login-current: CollectionSpace 4.1: PAHMA prototype
-login-deployment: Version pahma_4.1-10
+login-deployment: Version pahma_4.1-9
 #login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
 #login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
 login-current: PAHMA-CollectionSpace 4.1
@@ -1076,7 +1076,7 @@ exhibition-exhibitionReferenceNoteLabel: Reference note
 exhibition-updatedAtLabel: Modified date
 exhibition-updatedByLabel: Record last modified by
 
-exhibition-galleryRotationGroupLabel: Gallery Rotations
+exhibition-galleryRotationGroupLabel: Gallery rotations
 exhibition-galleryRotationNameLabel: Rotation name
 galleryRotationGroup-galleryRotationStartDateGroupLabel: Start date
 galleryRotationGroup-galleryRotationEndDateGroupLabel: End date
