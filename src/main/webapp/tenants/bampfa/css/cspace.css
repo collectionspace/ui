@@ -1257,6 +1257,10 @@ table.cs-admin-table td.checkbox {
 .content textarea.short, .content div.richtext.multiline.short {
     height:40px;
 }
+.content textarea.large {
+    height:200px;
+    overflow:auto;
+}
 .input-alpha-login {
     width: 120px; 
     height:18px;}
@@ -2625,22 +2629,4 @@ li.cs-repeatable-repeat .stretched .cs-termList {
 .cs-structuredDate-parseStatus.error {
        background: url(../images/warning.png) no-repeat top left;
        padding-left: 18px;
-}
-
-#title-bar.docked {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 31;
-    background-color: #F0F5FB;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
-}
-
-.cs-authority #title-bar.docked {
-    background-color: #F3EDF6;
-}
-
-#administration #title-bar.docked {
-    background-color: #EEF4D7;
 }
