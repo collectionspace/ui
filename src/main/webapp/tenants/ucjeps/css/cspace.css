@@ -1282,6 +1282,10 @@ table.cs-admin-table td.checkbox {
     height:75px; 
     overflow:auto;
 }
+.content textarea.large {
+    height:200px;
+    overflow:auto;
+}
 .input-alpha-login {
     width: 120px; 
     height:18px;}
