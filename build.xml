@@ -17,8 +17,9 @@
   <property name="src.dir" value="." />
   <property name="tenants.dir" value="${src.dir}/src/main/webapp/tenants"/>
     
-  <target name="clone-from-template"
-    depends="check-template-properties,check-tenant-properties">
+  <target name="clone-from-template" if="${template.exists}" unless="${tenant.exists}"
+    depends="template-exists-message,tenant-exists-message">
+    <echo message="Cloning configuration from template tenant '${template.tenant.shortname}' to new tenant '${tenant.shortname}' ..."/>
     <copy todir="${tenants.dir}/${tenant.shortname}">
       <fileset dir="${tenants.dir}/${template.tenant.shortname}"/>
     </copy>
@@ -58,6 +59,30 @@
         <not><isset property="${property-to-check}"/></not>
       </condition>
     </fail>
+  </target>
+  
+  <target name="template-exists" depends="check-template-properties">
+    <condition property="template.exists">
+      <available file="${tenants.dir}/${template.tenant.shortname}" type="dir"/>
+    </condition>
+  </target>
+  
+  <target name="tenant-exists" depends="check-tenant-properties">
+    <condition property="tenant.exists">
+      <available file="${tenants.dir}/${tenant.shortname}" type="dir"/>
+    </condition>
+  </target>
+  
+  <target name="template-exists-message" depends="template-exists" unless="${template.exists}">
+    <echo message="Could not find 'template' tenant folder '${template.tenant.shortname}' in ${tenants.dir} ..."/>
+  </target>
+  
+  <target name="tenant-exists-message" depends="tenant-exists" if="${tenant.exists}">
+    <echo message="Tenant folder '${tenant.shortname}' already exists in ${tenants.dir} ..."/>
+  </target>
+  
+  <target name="tenant-not-exists-message" depends="tenant-exists" unless="${template.exists}">
+    <echo message="Could not find tenant folder '${tenant.shortname}' in ${tenants.dir} ..."/>
   </target>
     
 </project>
