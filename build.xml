@@ -1,4 +1,4 @@
-<project name="ui-layer-tenant-management" default="deploy" basedir=".">
+<project name="ui-layer-tenant-management" default="clone-from-template" basedir=".">
   <description>Manage UI layer folders and files containing per-tenant configurations</description>
   
   <!-- 'environment' must be declared to bring values of system -->
@@ -14,16 +14,38 @@
   <!-- Where there are conflicts, values provided via the command line -->
   <!-- are used in preference to those provided in this properties file. -->
   <property file="tenant.properties" />
+  <property name="src.dir" value="." />
+  <property name="tenants.dir" value="${src.dir}/src/main/webapp/tenants"/>
     
-  <target name="deploy" depends="check-properties-are-present"/>
+  <target name="clone-from-template"
+    depends="check-template-properties,check-tenant-properties">
+    <copy todir="${tenants.dir}/${tenant.shortname}">
+      <fileset dir="${tenants.dir}/${template.tenant.shortname}"/>
+    </copy>
+  </target>
   
-  <target name="check-properties-are-present">
-    <echo message="Checking that required properties have been set ..."/>    
+  <target name="check-template-properties">
+    <echo message="Checking that required template properties have been set ..."/>
+    <!-- Short name of the existing tenant to use as a template, when -->
+    <!-- creating a new tenant -->  
+    <antcall target="check-property-is-present">
+      <param name="property-to-check" value="template.tenant.shortname"/>
+    </antcall>
+    <echo message="template.tenant.shortname=${template.tenant.shortname}"/>
+  </target>  
+  
+  <target name="check-tenant-properties">
+    <echo message="Checking that required tenant properties have been set ..."/>
+    <!-- Short name of the new tenant to create -->
     <antcall target="check-property-is-present">
       <param name="property-to-check" value="tenant.shortname"/>
     </antcall>
-    <!-- Short name of the new tenant to create -->
     <echo message="tenant.shortname=${tenant.shortname}"/>
+  </target>
+  
+  <target name="check-tenant-extended-properties">
+    <echo message="Checking that required tenant extended properties have been set ..."/>
+    <!-- Short name of the new tenant to create -->
     <antcall target="check-property-is-present">
       <param name="property-to-check" value="tenant.internet.domain"/>
     </antcall>
