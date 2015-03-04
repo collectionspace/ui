@@ -1,0 +1,41 @@
+<project name="ui-layer-tenant-management" default="deploy" basedir=".">
+  <description>Manage UI layer folders and files containing per-tenant configurations</description>
+  
+  <!-- 'environment' must be declared to bring values of system -->
+  <!-- environment variables into Ant, prior to reading any -->
+  <!-- properties files that may reference those values. -->
+  <property environment="env" />
+  
+  <!-- If a 'tenant.properties' file is provided, values for -->
+  <!-- properties used in this Ant buildfile will be read -->
+  <!-- from that file. -->
+  <!-- Values for those properties can also be provided at the command -->
+  <!-- line when invoking Ant, via -Dvariable.name=somevalue arguments. -->
+  <!-- Where there are conflicts, values provided via the command line -->
+  <!-- are used in preference to those provided in this properties file. -->
+  <property file="tenant.properties" />
+    
+  <target name="deploy" depends="check-properties-are-present"/>
+  
+  <target name="check-properties-are-present">
+    <echo message="Checking that required properties have been set ..."/>    
+    <antcall target="check-property-is-present">
+      <param name="property-to-check" value="tenant.shortname"/>
+    </antcall>
+    <!-- Short name of the new tenant to create -->
+    <echo message="tenant.shortname=${tenant.shortname}"/>
+    <antcall target="check-property-is-present">
+      <param name="property-to-check" value="tenant.internet.domain"/>
+    </antcall>
+    <echo message="tenant.internet.domain=${tenant.internet.domain}"/>
+  </target>
+  
+  <target name="check-property-is-present">
+    <fail message="${property-to-check} property is not set. It is usually defined in either a tenant.properties file, when added to the same directory as this Ant build.xml file, or by adding a -D${property-to-check}=somevalue argument when running 'ant'">
+      <condition>
+        <not><isset property="${property-to-check}"/></not>
+      </condition>
+    </fail>
+  </target>
+    
+</project>
