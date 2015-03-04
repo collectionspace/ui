@@ -1,4 +1,4 @@
-<project name="ui-layer-tenant-management" default="clone-from-template" basedir=".">
+<project name="ui-layer-tenant-management" default="update-text-in-cloned-tenant" basedir=".">
   <description>Manage UI layer folders and files containing per-tenant configurations</description>
   
   <!-- 'environment' must be declared to bring values of system -->
@@ -16,7 +16,20 @@
   <property file="tenant.properties" />
   <property name="src.dir" value="." />
   <property name="tenants.dir" value="${src.dir}/src/main/webapp/tenants"/>
-    
+
+  <!-- Note: this text replacement is brute-force and will even replace sub-strings, -->
+  <!-- if found, so you'll need to ensure that your template tenant shortname is -->
+  <!-- unique - that it won't be inadvertently contained within text elsewhere. -->
+  <!-- TODO: This replacement is also currently case-sensitive, and needs to be revised -->
+  <!-- to detect matches of the template tenant shortname regardless of case. -->
+  <!-- (See the Ant ReplaceRegExp task for one potential method.) -->
+  <target name="update-text-in-cloned-tenant" depends="clone-from-template">
+    <!-- Update tenant names where found in property bundle files. -->
+    <replace dir="${tenants.dir}/${tenant.shortname}/bundle" token="${template.tenant.shortname}"
+      value="${tenant.shortname}">
+    </replace>
+  </target>
+
   <target name="clone-from-template" if="${template.exists}" unless="${tenant.exists}"
     depends="template-exists-message,tenant-exists-message">
     <echo message="Cloning configuration from template tenant '${template.tenant.shortname}' to new tenant '${tenant.shortname}' ..."/>
