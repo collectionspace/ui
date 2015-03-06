@@ -14,8 +14,9 @@
        See http://wiki.apache.org/ant/NewAntFeaturesInDetail/Import -->
   <import file="./tenant-utils-build.xml"/>
   
-  <!-- This target inherits from an (empty) target in the imported utility routines
-       buildfile, and adds its own CollectionSpace layer-specific behavior. -->
+  <!-- This target inherits from an (essentially empty) target in the imported
+       utility routines buildfile, and adds its own behavior specific to this
+       CollectionSpace source code layer. -->
   <target name="update-text-in-cloned-tenant" depends="tenant-utils.update-text-in-cloned-tenant">
     <!-- Update tenant names where found in property bundle files. -->
     <!-- Note: this text replacement is brute-force and will even replace sub-strings,
