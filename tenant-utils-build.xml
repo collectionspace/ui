@@ -39,6 +39,7 @@
   <!-- This (empty) target is intended to be inherited and overridden by
        each Ant buildfile that imports this tenant-utils buildfile. -->
   <target name="update-text-in-cloned-tenant" depends="clone-from-template">
+    <echo message="Updating text in the newly-cloned tenant ..."/>
   </target>
 
   <!-- Utility targets -->
