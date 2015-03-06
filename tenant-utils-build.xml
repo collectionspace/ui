@@ -4,11 +4,6 @@
   <!-- Import this Ant build file into any other Ant build file
        via '<import file="./tenant-mgmt-build.xml"/>' -->
   
-  <!-- 'environment' must be declared to bring values of system
-       environment variables into Ant, prior to reading any
-       properties files that may reference those values. -->
-  <property environment="env" />
-  
   <!-- If a 'tenant.properties' file is provided, values for
        properties used in this Ant buildfile will be read
        from that file. -->
