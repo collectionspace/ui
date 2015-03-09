@@ -32,21 +32,21 @@
     </copy>
   </target>
 
-  <!-- This (essentially empty) target is intended to be inherited and overridden by
-       each Ant buildfile that imports this tenant-utils buildfile. -->
+  <!-- This (essentially empty) target can be inherited and overridden by
+       any Ant buildfile that imports this tenant-utils buildfile. -->
   <target name="clone-other-template-files" depends="clone-template-folder">
     <echo message="Cloning other template files, where applicable ..."/>
   </target>
   
-  <!-- This (essentially empty) target is intended to be inherited and overridden by
-       each Ant buildfile that imports this tenant-utils buildfile. -->
-  <target name="rename-files" depends="clone-template-folder">
+  <!-- This (essentially empty) target can be inherited and overridden by
+       any Ant buildfile that imports this tenant-utils buildfile. -->
+  <target name="rename-files" depends="clone-other-template-files">
     <echo message="Renaming files, where applicable ..."/>
   </target>
 
-  <!-- This (essentially empty) target is intended to be inherited and overridden by
-       each Ant buildfile that imports this tenant-utils buildfile. -->
-  <target name="update-text-in-cloned-tenant" depends="clone-template-folder">
+  <!-- This (essentially empty) target can be inherited and overridden by
+       any Ant buildfile that imports this tenant-utils buildfile. -->
+  <target name="update-text-in-cloned-tenant" depends="rename-files">
     <echo message="Updating text in the newly-cloned tenant ..."/>
   </target>
 
@@ -81,10 +81,10 @@
   
   <!-- Check that any required per-tenant properties, beyond the tenant shortname,
        have been defined and are non-blank.
-       This (essentially empty) target is intended to be inherited and overridden by
-       each Ant buildfile that imports this tenant-utils buildfile. -->
+       This (essentially empty) target can be inherited and overridden by
+       any Ant buildfile that imports this tenant-utils buildfile. -->
   <target name="check-tenant-extended-properties">
-    <echo message="Checking that required tenant extended properties have been set ..."/>
+    <echo message="Checking that any required tenant extended properties have been set ..."/>
   </target>
  
   <target name="check-property-is-defined">
