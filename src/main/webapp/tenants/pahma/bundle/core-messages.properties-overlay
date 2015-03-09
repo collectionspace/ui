@@ -1095,8 +1095,8 @@ exhibition-exhibitionObjectInformationLabel: Exhibited Object Information
 exhibition-exhibitionObjectGroupLabel: Object checklist
 exhibition-exhibitionObjectNumberLabel: Object
 exhibition-exhibitionObjectNameLabel: Name
-exhibition-exhibitionObjectConsCheckLabel: Cons. check
-exhibition-exhibitionObjectConsTreatmentDateLabel: Cons. treatment
+exhibition-exhibitionObjectConsCheckDateLabel: Cons. check
+exhibition-exhibitionObjectConsTreatmentLabel: Cons. treatment
 exhibition-exhibitionObjectMountLabel: Mount?
 exhibition-exhibitionObjectSectionLabel: Section
 exhibition-exhibitionObjectCaseLabel: Case
