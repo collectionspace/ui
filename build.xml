@@ -10,6 +10,13 @@
        See http://wiki.apache.org/ant/NewAntFeaturesInDetail/Import -->
   <import file="./tenant-utils-build.xml"/>
   
+  <!-- TODO: If you wish to clone any per-tenant UI files beyond those found in
+       the template tenant folder, add a "clone-from-template" target here
+       that inherits and overrides the equivalent target in the imported
+       utility routines buildfile; e.g. 'depends="tenant-utils.clone-from-template"'.
+       One possible candidate might be the 'src/wro-{tenant.shortname}.xml' file,
+       which identifies CSS and JavaScript files that can be aggregated and minimized. -->
+  
   <!-- This target inherits from an (essentially empty) target in the imported
        utility routines buildfile, and adds its own behavior specific to this
        CollectionSpace source code layer. -->
