@@ -1103,3 +1103,9 @@ exhibition-exhibitionObjectCaseLabel: Case
 exhibition-exhibitionObjectSeqNumLabel: Seq. #
 exhibition-exhibitionObjectRotationLabel: Rotation
 exhibition-exhibitionObjectNoteLabel: Note
+
+# Osteology
+osteology: Osteology
+osteology-tab: Osteo
+osteology-osteologyNumberLabel: Osteology number
+osteology-Humerus_L_JS_PLabel: Humerus, Left, Prox. JS

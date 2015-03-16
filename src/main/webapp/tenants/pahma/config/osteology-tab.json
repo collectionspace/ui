@@ -1,0 +1,43 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "osteology",
+            "schema": {
+                "osteology": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "osteology-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-osteology"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "osteology-editRecord",
+                            "recordList": "osteology-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "identificationNumber": ".csc-osteology-osteologyNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.osteologyNumber"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
