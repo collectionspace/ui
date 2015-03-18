@@ -10,7 +10,16 @@
                             "identificationNumber": ".csc-osteology-osteologyNumber"
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.osteologyNumber"]
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.osteologyNumber"],
+                        "components": {
+                            "osteology": {
+                                "type": "cspace.osteology",
+                                "options": {
+                                    "applier": "{recordEditor}.applier",
+                                    "model": "{recordEditor}.model"
+                                }
+                            }
+                        }
                     }
                 },
                 "titleBar": {

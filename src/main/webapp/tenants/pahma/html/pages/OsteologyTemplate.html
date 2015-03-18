@@ -1,51 +1,292 @@
-<div>
-  <div class="info-pair">
-      <div class="header">
-          <span class="label required csc-osteology-osteologyNumber-label"></span><span class="required">*</span>
-      </div>
-      <div class="content">
-          <input type="text" class="csc-osteology-osteologyNumber" />
-      </div>
-   </div>
-   <div class="info-pair">
-       <div class="header">
-           <div class="label csc-osteology-Humerus_L_JS_P-label"></div>
-       </div>
-       <div class="content">
-           <input type="text" class="csc-osteology-Humerus_L_JS_P" />
-       </div>
+<form class="csc-osteology-form">
+    <div class="info-pair">
+        <div class="header">
+            <span class="label required csc-osteology-osteologyNumber-label"></span><span class="required">*</span>
+        </div>
+        <div class="content">
+            <input type="text" class="csc-osteology-osteologyNumber" />
+        </div>
     </div>
-
+    
     <table class="osteo">
-        <tr>
-            <th><input type="radio"/></th>
-            <th><span>&lt;25%</span></th>
-            <th><span>25-50%</span></th>
-            <th><span>50-75%</span></th>
-            <th><span>&gt;75%</span></th>
-            <th><input type="radio"></th>
-            <th>Humerus</th>
-            <th><input type="radio"></th>
-            <th><span>&gt;75%</span></th>
-            <th><span>50-75%</span></th>
-            <th><span>25-50%</span></th>
-            <th><span>&lt;25%</span></th>
-            <th><input type="radio"/></th>
-        </tr>
-        <tr>
-            <td><input type="radio" name="Humerus_L_JS_P" value="0"/></td>
-            <td><input type="radio" name="Humerus_L_JS_P" value="1"/></td>
-            <td><input type="radio" name="Humerus_L_JS_P" value="2a"/></td>
-            <td><input type="radio" name="Humerus_L_JS_P" value="2b"/></td>
-            <td><input type="radio" name="Humerus_L_JS_P" value="3"/></td>
-            <td><input type="radio" name="Humerus_L_JS_P" value="C"/></td>
-            <td>Prox. JS</td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-            <td><input type="radio" name="Humerus_R_JS_P"/></td>
-        </tr>
+        <thead>
+            <tr class="sides">
+                <th class="left" colspan="5">Left</th>
+                <th colspan="3"></th>
+                <th class="right" colspan="5">Right</th>
+            </tr>
+            <tr class="labels">
+                <th></th>
+                <th><span>&lt;25%</span></th>
+                <th><span>25-50%</span></th>
+                <th><span>50-75%</span></th>
+                <th><span>&gt;75%</span></th>
+                <th class="complete"><span>compl.</span></th> 
+                <th></th>
+                <th class="complete"><span>compl.</span></th> 
+                <th><span>&gt;75%</span></th>
+                <th><span>50-75%</span></th>
+                <th><span>25-50%</span></th>
+                <th><span>&lt;25%</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><input name="Humerus_L_complete" data-complete="Humerus_L" type="radio" value="0"/></th>
+                <th colspan="4"></th>
+                <th><input name="Humerus_L_complete" data-complete="Humerus_L" type="radio" value="C"></th>
+                <th class="bone">Humerus</th>
+                <th><input name="Humerus_R_complete" data-complete="Humerus_R" type="radio" value="C"></th>
+                <th colspan="4"></th>
+                <th><input name="Humerus_R_complete" data-complete="Humerus_R" type="radio" value="0"/></th>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="0"/></td>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="1"/></td>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="2a"/></td>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="2b"/></td>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="3"/></td>
+                <td><input type="radio" name="Humerus_L_JS_P" data-bone="Humerus_L" value="C"/></td>
+                <td class="part">Prox. JS</td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="C"/></td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="3"/></td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="2b"/></td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="2a"/></td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="1"/></td>
+                <td><input type="radio" name="Humerus_R_JS_P" data-bone="Humerus_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="0"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="1"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="2a"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="2b"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="3"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_P" data-bone="Humerus_L" value="C"/></td>
+                <td class="part">Pr. 1/3 shaft</td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="C"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="3"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="2b"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="2a"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="1"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_P" data-bone="Humerus_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="0"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="1"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="2a"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="2b"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="3"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_M" data-bone="Humerus_L" value="C"/></td>
+                <td class="part">Md. 1/3 shaft</td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="C"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="3"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="2b"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="2a"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="1"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_M" data-bone="Humerus_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="0"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="1"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="2a"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="2b"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="3"/></td>
+                <td><input type="radio" name="Humerus_L_shaft_D" data-bone="Humerus_L" value="C"/></td>
+                <td class="part">Ds. 1/3 shaft</td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="C"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="3"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="2b"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="2a"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="1"/></td>
+                <td><input type="radio" name="Humerus_R_shaft_D" data-bone="Humerus_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="0"/></td>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="1"/></td>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="2a"/></td>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="2b"/></td>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="3"/></td>
+                <td><input type="radio" name="Humerus_L_JS_D" data-bone="Humerus_L" value="C"/></td>
+                <td class="part">Dist. JS</td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="C"/></td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="3"/></td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="2b"/></td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="2a"/></td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="1"/></td>
+                <td><input type="radio" name="Humerus_R_JS_D" data-bone="Humerus_R" value="0"/></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th><input name="Radius_L_complete" data-complete="Radius_L" type="radio" value="0"/></th>
+                <th colspan="4"></th>
+                <th><input name="Radius_L_complete" data-complete="Radius_L" type="radio" value="C"></th>
+                <th class="bone">Radius</th>
+                <th><input name="Radius_R_complete" data-complete="Radius_R" type="radio" value="C"></th>
+                <th colspan="4"></th>
+                <th><input name="Radius_R_complete" data-complete="Radius_R" type="radio" value="0"/></th>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="0"/></td>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="1"/></td>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="2a"/></td>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="2b"/></td>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="3"/></td>
+                <td><input type="radio" name="Radius_L_JS_P" data-bone="Radius_L" value="C"/></td>
+                <td class="part">Prox. JS</td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="C"/></td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="3"/></td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="2b"/></td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="2a"/></td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="1"/></td>
+                <td><input type="radio" name="Radius_R_JS_P" data-bone="Radius_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="0"/></td>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="1"/></td>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="2a"/></td>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="2b"/></td>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="3"/></td>
+                <td><input type="radio" name="Radius_L_shaft_P" data-bone="Radius_L" value="C"/></td>
+                <td class="part">Pr. 1/3 shaft</td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="C"/></td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="3"/></td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="2b"/></td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="2a"/></td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="1"/></td>
+                <td><input type="radio" name="Radius_R_shaft_P" data-bone="Radius_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="0"/></td>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="1"/></td>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="2a"/></td>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="2b"/></td>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="3"/></td>
+                <td><input type="radio" name="Radius_L_shaft_M" data-bone="Radius_L" value="C"/></td>
+                <td class="part">Md. 1/3 shaft</td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="C"/></td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="3"/></td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="2b"/></td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="2a"/></td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="1"/></td>
+                <td><input type="radio" name="Radius_R_shaft_M" data-bone="Radius_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="0"/></td>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="1"/></td>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="2a"/></td>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="2b"/></td>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="3"/></td>
+                <td><input type="radio" name="Radius_L_shaft_D" data-bone="Radius_L" value="C"/></td>
+                <td class="part">Ds. 1/3 shaft</td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="C"/></td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="3"/></td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="2b"/></td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="2a"/></td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="1"/></td>
+                <td><input type="radio" name="Radius_R_shaft_D" data-bone="Radius_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="0"/></td>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="1"/></td>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="2a"/></td>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="2b"/></td>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="3"/></td>
+                <td><input type="radio" name="Radius_L_JS_D" data-bone="Radius_L" value="C"/></td>
+                <td class="part">Dist. JS</td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="C"/></td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="3"/></td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="2b"/></td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="2a"/></td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="1"/></td>
+                <td><input type="radio" name="Radius_R_JS_D" data-bone="Radius_R" value="0"/></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th><input name="Ulna_L_complete" data-complete="Ulna_L" type="radio" value="0"/></th>
+                <th colspan="4"></th>
+                <th><input name="Ulna_L_complete" data-complete="Ulna_L" type="radio" value="C"></th>
+                <th class="bone">Ulna</th>
+                <th><input name="Ulna_R_complete" data-complete="Ulna_R" type="radio" value="C"></th>
+                <th colspan="4"></th>
+                <th><input name="Ulna_R_complete" data-complete="Ulna_R" type="radio" value="0"/></th>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="0"/></td>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="1"/></td>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="2a"/></td>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="2b"/></td>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="3"/></td>
+                <td><input type="radio" name="Ulna_L_JS_P" data-bone="Ulna_L" value="C"/></td>
+                <td class="part">Prox. JS</td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="C"/></td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="3"/></td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="2b"/></td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="2a"/></td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="1"/></td>
+                <td><input type="radio" name="Ulna_R_JS_P" data-bone="Ulna_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="0"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="1"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="2a"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="2b"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="3"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_P" data-bone="Ulna_L" value="C"/></td>
+                <td class="part">Pr. 1/3 shaft</td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="C"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="3"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="2b"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="2a"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="1"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_P" data-bone="Ulna_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="0"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="1"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="2a"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="2b"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="3"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_M" data-bone="Ulna_L" value="C"/></td>
+                <td class="part">Md. 1/3 shaft</td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="C"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="3"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="2b"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="2a"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="1"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_M" data-bone="Ulna_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="0"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="1"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="2a"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="2b"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="3"/></td>
+                <td><input type="radio" name="Ulna_L_shaft_D" data-bone="Ulna_L" value="C"/></td>
+                <td class="part">Ds. 1/3 shaft</td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="C"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="3"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="2b"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="2a"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="1"/></td>
+                <td><input type="radio" name="Ulna_R_shaft_D" data-bone="Ulna_R" value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="0"/></td>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="1"/></td>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="2a"/></td>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="2b"/></td>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="3"/></td>
+                <td><input type="radio" name="Ulna_L_JS_D" data-bone="Ulna_L" value="C"/></td>
+                <td class="part">Dist. JS</td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="C"/></td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="3"/></td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="2b"/></td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="2a"/></td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="1"/></td>
+                <td><input type="radio" name="Ulna_R_JS_D" data-bone="Ulna_R" value="0"/></td>
+            </tr>
+        </tbody>
     </table>
-</div>
+</form>

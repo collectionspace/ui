@@ -1,16 +1,48 @@
+.osteo th, .osteo td {
+    line-height: 16px;
+    width: 16px;
+}
+
 .osteo th {
-    line-height: 14px;
-    width: 14px;
+    vertical-align: bottom;
+}
+
+.osteo .sides {
+    height: 40px;
+}
+
+.osteo .sides > th {
+    vertical-align: top;
+}
+
+.osteo .sides > th.right {
+    text-align: right;
+}
+
+.osteo .labels > th {
     position: relative;
 }
 
-.osteo th > span {
+.osteo .labels > th > span {
     font-size: 10px;
     position: absolute;
-    top: 16px;
+    top: 18px;
+    left: -2px;
     transform: rotate(-90deg);
     transform-origin: top left;
     white-space: nowrap;
 }
 
+.osteo .labels > th.complete > span {
+    top: 0;
+}
 
+.osteo .bone, .osteo .part {
+    text-align: center;
+    white-space: nowrap;
+    padding: 0 5px 0 5px;
+}
+
+.osteo .part {
+    font-size: 10px;
+}
