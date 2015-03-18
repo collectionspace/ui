@@ -66,7 +66,7 @@
     };
     
     cspace.osteology.bindEvents = function(that, recordEditor) {
-        recordEditor.events.afterInit.addListener(function() {
+        recordEditor.events.afterRecordRender.addListener(function() {
             that.initForm();
         }, that.typeName);
     };
@@ -114,9 +114,22 @@
             }
         });
 
-        console.log(that.segments);
-        console.log(that.segmentInputs);
-        console.log(that.completeInputs);
+        // console.log(that.segments);
+        // console.log(that.segmentInputs);
+        // console.log(that.completeInputs);
+        
+        // Fill in the form using values from the model.
+        
+        for (var name in that.model.fields) {
+            if (name.match(/^(.*?)_complete$/)) {
+                var boneName = RegExp.$1;
+                
+                that.setCompleteValue(boneName, that.model.fields[name]);
+            }
+            else if (that.isSegmentName(name)) {
+                that.setSegmentValue(name, that.model.fields[name]);
+            }
+        }
         
         that.form.change(function(event) {
             var target = event.target;
@@ -160,19 +173,6 @@
                 }
             }
         });
-
-        // Fill in the form using values from the model.
-        
-        for (var name in that.model.fields) {
-            if (name.match(/^(.*?)_complete$/)) {
-                var boneName = RegExp.$1;
-                
-                that.setCompleteValue(boneName, that.model.fields[name]);
-            }
-            else if (that.isSegmentName(name)) {
-                that.setSegmentValue(name, that.model.fields[name]);
-            }
-        }
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.osteology");
