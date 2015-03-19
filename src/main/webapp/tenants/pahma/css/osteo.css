@@ -1,10 +1,18 @@
 .osteo th, .osteo td {
     line-height: 16px;
     width: 16px;
+    position: relative;
 }
 
 .osteo th {
     vertical-align: bottom;
+    text-align: left;
+}
+
+.osteo td {
+    vertical-align: center;
+    text-align: center;
+    overflow: hidden;
 }
 
 .osteo .sides {
@@ -26,23 +34,69 @@
 .osteo .labels > th > span {
     font-size: 10px;
     position: absolute;
-    top: 18px;
-    left: -2px;
+    top: 14px;
     transform: rotate(-90deg);
     transform-origin: top left;
     white-space: nowrap;
 }
 
 .osteo .labels > th.complete > span {
-    top: 0;
+    top: -2px;
+    color: #0033FF;
 }
 
-.osteo .bone, .osteo .part {
+.osteo .bone, .osteo .segment {
     text-align: center;
     white-space: nowrap;
     padding: 0 5px 0 5px;
 }
 
-.osteo .part {
+.osteo .segment {
     font-size: 10px;
+}
+
+.osteo tbody {
+    border-bottom: 1em solid rgba(0, 0, 0, 0);
+}
+
+.osteo label > input[type="radio"] + span {
+    display: block;
+    color: black;
+    width: 16px;
+    height: 16px;
+    background: url(../images/radio-black-unchecked.png) no-repeat;
+    background-size: 16px 16px;
+}
+
+.osteo label > input[type="radio"].missing + span {
+    background-image: url(../images/radio-red-unchecked.png);
+}
+
+.osteo label > input[type="radio"].complete + span {
+    background-image: url(../images/radio-blue-unchecked.png);
+}
+
+.osteo label > input[type="radio"]:checked + span {
+    background-image: url(../images/radio-black-checked.png);
+}
+
+.osteo label > input[type="radio"].missing:checked + span {
+    background-image: url(../images/radio-red-checked.png);
+}
+
+.osteo label > input[type="radio"].complete:checked + span {
+    background-image: url(../images/radio-blue-checked.png);
+}
+
+.osteo label > input[type="radio"]:focus + span {
+    outline: 1px solid black;
+    outline-offset: -1px;
+}
+
+.osteo label > input[type="radio"] {
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    width: 1px;
+    height: 1px;
 }

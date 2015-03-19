@@ -84,6 +84,13 @@
         that.completeInputs = {};
         
         that.form.find("input[type='radio']").each(function(index, element) {
+            $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
+                switch (element.value) {
+                    case "C": return "complete"
+                    case "0": return "missing"
+                }
+            });
+            
             var boneName = $(element).data("complete");
             
             if (boneName) {
