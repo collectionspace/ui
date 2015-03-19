@@ -21,17 +21,24 @@
        utility routines buildfile, and adds its own behavior specific to this
        CollectionSpace source code layer. -->
   <target name="update-text-in-cloned-tenant" depends="tenant-utils.update-text-in-cloned-tenant">
-    <!-- Update tenant names where found in property bundle files. -->
+    <!-- Update tenant names, where found, within property bundle files. -->
     <!-- Note: this text replacement is brute-force and will even replace sub-strings,
          if found, so you'll need to ensure that your 'template tenant' shortname is a
          unique string: that it won't be inadvertently contained within text elsewhere. -->
-    <!-- TODO: Perform more nuanced replacements to avoid the problem described above. 
-         (See the Ant ReplaceRegExp task for one potential approach when doing so.) -->
-    <!-- TODO: This replacement is also currently case-sensitive, and may need to be
-         revised to detect matches of the template tenant shortname regardless of case. -->
-    <replace dir="${tenants.dir}/${tenant.shortname}/bundle" token="${template.tenant.shortname}"
-      value="${tenant.shortname}">
-    </replace>
+    <!-- Update tenant names within property values -->
+    <replaceregexp
+      match="^([^:]*?:)(.*?)${template.tenant.shortname}(.*)$"
+      replace="\1\2${tenant.shortname}\3"
+      flags="gim">
+      <fileset dir="${tenants.dir}/${tenant.shortname}/bundle"/>
+    </replaceregexp>
+    <!-- Update tenant names in comment lines -->
+    <replaceregexp
+      match="^(\s*?#)(.*?)${template.tenant.shortname}(.*)$"
+      replace="\1\2${tenant.shortname}\3"
+      flags="gim">
+      <fileset dir="${tenants.dir}/${tenant.shortname}/bundle"/>
+    </replaceregexp>
   </target>
     
 </project>
