@@ -4,6 +4,14 @@
   <!-- Location of the 'tenants' directory for this CollectionSpace source code layer. -->
   <property name="src.dir" value="${basedir}" />
   <property name="tenants.dir" value="${src.dir}/src/main/webapp/tenants"/>
+
+  <!-- Location of the property bundle overlay file for the newly-cloned tenant. -->
+  <property name="bundle.dir" value="bundle"/>
+  <property name="tenant.bundle.dir"
+    value="${tenants.dir}/${tenant.shortname}/${bundle.dir}"/>
+    <property name="bundle.overlay.file.name" value="core-messages.properties-overlay"/>
+  <property name="tenant.bundle.overlay.file"
+    value="${tenant.bundle.dir}/${bundle.overlay.file.name}"/>
   
   <!-- Imports a set of utility routines for managing tenant folders
        from a separate Ant buildfile.
@@ -20,8 +28,45 @@
   <!-- This target inherits from an (essentially empty) target in the imported
        utility routines buildfile, and adds its own behavior specific to this
        CollectionSpace source code layer. -->
-  <target name="update-text-in-cloned-tenant" depends="tenant-utils.update-text-in-cloned-tenant">
-    <!-- Update tenant names, where found, within property bundle files. -->
+  <target name="update-text-in-cloned-tenant"
+    depends="tenant-utils.update-text-in-cloned-tenant,
+    update-tenant-internet-domain-in-tenant-property-bundle,
+    update-tenant-shortname-in-tenant-property-bundles">
+  </target>
+  
+  <target name="extract-template-tenant-internet-domain" depends="tenant-utils.check-template-properties">
+    <!-- Will retrieve the template tenant's Internet domain from the email address value
+         of the 'login-login' property, in the property bundle overlay file. -->
+    <loadfile srcfile="${tenant.bundle.overlay.file}" property="template.tenant.internet.domain">
+       <filterchain>
+         <linecontains>
+           <contains value="login-login:"/>
+         </linecontains>
+         <replaceregex pattern="^login-login:[^@]*?@" replace="" />
+      </filterchain>
+    </loadfile>
+    <echo message="template.tenant.internet.domain=${template.tenant.internet.domain}"/>
+  </target>
+  
+  <target name="update-tenant-internet-domain-in-tenant-property-bundle"
+    depends="extract-template-tenant-internet-domain">
+    <!-- Default admin user -->
+    <replaceregexp
+      file="${tenant.bundle.overlay.file}"
+      match="(login-login:[^@]*?@)${template.tenant.internet.domain}"
+      replace="\1${tenant.internet.domain}${line.separator}"
+      flags="i"/>
+      <!-- Default reader user -->
+    <replaceregexp
+      file="${tenant.bundle.overlay.file}"
+      match="(login-rologin:[^@]*?@)${template.tenant.internet.domain}"
+      replace="\1${tenant.internet.domain}${line.separator}"
+      flags="i"/>
+  </target>
+
+  <target name="update-tenant-shortname-in-tenant-property-bundles">
+    <!-- Update tenant names, where found, within all property bundle files, both in
+         the main property bundle overlay file and in any other bundles files found. -->
     <!-- Note: this text replacement is brute-force and will even replace sub-strings,
          if found, so you'll need to ensure that your 'template tenant' shortname is a
          unique string: that it won't be inadvertently contained within text elsewhere. -->
@@ -30,15 +75,36 @@
       match="^([^:]*?:)(.*?)${template.tenant.shortname}(.*)$"
       replace="\1\2${tenant.shortname}\3"
       flags="gim">
-      <fileset dir="${tenants.dir}/${tenant.shortname}/bundle"/>
+      <fileset dir="${tenant.bundle.dir}"/>
     </replaceregexp>
     <!-- Update tenant names in comment lines -->
     <replaceregexp
       match="^(\s*?#)(.*?)${template.tenant.shortname}(.*)$"
       replace="\1\2${tenant.shortname}\3"
       flags="gim">
-      <fileset dir="${tenants.dir}/${tenant.shortname}/bundle"/>
+      <fileset dir="${tenant.bundle.dir}"/>
     </replaceregexp>
+  </target>
+  
+  <!-- There might be other non-consequential references to the template tenant;
+       e.g. in a comment in the tenant's CSS file. These could be cleaned up
+       by adding more target(s) and referencing them as dependencies of the
+       'update-text-in-cloned-tenant' target. -->
+  
+  <!-- This target inherits from an (essentially empty) target in the imported
+       utility routines buildfile, and adds its own behavior specific to this
+       CollectionSpace source code layer. -->
+  <target name="check-tenant-extended-properties" 
+    depends="tenant-utils.check-tenant-extended-properties">
+    <!-- Internet domain of the new tenant to create -->
+    <antcall target="check-property-is-defined">
+      <param name="property-to-check" value="tenant.internet.domain"/>
+    </antcall>
+    <antcall target="check-property-value-is-not-blank">
+      <param name="property-to-check" value="tenant.internet.domain"/>
+      <param name="property-to-check-value" value="${tenant.internet.domain}"/>
+    </antcall>
+    <echo message="tenant.internet.domain=${tenant.internet.domain}"/>
   </target>
     
 </project>
