@@ -96,6 +96,10 @@
        CollectionSpace source code layer. -->
   <target name="check-tenant-extended-properties" 
     depends="tenant-utils.check-tenant-extended-properties">
+    <!-- ID of the new tenant to create
+         Note: Although this property is included in the provided tenant.properties file
+         and in documentation, for the purpose of simplicity and consistency across all
+         three layers, it is not currently used (nor is it checked here) in the UI layer -->
     <!-- Internet domain of the new tenant to create -->
     <antcall target="check-property-is-defined">
       <param name="property-to-check" value="tenant.internet.domain"/>
