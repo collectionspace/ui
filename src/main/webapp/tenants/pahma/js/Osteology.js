@@ -1,4 +1,7 @@
 (function ($, fluid) {
+    var COMPLETE_VALUE = "C";
+    var MISSING_VALUE = "0";
+    
     fluid.defaults("cspace.osteology", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
         selectors: {},
@@ -31,6 +34,7 @@
         };
         
         that.setSegmentValue = function(segmentName, value) {
+            console.log(segmentName + "=" + value);
             that.segmentInputs[segmentName][value].checked = true;
         };
         
@@ -38,7 +42,7 @@
             var complete = true;
             
             for (var segmentName in that.segments[boneName]) {
-                if (that.model.fields[segmentName] !== "C") {
+                if (that.model.fields[segmentName] !== COMPLETE_VALUE) {
                     complete = false;
                     break;
                 }
@@ -51,7 +55,7 @@
             var missing = true;
             
             for (var segmentName in that.segments[boneName]) {
-                if (that.model.fields[segmentName] !== "0") {
+                if (that.model.fields[segmentName] !== MISSING_VALUE) {
                     missing = false;
                     break;
                 }
@@ -86,8 +90,8 @@
         that.form.find("input[type='radio']").each(function(index, element) {
             $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
                 switch (element.value) {
-                    case "C": return "complete"
-                    case "0": return "missing"
+                    case COMPLETE_VALUE: return "complete"
+                    case MISSING_VALUE: return "missing"
                 }
             });
             
@@ -100,24 +104,23 @@
 
                 that.completeInputs[boneName][element.value] = element;
             }
-            else {
-                boneName = $(element).data("bone");
 
-                if (boneName) {
-                    var segmentName = element.name;
-                    
-                    if (!(boneName in that.segments)) {
-                        that.segments[boneName] = {};
-                    }
-                    
-                    that.segments[boneName][segmentName] = true;
-                    
-                    if (!(segmentName in that.segmentInputs)) {
-                        that.segmentInputs[segmentName] = {};
-                    }
-                    
-                    that.segmentInputs[segmentName][element.value] = element;
+            boneName = $(element).data("bone");
+
+            if (boneName) {
+                var segmentName = element.name;
+                
+                if (!(boneName in that.segments)) {
+                    that.segments[boneName] = {};
                 }
+                
+                that.segments[boneName][segmentName] = true;
+                
+                if (!(segmentName in that.segmentInputs)) {
+                    that.segmentInputs[segmentName] = {};
+                }
+                
+                that.segmentInputs[segmentName][element.value] = element;
             }
         });
 
@@ -141,45 +144,110 @@
         that.form.change(function(event) {
             var target = event.target;
 
+            var name = target.name;
+            var value = target.value;
+
+            that.applier.requestChange(cspace.util.composeSegments("fields", name), value);
+
             if (target.tagName === "INPUT" && target.type === "radio" && target.checked) {
-                var name = target.name;
-                var value = target.value;
+                propagateDown(that, target);
+                propagateUp(that, target);
+            }
+        });
+    };
+    
+    var propagateDown = function(that, input) {
+        var name = input.name;
+        var value = input.value;
 
-                that.applier.requestChange(cspace.util.composeSegments("fields", name), value);
+        var boneName = $(input).data("complete");
 
-                var boneName = $(target).data("complete");
+        if (boneName) {
+            if (value === COMPLETE_VALUE || value === MISSING_VALUE) {
+                for (var segmentName in that.segments[boneName]) {
+                    that.setSegmentValue(segmentName, value);
+                    that.applier.requestChange(cspace.util.composeSegments("fields", segmentName), value);
+                    
+                    propagateDown(that, that.segmentInputs[segmentName][value]);
+                };
+            }
+        }
+    };
+    
+    var propagateUp = function(that, input) {
+        var name = input.name;
+        var value = input.value;
 
-                if (boneName) {
-                    for (var segmentName in that.segments[boneName]) {
-                        that.setSegmentValue(segmentName, value);
-                        that.applier.requestChange(cspace.util.composeSegments("fields", segmentName), value);    
-                    };
+        var boneName = $(input).data("bone");
+
+        if (boneName) {
+            var completeInputs = that.completeInputs[boneName];
+
+            if (completeInputs) {
+                if (that.isComplete(boneName)) {
+                    completeInputs[COMPLETE_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
+                    
+                    propagateUp(that, completeInputs[COMPLETE_VALUE]);
+                }
+                else if (that.isMissing(boneName)) {
+                    completeInputs[MISSING_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), MISSING_VALUE);
+                    
+                    propagateUp(that, completeInputs[MISSING_VALUE]);
                 }
                 else {
-                    boneName = $(target).data("bone");
+                    completeInputs[COMPLETE_VALUE].checked = false;
+                    completeInputs[MISSING_VALUE].checked = false;
+                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), "");
+                    
+                    propagateUp(that, completeInputs[MISSING_VALUE]);
+                }
+            }
+        }
+    };
+    
+    var handleRadioCheck = function(that, input) {
+        var name = input.name;
+        var value = input.value;
 
-                    if (boneName) {
-                        var completeInputs = that.completeInputs[boneName];
+        that.applier.requestChange(cspace.util.composeSegments("fields", name), value);
 
-                        if (completeInputs) {
-                            if (that.isComplete(boneName)) {
-                                completeInputs["C"].checked = true;
-                                that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs["C"].name), "C");
-                            }
-                            else if (that.isMissing(boneName)) {
-                                completeInputs["0"].checked = true;
-                                that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs["0"].name), "0");
-                            }
-                            else {
-                                completeInputs["C"].checked = false;
-                                completeInputs["0"].checked = false;
-                                that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs["0"].name), "");
-                            }
-                        }
+        var boneName = $(input).data("complete");
+
+        if (boneName) {
+            if (value === COMPLETE_VALUE || value === MISSING_VALUE) {
+                for (var segmentName in that.segments[boneName]) {
+                    that.setSegmentValue(segmentName, value);
+                    that.applier.requestChange(cspace.util.composeSegments("fields", segmentName), value);
+                    
+                    handleRadioCheck(that, that.segmentInputs[segmentName][value]);
+                };
+            }
+        }
+        else {
+            boneName = $(input).data("bone");
+
+            if (boneName) {
+                var completeInputs = that.completeInputs[boneName];
+
+                if (completeInputs) {
+                    if (that.isComplete(boneName)) {
+                        completeInputs[COMPLETE_VALUE].checked = true;
+                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
+                    }
+                    else if (that.isMissing(boneName)) {
+                        completeInputs[MISSING_VALUE].checked = true;
+                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), MISSING_VALUE);
+                    }
+                    else {
+                        completeInputs[COMPLETE_VALUE].checked = false;
+                        completeInputs[MISSING_VALUE].checked = false;
+                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), "");
                     }
                 }
             }
-        });
+        }
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.osteology");

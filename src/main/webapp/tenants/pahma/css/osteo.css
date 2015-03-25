@@ -1,3 +1,15 @@
+.osteo-row {
+    display: flex;
+}
+
+.osteo {
+    background: white;
+}
+
+.osteo + .osteo {
+	margin-left: 40px;
+}
+
 .osteo th, .osteo td {
     line-height: 16px;
     width: 16px;
@@ -13,6 +25,10 @@
     vertical-align: center;
     text-align: center;
     overflow: hidden;
+}
+
+.osteo .flat-label .sides {
+    height: 56px;
 }
 
 .osteo .sides {
@@ -34,10 +50,17 @@
 .osteo .labels > th > span {
     font-size: 10px;
     position: absolute;
-    top: 14px;
     transform: rotate(-90deg);
     transform-origin: top left;
     white-space: nowrap;
+}
+
+.osteo .labels > th > span {
+    top: 14px;
+}
+
+.osteo .flat-label .labels > th > span {
+    top: -2px;
 }
 
 .osteo .labels > th.complete > span {
