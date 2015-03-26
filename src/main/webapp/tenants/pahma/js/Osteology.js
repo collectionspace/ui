@@ -82,7 +82,7 @@
         that.inputs = {};
         
         // itemName: {value: input element, ...}
-        that.aggregateInputs = {};
+        that.aggregatingInputs = {};
         
         that.form.find("input[type='radio']").each(function(index, element) {
             $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
@@ -95,11 +95,11 @@
             var aggregatesItemName = $(element).data(AGGREGATES_ATTRIBUTE_NAME);
             
             if (aggregatesItemName) {
-                if (!(aggregatesItemName in that.aggregateInputs)) {
-                    that.aggregateInputs[aggregatesItemName] = {};
+                if (!(aggregatesItemName in that.aggregatingInputs)) {
+                    that.aggregatingInputs[aggregatesItemName] = {};
                 }
 
-                that.aggregateInputs[aggregatesItemName][element.value] = element;
+                that.aggregatingInputs[aggregatesItemName][element.value] = element;
             }
 
             var itemName = element.name;
@@ -122,7 +122,7 @@
 
         // console.log(that.children);
         // console.log(that.inputs);
-        // console.log(that.aggregateInputs);
+        // console.log(that.aggregatingInputs);
         
         // Fill in the form using values from the model.
         
@@ -140,13 +140,13 @@
             that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, name), value);
 
             if (target.tagName === "INPUT" && target.type === "radio" && target.checked) {
-                propagateValueToChildren(that, target);
-                propagateValueToParents(that, target);
+                updateChildren(that, target);
+                updateParents(that, target);
             }
         });
     };
     
-    var propagateValueToChildren = function(that, input) {
+    var updateChildren = function(that, input) {
         var name = input.name;
         var value = input.value;
 
@@ -158,40 +158,45 @@
                     that.setItemValue(childName, value);
                     that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
                     
-                    propagateValueToChildren(that, that.inputs[childName][value]);
+                    updateChildren(that, that.inputs[childName][value]);
                 };
             }
         }
     };
     
-    var propagateValueToParents = function(that, input) {
+    var updateParents = function(that, input) {
         var name = input.name;
         var value = input.value;
 
         var parentName = $(input).data(PARENT_ATTRIBUTE_NAME);
 
         if (parentName) {
-            var aggregateInputs = that.aggregateInputs[parentName];
+            var aggregatingInputs = that.aggregatingInputs[parentName];
+            
+            if (aggregatingInputs) {
+                var isBinary = 
+                    Object.keys(aggregatingInputs).size === 2
+                    && (COMPLETE_VALUE in aggregatingInputs)
+                    && (MISSING_VALUE in aggregatingInputs);
 
-            if (aggregateInputs) {
-                if (that.areAllChildrenComplete(parentName)) {
-                    aggregateInputs[COMPLETE_VALUE].checked = true;
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
+                if (that.areAllChildrenComplete(parentName) && isBinary) {
+                    aggregatingInputs[COMPLETE_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
                     
-                    propagateValueToParents(that, aggregateInputs[COMPLETE_VALUE]);
+                    updateParents(that, aggregatingInputs[COMPLETE_VALUE]);
                 }
-                else if (that.areAllChildrenMissing(parentName)) {
-                    aggregateInputs[MISSING_VALUE].checked = true;
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[MISSING_VALUE].name), MISSING_VALUE);
+                else if (that.areAllChildrenMissing(parentName) && isBinary) {
+                    aggregatingInputs[MISSING_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[MISSING_VALUE].name), MISSING_VALUE);
                     
-                    propagateValueToParents(that, aggregateInputs[MISSING_VALUE]);
+                    updateParents(that, aggregatingInputs[MISSING_VALUE]);
                 }
                 else {
-                    aggregateInputs[COMPLETE_VALUE].checked = false;
-                    aggregateInputs[MISSING_VALUE].checked = false;
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[MISSING_VALUE].name), "");
+                    aggregatingInputs[COMPLETE_VALUE].checked = false;
+                    aggregatingInputs[MISSING_VALUE].checked = false;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[MISSING_VALUE].name), "");
                     
-                    propagateValueToParents(that, aggregateInputs[MISSING_VALUE]);
+                    updateParents(that, aggregatingInputs[MISSING_VALUE]);
                 }
             }
         }
