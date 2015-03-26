@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.osteo-row + .osteo-row {
+    margin-top: 10px;
+}
+
 .osteo {
     background: white;
 }

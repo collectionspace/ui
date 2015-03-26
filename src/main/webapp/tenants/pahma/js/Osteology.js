@@ -175,17 +175,17 @@
             
             if (aggregatingInputs) {
                 var isBinary = 
-                    Object.keys(aggregatingInputs).size === 2
+                    Object.keys(aggregatingInputs).length === 2
                     && (COMPLETE_VALUE in aggregatingInputs)
                     && (MISSING_VALUE in aggregatingInputs);
 
-                if (that.areAllChildrenComplete(parentName) && isBinary) {
+                if (isBinary && that.areAllChildrenComplete(parentName)) {
                     aggregatingInputs[COMPLETE_VALUE].checked = true;
                     that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
                     
                     updateParents(that, aggregatingInputs[COMPLETE_VALUE]);
                 }
-                else if (that.areAllChildrenMissing(parentName) && isBinary) {
+                else if (isBinary && that.areAllChildrenMissing(parentName)) {
                     aggregatingInputs[MISSING_VALUE].checked = true;
                     that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[MISSING_VALUE].name), MISSING_VALUE);
                     
