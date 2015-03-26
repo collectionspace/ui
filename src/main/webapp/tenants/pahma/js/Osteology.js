@@ -1,6 +1,11 @@
 (function ($, fluid) {
+    var BASE_EL_PATH = "fields";
+    var COMPLETE_CLASS = "complete";
     var COMPLETE_VALUE = "C";
+    var MISSING_CLASS = "missing";
     var MISSING_VALUE = "0";
+    var PARENT_ATTRIBUTE_NAME = "parent";
+    var AGGREGATES_ATTRIBUTE_NAME = "aggregates-children-of";
     
     fluid.defaults("cspace.osteology", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
@@ -22,27 +27,19 @@
     });
     
     cspace.osteology.preInit = function(that) {
-        that.setCompleteValue = function(boneName, value) {
-            for (var inputValue in that.completeInputs[boneName]) {
-                var input = that.completeInputs[boneName][inputValue];
-                input.checked = (inputValue === value);
-            }
+        that.isItemName = function(candidateName) {
+            return (candidateName in that.inputs);
         };
         
-        that.isSegmentName = function(candidateName) {
-            return (candidateName in that.segmentInputs);
+        that.setItemValue = function(itemName, value) {
+            that.inputs[itemName][value].checked = true;
         };
         
-        that.setSegmentValue = function(segmentName, value) {
-            console.log(segmentName + "=" + value);
-            that.segmentInputs[segmentName][value].checked = true;
-        };
-        
-        that.isComplete = function(boneName) {
+        that.areAllChildrenComplete = function(itemName) {
             var complete = true;
             
-            for (var segmentName in that.segments[boneName]) {
-                if (that.model.fields[segmentName] !== COMPLETE_VALUE) {
+            for (var childName in that.children[itemName]) {
+                if (that.model.fields[childName] !== COMPLETE_VALUE) {
                     complete = false;
                     break;
                 }
@@ -51,11 +48,11 @@
             return complete;
         };
         
-        that.isMissing = function(boneName) {
+        that.areAllChildrenMissing = function(itemName) {
             var missing = true;
             
-            for (var segmentName in that.segments[boneName]) {
-                if (that.model.fields[segmentName] !== MISSING_VALUE) {
+            for (var childName in that.children[itemName]) {
+                if (that.model.fields[childName] !== MISSING_VALUE) {
                     missing = false;
                     break;
                 }
@@ -78,173 +75,123 @@
     cspace.osteology.initForm = function(that) {
         that.form = $("form.csc-osteology-form");
         
-        // boneName: {segmentName: true, ...}
-        that.segments = {};
+        // itemName: {childItemName: true, ...}
+        that.children = {};
         
-        // segmentName: {value: input element, ...}
-        that.segmentInputs = {};
+        // itemName: {value: input element, ...}
+        that.inputs = {};
         
-        // boneName: {value: input element, ...}
-        that.completeInputs = {};
+        // itemName: {value: input element, ...}
+        that.aggregateInputs = {};
         
         that.form.find("input[type='radio']").each(function(index, element) {
             $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
                 switch (element.value) {
-                    case COMPLETE_VALUE: return "complete"
-                    case MISSING_VALUE: return "missing"
+                    case COMPLETE_VALUE: return COMPLETE_CLASS;
+                    case MISSING_VALUE: return MISSING_CLASS;
                 }
             });
             
-            var boneName = $(element).data("complete");
+            var aggregatesItemName = $(element).data(AGGREGATES_ATTRIBUTE_NAME);
             
-            if (boneName) {
-                if (!(boneName in that.completeInputs)) {
-                    that.completeInputs[boneName] = {};
+            if (aggregatesItemName) {
+                if (!(aggregatesItemName in that.aggregateInputs)) {
+                    that.aggregateInputs[aggregatesItemName] = {};
                 }
 
-                that.completeInputs[boneName][element.value] = element;
+                that.aggregateInputs[aggregatesItemName][element.value] = element;
             }
 
-            boneName = $(element).data("bone");
+            var itemName = element.name;
+            var parentItemName = $(element).data(PARENT_ATTRIBUTE_NAME);
 
-            if (boneName) {
-                var segmentName = element.name;
-                
-                if (!(boneName in that.segments)) {
-                    that.segments[boneName] = {};
+            if (parentItemName) {
+                if (!(parentItemName in that.children)) {
+                    that.children[parentItemName] = {};
                 }
                 
-                that.segments[boneName][segmentName] = true;
-                
-                if (!(segmentName in that.segmentInputs)) {
-                    that.segmentInputs[segmentName] = {};
-                }
-                
-                that.segmentInputs[segmentName][element.value] = element;
+                that.children[parentItemName][itemName] = true;
             }
+            
+            if (!(itemName in that.inputs)) {
+                that.inputs[itemName] = {};
+            }
+            
+            that.inputs[itemName][element.value] = element;
         });
 
-        // console.log(that.segments);
-        // console.log(that.segmentInputs);
-        // console.log(that.completeInputs);
+        // console.log(that.children);
+        // console.log(that.inputs);
+        // console.log(that.aggregateInputs);
         
         // Fill in the form using values from the model.
         
         for (var name in that.model.fields) {
-            if (name.match(/^(.*?)_complete$/)) {
-                var boneName = RegExp.$1;
-                
-                that.setCompleteValue(boneName, that.model.fields[name]);
-            }
-            else if (that.isSegmentName(name)) {
-                that.setSegmentValue(name, that.model.fields[name]);
+            if (that.isItemName(name)) {
+                that.setItemValue(name, that.model.fields[name]);
             }
         }
         
         that.form.change(function(event) {
             var target = event.target;
-
             var name = target.name;
             var value = target.value;
 
-            that.applier.requestChange(cspace.util.composeSegments("fields", name), value);
+            that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, name), value);
 
             if (target.tagName === "INPUT" && target.type === "radio" && target.checked) {
-                propagateDown(that, target);
-                propagateUp(that, target);
+                propagateValueToChildren(that, target);
+                propagateValueToParents(that, target);
             }
         });
     };
     
-    var propagateDown = function(that, input) {
+    var propagateValueToChildren = function(that, input) {
         var name = input.name;
         var value = input.value;
 
-        var boneName = $(input).data("complete");
+        var aggregatesItemName = $(input).data(AGGREGATES_ATTRIBUTE_NAME);
 
-        if (boneName) {
+        if (aggregatesItemName) {
             if (value === COMPLETE_VALUE || value === MISSING_VALUE) {
-                for (var segmentName in that.segments[boneName]) {
-                    that.setSegmentValue(segmentName, value);
-                    that.applier.requestChange(cspace.util.composeSegments("fields", segmentName), value);
+                for (var childName in that.children[aggregatesItemName]) {
+                    that.setItemValue(childName, value);
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
                     
-                    propagateDown(that, that.segmentInputs[segmentName][value]);
+                    propagateValueToChildren(that, that.inputs[childName][value]);
                 };
             }
         }
     };
     
-    var propagateUp = function(that, input) {
+    var propagateValueToParents = function(that, input) {
         var name = input.name;
         var value = input.value;
 
-        var boneName = $(input).data("bone");
+        var parentName = $(input).data(PARENT_ATTRIBUTE_NAME);
 
-        if (boneName) {
-            var completeInputs = that.completeInputs[boneName];
+        if (parentName) {
+            var aggregateInputs = that.aggregateInputs[parentName];
 
-            if (completeInputs) {
-                if (that.isComplete(boneName)) {
-                    completeInputs[COMPLETE_VALUE].checked = true;
-                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
+            if (aggregateInputs) {
+                if (that.areAllChildrenComplete(parentName)) {
+                    aggregateInputs[COMPLETE_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
                     
-                    propagateUp(that, completeInputs[COMPLETE_VALUE]);
+                    propagateValueToParents(that, aggregateInputs[COMPLETE_VALUE]);
                 }
-                else if (that.isMissing(boneName)) {
-                    completeInputs[MISSING_VALUE].checked = true;
-                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), MISSING_VALUE);
+                else if (that.areAllChildrenMissing(parentName)) {
+                    aggregateInputs[MISSING_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[MISSING_VALUE].name), MISSING_VALUE);
                     
-                    propagateUp(that, completeInputs[MISSING_VALUE]);
+                    propagateValueToParents(that, aggregateInputs[MISSING_VALUE]);
                 }
                 else {
-                    completeInputs[COMPLETE_VALUE].checked = false;
-                    completeInputs[MISSING_VALUE].checked = false;
-                    that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), "");
+                    aggregateInputs[COMPLETE_VALUE].checked = false;
+                    aggregateInputs[MISSING_VALUE].checked = false;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregateInputs[MISSING_VALUE].name), "");
                     
-                    propagateUp(that, completeInputs[MISSING_VALUE]);
-                }
-            }
-        }
-    };
-    
-    var handleRadioCheck = function(that, input) {
-        var name = input.name;
-        var value = input.value;
-
-        that.applier.requestChange(cspace.util.composeSegments("fields", name), value);
-
-        var boneName = $(input).data("complete");
-
-        if (boneName) {
-            if (value === COMPLETE_VALUE || value === MISSING_VALUE) {
-                for (var segmentName in that.segments[boneName]) {
-                    that.setSegmentValue(segmentName, value);
-                    that.applier.requestChange(cspace.util.composeSegments("fields", segmentName), value);
-                    
-                    handleRadioCheck(that, that.segmentInputs[segmentName][value]);
-                };
-            }
-        }
-        else {
-            boneName = $(input).data("bone");
-
-            if (boneName) {
-                var completeInputs = that.completeInputs[boneName];
-
-                if (completeInputs) {
-                    if (that.isComplete(boneName)) {
-                        completeInputs[COMPLETE_VALUE].checked = true;
-                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[COMPLETE_VALUE].name), COMPLETE_VALUE);
-                    }
-                    else if (that.isMissing(boneName)) {
-                        completeInputs[MISSING_VALUE].checked = true;
-                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), MISSING_VALUE);
-                    }
-                    else {
-                        completeInputs[COMPLETE_VALUE].checked = false;
-                        completeInputs[MISSING_VALUE].checked = false;
-                        that.applier.requestChange(cspace.util.composeSegments("fields", completeInputs[MISSING_VALUE].name), "");
-                    }
+                    propagateValueToParents(that, aggregateInputs[MISSING_VALUE]);
                 }
             }
         }
