@@ -1069,7 +1069,8 @@ exhibition-venueUrlLabel: Web address
 exhibition-planningNoteLabel: Planning notes
 exhibition-curatorialNoteLabel: Curatorial notes
 exhibition-generalNoteLabel: General notes
-exhibition-exhibitionPersonGroupLabel: Curator and other associated persons
+exhibition-workingGroupLabel: Exhibition working group
+exhibition-workingGroupTitleLabel: Working group title
 exhibition-boilerplateTextLabel: Boilerplate text
 exhibition-exhibitionReferenceGroupLabel: Bibliographic references
 exhibition-exhibitionReferenceLabel: Reference
