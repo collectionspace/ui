@@ -95,7 +95,7 @@
     background-size: 16px 16px;
 }
 
-.osteo label > input[type="radio"].missing + span {
+.osteo label > input[type="radio"].absent + span {
     background-image: url(../images/radio-red-unchecked.png);
 }
 
@@ -107,7 +107,7 @@
     background-image: url(../images/radio-black-checked.png);
 }
 
-.osteo label > input[type="radio"].missing:checked + span {
+.osteo label > input[type="radio"].absent:checked + span {
     background-image: url(../images/radio-red-checked.png);
 }
 

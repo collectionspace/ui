@@ -2,10 +2,11 @@
     var BASE_EL_PATH = "fields";
     var COMPLETE_CLASS = "complete";
     var COMPLETE_VALUE = "C";
-    var MISSING_CLASS = "missing";
-    var MISSING_VALUE = "0";
+    var ABSENT_CLASS = "absent";
+    var ABSENT_VALUE = "0";
     var PARENT_ATTRIBUTE_NAME = "parent";
     var AGGREGATES_ATTRIBUTE_NAME = "aggregates-children-of";
+    var PROPAGATES_ATTRIBUTE_NAME = "propagates-to-children-of";
     
     fluid.defaults("cspace.osteology", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
@@ -48,17 +49,17 @@
             return complete;
         };
         
-        that.areAllChildrenMissing = function(itemName) {
-            var missing = true;
+        that.areAllChildrenAbsent = function(itemName) {
+            var absent = true;
             
             for (var childName in that.children[itemName]) {
-                if (that.model.fields[childName] !== MISSING_VALUE) {
-                    missing = false;
+                if (that.model.fields[childName] !== ABSENT_VALUE) {
+                    absent = false;
                     break;
                 }
             }
             
-            return missing;
+            return absent;
         };
     };
     
@@ -88,7 +89,7 @@
             $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
                 switch (element.value) {
                     case COMPLETE_VALUE: return COMPLETE_CLASS;
-                    case MISSING_VALUE: return MISSING_CLASS;
+                    case ABSENT_VALUE: return ABSENT_CLASS;
                 }
             });
             
@@ -153,7 +154,7 @@
         var aggregatesItemName = $(input).data(AGGREGATES_ATTRIBUTE_NAME);
 
         if (aggregatesItemName) {
-            if (value === COMPLETE_VALUE || value === MISSING_VALUE) {
+            if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
                 for (var childName in that.children[aggregatesItemName]) {
                     that.setItemValue(childName, value);
                     that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
@@ -177,7 +178,7 @@
                 var isBinary = 
                     Object.keys(aggregatingInputs).length === 2
                     && (COMPLETE_VALUE in aggregatingInputs)
-                    && (MISSING_VALUE in aggregatingInputs);
+                    && (ABSENT_VALUE in aggregatingInputs);
 
                 if (isBinary && that.areAllChildrenComplete(parentName)) {
                     aggregatingInputs[COMPLETE_VALUE].checked = true;
@@ -185,18 +186,18 @@
                     
                     updateParents(that, aggregatingInputs[COMPLETE_VALUE]);
                 }
-                else if (isBinary && that.areAllChildrenMissing(parentName)) {
-                    aggregatingInputs[MISSING_VALUE].checked = true;
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[MISSING_VALUE].name), MISSING_VALUE);
+                else if (isBinary && that.areAllChildrenAbsent(parentName)) {
+                    aggregatingInputs[ABSENT_VALUE].checked = true;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[ABSENT_VALUE].name), ABSENT_VALUE);
                     
-                    updateParents(that, aggregatingInputs[MISSING_VALUE]);
+                    updateParents(that, aggregatingInputs[ABSENT_VALUE]);
                 }
                 else {
                     aggregatingInputs[COMPLETE_VALUE].checked = false;
-                    aggregatingInputs[MISSING_VALUE].checked = false;
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[MISSING_VALUE].name), "");
+                    aggregatingInputs[ABSENT_VALUE].checked = false;
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, aggregatingInputs[ABSENT_VALUE].name), "");
                     
-                    updateParents(that, aggregatingInputs[MISSING_VALUE]);
+                    updateParents(that, aggregatingInputs[ABSENT_VALUE]);
                 }
             }
         }
