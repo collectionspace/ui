@@ -34,6 +34,28 @@
             </div>
         </div>
         <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-exhibition-sponsor-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="csc-exhibition-sponsor" />
+                    </div>
+                 </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-exhibition-organizer-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="csc-exhibition-organizer" />
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="info-column">
             <div class="info-pair">
                 <div class="header">
                     <div class="label csc-exhibition-venueGroup-label"></div>
@@ -59,6 +81,60 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="info-column cs-multipleEdit" id="multipleEdit">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-exhibition-workingGroup-label"></div>
+                </div>
+                <div class="content csc-exhibition-workingGroup cs-repeatable-stretched">
+                    <div class="info-column">
+                        <div class="info-column2-50 fl-force-left">
+                            <div class="info-pair-select">
+                                <div class="header">
+                                    <div class="label csc-exhibition-workingGroupTitle-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-exhibition-workingGroupTitle" />
+                                </div>
+                             </div>
+                        </div>
+                        <div class="info-column2-50 fl-force-right">
+                            <div class="info-pair-select">
+                                <div class="header">
+                                    <div class="label csc-exhibition-workingGroupNote-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-exhibition-workingGroupNote" />
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="info-column">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-workingGroup-exhibitionPersonGroup-label"></div>
+                            </div>
+                            <div class="content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="csc-exhibition-exhibitionPerson-label"></td>
+                                            <td class="csc-exhibition-exhibitionPersonRole-label"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="csc-workingGroup-exhibitionPersonGroup">
+                                            <td><input type="text" class="csc-exhibition-exhibitionPerson" /></td>
+                                            <td><select class="csc-exhibition-exhibitionPersonRole input-select"><option value="">Options not loaded</option></select></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,27 +168,6 @@
             <div class="info-column2-50 fl-force-right">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label csc-exhibition-exhibitionPersonGroup-label"></div>
-                    </div>
-                    <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td class="csc-exhibition-exhibitionPerson-label"></td>
-                                    <td class="csc-exhibition-exhibitionPersonRole-label"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="csc-exhibition-exhibitionPersonGroup">
-                                    <td><input type="text" class="csc-exhibition-exhibitionPerson" /></td>
-                                    <td><select class="csc-exhibition-exhibitionPersonRole input-select"><option value="">Options not loaded</option></select></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="info-pair">
-                    <div class="header">
                         <div class="label csc-exhibition-boilerplateText-label"></div>
                     </div>
                     <div class="content">
@@ -131,12 +186,14 @@
                         <thead>
                             <tr>
                                 <td class="csc-exhibition-exhibitionReference-label"></td>
+                                <td class="csc-exhibition-exhibitionReferenceType-label"></td>
                                 <td class="csc-exhibition-exhibitionReferenceNote-label"></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="csc-exhibition-exhibitionReferenceGroup">
                                 <td><input type="text" class="csc-exhibition-exhibitionReference" /></td>
+                                <td><select class="csc-exhibition-exhibitionReferenceType input-select"><option value="">Options not loaded</option></select></td>
                                 <td><input type="text" class="csc-exhibition-exhibitionReferenceNote" /></td>
                             </tr>
                         </tbody>
