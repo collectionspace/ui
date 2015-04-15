@@ -308,6 +308,170 @@
                 'Manubrium',
                 '__other__'
             ]
+        },
+        
+        //
+        
+        Carpals_L_complete: {
+            children: [
+                "Scaphoid_L",
+                "Lunate_L",
+                "Triquetral_L",
+                "Pisiform_L",
+                "Trapezium_L",
+                "Trapezoid_L",
+                "Capitate_L",
+                "Hamate_L"
+            ],
+            computedFrom: [
+                "Scaphoid_L",
+                "Lunate_L",
+                "Triquetral_L",
+                "Pisiform_L",
+                "Trapezium_L",
+                "Trapezoid_L",
+                "Capitate_L",
+                "Hamate_L"
+            ]
+        },
+        
+        Carpals_R_complete: {
+            children: [
+                "Scaphoid_R",
+                "Lunate_R",
+                "Triquetral_R",
+                "Pisiform_R",
+                "Trapezium_R",
+                "Trapezoid_R",
+                "Capitate_R",
+                "Hamate_R"
+            ],
+            computedFrom: [
+                "Scaphoid_R",
+                "Lunate_R",
+                "Triquetral_R",
+                "Pisiform_R",
+                "Trapezium_R",
+                "Trapezoid_R",
+                "Capitate_R",
+                "Hamate_R"
+            ]
+        },
+        
+        //
+        
+        Tarsals_L_complete: {
+            children: [
+                "Talus_L",
+                "Calcaneus_L",
+                "Navicular_L",
+                "Cuboid_L",
+                "Med_cuneif_1_L",
+                "Int_cuneif_2_L",
+                "Lat_cuneif_3_L"
+            ],
+            computedFrom: [
+                "Talus_L",
+                "Calcaneus_L",
+                "Navicular_L",
+                "Cuboid_L",
+                "Med_cuneif_1_L",
+                "Int_cuneif_2_L",
+                "Lat_cuneif_3_L"
+            ]
+        },
+
+        Tarsals_R_complete: {
+            children: [
+                "Talus_R",
+                "Calcaneus_R",
+                "Navicular_R",
+                "Cuboid_R",
+                "Med_cuneif_1_R",
+                "Int_cuneif_2_R",
+                "Lat_cuneif_3_R"
+            ],
+            computedFrom: [
+                "Talus_R",
+                "Calcaneus_R",
+                "Navicular_R",
+                "Cuboid_R",
+                "Med_cuneif_1_R",
+                "Int_cuneif_2_R",
+                "Lat_cuneif_3_R"
+            ]
+        },
+        
+        //
+        
+        MC_L_complete: {
+            children: [
+                "MC1_L",
+                "MC2_L",
+                "MC3_L",
+                "MC4_L",
+                "MC5_L"
+            ],
+            computedFrom: [
+                "MC1_L",
+                "MC2_L",
+                "MC3_L",
+                "MC4_L",
+                "MC5_L"
+            ]
+        },
+        
+        MC_R_complete: {
+            children: [
+                "MC1_R",
+                "MC2_R",
+                "MC3_R",
+                "MC4_R",
+                "MC5_R"
+            ],
+            computedFrom: [
+                "MC1_R",
+                "MC2_R",
+                "MC3_R",
+                "MC4_R",
+                "MC5_R"
+            ]
+        },
+        
+        //
+        
+        MT_L_complete: {
+            children: [
+                "MT1_L",
+                "MT2_L",
+                "MT3_L",
+                "MT4_L",
+                "MT5_L"
+            ],
+            computedFrom: [
+                "MT1_L",
+                "MT2_L",
+                "MT3_L",
+                "MT4_L",
+                "MT5_L"
+            ]
+        },
+        
+        MT_R_complete: {
+            children: [
+                "MT1_R",
+                "MT2_R",
+                "MT3_R",
+                "MT4_R",
+                "MT5_R"
+            ],
+            computedFrom: [
+                "MT1_R",
+                "MT2_R",
+                "MT3_R",
+                "MT4_R",
+                "MT5_R"
+            ]
         }
     };
     
@@ -346,18 +510,25 @@
     
     cspace.osteology.preInit = function(that) {
         that.setFieldValue = function(fieldName, value) {
-            if (fieldName in that.inputs) {
-                var input = that.inputs[fieldName][value];
+            if (fieldName in that.radioInputs) {
+                var input = that.radioInputs[fieldName][value];
             
                 if (input) {
                     input.checked = true;
                 }
                 else {
-                    var inputs = that.inputs[fieldName];
+                    var radioInputs = that.radioInputs[fieldName];
                 
-                    for(var value in inputs) {
-                        inputs[value].checked = false;
+                    for(var value in radioInputs) {
+                        radioInputs[value].checked = false;
                     }
+                }
+            }
+            else if (fieldName in that.textInputs) {
+                var input = that.textInputs[fieldName];
+                
+                if (input) {
+                    input.value = value;
                 }
             }
         };
@@ -414,8 +585,8 @@
         that.form = $("form.csc-osteology-form");
         
         // name: {value: input element, ...}
-        that.inputs = {};
-        
+        that.radioInputs = {};
+                
         that.form.find("input[type='radio']").each(function(index, element) {
             $(element).wrap("<label></label>").after("<span></span>").addClass(function() {
                 switch (element.value) {
@@ -426,14 +597,27 @@
             
             var inputName = element.name;
             
-            if (!(inputName in that.inputs)) {
-                that.inputs[inputName] = {};
+            if (!(inputName in that.radioInputs)) {
+                that.radioInputs[inputName] = {};
             }
             
-            that.inputs[inputName][element.value] = element;
+            that.radioInputs[inputName][element.value] = element;
         });
 
-        // console.log(that.inputs);
+        // console.log(that.radioInputs);
+        
+        // name: input element
+        that.textInputs = {};
+        
+        that.form.find("input[type='text']").each(function(index, element) {
+            var inputName = element.name;
+            
+            if (!(inputName in that.textInputs)) {
+                that.textInputs[inputName] = element;
+            }
+        });
+        
+        // console.log(that.textInputs);
         
         // Fill in the form using values from the model.
         
@@ -445,7 +629,7 @@
             var target = event.target;
             var name = target.name;
             var value = target.value;
-
+            
             that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, name), value);
 
             if (target.tagName === "INPUT" && target.type === "radio") {

@@ -43,6 +43,10 @@
     vertical-align: top;
 }
 
+.osteo.vertebrae .sides > th {
+/*    text-align: center;*/
+}
+
 .osteo .sides > th.right {
     text-align: right;
 }
@@ -59,8 +63,16 @@
     white-space: nowrap;
 }
 
-.osteo .labels > th > span {
+.osteo .labels > th > span, .osteo.vertebrae .labels > th.arch > span {
     top: 14px;
+}
+
+.osteo.vertebrae .labels > th.centrum > span {
+  top: 14px;
+}
+
+.osteo.vertebrae .hspace {
+  width: 8px;
 }
 
 .osteo .flat-label .labels > th > span {
@@ -80,6 +92,20 @@
 
 .osteo .segment {
     font-size: 10px;
+}
+
+.osteo input[type="text"] {
+  border: 1px solid #C7CFD4;
+}
+
+.osteo input.sesamoid {
+  width: 96px;
+  text-align: center;
+}
+
+.osteo input.mc, .osteo input.mt {
+  height: 80px;
+  text-align: center;
 }
 
 .osteo tbody {
@@ -126,4 +152,24 @@
     top: -20px;
     width: 1px;
     height: 1px;
+}
+
+.osteo input[name="C_centra_count"] {
+  height: 96px;
+}
+
+.osteo input[name="C_L_arch_count"], .osteo input[name="C_R_arch_count"] {
+  height: 112px;
+}
+
+.osteo input[name="T_centra_count"], .osteo input[name="T_L_arch_count"], .osteo input[name="T_R_arch_count"] {
+  height: 192px;
+}
+
+.osteo input[name="L_centra_count"], .osteo input[name="L_L_arch_count"], .osteo input[name="L_R_arch_count"] {
+  height: 80px;
+}
+
+.osteo input[name="S_centra_count"], .osteo input[name="S_L_ala_count"], .osteo input[name="S_R_ala_count"] {
+  height:96px;
 }
