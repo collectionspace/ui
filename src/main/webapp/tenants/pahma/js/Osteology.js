@@ -472,6 +472,513 @@
                 "MT4_R",
                 "MT5_R"
             ]
+        },
+        
+        //
+        
+        Vertebrae_complete: {
+            children: [
+                "C1_complete",
+                "C2_complete",
+                "C3_complete",
+                "C4_complete",
+                "C5_complete",
+                "C6_complete",
+                "C7_complete",
+                "T1_complete",
+                "T2_complete",
+                "T3_complete",
+                "T4_complete",
+                "T5_complete",
+                "T6_complete",
+                "T7_complete",
+                "T8_complete",
+                "T9_complete",
+                "T10_complete",
+                "T11_complete",
+                "T12_complete",
+                "L1_complete",
+                "L2_complete",
+                "L3_complete",
+                "L4_complete",
+                "L5_complete",
+                "Sacrum_complete",
+                "Coccyx_complete"
+            ],
+            computedFrom: [
+                "C1_complete",
+                "C2_complete",
+                "C3_complete",
+                "C4_complete",
+                "C5_complete",
+                "C6_complete",
+                "C7_complete",
+                "T1_complete",
+                "T2_complete",
+                "T3_complete",
+                "T4_complete",
+                "T5_complete",
+                "T6_complete",
+                "T7_complete",
+                "T8_complete",
+                "T9_complete",
+                "T10_complete",
+                "T11_complete",
+                "T12_complete",
+                "L1_complete",
+                "L2_complete",
+                "L3_complete",
+                "L4_complete",
+                "L5_complete",
+                "Sacrum_complete",
+                "Coccyx_complete"
+            ]
+        },
+        
+        C1_complete: {
+            children: [
+                "C1_L_arch",
+                "C1_R_arch"
+            ],
+            computedFrom: [
+                "C1_L_arch",
+                "C1_R_arch",
+                "__other__"
+            ]
+        },
+        
+        C2_complete: {
+            children: [
+                "C2_centrum",
+                "C2_L_arch",
+                "C2_R_arch"
+            ],
+            computedFrom: [
+                "C2_centrum",
+                "C2_L_arch",
+                "C2_R_arch",
+                "__other__"
+            ]
+        },
+
+        C3_complete: {
+            children: [
+                "C3_centrum",
+                "C3_L_arch",
+                "C3_R_arch"
+            ],
+            computedFrom: [
+                "C3_centrum",
+                "C3_L_arch",
+                "C3_R_arch",
+                "__other__"
+            ]
+        },
+
+        C4_complete: {
+            children: [
+                "C4_centrum",
+                "C4_L_arch",
+                "C4_R_arch"
+            ],
+            computedFrom: [
+                "C4_centrum",
+                "C4_L_arch",
+                "C4_R_arch",
+                "__other__"
+            ]
+        },
+
+        C5_complete: {
+            children: [
+                "C5_centrum",
+                "C5_L_arch",
+                "C5_R_arch"
+            ],
+            computedFrom: [
+                "C5_centrum",
+                "C5_L_arch",
+                "C5_R_arch",
+                "__other__"
+            ]
+        },
+
+        C6_complete: {
+            children: [
+                "C6_centrum",
+                "C6_L_arch",
+                "C6_R_arch"
+            ],
+            computedFrom: [
+                "C6_centrum",
+                "C6_L_arch",
+                "C6_R_arch",
+                "__other__"
+            ]
+        },
+
+        C7_complete: {
+            children: [
+                "C7_centrum",
+                "C7_L_arch",
+                "C7_R_arch"
+            ],
+            computedFrom: [
+                "C7_centrum",
+                "C7_L_arch",
+                "C7_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T1_complete: {
+            children: [
+                "T1_centrum",
+                "T1_L_arch",
+                "T1_R_arch"
+            ],
+            computedFrom: [
+                "T1_centrum",
+                "T1_L_arch",
+                "T1_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T2_complete: {
+            children: [
+                "T2_centrum",
+                "T2_L_arch",
+                "T2_R_arch"
+            ],
+            computedFrom: [
+                "T2_centrum",
+                "T2_L_arch",
+                "T2_R_arch",
+                "__other__"
+            ]
+        },
+
+        T3_complete: {
+            children: [
+                "T3_centrum",
+                "T3_L_arch",
+                "T3_R_arch"
+            ],
+            computedFrom: [
+                "T3_centrum",
+                "T3_L_arch",
+                "T3_R_arch",
+                "__other__"
+            ]
+        },
+
+        T4_complete: {
+            children: [
+                "T4_centrum",
+                "T4_L_arch",
+                "T4_R_arch"
+            ],
+            computedFrom: [
+                "T4_centrum",
+                "T4_L_arch",
+                "T4_R_arch",
+                "__other__"
+            ]
+        },
+
+        T5_complete: {
+            children: [
+                "T5_centrum",
+                "T5_L_arch",
+                "T5_R_arch"
+            ],
+            computedFrom: [
+                "T5_centrum",
+                "T5_L_arch",
+                "T5_R_arch",
+                "__other__"
+            ]
+        },
+
+        T6_complete: {
+            children: [
+                "T6_centrum",
+                "T6_L_arch",
+                "T6_R_arch"
+            ],
+            computedFrom: [
+                "T6_centrum",
+                "T6_L_arch",
+                "T6_R_arch",
+                "__other__"
+            ]
+        },
+
+        T7_complete: {
+            children: [
+                "T7_centrum",
+                "T7_L_arch",
+                "T7_R_arch"
+            ],
+            computedFrom: [
+                "T7_centrum",
+                "T7_L_arch",
+                "T7_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T8_complete: {
+            children: [
+                "T8_centrum",
+                "T8_L_arch",
+                "T8_R_arch"
+            ],
+            computedFrom: [
+                "T8_centrum",
+                "T8_L_arch",
+                "T8_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T9_complete: {
+            children: [
+                "T9_centrum",
+                "T9_L_arch",
+                "T9_R_arch"
+            ],
+            computedFrom: [
+                "T9_centrum",
+                "T9_L_arch",
+                "T9_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T10_complete: {
+            children: [
+                "T10_centrum",
+                "T10_L_arch",
+                "T10_R_arch"
+            ],
+            computedFrom: [
+                "T10_centrum",
+                "T10_L_arch",
+                "T10_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T11_complete: {
+            children: [
+                "T11_centrum",
+                "T11_L_arch",
+                "T11_R_arch"
+            ],
+            computedFrom: [
+                "T11_centrum",
+                "T11_L_arch",
+                "T11_R_arch",
+                "__other__"
+            ]
+        },
+        
+        T12_complete: {
+            children: [
+                "T12_centrum",
+                "T12_L_arch",
+                "T12_R_arch"
+            ],
+            computedFrom: [
+                "T12_centrum",
+                "T12_L_arch",
+                "T12_R_arch",
+                "__other__"
+            ]
+        },
+
+        L1_complete: {
+            children: [
+                "L1_centrum",
+                "L1_L_arch",
+                "L1_R_arch"
+            ],
+            computedFrom: [
+                "L1_centrum",
+                "L1_L_arch",
+                "L1_R_arch",
+                "__other__"
+            ]
+        },
+        
+        L2_complete: {
+            children: [
+                "L2_centrum",
+                "L2_L_arch",
+                "L2_R_arch"
+            ],
+            computedFrom: [
+                "L2_centrum",
+                "L2_L_arch",
+                "L2_R_arch",
+                "__other__"
+            ]
+        },
+
+        L3_complete: {
+            children: [
+                "L3_centrum",
+                "L3_L_arch",
+                "L3_R_arch"
+            ],
+            computedFrom: [
+                "L3_centrum",
+                "L3_L_arch",
+                "L3_R_arch",
+                "__other__"
+            ]
+        },
+
+        L4_complete: {
+            children: [
+                "L4_centrum",
+                "L4_L_arch",
+                "L4_R_arch"
+            ],
+            computedFrom: [
+                "L4_centrum",
+                "L4_L_arch",
+                "L4_R_arch",
+                "__other__"
+            ]
+        },
+
+        L5_complete: {
+            children: [
+                "L5_centrum",
+                "L5_L_arch",
+                "L5_R_arch"
+            ],
+            computedFrom: [
+                "L5_centrum",
+                "L5_L_arch",
+                "L5_R_arch",
+                "__other__"
+            ]
+        },
+
+        Sacrum_complete: {
+            children: [
+                "Sacrum",
+                "Sacrum_L_alae",
+                "Sacrum_R_alae",
+                "S1_complete",
+                "S2_complete",
+                "S3_complete",
+                "S4_complete",
+                "S5_complete"
+            ],
+            branchedChildren: [
+                [
+                    "Sacrum",
+                    "Sacrum_L_alae",
+                    "Sacrum_R_alae",
+                ],[
+                    "S1_complete",
+                    "S2_complete",
+                    "S3_complete",
+                    "S4_complete",
+                    "S5_complete"
+                ]
+            ],
+            computedFrom: [
+                "S1_complete",
+                "S2_complete",
+                "S3_complete",
+                "S4_complete",
+                "S5_complete"
+            ]
+        },
+        
+        S1_complete: {
+            children: [
+                "S1_centrum",
+                "S1_L_ala",
+                "S1_R_ala"
+            ],
+            computedFrom: [
+                "S1_centrum",
+                "S1_L_ala",
+                "S1_R_ala",
+                "__other__"
+            ]
+        },
+        
+        S2_complete: {
+            children: [
+                "S2_centrum",
+                "S2_L_ala",
+                "S2_R_ala"
+            ],
+            computedFrom: [
+                "S2_centrum",
+                "S2_L_ala",
+                "S2_R_ala",
+                "__other__"
+            ]
+        },
+
+        S3_complete: {
+            children: [
+                "S3_centrum",
+                "S3_L_ala",
+                "S3_R_ala"
+            ],
+            computedFrom: [
+                "S3_centrum",
+                "S3_L_ala",
+                "S3_R_ala",
+                "__other__"
+            ]
+        },
+
+        S4_complete: {
+            children: [
+                "S4_centrum",
+                "S4_L_ala",
+                "S4_R_ala"
+            ],
+            computedFrom: [
+                "S4_centrum",
+                "S4_L_ala",
+                "S4_R_ala",
+                "__other__"
+            ]
+        },
+
+        S5_complete: {
+            children: [
+                "S5_centrum",
+                "S5_L_ala",
+                "S5_R_ala"
+            ],
+            computedFrom: [
+                "S5_centrum",
+                "S5_L_ala",
+                "S5_R_ala",
+                "__other__"
+            ]
+        },
+
+        Coccyx_complete: {
+            children: [
+                "Coccyx"
+            ],
+            computedFrom: [
+                "Coccyx"
+            ]
         }
     };
     
@@ -637,7 +1144,6 @@
                 
                 if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
                     updateChildren(that, name, value);
-                    updateParents(that, name);
                 }
             }
         });
@@ -655,7 +1161,33 @@
                     that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
                 
                     updateChildren(that, childName, value);
-                };
+                }
+            }
+        }
+    };
+    
+    var updateBranchedChildren = function(that, name, excludeBranchContainingName, value) {
+        if (name in relations) {
+            var branches = relations[name].branchedChildren;
+            
+            if (branches && branches.length > 0) {
+                for (var i=0; i<branches.length; i++) {
+                    var branch = branches[i];
+                    
+                    if (branch.indexOf(excludeBranchContainingName) == -1) {
+                        console.log("updating branch");
+                        console.log(branch);
+                        
+                        for (var b=0; b<branch.length; b++) {
+                            var childName = branch[b];
+                
+                            that.setFieldValue(childName, value);
+                            that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
+                
+                            updateChildren(that, childName, value);
+                        }
+                    }
+                }
             }
         }
     };
@@ -669,7 +1201,11 @@
                 
                 that.setFieldValue(parentName, value);
                 that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, parentName), value);
-             
+                
+                if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
+                    updateBranchedChildren(that, parentName, name, value);
+                }
+                
                 updateParents(that, parentName);
             }
         }
