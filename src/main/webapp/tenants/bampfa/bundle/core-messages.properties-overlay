@@ -13,6 +13,9 @@ login-rologin-pwdValue:
 vocab-collective: Artists Collectives
 vocab-crate: Crates
 
+# Search
+search-artist: Artist
+
 # Cataloging
 collection-object-objectNumberLabel: ID Number
 cataloging-identificationNumberRequired: Please specify at least one ID Number Information field.

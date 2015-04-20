@@ -271,7 +271,7 @@ cspace = cspace || {};
             pagerAfterRender: null
         },
         //columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
-        columnList: ["number", "summary", "recordtype", "namespace", "summarylist.updatedAt"],
+        columnList: ["number", "summarylist.bampfaObjectProductionPerson", "summary", "recordtype", "namespace", "summarylist.updatedAt"],
         resultsSelectable: false,
         listeners: {
             primaryRecordCreated: "{that}.primaryRecordCreated",
