@@ -89,8 +89,8 @@ collection-object-otherNumberLabel: T.R. / Other Number
 collection-object-numberValueLabel: T.R. / Other Number
 collection-object-titleLanguageLabel: Language
 collection-object-objectProductionPersonLabel: Artist or Maker
-collection-object-objectProductionPeopleGroupLabel: Artists Collective
-collection-object-objectProductionPeopleLabel: Artists Collective
+collection-object-objectProductionPeopleGroupLabel: Production Organization 
+collection-object-objectProductionPeopleLabel: Production Organization
 collection-object-objectProductionInformationLabel: Detail
 collection-object-classificationInformationLabel: Classification
 collection-object-numberOfObjectsLabel: Item Count
