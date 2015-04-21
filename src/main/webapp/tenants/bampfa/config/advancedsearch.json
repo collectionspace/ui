@@ -23,7 +23,16 @@
                 "search": {
                     "type": "cspace.search.searchView",
                     "options": {
-                        "pivoting": true
+                        "pivoting": true,
+                        "components": {
+                            "resultsPager": {
+                                "options": {
+                                    "model": {
+                                        "pageSize": 50
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "header": {
