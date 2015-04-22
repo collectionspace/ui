@@ -476,6 +476,358 @@
         
         //
         
+        Ribs_L_complete: {
+          children: [
+            "Rib1_L",
+            "Rib2_L",
+            "Rib3_L",
+            "Rib4_L",
+            "Rib5_L",
+            "Rib6_L",
+            "Rib7_L",
+            "Rib8_L",
+            "Rib9_L",
+            "Rib10_L",
+            "Rib11_L",
+            "Rib12_L"
+          ],
+          computedFrom: [
+            "Rib1_L",
+            "Rib2_L",
+            "Rib3_L",
+            "Rib4_L",
+            "Rib5_L",
+            "Rib6_L",
+            "Rib7_L",
+            "Rib8_L",
+            "Rib9_L",
+            "Rib10_L",
+            "Rib11_L",
+            "Rib12_L"
+          ]
+        },
+        
+        Rib1_L: {
+          children: [
+            "Rib1_L_sternal_end_complete",
+            "Rib1_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib1_L_sternal_end_complete",
+            "Rib1_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib2_L: {
+          children: [
+            "Rib2_L_sternal_end_complete",
+            "Rib2_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib2_L_sternal_end_complete",
+            "Rib2_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib3_L: {
+          children: [
+            "Rib3_L_sternal_end_complete",
+            "Rib3_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib3_L_sternal_end_complete",
+            "Rib3_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib4_L: {
+          children: [
+            "Rib4_L_sternal_end_complete",
+            "Rib4_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib4_L_sternal_end_complete",
+            "Rib4_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib5_L: {
+          children: [
+            "Rib5_L_sternal_end_complete",
+            "Rib5_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib5_L_sternal_end_complete",
+            "Rib5_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib6_L: {
+          children: [
+            "Rib6_L_sternal_end_complete",
+            "Rib6_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib6_L_sternal_end_complete",
+            "Rib6_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib7_L: {
+          children: [
+            "Rib7_L_sternal_end_complete",
+            "Rib7_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib7_L_sternal_end_complete",
+            "Rib7_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib8_L: {
+          children: [
+            "Rib8_L_sternal_end_complete",
+            "Rib8_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib8_L_sternal_end_complete",
+            "Rib8_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib9_L: {
+          children: [
+            "Rib9_L_sternal_end_complete",
+            "Rib9_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib9_L_sternal_end_complete",
+            "Rib9_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib10_L: {
+          children: [
+            "Rib10_L_sternal_end_complete",
+            "Rib10_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib10_L_sternal_end_complete",
+            "Rib10_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib11_L: {
+          children: [
+            "Rib11_L_sternal_end_complete",
+            "Rib11_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib11_L_sternal_end_complete",
+            "Rib11_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib12_L: {
+          children: [
+            "Rib12_L_sternal_end_complete",
+            "Rib12_L_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib12_L_sternal_end_complete",
+            "Rib12_L_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Ribs_R_complete: {
+          children: [
+            "Rib1_R",
+            "Rib2_R",
+            "Rib3_R",
+            "Rib4_R",
+            "Rib5_R",
+            "Rib6_R",
+            "Rib7_R",
+            "Rib8_R",
+            "Rib9_R",
+            "Rib10_R",
+            "Rib11_R",
+            "Rib12_R"
+          ],
+          computedFrom: [
+            "Rib1_R",
+            "Rib2_R",
+            "Rib3_R",
+            "Rib4_R",
+            "Rib5_R",
+            "Rib6_R",
+            "Rib7_R",
+            "Rib8_R",
+            "Rib9_R",
+            "Rib10_R",
+            "Rib11_R",
+            "Rib12_R"
+          ]
+        },
+        
+        Rib1_R: {
+          children: [
+            "Rib1_R_sternal_end_complete",
+            "Rib1_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib1_R_sternal_end_complete",
+            "Rib1_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib2_R: {
+          children: [
+            "Rib2_R_sternal_end_complete",
+            "Rib2_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib2_R_sternal_end_complete",
+            "Rib2_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib3_R: {
+          children: [
+            "Rib3_R_sternal_end_complete",
+            "Rib3_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib3_R_sternal_end_complete",
+            "Rib3_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib4_R: {
+          children: [
+            "Rib4_R_sternal_end_complete",
+            "Rib4_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib4_R_sternal_end_complete",
+            "Rib4_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib5_R: {
+          children: [
+            "Rib5_R_sternal_end_complete",
+            "Rib5_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib5_R_sternal_end_complete",
+            "Rib5_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib6_R: {
+          children: [
+            "Rib6_R_sternal_end_complete",
+            "Rib6_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib6_R_sternal_end_complete",
+            "Rib6_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib7_R: {
+          children: [
+            "Rib7_R_sternal_end_complete",
+            "Rib7_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib7_R_sternal_end_complete",
+            "Rib7_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib8_R: {
+          children: [
+            "Rib8_R_sternal_end_complete",
+            "Rib8_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib8_R_sternal_end_complete",
+            "Rib8_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib9_R: {
+          children: [
+            "Rib9_R_sternal_end_complete",
+            "Rib9_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib9_R_sternal_end_complete",
+            "Rib9_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib10_R: {
+          children: [
+            "Rib10_R_sternal_end_complete",
+            "Rib10_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib10_R_sternal_end_complete",
+            "Rib10_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib11_R: {
+          children: [
+            "Rib11_R_sternal_end_complete",
+            "Rib11_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib11_R_sternal_end_complete",
+            "Rib11_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        Rib12_R: {
+          children: [
+            "Rib12_R_sternal_end_complete",
+            "Rib12_R_head_neck_complete"
+          ],
+          computedFrom: [
+            "Rib12_R_sternal_end_complete",
+            "Rib12_R_head_neck_complete",
+            "__other__"
+          ]
+        },
+          
+        //
+        
         Vertebrae_complete: {
             children: [
                 "C1_complete",
@@ -1111,6 +1463,18 @@
             that.radioInputs[inputName][element.value] = element;
         });
 
+        that.form.find("input[type='checkbox']").each(function(index, element) {
+            $(element).wrap("<label></label>").after("<span></span>");
+            
+            var inputName = element.name;
+            
+            if (!(inputName in that.radioInputs)) {
+                that.radioInputs[inputName] = {};
+            }
+            
+            that.radioInputs[inputName][element.value] = element;
+        });
+        
         // console.log(that.radioInputs);
         
         // name: input element
@@ -1137,12 +1501,16 @@
             var name = target.name;
             var value = target.value;
             
+            if (target.type === "checkbox" && !target.checked) {
+              value = "";
+            }
+            
             that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, name), value);
 
-            if (target.tagName === "INPUT" && target.type === "radio") {
+            if (target.tagName === "INPUT" && (target.type === "radio" || target.type === "checkbox")) {
                 updateParents(that, name);
                 
-                if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
+                if (value === COMPLETE_VALUE || value === ABSENT_VALUE || target.type === "checkbox") {
                     updateChildren(that, name, value);
                 }
             }

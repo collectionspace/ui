@@ -95,12 +95,13 @@
 }
 
 .osteo input[type="text"] {
+  padding: 0;
   border: 1px solid #C7CFD4;
+  text-align: center;
 }
 
 .osteo input.sesamoid {
   width: 96px;
-  text-align: center;
 }
 
 .osteo input.mc, .osteo input.mt {
@@ -112,7 +113,8 @@
     border-bottom: 1em solid rgba(0, 0, 0, 0);
 }
 
-.osteo label > input[type="radio"] + span {
+.osteo label > input[type="radio"] + span,
+.osteo label > input[type="checkbox"] + span {
     display: block;
     color: black;
     width: 16px;
@@ -129,7 +131,8 @@
     background-image: url(../images/radio-blue-unchecked.png);
 }
 
-.osteo label > input[type="radio"]:checked + span {
+.osteo label > input[type="radio"]:checked + span,
+.osteo label > input[type="checkbox"]:checked + span {
     background-image: url(../images/radio-black-checked.png);
 }
 
@@ -141,12 +144,14 @@
     background-image: url(../images/radio-blue-checked.png);
 }
 
-.osteo label > input[type="radio"]:focus + span {
+.osteo label > input[type="radio"]:focus + span,
+.osteo label > input[type="checkbox"]:focus + span {
     outline: 1px solid black;
     outline-offset: -1px;
 }
 
-.osteo label > input[type="radio"] {
+.osteo label > input[type="radio"],
+.osteo label > input[type="checkbox"] {
     position: absolute;
     left: -20px;
     top: -20px;
@@ -172,4 +177,27 @@
 
 .osteo input[name="S_centra_count"], .osteo input[name="S_L_ala_count"], .osteo input[name="S_R_ala_count"] {
   height:96px;
+}
+
+.osteo.phalanges {
+  margin-left: 0;
+}
+
+.osteo.phalanges th {
+  white-space: nowrap;
+  padding-right: 3px;
+}
+
+.osteo.phalanges th, .osteo.phalanges td {
+  width: auto;
+  font-size: 10px;
+  text-align: left;
+}
+
+.osteo.phalanges input {
+  width: 3em;
+}
+
+.osteo.phalanges input[name="Phalanx_juv_count_hand"], .osteo.phalanges input[name="Phalanx_juv_count_foot"] {
+  height: 57px;
 }
