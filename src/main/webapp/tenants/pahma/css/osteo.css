@@ -121,8 +121,16 @@
     color: black;
     width: 16px;
     height: 16px;
-    background: url(../images/radio-black-unchecked.png) no-repeat;
     background-size: 16px 16px;
+    background-repeat: no-repeat;
+}
+
+.osteo label > input[type="radio"] + span {
+    background-image: url(../images/radio-black-unchecked.png);
+}
+
+.osteo label > input[type="checkbox"] + span {
+    background-image: url(../images/checkbox-unchecked.png);
 }
 
 .osteo label > input[type="radio"].absent + span {
@@ -133,8 +141,11 @@
     background-image: url(../images/radio-blue-unchecked.png);
 }
 
-.osteo label > input[type="radio"]:checked + span,
 .osteo label > input[type="checkbox"]:checked + span {
+    background-image: url(../images/checkbox-checked.png);;
+}
+
+.osteo label > input[type="radio"]:checked + span {
     background-image: url(../images/radio-black-checked.png);
 }
 
