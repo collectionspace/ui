@@ -7,10 +7,10 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-osteology-osteologyNumber"
+                            "identificationNumber": ".csc-osteology-InventoryID"
                         },
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.osteologyNumber"],
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.InventoryID"],
                         "components": {
                             "osteology": {
                                 "type": "cspace.osteology",
@@ -26,7 +26,7 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.osteologyNumber"
+                            "fields.InventoryID"
                         ]
                     }
                 },

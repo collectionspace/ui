@@ -1109,6 +1109,6 @@ exhibition-exhibitionObjectNoteLabel: Note
 # Osteology
 osteology: Osteology
 osteology-tab: Osteo
-osteology-osteologyNumberLabel: Osteology number
-osteology-identificationNumberRequired: Please specify an Osteology number
-osteology-Humerus_L_JS_PLabel: Humerus, Left, Prox. JS
+osteology-InventoryIDLabel: Inventory ID
+osteology-identificationNumberRequired: Please specify an Inventory ID
+osteology-NotesOnElementInventoryLabel: Notes on inventory
