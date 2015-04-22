@@ -1543,9 +1543,6 @@
                     var branch = branches[i];
                     
                     if (branch.indexOf(excludeBranchContainingName) == -1) {
-                        console.log("updating branch");
-                        console.log(branch);
-                        
                         for (var b=0; b<branch.length; b++) {
                             var childName = branch[b];
                 
