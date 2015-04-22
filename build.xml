@@ -5,6 +5,11 @@
   <property name="src.dir" value="${basedir}" />
   <property name="tenants.dir" value="${src.dir}/src/main/webapp/tenants"/>
 
+  <!-- Imports a set of utility routines for managing tenant folders
+       from a separate Ant buildfile.
+       See http://wiki.apache.org/ant/NewAntFeaturesInDetail/Import -->
+  <import file="./tenant-utils-build.xml"/>
+  
   <!-- Location of the property bundle overlay file for the newly-cloned tenant. -->
   <property name="bundle.dir" value="bundle"/>
   <property name="tenant.bundle.dir"
@@ -12,11 +17,6 @@
     <property name="bundle.overlay.file.name" value="core-messages.properties-overlay"/>
   <property name="tenant.bundle.overlay.file"
     value="${tenant.bundle.dir}/${bundle.overlay.file.name}"/>
-  
-  <!-- Imports a set of utility routines for managing tenant folders
-       from a separate Ant buildfile.
-       See http://wiki.apache.org/ant/NewAntFeaturesInDetail/Import -->
-  <import file="./tenant-utils-build.xml"/>
   
   <!-- TODO: If you wish to clone any per-tenant UI files beyond those found in
        the template tenant folder, add a "clone-other-template-files" target here
