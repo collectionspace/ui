@@ -36,6 +36,7 @@ cspace = cspace || {};
             media: ".csc-myCollectionSpace-media-group",
             group: ".csc-myCollectionSpace-group-group",
             valuationcontrol: ".csc-myCollectionSpace-valuationcontrol-group",
+            exhibition: ".csc-myCollectionSpace-exhibition-group",
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",
