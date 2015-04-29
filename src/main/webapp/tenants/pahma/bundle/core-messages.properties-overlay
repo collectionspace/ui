@@ -1107,6 +1107,9 @@ exhibition-exhibitionObjectRotationLabel: Rotation
 exhibition-exhibitionObjectNoteLabel: Note
 
 # Osteology
+osteology-recordList: Related Osteology Records
+osteology-number: Inventory ID
+osteology-editRecord: Edit Osteology Record
 osteology: Osteology
 osteology-tab: Osteo
 osteology-InventoryIDLabel: Inventory ID
