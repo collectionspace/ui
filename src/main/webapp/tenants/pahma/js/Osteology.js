@@ -268,6 +268,34 @@
                 "Pubis_L",
             ]
         },
+        Ischium_L: {
+            markVisited: [
+                "Acetabulum_L",
+                "Auricular_surf_L"
+            ]
+        },
+        Ilium_L: {
+            markVisited: [
+                "Acetabulum_L",
+                "Auricular_surf_L"
+            ]
+        },
+        Acetabulum_L: {
+            markVisited: [
+                "Auricular_surf_L"
+            ]
+        },
+        Auricular_surf_L: {
+            markVisited: [
+                "Acetabulum_L"
+            ]
+        },
+        Pubis_L: {
+            markVisited: [
+                "Acetabulum_L",
+                "Auricular_surf_L"
+            ]
+        },
         Os_coxae_R: {
             children: [
                 "Ischium_R",
@@ -280,6 +308,24 @@
                 "Ischium_R",
                 "Ilium_R",
                 "Pubis_R"
+            ]
+        },
+        Ischium_R: {
+            markVisited: [
+                "Acetabulum_R",
+                "Auricular_surf_R"
+            ]
+        },
+        Ilium_R: {
+            markVisited: [
+                "Acetabulum_R",
+                "Auricular_surf_R"
+            ]
+        },
+        Pubis_R: {
+            markVisited: [
+                "Acetabulum_R",
+                "Auricular_surf_R"
             ]
         },
         Scapula_L: {
@@ -1232,25 +1278,63 @@
                 "S4_complete",
                 "S5_complete"
             ],
-            branchedChildren: [
-                [
-                    "Sacrum",
-                    "Sacrum_L_alae",
-                    "Sacrum_R_alae",
-                ],[
-                    "S1_complete",
-                    "S2_complete",
-                    "S3_complete",
-                    "S4_complete",
-                    "S5_complete"
-                ]
-            ],
             computedFrom: [
                 "S1_complete",
                 "S2_complete",
                 "S3_complete",
                 "S4_complete",
                 "S5_complete"
+            ]
+        },
+        
+        Sacrum: {
+          children: [
+              "S1_centrum",
+              "S2_centrum",
+              "S3_centrum",
+              "S4_centrum",
+              "S5_centrum"
+          ],
+          computedFrom: [
+              "S1_centrum",
+              "S2_centrum",
+              "S3_centrum",
+              "S4_centrum",
+              "S5_centrum"
+          ]
+        },
+        
+        Sacrum_L_alae: {
+            children: [
+                "S1_L_ala",
+                "S2_L_ala",
+                "S3_L_ala",
+                "S4_L_ala",
+                "S5_L_ala"
+            ],
+            computedFrom: [
+                "S1_L_ala",
+                "S2_L_ala",
+                "S3_L_ala",
+                "S4_L_ala",
+                "S5_L_ala"
+            ]
+        },
+        
+        Sacrum_R_alae: {
+            children: [
+                "S1_R_ala",
+                "S2_R_ala",
+                "S3_R_ala",
+                "S4_R_ala",
+                "S5_R_ala"
+            ],
+            computedFrom: [
+                "S1_R_ala",
+                "S2_R_ala",
+                "S3_R_ala",
+                "S4_R_ala",
+                "S5_R_ala"
             ]
         },
         
@@ -1267,7 +1351,7 @@
                 "__other__"
             ]
         },
-        
+
         S2_complete: {
             children: [
                 "S2_centrum",
@@ -1343,7 +1427,11 @@
             for (var i=0; i<children.length; i++) {
                 var childName = children[i];
                 
-                parents[childName] = parentName;
+                if (!parents[childName]) {
+                    parents[childName] = [];
+                }
+                
+                parents[childName].push(parentName);
             }
         }
     }
@@ -1407,7 +1495,7 @@
                     }
                     else if (value == COMPLETE_VALUE || value == ABSENT_VALUE) {
                         value = "";
-                    }
+                    } 
                 }
             }
             
@@ -1507,6 +1595,16 @@
             
             that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, name), value);
 
+            that.visitedFields = {};
+            that.visitedFields[name] = true;
+
+            if ((name in relations) && relations[name].markVisited) {
+                //console.log(relations[name].markVisited);
+                relations[name].markVisited.forEach(function(markVisitedFieldName) {
+                    that.visitedFields[markVisitedFieldName] = true;
+                })
+            }
+            
             if (target.tagName === "INPUT" && (target.type === "radio" || target.type === "checkbox")) {
                 updateParents(that, name);
                 
@@ -1524,33 +1622,15 @@
             if (children && children.length > 0) {
                 for (var i=0; i<children.length; i++) {
                     var childName = children[i];
-                
-                    that.setFieldValue(childName, value);
-                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
-                
-                    updateChildren(that, childName, value);
-                }
-            }
-        }
-    };
-    
-    var updateBranchedChildren = function(that, name, excludeBranchContainingName, value) {
-        if (name in relations) {
-            var branches = relations[name].branchedChildren;
-            
-            if (branches && branches.length > 0) {
-                for (var i=0; i<branches.length; i++) {
-                    var branch = branches[i];
                     
-                    if (branch.indexOf(excludeBranchContainingName) == -1) {
-                        for (var b=0; b<branch.length; b++) {
-                            var childName = branch[b];
-                
-                            that.setFieldValue(childName, value);
-                            that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
-                
-                            updateChildren(that, childName, value);
-                        }
+                    if (!that.visitedFields[childName]) {
+                        //console.log("child of " + name + ": " + childName + "=" + value);
+                        that.setFieldValue(childName, value);
+                        that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, childName), value);
+                    
+                        that.visitedFields[childName] = true;
+                    
+                        updateChildren(that, childName, value);
                     }
                 }
             }
@@ -1559,20 +1639,28 @@
     
     var updateParents = function(that, name) {
         if (name in parents) {
-            var parentName = parents[name];
+            var parentNames = parents[name];
             
-            if (parentName) {
-                var value = that.computeValue(parentName);
-                
-                that.setFieldValue(parentName, value);
-                that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, parentName), value);
-                
-                if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
-                    updateBranchedChildren(that, parentName, name, value);
+            // Update parents breadth-first.
+            
+            parentNames.forEach(function(parentName) {
+                if (!that.visitedFields[parentName]) {
+                    var value = that.computeValue(parentName);
+                    //console.log("parent of " + name + ": " + parentName + "=" + value);
+                    that.setFieldValue(parentName, value);
+                    that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, parentName), value);
+                    
+                    that.visitedFields[parentName] = true;
+                    
+                    if (value === COMPLETE_VALUE || value === ABSENT_VALUE) {
+                        updateChildren(that, parentName, value);
+                    }
                 }
-                
+            });
+                        
+            parentNames.forEach(function(parentName) {
                 updateParents(that, parentName);
-            }
+            });
         }
     };
     
