@@ -1516,6 +1516,23 @@
     
             return result;
         };
+        
+        that.markAllPresent = function() {
+            that.markAll(COMPLETE_VALUE);
+        };
+        
+        that.markAllAbsent = function() {
+            that.markAll(ABSENT_VALUE);
+        };
+        
+        that.markAll = function(value) {
+            var radioInputs = that.radioInputs;
+            
+            for(var fieldName in radioInputs) {
+                that.setFieldValue(fieldName, value);
+                that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, fieldName), value);
+            }
+        };
     };
     
     cspace.osteology.finalInit = function(that) {
@@ -1530,6 +1547,24 @@
     
     cspace.osteology.initForm = function(that) {
         that.form = $("form.csc-osteology-form");
+        
+        that.form.find("#markAllPresentButton").click(function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            
+            if (window.confirm("Are you sure? This will erase all entered completeness data.")) {
+                that.markAllPresent();
+            }
+        });
+        
+        that.form.find("#markAllAbsentButton").click(function() {
+            event.stopPropagation();
+            event.preventDefault();
+            
+            if (window.confirm("Are you sure? This will erase all entered completeness data.")) {
+                that.markAllAbsent();
+            }
+        });
         
         // name: {value: input element, ...}
         that.radioInputs = {};
