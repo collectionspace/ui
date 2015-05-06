@@ -231,6 +231,8 @@
 }
 
 .osteo.dental legend {
+    text-align: center;
+    width: 100%;
     position: relative;
     color: #333333;
 }
@@ -283,7 +285,7 @@
 }
 
 .osteo.dental label {
-    color: rgba(0, 0, 0, .4);
+    color: rgba(0, 0, 0, .3);
     position: absolute;
     font-size: 9px;
 }
@@ -292,7 +294,7 @@
     vertical-align: sub;
 }
 
-.osteo.dental input[type='text'] {
+.osteo.dental fieldset input[type='text'] {
     color: #0033FF;
     width: 100%;
     background: none;
@@ -597,4 +599,16 @@
 .osteo.dental label.Teeth_decid_Ldm2_L {
     left: 132px;
     top: 180px;
+}
+
+.osteo.dental .immVertFrags {
+    position: relative;
+    top: 270px;
+    font-size: 10px;
+}
+
+.osteo.dental .immVertFrags input[type='text'] {
+    width: 2em;
+    text-align: left;
+    padding: 1px 0 0 1px;
 }
