@@ -1953,929 +1953,1020 @@
     </div>
     
     <div class="osteo-row">
-        <table class="osteo vertebrae">
-            <thead>
-                <tr class="sides">
-                    <th></th>
-                    <th class="hspace"></th>
-                    <th colspan="7">Centrum (body)</th>
-                    <th class="hspace"></th>
-                    <th colspan="2"></th>
-                    <th class="hspace"></th>
-                    <th colspan="7">Left arch</th>
-                    <th class="hspace"></th>
-                    <th colspan="7">Right arch</th>
-                </tr>
-                <tr class="labels">
-                    <th></th>
-                    <th class="hspace"></th>
-                    <th></th>
-                    <th class="centrum"><span>#</span></th>
-                    <th class="centrum"><span>&lt;25%</span></th>
-                    <th class="centrum"><span>25-50%</span></th>
-                    <th class="centrum"><span>50-75%</span></th>
-                    <th class="centrum"><span>&gt;75%</span></th>
-                    <th class="centrum complete"><span>compl.</span></th>
-                    <th class="hspace"></th>
-                    <th></th>
-                    <th class="complete"><span>compl.</span></th>
-                    <th class="hspace"></th>
-                    <th class="arch complete"><span>compl.</span></th>
-                    <th><span>&gt;75%</span></th>
-                    <th><span>50-75%</span></th>
-                    <th><span>25-50%</span></th>
-                    <th><span>&lt;25%</span></th>
-                    <th><span>#</span></th>
-                    <th></th>
-                    <th class="hspace"></th>
-                    <th class="arch complete"><span>compl.</span></th>
-                    <th><span>&gt;75%</span></th>
-                    <th><span>50-75%</span></th>
-                    <th><span>25-50%</span></th>
-                    <th><span>&lt;25%</span></th>
-                    <th><span>#</span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input name="Vertebrae_complete" type="radio" value="0"/></td>
-                    <td class="hspace" rowspan="8"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="8"></td>
-                    <td></td>
-                    <td><input name="Vertebrae_complete" type="radio" value="C"></td>
-                    <td class="hspace" rowspan="8"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="8"></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C1_complete" value="0"/></td>
-                    <td colspan="7"></td>
-                    <td class="segment">C1</td>
-                    <td><input type="radio" name="C1_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C1_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C1_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C1_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C1_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C1_L_arch" value="1"/></td>
-                    <td rowspan="7"><input type="text" name="C_L_arch_count"/></td>
-                    <td><input type="radio" name="C1_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C1_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C1_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C1_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C1_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C1_R_arch" value="1"/></td>
-                    <td rowspan="7"><input type="text" name="C_R_arch_count"/></td>
-                    <td><input type="radio" name="C1_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C2_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C2_centrum" value="0"/></td>
-                    <td rowspan="6"><input type="text" name="C_centra_count"/></td>
-                    <td><input type="radio" name="C2_centrum" value="1"/></td>
-                    <td><input type="radio" name="C2_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C2_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C2_centrum" value="3"/></td>
-                    <td><input type="radio" name="C2_centrum" value="C"/></td>
-                    
-                    <td class="segment">C2</td>
-                    <td><input type="radio" name="C2_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C2_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C2_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C2_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C2_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C2_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C2_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C2_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C2_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C2_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C2_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C2_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C2_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C3_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C3_centrum" value="0"/></td>
-                    <td><input type="radio" name="C3_centrum" value="1"/></td>
-                    <td><input type="radio" name="C3_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C3_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C3_centrum" value="3"/></td>
-                    <td><input type="radio" name="C3_centrum" value="C"/></td>
-                    
-                    <td class="segment">C3-6 (~3)</td>
-                    <td><input type="radio" name="C3_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C3_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C3_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C3_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C3_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C3_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C3_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C3_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C3_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C3_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C3_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C3_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C3_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C4_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C4_centrum" value="0"/></td>
-                    <td><input type="radio" name="C4_centrum" value="1"/></td>
-                    <td><input type="radio" name="C4_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C4_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C4_centrum" value="3"/></td>
-                    <td><input type="radio" name="C4_centrum" value="C"/></td>
-                    
-                    <td class="segment">C3-6 (~4)</td>
-                    <td><input type="radio" name="C4_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C4_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C4_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C4_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C4_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C4_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C4_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C4_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C4_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C4_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C4_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C4_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C4_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C5_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C5_centrum" value="0"/></td>
-                    <td><input type="radio" name="C5_centrum" value="1"/></td>
-                    <td><input type="radio" name="C5_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C5_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C5_centrum" value="3"/></td>
-                    <td><input type="radio" name="C5_centrum" value="C"/></td>
-                    
-                    <td class="segment">C3-6 (~5)</td>
-                    <td><input type="radio" name="C5_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C5_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C5_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C5_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C5_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C5_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C5_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C5_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C5_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C5_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C5_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C5_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C5_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C6_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C6_centrum" value="0"/></td>
-                    <td><input type="radio" name="C6_centrum" value="1"/></td>
-                    <td><input type="radio" name="C6_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C6_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C6_centrum" value="3"/></td>
-                    <td><input type="radio" name="C6_centrum" value="C"/></td>
-                    
-                    <td class="segment">C3-6 (~6)</td>
-                    <td><input type="radio" name="C6_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C6_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C6_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C6_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C6_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C6_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C6_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C6_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C6_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C6_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C6_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C6_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C6_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="C7_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="C7_centrum" value="0"/></td>
-                    <td><input type="radio" name="C7_centrum" value="1"/></td>
-                    <td><input type="radio" name="C7_centrum" value="2a"/></td>
-                    <td><input type="radio" name="C7_centrum" value="2b"/></td>
-                    <td><input type="radio" name="C7_centrum" value="3"/></td>
-                    <td><input type="radio" name="C7_centrum" value="C"/></td>
-                    
-                    <td class="segment">C7</td>
-                    <td><input type="radio" name="C7_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="C7_L_arch" value="C"/></td>
-                    <td><input type="radio" name="C7_L_arch" value="3"/></td>
-                    <td><input type="radio" name="C7_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="C7_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="C7_L_arch" value="1"/></td>
-                    <td><input type="radio" name="C7_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="C7_R_arch" value="C"/></td>
-                    <td><input type="radio" name="C7_R_arch" value="3"/></td>
-                    <td><input type="radio" name="C7_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="C7_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="C7_R_arch" value="1"/></td>
-                    <td><input type="radio" name="C7_R_arch" value="0"/></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td class="hspace" rowspan="13"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="13"></td>
-                    <td colspan="2"></td>
-                    <td class="hspace" rowspan="13"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="13"></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T1_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T1_centrum" value="0"/></td>
-                    <td rowspan="12"><input type="text" name="T_centra_count"/></td>
-                    <td><input type="radio" name="T1_centrum" value="1"/></td>
-                    <td><input type="radio" name="T1_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T1_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T1_centrum" value="3"/></td>
-                    <td><input type="radio" name="T1_centrum" value="C"/></td>
-                    
-                    <td class="segment">T1</td>
-                    <td><input type="radio" name="T1_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T1_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T1_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T1_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T1_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T1_L_arch" value="1"/></td>
-                    <td rowspan="12"><input type="text" name="T_L_arch_count"/></td>
-                    <td><input type="radio" name="T1_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T1_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T1_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T1_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T1_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T1_R_arch" value="1"/></td>
-                    <td rowspan="12"><input type="text" name="T_R_arch_count"/></td>
-                    <td><input type="radio" name="T1_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T2_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T2_centrum" value="0"/></td>
-                    <td><input type="radio" name="T2_centrum" value="1"/></td>
-                    <td><input type="radio" name="T2_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T2_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T2_centrum" value="3"/></td>
-                    <td><input type="radio" name="T2_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~2)</td>
-                    <td><input type="radio" name="T2_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T2_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T2_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T2_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T2_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T2_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T2_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T2_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T2_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T2_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T2_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T2_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T2_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T3_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T3_centrum" value="0"/></td>
-                    <td><input type="radio" name="T3_centrum" value="1"/></td>
-                    <td><input type="radio" name="T3_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T3_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T3_centrum" value="3"/></td>
-                    <td><input type="radio" name="T3_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~3)</td>
-                    <td><input type="radio" name="T3_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T3_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T3_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T3_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T3_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T3_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T3_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T3_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T3_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T3_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T3_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T3_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T3_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T4_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T4_centrum" value="0"/></td>
-                    <td><input type="radio" name="T4_centrum" value="1"/></td>
-                    <td><input type="radio" name="T4_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T4_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T4_centrum" value="3"/></td>
-                    <td><input type="radio" name="T4_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~4)</td>
-                    <td><input type="radio" name="T4_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T4_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T4_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T4_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T4_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T4_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T4_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T4_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T4_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T4_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T4_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T4_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T4_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T5_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T5_centrum" value="0"/></td>
-                    <td><input type="radio" name="T5_centrum" value="1"/></td>
-                    <td><input type="radio" name="T5_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T5_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T5_centrum" value="3"/></td>
-                    <td><input type="radio" name="T5_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~5)</td>
-                    <td><input type="radio" name="T5_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T5_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T5_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T5_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T5_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T5_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T5_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T5_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T5_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T5_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T5_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T5_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T5_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T6_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T6_centrum" value="0"/></td>
-                    <td><input type="radio" name="T6_centrum" value="1"/></td>
-                    <td><input type="radio" name="T6_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T6_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T6_centrum" value="3"/></td>
-                    <td><input type="radio" name="T6_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~6)</td>
-                    <td><input type="radio" name="T6_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T6_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T6_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T6_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T6_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T6_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T6_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T6_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T6_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T6_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T6_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T6_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T6_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T7_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T7_centrum" value="0"/></td>
-                    <td><input type="radio" name="T7_centrum" value="1"/></td>
-                    <td><input type="radio" name="T7_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T7_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T7_centrum" value="3"/></td>
-                    <td><input type="radio" name="T7_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~7)</td>
-                    <td><input type="radio" name="T7_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T7_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T7_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T7_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T7_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T7_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T7_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T7_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T7_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T7_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T7_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T7_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T7_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T8_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T8_centrum" value="0"/></td>
-                    <td><input type="radio" name="T8_centrum" value="1"/></td>
-                    <td><input type="radio" name="T8_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T8_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T8_centrum" value="3"/></td>
-                    <td><input type="radio" name="T8_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~8)</td>
-                    <td><input type="radio" name="T8_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T8_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T8_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T8_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T8_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T8_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T8_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T8_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T8_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T8_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T8_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T8_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T8_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T9_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T9_centrum" value="0"/></td>
-                    <td><input type="radio" name="T9_centrum" value="1"/></td>
-                    <td><input type="radio" name="T9_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T9_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T9_centrum" value="3"/></td>
-                    <td><input type="radio" name="T9_centrum" value="C"/></td>
-                    
-                    <td class="segment">T2-9 (~9)</td>
-                    <td><input type="radio" name="T9_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T9_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T9_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T9_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T9_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T9_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T9_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T9_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T9_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T9_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T9_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T9_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T9_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T10_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T10_centrum" value="0"/></td>
-                    <td><input type="radio" name="T10_centrum" value="1"/></td>
-                    <td><input type="radio" name="T10_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T10_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T10_centrum" value="3"/></td>
-                    <td><input type="radio" name="T10_centrum" value="C"/></td>
-                    
-                    <td class="segment">T10</td>
-                    <td><input type="radio" name="T10_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T10_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T10_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T10_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T10_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T10_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T10_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T10_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T10_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T10_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T10_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T10_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T10_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T11_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T11_centrum" value="0"/></td>
-                    <td><input type="radio" name="T11_centrum" value="1"/></td>
-                    <td><input type="radio" name="T11_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T11_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T11_centrum" value="3"/></td>
-                    <td><input type="radio" name="T11_centrum" value="C"/></td>
-                    
-                    <td class="segment">T11</td>
-                    <td><input type="radio" name="T11_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T11_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T11_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T11_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T11_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T11_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T11_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T11_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T11_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T11_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T11_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T11_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T11_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="T12_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="T12_centrum" value="0"/></td>
-                    <td><input type="radio" name="T12_centrum" value="1"/></td>
-                    <td><input type="radio" name="T12_centrum" value="2a"/></td>
-                    <td><input type="radio" name="T12_centrum" value="2b"/></td>
-                    <td><input type="radio" name="T12_centrum" value="3"/></td>
-                    <td><input type="radio" name="T12_centrum" value="C"/></td>
-                    
-                    <td class="segment">T12</td>
-                    <td><input type="radio" name="T12_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="T12_L_arch" value="C"/></td>
-                    <td><input type="radio" name="T12_L_arch" value="3"/></td>
-                    <td><input type="radio" name="T12_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="T12_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="T12_L_arch" value="1"/></td>
-                    <td><input type="radio" name="T12_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="T12_R_arch" value="C"/></td>
-                    <td><input type="radio" name="T12_R_arch" value="3"/></td>
-                    <td><input type="radio" name="T12_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="T12_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="T12_R_arch" value="1"/></td>
-                    <td><input type="radio" name="T12_R_arch" value="0"/></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td class="hspace" rowspan="6"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="6"></td>
-                    <td colspan="2"></td>
-                    <td class="hspace" rowspan="6"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="6"></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="L1_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="L1_centrum" value="0"/></td>
-                    <td rowspan="5"><input type="text" name="L_centra_count"/></td>
-                    <td><input type="radio" name="L1_centrum" value="1"/></td>
-                    <td><input type="radio" name="L1_centrum" value="2a"/></td>
-                    <td><input type="radio" name="L1_centrum" value="2b"/></td>
-                    <td><input type="radio" name="L1_centrum" value="3"/></td>
-                    <td><input type="radio" name="L1_centrum" value="C"/></td>
-                    
-                    <td class="segment">L1</td>
-                    <td><input type="radio" name="L1_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="L1_L_arch" value="C"/></td>
-                    <td><input type="radio" name="L1_L_arch" value="3"/></td>
-                    <td><input type="radio" name="L1_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="L1_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="L1_L_arch" value="1"/></td>
-                    <td rowspan="5"><input type="text" name="L_L_arch_count"/></td>
-                    <td><input type="radio" name="L1_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="L1_R_arch" value="C"/></td>
-                    <td><input type="radio" name="L1_R_arch" value="3"/></td>
-                    <td><input type="radio" name="L1_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="L1_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="L1_R_arch" value="1"/></td>
-                    <td rowspan="5"><input type="text" name="L_R_arch_count"/></td>
-                    <td><input type="radio" name="L1_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="L2_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="L2_centrum" value="0"/></td>
-                    <td><input type="radio" name="L2_centrum" value="1"/></td>
-                    <td><input type="radio" name="L2_centrum" value="2a"/></td>
-                    <td><input type="radio" name="L2_centrum" value="2b"/></td>
-                    <td><input type="radio" name="L2_centrum" value="3"/></td>
-                    <td><input type="radio" name="L2_centrum" value="C"/></td>
-                    
-                    <td class="segment">L2</td>
-                    <td><input type="radio" name="L2_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="L2_L_arch" value="C"/></td>
-                    <td><input type="radio" name="L2_L_arch" value="3"/></td>
-                    <td><input type="radio" name="L2_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="L2_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="L2_L_arch" value="1"/></td>
-                    <td><input type="radio" name="L2_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="L2_R_arch" value="C"/></td>
-                    <td><input type="radio" name="L2_R_arch" value="3"/></td>
-                    <td><input type="radio" name="L2_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="L2_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="L2_R_arch" value="1"/></td>
-                    <td><input type="radio" name="L2_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="L3_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="L3_centrum" value="0"/></td>
-                    <td><input type="radio" name="L3_centrum" value="1"/></td>
-                    <td><input type="radio" name="L3_centrum" value="2a"/></td>
-                    <td><input type="radio" name="L3_centrum" value="2b"/></td>
-                    <td><input type="radio" name="L3_centrum" value="3"/></td>
-                    <td><input type="radio" name="L3_centrum" value="C"/></td>
-                    
-                    <td class="segment">L3</td>
-                    <td><input type="radio" name="L3_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="L3_L_arch" value="C"/></td>
-                    <td><input type="radio" name="L3_L_arch" value="3"/></td>
-                    <td><input type="radio" name="L3_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="L3_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="L3_L_arch" value="1"/></td>
-                    <td><input type="radio" name="L3_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="L3_R_arch" value="C"/></td>
-                    <td><input type="radio" name="L3_R_arch" value="3"/></td>
-                    <td><input type="radio" name="L3_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="L3_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="L3_R_arch" value="1"/></td>
-                    <td><input type="radio" name="L3_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="L4_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="L4_centrum" value="0"/></td>
-                    <td><input type="radio" name="L4_centrum" value="1"/></td>
-                    <td><input type="radio" name="L4_centrum" value="2a"/></td>
-                    <td><input type="radio" name="L4_centrum" value="2b"/></td>
-                    <td><input type="radio" name="L4_centrum" value="3"/></td>
-                    <td><input type="radio" name="L4_centrum" value="C"/></td>
-                    
-                    <td class="segment">L4</td>
-                    <td><input type="radio" name="L4_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="L4_L_arch" value="C"/></td>
-                    <td><input type="radio" name="L4_L_arch" value="3"/></td>
-                    <td><input type="radio" name="L4_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="L4_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="L4_L_arch" value="1"/></td>
-                    <td><input type="radio" name="L4_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="L4_R_arch" value="C"/></td>
-                    <td><input type="radio" name="L4_R_arch" value="3"/></td>
-                    <td><input type="radio" name="L4_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="L4_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="L4_R_arch" value="1"/></td>
-                    <td><input type="radio" name="L4_R_arch" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="L5_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="L5_centrum" value="0"/></td>
-                    <td><input type="radio" name="L5_centrum" value="1"/></td>
-                    <td><input type="radio" name="L5_centrum" value="2a"/></td>
-                    <td><input type="radio" name="L5_centrum" value="2b"/></td>
-                    <td><input type="radio" name="L5_centrum" value="3"/></td>
-                    <td><input type="radio" name="L5_centrum" value="C"/></td>
-                    
-                    <td class="segment">L5</td>
-                    <td><input type="radio" name="L5_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="L5_L_arch" value="C"/></td>
-                    <td><input type="radio" name="L5_L_arch" value="3"/></td>
-                    <td><input type="radio" name="L5_L_arch" value="2b"/></td>
-                    <td><input type="radio" name="L5_L_arch" value="2a"/></td>
-                    <td><input type="radio" name="L5_L_arch" value="1"/></td>
-                    <td><input type="radio" name="L5_L_arch" value="0"/></td>
-                    
-                    <td><input type="radio" name="L5_R_arch" value="C"/></td>
-                    <td><input type="radio" name="L5_R_arch" value="3"/></td>
-                    <td><input type="radio" name="L5_R_arch" value="2b"/></td>
-                    <td><input type="radio" name="L5_R_arch" value="2a"/></td>
-                    <td><input type="radio" name="L5_R_arch" value="1"/></td>
-                    <td><input type="radio" name="L5_R_arch" value="0"/></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td class="hspace" rowspan="8"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="8"></td>
-                    <td colspan="2"></td>
-                    <td class="hspace" rowspan="7"></td>
-                    <td colspan="7"></td>
-                    <td class="hspace" rowspan="7"></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="Sacrum_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="Sacrum" value="0"/></td>
-                    <td rowspan="6"><input type="text" name="S_centra_count"/></td>
-                    <td><input type="radio" name="Sacrum" value="1"/></td>
-                    <td><input type="radio" name="Sacrum" value="2a"/></td>
-                    <td><input type="radio" name="Sacrum" value="2b"/></td>
-                    <td><input type="radio" name="Sacrum" value="3"/></td>
-                    <td><input type="radio" name="Sacrum" value="C"/></td>
-                    
-                    <td class="segment">Sacrum</td>
-                    <td><input type="radio" name="Sacrum_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="Sacrum_L_alae" value="C"/></td>
-                    <td><input type="radio" name="Sacrum_L_alae" value="3"/></td>
-                    <td><input type="radio" name="Sacrum_L_alae" value="2b"/></td>
-                    <td><input type="radio" name="Sacrum_L_alae" value="2a"/></td>
-                    <td><input type="radio" name="Sacrum_L_alae" value="1"/></td>
-                    <td rowspan="6"><input type="text" name="S_L_ala_count"/></td>
-                    <td><input type="radio" name="Sacrum_L_alae" value="0"/></td>
-                    
-                    <td><input type="radio" name="Sacrum_R_alae" value="C"/></td>
-                    <td><input type="radio" name="Sacrum_R_alae" value="3"/></td>
-                    <td><input type="radio" name="Sacrum_R_alae" value="2b"/></td>
-                    <td><input type="radio" name="Sacrum_R_alae" value="2a"/></td>
-                    <td><input type="radio" name="Sacrum_R_alae" value="1"/></td>
-                    <td rowspan="6"><input type="text" name="S_R_ala_count"/></td>
-                    <td><input type="radio" name="Sacrum_R_alae" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="S1_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="S1_centrum" value="0"/></td>
-                    <td><input type="radio" name="S1_centrum" value="1"/></td>
-                    <td><input type="radio" name="S1_centrum" value="2a"/></td>
-                    <td><input type="radio" name="S1_centrum" value="2b"/></td>
-                    <td><input type="radio" name="S1_centrum" value="3"/></td>
-                    <td><input type="radio" name="S1_centrum" value="C"/></td>
-                    
-                    <td class="segment">S1</td>
-                    <td><input type="radio" name="S1_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="S1_L_ala" value="C"/></td>
-                    <td><input type="radio" name="S1_L_ala" value="3"/></td>
-                    <td><input type="radio" name="S1_L_ala" value="2b"/></td>
-                    <td><input type="radio" name="S1_L_ala" value="2a"/></td>
-                    <td><input type="radio" name="S1_L_ala" value="1"/></td>
-                    <td><input type="radio" name="S1_L_ala" value="0"/></td>
-                    
-                    <td><input type="radio" name="S1_R_ala" value="C"/></td>
-                    <td><input type="radio" name="S1_R_ala" value="3"/></td>
-                    <td><input type="radio" name="S1_R_ala" value="2b"/></td>
-                    <td><input type="radio" name="S1_R_ala" value="2a"/></td>
-                    <td><input type="radio" name="S1_R_ala" value="1"/></td>
-                    <td><input type="radio" name="S1_R_ala" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="S2_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="S2_centrum" value="0"/></td>
-                    <td><input type="radio" name="S2_centrum" value="1"/></td>
-                    <td><input type="radio" name="S2_centrum" value="2a"/></td>
-                    <td><input type="radio" name="S2_centrum" value="2b"/></td>
-                    <td><input type="radio" name="S2_centrum" value="3"/></td>
-                    <td><input type="radio" name="S2_centrum" value="C"/></td>
-                    
-                    <td class="segment">S2</td>
-                    <td><input type="radio" name="S2_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="S2_L_ala" value="C"/></td>
-                    <td><input type="radio" name="S2_L_ala" value="3"/></td>
-                    <td><input type="radio" name="S2_L_ala" value="2b"/></td>
-                    <td><input type="radio" name="S2_L_ala" value="2a"/></td>
-                    <td><input type="radio" name="S2_L_ala" value="1"/></td>
-                    <td><input type="radio" name="S2_L_ala" value="0"/></td>
-                    
-                    <td><input type="radio" name="S2_R_ala" value="C"/></td>
-                    <td><input type="radio" name="S2_R_ala" value="3"/></td>
-                    <td><input type="radio" name="S2_R_ala" value="2b"/></td>
-                    <td><input type="radio" name="S2_R_ala" value="2a"/></td>
-                    <td><input type="radio" name="S2_R_ala" value="1"/></td>
-                    <td><input type="radio" name="S2_R_ala" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="S3_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="S3_centrum" value="0"/></td>
-                    <td><input type="radio" name="S3_centrum" value="1"/></td>
-                    <td><input type="radio" name="S3_centrum" value="2a"/></td>
-                    <td><input type="radio" name="S3_centrum" value="2b"/></td>
-                    <td><input type="radio" name="S3_centrum" value="3"/></td>
-                    <td><input type="radio" name="S3_centrum" value="C"/></td>
-                    
-                    <td class="segment">S3</td>
-                    <td><input type="radio" name="S3_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="S3_L_ala" value="C"/></td>
-                    <td><input type="radio" name="S3_L_ala" value="3"/></td>
-                    <td><input type="radio" name="S3_L_ala" value="2b"/></td>
-                    <td><input type="radio" name="S3_L_ala" value="2a"/></td>
-                    <td><input type="radio" name="S3_L_ala" value="1"/></td>
-                    <td><input type="radio" name="S3_L_ala" value="0"/></td>
-                    
-                    <td><input type="radio" name="S3_R_ala" value="C"/></td>
-                    <td><input type="radio" name="S3_R_ala" value="3"/></td>
-                    <td><input type="radio" name="S3_R_ala" value="2b"/></td>
-                    <td><input type="radio" name="S3_R_ala" value="2a"/></td>
-                    <td><input type="radio" name="S3_R_ala" value="1"/></td>
-                    <td><input type="radio" name="S3_R_ala" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="S4_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="S4_centrum" value="0"/></td>
-                    <td><input type="radio" name="S4_centrum" value="1"/></td>
-                    <td><input type="radio" name="S4_centrum" value="2a"/></td>
-                    <td><input type="radio" name="S4_centrum" value="2b"/></td>
-                    <td><input type="radio" name="S4_centrum" value="3"/></td>
-                    <td><input type="radio" name="S4_centrum" value="C"/></td>
-                    
-                    <td class="segment">S4</td>
-                    <td><input type="radio" name="S4_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="S4_L_ala" value="C"/></td>
-                    <td><input type="radio" name="S4_L_ala" value="3"/></td>
-                    <td><input type="radio" name="S4_L_ala" value="2b"/></td>
-                    <td><input type="radio" name="S4_L_ala" value="2a"/></td>
-                    <td><input type="radio" name="S4_L_ala" value="1"/></td>
-                    <td><input type="radio" name="S4_L_ala" value="0"/></td>
-                    
-                    <td><input type="radio" name="S4_R_ala" value="C"/></td>
-                    <td><input type="radio" name="S4_R_ala" value="3"/></td>
-                    <td><input type="radio" name="S4_R_ala" value="2b"/></td>
-                    <td><input type="radio" name="S4_R_ala" value="2a"/></td>
-                    <td><input type="radio" name="S4_R_ala" value="1"/></td>
-                    <td><input type="radio" name="S4_R_ala" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="S5_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="S5_centrum" value="0"/></td>
-                    <td><input type="radio" name="S5_centrum" value="1"/></td>
-                    <td><input type="radio" name="S5_centrum" value="2a"/></td>
-                    <td><input type="radio" name="S5_centrum" value="2b"/></td>
-                    <td><input type="radio" name="S5_centrum" value="3"/></td>
-                    <td><input type="radio" name="S5_centrum" value="C"/></td>
-                    
-                    <td class="segment">S5</td>
-                    <td><input type="radio" name="S5_complete" value="C"/></td>
-                    
-                    <td><input type="radio" name="S5_L_ala" value="C"/></td>
-                    <td><input type="radio" name="S5_L_ala" value="3"/></td>
-                    <td><input type="radio" name="S5_L_ala" value="2b"/></td>
-                    <td><input type="radio" name="S5_L_ala" value="2a"/></td>
-                    <td><input type="radio" name="S5_L_ala" value="1"/></td>
-                    <td><input type="radio" name="S5_L_ala" value="0"/></td>
-                    
-                    <td><input type="radio" name="S5_R_ala" value="C"/></td>
-                    <td><input type="radio" name="S5_R_ala" value="3"/></td>
-                    <td><input type="radio" name="S5_R_ala" value="2b"/></td>
-                    <td><input type="radio" name="S5_R_ala" value="2a"/></td>
-                    <td><input type="radio" name="S5_R_ala" value="1"/></td>
-                    <td><input type="radio" name="S5_R_ala" value="0"/></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="Coccyx_complete" value="0"/></td>
-                    
-                    <td><input type="radio" name="Coccyx" value="0"/></td>
-                    <td></td>
-                    <td><input type="radio" name="Coccyx" value="1"/></td>
-                    <td><input type="radio" name="Coccyx" value="2a"/></td>
-                    <td><input type="radio" name="Coccyx" value="2b"/></td>
-                    <td><input type="radio" name="Coccyx" value="3"/></td>
-                    <td><input type="radio" name="Coccyx" value="C"/></td>
-                    
-                    <td class="segment">Coccyx</td>
-                    <td><input type="radio" name="Coccyx_complete" value="C"/></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="column">
+            <table class="osteo vertebrae">
+                <thead>
+                    <tr class="sides">
+                        <th></th>
+                        <th class="hspace"></th>
+                        <th colspan="7">Centrum (body)</th>
+                        <th class="hspace"></th>
+                        <th colspan="2"></th>
+                        <th class="hspace"></th>
+                        <th colspan="7">Left arch</th>
+                        <th class="hspace"></th>
+                        <th colspan="7">Right arch</th>
+                    </tr>
+                    <tr class="labels">
+                        <th></th>
+                        <th class="hspace"></th>
+                        <th></th>
+                        <th class="centrum"><span>#</span></th>
+                        <th class="centrum"><span>&lt;25%</span></th>
+                        <th class="centrum"><span>25-50%</span></th>
+                        <th class="centrum"><span>50-75%</span></th>
+                        <th class="centrum"><span>&gt;75%</span></th>
+                        <th class="centrum complete"><span>compl.</span></th>
+                        <th class="hspace"></th>
+                        <th></th>
+                        <th class="complete"><span>compl.</span></th>
+                        <th class="hspace"></th>
+                        <th class="arch complete"><span>compl.</span></th>
+                        <th><span>&gt;75%</span></th>
+                        <th><span>50-75%</span></th>
+                        <th><span>25-50%</span></th>
+                        <th><span>&lt;25%</span></th>
+                        <th><span>#</span></th>
+                        <th></th>
+                        <th class="hspace"></th>
+                        <th class="arch complete"><span>compl.</span></th>
+                        <th><span>&gt;75%</span></th>
+                        <th><span>50-75%</span></th>
+                        <th><span>25-50%</span></th>
+                        <th><span>&lt;25%</span></th>
+                        <th><span>#</span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input name="Vertebrae_complete" type="radio" value="0"/></td>
+                        <td class="hspace" rowspan="8"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="8"></td>
+                        <td></td>
+                        <td><input name="Vertebrae_complete" type="radio" value="C"></td>
+                        <td class="hspace" rowspan="8"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="8"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C1_complete" value="0"/></td>
+                        <td colspan="7"></td>
+                        <td class="segment">C1</td>
+                        <td><input type="radio" name="C1_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C1_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C1_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C1_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C1_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C1_L_arch" value="1"/></td>
+                        <td rowspan="7"><input type="text" name="C_L_arch_count"/></td>
+                        <td><input type="radio" name="C1_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C1_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C1_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C1_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C1_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C1_R_arch" value="1"/></td>
+                        <td rowspan="7"><input type="text" name="C_R_arch_count"/></td>
+                        <td><input type="radio" name="C1_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C2_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C2_centrum" value="0"/></td>
+                        <td rowspan="6"><input type="text" name="C_centra_count"/></td>
+                        <td><input type="radio" name="C2_centrum" value="1"/></td>
+                        <td><input type="radio" name="C2_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C2_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C2_centrum" value="3"/></td>
+                        <td><input type="radio" name="C2_centrum" value="C"/></td>
+                    
+                        <td class="segment">C2</td>
+                        <td><input type="radio" name="C2_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C2_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C2_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C2_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C2_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C2_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C2_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C2_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C2_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C2_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C2_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C2_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C2_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C3_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C3_centrum" value="0"/></td>
+                        <td><input type="radio" name="C3_centrum" value="1"/></td>
+                        <td><input type="radio" name="C3_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C3_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C3_centrum" value="3"/></td>
+                        <td><input type="radio" name="C3_centrum" value="C"/></td>
+                    
+                        <td class="segment">C3-6 (~3)</td>
+                        <td><input type="radio" name="C3_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C3_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C3_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C3_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C3_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C3_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C3_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C3_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C3_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C3_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C3_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C3_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C3_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C4_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C4_centrum" value="0"/></td>
+                        <td><input type="radio" name="C4_centrum" value="1"/></td>
+                        <td><input type="radio" name="C4_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C4_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C4_centrum" value="3"/></td>
+                        <td><input type="radio" name="C4_centrum" value="C"/></td>
+                    
+                        <td class="segment">C3-6 (~4)</td>
+                        <td><input type="radio" name="C4_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C4_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C4_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C4_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C4_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C4_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C4_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C4_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C4_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C4_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C4_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C4_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C4_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C5_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C5_centrum" value="0"/></td>
+                        <td><input type="radio" name="C5_centrum" value="1"/></td>
+                        <td><input type="radio" name="C5_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C5_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C5_centrum" value="3"/></td>
+                        <td><input type="radio" name="C5_centrum" value="C"/></td>
+                    
+                        <td class="segment">C3-6 (~5)</td>
+                        <td><input type="radio" name="C5_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C5_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C5_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C5_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C5_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C5_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C5_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C5_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C5_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C5_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C5_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C5_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C5_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C6_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C6_centrum" value="0"/></td>
+                        <td><input type="radio" name="C6_centrum" value="1"/></td>
+                        <td><input type="radio" name="C6_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C6_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C6_centrum" value="3"/></td>
+                        <td><input type="radio" name="C6_centrum" value="C"/></td>
+                    
+                        <td class="segment">C3-6 (~6)</td>
+                        <td><input type="radio" name="C6_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C6_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C6_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C6_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C6_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C6_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C6_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C6_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C6_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C6_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C6_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C6_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C6_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="C7_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="C7_centrum" value="0"/></td>
+                        <td><input type="radio" name="C7_centrum" value="1"/></td>
+                        <td><input type="radio" name="C7_centrum" value="2a"/></td>
+                        <td><input type="radio" name="C7_centrum" value="2b"/></td>
+                        <td><input type="radio" name="C7_centrum" value="3"/></td>
+                        <td><input type="radio" name="C7_centrum" value="C"/></td>
+                    
+                        <td class="segment">C7</td>
+                        <td><input type="radio" name="C7_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="C7_L_arch" value="C"/></td>
+                        <td><input type="radio" name="C7_L_arch" value="3"/></td>
+                        <td><input type="radio" name="C7_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="C7_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="C7_L_arch" value="1"/></td>
+                        <td><input type="radio" name="C7_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="C7_R_arch" value="C"/></td>
+                        <td><input type="radio" name="C7_R_arch" value="3"/></td>
+                        <td><input type="radio" name="C7_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="C7_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="C7_R_arch" value="1"/></td>
+                        <td><input type="radio" name="C7_R_arch" value="0"/></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td class="hspace" rowspan="13"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="13"></td>
+                        <td colspan="2"></td>
+                        <td class="hspace" rowspan="13"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="13"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T1_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T1_centrum" value="0"/></td>
+                        <td rowspan="12"><input type="text" name="T_centra_count"/></td>
+                        <td><input type="radio" name="T1_centrum" value="1"/></td>
+                        <td><input type="radio" name="T1_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T1_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T1_centrum" value="3"/></td>
+                        <td><input type="radio" name="T1_centrum" value="C"/></td>
+                    
+                        <td class="segment">T1</td>
+                        <td><input type="radio" name="T1_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T1_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T1_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T1_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T1_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T1_L_arch" value="1"/></td>
+                        <td rowspan="12"><input type="text" name="T_L_arch_count"/></td>
+                        <td><input type="radio" name="T1_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T1_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T1_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T1_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T1_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T1_R_arch" value="1"/></td>
+                        <td rowspan="12"><input type="text" name="T_R_arch_count"/></td>
+                        <td><input type="radio" name="T1_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T2_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T2_centrum" value="0"/></td>
+                        <td><input type="radio" name="T2_centrum" value="1"/></td>
+                        <td><input type="radio" name="T2_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T2_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T2_centrum" value="3"/></td>
+                        <td><input type="radio" name="T2_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~2)</td>
+                        <td><input type="radio" name="T2_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T2_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T2_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T2_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T2_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T2_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T2_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T2_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T2_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T2_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T2_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T2_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T2_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T3_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T3_centrum" value="0"/></td>
+                        <td><input type="radio" name="T3_centrum" value="1"/></td>
+                        <td><input type="radio" name="T3_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T3_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T3_centrum" value="3"/></td>
+                        <td><input type="radio" name="T3_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~3)</td>
+                        <td><input type="radio" name="T3_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T3_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T3_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T3_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T3_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T3_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T3_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T3_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T3_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T3_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T3_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T3_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T3_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T4_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T4_centrum" value="0"/></td>
+                        <td><input type="radio" name="T4_centrum" value="1"/></td>
+                        <td><input type="radio" name="T4_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T4_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T4_centrum" value="3"/></td>
+                        <td><input type="radio" name="T4_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~4)</td>
+                        <td><input type="radio" name="T4_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T4_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T4_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T4_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T4_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T4_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T4_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T4_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T4_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T4_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T4_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T4_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T4_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T5_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T5_centrum" value="0"/></td>
+                        <td><input type="radio" name="T5_centrum" value="1"/></td>
+                        <td><input type="radio" name="T5_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T5_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T5_centrum" value="3"/></td>
+                        <td><input type="radio" name="T5_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~5)</td>
+                        <td><input type="radio" name="T5_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T5_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T5_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T5_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T5_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T5_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T5_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T5_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T5_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T5_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T5_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T5_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T5_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T6_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T6_centrum" value="0"/></td>
+                        <td><input type="radio" name="T6_centrum" value="1"/></td>
+                        <td><input type="radio" name="T6_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T6_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T6_centrum" value="3"/></td>
+                        <td><input type="radio" name="T6_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~6)</td>
+                        <td><input type="radio" name="T6_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T6_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T6_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T6_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T6_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T6_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T6_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T6_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T6_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T6_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T6_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T6_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T6_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T7_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T7_centrum" value="0"/></td>
+                        <td><input type="radio" name="T7_centrum" value="1"/></td>
+                        <td><input type="radio" name="T7_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T7_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T7_centrum" value="3"/></td>
+                        <td><input type="radio" name="T7_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~7)</td>
+                        <td><input type="radio" name="T7_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T7_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T7_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T7_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T7_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T7_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T7_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T7_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T7_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T7_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T7_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T7_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T7_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T8_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T8_centrum" value="0"/></td>
+                        <td><input type="radio" name="T8_centrum" value="1"/></td>
+                        <td><input type="radio" name="T8_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T8_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T8_centrum" value="3"/></td>
+                        <td><input type="radio" name="T8_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~8)</td>
+                        <td><input type="radio" name="T8_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T8_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T8_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T8_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T8_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T8_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T8_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T8_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T8_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T8_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T8_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T8_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T8_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T9_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T9_centrum" value="0"/></td>
+                        <td><input type="radio" name="T9_centrum" value="1"/></td>
+                        <td><input type="radio" name="T9_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T9_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T9_centrum" value="3"/></td>
+                        <td><input type="radio" name="T9_centrum" value="C"/></td>
+                    
+                        <td class="segment">T2-9 (~9)</td>
+                        <td><input type="radio" name="T9_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T9_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T9_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T9_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T9_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T9_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T9_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T9_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T9_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T9_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T9_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T9_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T9_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T10_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T10_centrum" value="0"/></td>
+                        <td><input type="radio" name="T10_centrum" value="1"/></td>
+                        <td><input type="radio" name="T10_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T10_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T10_centrum" value="3"/></td>
+                        <td><input type="radio" name="T10_centrum" value="C"/></td>
+                    
+                        <td class="segment">T10</td>
+                        <td><input type="radio" name="T10_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T10_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T10_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T10_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T10_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T10_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T10_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T10_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T10_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T10_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T10_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T10_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T10_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T11_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T11_centrum" value="0"/></td>
+                        <td><input type="radio" name="T11_centrum" value="1"/></td>
+                        <td><input type="radio" name="T11_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T11_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T11_centrum" value="3"/></td>
+                        <td><input type="radio" name="T11_centrum" value="C"/></td>
+                    
+                        <td class="segment">T11</td>
+                        <td><input type="radio" name="T11_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T11_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T11_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T11_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T11_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T11_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T11_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T11_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T11_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T11_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T11_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T11_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T11_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="T12_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="T12_centrum" value="0"/></td>
+                        <td><input type="radio" name="T12_centrum" value="1"/></td>
+                        <td><input type="radio" name="T12_centrum" value="2a"/></td>
+                        <td><input type="radio" name="T12_centrum" value="2b"/></td>
+                        <td><input type="radio" name="T12_centrum" value="3"/></td>
+                        <td><input type="radio" name="T12_centrum" value="C"/></td>
+                    
+                        <td class="segment">T12</td>
+                        <td><input type="radio" name="T12_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="T12_L_arch" value="C"/></td>
+                        <td><input type="radio" name="T12_L_arch" value="3"/></td>
+                        <td><input type="radio" name="T12_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="T12_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="T12_L_arch" value="1"/></td>
+                        <td><input type="radio" name="T12_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="T12_R_arch" value="C"/></td>
+                        <td><input type="radio" name="T12_R_arch" value="3"/></td>
+                        <td><input type="radio" name="T12_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="T12_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="T12_R_arch" value="1"/></td>
+                        <td><input type="radio" name="T12_R_arch" value="0"/></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td class="hspace" rowspan="6"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="6"></td>
+                        <td colspan="2"></td>
+                        <td class="hspace" rowspan="6"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="6"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="L1_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="L1_centrum" value="0"/></td>
+                        <td rowspan="5"><input type="text" name="L_centra_count"/></td>
+                        <td><input type="radio" name="L1_centrum" value="1"/></td>
+                        <td><input type="radio" name="L1_centrum" value="2a"/></td>
+                        <td><input type="radio" name="L1_centrum" value="2b"/></td>
+                        <td><input type="radio" name="L1_centrum" value="3"/></td>
+                        <td><input type="radio" name="L1_centrum" value="C"/></td>
+                    
+                        <td class="segment">L1</td>
+                        <td><input type="radio" name="L1_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="L1_L_arch" value="C"/></td>
+                        <td><input type="radio" name="L1_L_arch" value="3"/></td>
+                        <td><input type="radio" name="L1_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="L1_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="L1_L_arch" value="1"/></td>
+                        <td rowspan="5"><input type="text" name="L_L_arch_count"/></td>
+                        <td><input type="radio" name="L1_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="L1_R_arch" value="C"/></td>
+                        <td><input type="radio" name="L1_R_arch" value="3"/></td>
+                        <td><input type="radio" name="L1_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="L1_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="L1_R_arch" value="1"/></td>
+                        <td rowspan="5"><input type="text" name="L_R_arch_count"/></td>
+                        <td><input type="radio" name="L1_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="L2_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="L2_centrum" value="0"/></td>
+                        <td><input type="radio" name="L2_centrum" value="1"/></td>
+                        <td><input type="radio" name="L2_centrum" value="2a"/></td>
+                        <td><input type="radio" name="L2_centrum" value="2b"/></td>
+                        <td><input type="radio" name="L2_centrum" value="3"/></td>
+                        <td><input type="radio" name="L2_centrum" value="C"/></td>
+                    
+                        <td class="segment">L2</td>
+                        <td><input type="radio" name="L2_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="L2_L_arch" value="C"/></td>
+                        <td><input type="radio" name="L2_L_arch" value="3"/></td>
+                        <td><input type="radio" name="L2_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="L2_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="L2_L_arch" value="1"/></td>
+                        <td><input type="radio" name="L2_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="L2_R_arch" value="C"/></td>
+                        <td><input type="radio" name="L2_R_arch" value="3"/></td>
+                        <td><input type="radio" name="L2_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="L2_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="L2_R_arch" value="1"/></td>
+                        <td><input type="radio" name="L2_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="L3_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="L3_centrum" value="0"/></td>
+                        <td><input type="radio" name="L3_centrum" value="1"/></td>
+                        <td><input type="radio" name="L3_centrum" value="2a"/></td>
+                        <td><input type="radio" name="L3_centrum" value="2b"/></td>
+                        <td><input type="radio" name="L3_centrum" value="3"/></td>
+                        <td><input type="radio" name="L3_centrum" value="C"/></td>
+                    
+                        <td class="segment">L3</td>
+                        <td><input type="radio" name="L3_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="L3_L_arch" value="C"/></td>
+                        <td><input type="radio" name="L3_L_arch" value="3"/></td>
+                        <td><input type="radio" name="L3_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="L3_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="L3_L_arch" value="1"/></td>
+                        <td><input type="radio" name="L3_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="L3_R_arch" value="C"/></td>
+                        <td><input type="radio" name="L3_R_arch" value="3"/></td>
+                        <td><input type="radio" name="L3_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="L3_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="L3_R_arch" value="1"/></td>
+                        <td><input type="radio" name="L3_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="L4_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="L4_centrum" value="0"/></td>
+                        <td><input type="radio" name="L4_centrum" value="1"/></td>
+                        <td><input type="radio" name="L4_centrum" value="2a"/></td>
+                        <td><input type="radio" name="L4_centrum" value="2b"/></td>
+                        <td><input type="radio" name="L4_centrum" value="3"/></td>
+                        <td><input type="radio" name="L4_centrum" value="C"/></td>
+                    
+                        <td class="segment">L4</td>
+                        <td><input type="radio" name="L4_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="L4_L_arch" value="C"/></td>
+                        <td><input type="radio" name="L4_L_arch" value="3"/></td>
+                        <td><input type="radio" name="L4_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="L4_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="L4_L_arch" value="1"/></td>
+                        <td><input type="radio" name="L4_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="L4_R_arch" value="C"/></td>
+                        <td><input type="radio" name="L4_R_arch" value="3"/></td>
+                        <td><input type="radio" name="L4_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="L4_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="L4_R_arch" value="1"/></td>
+                        <td><input type="radio" name="L4_R_arch" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="L5_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="L5_centrum" value="0"/></td>
+                        <td><input type="radio" name="L5_centrum" value="1"/></td>
+                        <td><input type="radio" name="L5_centrum" value="2a"/></td>
+                        <td><input type="radio" name="L5_centrum" value="2b"/></td>
+                        <td><input type="radio" name="L5_centrum" value="3"/></td>
+                        <td><input type="radio" name="L5_centrum" value="C"/></td>
+                    
+                        <td class="segment">L5</td>
+                        <td><input type="radio" name="L5_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="L5_L_arch" value="C"/></td>
+                        <td><input type="radio" name="L5_L_arch" value="3"/></td>
+                        <td><input type="radio" name="L5_L_arch" value="2b"/></td>
+                        <td><input type="radio" name="L5_L_arch" value="2a"/></td>
+                        <td><input type="radio" name="L5_L_arch" value="1"/></td>
+                        <td><input type="radio" name="L5_L_arch" value="0"/></td>
+                    
+                        <td><input type="radio" name="L5_R_arch" value="C"/></td>
+                        <td><input type="radio" name="L5_R_arch" value="3"/></td>
+                        <td><input type="radio" name="L5_R_arch" value="2b"/></td>
+                        <td><input type="radio" name="L5_R_arch" value="2a"/></td>
+                        <td><input type="radio" name="L5_R_arch" value="1"/></td>
+                        <td><input type="radio" name="L5_R_arch" value="0"/></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td class="hspace" rowspan="8"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="8"></td>
+                        <td colspan="2"></td>
+                        <td class="hspace" rowspan="7"></td>
+                        <td colspan="7"></td>
+                        <td class="hspace" rowspan="7"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Sacrum_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="Sacrum" value="0"/></td>
+                        <td rowspan="6"><input type="text" name="S_centra_count"/></td>
+                        <td><input type="radio" name="Sacrum" value="1"/></td>
+                        <td><input type="radio" name="Sacrum" value="2a"/></td>
+                        <td><input type="radio" name="Sacrum" value="2b"/></td>
+                        <td><input type="radio" name="Sacrum" value="3"/></td>
+                        <td><input type="radio" name="Sacrum" value="C"/></td>
+                    
+                        <td class="segment">Sacrum</td>
+                        <td><input type="radio" name="Sacrum_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="Sacrum_L_alae" value="C"/></td>
+                        <td><input type="radio" name="Sacrum_L_alae" value="3"/></td>
+                        <td><input type="radio" name="Sacrum_L_alae" value="2b"/></td>
+                        <td><input type="radio" name="Sacrum_L_alae" value="2a"/></td>
+                        <td><input type="radio" name="Sacrum_L_alae" value="1"/></td>
+                        <td rowspan="6"><input type="text" name="S_L_ala_count"/></td>
+                        <td><input type="radio" name="Sacrum_L_alae" value="0"/></td>
+                    
+                        <td><input type="radio" name="Sacrum_R_alae" value="C"/></td>
+                        <td><input type="radio" name="Sacrum_R_alae" value="3"/></td>
+                        <td><input type="radio" name="Sacrum_R_alae" value="2b"/></td>
+                        <td><input type="radio" name="Sacrum_R_alae" value="2a"/></td>
+                        <td><input type="radio" name="Sacrum_R_alae" value="1"/></td>
+                        <td rowspan="6"><input type="text" name="S_R_ala_count"/></td>
+                        <td><input type="radio" name="Sacrum_R_alae" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="S1_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="S1_centrum" value="0"/></td>
+                        <td><input type="radio" name="S1_centrum" value="1"/></td>
+                        <td><input type="radio" name="S1_centrum" value="2a"/></td>
+                        <td><input type="radio" name="S1_centrum" value="2b"/></td>
+                        <td><input type="radio" name="S1_centrum" value="3"/></td>
+                        <td><input type="radio" name="S1_centrum" value="C"/></td>
+                    
+                        <td class="segment">S1</td>
+                        <td><input type="radio" name="S1_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="S1_L_ala" value="C"/></td>
+                        <td><input type="radio" name="S1_L_ala" value="3"/></td>
+                        <td><input type="radio" name="S1_L_ala" value="2b"/></td>
+                        <td><input type="radio" name="S1_L_ala" value="2a"/></td>
+                        <td><input type="radio" name="S1_L_ala" value="1"/></td>
+                        <td><input type="radio" name="S1_L_ala" value="0"/></td>
+                    
+                        <td><input type="radio" name="S1_R_ala" value="C"/></td>
+                        <td><input type="radio" name="S1_R_ala" value="3"/></td>
+                        <td><input type="radio" name="S1_R_ala" value="2b"/></td>
+                        <td><input type="radio" name="S1_R_ala" value="2a"/></td>
+                        <td><input type="radio" name="S1_R_ala" value="1"/></td>
+                        <td><input type="radio" name="S1_R_ala" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="S2_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="S2_centrum" value="0"/></td>
+                        <td><input type="radio" name="S2_centrum" value="1"/></td>
+                        <td><input type="radio" name="S2_centrum" value="2a"/></td>
+                        <td><input type="radio" name="S2_centrum" value="2b"/></td>
+                        <td><input type="radio" name="S2_centrum" value="3"/></td>
+                        <td><input type="radio" name="S2_centrum" value="C"/></td>
+                    
+                        <td class="segment">S2</td>
+                        <td><input type="radio" name="S2_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="S2_L_ala" value="C"/></td>
+                        <td><input type="radio" name="S2_L_ala" value="3"/></td>
+                        <td><input type="radio" name="S2_L_ala" value="2b"/></td>
+                        <td><input type="radio" name="S2_L_ala" value="2a"/></td>
+                        <td><input type="radio" name="S2_L_ala" value="1"/></td>
+                        <td><input type="radio" name="S2_L_ala" value="0"/></td>
+                    
+                        <td><input type="radio" name="S2_R_ala" value="C"/></td>
+                        <td><input type="radio" name="S2_R_ala" value="3"/></td>
+                        <td><input type="radio" name="S2_R_ala" value="2b"/></td>
+                        <td><input type="radio" name="S2_R_ala" value="2a"/></td>
+                        <td><input type="radio" name="S2_R_ala" value="1"/></td>
+                        <td><input type="radio" name="S2_R_ala" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="S3_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="S3_centrum" value="0"/></td>
+                        <td><input type="radio" name="S3_centrum" value="1"/></td>
+                        <td><input type="radio" name="S3_centrum" value="2a"/></td>
+                        <td><input type="radio" name="S3_centrum" value="2b"/></td>
+                        <td><input type="radio" name="S3_centrum" value="3"/></td>
+                        <td><input type="radio" name="S3_centrum" value="C"/></td>
+                    
+                        <td class="segment">S3</td>
+                        <td><input type="radio" name="S3_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="S3_L_ala" value="C"/></td>
+                        <td><input type="radio" name="S3_L_ala" value="3"/></td>
+                        <td><input type="radio" name="S3_L_ala" value="2b"/></td>
+                        <td><input type="radio" name="S3_L_ala" value="2a"/></td>
+                        <td><input type="radio" name="S3_L_ala" value="1"/></td>
+                        <td><input type="radio" name="S3_L_ala" value="0"/></td>
+                    
+                        <td><input type="radio" name="S3_R_ala" value="C"/></td>
+                        <td><input type="radio" name="S3_R_ala" value="3"/></td>
+                        <td><input type="radio" name="S3_R_ala" value="2b"/></td>
+                        <td><input type="radio" name="S3_R_ala" value="2a"/></td>
+                        <td><input type="radio" name="S3_R_ala" value="1"/></td>
+                        <td><input type="radio" name="S3_R_ala" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="S4_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="S4_centrum" value="0"/></td>
+                        <td><input type="radio" name="S4_centrum" value="1"/></td>
+                        <td><input type="radio" name="S4_centrum" value="2a"/></td>
+                        <td><input type="radio" name="S4_centrum" value="2b"/></td>
+                        <td><input type="radio" name="S4_centrum" value="3"/></td>
+                        <td><input type="radio" name="S4_centrum" value="C"/></td>
+                    
+                        <td class="segment">S4</td>
+                        <td><input type="radio" name="S4_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="S4_L_ala" value="C"/></td>
+                        <td><input type="radio" name="S4_L_ala" value="3"/></td>
+                        <td><input type="radio" name="S4_L_ala" value="2b"/></td>
+                        <td><input type="radio" name="S4_L_ala" value="2a"/></td>
+                        <td><input type="radio" name="S4_L_ala" value="1"/></td>
+                        <td><input type="radio" name="S4_L_ala" value="0"/></td>
+                    
+                        <td><input type="radio" name="S4_R_ala" value="C"/></td>
+                        <td><input type="radio" name="S4_R_ala" value="3"/></td>
+                        <td><input type="radio" name="S4_R_ala" value="2b"/></td>
+                        <td><input type="radio" name="S4_R_ala" value="2a"/></td>
+                        <td><input type="radio" name="S4_R_ala" value="1"/></td>
+                        <td><input type="radio" name="S4_R_ala" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="S5_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="S5_centrum" value="0"/></td>
+                        <td><input type="radio" name="S5_centrum" value="1"/></td>
+                        <td><input type="radio" name="S5_centrum" value="2a"/></td>
+                        <td><input type="radio" name="S5_centrum" value="2b"/></td>
+                        <td><input type="radio" name="S5_centrum" value="3"/></td>
+                        <td><input type="radio" name="S5_centrum" value="C"/></td>
+                    
+                        <td class="segment">S5</td>
+                        <td><input type="radio" name="S5_complete" value="C"/></td>
+                    
+                        <td><input type="radio" name="S5_L_ala" value="C"/></td>
+                        <td><input type="radio" name="S5_L_ala" value="3"/></td>
+                        <td><input type="radio" name="S5_L_ala" value="2b"/></td>
+                        <td><input type="radio" name="S5_L_ala" value="2a"/></td>
+                        <td><input type="radio" name="S5_L_ala" value="1"/></td>
+                        <td><input type="radio" name="S5_L_ala" value="0"/></td>
+                    
+                        <td><input type="radio" name="S5_R_ala" value="C"/></td>
+                        <td><input type="radio" name="S5_R_ala" value="3"/></td>
+                        <td><input type="radio" name="S5_R_ala" value="2b"/></td>
+                        <td><input type="radio" name="S5_R_ala" value="2a"/></td>
+                        <td><input type="radio" name="S5_R_ala" value="1"/></td>
+                        <td><input type="radio" name="S5_R_ala" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="Coccyx_complete" value="0"/></td>
+                    
+                        <td><input type="radio" name="Coccyx" value="0"/></td>
+                        <td></td>
+                        <td><input type="radio" name="Coccyx" value="1"/></td>
+                        <td><input type="radio" name="Coccyx" value="2a"/></td>
+                        <td><input type="radio" name="Coccyx" value="2b"/></td>
+                        <td><input type="radio" name="Coccyx" value="3"/></td>
+                        <td><input type="radio" name="Coccyx" value="C"/></td>
+                    
+                        <td class="segment">Coccyx</td>
+                        <td><input type="radio" name="Coccyx_complete" value="C"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="column">
+            <div class="osteo dental">
+                <div class="permanent">
+                    <h3>Permanent Dentition</h3>
+                    <div class="key">0=absent; F=frag.; 1-5=wear stage</div>
+                    
+                    <fieldset class="upper">
+                        <legend>Upper</legend>
+
+                        <label class="Teeth_UM3_R"><input name="Teeth_UM3_R" type="text"/>RM<sup>3</sup></label>
+                        <label class="Teeth_UM2_R"><input name="Teeth_UM2_R" type="text"/>RM<sup>2</sup></label>
+                        <label class="Teeth_UM1_R"><input name="Teeth_UM1_R" type="text"/>RM<sup>1</sup></label>
+                        <label class="Teeth_UP4_R"><input name="Teeth_UP4_R" type="text"/>RP<sup>4</sup></label>
+                        <label class="Teeth_UP3_R"><input name="Teeth_UP3_R" type="text"/>RP<sup>3</sup></label>
+                        <label class="Teeth_UC_R"><input name="Teeth_UC_R" type="text"/>RC<sup>X</sup></label>
+                        <label class="Teeth_UI2_R"><input name="Teeth_UI2_R" type="text"/>RI<sup>2</sup></label>
+                        <label class="Teeth_UI1_R"><input name="Teeth_UI1_R" type="text"/>RI<sup>1</sup></label>
+
+                        <label class="Teeth_UI1_L"><input name="Teeth_UI1_L" type="text"/>LI<sup>1</sup></label>
+                        <label class="Teeth_UI2_L"><input name="Teeth_UI2_L" type="text"/>LI<sup>2</sup></label>
+                        <label class="Teeth_UC_L"><input name="Teeth_UC_L" type="text"/>LC<sup>X</sup></label>
+                        <label class="Teeth_UP3_L"><input name="Teeth_UP3_L" type="text"/>LP<sup>3</sup></label>
+                        <label class="Teeth_UP4_L"><input name="Teeth_UP4_L" type="text"/>LP<sup>4</sup></label>
+                        <label class="Teeth_UM1_L"><input name="Teeth_UM1_L" type="text"/>LM<sup>1</sup></label>
+                        <label class="Teeth_UM2_L"><input name="Teeth_UM2_L" type="text"/>LM<sup>2</sup></label>
+                        <label class="Teeth_UM3_L"><input name="Teeth_UM3_L" type="text"/>LM<sup>3</sup></label>
+                    </fieldset>
+                    
+                    <fieldset class="lower">
+                        <legend>Lower</legend>
+                        
+                        <label class="Teeth_LM3_R"><input name="Teeth_LM3_R" type="text"/>RM<sub>3</sub></label>
+                        <label class="Teeth_LM2_R"><input name="Teeth_LM2_R" type="text"/>RM<sub>2</sub></label>
+                        <label class="Teeth_LM1_R"><input name="Teeth_LM1_R" type="text"/>RM<sub>1</sub></label>
+                        <label class="Teeth_LP4_R"><input name="Teeth_LP4_R" type="text"/>RP<sub>4</sub></label>
+                        <label class="Teeth_LP3_R"><input name="Teeth_LP3_R" type="text"/>RP<sub>3</sub></label>
+                        <label class="Teeth_LC_R"><input name="Teeth_LC_R" type="text"/>RC<sub>X</sub></label>
+                        <label class="Teeth_LI2_R"><input name="Teeth_LI2_R" type="text"/>I<sub>2</sub></label>
+                        <label class="Teeth_LI1_R"><input name="Teeth_LI1_R" type="text"/>I<sub>1</sub></label>
+
+                        <label class="Teeth_LI1_L"><input name="Teeth_LI1_L" type="text"/>I<sub>1</sub></label>
+                        <label class="Teeth_LI2_L"><input name="Teeth_LI2_L" type="text"/>I<sub>2</sub></label>
+                        <label class="Teeth_LC_L"><input name="Teeth_LC_L" type="text"/>LC<sub>X</sub></label>
+                        <label class="Teeth_LP3_L"><input name="Teeth_LP3_L" type="text"/>LP<sub>3</sub></label>
+                        <label class="Teeth_LP4_L"><input name="Teeth_LP4_L" type="text"/>LP<sub>4</sub></label>
+                        <label class="Teeth_LM1_L"><input name="Teeth_LM1_L" type="text"/>LM<sub>1</sub></label>
+                        <label class="Teeth_LM2_L"><input name="Teeth_LM2_L" type="text"/>LM<sub>2</sub></label>
+                        <label class="Teeth_LM3_L"><input name="Teeth_LM3_L" type="text"/>LM<sub>3</sub></label>
+                    </fieldset>
+                </div>
+                <div class="deciduous">
+                    <h3>Deciduous Dentition</h3>
+                    <div class="key">0=absent; F=frag.; 1-5=wear stage</div>
+
+                    <fieldset class="upper">
+                        <legend>Upper</legend>
+                        
+                        <label class="Teeth_decid_Udm2_R"><input name="Teeth_decid_Udm2_R" type="text"/>Rdm<sup>2</sup></label>
+                        <label class="Teeth_decid_Udm1_R"><input name="Teeth_decid_Udm1_R" type="text"/>Rdm<sup>1</sup></label>
+                        <label class="Teeth_decid_Udc_R"><input name="Teeth_decid_Udc_R" type="text"/>Rdc<sup>x</sup></label>
+                        <label class="Teeth_decid_Udi2_R"><input name="Teeth_decid_Udi2_R" type="text"/>Rdi<sup>2</sup></label>
+                        <label class="Teeth_decid_Udi1_R"><input name="Teeth_decid_Udi1_R" type="text"/>Rdi<sup>1</sup></label>
+
+                        <label class="Teeth_decid_Udi1_L"><input name="Teeth_decid_Udi1_L" type="text"/>Ldi<sup>1</sup></label>
+                        <label class="Teeth_decid_Udi2_L"><input name="Teeth_decid_Udi2_L" type="text"/>Ldi<sup>2</sup></label>
+                        <label class="Teeth_decid_Udc_L"><input name="Teeth_decid_Udc_L" type="text"/>Ldc<sup>x</sup></label>
+                        <label class="Teeth_decid_Udm1_L"><input name="Teeth_decid_Udm1_L" type="text"/>Ldm<sup>1</sup></label>
+                        <label class="Teeth_decid_Udm2_L"><input name="Teeth_decid_Udm2_L" type="text"/>Ldm<sup>2</sup></label>
+                    </fieldset>
+                    
+                    <fieldset class="lower">
+                        <legend>Lower</legend>
+
+                        <label class="Teeth_decid_Ldm2_R"><input name="Teeth_decid_Ldm2_R" type="text"/>Rdm<sub>2</sub></label>
+                        <label class="Teeth_decid_Ldm1_R"><input name="Teeth_decid_Ldm1_R" type="text"/>Rdm<sub>1</sub></label>
+                        <label class="Teeth_decid_Ldc_R"><input name="Teeth_decid_Ldc_R" type="text"/>dc<sub>x</sub></label>
+                        <label class="Teeth_decid_Ldi2_R"><input name="Teeth_decid_Ldi2_R" type="text"/>di<sub>2</sub></label>
+                        <label class="Teeth_decid_Ldi1_R"><input name="Teeth_decid_Ldi1_R" type="text"/>di<sub>1</sub></label>
+
+                        <label class="Teeth_decid_Ldi1_L"><input name="Teeth_decid_Ldi1_L" type="text"/>di<sub>1</sub></label>
+                        <label class="Teeth_decid_Ldi2_L"><input name="Teeth_decid_Ldi2_L" type="text"/>di<sub>2</sub></label>
+                        <label class="Teeth_decid_Ldc_L"><input name="Teeth_decid_Ldc_L" type="text"/>dc<sub>x</sub></label>
+                        <label class="Teeth_decid_Ldm1_L"><input name="Teeth_decid_Ldm1_L" type="text"/>Ldm<sub>1</sub></label>
+                        <label class="Teeth_decid_Ldm2_L"><input name="Teeth_decid_Ldm2_L" type="text"/>Ldm<sub>2</sub></label>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 
