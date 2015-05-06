@@ -1566,6 +1566,32 @@
             }
         });
         
+        that.form.find(".osteo .permanent .zeroButton").click(function() {
+          event.stopPropagation();
+          event.preventDefault();
+          
+          that.form.find(".osteo .permanent input[type='text']").each(function(index, element) {
+            var fieldName = element.name;
+            var value = "0";
+            
+            element.value = value;
+            that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, fieldName), value);
+          });
+        });
+
+        that.form.find(".osteo .deciduous .zeroButton").click(function() {
+          event.stopPropagation();
+          event.preventDefault();
+          
+          that.form.find(".osteo .deciduous input[type='text']").each(function(index, element) {
+            var fieldName = element.name;
+            var value = "0";
+            
+            element.value = value;
+            that.applier.requestChange(cspace.util.composeSegments(BASE_EL_PATH, fieldName), value);
+          });
+        });
+        
         // name: {value: input element, ...}
         that.radioInputs = {};
                 

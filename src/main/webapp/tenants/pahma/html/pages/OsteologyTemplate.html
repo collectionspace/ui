@@ -69,7 +69,8 @@
 
 <form class="csc-osteology-form">
     <p>
-        <button id="markAllPresentButton">Mark all present</button> <button id="markAllAbsentButton">Mark all absent</button>
+        <input type="button" id="markAllPresentButton" value="Mark all present"/>
+        <input type="button" id="markAllAbsentButton" value="Mark all absent"/>
     </p>
     <div class="osteo-row">
         <div class="column">
@@ -2884,10 +2885,12 @@
                 <div class="permanent">
                     <h3>Permanent Dentition</h3>
                     <div class="key">0=absent; F=frag.; 1-5=wear stage</div>
+
+                    <input type="button" class="zeroButton" value="0"/>
                     
                     <fieldset class="upper">
                         <legend>Upper</legend>
-
+                        
                         <label class="Teeth_UM3_R">RM<sup>3</sup><input name="Teeth_UM3_R" type="text"/></label>
                         <label class="Teeth_UM2_R">RM<sup>2</sup><input name="Teeth_UM2_R" type="text"/></label>
                         <label class="Teeth_UM1_R">RM<sup>1</sup><input name="Teeth_UM1_R" type="text"/></label>
@@ -2933,6 +2936,8 @@
                     <h3>Deciduous Dentition</h3>
                     <div class="key">0=absent; F=frag.; 1-5=wear stage</div>
 
+                    <input type="button" class="zeroButton" value="0"/>
+                    
                     <fieldset class="upper">
                         <legend>Upper</legend>
                         
