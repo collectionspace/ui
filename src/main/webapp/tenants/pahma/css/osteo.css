@@ -228,13 +228,16 @@
 /*    background-color: rgba(255, 0, 0, .3);*/
 }
 
-.osteo.dental .permanent .upper legend {
+.osteo.dental legend {
     position: relative;
+    color: #333333;
+}
+
+.osteo.dental .permanent .upper legend {
     top: 120px;
 }
 
 .osteo.dental .permanent .lower legend {
-    position: relative;
     top: 270px;
 }
 
@@ -246,12 +249,10 @@
 }
 
 .osteo.dental .deciduous .upper legend {
-    position: relative;
     top: 80px;
 }
 
 .osteo.dental .deciduous .lower legend {
-    position: relative;
     top: 165px;
 }
 
@@ -266,9 +267,9 @@
 }
 
 .osteo.dental label {
-    color: #DDDDDD;
+    color: rgba(0, 0, 0, .4);
     position: absolute;
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .osteo.dental label sub {
@@ -277,12 +278,13 @@
 
 .osteo.dental input {
     color: #0033FF;
-    width: 16px;
+    width: 100%;
     background: none;
     position: absolute;
 /*    border-color: rgba(128, 128, 128, .5);*/
     border: none;
     top: -3px;
+    left: 0px;
 }
 
 .osteo.dental label.Teeth_UM3_R {
@@ -387,8 +389,7 @@
 
 .osteo.dental label.Teeth_LP4_R sub {
     position: relative;
-    left: -2px;
-    top: -1px;
+    left: -1px;
 }
 
 .osteo.dental label.Teeth_LP3_R {
@@ -398,8 +399,7 @@
 
 .osteo.dental label.Teeth_LP3_R sub {
     position: relative;
-    left: -2px;
-    top: -1px;
+    left: -1px;
 }
 
 .osteo.dental label.Teeth_LC_R {
@@ -455,8 +455,7 @@
 
 .osteo.dental label.Teeth_LP3_L sub {
     position: relative;
-    left: -2px;
-    top: -1px;
+    left: -1px;
 }
 
 .osteo.dental label.Teeth_LP4_L {
@@ -466,8 +465,7 @@
 
 .osteo.dental label.Teeth_LP4_L sub {
     position: relative;
-    left: -2px;
-    top: -1px;
+    left: -1px;
 }
 
 .osteo.dental label.Teeth_LM1_L {
@@ -576,7 +574,7 @@
 }
 
 .osteo.dental label.Teeth_decid_Ldm1_L {
-    left: 124px;
+    left: 122px;
     top: 211px;
 }
 
