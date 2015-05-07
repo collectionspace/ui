@@ -1106,6 +1106,11 @@ exhibition-exhibitionObjectSeqNumLabel: Seq. #
 exhibition-exhibitionObjectRotationLabel: Rotation
 exhibition-exhibitionObjectNoteLabel: Note
 
+# Condition check
+conditioncheck-tempRequirementLabel: Temperature
+conditioncheck-humidityRequirementLabel: Humidity
+conditioncheck-lightRequirementLabel: Light
+
 # Osteology
 osteology-recordList: Related Osteology Records
 osteology-number: Inventory ID
