@@ -136,4 +136,68 @@ var pahma = {};
     //         });
     // }
 	
+    fluid.defaults("cspace.conditionReorderer", {
+        gradeNames: ["fluid.modelComponent", "autoInit"],
+        selectors: {},
+        strings: {},
+        parentBundle: "{globalBundle}",
+        finalInitFunction: "cspace.conditionReorderer.finalInit",
+        invokers: {
+            bindEvents: {
+                funcName: "cspace.conditionReorderer.bindEvents",
+                args: ["{conditionReorderer}", "{recordEditor}"]
+            },
+            reorderCondition: {
+                funcName: "cspace.conditionReorderer.reorderCondition",
+                args: ["{conditionReorderer}", "{recordEditor}"]
+            }
+        }
+    });
+
+    cspace.conditionReorderer.finalInit = function(that) {
+        that.bindEvents();
+    };
+    
+    cspace.conditionReorderer.finalInit = function(that) {
+        that.bindEvents();
+    };
+
+    cspace.conditionReorderer.bindEvents = function(that, recordEditor) {
+        recordEditor.events.onSave.addListener(function() {
+            that.reorderCondition();
+        }, that.typeName);
+    };
+    
+    cspace.conditionReorderer.reorderCondition = function(that, recordEditor) {
+        var conditions = recordEditor.model.fields.conditionCheckGroup;
+        
+        if (conditions && conditions.length > 0) {
+            var reorderedConditions = conditions.slice();
+            var fieldName = "conditionDate";
+        
+            reorderedConditions.sort(function(a, b) {
+                var aField = a[fieldName];
+                var bField = b[fieldName];
+            
+                if (aField> bField) {
+                  return -1;
+                }
+            
+                if (aField < bField) {
+                  return 1;
+                }
+            
+                return 0;
+            })
+        
+            reorderedConditions.forEach(function(condition, index) {
+                condition["_primary"] = false;
+            });
+            
+            reorderedConditions[0]["_primary"] = true;
+        
+            recordEditor.applier.requestChange("fields.conditionCheckGroup", reorderedConditions);
+        }
+    };
 })(jQuery, fluid);
+
