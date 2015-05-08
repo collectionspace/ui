@@ -1,0 +1,35 @@
+#Login
+
+login-login: admin@fcart.collectionspace.org
+login-rologin: reader@fcart.collectionspace.org
+
+login-current-info-1: Welcome to the
+login-current-info-2:Fine and Contemporary Art Profile. Additions to the core CollectionSpace functionality include field that align with the
+login-current-info-3: core categories, and fields that allow for the cataloging and description of variable media works, based on the
+login-current-info-4:
+
+login-footerFirst: You can also return to the
+login-footerLink: CollectionSpace Common configuration
+login-footerLast: .
+
+# Fine and Contemporary Art Profile - Cataloging
+collection-object-objectNameLabel: Object/work type
+collection-object-responsibleDepartmentsLabel: Classification terms
+collection-object-responsibleDepartmentLabel: Classification term
+collection-object-referenceLabel: Source brief citation
+collection-object-titleLabel: Title text
+collection-object-contentConceptsLabel: General subject terms
+collection-object-dimensionSummaryLabel: Dimensions description
+collection-object-objectProductionDateGroupLabel: Creation date
+collection-object-objectProductionDateLabel: Creation date
+collection-object-objectProductionOrganizationLabel: Creator identity
+collection-object-objectProductionOrganizationRoleLabel: Creator role
+collection-object-objectProductionPersononLabel: Creator identity
+collection-object-objectProductionPersonRoleLabel: Creator role
+collection-object-objectProductionPeopleLabel: Creator identity
+collection-object-objectProductionPeopleRoleLabel: Creator role
+
+# Fine and Contemporary Art Profile - Concept
+preferredCA-termDisplayNameLabel: Generic concept term
+concept-scopeNoteLabel: Concept scope note
+concept-scopeNoteSourceLabel: Note source
