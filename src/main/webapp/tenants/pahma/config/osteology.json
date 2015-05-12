@@ -18,6 +18,19 @@
                                     "applier": "{recordEditor}.applier",
                                     "model": "{recordEditor}.model"
                                 }
+                            },
+                            "saver": {
+                                "options": {
+                                    "components": {
+                                        "validator": {
+                                            "options": {
+                                                "selectors": {
+                                                    "requiredFields": ".csc-required"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

@@ -1131,3 +1131,5 @@ osteology-sexDeterminationLabel: Sex
 sexDeterminationGroup-sexDeterminationDateGroupLabel: Date
 osteology-sexDeterminationAnalystLabel: Analyst
 osteology-sexDeterminationNoteLabel: Notes
+osteology-inventoryAnalystLabel: Analyst
+osteology-inventoryDateLabel: Date
