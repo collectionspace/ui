@@ -296,6 +296,7 @@
 
 .osteo.dental fieldset input[type='text'] {
     color: #0033FF;
+    font-weight: bold;
     width: 100%;
     background: none;
     position: absolute;
