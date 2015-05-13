@@ -1110,3 +1110,4 @@ exhibition-exhibitionObjectNoteLabel: Note
 conditioncheck-tempRequirementLabel: Temperature
 conditioncheck-humidityRequirementLabel: Humidity
 conditioncheck-lightRequirementLabel: Light
+conditioncheck-objectRequirementInformationLabel: Object Requirement and Handling Information
