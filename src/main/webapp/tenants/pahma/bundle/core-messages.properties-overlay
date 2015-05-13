@@ -1111,3 +1111,4 @@ conditioncheck-tempRequirementLabel: Temperature
 conditioncheck-humidityRequirementLabel: Humidity
 conditioncheck-lightRequirementLabel: Light
 conditioncheck-objectRequirementInformationLabel: Object Requirement and Handling Information
+conditioncheck-conditionCheckNoteLabel: Condition Note
