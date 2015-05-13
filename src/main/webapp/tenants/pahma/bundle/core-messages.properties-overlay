@@ -1,6 +1,6 @@
 #Login
 #login-current: CollectionSpace 4.1: PAHMA prototype
-login-deployment: Version pahma_4.1-20-osteo-3
+login-deployment: Version pahma_4.1-21
 #login-current-info: Welcome to the prototype of PAHMA-CSpace, which is being configured to support the needs of anthropology museums in general, as well as the specific needs of the Phoebe A. Hearst Museum of Anthropology.
 #login-login-info: To view the CollectionSpace PAHMA tenant as an administrator, use the login box on the right with the login
 login-current: PAHMA-CollectionSpace 4.1
@@ -1105,31 +1105,3 @@ exhibition-exhibitionObjectCaseLabel: Case
 exhibition-exhibitionObjectSeqNumLabel: Seq. #
 exhibition-exhibitionObjectRotationLabel: Rotation
 exhibition-exhibitionObjectNoteLabel: Note
-
-# Condition check
-conditioncheck-tempRequirementLabel: Temperature
-conditioncheck-humidityRequirementLabel: Humidity
-conditioncheck-lightRequirementLabel: Light
-
-# Osteology
-osteology-recordList: Related Osteology Records
-osteology-number: Inventory ID
-osteology-editRecord: Edit Osteology Record
-osteology: Osteology
-osteology-tab: Osteo
-osteology-InventoryIDLabel: Inventory ID
-osteology-identificationNumberRequired: Please specify an Inventory ID
-osteology-NotesOnElementInventoryLabel: Notes on inventory
-osteology-osteoAgeEstimateGroupLabel: Age estimate
-osteology-osteoAgeEstimateLowerLabel: Lower estimate (in years)
-osteology-osteoAgeEstimateUpperLabel: Upper estimate (in years)
-osteoAgeEstimateGroup-osteoAgeEstimateDateGroupLabel: Date
-osteology-osteoAgeEstimateAnalystLabel: Analyst
-osteology-osteoAgeEstimateNoteLabel: Notes
-osteology-sexDeterminationGroupLabel: Sex determination
-osteology-sexDeterminationLabel: Sex
-sexDeterminationGroup-sexDeterminationDateGroupLabel: Date
-osteology-sexDeterminationAnalystLabel: Analyst
-osteology-sexDeterminationNoteLabel: Notes
-osteology-inventoryAnalystLabel: Analyst
-osteology-inventoryDateLabel: Date
