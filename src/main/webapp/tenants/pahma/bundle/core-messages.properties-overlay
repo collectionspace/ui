@@ -1135,3 +1135,12 @@ osteology-sexDeterminationAnalystLabel: Analyst
 osteology-sexDeterminationNoteLabel: Notes
 osteology-inventoryAnalystLabel: Analyst
 osteology-inventoryDateLabel: Date
+osteology-inventoryDateStartLabel: Earliest
+osteology-inventoryDateEndLabel: Latest
+osteology-updatedByLabel: Record last modified by
+osteology-createdAtLabel: Created date
+osteology-createdAtStartLabel: Earliest
+osteology-createdAtEndLabel: Latest
+osteology-updatedAtLabel: Modified date
+osteology-updatedAtStartLabel: Earliest
+osteology-updatedAtEndLabel: Latest
