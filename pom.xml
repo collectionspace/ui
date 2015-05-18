@@ -9,16 +9,16 @@
   <name>collectionspace Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <output.location>/tmp</output.location>
+    <output.location>${basedir}/tmp</output.location>
   </properties>
   <profiles>
     <profile>
-      <id>jboss</id>
+      <id>nodeploy</id>
       <properties>
         <warPlugin.warSourceDirectory>${basedir}/src/main/webapp</warPlugin.warSourceDirectory>
-        <cspace.server.home>${env.JBOSS_HOME}/server/cspace</cspace.server.home>
-        <!-- using the jboss 4.2.x container -->
-        <cargo.container>jboss42x</cargo.container>
+        <cspace.server.home>${output.location}/tomcat</cspace.server.home>
+        <!-- using the tomcat 6.x container -->
+        <cargo.container>tomcat6x</cargo.container>
       </properties>
     </profile>
     <profile>
