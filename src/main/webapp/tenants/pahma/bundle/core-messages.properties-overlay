@@ -1105,3 +1105,10 @@ exhibition-exhibitionObjectCaseLabel: Case
 exhibition-exhibitionObjectSeqNumLabel: Seq. #
 exhibition-exhibitionObjectRotationLabel: Rotation
 exhibition-exhibitionObjectNoteLabel: Note
+
+# Condition check
+conditioncheck-tempRequirementLabel: Temperature
+conditioncheck-humidityRequirementLabel: Humidity
+conditioncheck-lightRequirementLabel: Light
+conditioncheck-objectRequirementInformationLabel: Object Requirement and Handling Information
+conditioncheck-conditionCheckNoteLabel: Condition Note
