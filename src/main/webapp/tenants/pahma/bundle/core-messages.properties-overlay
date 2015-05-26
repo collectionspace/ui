@@ -590,6 +590,9 @@ place-preferredPlaceLabel: Place Term(s)
 place-createdAtLabel: Created date
 place-createdAtStartLabel: Earliest
 place-createdAtEndLabel: Latest
+place-placeReferenceGroupLabel: References
+place-placeReferenceLabel: Reference
+place-placeReferenceNoteLabel: Note
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
