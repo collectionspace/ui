@@ -598,6 +598,11 @@ place-placeAssocNameLabel: Name
 place-placeAssociationLabel: Association
 placeAssocGroup-placeAssocDateGroupLabel: Date(s)
 place-placeAssocNoteLabel: Notes
+place-townshipLabel: Township
+place-rangeLabel: Range
+place-sectionLabel: Section
+place-verbatimQuarterSectionLabel: Verbatim quarter section
+
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
