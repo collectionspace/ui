@@ -593,6 +593,11 @@ place-createdAtEndLabel: Latest
 place-placeReferenceGroupLabel: References
 place-placeReferenceLabel: Reference
 place-placeReferenceNoteLabel: Note
+place-placeAssocGroupLabel: Associated persons and organizations
+place-placeAssocNameLabel: Name
+place-placeAssociationLabel: Association
+placeAssocGroup-placeAssocDateGroupLabel: Date(s)
+place-placeAssocNoteLabel: Notes
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
