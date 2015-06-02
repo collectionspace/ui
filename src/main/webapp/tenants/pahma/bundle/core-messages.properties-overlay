@@ -602,7 +602,10 @@ place-townshipLabel: Township
 place-rangeLabel: Range
 place-sectionLabel: Section
 place-verbatimQuarterSectionLabel: Verbatim quarter section
-
+place-placeNoteGroupLabel: Place notes
+place-placeNoteTextLabel: Place note
+place-placeNoteAuthorLabel: Author
+place-placeNoteDateLabel: Date
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
