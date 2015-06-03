@@ -59,12 +59,21 @@ taxon-miniView-field2Label: Term Status:
 taxon-miniView-field3Label: Rank:
 
 # -------------------------------------
+
+
+
+
 #Login
 
-login-current-info-4: This is the landing page for the CollectionSpace Life Science tenant, which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
+login-current-info-1: Welcome to the
+login-current-info-2:Life Sciences tenant which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
+login-current-info-3:
+login-current-info-4:
+
+
 login-login: admin@lifesci.collectionspace.org
 login-rologin: reader@lifesci.collectionspace.org
 
 login-footerFirst: To return to the CollectionSpace Core tenant, follow\t
 login-footerLink: this link
-login-footerLast: .
+login-footerLast:.
