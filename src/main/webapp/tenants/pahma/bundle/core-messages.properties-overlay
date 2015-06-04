@@ -606,6 +606,8 @@ place-placeNoteGroupLabel: Place notes
 place-placeNoteTextLabel: Place note
 place-placeNoteAuthorLabel: Author
 place-placeNoteDateLabel: Date
+place-anthropologyPlaceTypesLabel: Place type
+place-anthropologyPlaceTypeLabel: Place type
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
