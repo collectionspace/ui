@@ -608,6 +608,11 @@ place-placeNoteAuthorLabel: Author
 place-placeNoteDateLabel: Date
 place-anthropologyPlaceTypesLabel: Place type
 place-anthropologyPlaceTypeLabel: Place type
+place-anthropologyPlaceOwnerGroupLabel: Place owners
+place-anthropologyPlaceOwnerLabel: Owner
+anthropologyPlaceOwnerGroup-anthropologyPlaceOwnershipStartDateGroupLabel: Start date
+anthropologyPlaceOwnerGroup-anthropologyPlaceOwnershipEndDateGroupLabel: End date
+place-anthropologyPlaceOwnershipNoteLabel: Note
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
