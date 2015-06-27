@@ -590,6 +590,29 @@ place-preferredPlaceLabel: Place Term(s)
 place-createdAtLabel: Created date
 place-createdAtStartLabel: Earliest
 place-createdAtEndLabel: Latest
+place-placeReferenceGroupLabel: References
+place-placeReferenceLabel: Reference
+place-placeReferenceNoteLabel: Note
+place-placeAssocGroupLabel: Associated persons and organizations
+place-placeAssocNameLabel: Name
+place-placeAssociationLabel: Association
+placeAssocGroup-placeAssocDateGroupLabel: Date(s)
+place-placeAssocNoteLabel: Notes
+place-townshipLabel: Township
+place-rangeLabel: Range
+place-sectionLabel: Section
+place-verbatimQuarterSectionLabel: Verbatim quarter section
+place-placeNoteGroupLabel: Place notes
+place-placeNoteTextLabel: Place note
+place-placeNoteAuthorLabel: Author
+place-placeNoteDateLabel: Date
+place-anthropologyPlaceTypesLabel: Place type
+place-anthropologyPlaceTypeLabel: Place type
+place-anthropologyPlaceOwnerGroupLabel: Place owners
+place-anthropologyPlaceOwnerLabel: Owner
+anthropologyPlaceOwnerGroup-anthropologyPlaceOwnershipStartDateGroupLabel: Start date
+anthropologyPlaceOwnerGroup-anthropologyPlaceOwnershipEndDateGroupLabel: End date
+place-anthropologyPlaceOwnershipNoteLabel: Note
 
 # ******************* Media ******************* #
 media-fileInformationHeaderLabel: Media file information
