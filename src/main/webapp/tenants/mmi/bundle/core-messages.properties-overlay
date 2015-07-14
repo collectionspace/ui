@@ -9,3 +9,66 @@ login-rologin-info:
 login-rologin:
 login-rologin-pwd:
 login-rologin-pwdValue:
+
+acquisition-extentLabel: Extent
+
+work-genreLabel: Genre
+work-mediumLabel: Medium
+work-migratedEntityGroupLabel: Migrated Entity
+work-migratedEntityLabel: Entity
+work-migratedEntityTypeLabel: Entity Type
+media-isPrimaryLabel: Is Primary?
+media-isOriginalMediaLabel: Is Original Media?
+media-statusLabel: Status
+
+
+collection-object-administrativeRemarksLabel: Administrative Remarks
+collection-object-provenanceLabel: Provenance
+collection-object-initialCatalogingLabel: Initial Cataloging Completed
+collection-object-additionalResearchLabel: Additional Research Required
+collection-object-curatorApprovedLabel: Approved by Curator
+collection-object-briefDescriptionLabel: Caption
+collection-object-distinguishingFeaturesLabel: Description
+collection-object-numberOfObjectsLabel: Extent
+collection-object-objectNameLabel: Artifact class / Work type
+collection-object-responsibleDepartmentLabel: Collection category
+collection-object-contentLanguageLabel: Language
+collection-object-contentPlaceLabel: Place
+collection-object-contentEntitiesGroupLabel: Content - Entities
+collection-object-contentEntityLabel: Content - Entity
+collection-object-contentEntityTypeLabel: Content - Entity Type
+collection-object-contentEntityNoteLabel: Content - Entity Note
+collection-object-contentWorkGroupLabel: Content - Works
+collection-object-contentWorkLabel: Content - Work
+collection-object-contentWorkTypeLabel: Content - Work Type
+collection-object-contentWorkNoteLabel: Content - Work Note
+collection-object-copyrightStatementsLabel: Copyright Statements
+collection-object-physicalDescriptionLabel: Format
+collection-object-objectProductionOrganizationLabel: Object production entity
+collection-object-objectProductionOrganizationRoleLabel: Object production entity - Role
+collection-object-objectProductionEntityNoteLabel: Object production entity - Note
+collection-object-assocOrganizationLabel: Associated Entity
+collection-object-assocOrganizationLabel: Associated Entity Type
+collection-object-assocOrganizationLabel: Associated Entity Note
+collection-object-objectHistoryNoteLabel: Historical Note
+collection-object-historyNoteSourcesLabel: Historical Note Sources
+
+
+vocab-person: Local Entity
+vocab-ulan_pa: ULAN Entity
+
+person: Entity
+person-personNameAuthorityInformationLabel: Entity Information
+
+preferredPA-surNameLabel: Surname / Entity Name
+person-birthDateGroupLabel: Birth / Founding Date
+person-deathDateGroupLabel: Death / Dissolution Date
+person-birthPlaceLabel: Place of Birth / Founding
+person-deathPlaceLabel: Place of Death / Dissolution
+
+person-affiliatedEntityGroupLabel: Affiliated Entities
+person-affiliatedEntityLabel: Entity
+person-affiliatedEntityTypeLabel: Type
+person-entityContactNameLabel: Entity Contact Name
+person-functionLabel: Function
+
