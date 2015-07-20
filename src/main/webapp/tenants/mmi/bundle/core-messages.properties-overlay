@@ -11,6 +11,7 @@ login-rologin-pwd:
 login-rologin-pwdValue:
 
 acquisition-extentLabel: Extent
+acquisition-accessionDateLabel: Accession Date
 
 work-genreLabel: Genre
 work-mediumLabel: Medium
