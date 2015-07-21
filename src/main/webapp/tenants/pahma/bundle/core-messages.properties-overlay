@@ -1167,3 +1167,9 @@ osteology-createdAtEndLabel: Latest
 osteology-updatedAtLabel: Modified date
 osteology-updatedAtStartLabel: Earliest
 osteology-updatedAtEndLabel: Latest 
+osteology-Notes_DentalPathologyLabel: Dental pathology (incl. alveolar)
+osteology-Notes_CranialPathologyLabel: Cranial bony pathology
+osteology-Notes_PostcranialPathologyLabel: Postcranial bony pathology
+osteology-Notes_CulturalModificationsLabel: Cultural modifications
+osteology-Notes_NHTaphonomicAlterationsLabel: Nonhuman taphonomic alterations
+osteology-Notes_CuratorialSuffixingLabel: Curatorial suffixing notes
