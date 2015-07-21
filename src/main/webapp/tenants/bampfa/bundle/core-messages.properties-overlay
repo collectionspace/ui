@@ -197,6 +197,8 @@ media-imageNumberEndLabel: To
 media-number: Image Number
 media-identificationNumberRequired: Please specify an Image Number
 media-titleSearchLabel: File name
+media-primaryDisplayLabel: Primary Display
+media-computedOrderNumberLabel: Computed Order Number
 
 # Search
 # For cataloging records, "ID Number" refers to specifically to objectNumber, but in search results, the number column could contain

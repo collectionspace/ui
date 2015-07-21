@@ -396,4 +396,20 @@ var bampfa = {};
 		
 		return filename;
 	}
+
+	bampfa.computeMediaOrderNumber = function(primaryDisplay, imageNumber) {
+		// Compute an ordering for images in the media snapshot sidebar,
+		// using the primary display boolean (typically populated from Piction) and the
+		// image number (typically parsed from the file name). This ensures that any
+		// primary images appear before any alternate images, while maintaining the
+		// image number ordering as a secondary ordering.
+		
+		imageNumber = zeroPad(imageNumber, 5);
+		
+		if (!primaryDisplay) {
+			imageNumber = "alt " + imageNumber;
+		}
+		
+		return imageNumber;
+	}
 })(jQuery, fluid);
