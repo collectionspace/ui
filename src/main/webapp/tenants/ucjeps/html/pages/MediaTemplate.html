@@ -25,12 +25,37 @@
 		</div>
 		
 		<div class="info-column">
-			<div class="info-pair">
-				<div class="header">
-					<div class="label csc-media-title-label"></div>
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-media-title-label"></div>
+					</div>
+					<div class="content">
+						<input type="text" class="csc-media-title"/>
+					</div>
 				</div>
-				<div class="content">
-					<input type="text" class="csc-media-title"/>
+			</div>
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-media-mediaOtherNumber-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="csc-media-numberValue-label"></td>
+									<td class="csc-media-numberType-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-media-mediaOtherNumber">
+									<td><input type="text" class="csc-media-numberValue"/></td>
+									<td><select class="csc-media-numberType input-select"><option value="">Options not loaded</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -124,6 +149,30 @@
 			</div>
 		
 			<div class="csc-media-dimension cs-multipleEdit"></div>
+
+			<div class="info-column">
+				<div class="info-column2-50 fl-force-left">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-media-majorCategory-label"></div>
+						</div>
+						<div class="content">
+							<select class="csc-media-majorCategory input-select"><option value="">Options not loaded</option></select>
+						</div>
+					</div>
+				</div>
+			
+				<div class="info-column2-50 fl-force-right">
+					<div class="info-pair-select">
+						<div class="header">
+							<div class="label csc-media-morphologyCategories-label"></div>
+						</div>
+						<div class="content">
+							<select class="csc-media-morphologyCategory input-select"><option value="">Options not loaded</option></select>
+						</div>
+					</div>
+				</div>
+			</div>
 		
 			<div class="info-column">
 				<div class="info-column2-50 fl-force-left">
@@ -150,7 +199,7 @@
 			</div>
 		
 			<div class="info-column">
-				<div class="info-column2-50 fl-force-left" >    
+				<div class="info-column2-50 fl-force-left" >	
 					<div class="info-pair">
 						<div class="header">
 							<div class="label csc-media-creator-label"></div>
@@ -174,7 +223,7 @@
 			</div>
 		
 			<div class="info-column">
-				<div class="info-column2-50 fl-force-left" >    
+				<div class="info-column2-50 fl-force-left" >	
 					<div class="info-pair-select">
 						<div class="header">
 							<div class="label csc-media-language-label"></div>
@@ -198,7 +247,7 @@
 			</div>
 		
 			<div class="info-column">
-				<div class="info-column2-50 fl-force-left" >    
+				<div class="info-column2-50 fl-force-left" >	
 					<div class="info-pair">
 						<div class="header">
 							<div class="label csc-media-publisher-label"></div>
@@ -222,7 +271,7 @@
 			</div>
 		
 			<div class="info-column">
-				<div class="info-column2-50 fl-force-left" >    
+				<div class="info-column2-50 fl-force-left" >	
 					<div class="info-pair">
 						<div class="header">
 							<div class="label csc-media-relation-label"></div>
@@ -244,9 +293,33 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="info-column">
+				<div class="info-column2-50 fl-force-left" >	
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-media-person-label"></div>
+						</div>
+						<div class="content">
+							<input type="text" class="csc-media-person" />
+						</div>
+					</div>
+				</div>
+			
+				<div class="info-column2-50 fl-force-right">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-media-place-label"></div>
+						</div>
+						<div class="content">
+							<input type="text" class="csc-media-place" />
+						</div>
+					</div>
+				</div>
+			</div>
 		
 			<div class="info-column">
-				<div class="info-column2-50 fl-force-left" >    
+				<div class="info-column2-50 fl-force-left" >	
 					<div class="info-pair">
 						<div class="header">
 							<div class="label csc-media-copyrightStatement-label"></div>
@@ -276,6 +349,17 @@
 					</div>
 					<div class="content">
 						<textarea rows="4" cols="30" class="input-textarea csc-media-description" ></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="info-column fl-force-left">   
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-media-locality-label"></div>
+					</div>
+					<div class="content">
+						<textarea rows="4" cols="30" class="input-textarea csc-media-locality" ></textarea>
 					</div>
 				</div>
 			</div>

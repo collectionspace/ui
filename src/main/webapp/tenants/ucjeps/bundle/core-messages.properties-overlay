@@ -110,6 +110,14 @@ media-scientificTaxonomyLabel: Scientific name
 media-handwrittenLabel: Handwritten label
 media-postToPublicLabel: Post to public
 media-identificationNumberLabel: Accession number
+media-mediaOtherNumberLabel: Other number
+media-numberValueLabel: Other number
+media-numberTypeLabel: Number type
+media-majorCategoryLabel: Major category
+media-morphologyCategoriesLabel: Morphology category
+media-personLabel: Persons
+media-placeLabel: Places
+media-localityLabel: Locality
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
