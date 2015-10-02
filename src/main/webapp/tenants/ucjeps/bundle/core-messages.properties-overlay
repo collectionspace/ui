@@ -118,6 +118,8 @@ media-morphologyCategoriesLabel: Morphology category
 media-personLabel: Persons
 media-placeLabel: Places
 media-localityLabel: Locality
+media-typesLabel: Types of media
+media-typeLabel: Types of media
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
