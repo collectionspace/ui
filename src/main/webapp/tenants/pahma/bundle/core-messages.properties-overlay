@@ -1146,6 +1146,7 @@ osteology-InventoryIDLabel: Inventory ID
 osteology-identificationNumberRequired: Please specify an Inventory ID
 osteology-NotesOnElementInventoryLabel: Notes on inventory
 osteology-osteoAgeEstimateGroupLabel: Age estimate
+osteology-osteoAgeEstimateVerbatimLabel: Age estimate verbatim
 osteology-osteoAgeEstimateLowerLabel: Lower estimate (in years)
 osteology-osteoAgeEstimateUpperLabel: Upper estimate (in years)
 osteoAgeEstimateGroup-osteoAgeEstimateDateGroupLabel: Date
