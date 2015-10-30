@@ -231,51 +231,51 @@ collection-object-annotationDateLabel: Date
 collection-object-annotationAuthorLabel: Author
 
 collection-object-localityInformationLabel: Locality Information
-collection-object-fieldLocVerbatimLabel: Field collection location verbatim
-collection-object-fieldLocPlaceLabel: Field collection place
-collection-object-fieldLocCountyLabel: Field location county
-collection-object-fieldLocCountryLabel: Field location country
-collection-object-fieldLocStateLabel: Field location state
-collection-object-fieldLocHigherGeographyLabel: Field location higher geography
-collection-object-decimalLatitudeLabel: Decimal latitude
-collection-object-decimalLongitudeLabel: Decimal longitude
-collection-object-geodeticDatumLabel: Datum
-collection-object-coordUncertaintyLabel: Uncertainty
-collection-object-coordUncertaintyUnitLabel: Uncertainty units
-collection-object-vCoordinatesLabel: TRS
-collection-object-vOtherCoordsLabel: Other coords
-collection-object-vLatitudeLabel: Verbatim latitude
-collection-object-vLongitudeLabel: Verbatim longitude
-collection-object-vCoordSysLabel: Other coords system
-collection-object-vSpatialReferenceSystemLabel: Verbatim SRS
-collection-object-vDepthLabel: Depth
-collection-object-minDepthLabel: Min
-collection-object-maxDepthLabel: Max
-collection-object-depthUnitLabel: Unit
-collection-object-vElevationLabel: Elevation
-collection-object-minElevationLabel: Min
-collection-object-maxElevationLabel: Max
-collection-object-elevationUnitLabel: Unit
-collection-object-vDistanceAboveSurfaceLabel: Above surface
-collection-object-minDistanceAboveSurfaceLabel: Min
-collection-object-maxDistanceAboveSurfaceLabel: Max
-collection-object-distanceAboveSurfaceUnitLabel: Unit
-collection-object-localityNoteLabel: Locality note
-collection-object-localitySourceLabel: Source
-collection-object-localitySourceDetailLabel: Source detail
-collection-object-geoRefDetailLabel: Georeference Detail
-collection-object-pointRadiusSpatialFitLabel: Pt. radius sp. fit
-collection-object-footprintWKTLabel: Footprint WKT
-collection-object-footprintSRSLabel: Footprint SRS
-collection-object-footprintSpatialFitLabel: Footprint sp. fit
-collection-object-coordPrecisionLabel: Precision
-collection-object-geoRefencedByLabel: Georeference by
+locality-fieldLocVerbatimLabel: Field collection location verbatim
+locality-fieldLocPlaceLabel: Field collection place
+locality-fieldLocCountyLabel: Field location county
+locality-fieldLocCountryLabel: Field location country
+locality-fieldLocStateLabel: Field location state
+locality-fieldLocHigherGeographyLabel: Field location higher geography
+locality-decimalLatitudeLabel: Decimal latitude
+locality-decimalLongitudeLabel: Decimal longitude
+locality-geodeticDatumLabel: Datum
+locality-coordUncertaintyLabel: Uncertainty
+locality-coordUncertaintyUnitLabel: Uncertainty units
+locality-vCoordinatesLabel: TRS
+locality-vOtherCoordsLabel: Other coords
+locality-vLatitudeLabel: Verbatim latitude
+locality-vLongitudeLabel: Verbatim longitude
+locality-vCoordSysLabel: Other coords system
+locality-vSpatialReferenceSystemLabel: Verbatim SRS
+locality-vDepthLabel: Depth
+locality-minDepthLabel: Min
+locality-maxDepthLabel: Max
+locality-depthUnitLabel: Unit
+locality-vElevationLabel: Elevation
+locality-minElevationLabel: Min
+locality-maxElevationLabel: Max
+locality-elevationUnitLabel: Unit
+locality-vDistanceAboveSurfaceLabel: Above surface
+locality-minDistanceAboveSurfaceLabel: Min
+locality-maxDistanceAboveSurfaceLabel: Max
+locality-distanceAboveSurfaceUnitLabel: Unit
+locality-localityNoteLabel: Locality note
+locality-localitySourceLabel: Source
+locality-localitySourceDetailLabel: Source detail
+locality-geoRefDetailLabel: Georeference Detail
+locality-pointRadiusSpatialFitLabel: Pt. radius sp. fit
+locality-footprintWKTLabel: Footprint WKT
+locality-footprintSRSLabel: Footprint SRS
+locality-footprintSpatialFitLabel: Footprint sp. fit
+locality-coordPrecisionLabel: Precision
+locality-geoRefencedByLabel: Georeference by
 localityGroup-geoRefDateGroupLabel: Date
-collection-object-geoRefProtocolLabel: Protocol
-collection-object-geoRefSourceLabel: Source
-collection-object-geoRefVerificationStatusLabel: Verification
-collection-object-geoRefRemarksLabel: Remarks
-collection-object-geoRefPlaceNameLabel: Georeference place name
+locality-geoRefProtocolLabel: Protocol
+locality-geoRefSourceLabel: Source
+locality-geoRefVerificationStatusLabel: Verification
+locality-geoRefRemarksLabel: Remarks
+locality-geoRefPlaceNameLabel: Georeference place name
 
 #concept
 concept: Concept
