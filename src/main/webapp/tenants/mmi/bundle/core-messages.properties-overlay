@@ -10,24 +10,33 @@ login-rologin:
 login-rologin-pwd:
 login-rologin-pwdValue:
 
-acquisition-extentLabel: Extent
-acquisition-accessionDateLabel: Accession Date
+#Acquisition
+acquisition-acquisitionExtentLabel: Extent
+acquisition-mmiAccessionDateLabel: Accession Date
+acquisition-mmiAcquisitionDateLabel: Acquisition Date
 
 work-genreLabel: Genre
 work-mediumLabel: Medium
+work-scopeNoteLabel: Scope Note
+
 work-migratedEntityGroupLabel: Migrated Entity
 work-migratedEntityLabel: Entity
 work-migratedEntityTypeLabel: Entity Type
 media-isPrimaryLabel: Is Primary?
 media-isOriginalMediaLabel: Is Original Media?
-media-statusLabel: Status
+media-mediaStatusLabel: Status
 
+#Cataloging
+object-identification-administrativeRemarksLabel: Administrative Remarks
+object-identification-provenanceLabel: Provenance
+object-identification-initialCatalogingCompletedLabel: Initial Cataloging Completed
+object-identification-additionalResearchRequiredLabel: Additional research required
+object-identification-approvedByCuratorLabel: Approved by Curator
+object-identification-objectTitleLabel: Object title
+object-identification-artifactClassLabel: Artifact class
+object-identification-workTypeLabel: Work type
 
-collection-object-administrativeRemarksLabel: Administrative Remarks
-collection-object-provenanceLabel: Provenance
-collection-object-initialCatalogingLabel: Initial Cataloging Completed
-collection-object-additionalResearchLabel: Additional Research Required
-collection-object-curatorApprovedLabel: Approved by Curator
+collection-object-captionLabel: Caption
 collection-object-briefDescriptionLabel: Caption
 collection-object-distinguishingFeaturesLabel: Description
 collection-object-numberOfObjectsLabel: Extent
@@ -52,8 +61,13 @@ collection-object-assocOrganizationLabel: Associated Entity
 collection-object-assocOrganizationLabel: Associated Entity Type
 collection-object-assocOrganizationLabel: Associated Entity Note
 collection-object-objectHistoryNoteLabel: Historical Note
-collection-object-historyNoteSourcesLabel: Historical Note Sources
 
+object-description-mmiMaterialLabel: Material
+object-description-mmiInscriptionContentLabel: Inscription content
+object-description-formatLabel: Format
+
+object-history-association-historicalNoteSourcesLabel: Historical Note Sources
+object-production-mmiTechniqueLabel: Technique
 
 vocab-person: Local Entity
 vocab-ulan_pa: ULAN Entity
@@ -67,9 +81,12 @@ person-deathDateGroupLabel: Death / Dissolution Date
 person-birthPlaceLabel: Place of Birth / Founding
 person-deathPlaceLabel: Place of Death / Dissolution
 
-person-affiliatedEntityGroupLabel: Affiliated Entities
-person-affiliatedEntityLabel: Entity
-person-affiliatedEntityTypeLabel: Type
-person-entityContactNameLabel: Entity Contact Name
+person-affiliatedPersonOrgGroupLabel: Affiliated entity
+person-affiliatedPersonOrgLabel: Affiliated entity
+person-affiliatedPersonOrgTypeLabel: Affiliated entity type
+person-lifeSpanLabel: Life span
+
+person-orgContactNameLabel: Entity's contact name
+person-orgFunctionLabel: Function
 person-functionLabel: Function
 

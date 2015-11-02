@@ -52,6 +52,28 @@
 					</div>
 				</div>
 				
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-collection-object-artifactClassWorkTypeGroup-label"></div>
+					</div>
+					<div class="content">
+						<table>
+							<thead>
+								<tr>
+									<td class="label csc-object-identification-artifactClass-label"></td>
+									<td class="label csc-object-identification-workType-label"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="csc-collection-object-artifactClassWorkTypeGroup">
+									<td><select class="input-alpha-table csc-object-identification-artifactClass input-select"><option value="">Loading terms...</option></select></td>
+									<td><select class="input-alpha-table csc-object-identification-workType input-select"><option value="">Loading terms...</option></select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>			
+				
 				<div class="info-pair-select">
 					<div class="header">
 						<div class="label csc-collection-object-recordStatus-label"></div>
@@ -61,6 +83,7 @@
 					</div>
 				</div>
 			</div>
+			
 			
 			<div class="info-column2-50 fl-force-right">
 				<div class="info-pair">
@@ -78,6 +101,15 @@
 					</div>
 					<div class="content">
 						<textarea rows="4" cols="30" class="input-textarea csc-object-identification-distinguishing-features"></textarea>
+					</div>
+				</div>
+				
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-object-description-mmiInscriptionContent-label"></div>
+					</div>
+					<div class="content">
+						<textarea rows="4" cols="30" class="input-textarea csc-object-description-mmiInscriptionContent"></textarea>
 					</div>
 				</div>
 
@@ -134,44 +166,61 @@
 				</table>
 			</div>
 		</div>
+		
+		<div class="info-pair">
+			<div class="header">
+				<div class="label csc-object-identification-objectTitle-label"></div>
+			</div>
+			<div class="content">
+				<input type="text" class="csc-object-identification-objectTitle editableText"/>
+			</div>
+		</div>		
+		<div class="info-pair">
+			<div class="header">
+				<div class="label csc-collection-object-caption-label"></div>
+			</div>
+			<div class="content">
+				<textarea rows="4" cols="30" class="input-textarea csc-object-identification-caption"></textarea>
+			</div>
+		</div>		
         <div class="info-pair">
             <div class="header">
-                <div class="label csc-collection-object-administrativeRemarks-label"></div>
+                <div class="label csc-object-identification-administrativeRemarks-label"></div>
             </div>
             <div class="content">
-                <input type="text" class="csc-collection-object-administrativeRemarks"/>
+                <input type="text" class="csc-object-identification-administrativeRemarks"/>
             </div>
         </div>
         <div class="info-pair">
             <div class="header">
-                <div class="label csc-collection-object-provenance-label"></div>
+                <div class="label csc-object-identification-provenance-label"></div>
             </div>
             <div class="content">
-                <input type="text" class="csc-collection-object-provenance"/>
+                <input type="text" class="csc-object-identification-provenance"/>
             </div>
         </div>
         <div class="info-pair">
             <div class="header">
-                <div class="label csc-collection-object-initialCataloging-label"></div>
+                <div class="label csc-object-identification-initialCatalogingCompleted-label"></div>
             </div>
             <div class="content">
-                <input type="checkbox" class="csc-collection-object-initialCataloging"/>
+                <input type="checkbox" class="csc-object-identification-initialCatalogingCompleted"/>
             </div>
         </div>
         <div class="info-pair">
             <div class="header">
-                <div class="label csc-collection-object-additionalResearch-label"></div>
+                <div class="label csc-object-identification-additionalResearchRequired-label"></div>
             </div>
             <div class="content">
-                <input type="checkbox" class="csc-collection-object-additionalResearch"/>
+                <input type="checkbox" class="csc-object-identification-additionalResearchRequired"/>
             </div>
         </div>
         <div class="info-pair">
             <div class="header">
-                <div class="label csc-collection-object-curatorApproved-label"></div>
+                <div class="label csc-object-identification-approvedByCurator-label"></div>
             </div>
             <div class="content">
-                <input type="checkbox" class="csc-collection-object-curatorApproved"/>
+                <input type="checkbox" class="csc-object-identification-approvedByCurator"/>
             </div>
         </div>
 	</div>
@@ -183,6 +232,14 @@
 		<div class="info-column">
 			<div class="info-column2-50 fl-force-left">
 				<div class="info-pair">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-object-description-format-label"></div>
+						</div>
+						<div class="content">
+							<select class="input-textarea csc-object-description-format input-select"><option value="">Options not loaded</option></select>
+						</div>
+					</div>
 					<div class="header">
 						<div class="label csc-collection-object-copyNumber-label"></div>
 					</div>
@@ -191,6 +248,15 @@
 					</div>
 				</div>
 
+				<div class="info-pair">
+					<div class="header">
+						<div class="label csc-object-production-mmiTechnique-label"></div>
+					</div>
+					<div class="content">
+						<select class="csc-object-production-mmiTechnique input-select"><option value="">Options not loaded</option></select>
+					</div>
+				</div>
+				
 				<div class="info-pair-select">
 					<div class="header">
 						<div class="label csc-collection-object-forms-label"></div>
@@ -210,7 +276,14 @@
 						<input type="text" class="csc-object-description-edition-number"/>
 					</div>
 				</div>
-
+			</div>
+			<div class="info-pair">
+				<div class="header">
+					<div class="label csc-object-description-mmiMaterial-label"></div>
+				</div>
+				<div class="content">
+					<select class="csc-object-description-mmiMaterial input-select"><option value="">Options not loaded</option></select>
+				</div>
 			</div>
 		</div>
 		
@@ -553,10 +626,10 @@
 			</div>
             <div class="info-pair">
                 <div class="header">
-                    <div class="label csc-collection-object-historyNoteSources-label"></div>
+                    <div class="label csc-object-history-association-historicalNoteSources-label"></div>
                 </div>
                 <div class="content">
-                    <input type="text" class="csc-collection-object-historyNoteSources" />
+                    <input type="text" class="csc-object-history-association-historicalNoteSources" />
                 </div>
             </div>
 		</div>
