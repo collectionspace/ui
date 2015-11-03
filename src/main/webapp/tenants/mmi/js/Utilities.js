@@ -17,6 +17,12 @@ fluid.registerNamespace("cspace.util");
 
     fluid.log("Utilities.js loaded");
 
+    cspace.util.redirectToLoginPage = function () {
+        var currentUrl = document.location.href,
+            loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+        window.location = loginUrl;
+    };
+    
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
@@ -363,16 +369,6 @@ fluid.registerNamespace("cspace.util");
         };
     };
 
-    cspace.util.setZIndex = function () {
-        if ($.browser.msie) {
-            var zIndexNumber = 999;
-            $("div").each(function () {
-                $(this).css('zIndex', zIndexNumber);
-                zIndexNumber -= 1;
-            });
-        }
-    };
-
     cspace.util.initWorkType = function(mySelected){
         var myWT = $(".csc-object-identification-workType");
         //add in terms that match
@@ -469,7 +465,7 @@ fluid.registerNamespace("cspace.util");
             }).attr("selected", "selected");
         }   
     }
-
+	
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
         fluid.initDependents(that);
@@ -903,6 +899,33 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
 
+    fluid.defaults("cspace.util.urnCSIDConverter", {
+        gradeNames: ["autoInit", "fluid.viewComponent"],
+        strategy: "cspace.util.urnToString",
+        postInitFunction: "cspace.util.urnCSIDConverter.postInit",
+        components: {
+            externalURL: {
+                type: "cspace.externalURL",
+                container: "{cspace.util.urnCSIDConverter}.container"
+            }
+        },
+        styles: {
+            parent: "cs-urnCSIDConverter"
+        }
+    });
+
+    cspace.util.urnCSIDConverter.postInit = function (that) {
+        var strategy = fluid.getGlobalValue(that.options.strategy);
+        that.container.hide();
+        that.parent = $("<div/>");
+        that.parent.addClass(that.options.styles.parent);
+        that.container.wrap(that.parent);
+        that.input = $("<input/>");
+        that.input.prop("disabled", true);
+        that.input.val(strategy(that.container.val()));
+        that.container.after(that.input);
+    };
+
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -913,6 +936,23 @@ fluid.registerNamespace("cspace.util");
             return "";
         }
         return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");
+    };
+
+    cspace.util.urnToCSID = function (urn) {
+        if (!urn) {
+            return "";
+        }
+        return decodeURIComponent(urn.slice(urn.indexOf("id(") + 3, urn.indexOf(")")));
+    };
+
+    cspace.util.shortIdentifierToCSID = function (urn) {
+        var shortIdentifier;
+        if (!urn) {
+            return "";
+        }
+        urn = urn.slice(urn.indexOf("item:name(") + 10);
+        shortIdentifier = decodeURIComponent(urn.slice(0, urn.indexOf(")")));
+        return fluid.stringTemplate("urn:cspace:name(%shortIdentifier)", {shortIdentifier: shortIdentifier});
     };
 
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
@@ -1061,6 +1101,9 @@ fluid.registerNamespace("cspace.util");
                 namespace: "onPerformNavigationFinal"
             }
         },
+        components: {
+            messageBar: "{messageBar}"
+        },
         preInitFunction: "cspace.util.globalNavigator.preInit",
         postInitFunction: "cspace.util.globalNavigator.postInit",
         clearFunction: "cspace.util.globalNavigator.clear"
@@ -1100,7 +1143,8 @@ fluid.registerNamespace("cspace.util");
             }
             that.events.onPerformNavigation.fire(function () {
                 // NOTE: dispatchEvent has proven to be extremely unreliable in cross
-                // browser testing. Thus we resolve to more straitforward redirect. 
+                // browser testing. Thus we resolve to more straitforward redirect.
+                that.messageBar.disable();
                 window.location.href = target.attr("href");
             }, evt);
             return false;
@@ -1108,6 +1152,7 @@ fluid.registerNamespace("cspace.util");
         that.container.delegate(that.options.selectors.forms, "submit", function () {
             var target = $(this);
             that.events.onPerformNavigation.fire(function () {
+                that.messageBar.disable();
                 target[0].submit();
             });
             return false;
@@ -1131,7 +1176,8 @@ fluid.registerNamespace("cspace.util");
         that.init = function (tag, options) {
             options = options || {};
             that.events.onFetch.fire();
-            fluid.fetchResources({
+
+            var spec = {
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
                     options: {
@@ -1140,8 +1186,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("Error fetching config file: " + textStatus);
                         }
                     }
-                },
-                loginstatus: {
+                }
+            };
+
+            if (!that.loginStatus) {
+                spec.loginstatus = {
                     href: fluid.invoke("cspace.util.getLoginURL"),
                     options: {
                         dataType: "json",
@@ -1159,9 +1208,7 @@ fluid.registerNamespace("cspace.util");
                                 }
                                 
                                 if (!check) {
-                                    var currentUrl = document.location.href;
-                                    var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                                    window.location = loginUrl;
+                                    cspace.util.redirectToLoginPage();
                                 }
                             });
                         },
@@ -1169,8 +1216,11 @@ fluid.registerNamespace("cspace.util");
                             that.displayErrorMessage("PageBuilder was not able to retrieve login information and user permissions: " + textStatus);
                         }
                     }
-                }
-            }, function (resourceSpecs) {
+                };
+            }
+
+            fluid.fetchResources(spec, function (resourceSpecs) {
+                that.loginStatus = that.loginStatus || resourceSpecs.loginstatus.resourceText;
                 if (!that.globalBundle || !that.messageBar) {
                     that.events.afterFetch.fire();
                 }
@@ -1181,7 +1231,7 @@ fluid.registerNamespace("cspace.util");
                 }, {
                     pageBuilder: {
                         options: {
-                            userLogin: resourceSpecs.loginstatus.resourceText
+                            userLogin: that.loginStatus
                         }
                     },
                     pageBuilderIO: {
@@ -1246,7 +1296,7 @@ fluid.registerNamespace("cspace.util");
             eventMap: {
                 "primaryModel.csid": function () {
                     if (fluid.get(that.globalModel.model, "primaryModel.csid")) {
-                        that.events.primaryRecordCreated.fire();
+                        that.events.primaryRecordCreated.fire(fluid.get(that.globalModel.model, "primaryModel"));
                     }
                 },
                 "primaryModel.fields.blobCsid": that.events.primaryMediaUpdated.fire
@@ -1309,6 +1359,23 @@ fluid.registerNamespace("cspace.util");
                         "{globalSetup}.events.onFetch"
                     ]
                 }
+            },
+            autoLogout: {
+                type: "cspace.autoLogout",
+                createOnEvent: "afterFetch",
+                options: {
+                    invokers: {
+                        warnUser: {
+                            funcName: "cspace.autoLogout.warnUser",
+                            args: ["{messageBar}", "{autoLogout}.options.strings", "{globalBundle}", "{autoLogout}.options.loginExpiryNotificationTime"]
+                        },
+                        processModel: {
+                            funcName: "cspace.autoLogout.processLoginStatus",
+                            args: ["{autoLogout}"]
+                        }
+                    },
+                    model: "{cspace.globalSetup}.loginStatus"
+                }
             }
         }
     });
@@ -1319,6 +1386,82 @@ fluid.registerNamespace("cspace.util");
         }
         messageBar.show(message, Date(), true);
     };
+    
+    /* autoLogout component */
+    fluid.defaults("cspace.autoLogout", {
+        gradeNames: ["fluid.eventedComponent", "autoInit", "fluid.modelComponent"],
+        preInitFunction: "cspace.autoLogout.preInit",
+        finalInitFunction: "cspace.autoLogout.finalInit",
+        invokers: {
+            logoutUser: "cspace.util.redirectToLoginPage",
+            warnUser: null,
+            processModel: null
+        },
+        events: {
+            onModel: null
+        },
+        listeners: {
+            onModel: "{that}.applyModel"
+        },
+        timerLoginExpiry: undefined,
+        timerLoginExpiryNotification: undefined,
+        loginExpiryTime: undefined,
+        loginExpiryNotificationTime: 180, // Going to set default 3 minutes of notifications before the logout
+        model: {}
+    });
+    
+    cspace.autoLogout.preInit = function (that) {
+        that.applyModel = function (newModel) {
+            that.applier.requestChange("", newModel);
+        };
+    };
+    
+    cspace.autoLogout.finalInit = function (that) {
+        var invokers = that.options.invokers;
+        var setTimers = function () {
+            var loginExpiryTime = that.options.loginExpiryTime,
+                loginExpiryNotificationTime = that.options.loginExpiryNotificationTime,
+                logoutUser = (invokers.logoutUser) ? that.logoutUser : null,
+                warnUser = (invokers.warnUser) ? that.warnUser : null;
+
+            if (!loginExpiryTime || !logoutUser) {
+                return;
+            }
+
+            clearTimeout(that.options.timerLoginExpiry);
+            that.options.timerLoginExpiry = setTimeout(logoutUser, loginExpiryTime * 1000);
+
+            if (loginExpiryNotificationTime && loginExpiryTime && (loginExpiryTime - loginExpiryNotificationTime) > 0 && warnUser) {
+                clearTimeout(that.options.timerLoginExpiryNotification);
+                that.options.timerLoginExpiryNotification = setTimeout(warnUser, (loginExpiryTime - loginExpiryNotificationTime) * 1000);
+            }
+        };
+        if (invokers.processModel) {
+            that.applier.modelChanged.addListener("", function () {
+                that.processModel();
+                setTimers();
+            });
+            that.processModel();
+        }
+        setTimers();
+    };
+    
+    cspace.autoLogout.warnUser = function (messageBar, strings, parentBundle, loginExpiryNotificationTime) {
+        loginExpiryNotificationTime = Math.floor(loginExpiryNotificationTime / 60);
+        messageBar.show(parentBundle.resolve("login-autoLogoutMessage", [loginExpiryNotificationTime]), null, false);
+    };
+    
+    cspace.autoLogout.processLoginStatus = function (that) {
+        var loginStatus = that.model;
+        
+        // If we are not logged-in or have a valid login expiry time then set a timer on for auto logout
+        if (!loginStatus.login || !loginStatus.maxInterval) {
+            return;
+        }
+        
+        that.options.loginExpiryTime = loginStatus.maxInterval;
+    };
+    /* autoLogout component */
     
     fluid.defaults("cspace.vocab", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
@@ -1370,7 +1513,8 @@ fluid.registerNamespace("cspace.util");
         });
         fluid.each(that.authorities, function (authority) {
             that.authority[authority] = {
-                nptAllowed: {}
+                nptAllowed: {},
+                order: {}
             };
             Object.defineProperty(that.authority[authority], "vocabs", {
                 get: function () {
@@ -1385,6 +1529,16 @@ fluid.registerNamespace("cspace.util");
                     return fluid.transform(fluid.get(that.list, authority), function (val) {
                         return val.nptAllowed;
                     });
+                },
+                enumerable : true
+            });
+            Object.defineProperty(that.authority[authority].order, "vocabs", {
+                get: function () {
+                    var vocabs = [];
+                    fluid.each(fluid.get(that.list, authority), function (val, authority) {
+                        vocabs[val.order] = authority;
+                    });
+                    return vocabs;
                 },
                 enumerable : true
             });
@@ -1419,7 +1573,8 @@ fluid.registerNamespace("cspace.util");
         },
         mergePolicy: {
             schema: "nomerge",
-            model: "preserve"
+            model: "preserve",
+            sortRecords: "replace"
         },
         invokers: {
             getRecordTypes: {
@@ -1428,6 +1583,9 @@ fluid.registerNamespace("cspace.util");
             }
         },
         model: {},
+        sortRecords: [
+            "nonVocabularies"
+        ],
         strategy: cspace.util.schemaStrategy,
         finalInitFunction: "cspace.recordTypes.finalInit"
     });
@@ -1444,6 +1602,14 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
         that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
+        
+        fluid.each(that.options.sortRecords, function(elPath) {
+            if (!that[elPath]) {
+                return;
+            }
+            that[elPath] = that[elPath].sort();
+        });
+        
         that.events.ready.fire(that);
     };
 
@@ -1741,7 +1907,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.findLabel = function (required) {
-        return $(required).parents(".info-pair").find(".label").text();
+        return $(required).parents(".info-pair,.info-pair-date,.info-pair-select").find(".label").text();
     };
     
     cspace.util.processReadOnly = function (container, readOnly, neverReadOnly) {

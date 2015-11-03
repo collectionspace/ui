@@ -15,13 +15,17 @@ acquisition-acquisitionExtentLabel: Extent
 acquisition-mmiAccessionDateLabel: Accession Date
 acquisition-mmiAcquisitionDateLabel: Acquisition Date
 
+#Work
+preferredWork-termSourceDetailLabel: Indexing notes
+preferredWork-termSourceNoteLabel: History notes
+
+work-workHistoryNoteLabel: Scope notes
 work-genreLabel: Genre
 work-mediumLabel: Medium
-work-scopeNoteLabel: Scope Note
-
 work-migratedEntityGroupLabel: Migrated Entity
 work-migratedEntityLabel: Entity
 work-migratedEntityTypeLabel: Entity Type
+
 media-isPrimaryLabel: Is Primary?
 media-isOriginalMediaLabel: Is Original Media?
 media-mediaStatusLabel: Status
