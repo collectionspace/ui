@@ -14,6 +14,8 @@ login-rologin-pwdValue:
 acquisition-acquisitionExtentLabel: Extent
 acquisition-mmiAccessionDateLabel: Accession Date
 acquisition-mmiAcquisitionDateLabel: Acquisition Date
+acquisition-acquisitionReasonLabel: Provenance
+acquisition-acquisitionNoteLabel: Acquisition description
 
 #Work
 preferredWork-termSourceDetailLabel: Indexing notes
@@ -29,6 +31,9 @@ work-migratedEntityTypeLabel: Entity Type
 media-isPrimaryLabel: Is Primary?
 media-isOriginalMediaLabel: Is Original Media?
 media-mediaStatusLabel: Status
+media-rightsHolderLabel: License
+media-descriptionLabel: Notes
+media-titleLabel: Caption
 
 #Cataloging
 object-identification-administrativeRemarksLabel: Administrative Remarks
