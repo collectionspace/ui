@@ -50,7 +50,12 @@ collection-object-briefDescriptionLabel: Caption
 collection-object-distinguishingFeaturesLabel: Description
 collection-object-numberOfObjectsLabel: Extent
 collection-object-objectNameLabel: Artifact class / Work type
+
 collection-object-responsibleDepartmentLabel: Collection category
+collection-object-responsibleDepartmentLabel: Collection category
+collection-object-responsibleDepartmentsLabel: Collection category
+object-identification-responsible-departmentLabel: Collection category
+
 collection-object-contentLanguageLabel: Language
 collection-object-contentPlaceLabel: Place
 collection-object-contentEntitiesGroupLabel: Content - Entities
