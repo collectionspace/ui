@@ -121,6 +121,11 @@ media-localityLabel: Locality
 media-typesLabel: Types of media
 media-typeLabel: Types of media
 media-localityInformationLabel: Locality Information
+media-collectorLabel: Collector
+media-mediaTaxaGroupLabel: Associated Taxa
+media-associatedTaxonLabel: Scientific Name
+media-commonNameLabel: Common Name
+media-interactionLabel: Interaction
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
