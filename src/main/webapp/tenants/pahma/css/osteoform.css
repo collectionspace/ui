@@ -1,3 +1,7 @@
+.osteo-form input[type='button']:disabled {
+    display: none;
+}
+
 .osteo-row {
     display: flex;
 }
@@ -16,14 +20,23 @@
     margin-right: auto;
 }
 
-.csc-osteology-form input[type='button'] {
-    border-radius: 4px;
+.osteo {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.osteo fieldset {
+    border: none;
 }
 
 .osteo th, .osteo td {
+    font-size: 12px;
+    font-weight: normal;
     line-height: 16px;
     width: 16px;
     position: relative;
+    border: 0;
+    padding: 0;
 }
 
 .osteo th {
@@ -35,6 +48,11 @@
     vertical-align: center;
     text-align: center;
     overflow: hidden;
+}
+
+.osteo input[type="text"] {
+    width: 100%;
+    height: 19px;
 }
 
 .osteo .flat-label .sides {
@@ -146,7 +164,7 @@
 }
 
 .osteo label > input[type="checkbox"]:checked + span {
-    background-image: url(../images/checkbox-checked.png);;
+    background-image: url(../images/checkbox-checked.png);
 }
 
 .osteo label > input[type="radio"]:checked + span {
@@ -218,7 +236,6 @@
 .osteo.dental {
     width: 420px;
     height: 420px;
-/*    background-color: yellow;*/
     background-image: url(../images/dental_form.svg);
     background-repeat: no-repeat;
     background-size: 420px;
@@ -226,21 +243,33 @@
     display: flex;
 }
 
+.osteo.dental input[type='button']:disabled {
+    display: inline-block;
+    visibility: hidden;
+}
+
+.osteo.dental fieldset {
+    margin: 0;
+    padding: 0;
+}
+
 .osteo.dental .zeroButton {
     position: relative;
 }
 
 .osteo.dental legend {
+    font-size: 12px;
     text-align: center;
     width: 100%;
     position: relative;
     color: #333333;
+    margin: 0;
+    padding: 0;
 }
 
 .osteo.dental .permanent {
     width: 210px;
     position: relative;
-/*    background-color: rgba(255, 0, 0, .3);*/
 }
 
 .osteo.dental .permanent .zeroButton {
@@ -259,7 +288,6 @@
     margin-left: 42px;
     width: 168px;
     position: relative;
-/*    background-color: rgba(255, 0, 0, .3);*/
 }
 
 .osteo.dental .deciduous .zeroButton {

@@ -2765,3 +2765,9 @@ li.cs-repeatable-repeat .stretched .cs-termList {
     background: url(../images/warning.png) no-repeat top left;
     padding-left: 18px;
 }
+
+/* osteology */
+
+.csc-osteology-form input[type='button'] {
+    border-radius: 4px;
+}
