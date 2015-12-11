@@ -6,6 +6,49 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(botgarden_4.1-9) -->
+<div id="botgarden_4.1-9">
+<h2>Version botgarden_4.1-9 <span class="releasedate">(December 10, 2015)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Install demo instances of botanical garden, anthropology, and herbarium tenants <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6856">CSPACE-6856</a>)</span>
+<ul class="commits">
+<li id="commit_86d4b75" class="application commit">Uncomment taxon from core-tenant.xml, so nuxeo doctype bundles are properly built.</li>
+</ul>
+</li>
+<li class="issue">
+Enable structured date parser <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/UCBG-429">UCBG-429</a>)</span>
+<ul class="commits">
+<li id="commit_ec6934b" class="services commit">Change refname domains for botgarden.</li>
+<li id="commit_ec7cb6c" class="ui commit">Enable structured date parser.</li>
+</ul>
+</li>
+<li class="issue">
+Add "Nectandra Working Group Number" to Other Number static vocabulary <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/UCJEPS-615">UCJEPS-615</a>)</span>
+<ul class="commits">
+<li id="commit_1f1f48a" class="application commit">add 'living under' to associated taxa interactions</li>
+</ul>
+</li>
+<li class="issue">
+Add locality group to media record <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/UCJEPS-619">UCJEPS-619</a>)</span>
+<ul class="commits">
+<li id="commit_b262143" class="application commit">Add locality group config and modify naturalhistory-collectionobject.xml to use it.</li>
+<li id="commit_50542e0" class="ui commit">Add locality group component.</li>
+<li id="commit_496b0a4" class="application commit">Use locality group.</li>
+<li id="commit_72500e8" class="ui commit">Use locality group.</li>
+<li id="commit_04dd668" class="application commit">Generate authrefs/termrefs correctly for 'self renderer' groups not in the common schema.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_1958b73" class="services commit">Instantiate an evaluator on the stack for calls to StructuredDate.parse, so that it is thread safe.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(botgarden_4.1-8) -->
 <div id="botgarden_4.1-8">
 <h2>Version botgarden_4.1-8 <span class="releasedate">(August 10, 2015)</span></h2>
