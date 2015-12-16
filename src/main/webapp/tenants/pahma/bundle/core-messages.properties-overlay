@@ -1137,37 +1137,6 @@ conditioncheck-objectRequirementInformationLabel: Object Requirement and Handlin
 conditioncheck-conditionCheckNoteLabel: Condition Note
 
 # Osteology
-osteology-recordList: Related Osteology Records
-osteology-number: Inventory ID
-osteology-editRecord: Edit Osteology Record
-osteology: Osteology
-osteology-tab: Osteo
-osteology-InventoryIDLabel: Inventory ID
-osteology-identificationNumberRequired: Please specify an Inventory ID
-osteology-NotesOnElementInventoryLabel: Notes on inventory
-osteology-osteoAgeEstimateGroupLabel: Age estimate
-osteology-osteoAgeEstimateVerbatimLabel: Age estimate verbatim
-osteology-osteoAgeEstimateLowerLabel: Lower estimate (in years)
-osteology-osteoAgeEstimateUpperLabel: Upper estimate (in years)
-osteoAgeEstimateGroup-osteoAgeEstimateDateGroupLabel: Date
-osteology-osteoAgeEstimateAnalystLabel: Analyst
-osteology-osteoAgeEstimateNoteLabel: Notes
-osteology-sexDeterminationGroupLabel: Sex determination
-osteology-sexDeterminationLabel: Sex
-sexDeterminationGroup-sexDeterminationDateGroupLabel: Date
-osteology-sexDeterminationAnalystLabel: Analyst
-osteology-sexDeterminationNoteLabel: Notes
-osteology-inventoryAnalystLabel: Analyst
-osteology-inventoryDateLabel: Date 
-osteology-inventoryDateStartLabel: Earliest
-osteology-inventoryDateEndLabel: Latest
-osteology-updatedByLabel: Record last modified by
-osteology-createdAtLabel: Created date
-osteology-createdAtStartLabel: Earliest
-osteology-createdAtEndLabel: Latest
-osteology-updatedAtLabel: Modified date
-osteology-updatedAtStartLabel: Earliest
-osteology-updatedAtEndLabel: Latest 
 osteology-Notes_DentalPathologyLabel: Dental pathology (incl. alveolar)
 osteology-Notes_CranialPathologyLabel: Cranial bony pathology
 osteology-Notes_PostcranialPathologyLabel: Postcranial bony pathology
