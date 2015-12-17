@@ -1143,3 +1143,18 @@ osteology-Notes_PostcranialPathologyLabel: Postcranial bony pathology
 osteology-Notes_CulturalModificationsLabel: Cultural modifications
 osteology-Notes_NHTaphonomicAlterationsLabel: Nonhuman taphonomic alterations
 osteology-Notes_CuratorialSuffixingLabel: Curatorial suffixing notes
+osteology-culturalModificationInformationLabel: Cultural Modification Information
+osteology-cranialDeformationInformationLabel: Cranial Deformation Information
+osteology-trepanationInformationLabel: Trepanation Information
+osteology-cranialDeformationPresentLabel: Is any evidence of cranial deformation present?
+osteology-cranialDeformationCategoryLabel: General category
+osteology-cranialDeformationNoteLabel: Comments on cranial deformation
+osteology-trepanationPresentLabel: Is any evidence of trepanation present?
+osteology-trepanationLocationLabel: Location (bone and side)
+osteology-trepanationDimensionMaxLabel: Max. dimension (mm)
+osteology-trepanationDimensionMinLabel: Min. dimension (mm)
+osteology-trepanationTechniqueLabel: Technique
+osteology-trepanationHealingLabel: Healing
+osteology-trepanationCertaintyLabel: Certainty
+osteology-trepanationNoteLabel: Comments
+osteology-trepanationGeneralNoteLabel: Comments on trepanation

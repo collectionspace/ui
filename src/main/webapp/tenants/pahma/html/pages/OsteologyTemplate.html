@@ -78,7 +78,7 @@
                 <div class="label csc-osteology-NotesOnElementInventory-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-NotesOnElementInventory" />
+                <textarea class="csc-osteology-NotesOnElementInventory"></textarea>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
                 <div class="label csc-osteology-Notes_DentalPathology-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_DentalPathology" />
+                <textarea class="csc-osteology-Notes_DentalPathology"></textarea>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
                 <div class="label csc-osteology-Notes_CranialPathology-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_CranialPathology" />
+                <textarea class="csc-osteology-Notes_CranialPathology"></textarea>
             </div>
         </div>
     </div>
@@ -147,7 +147,7 @@
                 <div class="label csc-osteology-Notes_PostcranialPathology-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_PostcranialPathology" />
+                <textarea class="csc-osteology-Notes_PostcranialPathology"></textarea>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
                 <div class="label csc-osteology-Notes_CulturalModifications-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_CulturalModifications" />
+                <textarea class="csc-osteology-Notes_CulturalModifications"></textarea>
             </div>
         </div>
     </div>
@@ -170,7 +170,7 @@
                 <div class="label csc-osteology-Notes_NHTaphonomicAlterations-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_NHTaphonomicAlterations" />
+                <textarea class="csc-osteology-Notes_NHTaphonomicAlterations"></textarea>
             </div>
         </div>
     </div>
@@ -180,7 +180,155 @@
                 <div class="label csc-osteology-Notes_CuratorialSuffixing-label"></div>
             </div>
             <div class="content">
-                <textarea class="csc-osteology-Notes_CuratorialSuffixing" />
+                <textarea class="csc-osteology-Notes_CuratorialSuffixing"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-osteology-culturalModificationInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
+        <div class="fl-container-flex fl-fix information-group">
+            <div class="csc-recordEditor-header fl-container-flex header toggle csc-osteology-cranialDeformationInformation-label"></div>
+            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
+                <div class="info-column">
+                    <div class="info-column2-50 fl-force-left">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label"><label for=".csc-osteology-cranialDeformationPresent" class="csc-osteology-cranialDeformationPresent-label"/></div>
+                            </div>
+                            <div class="content">
+                                <input class="csc-osteology-cranialDeformationPresent" type="checkbox"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair-select">
+                            <div class="header">
+                                <div class="label csc-osteology-cranialDeformationCategory-label"></div>
+                            </div>
+                            <div class="content">
+                                <select class="csc-osteology-cranialDeformationCategory input-select"><option value="">Options not loaded</option></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-osteology-cranialDeformationNote-label"></div>
+                    </div>
+                    <div class="content">
+                        <textarea class="csc-osteology-cranialDeformationNote"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="fl-container-flex fl-fix information-group">
+            <div class="csc-recordEditor-header fl-container-flex header toggle csc-osteology-trepanationInformation-label"></div>
+            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label"><label for=".csc-osteology-trepanationPresent" class="csc-osteology-trepanationPresent-label"/></div>
+                        </div>
+                        <div class="content">
+                            <input class="csc-osteology-trepanationPresent" type="checkbox"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column cs-multipleEdit" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label"></div>
+                        </div>
+                        <div class="content csc-osteology-trepanationGroup cs-repeatable-stretched">
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-osteology-trepanationLocation-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-osteology-trepanationLocation"/>
+                                        </div>
+                                    </div>
+                                    <div class="info-column">
+                                        <div class="info-column2-50 fl-force-left">
+                                            <div class="info-pair">
+                                                <div class="header">
+                                                    <div class="label csc-osteology-trepanationDimensionMin-label"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <input type="text" class="csc-osteology-trepanationDimensionMin"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="info-column2-50 fl-force-right">
+                                            <div class="info-pair">
+                                                <div class="header">
+                                                    <div class="label csc-osteology-trepanationDimensionMax-label"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <input type="text" class="csc-osteology-trepanationDimensionMax"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-column">
+                                        <div class="info-column2-50 fl-force-left">
+                                            <div class="info-pair-select">
+                                                <div class="header">
+                                                    <div class="label csc-osteology-trepanationTechnique-label"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <select class="csc-osteology-trepanationTechnique input-select"><option value="">Options not loaded</option></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="info-column2-50 fl-force-right">
+                                            <div class="info-pair-select">
+                                                <div class="header">
+                                                    <div class="label csc-osteology-trepanationHealing-label"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <select class="csc-osteology-trepanationHealing input-select"><option value="">Options not loaded</option></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair-select">
+                                        <div class="header">
+                                            <div class="label csc-osteology-trepanationCertainty-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-osteology-trepanationCertainty input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-osteology-trepanationNote-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <textarea class="csc-osteology-trepanationNote"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-osteology-trepanationGeneralNote-label"></div>
+                    </div>
+                    <div class="content">
+                        <textarea class="csc-osteology-trepanationGeneralNote"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
