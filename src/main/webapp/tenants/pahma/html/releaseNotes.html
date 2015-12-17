@@ -6,6 +6,56 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(pahma_4.1-35) -->
+<div id="pahma_4.1-35">
+<h2>Version pahma_4.1-35 <span class="releasedate">(December 16, 2015)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Install demo instances of botanical garden, anthropology, and herbarium tenants <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6856">CSPACE-6856</a>)</span>
+<ul class="commits">
+<li id="commit_86d4b75" class="application commit">Uncomment taxon from core-tenant.xml, so nuxeo doctype bundles are properly built.</li>
+</ul>
+</li>
+<li class="issue">
+Osteology: Implement "Cultural Modification" information section <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1397">PAHMA-1397</a>)</span>
+<ul class="commits">
+<li id="commit_04d9dd8" class="ui commit">Add cultural modification fields to osteo form.</li>
+<li id="commit_b881e31" class="application commit">Configure fields and vocabs for osteo cultural modification section.</li>
+<li id="commit_25326dd" class="application commit">Merge changes from defaults into tenant overrides.</li>
+</ul>
+</li>
+<li class="issue">
+Add "Nectandra Working Group Number" to Other Number static vocabulary <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/UCJEPS-615">UCJEPS-615</a>)</span>
+<ul class="commits">
+<li id="commit_1f1f48a" class="application commit">add 'living under' to associated taxa interactions</li>
+</ul>
+</li>
+<li class="issue">
+Add locality group to media record <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/UCJEPS-619">UCJEPS-619</a>)</span>
+<ul class="commits">
+<li id="commit_b262143" class="application commit">Add locality group config and modify naturalhistory-collectionobject.xml to use it.</li>
+<li id="commit_50542e0" class="ui commit">Add locality group component.</li>
+<li id="commit_04dd668" class="application commit">Generate authrefs/termrefs correctly for 'self renderer' groups not in the common schema.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_6aecfbb" class="ui commit">Remove osteo files from tenants/pahma.</li>
+<li id="commit_2cfb209" class="ui commit">Add osteo files to defaults.</li>
+<li id="commit_7c4f303" class="ui commit">Add (commented out) osteo css and js to record.html.</li>
+<li id="commit_5e614d5" class="ui commit">Remove core osteology messages from pahma overlay.</li>
+<li id="commit_90976bb" class="ui commit">Add core osteology messages to defaults.</li>
+<li id="commit_492534f" class="ui commit">Remove anthro extension fields from default osteology template.</li>
+<li id="commit_f5da63a" class="ui commit">Add anthro extension fields to osteo template for pahma.</li>
+<li id="commit_220f4a4" class="ui commit">Properly close a textarea tag.</li>
+<li id="commit_95e0c50" class="application commit">Add defaults/anthropology-procedure-osteology.xml to shared branch.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(pahma_4.1-34) -->
 <div id="pahma_4.1-34">
 <h2>Version pahma_4.1-34 <span class="releasedate">(November 30, 2015)</span></h2>
