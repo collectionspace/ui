@@ -6,6 +6,39 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(pahma_4.1-37) -->
+<div id="pahma_4.1-37">
+<h2>Version pahma_4.1-37 <span class="releasedate">(December 23, 2015)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+App layer processing of list results is very inefficient <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6852">CSPACE-6852</a>)</span>
+<ul class="commits">
+<li id="commit_5716b9a" class="application commit">Refactor GenericStorage.getHardListView.</li>
+<li id="commit_1a30153" class="application commit">Refactor AuthorizationStorage.getPathsJSON.</li>
+<li id="commit_e725158" class="application commit">Replace node.matches call in ServicesRelationStorage.getPathsJSON with string equality test.</li>
+<li id="commit_759f026" class="application commit">Replace node.matches call in ConfiguredVocabStorage.getPathsJSON with string equality test.</li>
+<li id="commit_94291dc" class="application commit">Replace node.matches call in GenericStorage.handleHierarchyPayloadRetrieve with string equality test.</li>
+<li id="commit_a66fbc4" class="application commit">Refactor GenericStorage.getRepeatableHardListView.</li>
+</ul>
+</li>
+<li class="issue">
+Add PAHMA Place Authority to Display Name field on Place Adv. Search <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1081">PAHMA-1081</a>)</span>
+<ul class="commits">
+<li id="commit_c49297a" class="application commit">Make display name on place adv. search an autocomplete.</li>
+<li id="commit_32a0141" class="ui commit">Make display name on place adv. search an autocomplete.</li>
+</ul>
+</li>
+<li class="issue">
+Add checkbox to media record for "is a catalog card" <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-988">PAHMA-988</a>)</span>
+<ul class="commits">
+<li id="commit_0230e97" class="application commit">Add documentationImage field to media_pahma.</li>
+<li id="commit_e889832" class="ui commit">Add documentation image field to media record.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(pahma_4.1-36) -->
 <div id="pahma_4.1-36">
 <h2>Version pahma_4.1-36 <span class="releasedate">(December 16, 2015)</span></h2>
