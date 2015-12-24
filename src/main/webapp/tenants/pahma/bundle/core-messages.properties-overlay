@@ -634,6 +634,8 @@ media-createdAtLabel: Created Date
 media-createdAtStartLabel: Earliest
 media-createdAtEndLabel: Latest
 media-subjectLabel: Subject(s)
+media-documentationImageLabel: Documentation image?
+media-documentationImageSearchLabel: Documentation image?
 
 # ******************* Intake (=Object Entry) ******************* #
 intake-objectEntryInformationLabel: Object Entry Information
