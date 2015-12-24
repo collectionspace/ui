@@ -516,6 +516,7 @@ place-placeTypeLabel: Place type
 place-placeIdentifierLabel: Identifier
 place-placeNameGroupLabel: Place names
 preferredPlace-termDisplayNameLabel: Display name
+preferredPlace-termDisplayNameSearchEntryLabel: Display name
 preferredPlace-termNameLabel: Name
 preferredPlace-termQualifierLabel: Qualifier
 preferredPlace-termTypeLabel: Type
