@@ -1,0 +1,65 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "osteology",
+            "schema": {
+                "osteology": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "osteology-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-osteology"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "osteology-editRecord",
+                            "recordList": "osteology-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                    "selectors": {
+                                        "identificationNumber": ".csc-osteology-InventoryID"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy", "fields.InventoryID"],
+                                    "components": {
+                                        "osteology": {
+                                            "type": "cspace.osteology",
+                                            "options": {
+                                                "applier": "{recordEditor}.applier",
+                                                "model": "{recordEditor}.model"
+                                            }
+                                        },
+                                        "saver": {
+                                            "options": {
+                                                "components": {
+                                                    "validator": {
+                                                        "options": {
+                                                            "selectors": {
+                                                                "requiredFields": ".csc-required"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
