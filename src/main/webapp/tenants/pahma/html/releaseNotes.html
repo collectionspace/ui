@@ -6,6 +6,22 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(pahma_4.1-39) -->
+<div id="pahma_4.1-39">
+<h2>Version pahma_4.1-39 <span class="releasedate">(January  4, 2016)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Database connections are not pooled <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6823">CSPACE-6823</a>)</span>
+<ul class="commits">
+<li id="commit_eccef2f" class="services commit">Cache and re-use EntityManagerFactory instances.</li>
+<li id="commit_97ddd77" class="services commit">Configure pooling for JPA.</li>
+<li id="commit_6229eff" class="services commit">Clear entity manager factory cache after releasing.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(pahma_4.1-38) -->
 <div id="pahma_4.1-38">
 <h2>Version pahma_4.1-38 <span class="releasedate">(January  4, 2016)</span></h2>
