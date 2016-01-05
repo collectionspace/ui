@@ -6,6 +6,51 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(ucjeps_4.1-22) -->
+<div id="ucjeps_4.1-22">
+<h2>Version ucjeps_4.1-22 <span class="releasedate">(January  4, 2016)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Database connections are not pooled <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6823">CSPACE-6823</a>)</span>
+<ul class="commits">
+<li id="commit_eccef2f" class="services commit">Cache and re-use EntityManagerFactory instances.</li>
+<li id="commit_97ddd77" class="services commit">Configure pooling for JPA.</li>
+<li id="commit_6229eff" class="services commit">Clear entity manager factory cache after releasing.</li>
+</ul>
+</li>
+<li class="issue">
+App layer processing of list results is very inefficient <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6852">CSPACE-6852</a>)</span>
+<ul class="commits">
+<li id="commit_5716b9a" class="application commit">Refactor GenericStorage.getHardListView.</li>
+<li id="commit_1a30153" class="application commit">Refactor AuthorizationStorage.getPathsJSON.</li>
+<li id="commit_e725158" class="application commit">Replace node.matches call in ServicesRelationStorage.getPathsJSON with string equality test.</li>
+<li id="commit_759f026" class="application commit">Replace node.matches call in ConfiguredVocabStorage.getPathsJSON with string equality test.</li>
+<li id="commit_94291dc" class="application commit">Replace node.matches call in GenericStorage.handleHierarchyPayloadRetrieve with string equality test.</li>
+<li id="commit_a66fbc4" class="application commit">Refactor GenericStorage.getRepeatableHardListView.</li>
+</ul>
+</li>
+<li class="issue">
+Osteology: Implement "Cultural Modification" information section <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1397">PAHMA-1397</a>)</span>
+<ul class="commits">
+<li id="commit_b881e31" class="application commit">Configure fields and vocabs for osteo cultural modification section.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_034267e" class="application commit">CSPACE-6590, CSPACE-6696: Fixed issues causing very bad fanout to the services layer when reading role permissions.</li>
+<li id="commit_2cfb209" class="ui commit">Add osteo files to defaults.</li>
+<li id="commit_7c4f303" class="ui commit">Add (commented out) osteo css and js to record.html.</li>
+<li id="commit_90976bb" class="ui commit">Add core osteology messages to defaults.</li>
+<li id="commit_492534f" class="ui commit">Remove anthro extension fields from default osteology template.</li>
+<li id="commit_220f4a4" class="ui commit">Properly close a textarea tag.</li>
+<li id="commit_95e0c50" class="application commit">Add defaults/anthropology-procedure-osteology.xml to shared branch.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(ucjeps_4.1-21) -->
 <div id="ucjeps_4.1-21">
 <h2>Version ucjeps_4.1-21 <span class="releasedate">(December 10, 2015)</span></h2>
