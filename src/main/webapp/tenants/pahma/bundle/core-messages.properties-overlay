@@ -825,6 +825,7 @@ collection-object-biologicalInformationLabel: Biological Information
 collection-object-contentInformationLabel: Content Depicted
 collection-object-contentDescriptionLabel: Description
 collection-object-contentOrganizationsLabel: Organization depicted
+collection-object-contentWorksLabel: Work depicted
 collection-object-contentPositionsLabel: Position
 collection-object-contentActivitiesLabel: Activity depicted
 collection-object-contentLanguagesLabel: Language
