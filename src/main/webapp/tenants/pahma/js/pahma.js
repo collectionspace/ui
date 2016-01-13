@@ -24,15 +24,15 @@ var pahma = {};
 		return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 
-	var objectNumberPattern = /^([cC](ons|ONS)?[\-\. ]?)?(No-Temp|[A-Z]+)?([\-\. ])?(\d+)([\-\. ])?(\d+)?([\.\- ]+)?(\d+)?([\.\- ]+)?(.*)$/;
-	//                          1    2                   3                4         5    6         7     8          9     10         11   
+	var objectNumberPattern = /^([cC](ons|ONS)?[\-\. ]?)?([A-Za-z]+(-[A-Za-z]+)?)?([\-\. ])?(\d+)([\-\. ])?(\d+)?([\.\- ]+)?(\d+)?([\.\- ]+)?(.*)$/;
+	//                          1    2                   3         4              5         6    7         8     9          10    11         12
 
 	pahma.computeSortableObjectNumber = function(objectNumber) {
 		var sortableObjectNumber = objectNumber;
 		var tokens = objectNumberPattern.exec(objectNumber);
 
 		if (tokens) {
-			var parts = [tokens[3], tokens[5], tokens[7], tokens[9], tokens[11]]
+			var parts = [tokens[3], tokens[6], tokens[8], tokens[10], tokens[12]]
 				.filter(function(token) {
 					return token;
 				})
