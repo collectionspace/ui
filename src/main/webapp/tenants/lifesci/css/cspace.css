@@ -394,6 +394,7 @@ li .flc-pager-pageLink {
 #name-header-login {
     margin-top:30px;
     background: #fff url("../images/header-logo.png") no-repeat left top;
+    background-size: contain;
     width:270px; 
     height:51px;
 }
@@ -405,6 +406,7 @@ li .flc-pager-pageLink {
     margin-top:15px; 
     float:left; 
     background: #fff url("../images/header-logo.png") no-repeat left top; 
+    background-size: contain;
     width:270px; 
     height:51px;}
 .header-menu-logo a {
