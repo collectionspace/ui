@@ -1176,6 +1176,16 @@ table.cs-admin-table td.checkbox {
     padding-top:10px; 
     width:100%;}
 
+.login-webcast-links {
+    display: inline-table;
+}
+.login-webcast-links > li {
+    display: table-row;
+}
+.login-webcast-links > li > * {
+    display: table-cell;
+    padding-right: 1em;
+}
 .reset-password .login-pair .login-label {
     width:120px;}
 .reset-password .login-pair .login-element {

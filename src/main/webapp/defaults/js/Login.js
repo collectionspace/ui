@@ -250,16 +250,22 @@ cspace = cspace || {};
             currentReleaseInfo2: ".csc-login-current-info-2",
             currentReleaseInfo3: ".csc-login-current-info-3",
             currentReleaseInfo4: ".csc-login-current-info-4",
+            currentReleaseInfo5: ".csc-login-current-info-5",
+            currentReleaseInfo6: ".csc-login-current-info-6",
+            currentReleaseInfo7: ".csc-login-current-info-7",
             currentReleaseDetails: ".csc-login-current-details",
 			
             loginInfo: ".csc-login-login-info",
             loginLogin: ".csc-login-login",
+            loginLoginAfter: ".csc-login-login-after",
             loginPwd: ".csc-login-login-pwd",
             loginPwdValue: ".csc-login-login-pwdValue",
+            loginPwdValueAfter: ".csc-login-login-pwdValue-after",
             rologinInfo: ".csc-login-rologin-info",
             rologinLogin: ".csc-login-rologin",
             rologinPwd: ".csc-login-rologin-pwd",
             rologinPwdValue: ".csc-login-rologin-pwdValue",
+            rologinPwdValueAfter: ".csc-login-rologin-pwdValue-after",
 			
 			loginRebuild: ".csc-login-rebuild",
 			
@@ -311,6 +317,15 @@ cspace = cspace || {};
             currentReleaseInfo4: {
                 messagekey: "login-current-info-4"
             },
+            currentReleaseInfo5: {
+                messagekey: "login-current-info-5"
+            },
+            currentReleaseInfo6: {
+                messagekey: "login-current-info-6"
+            },
+            currentReleaseInfo7: {
+                messagekey: "login-current-info-7"
+            },
             currentReleaseDetails: {
                 messagekey: "login-current-details"
             },
@@ -320,11 +335,17 @@ cspace = cspace || {};
             loginLogin: {
                 messagekey: "login-login"
             },
+            loginLoginAfter: {
+                messagekey: "login-login-after"
+            },
             loginPwd: {
                 messagekey: "login-login-pwd"
             },
             loginPwdValue: {
                 messagekey: "login-login-pwdValue"
+            },
+            loginPwdValueAfter: {
+                messagekey: "login-login-pwdValue-after"
             },
             rologinInfo: {
                 messagekey: "login-rologin-info"
@@ -338,6 +359,9 @@ cspace = cspace || {};
             rologinPwdValue: {
                 messagekey: "login-rologin-pwdValue"
             },			
+            rologinPwdValueAfter: {
+                messagekey: "login-rologin-pwdValue-after"
+            },
             loginRebuild: {
                 messagekey: "login-rebuild"
             },			
