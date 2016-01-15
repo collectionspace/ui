@@ -1,16 +1,10 @@
 #Login
 
+login-current: Welcome to the CollectionSpace Fine and Contemporary Art Demo
+login-current-info-4: fine and contemporary art profile
+login-current-info-5: of CollectionSpace, which includes fields and procedures useful for collections of fine and contemporary art. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
 login-login: admin@fcart.collectionspace.org
 login-rologin: reader@fcart.collectionspace.org
-
-login-current-info-1: Welcome to the
-login-current-info-2:Fine and Contemporary Art Profile. Additions to the core CollectionSpace functionality include fields that align with the
-login-current-info-3: core categories, and fields that allow for the cataloging and description of variable media works, based on the
-login-current-info-4:
-
-login-footerFirst: You can also return to the
-login-footerLink: CollectionSpace Common configuration
-login-footerLast: .
 
 # Fine and Contemporary Art Profile - Cataloging
 collection-object-objectNameLabel: Object/work type
