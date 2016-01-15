@@ -1794,231 +1794,231 @@
                             '<tbody>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Cranium" value="0"/></td>' +
-                                    '<td><input type="radio" name="Cranium" value="1"/></td>' +
-                                    '<td><input type="radio" name="Cranium" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Cranium" value="2b"/></td>' +
                                     '<td><input type="radio" name="Cranium" value="3"/></td>' +
+                                    '<td><input type="radio" name="Cranium" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Cranium" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Cranium" value="1"/></td>' +
                                     '<td><input type="radio" name="Cranium" value="C"/></td>' +
                                     '<td class="segment">Cranium</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Frontal_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Frontal_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Frontal_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Frontal_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Frontal_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Frontal_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Frontal_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Frontal_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Frontal_L" value="C"/></td>' +
                                     '<td class="segment">Frontal</td>' +
                                     '<td><input type="radio" name="Frontal_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Frontal_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Frontal_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Frontal_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Frontal_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Frontal_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Frontal_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Frontal_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Frontal_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Occipital" value="0"/></td>' +
-                                    '<td><input type="radio" name="Occipital" value="1"/></td>' +
-                                    '<td><input type="radio" name="Occipital" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Occipital" value="2b"/></td>' +
                                     '<td><input type="radio" name="Occipital" value="3"/></td>' +
+                                    '<td><input type="radio" name="Occipital" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Occipital" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Occipital" value="1"/></td>' +
                                     '<td><input type="radio" name="Occipital" value="C"/></td>' +
                                     '<td class="segment">Occipital</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Occipital_pars_basilaris" value="0"/></td>' +
-                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="1"/></td>' +
-                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="2b"/></td>' +
                                     '<td><input type="radio" name="Occipital_pars_basilaris" value="3"/></td>' +
+                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Occipital_pars_basilaris" value="1"/></td>' +
                                     '<td><input type="radio" name="Occipital_pars_basilaris" value="C"/></td>' +
                                     '<td class="segment">Pars basilaris</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Occipital_L_pars_lateralis" value="0"/></td>' +
-                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="1"/></td>' +
-                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="2b"/></td>' +
                                     '<td><input type="radio" name="Occipital_L_pars_lateralis" value="3"/></td>' +
+                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Occipital_L_pars_lateralis" value="1"/></td>' +
                                     '<td><input type="radio" name="Occipital_L_pars_lateralis" value="C"/></td>' +
                                     '<td class="segment">Pars lateralis</td>' +
                                     '<td><input type="radio" name="Occipital_R_pars_lateralis" value="C"/></td>' +
-                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="3"/></td>' +
-                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="2a"/></td>' +
                                     '<td><input type="radio" name="Occipital_R_pars_lateralis" value="1"/></td>' +
+                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Occipital_R_pars_lateralis" value="3"/></td>' +
                                     '<td><input type="radio" name="Occipital_R_pars_lateralis" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Sphenoid" value="0"/></td>' +
-                                    '<td><input type="radio" name="Sphenoid" value="1"/></td>' +
-                                    '<td><input type="radio" name="Sphenoid" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Sphenoid" value="2b"/></td>' +
                                     '<td><input type="radio" name="Sphenoid" value="3"/></td>' +
+                                    '<td><input type="radio" name="Sphenoid" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Sphenoid" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Sphenoid" value="1"/></td>' +
                                     '<td><input type="radio" name="Sphenoid" value="C"/></td>' +
                                     '<td class="segment">Sphenoid</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Vomer" value="0"/></td>' +
-                                    '<td><input type="radio" name="Vomer" value="1"/></td>' +
-                                    '<td><input type="radio" name="Vomer" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Vomer" value="2b"/></td>' +
                                     '<td><input type="radio" name="Vomer" value="3"/></td>' +
+                                    '<td><input type="radio" name="Vomer" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Vomer" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Vomer" value="1"/></td>' +
                                     '<td><input type="radio" name="Vomer" value="C"/></td>' +
                                     '<td class="segment">Vomer</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ethmoid" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ethmoid" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ethmoid" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ethmoid" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ethmoid" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ethmoid" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ethmoid" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ethmoid" value="1"/></td>' +
                                     '<td><input type="radio" name="Ethmoid" value="C"/></td>' +
                                     '<td class="segment">Ethmoid</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Parietal_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Parietal_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Parietal_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Parietal_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Parietal_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Parietal_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Parietal_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Parietal_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Parietal_L" value="C"/></td>' +
                                     '<td class="segment">Parietal</td>' +
                                     '<td><input type="radio" name="Parietal_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Parietal_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Parietal_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Parietal_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Parietal_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Parietal_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Parietal_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Parietal_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Parietal_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Temporal_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Temporal_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Temporal_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Temporal_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Temporal_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Temporal_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Temporal_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Temporal_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Temporal_L" value="C"/></td>' +
                                     '<td class="segment">Temporal</td>' +
                                     '<td><input type="radio" name="Temporal_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Temporal_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Temporal_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Temporal_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Temporal_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Temporal_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Temporal_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Temporal_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Temporal_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Maxilla_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Maxilla_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Maxilla_L" value="C"/></td>' +
                                     '<td class="segment">Maxilla</td>' +
                                     '<td><input type="radio" name="Maxilla_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Maxilla_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Maxilla_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Maxilla_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Maxilla_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Nasal_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Nasal_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Nasal_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Nasal_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Nasal_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Nasal_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Nasal_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Nasal_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Nasal_L" value="C"/></td>' +
                                     '<td class="segment">Nasal</td>' +
                                     '<td><input type="radio" name="Nasal_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Nasal_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Nasal_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Nasal_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Nasal_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Nasal_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Nasal_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Nasal_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Nasal_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Zygomatic_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Zygomatic_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Zygomatic_L" value="C"/></td>' +
                                     '<td class="segment">Zygomatic</td>' +
                                     '<td><input type="radio" name="Zygomatic_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Zygomatic_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Zygomatic_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Zygomatic_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Zygomatic_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Lacrimal_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Lacrimal_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Lacrimal_L" value="C"/></td>' +
                                     '<td class="segment">Lacrimal</td>' +
                                     '<td><input type="radio" name="Lacrimal_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Lacrimal_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Lacrimal_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lacrimal_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Lacrimal_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Palatine_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Palatine_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Palatine_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Palatine_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Palatine_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Palatine_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Palatine_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Palatine_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Palatine_L" value="C"/></td>' +
                                     '<td class="segment">Palatine</td>' +
                                     '<td><input type="radio" name="Palatine_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Palatine_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Palatine_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Palatine_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Palatine_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Palatine_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Palatine_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Palatine_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Palatine_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Mandible_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Mandible_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Mandible_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Mandible_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Mandible_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Mandible_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Mandible_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Mandible_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Mandible_L" value="C"/></td>' +
                                     '<td class="segment">Mandible</td>' +
                                     '<td><input type="radio" name="Mandible_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Mandible_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Mandible_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Mandible_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Mandible_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Mandible_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Mandible_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Mandible_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Mandible_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Orbit_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Orbit_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Orbit_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Orbit_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Orbit_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Orbit_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Orbit_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Orbit_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Orbit_L" value="C"/></td>' +
                                     '<td class="segment">Orbit</td>' +
                                     '<td><input type="radio" name="Orbit_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Orbit_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Orbit_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Orbit_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Orbit_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Orbit_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Orbit_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Orbit_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Orbit_R" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
                             '<tbody>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Hyoid" value="0"/></td>' +
-                                    '<td><input type="radio" name="Hyoid" value="1"/></td>' +
-                                    '<td><input type="radio" name="Hyoid" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Hyoid" value="2b"/></td>' +
                                     '<td><input type="radio" name="Hyoid" value="3"/></td>' +
+                                    '<td><input type="radio" name="Hyoid" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Hyoid" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Hyoid" value="1"/></td>' +
                                     '<td><input type="radio" name="Hyoid" value="C"/></td>' +
                                     '<td class="segment">Hyoid</td>' +
                                 '</tr>' +
@@ -2061,77 +2061,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Humerus_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Humerus_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Humerus_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Humerus_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Humerus_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Humerus_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Humerus_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2147,77 +2147,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Radius_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Radius_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Radius_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Radius_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Radius_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Radius_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Radius_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Radius_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Radius_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Radius_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Radius_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Radius_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Radius_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Radius_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Radius_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Radius_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Radius_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Radius_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Radius_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Radius_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2233,77 +2233,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ulna_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ulna_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ulna_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Ulna_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ulna_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ulna_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Ulna_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2345,77 +2345,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Femur_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Femur_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Femur_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Femur_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Femur_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Femur_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Femur_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Femur_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Femur_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Femur_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Femur_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Femur_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Femur_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Femur_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Femur_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Femur_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Femur_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Femur_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Femur_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Femur_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2431,77 +2431,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Tibia_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Tibia_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Tibia_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Tibia_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Tibia_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Tibia_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Tibia_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2517,77 +2517,77 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Fibula_L_JS_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_JS_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_JS_P" value="C"/></td>' +
                                     '<td class="segment">Prox. JS</td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_P" value="0"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="1"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="2b"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_P" value="3"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_P" value="1"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_P" value="C"/></td>' +
                                     '<td class="segment">Pr. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_P" value="C"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="3"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="2a"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_P" value="1"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_P" value="3"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_P" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_M" value="0"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="1"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="2b"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_M" value="3"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_M" value="1"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_M" value="C"/></td>' +
                                     '<td class="segment">Md. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_M" value="C"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="3"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="2a"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_M" value="1"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_M" value="3"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_M" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_shaft_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_shaft_D" value="C"/></td>' +
                                     '<td class="segment">Ds. 1/3 shaft</td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_shaft_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_shaft_D" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Fibula_L_JS_D" value="0"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_D" value="1"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_D" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Fibula_L_JS_D" value="2b"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_JS_D" value="3"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_L_JS_D" value="1"/></td>' +
                                     '<td><input type="radio" name="Fibula_L_JS_D" value="C"/></td>' +
                                     '<td class="segment">Dist. JS</td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_D" value="C"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_D" value="3"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_D" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Fibula_R_JS_D" value="2a"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_D" value="1"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_D" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_D" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Fibula_R_JS_D" value="3"/></td>' +
                                     '<td><input type="radio" name="Fibula_R_JS_D" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2622,170 +2622,170 @@
                             '<tbody>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Os_coxae_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Os_coxae_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Os_coxae_L" value="C"/></td>' +
                                     '<td class="segment">Os coxae</td>' +
                                     '<td><input type="radio" name="Os_coxae_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Os_coxae_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Os_coxae_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Os_coxae_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Os_coxae_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ischium_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ischium_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ischium_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ischium_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ischium_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ischium_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ischium_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ischium_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Ischium_L" value="C"/></td>' +
                                     '<td class="segment">Ischium</td>' +
                                     '<td><input type="radio" name="Ischium_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ischium_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ischium_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ischium_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ischium_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ischium_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ischium_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ischium_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Ischium_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Ilium_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Ilium_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Ilium_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Ilium_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Ilium_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Ilium_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ilium_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ilium_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Ilium_L" value="C"/></td>' +
                                     '<td class="segment">Ilium</td>' +
                                     '<td><input type="radio" name="Ilium_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Ilium_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Ilium_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Ilium_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Ilium_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Ilium_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Ilium_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Ilium_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Ilium_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Pubis_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Pubis_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Pubis_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Pubis_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Pubis_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Pubis_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Pubis_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Pubis_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Pubis_L" value="C"/></td>' +
                                     '<td class="segment">Pubis</td>' +
                                     '<td><input type="radio" name="Pubis_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Pubis_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Pubis_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Pubis_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Pubis_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Pubis_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Pubis_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Pubis_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Pubis_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Acetabulum_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Acetabulum_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Acetabulum_L" value="C"/></td>' +
                                     '<td class="segment">Acetabulum</td>' +
                                     '<td><input type="radio" name="Acetabulum_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Acetabulum_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Acetabulum_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Acetabulum_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Acetabulum_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Auricular_surf_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Auricular_surf_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Auricular_surf_L" value="C"/></td>' +
                                     '<td class="segment">Auricular sur.</td>' +
                                     '<td><input type="radio" name="Auricular_surf_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Auricular_surf_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Auricular_surf_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Auricular_surf_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Auricular_surf_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Scapula_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Scapula_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Scapula_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Scapula_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Scapula_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Scapula_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Scapula_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Scapula_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Scapula_L" value="C"/></td>' +
                                     '<td class="segment">Scapula</td>' +
                                     '<td><input type="radio" name="Scapula_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Scapula_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Scapula_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Scapula_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Scapula_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Scapula_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Scapula_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Scapula_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Scapula_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Glenoid_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Glenoid_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Glenoid_L" value="C"/></td>' +
                                     '<td class="segment">Glenoid</td>' +
                                     '<td><input type="radio" name="Glenoid_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Glenoid_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Glenoid_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Glenoid_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Glenoid_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Clavicle_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Clavicle_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Clavicle_L" value="C"/></td>' +
                                     '<td class="segment">Clavicle</td>' +
                                     '<td><input type="radio" name="Clavicle_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Clavicle_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Clavicle_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Clavicle_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Clavicle_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Sternum" value="0"/></td>' +
-                                    '<td><input type="radio" name="Sternum" value="1"/></td>' +
-                                    '<td><input type="radio" name="Sternum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Sternum" value="2b"/></td>' +
                                     '<td><input type="radio" name="Sternum" value="3"/></td>' +
+                                    '<td><input type="radio" name="Sternum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Sternum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Sternum" value="1"/></td>' +
                                     '<td><input type="radio" name="Sternum" value="C"/></td>' +
                                     '<td class="segment">Sternum</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Manubrium" value="0"/></td>' +
-                                    '<td><input type="radio" name="Manubrium" value="1"/></td>' +
-                                    '<td><input type="radio" name="Manubrium" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Manubrium" value="2b"/></td>' +
                                     '<td><input type="radio" name="Manubrium" value="3"/></td>' +
+                                    '<td><input type="radio" name="Manubrium" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Manubrium" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Manubrium" value="1"/></td>' +
                                     '<td><input type="radio" name="Manubrium" value="C"/></td>' +
                                     '<td class="segment">Manubrium</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Patella_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Patella_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Patella_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Patella_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Patella_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Patella_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Patella_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Patella_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Patella_L" value="C"/></td>' +
                                     '<td class="segment">Patella</td>' +
                                     '<td><input type="radio" name="Patella_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Patella_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Patella_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Patella_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Patella_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Patella_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Patella_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Patella_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Patella_R" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -2827,122 +2827,122 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Scaphoid_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Scaphoid_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Scaphoid_L" value="C"/></td>' +
                                     '<td class="segment">Scaphoid</td>' +
                                     '<td><input type="radio" name="Scaphoid_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Scaphoid_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Scaphoid_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Scaphoid_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Scaphoid_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Lunate_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Lunate_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Lunate_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Lunate_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Lunate_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Lunate_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lunate_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lunate_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Lunate_L" value="C"/></td>' +
                                     '<td class="segment">Lunate</td>' +
                                     '<td><input type="radio" name="Lunate_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Lunate_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Lunate_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Lunate_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Lunate_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Lunate_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lunate_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lunate_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Lunate_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Triquetral_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Triquetral_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Triquetral_L" value="C"/></td>' +
                                     '<td class="segment">Triquetral</td>' +
                                     '<td><input type="radio" name="Triquetral_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Triquetral_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Triquetral_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Triquetral_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Triquetral_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Pisiform_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Pisiform_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Pisiform_L" value="C"/></td>' +
                                     '<td class="segment">Pisiform</td>' +
                                     '<td><input type="radio" name="Pisiform_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Pisiform_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Pisiform_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Pisiform_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Pisiform_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Trapezium_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Trapezium_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Trapezium_L" value="C"/></td>' +
                                     '<td class="segment">Trapezium</td>' +
                                     '<td><input type="radio" name="Trapezium_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Trapezium_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Trapezium_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Trapezium_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Trapezium_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Trapezoid_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Trapezoid_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Trapezoid_L" value="C"/></td>' +
                                     '<td class="segment">Trapezoid</td>' +
                                     '<td><input type="radio" name="Trapezoid_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Trapezoid_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Trapezoid_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Trapezoid_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Trapezoid_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Capitate_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Capitate_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Capitate_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Capitate_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Capitate_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Capitate_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Capitate_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Capitate_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Capitate_L" value="C"/></td>' +
                                     '<td class="segment">Capitate</td>' +
                                     '<td><input type="radio" name="Capitate_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Capitate_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Capitate_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Capitate_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Capitate_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Capitate_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Capitate_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Capitate_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Capitate_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Hamate_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Hamate_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Hamate_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Hamate_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Hamate_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Hamate_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Hamate_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Hamate_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Hamate_L" value="C"/></td>' +
                                     '<td class="segment">Hamate</td>' +
                                     '<td><input type="radio" name="Hamate_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Hamate_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Hamate_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Hamate_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Hamate_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Hamate_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Hamate_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Hamate_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Hamate_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
@@ -2989,107 +2989,107 @@
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Talus_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Talus_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Talus_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Talus_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Talus_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Talus_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Talus_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Talus_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Talus_L" value="C"/></td>' +
                                     '<td class="segment">Talus</td>' +
                                     '<td><input type="radio" name="Talus_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Talus_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Talus_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Talus_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Talus_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Talus_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Talus_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Talus_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Talus_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Calcaneus_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Calcaneus_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Calcaneus_L" value="C"/></td>' +
                                     '<td class="segment">Calcaneus</td>' +
                                     '<td><input type="radio" name="Calcaneus_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Calcaneus_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Calcaneus_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Calcaneus_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Calcaneus_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Navicular_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Navicular_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Navicular_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Navicular_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Navicular_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Navicular_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Navicular_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Navicular_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Navicular_L" value="C"/></td>' +
                                     '<td class="segment">Navicular</td>' +
                                     '<td><input type="radio" name="Navicular_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Navicular_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Navicular_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Navicular_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Navicular_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Navicular_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Navicular_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Navicular_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Navicular_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Cuboid_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Cuboid_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Cuboid_L" value="C"/></td>' +
                                     '<td class="segment">Cuboid</td>' +
                                     '<td><input type="radio" name="Cuboid_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Cuboid_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Cuboid_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Cuboid_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Cuboid_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Med_cuneif_1_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Med_cuneif_1_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Med_cuneif_1_L" value="C"/></td>' +
                                     '<td class="segment">Med. cun. (1)</td>' +
                                     '<td><input type="radio" name="Med_cuneif_1_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Med_cuneif_1_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Med_cuneif_1_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Med_cuneif_1_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Med_cuneif_1_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Int_cuneif_2_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Int_cuneif_2_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Int_cuneif_2_L" value="C"/></td>' +
                                     '<td class="segment">Int. cun. (2)</td>' +
                                     '<td><input type="radio" name="Int_cuneif_2_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Int_cuneif_2_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Int_cuneif_2_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Int_cuneif_2_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Int_cuneif_2_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_L" value="C"/></td>' +
                                     '<td class="segment">Lat. cun. (3)</td>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Lat_cuneif_3_R" value="3"/></td>' +
                                     '<td><input type="radio" name="Lat_cuneif_3_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
@@ -3145,17 +3145,17 @@
                                     '<td><input type="radio" name="Rib1_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib1_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib1_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib1_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib1_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib1_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib1_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib1_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib1_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib1_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib1_L" value="C"/></td>' +
                                     '<td class="segment">1</td>' +
                                     '<td><input type="radio" name="Rib1_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib1_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib1_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib1_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib1_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib1_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib1_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib1_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib1_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib1_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib1_R" value="0"/></td>' +
@@ -3164,17 +3164,17 @@
                                     '<td><input type="radio" name="Rib2_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib2_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib2_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib2_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib2_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib2_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib2_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib2_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib2_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib2_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib2_L" value="C"/></td>' +
                                     '<td class="segment">2</td>' +
                                     '<td><input type="radio" name="Rib2_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib2_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib2_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib2_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib2_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib2_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib2_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib2_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib2_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib2_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib2_R" value="0"/></td>' +
@@ -3183,17 +3183,17 @@
                                     '<td><input type="radio" name="Rib3_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib3_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib3_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib3_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib3_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib3_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib3_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib3_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib3_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib3_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib3_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~3)</td>' +
                                     '<td><input type="radio" name="Rib3_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib3_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib3_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib3_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib3_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib3_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib3_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib3_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib3_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib3_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib3_R" value="0"/></td>' +
@@ -3202,17 +3202,17 @@
                                     '<td><input type="radio" name="Rib4_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib4_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib4_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib4_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib4_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib4_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib4_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib4_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib4_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib4_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib4_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~4)</td>' +
                                     '<td><input type="radio" name="Rib4_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib4_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib4_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib4_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib4_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib4_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib4_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib4_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib4_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib4_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib4_R" value="0"/></td>' +
@@ -3221,17 +3221,17 @@
                                     '<td><input type="radio" name="Rib5_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib5_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib5_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib5_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib5_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib5_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib5_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib5_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib5_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib5_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib5_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~5)</td>' +
                                     '<td><input type="radio" name="Rib5_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib5_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib5_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib5_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib5_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib5_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib5_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib5_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib5_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib5_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib5_R" value="0"/></td>' +
@@ -3240,17 +3240,17 @@
                                     '<td><input type="radio" name="Rib6_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib6_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib6_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib6_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib6_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib6_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib6_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib6_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib6_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib6_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib6_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~6)</td>' +
                                     '<td><input type="radio" name="Rib6_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib6_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib6_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib6_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib6_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib6_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib6_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib6_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib6_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib6_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib6_R" value="0"/></td>' +
@@ -3259,17 +3259,17 @@
                                     '<td><input type="radio" name="Rib7_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib7_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib7_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib7_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib7_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib7_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib7_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib7_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib7_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib7_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib7_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~7)</td>' +
                                     '<td><input type="radio" name="Rib7_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib7_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib7_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib7_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib7_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib7_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib7_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib7_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib7_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib7_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib7_R" value="0"/></td>' +
@@ -3278,17 +3278,17 @@
                                     '<td><input type="radio" name="Rib8_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib8_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib8_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib8_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib8_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib8_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib8_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib8_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib8_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib8_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib8_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~8)</td>' +
                                     '<td><input type="radio" name="Rib8_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib8_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib8_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib8_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib8_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib8_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib8_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib8_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib8_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib8_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib8_R" value="0"/></td>' +
@@ -3297,17 +3297,17 @@
                                     '<td><input type="radio" name="Rib9_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib9_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib9_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib9_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib9_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib9_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib9_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib9_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib9_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib9_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib9_L" value="C"/></td>' +
                                     '<td class="segment">3-9 (~9)</td>' +
                                     '<td><input type="radio" name="Rib9_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib9_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib9_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib9_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib9_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib9_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib9_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib9_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib9_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib9_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib9_R" value="0"/></td>' +
@@ -3316,17 +3316,17 @@
                                     '<td><input type="radio" name="Rib10_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib10_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib10_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib10_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib10_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib10_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib10_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib10_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib10_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib10_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib10_L" value="C"/></td>' +
                                     '<td class="segment">10</td>' +
                                     '<td><input type="radio" name="Rib10_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib10_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib10_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib10_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib10_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib10_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib10_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib10_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib10_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib10_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib10_R" value="0"/></td>' +
@@ -3335,17 +3335,17 @@
                                     '<td><input type="radio" name="Rib11_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib11_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib11_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib11_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib11_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib11_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib11_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib11_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib11_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib11_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib11_L" value="C"/></td>' +
                                     '<td class="segment">11</td>' +
                                     '<td><input type="radio" name="Rib11_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib11_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib11_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib11_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib11_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib11_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib11_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib11_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib11_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib11_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib11_R" value="0"/></td>' +
@@ -3354,17 +3354,17 @@
                                     '<td><input type="radio" name="Rib12_L" value="0"/></td>' +
                                     '<td><input type="checkbox" name="Rib12_L_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib12_L_head_neck_complete" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib12_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="Rib12_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Rib12_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="Rib12_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="Rib12_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib12_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib12_L" value="1"/></td>' +
                                     '<td><input type="radio" name="Rib12_L" value="C"/></td>' +
                                     '<td class="segment">12</td>' +
                                     '<td><input type="radio" name="Rib12_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="Rib12_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="Rib12_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Rib12_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="Rib12_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="Rib12_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Rib12_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Rib12_R" value="3"/></td>' +
                                     '<td><input type="checkbox" name="Rib12_R_head_neck_complete" value="C"/></td>' +
                                     '<td><input type="checkbox" name="Rib12_R_sternal_end_complete" value="C"/></td>' +
                                     '<td><input type="radio" name="Rib12_R" value="0"/></td>' +
@@ -3411,78 +3411,78 @@
                                 '<tr>' +
                                     '<td><input type="radio" name="MC1_L" value="0"/></td>' +
                                     '<td rowspan="5"><input class="mc" type="text" name="MC_L_count"/></td>' +
-                                    '<td><input type="radio" name="MC1_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MC1_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MC1_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MC1_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MC1_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC1_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC1_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MC1_L" value="C"/></td>' +
                                     '<td class="segment">MC 1</td>' +
                                     '<td><input type="radio" name="MC1_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MC1_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MC1_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MC1_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MC1_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MC1_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC1_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC1_R" value="3"/></td>' +
                                     '<td rowspan="5"><input class="mc" type="text" name="MC_R_count"/></td>' +
                                     '<td><input type="radio" name="MC1_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MC2_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MC2_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MC2_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MC2_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MC2_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MC2_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC2_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC2_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MC2_L" value="C"/></td>' +
                                     '<td class="segment">MC 2</td>' +
                                     '<td><input type="radio" name="MC2_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MC2_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MC2_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MC2_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MC2_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MC2_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC2_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC2_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MC2_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MC3_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MC3_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MC3_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MC3_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MC3_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MC3_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC3_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC3_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MC3_L" value="C"/></td>' +
                                     '<td class="segment">MC 3</td>' +
                                     '<td><input type="radio" name="MC3_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MC3_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MC3_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MC3_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MC3_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MC3_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC3_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC3_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MC3_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MC4_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MC4_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MC4_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MC4_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MC4_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MC4_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC4_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC4_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MC4_L" value="C"/></td>' +
                                     '<td class="segment">MC 4</td>' +
                                     '<td><input type="radio" name="MC4_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MC4_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MC4_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MC4_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MC4_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MC4_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC4_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC4_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MC4_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MC5_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MC5_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MC5_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MC5_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MC5_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MC5_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC5_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC5_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MC5_L" value="C"/></td>' +
                                     '<td class="segment">MC 5</td>' +
                                     '<td><input type="radio" name="MC5_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MC5_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MC5_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MC5_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MC5_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MC5_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MC5_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MC5_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MC5_R" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -3548,78 +3548,78 @@
                                 '<tr>' +
                                     '<td><input type="radio" name="MT1_L" value="0"/></td>' +
                                     '<td rowspan="5"><input class="mt" type="text" name="MT_L_count"/></td>' +
-                                    '<td><input type="radio" name="MT1_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MT1_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MT1_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MT1_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MT1_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT1_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT1_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MT1_L" value="C"/></td>' +
                                     '<td class="segment">MT 1</td>' +
                                     '<td><input type="radio" name="MT1_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MT1_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MT1_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MT1_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MT1_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MT1_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT1_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT1_R" value="3"/></td>' +
                                     '<td rowspan="5"><input class="mt" type="text" name="MT_R_count"/></td>' +
                                     '<td><input type="radio" name="MT1_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MT2_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MT2_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MT2_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MT2_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MT2_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MT2_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT2_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT2_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MT2_L" value="C"/></td>' +
                                     '<td class="segment">MT 2</td>' +
                                     '<td><input type="radio" name="MT2_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MT2_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MT2_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MT2_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MT2_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MT2_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT2_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT2_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MT2_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MT3_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MT3_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MT3_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MT3_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MT3_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MT3_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT3_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT3_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MT3_L" value="C"/></td>' +
                                     '<td class="segment">MT 3</td>' +
                                     '<td><input type="radio" name="MT3_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MT3_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MT3_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MT3_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MT3_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MT3_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT3_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT3_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MT3_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MT4_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MT4_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MT4_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MT4_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MT4_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MT4_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT4_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT4_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MT4_L" value="C"/></td>' +
                                     '<td class="segment">MT 4</td>' +
                                     '<td><input type="radio" name="MT4_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MT4_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MT4_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MT4_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MT4_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MT4_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT4_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT4_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MT4_R" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="MT5_L" value="0"/></td>' +
-                                    '<td><input type="radio" name="MT5_L" value="1"/></td>' +
-                                    '<td><input type="radio" name="MT5_L" value="2a"/></td>' +
-                                    '<td><input type="radio" name="MT5_L" value="2b"/></td>' +
                                     '<td><input type="radio" name="MT5_L" value="3"/></td>' +
+                                    '<td><input type="radio" name="MT5_L" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT5_L" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT5_L" value="1"/></td>' +
                                     '<td><input type="radio" name="MT5_L" value="C"/></td>' +
                                     '<td class="segment">MT 5</td>' +
                                     '<td><input type="radio" name="MT5_R" value="C"/></td>' +
-                                    '<td><input type="radio" name="MT5_R" value="3"/></td>' +
-                                    '<td><input type="radio" name="MT5_R" value="2b"/></td>' +
-                                    '<td><input type="radio" name="MT5_R" value="2a"/></td>' +
                                     '<td><input type="radio" name="MT5_R" value="1"/></td>' +
+                                    '<td><input type="radio" name="MT5_R" value="2a"/></td>' +
+                                    '<td><input type="radio" name="MT5_R" value="2b"/></td>' +
+                                    '<td><input type="radio" name="MT5_R" value="3"/></td>' +
                                     '<td><input type="radio" name="MT5_R" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -3713,18 +3713,18 @@
                                     '<td><input type="radio" name="C1_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C1_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C1_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C1_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C1_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C1_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C1_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C1_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C1_L_arch" value="3"/></td>' +
                                     '<td rowspan="7"><input type="text" name="C_L_arch_count"/></td>' +
                                     '<td><input type="radio" name="C1_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C1_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C1_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C1_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C1_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C1_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C1_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C1_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C1_R_arch" value="3"/></td>' +
                                     '<td rowspan="7"><input type="text" name="C_R_arch_count"/></td>' +
                                     '<td><input type="radio" name="C1_R_arch" value="0"/></td>' +
                                 '</tr>' +
@@ -3733,162 +3733,162 @@
                     
                                     '<td><input type="radio" name="C2_centrum" value="0"/></td>' +
                                     '<td rowspan="6"><input type="text" name="C_centra_count"/></td>' +
-                                    '<td><input type="radio" name="C2_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C2_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C2_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C2_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C2_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C2_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C2_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C2_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C2</td>' +
                                     '<td><input type="radio" name="C2_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C2_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C2_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C2_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C2_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C2_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C2_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C2_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C2_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C2_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C2_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C2_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C2_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C2_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C2_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C2_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C2_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C2_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C2_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="C3_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C3_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="C3_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C3_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C3_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C3_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C3_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C3_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C3_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C3_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C3-6 (~3)</td>' +
                                     '<td><input type="radio" name="C3_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C3_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C3_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C3_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C3_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C3_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C3_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C3_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C3_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C3_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C3_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C3_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C3_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C3_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C3_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C3_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C3_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C3_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C3_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="C4_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C4_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="C4_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C4_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C4_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C4_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C4_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C4_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C4_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C4_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C3-6 (~4)</td>' +
                                     '<td><input type="radio" name="C4_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C4_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C4_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C4_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C4_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C4_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C4_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C4_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C4_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C4_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C4_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C4_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C4_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C4_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C4_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C4_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C4_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C4_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C4_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="C5_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C5_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="C5_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C5_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C5_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C5_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C5_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C5_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C5_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C5_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C3-6 (~5)</td>' +
                                     '<td><input type="radio" name="C5_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C5_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C5_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C5_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C5_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C5_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C5_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C5_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C5_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C5_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C5_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C5_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C5_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C5_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C5_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C5_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C5_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C5_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C5_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="C6_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C6_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="C6_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C6_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C6_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C6_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C6_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C6_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C6_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C6_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C3-6 (~6)</td>' +
                                     '<td><input type="radio" name="C6_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C6_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C6_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C6_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C6_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C6_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C6_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C6_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C6_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C6_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C6_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C6_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C6_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C6_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C6_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C6_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C6_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C6_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C6_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="C7_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C7_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="C7_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="C7_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="C7_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="C7_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="C7_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C7_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C7_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="C7_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">C7</td>' +
                                     '<td><input type="radio" name="C7_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="C7_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C7_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C7_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C7_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C7_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C7_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C7_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C7_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C7_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="C7_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="C7_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="C7_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="C7_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="C7_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="C7_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="C7_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="C7_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="C7_R_arch" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -3908,28 +3908,28 @@
                     
                                     '<td><input type="radio" name="T1_centrum" value="0"/></td>' +
                                     '<td rowspan="12"><input type="text" name="T_centra_count"/></td>' +
-                                    '<td><input type="radio" name="T1_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T1_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T1_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T1_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T1_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T1_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T1_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T1_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T1</td>' +
                                     '<td><input type="radio" name="T1_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T1_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T1_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T1_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T1_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T1_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T1_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T1_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T1_L_arch" value="3"/></td>' +
                                     '<td rowspan="12"><input type="text" name="T_L_arch_count"/></td>' +
                                     '<td><input type="radio" name="T1_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T1_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T1_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T1_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T1_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T1_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T1_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T1_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T1_R_arch" value="3"/></td>' +
                                     '<td rowspan="12"><input type="text" name="T_R_arch_count"/></td>' +
                                     '<td><input type="radio" name="T1_R_arch" value="0"/></td>' +
                                 '</tr>' +
@@ -3937,297 +3937,297 @@
                                     '<td><input type="radio" name="T2_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T2_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T2_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T2_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T2_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T2_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T2_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T2_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T2_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T2_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~2)</td>' +
                                     '<td><input type="radio" name="T2_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T2_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T2_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T2_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T2_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T2_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T2_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T2_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T2_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T2_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T2_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T2_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T2_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T2_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T2_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T2_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T2_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T2_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T2_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T3_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T3_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T3_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T3_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T3_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T3_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T3_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T3_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T3_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T3_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~3)</td>' +
                                     '<td><input type="radio" name="T3_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T3_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T3_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T3_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T3_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T3_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T3_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T3_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T3_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T3_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T3_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T3_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T3_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T3_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T3_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T3_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T3_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T3_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T3_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T4_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T4_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T4_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T4_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T4_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T4_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T4_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T4_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T4_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T4_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~4)</td>' +
                                     '<td><input type="radio" name="T4_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T4_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T4_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T4_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T4_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T4_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T4_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T4_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T4_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T4_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T4_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T4_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T4_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T4_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T4_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T4_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T4_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T4_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T4_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T5_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T5_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T5_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T5_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T5_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T5_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T5_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T5_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T5_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T5_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~5)</td>' +
                                     '<td><input type="radio" name="T5_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T5_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T5_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T5_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T5_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T5_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T5_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T5_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T5_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T5_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T5_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T5_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T5_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T5_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T5_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T5_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T5_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T5_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T5_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T6_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T6_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T6_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T6_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T6_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T6_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T6_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T6_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T6_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T6_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~6)</td>' +
                                     '<td><input type="radio" name="T6_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T6_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T6_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T6_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T6_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T6_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T6_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T6_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T6_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T6_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T6_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T6_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T6_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T6_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T6_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T6_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T6_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T6_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T6_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T7_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T7_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T7_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T7_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T7_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T7_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T7_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T7_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T7_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T7_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~7)</td>' +
                                     '<td><input type="radio" name="T7_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T7_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T7_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T7_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T7_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T7_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T7_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T7_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T7_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T7_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T7_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T7_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T7_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T7_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T7_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T7_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T7_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T7_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T7_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T8_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T8_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T8_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T8_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T8_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T8_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T8_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T8_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T8_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T8_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~8)</td>' +
                                     '<td><input type="radio" name="T8_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T8_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T8_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T8_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T8_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T8_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T8_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T8_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T8_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T8_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T8_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T8_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T8_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T8_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T8_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T8_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T8_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T8_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T8_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T9_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T9_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T9_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T9_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T9_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T9_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T9_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T9_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T9_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T9_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T2-9 (~9)</td>' +
                                     '<td><input type="radio" name="T9_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T9_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T9_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T9_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T9_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T9_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T9_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T9_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T9_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T9_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T9_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T9_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T9_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T9_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T9_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T9_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T9_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T9_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T9_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T10_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T10_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T10_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T10_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T10_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T10_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T10_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T10_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T10_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T10_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T10</td>' +
                                     '<td><input type="radio" name="T10_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T10_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T10_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T10_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T10_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T10_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T10_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T10_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T10_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T10_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T10_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T10_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T10_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T10_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T10_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T10_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T10_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T10_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T10_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T11_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T11_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T11_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T11_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T11_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T11_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T11_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T11_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T11_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T11_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T11</td>' +
                                     '<td><input type="radio" name="T11_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T11_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T11_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T11_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T11_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T11_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T11_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T11_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T11_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T11_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T11_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T11_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T11_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T11_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T11_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T11_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T11_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T11_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T11_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="T12_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T12_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="T12_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="T12_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="T12_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="T12_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="T12_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T12_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T12_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="T12_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">T12</td>' +
                                     '<td><input type="radio" name="T12_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="T12_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T12_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T12_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T12_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T12_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T12_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T12_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T12_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T12_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="T12_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="T12_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="T12_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="T12_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="T12_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="T12_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="T12_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="T12_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="T12_R_arch" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -4247,28 +4247,28 @@
                     
                                     '<td><input type="radio" name="L1_centrum" value="0"/></td>' +
                                     '<td rowspan="5"><input type="text" name="L_centra_count"/></td>' +
-                                    '<td><input type="radio" name="L1_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="L1_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="L1_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="L1_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="L1_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L1_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L1_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="L1_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">L1</td>' +
                                     '<td><input type="radio" name="L1_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="L1_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L1_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L1_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L1_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L1_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L1_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L1_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L1_L_arch" value="3"/></td>' +
                                     '<td rowspan="5"><input type="text" name="L_L_arch_count"/></td>' +
                                     '<td><input type="radio" name="L1_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L1_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L1_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L1_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L1_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L1_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L1_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L1_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L1_R_arch" value="3"/></td>' +
                                     '<td rowspan="5"><input type="text" name="L_R_arch_count"/></td>' +
                                     '<td><input type="radio" name="L1_R_arch" value="0"/></td>' +
                                 '</tr>' +
@@ -4276,108 +4276,108 @@
                                     '<td><input type="radio" name="L2_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L2_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="L2_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="L2_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="L2_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="L2_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="L2_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L2_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L2_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="L2_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">L2</td>' +
                                     '<td><input type="radio" name="L2_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="L2_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L2_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L2_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L2_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L2_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L2_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L2_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L2_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L2_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L2_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L2_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L2_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L2_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L2_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L2_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L2_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L2_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L2_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="L3_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L3_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="L3_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="L3_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="L3_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="L3_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="L3_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L3_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L3_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="L3_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">L3</td>' +
                                     '<td><input type="radio" name="L3_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="L3_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L3_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L3_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L3_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L3_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L3_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L3_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L3_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L3_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L3_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L3_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L3_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L3_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L3_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L3_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L3_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L3_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L3_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="L4_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L4_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="L4_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="L4_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="L4_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="L4_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="L4_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L4_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L4_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="L4_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">L4</td>' +
                                     '<td><input type="radio" name="L4_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="L4_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L4_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L4_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L4_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L4_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L4_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L4_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L4_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L4_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L4_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L4_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L4_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L4_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L4_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L4_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L4_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L4_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L4_R_arch" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="L5_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L5_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="L5_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="L5_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="L5_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="L5_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="L5_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L5_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L5_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="L5_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">L5</td>' +
                                     '<td><input type="radio" name="L5_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="L5_L_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L5_L_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L5_L_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L5_L_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L5_L_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L5_L_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L5_L_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L5_L_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L5_L_arch" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="L5_R_arch" value="C"/></td>' +
-                                    '<td><input type="radio" name="L5_R_arch" value="3"/></td>' +
-                                    '<td><input type="radio" name="L5_R_arch" value="2b"/></td>' +
-                                    '<td><input type="radio" name="L5_R_arch" value="2a"/></td>' +
                                     '<td><input type="radio" name="L5_R_arch" value="1"/></td>' +
+                                    '<td><input type="radio" name="L5_R_arch" value="2a"/></td>' +
+                                    '<td><input type="radio" name="L5_R_arch" value="2b"/></td>' +
+                                    '<td><input type="radio" name="L5_R_arch" value="3"/></td>' +
                                     '<td><input type="radio" name="L5_R_arch" value="0"/></td>' +
                                 '</tr>' +
                             '</tbody>' +
@@ -4397,28 +4397,28 @@
                     
                                     '<td><input type="radio" name="Sacrum" value="0"/></td>' +
                                     '<td rowspan="6"><input type="text" name="S_centra_count"/></td>' +
-                                    '<td><input type="radio" name="Sacrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="Sacrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Sacrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="Sacrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="Sacrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Sacrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Sacrum" value="1"/></td>' +
                                     '<td><input type="radio" name="Sacrum" value="C"/></td>' +
                     
                                     '<td class="segment">Sacrum</td>' +
                                     '<td><input type="radio" name="Sacrum_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="Sacrum_L_alae" value="C"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_L_alae" value="3"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_L_alae" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_L_alae" value="2a"/></td>' +
                                     '<td><input type="radio" name="Sacrum_L_alae" value="1"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_L_alae" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_L_alae" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_L_alae" value="3"/></td>' +
                                     '<td rowspan="6"><input type="text" name="S_L_ala_count"/></td>' +
                                     '<td><input type="radio" name="Sacrum_L_alae" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="Sacrum_R_alae" value="C"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_R_alae" value="3"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_R_alae" value="2b"/></td>' +
-                                    '<td><input type="radio" name="Sacrum_R_alae" value="2a"/></td>' +
                                     '<td><input type="radio" name="Sacrum_R_alae" value="1"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_R_alae" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_R_alae" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Sacrum_R_alae" value="3"/></td>' +
                                     '<td rowspan="6"><input type="text" name="S_R_ala_count"/></td>' +
                                     '<td><input type="radio" name="Sacrum_R_alae" value="0"/></td>' +
                                 '</tr>' +
@@ -4426,135 +4426,135 @@
                                     '<td><input type="radio" name="S1_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S1_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="S1_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="S1_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="S1_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="S1_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="S1_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S1_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S1_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="S1_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">S1</td>' +
                                     '<td><input type="radio" name="S1_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="S1_L_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S1_L_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S1_L_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S1_L_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S1_L_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S1_L_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S1_L_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S1_L_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S1_L_ala" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S1_R_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S1_R_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S1_R_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S1_R_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S1_R_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S1_R_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S1_R_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S1_R_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S1_R_ala" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="S2_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S2_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="S2_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="S2_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="S2_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="S2_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="S2_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S2_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S2_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="S2_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">S2</td>' +
                                     '<td><input type="radio" name="S2_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="S2_L_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S2_L_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S2_L_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S2_L_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S2_L_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S2_L_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S2_L_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S2_L_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S2_L_ala" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S2_R_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S2_R_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S2_R_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S2_R_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S2_R_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S2_R_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S2_R_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S2_R_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S2_R_ala" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="S3_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S3_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="S3_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="S3_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="S3_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="S3_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="S3_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S3_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S3_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="S3_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">S3</td>' +
                                     '<td><input type="radio" name="S3_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="S3_L_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S3_L_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S3_L_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S3_L_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S3_L_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S3_L_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S3_L_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S3_L_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S3_L_ala" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S3_R_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S3_R_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S3_R_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S3_R_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S3_R_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S3_R_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S3_R_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S3_R_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S3_R_ala" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="S4_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S4_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="S4_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="S4_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="S4_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="S4_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="S4_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S4_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S4_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="S4_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">S4</td>' +
                                     '<td><input type="radio" name="S4_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="S4_L_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S4_L_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S4_L_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S4_L_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S4_L_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S4_L_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S4_L_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S4_L_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S4_L_ala" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S4_R_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S4_R_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S4_R_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S4_R_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S4_R_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S4_R_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S4_R_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S4_R_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S4_R_ala" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
                                     '<td><input type="radio" name="S5_complete" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S5_centrum" value="0"/></td>' +
-                                    '<td><input type="radio" name="S5_centrum" value="1"/></td>' +
-                                    '<td><input type="radio" name="S5_centrum" value="2a"/></td>' +
-                                    '<td><input type="radio" name="S5_centrum" value="2b"/></td>' +
                                     '<td><input type="radio" name="S5_centrum" value="3"/></td>' +
+                                    '<td><input type="radio" name="S5_centrum" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S5_centrum" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S5_centrum" value="1"/></td>' +
                                     '<td><input type="radio" name="S5_centrum" value="C"/></td>' +
                     
                                     '<td class="segment">S5</td>' +
                                     '<td><input type="radio" name="S5_complete" value="C"/></td>' +
                     
                                     '<td><input type="radio" name="S5_L_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S5_L_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S5_L_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S5_L_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S5_L_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S5_L_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S5_L_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S5_L_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S5_L_ala" value="0"/></td>' +
                     
                                     '<td><input type="radio" name="S5_R_ala" value="C"/></td>' +
-                                    '<td><input type="radio" name="S5_R_ala" value="3"/></td>' +
-                                    '<td><input type="radio" name="S5_R_ala" value="2b"/></td>' +
-                                    '<td><input type="radio" name="S5_R_ala" value="2a"/></td>' +
                                     '<td><input type="radio" name="S5_R_ala" value="1"/></td>' +
+                                    '<td><input type="radio" name="S5_R_ala" value="2a"/></td>' +
+                                    '<td><input type="radio" name="S5_R_ala" value="2b"/></td>' +
+                                    '<td><input type="radio" name="S5_R_ala" value="3"/></td>' +
                                     '<td><input type="radio" name="S5_R_ala" value="0"/></td>' +
                                 '</tr>' +
                                 '<tr>' +
@@ -4562,10 +4562,10 @@
                     
                                     '<td><input type="radio" name="Coccyx" value="0"/></td>' +
                                     '<td></td>' +
-                                    '<td><input type="radio" name="Coccyx" value="1"/></td>' +
-                                    '<td><input type="radio" name="Coccyx" value="2a"/></td>' +
-                                    '<td><input type="radio" name="Coccyx" value="2b"/></td>' +
                                     '<td><input type="radio" name="Coccyx" value="3"/></td>' +
+                                    '<td><input type="radio" name="Coccyx" value="2b"/></td>' +
+                                    '<td><input type="radio" name="Coccyx" value="2a"/></td>' +
+                                    '<td><input type="radio" name="Coccyx" value="1"/></td>' +
                                     '<td><input type="radio" name="Coccyx" value="C"/></td>' +
                     
                                     '<td class="segment">Coccyx</td>' +
