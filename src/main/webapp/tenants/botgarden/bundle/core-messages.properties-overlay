@@ -66,7 +66,6 @@ collection-object-affinityTaxonLabel: Affinity Taxon
 collection-object-hybridFlagLabel: Hybrid Flag
 taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
-collection-object-taxonomicRangeLabel: Geographic Range of Taxon
 collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
 collection-object-objectNumberRangeSearchEndLabel: To
@@ -233,6 +232,7 @@ collection-object-annotationAuthorLabel: Author
 collection-object-localityInformationLabel: Locality Information
 locality-fieldLocVerbatimLabel: Field collection location verbatim
 locality-fieldLocPlaceLabel: Field collection place
+locality-taxonomicRangeLabel: Geographic Range of Taxon
 locality-fieldLocCountyLabel: Field location county
 locality-fieldLocCountryLabel: Field location country
 locality-fieldLocStateLabel: Field location state
