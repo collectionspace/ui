@@ -1,14 +1,37 @@
 #Login
 login-current: Museum of the Moving Image
-login-current-info: This instance is under development and rebuilt nightly.
+login-current-details: CollectionSpace is a free, open-source collections management application for museums, historical societies, natural science collections, and more.
 login-login-info:
 login-login:
+login-login-after:
 login-login-pwd:
 login-login-pwdValue:
+login-login-pwdValue-after:
 login-rologin-info:
 login-rologin:
 login-rologin-pwd:
 login-rologin-pwdValue:
+login-rologin-pwdValue-after:
+
+login-current-info-1:
+login-current-info-2:
+login-current-info-3:
+login-current-info-4:
+login-current-info-5:
+login-current-info-6:
+login-current-info-7:
+login-webcast-info:
+login-webcast-link-object:
+login-webcast-link-image:
+login-webcast-link-location:
+login-rebuild:
+login-footerFirst:
+login-footerLink:
+login-footerLast:
+
+footer-text1: 2009 - 2016
+footer-currentRelease: Resources
+footer-feedback: LYRASIS support
 
 #Acquisition
 acquisition-acquisitionExtentLabel: Extent
