@@ -154,7 +154,7 @@ taxon-miniView-field2Label: Term Status:
 taxon-miniView-field3Label: Rank:
 
 #Login
-login-deployment: Version botgarden_4.1-11
+login-deployment: Version botgarden_4.1-12
 login-current-info: Welcome to the UC Botanical Garden's collection management system, CollectionSpace. UCBG-CSpace has been configured to support the needs of botanical gardens in general, as well as the specific needs of the UC Botanical Garden.
 login-current-details: 
 login-login-info: 
