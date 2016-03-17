@@ -64,10 +64,10 @@ object-identification-provenanceLabel: Provenance
 object-identification-initialCatalogingCompletedLabel: Initial Cataloging Completed
 object-identification-additionalResearchRequiredLabel: Additional research required
 object-identification-approvedByCuratorLabel: Approved by Curator
-object-identification-objectTitleLabel: Object title
 object-identification-artifactClassLabel: Artifact class
 object-identification-workTypeLabel: Work type
 
+collection-object-objectTitleLabel: Object title
 collection-object-captionLabel: Caption
 collection-object-briefDescriptionLabel: Caption
 collection-object-distinguishingFeaturesLabel: Description
@@ -81,7 +81,7 @@ object-identification-responsible-departmentLabel: Collection category
 
 collection-object-contentLanguageLabel: Language
 collection-object-contentPlaceLabel: Place
-collection-object-contentEntitiesGroupLabel: Content - Entities
+collection-object-contentEntityGroupLabel: Content - Entities
 collection-object-contentEntityLabel: Content - Entity
 collection-object-contentEntityTypeLabel: Content - Entity Type
 collection-object-contentEntityNoteLabel: Content - Entity Note
@@ -95,8 +95,8 @@ collection-object-objectProductionOrganizationLabel: Object production entity
 collection-object-objectProductionOrganizationRoleLabel: Object production entity - Role
 collection-object-objectProductionEntityNoteLabel: Object production entity - Note
 collection-object-assocOrganizationLabel: Associated Entity
-collection-object-assocOrganizationLabel: Associated Entity Type
-collection-object-assocOrganizationLabel: Associated Entity Note
+collection-object-assocOrganizationTypeLabel: Associated Entity Type
+collection-object-assocOrganizationNoteLabel: Associated Entity Note
 collection-object-objectHistoryNoteLabel: Historical Note
 
 object-description-mmiMaterialLabel: Material
@@ -104,7 +104,9 @@ object-description-mmiInscriptionContentLabel: Inscription content
 object-description-formatLabel: Format
 
 object-history-association-historicalNoteSourcesLabel: Historical Note Sources
+collection-object-assocOrganizationGroupLabel: Associated Entity
 object-production-mmiTechniqueLabel: Technique
+collection-object-objProdEntityGroupLabel: Production Entity
 
 vocab-person: Local Entity
 vocab-ulan_pa: ULAN Entity
