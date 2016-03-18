@@ -995,8 +995,8 @@ cspace = cspace || {};
             return element.narrowerContext || undefined;
         })) {
             removeMessage = removeMessage || "deleteDialog-hasNarrowerContextsMessage";
-        } else if (model.fields.broaderContext) {
-            removeMessage = removeMessage || "deleteDialog-hasBroaderContextMessage";
+        // } else if (model.fields.broaderContext) {
+        //     removeMessage = removeMessage || "deleteDialog-hasBroaderContextMessage";
         }
         if (removeMessage) {
             confirmation.open("cspace.confirmation.deleteDialog", undefined, {
