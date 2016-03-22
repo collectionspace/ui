@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html manifest="../cspace.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>CollectionSpace - Login</title>
+
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+		
+        <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
+        <script type="text/javascript" src="../js/Demands.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
+        <script type="text/javascript" src="../js/PasswordValidator.js"></script>
+        <script type="text/javascript" src="../js/Login.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/Footer.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        
+    </head>
+
+    <body>
+        <!-- body content -->
+        <div class="fl-container-1050 fl-centered csc-login">
+            <!-- CSpace logo and right-side search box -->
+            <div id="name-header-login"></div>
+            <!-- main content -->
+            <div id="all-content" class="fl-fix">
+                <!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+                <div class="fl-fix fl-container-flex fl-col-mixed2">
+                        <!-- outer-border block -->
+                        <div class="login-outer-border">
+                            <div class="fl-container-flex fl-fix" id="login">    
+                                <div class="info-column2-60 fl-force-left">
+                                    <div class="login-text">
+                                        <div class="info-pair">
+                                            <div class="header csc-login-current"></div>
+                                            <div class="content">
+	                                            <p class="csc-login-current-details"></p>
+                                                <p>
+                                                    <span class="csc-login-current-info-1"></span>
+                                                    <a class="csc-login-current-info-2" href="http://www.collectionspace.org/current_release/"></a>
+                                                    <span class="csc-login-current-info-3"></span>
+                                                    <span class="csc-login-current-info-4"></span>
+                                                    <span class="csc-login-current-info-5"></span>
+                                                    <a class="csc-login-current-info-6" href="http://demo.collectionspace.org"></a>
+                                                    <span class="csc-login-current-info-7"></span>
+                                                </p>
+                                                <p>                                                                          
+                                                    <span class="csc-login-login-info"></span>
+                                                    <strong class="csc-login-login"></strong><span class="csc-login-login-after"></span>
+                                                    <span class="csc-login-login-pwd"></span>
+                                                    <strong class="csc-login-login-pwdValue"></strong><span class="csc-login-login-pwdValue-after"></span>
+                                                    
+                                                    <span class="csc-login-rologin-info"></span>
+                                                    <strong class="csc-login-rologin"></strong>
+                                                    <span class="csc-login-rologin-pwd"></span>
+                                                    <strong class="csc-login-rologin-pwdValue"></strong><span class="csc-login-rologin-pwdValue-after"></span>
+                                                </p>
+
+                                                <p class="csc-login-webcast-info"></p>
+                                                
+                                                <p>
+                                                    <ul class="login-webcast-links">
+                                                        <li>
+                                                            <span class="csc-login-webcast-link-object"></span>
+                                                            <a href="http://bit.ly/newobjpdf">PDF</a>
+                                                            <a href="https://vimeo.com/112212895">Screencast</a>
+                                                        </li>
+                                                        <li>
+                                                            <span class="csc-login-webcast-link-image"></span>
+                                                            <a href="http://bit.ly/linkimgpdf">PDF</a>
+                                                            <a href="https://vimeo.com/112214418">Screencast</a>
+                                                        </li>
+                                                        <li>
+                                                            <span class="csc-login-webcast-link-location"></span>
+                                                            <a href="http://bit.ly/storlocpdf">PDF</a>
+                                                            <a href="https://vimeo.com/112818120">Screencast</a>
+                                                        </li>
+                                                   	</ul>
+                                                </p>
+                                                
+                                                <p class="csc-login-rebuild"></p>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-40 fl-force-right">
+                                    <div class="login-forms">
+                                        <!-- Main welcome / login form -->
+                                        <div class="info-pair csc-login-signIn">
+                                            <form class="csc-login-loginForm" action="" method="post">
+                                                <div class="header">
+                                                    <div class="label csc-login-header"></div>
+                                                </div>
+                                                <div class="content sign-in">
+                                                    <div class="inner">
+                                                        <div class="login-block">
+                                                            <div class="login-pair">
+                                                                <!--
+                                                                    In the default configuration, the email address used as the userid.
+                                                                    The information is submitted as the userId, but for clarity, the field
+                                                                    is labelled "Email"
+                                                                    -->
+                                                                <div class="login-label csc-login-email-label"></div>
+                                                                <div class="login-element"><input type="text" class="input-alpha csc-login-userId csc-login-loginRequired" name="userid"/></div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                            <div class="login-pair">
+                                                                <div class="login-label csc-login-password-label"></div>
+                                                                <div class="login-element"><input type="password" class="input-alpha csc-login-password csc-login-loginRequired" name="password"/></div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                            <div class="login-pair">
+                                                                <div class="login-element"><input type="submit" class="log-in button csc-login-button"/></div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                            
+                                                            <div class="login-pair forgotpw"><span class="csc-login-forgot"></span><a href="#" class="link csc-login-requestReset"><span class="csc-login-reset-label"></span></a></div>
+                                                        </div>
+                                                    <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </form>
+                                        </div>
+                                        <!-- Reset password form -->
+                                        <div class="info-pair csc-login-enterEmail" style="display:none;">
+                                            <div class="header">
+                                                <div class="label csc-login-reset-header"></div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="inner">
+                                                    <div class="csc-login-enterEmailForm">
+                                                        <div class="csc-login-enterEmailMessage"></div>
+                                                        <div class="login-block">
+                                                            <div class="login-pair">
+                                                                <div class="login-label csc-login-email-label"></div>
+                                                                <div class="login-element"><input type="text" class="input-alpha csc-login-email csc-login-emailRequired" name="email"/></div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                            
+                                                            <div class="login-pair">
+                                                                <div class="login-element"><input type="submit" class="button csc-login-submitEmail" name="submit" /></div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="login-pair forgotpw"><a href="index.html" class="link csc-login-back"></a></div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <!-- Enter new password form -->
+                                        <div class="info-pair csc-login-resetRequest" style="display:none;">
+                                            <div class="header">
+                                                <div class="label csc-login-reset-header"></div>
+                                            </div>
+                                            <div class="content reset-password">
+                                                <div class="inner">
+                                                    <div class="">
+                                                        <span class="csc-login-newPassword-note"></span>
+                                                        <span class="csc-login-email"></span>
+                                                    </div>
+                                                    <div class="login-block">
+                                                        <div class="password-instructions csc-login-password-instructions"></div>
+                                                        <div class="clear"></div>
+
+                                                        <div class="login-pair">
+                                                            <div class="login-label csc-login-newPwd-label"></div>
+                                                            <div class="login-element"><input type="password" class="input-alpha csc-login-newPassword csc-login-passwordRequired csc-passwordValidator-password" name="password"/></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+
+                                                        <div class="login-pair">
+                                                            <div class="login-label csc-login-confirmPwd-label"></div>
+                                                            <div class="login-element"><input type="password" class="input-alpha csc-login-confirmPassword csc-login-passwordRequired" name="passwordConfirm"/></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                        
+                                                        <div class="login-pair">
+                                                            <div class="login-element"><input type="submit" class="button csc-login-submitNewPassword" name="submit" /></div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div> <!-- end outer border-->
+                    <div class="clear"></div>
+                </div> <!-- END sub-main content -->
+                <div class="csc-footer-container" id="footer"></div>
+            </div> <!-- END main content -->
+        </div> <!-- END body content -->
+        <script type="text/javascript">
+            cspace.globalSetup("cspace.login");
+        </script>
+    </body>
+</html>
