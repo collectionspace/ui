@@ -8,7 +8,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/search.css</css>
     <css>/defaults/css/createNew.css</css>
     <css>/defaults/css/pivot.css</css>
@@ -18,7 +18,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
   </group>
@@ -27,7 +27,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
   </group>
   
@@ -35,14 +35,14 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
   </group>
   
   <group name='administration'>
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/cabinet.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -57,7 +57,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/Autocomplete.css</css>
     <css>/defaults/css/pivot.css</css>
@@ -69,7 +69,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
@@ -87,7 +87,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
-    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/tenants/testsci/css/cspace.css</css>
     <css>/defaults/css/NumberPatternChooser.css</css>
     <css>/defaults/css/Confirmation.css</css>
     <css>/defaults/css/Autocomplete.css</css>

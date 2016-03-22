@@ -9,7 +9,7 @@
                     "type": "cspace.login",
                     "options": {
                         "model": {
-                            "otherTenant": "../../lifesci/html/index.html"
+                            "otherTenant": "../../testsci/html/index.html"
                         }
                     } 
                 } 

@@ -39,7 +39,7 @@ cp $PREFIX-tenant.xml cspace-config-$PREFIX.xml
 cp tenants/$PREFIX/nightly-settings.xml tenants/$PREFIX/local-settings.xml
 echo "-> Copied $PREFIX files"
 
-PREFIX="lifesci"
+PREFIX="testsci"
 
 cp $PREFIX-tenant.xml cspace-config-$PREFIX.xml
 cp tenants/$PREFIX/nightly-settings.xml tenants/$PREFIX/local-settings.xml

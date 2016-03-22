@@ -105,8 +105,8 @@
                                         {
                                             "func": "cspace.autocomplete",
                                             "options": {
-                                                "queryUrl": "../../../tenant/lifesci/vocabularies/taxon/autocomplete/taxonAuthor",
-                                                "vocabUrl": "../../../tenant/lifesci/vocabularies/taxon/source-vocab/taxonAuthor"
+                                                "queryUrl": "../../../tenant/testsci/vocabularies/taxon/autocomplete/taxonAuthor",
+                                                "vocabUrl": "../../../tenant/testsci/vocabularies/taxon/source-vocab/taxonAuthor"
                                             },
                                             "type": "fluid"
                                         }

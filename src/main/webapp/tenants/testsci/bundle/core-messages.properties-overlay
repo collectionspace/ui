@@ -1,4 +1,4 @@
-# Added for lifesci tenant
+# Added for testsci tenant
 
 # Schema extensions to Cataloging record
 collection-object-taxonomicIdentGroupLabel: Determination History
@@ -71,8 +71,8 @@ login-current-info-3:
 login-current-info-4:
 
 
-login-login: admin@lifesci.collectionspace.org
-login-rologin: reader@lifesci.collectionspace.org
+login-login: admin@testsci.collectionspace.org
+login-rologin: reader@testsci.collectionspace.org
 
 login-footerFirst: To return to the CollectionSpace Core tenant, follow\t
 login-footerLink: this link
