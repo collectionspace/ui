@@ -365,6 +365,9 @@ acquisition-objectPurchaseOfferPriceValueLabel: Object purch. offer price
 acquisition-objectPurchaseOfferPriceCurrencyLabel: Purchase price(s), if applicable
 acquisition-updatedAtLabel: Modified date
 acquisition-identificationNumberRequired: Please specify an acquisition reference number
+acquisition-acquisitionDonorGroupLabel: Previous owner (donor)
+acquisition-donorLabel: Donor
+acquisition-donorAnonLabel: Anonymous
 
 #Loan in
 loanin-loaninInformationLabel: Incoming Loans Information
