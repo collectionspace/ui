@@ -5,3 +5,22 @@ login-current-info-4: herbarium profile
 login-current-info-5: of CollectionSpace, which includes fields and procedures useful for preserved plant specimen collections. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
 login-login: admin@herbarium.collectionspace.org
 login-rologin: reader@herbarium.collectionspace.org
+
+# Loan in
+
+loanin-returnInformationLabel: Items Returned
+loanin-returnGroupLabel: Items Returned
+loanin-returnDateLabel: Date
+loanin-returnQuantityLabel: Quantity
+loanin-returnNotesLabel: Notes
+loanin-transferOutInformationLabel: Items Transferred Out
+loanin-transferOutDateLabel: Date
+loanin-transferOutQuantityLabel: Quantity
+loanin-transferOutOrgLabel: Institution
+loanin-transferOutPersonLabel: For Study By
+loanin-transferOutDirectorLabel: Under Direction Of
+loanin-transferOutNotesLabel: Notes
+loanin-transferOutReturnLabel: Transferred Items Returned
+loanin-transferOutReturnDateLabel: Date
+loanin-transferOutReturnQuantityLabel: Quantity
+loanin-transferOutReturnNotesLabel: Notes
