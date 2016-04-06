@@ -8,6 +8,21 @@ login-rologin: reader@herbarium.collectionspace.org
 
 # Loan in
 
+loanin-identificationNumberRequired: Please specify a Lender's No.
+loanin-loanInNumberLabel: Lender's No.
+loanin-majorGroupLabel: Major Group
+loanin-geographyLabel: Geography
+loanin-taxonomyLabel: Taxonomy
+loanin-objKindLabel: Object Kind
+loanin-dueDateLabel: Due Date
+loanin-shipDateLabel: Loan Shipped Date
+loanin-transferInLabel: Transfer In
+loanin-transferInDateLabel: Date
+loanin-transferInOrgLabel: From
+loanin-transferInPersonLabel: Previous Borrower
+
+# Loan in - naturalhistory extension
+
 loanin-returnInformationLabel: Items Returned
 loanin-returnGroupLabel: Items Returned
 loanin-returnDateLabel: Date
