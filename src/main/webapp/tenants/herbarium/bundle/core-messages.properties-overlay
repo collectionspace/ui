@@ -40,6 +40,17 @@ loanin-transferOutReturnDateLabel: Date
 loanin-transferOutReturnQuantityLabel: Quantity
 loanin-transferOutReturnNotesLabel: Notes
 
+# Loan out
+
+loanout-majorGroupLabel: Major Group
+loanout-geographyLabel: Geography
+loanout-taxonomyLabel: Taxonomy
+loanout-objKindLabel: Object Kind
+loanout-shipDateLabel: Shipping Form Date
+loanout-transportMethodLabel: Transportation
+loanout-numPackagesLabel: # Packages
+loanout-acknowledgeDateLabel: Acknowledge Date
+
 # Loan out - naturalhistory extension
 
 loanout-objectInformationLabel: Loan Out Items
