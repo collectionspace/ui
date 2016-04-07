@@ -39,3 +39,25 @@ loanin-transferOutReturnLabel: Transferred Items Returned
 loanin-transferOutReturnDateLabel: Date
 loanin-transferOutReturnQuantityLabel: Quantity
 loanin-transferOutReturnNotesLabel: Notes
+
+# Loan out - naturalhistory extension
+
+loanout-objectInformationLabel: Loan Out Items
+loanout-loanoutItemsLabel: Accession Numbers
+loanout-objectNumbersLabel: Object number(s)
+loanout-objectQuantityLabel: Quantity
+loanout-objectConditionsLabel: Loan Conditions
+loanout-objectNotesLabel: Notes
+loanout-returnInformationLabel: Loan Return Items
+loanout-returnObjectNumbersLabel: Object number(s)
+loanout-returnQuantityLabel: Quantity
+loanout-returnDateLabel: Return Date
+loanout-returnDeterminationLabel: New Determination
+loanout-returnNotesLabel: Notes
+loanout-transferInformationLabel: Loan Transfers
+loanout-transferDateLabel: Transfer Date
+loanout-transferOrgLabel: To Institution
+loanout-transferPersonLabel: To Person
+loanout-transferDirectorLabel: Under Direction Of
+loanout-transferQuantityLabel: Quantity
+loanout-transferNotesLabel: Notes
