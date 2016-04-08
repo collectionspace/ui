@@ -6,6 +6,19 @@ login-current-info-5: of CollectionSpace, which includes fields and procedures u
 login-login: admin@herbarium.collectionspace.org
 login-rologin: reader@herbarium.collectionspace.org
 
+# Cataloging - naturalhistory extension
+
+collection-object-determinationHistoryGroupLabel: Determination History
+collection-object-determinationTaxonLabel: Scientific Name
+collection-object-determinationQualifierLabel: Qualifier
+collection-object-determinationByLabel: By
+determinationHistoryGroup-determinationDateGroupLabel: Date
+collection-object-determinationInstitutionLabel: Institution
+collection-object-determinationKindLabel: Kind
+collection-object-determinationReferenceLabel: Reference
+collection-object-determinationRefPageLabel: Page
+collection-object-determinationNoteLabel: Notes
+
 # Loan in
 
 loanin-identificationNumberRequired: Please specify a Lender's No.
