@@ -4,6 +4,8 @@ login-current-info-5: of CollectionSpace. If you’re interested in a version of
 login-login: admin@materials.collectionspace.org
 login-rologin: reader@materials.collectionspace.org
 
+collection-object-materialLabel: Material name
+
 vocab-materialclassification: Material Classifications
 vocab-materialformtype: Material Form Types
 vocab-material: Local Materials
