@@ -149,6 +149,13 @@ cspace = cspace || {};
                 that.applier.requestChange("vocabs", undefined);
                 return;
             }
+            vocabs = vocabs.filter(function (vocab) {
+                return !!(that.vocab.authority[model.recordType].workflowState.vocabs[vocab]);
+            });
+            if (vocabs.length == 0) {
+                that.applier.requestChange("vocabs", undefined);
+                return;
+            }
             var vocabNames = [];
             fluid.each(vocabs, function (vocab) {
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));

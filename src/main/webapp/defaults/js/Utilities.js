@@ -1417,6 +1417,7 @@ fluid.registerNamespace("cspace.util");
         fluid.each(that.authorities, function (authority) {
             that.authority[authority] = {
                 nptAllowed: {},
+                workflowState: {},
                 order: {}
             };
             Object.defineProperty(that.authority[authority], "vocabs", {
@@ -1431,6 +1432,14 @@ fluid.registerNamespace("cspace.util");
                 get: function () {
                     return fluid.transform(fluid.get(that.list, authority), function (val) {
                         return val.nptAllowed;
+                    });
+                },
+                enumerable : true
+            });
+            Object.defineProperty(that.authority[authority].workflowState, "vocabs", {
+                get: function () {
+                    return fluid.transform(fluid.get(that.list, authority), function (val) {
+                        return val.workflowState;
                     });
                 },
                 enumerable : true
