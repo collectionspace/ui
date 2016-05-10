@@ -1845,10 +1845,14 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["autoInit", "fluid.eventedComponent"]
     });
 
+    cspace.util.isLockedState = function (workflowState) {
+      return workflowState && (workflowState === "locked" || workflowState.indexOf("replicated") > -1)
+    };
+
     cspace.util.resolveLocked = function (model) {
         // Checking whether workflow is present in model.fields or model.
         var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
-        return workflow && workflow === "locked";
+        return cspace.util.isLockedState(workflow);
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
