@@ -266,6 +266,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             if (that.handlePermissions) {
                 that.handlePermissions();
             }
+            if (that.handleWorkflowState) {
+                that.handleWorkflowState();
+            }
             that.model.authorities.sort(function (auth1, auth2) {
                 return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
             });
@@ -1145,6 +1148,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         applier.requestChange("authorities", authorities);
     };
+
+    cspace.autocomplete.handleWorkflowState = function (applier, model, vocab) {
+        // Filter vocabularies from configuration based on workflow state.
+        applier.requestChange("authorities", model.authorities.filter(function (auth) {
+            var parts = auth.type.split("-");
+            var authority = parts[0];
+            var vocabulary = parts[1];
+            
+            return !cspace.util.isLockedState(vocab.authority[authority].workflowState.vocabs[vocabulary]);
+        }));
+    };
+    
     
     cspace.autocomplete.buttonAdjustor = function (closeButton, model, hide) {
         closeButton[model.term === model.baseRecord.displayName || hide ? "hide": "show"]();
