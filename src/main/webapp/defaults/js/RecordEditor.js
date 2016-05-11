@@ -1248,7 +1248,9 @@ cspace = cspace || {};
             showGoto: "read"
         },
         requiredParentWorkflowStates: {
-            showCreateFromExistingButton: "project"
+            showCreateFromExistingButton: "project",
+            showDeleteButton: "project",
+            showSaveCancelButtons: "project"
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
@@ -1533,7 +1535,13 @@ cspace = cspace || {};
           var authority = vocab.authority[recordType];
         
           if (authority) {
-            parentWorkflowState = authority.workflowState.vocabs[rModel.namespace];
+            var vocabulary = cspace.vocab.resolve({
+                model: rModel,
+                recordType: recordType,
+                vocab: vocab
+            });
+
+            parentWorkflowState = authority.workflowState.vocabs[vocabulary];
           }
         }
         
@@ -1542,13 +1550,13 @@ cspace = cspace || {};
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
 
-        // Hide buttons if the parent (e.g. vocabulary) is locked
+        // Hide buttons if user does not have specific permissions for the recordType
+        that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
+
+        // Hide buttons if the parent vocabulary is locked
         if (parentWorkflowState) {
           that.hideButtonsByParentWorkflowState(parentWorkflowState, that.options.requiredParentWorkflowStates);
         }
-        
-        // Hide buttons if user does not have specific permissions for the recordType
-        that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
