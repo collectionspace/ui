@@ -620,6 +620,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             resolver: "{permissionsResolver}",
                             permission: "update"
                         }, "create"]
+                    },
+                    handleWorkflowState: {
+                        funcName: "cspace.autocomplete.handleWorkflowState",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "{vocab}"]
                     }
                 }
             }, "{arguments}.1"]
@@ -647,6 +651,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             resolver: "{permissionsResolver}",
                             permission: "update"
                         }, "create"]
+                    },
+                    handleWorkflowState: {
+                        funcName: "cspace.autocomplete.handleWorkflowState",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "{vocab}"]
                     }
                 },
                 components: {

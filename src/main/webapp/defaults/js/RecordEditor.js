@@ -1112,7 +1112,8 @@ cspace = cspace || {};
                 showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
                 showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
             },
-            recordType: "{cspace.recordEditor}.options.recordType"
+            recordType: "{cspace.recordEditor}.options.recordType",
+            vocab: "{cspace.recordEditor}.vocab"
         }, "{arguments}.1"]
     });
 
@@ -1245,6 +1246,11 @@ cspace = cspace || {};
             showSaveCancelButtons: "update",
             showDeleteButton: "delete",
             showGoto: "read"
+        },
+        requiredParentWorkflowStates: {
+            showCreateFromExistingButton: "project",
+            showDeleteButton: "project",
+            showSaveCancelButtons: "project"
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
@@ -1509,25 +1515,54 @@ cspace = cspace || {};
                 }));
             }); 
         };
+        
+        that.hideButtonsByParentWorkflowState = function (parentWorkflowState, requiredParentWorkflowStates) {
+             fluid.each(requiredParentWorkflowStates, function(workflowState, flag) {
+                that.applier.requestChange(flag, parentWorkflowState === workflowState);
+            }); 
+        };
     };
 
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel,
             notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
-            recordType = that.options.recordType;
+            recordType = that.options.recordType,
+            vocab = that.options.vocab;
+        
+        var parentWorkflowState = null;
+        
+        if (vocab) {
+          var authority = vocab.authority[recordType];
+        
+          if (authority) {
+            var vocabulary = cspace.vocab.resolve({
+                model: rModel,
+                recordType: recordType,
+                vocab: vocab
+            });
+
+            parentWorkflowState = authority.workflowState.vocabs[vocabulary];
+          }
+        }
+        
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
-        
+
         // Hide buttons if user does not have specific permissions for the recordType
         that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
+
+        // Hide buttons if the parent vocabulary is locked
+        if (parentWorkflowState) {
+          that.hideButtonsByParentWorkflowState(parentWorkflowState, that.options.requiredParentWorkflowStates);
+        }
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
         
         that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
-
+        
         that.refreshView();
         that.renderGoTo();
     };
