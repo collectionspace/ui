@@ -156,7 +156,8 @@ cspace = cspace || {};
             var vocabs = {};
             fluid.each(permittedAuth, function (auth) {
                 vocabs[auth] = that.vocab.authority[auth].order.vocabs.filter(function (vocab) {
-                    return !!(that.vocab.authority[auth].workflowState.vocabs[vocab]);
+                    var workflowState = that.vocab.authority[auth].workflowState.vocabs[vocab];
+                    return (workflowState && !cspace.util.isLockedState(workflowState));
                 });
                 if (vocabs[auth].length == 0) {
                     vocabs[auth] = null;
