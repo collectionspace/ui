@@ -25,21 +25,23 @@
         
         <div class="info-column">
             <div class="info-pair">
-                <div class="header"></div>
+                <div class="header">
+                    <div class="label csc-material-materialCompositionGroup-label"></div>
+                </div>
                 <div class="content">
                     <table>
                         <thead>
                             <tr>
-                                <td class="csc-material-familyName-label"></td>
-                                <td class="csc-material-className-label"></td>
-                                <td class="csc-material-genericName-label"></td>
+                                <td class="csc-material-materialCompositionFamilyName-label"></td>
+                                <td class="csc-material-materialCompositionClassName-label"></td>
+                                <td class="csc-material-materialCompositionGenericName-label"></td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="text" class="csc-material-familyName"/></td>
-                                <td><input type="text" class="csc-material-className"/></td>
-                                <td><input type="text" class="csc-material-genericName"/></td>
+                            <tr class="csc-material-materialCompositionGroup">
+                                <td><input type="text" class="csc-material-materialCompositionFamilyName"/></td>
+                                <td><input type="text" class="csc-material-materialCompositionClassName"/></td>
+                                <td><input type="text" class="csc-material-materialCompositionGenericName"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -219,6 +221,60 @@
                 </div>
             </div>
         </div>
+
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialTermAttributionContributingGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialTermAttributionContributingOrganization-label"></td>
+                                <td class="csc-material-materialTermAttributionContributingPerson-label"></td>
+                                <td class="csc-material-materialTermAttributionContributingDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialTermAttributionContributingGroup">
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingOrganization"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingPerson"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingDate"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialTermAttributionEditingGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialTermAttributionEditingOrganization-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingPerson-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingNote-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialTermAttributionEditingGroup">
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingOrganization"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingPerson"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingNote"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingDate"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -226,7 +282,7 @@
     <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-formInformation-label"></div>
     <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
         <div class="info-column">
-            <div class="info-column2-30 fl-force-left">
+            <div class="info-column2-50 fl-force-left">
                 <div class="info-pair-select">
                     <div class="header">
                         <div class="label csc-material-commonForm-label"></div>
@@ -236,26 +292,13 @@
                     </div>
                 </div>
             </div>
-            <div class="info-column2-70 fl-force-right">
-                <div class="info-pair">
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair-select">
                     <div class="header">
-                        <div class="label csc-material-formTypeGroup-label"></div>
+                        <div class="label csc-material-formType-label"></div>
                     </div>
                     <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td class="csc-material-formType-label"></td>
-                                    <td class="csc-material-formSubtype-label"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="csc-material-formTypeGroup">
-                                    <td><input type="text" class="csc-material-formType"/></td>
-                                    <td><input type="text" class="csc-material-formSubtype"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <select class="csc-material-formType input-select"><option value="">Options not loaded</option></select>
                     </div>
                 </div>
             </div>
