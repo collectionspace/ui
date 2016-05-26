@@ -1,0 +1,606 @@
+<div class="fl-container-flex fl-fix information-group">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-objectTreatmentInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <span class="label required csc-conservation-conservationNumber-label"></span><span class="required">*</span>
+                    </div>
+                    <div class="content csc-conservation-conservationNumber-patternChooserContainer clearfix">
+                        <input type="text" class="csc-conservation-conservationNumber pattern-chooser-input"/>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-treatmentsPerformed-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-conservation-treatmentPerformed input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-conservationStatusGroup-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-conservation-status-label"></td>
+                                    <td class="csc-conservation-statusDate-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="csc-conservation-conservationStatusGroup">
+                                    <td><select class="csc-conservation-status input-select"><option value="">Options not loaded</option></select></td>
+                                    <td><input type="text" class="csc-conservation-statusDate"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-conservation-treatmentPurpose-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-conservation-treatmentPurpose input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-conservators-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="input-alpha csc-conservation-conservator"/>
+                    </div>
+                </div>
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-otherPartyGroup-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-conservation-otherParty-label"></td>
+                                    <td class="csc-conservation-otherPartyRole-label"></td>
+                                    <td class="csc-conservation-otherPartyNote-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="csc-conservation-otherPartyGroup">
+                                    <td><input type="text" class="csc-conservation-otherParty"/></td>
+                                    <td><select class="csc-conservation-otherPartyRole input-select"><option value="">Options not loaded</option></select></td>
+                                    <td><input type="text" class="csc-conservation-otherPartyNote"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-conservation-proposedTreatment-label"></div>
+            </div>
+            <div class="content">
+                <textarea rows="4" cols="30" class="input-textarea csc-conservation-proposedTreatment"></textarea>
+            </div>
+        </div>
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-approvalInformation-label"></div>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="csc-conservation-approvedBy-label"></td>
+                                    <td class="csc-conservation-approvedDate-label"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="csc-conservation-approvedBy"/></td>
+                                    <td><input type="text" class="csc-conservation-approvedDate"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair-date">
+                        <div class="header">
+                            <div class="label csc-conservation-treatmentStartDate-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-conservation-treatmentStartDate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair-date">
+                        <div class="header">
+                            <div class="label csc-conservation-treatmentEndDate-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-conservation-treatmentEndDate" />
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-conservation-treatmentSummary-label"></div>
+            </div>
+            <div class="content">
+                <textarea rows="4" cols="30" class="input-textarea csc-conservation-treatmentSummary"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-objectAnalysisInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-conservation-futureTreatmentGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-conservation-futureTreatment-label"></td>
+                                <td class="csc-conservation-futureTreatmentDate-label"></td>
+                                <td class="csc-conservation-futureTreatmentNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-conservation-futureTreatmentGroup">
+                                <td><select class="csc-conservation-futureTreatment input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-conservation-futureTreatmentDate"/></td>
+                                <td><input type="text" class="csc-conservation-futureTreatmentNote"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column cs-multipleEdit" id="multipleEdit">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-conservation-destAnalysisGroup-label"></div>
+                </div>
+                <div class="content csc-conservation-destAnalysisGroup cs-repeatable-stretched">
+                    <div class="info-column">
+                        <div class="info-column2-50 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header"></div>
+                                <div class="content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-conservation-destAnalysisApprovedDate-label"></td>
+                                                <td class="csc-conservation-destAnalysisApprovalNote-label"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="csc-conservation-destAnalysisApprovedDate"/></td>
+                                                <td><input type="text" class="csc-conservation-destAnalysisApprovalNote"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-column2-50 fl-force-right">
+                            <div class="info-pair">
+                                <div class="header"></div>
+                                <div class="content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td class="csc-conservation-sampleBy-label"></td>
+                                                <td class="csc-conservation-sampleDate-label"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="csc-conservation-sampleBy"/></td>
+                                                <td><input type="text" class="csc-conservation-sampleDate"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column">
+                        <div class="info-column2-50 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-conservation-sampleDescription-label"></div>
+                                </div>
+                                <div class="content">
+                                    <textarea rows="4" cols="30" class="input-textarea csc-conservation-sampleDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-column2-50 fl-force-right">
+                            <div class="info-column2-30 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-conservation-sampleReturned-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <input type="checkbox" class="csc-conservation-sampleReturned"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column2-70 fl-force-right">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-conservation-sampleReturnedLocation-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <input type="text" class="csc-conservation-sampleReturnedLocation"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-conservation-analysisMethod-label"></div>
+            </div>
+            <div class="content">
+                <textarea rows="4" cols="30" class="input-textarea csc-conservation-analysisMethod"></textarea>
+            </div>
+        </div>
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-conservation-analysisResults-label"></div>
+            </div>
+            <div class="content">
+                <textarea rows="4" cols="30" class="input-textarea csc-conservation-analysisResults"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Living Plant extension -->
+<div class="fl-container-flex fl-fix information-group">
+  <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-livingPlantInformation-label"></div>
+  <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+
+    <div class="fl-container-flex fl-fix information-subgroup infoGroup fertilization">
+        <div class="csc-conservation-fertilizationGroup cs-repeatable-stretched">
+          <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-fertilizationInformation-label"></div>
+          <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <span class="label csc-conservation-fertilizerUsed-label"></span>
+                        </div>
+                        <div class="content">
+                            <select class="csc-living-plant-fertilization-fertilizer-used input-select"><option value="">Options not loaded</option></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-appliedBy-label"></div>
+                        </div>
+                        <div class="content">
+                            <td><input type="text" class="csc-living-plant-fertilization-applied-by"/></td>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+              <div class="info-pair">
+                <div class="header">
+                </div>
+                <div class="content">
+                  <table>
+                    <thead>
+                      <tr>
+                        <td style="text-align: center;" class="csc-conservation-nitrogenPercent-label"></td>
+                        <td style="text-align: center;" class="csc-conservation-phosphorusPercent-label"></td>
+                        <td style="text-align: center;" class="csc-conservation-potassiumPercent-label"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-fertilization-nitrogen-percent"/></td>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-fertilization-phosphorus-percent"/></td>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-fertilization-potassium-percent"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>          
+            </div>
+
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                  <div class="info-pair">
+                    <div class="header">
+                    </div>
+                    <div class="content">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td class="csc-conservation-applicationDate-label"></td>
+                            <td class="csc-conservation-nextApplicationDate-label"></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><input type="text" class="csc-living-plant-fertilization-application-date"/></td>
+                            <td><input type="text" class="csc-living-plant-fertilization-next-application-date"/></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>  
+                </div>
+                
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-amountApplied-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-living-plant-fertilization-amount-applied"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <span class="label csc-conservation-fertilizationNotes-label"></span>
+                        </div>
+                        <div class="content">
+                            <textarea rows="4" cols="30" class="input-textarea csc-living-plant-fertilization-notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-fertilizerToBeUsed-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-living-plant-fertilization-fertilizer-to-be-used"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="fl-container-flex fl-fix information-subgroup infoGroup pests_and_disease">
+        <div class="csc-conservation-pestsAndDiseaseGroup cs-repeatable-stretched">
+          <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-pestsAndDiseaseInformation-label"></div>
+          <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <span class="label csc-conservation-pestOrDiseaseObserved-label"></span>
+                        </div>
+                        <div class="content">
+                            <select class="csc-living-plant-pests-and-disease-observed input-select"><option value="">Options not loaded</option></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-identifiedBy-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-living-plant-pests-and-disease-identified-by"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+              <div class="info-pair">
+                <div class="header">
+                </div>
+                <div class="content">
+                  <table>
+                    <thead>
+                      <tr>
+                        <td style="text-align: center;" class="csc-conservation-dateObserved-label"></td>
+                        <td style="text-align: center;" class="csc-conservation-treatmentDate-label"></td>
+                        <td style="text-align: center;" class="csc-conservation-futureTreatmentDate-label"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-pests-and-disease-date-observed"/></td>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-pests-and-disease-treatment-date"/></td>
+                        <td><input style="text-align: center;" type="text" class="csc-living-plant-pests-and-disease-future-treatment-date"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>          
+            </div>
+
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-treatedBy-label"></div>
+                        </div>
+                        <div class="content">
+                            <input type="text" class="csc-living-plant-pests-and-disease-treated-by"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-treatedWith-label"></div>
+                        </div>
+                        <div class="content">
+                           <textarea rows="4" cols="30" class="input-textarea csc-living-plant-pests-and-disease-treated-with"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+                <div class="info-column2-50 fl-force-left">
+                    <div class="info-pair">
+                        <div class="header">
+                            <span class="label csc-conservation-futureTreatment-label"></span>
+                        </div>
+                        <div class="content">
+                            <textarea rows="4" cols="30" class="input-textarea csc-living-plant-pests-and-disease-future-treatment"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-conservation-futureTreatmentNotes-label"></div>
+                        </div>
+                        <div class="content">
+                           <textarea rows="4" cols="30" class="input-textarea csc-living-plant-pests-and-disease-future-treatment-notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="fl-container-flex fl-fix information-subgroup repotting">
+      <div class="csc-recordEditor-header fl-container-flex header toggle csc-conservation-repottingInformation-label"></div>
+      <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+              <div class="info-pair">
+                <div class="header">
+                </div>
+                <div class="content">
+                  <table>
+                    <thead>
+                      <tr>
+                        <td class="csc-conservation-dateRepotted-label"></td>
+                        <td class="csc-conservation-nextRepotting-label"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" class="csc-living-plant-repotting-date-repotted"/></td>
+                        <td><input type="text" class="csc-living-plant-repotting-next-repotting"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>  
+            </div>
+            
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-container-label"></div>
+                    </div>
+                    <div class="content">
+                        <input type="text" class="csc-living-plant-repotting-container"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <span class="label csc-conservation-soilMix-label"></span>
+                    </div>
+                    <div class="content">
+                        <select class="csc-living-plant-repotting-soil-mix input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-performedBy-label"></div>
+                    </div>
+                    <div class="content">
+                        <td><input type="text" class="csc-living-plant-repotting-performed-by"/></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <span class="label csc-conservation-description-label"></span>
+                    </div>
+                    <div class="content">
+                        <textarea rows="4" cols="30" class="input-textarea csc-living-plant-repotting-description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-conservation-plannedTreatment-label"></div>
+                    </div>
+                    <div class="content">
+                       <textarea rows="4" cols="30" class="input-textarea csc-living-plant-repotting-planned-treatment"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
