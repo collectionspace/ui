@@ -117,3 +117,13 @@ loanout-transportMethodLabel: Transportation
 loanout-numPackagesLabel: # Packages
 loanout-acknowledgeDateLabel: Acknowledge Date
 
+# Taxon
+
+taxon-taxonMajorGroupLabel: Major Group
+taxon-taxonFamilyLabel: Family
+taxon-taxonBasionymLabel: Basionym
+taxon-relatedTermGroupLabel: Related Terms
+taxon-relatedTermLabel: Related Term
+taxon-relatedTermTypeLabel: Type
+taxon-relatedTermSourceLabel: Source
+taxon-relatedTermSourceDetailLabel: Source Detail
