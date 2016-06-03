@@ -6,32 +6,6 @@ login-current-info-5: of CollectionSpace, which includes fields and procedures u
 login-login: admin@herbarium.collectionspace.org
 login-rologin: reader@herbarium.collectionspace.org
 
-# Loan in
-
-loanin-identificationNumberRequired: Please specify a Lender's No.
-loanin-loanInNumberLabel: Lender's No.
-loanin-majorGroupLabel: Major Group
-loanin-geographyLabel: Geography
-loanin-taxonomyLabel: Taxonomy
-loanin-objKindLabel: Object Kind
-loanin-dueDateLabel: Due Date
-loanin-shipDateLabel: Loan Shipped Date
-loanin-transferInLabel: Transfer In
-loanin-transferInDateLabel: Date
-loanin-transferInOrgLabel: From
-loanin-transferInPersonLabel: Previous Borrower
-
-# Loan out
-
-loanout-majorGroupLabel: Major Group
-loanout-geographyLabel: Geography
-loanout-taxonomyLabel: Taxonomy
-loanout-objKindLabel: Object Kind
-loanout-shipDateLabel: Shipping Form Date
-loanout-transportMethodLabel: Transportation
-loanout-numPackagesLabel: # Packages
-loanout-acknowledgeDateLabel: Acknowledge Date
-
 # Cataloging - naturalhistory extension
 
 collection-object-determinationHistoryGroupLabel: Determination History
@@ -85,3 +59,61 @@ loanout-transferPersonLabel: To Person
 loanout-transferDirectorLabel: Under Direction Of
 loanout-transferQuantityLabel: Quantity
 loanout-transferNotesLabel: Notes
+
+# Cataloging
+
+collection-object-localNameGroupLabel: Local Name
+collection-object-localNameLabel: Local Name
+collection-object-localNameLanguageLabel: Language
+collection-object-hybridParentGroupLabel: Hybrid Parent
+collection-object-hybridParentLabel: Hybrid Parent
+collection-object-hybridParentQualifierLabel: Parent Qualifier
+collection-object-hybridNameLabel: Hybrid Name
+collection-object-labelHeaderLabel: Label Header
+collection-object-labelFooterLabel: Label Footer
+collection-object-sheetNumberLabel: Sheet Number
+collection-object-sheetCountLabel: Sheet Count
+collection-object-typeSpecimenGroupLabel: Type Specimen
+collection-object-typeSpecimenKindLabel: Kind of Type
+collection-object-typeSpecimenAssertionByLabel: Asserted By
+collection-object-typeSpecimenReferenceLabel: Reference
+collection-object-typeSpecimenRefPageLabel: Page
+collection-object-typeSpecimenBasionymLabel: Verified Basionym
+collection-object-typeSpecimenNotesLabel: Notes
+collection-object-postToPublicLabel: Post to Public
+collection-object-habitatLabel: Habitat
+collection-object-associatedTaxaGroupLabel: Associated Taxa
+collection-object-assocTaxonLabel: Scientific Name
+collection-object-assocTaxonCommonNameLabel: Common Name
+collection-object-assocTaxonInteractionLabel: Interaction
+collection-object-localityInformationLabel: Locality Information
+collection-object-localityGroupLabel: 
+collection-object-collectionLocationVerbatimLabel: Field Collection Location Verbatim
+collection-object-collectionPlaceLabel: Field Collection Place
+
+# Loan in
+
+loanin-identificationNumberRequired: Please specify a Lender's No.
+loanin-loanInNumberLabel: Lender's No.
+loanin-majorGroupLabel: Major Group
+loanin-geographyLabel: Geography
+loanin-taxonomyLabel: Taxonomy
+loanin-objKindLabel: Object Kind
+loanin-dueDateLabel: Due Date
+loanin-shipDateLabel: Loan Shipped Date
+loanin-transferInLabel: Transfer In
+loanin-transferInDateLabel: Date
+loanin-transferInOrgLabel: From
+loanin-transferInPersonLabel: Previous Borrower
+
+# Loan out
+
+loanout-majorGroupLabel: Major Group
+loanout-geographyLabel: Geography
+loanout-taxonomyLabel: Taxonomy
+loanout-objKindLabel: Object Kind
+loanout-shipDateLabel: Shipping Form Date
+loanout-transportMethodLabel: Transportation
+loanout-numPackagesLabel: # Packages
+loanout-acknowledgeDateLabel: Acknowledge Date
+
