@@ -4,4 +4,12 @@ login-current-info-5: of CollectionSpace. If you’re interested in a version of
 login-login: admin@materials.collectionspace.org
 login-rologin: reader@materials.collectionspace.org
 
+collection-object-objectNumberLabel: Accession number
+collection-object-briefDescriptionsLabel: Sample Description
+collection-object-objectStatusLabel: Object Type
+collection-object-materialPhysicalDescriptionsLabel: Physical Descriptions
+collection-object-materialPhysicalDescriptionLabel: Physical Description
+collection-object-referenceLabel: Supplementary literature description
 collection-object-materialLabel: Material name
+
+dimension-dimensionSummaryLabel: Sample size
