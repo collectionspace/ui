@@ -1845,8 +1845,18 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["autoInit", "fluid.eventedComponent"]
     });
 
+    cspace.util.isReplicatedState = function (workflowState) {
+      return workflowState && (workflowState.indexOf("replicated") > -1)
+    };
+
+    cspace.util.resolveReplicated = function (model) {
+        // Checking whether workflow is present in model.fields or model.
+        var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
+        return cspace.util.isReplicatedState(workflow);
+    };
+
     cspace.util.isLockedState = function (workflowState) {
-      return workflowState && (workflowState === "locked" || workflowState.indexOf("replicated") > -1)
+      return workflowState && (workflowState === "locked")
     };
 
     cspace.util.resolveLocked = function (model) {
@@ -1856,23 +1866,26 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
-        return readOnly || cspace.util.resolveLocked(model);
+        return readOnly || cspace.util.resolveLocked(model) || cspace.util.resolveReplicated(model);
     };
 
     fluid.defaults("cspace.util.recordLock", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         styles: {
-            locked: "cs-locked"
+            locked: "cs-locked",
+            replicated: "cs-replicated"
         },
         finalInitFunction: "cspace.util.recordLock.finalInit"
     });
 
     cspace.util.recordLock.finalInit = function (that) {
         function processWorkflow (model) {
-            if (!cspace.util.resolveLocked(model)) {
-                return;
+            if (cspace.util.resolveLocked(model)) {
+                that.container.addClass(that.options.styles.locked);
             }
-            that.container.addClass(that.options.styles.locked);
+            if (cspace.util.resolveReplicated(model)) {
+                that.container.addClass(that.options.styles.replicated);
+            }
         }
         that.applier.modelChanged.addListener("fields.workflow", function (model) {
              processWorkflow(model);
