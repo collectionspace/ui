@@ -2445,29 +2445,34 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 /* ---------------------------------------*/
 
 
-.cs-locked {
-    background-image: url(../images/lock.png);
-    width: 16px;
+.cs-locked, .cs-replicated {
+    width: 17px;
     height: 20px;
     float: right;
     display: inline;
-    margin-right: 6px;
+    margin-left: 10px;
     background-repeat: no-repeat;
     background-position: right center;
 }
-tr .cs-locked {
-    background-image: url(../images/lock_small.png);
+tr .cs-locked, tr .cs-replicated {
     float: none;
     display: table-cell;
     width: inherit;
     height: inherit;
 }
-li.cs-locked {
-    background-image: url(../images/lock_small.png);
+li.cs-locked, li.cs-replicated {
     float: none;
     display: list-item;
     width: inherit;
     height: inherit;
+}
+
+.cs-locked {
+  background-image: url(../images/lock_small.png);
+}
+
+.cs-replicated {
+  background-image: url(../images/sync.png);
 }
 
 .cs-termList {
