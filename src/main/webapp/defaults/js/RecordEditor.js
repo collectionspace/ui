@@ -1248,9 +1248,8 @@ cspace = cspace || {};
             showGoto: "read"
         },
         requiredParentWorkflowStates: {
-            showCreateFromExistingButton: "project",
-            showDeleteButton: "project",
-            showSaveCancelButtons: "project"
+            showCreateFromExistingButton: ["project", "replicated"],
+            showDeleteButton: ["project", "replicated"]
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
@@ -1513,12 +1512,12 @@ cspace = cspace || {};
                     target: recordType,
                     resolver: resolver
                 }));
-            }); 
+            });
         };
         
         that.hideButtonsByParentWorkflowState = function (parentWorkflowState, requiredParentWorkflowStates) {
-             fluid.each(requiredParentWorkflowStates, function(workflowState, flag) {
-                that.applier.requestChange(flag, parentWorkflowState === workflowState);
+             fluid.each(requiredParentWorkflowStates, function(requiredWorkflowStates, flag) {
+                that.applier.requestChange(flag, requiredWorkflowStates.indexOf(parentWorkflowState) > -1);
             }); 
         };
     };
