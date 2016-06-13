@@ -1855,6 +1855,16 @@ fluid.registerNamespace("cspace.util");
         return cspace.util.isReplicatedState(workflow);
     };
 
+    cspace.util.isDeprecatedState = function (workflowState) {
+      return workflowState && (workflowState === "deprecated")
+    };
+
+    cspace.util.resolveDeprecated = function (model) {
+        // Checking whether workflow is present in model.fields or model.
+        var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
+        return cspace.util.isDeprecatedState(workflow);
+    };
+
     cspace.util.isLockedState = function (workflowState) {
       return workflowState && (workflowState === "locked")
     };
@@ -1866,14 +1876,15 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
-        return readOnly || cspace.util.resolveLocked(model) || cspace.util.resolveReplicated(model);
+        return readOnly || cspace.util.resolveLocked(model) || cspace.util.resolveReplicated(model) || cspace.util.resolveDeprecated(model);
     };
 
     fluid.defaults("cspace.util.recordLock", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         styles: {
             locked: "cs-locked",
-            replicated: "cs-replicated"
+            replicated: "cs-replicated",
+            deprecated: "cs-deprecated"
         },
         finalInitFunction: "cspace.util.recordLock.finalInit"
     });
@@ -1883,8 +1894,11 @@ fluid.registerNamespace("cspace.util");
             if (cspace.util.resolveLocked(model)) {
                 that.container.addClass(that.options.styles.locked);
             }
-            if (cspace.util.resolveReplicated(model)) {
+            else if (cspace.util.resolveReplicated(model)) {
                 that.container.addClass(that.options.styles.replicated);
+            }
+            else if (cspace.util.resolveDeprecated(model)) {
+                that.container.addClass(that.options.styles.deprecated);
             }
         }
         that.applier.modelChanged.addListener("fields.workflow", function (model) {

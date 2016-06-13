@@ -2445,7 +2445,7 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 /* ---------------------------------------*/
 
 
-.cs-locked, .cs-replicated {
+.cs-locked, .cs-replicated, .cs-deprecated {
     width: 17px;
     height: 20px;
     float: right;
@@ -2454,13 +2454,13 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
     background-repeat: no-repeat;
     background-position: right center;
 }
-tr .cs-locked, tr .cs-replicated {
+tr .cs-locked, tr .cs-replicated, tr .cs-deprecated {
     float: none;
     display: table-cell;
     width: inherit;
     height: inherit;
 }
-li.cs-locked, li.cs-replicated {
+li.cs-locked, li.cs-replicated, li.cs-deprecated {
     float: none;
     display: list-item;
     width: inherit;
@@ -2473,6 +2473,10 @@ li.cs-locked, li.cs-replicated {
 
 .cs-replicated {
   background-image: url(../images/sync.png);
+}
+
+.cs-deprecated {
+  background-image: url(../images/inactive.png);
 }
 
 .cs-termList {
