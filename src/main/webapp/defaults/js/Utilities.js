@@ -849,7 +849,7 @@ fluid.registerNamespace("cspace.util");
         if (!urn) {
             return "";
         }
-        return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");
+        return urn.slice(urn.indexOf("'") + 1, urn.length - 1);
     };
 
     cspace.util.urnToCSID = function (urn) {
