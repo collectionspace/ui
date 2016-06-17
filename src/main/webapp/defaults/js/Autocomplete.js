@@ -576,9 +576,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     type: "fluid.renderer.condition",
                     condition: buildValueBinding(preferred),
                     trueTree: {
-                        matchItemContent: {
-                            value: buildValueBinding(displayName)
-                        }
+                        expander: [{
+                            type: "fluid.renderer.condition",
+                            condition: buildValueBinding(rowDisabled),
+                            trueTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName),
+                                    decorators: {
+                                        type: "addClass",
+                                        classes: styles.preferredDisabled
+                                    }
+                                }
+                            },
+                            falseTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName)
+                                }
+                            }
+                        }]
                     },
                     falseTree: {
                         expander: [{
@@ -757,7 +772,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[preferred] = index === 0;
                         elem[type] = match.type;
                         elem[csid] = match.csid;
-                        elem[rowDisabled] = (!elem[preferred] && (disabled === true));
+                        elem[rowDisabled] = (!elem[preferred] && (disabled === true)) || cspace.util.isDeprecatedState(match.workflow);
                         elem[namespace] = match.namespace;
                         return elem;
                     }));
@@ -972,7 +987,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
             matchesSelect: "cs-autocomplete-matchItem-select",
             nonPreferred: "cs-autocomplete-nonPreferred",
-            nonPreferredDisabled: "cs-autocomplete-nonPreferredDisabled"
+            nonPreferredDisabled: "cs-autocomplete-nonPreferredDisabled",
+            preferredDisabled: "cs-autocomplete-preferredDisabled"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
         preInitFunction: "cspace.autocomplete.popup.preInit",
