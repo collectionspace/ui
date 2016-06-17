@@ -26,6 +26,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             authorities: [],
             matches: []
         },
+        // Disable items with deprecated workflow?
+        disableDeprecated: false,
         // Delay before making a request to complete the term.
         delay: 500,
         invokers: {
@@ -75,7 +77,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     model: "{autocomplete}.model",
                     applier: "{autocomplete}.applier",
                     inputField: "{autocomplete}.autocompleteInput",
-                    elPaths: "{autocomplete}.options.elPaths"
+                    elPaths: "{autocomplete}.options.elPaths",
+                    disableDeprecated: "{autocomplete}.options.disableDeprecated"
                 }
             },
             // Data source to get all available authorities for the
@@ -772,7 +775,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[preferred] = index === 0;
                         elem[type] = match.type;
                         elem[csid] = match.csid;
-                        elem[rowDisabled] = (!elem[preferred] && (disabled === true)) || cspace.util.isDeprecatedState(match.workflow);
+                        elem[rowDisabled] = (!elem[preferred] && (disabled === true)) || (that.options.disableDeprecated && cspace.util.isDeprecatedState(match.workflow));
                         elem[namespace] = match.namespace;
                         return elem;
                     }));
