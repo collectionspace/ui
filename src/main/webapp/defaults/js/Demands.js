@@ -847,6 +847,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 },
+                showToggleActiveButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "update",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
                 strings: {
                     updateSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-updateSuccessfulMessage",
                     createSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-createSuccessfulMessage",
