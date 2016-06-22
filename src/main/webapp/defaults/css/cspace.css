@@ -2219,6 +2219,17 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     border-radius:4px;
     display: none;
 }
+.csc-advancedsearch-container .cs-multipleEdit .tablegroupfix .content {
+    width: 86%;
+}
+.csc-advancedsearch-container .cs-multipleEdit input[type="button"].cs-repeatable-add {
+    top: 0;
+}
+.csc-advancedsearch-container .tablegroupfix .cs-repeatable-group li {
+    border: none;
+    background-color: inherit;
+    padding: 0px !important;
+}
 
 .cs-searchTips-template {
     margin: 0 20px;
