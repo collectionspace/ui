@@ -193,6 +193,17 @@ input[type="button"].deleteButton[disabled]:focus, input[type="submit"].deleteBu
     background-color:#ADADAD;
     color:#606060
 }
+input[type="button"].toggleActiveButton[disabled], input[type="submit"].toggleActiveButton[disabled] {
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+       border-radius:4px;
+  background:white;
+    color:#CCC;}
+input[type="button"].toggleActiveButton[disabled]:hover, input[type="submit"].toggleActiveButton[disabled]:hover,
+input[type="button"].toggleActiveButton[disabled]:focus, input[type="submit"].toggleActiveButton[disabled]:focus {
+    background-color:#ADADAD;
+    color:#606060
+}
 input[type="button"].duplicateButton, input[type="submit"].duplicateButton {
     background:transparent url('../images/icnDuplicate.png') no-repeat 8px 4px; 
     padding-left:24px; 
@@ -1578,7 +1589,7 @@ input[type="text"].cs-externalURL.cs-externalURL-error{
     -webkit-border-radius:0;
   border-radius:0;}
 
-.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-show-related-records-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton, .cs-add-search-results-button {
+.saveButton, .createFromExistingButton, .toggleActiveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-show-related-records-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton, .cs-advancedSearch-searchButton, .cs-add-search-results-button {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
   border-radius:4px;
@@ -2445,8 +2456,8 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
 /* ---------------------------------------*/
 
 
-.cs-locked, .cs-replicated {
-    width: 17px;
+.cs-locked, .cs-replicated, .cs-deprecated {
+    width: 31px;
     height: 20px;
     float: right;
     display: inline;
@@ -2454,13 +2465,13 @@ tbody.csc-listView-rows tr.cs-listView-row td a:active, tbody.csc-listView-rows 
     background-repeat: no-repeat;
     background-position: right center;
 }
-tr .cs-locked, tr .cs-replicated {
+tr .cs-locked, tr .cs-replicated, tr .cs-deprecated {
     float: none;
     display: table-cell;
     width: inherit;
     height: inherit;
 }
-li.cs-locked, li.cs-replicated {
+li.cs-locked, li.cs-replicated, li.cs-deprecated {
     float: none;
     display: list-item;
     width: inherit;
@@ -2472,7 +2483,15 @@ li.cs-locked, li.cs-replicated {
 }
 
 .cs-replicated {
-  background-image: url(../images/sync.png);
+  background-image: url(../images/replicated.png);
+}
+
+.cs-deprecated {
+  background-image: url(../images/inactive.png);
+}
+
+.cs-replicated.cs-deprecated {
+  background-image: url(../images/replicated_inactive.png);
 }
 
 .cs-termList {

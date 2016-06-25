@@ -1823,16 +1823,34 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.processReadOnly = function (container, readOnly, neverReadOnly) {
-        fluid.each(["input", "select", "textarea"], function (tag) {
-            container.find(tag).prop("disabled", function (index, oldPropertyValue) {
-                // if oldPropertyValue is "disabled" or true: leave it unchanged.
-                return oldPropertyValue || readOnly;
+        var elementsToIgnore = [];
+        
+        fluid.each(neverReadOnly, function (selector) {
+            container.find(selector).each(function() {
+                elementsToIgnore.push(this);
             });
         });
-        // Now lets enable back selectors which should not be disabled
-        fluid.each(neverReadOnly, function (selector) {
-            container.find(selector).removeAttr('disabled');
+        
+        fluid.each(["input", "select", "textarea"], function (tag) {
+            container.find(tag)
+                .filter(function() {
+                    var candidate = this;
+                    
+                    if (elementsToIgnore.indexOf(candidate) == -1) {
+                        return true;
+                    }
+                    
+                    return false;
+                })
+                .prop("disabled", function (index, oldPropertyValue) {
+                    // if oldPropertyValue is "disabled" or true: leave it unchanged.
+                    return oldPropertyValue || readOnly;
+                });
         });
+        // Now lets enable back selectors which should not be disabled
+        // fluid.each(neverReadOnly, function (selector) {
+        //     container.find(selector).removeAttr('disabled');
+        // });
     };
     
     cspace.util.composeSegments = function (root, path) {
@@ -1846,7 +1864,7 @@ fluid.registerNamespace("cspace.util");
     });
 
     cspace.util.isReplicatedState = function (workflowState) {
-      return workflowState && (workflowState.indexOf("replicated") > -1)
+      return workflowState && (workflowState.indexOf("replicated") > -1);
     };
 
     cspace.util.resolveReplicated = function (model) {
@@ -1855,8 +1873,18 @@ fluid.registerNamespace("cspace.util");
         return cspace.util.isReplicatedState(workflow);
     };
 
+    cspace.util.isDeprecatedState = function (workflowState) {
+      return workflowState && (workflowState.indexOf("deprecated") > -1);
+    };
+
+    cspace.util.resolveDeprecated = function (model) {
+        // Checking whether workflow is present in model.fields or model.
+        var workflow = fluid.get(model, "fields.workflow") || fluid.get(model, "workflow");
+        return cspace.util.isDeprecatedState(workflow);
+    };
+
     cspace.util.isLockedState = function (workflowState) {
-      return workflowState && (workflowState === "locked")
+      return workflowState && (workflowState === "locked");
     };
 
     cspace.util.resolveLocked = function (model) {
@@ -1866,14 +1894,15 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.isReadOnly = function (readOnly, model) {
-        return readOnly || cspace.util.resolveLocked(model) || cspace.util.resolveReplicated(model);
+        return readOnly || cspace.util.resolveLocked(model) || cspace.util.resolveReplicated(model) || cspace.util.resolveDeprecated(model);
     };
 
     fluid.defaults("cspace.util.recordLock", {
         gradeNames: ["autoInit", "fluid.viewComponent"],
         styles: {
             locked: "cs-locked",
-            replicated: "cs-replicated"
+            replicated: "cs-replicated",
+            deprecated: "cs-deprecated"
         },
         finalInitFunction: "cspace.util.recordLock.finalInit"
     });
@@ -1885,6 +1914,9 @@ fluid.registerNamespace("cspace.util");
             }
             if (cspace.util.resolveReplicated(model)) {
                 that.container.addClass(that.options.styles.replicated);
+            }
+            if (cspace.util.resolveDeprecated(model)) {
+                that.container.addClass(that.options.styles.deprecated);
             }
         }
         that.applier.modelChanged.addListener("fields.workflow", function (model) {

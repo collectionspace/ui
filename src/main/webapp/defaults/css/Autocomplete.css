@@ -100,6 +100,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     color: red;
     background-color: red;
 }
+.cs-autocomplete-matchItem-content.cs-autocomplete-preferredDisabled {
+    color: #999999;
+}
 .cs-autocomplete-matchItem-content.cs-autocomplete-nonPreferred {
     margin-left: 20px;
 }

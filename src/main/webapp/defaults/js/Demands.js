@@ -613,6 +613,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                disableDeprecated: true,
                 model: {
                     vocab: {
                         expander: {
@@ -842,6 +843,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: {
                             resolver: "{permissionsResolver}",
                             permission: "create",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
+                showToggleActiveButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "update",
                             target: "{pageBuilderIO}.options.recordType"
                         }
                     }
