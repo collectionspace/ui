@@ -1925,6 +1925,30 @@ fluid.registerNamespace("cspace.util");
         processWorkflow(that.model);
     };
 
+    fluid.defaults("cspace.util.workflowToStyleFieldConverter", {
+        gradeNames: ["fluid.viewComponent"]
+    });
+
+    cspace.util.workflowToStyleFieldConverter = function (container, options) {
+        var that = fluid.initView("cspace.util.workflowToStyleFieldConverter", container, options);
+        var func = that.container.val() ? "val" : "text";
+        var value = that.container[func]();
+        
+        if (cspace.util.isLockedState(value)) {
+            that.container.addClass("cs-locked");
+        }
+        if (cspace.util.isReplicatedState(value)) {
+            that.container.addClass("cs-replicated");
+        }
+        if (cspace.util.isDeprecatedState(value)) {
+            that.container.addClass("cs-deprecated");
+        }
+        
+        that.container[func]("");
+        
+        return that;
+    };
+
     fluid.defaults("cspace.util.workflowStyler", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         finalInitFunction: "cspace.util.workflowStyler.finalInit",
