@@ -2461,6 +2461,10 @@ li.cs-locked, li.cs-replicated, li.cs-deprecated {
   background-image: url(../images/replicated_inactive.png);
 }
 
+td.cs-workflow {
+  width: 17px;
+}
+
 .cs-termList {
     float: none;
 }
