@@ -380,6 +380,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
                     },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
+                    },
                     field1: "${fields.birthDateGroup.dateDisplayDate}",
                     field2: "${fields.deathDateGroup.dateDisplayDate}",
                     field3: "${fields.bioNote}",
@@ -399,6 +409,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
                     },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
+                    },
                     field1: "${fields.foundingDateGroup.dateDisplayDate}",
                     field2: "${fields.dissolutionDateGroup.dateDisplayDate}",
                     field3: "${fields.historyNotes.0.historyNote}",
@@ -417,6 +437,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -427,6 +457,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -437,6 +477,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -447,6 +497,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -457,6 +517,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     },
                     field1: "${fields.taxonTermGroup.0.termType}",
                     field2: "${fields.taxonTermGroup.0.termStatus}",
@@ -479,6 +549,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -489,6 +569,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.termDisplayName}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }
@@ -507,6 +597,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     displayName: {
                         target: "${miniView-link}",
                         linktext: "${fields.objectNumber}"
+                    },
+                    broaderContext: {
+                        value: "${fields.broaderContext}",
+                        decorators: {
+                            type: "fluid",
+                            func: "cspace.util.urnToStringFieldConverter"
+                        }
+                    },
+                    broaderContextLabel: {
+                        messagekey: "autocomplete-popup-miniView-broaderContextLabel"
                     }
                 }
             }

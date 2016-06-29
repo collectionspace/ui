@@ -899,6 +899,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         selectors: {
             displayName: ".csc-autocomplete-popup-miniView-displayName",
+            broaderContext: ".csc-autocomplete-popup-miniView-broaderContext",
+            broaderContextLabel: ".csc-autocomplete-popup-miniView-broaderContextLabel",
             field1: ".csc-autocomplete-popup-miniView-field1",
             field2: ".csc-autocomplete-popup-miniView-field2",
             field3: ".csc-autocomplete-popup-miniView-field3",
