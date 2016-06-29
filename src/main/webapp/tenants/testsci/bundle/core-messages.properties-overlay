@@ -17,7 +17,7 @@ collection-object-titleNoteLabel: Notes
 #Login
 
 login-current-info-1: Welcome to the
-login-current-info-2:Life Sciences tenant which has been configured to support life sciences collections. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
+login-current-info-2:Testsci tenant which has been configured to support the testing of CollectionSpace. Additions to the core CollectionSpace functionality include support for scientific taxonomies, scientific determination, and more.
 login-current-info-3:
 login-current-info-4:
 
