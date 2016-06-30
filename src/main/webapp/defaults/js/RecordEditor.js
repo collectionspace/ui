@@ -1745,7 +1745,7 @@ cspace = cspace || {};
         }
         
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
-        that.applier.requestChange("disableToggleActiveButton", cspace.util.isReplicatedState(rModel.fields.workflow));
+        that.applier.requestChange("disableToggleActiveButton", notSaved || cspace.util.isReplicatedState(rModel.fields.workflow));
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
