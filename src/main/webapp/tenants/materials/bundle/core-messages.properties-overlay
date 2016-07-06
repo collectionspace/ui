@@ -13,4 +13,6 @@ collection-object-referenceLabel: Supplementary literature description
 collection-object-materialLabel: Material name
 
 dimension-dimensionSummaryLabel: Sample size
+vocab-person_shared: Shared Persons
 vocab-material_shared: Shared Materials
+vocab-materialclassification_shared: Shared Material Classifications
