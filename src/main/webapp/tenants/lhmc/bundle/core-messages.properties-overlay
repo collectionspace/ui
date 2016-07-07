@@ -1,0 +1,133 @@
+#Login
+login-current: Welcome to the CollectionSpace Local History and Material Culture Demo
+login-current-info-4: Local History and Material Culture
+login-current-info-5: of CollectionSpace, which includes fields and procedures useful for history and material culture collections. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
+login-login: admin@lhmc.collectionspace.org
+login-rologin: reader@lhmc.collectionspace.org
+
+# Cataloging
+collection-object-contentDescriptionLabel: Description / Summary / Scope
+collection-object-inscriptionDescriptionInterpretationLabel: Maker's Mark Notes
+collection-object-objectStatusLabel: Original / Copy
+collection-object-objectHistoryNoteLabel: Provenance
+collection-object-contentNoteLabel: Abstract
+
+# Loanout
+loanout-loanoutStatusLHMCGroupLabel: Loan Status
+loanout-loanoutStatusLHMCLabel: Loan Status
+loanout-loanoutStatusDateLHMCLabel: Loan Status Date
+loanout-loanoutStatusNoteLHMCLabel: Loan Status Note
+loanout-loanoutStatusAuthorizerLHMCLabel: Loan Status Authorizer
+
+# Acquisition
+acquisition-receivedGroupLabel: Received
+acquisition-receivedDateLabel: Received Date
+acquisition-receivedByLabel: Received By
+acquisition-accessionDateGroupLabel: Accessioned
+acquisition-acquisitionAuthorizerLabel: Accessioned by
+acquisition-acquisitionMethodLabel: Received As
+acquisition-acquisitionNoteLabel: Notes
+acquisition-acquisitionProvisosLabel: Restrictions
+acquisition-acquisitionReferenceNumberLabel: Accession #
+acquisition-ownerLabel: Source
+acquisition-creditLineLabel: Credit line
+acquisition-objectPurchasePriceValueLabel: Price or Value
+
+# ConditionCheck
+conditioncheck-conditionCheckLHMCGroupLabel: Condition
+conditioncheck-conditionLHMCLabel: Condition
+conditioncheck-conditionFacetLHMCLabel: Condition Facet
+conditioncheck-conditionDateLHMCLabel: Condition Date
+conditioncheck-conditionNoteLHMCLabel: Condition Note
+conditioncheck-maintenanceGroupLabel: Maintenance
+conditioncheck-maintenanceDateLabel: Maintenance Date
+conditioncheck-maintenanceCycleLabel: Maintenance Cycle
+conditioncheck-maintenanceNoteLabel: Maintenance Note
+conditioncheck-techAssessmentGroupLabel: Mechanism Operation
+
+# Intake
+intake-receivedByLabel: Received By
+intake-intakeStatusLabel: Intake Status
+intake-insuredByLabel: Insured By
+intake-premiumGroupLabel: Premium
+intake-premiumCurrencyLabel: Premium Currency
+intake-premiumValueLabel: Premium Value
+intake-insuredValueGroupLabel: Insured Value
+intake-insuredValueCurrencyLabel: Insured Value Currency
+intake-insuredValueLabel: Insured Value
+intake-inventoriedByLabel: Inventoried By
+intake-conditionLabel: Condition
+intake-currentOwnerLabel: Source
+intake-depositorsRequirementsLabel: Restrictions
+intake-entryDateLabel: Received Date
+intake-entryMethodLabel: Received As
+intake-entryNoteLabel: Notes
+intake-returnDateLabel: Return By
+intake-insurancePolicyNumberLabel: Policy #
+intake-insuranceRenewalDateLabel: Policy Expiration Date
+intake-insurerLabel: Insurance Company
+intake-currentLocationLabel: Interim Locations
+intake-locationDateLabel: Inventoried Date
+intake-conditionCheckDateLabel: Condition Date
+intake-conditionCheckNoteLabel: Condition Notes
+intake-conditionCheckerOrAssessorLabel: Condition By
+
+# Loanin
+loanin-loaninStatusLHMCGroupLabel: Loan Status
+loanin-loaninStatusLHMCLabel: Loan Status
+loanin-loaninStatusDateLHMCLabel: Loan Status Date
+loanin-loaninStatusNoteLHMCLabel: Loan Status Note
+loanin-loaninStatusAuthorizerLHMCLabel: Loan Status Authorizer
+
+# Movement
+movement-tempLocAuthorizedByLabel: Temp Location Authorized By
+movement-movementReferenceNumberLabel: Object ID
+movement-normalLocationLabel: Home Location/Building
+movement-currentLocationLabel: Temp Location/Building
+movement-locationDateLabel: Inventoried Date
+movement-reasonForMoveLabel: Reason
+movement-movementContactLabel: Moved by
+movement-plannedRemovalDateLabel: Temp Location Until
+movement-removalDateLabel: Temp Location Date
+movement-movementNoteLabel: Temp Location Notes
+
+# Person
+person-relatedPersonLabel: Related Person
+person-relationshipTypeLabel: Relationship Type
+person-relationshipNoteLabel: Relationship Note
+person-placeOrResidenceLabel: Places and/or Geographical Areas of Residence
+person-placeNoteLabel: Place Note
+person-publicationsPersonGroupLabel: Publications
+person-publicationsPersonLabel: Publications
+person-publicationsPersonNoteLabel: Publication Note
+preferredPA-termDisplayNameLabel: Full Name
+preferredPA-foreNameLabel: First Name
+preferredPA-surNameLabel: Last Name
+preferredPA-titleLabel: Title
+person-birthDateGroupLabel: Born
+person-deathDateGroupLabel: Died
+person-birthPlaceLabel: Where
+person-deathPlaceLabel: Where
+person-nationalityLabel: Nationality
+person-occupationLabel: Occupation Sphere of Activity
+person-bioNoteLabel: Notes
+contact-emailGroupLabel: E-mail
+contact-emailLabel: E-mail
+contact-faxNumberGroupLabel: Fax
+contact-faxNumberLabel: Number
+contact-webAddressGroupLabel: Website
+contact-webAddressLabel: Website
+contact-addressPlace1Label: Address
+contact-addressMunicipalityLabel: City
+contact-addressStateOrProvinceLabel: St
+contact-addressPostCodeLabel: Zip
+contact-addressCountyLabel: Country
+
+# Place
+place-placeWidthLabel: Width
+place-placeLengthLabel: Length
+preferredPlace-termDisplayNameLabel: Site
+place-placeNoteLabel: Legal description
+
+# Exhibition
+exhibition-restrictionsLabel: Restrictions
