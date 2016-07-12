@@ -11,6 +11,7 @@ collection-object-inscriptionDescriptionInterpretationLabel: Maker's Mark Notes
 collection-object-objectStatusLabel: Original / Copy
 collection-object-objectHistoryNoteLabel: Provenance
 collection-object-contentNoteLabel: Abstract
+collection-object-otherNumberLabel: Other number
 
 # Loanout
 loanout-loanoutStatusLHMCGroupLabel: Loan Status
