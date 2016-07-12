@@ -24,14 +24,15 @@ acquisition-receivedGroupLabel: Received
 acquisition-receivedDateLabel: Received Date
 acquisition-receivedByLabel: Received By
 acquisition-accessionDateGroupLabel: Accessioned
-acquisition-acquisitionAuthorizerLabel: Accessioned by
+acquisition-acquisitionAuthorizerHeaderLabel: Authorized by
+acquisition-acquisitionAuthorizerLabel: Authorized by
+acquisition-acquisitionAuthorizerDateLabel: Authorized date
 acquisition-acquisitionMethodLabel: Received As
 acquisition-acquisitionNoteLabel: Notes
 acquisition-acquisitionProvisosLabel: Restrictions
 acquisition-acquisitionReferenceNumberLabel: Accession #
 acquisition-ownerLabel: Source
 acquisition-creditLineLabel: Credit line
-acquisition-objectPurchasePriceValueLabel: Price or Value
 
 # ConditionCheck
 conditioncheck-conditionCheckLHMCGroupLabel: Condition
@@ -56,7 +57,7 @@ intake-insuredValueGroupLabel: Insured Value
 intake-insuredValueCurrencyLabel: Insured Value Currency
 intake-insuredValueLabel: Insured Value
 intake-inventoriedByLabel: Inventoried By
-intake-conditionLabel: Condition
+intake-intakeConditionLabel: Condition
 intake-currentOwnerLabel: Source
 intake-depositorsRequirementsLabel: Restrictions
 intake-entryDateLabel: Received Date
@@ -117,16 +118,10 @@ contact-faxNumberGroupLabel: Fax
 contact-faxNumberLabel: Number
 contact-webAddressGroupLabel: Website
 contact-webAddressLabel: Website
-contact-addressPlace1Label: Address
-contact-addressMunicipalityLabel: City
-contact-addressStateOrProvinceLabel: St
-contact-addressPostCodeLabel: Zip
-contact-addressCountyLabel: Country
 
 # Place
 place-placeWidthLabel: Width
 place-placeLengthLabel: Length
-preferredPlace-termDisplayNameLabel: Site
 place-placeNoteLabel: Legal description
 
 # Exhibition
