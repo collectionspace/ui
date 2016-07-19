@@ -7,6 +7,6 @@ Create a new object [http://bit.ly/newobjpdf] [https://vimeo.com/112212895]
 Link to an image [http://bit.ly/linkimgpdf] [https://vimeo.com/112214418]
 Add a storage location [http://bit.ly/storlocpdf] [https://vimeo.com/112818120]
 
-We re-build this demo site weekly so don’t worry, you can’t break it!
+We re-build this demo site frequently so don’t worry, you can’t break it!
 
 To return to the CollectionSpace Core tenant, follow this link.
