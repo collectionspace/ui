@@ -649,7 +649,7 @@ intake-valuationInformationLabel: Valuation Information
 intake-conditionCheckReasonsLabel: Condition check reason
 intake-normalLocationLabel: Home location
 intake-entryNoteLabel: Entry note
-intake-returnDateLabel: Return date
+intake-returnDateLabel: Actual return date
 intake-conditionInformationLabel: Condition Information
 intake-locationInformationLabel: Location Information
 intake-depositorsRequirementsLabel: Depositor requirements
@@ -669,6 +669,7 @@ intake-conditionCheckNoteLabel: Condition check note
 intake-entryDateLabel: Entry date
 intake-conditionCheckReferenceNumberLabel: Condition check reference number
 intake-insurancePolicyNumberLabel: Policy number
+intake-expectedReturnDateLabel: Expected Return Date
 
 # ---------------------------------- Object Collection Information (Intake/Object Entry) -------------------------- #
 intake-conditionCheckersOrAssessorsLabel: Condition check assessor
