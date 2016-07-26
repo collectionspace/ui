@@ -794,6 +794,9 @@ table tbody.highlight tr:focus td {
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
     border:none;
 }
+.content.checkbox {
+    width: 15px;
+}
 .info-pair .content.fl-date-group {
 	width: 162px;}
 td.fl-date-group {
