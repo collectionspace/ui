@@ -93,8 +93,7 @@ var bampfa = {};
 			var measurementDescription = measurement.value;
 			
 			if (!hasCommonUnit) {
-				// FIXME: Remove call to getUnitLabel when the unit values are changed to "in." and "cm."
-				measurementDescription += " " + getUnitLabel(measurement.unit);
+				measurementDescription += " " + measurement.unit;
 			}
 			
 			orderedMeasurementDescriptions.push(measurementDescription);
@@ -109,8 +108,7 @@ var bampfa = {};
 		if (hasCommonUnit) {
 			var commonUnit = (Object.keys(usedUnits))[0];
 			
-			// FIXME: Remove call to getUnitLabel when the unit values are changed to "in." and "cm."
-			measurementSummary += " " + getUnitLabel(commonUnit);
+			measurementSummary += " " + commonUnit;
 		}
 		
 		// Compose this with the measured part and the measured part note.
@@ -130,10 +128,6 @@ var bampfa = {};
 		}
 		
 		return summaryParts.join(" ");
-	}
-	
-	var getUnitLabel = function(unit) {
-		return (unit == "inches") ? "in." : "cm.";
 	}
 
 	bampfa.computeFullNameLFM = function(foreName, middleName, surName, nameAdditions, nationalities) {
