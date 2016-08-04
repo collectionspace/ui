@@ -1,0 +1,23 @@
+login-current: Welcome to the CollectionSpace Materials Authority Demo
+login-current-info-4: materials authority profile
+login-current-info-5: of CollectionSpace. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
+login-login: admin@materials.collectionspace.org
+login-rologin: reader@materials.collectionspace.org
+
+collection-object-objectNumberLabel: Accession number
+collection-object-briefDescriptionsLabel: Sample Description
+collection-object-objectStatusLabel: Object Type
+collection-object-materialPhysicalDescriptionsLabel: Physical Descriptions
+collection-object-materialPhysicalDescriptionLabel: Physical Description
+collection-object-referenceLabel: Supplementary literature description
+collection-object-materialLabel: Material name
+
+dimension-dimensionSummaryLabel: Sample size
+vocab-person_shared: Shared Persons
+vocab-material_shared: Shared Materials
+vocab-materialclassification_shared: Shared Material Classifications
+vocab-organization_shared: Shared Organizations
+vocab-place_shared: Shared Places
+vocab-citation_shared: Shared Citations
+vocab-material_ca_shared: Shared Material Concepts
+vocab-work_shared: Shared Works

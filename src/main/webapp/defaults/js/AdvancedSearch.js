@@ -454,8 +454,16 @@ cspace = cspace || {};
                 that.applier.requestChange("vocab", "");
                 return;
             }
-            var vocabs = vocab.authority[model.recordType].order.vocabs,
-                vocabNames = [];
+            var vocabs = vocab.authority[model.recordType].order.vocabs;
+            vocabs = vocabs.filter(function (v) {
+                return !!(vocab.authority[model.recordType].workflowState.vocabs[v]);
+            });
+            if (vocabs.length == 0) {
+                that.applier.requestChange("vocabs", undefined);
+                that.applier.requestChange("vocab", "");
+                return;
+            }
+            var vocabNames = [];
             fluid.each(vocabs, function (vocab) {
                 vocabNames.push(that.options.parentBundle.resolve("vocab-" + vocab));
             });

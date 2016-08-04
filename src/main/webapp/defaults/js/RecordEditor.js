@@ -95,6 +95,15 @@ cspace = cspace || {};
                 type: "cspace.recordEditor.saver",
                 createOnEvent: "afterFetch"
             },
+            // Component that handles all workflow transition related functionality (except for delete)
+            workflowTransitioner: {
+                type: "cspace.recordEditor.workflowTransitioner",
+                createOnEvent: "afterFetch",
+                options: {
+                    recordType: "{cspace.recordEditor}.options.recordType",
+                    strings: "{cspace.recordEditor}.options.strings"
+                }
+            },
             // Component that handles all delete related functionality.
             remover: {
                 type: "cspace.recordEditor.remover",
@@ -234,6 +243,12 @@ cspace = cspace || {};
             // Fires when the user is about to create a new record from
             // existing.
             onCreateFromExisting: null,
+            // Fires when the user is about to toggle the active state of a record
+            onToggleActive: "preventable",
+            // Fires when a workflow transition is about to be done
+            beforeWorkflowTransition: null,
+            // Fires after a workflow transition
+            afterWorkflowTransition: null,
             // Fires after the record editor section is rendered.
             afterRecordRender: null,
             // Fires whenever there's an error.
@@ -258,12 +273,16 @@ cspace = cspace || {};
             ],
             onError: "{loadingIndicator}.events.hideOn.fire",
             onCancel: "{loadingIndicator}.events.showOn.fire",
-            afterRemove: "{loadingIndicator}.events.hideOn.fire"
+            afterRemove: "{loadingIndicator}.events.hideOn.fire",
+            beforeWorkflowTransition: "{loadingIndicator}.events.showOn.fire",
+            afterWorkflowTransition: "{loadingIndicator}.events.hideOn.fire"
         },
         // Component that contains all messages.
         parentBundle: "{globalBundle}",
         // A flag to show create from existing button.
         showCreateFromExistingButton: false,
+        // A flag to show toggle active button.
+        showToggleActiveButton: false,
         // A flag to show delete button.
         showDeleteButton: false,
         // A flag to indicate that record editor section needs
@@ -274,7 +293,8 @@ cspace = cspace || {};
         globalRef: "primaryModel",
         // Elements on the page that should never be treated as read only.
         neverReadOnlySelectors: {
-            createFromExistingButton: ".csc-createFromExisting"
+            createFromExistingButton: ".csc-createFromExisting",
+            toggleActiveButton: ".csc-toggleActive"
         }
     });
 
@@ -696,6 +716,128 @@ cspace = cspace || {};
         };
     };
 
+    // Component that does the workflow transition work (except for delete).
+    fluid.defaults("cspace.recordEditor.workflowTransitioner", {
+        gradeNames: ["autoInit", "fluid.eventedComponent"],
+        events: {
+            onToggleActive: {
+                event: "{cspace.recordEditor}.events.onToggleActive"
+            },
+            afterSave: "{cspace.recordEditor}.events.afterSave",
+            onError: "{cspace.recordEditor}.events.onError"
+        },
+        listeners: {
+            onToggleActive: "{cspace.recordEditor.workflowTransitioner}.onToggleActiveHandler",
+            afterSave: {
+                listener: "{cspace.recordEditor.workflowTransitioner}.afterSaveHandler",
+                priority: "last"
+            },
+            onError: "{cspace.recordEditor.workflowTransitioner}.onErrorHandler"
+        },
+        preInitFunction: "cspace.recordEditor.workflowTransitioner.preInit",
+        invokers: {
+            openConfirmation: "cspace.recordEditor.workflowTransitioner.openConfirmation",
+            transition: {
+                funcName: "cspace.recordEditor.workflowTransitioner.transition",
+                args: ["{cspace.recordEditor.workflowTransitioner}", "{arguments}.0"]
+            },
+            afterSave: "cspace.recordEditor.workflowTransitioner.afterSave"
+        },
+    });
+
+    fluid.demands("cspace.recordEditor.workflowTransitioner.afterSave", "cspace.recordEditor.workflowTransitioner", {
+        funcName: "cspace.recordEditor.workflowTransitioner.afterSave",
+        args: ["{recordEditor}", "{arguments}.0"]
+    });
+
+    fluid.demands("cspace.recordEditor.workflowTransitioner.openConfirmation", "cspace.recordEditor.workflowTransitioner", {
+        funcName: "cspace.recordEditor.workflowTransitioner.openConfirmation",
+        args: ["{recordEditor}", "{confirmation}", "{recordDataSource}", "{globalBundle}", "{cspace.recordEditor.workflowTransitioner}", "{arguments}.0"]
+    });
+
+    cspace.recordEditor.workflowTransitioner.openConfirmation = function (recordEditor, confirmation, recordDataSource, parentBundle, that, transitionName) {
+        confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        that.transitionPending = transitionName;
+                        recordEditor.events.onSave.fire();
+                    }
+                }
+            },
+            model: {
+                messages: ["recordEditor-dialog-workflowTransition-" + transitionName + "Message"],
+                messagekeys: {
+                    actText: "recordEditor-dialog-workflowTransition-actText",
+                    actAlt: "recordEditor-dialog-workflowTransition-actAlt"
+                }
+            },
+            termMap: [
+                parentBundle.resolve(that.options.recordType)
+            ],
+            parentBundle: parentBundle
+        });
+    };
+
+    cspace.recordEditor.workflowTransitioner.preInit = function (that) {
+        that.onToggleActiveHandler = function (makeActive) {
+            that.transition(makeActive ? "undeprecate" : "deprecate");
+        };
+
+        that.afterSaveHandler = function () {
+            if (that.transitionPending) {
+                var transitionName = that.transitionPending;
+                that.afterSave(transitionName);
+                
+                that.transitionPending = null;
+            }
+        };
+        
+        that.onErrorHandler = function (data, operation) {
+            that.transitionPending = null;
+        };
+    };
+
+    cspace.recordEditor.workflowTransitioner.transition = function (that, transitionName) {
+        that.openConfirmation(transitionName);
+    };
+    
+    // If save succeeded do the transition.
+    cspace.recordEditor.workflowTransitioner.afterSave = function (recordEditor, transitionName) {
+        var vocab = cspace.vocab.resolve({
+            model: recordEditor.model,
+            recordType: recordEditor.options.recordType,
+            vocab: recordEditor.vocab
+        });
+        if (vocab) {
+            recordEditor.applier.requestChange("namespace", vocab);
+        }
+        
+        recordEditor.events.beforeWorkflowTransition.fire();
+        
+        recordEditor.recordDataSource.transition(recordEditor.model, transitionName, function (data) {
+            if (data && data.isError) {
+                recordEditor.events.onError.fire(data, "workflowTransition");
+                return;
+            }
+            
+            // We don't know what the new workflow state is, so need to refetch
+            // the record.
+            
+            recordEditor.recordDataSource.get(function (data) {
+                if (data.isError) {
+                    recordEditor.events.onError.fire(data, "fetch");
+                    return;
+                }
+                recordEditor.applier.requestChange("", data);
+                recordEditor.events.afterWorkflowTransition.fire();
+
+                // Fire afterSave to update field read-only states
+                recordEditor.events.afterSave.fire(data);
+            });
+        });
+    };
+    
     // Component that does all removing work.
     fluid.defaults("cspace.recordEditor.remover", {
         gradeNames: ["autoInit", "fluid.eventedComponent"],
@@ -1110,18 +1252,35 @@ cspace = cspace || {};
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
                 showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showToggleActiveButton: false,
                 showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
             },
-            recordType: "{cspace.recordEditor}.options.recordType"
+            recordType: "{cspace.recordEditor}.options.recordType",
+            vocab: "{cspace.recordEditor}.vocab"
         }, "{arguments}.1"]
     });
 
+    fluid.demands("cspace.recordEditor.controlPanel", ["cspace.recordEditor", "cspace.authority"], {
+        mergeAllOptions: [{
+            recordModel: "{cspace.recordEditor}.model",
+            recordApplier: "{cspace.recordEditor}.applier",
+            model: {
+                showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showToggleActiveButton: "{cspace.recordEditor}.options.showToggleActiveButton",
+                showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
+            },
+            recordType: "{cspace.recordEditor}.options.recordType",
+            vocab: "{cspace.recordEditor}.vocab"
+        }, "{arguments}.1"]
+    });
+    
     fluid.demands("cspace.recordEditor.controlPanel", ["cspace.recordEditor", "cspace.relatedRecordsTab"], {
         mergeAllOptions: [{
             recordModel: "{cspace.recordEditor}.model",
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
                 showCreateFromExistingButton: false,
+                showToggleActiveButton: false,
                 showDeleteButton: false,
                 showDeleteRelationButton: {
                     expander: {
@@ -1156,6 +1315,7 @@ cspace = cspace || {};
             recordApplier: "{cspace.recordEditor}.applier",
             model: {
                 showCreateFromExistingButton: "{cspace.recordEditor}.options.showCreateFromExistingButton",
+                showToggleActiveButton: false,
                 showDeleteButton: "{cspace.recordEditor}.options.showDeleteButton"
             },
             recordType: "{cspace.recordEditor}.options.recordType",
@@ -1187,6 +1347,7 @@ cspace = cspace || {};
         selectors: {
             recordTraverser: ".csc-recordTraverser",
             createFromExistingButton: ".csc-createFromExisting",
+            toggleActiveButton: ".csc-toggleActive",
             deleteButton: ".csc-delete",
             save: ".csc-save",
             cancel: ".csc-cancel",
@@ -1221,11 +1382,18 @@ cspace = cspace || {};
             onCreateFromExisting: {
                 event: "{cspace.recordEditor}.events.onCreateFromExisting"
             },
+            onToggleActive: {
+                event: "{cspace.recordEditor}.events.onToggleActive"
+            },
             onChange: {
                 event: "{cspace.recordEditor}.events.onChange"
+            },
+            afterWorkflowTransition: {
+                event: "{cspace.recordEditor}.events.afterWorkflowTransition"
             }
         },
         listeners: {
+            afterWorkflowTransition: "{cspace.recordEditor.controlPanel}.afterWorkflowTransitionHandler",
             onSave: {
                 listener: "{cspace.recordEditor.controlPanel}.disableControlButtons",
                 priority: "first"
@@ -1245,6 +1413,10 @@ cspace = cspace || {};
             showSaveCancelButtons: "update",
             showDeleteButton: "delete",
             showGoto: "read"
+        },
+        requiredParentWorkflowStates: {
+            showCreateFromExistingButton: ["project", "replicated"],
+            showDeleteButton: ["project", "replicated"]
         },
         hideButtonMap: {
             showDeleteButton: ["termlist"]
@@ -1326,6 +1498,9 @@ cspace = cspace || {};
 
     // Render spec for control panel.
     cspace.recordEditor.controlPanel.produceTree = function (that) {
+        var workflowState = that.options.recordModel.fields.workflow;
+        var isDeprecated = cspace.util.isDeprecatedState(workflowState);
+        
         return {
             recordLock: {
                 decorators: {
@@ -1362,6 +1537,29 @@ cspace = cspace || {};
                             type: "jQuery",
                             func: "click",
                             args: that.events.onCreateFromExisting.fire
+                        }]
+                    }
+                }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: "${showToggleActiveButton}",
+                trueTree: {
+                    toggleActiveButton: {
+                        messagekey: isDeprecated ? "recordEditor-toggleActiveButtonActivate" : "recordEditor-toggleActiveButtonDeactivate",
+                        decorators: [{
+                            type: "jQuery",
+                            func: "prop",
+                            args: {
+                                disabled: "${disableToggleActiveButton}"
+                            }
+                        }, {
+                            type: "jQuery",
+                            func: "click",
+                            args: {
+                                handler: function () {
+                                     that.events.onToggleActive.fire(isDeprecated)
+                                }
+                            }
                         }]
                     }
                 }
@@ -1456,6 +1654,7 @@ cspace = cspace || {};
             var notSaved = cspace.recordEditor.controlPanel.notSaved(rModel);
             that.locate("cancel").prop("disabled", !unsavedChanges);
             that.locate("createFromExistingButton").prop("disabled", notSaved);
+            that.locate("toggleActiveButton").prop("disabled", notSaved);
             that.locate("deleteButton").prop("disabled", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
             that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
             that.locate("deleteRelationButton").prop("disabled", notSaved);
@@ -1475,13 +1674,19 @@ cspace = cspace || {};
             }
             goTo.attr("href", fluid.stringTemplate(that.options.urls.goTo, {recordType: that.options.recordType, csid: rModel.csid}));
         };
+        that.afterWorkflowTransitionHandler = function () {
+            console.log("control panel afterWorkflowTransition");
+            that.refreshView();
+        };
         that.disableControlButtons = function () {
             that.locate("save").prop("disabled", true);
             that.locate("createFromExistingButton").prop("disabled", true);
+            that.locate("toggleActiveButton").prop("disabled", true);
         };
         that.enableControlButtons = function () {
             that.locate("save").prop("disabled", false);
             that.locate("createFromExistingButton").prop("disabled", false);
+            that.locate("toggleActiveButton").prop("disabled", false);
         };
         that.hideDeleteButtonForCurrentUser = function (userId) {
             var userLogin = that.options.userLogin;
@@ -1507,6 +1712,12 @@ cspace = cspace || {};
                     target: recordType,
                     resolver: resolver
                 }));
+            });
+        };
+        
+        that.hideButtonsByParentWorkflowState = function (parentWorkflowState, requiredParentWorkflowStates) {
+             fluid.each(requiredParentWorkflowStates, function(requiredWorkflowStates, flag) {
+                that.applier.requestChange(flag, requiredWorkflowStates.indexOf(parentWorkflowState) > -1);
             }); 
         };
     };
@@ -1514,20 +1725,44 @@ cspace = cspace || {};
     cspace.recordEditor.controlPanel.finalInit = function (that) {
         var rModel = that.options.recordModel,
             notSaved = cspace.recordEditor.controlPanel.notSaved(rModel),
-            recordType = that.options.recordType;
+            recordType = that.options.recordType,
+            vocab = that.options.vocab;
+        
+        var parentWorkflowState = null;
+        
+        if (vocab) {
+          var authority = vocab.authority[recordType];
+        
+          if (authority) {
+            var vocabulary = cspace.vocab.resolve({
+                model: rModel,
+                recordType: recordType,
+                vocab: vocab
+            });
+
+            parentWorkflowState = authority.workflowState.vocabs[vocabulary];
+          }
+        }
+        
         that.applier.requestChange("disableCreateFromExistingButton", notSaved);
+        that.applier.requestChange("disableToggleActiveButton", notSaved || cspace.util.isReplicatedState(rModel.fields.workflow));
         that.applier.requestChange("disableDeleteButton", cspace.recordEditor.controlPanel.disableDeleteButton(rModel));
         that.applier.requestChange("disableDeleteRelationButton", notSaved);
         that.applier.requestChange("disableCancelButton", !that.changeTracker.unsavedChanges);
-        
+
         // Hide buttons if user does not have specific permissions for the recordType
         that.hideButtonsByPermission(recordType, that.options.requiredPermissions, that.resolver);
+
+        // Hide buttons if the parent vocabulary is locked
+        if (parentWorkflowState) {
+          that.hideButtonsByParentWorkflowState(parentWorkflowState, that.options.requiredParentWorkflowStates);
+        }
         
         // Hide buttons for specific recordType
         that.hideButtonsByRecordType(recordType, that.options.hideButtonMap);
         
         that.hideDeleteButtonForCurrentUser(rModel.fields.userId);
-
+        
         that.refreshView();
         that.renderGoTo();
     };
@@ -2061,11 +2296,15 @@ cspace = cspace || {};
             components: {
                 sourceFull: {
                     type: "cspace.recordEditor.dataSource.sourceFull"
+                },
+                sourceWorkflow: {
+                    type: "cspace.recordEditor.dataSource.sourceWorkflow"
                 }
             },
             urls: cspace.componentUrlBuilder({
                 recordURL: "%tenant/%tname/vocabularies/basic/%vocab/%csid",
-                recordURLFull: "%tenant/%tname/vocabularies/%vocab/%csid"
+                recordURLFull: "%tenant/%tname/vocabularies/%vocab/%csid",
+                recordURLWorkflow: "%tenant/%tname/vocabularies/%vocab/workflow/%csid/%transition"
             })
         }
     });
@@ -2302,6 +2541,21 @@ cspace = cspace || {};
                 })
             }, callback);
         };
+        that.transition = function (model, transition, callback) {
+            that.options.csid = model.csid = model.csid || that.options.csid || "";
+            var source = that.sourceWorkflow;
+            source.put(model, {
+                csid: that.options.csid,
+                vocab: cspace.vocab.resolve({
+                    model: null,
+                    recordType: that.options.recordType,
+                    vocab: that.vocab
+                }),
+                transition: transition
+            }, function (data) {
+                callback(data);
+            });
+        };
     };
 
     fluid.demands("cspace.recordEditor.dataSource.source",  ["cspace.localData", "cspace.recordEditor.dataSource"], {
@@ -2363,6 +2617,21 @@ cspace = cspace || {};
             },
             responseParser: "cspace.recordEditor.dataSource.responseParser",
             targetTypeName: "cspace.recordEditor.dataSource.sourceFull"
+        }
+    });
+    fluid.demands("cspace.recordEditor.dataSource.sourceWorkflow", ["cspace.recordEditor.dataSource"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            writeable: true,
+            url: "{cspace.recordEditor.dataSource}.options.urls.recordURLWorkflow",
+            termMap: {
+                recordType: "{cspace.recordEditor.dataSource}.options.recordType",
+                csid: "%csid",
+                vocab: "%vocab",
+                transition: "%transition"
+            },
+            responseParser: "cspace.recordEditor.dataSource.responseParser",
+            targetTypeName: "cspace.recordEditor.dataSource.sourceWorkflow"
         }
     });
 

@@ -26,6 +26,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             authorities: [],
             matches: []
         },
+        // Disable items with deprecated workflow?
+        disableDeprecated: false,
         // Delay before making a request to complete the term.
         delay: 500,
         invokers: {
@@ -75,7 +77,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     model: "{autocomplete}.model",
                     applier: "{autocomplete}.applier",
                     inputField: "{autocomplete}.autocompleteInput",
-                    elPaths: "{autocomplete}.options.elPaths"
+                    elPaths: "{autocomplete}.options.elPaths",
+                    disableDeprecated: "{autocomplete}.options.disableDeprecated"
                 }
             },
             // Data source to get all available authorities for the
@@ -265,6 +268,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.applier.requestChange("authorities", authorities);
             if (that.handlePermissions) {
                 that.handlePermissions();
+            }
+            if (that.handleWorkflowState) {
+                that.handleWorkflowState();
             }
             that.model.authorities.sort(function (auth1, auth2) {
                 return cspace.autocomplete.compareAuthorities(that.vocab, auth1, auth2);
@@ -573,9 +579,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     type: "fluid.renderer.condition",
                     condition: buildValueBinding(preferred),
                     trueTree: {
-                        matchItemContent: {
-                            value: buildValueBinding(displayName)
-                        }
+                        expander: [{
+                            type: "fluid.renderer.condition",
+                            condition: buildValueBinding(rowDisabled),
+                            trueTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName),
+                                    decorators: {
+                                        type: "addClass",
+                                        classes: styles.preferredDisabled
+                                    }
+                                }
+                            },
+                            falseTree: {
+                                matchItemContent: {
+                                    value: buildValueBinding(displayName)
+                                }
+                            }
+                        }]
                     },
                     falseTree: {
                         expander: [{
@@ -754,7 +775,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         elem[preferred] = index === 0;
                         elem[type] = match.type;
                         elem[csid] = match.csid;
-                        elem[rowDisabled] = (!elem[preferred] && (disabled === true));
+                        elem[rowDisabled] = (!elem[preferred] && (disabled === true)) || (that.options.disableDeprecated && cspace.util.isDeprecatedState(match.workflow));
                         elem[namespace] = match.namespace;
                         return elem;
                     }));
@@ -878,6 +899,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         selectors: {
             displayName: ".csc-autocomplete-popup-miniView-displayName",
+            broaderContext: ".csc-autocomplete-popup-miniView-broaderContext",
+            broaderContextLabel: ".csc-autocomplete-popup-miniView-broaderContextLabel",
             field1: ".csc-autocomplete-popup-miniView-field1",
             field2: ".csc-autocomplete-popup-miniView-field2",
             field3: ".csc-autocomplete-popup-miniView-field3",
@@ -969,7 +992,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
             matchesSelect: "cs-autocomplete-matchItem-select",
             nonPreferred: "cs-autocomplete-nonPreferred",
-            nonPreferredDisabled: "cs-autocomplete-nonPreferredDisabled"
+            nonPreferredDisabled: "cs-autocomplete-nonPreferredDisabled",
+            preferredDisabled: "cs-autocomplete-preferredDisabled"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
         preInitFunction: "cspace.autocomplete.popup.preInit",
@@ -1145,6 +1169,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         applier.requestChange("authorities", authorities);
     };
+
+    cspace.autocomplete.handleWorkflowState = function (applier, model, vocab) {
+        // Filter vocabularies from configuration based on workflow state.
+        applier.requestChange("authorities", model.authorities.filter(function (auth) {
+            var parts = auth.type.split("-");
+            var authority = parts[0];
+            var vocabulary = parts[1];
+            
+            return !cspace.util.isLockedState(vocab.authority[authority].workflowState.vocabs[vocabulary]);
+        }));
+    };
+    
     
     cspace.autocomplete.buttonAdjustor = function (closeButton, model, hide) {
         closeButton[model.term === model.baseRecord.displayName || hide ? "hide": "show"]();

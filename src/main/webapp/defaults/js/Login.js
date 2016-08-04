@@ -463,7 +463,11 @@ cspace = cspace || {};
         var result = cspace.util.getUrlParameter("result");
         if (result === "fail") {
             that.messageBar.show(that.lookupMessage("login-invalid"), null, true);
-        } else {
+        } else if (result === "login-connectionError") {
+			that.messageBar.show(that.lookupMessage(result), null, true);
+		} else if (result === "login-conflictError") {
+			that.messageBar.show(that.lookupMessage(result), null, true);
+		} else {
             that.messageBar.hide();
         }
         var resetToken = cspace.util.getUrlParameter("token");

@@ -1,0 +1,787 @@
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-materialAuthorityInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-preferredMaterial-label"></div>
+                </div>
+                <div class="content">
+                    <div class="csc-preferred-materialAuthority"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="info-column2">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialRecordType-label"></div>
+                </div>
+                <div class="content">
+                    <select class="csc-material-materialRecordType input-select"><option value="">Options not loaded</option></select>
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialCompositionGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialCompositionFamilyName-label"></td>
+                                <td class="csc-material-materialCompositionClassName-label"></td>
+                                <td class="csc-material-materialCompositionGenericName-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialCompositionGroup">
+                                <td><input type="text" class="csc-material-materialCompositionFamilyName"/></td>
+                                <td><input type="text" class="csc-material-materialCompositionClassName"/></td>
+                                <td><input type="text" class="csc-material-materialCompositionGenericName"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-column">
+            <div class="info-column2 fl-force-left">
+                <div class="info-pair">
+                    <div class="header">
+                        <div class="label csc-material-description-label"></div>
+                    </div>
+                    <div class="content">
+                        <textarea rows="4" cols="30" class="input-textarea csc-material-description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2 fl-force-right">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-typicalUse-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-typicalUse input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialProductionOrganizationGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialProductionOrganization-label"></td>
+                                <td class="csc-material-materialProductionOrganizationRole-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialProductionOrganizationGroup">
+                                <td><input type="text" class="csc-material-materialProductionOrganization"/></td>
+                                <td><select class="csc-material-materialProductionOrganizationRole input-select"><option value="">Options not loaded</option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialProductionPersonGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialProductionPerson-label"></td>
+                                <td class="csc-material-materialProductionPersonRole-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialProductionPersonGroup">
+                                <td><input type="text" class="csc-material-materialProductionPerson"/></td>
+                                <td><select class="csc-material-materialProductionPersonRole input-select"><option value="">Options not loaded</option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialProductionPlaceGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialProductionPlace-label"></td>
+                                <td class="csc-material-materialProductionPlaceRole-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialProductionPlaceGroup">
+                                <td><input type="text" class="csc-material-materialProductionPlace"/></td>
+                                <td><select class="csc-material-materialProductionPlaceRole input-select"><option value="">Options not loaded</option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-featuredApplicationGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-featuredApplication-label"></td>
+                                <td class="csc-material-featuredApplicationNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-featuredApplicationGroup">
+                                <td><input type="text" class="csc-material-featuredApplication"/></td>
+                                <td><input type="text" class="csc-material-featuredApplicationNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="csc-material-materialCitationGroup-label label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialCitationSource-label"></td>
+                                <td class="csc-material-materialCitationSourceDetail-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialCitationGroup">
+                                <td><input type="text" class="csc-material-materialCitationSource"/></td>
+                                <td><input type="text" class="csc-material-materialCitationSourceDetail"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-externalUrlGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-externalUrl-label"></td>
+                                <td class="csc-material-externalUrlNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-externalUrlGroup">
+                                <td><input type="text" class="csc-material-externalUrl"/></td>
+                                <td><input type="text" class="csc-material-externalUrlNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-additionalResourceGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-additionalResource-label"></td>
+                                <td class="csc-material-additionalResourceNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-additionalResourceGroup">
+                                <td><select class="csc-material-additionalResource input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-additionalResourceNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialTermAttributionContributingGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialTermAttributionContributingOrganization-label"></td>
+                                <td class="csc-material-materialTermAttributionContributingPerson-label"></td>
+                                <td class="csc-material-materialTermAttributionContributingDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialTermAttributionContributingGroup">
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingOrganization"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingPerson"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionContributingDate"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-materialTermAttributionEditingGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-materialTermAttributionEditingOrganization-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingPerson-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingNote-label"></td>
+                                <td class="csc-material-materialTermAttributionEditingDate-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-materialTermAttributionEditingGroup">
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingOrganization"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingPerson"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingNote"/></td>
+                                <td><input type="text" class="csc-material-materialTermAttributionEditingDate"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-formInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-commonForm-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-commonForm input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-formType-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-formType input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-typicalSizeGroup-label"></div>
+                </div>
+                <div class="content csc-material-typicalSizeGroup">
+                    <div class="info-column">
+                        <div class="info-column2-50 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label csc-material-typicalSize-label"></div>
+                                </div>
+                                <div class="content">
+                                    <input type="text" class="csc-material-typicalSize"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label csc-typicalSizeGroup-typicalSizeDimensionGroup-label"></div>
+                            </div>
+                            <div class="content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="csc-material-dimension-label"></td>
+                                            <td class="csc-material-measurementUnit-label"></td>
+                                            <td class="csc-material-value-label"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="csc-typicalSizeGroup-typicalSizeDimensionGroup">
+                                            <td><select class="csc-material-dimension input-select"><option value="">Options not loaded</option></select></td>
+                                            <td><select class="csc-material-measurementUnit input-select"><option value="">Options not loaded</option></select></td>
+                                            <td><input type="text" class="csc-material-value"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-formNote-label"></div>
+                </div>
+                <div class="content">
+                    <textarea rows="4" cols="30" class="input-textarea csc-material-formNote"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-propertyInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-acousticalPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-acousticalPropertyType-label"></td>
+                                <td class="csc-material-acousticalPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-acousticalPropertyGroup">
+                                <td><select class="csc-material-acousticalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-acousticalPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-durabilityPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-durabilityPropertyType-label"></td>
+                                <td class="csc-material-durabilityPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-durabilityPropertyGroup">
+                                <td><select class="csc-material-durabilityPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-durabilityPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+             <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-electricalPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-electricalPropertyType-label"></td>
+                                <td class="csc-material-electricalPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-electricalPropertyGroup">
+                                <td><select class="csc-material-electricalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-electricalPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="info-pair">
+            <div class="header">
+                <div class="label csc-material-hygrothermalPropertyGroup-label"></div>
+            </div>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="csc-material-hygrothermalPropertyType-label"></td>
+                            <td class="csc-material-hygrothermalPropertyUnit-label"></td>
+                            <td class="csc-material-hygrothermalPropertyValue-label"></td>
+                            <td class="csc-material-hygrothermalPropertyNote-label"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-material-hygrothermalPropertyGroup">
+                            <td><select class="csc-material-hygrothermalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                            <td><select class="csc-material-hygrothermalPropertyUnit input-select"><option value="">Options not loaded</option></select></td>
+                            <td><input type="text" class="csc-material-hygrothermalPropertyValue"/></td>
+                            <td><input type="text" class="csc-material-hygrothermalPropertyNote"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    	<div class="info-pair">
+    		<div class="header">
+    			<div class="label csc-material-mechanicalPropertyGroup-label"></div>
+    		</div>
+    		<div class="content">
+    			<table>
+    				<thead>
+    					<tr>
+    						<td class="csc-material-mechanicalPropertyType-label"></td>
+    						<td class="csc-material-mechanicalPropertyUnit-label"></td>
+    						<td class="csc-material-mechanicalPropertyValue-label"></td>
+    						<td class="csc-material-mechanicalPropertyNote-label"></td>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<tr class="csc-material-mechanicalPropertyGroup">
+    						<td><select class="csc-material-mechanicalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+    						<td><select class="csc-material-mechanicalPropertyUnit input-select"><option value="">Options not loaded</option></select></td>
+    						<td><input type="text" class="csc-material-mechanicalPropertyValue"/></td>
+    						<td><input type="text" class="csc-material-mechanicalPropertyNote"/></td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    	</div>
+    	<div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-opticalPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-opticalPropertyType-label"></td>
+                                <td class="csc-material-opticalPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-opticalPropertyGroup">
+                                <td><select class="csc-material-opticalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-opticalPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-sensorialPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-sensorialPropertyType-label"></td>
+                                <td class="csc-material-sensorialPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-sensorialPropertyGroup">
+                                <td><select class="csc-material-sensorialPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-sensorialPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-smartMaterialPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-smartMaterialPropertyType-label"></td>
+                                <td class="csc-material-smartMaterialPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-smartMaterialPropertyGroup">
+                                <td><select class="csc-material-smartMaterialPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-smartMaterialPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-additionalPropertyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-additionalPropertyType-label"></td>
+                                <td class="csc-material-additionalPropertyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-additionalPropertyGroup">
+                                <td><select class="csc-material-additionalPropertyType input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-additionalPropertyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-propertyNote-label"></div>
+                </div>
+                <div class="content">
+                    <textarea rows="4" cols="30" class="input-textarea csc-material-propertyNote"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-ecologyInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-recycledContentGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-recycledContent-label"></td>
+                                <td class="csc-material-recycledContentQualifier-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-recycledContentGroup">
+                                <td><input type="text" class="csc-material-recycledContent"/></td>
+                                <td><select class="csc-material-recycledContentQualifier input-select"><option value="">Options not loaded</option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-lifecycleComponentGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-lifecycleComponent-label"></td>
+                                <td class="csc-material-lifecycleComponentNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-lifecycleComponentGroup">
+                                <td><select class="csc-material-lifecycleComponent input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-lifecycleComponentNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="info-column">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-embodiedEnergyGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-embodiedEnergyValue-label"></td>
+                                <td class="csc-material-embodiedEnergyUnit-label"></td>
+                                <td class="csc-material-embodiedEnergyNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-embodiedEnergyGroup">
+                                <td><input type="text" class="csc-material-embodiedEnergyValue"/></td>
+                                <td><select class="csc-material-embodiedEnergyUnit input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-embodiedEnergyNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-certificationCreditGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-certificationProgram-label"></td>
+                                <td class="csc-material-certificationCreditNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-certificationCreditGroup">
+                                <td><select class="csc-material-certificationProgram input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-certificationCreditNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-ecologyNote-label"></div>
+                </div>
+                <div class="content">
+                    <textarea rows="4" cols="30" class="input-textarea csc-material-ecologyNote"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fl-container-flex fl-fix information-group info-column">
+    <div class="csc-recordEditor-header fl-container-flex header toggle csc-material-processInformation-label"></div>
+    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+        <div class="info-column">
+            <div class="info-column2-50 fl-force-left">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-castingProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-castingProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-joiningProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-joiningProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-moldingProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-moldingProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-surfacingProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-surfacingProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column2-50 fl-force-right">
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-deformingProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-deformingProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-machiningProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-machiningProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+                <div class="info-pair-select">
+                    <div class="header">
+                        <div class="label csc-material-rapidPrototypingProcess-label"></div>
+                    </div>
+                    <div class="content">
+                        <select class="csc-material-rapidPrototypingProcess input-select"><option value="">Options not loaded</option></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-column2-70">
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-additionalProcessGroup-label"></div>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="csc-material-additionalProcess-label"></td>
+                                <td class="csc-material-additionalProcessNote-label"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-material-additionalProcessGroup">
+                                <td><select class="csc-material-additionalProcess input-select"><option value="">Options not loaded</option></select></td>
+                                <td><input type="text" class="csc-material-additionalProcessNote"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info-pair">
+                <div class="header">
+                    <div class="label csc-material-processNote-label"></div>
+                </div>
+                <div class="content">
+                    <textarea rows="4" cols="30" class="input-textarea csc-material-processNote"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="csc-record-hierarchy"></div>

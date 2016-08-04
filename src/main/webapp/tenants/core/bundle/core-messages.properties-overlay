@@ -4,5 +4,5 @@ login-login: admin@core.collectionspace.org
 login-rologin: reader@core.collectionspace.org
 
 login-footerFirst: A tenant configured for use with \t
-login-footerLink: life sciences collections
+login-footerLink: Testsci testing of CollectionSpace
 login-footerLast:  is also available. In the future, additional demo tenants will be created to show configurations specific to art, digital and variable media, and anthropology.

@@ -155,7 +155,13 @@ cspace = cspace || {};
             }
             var vocabs = {};
             fluid.each(permittedAuth, function (auth) {
-                vocabs[auth] = that.vocab.authority[auth].order.vocabs;
+                vocabs[auth] = that.vocab.authority[auth].order.vocabs.filter(function (vocab) {
+                    var workflowState = that.vocab.authority[auth].workflowState.vocabs[vocab];
+                    return (workflowState && !cspace.util.isLockedState(workflowState));
+                });
+                if (vocabs[auth].length == 0) {
+                    vocabs[auth] = null;
+                }
             });
             that.applier.requestChange("vocabs", vocabs);
         };
