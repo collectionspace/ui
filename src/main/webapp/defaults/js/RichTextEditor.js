@@ -158,7 +158,9 @@ cspace = cspace || {};
 	cspace.richTextEditor.transferData = function(that) {
 		var data = that.editor.getData();
 		
-		that.container.val(data);
-		that.container.change();
+		if (that.container.context.value != data) {
+			that.container.val(data);
+			that.container.change();
+		}
 	}
 })(jQuery, fluid);
