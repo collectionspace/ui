@@ -17,7 +17,6 @@ CollectionSpace 1.8 default CSS selectors
 
 /* Added selectors specific to Determination History repeating group (table) in Cataloging */
 /* to adjust width of table cells - rickj, 24may2011 */
-
 .input-numeric-tiny   {
 	width: 35px  !important;}
 .interfield-text {
@@ -2660,3 +2659,26 @@ li.cs-repeatable-repeat .stretched .cs-termList {
     background: url(../images/warning.png) no-repeat top left;
     padding-left: 18px;
 }
+
+.termlist-table tbody tr:nth-child(odd) td {
+    background-color: rgb(245, 245, 245);
+}
+.termlist-table tbody tr:nth-child(even) td {
+    background-color: rgb(255, 255, 255);
+}
+
+.termlist-table tbody tr:nth-child(odd) td input {
+    background-color: rgb(245, 245, 245);
+}
+.termlist-table tbody tr:nth-child(even) td input {
+    background-color: rgb(255, 255, 255);
+ }
+
+.termlist-table tbody tr:nth-child(odd) td select {
+    background-color: rgb(245, 245, 245);
+}
+.termlist-table tbody tr:nth-child(even) td select {
+    background-color: rgb(255, 255, 255);
+}
+
+
