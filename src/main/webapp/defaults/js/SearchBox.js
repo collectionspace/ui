@@ -1,7 +1,7 @@
 /*
 Copyright 2010
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
@@ -106,7 +106,6 @@ cspace = cspace || {};
             }
             that.subTree.recordTypeSelect.selection = "${recordType}";
         }
-
         that.applier.modelChanged.addListener("recordType", function () {
             that.refreshView();
             if (that.model.vocabs) {
@@ -119,6 +118,7 @@ cspace = cspace || {};
         if (that.options.selfRender) {
             that.refreshView();
         }
+        that.dom.locate("searchQuery").focus();
     };
 
     cspace.searchBox.preInit = function (that) {
@@ -172,7 +172,7 @@ cspace = cspace || {};
     };
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
-    // the search results page.    
+    // the search results page.
     cspace.searchBox.navigateToSearch = function (that, recordEditor) {
         function navigate () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
