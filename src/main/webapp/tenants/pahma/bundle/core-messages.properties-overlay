@@ -670,6 +670,8 @@ intake-entryDateLabel: Entry date
 intake-conditionCheckReferenceNumberLabel: Condition check reference number
 intake-insurancePolicyNumberLabel: Policy number
 intake-expectedReturnDateLabel: Expected Return Date
+intake-expectedReturnDateStartLabel: Earliest
+intake-expectedReturnDateEndLabel: Latest
 
 # ---------------------------------- Object Collection Information (Intake/Object Entry) -------------------------- #
 intake-conditionCheckersOrAssessorsLabel: Condition check assessor
