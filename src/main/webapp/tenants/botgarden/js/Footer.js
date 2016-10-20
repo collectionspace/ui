@@ -87,7 +87,7 @@ cspace = cspace || {};
             deploymentRelease: "releaseNotes.html",
             feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.1+Feedback",
             version: "4.1",
-            deploymentVersion: "botgarden_4.1-12",
+            deploymentVersion: "botgarden_4.1-13",
             support: "mailto:cspace-support@lists.berkeley.edu"
         },
         // Footer template resource.
