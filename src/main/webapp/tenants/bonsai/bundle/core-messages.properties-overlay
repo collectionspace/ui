@@ -90,6 +90,8 @@ conservation-treatedByLabel: Treated By
 conservation-treatmentDateLabel: Treatment Date
 conservation-futureTreatmentLabel: Future Treatment
 conservation-futureTreatmentDateLabel: Future Treatment Date
+conservation-futureTreatmentDateStartLabel: Earliest
+conservation-futureTreatmentDateEndLabel: Latest
 conservation-futureTreatmentNotesLabel: Future Treatment Notes
 conservation-dateRepottedLabel: Date Repotted
 conservation-performedByLabel: Performed By
@@ -97,6 +99,8 @@ conservation-soilMixLabel: Soil Mix
 conservation-containerLabel: Container
 conservation-descriptionLabel: Description
 conservation-nextRepottingLabel: Next Repotting
+conservation-nextRepottingStartLabel: Earliest
+conservation-nextRepottingEndLabel: Latest
 conservation-plannedTreatmentLabel: Planned Treatment
 conservation-dateRepottedDateStartLabel: Earliest
 conservation-dateRepottedDateEndLabel: Latest
