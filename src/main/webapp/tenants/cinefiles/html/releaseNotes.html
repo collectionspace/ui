@@ -6,6 +6,75 @@
 	</head>
 	<body>
 		<h1>UC Berkeley CollectionSpace Release Notes</h1>
+<!-- generated_release_notes(cinefiles_4.1-12) -->
+<div id="cinefiles_4.1-12">
+<h2>Version cinefiles_4.1-12 <span class="releasedate">(December 13, 2016)</span></h2>
+<p class="auto-generation warning">These release notes were automatically generated, and have not been edited. Please contact <a href="mailto:cspace-support@lists.berkeley.edu">cspace-support@lists.berkeley.edu</a> if you have questions about this release.</p>
+<p class="description">This release of CollectionSpace addresses the following issues:</p>
+<ul class="issues">
+<li class="issue">
+Uploading non-image media to a Media record does not display thumbnail <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/CSPACE-6692">CSPACE-6692</a>)</span>
+<ul class="commits">
+<li id="commit_5a70563" class="services commit">We needed to copy the binaries that are in the resources folder without the <filterset> in place because it seems to corrupt them.</li>
+</ul>
+</li>
+<li class="issue">
+"+" is replaced by space in Broader Object <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1342">PAHMA-1342</a>)</span>
+<ul class="commits">
+<li id="commit_beeaba2" class="application commit">Do not URI-decode display names when parsing refnames.</li>
+</ul>
+</li>
+<li class="issue">
+Implement Conservation procedure <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1403">PAHMA-1403</a>)</span>
+<ul class="commits">
+<li id="commit_ea63040" class="services commit">Add conservation procedure.</li>
+<li id="commit_3f06825" class="application commit">Add conservation procedure.</li>
+<li id="commit_92a224a" class="application commit">Configure vocabularies.</li>
+<li id="commit_2636dd2" class="application commit">Fix incorrectly named services-record-path.</li>
+<li id="commit_801734f" class="services commit">Configure number generator.</li>
+<li id="commit_991052a" class="application commit">Configure number generator.</li>
+<li id="commit_eed6f5f" class="application commit">Configure conservation search.</li>
+<li id="commit_f81a552" class="application commit">Add conservation to relations configuration.</li>
+<li id="commit_0415933" class="application commit">Add conservation to default, lifesci, and fcart tenants.</li>
+<li id="commit_79dda7c" class="application commit">Add treatmentpurpose options.</li>
+<li id="commit_a9fd6b3" class="application commit">Change conservation number pattern.</li>
+<li id="commit_e669977" class="services commit">Change conservation number pattern.</li>
+<li id="commit_9f5f7e8" class="application commit">Remove autocomplete from sampleReturnedLocation, and add mini to status.</li>
+<li id="commit_e04b58e" class="services commit">Change version numbers to 4.1.1.</li>
+<li id="commit_5e850c3" class="services commit">Downgrade pom files for 4.1.</li>
+<li id="commit_b65dd99" class="services commit">Downgrade conservation for 4.1.</li>
+</ul>
+</li>
+<li class="issue">
+Running large reports causes tomcat to run out of memory <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1455">PAHMA-1455</a>)</span>
+<ul class="commits">
+<li id="commit_efbbfbf" class="services commit">Write reports to temp files instead of memory.</li>
+<li id="commit_bd30bb6" class="application commit">Stream reports from services layer without loading into memory.</li>
+</ul>
+</li>
+<li class="issue">
+Roles: Newer record types not appearing <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-1467">PAHMA-1467</a>)</span>
+<ul class="commits">
+<li id="commit_828428f" class="application commit">Hack the permissions page size to be 400 for now.</li>
+</ul>
+</li>
+<li class="issue">
+Would like a way to "merge" term records <span class="issuenumber">(<a href="https://issues.collectionspace.org/browse/PAHMA-903">PAHMA-903</a>)</span>
+<ul class="commits">
+<li id="commit_4a6eeb3" class="services commit">Add merge authority items batch job to shared code.</li>
+</ul>
+</li>
+<li class="issue">
+Other changes
+<ul class="commits">
+<li id="commit_f69616f" class="application commit">Prevent app layer log messages from being duplicated in catalina.out.</li>
+<li id="commit_d397b68" class="services commit">Write authenticated user to the request so it may be logged.</li>
+<li id="commit_4ef01ee" class="application commit">Add repos to pom.xml.</li>
+<li id="commit_f609c01" class="services commit">Add create_unaccent_text_search_configuration.sql script.</li>
+</ul>
+</li>
+</ul>
+</div>
 <!-- generated_release_notes(cinefiles_4.1-11) -->
 <div id="cinefiles_4.1-11">
 <h2>Version cinefiles_4.1-11 <span class="releasedate">(January 22, 2016)</span></h2>
