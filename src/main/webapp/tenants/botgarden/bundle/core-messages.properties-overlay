@@ -193,6 +193,7 @@ media-handwrittenLabel: Handwritten label
 media-postToPublicLabel: Post to public
 media-identificationNumberLabel: Accession number
 media-identificationNumberRequired: Please specify an Accession number
+media-imageNumberLabel: Image number
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
