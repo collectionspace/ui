@@ -477,7 +477,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     field1: "${fields.taxonTermGroup.0.termType}",
                     field2: "${fields.taxonTermGroup.0.termStatus}",
-                    field3: "${fields.taxonRank}",
+                    field3: {
+                      value: "${fields.taxonRank}",
+                      decorators: {
+                        type: "fluid",
+                        func: "cspace.util.urnToStringFieldConverter"
+                      }
+                    },
                     field1Label: {
                         messagekey: "taxon-miniView-field1Label"
                     },
