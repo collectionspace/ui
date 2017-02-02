@@ -69,7 +69,8 @@ var pahma = {};
 		}
 		
 		date = removeTimestamp(date);
-		
+		reason = cspace.util.urnToString(reason);
+
 		if (date && reason) {
 			summary = date + " (" + reason + ")";
 		}
