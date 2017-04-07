@@ -194,6 +194,8 @@
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
+    <js>/defaults/js/ComputedField.js</js>
+    <js>/defaults/js/RichTextEditor.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
@@ -215,6 +217,7 @@
     <js>/defaults/js/MediaView.js</js>
     <js>/defaults/js/Hierarchy.js</js>
     <js>/defaults/js/ReportProducer.js</js>
+    <js>/defaults/js/BatchRunner.js</js>
     <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/RelatedRecordsTab.js</js>
     <js>/defaults/js/PageBuilder.js</js>

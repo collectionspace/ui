@@ -69,7 +69,7 @@ cspace = cspace || {};
                                     }
                                 },
                                 related: "{searchToRelateDialog}.options.related",
-                                permission: "update",
+                                permission: "read",
                                 enableAdvancedSearch: false
                             }
                         },

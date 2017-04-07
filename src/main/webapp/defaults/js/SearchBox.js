@@ -119,7 +119,8 @@ cspace = cspace || {};
         if (that.options.selfRender) {
             that.refreshView();
         }
-    };
+        that.dom.locate("searchQuery").focus();
+	};
 
     cspace.searchBox.preInit = function (that) {
         that.afterRenderHandler = function () {

@@ -79,6 +79,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        // Batch Runner
+        fluid.demands("cspace.batchRunner.batchTypesSource", ["cspace.batchRunner", "cspace.localData"], {
+            funcName: "cspace.batchRunner.testBatchTypesSource",
+            args: {
+                targetTypeName: "cspace.batchRunner.testBatchTypesSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+		
         // Autocomplete demands
         var localDataSourceDemands = {
             funcName: "cspace.URLDataSource",
@@ -205,6 +216,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         fluid.demands("cspace.util.globalNavigator", null, {
             container: "body"
+            options: {
+                selectors: {
+                    include: "a",
+                    exclude: ".cke_button, [href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+                    forms: ".csc-header-logout-form"
+                }
+            }
         });
 
         fluid.demands("cspace.util.recordLock", "cspace.recordEditor", {
@@ -364,6 +382,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 toCSID: "cspace.util.urnToCSID"
             }
         });
+        fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "vocab-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "person-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authUrnToCSID);
         fluid.demands("cspace.autocomplete.popup.miniView.urnToCSID", ["cspace.autocomplete.popup.miniView", "location-miniView"], authUrnToCSID);
@@ -634,6 +653,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         };
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "cataloging-miniView"], nonAuthDataSourceDemands);
+        fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "vocab-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "person-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "organization-miniView"], authDataSourceDemands);
         fluid.demands("cspace.autocomplete.popup.miniView.dataSource", ["cspace.autocomplete.popup.miniView", "location-miniView"], authDataSourceDemands);
@@ -831,6 +851,35 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.reportProducer.generateReport",
             args: ["{reportProducer}.confirmation", "{reportProducer}.options.parentBundle", "{reportProducer}.requestReport", "{recordEditor}"]
         });
+
+        // Batch runner
+
+        fluid.demands("cspace.batchRunner", ["cspace.sidebar", "cspace.pageBuilder"], {
+            options: {
+                listeners: {
+                    onSynchronousFetch: "{loadingIndicator}.events.showOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onStop: "{loadingIndicator}.events.hideOn.fire",
+                    batchFinished: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
+        });
+
+        fluid.demands("cspace.batchRunner.batchTypesSource", "cspace.batchRunner", {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{batchRunner}.options.urls.batchTypesUrl",
+                targetTypeName: "cspace.batchRunner.batchTypesSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+        
+        fluid.demands("cspace.batchRunner.runBatch", ["cspace.batchRunner", "cspace.recordEditor"], {
+            funcName: "cspace.batchRunner.runBatch",
+            args: ["{batchRunner}.confirmation", "{batchRunner}.options.parentBundle", "{batchRunner}.requestBatch", "{recordEditor}"]
+        });
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", {
@@ -850,7 +899,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         fluid.demands("confirmation", "cspace.reportProducer", "{options}");
-
+        fluid.demands("confirmation", "cspace.batchRunner", "{options}");
+		
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
@@ -1470,6 +1520,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 listeners: {
@@ -1561,6 +1612,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     number: "{globalBundle}.messageBase.search-number",
                     summary: "{globalBundle}.messageBase.search-summary",
                     recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    namespace: "{globalBundle}.messageBase.search-namespace",
                     "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
                 },
                 selectors: {
@@ -1671,6 +1723,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.URLDataSource",
             args: {
                 url: "{termList}.options.urls.termList",
+                caching: true,				
                 targetTypeName: "cspace.termList.termListSource",
                 termMap: {
                     recordType: "%recordType",
@@ -1758,7 +1811,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectors: {
                     relatedNonVocabularies: ".csc-related-nonVocabularies"
                 },
-                selectorsToIgnore: ["report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner", "relatedNonVocabularies"],
+                selectorsToIgnore: ["batch", "report", "termsUsed", "relatedVocabularies", "relatedCataloging", "relatedProcedures", "header", "togglable", "termsUsedBanner", "relatedNonVocabularies"],
                 model: {
                     categories: [{
                         expander: {
@@ -2079,6 +2132,109 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
+        // computedField demands
+        fluid.demands("cspace.computedField", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model",
+                events: {
+                    removeApplierListeners: "{recordEditor}.events.onRenderTree",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{computedField}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{computedField}.events.removeAllListeners.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.computedField", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{repeatableImpl}.applier",
+                model: "{repeatableImpl}.model",
+                events: {
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorOnRenderTree: "{recordEditor}.events.onRenderTree",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel"
+                },
+                listeners: {
+                    repeatableOnRefreshView: "{computedField}.events.removeAllListeners.fire",
+                    recordEditorOnRenderTree: "{computedField}.events.removeAllListeners.fire",
+                    recordEditorAfterSave: {
+                        listener: "{computedField}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{computedField}.events.removeAllListeners.fire"
+                    }
+               }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.computedField", "cspace.advancedSearch.searchFields", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{searchFields}.applier",
+                model: "{searchFields}.model",
+                events: {
+                    removeAllListeners: "{advancedSearch}.events.recordTypeChanged",
+                    onSubmit: "{searchView}.events.onAdvancedSearch"
+                },
+            }, "{arguments}.1"]
+        });
+
+        // richTextEditor demands
+        fluid.demands("cspace.richTextEditor", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.removeAllListeners.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.richTextEditor", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    repeatableOnUpdateModel: "{repeatableImpl}.events.onUpdateModel",
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorAfterSave: "{recordEditor}.events.afterSave",
+                    recordEditorAfterCancel: "{recordEditor}.events.afterCancel",
+                    onSubmit: "{recordEditor}.saver.events.beforeSave"
+                },
+                listeners: {
+                    recordEditorAfterSave: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire",
+                        priority: "first"
+                    },
+                    recordEditorAfterCancel: {
+                        listener: "{richTextEditor}.events.destroyEditor.fire"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
+    };
+	
     fluid.demands("cspace.localDemands", "cspace.localData", {
         options: {
             finalInitFunction: cspace.includeLocalDemands

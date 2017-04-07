@@ -1,0 +1,43 @@
+{
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "claim",
+            "schema": {
+                "claim": null
+            }
+        }
+    },
+    "pageBuilder": {
+        "options": {
+            "pageType": "claim-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-claim"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
+                    "options": {
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "csid": "{globalModel}.model.primaryModel.csid",
+                        "strings": {
+                            "editRecord": "claim-editRecord",
+                            "recordList": "claim-recordList"
+                        },
+                        "components": {
+                            "relatedRecordsRecordEditor": {
+                                "options": {
+                                   "selectors": {
+                                        "identificationNumber": ".csc-claim-claimNumber"
+                                    },
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.claimNumber", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

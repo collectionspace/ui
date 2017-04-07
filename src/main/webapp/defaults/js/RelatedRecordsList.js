@@ -138,7 +138,8 @@ cspace = cspace || {};
             relatedRelationsUpdated: "{relatedRecordsList}.relatedRelationsUpdatedHandler",
             afterAddRelation: [
                 "{relatedRecordsList}.events.relationsUpdated.fire"
-            ]
+            ],
+            primaryRecordCreated: "{relatedRecordsList}.primaryRecordCreatedHandler"
         },
         invokers: {
             navigateToAdvancedSearch: {
@@ -235,6 +236,9 @@ cspace = cspace || {};
             // Enable or disable the Show button.
             that.locate("showButton").prop("disabled", hasNoRecords);
         };
+        that.primaryRecordCreatedHandler = function () {
+            that.listBanner.events.showBanner.fire(true);
+		};
     };
 
     cspace.relatedRecordsList.finalInit = function (that) {
@@ -293,7 +297,7 @@ cspace = cspace || {};
                 }
             },
             bannerMessage: {
-                messagekey: "sidebar-banner-message",
+                messagekey: "sidebar-banner-empty-message",
                 args: [],
                 decorators: {
                     addClass: "{styles}.bannerMessage"
@@ -306,8 +310,9 @@ cspace = cspace || {};
     });
 
     cspace.relatedRecordsList.banner.preInit = function (that) {
-        that.showBanner = function () {
+        that.showBanner = function (showLoadingMessage) {
             that.options.list.hide();
+            that.locate("bannerMessage").text(that.options.parentBundle.resolve(showLoadingMessage ? "sidebar-banner-loading-message" : "sidebar-banner-empty-message"));
             that.locate("banner").show();
         };
         that.hideHandler = function () {

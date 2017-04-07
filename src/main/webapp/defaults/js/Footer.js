@@ -39,6 +39,13 @@ cspace = cspace || {};
                     args: ["${version}"]
                 }
             },
+            deploymentRelease: {
+                target: "${deploymentRelease}",
+                linktext: {
+                    messagekey: "footer-deploymentRelease",
+                    args: ["${deploymentVersion}"]
+                }
+            },
             about: {
                 target: "${about}",
                 linktext: {
@@ -49,6 +56,12 @@ cspace = cspace || {};
                 target: "${feedback}",
                 linktext: {
                     messagekey: "footer-feedback"
+                }
+            },
+            support: {
+                target: "${support}",
+                linktext: {
+                    messagekey: "footer-support"
                 }
             }
         };
@@ -63,14 +76,19 @@ cspace = cspace || {};
             text1: ".csc-footer-text1",
             text2: ".csc-footer-text2",
             currentRelease: ".csc-footer-currentRelease",
+            deploymentRelease: ".csc-footer-deploymentRelease",
             about: ".csc-footer-about",
-            feedback: ".csc-footer-feedback"
+            feedback: ".csc-footer-feedback",
+            support: ".csc-footer-support"			
         },
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
+            deploymentRelease: "releaseNotes.html",
             feedback: "http://www.collectionspace.org/contact/",
-            version: "4.5"
+            version: "4.5",
+            deploymentVersion: "CollectionSpace.org",
+            support: "mailto:info@collectionspace.org"
         },
         // Footer template resource.
         resources: {

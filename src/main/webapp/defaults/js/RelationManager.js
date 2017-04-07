@@ -127,7 +127,15 @@ cspace = cspace || {};
                     });
                     return;
                 }
-                that.events.afterAddRelation.fire(options.related);
+                var targetRecordTypes = {};
+                
+                fluid.each(data.items, function(item) {
+                    targetRecordTypes[item.target.recordtype] = true;
+                });
+                
+                for (var targetRecordType in targetRecordTypes) {
+                    that.events.afterAddRelation.fire(targetRecordType);
+                }
             });
         };
         that.afterAddRelation = function () {
@@ -202,10 +210,10 @@ cspace = cspace || {};
             resolver: "{permissionsResolver}"
         },
         recordType: "{relationManager}.options.related",
-        recordTypePermission: "update",
+        recordTypePermission: "read",
         allOf: [{
             target: "{relationManager}.options.primary",
-            permission: "update"
+            permission: "read"
         }],
         finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
     });

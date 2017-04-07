@@ -1,0 +1,643 @@
+.osteo-form input[type='button']:disabled {
+    display: none;
+}
+
+.osteo-row {
+    display: flex;
+}
+
+.osteo-row + .osteo-row {
+    margin-top: 10px;
+}
+
+.osteo-row > .column {
+    text-align: center;
+    flex: 1 0 33%;
+}
+
+.column > .osteo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.osteo {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.osteo fieldset {
+    border: none;
+}
+
+.osteo th, .osteo td {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 16px;
+    width: 16px;
+    position: relative;
+    border: 0;
+    padding: 0;
+}
+
+.osteo th {
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.osteo td {
+    vertical-align: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.osteo input[type="text"] {
+    width: 100%;
+    height: 19px;
+}
+
+.osteo .flat-label .sides {
+    height: 56px;
+}
+
+.osteo .sides {
+    height: 40px;
+}
+
+.osteo .sides > th {
+    vertical-align: top;
+}
+
+.osteo.vertebrae .sides > th {
+/*    text-align: center;*/
+}
+
+.osteo .sides > th.right {
+    text-align: right;
+}
+
+.osteo .labels > th {
+    position: relative;
+}
+
+.osteo .labels > th > span {
+    font-size: 10px;
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: top left;
+    white-space: nowrap;
+}
+
+.osteo .labels > th > span, .osteo.vertebrae .labels > th.arch > span {
+    top: 14px;
+}
+
+.osteo.vertebrae .labels > th.centrum > span {
+    top: 14px;
+}
+
+.osteo.vertebrae .hspace {
+    width: 8px;
+}
+
+.osteo .flat-label .labels > th > span {
+    top: -2px;
+}
+
+.osteo .labels > th.complete > span {
+    top: -2px;
+    color: #0033FF;
+}
+
+.osteo .bone, .osteo .segment {
+    text-align: center;
+    white-space: nowrap;
+    padding: 0 5px 0 5px;
+}
+
+.osteo .segment {
+    font-size: 10px;
+}
+
+.osteo input[type="text"] {
+    padding: 0;
+    border: 1px solid #C7CFD4;
+    text-align: center;
+}
+
+.osteo input.sesamoid {
+    width: 96px;
+}
+
+.osteo input.mc, .osteo input.mt {
+    height: 80px;
+    text-align: center;
+}
+
+.osteo tbody {
+    border-bottom: 1em solid rgba(0, 0, 0, 0);
+}
+
+.osteo label > input[type="radio"] + span,
+.osteo label > input[type="checkbox"] + span {
+    display: block;
+    color: black;
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+}
+
+.osteo label > input[type="radio"] + span {
+    background-image: url(../images/radio-black-unchecked.png);
+}
+
+.osteo label > input[type="checkbox"] + span {
+    background-image: url(../images/checkbox-unchecked.png);
+}
+
+.osteo label > input[type="radio"].absent + span {
+    background-image: url(../images/radio-red-unchecked.png);
+}
+
+.osteo label > input[type="radio"].complete + span {
+    background-image: url(../images/radio-blue-unchecked.png);
+}
+
+.osteo label > input[type="checkbox"]:checked + span {
+    background-image: url(../images/checkbox-checked.png);
+}
+
+.osteo label > input[type="radio"]:checked + span {
+    background-image: url(../images/radio-black-checked.png);
+}
+
+.osteo label > input[type="radio"].absent:checked + span {
+    background-image: url(../images/radio-red-checked.png);
+}
+
+.osteo label > input[type="radio"].complete:checked + span {
+    background-image: url(../images/radio-blue-checked.png);
+}
+
+.osteo label > input[type="radio"]:focus + span,
+.osteo label > input[type="checkbox"]:focus + span {
+    outline: 1px solid black;
+    outline-offset: -1px;
+}
+
+.osteo label > input[type="radio"],
+.osteo label > input[type="checkbox"] {
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    width: 1px;
+    height: 1px;
+}
+
+.osteo input[name="C_centra_count"] {
+    height: 96px;
+}
+
+.osteo input[name="C_L_arch_count"], .osteo input[name="C_R_arch_count"] {
+    height: 112px;
+}
+
+.osteo input[name="T_centra_count"], .osteo input[name="T_L_arch_count"], .osteo input[name="T_R_arch_count"] {
+    height: 192px;
+}
+
+.osteo input[name="L_centra_count"], .osteo input[name="L_L_arch_count"], .osteo input[name="L_R_arch_count"] {
+    height: 80px;
+}
+
+.osteo input[name="S_centra_count"], .osteo input[name="S_L_ala_count"], .osteo input[name="S_R_ala_count"] {
+    height:96px;
+}
+
+.osteo.phalanges th {
+    white-space: nowrap;
+    padding-right: 3px;
+}
+
+.osteo.phalanges th, .osteo.phalanges td {
+    width: auto;
+    font-size: 10px;
+    text-align: left;
+}
+
+.osteo.phalanges input {
+    width: 3em;
+}
+
+.osteo.phalanges input[name="Phalanx_juv_count_hand"], .osteo.phalanges input[name="Phalanx_juv_count_foot"] {
+    height: 57px;
+}
+
+.osteo.dental {
+    width: 420px;
+    height: 420px;
+    background-image: url(../images/dental_form.svg);
+    background-repeat: no-repeat;
+    background-size: 420px;
+    background-position: 0 50px;
+    display: flex;
+}
+
+.osteo.dental input[type='button']:disabled {
+    display: inline-block;
+    visibility: hidden;
+}
+
+.osteo.dental fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+.osteo.dental .zeroButton {
+    position: relative;
+}
+
+.osteo.dental legend {
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+
+.osteo.dental .permanent {
+    width: 210px;
+    position: relative;
+}
+
+.osteo.dental .permanent .zeroButton {
+    top: 196px;
+}
+
+.osteo.dental .permanent .upper legend {
+    top: 100px;
+}
+
+.osteo.dental .permanent .lower legend {
+    top: 250px;
+}
+
+.osteo.dental .deciduous {
+    margin-left: 42px;
+    width: 168px;
+    position: relative;
+}
+
+.osteo.dental .deciduous .zeroButton {
+    top: 126px;
+}
+
+.osteo.dental .deciduous .upper legend {
+    top: 60px;
+}
+
+.osteo.dental .deciduous .lower legend {
+    top: 145px;
+}
+
+.osteo.dental h3, .osteo.dental h4 {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.osteo.dental .key {
+    font-size: 10px;
+}
+
+.osteo.dental label {
+    color: rgba(0, 0, 0, .3);
+    position: absolute;
+    font-size: 9px;
+}
+
+.osteo.dental label sub {
+    vertical-align: sub;
+}
+
+.osteo.dental fieldset input[type='text'] {
+    color: #0033FF;
+    font-weight: bold;
+    width: 100%;
+    background: none;
+    position: absolute;
+/*    border-color: rgba(128, 128, 128, .5);*/
+    border: none;
+    top: -3px;
+    left: 0px;
+}
+
+.osteo.dental label.Teeth_UM3_R {
+    left: 12px;
+    top: 198px;
+}
+
+.osteo.dental label.Teeth_UM2_R {
+    left: 15px;
+    top: 173px;
+}
+
+.osteo.dental label.Teeth_UM1_R {
+    left: 21px;
+    top: 145px;
+}
+
+.osteo.dental label.Teeth_UP4_R {
+    left: 25px;
+    top: 123px;
+}
+
+.osteo.dental label.Teeth_UP3_R {
+    left: 35px;
+    top: 107px;
+}
+
+.osteo.dental label.Teeth_UC_R {
+    left: 45px;
+    top: 89px;
+}
+
+.osteo.dental label.Teeth_UI2_R {
+    left: 61px;
+    top: 69px;
+}
+
+.osteo.dental label.Teeth_UI1_R {
+    left: 84px;
+    top: 62px;
+}
+
+.osteo.dental label.Teeth_UI1_L {
+    left: 110px;
+    top: 62px;
+}
+
+.osteo.dental label.Teeth_UI2_L {
+    left: 132px;
+    top: 69px;
+}
+
+.osteo.dental label.Teeth_UC_L {
+    left: 144px;
+    top: 89px;
+}
+
+.osteo.dental label.Teeth_UP3_L {
+    left: 154px;
+    top: 107px;
+}
+
+.osteo.dental label.Teeth_UP4_L {
+    left: 164px;
+    top: 123px;
+}
+
+.osteo.dental label.Teeth_UM1_L {
+    left: 169px;
+    top: 145px;
+}
+
+.osteo.dental label.Teeth_UM2_L {
+    left: 174px;
+    top: 173px;
+}
+
+.osteo.dental label.Teeth_UM3_L {
+    left: 177px;
+    top: 198px;
+}
+
+.osteo.dental label.Teeth_LM3_R {
+    left: 21px;
+    top: 257px;
+}
+
+.osteo.dental label.Teeth_LM2_R {
+    left: 25px;
+    top: 286px;
+}
+
+.osteo.dental label.Teeth_LM1_R {
+    left: 33px;
+    top: 315px;
+}
+
+.osteo.dental label.Teeth_LP4_R {
+    left: 41px;
+    top: 338px;
+}
+
+.osteo.dental label.Teeth_LP4_R sub {
+    position: relative;
+    left: -1px;
+}
+
+.osteo.dental label.Teeth_LP3_R {
+    left: 48px;
+    top: 357px;
+}
+
+.osteo.dental label.Teeth_LP3_R sub {
+    position: relative;
+    left: -1px;
+}
+
+.osteo.dental label.Teeth_LC_R {
+    left: 57px;
+    top: 371px;
+}
+
+.osteo.dental label.Teeth_LI2_R {
+    left: 78px;
+    top: 381px;
+}
+
+.osteo.dental label.Teeth_LI2_R input {
+    width: 10px;
+}
+
+.osteo.dental label.Teeth_LI1_R {
+    left: 93px;
+    top: 384px;
+}
+
+.osteo.dental label.Teeth_LI1_R input {
+    width: 10px;
+}
+
+.osteo.dental label.Teeth_LI1_L {
+    left: 108px;
+    top: 384px;
+}
+
+.osteo.dental label.Teeth_LI1_L input {
+    width: 10px;
+}
+
+.osteo.dental label.Teeth_LI2_L {
+    left: 122px;
+    top: 381px;
+}
+
+.osteo.dental label.Teeth_LI2_L input {
+    width: 10px;
+}
+
+.osteo.dental label.Teeth_LC_L {
+    left: 131px;
+    top: 371px;
+}
+
+.osteo.dental label.Teeth_LP3_L {
+    left: 143px;
+    top: 356px;
+}
+
+.osteo.dental label.Teeth_LP3_L sub {
+    position: relative;
+    left: -1px;
+}
+
+.osteo.dental label.Teeth_LP4_L {
+    left: 151px;
+    top: 337px;
+}
+
+.osteo.dental label.Teeth_LP4_L sub {
+    position: relative;
+    left: -1px;
+}
+
+.osteo.dental label.Teeth_LM1_L {
+    left: 157px;
+    top: 314px;
+}
+
+.osteo.dental label.Teeth_LM2_L {
+    left: 165px;
+    top: 285px;
+}
+
+.osteo.dental label.Teeth_LM3_L {
+    left: 168px;
+    top: 256px;
+}
+
+.osteo.dental label.Teeth_decid_Udm2_R {
+    left: 9px;
+    top: 130px;
+}
+
+.osteo.dental label.Teeth_decid_Udm1_R {
+    left: 17px;
+    top: 100px;
+}
+
+.osteo.dental label.Teeth_decid_Udc_R {
+    left: 33px;
+    top: 80px;
+}
+
+.osteo.dental label.Teeth_decid_Udi2_R {
+    left: 45px;
+    top: 66px;
+}
+
+.osteo.dental label.Teeth_decid_Udi1_R {
+    left: 65px;
+    top: 60px;
+}
+
+.osteo.dental label.Teeth_decid_Udi1_L {
+    left: 88px;
+    top: 60px;
+}
+
+.osteo.dental label.Teeth_decid_Udi2_L {
+    left: 105px;
+    top: 66px;
+}
+
+.osteo.dental label.Teeth_decid_Udc_L {
+    left: 115px;
+    top: 80px;
+}
+
+.osteo.dental label.Teeth_decid_Udm1_L {
+    left: 128px;
+    top: 100px;
+}
+
+.osteo.dental label.Teeth_decid_Udm2_L {
+    left: 135px;
+    top: 130px;
+}
+
+.osteo.dental label.Teeth_decid_Ldm2_R {
+    left: 11px;
+    top: 180px;
+}
+
+.osteo.dental label.Teeth_decid_Ldm1_R {
+    left: 22px;
+    top: 211px;
+}
+
+.osteo.dental label.Teeth_decid_Ldc_R {
+    left: 40px;
+    top: 232px;
+}
+
+.osteo.dental label.Teeth_decid_Ldi2_R {
+    left: 54px;
+    top: 243px;
+}
+
+.osteo.dental label.Teeth_decid_Ldi1_R {
+    left: 70px;
+    top: 246px;
+}
+
+.osteo.dental label.Teeth_decid_Ldi1_L {
+    left: 87px;
+    top: 246px;
+}
+
+.osteo.dental label.Teeth_decid_Ldi2_L {
+    left: 102px;
+    top: 243px;
+}
+
+.osteo.dental label.Teeth_decid_Ldc_L {
+    left: 113px;
+    top: 232px;
+}
+
+.osteo.dental label.Teeth_decid_Ldm1_L {
+    left: 122px;
+    top: 211px;
+}
+
+.osteo.dental label.Teeth_decid_Ldm2_L {
+    left: 132px;
+    top: 180px;
+}
+
+.osteo.dental .immVertFrags {
+    position: relative;
+    top: 270px;
+    font-size: 10px;
+}
+
+.osteo.dental .immVertFrags input[type='text'] {
+    width: 2em;
+    text-align: left;
+    padding: 1px 0 0 1px;
+}
