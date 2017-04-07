@@ -215,7 +215,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.includeDemands = function () {
 
         fluid.demands("cspace.util.globalNavigator", null, {
-            container: "body"
+            container: "body",
             options: {
                 selectors: {
                     include: "a",

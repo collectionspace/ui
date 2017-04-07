@@ -201,7 +201,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 		
         // Create an input that will be used by autocomplete.
         var autocompleteInput = $("<input/>");
-        autocompleteInput.insertAfter(that.hiddenInput);
+        autocompleteInput.insertAfter(that.miniViewContainer);
         that.autocompleteInput = autocompleteInput;
 
         // Create a coantiner for a popup.
