@@ -240,7 +240,7 @@ cspace = cspace || {};
             dateLatestQualifier: ".csc-structuredDate-dateLatestQualifier",
             dateLatestQualifierValue: ".csc-structuredDate-dateLatestQualifierValue",
             dateLatestQualifierUnit: ".csc-structuredDate-dateLatestQualifierUnit",
-            dateLatestScalarValue: ".csc-structuredDate-dateLatestScalarValue"
+            dateLatestScalarValue: ".csc-structuredDate-dateLatestScalarValue",
             parseStatus: ".csc-structuredDate-parseStatus"
 		},
         strings: {},

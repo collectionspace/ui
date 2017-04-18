@@ -2130,8 +2130,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-    };
-    
+
         // computedField demands
         fluid.demands("cspace.computedField", "cspace.recordEditor", {
             container: "{arguments}.0",
@@ -2234,7 +2233,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, "{arguments}.1"]
         });
     };
-	
+
     fluid.demands("cspace.localDemands", "cspace.localData", {
         options: {
             finalInitFunction: cspace.includeLocalDemands
@@ -2248,7 +2247,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.defaults("cspace.localDemands", {
         gradeNames: ["fluid.littleComponent", "autoInit"]
     });
-    
+
     if (document.location.protocol === "file:") {
         fluid.staticEnvironment.cspaceEnvironment = fluid.typeTag("cspace.localData");
     }
@@ -2256,3 +2255,4 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.invoke("cspace.localDemands");
     
 })(jQuery, fluid);
+
