@@ -425,33 +425,32 @@ cspace = cspace || {};
     };
 
     cspace.recordEditor.cloner.clone = function (that) {
-		that.globalNavigator.events.onPerformNavigation.fire(function () {
-                that.copyAndStore();
-                var vocab = cspace.vocab.resolve({
-                    model: that.model,
-                    recordType: that.options.recordType,
-                    vocab: that.vocab
-                });
-                that.messageBar.disable();
-
-                var params = {};
-                
-                if (that.options.template) {
-                    params.template = that.options.template;
-                }
-
-                if (vocab) {
-                    params.vocab = vocab;
-                }
-
-                params = $.param(params);
-
-                window.location = fluid.stringTemplate(that.options.cloneURL, {
-                    recordType: that.options.recordType,
-                    params: params ? ("?" + params) : ""
-                });
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
+            that.copyAndStore();
+            var vocab = cspace.vocab.resolve({
+                model: that.model,
+                recordType: that.options.recordType,
+                vocab: that.vocab
             });
-        };
+            that.messageBar.disable();
+
+            var params = {};
+
+            if (that.options.template) {
+                params.template = that.options.template;
+            }
+
+            if (vocab) {
+                params.vocab = vocab;
+            }
+
+            params = $.param(params);
+
+            window.location = fluid.stringTemplate(that.options.cloneURL, {
+                recordType: that.options.recordType,
+                params: params ? ("?" + params) : ""
+            });
+        });
     };
 
     cspace.recordEditor.cloner.cloneTab = function (that, relatedRecordsTab) {
