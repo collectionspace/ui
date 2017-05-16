@@ -31,7 +31,8 @@
                                         "identificationNumber": ".csc-movement-currentLocation",
                                         "recordLockContainer": ".csc-recordLock"
                                     },
-                                    "uispec": "{pageBuilder}.options.uispec.details"
+                                    "uispec": "{pageBuilder}.options.uispec.details",
+                                    "fieldsToIgnore": ["csid", "fields.csid", "fields.workflow", "fields.createdAt", "fields.createdBy", "fields.updatedAt", "fields.updatedBy"]
                                 }
                             }
                         }
