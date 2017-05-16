@@ -729,7 +729,7 @@ cspace = cspace || {};
         that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
         var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed");
         if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
-            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, "scalar-" + that.id);
+            that.applier.modelChanged.addListener(that.rootElPath, that.updateScalarValues, "updateScalarValues-" + that.rootElPath);
         }
 		
         that.applier.modelChanged.addListener(that.displayDateElPath, function (model, oldModel) {
