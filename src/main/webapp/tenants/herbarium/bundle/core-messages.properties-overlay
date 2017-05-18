@@ -65,31 +65,31 @@ loanout-transferNotesLabel: Notes
 collection-object-localNameGroupLabel: Local Name
 collection-object-localNameLabel: Local Name
 collection-object-localNameLanguageLabel: Language
-collection-object-hybridParentGroupLabel: Hybrid Parent
-collection-object-hybridParentLabel: Hybrid Parent
-collection-object-hybridParentQualifierLabel: Parent Qualifier
+collection-object-herbHybridParentGroupLabel: Hybrid Parent
+collection-object-herbHybridParentLabel: Hybrid Parent
+collection-object-herbHybridParentQualifierLabel: Parent Qualifier
 collection-object-hybridNameLabel: Hybrid Name
 collection-object-labelHeaderLabel: Label Header
 collection-object-labelFooterLabel: Label Footer
 collection-object-sheetNumberLabel: Sheet Number
 collection-object-sheetCountLabel: Sheet Count
-collection-object-typeSpecimenGroupLabel: Type Specimen
-collection-object-typeSpecimenKindLabel: Kind of Type
-collection-object-typeSpecimenAssertionByLabel: Asserted By
-collection-object-typeSpecimenReferenceLabel: Reference
-collection-object-typeSpecimenRefPageLabel: Page
-collection-object-typeSpecimenBasionymLabel: Verified Basionym
-collection-object-typeSpecimenNotesLabel: Notes
+collection-object-herbTypeSpecimenGroupLabel: Type Specimen
+collection-object-herbTypeSpecimenKindLabel: Kind of Type
+collection-object-herbTypeSpecimenAssertionByLabel: Asserted By
+collection-object-herbTypeSpecimenReferenceLabel: Reference
+collection-object-herbTypeSpecimenRefPageLabel: Page
+collection-object-herbTypeSpecimenBasionymLabel: Verified Basionym
+collection-object-herbTypeSpecimenNotesLabel: Notes
 collection-object-postToPublicLabel: Post to Public
 collection-object-habitatLabel: Habitat
-collection-object-associatedTaxaGroupLabel: Associated Taxa
-collection-object-assocTaxonLabel: Scientific Name
-collection-object-assocTaxonCommonNameLabel: Common Name
-collection-object-assocTaxonInteractionLabel: Interaction
+collection-object-herbAssociatedTaxaGroupLabel: Associated Taxa
+collection-object-herbAssocTaxonLabel: Scientific Name
+collection-object-herbAssocTaxonCommonNameLabel: Common Name
+collection-object-herbAssocTaxonInteractionLabel: Interaction
 collection-object-localityInformationLabel: Locality Information
-collection-object-localityGroupLabel: 
-collection-object-collectionLocationVerbatimLabel: Field Collection Location Verbatim
-collection-object-collectionPlaceLabel: Field Collection Place
+collection-object-herbLocalityGroupLabel: 
+collection-object-herbCollectionLocationVerbatimLabel: Field Collection Location Verbatim
+collection-object-herbCollectionPlaceLabel: Field Collection Place
 
 # Loan in
 

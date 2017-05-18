@@ -2,9 +2,12 @@
 # Schema extensions to Cataloging record
 collection-object-taxonLabel: Name
 collection-object-qualifierLabel: Qualifier
+
+# Last row in Determination History grouping
 collection-object-identByLabel: By
 taxonomicIdentGroup-identDateGroupLabel: Date
 collection-object-institutionLabel: Institution
+
 collection-object-identKindLabel: Kind
 collection-object-objectCountNumberLabel: Sheet
 collection-object-briefDescriptionsLabel: Material Type
@@ -54,17 +57,18 @@ collection-object-fruitsSepLabel: Fruits Sep
 collection-object-fruitsOctLabel: Fruits Oct
 collection-object-fruitsNovLabel: Fruits Nov
 collection-object-fruitsDecLabel: Fruits Dec
+
 collection-object-accessionUseInformationLabel: Accession Use Information
 collection-object-accessionUseGroupLabel: Accession Use
-collection-object-useTypeLabel: Use Type
-collection-object-usedInLabel: Used In
-collection-object-materialTypeLabel: Material Type
-collection-object-requestDateLabel: Request Date
-collection-object-filledDateLabel: Filled Date
-collection-object-useNotesLabel: Use Notes
+collection-object-accessionUseTypeLabel: Use Type
+collection-object-accessionUsedInLabel: Used In
+collection-object-accessionUseRequestDateLabel: Request Date
+collection-object-accessionUseFilledDateLabel: Filled Date
+collection-object-accessionUserMaterialTypeLabel: Material Type
+collection-object-accessionUseNotesLabel: Use Notes
+
 collection-object-affinityTaxonLabel: Affinity Taxon
 collection-object-hybridFlagLabel: Hybrid Flag
-taxonomicIdentGroup-taxonomicIdentHybridParentGroupLabel: Hybrid Parent
 collection-object-sourceLabel: Source
 collection-object-objectNumberRangeSearchLabel: Accession Number (Range)
 collection-object-objectNumberRangeSearchStartLabel: From
@@ -188,25 +192,28 @@ cataloging-identificationNumberRequired: Please specify an Accession Number
 preferredPlace-termStatusLabel: Admin Status
 
 #media
-media-scientificTaxonomyLabel: Scientific name
-media-handwrittenLabel: Handwritten label
-media-postToPublicLabel: Post to public
 media-identificationNumberLabel: Accession number
 media-identificationNumberRequired: Please specify an Accession number
-media-imageNumberLabel: Image number
 
 #cataloging
 collection-object-objectNumberLabel: Accession Number
 collection-object-basicStorageLocationLabel: Filed in Cabinet
 collection-object-otherNumberLabel: Other Number
 collection-object-otherNumberGroupLabel: Other Number
-collection-object-taxonomicIdentGroupLabel: Determination History
 collection-object-localNameGroupLabel: Common Name
 collection-object-localNameLabel: Common Name
 collection-object-localNameLanguageLabel: Language
-collection-object-hybridParentGroupLabel: Hybrid Parent
+
+collection-object-taxonomicIdentGroupLabel: Determination History
+
+# Repeating Hybrid Parent group
+collection-object-taxonomicIdentHybridParentLabel: Hybrid Parent
+collection-object-taxonomicIdentHybridParentQualifierLabel: Parent Qualifier
+
+# Not used by Botanical Garden profile?
 collection-object-hybridParentLabel: Hybrid Parent
 collection-object-hybridParentQualifierLabel: Parent Qualifier
+
 collection-object-hybridNameLabel: Hybrid Name
 collection-object-donorGroupLabel: Donor
 collection-object-donorLabel: Donor
@@ -215,7 +222,6 @@ collection-object-donorNoteLabel: Note
 collection-object-labelHeaderLabel: Label Header
 collection-object-labelFooterLabel: Label Footer
 collection-object-numberOfObjectsLabel: Number of Sheets
-collection-object-handwrittenLabel: Handwritten label
 collection-object-postToPublicLabel: Post to public
 collection-object-cultivatedLabel: Cultivated
 collection-object-recordStatusLabel: Provenance Data Quality
