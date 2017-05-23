@@ -428,11 +428,12 @@ li .flc-pager-pageLink {
 #name-header-login {
     margin-top:30px;
     background-color: #fff;
-    background: url("../images/header-logo.png"), url("../images/header-logo-cspace.png");
+    background: url("../images/header-logo.png");
     background-repeat: no-repeat;
-    background-position: left top, right top;
+    background-position: left top;
+	background-size: contain;
     width:100%; 
-    height:75px;
+    height:51px;
 }
 
 
@@ -442,8 +443,9 @@ li .flc-pager-pageLink {
     margin-top:15px; 
     float:left; 
     background: #fff url("../images/header-logo.png") no-repeat left top; 
+	background-size: contain;
     width:450px; 
-    height:75px;}
+    height:51px;}
 .header-menu-logo a {
     display:block; 
     height:51px; 

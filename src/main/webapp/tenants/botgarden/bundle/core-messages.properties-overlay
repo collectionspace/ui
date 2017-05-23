@@ -158,17 +158,28 @@ taxon-miniView-field2Label: Term Status:
 taxon-miniView-field3Label: Rank:
 
 #Login
-login-deployment: Version botgarden_4.1-14
-login-current-info: Welcome to the UC Botanical Garden's collection management system, CollectionSpace. UCBG-CSpace has been configured to support the needs of botanical gardens in general, as well as the specific needs of the UC Botanical Garden.
-login-current-details: 
-login-login-info: 
-login-login: 
-login-login-pwd: 
-login-login-pwdValue:
-login-rologin-info:  
-login-rologin:  
-login-rologin-pwd: 
-login-rologin-pwdValue: 
+login-deployment: v4.5
+login-current-info: The CollectionSpace community is pleased to announce the release of CollectionSpace 4.5. For release notes, please visit the project's wiki.
+login-current-info-1: This demo site is running the
+login-current-info-2: current version
+login-current-info-3: of the
+login-current-info-4: Botanical Garden profile
+login-current-info-5: installation, which includes fields and procedures common to most botanical collecting organizations. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
+login-current-info-6: demo landing page
+login-current-info-7: to view all available options. Examples include Anthropology, Botanical Garden, Fine Art, Herbarium, and Local History & Material Culture.
+
+login-current-details: CollectionSpace is a free, open-source collections management application for museums, historical societies, natural science collections, and more.
+login-login-info: To log in, use the email
+login-login: admin@botgarden.collectionspace.org
+login-login-after: ,
+login-login-pwd: with the case-sensitive password
+login-login-pwdValue: Administrator
+login-login-pwdValue-after: .
+login-rologin-info: To view in read-only mode, use the email
+login-rologin: reader@botgarden.collectionspace.org
+login-rologin-pwd: with the password
+login-rologin-pwdValue: reader
+login-rologin-pwdValue-after: .
 
 #Vocabularies
 vocab-person: Default Persons
