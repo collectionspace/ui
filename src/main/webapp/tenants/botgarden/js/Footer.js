@@ -84,11 +84,11 @@ cspace = cspace || {};
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
-            deploymentRelease: "releaseNotes.html",
-            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.1+Feedback",
-            version: "4.1",
-            deploymentVersion: "botgarden_4.1-14",
-            support: "mailto:cspace-support@lists.berkeley.edu"
+            deploymentRelease: "http://www.collectionspace.org/current_release",
+            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+4.5+Feedback",
+            version: "4.5",
+            deploymentVersion: "botgarden_4.5-1",
+            support: "mailto:info@collectionspace.org"
         },
         // Footer template resource.
         resources: {
