@@ -1,0 +1,161 @@
+# Login
+
+login-current: Welcome to the CollectionSpace Anthropology Demo
+login-current-info-4: anthropology profile
+login-current-info-5: of CollectionSpace, which includes fields and procedures useful for anthropology collections. If you’re interested in a version of CollectionSpace configured to meet the needs of a different domain, please visit our
+login-login: admin@anthro.collectionspace.org
+login-rologin: reader@anthro.collectionspace.org
+
+# Cataloging
+
+collection-object-anthroObjectStatusLabel: Object status
+collection-object-ethnoFileCodeLabel: Ethnographic file code
+
+collection-object-assocPeopleGroupLabel: Associated cultural group
+collection-object-assocPeopleLabel: Cultural group
+collection-object-assocPeopleTypeLabel: Type of association
+collection-object-assocPeopleNoteLabel: Note
+
+collection-object-annotationGroupLabel: Annotations
+collection-object-annotationTypeLabel: Type
+collection-object-annotationNoteLabel: Note
+collection-object-annotationDateLabel: Date
+collection-object-annotationAuthorLabel: Author
+
+collection-object-usageGroupLabel: Context of use
+collection-object-usageNoteLabel: Note
+
+collection-object-fieldLocVerbatimLabel: Field collection place (verbatim)
+
+collection-object-objectProductionPeopleGroupLabel: Production cultural group
+collection-object-objectProductionPeopleLabel: Cultural group
+
+collection-object-nagpraInformationLabel: Repatriation and NAGPRA Compliance Information
+collection-object-nagpraInventoryNameLabel: NAGPRA inventory
+collection-object-nagpraCategoryLabel: Museum's NAGPRA category det.
+collection-object-nagpraCulturalDeterminationLabel: NAGPRA cultural determination
+collection-object-graveAssocCodeLabel: Grave association code
+collection-object-repatriationNoteLabel: Repatriation note
+
+collection-object-biologicalInformationLabel: Biological Information
+
+collection-object-taxonomicIdentGroupLabel: Determination History
+collection-object-taxonLabel: Scientific Name
+collection-object-qualifierLabel: Qualifier
+collection-object-identByLabel: By
+taxonomicIdentGroup-identDateGroupLabel: Date
+collection-object-institutionLabel: Institution
+collection-object-identKindLabel: Kind
+collection-object-referenceLabel: Reference
+collection-object-refPageLabel: Page
+collection-object-notesLabel: Notes
+
+collection-object-anthroOwnershipGroupLabel: Previous owners
+collection-object-anthroOwnerLabel: Name
+anthroOwnershipGroup-anthroOwnershipDateGroupLabel: Date(s)
+collection-object-anthroOwnershipCategoryLabel: Category
+collection-object-anthroOwnershipMethodLabel: Exch. meth.
+collection-object-anthroOwnershipPlaceLabel: Place
+collection-object-anthroOwnershipPriceCurrencyLabel: Price (currency)
+collection-object-anthroOwnershipPriceAmountLabel: Price (amount)
+collection-object-anthroOwnershipNoteLabel: Note
+
+collection-object-referenceInformationLabel: Bibliographic Reference Information
+collection-object-referenceGroupLabel: Bibliographic reference(s)
+
+# Concept
+
+vocab-ethculture: Ethnographic Cultures
+
+# Claim
+claim-editRecord: Edit NAGPRA Claim Record
+claim-recordList: Related NAGPRA Claim Records
+claim: NAGPRA Claim
+claim-tab: NAGPRA
+
+claim-claimInformationLabel: NAGPRA Claim Information
+
+claim-nagpraClaimNameLabel: Claim name
+
+claim-nagpraClaimAltNameGroupLabel: Alternate claim names or numbers
+claim-nagpraClaimAltNameLabel: Name
+claim-nagpraClaimAltNameNoteLabel: Note
+
+claim-nagpraClaimTypeLabel: Claim type
+
+claim-claimReceivedDateStartLabel: Earliest
+claim-claimReceivedDateEndLabel: Latest
+
+claim-nagpraClaimNoteLabel: Notes on claim
+
+claim-claimAssociationInformationLabel: Claim Context
+
+claim-nagpraClaimInventoryGroupLabel: Inventory Involved
+claim-nagpraClaimInventoryNameLabel: Inventory
+claim-nagpraClaimInventoryNoteLabel: Note
+
+claim-nagpraClaimSiteGroupLabel: Sites involved
+claim-nagpraClaimSiteNameLabel: Site or place name
+claim-nagpraClaimSiteNoteLabel: Note
+
+claim-nagpraClaimGroupGroupLabel: Cultural groups involved
+claim-nagpraClaimGroupNameLabel: Name
+claim-nagpraClaimGroupNoteLabel: Note
+
+claim-nagpraClaimPeriodGroupLabel: Time period(s) represented
+nagpraClaimPeriodGroup-nagpraClaimPeriodDateGroupLabel: Period or date
+claim-nagpraClaimPeriodNoteLabel: Note
+
+claim-claimProcessingInformationLabel: Claim Processing Information
+
+claim-nagpraClaimInitialResponseGroupLabel: Date of initial response
+claim-nagpraClaimInitialResponseDateLabel: Date
+claim-nagpraClaimInitialResponseNoteLabel: Note
+
+claim-nagpraClaimSentToLocalGroupLabel: Date sent to NAGPRA committee
+claim-nagpraClaimSentToLocalDateLabel: Date
+claim-nagpraClaimSentToLocalNoteLabel: Note
+
+claim-nagpraClaimLocalRecGroupLabel: Recommendation of NAGPRA committee
+claim-nagpraClaimLocalRecDateLabel: Date
+claim-nagpraClaimLocalRecNoteLabel: Committee's recommendations
+
+claim-nagpraClaimSentToNatlGroupLabel: Date sent to National NAGPRA
+claim-nagpraClaimSentToNatlDateLabel: Date
+claim-nagpraClaimSentToNatlNoteLabel: Note
+
+claim-nagpraClaimNatlRespGroupLabel: Response from National NAGPRA
+claim-nagpraClaimNatlRespDateLabel: Date
+claim-nagpraClaimNatlRespNoteLabel: Response
+
+claim-nagpraClaimNatlApprovalGroupLabel: Publication by National NAGPRA
+claim-nagpraClaimNatlApprovalDateLabel: Date
+claim-nagpraClaimNatlApprovalNoteLabel: Note
+
+claim-nagpraClaimNoticeGroupLabel: Start and end dates for National NAGPRA's 30-day notice
+claim-nagpraClaimNoticeDateLabel: Date
+claim-nagpraClaimNoticeDateTypeLabel: Type
+claim-nagpraClaimNoticeNoteLabel: Note
+
+claim-nagpraClaimTransferGroupLabel: Date of transfer
+claim-nagpraClaimTransferDateLabel: Date
+claim-nagpraClaimTransferNoteLabel: Note
+
+claim-claimTaskInformationLabel: Tasks to be completed
+claim-claimTaskHeaderLabel: Task
+claim-claimTaskNotesHeaderLabel: Notes
+claim-dispositionPossibilitiesDiscussedLabel: Disposition possibilities discussed
+claim-surroundingTribesContactedLabel: Surrounding tribes contacted
+claim-workingTeamNotifiedLabel: Institutional NAGPRA team notified
+claim-siteFileResearchCompletedLabel: Site file research completed
+claim-accessionFileResearchCompletedLabel: Accession file research completed
+claim-objectsLocatedAndCountedLabel: Objects located and counted
+claim-objectsConsolidatedLabel: Objects consolidated
+claim-objectsPhotographedLabel: Objects photographed
+claim-registrationDocumentsDraftedLabel: Registration documents drawn up
+claim-tribeContactedForPackingPreferencesLabel: Tribe contacted for packing/storage instructions
+claim-dateArrangedForTransferLabel: Date arranged for pickup/transfer
+claim-objectsMarkedAsDeaccessionedLabel: Objects marked as deaccessioned
+claim-documentsArchivedLabel: Claim documents archived
+
+
