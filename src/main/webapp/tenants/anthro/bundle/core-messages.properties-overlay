@@ -64,7 +64,8 @@ collection-object-referenceInformationLabel: Bibliographic Reference Information
 collection-object-referenceGroupLabel: Bibliographic reference(s)
 
 # Concept
-
+vocab-archculture: Arch Cultures
+vocab-ethfilecode: Ethnographic File Code
 vocab-ethculture: Ethnographic Cultures
 
 # Claim
