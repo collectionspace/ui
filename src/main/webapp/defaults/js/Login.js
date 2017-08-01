@@ -16,6 +16,12 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Login.js loaded");
 
+    // Notify user of IE browser incompatibility if IE is being used.
+    var browser = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+      window.alert('Notice: CollectionSpace is not optimized to use Internet Explorer. For an optimal experience please use the latest versions of Chrome or Firefox.');
+    }
+
     // Show sign in UI and make sure everything else is hidden.
     var showSignIn = function (domBinder) {
         domBinder.locate("signIn").show();
