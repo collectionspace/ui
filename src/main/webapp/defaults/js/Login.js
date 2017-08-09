@@ -16,7 +16,6 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Login.js loaded");
 
-
     // Alert users if they happen to be using an incompatible browser aka. Microsoft.
     var browserCompatibilityCheck = function () {
   
