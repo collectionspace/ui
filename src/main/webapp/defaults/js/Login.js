@@ -16,11 +16,21 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Login.js loaded");
 
-    // Notify user of IE browser incompatibility if IE is being used.
-    var browser = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if(/trident/i.test(M[1])){
-      window.alert('Notice: CollectionSpace is not optimized to use Internet Explorer. For an optimal experience please use the latest versions of Chrome or Firefox.');
-    }
+
+    // Alert users if they happen to be using an incompatible browser aka. Microsoft.
+    var browserCompatibilityCheck = function () {
+  
+        // User strings may change with time, 
+        // please see: https://msdn.microsoft.com/en-us/library/hh869301%28v=vs.85%29.aspx
+        // to stay up to date.
+        if (/MSIE 10/i.test(navigator.userAgent) || 
+            /MSIE 9/i.test(navigator.userAgent) || 
+            /rv:11.0/i.test(navigator.userAgent) ||
+            /Edge\/\d./i.test(navigator.userAgent)) 
+        {
+                window.alert('Hey there CollectionSpace user! Unfortunately, CollectionSpace is not optimized for use with your current browser. For an optimal experience, please use the latest version of Chrome or Firefox. - The CollectionSpace Team');
+        }
+    };
 
     // Show sign in UI and make sure everything else is hidden.
     var showSignIn = function (domBinder) {
